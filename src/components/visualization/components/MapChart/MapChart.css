@@ -386,3 +386,111 @@
     height: 300px;
   }
 }
+
+
+/* Multiple selection styles */
+.data-column-selector select[multiple] {
+  min-height: 120px;
+  padding: 8px;
+}
+
+.selection-info {
+  margin-top: 8px;
+  font-size: 0.85rem;
+  color: #666;
+}
+
+.max-warning {
+  color: #dc3545;
+  font-weight: bold;
+}
+
+/* Focus controls */
+.focus-controls {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  background: #e3f2fd;
+  border-radius: 8px;
+  margin-bottom: 15px;
+}
+
+.clear-focus-btn {
+  background: #0077b6;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.9rem;
+}
+
+.clear-focus-btn:hover {
+  background: #005a8c;
+}
+
+.focus-info {
+  font-weight: 500;
+  color: #0077b6;
+}
+
+/* Data columns info in sidebar */
+.data-columns-info {
+  background: #e8f5e8;
+  padding: 8px;
+  border-radius: 4px;
+  margin-bottom: 15px;
+  font-size: 0.85rem;
+  border-left: 3px solid #28a745;
+}
+
+/* Multiple legends spacing */
+.legend-control {
+  margin-bottom: 10px;
+}
+
+
+/* Single legend with multiple sections */
+.legend-section {
+  margin-bottom: 10px;
+}
+
+.legend-section-separator {
+  border-top: 1px solid #ddd;
+  padding-top: 10px;
+  margin-top: 10px;
+}
+
+.legend-control {
+  background: white;
+  padding: 10px;
+  border-radius: 5px;
+  box-shadow: 0 1px 5px rgba(0,0,0,0.4);
+  font-size: 12px;
+  line-height: 18px;
+  z-index: 1000;
+  max-height: 400px;
+  overflow-y: auto;
+}
+
+.legend-title {
+  font-weight: bold;
+  margin-bottom: 5px;
+  text-align: center;
+  color: #333;
+  font-size: 11px;
+}
+
+.legend-body i {
+  width: 18px;
+  height: 18px;
+  float: left;
+  margin-right: 8px;
+  opacity: 0.7;
+}
+
+.legend-body {
+  line-height: 18px;
+  color: #555;
+}
