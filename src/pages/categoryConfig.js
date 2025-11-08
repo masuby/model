@@ -41,25 +41,25 @@ export const FOOTER_CONTENT = {
   risk: {
     title: "INFORM Risk Index",
     description: 'The INFORM Risk Index is a global, open-source risk assessment for humanitarian crises and disasters. It can support decisions about prevention, preparedness and response.',
-    contacts: ["info@inform-index.org", "+255 123 456 789"],
+    contacts: ["info@inform.co.tz", "+255 719 592 997"],
     quickLinks: ["Methodology", "Data Sources", "Publications", "Get Involved"]
   },
   warning: {
     title: "INFORM Warning",
     description: 'The INFORM Warning (in development) intends to support decisions around preparedness, early warning and early action. It will be complementary to other INFORM products and is intended to pool resources and expertise to deliver shared analysis available to everyone.',
-    contacts: ["warning@inform-index.org", "+255 123 456 790"],
+    contacts: ["warning@inform.co.tz", "+255 719 592 997"],
     quickLinks: ["Early Action", "Alerts", "Partners", "Resources"]
   },
   severity: {
     title: "INFORM Severity Index", 
     description: 'The INFORM Severity Index is an improved way to objectively measure and compare the severity of humanitarian crises and disasters globally. It can help us develop a shared understanding of crisis severity and ensure all those affected get the help they need.',
-    contacts: ["severity@inform-index.org", "+255 123 456 791"],
+    contacts: ["severity@inform.co.tz", "+255 719 592 997"],
     quickLinks: ["Severity Scale", "Case Studies", "Reports", "Training"]
   },
   climate: {
     title: "INFORM Climate Change",
     description: 'INFORM Climate Change Risk Index is an upgrade of INFORM Risk Index. It includes climate and socio-economic projections. The results are intended to inform policy choices across climate mitigation, climate adaptation, disaster risk reduction, sustainable development and humanitarian assistance.',
-    contacts: ["climate@inform-index.org", "+255 123 456 792"],
+    contacts: ["climate@inform.co.tz", "+255 719 592 997"],
     quickLinks: ["Climate Data", "Projections", "Adaptation", "Mitigation"]
   }
 };
