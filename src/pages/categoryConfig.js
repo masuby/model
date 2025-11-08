@@ -41,7 +41,7 @@ export const FOOTER_CONTENT = {
   risk: {
     title: "INFORM Risk Index",
     description: 'The INFORM Risk Index is a global, open-source risk assessment for humanitarian crises and disasters. It can support decisions about prevention, preparedness and response.',
-    contacts: ["info@inform.co.tz", "+255 719 592 997"],
+    contacts: ["risk@inform.co.tz", "+255 719 592 997"],
     quickLinks: ["Methodology", "Data Sources", "Publications", "Get Involved"]
   },
   warning: {
