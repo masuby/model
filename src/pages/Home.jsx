@@ -67,7 +67,6 @@ function Home() {
     }
   };
 
-
   // File upload handler
   const handleFileUpload = async (event) => {
     const file = event.target.files[0];
@@ -160,14 +159,14 @@ function Home() {
     return data;
   };
 
-    if (!sheets && !isDataLoaded) {
-      return (
-        <div className="loading-container">
-          <div className="loading-spinner"></div>
-          <p>Loading {categoryConfig.name} Data...</p>
-        </div>
-      );
-    }
+  if (!sheets && !isDataLoaded) {
+    return (
+      <div className="loading-container">
+        <div className="loading-spinner"></div>
+        <p>Loading {categoryConfig.name} Data...</p>
+      </div>
+    );
+  }
 
   const tanzaniaData = getTanzaniaData();
   const data = tanzaniaData.length > 0 ? tanzaniaData : (sheets && sheets[activeSheet] ? sheets[activeSheet] : []);
@@ -192,7 +191,7 @@ function Home() {
       '--primary-color': categoryConfig.color,
       '--secondary-color': categoryConfig.secondaryColor
     }}>
-      {/* Category Navigation */}
+      {/* Category Navigation - Horizontal scrollable on mobile */}
       <div className="category-nav">
         {Object.values(CATEGORIES).map((category) => (
           <button
@@ -214,45 +213,48 @@ function Home() {
         ))}
       </div>
 
-      {/* Compact Toolbar */}
+      {/* Compact Toolbar - Optimized for mobile */}
       <div className="compact-toolbar">
-        <div className="toolbar-group">
-          <label className="upload-btn">
-            {isUploading ? "⏳" : "📁 Upload"}
-            <input
-              type="file"
-              accept=".xlsx,.xls"
-              onChange={handleFileUpload}
-              disabled={isUploading}
-              style={{ display: 'none' }}
+        {/* First row: Upload and File Select */}
+        <div className="toolbar-row">
+          <div className="toolbar-group file-controls">
+            <label className="upload-btn">
+              {isUploading ? "⏳" : "📁 Upload"}
+              <input
+                type="file"
+                accept=".xlsx,.xls"
+                onChange={handleFileUpload}
+                disabled={isUploading}
+                style={{ display: 'none' }}
+              />
+            </label>
+            
+            <select 
+              value={currentFileName} 
+              onChange={(e) => handleFileSelect(e.target.value)}
+              className="file-select"
+            >
+              <option value="">Choose Excel</option>
+              {availableFiles.map((file) => (
+                <option key={file.name} value={file.name}>
+                  {file.name}
+                </option>
+              ))}
+            </select>
+          </div>
+        </div>
+
+        {/* Second row: Search, Visualization and Export */}
+        <div className="toolbar-row">
+          <div className="toolbar-group search-visualization">
+            <SearchBar searchQuery={searchQuery} setSearchQuery={setSearchQuery} />
+            <Visualization 
+              onSelect={(type) => console.log("Chart:", type)}
+              sheetData={data}
+              sheetName={activeSheet}
             />
-          </label>
-          
-          <select 
-            value={currentFileName} 
-            onChange={(e) => handleFileSelect(e.target.value)}
-            className="file-select"
-          >
-            <option value="">Choose Excel</option>
-            {availableFiles.map((file) => (
-              <option key={file.name} value={file.name}>
-                {file.name}
-              </option>
-            ))}
-          </select>
-        </div>
-
-        <div className="toolbar-group">
-          <SearchBar searchQuery={searchQuery} setSearchQuery={setSearchQuery} />
-        </div>
-
-        <div className="toolbar-group">
-          <Visualization 
-            onSelect={(type) => console.log("Chart:", type)}
-            sheetData={data}
-            sheetName={activeSheet}
-          />
-          <DownloadButton sheets={sheets} fileName={currentFileName} />
+            <DownloadButton sheets={sheets} fileName={currentFileName} />
+          </div>
         </div>
       </div>
 
@@ -285,7 +287,7 @@ function Home() {
         ))}
       </div>
 
-      {/* Table Section */}
+      {/* Table Section - Maximized area */}
       <div className="table-section">
         <div className="table-header">
           <h3>

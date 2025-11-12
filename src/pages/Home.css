@@ -3,7 +3,6 @@
   display: flex;
   flex-direction: column;
   background-color: var(--secondary-color, #f8f9fa);
-  transition: all 0.3s ease;
   width: 100%;
   margin: 0;
   padding: 0;
@@ -43,30 +42,39 @@
   font-weight: 500;
 }
 
-/* Category Navigation */
+/* Category Navigation - Horizontal scrollable */
 .category-nav {
   display: flex;
   gap: 1px;
   background: #e0e0e0;
   padding: 0;
   position: sticky;
-  top: 68px; /* Account for header height */
+  top: 68px;
   z-index: 999;
   box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+  overflow-x: auto;
+  white-space: nowrap;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+}
+
+.category-nav::-webkit-scrollbar {
+  display: none;
 }
 
 .category-btn {
-  flex: 1;
-  padding: 10px 8px;
+  flex: 0 0 auto;
+  padding: 10px 12px;
   border: none;
   background: white;
   cursor: pointer;
   font-weight: 600;
-  font-size: 0.8rem;
+  font-size: 0.75rem;
   transition: all 0.3s ease;
   text-transform: uppercase;
   letter-spacing: 0.3px;
   border-bottom: 2px solid transparent;
+  min-width: max-content;
 }
 
 .category-btn:hover {
@@ -78,37 +86,49 @@
   background: #f8f9fa;
 }
 
-/* Compact Toolbar */
+/* Compact Toolbar - Optimized for mobile */
 .compact-toolbar {
   display: flex;
-  gap: 10px;
-  padding: 10px 15px;
+  flex-direction: column;
+  gap: 6px;
+  padding: 8px 10px;
+  margin-top: 3%;
   background: white;
   border-bottom: 1px solid #e0e0e0;
-  align-items: center;
-  flex-wrap: wrap;
-  box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+}
+
+.toolbar-row {
+  display: flex;
+  width: 100%;
 }
 
 .toolbar-group {
   display: flex;
-  gap: 8px;
+  gap: 6px;
   align-items: center;
-  flex: 1;
-  min-width: 200px;
+  width: 100%;
+}
+
+.file-controls {
+  justify-content: flex-start;
+}
+
+.search-visualization {
+  justify-content: space-between;
 }
 
 .upload-btn {
   background: var(--primary-color, #007bff);
   color: white;
-  padding: 6px 10px;
+  padding: 5px 8px;
   border-radius: 4px;
   cursor: pointer;
-  font-size: 0.75rem;
+  font-size: 0.7rem;
   font-weight: 500;
   transition: background-color 0.2s;
   white-space: nowrap;
   border: none;
+  flex-shrink: 0;
 }
 
 .upload-btn:hover {
@@ -117,14 +137,15 @@
 }
 
 .file-select {
-  padding: 6px 8px;
+  padding: 5px 6px;
   border: 1px solid #dcdfe6;
   border-radius: 4px;
   background: white;
-  font-size: 0.75rem;
+  font-size: 0.7rem;
   min-width: 120px;
   color: #333;
   font-family: inherit;
+  flex: 1;
 }
 
 .file-select:focus {
@@ -133,18 +154,19 @@
   box-shadow: 0 0 0 2px rgba(0, 119, 182, 0.1);
 }
 
-/* Search Bar - Update to match category */
+/* Search Bar */
 .search-container {
   flex: 1;
+  min-width: 100px;
 }
 
 .search-container input {
   width: 100%;
-  padding: 6px 10px;
+  padding: 5px 8px;
   border-radius: 4px;
   border: 1px solid #dcdfe6;
   background: white;
-  font-size: 0.75rem;
+  font-size: 0.7rem;
   font-family: inherit;
   transition: border-color 0.2s;
   color: #333;
@@ -156,9 +178,9 @@
   box-shadow: 0 0 0 2px rgba(0, 119, 182, 0.1);
 }
 
-/* Download Button - Update to match category */
+/* Download Button */
 .download-btn {
-  padding: 6px 10px;
+  padding: 5px 8px;
   border: none;
   border-radius: 4px;
   background: var(--primary-color, #0077b6);
@@ -169,8 +191,9 @@
   display: flex;
   align-items: center;
   gap: 4px;
-  font-size: 0.75rem;
+  font-size: 0.7rem;
   white-space: nowrap;
+  flex-shrink: 0;
 }
 
 .download-btn:hover {
@@ -181,16 +204,16 @@
 /* Action Label */
 .action-label {
   text-align: center;
-  padding: 6px 15px;
+  padding: 6px 10px;
   background: var(--primary-color, #0077b6);
   color: white;
-  font-size: 0.8rem;
+  font-size: 0.75rem;
   font-weight: 500;
 }
 
 /* Data Entry */
 .dataentry-container {
-  padding: 8px 15px;
+  padding: 6px 10px;
   background: white;
   border-bottom: 1px solid #e0e0e0;
 }
@@ -199,10 +222,12 @@
 .sheet-nav {
   display: flex;
   gap: 4px;
-  padding: 8px 15px;
+  padding: 6px 10px;
   background: white;
   border-bottom: 1px solid #e0e0e0;
   overflow-x: auto;
+  white-space: nowrap;
+  -webkit-overflow-scrolling: touch;
 }
 
 .sheet-btn {
@@ -212,10 +237,11 @@
   background: white;
   color: var(--primary-color, #0077b6);
   cursor: pointer;
-  font-size: 0.7rem;
+  font-size: 0.65rem;
   white-space: nowrap;
   transition: all 0.2s;
   font-weight: 500;
+  flex-shrink: 0;
 }
 
 .sheet-btn:hover {
@@ -227,37 +253,38 @@
   color: white;
 }
 
-/* Table Section */
+/* Table Section - Maximized area */
 .table-section {
   flex: 1;
   background: white;
   margin: 0;
   display: flex;
   flex-direction: column;
+  min-height: 400px;
 }
 
 .table-header {
-  padding: 8px 15px;
+  padding: 6px 10px;
   background: var(--secondary-color, #f1f9ff);
   border-bottom: 1px solid #e0e0e0;
   display: flex;
   justify-content: space-between;
   align-items: center;
   position: sticky;
-  top: 118px; /* Account for header + category nav */
+  top: 118px;
   z-index: 5;
 }
 
 .table-header h3 {
   margin: 0;
   color: var(--primary-color, #0077b6);
-  font-size: 0.9rem;
+  font-size: 0.8rem;
   font-weight: 600;
 }
 
 .record-count {
   color: #666;
-  font-size: 0.75rem;
+  font-size: 0.7rem;
   font-weight: 500;
 }
 
@@ -269,7 +296,7 @@
 .table-wrapper table {
   border-collapse: collapse;
   width: 100%;
-  font-size: 0.7rem;
+  font-size: 0.65rem;
   min-width: max-content;
   font-family: inherit;
 }
@@ -277,13 +304,13 @@
 .table-wrapper th {
   background: var(--primary-color, #0077b6);
   color: white;
-  padding: 6px 8px;
+  padding: 5px 6px;
   text-align: left;
   position: sticky;
   top: 0;
   z-index: 2;
   font-weight: 600;
-  font-size: 0.75rem;
+  font-size: 0.7rem;
   border-right: 1px solid rgba(255,255,255,0.1);
 }
 
@@ -293,10 +320,10 @@
 
 .table-wrapper td {
   border: 1px solid #e0e0e0;
-  padding: 4px 6px;
+  padding: 3px 5px;
   text-align: left;
   color: #333;
-  font-size: 0.7rem;
+  font-size: 0.65rem;
   line-height: 1.2;
 }
 
@@ -313,8 +340,8 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 10px;
-  padding: 10px 15px;
+  gap: 8px;
+  padding: 8px 10px;
   border-top: 1px solid #e0e0e0;
   background: white;
   position: sticky;
@@ -330,7 +357,7 @@
   color: #333;
   cursor: pointer;
   font-weight: 500;
-  font-size: 0.7rem;
+  font-size: 0.65rem;
   transition: all 0.2s;
   font-family: inherit;
 }
@@ -348,29 +375,30 @@
 .pagination span {
   color: #666;
   font-weight: 500;
-  font-size: 0.75rem;
+  font-size: 0.7rem;
 }
 
 /* Action Buttons Bottom */
 .action-buttons-bottom {
   display: flex;
-  gap: 8px;
-  padding: 10px 15px;
+  gap: 6px;
+  padding: 8px 10px;
   background: white;
   border-top: 1px solid #e0e0e0;
   justify-content: center;
 }
 
 .action-btn {
-  padding: 6px 12px;
+  padding: 5px 10px;
   border: none;
   border-radius: 4px;
   cursor: pointer;
   font-weight: 500;
-  font-size: 0.75rem;
+  font-size: 0.7rem;
   transition: all 0.2s;
   white-space: nowrap;
   font-family: inherit;
+  flex: 1;
 }
 
 .action-btn.download {
@@ -392,113 +420,142 @@
   background: #e0a800;
 }
 
-/* Responsive Design */
-@media (max-width: 768px) {
-  .category-nav {
-    flex-wrap: wrap;
-    top: 60px;
-  }
-  
-  .category-btn {
-    flex: 1 0 calc(50% - 1px);
-    font-size: 0.7rem;
-    padding: 8px 4px;
-  }
-  
+/* Desktop Styles */
+@media (min-width: 769px) {
   .compact-toolbar {
-    flex-direction: column;
-    align-items: stretch;
-    gap: 6px;
-    padding: 8px 10px;
-  }
-  
-  .toolbar-group {
-    min-width: auto;
-    justify-content: space-between;
-  }
-  
-  .table-header {
-    flex-direction: column;
-    gap: 4px;
-    align-items: flex-start;
-    top: 108px;
-  }
-  
-  .table-header h3 {
-    font-size: 0.8rem;
-  }
-  
-  .action-buttons-bottom {
-    flex-direction: column;
-  }
-  
-  .action-btn {
-    width: 100%;
-    text-align: center;
-  }
-}
+    flex-direction: row;
+    align-items: center;
+    padding: 10px 15px;
+    gap: 10px;
 
-@media (max-width: 480px) {
+    
+  }
+  
+  .toolbar-row {
+    flex: 1;
+  }
+  
+  .file-controls {
+    justify-content: flex-start;
+    min-width: 250px;
+  }
+  
+  .search-visualization {
+    justify-content: flex-end;
+    gap: 8px;
+  }
+  
   .category-btn {
-    flex: 1 0 100%;
-    font-size: 0.65rem;
-    padding: 6px 4px;
+    flex: 1;
+    font-size: 0.8rem;
+    padding: 10px 8px;
   }
   
-  .toolbar-group {
-    flex-direction: column;
-    align-items: stretch;
-  }
-  
-  .upload-btn, .file-select {
-    width: 100%;
-    text-align: center;
-  }
-  
-  .sheet-nav {
+  .upload-btn, .file-select, .download-btn {
+    font-size: 0.75rem;
     padding: 6px 10px;
   }
   
-  .sheet-btn {
-    padding: 3px 6px;
-    font-size: 0.65rem;
+  .search-container input {
+    font-size: 0.75rem;
+    padding: 6px 10px;
+  }
+  
+  .table-header {
+    padding: 8px 15px;
+  }
+  
+  .table-header h3 {
+    font-size: 0.9rem;
+  }
+  
+  .record-count {
+    font-size: 0.75rem;
   }
   
   .table-wrapper th,
   .table-wrapper td {
-    padding: 3px 4px;
-    font-size: 0.65rem;
-  }
-  
-  .pagination {
-    flex-wrap: wrap;
-    gap: 6px;
-  }
-  
-  .pagination button {
-    padding: 3px 6px;
-    font-size: 0.65rem;
-  }
-}
-
-/* Horizontal scroll for very small screens */
-@media (max-width: 360px) {
-  .compact-toolbar {
     padding: 6px 8px;
-  }
-  
-  .table-wrapper {
-    overflow-x: auto;
+    font-size: 0.7rem;
   }
   
   .sheet-nav {
-    overflow-x: auto;
+    padding: 8px 15px;
+  }
+  
+  .sheet-btn {
+    font-size: 0.7rem;
+    padding: 4px 8px;
+  }
+  
+  .action-label {
+    font-size: 0.8rem;
+    padding: 6px 15px;
+  }
+  
+  .dataentry-container {
+    padding: 8px 15px;
+  }
+  
+  .pagination {
+    padding: 10px 15px;
+    gap: 10px;
+  }
+  
+  .pagination button {
+    font-size: 0.7rem;
+  }
+  
+  .pagination span {
+    font-size: 0.75rem;
+  }
+  
+  .action-buttons-bottom {
+    padding: 10px 15px;
+    gap: 8px;
+  }
+  
+  .action-btn {
+    font-size: 0.75rem;
+    padding: 6px 12px;
+    flex: 0 1 auto;
   }
 }
 
-/* Ensure full width on all screens */
-@media (max-width: 1200px) {
-  .home-container {
-    width: 100%;
+/* Very small screens */
+@media (max-width: 360px) {
+  .compact-toolbar {
+    padding: 6px 8px;
+    
+  }
+  
+  .toolbar-group {
+    gap: 4px;
+  }
+  
+  .upload-btn, .download-btn {
+    font-size: 0.65rem;
+    padding: 4px 6px;
+  }
+  
+  .file-select {
+    font-size: 0.65rem;
+    padding: 4px 6px;
+  }
+  
+  .search-container input {
+    font-size: 0.65rem;
+    padding: 4px 6px;
+  }
+  
+  .category-btn {
+    padding: 8px 10px;
+    font-size: 0.7rem;
+  }
+  
+  .table-wrapper th,
+  .table-wrapper td {
+    padding: 2px 4px;
+    font-size: 0.6rem;
   }
 }
