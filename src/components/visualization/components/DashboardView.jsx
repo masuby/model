@@ -1,3 +1,4 @@
+// Modified: DashboardView.jsx (minor update for map container height and responsiveness)
 import React, { useState, useEffect } from 'react';
 import { 
   getNumericColumns,
@@ -27,7 +28,6 @@ function DashboardView({ data, columns, isOpen, onClose, onViewChart, onViewMap 
       const cols = getAllColumns(data);
       setAllColumns(cols);
       
-      // Set default values
       if (cols.includes('COUNTRY')) {
         setXAxisColumn('COUNTRY');
       } else if (cols.length > 0) {
@@ -309,6 +309,7 @@ function DashboardView({ data, columns, isOpen, onClose, onViewChart, onViewMap 
             </div>
           </div>
 
+          
           <div className="dashboard-map">
             <div className="map-card">
               <div className="map-card-header">
@@ -320,8 +321,8 @@ function DashboardView({ data, columns, isOpen, onClose, onViewChart, onViewMap 
                   View Map
                 </button>
               </div>
-              <div className="map-container">
-                <MapChart sheetData={data} />
+              <div className="map-container-small">
+                <MapChart sheetData={data} isMiniature={true} />
               </div>
             </div>
           </div>

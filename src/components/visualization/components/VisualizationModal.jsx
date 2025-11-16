@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from 'react';
+// Modified: VisualizationModal.jsx
+import React, { useState, useEffect, useRef } from 'react';
 import { 
   getNumericColumns,
   isConvertibleToNumber,
@@ -28,6 +29,12 @@ function VisualizationModal({ data, columns, isOpen, onClose, chartType: initial
   const [numericColumns, setNumericColumns] = useState([]);
   const [allColumns, setAllColumns] = useState([]);
 
+  // Map-specific states
+  const [dataColumnsMap, setDataColumnsMap] = useState([]);
+  const [availableColumnsMap, setAvailableColumnsMap] = useState([]);
+  const [dropdownOpenMap, setDropdownOpenMap] = useState(false);
+  const dropdownRefMap = useRef(null);
+
   useEffect(() => {
     if (columns && columns.length > 0) {
       const cols = getAllColumns(data);
@@ -45,11 +52,38 @@ function VisualizationModal({ data, columns, isOpen, onClose, chartType: initial
     }
   }, [columns, data]);
 
+  // Initialize map columns when entering map view
   useEffect(() => {
-    if (xAxisColumn && yAxisColumn && data && data.length > 0 && currentView !== 'dashboard' && currentView !== 'map') {
-      updateChartData();
+    if (currentView === 'map' && data.length > 0) {
+      const columns = Object.keys(data[0]).filter(col => 
+        !['COUNTRY', 'ADM1_NAME', 'ADM2_NAME', 'ISO3', 'ADM1_PCODE', 'ADM2_PCODE'].includes(col)
+      );
+      setAvailableColumnsMap(columns);
+      if (columns.length > 0 && dataColumnsMap.length === 0) {
+        setDataColumnsMap([columns[0]]);
+      }
+    } else {
+      setAvailableColumnsMap([]);
+      setDataColumnsMap([]);
+      setDropdownOpenMap(false);
     }
-  }, [xAxisColumn, yAxisColumn, data, currentView, aggregationType]);
+  }, [currentView, data]);
+
+  // Close dropdown on outside click for map
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (dropdownRefMap.current && !dropdownRefMap.current.contains(event.target)) {
+        setDropdownOpenMap(false);
+      }
+    };
+
+    if (currentView === 'map') {
+      document.addEventListener('mousedown', handleClickOutside);
+      return () => {
+        document.removeEventListener('mousedown', handleClickOutside);
+      };
+    }
+  }, [currentView]);
 
   const updateChartData = () => {
     try {
@@ -85,6 +119,14 @@ function VisualizationModal({ data, columns, isOpen, onClose, chartType: initial
     setCurrentView('dashboard');
   };
 
+  // Map column toggle handler
+  const handleColumnToggleMap = (column) => {
+    const newColumns = dataColumnsMap.includes(column)
+      ? dataColumnsMap.filter(col => col !== column)
+      : [...dataColumnsMap, column].slice(0, 5);
+    setDataColumnsMap(newColumns);
+  };
+
   const getChartComponent = () => {
     if (currentView === 'map') {
       return (
@@ -93,9 +135,58 @@ function VisualizationModal({ data, columns, isOpen, onClose, chartType: initial
             <button className="back-btn" onClick={handleBackToDashboard}>
               ← Back to Dashboard
             </button>
+            <div className="data-column-selector" ref={dropdownRefMap}>
+              <button 
+                className="dropdown-toggle"
+                onClick={() => setDropdownOpenMap(!dropdownOpenMap)}
+              >
+                Select Data Columns ({dataColumnsMap.length}/5 selected)
+                <span className={`dropdown-arrow ${dropdownOpenMap ? 'open' : ''}`}>▼</span>
+              </button>
+              
+              {dropdownOpenMap && (
+                <div className="dropdown-menu">
+                  <div className="dropdown-header">
+                    <span>Select up to 5 columns</span>
+                    <button 
+                      className="clear-all-btn"
+                      onClick={() => setDataColumnsMap([])}
+                    >
+                      Clear All
+                    </button>
+                  </div>
+                  <div className="dropdown-items">
+                    {availableColumnsMap.map(col => (
+                      <label key={col} className="dropdown-item">
+                        <input
+                          type="checkbox"
+                          checked={dataColumnsMap.includes(col)}
+                          onChange={() => handleColumnToggleMap(col)}
+                          disabled={!dataColumnsMap.includes(col) && dataColumnsMap.length >= 5}
+                        />
+                        <span className="checkmark"></span>
+                        <span className="column-name">{col}</span>
+                        {!dataColumnsMap.includes(col) && dataColumnsMap.length >= 5 && (
+                          <span className="max-warning">Max reached</span>
+                        )}
+                      </label>
+                    ))}
+                  </div>
+                </div>
+              )}
+              
+              <div className="selection-info">
+                {dataColumnsMap.length > 0 && (
+                  <span>Selected: {dataColumnsMap.join(', ')}</span>
+                )}
+                {dataColumnsMap.length >= 5 && (
+                  <span className="max-warning"> (Maximum reached)</span>
+                )}
+              </div>
+            </div>
             <h3>🗺️ Tanzania Map</h3>
           </div>
-          <MapChart sheetData={data} />
+          <MapChart sheetData={data} isMiniature={false} dataColumns={dataColumnsMap} />
         </div>
       );
     }
@@ -137,15 +228,21 @@ function VisualizationModal({ data, columns, isOpen, onClose, chartType: initial
           <button className="back-btn" onClick={handleBackToDashboard}>
             ← Back to Dashboard
           </button>
+          <h3>{title}</h3>
         </div>
         <ChartComponent {...props} />
       </div>
     );
   };
 
+  useEffect(() => {
+    if (xAxisColumn && yAxisColumn && data && data.length > 0 && currentView !== 'dashboard' && currentView !== 'map') {
+      updateChartData();
+    }
+  }, [xAxisColumn, yAxisColumn, data, currentView, aggregationType]);
+
   if (!isOpen) return null;
 
-  // If it's dashboard or single chart view, render accordingly
   if (currentView === 'dashboard') {
     return getChartComponent();
   }

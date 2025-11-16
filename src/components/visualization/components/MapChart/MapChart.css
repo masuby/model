@@ -1,306 +1,252 @@
+/* Modified: MapChart.css */
 /* MapChart.css - Modularized for sub-components */
 
-/* Main Container */
+/* Main Container - Full height and responsive */
 .map-chart-container {
   width: 100%;
-  height: 600px;
+  height: 100%;
+  min-height: 400px; /* Minimum height for visibility */
   display: flex;
   flex-direction: column;
+  position: relative;
+  overflow: hidden;
 }
 
-.map-header {
-  text-align: center;
-  margin-bottom: 15px;
+.map-chart-container.miniature {
+  min-height: 400px;
+  height: 400px;
 }
 
-.map-header h2 {
-  color: #323130;
-  margin: 0 0 5px 0;
-  font-size: 1.5rem;
+.chart-header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px 0;
+  background: #f8f9fa;
+  border-bottom: 1px solid #e0e0e0;
+  margin-bottom: 0;
+  width: 100%;
+  flex-shrink: 0;
 }
 
-.map-header p {
-  color: #605e5c;
-  margin: 0;
-  font-size: 0.9rem;
-}
-
-/* Data Column Selector */
+/* Data Column Selector - Centered */
 .data-column-selector {
   text-align: center;
-  margin-bottom: 15px;
   padding: 10px;
   background: #f8f9fa;
   border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  position: relative;
+  width: 100%;
+  max-width: 600px;
 }
 
-.data-column-selector label {
-  font-weight: 500;
-  margin-right: 10px;
-}
-
-.data-column-selector select {
-  padding: 8px 12px;
+/* Dropdown Toggle Button */
+.dropdown-toggle {
+  padding: 10px 16px;
   border: 1px solid #ced4da;
   border-radius: 4px;
   background: white;
   color: #495057;
   cursor: pointer;
-  min-width: 200px;
-}
-
-/* Map Content Layout */
-.map-content {
+  min-width: 300px;
+  max-width: 500px;
   display: flex;
-  height: 450px;
-  gap: 15px;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.9rem;
+  transition: all 0.3s ease;
 }
 
-/* Hover Popup Styles - Add coords */
+.dropdown-toggle:hover {
+  border-color: #0077b6;
+  background: #f8f9fa;
+}
+
+.dropdown-arrow {
+  transition: transform 0.3s ease;
+  font-size: 0.8rem;
+}
+
+.dropdown-arrow.open {
+  transform: rotate(180deg);
+}
+
+/* Dropdown Menu */
+.dropdown-menu {
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  background: white;
+  border: 1px solid #ced4da;
+  border-radius: 4px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  z-index: 1000;
+  min-width: 350px;
+  max-width: 500px;
+  max-height: 400px;
+  overflow-y: auto;
+  margin-top: 5px;
+}
+
+.dropdown-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 16px;
+  border-bottom: 1px solid #e9ecef;
+  background: #f8f9fa;
+  font-weight: 500;
+  font-size: 0.9rem;
+}
+
+.clear-all-btn {
+  background: none;
+  border: none;
+  color: #dc3545;
+  cursor: pointer;
+  font-size: 0.8rem;
+  text-decoration: underline;
+}
+
+.clear-all-btn:hover {
+  color: #c82333;
+}
+
+.dropdown-items {
+  padding: 8px 0;
+}
+
+.dropdown-item {
+  display: flex;
+  align-items: center;
+  padding: 8px 16px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  position: relative;
+}
+
+.dropdown-item:hover {
+  background-color: #f8f9fa;
+}
+
+.dropdown-item input[type="checkbox"] {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.checkmark {
+  position: relative;
+  height: 18px;
+  width: 18px;
+  background-color: #fff;
+  border: 2px solid #ced4da;
+  border-radius: 3px;
+  margin-right: 10px;
+  transition: all 0.3s ease;
+}
+
+.dropdown-item input[type="checkbox"]:checked ~ .checkmark {
+  background-color: #0077b6;
+  border-color: #0077b6;
+}
+
+.checkmark:after {
+  content: "";
+  position: absolute;
+  display: none;
+  left: 5px;
+  top: 2px;
+  width: 4px;
+  height: 8px;
+  border: solid white;
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+}
+
+.dropdown-item input[type="checkbox"]:checked ~ .checkmark:after {
+  display: block;
+}
+
+.column-name {
+  flex: 1;
+  font-size: 0.9rem;
+  color: #495057;
+}
+
+.dropdown-item input[type="checkbox"]:disabled ~ .column-name {
+  color: #6c757d;
+  opacity: 0.6;
+}
+
+.dropdown-item input[type="checkbox"]:disabled ~ .checkmark {
+  background-color: #e9ecef;
+  border-color: #ced4da;
+  cursor: not-allowed;
+}
+
+/* Map Content Layout - Full height */
+.map-content-full {
+  flex: 1;
+  height: 100%;
+  position: relative;
+  overflow: hidden;
+  min-height: 300px; /* Ensure minimum visibility */
+}
+
+.map-content-full.miniature {
+  height: 100%;
+  min-height: 300px;
+}
+
+/* Map Display Container */
+.map-display-container {
+  height: 100%;
+  width: 100%;
+  position: relative;
+}
+
+/* Hover Popup Styles */
 .popup-coords {
   margin: 4px 0 0 0;
   font-size: 0.85rem;
   color: #666;
-  font-style: italic;
 }
 
-/* Sidebar Styles */
-.sidebar-container {
-  width: 250px;
-  background: #f8f9fa;
-  border-radius: 8px;
-  padding: 15px;
-  overflow-y: auto;
-  display: flex;
-  flex-direction: column;
-}
-
-.sidebar-container h3 {
-  margin: 0 0 15px 0;
-  color: #0077b6;
-  font-size: 1.1rem;
-}
-
-.regions-list {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-}
-
-.region-item {
-  padding: 10px;
-  background: white;
-  border: 1px solid #e0e0e0;
-  border-radius: 4px;
-  color: #0077b6;
-  cursor: pointer;
-  transition: all 0.2s ease;
-  font-size: 0.9rem;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.region-item:hover {
-  background: #e6f7ff;
-  border-color: #0077b6;
-}
-
-.region-item.selected {
-  background: #0077b6;
-  color: white;
-  border-color: #0077b6;
-}
-
-.region-item .toggle-icon {
-  font-size: 0.8rem;
-}
-
-.districts-container {
-  margin-top: 5px;
-  border-left: 2px solid #0077b6;
-  padding-left: 10px;
-  margin-left: 10px;
-}
-
-.districts-list {
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-  max-height: 300px;
-  overflow-y: auto;
-  margin-top: 8px;
-}
-
-.district-item {
-  padding: 8px;
-  background: white;
-  border: 1px solid #e0e0e0;
-  border-radius: 4px;
-  color: #495057;
-  cursor: pointer;
-  transition: all 0.2s ease;
-  font-size: 0.85rem;
-}
-
-.district-item:hover {
-  background: #e6f7ff;
-  border-color: #0077b6;
-}
-
-.district-item.selected {
-  background: #0077b6;
-  color: white;
-  border-color: #0077b6;
-}
-
-/* Map Display Styles */
-.map-display-container {
-  flex: 1;
-  border-radius: 8px;
-  overflow: hidden;
-  position: relative;
-  border: 1px solid #e0e0e0;
-  height: 100%;
-}
-
-.osm-iframe {
-  border-radius: 8px;
-}
-
-.map-attribution {
-  position: absolute;
-  bottom: 10px;
-  right: 10px;
-  background: rgba(255, 255, 255, 0.9);
-  padding: 5px 10px;
-  border-radius: 4px;
-  font-size: 0.8rem;
-  text-align: right;
-  max-width: 200px;
-}
-
-.map-attribution a {
-  color: #0077b6;
-  text-decoration: none;
-  font-size: 0.8rem;
-}
-
-.map-attribution a:hover {
-  text-decoration: underline;
-}
-
-/* Legend Styles (New) */
-.legend-control {
-  background: white;
-  padding: 10px;
-  border-radius: 5px;
-  box-shadow: 0 1px 5px rgba(0,0,0,0.4);
-  font-size: 12px;
-  line-height: 18px;
-  z-index: 1000;
-}
-
-.legend-title {
-  font-weight: bold;
-  margin-bottom: 5px;
-  text-align: center;
-  color: #333;
-}
-
-.legend-body i {
-  width: 18px;
-  height: 18px;
-  float: left;
-  margin-right: 8px;
-  opacity: 0.7;
-}
-
-.legend-body {
-  line-height: 18px;
-  color: #555;
-}
-
-/* Info Panel Styles */
-.info-panel-container {
-  margin-top: 15px;
-  padding: 15px;
-  background: #f8f9fa;
-  border-radius: 8px;
-  border-left: 4px solid #0077b6;
-}
-
-.info-panel-container h3 {
-  margin: 0 0 10px 0;
-  color: #0077b6;
-  font-size: 1.2rem;
-}
-
-.info-panel-container p {
-  margin: 5px 0;
-  color: #495057;
-  font-size: 0.9rem;
-}
-
-.district-data {
-  margin-top: 15px;
-  padding: 10px;
-  background: white;
-  border-radius: 4px;
-  border: 1px solid #e0e0e0;
-}
-
-.district-data h4 {
-  margin: 0 0 10px 0;
-  color: #28a745;
-  font-size: 1rem;
-}
-
-.district-data p {
-  margin: 5px 0;
-  font-size: 0.9rem;
-}
-
-.district-data strong {
-  color: #495057;
-}
-
-.no-data-warning {
-  color: #dc3545 !important;
-  font-style: italic;
-  margin-top: 10px;
-}
-
-/* Hover Popup Styles */
 .hover-popup-container {
-  position: fixed;
-  z-index: 1000;
-  pointer-events: none;
+  position: absolute;
   background: white;
-  border: 2px solid #0077b6;
-  border-radius: 8px;
-  padding: 12px;
+  border-radius: 6px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-  max-width: 280px;
-  word-wrap: break-word;
+  padding: 10px;
+  z-index: 1000;
+  min-width: 200px;
+  max-width: 300px;
+  pointer-events: none;
+  border: 1px solid #ddd;
 }
 
 .hover-popup-container::before {
   content: '';
   position: absolute;
-  top: -10px;
-  left: 20px;
-  border-width: 0 10px 10px 10px;
+  top: -7px;
+  left: 21px;
+  border-width: 0 9px 9px 9px;
   border-style: solid;
-  border-color: transparent transparent #0077b6 transparent;
+  border-color: transparent transparent #ddd transparent;
 }
 
 .hover-popup-container::after {
   content: '';
   position: absolute;
-  top: -7px;
+  top: -6px;
   left: 21px;
-  border-width: 0 9px 9px 9px;
+  border-width: 0 8px 8px 8px;
   border-style: solid;
   border-color: transparent transparent white transparent;
 }
@@ -372,37 +318,18 @@
   font-size: 0.9rem;
 }
 
-/* Responsive */
-@media (max-width: 768px) {
-  .map-content {
-    flex-direction: column;
-    height: auto;
-  }
-  .sidebar-container {
-    width: 100%;
-    height: 200px;
-  }
-  .map-display-container {
-    height: 300px;
-  }
-}
-
-
-/* Multiple selection styles */
-.data-column-selector select[multiple] {
-  min-height: 120px;
-  padding: 8px;
-}
-
+/* Selection info */
 .selection-info {
   margin-top: 8px;
   font-size: 0.85rem;
   color: #666;
+  text-align: center;
 }
 
 .max-warning {
   color: #dc3545;
   font-weight: bold;
+  font-size: 0.8rem;
 }
 
 /* Focus controls */
@@ -414,6 +341,7 @@
   background: #e3f2fd;
   border-radius: 8px;
   margin-bottom: 15px;
+  flex-shrink: 0;
 }
 
 .clear-focus-btn {
@@ -434,22 +362,6 @@
   font-weight: 500;
   color: #0077b6;
 }
-
-/* Data columns info in sidebar */
-.data-columns-info {
-  background: #e8f5e8;
-  padding: 8px;
-  border-radius: 4px;
-  margin-bottom: 15px;
-  font-size: 0.85rem;
-  border-left: 3px solid #28a745;
-}
-
-/* Multiple legends spacing */
-.legend-control {
-  margin-bottom: 10px;
-}
-
 
 /* Single legend with multiple sections */
 .legend-section {
@@ -493,4 +405,123 @@
 .legend-body {
   line-height: 18px;
   color: #555;
+}
+
+/* Click interaction styles */
+.region-clicked {
+  stroke: #1e3a8a;
+  stroke-width: 3;
+  stroke-opacity: 0.8;
+}
+
+.district-clicked {
+  stroke: #dc2626;
+  stroke-width: 2;
+  stroke-opacity: 0.8;
+}
+
+/* Map Attribution */
+.map-attribution {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  background: rgba(255, 255, 255, 0.8);
+  padding: 5px 8px;
+  border-radius: 4px;
+  font-size: 0.8rem;
+  z-index: 1000;
+  text-align: right;
+  max-width: 200px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .map-chart-container {
+    min-height: 350px;
+  }
+  
+  .map-chart-container.miniature {
+    min-height: 300px;
+    height: 300px;
+  }
+  
+  .map-content-full {
+    min-height: 250px;
+  }
+  
+  .map-content-full.miniature {
+    min-height: 250px;
+  }
+  
+  .dropdown-toggle {
+    min-width: 250px;
+    max-width: 300px;
+    font-size: 0.8rem;
+  }
+  
+  .dropdown-menu {
+    min-width: 280px;
+    max-width: 320px;
+    left: 0;
+    transform: none;
+  }
+  
+  .focus-controls {
+    flex-direction: column;
+    gap: 10px;
+    text-align: center;
+  }
+  
+  .map-attribution {
+    font-size: 0.7rem;
+    max-width: 150px;
+    padding: 3px 6px;
+    bottom: 5px;
+    right: 5px;
+  }
+}
+
+@media (max-width: 480px) {
+  .map-chart-container {
+    min-height: 300px;
+  }
+  
+  .map-chart-container.miniature {
+    min-height: 250px;
+    height: 250px;
+  }
+  
+  .map-content-full {
+    min-height: 200px;
+  }
+  
+  .map-content-full.miniature {
+    min-height: 200px;
+  }
+  
+  .dropdown-toggle {
+    min-width: 200px;
+    max-width: 250px;
+    font-size: 0.8rem;
+  }
+  
+  .dropdown-menu {
+    min-width: 240px;
+    max-width: 280px;
+    left: 0;
+    transform: none;
+  }
+  
+  .selection-info {
+    font-size: 0.8rem;
+  }
+  
+  .chart-header {
+    padding: 5px 0;
+  }
+  
+  .data-column-selector {
+    padding: 5px;
+    gap: 5px;
+  }
 }
