@@ -42,57 +42,12 @@
   font-weight: 500;
 }
 
-/* Category Navigation - Horizontal scrollable */
-.category-nav {
-  display: flex;
-  gap: 1px;
-  background: #e0e0e0;
-  padding: 0;
-  position: sticky;
-  top: 68px;
-  z-index: 999;
-  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
-  overflow-x: auto;
-  white-space: nowrap;
-  -webkit-overflow-scrolling: touch;
-  scrollbar-width: none;
-}
-
-.category-nav::-webkit-scrollbar {
-  display: none;
-}
-
-.category-btn {
-  flex: 0 0 auto;
-  padding: 10px 12px;
-  border: none;
-  background: white;
-  cursor: pointer;
-  font-weight: 600;
-  font-size: 0.75rem;
-  transition: all 0.3s ease;
-  text-transform: uppercase;
-  letter-spacing: 0.3px;
-  border-bottom: 2px solid transparent;
-  min-width: max-content;
-}
-
-.category-btn:hover {
-  background: #f8f9fa;
-}
-
-.category-btn.active {
-  border-bottom-color: currentColor;
-  background: #f8f9fa;
-}
-
-/* Compact Toolbar - Optimized for mobile */
+/* Compact Toolbar - Two separate rows */
 .compact-toolbar {
   display: flex;
   flex-direction: column;
-  gap: 6px;
-  padding: 8px 10px;
-  margin-top: 3%;
+  gap: 8px;
+  padding: 10px 12px;
   background: white;
   border-bottom: 1px solid #e0e0e0;
 }
@@ -100,30 +55,57 @@
 .toolbar-row {
   display: flex;
   width: 100%;
+  gap: 10px;
+  align-items: center;
+}
+
+.first-row {
+  justify-content: space-between;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+  padding-bottom: 4px;
+}
+
+.first-row::-webkit-scrollbar {
+  height: 4px;
+}
+
+.first-row::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 2px;
+}
+
+.first-row::-webkit-scrollbar-thumb {
+  background: #c1c1c1;
+  border-radius: 2px;
+}
+
+.first-row::-webkit-scrollbar-thumb:hover {
+  background: #a8a8a8;
+}
+
+.second-row {
+  justify-content: flex-start;
 }
 
 .toolbar-group {
   display: flex;
-  gap: 6px;
+  gap: 8px;
   align-items: center;
+}
+
+.action-group {
   width: 100%;
-}
-
-.file-controls {
-  justify-content: flex-start;
-}
-
-.search-visualization {
-  justify-content: space-between;
 }
 
 .upload-btn {
   background: var(--primary-color, #007bff);
   color: white;
-  padding: 5px 8px;
+  padding: 6px 10px;
   border-radius: 4px;
   cursor: pointer;
-  font-size: 0.7rem;
+  font-size: 0.75rem;
   font-weight: 500;
   transition: background-color 0.2s;
   white-space: nowrap;
@@ -137,15 +119,15 @@
 }
 
 .file-select {
-  padding: 5px 6px;
+  padding: 6px 8px;
   border: 1px solid #dcdfe6;
   border-radius: 4px;
   background: white;
-  font-size: 0.7rem;
-  min-width: 120px;
+  font-size: 0.75rem;
   color: #333;
   font-family: inherit;
-  flex: 1;
+  min-width: 140px;
+  cursor: pointer;
 }
 
 .file-select:focus {
@@ -154,19 +136,20 @@
   box-shadow: 0 0 0 2px rgba(0, 119, 182, 0.1);
 }
 
-/* Search Bar */
+/* Search Bar - Larger */
 .search-container {
   flex: 1;
-  min-width: 100px;
+  min-width: 180px;
+  max-width: 300px;
 }
 
 .search-container input {
   width: 100%;
-  padding: 5px 8px;
+  padding: 6px 10px;
   border-radius: 4px;
   border: 1px solid #dcdfe6;
   background: white;
-  font-size: 0.7rem;
+  font-size: 0.75rem;
   font-family: inherit;
   transition: border-color 0.2s;
   color: #333;
@@ -178,51 +161,31 @@
   box-shadow: 0 0 0 2px rgba(0, 119, 182, 0.1);
 }
 
-/* Download Button */
-.download-btn {
-  padding: 5px 8px;
-  border: none;
+/* Action Select - Full width in second row */
+.action-select {
+  padding: 6px 10px;
+  border: 1px solid #dcdfe6;
   border-radius: 4px;
-  background: var(--primary-color, #0077b6);
-  color: white;
-  font-weight: 500;
-  cursor: pointer;
-  transition: all 0.2s ease;
-  display: flex;
-  align-items: center;
-  gap: 4px;
-  font-size: 0.7rem;
-  white-space: nowrap;
-  flex-shrink: 0;
-}
-
-.download-btn:hover {
-  background: var(--primary-color, #0056b3);
-  opacity: 0.9;
-}
-
-/* Action Label */
-.action-label {
-  text-align: center;
-  padding: 6px 10px;
-  background: var(--primary-color, #0077b6);
-  color: white;
-  font-size: 0.75rem;
-  font-weight: 500;
-}
-
-/* Data Entry */
-.dataentry-container {
-  padding: 6px 10px;
   background: white;
-  border-bottom: 1px solid #e0e0e0;
+  font-size: 0.75rem;
+  color: #333;
+  font-family: inherit;
+  width: 100%;
+  max-width: 200px;
+  cursor: pointer;
+}
+
+.action-select:focus {
+  outline: none;
+  border-color: var(--primary-color, #0077b6);
+  box-shadow: 0 0 0 2px rgba(0, 119, 182, 0.1);
 }
 
 /* Sheet Navigation */
 .sheet-nav {
   display: flex;
   gap: 4px;
-  padding: 6px 10px;
+  padding: 6px 12px;
   background: white;
   border-bottom: 1px solid #e0e0e0;
   overflow-x: auto;
@@ -264,14 +227,14 @@
 }
 
 .table-header {
-  padding: 6px 10px;
+  padding: 6px 12px;
   background: var(--secondary-color, #f1f9ff);
   border-bottom: 1px solid #e0e0e0;
   display: flex;
   justify-content: space-between;
   align-items: center;
   position: sticky;
-  top: 118px;
+  top: 60px;
   z-index: 5;
 }
 
@@ -341,7 +304,7 @@
   justify-content: center;
   align-items: center;
   gap: 8px;
-  padding: 8px 10px;
+  padding: 8px 12px;
   border-top: 1px solid #e0e0e0;
   background: white;
   position: sticky;
@@ -382,7 +345,7 @@
 .action-buttons-bottom {
   display: flex;
   gap: 6px;
-  padding: 8px 10px;
+  padding: 8px 12px;
   background: white;
   border-top: 1px solid #e0e0e0;
   justify-content: center;
@@ -423,42 +386,25 @@
 /* Desktop Styles */
 @media (min-width: 769px) {
   .compact-toolbar {
-    flex-direction: row;
-    align-items: center;
-    padding: 10px 15px;
+    padding: 12px 15px;
     gap: 10px;
-
-    
   }
   
   .toolbar-row {
-    flex: 1;
+    gap: 15px;
   }
   
-  .file-controls {
-    justify-content: flex-start;
-    min-width: 250px;
+  .file-select {
+    min-width: 160px;
   }
   
-  .search-visualization {
-    justify-content: flex-end;
-    gap: 8px;
+  .search-container {
+    min-width: 200px;
+    max-width: 400px;
   }
   
-  .category-btn {
-    flex: 1;
-    font-size: 0.8rem;
-    padding: 10px 8px;
-  }
-  
-  .upload-btn, .file-select, .download-btn {
-    font-size: 0.75rem;
-    padding: 6px 10px;
-  }
-  
-  .search-container input {
-    font-size: 0.75rem;
-    padding: 6px 10px;
+  .action-select {
+    max-width: 250px;
   }
   
   .table-header {
@@ -488,15 +434,6 @@
     padding: 4px 8px;
   }
   
-  .action-label {
-    font-size: 0.8rem;
-    padding: 6px 15px;
-  }
-  
-  .dataentry-container {
-    padding: 8px 15px;
-  }
-  
   .pagination {
     padding: 10px 15px;
     gap: 10px;
@@ -522,34 +459,45 @@
   }
 }
 
-/* Very small screens */
-@media (max-width: 360px) {
-  .compact-toolbar {
-    padding: 6px 8px;
-    
+/* Mobile Styles */
+@media (max-width: 768px) {
+  .first-row {
+    flex-wrap: wrap;
+    gap: 8px;
   }
   
   .toolbar-group {
-    gap: 4px;
+    flex: 1;
+    min-width: 150px;
   }
   
-  .upload-btn, .download-btn {
-    font-size: 0.65rem;
-    padding: 4px 6px;
+  .search-container {
+    min-width: 120px;
+  }
+}
+
+/* Very small screens */
+@media (max-width: 480px) {
+  .compact-toolbar {
+    padding: 8px 10px;
+    gap: 6px;
   }
   
-  .file-select {
-    font-size: 0.65rem;
-    padding: 4px 6px;
+  .first-row {
+    flex-direction: column;
+    gap: 6px;
+  }
+  
+  .toolbar-group {
+    width: 100%;
+    justify-content: space-between;
+  }
+  
+  .upload-btn, .file-select, .action-select {
+    font-size: 0.7rem;
   }
   
   .search-container input {
-    font-size: 0.65rem;
-    padding: 4px 6px;
-  }
-  
-  .category-btn {
-    padding: 8px 10px;
     font-size: 0.7rem;
   }
   

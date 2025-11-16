@@ -33,8 +33,7 @@ function DownloadButton({ sheets, fileName = "data.xlsx", categoryFolder = "risk
   };
 
   return (
-    <button onClick={handleDownload} className="download-btn">
-      ⬇️ Export Excel
+    <button onClick={handleDownload} className="download-button">
     </button>
   );
 }

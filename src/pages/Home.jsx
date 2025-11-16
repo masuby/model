@@ -24,17 +24,48 @@ function Home() {
   const [currentFileName, setCurrentFileName] = useState("model.xlsx");
   const [availableFiles, setAvailableFiles] = useState([]);
   const [isUploading, setIsUploading] = useState(false);
+  const [selectedAction, setSelectedAction] = useState("");
   const rowsPerPage = 20;
 
   const categoryConfig = CATEGORIES[currentCategory.toUpperCase()];
 
-  // Update header color when category changes
+  // Update header color and title when category changes
   useEffect(() => {
     const header = document.getElementById('app-header');
+    const categoryTitle = document.getElementById('category-title');
+    const categorySelect = document.getElementById('category-select');
+    
     if (header) {
       header.style.setProperty('--primary-color', categoryConfig.color);
     }
+    
+    if (categoryTitle) {
+      categoryTitle.textContent = categoryConfig.title;
+    }
+    
+    if (categorySelect) {
+      categorySelect.value = currentCategory;
+    }
   }, [currentCategory]);
+
+  // Handle category change from dropdown
+  useEffect(() => {
+    const categorySelect = document.getElementById('category-select');
+    if (categorySelect) {
+      const handleCategoryChange = (event) => {
+        const newCategory = event.target.value;
+        setCurrentCategory(newCategory);
+        setCurrentPage(1);
+        setSearchQuery("");
+      };
+      
+      categorySelect.addEventListener('change', handleCategoryChange);
+      
+      return () => {
+        categorySelect.removeEventListener('change', handleCategoryChange);
+      };
+    }
+  }, []);
 
   // Load available files and initial data when category changes
   useEffect(() => {
@@ -109,20 +140,6 @@ function Home() {
     }
   };
 
-  // Save changes back to storage
-  const handleSaveChanges = async () => {
-    if (!sheets) return;
-    
-    try {
-      const filePath = `${categoryConfig.folder}/${currentFileName}`;
-      await updateExcelInStorage(filePath, sheets);
-      alert('Changes saved successfully!');
-    } catch (error) {
-      console.error("Save failed:", error);
-      alert(`Save failed: ${error.message}`);
-    }
-  };
-
   // Update sheet data (for DataEntry component)
   const updateSheetData = (newData) => {
     setSheets({ ...sheets, [activeSheet]: newData });
@@ -191,35 +208,13 @@ function Home() {
       '--primary-color': categoryConfig.color,
       '--secondary-color': categoryConfig.secondaryColor
     }}>
-      {/* Category Navigation - Horizontal scrollable on mobile */}
-      <div className="category-nav">
-        {Object.values(CATEGORIES).map((category) => (
-          <button
-            key={category.id}
-            onClick={() => {
-              setCurrentCategory(category.id);
-              setCurrentPage(1);
-              setSearchQuery("");
-            }}
-            className={`category-btn ${currentCategory === category.id ? 'active' : ''}`}
-            style={{
-              backgroundColor: currentCategory === category.id ? category.color : 'transparent',
-              borderColor: category.color,
-              color: currentCategory === category.id ? 'white' : category.color
-            }}
-          >
-            {category.name}
-          </button>
-        ))}
-      </div>
-
-      {/* Compact Toolbar - Optimized for mobile */}
+      {/* Compact Toolbar - Two separate rows */}
       <div className="compact-toolbar">
-        {/* First row: Upload and File Select */}
-        <div className="toolbar-row">
-          <div className="toolbar-group file-controls">
+        {/* First row: Upload, Choose Excel, Search, Visualization, Export Excel */}
+        <div className="toolbar-row first-row">
+          <div className="toolbar-group">
             <label className="upload-btn">
-              {isUploading ? "⏳" : "📁 Upload"}
+              {isUploading ? "⏳" : "📁"}
               <input
                 type="file"
                 accept=".xlsx,.xls"
@@ -242,33 +237,19 @@ function Home() {
               ))}
             </select>
           </div>
-        </div>
 
-        {/* Second row: Search, Visualization and Export */}
-        <div className="toolbar-row">
-          <div className="toolbar-group search-visualization">
+          <div className="toolbar-group">
             <SearchBar searchQuery={searchQuery} setSearchQuery={setSearchQuery} />
+          </div>
+
+          <div className="toolbar-group">
             <Visualization 
               onSelect={(type) => console.log("Chart:", type)}
               sheetData={data}
               sheetName={activeSheet}
             />
-            <DownloadButton sheets={sheets} fileName={currentFileName} />
           </div>
         </div>
-      </div>
-
-      {/* Action Label */}
-      <div className="action-label">
-        <span>Select Action Below</span>
-      </div>
-
-      {/* Data Entry Section */}
-      <div className="dataentry-container">
-        <DataEntry
-          sheetData={data}
-          setSheetData={updateSheetData}
-        />
       </div>
 
       {/* Sheet Navigation */}
@@ -342,9 +323,6 @@ function Home() {
       <div className="action-buttons-bottom">
         <button onClick={handleDownload} className="action-btn download">
           ⬇️ Download
-        </button>
-        <button onClick={handleSaveChanges} className="action-btn save">
-          💾 Save Changes
         </button>
       </div>
 
