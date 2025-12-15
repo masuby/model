@@ -1,0 +1,302 @@
+/* INFORM Dimension Cards Styles */
+.dimension-cards-container {
+  padding: 20px;
+  background: #f8f9fa;
+  border-radius: 12px;
+}
+
+.cards-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.cards-header h2 {
+  margin: 0;
+  font-size: 22px;
+  font-weight: 700;
+  color: #1a1a2e;
+}
+
+.selected-area {
+  padding: 6px 14px;
+  background: #e3f2fd;
+  border-radius: 20px;
+  font-size: 13px;
+  font-weight: 500;
+  color: #1565c0;
+}
+
+.risk-equation {
+  padding: 12px 16px;
+  background: #fff;
+  border-radius: 8px;
+  border-left: 4px solid #6D4C41;
+  margin-bottom: 20px;
+}
+
+.equation-text {
+  font-size: 14px;
+  color: #333;
+}
+
+.equation-text strong {
+  font-size: 16px;
+}
+
+.equation-text sup {
+  font-size: 10px;
+}
+
+.cards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+/* Dimension Card */
+.dimension-card {
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  overflow: hidden;
+  transition: transform 0.2s, box-shadow 0.2s;
+  border-top: 4px solid var(--accent-color);
+}
+
+.dimension-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
+}
+
+.dimension-card.risk-card {
+  grid-column: 1 / -1;
+  background: linear-gradient(135deg, #fafafa 0%, #fff 100%);
+}
+
+@media (min-width: 900px) {
+  .dimension-card.risk-card {
+    grid-column: span 1;
+  }
+}
+
+.card-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 16px;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.card-icon {
+  font-size: 28px;
+  line-height: 1;
+}
+
+.card-title {
+  flex: 1;
+}
+
+.card-title h3 {
+  margin: 0 0 4px 0;
+  font-size: 15px;
+  font-weight: 600;
+  color: #1a1a2e;
+}
+
+.risk-level-badge {
+  display: inline-block;
+  padding: 2px 10px;
+  border-radius: 12px;
+  font-size: 11px;
+  font-weight: 600;
+  color: #fff;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.card-body {
+  display: flex;
+  padding: 16px;
+  gap: 16px;
+}
+
+.gauge-section {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.circular-gauge {
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
+}
+
+.subcategories {
+  flex: 1;
+  min-width: 0;
+}
+
+/* Mini Bar Chart */
+.mini-bar-chart {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.bar-item {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.bar-label {
+  font-size: 11px;
+  font-weight: 500;
+  color: #666;
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+}
+
+.bar-container {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  height: 20px;
+  background: #f0f0f0;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.bar-fill {
+  height: 100%;
+  border-radius: 4px;
+  transition: width 0.5s ease;
+  min-width: 2px;
+}
+
+.bar-value {
+  font-size: 11px;
+  font-weight: 600;
+  color: #333;
+  padding-right: 8px;
+  white-space: nowrap;
+}
+
+/* Card Footer */
+.card-footer {
+  padding: 12px 16px;
+  border-top: 1px solid #f0f0f0;
+  background: #fafafa;
+}
+
+.expand-btn {
+  background: none;
+  border: none;
+  color: #1976d2;
+  font-size: 12px;
+  font-weight: 500;
+  cursor: pointer;
+  padding: 0;
+}
+
+.expand-btn:hover {
+  text-decoration: underline;
+}
+
+.description {
+  margin: 8px 0 0 0;
+  font-size: 12px;
+  line-height: 1.5;
+  color: #555;
+}
+
+/* Risk Scale */
+.risk-scale {
+  background: #fff;
+  padding: 16px;
+  border-radius: 8px;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.06);
+}
+
+.risk-scale h4 {
+  margin: 0 0 12px 0;
+  font-size: 13px;
+  font-weight: 600;
+  color: #333;
+}
+
+.scale-bar {
+  display: flex;
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+.scale-segment {
+  flex: 1;
+  padding: 10px 6px;
+  text-align: center;
+  color: #fff;
+  transition: transform 0.2s;
+}
+
+.scale-segment:hover {
+  transform: scaleY(1.1);
+  z-index: 1;
+}
+
+.scale-label {
+  display: block;
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+}
+
+.scale-range {
+  display: block;
+  font-size: 10px;
+  opacity: 0.9;
+  margin-top: 2px;
+}
+
+/* No Data State */
+.no-data {
+  padding: 40px;
+  text-align: center;
+  color: #666;
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+  .dimension-cards-container {
+    padding: 12px;
+  }
+
+  .cards-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .card-body {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .subcategories {
+    width: 100%;
+  }
+
+  .scale-segment {
+    padding: 8px 4px;
+  }
+
+  .scale-label {
+    font-size: 9px;
+  }
+
+  .scale-range {
+    font-size: 8px;
+  }
+}

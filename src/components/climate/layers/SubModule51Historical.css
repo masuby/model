@@ -1,0 +1,414 @@
+/**
+ * SUB-MODULE 5.1: HISTORICAL CLIMATE & RISK BASELINE - STYLES
+ */
+
+.submodule51-container {
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+/* ========== PURPOSE BANNER ========== */
+.purpose-banner {
+  background: linear-gradient(135deg, #E3F2FD 0%, #BBDEFB 100%);
+  border: 3px solid #2196F3;
+  border-radius: 12px;
+  padding: 24px;
+  margin-bottom: 32px;
+}
+
+.purpose-banner h3 {
+  margin: 0 0 20px 0;
+  font-size: 20px;
+  color: #1976D2;
+}
+
+.purpose-items {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+.purpose-item {
+  background: white;
+  padding: 16px;
+  border-radius: 8px;
+}
+
+.purpose-item strong {
+  display: block;
+  font-size: 14px;
+  color: #1976D2;
+  margin-bottom: 8px;
+}
+
+.purpose-item p {
+  margin: 0;
+  font-size: 13px;
+  color: #666;
+}
+
+/* ========== VARIABLE SELECTOR ========== */
+.variable-selector {
+  margin-bottom: 32px;
+}
+
+.variable-selector h3 {
+  font-size: 18px;
+  color: #333;
+  margin-bottom: 16px;
+}
+
+.variable-buttons {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+
+.variable-btn {
+  background: white;
+  border: 3px solid #E0E0E0;
+  border-radius: 10px;
+  padding: 20px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.variable-btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
+}
+
+.variable-btn.active {
+  border-width: 4px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+}
+
+.var-icon {
+  font-size: 28px;
+}
+
+/* ========== HISTORICAL ANALYSIS ========== */
+.historical-analysis {
+  background: white;
+  border: 3px solid #E0E0E0;
+  border-radius: 12px;
+  padding: 28px;
+  margin-bottom: 32px;
+}
+
+.analysis-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+  padding-bottom: 16px;
+  border-bottom: 3px solid #F5F5F5;
+}
+
+.analysis-header h3 {
+  margin: 0;
+  font-size: 20px;
+  color: #333;
+}
+
+.inform-link-badge {
+  background: #FFF3E0;
+  border: 2px solid #FF9800;
+  padding: 8px 16px;
+  border-radius: 20px;
+  font-size: 12px;
+}
+
+.inform-link-badge strong {
+  color: #F57C00;
+}
+
+/* ========== TREND VISUALIZATION ========== */
+.trend-visualization {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 24px;
+  margin-bottom: 32px;
+}
+
+.trend-chart-placeholder {
+  background: #F5F7FA;
+  border-radius: 10px;
+  padding: 20px;
+}
+
+.chart-title {
+  font-size: 16px;
+  font-weight: 700;
+  color: #333;
+  margin-bottom: 16px;
+}
+
+.chart-area {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  height: 200px;
+  background: white;
+  border-radius: 8px;
+  padding: 16px;
+  gap: 4px;
+}
+
+.chart-bar {
+  flex: 1;
+  background: #2196F3;
+  border-radius: 4px 4px 0 0;
+  position: relative;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  min-height: 20px;
+}
+
+.chart-bar:hover {
+  opacity: 0.8;
+  transform: translateY(-4px);
+}
+
+.bar-label {
+  position: absolute;
+  bottom: -20px;
+  left: 50%;
+  transform: translateX(-50%) rotate(-45deg);
+  font-size: 10px;
+  color: #666;
+  white-space: nowrap;
+}
+
+.chart-axis {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 28px;
+  font-size: 12px;
+  color: #999;
+}
+
+/* ========== TREND STATISTICS ========== */
+.trend-statistics h4 {
+  margin: 0 0 16px 0;
+  font-size: 16px;
+  color: #333;
+}
+
+.stat-grid {
+  display: grid;
+  gap: 12px;
+}
+
+.stat-card {
+  background: white;
+  border: 2px solid #E0E0E0;
+  border-radius: 8px;
+  padding: 16px;
+  text-align: center;
+}
+
+.stat-label {
+  font-size: 12px;
+  color: #666;
+  margin-bottom: 8px;
+}
+
+.stat-value {
+  font-size: 24px;
+  font-weight: 800;
+  margin-bottom: 8px;
+}
+
+.stat-trend {
+  font-size: 13px;
+  font-weight: 600;
+  padding: 4px 12px;
+  border-radius: 12px;
+  display: inline-block;
+}
+
+.stat-trend.increasing {
+  background: #FFEBEE;
+  color: #C62828;
+}
+
+.stat-trend.decreasing {
+  background: #E3F2FD;
+  color: #1976D2;
+}
+
+/* ========== INFORM LINKAGE ========== */
+.inform-linkage {
+  margin-top: 32px;
+  padding-top: 28px;
+  border-top: 3px solid #F5F5F5;
+}
+
+.inform-linkage h4 {
+  margin: 0 0 20px 0;
+  font-size: 18px;
+  color: #2E7D32;
+}
+
+.linkage-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+
+.linkage-card {
+  background: linear-gradient(135deg, #E8F5E9 0%, #C8E6C9 100%);
+  border: 2px solid #4CAF50;
+  border-radius: 8px;
+  padding: 16px;
+}
+
+.linkage-dimension {
+  font-size: 14px;
+  font-weight: 700;
+  color: #2E7D32;
+  margin-bottom: 8px;
+}
+
+.linkage-description {
+  font-size: 12px;
+  color: #555;
+  line-height: 1.5;
+}
+
+/* ========== CLIMATE-SEVERITY CORRELATION ========== */
+.climate-severity-correlation {
+  margin-top: 32px;
+  padding: 24px;
+  background: #FFF8E1;
+  border: 3px solid #FFB74D;
+  border-radius: 10px;
+}
+
+.climate-severity-correlation h4 {
+  margin: 0 0 12px 0;
+  font-size: 18px;
+  color: #F57C00;
+}
+
+.correlation-description {
+  margin: 0 0 16px 0;
+  font-size: 14px;
+  color: #666;
+}
+
+.correlation-findings {
+  display: grid;
+  gap: 12px;
+}
+
+.finding-item {
+  display: flex;
+  gap: 12px;
+  background: white;
+  padding: 12px 16px;
+  border-radius: 6px;
+}
+
+.finding-icon {
+  font-size: 20px;
+  color: #4CAF50;
+  flex-shrink: 0;
+}
+
+.finding-text {
+  font-size: 13px;
+  color: #555;
+  line-height: 1.6;
+}
+
+.finding-text strong {
+  color: #333;
+}
+
+/* ========== DATA SOURCES PANEL ========== */
+.data-sources-panel {
+  background: white;
+  border: 3px solid #E0E0E0;
+  border-radius: 12px;
+  padding: 24px;
+  margin-bottom: 32px;
+}
+
+.data-sources-panel h4 {
+  margin: 0 0 20px 0;
+  font-size: 18px;
+  color: #333;
+}
+
+.sources-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+}
+
+.source-item {
+  background: #F5F5F5;
+  padding: 16px;
+  border-radius: 8px;
+}
+
+.source-item strong {
+  display: block;
+  font-size: 14px;
+  color: #333;
+  margin-bottom: 8px;
+}
+
+.source-item p {
+  margin: 0;
+  font-size: 12px;
+  color: #666;
+  line-height: 1.5;
+}
+
+/* ========== BASELINE SUMMARY ========== */
+.baseline-summary {
+  background: linear-gradient(135deg, #C8E6C9 0%, #A5D6A7 100%);
+  border: 3px solid #4CAF50;
+  border-radius: 12px;
+  padding: 24px;
+  text-align: center;
+}
+
+.baseline-summary h3 {
+  margin: 0 0 12px 0;
+  font-size: 20px;
+  color: #2E7D32;
+}
+
+.baseline-summary p {
+  margin: 0;
+  font-size: 14px;
+  color: #555;
+  line-height: 1.6;
+}
+
+.baseline-summary strong {
+  color: #2E7D32;
+}
+
+/* ========== RESPONSIVE ========== */
+@media (max-width: 1024px) {
+  .purpose-items,
+  .variable-buttons,
+  .linkage-grid,
+  .sources-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .trend-visualization {
+    grid-template-columns: 1fr;
+  }
+}

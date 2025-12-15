@@ -38,14 +38,23 @@ function Visualization({ onSelect, sheetData, sheetName }) {
       <div className="dropdown-container">
         <select value={selected} onChange={handleChange}>
           <option value="">Select Visualization</option>
-          <option value="dashboard">📊 Dashboard View</option>
-          <option value="bar">📈 Bar Chart</option>
-          <option value="line">📉 Line Graph</option>
-          <option value="scatter">🔵 Scatter Plot</option>
-          <option value="area">🟩 Area Graph</option>
-          <option value="pie">🥧 Pie Chart</option>
-          <option value="heatmap">🔥 Heat Map</option>
-          <option value="map">🗺️ Map Chart</option>
+          <optgroup label="INFORM Framework">
+            <option value="inform-dashboard">🎯 INFORM Risk Dashboard</option>
+            <option value="inform-flow">🔄 Hazard-to-Risk Flow</option>
+            <option value="inform-sunburst">🌐 Indicator Hierarchy</option>
+            <option value="inform-radar">📡 Dimension Comparison</option>
+            <option value="inform-map">🗺️ Risk Choropleth Map</option>
+          </optgroup>
+          <optgroup label="Standard Charts">
+            <option value="dashboard">📊 Dashboard View</option>
+            <option value="bar">📈 Bar Chart</option>
+            <option value="line">📉 Line Graph</option>
+            <option value="scatter">🔵 Scatter Plot</option>
+            <option value="area">🟩 Area Graph</option>
+            <option value="pie">🥧 Pie Chart</option>
+            <option value="heatmap">🔥 Heat Map</option>
+            <option value="map">🗺️ Map Chart</option>
+          </optgroup>
         </select>
       </div>
       

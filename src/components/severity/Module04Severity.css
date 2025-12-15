@@ -1,0 +1,291 @@
+/**
+ * MODULE 04: INFORM SEVERITY - STYLES
+ */
+
+.module04-container {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #F5F7FA 0%, #E8EAF6 100%);
+  padding-bottom: 40px;
+}
+
+/* ========== MODULE HEADER ========== */
+.module04-header {
+  background: linear-gradient(135deg, #2962FF 0%, #1976D2 100%);
+  color: white;
+  padding: 32px 40px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+}
+
+.module04-header .header-content {
+  max-width: 1400px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 32px;
+}
+
+.module04-header .module-title {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin: 0;
+}
+
+.module04-header .module-number {
+  font-size: 16px;
+  font-weight: 600;
+  opacity: 0.9;
+  letter-spacing: 1px;
+}
+
+.module04-header .module-name {
+  font-size: 36px;
+  font-weight: 800;
+  letter-spacing: -0.5px;
+}
+
+.module04-header .module-subtitle {
+  font-size: 18px;
+  opacity: 0.95;
+  margin: 8px 0 0 0;
+  font-weight: 400;
+}
+
+.module04-header .header-stats {
+  display: flex;
+  gap: 20px;
+}
+
+.module04-header .stat-box {
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(10px);
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-radius: 12px;
+  padding: 16px 24px;
+  text-align: center;
+  min-width: 120px;
+}
+
+.module04-header .stat-value {
+  font-size: 32px;
+  font-weight: 800;
+  line-height: 1;
+  margin-bottom: 6px;
+}
+
+.module04-header .stat-label {
+  font-size: 13px;
+  opacity: 0.9;
+  font-weight: 500;
+}
+
+/* ========== CONCEPTUAL BANNER ========== */
+.concept-banner {
+  background: linear-gradient(135deg, #FFFDE7 0%, #FFF9C4 100%);
+  border: 3px solid #FBC02D;
+  border-radius: 12px;
+  padding: 24px 32px;
+  margin: 32px 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.concept-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex: 1;
+}
+
+.concept-icon {
+  font-size: 32px;
+  flex-shrink: 0;
+}
+
+.concept-text {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.concept-text strong {
+  font-size: 15px;
+  color: #F57F17;
+}
+
+.concept-text small {
+  font-size: 12px;
+  color: #666;
+}
+
+.concept-arrow {
+  font-size: 24px;
+  color: #FBC02D;
+  font-weight: bold;
+  padding: 0 16px;
+}
+
+/* ========== NAVIGATION TABS ========== */
+.severity-tabs {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  padding: 0 40px;
+  margin-top: 32px;
+}
+
+.severity-tab {
+  background: white;
+  border: 3px solid #E0E0E0;
+  border-radius: 12px;
+  padding: 20px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  min-height: 100px;
+}
+
+.severity-tab:hover:not(:disabled) {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+  border-color: #2196F3;
+}
+
+.severity-tab.active {
+  background: linear-gradient(135deg, #E3F2FD 0%, #BBDEFB 100%);
+  border-color: #2196F3;
+  border-width: 4px;
+  box-shadow: 0 8px 24px rgba(33, 150, 243, 0.3);
+}
+
+.severity-tab:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.severity-tab .tab-icon {
+  font-size: 36px;
+  flex-shrink: 0;
+}
+
+.severity-tab .tab-content {
+  flex: 1;
+  text-align: left;
+}
+
+.severity-tab .tab-title {
+  font-size: 16px;
+  font-weight: 700;
+  color: #333;
+  margin-bottom: 4px;
+}
+
+.severity-tab .tab-description {
+  font-size: 12px;
+  color: #666;
+}
+
+/* ========== TAB CONTENT ========== */
+.severity-content {
+  padding: 32px 40px;
+}
+
+/* ========== LOGIC CHAIN ========== */
+.logic-chain {
+  background: white;
+  border: 3px solid #90CAF9;
+  border-radius: 12px;
+  padding: 24px 32px;
+  margin: 32px 40px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.logic-chain h4 {
+  margin: 0 0 20px 0;
+  font-size: 18px;
+  color: #1976D2;
+}
+
+.chain-flow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.chain-item {
+  background: #F5F5F5;
+  border: 2px solid #E0E0E0;
+  border-radius: 8px;
+  padding: 12px 20px;
+  flex: 1;
+  text-align: center;
+}
+
+.chain-item.completed {
+  background: #E8F5E9;
+  border-color: #4CAF50;
+}
+
+.chain-item.active {
+  background: linear-gradient(135deg, #E3F2FD 0%, #BBDEFB 100%);
+  border-color: #2196F3;
+  border-width: 3px;
+  box-shadow: 0 4px 12px rgba(33, 150, 243, 0.2);
+}
+
+.chain-label {
+  font-size: 11px;
+  font-weight: 600;
+  color: #666;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 4px;
+}
+
+.chain-value {
+  font-size: 14px;
+  font-weight: 700;
+  color: #333;
+}
+
+.chain-arrow {
+  font-size: 20px;
+  color: #2196F3;
+  font-weight: bold;
+  flex-shrink: 0;
+}
+
+/* ========== RESPONSIVE ========== */
+@media (max-width: 1024px) {
+  .module04-header .header-content {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .severity-tabs {
+    grid-template-columns: 1fr;
+  }
+
+  .concept-banner {
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .concept-arrow {
+    transform: rotate(90deg);
+  }
+
+  .chain-flow {
+    flex-direction: column;
+  }
+
+  .chain-arrow {
+    transform: rotate(90deg);
+  }
+}

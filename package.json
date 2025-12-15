@@ -16,6 +16,8 @@
     "echarts-for-react": "^3.0.2",
     "echarts-gl": "^2.0.9",
     "file-saver": "^2.0.5",
+    "html2canvas": "^1.4.1",
+    "jspdf": "^3.0.4",
     "leaflet": "^1.9.4",
     "mapbox-gl": "^3.15.0",
     "npm": "^11.6.2",

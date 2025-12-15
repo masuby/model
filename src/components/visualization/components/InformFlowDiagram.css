@@ -1,0 +1,29 @@
+.inform-flow-diagram {
+  padding: 30px;
+  max-width: 1200px;
+  margin: 0 auto;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+}
+
+.inform-flow-diagram h2 {
+  color: #1a1a2e;
+}
+
+.inform-flow-diagram h3 {
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.inform-flow-diagram select {
+  font-family: inherit;
+}
+
+.inform-flow-diagram select:hover {
+  border-color: #1976d2;
+}
+
+.inform-flow-diagram select:focus {
+  outline: none;
+  border-color: #1976d2;
+  box-shadow: 0 0 0 3px rgba(25, 118, 210, 0.1);
+}

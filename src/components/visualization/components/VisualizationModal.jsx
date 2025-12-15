@@ -1,6 +1,6 @@
-// Modified: VisualizationModal.jsx
+// Modified: VisualizationModal.jsx - INFORM Phase 1 Update
 import React, { useState, useEffect, useRef } from 'react';
-import { 
+import {
   getNumericColumns,
   isConvertibleToNumber,
   convertToNumberIfPossible,
@@ -17,9 +17,16 @@ import PieChart from './PieChart';
 import HeatMap from './HeatMap';
 import MapChart from './MapChart/MapChart';
 import DashboardView from './DashboardView';
+// INFORM Phase 1 Components
+import InformDashboard from './InformDashboard';
+import InformFlowDiagram from './InformFlowDiagram';
+import InformSunburst from './InformSunburst';
+import InformRadarChart from './InformRadarChart';
+import InformChoroplethMap from './InformChoroplethMap';
+import DimensionCards from './DimensionCards';
 import './VisualizationModal.css';
 
-function VisualizationModal({ data, columns, isOpen, onClose, chartType: initialChartType }) {
+function VisualizationModal({ data, columns, isOpen, onClose, chartType: initialChartType, adm1GeoJson, adm2GeoJson }) {
   const [currentView, setCurrentView] = useState(initialChartType || 'dashboard');
   const [xAxisColumn, setXAxisColumn] = useState('');
   const [yAxisColumn, setYAxisColumn] = useState('');
@@ -34,6 +41,29 @@ function VisualizationModal({ data, columns, isOpen, onClose, chartType: initial
   const [availableColumnsMap, setAvailableColumnsMap] = useState([]);
   const [dropdownOpenMap, setDropdownOpenMap] = useState(false);
   const dropdownRefMap = useRef(null);
+
+  // INFORM-specific states
+  const [selectedArea, setSelectedArea] = useState(null);
+  const [comparisonAreas, setComparisonAreas] = useState([]);
+  const [loadedAdm1, setLoadedAdm1] = useState(null);
+  const [loadedAdm2, setLoadedAdm2] = useState(null);
+
+  // Load GeoJSON for INFORM maps
+  useEffect(() => {
+    if (currentView.startsWith('inform-')) {
+      // Load ADM1 GeoJSON
+      fetch('/geojson/ADM1.geojson')
+        .then(res => res.ok ? res.json() : null)
+        .then(data => setLoadedAdm1(data))
+        .catch(err => console.error('Error loading ADM1:', err));
+
+      // Load ADM2 GeoJSON
+      fetch('/geojson/ADM2.geojson')
+        .then(res => res.ok ? res.json() : null)
+        .then(data => setLoadedAdm2(data))
+        .catch(err => console.error('Error loading ADM2:', err));
+    }
+  }, [currentView]);
 
   useEffect(() => {
     if (columns && columns.length > 0) {
@@ -128,6 +158,93 @@ function VisualizationModal({ data, columns, isOpen, onClose, chartType: initial
   };
 
   const getChartComponent = () => {
+    // INFORM Dashboard
+    if (currentView === 'inform-dashboard') {
+      return (
+        <InformDashboard
+          data={data}
+          adm1GeoJson={loadedAdm1}
+          adm2GeoJson={loadedAdm2}
+          isOpen={true}
+          onClose={onClose}
+        />
+      );
+    }
+
+    // INFORM Flow Diagram (Hazard-to-Risk Flow)
+    if (currentView === 'inform-flow') {
+      return (
+        <div className="single-chart-view inform-view">
+          <div className="chart-header">
+            <button className="back-btn" onClick={handleBackToDashboard}>
+              ← Back to Dashboard
+            </button>
+            <h3>🔄 INFORM Hazard-to-Risk Flow</h3>
+          </div>
+          <InformFlowDiagram data={data} />
+        </div>
+      );
+    }
+
+    // INFORM Sunburst (Indicator Hierarchy)
+    if (currentView === 'inform-sunburst') {
+      return (
+        <div className="single-chart-view inform-view">
+          <div className="chart-header">
+            <button className="back-btn" onClick={handleBackToDashboard}>
+              ← Back to Dashboard
+            </button>
+            <h3>🌐 INFORM Indicator Hierarchy</h3>
+          </div>
+          <InformSunburst
+            data={data}
+            selectedArea={selectedArea}
+            onNodeClick={(node) => console.log('Node clicked:', node)}
+          />
+        </div>
+      );
+    }
+
+    // INFORM Radar Chart (Dimension Comparison)
+    if (currentView === 'inform-radar') {
+      return (
+        <div className="single-chart-view inform-view">
+          <div className="chart-header">
+            <button className="back-btn" onClick={handleBackToDashboard}>
+              ← Back to Dashboard
+            </button>
+            <h3>📡 INFORM Dimension Comparison</h3>
+          </div>
+          <InformRadarChart
+            data={data}
+            selectedAreas={comparisonAreas}
+            onAreaChange={setComparisonAreas}
+          />
+        </div>
+      );
+    }
+
+    // INFORM Choropleth Map
+    if (currentView === 'inform-map') {
+      return (
+        <div className="single-chart-view inform-view">
+          <div className="chart-header">
+            <button className="back-btn" onClick={handleBackToDashboard}>
+              ← Back to Dashboard
+            </button>
+            <h3>🗺️ INFORM Risk Choropleth Map</h3>
+          </div>
+          <InformChoroplethMap
+            data={data}
+            adm1GeoJson={loadedAdm1}
+            adm2GeoJson={loadedAdm2}
+            onAreaSelect={(area, areaData) => setSelectedArea(area)}
+          />
+        </div>
+      );
+    }
+
+    // Standard Map
     if (currentView === 'map') {
       return (
         <div className="single-chart-view">
@@ -136,19 +253,19 @@ function VisualizationModal({ data, columns, isOpen, onClose, chartType: initial
               ← Back to Dashboard
             </button>
             <div className="data-column-selector" ref={dropdownRefMap}>
-              <button 
+              <button
                 className="dropdown-toggle"
                 onClick={() => setDropdownOpenMap(!dropdownOpenMap)}
               >
                 Select Data Columns ({dataColumnsMap.length}/5 selected)
                 <span className={`dropdown-arrow ${dropdownOpenMap ? 'open' : ''}`}>▼</span>
               </button>
-              
+
               {dropdownOpenMap && (
                 <div className="dropdown-menu">
                   <div className="dropdown-header">
                     <span>Select up to 5 columns</span>
-                    <button 
+                    <button
                       className="clear-all-btn"
                       onClick={() => setDataColumnsMap([])}
                     >
@@ -174,7 +291,7 @@ function VisualizationModal({ data, columns, isOpen, onClose, chartType: initial
                   </div>
                 </div>
               )}
-              
+
               <div className="selection-info">
                 {dataColumnsMap.length > 0 && (
                   <span>Selected: {dataColumnsMap.join(', ')}</span>
@@ -191,6 +308,7 @@ function VisualizationModal({ data, columns, isOpen, onClose, chartType: initial
       );
     }
 
+    // Standard Dashboard
     if (currentView === 'dashboard') {
       return (
         <DashboardView
