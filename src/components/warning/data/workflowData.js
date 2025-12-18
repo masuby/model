@@ -58,19 +58,6 @@ export const TECHNICAL_ENTITIES = {
     role: 'Provide drought/stress assessments and early alerts',
     icon: '🌾',
     color: '#8BC34A'
-  },
-  GST: {
-    name: 'Geological Survey of Tanzania',
-    abbreviation: 'GST',
-    hazards: [
-      'Earthquake',
-      'Landslide',
-      'Volcano',
-      'Seismic Activity'
-    ],
-    role: 'Provide alerts on earthquakes, landslides, volcanic activity',
-    icon: '🏔️',
-    color: '#795548'
   }
 };
 
@@ -165,8 +152,8 @@ export const REGISTERED_ACTORS = [
   },
   {
     id: 'police_fire',
-    name: 'Police & Fire Services',
-    role: 'Prepare evacuation & rescue',
+    name: 'Police and Fire Services',
+    role: 'Prepare evacuation and rescue',
     actions: [
       'Pre-position rescue equipment',
       'Identify evacuation routes',
@@ -376,7 +363,7 @@ export const ASSESSMENT_FACTORS = {
 // Data Entry Template for Technical Entities (Step 1.2)
 export const HAZARD_ENTRY_TEMPLATE = {
   hazardType: '',              // From entity's authorized list
-  institution: '',             // TMA, MoW, MoH, MoA, GST
+  institution: '',             // TMA, MoW, MoH, MoA
   likelihoodLevel: '',         // Low, Medium, High
   spatialCoverage: {
     regions: [],

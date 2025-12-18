@@ -3,7 +3,7 @@
  *
  * "From Risk Knowledge to Early Action"
  *
- * Integrates institutional hazard monitoring (TMA, MoW, MoH, MoA, GST)
+ * Integrates institutional hazard monitoring (TMA, MoW, MoH, MoA)
  * with INFORM Risk context from Module 02 to produce
  * impact-based, risk-conditioned warnings.
  *
@@ -16,7 +16,7 @@ import './Module03WarningSystem.css';
 
 // Layer components
 import Layer1HazardInput from './layers/Layer1HazardInput';
-import Layer2RiskContext from './layers/Layer2RiskContext';
+import Layer2RiskAnalysis from './layers/Layer2RiskAnalysis';
 import Layer3WarningLogic from './layers/Layer3WarningLogic';
 import Layer4PMODashboard from './layers/Layer4PMODashboard';
 
@@ -406,18 +406,11 @@ const Module03WarningSystem = ({ onNavigate }) => {
           Hazard Input
         </button>
         <button
-          className={`nav-tab ${currentView === 'riskcontext' ? 'active' : ''}`}
-          onClick={() => setCurrentView('riskcontext')}
+          className={`nav-tab ${currentView === 'riskanalysis' ? 'active' : ''}`}
+          onClick={() => setCurrentView('riskanalysis')}
         >
-          <span className="tab-icon">🗺️</span>
-          Risk Context
-        </button>
-        <button
-          className={`nav-tab ${currentView === 'warnings' ? 'active' : ''}`}
-          onClick={() => setCurrentView('warnings')}
-        >
-          <span className="tab-icon">⚠️</span>
-          Active Warnings
+          <span className="tab-icon">📐</span>
+          Risk Analysis
         </button>
         <button
           className={`nav-tab ${currentView === 'pmo' ? 'active' : ''}`}
@@ -430,17 +423,24 @@ const Module03WarningSystem = ({ onNavigate }) => {
           <span className="tab-icon">🏛️</span>
           PMO-DMD Dashboard
         </button>
+        <button
+          className={`nav-tab ${currentView === 'warnings' ? 'active' : ''}`}
+          onClick={() => setCurrentView('warnings')}
+        >
+          <span className="tab-icon">⚠️</span>
+          Active Warnings
+        </button>
       </div>
 
       {/* Main Content */}
       <main className="module03-main">
         {console.log('🎬 ========== RENDERING MAIN CONTENT ==========')}
         {console.log('   Current View:', currentView)}
-        {console.log('   Available Views: overview, input, riskcontext, warnings, pmo')}
+        {console.log('   Available Views: overview, input, riskanalysis, warnings, pmo')}
         {console.log('   Checking conditions...')}
         {console.log('   - overview?', currentView === 'overview')}
         {console.log('   - input?', currentView === 'input')}
-        {console.log('   - riskcontext?', currentView === 'riskcontext')}
+        {console.log('   - riskanalysis?', currentView === 'riskanalysis')}
         {console.log('   - warnings?', currentView === 'warnings')}
         {console.log('   - pmo?', currentView === 'pmo')}
 
@@ -470,12 +470,13 @@ const Module03WarningSystem = ({ onNavigate }) => {
           </>
         )}
 
-        {currentView === 'riskcontext' && (
+        {currentView === 'riskanalysis' && (
           <>
-            {console.log('✅ Rendering Risk Context')}
-            <Layer2RiskContext
+            {console.log('✅ Rendering Risk Analysis')}
+            <Layer2RiskAnalysis
               riskData={riskData}
               activeWarnings={activeWarnings}
+              activeHazards={activeHazards}
             />
           </>
         )}
@@ -509,58 +510,6 @@ const Module03WarningSystem = ({ onNavigate }) => {
         )}
       </main>
 
-      {/* Concept Explanation Panel */}
-      <div className="concept-panel">
-        <h3>💡 Risk-Informed Early Warning</h3>
-        <div className="concept-formula">
-          <div className="formula-part">
-            <strong>Baseline Risk</strong>
-            <span className="formula-from">(Module 02)</span>
-          </div>
-          <span className="formula-operator">+</span>
-          <div className="formula-part">
-            <strong>Real-time Hazard</strong>
-            <span className="formula-from">(TMA, MoW, MoH, etc.)</span>
-          </div>
-          <span className="formula-operator">=</span>
-          <div className="formula-part">
-            <strong>Warning Level</strong>
-            <span className="formula-from">(Impact-based)</span>
-          </div>
-        </div>
-        <p className="concept-description">
-          The same hazard signal does not produce the same warning everywhere.
-          A 100mm rainfall in a <strong>low-risk district</strong> may be an Advisory,
-          but in a <strong>high-risk district</strong> it becomes a Major Warning.
-        </p>
-      </div>
-
-      {/* Integration Links */}
-      {onNavigate && (
-        <div className="integration-links">
-          <button
-            className="integration-btn module02"
-            onClick={() => onNavigate('module02')}
-          >
-            <span className="btn-icon">📊</span>
-            <div className="btn-content">
-              <div className="btn-title">Module 02: INFORM Risk</div>
-              <div className="btn-description">View risk context data</div>
-            </div>
-          </button>
-          <button
-            className="integration-btn module04"
-            onClick={() => onNavigate('module04')}
-            disabled={true}
-          >
-            <span className="btn-icon">🚨</span>
-            <div className="btn-content">
-              <div className="btn-title">Module 04: INFORM Severity</div>
-              <div className="btn-description">Track actual crisis impacts (Coming Soon)</div>
-            </div>
-          </button>
-        </div>
-      )}
     </div>
   );
 };
@@ -607,8 +556,8 @@ const OverviewSection = ({ stats, activeWarnings, riskData, onNavigate }) => {
               <li>🏥 Coping Capacity</li>
               <li>🗺️ Risk Maps</li>
             </ul>
-            <button className="layer-btn" onClick={() => onNavigate('riskcontext')}>
-              View Risk Context →
+            <button className="layer-btn" onClick={() => onNavigate('riskanalysis')}>
+              View Risk Analysis →
             </button>
           </div>
         </div>
@@ -636,7 +585,7 @@ const OverviewSection = ({ stats, activeWarnings, riskData, onNavigate }) => {
             <h3>PMO-DMD Consolidation</h3>
             <p>National coordination and decision support</p>
             <ul>
-              <li>📋 Review & Validate</li>
+              <li>📋 Review and Validate</li>
               <li>📊 Impact Assessment</li>
               <li>📢 Dissemination</li>
               <li>📈 Response Tracking</li>
@@ -661,7 +610,7 @@ const OverviewSection = ({ stats, activeWarnings, riskData, onNavigate }) => {
                 <div className="warning-details">
                   <span className="warning-hazard">{warning.hazard.hazardType}</span>
                   <span className="warning-time">
-                    {new Date(warning.issuedAt).toLocaleString()}
+                    {new Date(warning.issuedAt).toLocaleString('en-GB', { day: '2-digit', month: '2-digit', year: 'numeric', hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: false })}
                   </span>
                 </div>
               </div>

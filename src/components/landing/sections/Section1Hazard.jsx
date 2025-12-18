@@ -15,13 +15,16 @@ const HAZARD_CATEGORIES = {
     color: '#D32F2F',
     hazards: [
       { id: 'rainfall', name: 'Heavy Rainfall', icon: '🌧️', frequency: 'Annual' },
-      { id: 'flood', name: 'Floods (Riverine & Flash)', icon: '🌊', frequency: 'Seasonal' },
+      { id: 'flood', name: 'Floods (Riverine and Flash)', icon: '🌊', frequency: 'Seasonal' },
       { id: 'drought', name: 'Drought', icon: '☀️', frequency: '3-5 years' },
       { id: 'cyclone', name: 'Cyclones', icon: '🌪️', frequency: 'Occasional' },
       { id: 'waves', name: 'Large Waves (Coastal)', icon: '🌊', frequency: 'Seasonal' },
       { id: 'wildfire', name: 'Wildfires', icon: '🔥', frequency: 'Dry season' },
       { id: 'temperature', name: 'Extreme Temperatures', icon: '🌡️', frequency: 'Annual' },
       { id: 'heatwave', name: 'Heat Waves', icon: '🌡️', frequency: 'Occasional' },
+      { id: 'volcano', name: 'Volcanic Activity', icon: '🌋', frequency: 'Rare' },
+      { id: 'earthquake', name: 'Earthquakes', icon: '🏔️', frequency: 'Rare' },
+      { id: 'landslide', name: 'Landslides', icon: '⛰️', frequency: 'Rainy season' },
     ]
   },
   human: {
@@ -29,18 +32,8 @@ const HAZARD_CATEGORIES = {
     icon: '👥',
     color: '#C62828',
     hazards: [
-      { id: 'conflict', name: 'Conflict & Unrest', icon: '⚔️', frequency: 'Variable' },
-      { id: 'epidemic', name: 'Epidemics & Disease Outbreaks', icon: '🦠', frequency: 'Variable' },
-    ]
-  },
-  geological: {
-    title: 'Geological Hazards',
-    icon: '🏔️',
-    color: '#795548',
-    hazards: [
-      { id: 'volcano', name: 'Volcanic Activity', icon: '🌋', frequency: 'Rare' },
-      { id: 'earthquake', name: 'Earthquakes', icon: '🏔️', frequency: 'Rare' },
-      { id: 'landslide', name: 'Landslides', icon: '⛰️', frequency: 'Rainy season' },
+      { id: 'conflict', name: 'Conflict and Unrest', icon: '⚔️', frequency: 'Variable' },
+      { id: 'epidemic', name: 'Epidemics and Disease Outbreaks', icon: '🦠', frequency: 'Variable' },
     ]
   }
 };
@@ -85,7 +78,7 @@ function Section1Hazard() {
         <div className="teaching-content">
           <h4>CRITICAL LESSON</h4>
           <div className="teaching-divider"></div>
-          <h3>HAZARD ≠ DISASTER</h3>
+          <h3>HAZARD and DISASTER</h3>
           <p className="teaching-emphasis">
             A hazard becomes a disaster only when:
           </p>
@@ -253,7 +246,7 @@ function Section1Hazard() {
       <div className="section-summary">
         <h4>Section 1 Summary: What You Learned</h4>
         <ul>
-          <li>✓ Hazards are potentially damaging events (natural, human, or geological)</li>
+          <li>✓ Hazards are potentially damaging events (natural or human)</li>
           <li>✓ Tanzania faces multiple hazard types with varying frequencies</li>
           <li>✓ <strong>Hazards alone do NOT create disasters</strong></li>
           <li>✓ Impact depends on exposure, vulnerability, and coping capacity (coming next!)</li>

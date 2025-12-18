@@ -6,6 +6,7 @@
 
 import jsPDF from 'jspdf';
 import html2canvas from 'html2canvas';
+import { logBulletinGenerated } from './auditService';
 
 // PMO Contact Information - Official Details
 const PMO_CONTACT_INFO = {
@@ -16,8 +17,45 @@ const PMO_CONTACT_INFO = {
   email: "ps@pmo.go.tz",
   phone: "+255 26 2322480",
   fax: "+255 26 2324534",
-  emergency: "112",
+  emergency: "190",  // National Emergency Number
   title: "Permanent Secretary"
+};
+
+// Hazard Type Icons for PDF reports
+const HAZARD_ICONS = {
+  'Heavy Rainfall': '🌧️',
+  'Strong Winds': '💨',
+  'Large Waves': '🌊',
+  'Flash Floods': '🌊',
+  'Riverine Floods': '🌊',
+  'Dry Spells': '☀️',
+  'Drought': '🏜️',
+  'Agrometeorological Drought': '🌾',
+  'Extreme Temperature': '🌡️',
+  'Heatwave': '🔥',
+  'Cold Wave': '❄️',
+  'Epidemics': '🦠',
+  'Disease Outbreak': '🏥',
+  'Crop Stress': '🌱',
+  'Pest Infestation': '🐛',
+  'Livestock Disease': '🐄',
+  'Earthquake': '🌍',
+  'Tsunami': '🌊',
+  'Volcanic Activity': '🌋',
+  'Landslide': '⛰️',
+  'Wildfire': '🔥',
+  'Cyclone': '🌀',
+  'Rising Water Levels': '📈',
+  'Dam Level Alert': '🚧'
+};
+
+/**
+ * Get hazard icon for PDF display
+ * @param {string} hazardType - The hazard type name
+ * @returns {string} Emoji icon for the hazard
+ */
+const getHazardIcon = (hazardType) => {
+  return HAZARD_ICONS[hazardType] || '⚠️';
 };
 
 /**
@@ -118,341 +156,758 @@ export const exportAsImage = async (element, filename = 'screenshot', options = 
 };
 
 /**
- * Capture map element as image
+ * SUPER ROBUST Map Capture with Multiple Fallback Strategies
  * @param {string} mapElementId - ID of map container element
  * @returns {Promise<string>} Base64 image data
  */
 const captureMapImage = async (mapElementId = 'leaflet-map-container') => {
   try {
-    // Try multiple possible map container selectors
+    console.log('🗺️🗺️🗺️ SUPER ROBUST MAP CAPTURE STARTING...');
+
+    // STRATEGY 1: Wait for map to fully render and complete 5-stage EXTREME Tanzania bounds fit
+    console.log('⏰ Waiting 4.5 seconds for map rendering and 5-stage EXTREME Tanzania bounds fit...');
+    await new Promise(resolve => setTimeout(resolve, 4500));
+
+    // STRATEGY 2: Try multiple possible map container selectors with priority
     const selectors = [
+      '#pdf-map-container .leaflet-container', // HIGHEST PRIORITY: Hidden map for PDF generation
+      '#pdf-map-container', // Hidden map container itself
+      '#hazard-map-container .leaflet-container', // Primary: New explicit ID
+      '.leaflet-container', // Secondary: Direct leaflet container
+      '#hazard-map-container', // Tertiary: Container itself
+      '.interactive-hazard-map-container .leaflet-container',
+      '.interactive-hazard-map-container',
       `#${mapElementId}`,
-      '.leaflet-container',
       '[class*="map-container"]',
-      '.interactive-hazard-map-container .leaflet-container'
+      '.hazard-map-view .leaflet-container',
+      '#map-container'
     ];
 
+    console.log('🔍 Searching for map with', selectors.length, 'different selectors...');
+
     let mapElement = null;
+    let foundSelector = '';
+
     for (const selector of selectors) {
-      mapElement = document.querySelector(selector);
-      if (mapElement) {
-        console.log(`📍 Found map using selector: ${selector}`);
-        break;
+      const elements = document.querySelectorAll(selector);
+      console.log(`  Testing: "${selector}" - Found ${elements.length} element(s)`);
+
+      if (elements.length > 0) {
+        // If multiple elements, choose the largest visible one
+        for (let i = 0; i < elements.length; i++) {
+          const el = elements[i];
+          const rect = el.getBoundingClientRect();
+          const isVisible = rect.width > 0 && rect.height > 0;
+          const hasContent = el.offsetWidth > 100 && el.offsetHeight > 100;
+
+          console.log(`    Element ${i}: ${el.offsetWidth}x${el.offsetHeight}px, visible: ${isVisible}, hasContent: ${hasContent}`);
+
+          if (isVisible && hasContent) {
+            mapElement = el;
+            foundSelector = selector;
+            break;
+          }
+        }
+
+        if (mapElement) break;
       }
     }
 
     if (!mapElement) {
-      console.warn('⚠️ Map element not found for capture');
+      console.error('❌ MAP NOT FOUND! Diagnostic info:');
+      console.log('  Total .leaflet-container:', document.querySelectorAll('.leaflet-container').length);
+      console.log('  Total [class*="map"]:', document.querySelectorAll('[class*="map"]').length);
+      console.log('  Total [id*="map"]:', document.querySelectorAll('[id*="map"]').length);
+
+      // List all potential map elements
+      const allMaps = document.querySelectorAll('[class*="map"], [id*="map"]');
+      allMaps.forEach((el, idx) => {
+        console.log(`  Candidate ${idx}: class="${el.className}", id="${el.id}", size=${el.offsetWidth}x${el.offsetHeight}`);
+      });
+
       return null;
     }
 
-    console.log('📸 Capturing map image...');
-    const canvas = await html2canvas(mapElement, {
-      scale: 2,
-      useCORS: true,
-      logging: false,
-      backgroundColor: '#ffffff',
-      width: mapElement.offsetWidth,
-      height: mapElement.offsetHeight
+    console.log(`✅✅ MAP FOUND using: "${foundSelector}"`);
+    console.log(`📐 Dimensions: ${mapElement.offsetWidth}x${mapElement.offsetHeight}px`);
+
+    // STRATEGY 3: Scroll map into view and ensure visibility
+    console.log('👀 Ensuring map is visible...');
+    mapElement.scrollIntoView({ behavior: 'instant', block: 'center' });
+    await new Promise(resolve => setTimeout(resolve, 300)); // Wait for scroll
+
+    // Check dimensions again
+    const rect = mapElement.getBoundingClientRect();
+    console.log(`📏 After scroll - BoundingRect: ${rect.width}x${rect.height}, Offset: ${mapElement.offsetWidth}x${mapElement.offsetHeight}`);
+
+    if (mapElement.offsetWidth === 0 || mapElement.offsetHeight === 0) {
+      console.error('❌ Map has ZERO dimensions! Cannot capture.');
+      return null;
+    }
+
+    // STRATEGY 4: Force map tiles to load by waiting for images
+    console.log('🖼️ Checking for map tiles...');
+    const images = mapElement.querySelectorAll('img');
+    console.log(`  Found ${images.length} images in map`);
+
+    // Wait for images to load
+    const imagePromises = Array.from(images).map(img => {
+      if (img.complete) return Promise.resolve();
+      return new Promise(resolve => {
+        img.onload = resolve;
+        img.onerror = resolve; // Continue even if some tiles fail
+        setTimeout(resolve, 2000); // Max 2s wait per image
+      });
     });
 
+    await Promise.all(imagePromises);
+    console.log('✅ All map tiles loaded (or timed out)');
+
+    // STRATEGY 5: Multiple capture attempts with different settings
+    let canvas = null;
+    const captureConfigs = [
+      // Config 1: High quality, strict CORS
+      {
+        scale: 2,
+        useCORS: true,
+        logging: false,
+        backgroundColor: '#ffffff',
+        allowTaint: false,
+        width: mapElement.offsetWidth,
+        height: mapElement.offsetHeight
+      },
+      // Config 2: Allow taint for cross-origin images
+      {
+        scale: 2,
+        useCORS: true,
+        logging: false,
+        backgroundColor: '#ffffff',
+        allowTaint: true,
+        width: mapElement.offsetWidth,
+        height: mapElement.offsetHeight
+      },
+      // Config 3: Lower quality, maximum compatibility
+      {
+        scale: 1,
+        useCORS: false,
+        logging: false,
+        backgroundColor: '#ffffff',
+        allowTaint: true,
+        width: mapElement.offsetWidth,
+        height: mapElement.offsetHeight
+      }
+    ];
+
+    for (let i = 0; i < captureConfigs.length; i++) {
+      try {
+        console.log(`📸 Capture attempt ${i + 1}/${captureConfigs.length} with config:`, captureConfigs[i]);
+        canvas = await html2canvas(mapElement, captureConfigs[i]);
+
+        if (canvas && canvas.width > 0 && canvas.height > 0) {
+          console.log(`✅ Capture successful with config ${i + 1}! Canvas: ${canvas.width}x${canvas.height}px`);
+          break;
+        }
+      } catch (err) {
+        console.warn(`⚠️ Capture attempt ${i + 1} failed:`, err.message);
+        if (i === captureConfigs.length - 1) throw err; // Rethrow on last attempt
+      }
+    }
+
+    if (!canvas) {
+      console.error('❌ All capture attempts failed!');
+      return null;
+    }
+
+    // Convert to base64
     const imageData = canvas.toDataURL('image/png');
-    console.log('✅ Map image captured successfully');
+    const sizeKB = (imageData.length / 1024).toFixed(2);
+    console.log(`✅✅✅ MAP CAPTURED SUCCESSFULLY!`);
+    console.log(`  Canvas: ${canvas.width}x${canvas.height}px`);
+    console.log(`  Data size: ${sizeKB} KB`);
+    console.log(`  Data preview: ${imageData.substring(0, 50)}...`);
+
     return imageData;
 
   } catch (error) {
-    console.error('❌ Error capturing map:', error);
+    console.error('❌❌❌ CATASTROPHIC MAP CAPTURE ERROR:', error);
+    console.error('Stack:', error.stack);
     return null;
   }
 };
 
 /**
- * Generate Warning Bulletin PDF with map
+ * Load image as base64 for PDF embedding
+ */
+const loadImageAsBase64 = async (imagePath) => {
+  try {
+    const response = await fetch(imagePath);
+    const blob = await response.blob();
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.onloadend = () => resolve(reader.result);
+      reader.onerror = reject;
+      reader.readAsDataURL(blob);
+    });
+  } catch (error) {
+    console.warn('Could not load image:', error);
+    return null;
+  }
+};
+
+/**
+ * Generate Warning Bulletin PDF with map - PROFESSIONAL BULLETIN VERSION
  * @param {object} warningData - Warning data object
  * @param {object} riskData - Associated risk data
  * @param {boolean} includeMap - Whether to include map screenshot
  */
-export const generateWarningBulletinPDF = async (warningData, riskData = null, includeMap = true) => {
+export const generateWarningBulletinPDF = async (warningData, riskData = null, includeMap = true, previewWindow = null) => {
   try {
-    console.log('📢 Generating Warning Bulletin PDF...');
+    console.log('📢 Generating Professional Warning Bulletin PDF...');
 
     const pdf = new jsPDF('portrait', 'mm', 'a4');
     const pageWidth = pdf.internal.pageSize.getWidth();
     const pageHeight = pdf.internal.pageSize.getHeight();
-    const margin = 20;
+    const margin = 15;
     let yPosition = margin;
 
+    // Professional color palette
+    const COLORS = {
+      primaryBlue: [0, 82, 147],      // Deep government blue
+      secondaryBlue: [41, 128, 185],  // Lighter blue
+      accentGold: [212, 175, 55],     // Gold accent
+      darkText: [33, 33, 33],
+      lightGray: [248, 249, 250],
+      mediumGray: [158, 158, 158],
+      // Warning colors - refined
+      majorWarning: [198, 40, 40],    // Deep red
+      warning: [230, 126, 34],        // Orange
+      advisory: [241, 196, 15],       // Gold/Yellow
+      monitor: [39, 174, 96]          // Green
+    };
+
     // Helper function to add text with word wrap
-    const addText = (text, size = 12, isBold = false) => {
+    const addText = (text, size = 12, isBold = false, x = margin) => {
       pdf.setFontSize(size);
       pdf.setFont('helvetica', isBold ? 'bold' : 'normal');
       const lines = pdf.splitTextToSize(text, pageWidth - 2 * margin);
-      pdf.text(lines, margin, yPosition);
+      pdf.text(lines, x, yPosition);
       yPosition += (lines.length * size * 0.4);
     };
 
-    // Header - Tanzania Coat of Arms & Title
-    pdf.setFillColor(33, 150, 243); // Blue header
-    pdf.rect(0, 0, pageWidth, 40, 'F');
+    // Helper to get warning color RGB - refined palette
+    const getWarningColorRGB = (level) => {
+      const levelUpper = (level || '').toUpperCase();
+      if (levelUpper.includes('MAJOR')) return COLORS.majorWarning;
+      if (levelUpper === 'WARNING') return COLORS.warning;
+      if (levelUpper === 'ADVISORY') return COLORS.advisory;
+      return COLORS.monitor;
+    };
 
+    // ========== COMPACT PROFESSIONAL HEADER WITH COAT OF ARMS ==========
+    // Top accent bar with gold stripe (reduced)
+    pdf.setFillColor(...COLORS.primaryBlue);
+    pdf.rect(0, 0, pageWidth, 4, 'F');
+    pdf.setFillColor(...COLORS.accentGold);
+    pdf.rect(0, 4, pageWidth, 1.5, 'F');
+
+    // Main header background - compact
+    pdf.setFillColor(...COLORS.primaryBlue);
+    pdf.rect(0, 5.5, pageWidth, 32, 'F');
+
+    // Load and add Coat of Arms (smaller)
+    let logoLoaded = false;
+    try {
+      const logoBase64 = await loadImageAsBase64('/urt-coat-of-arms.jpeg');
+      if (logoBase64) {
+        // White circle background for logo
+        pdf.setFillColor(255, 255, 255);
+        pdf.circle(22, 21.5, 12, 'F');
+        // Add logo (smaller)
+        pdf.addImage(logoBase64, 'JPEG', 10, 10, 24, 24);
+        logoLoaded = true;
+      }
+    } catch (e) {
+      console.warn('Logo load failed, using fallback');
+    }
+
+    // If logo failed, use text fallback
+    if (!logoLoaded) {
+      pdf.setFillColor(255, 255, 255);
+      pdf.circle(22, 21.5, 10, 'F');
+      pdf.setFontSize(6);
+      pdf.setTextColor(...COLORS.primaryBlue);
+      pdf.setFont('helvetica', 'bold');
+      pdf.text('URT', 22, 23, { align: 'center' });
+    }
+
+    // Government text - centered on page
     pdf.setTextColor(255, 255, 255);
-    pdf.setFontSize(24);
+    pdf.setFontSize(13);
     pdf.setFont('helvetica', 'bold');
-    pdf.text('UNITED REPUBLIC OF TANZANIA', pageWidth / 2, 15, { align: 'center' });
+    pdf.text('UNITED REPUBLIC OF TANZANIA', pageWidth / 2, 13, { align: 'center' });
 
-    pdf.setFontSize(18);
-    pdf.text('Prime Minister\'s Office', pageWidth / 2, 25, { align: 'center' });
+    pdf.setFontSize(11);
+    pdf.setFont('helvetica', 'bold');
+    pdf.text("PRIME MINISTER'S OFFICE", pageWidth / 2, 21, { align: 'center' });
 
+    pdf.setFontSize(9);
+    pdf.setFont('helvetica', 'normal');
+    pdf.text('Disaster Management Department (DMD)', pageWidth / 2, 28, { align: 'center' });
+
+    // Emergency badge - compact
+    pdf.setFillColor(...COLORS.majorWarning);
+    pdf.roundedRect(pageWidth - 38, 10, 28, 18, 2, 2, 'F');
+    pdf.setTextColor(255, 255, 255);
+    pdf.setFontSize(6);
+    pdf.setFont('helvetica', 'bold');
+    pdf.text('EMERGENCY', pageWidth - 24, 16, { align: 'center' });
     pdf.setFontSize(14);
-    pdf.text('Disaster Management Department', pageWidth / 2, 33, { align: 'center' });
+    pdf.text('190', pageWidth - 24, 24, { align: 'center' });
+
+    // Bottom gold accent line
+    pdf.setFillColor(...COLORS.accentGold);
+    pdf.rect(0, 37.5, pageWidth, 1.5, 'F');
 
     // Reset text color
-    pdf.setTextColor(0, 0, 0);
-    yPosition = 50;
+    pdf.setTextColor(...COLORS.darkText);
+    yPosition = 42;
 
-    // Warning Banner
+    // ========== WARNING BANNER ==========
     const warningLevel = warningData.finalStatement || warningData.warningLevel || 'WARNING';
-    const bannerColor = warningLevel === 'MAJOR WARNING' ? [244, 67, 54] :
-                       warningLevel === 'WARNING' ? [255, 152, 0] :
-                       [255, 193, 7];
+    const bannerColor = getWarningColorRGB(warningLevel);
 
+    // Warning level banner - compact
     pdf.setFillColor(...bannerColor);
-    pdf.rect(margin, yPosition, pageWidth - 2 * margin, 20, 'F');
+    pdf.roundedRect(margin, yPosition, pageWidth - 2 * margin, 12, 2, 2, 'F');
 
+    // Warning text - adjusted for compact banner with improved font
     pdf.setTextColor(255, 255, 255);
-    pdf.setFontSize(20);
+    pdf.setFontSize(14);
     pdf.setFont('helvetica', 'bold');
-    pdf.text(warningLevel, pageWidth / 2, yPosition + 13, { align: 'center' });
+    pdf.text('EARLY WARNING BULLETIN', pageWidth / 2, yPosition + 8, { align: 'center' });
 
-    pdf.setTextColor(0, 0, 0);
-    yPosition += 30;
+    pdf.setTextColor(...COLORS.darkText);
+    yPosition += 16;
 
-    // Bulletin Number & Date
-    pdf.setFontSize(10);
+    // ========== COMPACT BULLETIN METADATA ==========
+    // Clean reference box with gold accent
+    pdf.setFillColor(...COLORS.lightGray);
+    pdf.roundedRect(margin, yPosition, pageWidth - 2 * margin, 12, 2, 2, 'F');
+    pdf.setFillColor(...COLORS.accentGold);
+    pdf.rect(margin, yPosition, 3, 12, 'F');
+
+    pdf.setFontSize(8);
+    pdf.setFont('helvetica', 'bold');
+    pdf.setTextColor(...COLORS.primaryBlue);
+    const bulletinNo = `BULLETIN REF: PMO-DMD/EW/${new Date().getFullYear()}/${String(Math.floor(Math.random() * 100)).padStart(3, '0')}`;
+    pdf.text(bulletinNo, margin + 6, yPosition + 5);
+
+    pdf.setTextColor(...COLORS.darkText);
     pdf.setFont('helvetica', 'normal');
-    const bulletinNo = `BULLETIN NO: PMO-DMD/${new Date().getFullYear()}/${String(Math.floor(Math.random() * 1000)).padStart(3, '0')}`;
-    pdf.text(bulletinNo, margin, yPosition);
-    pdf.text(`DATE: ${new Date().toLocaleDateString('en-GB')}`, pageWidth - margin, yPosition, { align: 'right' });
-    yPosition += 10;
+    const issueDate = new Date();
+    pdf.text(`Issued: ${issueDate.toLocaleDateString('en-GB', { weekday: 'short', day: '2-digit', month: 'short', year: 'numeric' })}`, margin + 6, yPosition + 10);
 
-    // Horizontal line
-    pdf.setDrawColor(200, 200, 200);
-    pdf.line(margin, yPosition, pageWidth - margin, yPosition);
-    yPosition += 10;
+    // Valid until - on right side
+    const validUntil = warningData.validUntil || new Date(Date.now() + 48 * 60 * 60 * 1000);
+    pdf.setTextColor(...COLORS.majorWarning);
+    pdf.setFont('helvetica', 'bold');
+    // Format Valid Until with date and time (24-hour format)
+    const validUntilDate = new Date(validUntil);
+    const validDay = String(validUntilDate.getDate()).padStart(2, '0');
+    const validMonth = validUntilDate.toLocaleDateString('en-GB', { month: 'short' });
+    const validYear = validUntilDate.getFullYear();
+    // Format time in 24-hour format
+    const validHours = String(validUntilDate.getHours()).padStart(2, '0');
+    const validMinutes = String(validUntilDate.getMinutes()).padStart(2, '0');
+    pdf.text(`Valid Until: ${validDay} ${validMonth} ${validYear}, ${validHours}:${validMinutes}`, pageWidth - margin - 5, yPosition + 7, { align: 'right' });
 
-    // Hazard Information
-    addText('HAZARD INFORMATION', 16, true);
-    yPosition += 5;
+    pdf.setTextColor(...COLORS.darkText);
+    yPosition += 16;
 
-    addText(`Hazard Type: ${warningData.hazardType || 'N/A'}`, 12, false);
-    yPosition += 3;
+    // ========== AFFECTED AREAS SECTION (COMPACT) ==========
+    pdf.setFontSize(12);
+    pdf.setFont('helvetica', 'bold');
+    pdf.setFillColor(...COLORS.primaryBlue);
+    pdf.setTextColor(255, 255, 255);
+    pdf.roundedRect(margin, yPosition, pageWidth - 2 * margin, 8, 1, 1, 'F');
+    pdf.text('AREAS TO BE AFFECTED', margin + 5, yPosition + 5.5);
+    pdf.setTextColor(...COLORS.darkText);
+    yPosition += 11;
 
-    if (warningData.institution) {
-      addText(`Reporting Institution: ${warningData.institution}`, 12, false);
-      yPosition += 3;
-    }
+    // Get districts from various possible sources
+    const districts = warningData.spatialExtent || warningData.affectedDistricts || warningData.districts || [];
+    const districtWarningLevels = warningData.districtWarningLevels || {};
+    const selectedRegions = warningData.selectedRegions || [];
 
-    if (warningData.severity) {
-      addText(`Severity: ${warningData.severity}`, 12, false);
-      yPosition += 3;
-    }
+    // Summary statistics
+    const districtsByLevel = {
+      'MAJOR WARNING': [],
+      'WARNING': [],
+      'ADVISORY': [],
+      'MONITOR': []
+    };
 
-    yPosition += 5;
-
-    // Affected Areas
-    if (warningData.affectedDistricts || warningData.districts) {
-      addText('AFFECTED DISTRICTS', 16, true);
-      yPosition += 5;
-
-      const districts = warningData.affectedDistricts || warningData.districts || [];
-      const districtText = Array.isArray(districts) ? districts.join(', ') : districts;
-      addText(districtText, 12, false);
-      yPosition += 5;
-    }
-
-    // Impact Assessment
-    if (warningData.impactLevel) {
-      addText('IMPACT ASSESSMENT', 16, true);
-      yPosition += 5;
-
-      addText(`Impact Level: ${warningData.impactLevel.value || warningData.impactLevel}`, 12, true);
-      yPosition += 3;
-
-      if (warningData.impactLevel.description) {
-        addText(warningData.impactLevel.description, 11, false);
-        yPosition += 5;
+    districts.forEach(district => {
+      const level = (districtWarningLevels[district] || warningLevel || 'ADVISORY').toUpperCase();
+      if (level.includes('MAJOR')) {
+        districtsByLevel['MAJOR WARNING'].push(district);
+      } else if (level === 'WARNING') {
+        districtsByLevel['WARNING'].push(district);
+      } else if (level === 'ADVISORY') {
+        districtsByLevel['ADVISORY'].push(district);
+      } else {
+        districtsByLevel['MONITOR'].push(district);
       }
+    });
+
+    // Regions affected - compact display with blue indicator
+    if (selectedRegions.length > 0) {
+      pdf.setFillColor(...COLORS.primaryBlue);
+      pdf.circle(margin + 4, yPosition - 0.5, 2, 'F');
+
+      pdf.setFont('helvetica', 'bold');
+      pdf.setFontSize(10);
+      pdf.setTextColor(...COLORS.primaryBlue);
+      pdf.text(`Regions (${selectedRegions.length}):`, margin + 8, yPosition);
+
+      pdf.setFont('helvetica', 'normal');
+      pdf.setFontSize(9);
+      pdf.setTextColor(...COLORS.darkText);
+      const regionText = selectedRegions.join(', ');
+      const regionLines = pdf.splitTextToSize(regionText, pageWidth - 2 * margin - 42);
+      pdf.text(regionLines, margin + 42, yPosition);
+      yPosition += regionLines.length * 4 + 3;
     }
 
-    // Assessment Factors
-    if (warningData.assessmentFactors) {
-      const { exposure, vulnerability, capacity } = warningData.assessmentFactors;
+    // Districts - compact simple list (no level grouping)
+    if (districts.length > 0) {
+      pdf.setFillColor(...COLORS.warning);
+      pdf.circle(margin + 4, yPosition - 0.5, 2, 'F');
 
-      if (exposure) {
-        addText('Exposure Considerations:', 12, true);
-        addText(exposure, 11, false);
-        yPosition += 3;
-      }
+      pdf.setFont('helvetica', 'bold');
+      pdf.setFontSize(10);
+      pdf.setTextColor(...COLORS.warning);
+      pdf.text(`Districts (${districts.length}):`, margin + 8, yPosition);
 
-      if (vulnerability) {
-        addText('Vulnerability Analysis:', 12, true);
-        addText(vulnerability, 11, false);
-        yPosition += 3;
-      }
-
-      if (capacity) {
-        addText('Coping Capacity Assessment:', 12, true);
-        addText(capacity, 11, false);
-        yPosition += 3;
-      }
+      pdf.setFont('helvetica', 'normal');
+      pdf.setFontSize(9);
+      pdf.setTextColor(...COLORS.darkText);
+      const districtText = districts.join(', ');
+      const districtLines = pdf.splitTextToSize(districtText, pageWidth - 2 * margin - 42);
+      pdf.text(districtLines, margin + 42, yPosition);
+      yPosition += districtLines.length * 4 + 3;
     }
 
-    // Capture and add map image
+    yPosition += 2;
+
+    // ========== COMPACT MAP SECTION (LEFT) & HAZARD INFO (RIGHT) ==========
+    const sectionStartY = yPosition;
+    const halfWidth = (pageWidth - 2 * margin - 6) / 2;
+
+    // MAP ON LEFT - compact header with improved font
+    pdf.setFontSize(11);
+    pdf.setFont('helvetica', 'bold');
+    pdf.setFillColor(...COLORS.monitor);
+    pdf.setTextColor(255, 255, 255);
+    pdf.roundedRect(margin, yPosition, halfWidth, 7, 1, 1, 'F');
+    pdf.text('AFFECTED AREA MAP', margin + 4, yPosition + 5);
+    pdf.setTextColor(...COLORS.darkText);
+
+    let mapImage = null;
+    const mapY = yPosition + 8;
+    const mapHeight = 55; // Increased for better visibility
+
     if (includeMap) {
       try {
-        const mapImage = await captureMapImage();
+        mapImage = await captureMapImage();
         if (mapImage) {
-          // Check if we need a new page
-          if (yPosition > pageHeight - 150) {
-            pdf.addPage();
-            yPosition = margin;
-          }
-
-          yPosition += 10;
-          addText('AFFECTED AREA MAP', 14, true);
-          yPosition += 5;
-
-          // Add map image
-          const mapWidth = pageWidth - 2 * margin;
-          const mapHeight = 100; // Fixed height for map
-
-          pdf.addImage(mapImage, 'PNG', margin, yPosition, mapWidth, mapHeight);
-          yPosition += mapHeight + 10;
-
-          console.log('✅ Map image added to PDF');
+          pdf.setDrawColor(...COLORS.primaryBlue);
+          pdf.setLineWidth(0.5);
+          pdf.roundedRect(margin, mapY, halfWidth, mapHeight, 2, 2, 'S');
+          pdf.addImage(mapImage, 'PNG', margin + 1, mapY + 1, halfWidth - 2, mapHeight - 2);
         }
       } catch (error) {
-        console.warn('⚠️ Could not add map to PDF:', error);
+        console.error('❌ Could not add map to PDF:', error);
       }
     }
 
-    // Check if we need a new page
-    if (yPosition > pageHeight - 60) {
-      pdf.addPage();
-      yPosition = margin;
+    // HAZARD DETAILS ON RIGHT - compact header with improved font
+    const rightSectionX = margin + halfWidth + 6;
+    pdf.setFontSize(11);
+    pdf.setFont('helvetica', 'bold');
+    pdf.setFillColor(...COLORS.warning);
+    pdf.setTextColor(255, 255, 255);
+    pdf.roundedRect(rightSectionX, sectionStartY, halfWidth, 7, 1, 1, 'F');
+    pdf.text('HAZARD DETAILS', rightSectionX + 4, sectionStartY + 5);
+    pdf.setTextColor(...COLORS.darkText);
+
+    let infoY = sectionStartY + 12;
+    pdf.setFontSize(11);
+
+    // Helper for consistent row layout - all values aligned at same X position
+    const labelStartX = rightSectionX + 3;
+    const valueStartX = rightSectionX + 40; // Fixed position for all values
+
+    // Hazard Type Row
+    pdf.setFont('helvetica', 'bold');
+    pdf.setTextColor(...COLORS.primaryBlue);
+    pdf.text('Hazard Type:', labelStartX, infoY);
+    pdf.setFont('helvetica', 'normal');
+    pdf.setTextColor(...COLORS.darkText);
+    pdf.text(warningData.hazardType || 'N/A', valueStartX, infoY);
+    infoY += 7;
+
+    // Collaboration with Row
+    if (warningData.institution) {
+      pdf.setFont('helvetica', 'bold');
+      pdf.setTextColor(...COLORS.primaryBlue);
+      pdf.text('Collaboration:', labelStartX, infoY);
+      pdf.setFont('helvetica', 'normal');
+      pdf.setTextColor(...COLORS.darkText);
+      pdf.text(warningData.institution, valueStartX, infoY);
+      infoY += 7;
     }
 
-    // Public Actions
-    if (warningData.publicActions && warningData.publicActions.length > 0) {
-      addText('PUBLIC ADVISORY - ACTIONS TO TAKE', 16, true);
-      yPosition += 5;
-
-      warningData.publicActions.forEach((action, index) => {
-        addText(`${index + 1}. ${action.action}`, 11, false);
-        yPosition += 2;
-      });
-      yPosition += 5;
+    // Likelihood Level Row (was Confidence)
+    if (warningData.confidence) {
+      pdf.setFont('helvetica', 'bold');
+      pdf.setTextColor(...COLORS.primaryBlue);
+      pdf.text('Likelihood:', labelStartX, infoY);
+      pdf.setFont('helvetica', 'normal');
+      pdf.setTextColor(...COLORS.darkText);
+      pdf.text(warningData.confidence, valueStartX, infoY);
+      infoY += 7;
     }
 
-    // Actor Directives
-    if (warningData.actorDirectives && warningData.actorDirectives.length > 0) {
-      if (yPosition > pageHeight - 80) {
+    // Severity Row
+    if (warningData.severity) {
+      pdf.setFont('helvetica', 'bold');
+      pdf.setTextColor(...COLORS.primaryBlue);
+      pdf.text('Severity:', labelStartX, infoY);
+      pdf.setFont('helvetica', 'normal');
+      pdf.setTextColor(...COLORS.darkText);
+      pdf.text(warningData.severity, valueStartX, infoY);
+      infoY += 7;
+    }
+
+    // Impact Level - with prominent aligned box
+    pdf.setFont('helvetica', 'bold');
+    pdf.setTextColor(...COLORS.primaryBlue);
+    pdf.text('Impact Level:', labelStartX, infoY);
+
+    // Create a prominent badge box aligned with other values
+    const levelColor = getWarningColorRGB(warningLevel);
+    const badgeWidth = halfWidth - 44;
+    const badgeHeight = 10;
+    const badgeY = infoY - 6;
+
+    // Draw border around the badge for clarity
+    pdf.setDrawColor(...levelColor);
+    pdf.setLineWidth(0.5);
+    pdf.roundedRect(valueStartX, badgeY, badgeWidth, badgeHeight, 2, 2, 'S');
+
+    // Fill the badge with warning color
+    pdf.setFillColor(...levelColor);
+    pdf.roundedRect(valueStartX + 0.5, badgeY + 0.5, badgeWidth - 1, badgeHeight - 1, 1.5, 1.5, 'F');
+
+    // Add the warning level text centered in the badge
+    pdf.setTextColor(255, 255, 255);
+    pdf.setFontSize(10);
+    pdf.setFont('helvetica', 'bold');
+    pdf.text(warningLevel, valueStartX + badgeWidth / 2, infoY + 0.5, { align: 'center' });
+
+    yPosition = Math.max(mapY + mapHeight + 3, infoY + 10);
+
+    // ========== SIDE-BY-SIDE: PUBLIC ADVISORY (LEFT) & INSTITUTIONAL DIRECTIVES (RIGHT) ==========
+    const hasPublicActions = warningData.publicActions && warningData.publicActions.length > 0;
+    const hasDirectives = warningData.actorDirectives && warningData.actorDirectives.length > 0;
+
+    if (hasPublicActions || hasDirectives) {
+      if (yPosition > pageHeight - 70) {
         pdf.addPage();
         yPosition = margin;
       }
 
-      addText('INSTITUTIONAL DIRECTIVES', 16, true);
-      yPosition += 5;
+      const advisorySectionY = yPosition;
+      const colWidth = (pageWidth - 2 * margin - 6) / 2;
+      const rightColX = margin + colWidth + 6;
 
-      warningData.actorDirectives.forEach((directive, index) => {
-        addText(`${directive.actor} - ${directive.role}:`, 12, true);
-        yPosition += 2;
+      // ===== LEFT COLUMN: PUBLIC ADVISORY =====
+      if (hasPublicActions) {
+        pdf.setFontSize(11);
+        pdf.setFont('helvetica', 'bold');
+        pdf.setFillColor(...COLORS.monitor);
+        pdf.setTextColor(255, 255, 255);
+        pdf.roundedRect(margin, advisorySectionY, colWidth, 8, 1, 1, 'F');
+        pdf.text('PUBLIC ADVISORY', margin + 4, advisorySectionY + 5.5);
+        pdf.setTextColor(...COLORS.darkText);
 
-        if (directive.actions && directive.actions.length > 0) {
-          directive.actions.forEach(action => {
-            addText(`  • ${action}`, 11, false);
-            yPosition += 2;
-          });
-        }
-        yPosition += 3;
-      });
+        let leftY = advisorySectionY + 12;
+        pdf.setFontSize(10);
+
+        warningData.publicActions.forEach((action) => {
+          const actionText = action.instruction || action.action || action;
+          const category = action.category || '';
+
+          if (category) {
+            pdf.setFont('helvetica', 'bold');
+            pdf.setTextColor(...COLORS.primaryBlue);
+            pdf.text(`${category}:`, margin + 2, leftY);
+            leftY += 4;
+            pdf.setFont('helvetica', 'normal');
+            pdf.setTextColor(...COLORS.darkText);
+            const lines = pdf.splitTextToSize(actionText, colWidth - 8);
+            pdf.text(lines, margin + 2, leftY);
+            leftY += lines.length * 4 + 2.5;
+          } else {
+            pdf.setFont('helvetica', 'normal');
+            pdf.setTextColor(...COLORS.darkText);
+            const lines = pdf.splitTextToSize(`• ${actionText}`, colWidth - 6);
+            pdf.text(lines, margin + 2, leftY);
+            leftY += lines.length * 4 + 2;
+          }
+        });
+
+        yPosition = Math.max(yPosition, leftY);
+      }
+
+      // ===== RIGHT COLUMN: INSTITUTIONAL DIRECTIVES =====
+      if (hasDirectives) {
+        pdf.setFontSize(11);
+        pdf.setFont('helvetica', 'bold');
+        pdf.setFillColor(...COLORS.secondaryBlue);
+        pdf.setTextColor(255, 255, 255);
+        pdf.roundedRect(rightColX, advisorySectionY, colWidth, 8, 1, 1, 'F');
+        pdf.text('INSTITUTIONAL DIRECTIVES', rightColX + 4, advisorySectionY + 5.5);
+        pdf.setTextColor(...COLORS.darkText);
+
+        let rightY = advisorySectionY + 12;
+        pdf.setFontSize(10);
+
+        warningData.actorDirectives.forEach((directive) => {
+          pdf.setFont('helvetica', 'bold');
+          pdf.setTextColor(...COLORS.primaryBlue);
+          pdf.text(`${directive.actor}:`, rightColX + 2, rightY);
+          pdf.setTextColor(...COLORS.darkText);
+          rightY += 4;
+
+          pdf.setFont('helvetica', 'normal');
+          if (directive.actions && directive.actions.length > 0) {
+            directive.actions.forEach(action => {
+              const lines = pdf.splitTextToSize(`• ${action}`, colWidth - 8);
+              pdf.text(lines, rightColX + 4, rightY);
+              rightY += lines.length * 4 + 1.5;
+            });
+          }
+          rightY += 2;
+        });
+
+        yPosition = Math.max(yPosition, rightY);
+      }
+
+      yPosition += 3;
     }
 
-    // Footer - Contact Information (Professional Format)
-    if (yPosition > pageHeight - 70) {
+    // ========== COMPACT FOOTER ==========
+    // Check if we need to add a page for footer (reduced threshold)
+    if (yPosition > pageHeight - 30) {
       pdf.addPage();
-      yPosition = margin;
     }
 
-    const footerY = pageHeight - 60;
+    const footerStartY = pageHeight - 24;
 
-    // Separator line
-    pdf.setDrawColor(33, 150, 243);
-    pdf.setLineWidth(0.5);
-    pdf.line(margin, footerY, pageWidth - margin, footerY);
+    // Footer separator - gold accent (thinner)
+    pdf.setFillColor(...COLORS.accentGold);
+    pdf.rect(0, footerStartY, pageWidth, 1.5, 'F');
+    pdf.setFillColor(...COLORS.primaryBlue);
+    pdf.rect(0, footerStartY + 1.5, pageWidth, 0.5, 'F');
 
-    // Contact Section Header
-    yPosition = footerY + 7;
-    pdf.setFontSize(10);
+    // Footer background (compact)
+    pdf.setFillColor(...COLORS.lightGray);
+    pdf.rect(0, footerStartY + 2, pageWidth, 22, 'F');
+
+    // Left column - Issued By section (compact)
+    let footerY = footerStartY + 6;
+    pdf.setFontSize(7);
     pdf.setFont('helvetica', 'bold');
-    pdf.setTextColor(33, 150, 243);
-    pdf.text('FOR MORE INFORMATION, CONTACT US:', margin, yPosition);
+    pdf.setTextColor(...COLORS.primaryBlue);
+    pdf.text('ISSUED BY:', margin, footerY);
 
-    // Contact Details
-    pdf.setTextColor(0, 0, 0);
-    pdf.setFontSize(9);
+    pdf.setTextColor(60, 60, 60);
+    pdf.setFontSize(7);
     pdf.setFont('helvetica', 'bold');
-    yPosition += 5;
-    pdf.text(PMO_CONTACT_INFO.title, margin, yPosition);
-
+    footerY += 3.5;
+    pdf.text('Emergency Operation Communication Center (EOCC)', margin, footerY);
     pdf.setFont('helvetica', 'normal');
-    yPosition += 4;
-    pdf.text(PMO_CONTACT_INFO.office, margin, yPosition);
-    yPosition += 4;
-    pdf.text(PMO_CONTACT_INFO.department, margin, yPosition);
-    yPosition += 4;
-    pdf.text(PMO_CONTACT_INFO.address, margin, yPosition);
-    yPosition += 4;
-    pdf.text(PMO_CONTACT_INFO.poBox, margin, yPosition);
+    footerY += 3;
+    pdf.text(`${PMO_CONTACT_INFO.office} - ${PMO_CONTACT_INFO.department}`, margin, footerY);
+    footerY += 2.5;
+    pdf.text(`${PMO_CONTACT_INFO.address} | ${PMO_CONTACT_INFO.poBox}`, margin, footerY);
 
-    // Contact details in right column
-    const rightColX = pageWidth / 2 + 10;
-    yPosition = footerY + 17;
-
+    // Right column - Contact details (compact, single line format)
+    const rightColX = pageWidth - margin - 70;
+    footerY = footerStartY + 6;
+    pdf.setFontSize(7);
     pdf.setFont('helvetica', 'bold');
-    pdf.text('Email:', rightColX, yPosition);
+    pdf.setTextColor(...COLORS.primaryBlue);
+    pdf.text('CONTACT:', rightColX, footerY);
+
+    pdf.setTextColor(60, 60, 60);
+    pdf.setFontSize(7);
+    footerY += 3.5;
     pdf.setFont('helvetica', 'normal');
-    pdf.text(PMO_CONTACT_INFO.email, rightColX + 15, yPosition);
+    pdf.text(`Email: ${PMO_CONTACT_INFO.email}`, rightColX, footerY);
+    footerY += 3;
+    pdf.text(`Phone: ${PMO_CONTACT_INFO.phone} | Fax: ${PMO_CONTACT_INFO.fax}`, rightColX, footerY);
+    footerY += 2.5;
+    pdf.text('Web: www.pmo.go.tz', rightColX, footerY);
 
-    yPosition += 4;
-    pdf.setFont('helvetica', 'bold');
-    pdf.text('Phone:', rightColX, yPosition);
-    pdf.setFont('helvetica', 'normal');
-    pdf.text(PMO_CONTACT_INFO.phone, rightColX + 15, yPosition);
+    // Bottom bar with timestamp centered (thinner)
+    pdf.setFillColor(...COLORS.primaryBlue);
+    pdf.rect(0, pageHeight - 5, pageWidth, 5, 'F');
 
-    yPosition += 4;
-    pdf.setFont('helvetica', 'bold');
-    pdf.text('Fax:', rightColX, yPosition);
-    pdf.setFont('helvetica', 'normal');
-    pdf.text(PMO_CONTACT_INFO.fax, rightColX + 15, yPosition);
+    // Format timestamp with leading zeros for hours
+    const now = new Date();
+    const day = String(now.getDate()).padStart(2, '0');
+    const month = String(now.getMonth() + 1).padStart(2, '0');
+    const year = now.getFullYear();
+    const hours = String(now.getHours()).padStart(2, '0');
+    const minutes = String(now.getMinutes()).padStart(2, '0');
+    const seconds = String(now.getSeconds()).padStart(2, '0');
+    const formattedTimestamp = `${day}/${month}/${year}, ${hours}:${minutes}:${seconds}`;
 
-    yPosition += 4;
+    pdf.setTextColor(255, 255, 255);
+    pdf.setFontSize(6);
     pdf.setFont('helvetica', 'bold');
-    pdf.text('Emergency:', rightColX, yPosition);
-    pdf.setFont('helvetica', 'normal');
-    pdf.text(PMO_CONTACT_INFO.emergency, rightColX + 15, yPosition);
+    pdf.text(`Bulletin Generated: ${formattedTimestamp}`, pageWidth / 2, pageHeight - 1.5, { align: 'center' });
 
-    // Issued by information
-    pdf.setFont('helvetica', 'bold');
-    pdf.setFontSize(8);
-    pdf.setTextColor(100, 100, 100);
-    const issueY = pageHeight - 10;
-    pdf.text('Issued by: PMO-DMD Early Warning System', margin, issueY);
-    pdf.text(`${new Date().toLocaleString('en-GB')}`, pageWidth - margin, issueY, { align: 'right' });
+    // Generate filename
+    const filename = `Warning_Bulletin_${warningData.hazardType || 'Alert'}_${new Date().toISOString().split('T')[0]}`;
+
+    // Check if preview mode
+    if (warningData._previewMode || previewWindow) {
+      // Generate PDF blob and display in preview window
+      const pdfBlob = pdf.output('blob');
+      const pdfUrl = URL.createObjectURL(pdfBlob);
+
+      if (previewWindow) {
+        // Use the pre-opened window (avoids popup blocker)
+        previewWindow.location.href = pdfUrl;
+        previewWindow.focus();
+      } else {
+        // Fallback: try to open new window (may be blocked)
+        window.open(pdfUrl, '_blank');
+      }
+
+      console.log('📄 Bulletin preview opened in new tab');
+      return { preview: true, url: pdfUrl };
+    }
 
     // Save PDF
-    const filename = `Warning_Bulletin_${warningData.hazardType || 'Alert'}_${new Date().toISOString().split('T')[0]}`;
     pdf.save(`${filename}.pdf`);
+
+    // Log to audit trail
+    logBulletinGenerated(warningData, 'PDF');
 
     console.log('✅ Warning Bulletin PDF generated:', filename);
     return true;
@@ -536,12 +991,29 @@ export const generateRiskAssessmentPDF = async (riskData, districtName = null) =
       yPosition += 10;
 
       const districts = riskData.subnational.adm2;
+
+      // Helper to get risk score (handles both number and object structures)
+      const getRiskScore = (d) => {
+        if (typeof d.risk === 'number') return d.risk;
+        if (d.risk && typeof d.risk.score === 'number') return d.risk.score;
+        return 0;
+      };
+
+      // Helper to get risk class
+      const getRiskClass = (score) => {
+        if (score >= 6.5) return 'Very High';
+        if (score >= 5) return 'High';
+        if (score >= 3.5) return 'Medium';
+        if (score >= 2) return 'Low';
+        return 'Very Low';
+      };
+
       const riskCategories = {
-        'Very High': districts.filter(d => d.risk.score >= 6.5).length,
-        'High': districts.filter(d => d.risk.score >= 5 && d.risk.score < 6.5).length,
-        'Medium': districts.filter(d => d.risk.score >= 3.5 && d.risk.score < 5).length,
-        'Low': districts.filter(d => d.risk.score >= 2 && d.risk.score < 3.5).length,
-        'Very Low': districts.filter(d => d.risk.score < 2).length
+        'Very High': districts.filter(d => getRiskScore(d) >= 6.5).length,
+        'High': districts.filter(d => getRiskScore(d) >= 5 && getRiskScore(d) < 6.5).length,
+        'Medium': districts.filter(d => getRiskScore(d) >= 3.5 && getRiskScore(d) < 5).length,
+        'Low': districts.filter(d => getRiskScore(d) >= 2 && getRiskScore(d) < 3.5).length,
+        'Very Low': districts.filter(d => getRiskScore(d) < 2).length
       };
 
       pdf.setFontSize(11);
@@ -559,14 +1031,17 @@ export const generateRiskAssessmentPDF = async (riskData, districtName = null) =
       yPosition += 8;
 
       const topDistricts = [...districts]
-        .sort((a, b) => b.risk.score - a.risk.score)
+        .sort((a, b) => getRiskScore(b) - getRiskScore(a))
         .slice(0, 10);
 
       pdf.setFontSize(10);
       pdf.setFont('helvetica', 'normal');
       topDistricts.forEach((district, index) => {
+        const score = getRiskScore(district);
+        const districtName = district.name || district.admin?.adm2Name || 'Unknown';
+        const riskClass = district.risk?.class || getRiskClass(score);
         pdf.text(
-          `${index + 1}. ${district.name}: ${district.risk.score.toFixed(2)} (${district.risk.class})`,
+          `${index + 1}. ${districtName}: ${score.toFixed(2)} (${riskClass})`,
           margin + 5,
           yPosition
         );
@@ -708,7 +1183,7 @@ export const generateVulnerabilityReportPDF = async (vulnerabilityData, district
     pdf.setTextColor(0, 0, 0);
     yPosition = 45;
 
-    // Date & Metadata
+    // Date and Metadata
     addText(`Report Generated: ${new Date().toLocaleDateString('en-GB')}`, 10);
     yPosition += 5;
 
@@ -850,11 +1325,441 @@ export const generateAdaptiveCapacityReportPDF = async (capacityData, districtNa
   }
 };
 
+/**
+ * Helper function to load image as base64 for PDF
+ * @param {string} url - URL of the image to load
+ * @returns {Promise<string|null>} Base64 image data or null if failed
+ */
+const loadImageForPDF = async (url) => {
+  try {
+    const response = await fetch(url);
+    const blob = await response.blob();
+    return new Promise((resolve) => {
+      const reader = new FileReader();
+      reader.onloadend = () => resolve(reader.result);
+      reader.onerror = () => resolve(null);
+      reader.readAsDataURL(blob);
+    });
+  } catch (error) {
+    console.warn('Could not load image:', error);
+    return null;
+  }
+};
+
+/**
+ * Generate Hazard Input Report PDF
+ * For institutions (TMA, MoW, MoH, MoA, GST) to export their hazard submissions
+ * @param {object} hazardData - Hazard input data from institution
+ * @param {object} options - Additional options
+ */
+export const generateHazardInputPDF = async (hazardData, options = {}) => {
+  try {
+    console.log('📋 Generating Hazard Input Report PDF...');
+
+    const pdf = new jsPDF('portrait', 'mm', 'a4');
+    const pageWidth = pdf.internal.pageSize.getWidth();
+    const pageHeight = pdf.internal.pageSize.getHeight();
+    const margin = 15;
+    let yPosition = 0;
+
+    // Institution colors
+    const INSTITUTION_COLORS = {
+      TMA: [33, 150, 243],    // Blue
+      MoW: [3, 169, 244],     // Light Blue
+      MoH: [244, 67, 54],     // Red
+      MoA: [139, 195, 74],    // Light Green
+      GST: [121, 85, 72]      // Brown
+    };
+
+    // Institution logos (public folder paths)
+    const INSTITUTION_LOGOS = {
+      TMA: '/tmalogo.png',
+      MoW: null,  // Add path when available
+      MoH: null,  // Add path when available
+      MoA: null,  // Add path when available
+      GST: null   // Add path when available
+    };
+
+    // Warning level colors
+    const WARNING_COLORS = {
+      'Advisory': [255, 255, 0],      // Yellow
+      'Warning': [255, 102, 0],       // Orange
+      'Major Warning': [255, 0, 0]    // Red
+    };
+
+    const institutionColor = INSTITUTION_COLORS[hazardData.institution] || [33, 150, 243];
+    const warningColor = WARNING_COLORS[hazardData.warningLevel] || [255, 152, 0];
+
+    // Try to load institution logo
+    const logoPath = INSTITUTION_LOGOS[hazardData.institution];
+    let logoImage = null;
+    if (logoPath) {
+      console.log(`📷 Loading ${hazardData.institution} logo...`);
+      logoImage = await loadImageForPDF(logoPath);
+    }
+
+    // ========== HEADER SECTION ==========
+    // Institution-colored header bar
+    pdf.setFillColor(...institutionColor);
+    pdf.rect(0, 0, pageWidth, 38, 'F');
+
+    // Logo or fallback circle
+    if (logoImage) {
+      // Draw white background circle for logo
+      pdf.setFillColor(255, 255, 255);
+      pdf.circle(22, 19, 11, 'F');
+      // Add the logo image
+      try {
+        pdf.addImage(logoImage, 'PNG', 11, 8, 22, 22);
+        console.log('✅ Logo added to PDF');
+      } catch (imgError) {
+        console.warn('Could not add logo image:', imgError);
+        // Fallback to text
+        pdf.setFontSize(6);
+        pdf.setTextColor(...institutionColor);
+        pdf.setFont('helvetica', 'bold');
+        pdf.text(hazardData.institution || 'TMA', 22, 21, { align: 'center' });
+      }
+    } else {
+      // Fallback: White circle with institution abbreviation
+      pdf.setFillColor(255, 255, 255);
+      pdf.circle(22, 19, 10, 'F');
+      pdf.setFontSize(6);
+      pdf.setTextColor(...institutionColor);
+      pdf.setFont('helvetica', 'bold');
+      pdf.text(hazardData.institution || 'TMA', 22, 21, { align: 'center' });
+    }
+
+    // Header text
+    pdf.setTextColor(255, 255, 255);
+    pdf.setFontSize(12);
+    pdf.setFont('helvetica', 'bold');
+    pdf.text('UNITED REPUBLIC OF TANZANIA', pageWidth / 2, 12, { align: 'center' });
+
+    pdf.setFontSize(10);
+    pdf.text(hazardData.institutionName || 'Technical Institution', pageWidth / 2, 20, { align: 'center' });
+
+    pdf.setFontSize(8);
+    pdf.setFont('helvetica', 'normal');
+    pdf.text('Weather Alert Briefing to PMO-DMD', pageWidth / 2, 28, { align: 'center' });
+
+    // Report type badge
+    pdf.setFillColor(...warningColor);
+    pdf.roundedRect(pageWidth - 40, 10, 30, 16, 2, 2, 'F');
+    pdf.setTextColor(hazardData.warningLevel === 'Advisory' ? 0 : 255, hazardData.warningLevel === 'Advisory' ? 0 : 255, hazardData.warningLevel === 'Advisory' ? 0 : 255);
+    pdf.setFontSize(6);
+    pdf.setFont('helvetica', 'bold');
+    pdf.text('HAZARD', pageWidth - 25, 16, { align: 'center' });
+    pdf.text('INPUT', pageWidth - 25, 21, { align: 'center' });
+
+    yPosition = 44;
+
+    // ========== REPORT TITLE BANNER ==========
+    pdf.setFillColor(...warningColor);
+    pdf.roundedRect(margin, yPosition, pageWidth - 2 * margin, 12, 2, 2, 'F');
+    pdf.setTextColor(hazardData.warningLevel === 'Advisory' ? 0 : 255, hazardData.warningLevel === 'Advisory' ? 0 : 255, hazardData.warningLevel === 'Advisory' ? 0 : 255);
+    pdf.setFontSize(13);
+    pdf.setFont('helvetica', 'bold');
+    pdf.text('WEATHER ALERT BRIEFING TO PMO-DMD', pageWidth / 2, yPosition + 8, { align: 'center' });
+    yPosition += 18;
+
+    // ========== METADATA SECTION ==========
+    pdf.setFillColor(245, 245, 245);
+    pdf.roundedRect(margin, yPosition, pageWidth - 2 * margin, 14, 2, 2, 'F');
+
+    pdf.setFontSize(9);
+    pdf.setTextColor(100, 100, 100);
+    pdf.setFont('helvetica', 'bold');
+    pdf.text('Reference:', margin + 4, yPosition + 5);
+    pdf.setFont('helvetica', 'normal');
+    pdf.setTextColor(60, 60, 60);
+    const refNumber = `HI-${hazardData.institution}-${Date.now().toString().slice(-8)}`;
+    pdf.text(refNumber, margin + 24, yPosition + 5);
+
+    // Issue date
+    pdf.setFont('helvetica', 'normal');
+    const issueDate = new Date(hazardData.issuedAt || Date.now());
+    pdf.text(`Submitted: ${issueDate.toLocaleDateString('en-GB', { weekday: 'short', day: '2-digit', month: 'short', year: 'numeric' })}`, margin + 4, yPosition + 11);
+
+    // Forecast day indicator
+    if (hazardData.forecastDay) {
+      const forecastLabel = hazardData.forecastDay === 1 ? 'Today' : hazardData.forecastDay === 2 ? 'Tomorrow' : `Day ${hazardData.forecastDay}`;
+      pdf.setTextColor(...institutionColor);
+      pdf.setFont('helvetica', 'bold');
+      pdf.text(`Forecast: ${forecastLabel}`, pageWidth - margin - 4, yPosition + 8, { align: 'right' });
+    }
+
+    yPosition += 20;
+
+    // ========== HAZARD DETAILS SECTION ==========
+    pdf.setFontSize(11);
+    pdf.setFont('helvetica', 'bold');
+    pdf.setFillColor(...institutionColor);
+    pdf.setTextColor(255, 255, 255);
+    pdf.roundedRect(margin, yPosition, pageWidth - 2 * margin, 8, 1, 1, 'F');
+    pdf.text('HAZARD INFORMATION', margin + 4, yPosition + 5.5);
+    yPosition += 12;
+
+    // Hazard details grid
+    const detailsStartY = yPosition;
+    const halfWidth = (pageWidth - 2 * margin - 6) / 2;
+
+    // Left column - Hazard details
+    pdf.setFontSize(10);
+    pdf.setTextColor(60, 60, 60);
+
+    const addDetailRow = (label, value, x, y) => {
+      pdf.setFont('helvetica', 'bold');
+      pdf.setTextColor(...institutionColor);
+      pdf.text(`${label}:`, x, y);
+      pdf.setFont('helvetica', 'normal');
+      pdf.setTextColor(60, 60, 60);
+      pdf.text(value || 'N/A', x + 35, y);
+    };
+
+    addDetailRow('Hazard Type', hazardData.hazardType, margin + 2, yPosition);
+    yPosition += 6;
+
+    addDetailRow('Institution', `${hazardData.institution} - ${hazardData.institutionName}`, margin + 2, yPosition);
+    yPosition += 6;
+
+    addDetailRow('Warning Level', hazardData.warningLevel, margin + 2, yPosition);
+    yPosition += 6;
+
+    addDetailRow('Likelihood', hazardData.likelihood || 'High', margin + 2, yPosition);
+    yPosition += 6;
+
+    if (hazardData.quantitativeValue) {
+      addDetailRow('Intensity', `${hazardData.quantitativeValue}`, margin + 2, yPosition);
+      yPosition += 6;
+    }
+
+    // Temperature type for Extreme Temperature
+    if (hazardData.hazardType === 'Extreme Temperature' && hazardData.temperatureType) {
+      addDetailRow('Type', `${hazardData.temperatureType === 'Hot' ? '🔥 Extreme Heat' : '❄️ Extreme Cold'}`, margin + 2, yPosition);
+      yPosition += 6;
+    }
+
+    yPosition += 4;
+
+    // ========== VALIDITY PERIOD SECTION ==========
+    pdf.setFontSize(11);
+    pdf.setFont('helvetica', 'bold');
+    pdf.setFillColor(255, 152, 0);
+    pdf.setTextColor(255, 255, 255);
+    pdf.roundedRect(margin, yPosition, pageWidth - 2 * margin, 8, 1, 1, 'F');
+    pdf.text('VALIDITY PERIOD', margin + 4, yPosition + 5.5);
+    yPosition += 12;
+
+    const validityStart = hazardData.temporalValidity?.start ? new Date(hazardData.temporalValidity.start) : new Date();
+    const validityEnd = hazardData.temporalValidity?.end ? new Date(hazardData.temporalValidity.end) : new Date(Date.now() + 48 * 60 * 60 * 1000);
+
+    pdf.setFontSize(10);
+    pdf.setTextColor(60, 60, 60);
+
+    // Format dates with 24-hour time
+    const formatDateTime = (date) => {
+      const day = String(date.getDate()).padStart(2, '0');
+      const month = date.toLocaleDateString('en-GB', { month: 'short' });
+      const year = date.getFullYear();
+      const hours = String(date.getHours()).padStart(2, '0');
+      const minutes = String(date.getMinutes()).padStart(2, '0');
+      return `${day} ${month} ${year}, ${hours}:${minutes}`;
+    };
+
+    pdf.setFont('helvetica', 'bold');
+    pdf.setTextColor(255, 152, 0);
+    pdf.text('From:', margin + 2, yPosition);
+    pdf.setFont('helvetica', 'normal');
+    pdf.setTextColor(60, 60, 60);
+    pdf.text(formatDateTime(validityStart), margin + 18, yPosition);
+
+    pdf.setFont('helvetica', 'bold');
+    pdf.setTextColor(255, 152, 0);
+    pdf.text('Until:', margin + 80, yPosition);
+    pdf.setFont('helvetica', 'normal');
+    pdf.setTextColor(60, 60, 60);
+    pdf.text(formatDateTime(validityEnd), margin + 96, yPosition);
+
+    yPosition += 10;
+
+    // ========== AFFECTED AREAS SECTION ==========
+    pdf.setFontSize(11);
+    pdf.setFont('helvetica', 'bold');
+    pdf.setFillColor(76, 175, 80);
+    pdf.setTextColor(255, 255, 255);
+    pdf.roundedRect(margin, yPosition, pageWidth - 2 * margin, 8, 1, 1, 'F');
+    pdf.text('AFFECTED AREAS', margin + 4, yPosition + 5.5);
+    yPosition += 12;
+
+    const districts = hazardData.spatialExtent || [];
+    const districtWarningLevels = hazardData.districtWarningLevels || {};
+    const regions = hazardData.regions || [];
+
+    // Regions
+    if (regions.length > 0) {
+      pdf.setFillColor(33, 150, 243);
+      pdf.circle(margin + 4, yPosition - 0.5, 2, 'F');
+      pdf.setFont('helvetica', 'bold');
+      pdf.setFontSize(10);
+      pdf.setTextColor(33, 150, 243);
+      pdf.text(`Regions (${regions.length}):`, margin + 8, yPosition);
+      pdf.setFont('helvetica', 'normal');
+      pdf.setFontSize(9);
+      pdf.setTextColor(60, 60, 60);
+      const regionText = regions.join(', ');
+      const regionLines = pdf.splitTextToSize(regionText, pageWidth - 2 * margin - 42);
+      pdf.text(regionLines, margin + 40, yPosition);
+      yPosition += regionLines.length * 4 + 4;
+    }
+
+    // Districts with warning levels
+    if (districts.length > 0) {
+      pdf.setFillColor(255, 152, 0);
+      pdf.circle(margin + 4, yPosition - 0.5, 2, 'F');
+      pdf.setFont('helvetica', 'bold');
+      pdf.setFontSize(10);
+      pdf.setTextColor(255, 152, 0);
+      pdf.text(`Districts (${districts.length}):`, margin + 8, yPosition);
+      yPosition += 5;
+
+      // Group districts by warning level
+      const districtsByLevel = { 'Major Warning': [], 'Warning': [], 'Advisory': [] };
+      districts.forEach(district => {
+        const level = districtWarningLevels[district] || 'Advisory';
+        if (districtsByLevel[level]) {
+          districtsByLevel[level].push(district);
+        }
+      });
+
+      pdf.setFontSize(9);
+      Object.entries(districtsByLevel).forEach(([level, levelDistricts]) => {
+        if (levelDistricts.length > 0) {
+          const levelColor = WARNING_COLORS[level] || [255, 152, 0];
+          pdf.setFillColor(...levelColor);
+          pdf.circle(margin + 8, yPosition - 0.5, 1.5, 'F');
+          pdf.setFont('helvetica', 'bold');
+          pdf.setTextColor(...levelColor);
+          pdf.text(`${level} (${levelDistricts.length}):`, margin + 12, yPosition);
+          pdf.setFont('helvetica', 'normal');
+          pdf.setTextColor(60, 60, 60);
+          const districtText = levelDistricts.join(', ');
+          const districtLines = pdf.splitTextToSize(districtText, pageWidth - 2 * margin - 55);
+          pdf.text(districtLines, margin + 50, yPosition);
+          yPosition += districtLines.length * 4 + 3;
+        }
+      });
+    }
+
+    yPosition += 4;
+
+    // ========== ADDITIONAL INFORMATION SECTION ==========
+    if (hazardData.additionalInfo && hazardData.additionalInfo.trim()) {
+      pdf.setFontSize(11);
+      pdf.setFont('helvetica', 'bold');
+      pdf.setFillColor(156, 39, 176);
+      pdf.setTextColor(255, 255, 255);
+      pdf.roundedRect(margin, yPosition, pageWidth - 2 * margin, 8, 1, 1, 'F');
+      pdf.text('ADDITIONAL INFORMATION', margin + 4, yPosition + 5.5);
+      yPosition += 12;
+
+      pdf.setFontSize(9);
+      pdf.setFont('helvetica', 'normal');
+      pdf.setTextColor(60, 60, 60);
+      const infoLines = pdf.splitTextToSize(hazardData.additionalInfo, pageWidth - 2 * margin - 4);
+      pdf.text(infoLines, margin + 2, yPosition);
+      yPosition += infoLines.length * 4 + 4;
+    }
+
+    // ========== SIMULATION MODE INDICATOR ==========
+    if (hazardData.isSimulation) {
+      pdf.setFillColor(255, 193, 7);
+      pdf.roundedRect(margin, yPosition, pageWidth - 2 * margin, 10, 2, 2, 'F');
+      pdf.setFontSize(10);
+      pdf.setFont('helvetica', 'bold');
+      pdf.setTextColor(0, 0, 0);
+      pdf.text('🎯 SIMULATION MODE - This is a test scenario, not a real hazard alert', pageWidth / 2, yPosition + 7, { align: 'center' });
+      yPosition += 16;
+    }
+
+    // ========== FOOTER SECTION ==========
+    const footerStartY = pageHeight - 35;
+
+    // Footer separator
+    pdf.setFillColor(...institutionColor);
+    pdf.rect(0, footerStartY, pageWidth, 2, 'F');
+
+    // Footer background
+    pdf.setFillColor(250, 250, 250);
+    pdf.rect(0, footerStartY + 2, pageWidth, 33, 'F');
+
+    // Footer content
+    let footerY = footerStartY + 10;
+    pdf.setFontSize(9);
+    pdf.setFont('helvetica', 'bold');
+    pdf.setTextColor(...institutionColor);
+    pdf.text('SUBMITTED TO:', margin, footerY);
+
+    pdf.setTextColor(60, 60, 60);
+    pdf.setFontSize(8);
+    pdf.setFont('helvetica', 'bold');
+    footerY += 5;
+    pdf.text("Prime Minister's Office - Disaster Management Department (PMO-DMD)", margin, footerY);
+    pdf.setFont('helvetica', 'normal');
+    footerY += 4;
+    pdf.text('Emergency Operation Communication Center (EOCC)', margin, footerY);
+    footerY += 3.5;
+    pdf.text(`${PMO_CONTACT_INFO.poBox} | ${PMO_CONTACT_INFO.email}`, margin, footerY);
+
+    // Right side - Source info
+    const rightColX = pageWidth - margin - 60;
+    footerY = footerStartY + 10;
+    pdf.setFont('helvetica', 'bold');
+    pdf.setTextColor(...institutionColor);
+    pdf.text('SOURCE:', rightColX, footerY);
+
+    pdf.setTextColor(60, 60, 60);
+    pdf.setFontSize(8);
+    footerY += 5;
+    pdf.setFont('helvetica', 'bold');
+    pdf.text(hazardData.institutionName || 'Technical Institution', rightColX, footerY);
+    pdf.setFont('helvetica', 'normal');
+    footerY += 4;
+    pdf.text(hazardData.source || 'Official Submission', rightColX, footerY);
+
+    // Bottom bar with timestamp
+    pdf.setFillColor(...institutionColor);
+    pdf.rect(0, pageHeight - 7, pageWidth, 7, 'F');
+
+    const now = new Date();
+    const timestamp = `${String(now.getDate()).padStart(2, '0')}/${String(now.getMonth() + 1).padStart(2, '0')}/${now.getFullYear()}, ${String(now.getHours()).padStart(2, '0')}:${String(now.getMinutes()).padStart(2, '0')}:${String(now.getSeconds()).padStart(2, '0')}`;
+
+    pdf.setTextColor(255, 255, 255);
+    pdf.setFontSize(7);
+    pdf.setFont('helvetica', 'bold');
+    pdf.text(`Report Generated: ${timestamp}`, pageWidth / 2, pageHeight - 2.5, { align: 'center' });
+
+    // Generate filename
+    const filename = `Hazard_Input_${hazardData.institution}_${hazardData.hazardType?.replace(/\s+/g, '_') || 'Alert'}_${new Date().toISOString().split('T')[0]}`;
+
+    // Save PDF
+    pdf.save(`${filename}.pdf`);
+
+    console.log('✅ Hazard Input Report PDF generated:', filename);
+    return true;
+
+  } catch (error) {
+    console.error('❌ Error generating hazard input report:', error);
+    throw error;
+  }
+};
+
 export default {
   generatePDFFromElement,
   exportAsImage,
   generateWarningBulletinPDF,
   generateRiskAssessmentPDF,
   generateVulnerabilityReportPDF,
-  generateAdaptiveCapacityReportPDF
+  generateAdaptiveCapacityReportPDF,
+  generateHazardInputPDF
 };

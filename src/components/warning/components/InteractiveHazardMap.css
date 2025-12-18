@@ -556,3 +556,34 @@
   50% { transform: scale(1.2); }
   100% { transform: scale(1); }
 }
+
+/* ========== GEOGRAPHIC LAYER TOOLTIPS ========== */
+.water-tooltip {
+  background: linear-gradient(135deg, #1976D2, #0D47A1) !important;
+  color: white !important;
+  border: none !important;
+  border-radius: 6px !important;
+  padding: 6px 12px !important;
+  font-size: 12px !important;
+  font-weight: 600 !important;
+  box-shadow: 0 2px 8px rgba(25, 118, 210, 0.4) !important;
+}
+
+.water-tooltip::before {
+  border-top-color: #1976D2 !important;
+}
+
+.region-tooltip {
+  background: linear-gradient(135deg, #5D4037, #3E2723) !important;
+  color: white !important;
+  border: none !important;
+  border-radius: 6px !important;
+  padding: 6px 12px !important;
+  font-size: 12px !important;
+  font-weight: 600 !important;
+  box-shadow: 0 2px 8px rgba(93, 64, 55, 0.4) !important;
+}
+
+.region-tooltip::before {
+  border-top-color: #5D4037 !important;
+}

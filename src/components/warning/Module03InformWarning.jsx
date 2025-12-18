@@ -2,7 +2,7 @@
  * MODULE 03: INFORM WARNING EDUCATION
  *
  * Teaches users about INFORM Warning - an early warning system for humanitarian crises
- * Builds on INFORM Risk concepts from Modules 01 & 02
+ * Builds on INFORM Risk concepts from Modules 01 and 02
  *
  * Structure:
  * - 7 educational sections
@@ -37,7 +37,7 @@ const Module03InformWarning = ({ onComplete }) => {
     { id: 2, title: 'Trigger Events', duration: '8 min', icon: '🚨' },
     { id: 3, title: 'Vulnerability in Crisis', duration: '7 min', icon: '🛡️' },
     { id: 4, title: 'Immediate Coping Capacity', duration: '7 min', icon: '🏥' },
-    { id: 5, title: 'Warning Scores & Thresholds', duration: '8 min', icon: '📊' },
+    { id: 5, title: 'Warning Scores and Thresholds', duration: '8 min', icon: '📊' },
     { id: 6, title: 'Integration with INFORM Risk', duration: '7 min', icon: '🔗' },
     { id: 7, title: 'Real-World Applications', duration: '8 min', icon: '🌍' }
   ];
@@ -248,7 +248,7 @@ const Module03InformWarning = ({ onComplete }) => {
         <div className="info-card">
           <h3>📚 About This Module</h3>
           <p>
-            INFORM Warning builds on the INFORM Risk framework you learned in Modules 01 & 02.
+            INFORM Warning builds on the INFORM Risk framework you learned in Modules 01 and 02.
             While INFORM Risk assesses long-term vulnerability, INFORM Warning focuses on
             imminent threats and rapid-onset crises.
           </p>

@@ -26,11 +26,11 @@
 }
 
 .section-intro {
-  font-size: 18px;
+  font-size: 20px;
   color: #666;
   max-width: 700px;
   margin: 0 auto;
-  line-height: 1.6;
+  line-height: 1.7;
 }
 
 /* ===== INFORM DEFINITION BOX ===== */
@@ -67,8 +67,8 @@
 
 .definition-content p {
   margin: 0 0 12px 0;
-  font-size: 16px;
-  line-height: 1.7;
+  font-size: 18px;
+  line-height: 1.8;
   color: #333;
 }
 
@@ -126,7 +126,7 @@
 }
 
 .teaching-emphasis {
-  font-size: 17px;
+  font-size: 19px;
   font-weight: 600;
   color: #856404;
   margin: 0 0 12px 0;
@@ -140,9 +140,9 @@
 
 .teaching-list li {
   margin-bottom: 10px;
-  font-size: 16px;
+  font-size: 18px;
   color: #333;
-  line-height: 1.6;
+  line-height: 1.7;
   position: relative;
   padding-left: 20px;
 }
@@ -160,9 +160,9 @@
   padding: 16px 20px;
   border-radius: 8px;
   border-left: 4px solid #ff9800;
-  font-size: 15px;
+  font-size: 17px;
   color: #333;
-  line-height: 1.7;
+  line-height: 1.8;
 }
 
 .teaching-example strong {
@@ -182,10 +182,10 @@
 }
 
 .subsection-intro {
-  font-size: 16px;
+  font-size: 18px;
   color: #666;
   margin: 0 0 24px 0;
-  line-height: 1.6;
+  line-height: 1.7;
 }
 
 /* Category Selector */
@@ -208,7 +208,7 @@
   display: flex;
   align-items: center;
   gap: 12px;
-  font-size: 16px;
+  font-size: 18px;
   font-weight: 600;
 }
 
@@ -272,10 +272,10 @@
 
 .hazard-name {
   margin: 0 0 8px 0;
-  font-size: 16px;
+  font-size: 18px;
   font-weight: 600;
   color: #333;
-  line-height: 1.3;
+  line-height: 1.4;
 }
 
 .hazard-frequency {
@@ -285,13 +285,13 @@
 }
 
 .frequency-label {
-  font-size: 12px;
+  font-size: 14px;
   color: #999;
   font-weight: 500;
 }
 
 .frequency-value {
-  font-size: 14px;
+  font-size: 16px;
   color: #666;
   font-weight: 500;
 }
@@ -336,13 +336,13 @@
 }
 
 .detail-label {
-  font-size: 13px;
+  font-size: 15px;
   color: #999;
   font-weight: 600;
 }
 
 .detail-value {
-  font-size: 15px;
+  font-size: 17px;
   color: #333;
   font-weight: 500;
 }
@@ -365,8 +365,8 @@
 }
 
 .notice-text {
-  font-size: 15px;
-  line-height: 1.7;
+  font-size: 17px;
+  line-height: 1.8;
   color: #1b5e20;
 }
 
@@ -404,7 +404,7 @@
 }
 
 .year-label {
-  font-size: 12px;
+  font-size: 14px;
   font-weight: 600;
   color: #666;
 }
@@ -423,7 +423,7 @@
 
 .event-type {
   min-width: 140px;
-  font-size: 14px;
+  font-size: 16px;
   font-weight: 600;
   color: #333;
 }
@@ -463,7 +463,7 @@
 }
 
 .timeline-note {
-  font-size: 14px;
+  font-size: 16px;
   color: #666;
   font-style: italic;
   padding: 16px 20px;
@@ -496,9 +496,9 @@
 
 .section-summary li {
   margin-bottom: 12px;
-  font-size: 16px;
+  font-size: 18px;
   color: #4a148c;
-  line-height: 1.6;
+  line-height: 1.7;
   position: relative;
   padding-left: 8px;
 }
@@ -513,7 +513,7 @@
   padding: 16px 20px;
   border-radius: 8px;
   border-left: 4px solid #9c27b0;
-  font-size: 15px;
+  font-size: 17px;
   color: #4a148c;
 }
 

@@ -8,12 +8,13 @@ import React, { useState } from 'react';
 import {
   generateWarningBulletinPDF,
   generateRiskAssessmentPDF,
+  generateHazardInputPDF,
   generatePDFFromElement,
   exportAsImage
 } from '../../../services/reportGenerationService';
 
 const ReportExportButton = ({
-  reportType = 'warning', // 'warning', 'risk', 'custom'
+  reportType = 'warning', // 'warning', 'risk', 'hazard', 'custom'
   reportData = null,
   elementId = null, // ID of element to export if reportType is 'custom'
   buttonStyle = 'primary', // 'primary', 'secondary', 'compact'
@@ -30,13 +31,43 @@ const ReportExportButton = ({
     setIsExporting(true);
     setShowDropdown(false);
 
+    // IMPORTANT: Open preview window IMMEDIATELY on user click to avoid popup blocker
+    // This must happen synchronously before any await calls
+    let previewWindow = null;
+    if (format === 'preview') {
+      previewWindow = window.open('', '_blank');
+      if (previewWindow) {
+        // Show loading message while PDF generates
+        previewWindow.document.write(`
+          <html>
+            <head><title>Generating Bulletin Preview...</title></head>
+            <body style="display:flex;justify-content:center;align-items:center;height:100vh;margin:0;font-family:Arial,sans-serif;background:#f5f5f5;">
+              <div style="text-align:center;">
+                <div style="font-size:48px;margin-bottom:20px;">📄</div>
+                <h2 style="color:#1976D2;margin-bottom:10px;">Generating Bulletin Preview</h2>
+                <p style="color:#666;">Please wait while the PDF is being created...</p>
+                <div style="margin-top:20px;width:200px;height:4px;background:#e0e0e0;border-radius:2px;overflow:hidden;">
+                  <div style="width:100%;height:100%;background:linear-gradient(90deg,#1976D2,#42A5F5,#1976D2);animation:loading 1.5s infinite;background-size:200% 100%;"></div>
+                </div>
+                <style>@keyframes loading{0%{background-position:200% 0}100%{background-position:-200% 0}}</style>
+              </div>
+            </body>
+          </html>
+        `);
+      }
+    }
+
     try {
-      console.log(`📤 Exporting ${reportType} report as ${format}...`);
+      console.log(`📤 ${format === 'preview' ? 'Previewing' : 'Exporting'} ${reportType} report...`);
 
       switch (reportType) {
         case 'warning':
-          if (format === 'pdf') {
-            await generateWarningBulletinPDF(reportData);
+          if (format === 'preview') {
+            // Preview bulletin in new tab - pass the pre-opened window
+            await generateWarningBulletinPDF({ ...reportData, _previewMode: true }, null, true, previewWindow);
+          } else if (format === 'pdf') {
+            // Generate bulletin with enhanced publication-ready map
+            await generateWarningBulletinPDF(reportData, null, true);
           } else if (format === 'png' && elementId) {
             const element = document.getElementById(elementId);
             if (element) {
@@ -54,6 +85,17 @@ const ReportExportButton = ({
             const element = document.getElementById(elementId);
             if (element) {
               await exportAsImage(element, `risk_assessment_${Date.now()}`);
+            }
+          }
+          break;
+
+        case 'hazard':
+          if (format === 'pdf') {
+            await generateHazardInputPDF(reportData);
+          } else if (format === 'png' && elementId) {
+            const element = document.getElementById(elementId);
+            if (element) {
+              await exportAsImage(element, `hazard_input_${Date.now()}`);
             }
           }
           break;
@@ -81,10 +123,14 @@ const ReportExportButton = ({
         onExportComplete(format);
       }
 
-      console.log(`✅ Export completed successfully`);
+      console.log(`✅ ${format === 'preview' ? 'Preview' : 'Export'} completed successfully`);
 
     } catch (error) {
       console.error('❌ Export failed:', error);
+      // Close preview window if it was opened and there's an error
+      if (previewWindow && !previewWindow.closed) {
+        previewWindow.close();
+      }
       alert(`Export failed: ${error.message}`);
     } finally {
       setIsExporting(false);
@@ -174,8 +220,42 @@ const ReportExportButton = ({
               textTransform: 'uppercase',
               letterSpacing: '0.5px'
             }}>
-              Export Format
+              Export Options
             </div>
+
+            {/* Preview Option - Only for warning bulletins */}
+            {reportType === 'warning' && (
+              <button
+                className="export-option"
+                onClick={() => handleExport('preview')}
+                style={{
+                  width: '100%',
+                  padding: '14px 16px',
+                  border: 'none',
+                  background: 'linear-gradient(135deg, #E3F2FD 0%, #BBDEFB 100%)',
+                  textAlign: 'left',
+                  cursor: 'pointer',
+                  fontSize: '14px',
+                  fontWeight: '600',
+                  color: '#1565C0',
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: '12px',
+                  transition: 'all 0.2s ease',
+                  borderBottom: '2px solid #90CAF9'
+                }}
+                onMouseEnter={(e) => e.currentTarget.style.background = 'linear-gradient(135deg, #BBDEFB 0%, #90CAF9 100%)'}
+                onMouseLeave={(e) => e.currentTarget.style.background = 'linear-gradient(135deg, #E3F2FD 0%, #BBDEFB 100%)'}
+              >
+                <span style={{ fontSize: '20px' }}>👁️</span>
+                <div style={{ flex: 1 }}>
+                  <div>Preview Bulletin</div>
+                  <div style={{ fontSize: '11px', color: '#1976D2', fontWeight: '500' }}>
+                    View before downloading
+                  </div>
+                </div>
+              </button>
+            )}
 
             <button
               className="export-option"

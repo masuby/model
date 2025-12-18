@@ -107,7 +107,7 @@ const Layer3WarningLogic = ({ activeWarnings, riskData }) => {
                     Score: <strong>{warning.warningScore.toFixed(2)}</strong>
                   </div>
                   <div className="warning-timestamp">
-                    {new Date(warning.issuedAt).toLocaleTimeString()}
+                    {new Date(warning.issuedAt).toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: false })}
                   </div>
                 </div>
               </div>

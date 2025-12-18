@@ -18,7 +18,7 @@
 }
 
 .dimension-explanation {
-  font-size: 16px;
+  font-size: 18px;
   line-height: 1.8;
   color: #666;
   margin-bottom: 32px;
@@ -66,7 +66,7 @@
 }
 
 .score-label {
-  font-size: 18px;
+  font-size: 20px;
   font-weight: 600;
   color: #666;
 }
@@ -104,7 +104,7 @@
 }
 
 .sub-label {
-  font-size: 14px;
+  font-size: 16px;
   color: #666;
   font-weight: 600;
 }
@@ -166,13 +166,13 @@
 }
 
 .category-title h3 {
-  font-size: 24px;
+  font-size: 26px;
   color: #333;
   margin: 0;
 }
 
 .category-count {
-  font-size: 14px;
+  font-size: 16px;
   color: #999;
   font-weight: 600;
 }
@@ -202,6 +202,24 @@
   grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
   gap: 20px;
   animation: slideDown 0.4s ease;
+}
+
+/* ========== EXPOSURE EXPLANATION BOX ========== */
+.exposure-explanation {
+  grid-column: 1 / -1;
+  background: linear-gradient(135deg, #E3F2FD 0%, #BBDEFB 100%);
+  border: 2px solid #1976D2;
+  border-radius: 10px;
+  padding: 18px 24px;
+  font-size: 18px;
+  line-height: 1.7;
+  color: #0D47A1;
+  margin-bottom: 8px;
+}
+
+.exposure-explanation strong {
+  color: #1565C0;
+  font-weight: 700;
 }
 
 /* ========== INDICATOR CARDS ========== */
@@ -242,7 +260,7 @@
 }
 
 .indicator-name {
-  font-size: 16px;
+  font-size: 18px;
   font-weight: 600;
   color: #333;
   line-height: 1.3;
@@ -265,8 +283,8 @@
 }
 
 .indicator-description {
-  font-size: 14px;
-  line-height: 1.5;
+  font-size: 16px;
+  line-height: 1.6;
   color: #666;
   margin-bottom: 12px;
   font-style: italic;
@@ -308,7 +326,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  font-size: 14px;
+  font-size: 16px;
 }
 
 .classification-level {
@@ -330,26 +348,27 @@
 }
 
 .methodology-note h4 {
-  font-size: 20px;
+  font-size: 24px;
   color: #1976D2;
   margin-bottom: 16px;
 }
 
 .methodology-note p {
-  font-size: 15px;
-  line-height: 1.6;
+  font-size: 17px;
+  line-height: 1.7;
   color: #666;
   margin-bottom: 12px;
 }
 
-.methodology-note ol {
+.methodology-note ol,
+.methodology-note ul {
   margin: 16px 0;
   padding-left: 24px;
 }
 
 .methodology-note li {
-  font-size: 15px;
-  line-height: 1.6;
+  font-size: 17px;
+  line-height: 1.7;
   color: #666;
   margin-bottom: 8px;
 }

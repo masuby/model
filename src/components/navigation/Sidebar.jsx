@@ -4,9 +4,14 @@
  */
 
 import React, { useState } from 'react';
+import { useAuth } from '../../context/AuthContext';
+import { USER_ROLES } from '../../services/authService';
+import { useLanguage, LanguageSwitcher } from '../../contexts/LanguageContext';
 import './Sidebar.css';
 
-const Sidebar = ({ currentView, onNavigate }) => {
+const Sidebar = ({ currentView, onNavigate, user: propUser }) => {
+  const { user: authUser, logout } = useAuth();
+  const user = propUser || authUser;
   // Start collapsed on mobile, expanded on desktop
   const [isExpanded, setIsExpanded] = useState(() => {
     return window.innerWidth > 1024;
@@ -46,7 +51,7 @@ const Sidebar = ({ currentView, onNavigate }) => {
     {
       id: 'module01',
       number: '01',
-      name: 'INFORM Education',
+      name: 'EDUCATION',
       shortName: 'Education',
       icon: '📚',
       color: '#673AB7',
@@ -56,7 +61,7 @@ const Sidebar = ({ currentView, onNavigate }) => {
     {
       id: 'module02',
       number: '02',
-      name: 'INFORM Risk',
+      name: 'RISK',
       shortName: 'Risk',
       icon: '⚠️',
       color: '#F44336',
@@ -66,7 +71,7 @@ const Sidebar = ({ currentView, onNavigate }) => {
     {
       id: 'module03',
       number: '03',
-      name: 'Early Warning System',
+      name: 'WARNING',
       shortName: 'Warning',
       icon: '📢',
       color: '#FF9800',
@@ -76,7 +81,7 @@ const Sidebar = ({ currentView, onNavigate }) => {
     {
       id: 'module04',
       number: '04',
-      name: 'INFORM Severity',
+      name: 'SEVERITY',
       shortName: 'Severity',
       icon: '📊',
       color: '#2196F3',
@@ -86,7 +91,7 @@ const Sidebar = ({ currentView, onNavigate }) => {
     {
       id: 'module05',
       number: '05',
-      name: 'Climate Change',
+      name: 'CLIMATE CHANGE',
       shortName: 'Climate',
       icon: '🌍',
       color: '#4CAF50',
@@ -100,6 +105,12 @@ const Sidebar = ({ currentView, onNavigate }) => {
     { id: 'warning', name: 'Warning Data', icon: '⚡' },
     { id: 'severity', name: 'Severity Data', icon: '📉' },
     { id: 'climate', name: 'Climate Data', icon: '🌤️' }
+  ];
+
+  const toolsItems = [
+    { id: 'analytics', name: 'Analytics', icon: '📊' },
+    { id: 'dashboard', name: 'Dashboard', icon: '🏠' },
+    { id: 'database', name: 'Data Hub', icon: '📦' }
   ];
 
   return (
@@ -145,18 +156,18 @@ const Sidebar = ({ currentView, onNavigate }) => {
                 {isExpanded && (
                   <div className="module-content">
                     <div className="module-header">
-                      <span className="module-number">MODULE {module.number}</span>
+                      <span className="module-number">{module.number}</span>
                       {module.status === 'completed' && <span className="status-badge completed">✓</span>}
                       {module.status === 'active' && <span className="status-badge active">●</span>}
                     </div>
-                    <div className="module-name">{module.shortName}</div>
+                    <div className="module-name">{module.name}</div>
                   </div>
                 )}
 
                 {/* Hover Tooltip for collapsed state */}
                 {!isExpanded && hoveredModule === module.id && (
                   <div className="module-tooltip">
-                    <div className="tooltip-title">MODULE {module.number}</div>
+                    <div className="tooltip-title">{module.number}</div>
                     <div className="tooltip-name">{module.name}</div>
                     <div className="tooltip-desc">{module.description}</div>
                   </div>
@@ -183,18 +194,82 @@ const Sidebar = ({ currentView, onNavigate }) => {
           </div>
         </div>
 
-        {/* Progress Indicator */}
-        {isExpanded && (
-          <div className="sidebar-footer">
-            <div className="progress-section">
-              <div className="progress-title">System Progress</div>
-              <div className="progress-bar">
-                <div
-                  className="progress-fill"
-                  style={{ width: '60%', background: 'linear-gradient(90deg, #4CAF50, #2196F3)' }}
-                ></div>
+        {/* Tools Section */}
+        <div className="sidebar-section">
+          {isExpanded && <div className="section-title">TOOLS</div>}
+          <div className="sidebar-data">
+            {toolsItems.map((tool) => (
+              <div
+                key={tool.id}
+                className={`sidebar-data-item ${currentView === tool.id ? 'active' : ''}`}
+                onClick={() => onNavigate(tool.id)}
+              >
+                <span className="data-icon">{tool.icon}</span>
+                {isExpanded && <span className="data-name">{tool.name}</span>}
               </div>
-              <div className="progress-text">3 of 5 modules explored</div>
+            ))}
+          </div>
+        </div>
+
+        {/* Language Switcher */}
+        <div className="sidebar-section">
+          {isExpanded && <div className="section-title">LANGUAGE</div>}
+          <div className="sidebar-language">
+            {isExpanded ? (
+              <LanguageSwitcher style={{ width: '100%', justifyContent: 'center' }} />
+            ) : (
+              <LanguageSwitcher style={{ padding: '8px', fontSize: '12px' }} />
+            )}
+          </div>
+        </div>
+
+        {/* User Profile Section */}
+        {user && (
+          <div className="sidebar-footer">
+            <div className="sidebar-user">
+              {isExpanded ? (
+                <>
+                  <div className="user-info-expanded">
+                    <div className="user-avatar">
+                      {user.name?.charAt(0).toUpperCase() || '?'}
+                    </div>
+                    <div className="user-details">
+                      <div className="user-name">{user.name || 'User'}</div>
+                      <div className="user-role">
+                        {user.role === USER_ROLES.ADMIN && '👨‍💼 Administrator'}
+                        {user.role === USER_ROLES.PMO_OFFICER && '🏛️ PMO Officer'}
+                        {user.role === USER_ROLES.REGIONAL_OFFICER && '📍 Regional Officer'}
+                        {user.role === USER_ROLES.INSTITUTION_USER && '🏢 Institution User'}
+                        {user.role === USER_ROLES.PUBLIC_USER && '👤 Public User'}
+                      </div>
+                    </div>
+                  </div>
+                  <div className="user-actions">
+                    <button
+                      className="user-action-btn"
+                      onClick={() => onNavigate('profile')}
+                      title="View Profile"
+                    >
+                      👤 Profile
+                    </button>
+                    <button
+                      className="user-action-btn logout-btn"
+                      onClick={logout}
+                      title="Logout"
+                    >
+                      🚪 Logout
+                    </button>
+                  </div>
+                </>
+              ) : (
+                <div
+                  className="user-avatar-collapsed"
+                  onClick={() => onNavigate('profile')}
+                  title={`${user.name} - Click for profile`}
+                >
+                  {user.name?.charAt(0).toUpperCase() || '?'}
+                </div>
+              )}
             </div>
           </div>
         )}

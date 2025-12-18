@@ -1,7 +1,7 @@
 /**
  * LAYER 1: HAZARD INPUT INTERFACE
  *
- * Allows institutional partners (TMA, MoW, MoH, MoA, GST) to input
+ * Allows institutional partners (TMA, MoW, MoH, MoA) to input
  * hazard information that will be combined with risk context.
  *
  * Features:
@@ -13,11 +13,13 @@
  * - Simulation mode support
  */
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import InteractiveHazardMap from '../components/InteractiveHazardMap';
+import ReportExportButton from '../components/ReportExportButton';
 import '../Module03WarningSystem.css';
+import { logWarningCreated } from '../../../services/auditService';
 
-// Institutional mandates
+// Institutional mandates - Keys must match authService.js (TMA, MOW, MOH, MOA, GST)
 const INSTITUTIONS = {
   TMA: {
     name: 'Tanzania Meteorological Authority',
@@ -25,19 +27,19 @@ const INSTITUTIONS = {
     icon: '🌧️',
     color: '#2196F3'
   },
-  MoW: {
+  MOW: {
     name: 'Ministry of Water',
     hazards: ['River Flood', 'Dam Level Alert', 'Coastal Flood'],
     icon: '🌊',
     color: '#03A9F4'
   },
-  MoH: {
+  MOH: {
     name: 'Ministry of Health',
     hazards: ['Disease Outbreak', 'Epidemic', 'Health Emergency'],
     icon: '🏥',
     color: '#F44336'
   },
-  MoA: {
+  MOA: {
     name: 'Ministry of Agriculture',
     hazards: ['Agricultural Drought', 'Crop Disease', 'Livestock Disease', 'Pest Infestation'],
     icon: '🌾',
@@ -45,7 +47,7 @@ const INSTITUTIONS = {
   },
   GST: {
     name: 'Geological Survey of Tanzania',
-    hazards: ['Earthquake', 'Seismic Activity', 'Landslide Risk'],
+    hazards: ['Earthquake', 'Landslide', 'Volcanic Activity', 'Ground Subsidence'],
     icon: '🏔️',
     color: '#795548'
   }
@@ -70,10 +72,29 @@ const Layer1HazardInput = ({
   riskData,
   forecastDay = 1,
   forecastDate = new Date(),
-  onForecastSubmit
+  onForecastSubmit,
+  selectedInstitution: propInstitution = null // Institution passed from parent (e.g., logged-in user's institution)
 }) => {
-  const [selectedInstitution, setSelectedInstitution] = useState('TMA');
-  const [hazardType, setHazardType] = useState('Heavy Rainfall');
+  // If institution is provided via props, use it (locked mode for institution users)
+  // Otherwise, allow selection (for PMO users)
+  const isInstitutionLocked = !!propInstitution;
+  const [selectedInstitution, setSelectedInstitution] = useState(propInstitution || 'TMA');
+
+  // Get the initial hazard type based on the institution
+  const initialInst = propInstitution || 'TMA';
+  const initialHazard = INSTITUTIONS[initialInst]?.hazards[0] || 'Heavy Rainfall';
+  const [hazardType, setHazardType] = useState(initialHazard);
+
+  // Sync institution and hazard type when prop changes
+  useEffect(() => {
+    if (propInstitution && propInstitution !== selectedInstitution) {
+      setSelectedInstitution(propInstitution);
+      // Also set the default hazard type for this institution
+      if (INSTITUTIONS[propInstitution]) {
+        setHazardType(INSTITUTIONS[propInstitution].hazards[0]);
+      }
+    }
+  }, [propInstitution]);
   const [temperatureType, setTemperatureType] = useState('Hot'); // 'Hot' or 'Cold' for Extreme Temperature
   const [shadingMode, setShadingMode] = useState('none'); // 'none', 'low', 'medium', 'high'
   const [selectedRegions, setSelectedRegions] = useState([]);
@@ -85,6 +106,7 @@ const Layer1HazardInput = ({
   const [endDate, setEndDate] = useState(getTomorrowDate());
   const [additionalInfo, setAdditionalInfo] = useState('');
   const [selectionView, setSelectionView] = useState('map'); // 'map' or 'form'
+  const [lastSubmittedHazard, setLastSubmittedHazard] = useState(null); // Track last submission for export
 
   const institution = INSTITUTIONS[selectedInstitution];
 
@@ -148,32 +170,36 @@ const Layer1HazardInput = ({
   };
 
   // Handle district selection from map - assigns current warning level
-  const handleMapDistrictSelect = (districtName) => {
+  // FIXED: Use functional setState to always get latest state (avoids stale closure issue)
+  const handleMapDistrictSelect = useCallback((districtName) => {
     console.log(`🗺️ Map click on district: "${districtName}"`);
     console.log(`📍 Current warning level: ${currentWarningLevel}`);
-    console.log(`📋 Current selectedDistricts state:`, selectedDistricts);
 
-    if (selectedDistricts[districtName]) {
-      // If clicking on same warning level, deselect. Otherwise, update to new level.
-      if (selectedDistricts[districtName] === currentWarningLevel) {
-        console.log(`❌ Deselecting district (same level)`);
-        const newDistricts = { ...selectedDistricts };
-        delete newDistricts[districtName];
-        setSelectedDistricts(newDistricts);
-        console.log(`📋 New state:`, newDistricts);
+    setSelectedDistricts(prevDistricts => {
+      console.log(`📋 Previous selectedDistricts:`, prevDistricts);
+
+      if (prevDistricts[districtName]) {
+        // If clicking on same warning level, deselect. Otherwise, update to new level.
+        if (prevDistricts[districtName] === currentWarningLevel) {
+          console.log(`❌ Deselecting district (same level)`);
+          const newDistricts = { ...prevDistricts };
+          delete newDistricts[districtName];
+          console.log(`📋 New state:`, newDistricts);
+          return newDistricts;
+        } else {
+          console.log(`🔄 Updating district to new level: ${currentWarningLevel}`);
+          const newDistricts = { ...prevDistricts, [districtName]: currentWarningLevel };
+          console.log(`📋 New state:`, newDistricts);
+          return newDistricts;
+        }
       } else {
-        console.log(`🔄 Updating district to new level`);
-        const newDistricts = { ...selectedDistricts, [districtName]: currentWarningLevel };
-        setSelectedDistricts(newDistricts);
+        console.log(`✅ Adding new district: ${districtName} with level: ${currentWarningLevel}`);
+        const newDistricts = { ...prevDistricts, [districtName]: currentWarningLevel };
         console.log(`📋 New state:`, newDistricts);
+        return newDistricts;
       }
-    } else {
-      console.log(`✅ Adding new district selection`);
-      const newDistricts = { ...selectedDistricts, [districtName]: currentWarningLevel };
-      setSelectedDistricts(newDistricts);
-      console.log(`📋 New state:`, newDistricts);
-    }
-  };
+    });
+  }, [currentWarningLevel]);
 
   // Handle submit
   const handleSubmit = (e) => {
@@ -217,6 +243,19 @@ const Layer1HazardInput = ({
     };
 
     onHazardSubmit(hazardData);
+
+    // Save for export functionality
+    setLastSubmittedHazard(hazardData);
+
+    // Log to audit trail
+    logWarningCreated({
+      id: `hazard_${Date.now()}`,
+      hazardType: hazardData.hazardType,
+      warningLevel: hazardData.warningLevel,
+      spatialExtent: hazardData.spatialExtent,
+      validFrom: hazardData.temporalValidity?.start,
+      validTo: hazardData.temporalValidity?.end
+    });
 
     // If onForecastSubmit callback exists, also save it as a forecast
     if (onForecastSubmit) {
@@ -266,7 +305,7 @@ const Layer1HazardInput = ({
     <div className="layer1-container">
       <div className="layer-header">
         <div className="header-top">
-          <h2>Layer 1: Hazard Monitoring Input</h2>
+          <h2>Hazard Monitoring Input</h2>
           <div className="forecast-day-badge" style={{
             background: 'linear-gradient(135deg, #FF9800, #F57C00)',
             color: 'white',
@@ -284,28 +323,52 @@ const Layer1HazardInput = ({
         </p>
       </div>
 
-      {/* Institution Selector */}
-      <div className="institution-selector">
-        <h3>Select Institution</h3>
-        <div className="institution-cards">
-          {Object.keys(INSTITUTIONS).map(key => (
-            <button
-              key={key}
-              className={`institution-card ${selectedInstitution === key ? 'selected' : ''}`}
-              onClick={() => handleInstitutionChange(key)}
-              style={{
-                borderColor: selectedInstitution === key ? INSTITUTIONS[key].color : '#E0E0E0'
-              }}
-            >
-              <div className="institution-icon" style={{ fontSize: '32px' }}>
-                {INSTITUTIONS[key].icon}
-              </div>
-              <div className="institution-name">{key}</div>
-              <div className="institution-full-name">{INSTITUTIONS[key].name}</div>
-            </button>
-          ))}
+      {/* Institution Selector - Only show when not locked to a specific institution */}
+      {!isInstitutionLocked ? (
+        <div className="institution-selector">
+          <h3>Select Institution</h3>
+          <div className="institution-cards">
+            {Object.keys(INSTITUTIONS).map(key => (
+              <button
+                key={key}
+                className={`institution-card ${selectedInstitution === key ? 'selected' : ''}`}
+                onClick={() => handleInstitutionChange(key)}
+                style={{
+                  borderColor: selectedInstitution === key ? INSTITUTIONS[key].color : '#E0E0E0'
+                }}
+              >
+                <div className="institution-icon">
+                  {INSTITUTIONS[key].icon}
+                </div>
+                <div className="institution-name">{key}</div>
+                <div className="institution-full-name">{INSTITUTIONS[key].name}</div>
+              </button>
+            ))}
+          </div>
         </div>
-      </div>
+      ) : (
+        /* Show locked institution info for institution users */
+        <div className="institution-locked-info" style={{
+          background: `linear-gradient(135deg, ${institution.color}15 0%, ${institution.color}25 100%)`,
+          padding: '16px 20px',
+          borderRadius: '10px',
+          border: `2px solid ${institution.color}`,
+          marginBottom: '20px',
+          display: 'flex',
+          alignItems: 'center',
+          gap: '15px'
+        }}>
+          <div style={{ fontSize: '36px' }}>{institution.icon}</div>
+          <div>
+            <div style={{ fontWeight: '700', color: institution.color, fontSize: '16px' }}>
+              {institution.name}
+            </div>
+            <div style={{ color: '#666', fontSize: '13px' }}>
+              Submitting as authorized {selectedInstitution} representative
+            </div>
+          </div>
+        </div>
+      )}
 
       {/* Hazard Input Form */}
       <form onSubmit={handleSubmit} className="hazard-form">
@@ -472,20 +535,6 @@ const Layer1HazardInput = ({
                 </div>
 
                 <div className="param-group">
-                  <label className="input-label">Polygon Shading Mode</label>
-                  <select
-                    value={shadingMode}
-                    onChange={(e) => setShadingMode(e.target.value)}
-                    className="config-select styled-select"
-                  >
-                    <option value="none">⬜ No Shading</option>
-                    <option value="low">🟨 Low Intensity (Light)</option>
-                    <option value="medium">🟧 Medium Intensity</option>
-                    <option value="high">🟥 High Intensity (Dark)</option>
-                  </select>
-                </div>
-
-                <div className="param-group">
                   <label className="input-label">Quantitative Intensity (Optional)</label>
                   <div className="input-with-icon">
                     <input
@@ -502,7 +551,7 @@ const Layer1HazardInput = ({
             </div>
 
             {/* Action Buttons */}
-            <div className="action-buttons">
+            <div className="action-buttons" style={{ display: 'flex', gap: '12px', flexWrap: 'wrap', alignItems: 'center' }}>
               <button
                 type="button"
                 className="action-btn secondary"
@@ -523,6 +572,20 @@ const Layer1HazardInput = ({
                   {Object.keys(selectedDistricts).length > 0 && ` (${Object.keys(selectedDistricts).length})`}
                 </span>
               </button>
+
+              {/* Export Last Submission Button */}
+              {lastSubmittedHazard && (
+                <ReportExportButton
+                  reportType="hazard"
+                  reportData={lastSubmittedHazard}
+                  buttonStyle="secondary"
+                  buttonText="Export Last Submission"
+                  disabled={false}
+                  onExportComplete={(format) => {
+                    console.log(`📤 Hazard input exported as ${format}`);
+                  }}
+                />
+              )}
             </div>
           </div>
         </div>
@@ -690,12 +753,15 @@ const Layer1HazardInput = ({
 // Helper functions
 function getTodayDate() {
   const now = new Date();
+  // Set to 00:00 (midnight) for clean start time
+  now.setHours(0, 0, 0, 0);
   return formatDateTimeLocal(now);
 }
 
 function getTomorrowDate() {
   const tomorrow = new Date();
-  tomorrow.setDate(tomorrow.getDate() + 1);
+  // Set to 23:59 for full 24-hour validity period
+  tomorrow.setHours(23, 59, 0, 0);
   return formatDateTimeLocal(tomorrow);
 }
 
@@ -716,7 +782,6 @@ function getQuantitativeUnit(hazardType) {
     'Dry Spells': 'days',
     'Heatwave': '°C',
     'Strong Winds': 'km/h',
-    'Earthquake': 'Magnitude',
     'Disease Outbreak': 'cases',
     'Epidemic': 'cases'
   };
