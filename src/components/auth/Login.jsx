@@ -162,6 +162,17 @@ const Login = () => {
 
   return (
     <div className="auth-container">
+      {/* Maintenance/Implementation Banner */}
+      <div className="maintenance-banner">
+        <div className="maintenance-content">
+          <span className="maintenance-icon">🚧</span>
+          <div className="maintenance-text">
+            <strong>UNDER IMPLEMENTATION</strong>
+            <span>This platform is currently under active development and maintenance. Some features may be limited.</span>
+          </div>
+        </div>
+      </div>
+
       <div className="auth-wrapper">
         {/* Left side - Branding */}
         <div className="auth-branding">

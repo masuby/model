@@ -116,10 +116,43 @@ function MainApp() {
   );
 }
 
+// Maintenance Banner Component
+const MaintenanceBanner = () => (
+  <div style={{
+    position: 'fixed',
+    top: 0,
+    left: 0,
+    right: 0,
+    background: 'linear-gradient(135deg, #ff6b35 0%, #f7931e 100%)',
+    color: 'white',
+    padding: '12px 20px',
+    zIndex: 9999,
+    boxShadow: '0 2px 10px rgba(0, 0, 0, 0.2)',
+    textAlign: 'center'
+  }}>
+    <div style={{
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+      gap: '15px',
+      flexWrap: 'wrap'
+    }}>
+      <span style={{ fontSize: '24px' }}>🚧</span>
+      <div>
+        <strong style={{ letterSpacing: '1px' }}>UNDER IMPLEMENTATION</strong>
+        <span style={{ marginLeft: '10px', opacity: 0.9, fontSize: '14px' }}>
+          | This platform is under active development and maintenance
+        </span>
+      </div>
+    </div>
+  </div>
+);
+
 // Root App component with Router, Auth, and Database
 function App() {
   return (
     <ErrorBoundary>
+      <MaintenanceBanner />
       <BrowserRouter>
         <DatabaseProvider>
           <LanguageProvider>
