@@ -5,5 +5,5 @@ import react from '@vitejs/plugin-react'
 export default defineConfig({
   plugins: [react()],
   assetsInclude: ['**/*.xlsx'],
-  base: '/model/',  // GitHub Pages base path
+  base: '/',  // Custom domain (inform.co.tz)
 })
