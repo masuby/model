@@ -1,132 +1,162 @@
+import React, { useState, Component } from "react";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import { AuthProvider, useAuth } from "./context/AuthContext";
+import { LanguageProvider } from "./contexts/LanguageContext";
+import { DatabaseProvider } from "./contexts/DatabaseContext";
+import Login from "./components/auth/Login";
+import UserProfile from "./components/auth/UserProfile";
+import ProtectedRoute from "./components/auth/ProtectedRoute";
+import Home from "./pages/Home";
+import Module01Landing from "./components/landing/Module01Landing";
+import Module02InformRisk from "./components/inform-risk/Module02InformRisk";
+import Module03WarningSystem from "./components/warning/Module03WarningSystem";
+import Module04Severity from "./components/severity/Module04Severity";
+import Module05Climate from "./components/climate/Module05Climate";
+import Sidebar from "./components/navigation/Sidebar";
+import Dashboard from "./components/dashboard/Dashboard";
+import InstitutionDashboard from "./components/dashboard/InstitutionDashboard";
+import AnalyticsDashboard from "./components/warning/components/AnalyticsDashboard";
+import DatabasePanel from "./components/admin/DatabasePanel";
+import DataManagementHub from "./components/admin/DataManagementHub";
 import "./App.css";
 
-// Full Maintenance Page Component
-const MaintenancePage = () => (
-  <div style={{
-    minHeight: '100vh',
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
-    justifyContent: 'center',
-    background: 'linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%)',
-    color: 'white',
-    fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, sans-serif',
-    padding: '20px',
-    textAlign: 'center'
-  }}>
-    {/* Logo Section */}
-    <div style={{ marginBottom: '40px' }}>
-      <div style={{
-        fontSize: '80px',
-        marginBottom: '20px',
-        animation: 'float 3s ease-in-out infinite'
-      }}>
-        🇹🇿
-      </div>
-      <h1 style={{
-        fontSize: '2.5rem',
-        fontWeight: '700',
-        marginBottom: '10px',
-        background: 'linear-gradient(135deg, #00d4ff, #7b2cbf)',
-        WebkitBackgroundClip: 'text',
-        WebkitTextFillColor: 'transparent',
-        backgroundClip: 'text'
-      }}>
-        INFORM Tanzania
-      </h1>
-      <p style={{
-        fontSize: '1.1rem',
-        opacity: 0.8,
-        letterSpacing: '2px'
-      }}>
-        Index for Risk Management
-      </p>
-    </div>
+// Error Boundary to catch and display runtime errors
+class ErrorBoundary extends Component {
+  constructor(props) {
+    super(props);
+    this.state = { hasError: false, error: null, errorInfo: null };
+  }
 
-    {/* Maintenance Icon */}
-    <div style={{
-      fontSize: '100px',
-      marginBottom: '30px',
-      animation: 'pulse 2s ease-in-out infinite'
-    }}>
-      🚧
-    </div>
+  static getDerivedStateFromError(error) {
+    return { hasError: true, error };
+  }
 
-    {/* Maintenance Message */}
-    <div style={{
-      background: 'rgba(255, 255, 255, 0.1)',
-      backdropFilter: 'blur(10px)',
-      borderRadius: '20px',
-      padding: '40px 60px',
-      maxWidth: '600px',
-      border: '1px solid rgba(255, 255, 255, 0.2)',
-      boxShadow: '0 20px 60px rgba(0, 0, 0, 0.3)'
-    }}>
-      <h2 style={{
-        fontSize: '1.8rem',
-        marginBottom: '20px',
-        color: '#ff6b35'
-      }}>
-        System Under Maintenance
-      </h2>
+  componentDidCatch(error, errorInfo) {
+    console.error('App Error:', error, errorInfo);
+    this.setState({ errorInfo });
+  }
 
-      <p style={{
-        fontSize: '1.2rem',
-        lineHeight: '1.8',
-        marginBottom: '30px',
-        opacity: 0.9
-      }}>
-        Sorry, the system is under maintenance till <strong style={{ color: '#00d4ff' }}>02 January 2026</strong>.
-        <br />
-        Please be patient.
-      </p>
+  render() {
+    if (this.state.hasError) {
+      return (
+        <div style={{ padding: '40px', fontFamily: 'monospace', background: '#fee', minHeight: '100vh' }}>
+          <h1 style={{ color: '#c00' }}>Something went wrong</h1>
+          <h2>Error: {this.state.error?.message || 'Unknown error'}</h2>
+          <pre style={{ background: '#fff', padding: '20px', overflow: 'auto', border: '1px solid #c00' }}>
+            {this.state.error?.stack}
+          </pre>
+          <h3>Component Stack:</h3>
+          <pre style={{ background: '#fff', padding: '20px', overflow: 'auto', border: '1px solid #c00' }}>
+            {this.state.errorInfo?.componentStack}
+          </pre>
+          <button onClick={() => window.location.reload()} style={{ padding: '10px 20px', marginTop: '20px' }}>
+            Reload Page
+          </button>
+        </div>
+      );
+    }
+    return this.props.children;
+  }
+}
 
-      <div style={{
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        gap: '15px',
-        padding: '15px 25px',
-        background: 'rgba(255, 107, 53, 0.2)',
-        borderRadius: '10px',
-        border: '1px solid rgba(255, 107, 53, 0.3)'
-      }}>
-        <span style={{ fontSize: '24px' }}>⏰</span>
-        <span style={{ fontSize: '1rem' }}>
-          We are working hard to improve your experience
-        </span>
+// Main application component (protected)
+function MainApp() {
+  const [currentView, setCurrentView] = useState("dashboard");
+  const { user } = useAuth();
+
+  const handleNavigation = (view) => {
+    setCurrentView(view);
+    // Scroll to top on navigation
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  const renderContent = () => {
+    switch (currentView) {
+      case 'dashboard':
+        return <Dashboard onNavigate={handleNavigation} />;
+      case 'profile':
+        return <UserProfile />;
+      case 'module01':
+        return <Module01Landing onComplete={() => handleNavigation("module02")} />;
+      case 'module02':
+        return <Module02InformRisk onNavigate={handleNavigation} />;
+      case 'module03':
+        return (
+          <ProtectedRoute requiredPermission="canIssueWarnings">
+            <Module03WarningSystem onNavigate={handleNavigation} />
+          </ProtectedRoute>
+        );
+      case 'module04':
+        return <Module04Severity activeWarnings={[]} riskData={null} />;
+      case 'module05':
+        return <Module05Climate riskData={null} />;
+      case 'analytics':
+        return <AnalyticsDashboard />;
+      case 'database':
+        return <DataManagementHub />;
+      case 'risk':
+      case 'warning':
+      case 'severity':
+      case 'climate':
+        return <Home currentCategory={currentView} onNavigateToModule={handleNavigation} />;
+      default:
+        return <Dashboard onNavigate={handleNavigation} />;
+    }
+  };
+
+  return (
+    <div className="app">
+      <Sidebar currentView={currentView} onNavigate={handleNavigation} user={user} />
+      <div className="app-main">
+        <div className="content-wrapper">
+          {renderContent()}
+        </div>
       </div>
     </div>
+  );
+}
 
-    {/* Footer */}
-    <div style={{
-      marginTop: '50px',
-      opacity: 0.6,
-      fontSize: '0.9rem'
-    }}>
-      <p>Prime Minister's Office - Disaster Management Department</p>
-      <p style={{ marginTop: '10px' }}>
-        United Republic of Tanzania
-      </p>
-    </div>
-
-    {/* CSS Animations */}
-    <style>{`
-      @keyframes float {
-        0%, 100% { transform: translateY(0px); }
-        50% { transform: translateY(-10px); }
-      }
-
-      @keyframes pulse {
-        0%, 100% { transform: scale(1); opacity: 1; }
-        50% { transform: scale(1.05); opacity: 0.8; }
-      }
-    `}</style>
-  </div>
-);
-
+// Root App component with Router, Auth, and Database
 function App() {
-  return <MaintenancePage />;
+  return (
+    <ErrorBoundary>
+      <BrowserRouter>
+        <DatabaseProvider>
+          <LanguageProvider>
+            <AuthProvider>
+              <Routes>
+                {/* Public routes */}
+                <Route path="/login" element={<Login />} />
+
+                {/* Institution Dashboard - for institution users */}
+                <Route
+                  path="/institution-dashboard"
+                  element={
+                    <ProtectedRoute>
+                      <InstitutionDashboard />
+                    </ProtectedRoute>
+                  }
+                />
+
+                {/* Protected routes */}
+                <Route
+                  path="/*"
+                  element={
+                    <ProtectedRoute>
+                      <MainApp />
+                    </ProtectedRoute>
+                  }
+                />
+
+                {/* Default redirect */}
+                <Route path="*" element={<Navigate to="/login" replace />} />
+              </Routes>
+            </AuthProvider>
+          </LanguageProvider>
+        </DatabaseProvider>
+      </BrowserRouter>
+    </ErrorBoundary>
+  );
 }
 
 export default App;
