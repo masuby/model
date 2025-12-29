@@ -1199,6 +1199,8 @@ const Layer4PMODashboard = ({ activeWarnings, activeHazards, riskData, onApprove
                     institution: selectedHazard.institution || selectedHazard.institutionName,
                     severity: selectedHazard.severity,
                     confidence: selectedHazard.confidence || 'Medium',
+                    // Drawn shapes for hazard icons in PDF
+                    drawnShapes: selectedHazard.drawnShapes || [],
                     // Enhanced affected areas data
                     spatialExtent: selectedHazard.spatialExtent || [],
                     affectedDistricts: selectedHazard.spatialExtent || selectedHazard.affectedDistricts || [],

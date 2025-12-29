@@ -461,7 +461,9 @@ const InteractiveHazardMap = ({
   riskLayerOverlay = null, // { type: 'overall'|'flood_risk'|etc, score: number, color: string }
   forecastOverlay = null, // { type: 'heavy_rainfall'|'flood'|etc, icon: string, institution: string }
   exposureOverlay = null, // { type: 'population'|'infrastructure'|'cropland'|'livestock' }
-  vulnerabilityOverlay = null // { type: 'poverty'|'foodInsecurity'|'healthAccess'|'waterAccess'|'vulnerableGroups' }
+  vulnerabilityOverlay = null, // { type: 'poverty'|'foodInsecurity'|'healthAccess'|'waterAccess'|'vulnerableGroups' }
+  // Callback for drawn shapes (for PDF export)
+  onDrawnShapesChange = null // Callback when drawn shapes change - passes array of shape objects
 }) => {
   const [geoJsonData, setGeoJsonData] = useState(null);
   const [hoveredDistrict, setHoveredDistrict] = useState(null);
@@ -479,6 +481,27 @@ const InteractiveHazardMap = ({
   useEffect(() => {
     isDrawingActiveRef.current = isDrawingActive;
   }, [isDrawingActive]);
+
+  // Notify parent when drawn shapes change (for PDF export)
+  useEffect(() => {
+    if (onDrawnShapesChange) {
+      // Extract serializable data from drawnShapes (excluding Leaflet layer objects)
+      const serializableShapes = drawnShapes.map(shape => ({
+        id: shape.id,
+        type: shape.type,
+        hazardType: shape.hazardType,
+        warningLevel: shape.warningLevel,
+        color: shape.color,
+        position: shape.position,
+        center: shape.center,
+        radius: shape.radius,
+        bounds: shape.bounds,
+        coordinates: shape.coordinates,
+        formattedArea: shape.formattedArea
+      }));
+      onDrawnShapesChange(serializableShapes);
+    }
+  }, [drawnShapes, onDrawnShapesChange]);
 
   // Clear all drawn shapes
   const handleClearAllShapes = useCallback(() => {

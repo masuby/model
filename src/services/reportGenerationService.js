@@ -21,41 +21,59 @@ const PMO_CONTACT_INFO = {
   title: "Permanent Secretary"
 };
 
-// Hazard Type Icons for PDF reports
+// Hazard Type Icons for PDF reports with colors
 const HAZARD_ICONS = {
-  'Heavy Rainfall': '🌧️',
-  'Strong Winds': '💨',
-  'Large Waves': '🌊',
-  'Flash Floods': '🌊',
-  'Riverine Floods': '🌊',
-  'Dry Spells': '☀️',
-  'Drought': '🏜️',
-  'Agrometeorological Drought': '🌾',
-  'Extreme Temperature': '🌡️',
-  'Heatwave': '🔥',
-  'Cold Wave': '❄️',
-  'Epidemics': '🦠',
-  'Disease Outbreak': '🏥',
-  'Crop Stress': '🌱',
-  'Pest Infestation': '🐛',
-  'Livestock Disease': '🐄',
-  'Earthquake': '🌍',
-  'Tsunami': '🌊',
-  'Volcanic Activity': '🌋',
-  'Landslide': '⛰️',
-  'Wildfire': '🔥',
-  'Cyclone': '🌀',
-  'Rising Water Levels': '📈',
-  'Dam Level Alert': '🚧'
+  'Heavy Rainfall': { icon: '🌧️', color: '#2196F3' },
+  'Strong Winds': { icon: '💨', color: '#607D8B' },
+  'Large Waves': { icon: '🌊', color: '#00BCD4' },
+  'Flash Floods': { icon: '🌊', color: '#0288D1' },
+  'Riverine Floods': { icon: '🌊', color: '#03A9F4' },
+  'Dry Spells': { icon: '☀️', color: '#FF9800' },
+  'Drought': { icon: '🏜️', color: '#8D6E63' },
+  'Agrometeorological Drought': { icon: '🌾', color: '#8D6E63' },
+  'Extreme Temperature': { icon: '🌡️', color: '#F44336' },
+  'Extreme Temperature (Hot)': { icon: '🔥', color: '#F44336' },
+  'Extreme Temperature (Cold)': { icon: '❄️', color: '#2196F3' },
+  'Heatwave': { icon: '🔥', color: '#F44336' },
+  'Cold Wave': { icon: '❄️', color: '#2196F3' },
+  'Epidemics': { icon: '🦠', color: '#E91E63' },
+  'Disease Outbreak': { icon: '🏥', color: '#F44336' },
+  'Health-Related Hazards': { icon: '⚕️', color: '#D32F2F' },
+  'Crop Stress': { icon: '🌱', color: '#A1887F' },
+  'Pest Infestation': { icon: '🐛', color: '#795548' },
+  'Livestock Disease': { icon: '🐄', color: '#6D4C41' },
+  'Earthquake': { icon: '🌍', color: '#5D4037' },
+  'Tsunami': { icon: '🌊', color: '#01579B' },
+  'Volcanic Activity': { icon: '🌋', color: '#BF360C' },
+  'Landslide': { icon: '⛰️', color: '#4E342E' },
+  'Wildfire': { icon: '🔥', color: '#FF5722' },
+  'Cyclone': { icon: '🌀', color: '#673AB7' },
+  'Rising Water Levels': { icon: '📈', color: '#00ACC1' },
+  'Dam Level Alert': { icon: '🚧', color: '#0097A7' },
+  'Seismic Activity': { icon: '📊', color: '#3E2723' }
 };
 
 /**
- * Get hazard icon for PDF display
+ * Get hazard icon and color for PDF display
  * @param {string} hazardType - The hazard type name
- * @returns {string} Emoji icon for the hazard
+ * @returns {object} Object with icon emoji and color
  */
-const getHazardIcon = (hazardType) => {
-  return HAZARD_ICONS[hazardType] || '⚠️';
+const getHazardIconData = (hazardType) => {
+  return HAZARD_ICONS[hazardType] || { icon: '⚠️', color: '#FF9800' };
+};
+
+/**
+ * Convert hex color to RGB array
+ * @param {string} hex - Hex color code
+ * @returns {array} RGB array [r, g, b]
+ */
+const hexToRgb = (hex) => {
+  const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+  return result ? [
+    parseInt(result[1], 16),
+    parseInt(result[2], 16),
+    parseInt(result[3], 16)
+  ] : [255, 152, 0];
 };
 
 /**
@@ -806,6 +824,105 @@ export const generateWarningBulletinPDF = async (warningData, riskData = null, i
       }
 
       yPosition += 3;
+    }
+
+    // ========== HAZARD ICONS LEGEND SECTION ==========
+    // Check if we have drawn hazard icons to display
+    const drawnShapes = warningData.drawnShapes || [];
+    const hazardIconShapes = drawnShapes.filter(shape => shape.type === 'hazardIcon');
+    const hasHazardIcons = hazardIconShapes.length > 0 || warningData.hazardType;
+
+    if (hasHazardIcons) {
+      // Check if we need a new page
+      if (yPosition > pageHeight - 60) {
+        pdf.addPage();
+        yPosition = margin;
+      }
+
+      // Section header
+      pdf.setFontSize(11);
+      pdf.setFont('helvetica', 'bold');
+      pdf.setFillColor(156, 39, 176); // Purple for hazard icons
+      pdf.setTextColor(255, 255, 255);
+      pdf.roundedRect(margin, yPosition, pageWidth - 2 * margin, 8, 1, 1, 'F');
+      pdf.text('HAZARD INDICATORS ON MAP', margin + 4, yPosition + 5.5);
+      pdf.setTextColor(...COLORS.darkText);
+      yPosition += 12;
+
+      // Primary hazard type (always show)
+      if (warningData.hazardType) {
+        const primaryHazard = getHazardIconData(warningData.hazardType);
+        const primaryColor = hexToRgb(primaryHazard.color);
+
+        // Draw hazard icon circle
+        pdf.setFillColor(...primaryColor);
+        pdf.circle(margin + 8, yPosition + 2, 6, 'F');
+        pdf.setFillColor(255, 255, 255);
+        pdf.circle(margin + 8, yPosition + 2, 5, 'F');
+        pdf.setFillColor(...primaryColor);
+        pdf.circle(margin + 8, yPosition + 2, 4, 'F');
+
+        // Hazard text
+        pdf.setFontSize(10);
+        pdf.setFont('helvetica', 'bold');
+        pdf.setTextColor(...primaryColor);
+        pdf.text(`${primaryHazard.icon} ${warningData.hazardType}`, margin + 18, yPosition + 3);
+
+        pdf.setFont('helvetica', 'normal');
+        pdf.setTextColor(...COLORS.darkText);
+        pdf.text('(Primary Hazard)', margin + 18 + pdf.getTextWidth(`${primaryHazard.icon} ${warningData.hazardType}`) + 3, yPosition + 3);
+
+        yPosition += 10;
+      }
+
+      // Additional hazard icons placed on map
+      if (hazardIconShapes.length > 0) {
+        pdf.setFontSize(9);
+        pdf.setFont('helvetica', 'bold');
+        pdf.setTextColor(...COLORS.primaryBlue);
+        pdf.text('Additional Hazard Markers Placed:', margin + 2, yPosition);
+        yPosition += 5;
+
+        // Group icons by hazard type
+        const iconsByType = {};
+        hazardIconShapes.forEach(shape => {
+          const type = shape.hazardType || 'Unknown';
+          if (!iconsByType[type]) {
+            iconsByType[type] = { count: 0, positions: [] };
+          }
+          iconsByType[type].count++;
+          if (shape.position) {
+            iconsByType[type].positions.push(shape.position);
+          }
+        });
+
+        // Render each hazard type
+        Object.entries(iconsByType).forEach(([hazardType, data]) => {
+          const hazardInfo = getHazardIconData(hazardType);
+          const iconColor = hexToRgb(hazardInfo.color);
+
+          // Draw small icon indicator
+          pdf.setFillColor(...iconColor);
+          pdf.circle(margin + 6, yPosition + 1, 3, 'F');
+
+          // Hazard type and count
+          pdf.setFont('helvetica', 'normal');
+          pdf.setFontSize(9);
+          pdf.setTextColor(...COLORS.darkText);
+          pdf.text(`${hazardInfo.icon} ${hazardType}: ${data.count} marker${data.count > 1 ? 's' : ''}`, margin + 12, yPosition + 2);
+
+          yPosition += 6;
+        });
+
+        yPosition += 3;
+      }
+
+      // Legend note
+      pdf.setFontSize(8);
+      pdf.setFont('helvetica', 'italic');
+      pdf.setTextColor(100, 100, 100);
+      pdf.text('Note: Hazard icons indicate specific locations of concern within affected areas.', margin + 2, yPosition);
+      yPosition += 8;
     }
 
     // ========== COMPACT FOOTER ==========

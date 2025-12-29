@@ -107,6 +107,7 @@ const Layer1HazardInput = ({
   const [additionalInfo, setAdditionalInfo] = useState('');
   const [selectionView, setSelectionView] = useState('map'); // 'map' or 'form'
   const [lastSubmittedHazard, setLastSubmittedHazard] = useState(null); // Track last submission for export
+  const [drawnShapes, setDrawnShapes] = useState([]); // Track drawn shapes (hazard icons, polygons, etc.) for PDF export
 
   const institution = INSTITUTIONS[selectedInstitution];
 
@@ -239,7 +240,8 @@ const Layer1HazardInput = ({
       source: `${institution.name} ${simulationMode ? '(Simulation)' : '(Live)'}`,
       issuedAt: new Date().toISOString(),
       additionalInfo,
-      isSimulation: simulationMode
+      isSimulation: simulationMode,
+      drawnShapes: drawnShapes // Include drawn shapes (hazard icons, polygons, etc.) for PDF export
     };
 
     onHazardSubmit(hazardData);
@@ -628,6 +630,7 @@ const Layer1HazardInput = ({
                 warningLevel={currentWarningLevel}
                 shadingMode={shadingMode}
                 temperatureType={temperatureType}
+                onDrawnShapesChange={setDrawnShapes}
               />
 
               {/* Selected Districts Summary */}
