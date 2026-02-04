@@ -147,8 +147,13 @@ const ReportExportButton = ({
   return (
     <div className="report-export-container" style={{ position: 'relative', display: 'inline-block' }}>
       <button
+        type="button"
         className={getButtonClass()}
-        onClick={() => setShowDropdown(!showDropdown)}
+        onClick={(e) => {
+          e.preventDefault();
+          e.stopPropagation();
+          setShowDropdown(!showDropdown);
+        }}
         disabled={disabled || isExporting}
         style={{
           background: buttonStyle === 'primary'
@@ -226,8 +231,13 @@ const ReportExportButton = ({
             {/* Preview Option - Only for warning bulletins */}
             {reportType === 'warning' && (
               <button
+                type="button"
                 className="export-option"
-                onClick={() => handleExport('preview')}
+                onClick={(e) => {
+                  e.preventDefault();
+                  e.stopPropagation();
+                  handleExport('preview');
+                }}
                 style={{
                   width: '100%',
                   padding: '14px 16px',
@@ -258,8 +268,13 @@ const ReportExportButton = ({
             )}
 
             <button
+              type="button"
               className="export-option"
-              onClick={() => handleExport('pdf')}
+              onClick={(e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                handleExport('pdf');
+              }}
               style={{
                 width: '100%',
                 padding: '14px 16px',
@@ -289,8 +304,13 @@ const ReportExportButton = ({
             </button>
 
             <button
+              type="button"
               className="export-option"
-              onClick={() => handleExport('png')}
+              onClick={(e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                handleExport('png');
+              }}
               disabled={!elementId}
               style={{
                 width: '100%',

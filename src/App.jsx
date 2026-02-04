@@ -120,7 +120,7 @@ function MainApp() {
 function App() {
   return (
     <ErrorBoundary>
-      <BrowserRouter>
+      <BrowserRouter basename="/model">
         <DatabaseProvider>
           <LanguageProvider>
             <AuthProvider>

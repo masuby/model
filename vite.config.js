@@ -5,7 +5,7 @@ import react from '@vitejs/plugin-react'
 export default defineConfig({
   plugins: [react()],
   assetsInclude: ['**/*.xlsx'],
-  base: '/',  // Custom domain (inform.co.tz)
+  base: '/model/',  // GitHub Pages: https://masuby.github.io/model/
 
   // Proxy API requests to Go backend during development
   server: {

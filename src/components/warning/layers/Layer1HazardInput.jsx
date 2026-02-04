@@ -575,19 +575,41 @@ const Layer1HazardInput = ({
                 </span>
               </button>
 
-              {/* Export Last Submission Button */}
-              {lastSubmittedHazard && (
-                <ReportExportButton
-                  reportType="hazard"
-                  reportData={lastSubmittedHazard}
-                  buttonStyle="secondary"
-                  buttonText="Export Last Submission"
-                  disabled={false}
-                  onExportComplete={(format) => {
-                    console.log(`📤 Hazard input exported as ${format}`);
-                  }}
-                />
-              )}
+              {/* Export Current Form as PDF */}
+              <ReportExportButton
+                reportType="hazard"
+                reportData={{
+                  hazardType,
+                  temperatureType: hazardType === 'Extreme Temperature' ? temperatureType : undefined,
+                  shadingMode,
+                  institution: selectedInstitution,
+                  institutionName: institution.name,
+                  spatialExtent: Object.keys(selectedDistricts),
+                  districtWarningLevels: selectedDistricts,
+                  regions: selectedRegions,
+                  forecastDay: forecastDay,
+                  forecastDate: forecastDate.toISOString(),
+                  temporalValidity: {
+                    start: new Date(startDate).toISOString(),
+                    end: new Date(endDate).toISOString(),
+                    applicableDays: [forecastDay]
+                  },
+                  warningLevel: currentWarningLevel,
+                  quantitativeValue: quantitativeValue ? parseFloat(quantitativeValue) : null,
+                  likelihood,
+                  source: `${institution.name} ${simulationMode ? '(Simulation)' : '(Live)'}`,
+                  issuedAt: new Date().toISOString(),
+                  additionalInfo,
+                  isSimulation: simulationMode,
+                  drawnShapes: drawnShapes
+                }}
+                buttonStyle="secondary"
+                buttonText="Export PDF"
+                disabled={Object.keys(selectedDistricts).length === 0}
+                onExportComplete={(format) => {
+                  console.log(`📤 Hazard input exported as ${format}`);
+                }}
+              />
             </div>
           </div>
         </div>

@@ -174,181 +174,334 @@ export const exportAsImage = async (element, filename = 'screenshot', options = 
 };
 
 /**
- * SUPER ROBUST Map Capture with Multiple Fallback Strategies
- * @param {string} mapElementId - ID of map container element
+ * Draw Tanzania map with district colors and hazard icons directly on canvas (fallback method)
+ * @param {Object} districtWarningLevels - Object mapping district names to warning levels
+ * @param {Array} drawnShapes - Array of hazard icons/shapes to draw on map
+ * @param {string} primaryHazardType - The main hazard type for coloring icons
  * @returns {Promise<string>} Base64 image data
  */
-const captureMapImage = async (mapElementId = 'leaflet-map-container') => {
+const drawTanzaniaMapCanvas = async (districtWarningLevels = {}, drawnShapes = [], primaryHazardType = null) => {
   try {
-    console.log('🗺️🗺️🗺️ SUPER ROBUST MAP CAPTURE STARTING...');
+    console.log('🎨 Drawing Tanzania map on canvas...');
+    console.log(`  Districts: ${Object.keys(districtWarningLevels).length}, Icons: ${drawnShapes?.length || 0}`);
 
-    // STRATEGY 1: Wait for map to fully render and complete 5-stage EXTREME Tanzania bounds fit
-    console.log('⏰ Waiting 4.5 seconds for map rendering and 5-stage EXTREME Tanzania bounds fit...');
-    await new Promise(resolve => setTimeout(resolve, 4500));
+    // Fetch GeoJSON data
+    const response = await fetch('/tanzania-districts-simplified.geojson');
+    if (!response.ok) {
+      console.error('Could not load GeoJSON');
+      return null;
+    }
+    const geoJson = await response.json();
 
-    // STRATEGY 2: Try multiple possible map container selectors with priority
+    // Create canvas
+    const canvas = document.createElement('canvas');
+    const width = 800;
+    const height = 700;
+    canvas.width = width;
+    canvas.height = height;
+    const ctx = canvas.getContext('2d');
+
+    // Background
+    ctx.fillStyle = '#e8f4ea';
+    ctx.fillRect(0, 0, width, height);
+
+    // Tanzania bounds (approximate)
+    const bounds = {
+      minLng: 29.34,
+      maxLng: 40.44,
+      minLat: -11.75,
+      maxLat: -0.99
+    };
+
+    // Convert lat/lng to canvas coordinates
+    const toCanvasX = (lng) => ((lng - bounds.minLng) / (bounds.maxLng - bounds.minLng)) * (width - 40) + 20;
+    const toCanvasY = (lat) => ((bounds.maxLat - lat) / (bounds.maxLat - bounds.minLat)) * (height - 40) + 20;
+
+    // Warning colors
+    const warningColors = {
+      'Advisory': '#FFFF00',
+      'Warning': '#FF6600',
+      'Major Warning': '#FF0000'
+    };
+
+    // Draw each district
+    if (geoJson.features) {
+      geoJson.features.forEach(feature => {
+        const districtName = feature.properties?.District || feature.properties?.name || '';
+        const warningLevel = districtWarningLevels[districtName];
+        const fillColor = warningLevel ? warningColors[warningLevel] : '#d4edda';
+
+        ctx.fillStyle = fillColor;
+        ctx.strokeStyle = '#2d5016';
+        ctx.lineWidth = 0.5;
+
+        const geometry = feature.geometry;
+        if (geometry.type === 'Polygon') {
+          drawPolygon(ctx, geometry.coordinates[0], toCanvasX, toCanvasY);
+        } else if (geometry.type === 'MultiPolygon') {
+          geometry.coordinates.forEach(polygon => {
+            drawPolygon(ctx, polygon[0], toCanvasX, toCanvasY);
+          });
+        }
+      });
+    }
+
+    // Draw hazard icons on the map
+    const hazardIcons = drawnShapes?.filter(s => s.type === 'hazardIcon') || [];
+    if (hazardIcons.length > 0) {
+      console.log(`🎯 Drawing ${hazardIcons.length} hazard icons on canvas...`);
+
+      hazardIcons.forEach((shape, idx) => {
+        if (shape.position && shape.position.lat && shape.position.lng) {
+          const x = toCanvasX(shape.position.lng);
+          const y = toCanvasY(shape.position.lat);
+
+          // Get icon color based on hazard type
+          const hazardInfo = getHazardIconData(shape.hazardType || primaryHazardType);
+          const iconColor = hazardInfo.color;
+
+          // Draw outer circle (colored)
+          ctx.beginPath();
+          ctx.arc(x, y, 12, 0, Math.PI * 2);
+          ctx.fillStyle = iconColor;
+          ctx.fill();
+          ctx.strokeStyle = '#fff';
+          ctx.lineWidth = 2;
+          ctx.stroke();
+
+          // Draw inner white circle
+          ctx.beginPath();
+          ctx.arc(x, y, 8, 0, Math.PI * 2);
+          ctx.fillStyle = '#fff';
+          ctx.fill();
+
+          // Draw colored center
+          ctx.beginPath();
+          ctx.arc(x, y, 5, 0, Math.PI * 2);
+          ctx.fillStyle = iconColor;
+          ctx.fill();
+
+          console.log(`  Icon ${idx + 1}: ${shape.hazardType || 'unknown'} at (${x.toFixed(0)}, ${y.toFixed(0)})`);
+        }
+      });
+    }
+
+    // Add title
+    ctx.fillStyle = '#1565C0';
+    ctx.font = 'bold 16px Arial';
+    ctx.textAlign = 'center';
+    ctx.fillText('TANZANIA - Affected Areas', width / 2, 25);
+
+    // Add legend
+    const legendY = height - 50;
+    ctx.font = '12px Arial';
+    ctx.textAlign = 'left';
+
+    Object.entries(warningColors).forEach(([level, color], idx) => {
+      const x = 20 + idx * 150;
+      ctx.fillStyle = color;
+      ctx.fillRect(x, legendY, 20, 15);
+      ctx.strokeStyle = '#333';
+      ctx.strokeRect(x, legendY, 20, 15);
+      ctx.fillStyle = '#333';
+      ctx.fillText(level, x + 25, legendY + 12);
+    });
+
+    // Add hazard icon indicator if there are icons
+    if (hazardIcons.length > 0) {
+      const iconLegendX = width - 180;
+      ctx.fillStyle = '#9C27B0';
+      ctx.beginPath();
+      ctx.arc(iconLegendX, legendY + 7, 8, 0, Math.PI * 2);
+      ctx.fill();
+      ctx.fillStyle = '#333';
+      ctx.fillText(`Hazard Markers (${hazardIcons.length})`, iconLegendX + 15, legendY + 12);
+    }
+
+    const imageData = canvas.toDataURL('image/png');
+    console.log('✅ Canvas map drawn successfully');
+    return imageData;
+
+  } catch (error) {
+    console.error('❌ Canvas map drawing failed:', error);
+    return null;
+  }
+};
+
+// Helper to draw a polygon on canvas
+const drawPolygon = (ctx, coordinates, toCanvasX, toCanvasY) => {
+  if (!coordinates || coordinates.length === 0) return;
+
+  ctx.beginPath();
+  coordinates.forEach((coord, idx) => {
+    const x = toCanvasX(coord[0]);
+    const y = toCanvasY(coord[1]);
+    if (idx === 0) {
+      ctx.moveTo(x, y);
+    } else {
+      ctx.lineTo(x, y);
+    }
+  });
+  ctx.closePath();
+  ctx.fill();
+  ctx.stroke();
+};
+
+/**
+ * IMPROVED Map Capture - Optimized for Leaflet maps
+ * @param {Object} districtWarningLevels - Optional district warning levels for fallback drawing
+ * @param {Array} drawnShapes - Optional hazard icons/shapes for fallback drawing
+ * @param {string} hazardType - Optional primary hazard type for icon coloring
+ * @returns {Promise<string>} Base64 image data
+ */
+const captureMapImage = async (districtWarningLevels = null, drawnShapes = null, hazardType = null) => {
+  try {
+    console.log('🗺️ Starting map capture...');
+
+    // Short wait for any pending renders
+    await new Promise(resolve => setTimeout(resolve, 500));
+
+    // Find the leaflet container - this is the actual map element
     const selectors = [
-      '#pdf-map-container .leaflet-container', // HIGHEST PRIORITY: Hidden map for PDF generation
-      '#pdf-map-container', // Hidden map container itself
-      '#hazard-map-container .leaflet-container', // Primary: New explicit ID
-      '.leaflet-container', // Secondary: Direct leaflet container
-      '#hazard-map-container', // Tertiary: Container itself
+      '#hazard-map-container .leaflet-container',
       '.interactive-hazard-map-container .leaflet-container',
-      '.interactive-hazard-map-container',
-      `#${mapElementId}`,
-      '[class*="map-container"]',
-      '.hazard-map-view .leaflet-container',
-      '#map-container'
+      '.leaflet-container'
     ];
 
-    console.log('🔍 Searching for map with', selectors.length, 'different selectors...');
-
     let mapElement = null;
-    let foundSelector = '';
-
     for (const selector of selectors) {
-      const elements = document.querySelectorAll(selector);
-      console.log(`  Testing: "${selector}" - Found ${elements.length} element(s)`);
-
-      if (elements.length > 0) {
-        // If multiple elements, choose the largest visible one
-        for (let i = 0; i < elements.length; i++) {
-          const el = elements[i];
-          const rect = el.getBoundingClientRect();
-          const isVisible = rect.width > 0 && rect.height > 0;
-          const hasContent = el.offsetWidth > 100 && el.offsetHeight > 100;
-
-          console.log(`    Element ${i}: ${el.offsetWidth}x${el.offsetHeight}px, visible: ${isVisible}, hasContent: ${hasContent}`);
-
-          if (isVisible && hasContent) {
-            mapElement = el;
-            foundSelector = selector;
-            break;
-          }
-        }
-
-        if (mapElement) break;
+      const el = document.querySelector(selector);
+      if (el && el.offsetWidth > 0 && el.offsetHeight > 0) {
+        mapElement = el;
+        console.log(`✅ Found map: ${selector} (${el.offsetWidth}x${el.offsetHeight})`);
+        break;
       }
     }
 
     if (!mapElement) {
-      console.error('❌ MAP NOT FOUND! Diagnostic info:');
-      console.log('  Total .leaflet-container:', document.querySelectorAll('.leaflet-container').length);
-      console.log('  Total [class*="map"]:', document.querySelectorAll('[class*="map"]').length);
-      console.log('  Total [id*="map"]:', document.querySelectorAll('[id*="map"]').length);
-
-      // List all potential map elements
-      const allMaps = document.querySelectorAll('[class*="map"], [id*="map"]');
-      allMaps.forEach((el, idx) => {
-        console.log(`  Candidate ${idx}: class="${el.className}", id="${el.id}", size=${el.offsetWidth}x${el.offsetHeight}`);
+      console.error('❌ Map element not found');
+      // Debug: list all elements
+      document.querySelectorAll('[class*="leaflet"], [class*="map"]').forEach((el, i) => {
+        console.log(`  ${i}: ${el.className} - ${el.offsetWidth}x${el.offsetHeight}`);
       });
-
       return null;
     }
 
-    console.log(`✅✅ MAP FOUND using: "${foundSelector}"`);
-    console.log(`📐 Dimensions: ${mapElement.offsetWidth}x${mapElement.offsetHeight}px`);
-
-    // STRATEGY 3: Scroll map into view and ensure visibility
-    console.log('👀 Ensuring map is visible...');
+    // Ensure map is in viewport
     mapElement.scrollIntoView({ behavior: 'instant', block: 'center' });
-    await new Promise(resolve => setTimeout(resolve, 300)); // Wait for scroll
+    await new Promise(resolve => setTimeout(resolve, 300));
 
-    // Check dimensions again
-    const rect = mapElement.getBoundingClientRect();
-    console.log(`📏 After scroll - BoundingRect: ${rect.width}x${rect.height}, Offset: ${mapElement.offsetWidth}x${mapElement.offsetHeight}`);
+    // Wait for tile images to load
+    const tileImages = mapElement.querySelectorAll('.leaflet-tile-loaded, .leaflet-tile');
+    console.log(`📍 Found ${tileImages.length} map tiles`);
 
-    if (mapElement.offsetWidth === 0 || mapElement.offsetHeight === 0) {
-      console.error('❌ Map has ZERO dimensions! Cannot capture.');
-      return null;
-    }
-
-    // STRATEGY 4: Force map tiles to load by waiting for images
-    console.log('🖼️ Checking for map tiles...');
-    const images = mapElement.querySelectorAll('img');
-    console.log(`  Found ${images.length} images in map`);
-
-    // Wait for images to load
-    const imagePromises = Array.from(images).map(img => {
-      if (img.complete) return Promise.resolve();
-      return new Promise(resolve => {
-        img.onload = resolve;
-        img.onerror = resolve; // Continue even if some tiles fail
-        setTimeout(resolve, 2000); // Max 2s wait per image
-      });
+    // Force all tiles to be visible
+    tileImages.forEach(tile => {
+      tile.style.opacity = '1';
+      tile.style.visibility = 'visible';
     });
 
-    await Promise.all(imagePromises);
-    console.log('✅ All map tiles loaded (or timed out)');
+    await new Promise(resolve => setTimeout(resolve, 500));
 
-    // STRATEGY 5: Multiple capture attempts with different settings
-    let canvas = null;
-    const captureConfigs = [
-      // Config 1: High quality, strict CORS
-      {
-        scale: 2,
-        useCORS: true,
-        logging: false,
-        backgroundColor: '#ffffff',
-        allowTaint: false,
-        width: mapElement.offsetWidth,
-        height: mapElement.offsetHeight
-      },
-      // Config 2: Allow taint for cross-origin images
-      {
-        scale: 2,
-        useCORS: true,
-        logging: false,
-        backgroundColor: '#ffffff',
-        allowTaint: true,
-        width: mapElement.offsetWidth,
-        height: mapElement.offsetHeight
-      },
-      // Config 3: Lower quality, maximum compatibility
-      {
-        scale: 1,
-        useCORS: false,
-        logging: false,
-        backgroundColor: '#ffffff',
-        allowTaint: true,
-        width: mapElement.offsetWidth,
-        height: mapElement.offsetHeight
-      }
-    ];
+    // Capture with html2canvas - use ignoreElements to skip problematic elements
+    console.log('📸 Capturing with html2canvas...');
 
-    for (let i = 0; i < captureConfigs.length; i++) {
-      try {
-        console.log(`📸 Capture attempt ${i + 1}/${captureConfigs.length} with config:`, captureConfigs[i]);
-        canvas = await html2canvas(mapElement, captureConfigs[i]);
-
-        if (canvas && canvas.width > 0 && canvas.height > 0) {
-          console.log(`✅ Capture successful with config ${i + 1}! Canvas: ${canvas.width}x${canvas.height}px`);
-          break;
+    const canvas = await html2canvas(mapElement, {
+      useCORS: true,
+      allowTaint: true,
+      backgroundColor: '#e8f4ea', // Light green background for Tanzania
+      scale: 1.5,
+      logging: true, // Enable logging for debugging
+      imageTimeout: 5000,
+      removeContainer: true,
+      ignoreElements: (element) => {
+        // Skip elements that might cause issues
+        const className = element.className || '';
+        if (typeof className === 'string') {
+          if (className.includes('leaflet-control') ||
+              className.includes('leaflet-attribution') ||
+              className.includes('map-controls') ||
+              className.includes('drawing-tools')) {
+            return true;
+          }
         }
-      } catch (err) {
-        console.warn(`⚠️ Capture attempt ${i + 1} failed:`, err.message);
-        if (i === captureConfigs.length - 1) throw err; // Rethrow on last attempt
-      }
-    }
+        return false;
+      },
+      onclone: (clonedDoc, element) => {
+        // Make sure cloned element has proper dimensions
+        element.style.width = mapElement.offsetWidth + 'px';
+        element.style.height = mapElement.offsetHeight + 'px';
 
-    if (!canvas) {
-      console.error('❌ All capture attempts failed!');
+        // Force visibility on all tiles in clone
+        element.querySelectorAll('.leaflet-tile, .leaflet-tile-loaded, img').forEach(tile => {
+          tile.style.opacity = '1';
+          tile.style.visibility = 'visible';
+          tile.crossOrigin = 'anonymous';
+        });
+
+        // Make overlays visible
+        element.querySelectorAll('.leaflet-overlay-pane, .leaflet-marker-pane').forEach(pane => {
+          pane.style.opacity = '1';
+          pane.style.visibility = 'visible';
+        });
+      }
+    });
+
+    if (!canvas || canvas.width === 0 || canvas.height === 0) {
+      console.error('❌ Canvas is empty');
       return null;
     }
 
-    // Convert to base64
     const imageData = canvas.toDataURL('image/png');
-    const sizeKB = (imageData.length / 1024).toFixed(2);
-    console.log(`✅✅✅ MAP CAPTURED SUCCESSFULLY!`);
-    console.log(`  Canvas: ${canvas.width}x${canvas.height}px`);
-    console.log(`  Data size: ${sizeKB} KB`);
-    console.log(`  Data preview: ${imageData.substring(0, 50)}...`);
+    console.log(`✅ Map captured: ${canvas.width}x${canvas.height}px, ${(imageData.length / 1024).toFixed(0)}KB`);
 
     return imageData;
 
   } catch (error) {
-    console.error('❌❌❌ CATASTROPHIC MAP CAPTURE ERROR:', error);
-    console.error('Stack:', error.stack);
+    console.error('❌ Map capture error:', error);
+
+    // FALLBACK 1: Try to capture just the SVG overlay layer
+    try {
+      console.log('🔄 Trying fallback 1: capture SVG overlay...');
+      const svgOverlay = document.querySelector('.leaflet-overlay-pane svg');
+      if (svgOverlay) {
+        const svgData = new XMLSerializer().serializeToString(svgOverlay);
+        const svgBlob = new Blob([svgData], { type: 'image/svg+xml;charset=utf-8' });
+        const url = URL.createObjectURL(svgBlob);
+
+        const img = new Image();
+        await new Promise((resolve, reject) => {
+          img.onload = resolve;
+          img.onerror = reject;
+          img.src = url;
+        });
+
+        const canvas = document.createElement('canvas');
+        canvas.width = img.width || 800;
+        canvas.height = img.height || 600;
+        const ctx = canvas.getContext('2d');
+        ctx.fillStyle = '#e8f4ea';
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+        ctx.drawImage(img, 0, 0);
+
+        URL.revokeObjectURL(url);
+        const imageData = canvas.toDataURL('image/png');
+        console.log('✅ Fallback SVG capture successful');
+        return imageData;
+      }
+    } catch (fallbackError) {
+      console.error('❌ SVG fallback failed:', fallbackError);
+    }
+
+    // FALLBACK 2: Draw map directly from GeoJSON with icons
+    if (districtWarningLevels || drawnShapes) {
+      console.log('🔄 Trying fallback 2: draw map from GeoJSON...');
+      const canvasMap = await drawTanzaniaMapCanvas(districtWarningLevels || {}, drawnShapes || [], hazardType);
+      if (canvasMap) {
+        return canvasMap;
+      }
+    }
+
     return null;
   }
 };
@@ -637,12 +790,72 @@ export const generateWarningBulletinPDF = async (warningData, riskData = null, i
 
     if (includeMap) {
       try {
-        mapImage = await captureMapImage();
+        mapImage = await captureMapImage(warningData.districtWarningLevels, warningData.drawnShapes, warningData.hazardType);
         if (mapImage) {
           pdf.setDrawColor(...COLORS.primaryBlue);
           pdf.setLineWidth(0.5);
           pdf.roundedRect(margin, mapY, halfWidth, mapHeight, 2, 2, 'S');
           pdf.addImage(mapImage, 'PNG', margin + 1, mapY + 1, halfWidth - 2, mapHeight - 2);
+
+          // Draw hazard icons as overlay on the map
+          const drawnShapesForMap = warningData.drawnShapes || [];
+          const hazardIconsOnMap = drawnShapesForMap.filter(shape => shape.type === 'hazardIcon');
+
+          if (hazardIconsOnMap.length > 0) {
+            console.log(`🎯 Drawing ${hazardIconsOnMap.length} hazard icons on PDF map...`);
+
+            // Tanzania approximate bounds for coordinate mapping
+            const tanzaniaBounds = {
+              minLat: -11.75,
+              maxLat: -0.99,
+              minLng: 29.34,
+              maxLng: 40.44
+            };
+
+            // Map dimensions in PDF
+            const pdfMapX = margin + 1;
+            const pdfMapY = mapY + 1;
+            const pdfMapWidth = halfWidth - 2;
+            const pdfMapHeight = mapHeight - 2;
+
+            hazardIconsOnMap.forEach((shape, idx) => {
+              if (shape.position && shape.position.lat && shape.position.lng) {
+                // Convert lat/lng to PDF coordinates
+                const latRange = tanzaniaBounds.maxLat - tanzaniaBounds.minLat;
+                const lngRange = tanzaniaBounds.maxLng - tanzaniaBounds.minLng;
+
+                const xPercent = (shape.position.lng - tanzaniaBounds.minLng) / lngRange;
+                const yPercent = 1 - ((shape.position.lat - tanzaniaBounds.minLat) / latRange); // Invert Y
+
+                const iconX = pdfMapX + (xPercent * pdfMapWidth);
+                const iconY = pdfMapY + (yPercent * pdfMapHeight);
+
+                // Get hazard color
+                const hazardInfo = getHazardIconData(shape.hazardType || warningData.hazardType);
+                const iconColor = hexToRgb(hazardInfo.color);
+
+                // Draw icon marker (outer circle)
+                pdf.setFillColor(...iconColor);
+                pdf.circle(iconX, iconY, 3, 'F');
+
+                // Draw white inner circle
+                pdf.setFillColor(255, 255, 255);
+                pdf.circle(iconX, iconY, 2, 'F');
+
+                // Draw colored center dot
+                pdf.setFillColor(...iconColor);
+                pdf.circle(iconX, iconY, 1.2, 'F');
+
+                console.log(`  Icon ${idx + 1}: (${shape.position.lat.toFixed(2)}, ${shape.position.lng.toFixed(2)}) -> PDF (${iconX.toFixed(1)}, ${iconY.toFixed(1)})`);
+              }
+            });
+
+            // Add small legend for icon markers
+            pdf.setFontSize(6);
+            pdf.setFont('helvetica', 'italic');
+            pdf.setTextColor(100, 100, 100);
+            pdf.text(`${hazardIconsOnMap.length} hazard marker(s)`, margin + 2, mapY + mapHeight - 2);
+          }
         }
       } catch (error) {
         console.error('❌ Could not add map to PDF:', error);
@@ -824,105 +1037,6 @@ export const generateWarningBulletinPDF = async (warningData, riskData = null, i
       }
 
       yPosition += 3;
-    }
-
-    // ========== HAZARD ICONS LEGEND SECTION ==========
-    // Check if we have drawn hazard icons to display
-    const drawnShapes = warningData.drawnShapes || [];
-    const hazardIconShapes = drawnShapes.filter(shape => shape.type === 'hazardIcon');
-    const hasHazardIcons = hazardIconShapes.length > 0 || warningData.hazardType;
-
-    if (hasHazardIcons) {
-      // Check if we need a new page
-      if (yPosition > pageHeight - 60) {
-        pdf.addPage();
-        yPosition = margin;
-      }
-
-      // Section header
-      pdf.setFontSize(11);
-      pdf.setFont('helvetica', 'bold');
-      pdf.setFillColor(156, 39, 176); // Purple for hazard icons
-      pdf.setTextColor(255, 255, 255);
-      pdf.roundedRect(margin, yPosition, pageWidth - 2 * margin, 8, 1, 1, 'F');
-      pdf.text('HAZARD INDICATORS ON MAP', margin + 4, yPosition + 5.5);
-      pdf.setTextColor(...COLORS.darkText);
-      yPosition += 12;
-
-      // Primary hazard type (always show)
-      if (warningData.hazardType) {
-        const primaryHazard = getHazardIconData(warningData.hazardType);
-        const primaryColor = hexToRgb(primaryHazard.color);
-
-        // Draw hazard icon circle
-        pdf.setFillColor(...primaryColor);
-        pdf.circle(margin + 8, yPosition + 2, 6, 'F');
-        pdf.setFillColor(255, 255, 255);
-        pdf.circle(margin + 8, yPosition + 2, 5, 'F');
-        pdf.setFillColor(...primaryColor);
-        pdf.circle(margin + 8, yPosition + 2, 4, 'F');
-
-        // Hazard text
-        pdf.setFontSize(10);
-        pdf.setFont('helvetica', 'bold');
-        pdf.setTextColor(...primaryColor);
-        pdf.text(`${primaryHazard.icon} ${warningData.hazardType}`, margin + 18, yPosition + 3);
-
-        pdf.setFont('helvetica', 'normal');
-        pdf.setTextColor(...COLORS.darkText);
-        pdf.text('(Primary Hazard)', margin + 18 + pdf.getTextWidth(`${primaryHazard.icon} ${warningData.hazardType}`) + 3, yPosition + 3);
-
-        yPosition += 10;
-      }
-
-      // Additional hazard icons placed on map
-      if (hazardIconShapes.length > 0) {
-        pdf.setFontSize(9);
-        pdf.setFont('helvetica', 'bold');
-        pdf.setTextColor(...COLORS.primaryBlue);
-        pdf.text('Additional Hazard Markers Placed:', margin + 2, yPosition);
-        yPosition += 5;
-
-        // Group icons by hazard type
-        const iconsByType = {};
-        hazardIconShapes.forEach(shape => {
-          const type = shape.hazardType || 'Unknown';
-          if (!iconsByType[type]) {
-            iconsByType[type] = { count: 0, positions: [] };
-          }
-          iconsByType[type].count++;
-          if (shape.position) {
-            iconsByType[type].positions.push(shape.position);
-          }
-        });
-
-        // Render each hazard type
-        Object.entries(iconsByType).forEach(([hazardType, data]) => {
-          const hazardInfo = getHazardIconData(hazardType);
-          const iconColor = hexToRgb(hazardInfo.color);
-
-          // Draw small icon indicator
-          pdf.setFillColor(...iconColor);
-          pdf.circle(margin + 6, yPosition + 1, 3, 'F');
-
-          // Hazard type and count
-          pdf.setFont('helvetica', 'normal');
-          pdf.setFontSize(9);
-          pdf.setTextColor(...COLORS.darkText);
-          pdf.text(`${hazardInfo.icon} ${hazardType}: ${data.count} marker${data.count > 1 ? 's' : ''}`, margin + 12, yPosition + 2);
-
-          yPosition += 6;
-        });
-
-        yPosition += 3;
-      }
-
-      // Legend note
-      pdf.setFontSize(8);
-      pdf.setFont('helvetica', 'italic');
-      pdf.setTextColor(100, 100, 100);
-      pdf.text('Note: Hazard icons indicate specific locations of concern within affected areas.', margin + 2, yPosition);
-      yPosition += 8;
     }
 
     // ========== COMPACT FOOTER ==========
@@ -1658,6 +1772,102 @@ export const generateHazardInputPDF = async (hazardData, options = {}) => {
     }
 
     yPosition += 4;
+
+    // ========== MAP SECTION ==========
+    // Capture and display the hazard map with selected districts and icons
+    pdf.setFontSize(11);
+    pdf.setFont('helvetica', 'bold');
+    pdf.setFillColor(76, 175, 80);
+    pdf.setTextColor(255, 255, 255);
+    pdf.roundedRect(margin, yPosition, pageWidth - 2 * margin, 8, 1, 1, 'F');
+    pdf.text('HAZARD MAP', margin + 4, yPosition + 5.5);
+    yPosition += 12;
+
+    // Try to capture the map (pass districtWarningLevels for fallback canvas drawing)
+    let mapImage = null;
+    try {
+      console.log('🗺️ Capturing hazard map for PDF...');
+      mapImage = await captureMapImage(hazardData.districtWarningLevels, hazardData.drawnShapes, hazardData.hazardType);
+
+      if (mapImage) {
+        const mapHeight = 80; // Height for map in PDF
+        pdf.setDrawColor(...institutionColor);
+        pdf.setLineWidth(0.5);
+        pdf.roundedRect(margin, yPosition, pageWidth - 2 * margin, mapHeight, 2, 2, 'S');
+        pdf.addImage(mapImage, 'PNG', margin + 1, yPosition + 1, pageWidth - 2 * margin - 2, mapHeight - 2);
+
+        // Draw hazard icons as overlay on the map (if any)
+        const drawnShapesForMap = hazardData.drawnShapes || [];
+        const hazardIconsOnMap = drawnShapesForMap.filter(shape => shape.type === 'hazardIcon');
+
+        if (hazardIconsOnMap.length > 0) {
+          console.log(`🎯 Drawing ${hazardIconsOnMap.length} hazard icons on PDF map...`);
+
+          // Tanzania approximate bounds for coordinate mapping
+          const tanzaniaBounds = {
+            minLat: -11.75,
+            maxLat: -0.99,
+            minLng: 29.34,
+            maxLng: 40.44
+          };
+
+          // Map dimensions in PDF
+          const pdfMapX = margin + 1;
+          const pdfMapY = yPosition + 1;
+          const pdfMapWidth = pageWidth - 2 * margin - 2;
+          const pdfMapHeight = mapHeight - 2;
+
+          hazardIconsOnMap.forEach((shape, idx) => {
+            if (shape.position && shape.position.lat && shape.position.lng) {
+              // Convert lat/lng to PDF coordinates
+              const latRange = tanzaniaBounds.maxLat - tanzaniaBounds.minLat;
+              const lngRange = tanzaniaBounds.maxLng - tanzaniaBounds.minLng;
+
+              const xPercent = (shape.position.lng - tanzaniaBounds.minLng) / lngRange;
+              const yPercent = 1 - ((shape.position.lat - tanzaniaBounds.minLat) / latRange);
+
+              const iconX = pdfMapX + (xPercent * pdfMapWidth);
+              const iconY = pdfMapY + (yPercent * pdfMapHeight);
+
+              // Get hazard color
+              const hazardInfo = getHazardIconData(shape.hazardType || hazardData.hazardType);
+              const iconColor = hexToRgb(hazardInfo.color);
+
+              // Draw icon marker (outer circle with white center)
+              pdf.setFillColor(...iconColor);
+              pdf.circle(iconX, iconY, 4, 'F');
+              pdf.setFillColor(255, 255, 255);
+              pdf.circle(iconX, iconY, 2.5, 'F');
+              pdf.setFillColor(...iconColor);
+              pdf.circle(iconX, iconY, 1.5, 'F');
+
+              console.log(`  Icon ${idx + 1}: (${shape.position.lat.toFixed(2)}, ${shape.position.lng.toFixed(2)}) -> PDF (${iconX.toFixed(1)}, ${iconY.toFixed(1)})`);
+            }
+          });
+        }
+
+        yPosition += mapHeight + 4;
+        console.log('✅ Map added to hazard input PDF');
+      } else {
+        // Show placeholder message if map capture failed
+        pdf.setFillColor(245, 245, 245);
+        pdf.roundedRect(margin, yPosition, pageWidth - 2 * margin, 30, 2, 2, 'F');
+        pdf.setFontSize(10);
+        pdf.setTextColor(150, 150, 150);
+        pdf.text('Map capture not available', pageWidth / 2, yPosition + 16, { align: 'center' });
+        yPosition += 34;
+        console.log('⚠️ Map capture failed, showing placeholder');
+      }
+    } catch (mapError) {
+      console.error('❌ Error capturing map:', mapError);
+      // Show error placeholder
+      pdf.setFillColor(255, 240, 240);
+      pdf.roundedRect(margin, yPosition, pageWidth - 2 * margin, 20, 2, 2, 'F');
+      pdf.setFontSize(9);
+      pdf.setTextColor(200, 100, 100);
+      pdf.text('Map could not be captured', pageWidth / 2, yPosition + 12, { align: 'center' });
+      yPosition += 24;
+    }
 
     // ========== VALIDITY PERIOD SECTION ==========
     pdf.setFontSize(11);

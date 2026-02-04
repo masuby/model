@@ -980,7 +980,7 @@ const InteractiveHazardMap = ({
   }
 
   return (
-    <div className="interactive-hazard-map-container">
+    <div id="hazard-map-container" className="interactive-hazard-map-container">
       {/* Map Controls */}
       <div className="map-controls">
         {showPMOView && (
@@ -1199,6 +1199,7 @@ const InteractiveHazardMap = ({
         <TileLayer
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+          crossOrigin="anonymous"
         />
 
         {/* Water Bodies Layer - rendered first (underneath) */}
