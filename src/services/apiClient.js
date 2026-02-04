@@ -10,12 +10,12 @@ const API_CONFIG = {
   // Base URL - uses Vite proxy in development, direct URL in production
   baseURL: import.meta.env.VITE_API_URL || '/api/v1',
 
-  // Request timeout in milliseconds
-  timeout: 30000,
+  // Request timeout in milliseconds (reduced for faster fallback)
+  timeout: 5000,
 
-  // Retry configuration
-  maxRetries: 3,
-  retryDelay: 1000
+  // Retry configuration (minimal retries for faster fallback to mock data)
+  maxRetries: 1,
+  retryDelay: 500
 };
 
 /**
@@ -29,6 +29,33 @@ export class APIError extends Error {
     this.data = data;
   }
 }
+
+// Track backend availability (prevents repeated failed requests)
+let backendAvailable = null; // null = unknown, true = available, false = unavailable
+let lastBackendCheck = 0;
+const BACKEND_CHECK_INTERVAL = 30000; // Re-check every 30 seconds
+
+/**
+ * Check if backend is available (cached)
+ */
+export const isBackendAvailable = () => {
+  const now = Date.now();
+  if (backendAvailable !== null && (now - lastBackendCheck) < BACKEND_CHECK_INTERVAL) {
+    return backendAvailable;
+  }
+  return null; // Unknown, needs check
+};
+
+/**
+ * Mark backend as available/unavailable
+ */
+const setBackendStatus = (available) => {
+  backendAvailable = available;
+  lastBackendCheck = Date.now();
+  if (!available) {
+    console.log('ℹ️ Backend API unavailable - using local mock data');
+  }
+};
 
 /**
  * Get authentication token from storage
@@ -98,6 +125,11 @@ const handleResponse = async (response) => {
  * Make HTTP request with retry logic
  */
 const makeRequest = async (url, options, retries = 0) => {
+  // Skip API call if backend is known to be unavailable (faster fallback)
+  if (backendAvailable === false && (Date.now() - lastBackendCheck) < BACKEND_CHECK_INTERVAL) {
+    throw new APIError('Backend unavailable', 0, null);
+  }
+
   const controller = new AbortController();
   const timeoutId = setTimeout(() => controller.abort(), API_CONFIG.timeout);
 
@@ -108,16 +140,25 @@ const makeRequest = async (url, options, retries = 0) => {
     });
 
     clearTimeout(timeoutId);
+
+    // Backend is responding - mark as available
+    setBackendStatus(true);
+
     return await handleResponse(response);
 
   } catch (error) {
     clearTimeout(timeoutId);
 
-    // Retry on network errors (not API errors)
-    if (error.name !== 'APIError' && retries < API_CONFIG.maxRetries) {
-      console.log(`Retrying request (${retries + 1}/${API_CONFIG.maxRetries})...`);
-      await new Promise(resolve => setTimeout(resolve, API_CONFIG.retryDelay * (retries + 1)));
-      return makeRequest(url, options, retries + 1);
+    // Check if this is a network/connection error (backend unavailable)
+    if (error.name !== 'APIError') {
+      // Mark backend as unavailable for faster subsequent fallbacks
+      setBackendStatus(false);
+
+      // Retry only once on network errors
+      if (retries < API_CONFIG.maxRetries) {
+        await new Promise(resolve => setTimeout(resolve, API_CONFIG.retryDelay));
+        return makeRequest(url, options, retries + 1);
+      }
     }
 
     throw error;
