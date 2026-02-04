@@ -7,7 +7,7 @@
 import { useState, useEffect } from 'react';
 import { useAuth } from '../../context/AuthContext';
 import { useNavigate } from 'react-router-dom';
-import { INSTITUTIONS, REGIONS } from '../../services/authService';
+import { INSTITUTIONS } from '../../services/authService';
 import { getCommittees } from '../../services/committeeService';
 import './Auth.css';
 
@@ -15,15 +15,14 @@ import './Auth.css';
 const LOGIN_TYPES = {
   PMO: 'pmo',
   INSTITUTION: 'institution',
-  REGIONAL: 'regional',
-  COMMITTEE: 'committee'
+  REGIONAL_COMMITTEE: 'regional_committee',
+  DISTRICT_COMMITTEE: 'district_committee'
 };
 
 const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [institution, setInstitution] = useState('');
-  const [selectedRegion, setSelectedRegion] = useState('');
   const [selectedCommittee, setSelectedCommittee] = useState('');
   const [committees, setCommittees] = useState([]);
   const [committeesLoading, setCommitteesLoading] = useState(false);
@@ -50,9 +49,9 @@ const Login = () => {
     }
   }, []);
 
-  // Load committees when committee login is selected
+  // Load committees when committee login type is selected
   useEffect(() => {
-    if (loginType === LOGIN_TYPES.COMMITTEE) {
+    if (loginType === LOGIN_TYPES.REGIONAL_COMMITTEE || loginType === LOGIN_TYPES.DISTRICT_COMMITTEE) {
       loadCommittees();
     }
   }, [loginType]);
@@ -78,8 +77,9 @@ const Login = () => {
     }
   };
 
-  // Mock committees as fallback
+  // Mock committees as fallback - includes both regional and district/ward committees
   const getMockCommittees = () => [
+    // Regional Committees (26 regions)
     { id: 1, name: 'Dodoma Regional Disaster Committee', type: 'regional', adm1_code: 'TZ01', adm1_name: 'Dodoma' },
     { id: 2, name: 'Arusha Regional Disaster Committee', type: 'regional', adm1_code: 'TZ02', adm1_name: 'Arusha' },
     { id: 3, name: 'Kilimanjaro Regional Disaster Committee', type: 'regional', adm1_code: 'TZ03', adm1_name: 'Kilimanjaro' },
@@ -106,7 +106,41 @@ const Login = () => {
     { id: 24, name: 'Simiyu Regional Disaster Committee', type: 'regional', adm1_code: 'TZ24', adm1_name: 'Simiyu' },
     { id: 25, name: 'Geita Regional Disaster Committee', type: 'regional', adm1_code: 'TZ25', adm1_name: 'Geita' },
     { id: 26, name: 'Songwe Regional Disaster Committee', type: 'regional', adm1_code: 'TZ26', adm1_name: 'Songwe' },
+    // District/Ward Committees (sample - multiple per region)
+    { id: 101, name: 'Dodoma Urban District Committee', type: 'ward', adm1_code: 'TZ01', adm1_name: 'Dodoma', adm2_code: 'TZ0101', adm2_name: 'Dodoma Urban' },
+    { id: 102, name: 'Kondoa District Committee', type: 'ward', adm1_code: 'TZ01', adm1_name: 'Dodoma', adm2_code: 'TZ0102', adm2_name: 'Kondoa' },
+    { id: 103, name: 'Chamwino District Committee', type: 'ward', adm1_code: 'TZ01', adm1_name: 'Dodoma', adm2_code: 'TZ0103', adm2_name: 'Chamwino' },
+    { id: 104, name: 'Bahi District Committee', type: 'ward', adm1_code: 'TZ01', adm1_name: 'Dodoma', adm2_code: 'TZ0104', adm2_name: 'Bahi' },
+    { id: 201, name: 'Arusha City District Committee', type: 'ward', adm1_code: 'TZ02', adm1_name: 'Arusha', adm2_code: 'TZ0201', adm2_name: 'Arusha City' },
+    { id: 202, name: 'Arumeru District Committee', type: 'ward', adm1_code: 'TZ02', adm1_name: 'Arusha', adm2_code: 'TZ0202', adm2_name: 'Arumeru' },
+    { id: 203, name: 'Karatu District Committee', type: 'ward', adm1_code: 'TZ02', adm1_name: 'Arusha', adm2_code: 'TZ0203', adm2_name: 'Karatu' },
+    { id: 204, name: 'Monduli District Committee', type: 'ward', adm1_code: 'TZ02', adm1_name: 'Arusha', adm2_code: 'TZ0204', adm2_name: 'Monduli' },
+    { id: 301, name: 'Moshi Urban District Committee', type: 'ward', adm1_code: 'TZ03', adm1_name: 'Kilimanjaro', adm2_code: 'TZ0301', adm2_name: 'Moshi Urban' },
+    { id: 302, name: 'Moshi Rural District Committee', type: 'ward', adm1_code: 'TZ03', adm1_name: 'Kilimanjaro', adm2_code: 'TZ0302', adm2_name: 'Moshi Rural' },
+    { id: 303, name: 'Hai District Committee', type: 'ward', adm1_code: 'TZ03', adm1_name: 'Kilimanjaro', adm2_code: 'TZ0303', adm2_name: 'Hai' },
+    { id: 304, name: 'Rombo District Committee', type: 'ward', adm1_code: 'TZ03', adm1_name: 'Kilimanjaro', adm2_code: 'TZ0304', adm2_name: 'Rombo' },
+    { id: 701, name: 'Ilala District Committee', type: 'ward', adm1_code: 'TZ07', adm1_name: 'Dar es Salaam', adm2_code: 'TZ0701', adm2_name: 'Ilala' },
+    { id: 702, name: 'Kinondoni District Committee', type: 'ward', adm1_code: 'TZ07', adm1_name: 'Dar es Salaam', adm2_code: 'TZ0702', adm2_name: 'Kinondoni' },
+    { id: 703, name: 'Temeke District Committee', type: 'ward', adm1_code: 'TZ07', adm1_name: 'Dar es Salaam', adm2_code: 'TZ0703', adm2_name: 'Temeke' },
+    { id: 704, name: 'Ubungo District Committee', type: 'ward', adm1_code: 'TZ07', adm1_name: 'Dar es Salaam', adm2_code: 'TZ0704', adm2_name: 'Ubungo' },
+    { id: 705, name: 'Kigamboni District Committee', type: 'ward', adm1_code: 'TZ07', adm1_name: 'Dar es Salaam', adm2_code: 'TZ0705', adm2_name: 'Kigamboni' },
+    { id: 1201, name: 'Mbeya City District Committee', type: 'ward', adm1_code: 'TZ12', adm1_name: 'Mbeya', adm2_code: 'TZ1201', adm2_name: 'Mbeya City' },
+    { id: 1202, name: 'Mbeya Rural District Committee', type: 'ward', adm1_code: 'TZ12', adm1_name: 'Mbeya', adm2_code: 'TZ1202', adm2_name: 'Mbeya Rural' },
+    { id: 1203, name: 'Rungwe District Committee', type: 'ward', adm1_code: 'TZ12', adm1_name: 'Mbeya', adm2_code: 'TZ1203', adm2_name: 'Rungwe' },
+    { id: 1901, name: 'Mwanza City District Committee', type: 'ward', adm1_code: 'TZ19', adm1_name: 'Mwanza', adm2_code: 'TZ1901', adm2_name: 'Mwanza City' },
+    { id: 1902, name: 'Ilemela District Committee', type: 'ward', adm1_code: 'TZ19', adm1_name: 'Mwanza', adm2_code: 'TZ1902', adm2_name: 'Ilemela' },
+    { id: 1903, name: 'Nyamagana District Committee', type: 'ward', adm1_code: 'TZ19', adm1_name: 'Mwanza', adm2_code: 'TZ1903', adm2_name: 'Nyamagana' },
   ];
+
+  // Filter committees based on login type
+  const getFilteredCommittees = () => {
+    if (loginType === LOGIN_TYPES.REGIONAL_COMMITTEE) {
+      return committees.filter(c => c.type === 'regional');
+    } else if (loginType === LOGIN_TYPES.DISTRICT_COMMITTEE) {
+      return committees.filter(c => c.type === 'ward' || c.type === 'district');
+    }
+    return committees;
+  };
 
   // Real-time email validation
   const validateEmail = (emailValue) => {
@@ -189,13 +223,8 @@ const Login = () => {
       return;
     }
 
-    if (loginType === LOGIN_TYPES.COMMITTEE && !selectedCommittee) {
+    if ((loginType === LOGIN_TYPES.REGIONAL_COMMITTEE || loginType === LOGIN_TYPES.DISTRICT_COMMITTEE) && !selectedCommittee) {
       setError('Please select your committee');
-      return;
-    }
-
-    if (loginType === LOGIN_TYPES.REGIONAL && !selectedRegion) {
-      setError('Please select your region');
       return;
     }
 
@@ -205,8 +234,7 @@ const Login = () => {
       const loginOptions = {
         loginType,
         institution: loginType === LOGIN_TYPES.INSTITUTION ? institution : null,
-        committee: loginType === LOGIN_TYPES.COMMITTEE ? selectedCommittee : null,
-        region: loginType === LOGIN_TYPES.REGIONAL ? selectedRegion : null
+        committee: (loginType === LOGIN_TYPES.REGIONAL_COMMITTEE || loginType === LOGIN_TYPES.DISTRICT_COMMITTEE) ? selectedCommittee : null
       };
 
       const result = await login(
@@ -306,7 +334,7 @@ const Login = () => {
             }}>
               <button
                 type="button"
-                onClick={() => { setLoginType(LOGIN_TYPES.PMO); setInstitution(''); setSelectedRegion(''); setSelectedCommittee(''); }}
+                onClick={() => { setLoginType(LOGIN_TYPES.PMO); setInstitution(''); setSelectedCommittee(''); }}
                 style={{
                   padding: '12px 8px',
                   border: loginType === LOGIN_TYPES.PMO ? '2px solid #1976D2' : '2px solid #E0E0E0',
@@ -328,7 +356,7 @@ const Login = () => {
               </button>
               <button
                 type="button"
-                onClick={() => { setLoginType(LOGIN_TYPES.INSTITUTION); setSelectedRegion(''); setSelectedCommittee(''); }}
+                onClick={() => { setLoginType(LOGIN_TYPES.INSTITUTION); setSelectedCommittee(''); }}
                 style={{
                   padding: '12px 8px',
                   border: loginType === LOGIN_TYPES.INSTITUTION ? '2px solid #1976D2' : '2px solid #E0E0E0',
@@ -350,15 +378,15 @@ const Login = () => {
               </button>
               <button
                 type="button"
-                onClick={() => { setLoginType(LOGIN_TYPES.COMMITTEE); setInstitution(''); setSelectedRegion(''); }}
+                onClick={() => { setLoginType(LOGIN_TYPES.REGIONAL_COMMITTEE); setInstitution(''); setSelectedCommittee(''); }}
                 style={{
                   padding: '12px 8px',
-                  border: loginType === LOGIN_TYPES.COMMITTEE ? '2px solid #1976D2' : '2px solid #E0E0E0',
+                  border: loginType === LOGIN_TYPES.REGIONAL_COMMITTEE ? '2px solid #1976D2' : '2px solid #E0E0E0',
                   borderRadius: '10px',
-                  background: loginType === LOGIN_TYPES.COMMITTEE ? '#E3F2FD' : 'white',
-                  color: loginType === LOGIN_TYPES.COMMITTEE ? '#1976D2' : '#666',
+                  background: loginType === LOGIN_TYPES.REGIONAL_COMMITTEE ? '#E3F2FD' : 'white',
+                  color: loginType === LOGIN_TYPES.REGIONAL_COMMITTEE ? '#1976D2' : '#666',
                   fontWeight: '600',
-                  fontSize: '13px',
+                  fontSize: '12px',
                   cursor: 'pointer',
                   transition: 'all 0.2s ease',
                   display: 'flex',
@@ -367,20 +395,20 @@ const Login = () => {
                   gap: '4px'
                 }}
               >
-                <span style={{ fontSize: '18px' }}>👥</span>
-                Committee
+                <span style={{ fontSize: '18px' }}>🏛️</span>
+                Regional Committee
               </button>
               <button
                 type="button"
-                onClick={() => { setLoginType(LOGIN_TYPES.REGIONAL); setInstitution(''); setSelectedCommittee(''); }}
+                onClick={() => { setLoginType(LOGIN_TYPES.DISTRICT_COMMITTEE); setInstitution(''); setSelectedCommittee(''); }}
                 style={{
                   padding: '12px 8px',
-                  border: loginType === LOGIN_TYPES.REGIONAL ? '2px solid #1976D2' : '2px solid #E0E0E0',
+                  border: loginType === LOGIN_TYPES.DISTRICT_COMMITTEE ? '2px solid #1976D2' : '2px solid #E0E0E0',
                   borderRadius: '10px',
-                  background: loginType === LOGIN_TYPES.REGIONAL ? '#E3F2FD' : 'white',
-                  color: loginType === LOGIN_TYPES.REGIONAL ? '#1976D2' : '#666',
+                  background: loginType === LOGIN_TYPES.DISTRICT_COMMITTEE ? '#E3F2FD' : 'white',
+                  color: loginType === LOGIN_TYPES.DISTRICT_COMMITTEE ? '#1976D2' : '#666',
                   fontWeight: '600',
-                  fontSize: '13px',
+                  fontSize: '12px',
                   cursor: 'pointer',
                   transition: 'all 0.2s ease',
                   display: 'flex',
@@ -389,8 +417,8 @@ const Login = () => {
                   gap: '4px'
                 }}
               >
-                <span style={{ fontSize: '18px' }}>📍</span>
-                Regional
+                <span style={{ fontSize: '18px' }}>🏘️</span>
+                District Committee
               </button>
             </div>
 
@@ -406,8 +434,8 @@ const Login = () => {
             }}>
               {loginType === LOGIN_TYPES.PMO && 'PMO Disaster Management Department administrators with full system access.'}
               {loginType === LOGIN_TYPES.INSTITUTION && 'Government institutions (TMA, MoW, MoH, etc.) for data submission.'}
-              {loginType === LOGIN_TYPES.COMMITTEE && 'Regional and Ward Disaster Management Committees.'}
-              {loginType === LOGIN_TYPES.REGIONAL && 'Regional Secretariat officers and coordinators.'}
+              {loginType === LOGIN_TYPES.REGIONAL_COMMITTEE && 'Regional Disaster Management Committees (26 regions of Tanzania).'}
+              {loginType === LOGIN_TYPES.DISTRICT_COMMITTEE && 'District/Ward Disaster Management Committees at local level.'}
             </div>
 
             <form onSubmit={handleSubmit} className="auth-form">
@@ -448,12 +476,14 @@ const Login = () => {
                 </div>
               )}
 
-              {/* Committee Selection Dropdown */}
-              {loginType === LOGIN_TYPES.COMMITTEE && (
+              {/* Committee Selection Dropdown - for Regional or District Committees */}
+              {(loginType === LOGIN_TYPES.REGIONAL_COMMITTEE || loginType === LOGIN_TYPES.DISTRICT_COMMITTEE) && (
                 <div className="form-group">
-                  <label htmlFor="committee">Select Your Committee</label>
+                  <label htmlFor="committee">
+                    {loginType === LOGIN_TYPES.REGIONAL_COMMITTEE ? 'Select Your Regional Committee' : 'Select Your District Committee'}
+                  </label>
                   <div className="input-wrapper" style={{ position: 'relative' }}>
-                    <span className="input-icon">🏛️</span>
+                    <span className="input-icon">{loginType === LOGIN_TYPES.REGIONAL_COMMITTEE ? '🏛️' : '🏘️'}</span>
                     <select
                       id="committee"
                       value={selectedCommittee}
@@ -464,7 +494,7 @@ const Login = () => {
                         padding: '14px 14px 14px 45px',
                         border: '2px solid #E0E0E0',
                         borderRadius: '10px',
-                        fontSize: '15px',
+                        fontSize: '14px',
                         background: 'white',
                         cursor: committeesLoading ? 'wait' : 'pointer',
                         appearance: 'none',
@@ -474,53 +504,29 @@ const Login = () => {
                         backgroundSize: '20px'
                       }}
                     >
-                      <option value="">{committeesLoading ? 'Loading committees...' : '-- Select Committee --'}</option>
-                      {committees.map(committee => (
+                      <option value="">
+                        {committeesLoading
+                          ? 'Loading committees...'
+                          : loginType === LOGIN_TYPES.REGIONAL_COMMITTEE
+                            ? '-- Select Regional Committee --'
+                            : '-- Select District Committee --'
+                        }
+                      </option>
+                      {getFilteredCommittees().map(committee => (
                         <option key={committee.id} value={committee.id}>
-                          {committee.adm1_name} - {committee.name}
+                          {committee.adm2_name
+                            ? `${committee.adm1_name} → ${committee.adm2_name}`
+                            : committee.adm1_name
+                          } - {committee.name}
                         </option>
                       ))}
                     </select>
                   </div>
                   <div style={{ fontSize: '12px', color: '#666', marginTop: '4px' }}>
-                    Regional and Ward Disaster Management Committees
-                  </div>
-                </div>
-              )}
-
-              {/* Region Selection Dropdown for Regional Officers */}
-              {loginType === LOGIN_TYPES.REGIONAL && (
-                <div className="form-group">
-                  <label htmlFor="region">Select Your Region</label>
-                  <div className="input-wrapper" style={{ position: 'relative' }}>
-                    <span className="input-icon">📍</span>
-                    <select
-                      id="region"
-                      value={selectedRegion}
-                      onChange={(e) => setSelectedRegion(e.target.value)}
-                      disabled={loading}
-                      style={{
-                        width: '100%',
-                        padding: '14px 14px 14px 45px',
-                        border: '2px solid #E0E0E0',
-                        borderRadius: '10px',
-                        fontSize: '15px',
-                        background: 'white',
-                        cursor: 'pointer',
-                        appearance: 'none',
-                        backgroundImage: 'url("data:image/svg+xml;charset=US-ASCII,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'24\' height=\'24\' viewBox=\'0 0 24 24\'><path fill=\'%23666\' d=\'M7 10l5 5 5-5z\'/></svg>")',
-                        backgroundRepeat: 'no-repeat',
-                        backgroundPosition: 'right 12px center',
-                        backgroundSize: '20px'
-                      }}
-                    >
-                      <option value="">-- Select Region --</option>
-                      {REGIONS.map(region => (
-                        <option key={region} value={region}>
-                          {region} Region
-                        </option>
-                      ))}
-                    </select>
+                    {loginType === LOGIN_TYPES.REGIONAL_COMMITTEE
+                      ? `${getFilteredCommittees().length} Regional Committees available`
+                      : `${getFilteredCommittees().length} District/Ward Committees available`
+                    }
                   </div>
                 </div>
               )}
