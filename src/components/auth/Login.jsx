@@ -7,7 +7,7 @@
 import { useState, useEffect } from 'react';
 import { useAuth } from '../../context/AuthContext';
 import { useNavigate } from 'react-router-dom';
-import { INSTITUTIONS } from '../../services/authService';
+import { INSTITUTIONS, USER_ROLES } from '../../services/authService';
 import { getCommittees } from '../../services/committeeService';
 import './Auth.css';
 
@@ -253,10 +253,26 @@ const Login = () => {
           localStorage.removeItem('inform_remembered_email');
         }
 
-        console.log('✅ Login successful, redirecting...');
+        console.log('✅ Login successful, redirecting based on role...');
 
-        // All users go to main dashboard (full access)
-        navigate('/dashboard');
+        // Role-based navigation
+        const userRole = result.user?.role;
+        let redirectPath = '/dashboard'; // Default for ADMIN and PMO
+
+        if (userRole === USER_ROLES.REGIONAL_COMMITTEE || userRole === USER_ROLES.WARD_COMMITTEE) {
+          // Committee users go to committee dashboard
+          redirectPath = '/committee-dashboard';
+        } else if (userRole === USER_ROLES.INSTITUTION_USER) {
+          // Institution users go to institution dashboard
+          redirectPath = '/institution-dashboard';
+        } else if (userRole === USER_ROLES.REGIONAL_OFFICER) {
+          // Regional officers go to main dashboard with limited access
+          redirectPath = '/dashboard';
+        }
+        // ADMIN and PMO_OFFICER go to main dashboard (default)
+
+        console.log(`🔀 Redirecting ${userRole} to ${redirectPath}`);
+        navigate(redirectPath);
       } else {
         setError(result.error);
       }

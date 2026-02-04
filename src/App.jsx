@@ -15,9 +15,11 @@ import Module05Climate from "./components/climate/Module05Climate";
 import Sidebar from "./components/navigation/Sidebar";
 import Dashboard from "./components/dashboard/Dashboard";
 import InstitutionDashboard from "./components/dashboard/InstitutionDashboard";
+import CommitteeDashboard from "./components/dashboard/CommitteeDashboard";
 import AnalyticsDashboard from "./components/warning/components/AnalyticsDashboard";
 import DatabasePanel from "./components/admin/DatabasePanel";
 import DataManagementHub from "./components/admin/DataManagementHub";
+import { USER_ROLES } from "./services/authService";
 import "./App.css";
 
 // Error Boundary to catch and display runtime errors
@@ -134,6 +136,16 @@ function App() {
                   element={
                     <ProtectedRoute>
                       <InstitutionDashboard />
+                    </ProtectedRoute>
+                  }
+                />
+
+                {/* Committee Dashboard - for regional/ward committee users */}
+                <Route
+                  path="/committee-dashboard"
+                  element={
+                    <ProtectedRoute>
+                      <CommitteeDashboard />
                     </ProtectedRoute>
                   }
                 />

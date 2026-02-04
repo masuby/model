@@ -59,3 +59,21 @@ export {
   getDataFlow,
   getSheetLinkages
 } from './riskScoreService';
+
+// Unified Data Entry Service (Committee & Institution linkage)
+export {
+  default as unifiedDataEntryService,
+  getInstitutionIndicators,
+  getCommitteeIndicators,
+  getCommitteeIndicatorsByDimension,
+  submitCommitteeData,
+  submitInstitutionData,
+  getPendingSubmissions,
+  reviewSubmission,
+  getExcelTemplateMapping,
+  getDataFlowOverview,
+  INSTITUTION_INDICATOR_MAP,
+  COMMITTEE_INDICATOR_MAP,
+  EXCEL_TEMPLATE_MAPPINGS,
+  SUBMISSION_STATUS
+} from './unifiedDataEntryService';

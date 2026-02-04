@@ -89,6 +89,37 @@ export const ROLE_PERMISSIONS = {
     canExportReports: false,
     canEditSystemSettings: false,
     canAccessAllModules: false
+  },
+  [USER_ROLES.REGIONAL_COMMITTEE]: {
+    canManageUsers: false,
+    canIssueWarnings: false,
+    canSubmitCommitteeData: true,      // Can submit indicator data for their region
+    canViewOwnCommitteeData: true,     // Can view their committee's submissions
+    canViewOwnRegionData: true,        // Can view data for their region
+    canExportOwnData: true,            // Can export their own data
+    canEditSystemSettings: false,
+    canAccessAllModules: false,
+    canAccessCommitteeModule: true,    // Access to committee dashboard
+    canManageCommitteeMembers: true    // Can manage their committee members
+  },
+  [USER_ROLES.WARD_COMMITTEE]: {
+    canManageUsers: false,
+    canIssueWarnings: false,
+    canSubmitCommitteeData: true,      // Can submit indicator data for their ward
+    canViewOwnCommitteeData: true,     // Can view their committee's submissions
+    canViewOwnWardData: true,          // Can view data for their ward only
+    canExportOwnData: true,            // Can export their own data
+    canEditSystemSettings: false,
+    canAccessAllModules: false,
+    canAccessCommitteeModule: true     // Access to committee dashboard
+  },
+  [USER_ROLES.VIEWER]: {
+    canManageUsers: false,
+    canIssueWarnings: false,
+    canViewAllData: true,              // Read-only access to all data
+    canExportReports: true,
+    canEditSystemSettings: false,
+    canAccessAllModules: false
   }
 };
 
@@ -188,6 +219,82 @@ const MOCK_USERS = [
     department: 'Seismology Division',
     phone: '+255 22 2650745',
     createdAt: '2024-01-20'
+  },
+  // Regional Committee Users
+  {
+    id: '10',
+    email: 'committee@dodoma.go.tz',
+    password: 'Committee@2025',
+    name: 'Dodoma Regional Committee',
+    role: USER_ROLES.REGIONAL_COMMITTEE,
+    committeeId: 1,
+    committeeName: 'Dodoma Regional Disaster Committee',
+    committeeType: 'regional',
+    adm1Code: 'TZ01',
+    adm1Name: 'Dodoma',
+    phone: '+255 26 2322490',
+    createdAt: '2024-02-01'
+  },
+  {
+    id: '11',
+    email: 'committee@arusha.go.tz',
+    password: 'Committee@2025',
+    name: 'Arusha Regional Committee',
+    role: USER_ROLES.REGIONAL_COMMITTEE,
+    committeeId: 2,
+    committeeName: 'Arusha Regional Disaster Committee',
+    committeeType: 'regional',
+    adm1Code: 'TZ02',
+    adm1Name: 'Arusha',
+    phone: '+255 27 2504400',
+    createdAt: '2024-02-01'
+  },
+  {
+    id: '12',
+    email: 'committee@dar.go.tz',
+    password: 'Committee@2025',
+    name: 'Dar es Salaam Regional Committee',
+    role: USER_ROLES.REGIONAL_COMMITTEE,
+    committeeId: 7,
+    committeeName: 'Dar es Salaam Regional Disaster Committee',
+    committeeType: 'regional',
+    adm1Code: 'TZ07',
+    adm1Name: 'Dar es Salaam',
+    phone: '+255 22 2110000',
+    createdAt: '2024-02-01'
+  },
+  // Ward/District Committee Users
+  {
+    id: '13',
+    email: 'ilala@dar.go.tz',
+    password: 'Ward@2025',
+    name: 'Ilala District Committee',
+    role: USER_ROLES.WARD_COMMITTEE,
+    committeeId: 701,
+    committeeName: 'Ilala District Committee',
+    committeeType: 'ward',
+    adm1Code: 'TZ07',
+    adm1Name: 'Dar es Salaam',
+    adm2Code: 'TZ0701',
+    adm2Name: 'Ilala',
+    phone: '+255 22 2150001',
+    createdAt: '2024-02-01'
+  },
+  {
+    id: '14',
+    email: 'kinondoni@dar.go.tz',
+    password: 'Ward@2025',
+    name: 'Kinondoni District Committee',
+    role: USER_ROLES.WARD_COMMITTEE,
+    committeeId: 702,
+    committeeName: 'Kinondoni District Committee',
+    committeeType: 'ward',
+    adm1Code: 'TZ07',
+    adm1Name: 'Dar es Salaam',
+    adm2Code: 'TZ0702',
+    adm2Name: 'Kinondoni',
+    phone: '+255 22 2150002',
+    createdAt: '2024-02-01'
   }
 ];
 
