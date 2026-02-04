@@ -541,7 +541,7 @@ const Login = () => {
                     type="email"
                     value={email}
                     onChange={handleEmailChange}
-                    placeholder={loginType === LOGIN_TYPES.INSTITUTION ? "your.email@institution.go.tz" : loginType === LOGIN_TYPES.COMMITTEE ? "your.email@committee.go.tz" : loginType === LOGIN_TYPES.REGIONAL ? "your.email@region.go.tz" : "your.email@pmo.go.tz"}
+                    placeholder={loginType === LOGIN_TYPES.INSTITUTION ? "your.email@institution.go.tz" : (loginType === LOGIN_TYPES.REGIONAL_COMMITTEE || loginType === LOGIN_TYPES.DISTRICT_COMMITTEE) ? "your.email@committee.go.tz" : "your.email@pmo.go.tz"}
                     required
                     disabled={loading}
                     style={{
