@@ -297,50 +297,57 @@ class AuthService {
       console.log('🔐 Attempting login for:', email, institution ? `(${institution})` : '');
 
       if (USE_BACKEND_API) {
-        // Call Go backend API
-        const response = await apiClient.post('/auth/login', { email, password });
+        try {
+          // Call Go backend API
+          const response = await apiClient.post('/auth/login', { email, password });
 
-        if (response.success && response.data) {
-          const { token, user } = response.data;
+          if (response.success && response.data) {
+            const { token, user } = response.data;
 
-          // Store token for future API calls
-          setAuthToken(token);
+            // Store token for future API calls
+            setAuthToken(token);
 
-          // Map backend user to frontend format
-          const mappedUser = {
-            id: user.id.toString(),
-            email: user.email,
-            name: user.full_name,
-            role: this.mapBackendRole(user.role),
-            adm1Code: user.adm1_code,
-            createdAt: new Date().toISOString()
-          };
+            // Map backend user to frontend format
+            const mappedUser = {
+              id: user.id.toString(),
+              email: user.email,
+              name: user.full_name,
+              role: this.mapBackendRole(user.role),
+              adm1Code: user.adm1_code,
+              createdAt: new Date().toISOString()
+            };
 
-          // Store user in memory and localStorage
-          this.currentUser = mappedUser;
-          this.sessionStartTime = Date.now();
+            // Store user in memory and localStorage
+            this.currentUser = mappedUser;
+            this.sessionStartTime = Date.now();
 
-          localStorage.setItem('inform_user', JSON.stringify(mappedUser));
-          localStorage.setItem('inform_session', JSON.stringify({ startTime: this.sessionStartTime }));
-          localStorage.setItem('inform_remember_me', rememberMe.toString());
+            localStorage.setItem('inform_user', JSON.stringify(mappedUser));
+            localStorage.setItem('inform_session', JSON.stringify({ startTime: this.sessionStartTime }));
+            localStorage.setItem('inform_remember_me', rememberMe.toString());
 
-          if (!rememberMe) {
-            this.startSessionTimeout();
+            if (!rememberMe) {
+              this.startSessionTimeout();
+            }
+
+            console.log('✅ Login successful (API):', mappedUser.email, `(${mappedUser.role})`);
+
+            return {
+              success: true,
+              user: mappedUser,
+              message: 'Login successful'
+            };
           }
 
-          console.log('✅ Login successful (API):', mappedUser.email, `(${mappedUser.role})`);
-
-          return {
-            success: true,
-            user: mappedUser,
-            message: 'Login successful'
-          };
+          // API returned error response
+          throw new Error(response.error || 'Login failed');
+        } catch (apiError) {
+          // If API call fails (network error, 404, etc.), fall back to mock data
+          console.warn('⚠️ Backend API unavailable, falling back to mock data:', apiError.message);
+          // Continue to mock data fallback below
         }
-
-        throw new Error(response.error || 'Login failed');
       }
 
-      // Fallback to mock data if API is disabled
+      // Fallback to mock data (if API is disabled or unavailable)
       await new Promise(resolve => setTimeout(resolve, 500));
 
       let user = MOCK_USERS.find(u => u.email === email);

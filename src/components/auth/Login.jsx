@@ -4,23 +4,34 @@
  * Features: Institution-based login, password visibility, remember me, validation
  */
 
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { useAuth } from '../../context/AuthContext';
 import { useNavigate } from 'react-router-dom';
 import { INSTITUTIONS, REGIONS } from '../../services/authService';
+import { getCommittees } from '../../services/committeeService';
 import './Auth.css';
+
+// Login types
+const LOGIN_TYPES = {
+  PMO: 'pmo',
+  INSTITUTION: 'institution',
+  REGIONAL: 'regional',
+  COMMITTEE: 'committee'
+};
 
 const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [institution, setInstitution] = useState('');
   const [selectedRegion, setSelectedRegion] = useState('');
+  const [selectedCommittee, setSelectedCommittee] = useState('');
+  const [committees, setCommittees] = useState([]);
+  const [committeesLoading, setCommitteesLoading] = useState(false);
   const [rememberMe, setRememberMe] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
-  const [showInstitutionLogin, setShowInstitutionLogin] = useState(false);
-  const [showRegionalLogin, setShowRegionalLogin] = useState(false);
+  const [loginType, setLoginType] = useState(LOGIN_TYPES.PMO);
 
   // Validation states
   const [emailError, setEmailError] = useState('');
@@ -39,6 +50,64 @@ const Login = () => {
     }
   }, []);
 
+  // Load committees when committee login is selected
+  useEffect(() => {
+    if (loginType === LOGIN_TYPES.COMMITTEE) {
+      loadCommittees();
+    }
+  }, [loginType]);
+
+  // Fetch committees from backend
+  const loadCommittees = async () => {
+    setCommitteesLoading(true);
+    try {
+      const result = await getCommittees();
+      if (result.success && result.data) {
+        setCommittees(result.data);
+      } else {
+        // Fallback to mock committees if API fails
+        console.warn('Failed to load committees from API, using fallback');
+        setCommittees(getMockCommittees());
+      }
+    } catch (err) {
+      console.error('Error loading committees:', err);
+      // Use fallback mock data
+      setCommittees(getMockCommittees());
+    } finally {
+      setCommitteesLoading(false);
+    }
+  };
+
+  // Mock committees as fallback
+  const getMockCommittees = () => [
+    { id: 1, name: 'Dodoma Regional Disaster Committee', type: 'regional', adm1_code: 'TZ01', adm1_name: 'Dodoma' },
+    { id: 2, name: 'Arusha Regional Disaster Committee', type: 'regional', adm1_code: 'TZ02', adm1_name: 'Arusha' },
+    { id: 3, name: 'Kilimanjaro Regional Disaster Committee', type: 'regional', adm1_code: 'TZ03', adm1_name: 'Kilimanjaro' },
+    { id: 4, name: 'Tanga Regional Disaster Committee', type: 'regional', adm1_code: 'TZ04', adm1_name: 'Tanga' },
+    { id: 5, name: 'Morogoro Regional Disaster Committee', type: 'regional', adm1_code: 'TZ05', adm1_name: 'Morogoro' },
+    { id: 6, name: 'Pwani Regional Disaster Committee', type: 'regional', adm1_code: 'TZ06', adm1_name: 'Pwani' },
+    { id: 7, name: 'Dar es Salaam Regional Disaster Committee', type: 'regional', adm1_code: 'TZ07', adm1_name: 'Dar es Salaam' },
+    { id: 8, name: 'Lindi Regional Disaster Committee', type: 'regional', adm1_code: 'TZ08', adm1_name: 'Lindi' },
+    { id: 9, name: 'Mtwara Regional Disaster Committee', type: 'regional', adm1_code: 'TZ09', adm1_name: 'Mtwara' },
+    { id: 10, name: 'Ruvuma Regional Disaster Committee', type: 'regional', adm1_code: 'TZ10', adm1_name: 'Ruvuma' },
+    { id: 11, name: 'Iringa Regional Disaster Committee', type: 'regional', adm1_code: 'TZ11', adm1_name: 'Iringa' },
+    { id: 12, name: 'Mbeya Regional Disaster Committee', type: 'regional', adm1_code: 'TZ12', adm1_name: 'Mbeya' },
+    { id: 13, name: 'Singida Regional Disaster Committee', type: 'regional', adm1_code: 'TZ13', adm1_name: 'Singida' },
+    { id: 14, name: 'Tabora Regional Disaster Committee', type: 'regional', adm1_code: 'TZ14', adm1_name: 'Tabora' },
+    { id: 15, name: 'Rukwa Regional Disaster Committee', type: 'regional', adm1_code: 'TZ15', adm1_name: 'Rukwa' },
+    { id: 16, name: 'Kigoma Regional Disaster Committee', type: 'regional', adm1_code: 'TZ16', adm1_name: 'Kigoma' },
+    { id: 17, name: 'Shinyanga Regional Disaster Committee', type: 'regional', adm1_code: 'TZ17', adm1_name: 'Shinyanga' },
+    { id: 18, name: 'Kagera Regional Disaster Committee', type: 'regional', adm1_code: 'TZ18', adm1_name: 'Kagera' },
+    { id: 19, name: 'Mwanza Regional Disaster Committee', type: 'regional', adm1_code: 'TZ19', adm1_name: 'Mwanza' },
+    { id: 20, name: 'Mara Regional Disaster Committee', type: 'regional', adm1_code: 'TZ20', adm1_name: 'Mara' },
+    { id: 21, name: 'Manyara Regional Disaster Committee', type: 'regional', adm1_code: 'TZ21', adm1_name: 'Manyara' },
+    { id: 22, name: 'Njombe Regional Disaster Committee', type: 'regional', adm1_code: 'TZ22', adm1_name: 'Njombe' },
+    { id: 23, name: 'Katavi Regional Disaster Committee', type: 'regional', adm1_code: 'TZ23', adm1_name: 'Katavi' },
+    { id: 24, name: 'Simiyu Regional Disaster Committee', type: 'regional', adm1_code: 'TZ24', adm1_name: 'Simiyu' },
+    { id: 25, name: 'Geita Regional Disaster Committee', type: 'regional', adm1_code: 'TZ25', adm1_name: 'Geita' },
+    { id: 26, name: 'Songwe Regional Disaster Committee', type: 'regional', adm1_code: 'TZ26', adm1_name: 'Songwe' },
+  ];
+
   // Real-time email validation
   const validateEmail = (emailValue) => {
     if (!emailValue) {
@@ -48,13 +117,9 @@ const Login = () => {
     }
 
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    const govEmailRegex = /^[^\s@]+@(pmo\.go\.tz|tma\.go\.tz|mow\.go\.tz|moh\.go\.tz|moa\.go\.tz|gst\.go\.tz|[\w]+\.go\.tz)$/i;
 
     if (!emailRegex.test(emailValue)) {
       setEmailError('Please enter a valid email address');
-      setEmailValid(false);
-    } else if (showInstitutionLogin && !govEmailRegex.test(emailValue)) {
-      setEmailError('Institution login requires a government email (.go.tz)');
       setEmailValid(false);
     } else {
       setEmailError('');
@@ -118,20 +183,38 @@ const Login = () => {
       return;
     }
 
-    // Validate institution selection for institution login
-    if (showInstitutionLogin && !institution) {
+    // Validate selection based on login type
+    if (loginType === LOGIN_TYPES.INSTITUTION && !institution) {
       setError('Please select your institution');
+      return;
+    }
+
+    if (loginType === LOGIN_TYPES.COMMITTEE && !selectedCommittee) {
+      setError('Please select your committee');
+      return;
+    }
+
+    if (loginType === LOGIN_TYPES.REGIONAL && !selectedRegion) {
+      setError('Please select your region');
       return;
     }
 
     setLoading(true);
 
     try {
+      const loginOptions = {
+        loginType,
+        institution: loginType === LOGIN_TYPES.INSTITUTION ? institution : null,
+        committee: loginType === LOGIN_TYPES.COMMITTEE ? selectedCommittee : null,
+        region: loginType === LOGIN_TYPES.REGIONAL ? selectedRegion : null
+      };
+
       const result = await login(
         email,
         password,
         rememberMe,
-        showInstitutionLogin ? institution : null
+        loginOptions.institution,
+        loginOptions
       );
 
       if (result.success) {
@@ -144,12 +227,8 @@ const Login = () => {
 
         console.log('✅ Login successful, redirecting...');
 
-        // Redirect based on user role/institution
-        if (result.user.institution) {
-          navigate('/institution-dashboard');
-        } else {
-          navigate('/dashboard');
-        }
+        // All users go to main dashboard (full access)
+        navigate('/dashboard');
       } else {
         setError(result.error);
       }
@@ -162,17 +241,6 @@ const Login = () => {
 
   return (
     <div className="auth-container">
-      {/* Maintenance/Implementation Banner */}
-      <div className="maintenance-banner">
-        <div className="maintenance-content">
-          <span className="maintenance-icon">🚧</span>
-          <div className="maintenance-text">
-            <strong>UNDER IMPLEMENTATION</strong>
-            <span>This platform is currently under active development and maintenance. Some features may be limited.</span>
-          </div>
-        </div>
-      </div>
-
       <div className="auth-wrapper">
         {/* Left side - Branding */}
         <div className="auth-branding">
@@ -231,75 +299,120 @@ const Login = () => {
 
             {/* Login Type Toggle */}
             <div style={{
-              display: 'flex',
-              gap: '6px',
-              marginBottom: '20px',
-              background: '#F5F5F5',
-              borderRadius: '10px',
-              padding: '4px'
+              display: 'grid',
+              gridTemplateColumns: '1fr 1fr',
+              gap: '8px',
+              marginBottom: '20px'
             }}>
               <button
                 type="button"
-                onClick={() => { setShowInstitutionLogin(false); setShowRegionalLogin(false); setInstitution(''); setSelectedRegion(''); }}
+                onClick={() => { setLoginType(LOGIN_TYPES.PMO); setInstitution(''); setSelectedRegion(''); setSelectedCommittee(''); }}
                 style={{
-                  flex: 1,
-                  padding: '10px 12px',
-                  border: 'none',
-                  borderRadius: '8px',
-                  background: !showInstitutionLogin && !showRegionalLogin ? 'white' : 'transparent',
-                  color: !showInstitutionLogin && !showRegionalLogin ? '#1976D2' : '#666',
+                  padding: '12px 8px',
+                  border: loginType === LOGIN_TYPES.PMO ? '2px solid #1976D2' : '2px solid #E0E0E0',
+                  borderRadius: '10px',
+                  background: loginType === LOGIN_TYPES.PMO ? '#E3F2FD' : 'white',
+                  color: loginType === LOGIN_TYPES.PMO ? '#1976D2' : '#666',
                   fontWeight: '600',
                   fontSize: '13px',
                   cursor: 'pointer',
-                  boxShadow: !showInstitutionLogin && !showRegionalLogin ? '0 2px 8px rgba(0,0,0,0.1)' : 'none',
-                  transition: 'all 0.3s ease'
+                  transition: 'all 0.2s ease',
+                  display: 'flex',
+                  flexDirection: 'column',
+                  alignItems: 'center',
+                  gap: '4px'
                 }}
               >
-                PMO Login
+                <span style={{ fontSize: '18px' }}>🏛️</span>
+                PMO Admin
               </button>
               <button
                 type="button"
-                onClick={() => { setShowInstitutionLogin(true); setShowRegionalLogin(false); setSelectedRegion(''); }}
+                onClick={() => { setLoginType(LOGIN_TYPES.INSTITUTION); setSelectedRegion(''); setSelectedCommittee(''); }}
                 style={{
-                  flex: 1,
-                  padding: '10px 12px',
-                  border: 'none',
-                  borderRadius: '8px',
-                  background: showInstitutionLogin ? 'white' : 'transparent',
-                  color: showInstitutionLogin ? '#1976D2' : '#666',
+                  padding: '12px 8px',
+                  border: loginType === LOGIN_TYPES.INSTITUTION ? '2px solid #1976D2' : '2px solid #E0E0E0',
+                  borderRadius: '10px',
+                  background: loginType === LOGIN_TYPES.INSTITUTION ? '#E3F2FD' : 'white',
+                  color: loginType === LOGIN_TYPES.INSTITUTION ? '#1976D2' : '#666',
                   fontWeight: '600',
                   fontSize: '13px',
                   cursor: 'pointer',
-                  boxShadow: showInstitutionLogin ? '0 2px 8px rgba(0,0,0,0.1)' : 'none',
-                  transition: 'all 0.3s ease'
+                  transition: 'all 0.2s ease',
+                  display: 'flex',
+                  flexDirection: 'column',
+                  alignItems: 'center',
+                  gap: '4px'
                 }}
               >
+                <span style={{ fontSize: '18px' }}>🏢</span>
                 Institution
               </button>
               <button
                 type="button"
-                onClick={() => { setShowRegionalLogin(true); setShowInstitutionLogin(false); setInstitution(''); }}
+                onClick={() => { setLoginType(LOGIN_TYPES.COMMITTEE); setInstitution(''); setSelectedRegion(''); }}
                 style={{
-                  flex: 1,
-                  padding: '10px 12px',
-                  border: 'none',
-                  borderRadius: '8px',
-                  background: showRegionalLogin ? 'white' : 'transparent',
-                  color: showRegionalLogin ? '#1976D2' : '#666',
+                  padding: '12px 8px',
+                  border: loginType === LOGIN_TYPES.COMMITTEE ? '2px solid #1976D2' : '2px solid #E0E0E0',
+                  borderRadius: '10px',
+                  background: loginType === LOGIN_TYPES.COMMITTEE ? '#E3F2FD' : 'white',
+                  color: loginType === LOGIN_TYPES.COMMITTEE ? '#1976D2' : '#666',
                   fontWeight: '600',
                   fontSize: '13px',
                   cursor: 'pointer',
-                  boxShadow: showRegionalLogin ? '0 2px 8px rgba(0,0,0,0.1)' : 'none',
-                  transition: 'all 0.3s ease'
+                  transition: 'all 0.2s ease',
+                  display: 'flex',
+                  flexDirection: 'column',
+                  alignItems: 'center',
+                  gap: '4px'
                 }}
               >
+                <span style={{ fontSize: '18px' }}>👥</span>
+                Committee
+              </button>
+              <button
+                type="button"
+                onClick={() => { setLoginType(LOGIN_TYPES.REGIONAL); setInstitution(''); setSelectedCommittee(''); }}
+                style={{
+                  padding: '12px 8px',
+                  border: loginType === LOGIN_TYPES.REGIONAL ? '2px solid #1976D2' : '2px solid #E0E0E0',
+                  borderRadius: '10px',
+                  background: loginType === LOGIN_TYPES.REGIONAL ? '#E3F2FD' : 'white',
+                  color: loginType === LOGIN_TYPES.REGIONAL ? '#1976D2' : '#666',
+                  fontWeight: '600',
+                  fontSize: '13px',
+                  cursor: 'pointer',
+                  transition: 'all 0.2s ease',
+                  display: 'flex',
+                  flexDirection: 'column',
+                  alignItems: 'center',
+                  gap: '4px'
+                }}
+              >
+                <span style={{ fontSize: '18px' }}>📍</span>
                 Regional
               </button>
             </div>
 
+            {/* Login Type Description */}
+            <div style={{
+              fontSize: '12px',
+              color: '#666',
+              marginBottom: '16px',
+              padding: '8px 12px',
+              background: '#F5F7FA',
+              borderRadius: '8px',
+              borderLeft: '3px solid #1976D2'
+            }}>
+              {loginType === LOGIN_TYPES.PMO && 'PMO Disaster Management Department administrators with full system access.'}
+              {loginType === LOGIN_TYPES.INSTITUTION && 'Government institutions (TMA, MoW, MoH, etc.) for data submission.'}
+              {loginType === LOGIN_TYPES.COMMITTEE && 'Regional and Ward Disaster Management Committees.'}
+              {loginType === LOGIN_TYPES.REGIONAL && 'Regional Secretariat officers and coordinators.'}
+            </div>
+
             <form onSubmit={handleSubmit} className="auth-form">
               {/* Institution Selection Dropdown */}
-              {showInstitutionLogin && (
+              {loginType === LOGIN_TYPES.INSTITUTION && (
                 <div className="form-group">
                   <label htmlFor="institution">Select Your Institution</label>
                   <div className="input-wrapper" style={{ position: 'relative' }}>
@@ -335,8 +448,48 @@ const Login = () => {
                 </div>
               )}
 
+              {/* Committee Selection Dropdown */}
+              {loginType === LOGIN_TYPES.COMMITTEE && (
+                <div className="form-group">
+                  <label htmlFor="committee">Select Your Committee</label>
+                  <div className="input-wrapper" style={{ position: 'relative' }}>
+                    <span className="input-icon">🏛️</span>
+                    <select
+                      id="committee"
+                      value={selectedCommittee}
+                      onChange={(e) => setSelectedCommittee(e.target.value)}
+                      disabled={loading || committeesLoading}
+                      style={{
+                        width: '100%',
+                        padding: '14px 14px 14px 45px',
+                        border: '2px solid #E0E0E0',
+                        borderRadius: '10px',
+                        fontSize: '15px',
+                        background: 'white',
+                        cursor: committeesLoading ? 'wait' : 'pointer',
+                        appearance: 'none',
+                        backgroundImage: 'url("data:image/svg+xml;charset=US-ASCII,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'24\' height=\'24\' viewBox=\'0 0 24 24\'><path fill=\'%23666\' d=\'M7 10l5 5 5-5z\'/></svg>")',
+                        backgroundRepeat: 'no-repeat',
+                        backgroundPosition: 'right 12px center',
+                        backgroundSize: '20px'
+                      }}
+                    >
+                      <option value="">{committeesLoading ? 'Loading committees...' : '-- Select Committee --'}</option>
+                      {committees.map(committee => (
+                        <option key={committee.id} value={committee.id}>
+                          {committee.adm1_name} - {committee.name}
+                        </option>
+                      ))}
+                    </select>
+                  </div>
+                  <div style={{ fontSize: '12px', color: '#666', marginTop: '4px' }}>
+                    Regional and Ward Disaster Management Committees
+                  </div>
+                </div>
+              )}
+
               {/* Region Selection Dropdown for Regional Officers */}
-              {showRegionalLogin && (
+              {loginType === LOGIN_TYPES.REGIONAL && (
                 <div className="form-group">
                   <label htmlFor="region">Select Your Region</label>
                   <div className="input-wrapper" style={{ position: 'relative' }}>
@@ -382,7 +535,7 @@ const Login = () => {
                     type="email"
                     value={email}
                     onChange={handleEmailChange}
-                    placeholder={showInstitutionLogin ? "your.email@institution.go.tz" : "your.email@pmo.go.tz"}
+                    placeholder={loginType === LOGIN_TYPES.INSTITUTION ? "your.email@institution.go.tz" : loginType === LOGIN_TYPES.COMMITTEE ? "your.email@committee.go.tz" : loginType === LOGIN_TYPES.REGIONAL ? "your.email@region.go.tz" : "your.email@pmo.go.tz"}
                     required
                     disabled={loading}
                     style={{
