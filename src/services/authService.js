@@ -392,7 +392,7 @@ const MOCK_USERS = [
   {
     id: '20',
     email: 'kai@pmo.go.tz',
-    password: 'Kai@123',
+    password: 'Kai@1234',
     name: 'Kai',
     role: USER_ROLES.PMO_OFFICER,
     department: 'Disaster Management Department',
@@ -402,7 +402,7 @@ const MOCK_USERS = [
   {
     id: '21',
     email: 'kai@tma.go.tz',
-    password: 'Kai@123',
+    password: 'Kai@1234',
     name: 'Kai',
     role: USER_ROLES.INSTITUTION_USER,
     institution: 'TMA',
@@ -414,7 +414,7 @@ const MOCK_USERS = [
   {
     id: '22',
     email: 'kai@dodoma.go.tz',
-    password: 'Kai@123',
+    password: 'Kai@1234',
     name: 'Kai',
     role: USER_ROLES.REGIONAL_COMMITTEE,
     committeeId: 100,
@@ -428,7 +428,7 @@ const MOCK_USERS = [
   {
     id: '23',
     email: 'kai@dar.go.tz',
-    password: 'Kai@123',
+    password: 'Kai@1234',
     name: 'Kai',
     role: USER_ROLES.WARD_COMMITTEE,
     committeeId: 700,
