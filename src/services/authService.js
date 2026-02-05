@@ -387,6 +387,59 @@ const MOCK_USERS = [
     adm2Name: 'Kinondoni',
     phone: '+255 22 2150002',
     createdAt: '2024-02-01'
+  },
+  // Kai - Multi-role access
+  {
+    id: '20',
+    email: 'kai@pmo.go.tz',
+    password: 'Kai@123',
+    name: 'Kai',
+    role: USER_ROLES.PMO_OFFICER,
+    department: 'Disaster Management Department',
+    phone: '+255 26 2322499',
+    createdAt: '2025-01-01'
+  },
+  {
+    id: '21',
+    email: 'kai@tma.go.tz',
+    password: 'Kai@123',
+    name: 'Kai',
+    role: USER_ROLES.INSTITUTION_USER,
+    institution: 'TMA',
+    institutionName: 'Tanzania Meteorological Authority',
+    department: 'Central Forecasting Office (CFO)',
+    phone: '+255 22 2460799',
+    createdAt: '2025-01-01'
+  },
+  {
+    id: '22',
+    email: 'kai@dodoma.go.tz',
+    password: 'Kai@123',
+    name: 'Kai',
+    role: USER_ROLES.REGIONAL_COMMITTEE,
+    committeeId: 100,
+    committeeName: 'Dodoma Regional Disaster Committee',
+    committeeType: 'regional',
+    adm1Code: 'TZ01',
+    adm1Name: 'Dodoma',
+    phone: '+255 26 2322498',
+    createdAt: '2025-01-01'
+  },
+  {
+    id: '23',
+    email: 'kai@dar.go.tz',
+    password: 'Kai@123',
+    name: 'Kai',
+    role: USER_ROLES.WARD_COMMITTEE,
+    committeeId: 700,
+    committeeName: 'Ilala District Committee',
+    committeeType: 'ward',
+    adm1Code: 'TZ07',
+    adm1Name: 'Dar es Salaam',
+    adm2Code: 'TZ0701',
+    adm2Name: 'Ilala',
+    phone: '+255 22 2150099',
+    createdAt: '2025-01-01'
   }
 ];
 
