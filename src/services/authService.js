@@ -454,6 +454,22 @@ const MOCK_USERS = [
     adm1Name: 'Kagera',
     phone: '+255 28 2220025',
     createdAt: '2025-01-01'
+  },
+  {
+    id: '25',
+    email: 'kai@dodoma-urban.go.tz',
+    password: 'Kai@1234',
+    name: 'Kai',
+    role: USER_ROLES.WARD_COMMITTEE,
+    committeeId: 701,
+    committeeName: 'Dodoma Urban District Committee',
+    committeeType: 'ward',
+    adm1Code: 'TZ01',
+    adm1Name: 'Dodoma',
+    adm2Code: 'TZ0101',
+    adm2Name: 'Dodoma Urban',
+    phone: '+255 26 2322500',
+    createdAt: '2025-01-01'
   }
 ];
 
