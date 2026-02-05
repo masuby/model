@@ -46,6 +46,11 @@ const Login = () => {
     if (rememberedEmail) {
       setEmail(rememberedEmail);
       setRememberMe(true);
+      // Validate the loaded email so the Sign In button is enabled
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (emailRegex.test(rememberedEmail)) {
+        setEmailValid(true);
+      }
     }
   }, []);
 
