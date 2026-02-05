@@ -440,6 +440,20 @@ const MOCK_USERS = [
     adm2Name: 'Ilala',
     phone: '+255 22 2150099',
     createdAt: '2025-01-01'
+  },
+  {
+    id: '24',
+    email: 'kai@kagera.go.tz',
+    password: 'Kai@1234',
+    name: 'Kai',
+    role: USER_ROLES.REGIONAL_COMMITTEE,
+    committeeId: 101,
+    committeeName: 'Kagera Regional Disaster Committee',
+    committeeType: 'regional',
+    adm1Code: 'TZ18',
+    adm1Name: 'Kagera',
+    phone: '+255 28 2220025',
+    createdAt: '2025-01-01'
   }
 ];
 
