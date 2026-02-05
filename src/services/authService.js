@@ -123,6 +123,98 @@ export const ROLE_PERMISSIONS = {
   }
 };
 
+// Module access by role - defines which modules each role can see
+export const MODULE_ACCESS = {
+  [USER_ROLES.ADMIN]: {
+    modules: ['module01', 'module02', 'module03', 'module04', 'module05'],
+    dataViews: ['risk', 'warning', 'severity', 'climate'],
+    tools: ['analytics', 'dashboard', 'database', 'data-entry']
+  },
+  [USER_ROLES.PMO_OFFICER]: {
+    modules: ['module01', 'module02', 'module03', 'module04', 'module05'],
+    dataViews: ['risk', 'warning', 'severity', 'climate'],
+    tools: ['analytics', 'dashboard', 'database', 'data-entry']
+  },
+  [USER_ROLES.REGIONAL_OFFICER]: {
+    modules: ['module01', 'module02'],
+    dataViews: ['risk'],
+    tools: ['dashboard', 'data-entry']
+  },
+  [USER_ROLES.INSTITUTION_USER]: {
+    modules: ['module01', 'module03'], // Education + Warning (hazard input)
+    dataViews: [],
+    tools: ['dashboard']
+  },
+  [USER_ROLES.REGIONAL_COMMITTEE]: {
+    modules: ['module01'], // Education only
+    dataViews: [],
+    tools: ['dashboard', 'data-entry']
+  },
+  [USER_ROLES.WARD_COMMITTEE]: {
+    modules: ['module01'], // Education only
+    dataViews: [],
+    tools: ['dashboard', 'data-entry']
+  },
+  [USER_ROLES.PUBLIC_USER]: {
+    modules: ['module01'], // Education only
+    dataViews: [],
+    tools: ['dashboard']
+  },
+  [USER_ROLES.VIEWER]: {
+    modules: ['module01', 'module02', 'module04', 'module05'], // All except Warning
+    dataViews: ['risk', 'severity', 'climate'],
+    tools: ['dashboard']
+  }
+};
+
+/**
+ * Get accessible modules for a role
+ */
+export function getAccessibleModules(role) {
+  return MODULE_ACCESS[role]?.modules || ['module01'];
+}
+
+/**
+ * Get accessible data views for a role
+ */
+export function getAccessibleDataViews(role) {
+  return MODULE_ACCESS[role]?.dataViews || [];
+}
+
+/**
+ * Get accessible tools for a role
+ */
+export function getAccessibleTools(role) {
+  return MODULE_ACCESS[role]?.tools || ['dashboard'];
+}
+
+/**
+ * Check if a role can access a specific module
+ */
+export function canRoleAccessModule(role, moduleId) {
+  const access = MODULE_ACCESS[role];
+  if (!access) return false;
+  return access.modules.includes(moduleId);
+}
+
+/**
+ * Check if a role can access a specific data view
+ */
+export function canRoleAccessDataView(role, viewId) {
+  const access = MODULE_ACCESS[role];
+  if (!access) return false;
+  return access.dataViews.includes(viewId);
+}
+
+/**
+ * Check if a role can access a specific tool
+ */
+export function canRoleAccessTool(role, toolId) {
+  const access = MODULE_ACCESS[role];
+  if (!access) return false;
+  return access.tools.includes(toolId);
+}
+
 /**
  * Mock user database (will be replaced with real backend)
  * In production, this should connect to a secure backend API

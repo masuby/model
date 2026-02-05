@@ -19,7 +19,13 @@ import CommitteeDashboard from "./components/dashboard/CommitteeDashboard";
 import AnalyticsDashboard from "./components/warning/components/AnalyticsDashboard";
 import DatabasePanel from "./components/admin/DatabasePanel";
 import DataManagementHub from "./components/admin/DataManagementHub";
-import { USER_ROLES } from "./services/authService";
+import LiveDataEntry from "./components/data-entry/LiveDataEntry";
+import {
+  USER_ROLES,
+  canRoleAccessModule,
+  canRoleAccessDataView,
+  canRoleAccessTool
+} from "./services/authService";
 import "./App.css";
 
 // Error Boundary to catch and display runtime errors
@@ -61,20 +67,78 @@ class ErrorBoundary extends Component {
   }
 }
 
+// Access Denied Component
+function AccessDenied({ message }) {
+  return (
+    <div style={{
+      padding: '60px 20px',
+      textAlign: 'center',
+      maxWidth: '600px',
+      margin: '0 auto'
+    }}>
+      <div style={{ fontSize: '80px', marginBottom: '20px' }}>🔒</div>
+      <h2 style={{ color: '#F44336', marginBottom: '15px' }}>Access Denied</h2>
+      <p style={{ color: '#666', fontSize: '16px', lineHeight: '1.6' }}>
+        {message || 'You do not have permission to access this feature.'}
+      </p>
+      <p style={{ color: '#888', fontSize: '14px', marginTop: '10px' }}>
+        Contact your administrator if you need access to this module.
+      </p>
+    </div>
+  );
+}
+
 // Main application component (protected)
 function MainApp() {
   const [currentView, setCurrentView] = useState("dashboard");
   const { user } = useAuth();
 
+  // Check if user can access a view
+  const canAccess = (view) => {
+    if (!user?.role) return false;
+
+    // Modules
+    if (view.startsWith('module')) {
+      return canRoleAccessModule(user.role, view);
+    }
+
+    // Data views
+    if (['risk', 'warning', 'severity', 'climate'].includes(view)) {
+      return canRoleAccessDataView(user.role, view);
+    }
+
+    // Tools
+    if (['analytics', 'database', 'data-entry'].includes(view)) {
+      return canRoleAccessTool(user.role, view);
+    }
+
+    // Always allow dashboard and profile
+    return ['dashboard', 'profile'].includes(view);
+  };
+
   const handleNavigation = (view) => {
+    // Check access before navigating
+    if (!canAccess(view)) {
+      console.log(`🚫 Access denied to ${view} for role ${user?.role}`);
+      // Still set the view so we can show the access denied message
+    }
     setCurrentView(view);
     // Scroll to top on navigation
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   const renderContent = () => {
+    // Check access for the current view
+    if (!canAccess(currentView)) {
+      return <AccessDenied message={`Your role (${user?.role}) does not have access to this module.`} />;
+    }
+
     switch (currentView) {
       case 'dashboard':
+        // Committee users see their committee dashboard
+        if (user?.role === 'regional_committee' || user?.role === 'ward_committee') {
+          return <CommitteeDashboard />;
+        }
         return <Dashboard onNavigate={handleNavigation} />;
       case 'profile':
         return <UserProfile />;
@@ -83,11 +147,7 @@ function MainApp() {
       case 'module02':
         return <Module02InformRisk onNavigate={handleNavigation} />;
       case 'module03':
-        return (
-          <ProtectedRoute requiredPermission="canIssueWarnings">
-            <Module03WarningSystem onNavigate={handleNavigation} />
-          </ProtectedRoute>
-        );
+        return <Module03WarningSystem onNavigate={handleNavigation} />;
       case 'module04':
         return <Module04Severity activeWarnings={[]} riskData={null} />;
       case 'module05':
@@ -96,6 +156,8 @@ function MainApp() {
         return <AnalyticsDashboard />;
       case 'database':
         return <DataManagementHub />;
+      case 'data-entry':
+        return <LiveDataEntry onSubmit={(data) => console.log('Submitted:', data)} />;
       case 'risk':
       case 'warning':
       case 'severity':

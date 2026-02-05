@@ -3,9 +3,14 @@
  * Professional navigation with visual module cards and progress tracking
  */
 
-import React, { useState } from 'react';
+import React, { useState, useMemo } from 'react';
 import { useAuth } from '../../context/AuthContext';
-import { USER_ROLES } from '../../services/authService';
+import {
+  USER_ROLES,
+  getAccessibleModules,
+  getAccessibleDataViews,
+  getAccessibleTools
+} from '../../services/authService';
 import { useLanguage, LanguageSwitcher } from '../../contexts/LanguageContext';
 import './Sidebar.css';
 
@@ -17,6 +22,19 @@ const Sidebar = ({ currentView, onNavigate, user: propUser }) => {
     return window.innerWidth > 1024;
   });
   const [hoveredModule, setHoveredModule] = useState(null);
+
+  // Get accessible items based on user role
+  const accessibleModuleIds = useMemo(() => {
+    return user?.role ? getAccessibleModules(user.role) : ['module01'];
+  }, [user?.role]);
+
+  const accessibleDataViewIds = useMemo(() => {
+    return user?.role ? getAccessibleDataViews(user.role) : [];
+  }, [user?.role]);
+
+  const accessibleToolIds = useMemo(() => {
+    return user?.role ? getAccessibleTools(user.role) : ['dashboard'];
+  }, [user?.role]);
 
   // Initialize body class on mount
   React.useEffect(() => {
@@ -110,7 +128,8 @@ const Sidebar = ({ currentView, onNavigate, user: propUser }) => {
   const toolsItems = [
     { id: 'analytics', name: 'Analytics', icon: '📊' },
     { id: 'dashboard', name: 'Dashboard', icon: '🏠' },
-    { id: 'database', name: 'Data Hub', icon: '📦' }
+    { id: 'database', name: 'Data Hub', icon: '📦' },
+    { id: 'data-entry', name: 'Live Data Entry', icon: '📝' }
   ];
 
   return (
@@ -137,11 +156,11 @@ const Sidebar = ({ currentView, onNavigate, user: propUser }) => {
           </button>
         </div>
 
-        {/* Modules Section */}
+        {/* Modules Section - filtered by role */}
         <div className="sidebar-section">
           {isExpanded && <div className="section-title">MODULES</div>}
           <div className="sidebar-modules">
-            {modules.map((module) => (
+            {modules.filter(m => accessibleModuleIds.includes(m.id)).map((module) => (
               <div
                 key={module.id}
                 className={`sidebar-module ${currentView === module.id ? 'active' : ''} ${module.status}`}
@@ -177,11 +196,12 @@ const Sidebar = ({ currentView, onNavigate, user: propUser }) => {
           </div>
         </div>
 
-        {/* Data Section */}
+        {/* Data Section - filtered by role */}
+        {accessibleDataViewIds.length > 0 && (
         <div className="sidebar-section">
           {isExpanded && <div className="section-title">DATA VIEWS</div>}
           <div className="sidebar-data">
-            {dataCategories.map((category) => (
+            {dataCategories.filter(c => accessibleDataViewIds.includes(c.id)).map((category) => (
               <div
                 key={category.id}
                 className={`sidebar-data-item ${currentView === category.id ? 'active' : ''}`}
@@ -193,12 +213,14 @@ const Sidebar = ({ currentView, onNavigate, user: propUser }) => {
             ))}
           </div>
         </div>
+        )}
 
-        {/* Tools Section */}
+        {/* Tools Section - filtered by role */}
+        {accessibleToolIds.length > 0 && (
         <div className="sidebar-section">
           {isExpanded && <div className="section-title">TOOLS</div>}
           <div className="sidebar-data">
-            {toolsItems.map((tool) => (
+            {toolsItems.filter(t => accessibleToolIds.includes(t.id)).map((tool) => (
               <div
                 key={tool.id}
                 className={`sidebar-data-item ${currentView === tool.id ? 'active' : ''}`}
@@ -210,6 +232,7 @@ const Sidebar = ({ currentView, onNavigate, user: propUser }) => {
             ))}
           </div>
         </div>
+        )}
 
         {/* Language Switcher */}
         <div className="sidebar-section">
@@ -240,6 +263,9 @@ const Sidebar = ({ currentView, onNavigate, user: propUser }) => {
                         {user.role === USER_ROLES.PMO_OFFICER && '🏛️ PMO Officer'}
                         {user.role === USER_ROLES.REGIONAL_OFFICER && '📍 Regional Officer'}
                         {user.role === USER_ROLES.INSTITUTION_USER && '🏢 Institution User'}
+                        {user.role === USER_ROLES.REGIONAL_COMMITTEE && '🏛️ Regional Committee'}
+                        {user.role === USER_ROLES.WARD_COMMITTEE && '🏘️ District Committee'}
+                        {user.role === USER_ROLES.VIEWER && '👁️ Viewer'}
                         {user.role === USER_ROLES.PUBLIC_USER && '👤 Public User'}
                       </div>
                     </div>

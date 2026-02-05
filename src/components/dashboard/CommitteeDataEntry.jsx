@@ -4,12 +4,14 @@
  */
 
 import { useState } from 'react';
+import { arithmeticMean, roundTo, classifyRisk } from '../../database/formulas';
 
 const CommitteeDataEntry = ({ user, indicators, onSubmissionComplete }) => {
   const [formData, setFormData] = useState({});
   const [submitting, setSubmitting] = useState(false);
   const [currentStep, setCurrentStep] = useState(0);
   const [errors, setErrors] = useState({});
+  const [submitResult, setSubmitResult] = useState(null);
 
   // Group indicators by dimension
   const dimensions = [
@@ -70,11 +72,50 @@ const CommitteeDataEntry = ({ user, indicators, onSubmissionComplete }) => {
   };
 
   const handleSubmit = async () => {
-    if (!validateCurrentStep()) return;
+    // On review step, validate all dimensions before submitting
+    for (let i = 0; i < dimensions.length; i++) {
+      const dim = dimensions[i];
+      const dimIndicators = getIndicatorsByDimension(dim.id);
+      const dimErrors = {};
+      dimIndicators.forEach(indicator => {
+        const data = formData[indicator.id];
+        if (!data?.value && data?.value !== 0) {
+          dimErrors[indicator.id] = 'Value is required';
+        } else if (data.value < 0 || data.value > 10) {
+          dimErrors[indicator.id] = 'Value must be between 0 and 10';
+        }
+      });
+      if (Object.keys(dimErrors).length > 0) {
+        setErrors(dimErrors);
+        setCurrentStep(i); // Go back to the step with errors
+        return;
+      }
+    }
 
     setSubmitting(true);
 
     try {
+      // Calculate INFORM scores from submitted data
+      const getValues = (dimensionId) => indicators
+        .filter(i => i.dimension === dimensionId)
+        .map(i => formData[i.id]?.value)
+        .filter(v => v !== undefined && v !== null && !isNaN(v));
+
+      const hazardValues = getValues('HAZARD');
+      const vulnValues = getValues('VULNERABILITY');
+      const ccValues = getValues('COPING_CAPACITY');
+
+      const hazardScore = hazardValues.length > 0 ? roundTo(arithmeticMean(hazardValues), 2) : null;
+      const vulnScore = vulnValues.length > 0 ? roundTo(arithmeticMean(vulnValues), 2) : null;
+      const ccScore = ccValues.length > 0 ? roundTo(10 - arithmeticMean(ccValues), 2) : null;
+
+      let riskScore = null;
+      let riskClass = null;
+      if (hazardScore !== null && vulnScore !== null && ccScore !== null) {
+        riskScore = roundTo(Math.pow(hazardScore * vulnScore * ccScore, 1/3), 2);
+        riskClass = classifyRisk(riskScore).label;
+      }
+
       // Create submission object
       const submission = {
         id: Date.now().toString(),
@@ -88,6 +129,7 @@ const CommitteeDataEntry = ({ user, indicators, onSubmissionComplete }) => {
         submittedAt: new Date().toISOString(),
         indicatorCount: Object.keys(formData).length,
         indicators: formData,
+        scores: { hazardScore, vulnScore, ccScore, riskScore, riskClass },
         status: 'pending',
         reviewedBy: null,
         reviewedAt: null,
@@ -111,18 +153,28 @@ const CommitteeDataEntry = ({ user, indicators, onSubmissionComplete }) => {
 
       console.log('✅ Submission saved:', submission);
 
-      // Notify parent
-      if (onSubmissionComplete) {
-        onSubmissionComplete(submission);
-      }
+      // Show success
+      setSubmitResult({
+        success: true,
+        riskScore,
+        riskClass,
+        indicatorCount: Object.keys(formData).length
+      });
 
-      // Reset form
-      setFormData({});
-      setCurrentStep(0);
+      // Notify parent after a delay so user sees success
+      setTimeout(() => {
+        if (onSubmissionComplete) {
+          onSubmissionComplete(submission);
+        }
+        // Reset form
+        setFormData({});
+        setCurrentStep(0);
+        setSubmitResult(null);
+      }, 3000);
 
     } catch (error) {
       console.error('❌ Submission failed:', error);
-      alert('Failed to submit data. Please try again.');
+      setSubmitResult({ success: false, error: error.message });
     } finally {
       setSubmitting(false);
     }
@@ -286,6 +338,39 @@ const CommitteeDataEntry = ({ user, indicators, onSubmissionComplete }) => {
       </div>
 
       {renderStepIndicator()}
+
+      {/* Success / Error Message */}
+      {submitResult && (
+        <div style={{
+          padding: '16px 20px',
+          borderRadius: '8px',
+          margin: '16px 0',
+          display: 'flex',
+          alignItems: 'center',
+          gap: '12px',
+          background: submitResult.success ? '#d1fae5' : '#fee2e2',
+          color: submitResult.success ? '#065f46' : '#991b1b',
+          border: `1px solid ${submitResult.success ? '#6ee7b7' : '#fca5a5'}`,
+          fontSize: '15px'
+        }}>
+          <span style={{ fontSize: '24px' }}>{submitResult.success ? '✅' : '❌'}</span>
+          <div>
+            {submitResult.success ? (
+              <>
+                <strong>Data submitted successfully!</strong>
+                <div style={{ fontSize: '13px', marginTop: '4px', opacity: 0.8 }}>
+                  {submitResult.indicatorCount} indicators submitted.
+                  {submitResult.riskScore !== null && (
+                    <> INFORM Risk Index: <strong>{submitResult.riskScore}</strong> ({submitResult.riskClass})</>
+                  )}
+                </div>
+              </>
+            ) : (
+              <><strong>Submission failed:</strong> {submitResult.error}</>
+            )}
+          </div>
+        </div>
+      )}
 
       <div className="entry-content">
         {currentStep < dimensions.length ? renderDimensionForm() : renderReviewStep()}

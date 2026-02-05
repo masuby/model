@@ -260,8 +260,8 @@ const Login = () => {
         let redirectPath = '/dashboard'; // Default for ADMIN and PMO
 
         if (userRole === USER_ROLES.REGIONAL_COMMITTEE || userRole === USER_ROLES.WARD_COMMITTEE) {
-          // Committee users go to committee dashboard
-          redirectPath = '/committee-dashboard';
+          // Committee users go to main app with sidebar navigation
+          redirectPath = '/dashboard';
         } else if (userRole === USER_ROLES.INSTITUTION_USER) {
           // Institution users go to institution dashboard
           redirectPath = '/institution-dashboard';

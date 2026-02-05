@@ -83,9 +83,30 @@ export const AuthProvider = ({ children }) => {
     canAccessModule: (moduleId) => authService.canAccessModule(moduleId)
   };
 
+  // Show loading indicator while checking auth
+  if (loading) {
+    return (
+      <div style={{
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        minHeight: '100vh',
+        background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+        color: 'white',
+        fontFamily: 'system-ui, sans-serif'
+      }}>
+        <div style={{ textAlign: 'center' }}>
+          <div style={{ fontSize: '48px', marginBottom: '20px' }}>🇹🇿</div>
+          <h2 style={{ margin: '0 0 10px 0' }}>INFORM Tanzania</h2>
+          <p style={{ opacity: 0.8 }}>Loading...</p>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <AuthContext.Provider value={value}>
-      {!loading && children}
+      {children}
     </AuthContext.Provider>
   );
 };
