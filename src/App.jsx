@@ -184,7 +184,7 @@ function MainApp() {
 function App() {
   return (
     <ErrorBoundary>
-      <BrowserRouter basename="/model">
+      <BrowserRouter basename="/">
         <DatabaseProvider>
           <LanguageProvider>
             <AuthProvider>

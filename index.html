@@ -8,16 +8,14 @@
     <script type="text/javascript">
       // This script checks if a redirect is present in the query string,
       // converts it back into the correct URL and adds it to the browser's history.
-      // Works with base path /model/
+      // Custom domain: inform.co.tz (root path)
       (function(l) {
         if (l.search[1] === '/' ) {
           var decoded = l.search.slice(1).split('&').map(function(s) {
             return s.replace(/~and~/g, '&')
           }).join('?');
-          // Keep the base path and append the decoded route
-          var basePath = '/model';
           window.history.replaceState(null, null,
-              basePath + '/' + decoded + l.hash
+              '/' + decoded + l.hash
           );
         }
       }(window.location))

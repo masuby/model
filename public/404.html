@@ -9,7 +9,7 @@
     // This script takes the current URL and converts the path and query
     // string into just a query string, and then redirects the browser
     // to the new URL with only a query string and hash fragment
-    var pathSegmentsToKeep = 1; // Keep '/model' in the path
+    var pathSegmentsToKeep = 0; // Custom domain: serve from root
 
     var l = window.location;
     l.replace(
