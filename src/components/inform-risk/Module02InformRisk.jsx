@@ -32,6 +32,9 @@ import { getMockTanzaniaData, HAZARD_TYPES, OVERALL_RISK } from './mockData';
 // Report Export
 import ReportExportButton from '../warning/components/ReportExportButton';
 
+// Committee Verified Data Panel - Next Generation
+import CommitteeVerifiedDataPanel from './CommitteeVerifiedDataPanel';
+
 // Risk Assessment Phases based on ISO 31000 and UNDRR Technical Guidance
 const RISK_ASSESSMENT_PHASES = [
   {
@@ -324,6 +327,12 @@ const Module02InformRisk = ({ onNavigate }) => {
         >
           🗺️ Risk
         </button>
+        <button
+          className={`nav-tab verified-tab ${selectedView === 'verified' ? 'active' : ''}`}
+          onClick={() => setSelectedView('verified')}
+        >
+          ✅ Verified Data
+        </button>
       </div>
 
       {/* Main Content */}
@@ -352,6 +361,16 @@ const Module02InformRisk = ({ onNavigate }) => {
             data={data}
             selectedDistrict={selectedDistrict}
             onSelectDistrict={setSelectedDistrict}
+          />
+        )}
+
+        {selectedView === 'verified' && (
+          <CommitteeVerifiedDataPanel
+            nationalData={national}
+            onSelectRegion={(region) => {
+              setSelectedDistrict(region);
+              setSelectedView('risk');
+            }}
           />
         )}
       </main>
@@ -673,6 +692,7 @@ const RiskSection = ({ data, selectedDistrict, onSelectDistrict }) => {
           selectedDistrict={selectedDistrict}
           onSelectDistrict={onSelectDistrict}
           selectedHazard={selectedHazardType}
+          onSelectHazard={setSelectedHazardType}
         />
       )}
     </div>
@@ -1016,7 +1036,7 @@ const RegionalAnalysisView = ({ regions, districts, selectedHazard = 'overall' }
 /**
  * District Overview Section - with Hazard-Specific Risk from parent
  */
-const DistrictAnalysisSection = ({ districts, selectedDistrict, onSelectDistrict, selectedHazard = 'overall' }) => {
+const DistrictAnalysisSection = ({ districts, selectedDistrict, onSelectDistrict, selectedHazard = 'overall', onSelectHazard }) => {
   const [sortBy, setSortBy] = useState('risk');
   const [filterLevel, setFilterLevel] = useState('all');
 
@@ -1173,7 +1193,7 @@ const DistrictAnalysisSection = ({ districts, selectedDistrict, onSelectDistrict
             <button
               key={hazard.id}
               className={`legend-item ${selectedHazard === hazard.id ? 'active' : ''}`}
-              onClick={() => setSelectedHazard(hazard.id)}
+              onClick={() => onSelectHazard?.(hazard.id)}
               style={selectedHazard === hazard.id ? {
                 backgroundColor: getHazardColor(hazard.id),
                 color: 'white'
