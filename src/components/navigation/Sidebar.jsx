@@ -127,9 +127,8 @@ const Sidebar = ({ currentView, onNavigate, user: propUser }) => {
 
   const toolsItems = [
     { id: 'analytics', name: 'Analytics', icon: '📊' },
-    { id: 'dashboard', name: 'Dashboard', icon: '🏠' },
     { id: 'database', name: 'Data Hub', icon: '📦' },
-    { id: 'data-entry', name: 'Live Data Entry', icon: '📝' }
+    { id: 'data-entry', name: 'Data Entry', icon: '📝' }
   ];
 
   return (

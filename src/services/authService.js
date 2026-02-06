@@ -128,42 +128,42 @@ export const MODULE_ACCESS = {
   [USER_ROLES.ADMIN]: {
     modules: ['module01', 'module02', 'module03', 'module04', 'module05'],
     dataViews: ['risk', 'warning', 'severity', 'climate'],
-    tools: ['analytics', 'dashboard', 'database', 'data-entry']
+    tools: ['analytics', 'database', 'data-entry']
   },
   [USER_ROLES.PMO_OFFICER]: {
     modules: ['module01', 'module02', 'module03', 'module04', 'module05'],
     dataViews: ['risk', 'warning', 'severity', 'climate'],
-    tools: ['analytics', 'dashboard', 'database', 'data-entry']
+    tools: ['analytics', 'database', 'data-entry']
   },
   [USER_ROLES.REGIONAL_OFFICER]: {
     modules: ['module01', 'module02'],
     dataViews: ['risk'],
-    tools: ['dashboard', 'data-entry']
+    tools: ['data-entry']
   },
   [USER_ROLES.INSTITUTION_USER]: {
     modules: ['module01', 'module03'], // Education + Warning (hazard input)
     dataViews: [],
-    tools: ['dashboard']
+    tools: []
   },
   [USER_ROLES.REGIONAL_COMMITTEE]: {
     modules: ['module01'], // Education only
     dataViews: [],
-    tools: ['dashboard', 'data-entry']
+    tools: ['data-entry']
   },
   [USER_ROLES.WARD_COMMITTEE]: {
     modules: ['module01'], // Education only
     dataViews: [],
-    tools: ['dashboard', 'data-entry']
+    tools: ['data-entry']
   },
   [USER_ROLES.PUBLIC_USER]: {
     modules: ['module01'], // Education only
     dataViews: [],
-    tools: ['dashboard']
+    tools: []
   },
   [USER_ROLES.VIEWER]: {
     modules: ['module01', 'module02', 'module04', 'module05'], // All except Warning
     dataViews: ['risk', 'severity', 'climate'],
-    tools: ['dashboard']
+    tools: []
   }
 };
 
