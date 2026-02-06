@@ -1,38 +1,19 @@
 /**
- * PMO REVIEW PANEL TAB
- * Allows PMO and Admin to review and approve/reject committee submissions
+ * PMO REVIEW PANEL
+ * Professional approval interface for committee submissions
+ * Uses official INFORM methodology for risk calculation
  */
 
-import React, { useState } from 'react';
+import React, { useState, useMemo } from 'react';
+import {
+  calculateINFORMRisk,
+  validateIndicatorValues,
+  storeApprovedRiskData,
+  INDICATOR_DEFINITIONS,
+  DIMENSION_STRUCTURE,
+  getRiskColor
+} from '../../../services/informCalculationService';
 import './TabStyles.css';
-
-// Indicator names for display
-const INDICATOR_NAMES = {
-  flood_exposure: 'Flood Exposure',
-  drought_exposure: 'Drought Exposure',
-  earthquake_exposure: 'Earthquake Exposure',
-  conflict_intensity: 'Conflict Intensity',
-  development_deprivation: 'Development & Deprivation',
-  inequality: 'Inequality',
-  food_security: 'Food Security',
-  health_conditions: 'Health Conditions',
-  drr_capacity: 'DRR Capacity',
-  governance: 'Governance',
-  communication: 'Communication',
-  physical_infrastructure: 'Physical Infrastructure'
-};
-
-// Get risk class color
-const getRiskColor = (riskClass) => {
-  const colors = {
-    'Very Low': '#4CAF50',
-    'Low': '#8BC34A',
-    'Medium': '#FFC107',
-    'High': '#FF9800',
-    'Very High': '#F44336'
-  };
-  return colors[riskClass] || '#666';
-};
 
 function PMOReviewPanel({ user, submissions, onRefresh }) {
   const [selectedSubmission, setSelectedSubmission] = useState(null);
@@ -40,38 +21,21 @@ function PMOReviewPanel({ user, submissions, onRefresh }) {
   const [filter, setFilter] = useState('pending');
   const [processing, setProcessing] = useState(false);
 
-  const filteredSubmissions = submissions.filter(sub => {
-    if (filter === 'all') return true;
-    return sub.status === filter;
-  });
-
-  // Store approved data for risk profile
-  const storeApprovedDataForRiskProfile = (approvedSubmission) => {
-    const existing = JSON.parse(localStorage.getItem('approved_risk_data') || '[]');
-
-    // Remove previous approval for same committee/region
-    const filtered = existing.filter(d =>
-      !(d.adm1Code === approvedSubmission.adm1Code &&
-        d.adm2Code === approvedSubmission.adm2Code &&
-        d.committeeId === approvedSubmission.committeeId)
-    );
-
-    filtered.push({
-      id: approvedSubmission.id,
-      committeeId: approvedSubmission.committeeId,
-      committeeName: approvedSubmission.committeeName,
-      adm1Code: approvedSubmission.adm1Code,
-      adm1Name: approvedSubmission.adm1Name,
-      adm2Code: approvedSubmission.adm2Code,
-      adm2Name: approvedSubmission.adm2Name,
-      indicators: approvedSubmission.indicators,
-      scores: approvedSubmission.scores,
-      approvedAt: new Date().toISOString(),
-      approvedBy: user?.name || user?.email
+  // Filter submissions by status
+  const filteredSubmissions = useMemo(() => {
+    return submissions.filter(sub => {
+      if (filter === 'all') return true;
+      return (sub.status || 'pending') === filter;
     });
+  }, [submissions, filter]);
 
-    localStorage.setItem('approved_risk_data', JSON.stringify(filtered));
-  };
+  // Calculate INFORM risk for selected submission
+  const calculatedResult = useMemo(() => {
+    if (!selectedSubmission?.indicators) return null;
+    const validation = validateIndicatorValues(selectedSubmission.indicators);
+    const calculation = calculateINFORMRisk(selectedSubmission.indicators);
+    return { validation, calculation };
+  }, [selectedSubmission]);
 
   // Update submission status in localStorage
   const updateSubmissionStatus = (submissionId, newStatus, notes) => {
@@ -86,6 +50,16 @@ function PMOReviewPanel({ user, submissions, onRefresh }) {
           subs[idx].reviewedBy = user?.name || user?.email;
           subs[idx].reviewedAt = new Date().toISOString();
           subs[idx].reviewNotes = notes;
+          // Store calculated scores
+          if (calculatedResult?.calculation) {
+            subs[idx].calculatedScores = {
+              hazardScore: calculatedResult.calculation.dimensions.HAZARD?.score,
+              vulnerabilityScore: calculatedResult.calculation.dimensions.VULNERABILITY?.score,
+              lackOfCopingScore: calculatedResult.calculation.dimensions.COPING_CAPACITY?.score,
+              riskScore: calculatedResult.calculation.risk,
+              riskClass: calculatedResult.calculation.classification?.label
+            };
+          }
           localStorage.setItem(key, JSON.stringify(subs));
         }
       });
@@ -102,14 +76,16 @@ function PMOReviewPanel({ user, submissions, onRefresh }) {
     }
   };
 
-  const handleApprove = async (submission) => {
+  const handleApprove = async () => {
+    if (!selectedSubmission || !calculatedResult?.calculation) return;
+
     setProcessing(true);
     try {
       // Update status
-      updateSubmissionStatus(submission.id, 'approved', reviewComment);
+      updateSubmissionStatus(selectedSubmission.id, 'approved', reviewComment);
 
-      // Store for risk profile
-      storeApprovedDataForRiskProfile(submission);
+      // Store approved data for risk module using INFORM calculation
+      storeApprovedRiskData(selectedSubmission, calculatedResult.calculation, user);
 
       setSelectedSubmission(null);
       setReviewComment('');
@@ -121,14 +97,14 @@ function PMOReviewPanel({ user, submissions, onRefresh }) {
     setProcessing(false);
   };
 
-  const handleReject = async (submission) => {
+  const handleReject = async () => {
     if (!reviewComment.trim()) {
       alert('Please provide a reason for rejection');
       return;
     }
     setProcessing(true);
     try {
-      updateSubmissionStatus(submission.id, 'rejected', reviewComment);
+      updateSubmissionStatus(selectedSubmission.id, 'rejected', reviewComment);
       setSelectedSubmission(null);
       setReviewComment('');
       if (onRefresh) onRefresh();
@@ -143,316 +119,441 @@ function PMOReviewPanel({ user, submissions, onRefresh }) {
     const counts = { pending: 0, approved: 0, rejected: 0 };
     submissions.forEach(sub => {
       const status = sub.status || 'pending';
-      if (counts[status] !== undefined) {
-        counts[status]++;
-      }
+      if (counts[status] !== undefined) counts[status]++;
     });
     return counts;
   };
 
   const statusCounts = getStatusCounts();
 
-  // Render indicator data table
-  const renderIndicatorsTable = (indicators) => {
-    if (!indicators || Object.keys(indicators).length === 0) {
-      return <p style={{ color: '#666', fontStyle: 'italic' }}>No indicator data available</p>;
-    }
+  // Render dimension score card
+  const renderDimensionCard = (dimId, dimData) => {
+    const config = DIMENSION_STRUCTURE[dimId];
+    if (!dimData?.score) return null;
 
     return (
-      <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: '13px' }}>
-        <thead>
-          <tr style={{ background: '#f5f5f5' }}>
-            <th style={{ padding: '8px', textAlign: 'left', borderBottom: '1px solid #ddd' }}>Indicator</th>
-            <th style={{ padding: '8px', textAlign: 'center', borderBottom: '1px solid #ddd' }}>Value</th>
-            <th style={{ padding: '8px', textAlign: 'center', borderBottom: '1px solid #ddd' }}>Confidence</th>
-            <th style={{ padding: '8px', textAlign: 'left', borderBottom: '1px solid #ddd' }}>Source</th>
-          </tr>
-        </thead>
-        <tbody>
-          {Object.entries(indicators).map(([key, data]) => (
-            <tr key={key}>
-              <td style={{ padding: '8px', borderBottom: '1px solid #eee' }}>
-                {INDICATOR_NAMES[key] || key}
-              </td>
-              <td style={{ padding: '8px', textAlign: 'center', borderBottom: '1px solid #eee', fontWeight: 'bold' }}>
-                {data.value?.toFixed(1) || '-'}
-              </td>
-              <td style={{ padding: '8px', textAlign: 'center', borderBottom: '1px solid #eee' }}>
-                <span style={{
-                  padding: '2px 8px',
-                  borderRadius: '10px',
-                  fontSize: '11px',
-                  background: data.confidence === 'high' ? '#c8e6c9' : data.confidence === 'medium' ? '#fff3e0' : '#ffcdd2'
-                }}>
-                  {data.confidence || '-'}
-                </span>
-              </td>
-              <td style={{ padding: '8px', borderBottom: '1px solid #eee', color: '#666', fontSize: '12px' }}>
-                {data.source || '-'}
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
+      <div key={dimId} style={{
+        flex: 1,
+        minWidth: '180px',
+        background: 'white',
+        borderRadius: '12px',
+        padding: '16px',
+        boxShadow: '0 2px 8px rgba(0,0,0,0.08)',
+        borderLeft: `4px solid ${config.color}`
+      }}>
+        <div style={{ fontSize: '11px', color: '#666', fontWeight: '600', marginBottom: '8px' }}>
+          {config.name.toUpperCase()}
+        </div>
+        <div style={{ fontSize: '28px', fontWeight: 'bold', color: config.color }}>
+          {dimData.score?.toFixed(1)}
+        </div>
+        {dimData.categories && (
+          <div style={{ marginTop: '12px', borderTop: '1px solid #eee', paddingTop: '12px' }}>
+            {Object.entries(dimData.categories).map(([catName, catScore]) => (
+              <div key={catName} style={{
+                display: 'flex',
+                justifyContent: 'space-between',
+                fontSize: '12px',
+                marginBottom: '4px'
+              }}>
+                <span style={{ color: '#666' }}>{catName}</span>
+                <span style={{ fontWeight: '600' }}>{catScore?.toFixed(1) || '-'}</span>
+              </div>
+            ))}
+          </div>
+        )}
+      </div>
     );
   };
 
-  // Render dimension scores
-  const renderScores = (scores) => {
-    if (!scores) return null;
+  // Render indicator table
+  const renderIndicatorTable = (indicators) => {
+    if (!indicators) return null;
+
+    // Group by dimension
+    const grouped = { HAZARD: [], VULNERABILITY: [], COPING_CAPACITY: [] };
+    Object.entries(indicators).forEach(([id, data]) => {
+      const def = INDICATOR_DEFINITIONS[id];
+      if (def) {
+        grouped[def.dimension]?.push({ id, ...def, ...data });
+      }
+    });
 
     return (
-      <div style={{ display: 'flex', gap: '16px', flexWrap: 'wrap', marginTop: '12px' }}>
-        <div style={{ flex: 1, minWidth: '120px', padding: '12px', background: '#fff3e0', borderRadius: '8px', textAlign: 'center' }}>
-          <div style={{ fontSize: '11px', color: '#e65100', marginBottom: '4px' }}>HAZARD</div>
-          <div style={{ fontSize: '20px', fontWeight: 'bold', color: '#e65100' }}>{scores.hazardScore?.toFixed(1) || '-'}</div>
-        </div>
-        <div style={{ flex: 1, minWidth: '120px', padding: '12px', background: '#e3f2fd', borderRadius: '8px', textAlign: 'center' }}>
-          <div style={{ fontSize: '11px', color: '#1565c0', marginBottom: '4px' }}>VULNERABILITY</div>
-          <div style={{ fontSize: '20px', fontWeight: 'bold', color: '#1565c0' }}>{scores.vulnScore?.toFixed(1) || '-'}</div>
-        </div>
-        <div style={{ flex: 1, minWidth: '120px', padding: '12px', background: '#e8f5e9', borderRadius: '8px', textAlign: 'center' }}>
-          <div style={{ fontSize: '11px', color: '#2e7d32', marginBottom: '4px' }}>LACK OF COPING</div>
-          <div style={{ fontSize: '20px', fontWeight: 'bold', color: '#2e7d32' }}>{scores.ccScore?.toFixed(1) || '-'}</div>
-        </div>
-        <div style={{
-          flex: 1,
-          minWidth: '140px',
-          padding: '12px',
-          background: getRiskColor(scores.riskClass),
-          borderRadius: '8px',
-          textAlign: 'center',
-          color: 'white'
-        }}>
-          <div style={{ fontSize: '11px', marginBottom: '4px', opacity: 0.9 }}>RISK INDEX</div>
-          <div style={{ fontSize: '24px', fontWeight: 'bold' }}>{scores.riskScore?.toFixed(2) || '-'}</div>
-          <div style={{ fontSize: '12px', marginTop: '2px' }}>{scores.riskClass || '-'}</div>
-        </div>
+      <div style={{ background: '#f8f9fa', borderRadius: '8px', padding: '16px' }}>
+        {Object.entries(grouped).map(([dimId, items]) => {
+          if (items.length === 0) return null;
+          const config = DIMENSION_STRUCTURE[dimId];
+          return (
+            <div key={dimId} style={{ marginBottom: '16px' }}>
+              <div style={{
+                fontSize: '12px',
+                fontWeight: '700',
+                color: config.color,
+                marginBottom: '8px',
+                display: 'flex',
+                alignItems: 'center',
+                gap: '8px'
+              }}>
+                <span style={{
+                  width: '8px',
+                  height: '8px',
+                  borderRadius: '50%',
+                  background: config.color
+                }}></span>
+                {config.name}
+              </div>
+              <table style={{ width: '100%', fontSize: '13px', borderCollapse: 'collapse' }}>
+                <tbody>
+                  {items.map(item => (
+                    <tr key={item.id} style={{ borderBottom: '1px solid #e0e0e0' }}>
+                      <td style={{ padding: '8px 0', color: '#333' }}>{item.name}</td>
+                      <td style={{ padding: '8px 0', textAlign: 'center', fontWeight: '600', width: '60px' }}>
+                        {item.value?.toFixed(1) || '-'}
+                      </td>
+                      <td style={{ padding: '8px 0', width: '80px' }}>
+                        <span style={{
+                          padding: '2px 8px',
+                          borderRadius: '10px',
+                          fontSize: '11px',
+                          background: item.confidence === 'high' ? '#c8e6c9' :
+                                     item.confidence === 'medium' ? '#fff3e0' : '#ffebee',
+                          color: item.confidence === 'high' ? '#2e7d32' :
+                                 item.confidence === 'medium' ? '#ef6c00' : '#c62828'
+                        }}>
+                          {item.confidence || 'low'}
+                        </span>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          );
+        })}
       </div>
     );
   };
 
   return (
     <div className="tab-content pmo-review-panel">
-      <div className="tab-header">
-        <h3>Review & Approve Committee Submissions</h3>
+      {/* Header */}
+      <div style={{
+        background: 'linear-gradient(135deg, #1a237e 0%, #283593 100%)',
+        color: 'white',
+        padding: '24px',
+        borderRadius: '12px',
+        marginBottom: '24px'
+      }}>
+        <h3 style={{ margin: 0, fontSize: '20px', fontWeight: '600' }}>
+          INFORM Risk Data Review & Approval
+        </h3>
+        <p style={{ margin: '8px 0 0', opacity: 0.9, fontSize: '14px' }}>
+          Review committee submissions, verify calculations, and approve for official risk profile
+        </p>
       </div>
 
-      <div className="review-summary">
-        <div className="summary-cards">
+      {/* Status Filter Cards */}
+      <div style={{ display: 'flex', gap: '12px', marginBottom: '24px', flexWrap: 'wrap' }}>
+        {[
+          { key: 'pending', label: 'Pending Review', color: '#ff9800', icon: '⏳' },
+          { key: 'approved', label: 'Approved', color: '#4caf50', icon: '✓' },
+          { key: 'rejected', label: 'Rejected', color: '#f44336', icon: '✕' },
+          { key: 'all', label: 'All Submissions', color: '#607d8b', icon: '📋' }
+        ].map(status => (
           <div
-            className={`summary-card ${filter === 'pending' ? 'active' : ''}`}
-            onClick={() => setFilter('pending')}
+            key={status.key}
+            onClick={() => setFilter(status.key)}
+            style={{
+              flex: 1,
+              minWidth: '140px',
+              padding: '16px',
+              background: filter === status.key ? status.color : 'white',
+              color: filter === status.key ? 'white' : '#333',
+              borderRadius: '10px',
+              cursor: 'pointer',
+              boxShadow: filter === status.key ?
+                `0 4px 12px ${status.color}40` :
+                '0 2px 8px rgba(0,0,0,0.08)',
+              transition: 'all 0.2s',
+              textAlign: 'center'
+            }}
           >
-            <span className="card-count pending">{statusCounts.pending}</span>
-            <span className="card-label">Pending</span>
-          </div>
-          <div
-            className={`summary-card ${filter === 'approved' ? 'active' : ''}`}
-            onClick={() => setFilter('approved')}
-          >
-            <span className="card-count approved">{statusCounts.approved}</span>
-            <span className="card-label">Approved</span>
-          </div>
-          <div
-            className={`summary-card ${filter === 'rejected' ? 'active' : ''}`}
-            onClick={() => setFilter('rejected')}
-          >
-            <span className="card-count rejected">{statusCounts.rejected}</span>
-            <span className="card-label">Rejected</span>
-          </div>
-          <div
-            className={`summary-card ${filter === 'all' ? 'active' : ''}`}
-            onClick={() => setFilter('all')}
-          >
-            <span className="card-count">{submissions.length}</span>
-            <span className="card-label">All</span>
-          </div>
-        </div>
-      </div>
-
-      <div className="review-content">
-        <div className="submissions-list">
-          {filteredSubmissions.length === 0 ? (
-            <div className="empty-state">
-              <div className="empty-icon">📋</div>
-              <p>No submissions to review</p>
-              <p style={{ fontSize: '12px', color: '#999' }}>
-                Committee submissions will appear here when submitted
-              </p>
+            <div style={{ fontSize: '24px', marginBottom: '4px' }}>{status.icon}</div>
+            <div style={{ fontSize: '24px', fontWeight: 'bold' }}>
+              {status.key === 'all' ? submissions.length : statusCounts[status.key] || 0}
             </div>
-          ) : (
-            filteredSubmissions.map(sub => (
-              <div
-                key={sub.id}
-                className={`submission-card ${selectedSubmission?.id === sub.id ? 'selected' : ''}`}
-                onClick={() => setSelectedSubmission(sub)}
-              >
-                <div className="submission-header">
-                  <span className="submission-id" style={{ fontSize: '11px', color: '#999' }}>
-                    #{sub.id?.slice(-8) || sub.id}
-                  </span>
-                  <span className={`status-badge ${sub.status || 'pending'}`}>
-                    {(sub.status || 'pending').replace('_', ' ')}
-                  </span>
-                </div>
-                <div className="submission-body">
-                  <div className="submission-institution" style={{ fontWeight: 'bold', marginBottom: '4px' }}>
-                    {sub.committeeName || 'Committee'}
+            <div style={{ fontSize: '12px', opacity: 0.8 }}>{status.label}</div>
+          </div>
+        ))}
+      </div>
+
+      {/* Main Content */}
+      <div style={{ display: 'flex', gap: '24px', minHeight: '500px' }}>
+        {/* Submissions List */}
+        <div style={{ width: '320px', flexShrink: 0 }}>
+          <h4 style={{ margin: '0 0 16px', color: '#333' }}>Submissions</h4>
+          <div style={{ maxHeight: '600px', overflow: 'auto' }}>
+            {filteredSubmissions.length === 0 ? (
+              <div style={{
+                padding: '40px 20px',
+                textAlign: 'center',
+                color: '#666',
+                background: '#f5f5f5',
+                borderRadius: '8px'
+              }}>
+                <div style={{ fontSize: '40px', marginBottom: '12px' }}>📋</div>
+                <p>No submissions to review</p>
+              </div>
+            ) : (
+              filteredSubmissions.map(sub => (
+                <div
+                  key={sub.id}
+                  onClick={() => setSelectedSubmission(sub)}
+                  style={{
+                    padding: '16px',
+                    marginBottom: '12px',
+                    background: selectedSubmission?.id === sub.id ? '#e3f2fd' : 'white',
+                    border: selectedSubmission?.id === sub.id ? '2px solid #1976d2' : '1px solid #e0e0e0',
+                    borderRadius: '10px',
+                    cursor: 'pointer',
+                    transition: 'all 0.2s'
+                  }}
+                >
+                  <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '8px' }}>
+                    <span style={{ fontWeight: '600', color: '#333' }}>
+                      {sub.committeeName || 'Committee'}
+                    </span>
+                    <span style={{
+                      padding: '2px 8px',
+                      borderRadius: '10px',
+                      fontSize: '11px',
+                      background: (sub.status || 'pending') === 'approved' ? '#c8e6c9' :
+                                 (sub.status || 'pending') === 'rejected' ? '#ffcdd2' : '#fff3e0',
+                      color: (sub.status || 'pending') === 'approved' ? '#2e7d32' :
+                             (sub.status || 'pending') === 'rejected' ? '#c62828' : '#ef6c00'
+                    }}>
+                      {(sub.status || 'pending').toUpperCase()}
+                    </span>
                   </div>
-                  <div className="submission-region" style={{ color: '#666', fontSize: '13px' }}>
+                  <div style={{ fontSize: '13px', color: '#666', marginBottom: '4px' }}>
                     📍 {sub.adm1Name || '-'}{sub.adm2Name ? ` / ${sub.adm2Name}` : ''}
                   </div>
-                  {sub.scores?.riskScore != null && (
-                    <div style={{
-                      marginTop: '8px',
-                      display: 'inline-block',
-                      padding: '4px 10px',
-                      borderRadius: '12px',
-                      background: getRiskColor(sub.scores.riskClass),
-                      color: 'white',
-                      fontSize: '12px',
-                      fontWeight: 'bold'
-                    }}>
-                      Risk: {sub.scores.riskScore.toFixed(1)} ({sub.scores.riskClass})
-                    </div>
-                  )}
+                  <div style={{ fontSize: '12px', color: '#999' }}>
+                    {new Date(sub.submittedAt).toLocaleDateString()} • {Object.keys(sub.indicators || {}).length} indicators
+                  </div>
                 </div>
-                <div className="submission-footer">
-                  <span className="submission-date">
-                    {new Date(sub.submittedAt).toLocaleDateString()}
-                  </span>
-                  <span className="submission-author">{sub.submittedBy || '-'}</span>
-                </div>
-              </div>
-            ))
-          )}
+              ))
+            )}
+          </div>
         </div>
 
-        {selectedSubmission && (
-          <div className="review-detail">
-            <div className="detail-header">
-              <h4>Review Submission</h4>
-              <button
-                className="close-btn"
-                onClick={() => setSelectedSubmission(null)}
-              >
-                ✕
-              </button>
-            </div>
-
-            <div className="detail-content">
-              <div className="detail-section">
-                <h5>Committee Details</h5>
-                <div className="detail-grid">
-                  <div className="detail-item">
-                    <span className="detail-label">Committee</span>
-                    <span className="detail-value">{selectedSubmission.committeeName || '-'}</span>
+        {/* Review Detail */}
+        <div style={{ flex: 1 }}>
+          {selectedSubmission ? (
+            <div style={{ background: 'white', borderRadius: '12px', padding: '24px', boxShadow: '0 2px 12px rgba(0,0,0,0.08)' }}>
+              {/* Submission Info */}
+              <div style={{ marginBottom: '24px' }}>
+                <h4 style={{ margin: '0 0 16px', color: '#333', fontSize: '18px' }}>
+                  {selectedSubmission.committeeName}
+                </h4>
+                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '16px' }}>
+                  <div>
+                    <div style={{ fontSize: '11px', color: '#666', marginBottom: '4px' }}>REGION</div>
+                    <div style={{ fontWeight: '600' }}>{selectedSubmission.adm1Name || '-'}</div>
                   </div>
-                  <div className="detail-item">
-                    <span className="detail-label">Region</span>
-                    <span className="detail-value">{selectedSubmission.adm1Name || '-'}</span>
+                  <div>
+                    <div style={{ fontSize: '11px', color: '#666', marginBottom: '4px' }}>DISTRICT</div>
+                    <div style={{ fontWeight: '600' }}>{selectedSubmission.adm2Name || '-'}</div>
                   </div>
-                  <div className="detail-item">
-                    <span className="detail-label">District</span>
-                    <span className="detail-value">{selectedSubmission.adm2Name || '-'}</span>
-                  </div>
-                  <div className="detail-item">
-                    <span className="detail-label">Submitted By</span>
-                    <span className="detail-value">{selectedSubmission.submittedBy || '-'}</span>
-                  </div>
-                  <div className="detail-item">
-                    <span className="detail-label">Submitted At</span>
-                    <span className="detail-value">
-                      {new Date(selectedSubmission.submittedAt).toLocaleString()}
-                    </span>
-                  </div>
-                  <div className="detail-item">
-                    <span className="detail-label">Indicators</span>
-                    <span className="detail-value">
-                      {selectedSubmission.indicatorCount || Object.keys(selectedSubmission.indicators || {}).length} submitted
-                    </span>
+                  <div>
+                    <div style={{ fontSize: '11px', color: '#666', marginBottom: '4px' }}>SUBMITTED</div>
+                    <div style={{ fontWeight: '600' }}>{new Date(selectedSubmission.submittedAt).toLocaleDateString()}</div>
                   </div>
                 </div>
               </div>
 
-              <div className="detail-section">
-                <h5>Risk Scores</h5>
-                {renderScores(selectedSubmission.scores)}
-              </div>
+              {/* INFORM Risk Calculation */}
+              {calculatedResult?.calculation && (
+                <>
+                  {/* Final Risk Score */}
+                  <div style={{
+                    background: getRiskColor(calculatedResult.calculation.risk),
+                    color: 'white',
+                    padding: '24px',
+                    borderRadius: '12px',
+                    textAlign: 'center',
+                    marginBottom: '24px'
+                  }}>
+                    <div style={{ fontSize: '12px', opacity: 0.9, marginBottom: '8px' }}>
+                      CALCULATED INFORM RISK INDEX
+                    </div>
+                    <div style={{ fontSize: '48px', fontWeight: 'bold' }}>
+                      {calculatedResult.calculation.risk?.toFixed(2) || '-'}
+                    </div>
+                    <div style={{ fontSize: '16px', marginTop: '4px' }}>
+                      {calculatedResult.calculation.classification?.label || '-'}
+                    </div>
+                    <div style={{ fontSize: '11px', marginTop: '8px', opacity: 0.8 }}>
+                      Formula: Risk = (H × V × LCC)^(1/3)
+                    </div>
+                  </div>
 
-              <div className="detail-section">
-                <h5>Indicator Values</h5>
-                <div style={{ maxHeight: '250px', overflow: 'auto', border: '1px solid #eee', borderRadius: '8px' }}>
-                  {renderIndicatorsTable(selectedSubmission.indicators)}
-                </div>
-              </div>
+                  {/* Dimension Scores */}
+                  <div style={{ marginBottom: '24px' }}>
+                    <h5 style={{ margin: '0 0 16px', color: '#333' }}>Dimension Scores</h5>
+                    <div style={{ display: 'flex', gap: '16px', flexWrap: 'wrap' }}>
+                      {Object.entries(calculatedResult.calculation.dimensions).map(([dimId, dimData]) =>
+                        renderDimensionCard(dimId, dimData)
+                      )}
+                    </div>
+                  </div>
+                </>
+              )}
 
-              {selectedSubmission.status !== 'pending' && (
-                <div className="detail-section">
-                  <h5>Review Information</h5>
-                  <div style={{ background: '#f5f5f5', padding: '12px', borderRadius: '8px' }}>
-                    <p><strong>Reviewed By:</strong> {selectedSubmission.reviewedBy || '-'}</p>
-                    <p><strong>Reviewed At:</strong> {selectedSubmission.reviewedAt ? new Date(selectedSubmission.reviewedAt).toLocaleString() : '-'}</p>
-                    {selectedSubmission.reviewNotes && (
-                      <p><strong>Notes:</strong> {selectedSubmission.reviewNotes}</p>
+              {/* Validation Status */}
+              {calculatedResult?.validation && (
+                <div style={{ marginBottom: '24px' }}>
+                  <h5 style={{ margin: '0 0 12px', color: '#333' }}>Data Validation</h5>
+                  <div style={{
+                    padding: '12px 16px',
+                    borderRadius: '8px',
+                    background: calculatedResult.validation.isValid ? '#e8f5e9' : '#fff3e0',
+                    border: `1px solid ${calculatedResult.validation.isValid ? '#a5d6a7' : '#ffcc80'}`
+                  }}>
+                    <div style={{
+                      display: 'flex',
+                      alignItems: 'center',
+                      gap: '8px',
+                      color: calculatedResult.validation.isValid ? '#2e7d32' : '#ef6c00'
+                    }}>
+                      <span style={{ fontSize: '18px' }}>
+                        {calculatedResult.validation.isValid ? '✓' : '⚠'}
+                      </span>
+                      <span style={{ fontWeight: '600' }}>
+                        {calculatedResult.validation.isValid ?
+                          'All required data present - Ready for approval' :
+                          'Validation warnings detected'}
+                      </span>
+                    </div>
+                    {calculatedResult.validation.warnings.length > 0 && (
+                      <ul style={{ margin: '8px 0 0 24px', padding: 0, fontSize: '13px', color: '#666' }}>
+                        {calculatedResult.validation.warnings.map((w, i) => (
+                          <li key={i}>{w}</li>
+                        ))}
+                      </ul>
                     )}
                   </div>
                 </div>
               )}
 
-              {selectedSubmission.status === 'pending' && (
+              {/* Indicator Values */}
+              <div style={{ marginBottom: '24px' }}>
+                <h5 style={{ margin: '0 0 12px', color: '#333' }}>Submitted Indicator Values</h5>
+                {renderIndicatorTable(selectedSubmission.indicators)}
+              </div>
+
+              {/* Review Actions */}
+              {(selectedSubmission.status || 'pending') === 'pending' && (
                 <>
-                  <div className="detail-section">
-                    <h5>Review Comment</h5>
+                  <div style={{ marginBottom: '16px' }}>
+                    <label style={{ display: 'block', fontSize: '13px', color: '#666', marginBottom: '8px' }}>
+                      Review Notes (optional for approval, required for rejection)
+                    </label>
                     <textarea
                       value={reviewComment}
                       onChange={(e) => setReviewComment(e.target.value)}
-                      placeholder="Add comments (required for rejection)..."
+                      placeholder="Add review notes or feedback..."
                       rows={3}
-                      style={{ width: '100%', padding: '10px', borderRadius: '6px', border: '1px solid #ddd' }}
+                      style={{
+                        width: '100%',
+                        padding: '12px',
+                        borderRadius: '8px',
+                        border: '1px solid #ddd',
+                        fontSize: '14px',
+                        resize: 'vertical'
+                      }}
                     />
                   </div>
 
-                  <div className="review-actions">
+                  <div style={{ display: 'flex', gap: '12px' }}>
                     <button
-                      className="action-btn approve"
-                      onClick={() => handleApprove(selectedSubmission)}
-                      disabled={processing}
+                      onClick={handleApprove}
+                      disabled={processing || !calculatedResult?.validation?.isValid}
                       style={{
-                        background: '#4CAF50',
+                        flex: 1,
+                        padding: '14px 24px',
+                        background: processing ? '#ccc' : '#4caf50',
                         color: 'white',
                         border: 'none',
-                        padding: '12px 24px',
-                        borderRadius: '6px',
+                        borderRadius: '8px',
+                        fontSize: '15px',
+                        fontWeight: '600',
                         cursor: processing ? 'wait' : 'pointer',
-                        fontWeight: 'bold'
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        gap: '8px'
                       }}
                     >
                       {processing ? 'Processing...' : '✓ Approve & Publish to Risk Profile'}
                     </button>
                     <button
-                      className="action-btn reject"
-                      onClick={() => handleReject(selectedSubmission)}
+                      onClick={handleReject}
                       disabled={processing}
                       style={{
-                        background: '#f44336',
+                        padding: '14px 24px',
+                        background: processing ? '#ccc' : '#f44336',
                         color: 'white',
                         border: 'none',
-                        padding: '12px 24px',
-                        borderRadius: '6px',
-                        cursor: processing ? 'wait' : 'pointer',
-                        fontWeight: 'bold'
+                        borderRadius: '8px',
+                        fontSize: '15px',
+                        fontWeight: '600',
+                        cursor: processing ? 'wait' : 'pointer'
                       }}
                     >
-                      {processing ? 'Processing...' : '✕ Reject'}
+                      ✕ Reject
                     </button>
                   </div>
                 </>
               )}
+
+              {/* Already Reviewed */}
+              {(selectedSubmission.status || 'pending') !== 'pending' && (
+                <div style={{
+                  padding: '16px',
+                  background: '#f5f5f5',
+                  borderRadius: '8px'
+                }}>
+                  <div style={{ fontWeight: '600', marginBottom: '8px' }}>
+                    {selectedSubmission.status === 'approved' ? '✓ Approved' : '✕ Rejected'} by {selectedSubmission.reviewedBy}
+                  </div>
+                  <div style={{ fontSize: '13px', color: '#666' }}>
+                    {new Date(selectedSubmission.reviewedAt).toLocaleString()}
+                  </div>
+                  {selectedSubmission.reviewNotes && (
+                    <div style={{ marginTop: '8px', fontSize: '14px' }}>
+                      Notes: {selectedSubmission.reviewNotes}
+                    </div>
+                  )}
+                </div>
+              )}
             </div>
-          </div>
-        )}
+          ) : (
+            <div style={{
+              height: '100%',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              color: '#666'
+            }}>
+              <div style={{ textAlign: 'center' }}>
+                <div style={{ fontSize: '48px', marginBottom: '16px' }}>👈</div>
+                <p>Select a submission to review</p>
+              </div>
+            </div>
+          )}
+        </div>
       </div>
     </div>
   );

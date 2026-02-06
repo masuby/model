@@ -109,10 +109,10 @@ const Module02InformRisk = ({ onNavigate }) => {
   const [loading, setLoading] = useState(true);
   const [selectedPhase, setSelectedPhase] = useState('scoping');
 
-  // Load approved committee data from localStorage
+  // Load approved committee data from localStorage (uses new INFORM calculation format)
   const getApprovedRiskData = () => {
     try {
-      return JSON.parse(localStorage.getItem('approved_risk_data') || '[]');
+      return JSON.parse(localStorage.getItem('inform_approved_risk_data') || '[]');
     } catch {
       return [];
     }
@@ -125,9 +125,11 @@ const Module02InformRisk = ({ onNavigate }) => {
     const merged = JSON.parse(JSON.stringify(baseData)); // Deep clone
 
     approvedSubmissions.forEach(approved => {
-      if (!approved.scores) return;
+      // Use calculated scores from INFORM methodology
+      const calc = approved.calculated;
+      if (!calc) return;
 
-      // Create district entry from approved data
+      // Create district entry from approved data with full INFORM structure
       const newEntry = {
         admin: {
           country: 'United Republic of Tanzania',
@@ -137,14 +139,31 @@ const Module02InformRisk = ({ onNavigate }) => {
           adm1Code: approved.adm1Code,
           adm2Code: approved.adm2Code
         },
-        hazardExposure: { total: approved.scores.hazardScore },
-        vulnerability: { total: approved.scores.vulnScore },
-        lackCopingCapacity: { total: approved.scores.ccScore },
-        risk: approved.scores.riskScore,
+        hazardExposure: {
+          total: calc.hazardScore,
+          natural: calc.dimensions?.HAZARD?.categories?.Natural,
+          human: calc.dimensions?.HAZARD?.categories?.Human
+        },
+        vulnerability: {
+          total: calc.vulnerabilityScore,
+          socioEconomic: calc.dimensions?.VULNERABILITY?.categories?.['Socio-Economic'],
+          vulnerableGroups: calc.dimensions?.VULNERABILITY?.categories?.['Vulnerable Groups']
+        },
+        lackCopingCapacity: {
+          total: calc.lackOfCopingScore,
+          institutional: calc.dimensions?.COPING_CAPACITY?.categories?.Institutional,
+          infrastructure: calc.dimensions?.COPING_CAPACITY?.categories?.Infrastructure
+        },
+        risk: calc.riskScore,
+        classification: calc.riskClass,
         _committeeSource: {
           committeeName: approved.committeeName,
+          submittedBy: approved.submittedBy,
+          submittedAt: approved.submittedAt,
           approvedAt: approved.approvedAt,
-          approvedBy: approved.approvedBy
+          approvedBy: approved.approvedBy,
+          methodology: approved.methodology || 'INFORM 2024',
+          indicatorCount: Object.keys(approved.indicators || {}).length
         }
       };
 
