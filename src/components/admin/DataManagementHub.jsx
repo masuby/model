@@ -161,37 +161,39 @@ function DataManagementHub() {
   };
 
   const loadSubmissions = () => {
-    // Load mock submissions data
-    const mockSubmissions = [
-      {
-        id: 'SUB-001',
-        institution: 'TMA',
-        type: 'Hazard Data',
-        region: 'Dar es Salaam',
-        status: 'pending',
-        submittedAt: new Date().toISOString(),
-        submittedBy: 'TMA Officer'
-      },
-      {
-        id: 'SUB-002',
-        institution: 'MOW',
-        type: 'Water Level Data',
-        region: 'Dodoma',
-        status: 'approved',
-        submittedAt: new Date(Date.now() - 86400000).toISOString(),
-        submittedBy: 'MoW Officer'
-      },
-      {
-        id: 'SUB-003',
-        institution: 'MOH',
-        type: 'Health Risk Data',
-        region: 'Mwanza',
-        status: 'under_review',
-        submittedAt: new Date(Date.now() - 172800000).toISOString(),
-        submittedBy: 'MoH Officer'
-      }
-    ];
-    setSubmissions(mockSubmissions);
+    try {
+      const allSubmissions = [];
+      const seenIds = new Set();
+
+      // Scan all committee_submissions_* keys
+      Object.keys(localStorage)
+        .filter(k => k.startsWith('committee_submissions_'))
+        .forEach(key => {
+          const subs = JSON.parse(localStorage.getItem(key) || '[]');
+          subs.forEach(s => {
+            if (!seenIds.has(s.id)) {
+              seenIds.add(s.id);
+              allSubmissions.push(s);
+            }
+          });
+        });
+
+      // Also check all_pending_submissions for any missed
+      const globalPending = JSON.parse(localStorage.getItem('all_pending_submissions') || '[]');
+      globalPending.forEach(s => {
+        if (!seenIds.has(s.id)) {
+          seenIds.add(s.id);
+          allSubmissions.push(s);
+        }
+      });
+
+      // Sort newest first
+      allSubmissions.sort((a, b) => new Date(b.submittedAt) - new Date(a.submittedAt));
+      setSubmissions(allSubmissions);
+    } catch (error) {
+      console.error('Failed to load submissions:', error);
+      setSubmissions([]);
+    }
   };
 
   const loadAuditLogs = () => {
@@ -344,10 +346,10 @@ function DataManagementHub() {
             <table className="data-table compact">
               <thead>
                 <tr>
-                  <th>ID</th>
-                  <th>Institution</th>
-                  <th>Type</th>
+                  <th>Committee</th>
                   <th>Region</th>
+                  <th>Indicators</th>
+                  <th>Risk Score</th>
                   <th>Status</th>
                   <th>Date</th>
                 </tr>
@@ -355,13 +357,19 @@ function DataManagementHub() {
               <tbody>
                 {submissions.slice(0, 5).map(sub => (
                   <tr key={sub.id}>
-                    <td>{sub.id}</td>
-                    <td>{sub.institution}</td>
-                    <td>{sub.type}</td>
-                    <td>{sub.region}</td>
+                    <td>{sub.committeeName || sub.institution || 'Unknown'}</td>
+                    <td>{sub.adm1Name || sub.region || '-'}{sub.adm2Name ? ` / ${sub.adm2Name}` : ''}</td>
+                    <td>{sub.indicatorCount || Object.keys(sub.indicators || {}).length || '-'}</td>
+                    <td>
+                      {sub.scores?.riskScore != null ? (
+                        <span className={`risk-badge ${(sub.scores.riskClass || '').toLowerCase().replace(' ', '-')}`}>
+                          {sub.scores.riskScore.toFixed(1)} ({sub.scores.riskClass})
+                        </span>
+                      ) : '-'}
+                    </td>
                     <td>
                       <span className={`status-badge ${sub.status}`}>
-                        {sub.status.replace('_', ' ')}
+                        {(sub.status || 'pending').replace('_', ' ')}
                       </span>
                     </td>
                     <td>{new Date(sub.submittedAt).toLocaleDateString()}</td>
@@ -393,65 +401,60 @@ function DataManagementHub() {
   const renderSubmissions = () => (
     <div className="hub-section submissions-section">
       <div className="section-header">
-        <h3>All Data Submissions</h3>
+        <h3>All Committee Submissions</h3>
         <div className="section-actions">
-          <select className="filter-select">
-            <option value="">All Institutions</option>
-            {Object.values(INSTITUTIONS).map(inst => (
-              <option key={inst.id} value={inst.id}>{inst.shortName}</option>
-            ))}
-          </select>
           <select className="filter-select">
             <option value="">All Status</option>
             <option value="pending">Pending</option>
-            <option value="under_review">Under Review</option>
             <option value="approved">Approved</option>
             <option value="rejected">Rejected</option>
           </select>
         </div>
       </div>
 
-      <table className="data-table">
-        <thead>
-          <tr>
-            <th>Submission ID</th>
-            <th>Institution</th>
-            <th>Type</th>
-            <th>Region</th>
-            <th>Submitted By</th>
-            <th>Date</th>
-            <th>Status</th>
-            <th>Actions</th>
-          </tr>
-        </thead>
-        <tbody>
-          {submissions.map(sub => (
-            <tr key={sub.id}>
-              <td>{sub.id}</td>
-              <td>
-                <span className="institution-badge">
-                  {INSTITUTIONS[sub.institution]?.icon || '📌'} {sub.institution}
-                </span>
-              </td>
-              <td>{sub.type}</td>
-              <td>{sub.region}</td>
-              <td>{sub.submittedBy}</td>
-              <td>{new Date(sub.submittedAt).toLocaleDateString()}</td>
-              <td>
-                <span className={`status-badge ${sub.status}`}>
-                  {sub.status.replace('_', ' ')}
-                </span>
-              </td>
-              <td>
-                <button className="action-btn view">View</button>
-                {sub.status === 'pending' && (
-                  <button className="action-btn review">Review</button>
-                )}
-              </td>
+      {submissions.length === 0 ? (
+        <div className="empty-state" style={{ padding: '40px', textAlign: 'center', color: '#666' }}>
+          <div style={{ fontSize: '48px', marginBottom: '16px' }}>📋</div>
+          <p>No submissions yet. Committee submissions will appear here when committees submit data.</p>
+        </div>
+      ) : (
+        <table className="data-table">
+          <thead>
+            <tr>
+              <th>Committee</th>
+              <th>Region / District</th>
+              <th>Indicators</th>
+              <th>Risk Score</th>
+              <th>Submitted By</th>
+              <th>Date</th>
+              <th>Status</th>
             </tr>
-          ))}
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+            {submissions.map(sub => (
+              <tr key={sub.id}>
+                <td>{sub.committeeName || 'Committee'}</td>
+                <td>{sub.adm1Name || '-'}{sub.adm2Name ? ` / ${sub.adm2Name}` : ''}</td>
+                <td>{sub.indicatorCount || Object.keys(sub.indicators || {}).length || '-'}</td>
+                <td>
+                  {sub.scores?.riskScore != null ? (
+                    <span className={`risk-badge ${(sub.scores.riskClass || '').toLowerCase().replace(' ', '-')}`}>
+                      {sub.scores.riskScore.toFixed(1)} ({sub.scores.riskClass})
+                    </span>
+                  ) : '-'}
+                </td>
+                <td>{sub.submittedBy || '-'}</td>
+                <td>{new Date(sub.submittedAt).toLocaleDateString()}</td>
+                <td>
+                  <span className={`status-badge ${sub.status || 'pending'}`}>
+                    {(sub.status || 'pending').replace('_', ' ')}
+                  </span>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      )}
     </div>
   );
 

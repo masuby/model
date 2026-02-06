@@ -109,6 +109,70 @@ const Module02InformRisk = ({ onNavigate }) => {
   const [loading, setLoading] = useState(true);
   const [selectedPhase, setSelectedPhase] = useState('scoping');
 
+  // Load approved committee data from localStorage
+  const getApprovedRiskData = () => {
+    try {
+      return JSON.parse(localStorage.getItem('approved_risk_data') || '[]');
+    } catch {
+      return [];
+    }
+  };
+
+  // Merge approved committee data into existing risk data
+  const mergeApprovedData = (baseData, approvedSubmissions) => {
+    if (!baseData || !approvedSubmissions?.length) return baseData;
+
+    const merged = JSON.parse(JSON.stringify(baseData)); // Deep clone
+
+    approvedSubmissions.forEach(approved => {
+      if (!approved.scores) return;
+
+      // Create district entry from approved data
+      const newEntry = {
+        admin: {
+          country: 'United Republic of Tanzania',
+          adm1Name: approved.adm1Name,
+          adm2Name: approved.adm2Name || approved.adm1Name,
+          iso3: 'TZA',
+          adm1Code: approved.adm1Code,
+          adm2Code: approved.adm2Code
+        },
+        hazardExposure: { total: approved.scores.hazardScore },
+        vulnerability: { total: approved.scores.vulnScore },
+        lackCopingCapacity: { total: approved.scores.ccScore },
+        risk: approved.scores.riskScore,
+        _committeeSource: {
+          committeeName: approved.committeeName,
+          approvedAt: approved.approvedAt,
+          approvedBy: approved.approvedBy
+        }
+      };
+
+      // Merge into adm2 array
+      if (!merged.subnational) merged.subnational = {};
+      if (!merged.subnational.adm2) merged.subnational.adm2 = [];
+
+      // Find existing entry for this region/district
+      const existingIdx = merged.subnational.adm2.findIndex(d =>
+        d.admin?.adm1Name === approved.adm1Name &&
+        (approved.adm2Name ? d.admin?.adm2Name === approved.adm2Name : true)
+      );
+
+      if (existingIdx >= 0) {
+        // Override with committee-approved data
+        merged.subnational.adm2[existingIdx] = {
+          ...merged.subnational.adm2[existingIdx],
+          ...newEntry
+        };
+      } else {
+        // Add as new entry
+        merged.subnational.adm2.push(newEntry);
+      }
+    });
+
+    return merged;
+  };
+
   // Load INFORM Risk data
   useEffect(() => {
     const loadData = async () => {
@@ -116,14 +180,29 @@ const Module02InformRisk = ({ onNavigate }) => {
         setLoading(true);
         const excelUrl = '/data/tanzania-inform-risk.xlsx';
         console.log('🚀 Loading INFORM Risk data from Excel...');
-        const riskData = await parseInformRiskData(excelUrl);
+        let riskData = await parseInformRiskData(excelUrl);
+
+        // Merge approved committee data
+        const approvedData = getApprovedRiskData();
+        if (approvedData.length > 0) {
+          console.log(`📊 Merging ${approvedData.length} approved committee submissions...`);
+          riskData = mergeApprovedData(riskData, approvedData);
+        }
+
         setData(riskData);
         setLoading(false);
         console.log('✅ INFORM Risk data loaded successfully!');
       } catch (error) {
         console.error('❌ Error loading Excel data:', error);
         console.warn('⚠️ Falling back to mock data');
-        const mockData = getMockTanzaniaData();
+        let mockData = getMockTanzaniaData();
+
+        // Still merge approved data even with mock
+        const approvedData = getApprovedRiskData();
+        if (approvedData.length > 0) {
+          mockData = mergeApprovedData(mockData, approvedData);
+        }
+
         setData(mockData);
         setLoading(false);
       }
