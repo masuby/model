@@ -144,6 +144,11 @@ function DataManagementHub() {
   const tabs = getTabs();
 
   useEffect(() => {
+    // Always load submissions from localStorage (doesn't need database)
+    loadSubmissions();
+    loadAuditLogs();
+
+    // Only load database-dependent data if ready
     if (isReady) {
       loadData();
     }
@@ -233,16 +238,8 @@ function DataManagementHub() {
     );
   }
 
-  if (error) {
-    return (
-      <div className="data-hub error">
-        <div className="error-icon">⚠️</div>
-        <h3>Database Error</h3>
-        <p>{error}</p>
-        <button onClick={() => window.location.reload()}>Retry</button>
-      </div>
-    );
-  }
+  // Note: Database errors don't block the UI - committee submissions use localStorage
+  const hasDbError = Boolean(error);
 
   const getRoleLabel = () => {
     switch (user?.role) {
@@ -631,6 +628,9 @@ function DataManagementHub() {
     }
   };
 
+  // Count pending submissions for badge
+  const pendingCount = submissions.filter(s => (s.status || 'pending') === 'pending').length;
+
   return (
     <div className="data-management-hub">
       <div className="hub-header">
@@ -646,15 +646,28 @@ function DataManagementHub() {
         )}
       </div>
 
+      {/* Database warning banner (non-blocking) */}
+      {hasDbError && (
+        <div className="db-warning-banner">
+          <span className="warning-icon">⚠️</span>
+          <span>Some database features unavailable. Committee submissions workflow is fully operational.</span>
+          <button onClick={() => window.location.reload()} className="retry-btn">Retry</button>
+        </div>
+      )}
+
       <div className="hub-tabs">
         {tabs.map(tab => (
           <button
             key={tab.id}
-            className={`hub-tab ${activeTab === tab.id ? 'active' : ''}`}
+            className={`hub-tab ${activeTab === tab.id ? 'active' : ''} ${tab.id === 'review' ? 'review-tab' : ''}`}
             onClick={() => setActiveTab(tab.id)}
           >
             <span className="tab-icon">{tab.icon}</span>
             <span className="tab-label">{tab.label}</span>
+            {/* Show pending count badge on Review tab */}
+            {tab.id === 'review' && pendingCount > 0 && (
+              <span className="pending-badge">{pendingCount}</span>
+            )}
           </button>
         ))}
       </div>

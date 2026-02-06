@@ -103,6 +103,7 @@
   font-size: 13px;
   font-weight: 500;
   color: #475569;
+  position: relative;
 }
 
 .hub-tab:hover {
@@ -116,6 +117,82 @@
 
 .tab-icon {
   font-size: 16px;
+}
+
+/* Database Warning Banner */
+.db-warning-banner {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 20px;
+  background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+  border: 1px solid #f59e0b;
+  border-radius: 8px;
+  margin-bottom: 16px;
+  font-size: 13px;
+  color: #92400e;
+}
+
+.db-warning-banner .warning-icon {
+  font-size: 18px;
+}
+
+.db-warning-banner .retry-btn {
+  margin-left: auto;
+  padding: 6px 12px;
+  background: #f59e0b;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.db-warning-banner .retry-btn:hover {
+  background: #d97706;
+}
+
+/* Review Tab Special Styling */
+.hub-tab.review-tab {
+  position: relative;
+  background: linear-gradient(135deg, #dcfce7 0%, #bbf7d0 100%);
+  border: 1px solid #22c55e;
+  color: #166534;
+}
+
+.hub-tab.review-tab:hover {
+  background: linear-gradient(135deg, #bbf7d0 0%, #86efac 100%);
+}
+
+.hub-tab.review-tab.active {
+  background: linear-gradient(135deg, #22c55e 0%, #16a34a 100%);
+  color: white;
+  border-color: #16a34a;
+}
+
+/* Pending Badge */
+.pending-badge {
+  position: absolute;
+  top: -6px;
+  right: -6px;
+  min-width: 20px;
+  height: 20px;
+  padding: 0 6px;
+  background: #ef4444;
+  color: white;
+  border-radius: 10px;
+  font-size: 11px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: pulse-badge 2s ease-in-out infinite;
+}
+
+@keyframes pulse-badge {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.1); }
 }
 
 /* Content */
