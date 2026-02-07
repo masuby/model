@@ -553,7 +553,7 @@ const Layer2RiskAnalysis = ({ riskData, activeWarnings, activeHazards }) => {
     };
   }, [national]);
 
-  // Calculate expected impact based on enabled layers and selected regions
+  // Calculate expected impact based on SELECTED layers from Visual Risk Layering (dynamic)
   const calculatedImpact = useMemo(() => {
     if (selectedRegions.length === 0) return null;
 
@@ -563,50 +563,98 @@ const Layer2RiskAnalysis = ({ riskData, activeWarnings, activeHazards }) => {
     let infrastructureCount = { hospitals: 0, shelters: 0, roads: 0, fireStations: 0, policeStations: 0, evacuationRoutes: 0 };
     let regionData = [];
 
+    // Calculate baseline risk contribution from selected baseline risks
+    let baselineRiskScore = 0;
+    if (selectedBaselineRisks.length > 0) {
+      const selectedRisks = selectedBaselineRisks.map(id =>
+        BASELINE_RISK_OPTIONS.find(o => o.id === id)
+      ).filter(Boolean);
+      baselineRiskScore = selectedRisks.reduce((sum, r) => sum + r.score, 0) / selectedRisks.length;
+    } else {
+      baselineRiskScore = national?.risk || 4.8; // Default to national risk
+    }
+
+    // Calculate hazard contribution from selected hazards
+    let hazardScore = hazardIntensity;
+    if (selectedHazardIds.length > 0) {
+      const hazardSeverityScores = selectedHazards.map(h => {
+        const severity = h.severity || h.hazardData?.warningLevel || 'Advisory';
+        return severity === 'Major Warning' ? 9 : severity === 'Warning' ? 7 : severity === 'Advisory' ? 5 : 3;
+      });
+      hazardScore = Math.max(hazardIntensity, ...hazardSeverityScores);
+    }
+
     selectedRegions.forEach(region => {
       const exposure = EXPOSURE_DATA[region] || EXPOSURE_DATA['Default'];
       const vulnerability = VULNERABILITY_DATA[region] || VULNERABILITY_DATA['Default'];
 
-      // Calculate exposure score based on enabled layers
+      // Calculate exposure score based on SELECTED exposure layers (Visual Risk Layering)
       let exposureScore = 0;
-      if (enabledLayers.population) {
-        exposureScore += (exposure.population / 1000000) * 2; // Normalize to 0-10 scale
+      let exposureLayerCount = 0;
+
+      if (selectedExposureLayers.includes('population')) {
+        exposureScore += Math.min(10, (exposure.population / 1000000) * 2);
+        exposureLayerCount++;
       }
-      if (enabledLayers.infrastructure) {
-        const infraScore = exposure.infrastructure === 'Very High' ? 10 :
-                          exposure.infrastructure === 'High' ? 7.5 :
-                          exposure.infrastructure === 'Medium' ? 5 : 2.5;
-        exposureScore += infraScore * 0.5;
+      if (selectedExposureLayers.includes('infrastructure')) {
+        const infraScore = exposure.infrastructure === 'Very High' ? 9 :
+                          exposure.infrastructure === 'High' ? 7 :
+                          exposure.infrastructure === 'Medium' ? 5 : 3;
+        exposureScore += infraScore;
+        exposureLayerCount++;
       }
-      if (enabledLayers.cropland) {
-        const cropScore = exposure.cropland === 'Very High' ? 10 :
-                         exposure.cropland === 'High' ? 7.5 :
-                         exposure.cropland === 'Medium' ? 5 : 2.5;
-        exposureScore += cropScore * 0.3;
+      if (selectedExposureLayers.includes('cropland')) {
+        const cropScore = exposure.cropland === 'Very High' ? 9 :
+                         exposure.cropland === 'High' ? 7 :
+                         exposure.cropland === 'Medium' ? 5 : 3;
+        exposureScore += cropScore;
+        exposureLayerCount++;
       }
-      if (enabledLayers.livestock) {
-        const livestockScore = exposure.livestock === 'Very High' ? 10 :
-                              exposure.livestock === 'High' ? 7.5 :
-                              exposure.livestock === 'Medium' ? 5 : 2.5;
-        exposureScore += livestockScore * 0.3;
+      if (selectedExposureLayers.includes('livestock')) {
+        const livestockScore = exposure.livestock === 'Very High' ? 9 :
+                              exposure.livestock === 'High' ? 7 :
+                              exposure.livestock === 'Medium' ? 5 : 3;
+        exposureScore += livestockScore;
+        exposureLayerCount++;
       }
 
-      // Calculate vulnerability score based on enabled layers
+      // Normalize exposure by number of layers selected
+      if (exposureLayerCount > 0) {
+        exposureScore = exposureScore / exposureLayerCount;
+      } else {
+        exposureScore = national?.hazardExposure || 5; // Default
+      }
+
+      // Calculate vulnerability score based on SELECTED vulnerability layers
       let vulnScore = 0;
-      if (enabledLayers.poverty) {
+      let vulnLayerCount = 0;
+
+      if (selectedVulnerabilityLayers.includes('poverty')) {
         vulnScore += vulnerability.poverty * 10;
+        vulnLayerCount++;
       }
-      if (enabledLayers.foodInsecurity) {
+      if (selectedVulnerabilityLayers.includes('foodInsecurity')) {
         vulnScore += vulnerability.foodInsecurity * 10;
+        vulnLayerCount++;
       }
-      if (enabledLayers.healthAccess) {
-        vulnScore += (1 - vulnerability.healthAccess) * 10; // Invert - lower access = higher vulnerability
+      if (selectedVulnerabilityLayers.includes('healthAccess')) {
+        vulnScore += (1 - vulnerability.healthAccess) * 10;
+        vulnLayerCount++;
       }
-      if (enabledLayers.waterAccess) {
+      if (selectedVulnerabilityLayers.includes('waterAccess')) {
         vulnScore += (1 - vulnerability.waterAccess) * 10;
+        vulnLayerCount++;
       }
-      if (enabledLayers.vulnerableGroups) {
+      if (selectedVulnerabilityLayers.includes('vulnerableGroups')) {
         vulnScore += vulnerability.vulnerableGroups * 10;
+        vulnLayerCount++;
+      }
+
+      // Normalize vulnerability by number of layers selected
+      if (vulnLayerCount > 0) {
+        vulnScore = vulnScore / vulnLayerCount;
+      } else {
+        vulnScore = national?.vulnerability || 5; // Default
       }
 
       totalPopulation += exposure.population;
@@ -624,50 +672,59 @@ const Layer2RiskAnalysis = ({ riskData, activeWarnings, activeHazards }) => {
       });
     });
 
-    // Count infrastructure in affected areas
-    if (enabledLayers.hospitals) {
+    // Count infrastructure based on SELECTED coping layers
+    if (selectedCopingLayers.includes('hospitals')) {
       infrastructureCount.hospitals = HOSPITALS.filter(h =>
         selectedRegions.some(r => h.name.toLowerCase().includes(r.toLowerCase()) || h.name.toLowerCase().includes(r.split(' ')[0].toLowerCase()))
       ).length || Math.round(selectedRegions.length * 3);
     }
-    if (enabledLayers.shelters) {
+    if (selectedCopingLayers.includes('shelters')) {
       infrastructureCount.shelters = EMERGENCY_SHELTERS.filter(s =>
         selectedRegions.some(r => s.name.toLowerCase().includes(r.toLowerCase()) || s.name.toLowerCase().includes(r.split(' ')[0].toLowerCase()))
       ).length || Math.round(selectedRegions.length * 2);
     }
-    if (enabledLayers.roads) {
+    if (selectedCopingLayers.includes('roads')) {
       infrastructureCount.roads = MAJOR_ROADS.filter(rd =>
         selectedRegions.some(r => rd.name.toLowerCase().includes(r.toLowerCase()) || rd.name.toLowerCase().includes(r.split(' ')[0].toLowerCase()))
       ).length || Math.round(selectedRegions.length * 4);
     }
-    if (enabledLayers.fireStations) {
+    if (selectedCopingLayers.includes('fireStations')) {
       infrastructureCount.fireStations = FIRE_STATIONS.filter(f =>
         selectedRegions.some(r => f.name.toLowerCase().includes(r.toLowerCase()))
       ).length || Math.round(selectedRegions.length * 1.5);
     }
-    if (enabledLayers.policeStations) {
+    if (selectedCopingLayers.includes('policeStations')) {
       infrastructureCount.policeStations = POLICE_STATIONS.filter(p =>
         selectedRegions.some(r => p.name.toLowerCase().includes(r.toLowerCase()))
       ).length || Math.round(selectedRegions.length * 2);
     }
-    if (enabledLayers.evacuationRoutes) {
+    if (selectedCopingLayers.includes('evacuationRoutes')) {
       infrastructureCount.evacuationRoutes = EVACUATION_ROUTES.filter(e =>
         selectedRegions.some(r => e.name.toLowerCase().includes(r.toLowerCase()))
       ).length || Math.round(selectedRegions.length * 2);
     }
 
-    // Calculate overall impact using INFORM formula: Risk = (H×E × V × LCC)^(1/4)
+    // Calculate coping capacity score from selected coping layers
+    let copingScore = national?.lackCopingCapacity || 5;
+    if (selectedCopingLayers.length > 0) {
+      // More coping resources selected = lower lack of coping capacity
+      const copingReduction = selectedCopingLayers.length * 0.5; // Each layer reduces LCC by 0.5
+      copingScore = Math.max(1, copingScore - copingReduction);
+    }
+
+    // Calculate overall scores
     const avgExposure = totalExposureScore / selectedRegions.length;
     const avgVulnerability = totalVulnerabilityScore / selectedRegions.length;
-    const lackOfCoping = national?.lackCopingCapacity || 5;
 
-    // INFORM Risk calculation with hazard intensity
-    const riskScore = Math.pow(hazardIntensity * avgExposure * avgVulnerability * lackOfCoping, 1/4);
-    const normalizedRisk = Math.min(10, riskScore);
+    // INFORM Risk calculation: Risk = (H × E × V × LCC)^(1/4) - Modified to include baseline
+    // Combine baseline risk with real-time hazard assessment
+    const combinedHazard = (baselineRiskScore + hazardScore) / 2;
+    const riskScore = Math.pow(combinedHazard * avgExposure * avgVulnerability * copingScore, 1/4);
+    const normalizedRisk = Math.min(10, Math.max(0, riskScore));
 
-    // Determine impact classification
+    // Determine impact classification based on INFORM scale
     let impactClass, impactColor, impactDescription, warningLevel;
-    if (normalizedRisk >= 7.5) {
+    if (normalizedRisk >= 6.5) {
       impactClass = 'Critical';
       impactColor = '#D32F2F';
       impactDescription = 'Severe humanitarian impact expected. Immediate full-scale response required.';
@@ -677,24 +734,31 @@ const Layer2RiskAnalysis = ({ riskData, activeWarnings, activeHazards }) => {
       impactColor = '#F57C00';
       impactDescription = 'Significant impact expected. Activate emergency response protocols.';
       warningLevel = 'WARNING';
-    } else if (normalizedRisk >= 2.5) {
+    } else if (normalizedRisk >= 3.5) {
       impactClass = 'Moderate';
       impactColor = '#FBC02D';
       impactDescription = 'Moderate impact expected. Enhanced monitoring and preparation advised.';
       warningLevel = 'ADVISORY';
-    } else {
+    } else if (normalizedRisk >= 2) {
       impactClass = 'Low';
-      impactColor = '#388E3C';
+      impactColor = '#8BC34A';
       impactDescription = 'Limited impact expected. Continue standard monitoring.';
+      warningLevel = 'WATCH';
+    } else {
+      impactClass = 'Very Low';
+      impactColor = '#388E3C';
+      impactDescription = 'Minimal impact expected. Normal operations.';
       warningLevel = 'MONITOR';
     }
 
-    // Estimate affected population
+    // Estimate affected population based on risk score
     const affectedPercentage = normalizedRisk / 10;
     const estimatedAffected = Math.round(totalPopulation * affectedPercentage);
 
-    // Count enabled layers
-    const enabledLayerCount = Object.values(enabledLayers).filter(Boolean).length;
+    // Count all enabled layers
+    const totalLayerCount = selectedBaselineRisks.length + selectedHazardIds.length +
+                           selectedExposureLayers.length + selectedVulnerabilityLayers.length +
+                           selectedCopingLayers.length;
 
     return {
       riskScore: normalizedRisk.toFixed(2),
@@ -706,14 +770,26 @@ const Layer2RiskAnalysis = ({ riskData, activeWarnings, activeHazards }) => {
       estimatedAffected,
       avgExposure: avgExposure.toFixed(2),
       avgVulnerability: avgVulnerability.toFixed(2),
-      hazardIntensity,
-      lackOfCoping: lackOfCoping.toFixed(2),
+      hazardIntensity: hazardScore,
+      baselineRisk: baselineRiskScore.toFixed(2),
+      combinedHazard: combinedHazard.toFixed(2),
+      lackOfCoping: copingScore.toFixed(2),
       infrastructureCount,
       regionData,
-      enabledLayerCount,
-      regionsCount: selectedRegions.length
+      enabledLayerCount: totalLayerCount,
+      regionsCount: selectedRegions.length,
+      // Layer breakdown for display
+      layerBreakdown: {
+        baselineRisks: selectedBaselineRisks.length,
+        hazards: selectedHazardIds.length,
+        exposure: selectedExposureLayers.length,
+        vulnerability: selectedVulnerabilityLayers.length,
+        coping: selectedCopingLayers.length
+      }
     };
-  }, [selectedRegions, enabledLayers, hazardIntensity, national]);
+  }, [selectedRegions, selectedBaselineRisks, selectedHazardIds, selectedHazards,
+      selectedExposureLayers, selectedVulnerabilityLayers, selectedCopingLayers,
+      hazardIntensity, national]);
 
   const getRiskLevel = (likelihood, impact) => {
     const score = likelihood * impact;
@@ -1095,9 +1171,269 @@ const Layer2RiskAnalysis = ({ riskData, activeWarnings, activeHazards }) => {
         <h2 style={{ margin: '0 0 8px 0', fontSize: '24px', display: 'flex', alignItems: 'center', gap: '12px' }}>
           🗺️ Interactive Risk Layering Analysis
         </h2>
-        <p style={{ margin: '0 0 24px 0', opacity: 0.9 }}>
+        <p style={{ margin: '0 0 16px 0', opacity: 0.9 }}>
           Select regions, toggle data layers, and calculate expected impact using the INFORM methodology
         </p>
+
+        {/* REAL-TIME LAYER COMBINATION DISPLAY */}
+        <div style={{
+          background: 'rgba(255,255,255,0.15)',
+          padding: '16px 20px',
+          borderRadius: '12px',
+          marginBottom: '20px',
+          border: '2px solid rgba(255,255,255,0.3)'
+        }}>
+          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '12px' }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+              <span style={{ fontSize: '14px', fontWeight: 'bold' }}>Active Layer Formula:</span>
+            </div>
+            {/* Dynamic Formula Display */}
+            <div style={{
+              display: 'flex',
+              alignItems: 'center',
+              gap: '6px',
+              flexWrap: 'wrap',
+              fontFamily: 'monospace',
+              fontSize: '13px'
+            }}>
+              <span style={{
+                background: selectedBaselineRisks.length > 0 ? '#4CAF50' : 'rgba(255,255,255,0.3)',
+                padding: '4px 10px',
+                borderRadius: '6px',
+                fontWeight: 'bold',
+                opacity: selectedBaselineRisks.length > 0 ? 1 : 0.5
+              }}>
+                B({selectedBaselineRisks.length})
+              </span>
+              <span style={{ opacity: 0.7 }}>+</span>
+              <span style={{
+                background: selectedHazardIds.length > 0 ? '#F44336' : 'rgba(255,255,255,0.3)',
+                padding: '4px 10px',
+                borderRadius: '6px',
+                fontWeight: 'bold',
+                opacity: selectedHazardIds.length > 0 ? 1 : 0.5,
+                animation: selectedHazardIds.length > 0 ? 'pulse 2s infinite' : 'none'
+              }}>
+                H({selectedHazardIds.length > 0 ? selectedHazardIds.length : hazardIntensity})
+              </span>
+              <span style={{ opacity: 0.7 }}>x</span>
+              <span style={{
+                background: selectedExposureLayers.length > 0 ? '#2196F3' : 'rgba(255,255,255,0.3)',
+                padding: '4px 10px',
+                borderRadius: '6px',
+                fontWeight: 'bold',
+                opacity: selectedExposureLayers.length > 0 ? 1 : 0.5
+              }}>
+                E({selectedExposureLayers.length})
+              </span>
+              <span style={{ opacity: 0.7 }}>x</span>
+              <span style={{
+                background: selectedVulnerabilityLayers.length > 0 ? '#FF9800' : 'rgba(255,255,255,0.3)',
+                padding: '4px 10px',
+                borderRadius: '6px',
+                fontWeight: 'bold',
+                opacity: selectedVulnerabilityLayers.length > 0 ? 1 : 0.5
+              }}>
+                V({selectedVulnerabilityLayers.length})
+              </span>
+              <span style={{ opacity: 0.7 }}>x</span>
+              <span style={{
+                background: selectedCopingLayers.length > 0 ? '#9C27B0' : 'rgba(255,255,255,0.3)',
+                padding: '4px 10px',
+                borderRadius: '6px',
+                fontWeight: 'bold',
+                opacity: selectedCopingLayers.length > 0 ? 1 : 0.5
+              }}>
+                C({selectedCopingLayers.length})
+              </span>
+              {calculatedImpact && (
+                <>
+                  <span style={{ opacity: 0.7 }}>=</span>
+                  <span style={{
+                    background: calculatedImpact.impactColor,
+                    padding: '6px 14px',
+                    borderRadius: '8px',
+                    fontWeight: 'bold',
+                    fontSize: '16px',
+                    boxShadow: '0 2px 8px rgba(0,0,0,0.3)'
+                  }}>
+                    {calculatedImpact.riskScore}
+                  </span>
+                </>
+              )}
+            </div>
+          </div>
+
+          {/* Quick Stats Row */}
+          {calculatedImpact && (
+            <div style={{
+              display: 'flex',
+              gap: '16px',
+              marginTop: '12px',
+              paddingTop: '12px',
+              borderTop: '1px solid rgba(255,255,255,0.2)',
+              flexWrap: 'wrap'
+            }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+                <span style={{ opacity: 0.8, fontSize: '12px' }}>Regions:</span>
+                <span style={{ fontWeight: 'bold' }}>{selectedRegions.length}</span>
+              </div>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+                <span style={{ opacity: 0.8, fontSize: '12px' }}>Districts:</span>
+                <span style={{ fontWeight: 'bold' }}>{totalSelectedDistricts}</span>
+              </div>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+                <span style={{ opacity: 0.8, fontSize: '12px' }}>Est. Affected:</span>
+                <span style={{ fontWeight: 'bold', color: calculatedImpact.impactColor }}>
+                  {calculatedImpact.estimatedAffected.toLocaleString()}
+                </span>
+              </div>
+              <div style={{
+                display: 'flex',
+                alignItems: 'center',
+                gap: '6px',
+                marginLeft: 'auto',
+                background: calculatedImpact.impactColor,
+                padding: '4px 12px',
+                borderRadius: '6px',
+                fontWeight: 'bold'
+              }}>
+                {calculatedImpact.warningLevel}
+              </div>
+            </div>
+          )}
+        </div>
+
+        {/* QUICK LAYER PRESETS */}
+        <div style={{
+          display: 'flex',
+          gap: '8px',
+          marginBottom: '16px',
+          flexWrap: 'wrap'
+        }}>
+          <span style={{ fontSize: '12px', opacity: 0.8, alignSelf: 'center' }}>Quick Presets:</span>
+          <button
+            onClick={() => {
+              setSelectedBaselineRisks(['overall']);
+              setSelectedExposureLayers(['population']);
+              setSelectedVulnerabilityLayers(['poverty']);
+              setSelectedCopingLayers(['hospitals']);
+            }}
+            style={{
+              padding: '6px 12px',
+              borderRadius: '6px',
+              border: '1px solid rgba(255,255,255,0.4)',
+              background: 'rgba(255,255,255,0.15)',
+              color: 'white',
+              cursor: 'pointer',
+              fontSize: '11px',
+              fontWeight: 'bold'
+            }}
+          >
+            Standard Analysis
+          </button>
+          <button
+            onClick={() => {
+              setSelectedBaselineRisks(['flood_risk', 'drought_risk']);
+              setSelectedExposureLayers(['population', 'cropland']);
+              setSelectedVulnerabilityLayers(['poverty', 'foodInsecurity']);
+              setSelectedCopingLayers(['hospitals', 'shelters', 'roads']);
+            }}
+            style={{
+              padding: '6px 12px',
+              borderRadius: '6px',
+              border: '1px solid rgba(255,255,255,0.4)',
+              background: 'rgba(255,255,255,0.15)',
+              color: 'white',
+              cursor: 'pointer',
+              fontSize: '11px',
+              fontWeight: 'bold'
+            }}
+          >
+            Full Humanitarian
+          </button>
+          <button
+            onClick={() => {
+              setSelectedBaselineRisks(['flood_risk', 'riverine_flood', 'flash_flood']);
+              setSelectedExposureLayers(['population', 'infrastructure']);
+              setSelectedVulnerabilityLayers(['poverty', 'waterAccess']);
+              setSelectedCopingLayers(['shelters', 'evacuationRoutes']);
+            }}
+            style={{
+              padding: '6px 12px',
+              borderRadius: '6px',
+              border: '1px solid #2196F3',
+              background: '#2196F3',
+              color: 'white',
+              cursor: 'pointer',
+              fontSize: '11px',
+              fontWeight: 'bold'
+            }}
+          >
+            Flood Scenario
+          </button>
+          <button
+            onClick={() => {
+              setSelectedBaselineRisks(['drought_risk', 'food_crisis']);
+              setSelectedExposureLayers(['cropland', 'livestock']);
+              setSelectedVulnerabilityLayers(['foodInsecurity', 'waterAccess']);
+              setSelectedCopingLayers(['hospitals', 'roads']);
+            }}
+            style={{
+              padding: '6px 12px',
+              borderRadius: '6px',
+              border: '1px solid #FF9800',
+              background: '#FF9800',
+              color: 'white',
+              cursor: 'pointer',
+              fontSize: '11px',
+              fontWeight: 'bold'
+            }}
+          >
+            Drought/Food Crisis
+          </button>
+          <button
+            onClick={() => {
+              setSelectedBaselineRisks(['epidemic_risk', 'cholera_risk', 'malaria_risk']);
+              setSelectedExposureLayers(['population']);
+              setSelectedVulnerabilityLayers(['healthAccess', 'waterAccess', 'vulnerableGroups']);
+              setSelectedCopingLayers(['hospitals']);
+            }}
+            style={{
+              padding: '6px 12px',
+              borderRadius: '6px',
+              border: '1px solid #E91E63',
+              background: '#E91E63',
+              color: 'white',
+              cursor: 'pointer',
+              fontSize: '11px',
+              fontWeight: 'bold'
+            }}
+          >
+            Health Emergency
+          </button>
+          <button
+            onClick={() => {
+              setSelectedBaselineRisks([]);
+              setSelectedHazardIds([]);
+              setSelectedExposureLayers([]);
+              setSelectedVulnerabilityLayers([]);
+              setSelectedCopingLayers([]);
+            }}
+            style={{
+              padding: '6px 12px',
+              borderRadius: '6px',
+              border: '1px solid rgba(255,255,255,0.4)',
+              background: 'transparent',
+              color: 'white',
+              cursor: 'pointer',
+              fontSize: '11px',
+              opacity: 0.8
+            }}
+          >
+            Clear All
+          </button>
+        </div>
 
         {/* Region & District Selection - Simplified */}
         <div style={{
@@ -1914,50 +2250,102 @@ const Layer2RiskAnalysis = ({ riskData, activeWarnings, activeHazards }) => {
                 </div>
               </div>
 
-              {/* Formula Display */}
+              {/* Formula Display - Dynamic Layer-Based Calculation */}
               <div style={{
                 background: '#FAFAFA',
                 padding: '16px',
                 borderRadius: '12px',
-                minWidth: '200px',
+                minWidth: '240px',
                 border: '2px solid #E0E0E0'
               }}>
-                <h5 style={{ margin: '0 0 12px 0', fontSize: '12px', color: '#666', textTransform: 'uppercase' }}>INFORM Formula</h5>
-                <div style={{ fontFamily: 'monospace', fontSize: '13px', color: '#333' }}>
-                  <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '4px' }}>
-                    <span>H (Hazard):</span>
-                    <strong>{calculatedImpact.hazardIntensity}</strong>
+                <h5 style={{ margin: '0 0 12px 0', fontSize: '12px', color: '#666', textTransform: 'uppercase' }}>
+                  Dynamic Layer Calculation
+                </h5>
+                <div style={{ fontFamily: 'monospace', fontSize: '12px', color: '#333' }}>
+                  {/* Baseline Risk */}
+                  <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '4px', padding: '4px', background: '#E8F5E9', borderRadius: '4px' }}>
+                    <span style={{ color: '#1B5E20' }}>B (Baseline):</span>
+                    <strong style={{ color: '#1B5E20' }}>{calculatedImpact.baselineRisk}</strong>
                   </div>
-                  <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '4px' }}>
-                    <span>E (Exposure):</span>
-                    <strong>{calculatedImpact.avgExposure}</strong>
+                  {/* Hazard */}
+                  <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '4px', padding: '4px', background: '#FFEBEE', borderRadius: '4px' }}>
+                    <span style={{ color: '#C62828' }}>H (Hazard):</span>
+                    <strong style={{ color: '#C62828' }}>{calculatedImpact.hazardIntensity}</strong>
                   </div>
-                  <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '4px' }}>
-                    <span>V (Vulnerability):</span>
-                    <strong>{calculatedImpact.avgVulnerability}</strong>
+                  {/* Combined Hazard */}
+                  <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '4px', fontSize: '11px', color: '#666' }}>
+                    <span>Combined (B+H)/2:</span>
+                    <strong>{calculatedImpact.combinedHazard}</strong>
                   </div>
-                  <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '4px' }}>
-                    <span>LCC:</span>
-                    <strong>{calculatedImpact.lackOfCoping}</strong>
+                  {/* Exposure */}
+                  <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '4px', padding: '4px', background: '#E3F2FD', borderRadius: '4px' }}>
+                    <span style={{ color: '#1565C0' }}>E (Exposure):</span>
+                    <strong style={{ color: '#1565C0' }}>{calculatedImpact.avgExposure}</strong>
+                  </div>
+                  {/* Vulnerability */}
+                  <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '4px', padding: '4px', background: '#FFF3E0', borderRadius: '4px' }}>
+                    <span style={{ color: '#E65100' }}>V (Vulnerability):</span>
+                    <strong style={{ color: '#E65100' }}>{calculatedImpact.avgVulnerability}</strong>
+                  </div>
+                  {/* Lack of Coping */}
+                  <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '4px', padding: '4px', background: '#F3E5F5', borderRadius: '4px' }}>
+                    <span style={{ color: '#7B1FA2' }}>LCC (Coping):</span>
+                    <strong style={{ color: '#7B1FA2' }}>{calculatedImpact.lackOfCoping}</strong>
                   </div>
                   <hr style={{ margin: '8px 0', border: 'none', borderTop: '2px solid #E0E0E0' }} />
-                  <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '14px' }}>
-                    <span>Risk =</span>
+                  {/* Formula */}
+                  <div style={{ fontSize: '10px', color: '#666', textAlign: 'center', marginBottom: '6px' }}>
+                    Risk = ((B+H)/2 x E x V x LCC)^(1/4)
+                  </div>
+                  <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '16px', padding: '8px', background: calculatedImpact.impactColor + '22', borderRadius: '6px' }}>
+                    <span>Risk Score:</span>
                     <strong style={{ color: calculatedImpact.impactColor }}>{calculatedImpact.riskScore}</strong>
                   </div>
                 </div>
-                <div style={{ marginTop: '12px', fontSize: '11px', color: '#999', textAlign: 'center' }}>
+                {/* Layer count breakdown */}
+                <div style={{ marginTop: '12px', fontSize: '10px', color: '#666' }}>
+                  <div style={{ display: 'flex', flexWrap: 'wrap', gap: '4px', justifyContent: 'center' }}>
+                    {calculatedImpact.layerBreakdown?.baselineRisks > 0 && (
+                      <span style={{ background: '#E8F5E9', padding: '2px 6px', borderRadius: '3px' }}>
+                        B:{calculatedImpact.layerBreakdown.baselineRisks}
+                      </span>
+                    )}
+                    {calculatedImpact.layerBreakdown?.hazards > 0 && (
+                      <span style={{ background: '#FFEBEE', padding: '2px 6px', borderRadius: '3px' }}>
+                        H:{calculatedImpact.layerBreakdown.hazards}
+                      </span>
+                    )}
+                    {calculatedImpact.layerBreakdown?.exposure > 0 && (
+                      <span style={{ background: '#E3F2FD', padding: '2px 6px', borderRadius: '3px' }}>
+                        E:{calculatedImpact.layerBreakdown.exposure}
+                      </span>
+                    )}
+                    {calculatedImpact.layerBreakdown?.vulnerability > 0 && (
+                      <span style={{ background: '#FFF3E0', padding: '2px 6px', borderRadius: '3px' }}>
+                        V:{calculatedImpact.layerBreakdown.vulnerability}
+                      </span>
+                    )}
+                    {calculatedImpact.layerBreakdown?.coping > 0 && (
+                      <span style={{ background: '#F3E5F5', padding: '2px 6px', borderRadius: '3px' }}>
+                        C:{calculatedImpact.layerBreakdown.coping}
+                      </span>
+                    )}
+                  </div>
+                </div>
+                <div style={{ marginTop: '8px', fontSize: '10px', color: '#999', textAlign: 'center' }}>
                   {calculatedImpact.enabledLayerCount} layers • {calculatedImpact.regionsCount} regions
                 </div>
               </div>
             </div>
 
-            {/* Infrastructure at Risk */}
-            {(enabledLayers.hospitals || enabledLayers.shelters || enabledLayers.roads || enabledLayers.fireStations || enabledLayers.policeStations || enabledLayers.evacuationRoutes) && (
+            {/* Infrastructure at Risk - Now uses selectedCopingLayers */}
+            {selectedCopingLayers.length > 0 && (
               <div style={{ marginTop: '20px', paddingTop: '20px', borderTop: '2px solid #E0E0E0' }}>
-                <h5 style={{ margin: '0 0 16px 0', color: '#333', fontSize: '14px' }}>🏛️ Infrastructure Analysis</h5>
+                <h5 style={{ margin: '0 0 16px 0', color: '#333', fontSize: '14px' }}>
+                  🏛️ Coping Capacity Resources ({selectedCopingLayers.length} layers active)
+                </h5>
                 <div style={{ display: 'flex', gap: '16px', flexWrap: 'wrap' }}>
-                  {enabledLayers.hospitals && (
+                  {selectedCopingLayers.includes('hospitals') && (
                     <div style={{ background: '#FFEBEE', padding: '12px 20px', borderRadius: '8px', display: 'flex', alignItems: 'center', gap: '10px' }}>
                       <span style={{ fontSize: '28px' }}>🏥</span>
                       <div>
@@ -1968,7 +2356,7 @@ const Layer2RiskAnalysis = ({ riskData, activeWarnings, activeHazards }) => {
                       </div>
                     </div>
                   )}
-                  {enabledLayers.shelters && (
+                  {selectedCopingLayers.includes('shelters') && (
                     <div style={{ background: '#E3F2FD', padding: '12px 20px', borderRadius: '8px', display: 'flex', alignItems: 'center', gap: '10px' }}>
                       <span style={{ fontSize: '28px' }}>🏠</span>
                       <div>
@@ -1979,7 +2367,7 @@ const Layer2RiskAnalysis = ({ riskData, activeWarnings, activeHazards }) => {
                       </div>
                     </div>
                   )}
-                  {enabledLayers.roads && (
+                  {selectedCopingLayers.includes('roads') && (
                     <div style={{ background: '#FFF3E0', padding: '12px 20px', borderRadius: '8px', display: 'flex', alignItems: 'center', gap: '10px' }}>
                       <span style={{ fontSize: '28px' }}>🛣️</span>
                       <div>
@@ -1990,7 +2378,7 @@ const Layer2RiskAnalysis = ({ riskData, activeWarnings, activeHazards }) => {
                       </div>
                     </div>
                   )}
-                  {enabledLayers.fireStations && (
+                  {selectedCopingLayers.includes('fireStations') && (
                     <div style={{ background: '#FCE4EC', padding: '12px 20px', borderRadius: '8px', display: 'flex', alignItems: 'center', gap: '10px' }}>
                       <span style={{ fontSize: '28px' }}>🚒</span>
                       <div>
@@ -2001,7 +2389,7 @@ const Layer2RiskAnalysis = ({ riskData, activeWarnings, activeHazards }) => {
                       </div>
                     </div>
                   )}
-                  {enabledLayers.policeStations && (
+                  {selectedCopingLayers.includes('policeStations') && (
                     <div style={{ background: '#E8EAF6', padding: '12px 20px', borderRadius: '8px', display: 'flex', alignItems: 'center', gap: '10px' }}>
                       <span style={{ fontSize: '28px' }}>👮</span>
                       <div>
@@ -2012,7 +2400,7 @@ const Layer2RiskAnalysis = ({ riskData, activeWarnings, activeHazards }) => {
                       </div>
                     </div>
                   )}
-                  {enabledLayers.evacuationRoutes && (
+                  {selectedCopingLayers.includes('evacuationRoutes') && (
                     <div style={{ background: '#E8F5E9', padding: '12px 20px', borderRadius: '8px', display: 'flex', alignItems: 'center', gap: '10px' }}>
                       <span style={{ fontSize: '28px' }}>🚗</span>
                       <div>
@@ -2023,6 +2411,25 @@ const Layer2RiskAnalysis = ({ riskData, activeWarnings, activeHazards }) => {
                       </div>
                     </div>
                   )}
+                </div>
+                {/* Coping Capacity Impact Note */}
+                <div style={{
+                  marginTop: '12px',
+                  padding: '10px 14px',
+                  background: '#F3E5F5',
+                  borderRadius: '8px',
+                  fontSize: '12px',
+                  color: '#7B1FA2',
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: '8px'
+                }}>
+                  <span style={{ fontSize: '16px' }}>💡</span>
+                  <span>
+                    <strong>Coping Capacity Effect:</strong> {selectedCopingLayers.length} resources selected reduces
+                    Lack of Coping Capacity by {(selectedCopingLayers.length * 0.5).toFixed(1)} points,
+                    lowering overall risk.
+                  </span>
                 </div>
               </div>
             )}
@@ -2111,6 +2518,177 @@ const Layer2RiskAnalysis = ({ riskData, activeWarnings, activeHazards }) => {
                 </div>
               </div>
             )}
+
+            {/* Layer Contribution Analysis - Visual breakdown of how each layer affects the score */}
+            <div style={{ marginTop: '24px', paddingTop: '20px', borderTop: '2px solid #E0E0E0' }}>
+              <h5 style={{ margin: '0 0 16px 0', color: '#333', fontSize: '14px' }}>
+                📊 Layer Contribution Analysis
+              </h5>
+              <div style={{
+                display: 'grid',
+                gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))',
+                gap: '12px'
+              }}>
+                {/* Baseline Risk Contribution */}
+                <div style={{
+                  background: 'linear-gradient(135deg, #E8F5E9 0%, #C8E6C9 100%)',
+                  padding: '16px',
+                  borderRadius: '12px',
+                  border: '2px solid #4CAF50'
+                }}>
+                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '8px' }}>
+                    <span style={{ fontSize: '12px', fontWeight: 'bold', color: '#1B5E20' }}>Baseline Risk</span>
+                    <span style={{ fontSize: '18px', fontWeight: 'bold', color: '#1B5E20' }}>
+                      {calculatedImpact.baselineRisk}
+                    </span>
+                  </div>
+                  <div style={{ height: '8px', background: '#C8E6C9', borderRadius: '4px', overflow: 'hidden' }}>
+                    <div style={{
+                      width: `${(parseFloat(calculatedImpact.baselineRisk) / 10) * 100}%`,
+                      height: '100%',
+                      background: '#4CAF50',
+                      borderRadius: '4px'
+                    }} />
+                  </div>
+                  <div style={{ fontSize: '10px', color: '#388E3C', marginTop: '6px' }}>
+                    {selectedBaselineRisks.length} layer{selectedBaselineRisks.length !== 1 ? 's' : ''} selected
+                  </div>
+                </div>
+
+                {/* Hazard Contribution */}
+                <div style={{
+                  background: 'linear-gradient(135deg, #FFEBEE 0%, #FFCDD2 100%)',
+                  padding: '16px',
+                  borderRadius: '12px',
+                  border: '2px solid #F44336'
+                }}>
+                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '8px' }}>
+                    <span style={{ fontSize: '12px', fontWeight: 'bold', color: '#B71C1C' }}>Hazard Intensity</span>
+                    <span style={{ fontSize: '18px', fontWeight: 'bold', color: '#B71C1C' }}>
+                      {calculatedImpact.hazardIntensity}
+                    </span>
+                  </div>
+                  <div style={{ height: '8px', background: '#FFCDD2', borderRadius: '4px', overflow: 'hidden' }}>
+                    <div style={{
+                      width: `${(parseFloat(calculatedImpact.hazardIntensity) / 10) * 100}%`,
+                      height: '100%',
+                      background: '#F44336',
+                      borderRadius: '4px'
+                    }} />
+                  </div>
+                  <div style={{ fontSize: '10px', color: '#C62828', marginTop: '6px' }}>
+                    {selectedHazardIds.length > 0 ? `${selectedHazardIds.length} alert(s)` : 'Manual slider'}
+                  </div>
+                </div>
+
+                {/* Exposure Contribution */}
+                <div style={{
+                  background: 'linear-gradient(135deg, #E3F2FD 0%, #BBDEFB 100%)',
+                  padding: '16px',
+                  borderRadius: '12px',
+                  border: '2px solid #2196F3'
+                }}>
+                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '8px' }}>
+                    <span style={{ fontSize: '12px', fontWeight: 'bold', color: '#0D47A1' }}>Exposure</span>
+                    <span style={{ fontSize: '18px', fontWeight: 'bold', color: '#0D47A1' }}>
+                      {calculatedImpact.avgExposure}
+                    </span>
+                  </div>
+                  <div style={{ height: '8px', background: '#BBDEFB', borderRadius: '4px', overflow: 'hidden' }}>
+                    <div style={{
+                      width: `${(parseFloat(calculatedImpact.avgExposure) / 10) * 100}%`,
+                      height: '100%',
+                      background: '#2196F3',
+                      borderRadius: '4px'
+                    }} />
+                  </div>
+                  <div style={{ fontSize: '10px', color: '#1565C0', marginTop: '6px' }}>
+                    {selectedExposureLayers.length} layer{selectedExposureLayers.length !== 1 ? 's' : ''} selected
+                  </div>
+                </div>
+
+                {/* Vulnerability Contribution */}
+                <div style={{
+                  background: 'linear-gradient(135deg, #FFF3E0 0%, #FFE0B2 100%)',
+                  padding: '16px',
+                  borderRadius: '12px',
+                  border: '2px solid #FF9800'
+                }}>
+                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '8px' }}>
+                    <span style={{ fontSize: '12px', fontWeight: 'bold', color: '#E65100' }}>Vulnerability</span>
+                    <span style={{ fontSize: '18px', fontWeight: 'bold', color: '#E65100' }}>
+                      {calculatedImpact.avgVulnerability}
+                    </span>
+                  </div>
+                  <div style={{ height: '8px', background: '#FFE0B2', borderRadius: '4px', overflow: 'hidden' }}>
+                    <div style={{
+                      width: `${(parseFloat(calculatedImpact.avgVulnerability) / 10) * 100}%`,
+                      height: '100%',
+                      background: '#FF9800',
+                      borderRadius: '4px'
+                    }} />
+                  </div>
+                  <div style={{ fontSize: '10px', color: '#EF6C00', marginTop: '6px' }}>
+                    {selectedVulnerabilityLayers.length} layer{selectedVulnerabilityLayers.length !== 1 ? 's' : ''} selected
+                  </div>
+                </div>
+
+                {/* Coping Capacity Contribution */}
+                <div style={{
+                  background: 'linear-gradient(135deg, #F3E5F5 0%, #E1BEE7 100%)',
+                  padding: '16px',
+                  borderRadius: '12px',
+                  border: '2px solid #9C27B0'
+                }}>
+                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '8px' }}>
+                    <span style={{ fontSize: '12px', fontWeight: 'bold', color: '#6A1B9A' }}>Lack of Coping</span>
+                    <span style={{ fontSize: '18px', fontWeight: 'bold', color: '#6A1B9A' }}>
+                      {calculatedImpact.lackOfCoping}
+                    </span>
+                  </div>
+                  <div style={{ height: '8px', background: '#E1BEE7', borderRadius: '4px', overflow: 'hidden' }}>
+                    <div style={{
+                      width: `${(parseFloat(calculatedImpact.lackOfCoping) / 10) * 100}%`,
+                      height: '100%',
+                      background: '#9C27B0',
+                      borderRadius: '4px'
+                    }} />
+                  </div>
+                  <div style={{ fontSize: '10px', color: '#7B1FA2', marginTop: '6px' }}>
+                    {selectedCopingLayers.length > 0
+                      ? `${selectedCopingLayers.length} resources reduce LCC`
+                      : 'No coping resources'}
+                  </div>
+                </div>
+              </div>
+
+              {/* Key Insight Box */}
+              <div style={{
+                marginTop: '16px',
+                padding: '14px 18px',
+                background: '#FAFAFA',
+                borderRadius: '10px',
+                border: '1px solid #E0E0E0',
+                fontSize: '13px',
+                color: '#424242'
+              }}>
+                <strong style={{ color: '#1976D2' }}>Key Insight:</strong>
+                {parseFloat(calculatedImpact.avgVulnerability) > parseFloat(calculatedImpact.avgExposure) ? (
+                  <span> Vulnerability ({calculatedImpact.avgVulnerability}) is higher than Exposure ({calculatedImpact.avgExposure}).
+                    Consider prioritizing vulnerability reduction programs in the selected regions.</span>
+                ) : parseFloat(calculatedImpact.avgExposure) > parseFloat(calculatedImpact.avgVulnerability) ? (
+                  <span> Exposure ({calculatedImpact.avgExposure}) is higher than Vulnerability ({calculatedImpact.avgVulnerability}).
+                    Focus on reducing population and asset exposure to hazards.</span>
+                ) : (
+                  <span> Exposure and Vulnerability are balanced. A comprehensive risk reduction approach is recommended.</span>
+                )}
+                {selectedCopingLayers.length === 0 && (
+                  <span style={{ color: '#F44336', display: 'block', marginTop: '6px' }}>
+                    <strong>Note:</strong> No coping capacity resources selected. Adding resources will reduce the overall risk score.
+                  </span>
+                )}
+              </div>
+            </div>
           </div>
         )}
 
