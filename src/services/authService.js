@@ -128,12 +128,12 @@ export const MODULE_ACCESS = {
   [USER_ROLES.ADMIN]: {
     modules: ['module01', 'module02', 'module03', 'module04', 'module05'],
     dataViews: ['risk', 'warning', 'severity', 'climate'],
-    tools: ['analytics', 'database', 'data-entry']
+    tools: ['analytics', 'database', 'data-entry', 'data-sources']
   },
   [USER_ROLES.PMO_OFFICER]: {
     modules: ['module01', 'module02', 'module03', 'module04', 'module05'],
     dataViews: ['risk', 'warning', 'severity', 'climate'],
-    tools: ['analytics', 'database', 'data-entry']
+    tools: ['analytics', 'database', 'data-entry', 'data-sources']
   },
   [USER_ROLES.REGIONAL_OFFICER]: {
     modules: ['module01', 'module02'],

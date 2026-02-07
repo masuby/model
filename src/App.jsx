@@ -20,6 +20,7 @@ import AnalyticsDashboard from "./components/warning/components/AnalyticsDashboa
 import DatabasePanel from "./components/admin/DatabasePanel";
 import DataManagementHub from "./components/admin/DataManagementHub";
 import LiveDataEntry from "./components/data-entry/LiveDataEntry";
+import DataManagementDashboard from "./components/warning/DataManagementDashboard";
 import {
   USER_ROLES,
   canRoleAccessModule,
@@ -158,6 +159,8 @@ function MainApp() {
         return <DataManagementHub />;
       case 'data-entry':
         return <LiveDataEntry onSubmit={(data) => console.log('Submitted:', data)} />;
+      case 'data-sources':
+        return <DataManagementDashboard />;
       case 'risk':
       case 'warning':
       case 'severity':
