@@ -459,7 +459,7 @@ export const HUMAN_HAZARD_INDICATORS = [
 
 /**
  * Calculate Natural Hazard Aggregate
- * Method: Maximum of all natural hazard indicators
+ * Method: Arithmetic Mean of all natural hazard components (per Excel template =AVERAGE(G4:R4))
  * @param {Object} indicators - Natural hazard indicators
  * @param {Object} options - Calculation options
  * @returns {number|null}
@@ -470,7 +470,7 @@ export function calculateNaturalHazard(indicators, options = {}) {
   if (trace) tracer.startContext('calculateNaturalHazard', indicators);
 
   const values = NATURAL_HAZARD_INDICATORS.map(key => indicators[key]);
-  const result = maximum(values, { trace });
+  const result = arithmeticMean(values, { trace }); // Changed from maximum to arithmeticMean per Excel
 
   if (trace) tracer.endContext(result);
 
@@ -479,7 +479,7 @@ export function calculateNaturalHazard(indicators, options = {}) {
     NATURAL_HAZARD_INDICATORS.forEach((key, i) => {
       breakdown[key] = values[i];
     });
-    return { value: result, breakdown, maxIndicator: findMaxIndicator(indicators, NATURAL_HAZARD_INDICATORS) };
+    return { value: result, breakdown };
   }
 
   return result;
@@ -487,7 +487,7 @@ export function calculateNaturalHazard(indicators, options = {}) {
 
 /**
  * Calculate Human Hazard Aggregate
- * Method: Maximum of all human hazard indicators
+ * Method: Arithmetic Mean of all human hazard components (per Excel template =AVERAGE(T4:X4))
  * @param {Object} indicators - Human hazard indicators
  * @param {Object} options - Calculation options
  * @returns {number|null}
@@ -498,7 +498,7 @@ export function calculateHumanHazard(indicators, options = {}) {
   if (trace) tracer.startContext('calculateHumanHazard', indicators);
 
   const values = HUMAN_HAZARD_INDICATORS.map(key => indicators[key]);
-  const result = maximum(values, { trace });
+  const result = arithmeticMean(values, { trace }); // Changed from maximum to arithmeticMean per Excel
 
   if (trace) tracer.endContext(result);
 
@@ -507,7 +507,7 @@ export function calculateHumanHazard(indicators, options = {}) {
     HUMAN_HAZARD_INDICATORS.forEach((key, i) => {
       breakdown[key] = values[i];
     });
-    return { value: result, breakdown, maxIndicator: findMaxIndicator(indicators, HUMAN_HAZARD_INDICATORS) };
+    return { value: result, breakdown };
   }
 
   return result;
@@ -535,28 +535,38 @@ function findMaxIndicator(indicators, keys) {
 }
 
 /**
- * Calculate Hazard and Exposure Total
- * Method: Maximum of Natural and Human aggregates
- * @param {number} naturalHazard - Natural hazard aggregate
- * @param {number} humanHazard - Human hazard aggregate
+ * Calculate Hazard and Exposure Total (Dimension Score)
+ * Method: Scaled Geometric Mean of Natural and Human categories
+ * Excel formula: =(10-GEOMEAN(((10-S4)/10*9+1),((10-Y4)/10*9+1)))/9*10
+ * @param {number} naturalHazard - Natural hazard category score
+ * @param {number} humanHazard - Human hazard category score
  * @param {Object} options - Calculation options
  * @returns {number|null}
  */
 export function calculateHazardExposure(naturalHazard, humanHazard, options = {}) {
-  const { trace = false, includeDominant = false } = options;
+  const { trace = false, includeComponents = false } = options;
 
   if (trace) tracer.startContext('calculateHazardExposure', { naturalHazard, humanHazard });
 
-  const result = maximum([naturalHazard, humanHazard], { trace });
+  // Scaled Geometric Mean formula (per Excel template)
+  // =(10-GEOMEAN(((10-val1)/10*9+1),((10-val2)/10*9+1)))/9*10
+  let result = null;
+  if (naturalHazard !== null && humanHazard !== null &&
+      !isNaN(naturalHazard) && !isNaN(humanHazard)) {
+    const adj1 = ((10 - naturalHazard) / 10 * 9) + 1;
+    const adj2 = ((10 - humanHazard) / 10 * 9) + 1;
+    const geomean = Math.sqrt(adj1 * adj2);
+    result = roundTo((10 - geomean) / 9 * 10, FORMULA_CONFIG.precision.default);
+  }
 
   if (trace) tracer.endContext(result);
 
-  if (includeDominant) {
+  if (includeComponents) {
     return {
       value: result,
       naturalHazard,
       humanHazard,
-      dominant: naturalHazard >= humanHazard ? 'natural' : 'human'
+      formula: `=(10-GEOMEAN(((10-${naturalHazard})/10*9+1),((10-${humanHazard})/10*9+1)))/9*10`
     };
   }
 
