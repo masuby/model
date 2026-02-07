@@ -581,4 +581,4 @@ export function resetGEEClient() {
 }
 
 export default GEEClient;
-export { GEE_CONFIG, GEE_DATASETS, GEE_RECIPES };
+export { GEE_CONFIG };
