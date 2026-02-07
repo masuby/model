@@ -2,7 +2,8 @@
  * DATA INTEGRATION MODULE
  *
  * Central module for all external data source integrations
- * Supports TCVMP (PMO-DMD), RCMRD, NBS, and Google Earth Engine
+ * Supports TCVMP (PMO-DMD), RCMRD, NBS, Google Earth Engine,
+ * OpenStreetMap, World Bank, UNEP GAR, ESA WorldCover, and more
  */
 
 // Data Source Registry
@@ -55,6 +56,40 @@ export {
   listRecipes
 } from './geeIntegration';
 
+// Risk Data Connector (DRM Portal, UNEP GAR, UNDRR, METEOR)
+export {
+  default as RiskDataConnector,
+  getRiskDataConnector,
+  resetRiskDataConnector,
+  RISK_DATA_SOURCES
+} from './riskDataConnector';
+
+// Exposure Data Connector (ESA WorldCover, SRTM, WorldPop, FAO, NBS)
+export {
+  default as ExposureDataConnector,
+  getExposureDataConnector,
+  resetExposureDataConnector,
+  EXPOSURE_DATA_SOURCES,
+  LAND_COVER_CLASSES
+} from './exposureDataConnector';
+
+// Infrastructure Connector (OpenStreetMap, World Bank, GCA)
+export {
+  default as InfrastructureConnector,
+  getInfrastructureConnector,
+  resetInfrastructureConnector,
+  INFRASTRUCTURE_DATA_SOURCES
+} from './infrastructureConnector';
+
+// Climate Data Connector (UNDRR, World Bank Climate, Copernicus, TMA)
+export {
+  default as ClimateDataConnector,
+  getClimateDataConnector,
+  resetClimateDataConnector,
+  CLIMATE_DATA_SOURCES,
+  CLIMATE_SCENARIOS
+} from './climateDataConnector';
+
 // ============================================================================
 // UNIFIED DATA SERVICE
 // ============================================================================
@@ -66,7 +101,11 @@ class DataIntegrationService {
     this.status = {
       tcvmp: { connected: false },
       rcmrd: { connected: false },
-      gee: { available: false }
+      gee: { available: false },
+      risk: { connected: false },
+      exposure: { connected: false },
+      infrastructure: { connected: false },
+      climate: { connected: false }
     };
   }
 
@@ -111,6 +150,54 @@ class DataIntegrationService {
       results.gee = { available: false, error: error.message };
     }
 
+    // Initialize Risk Data Connector (DRM Portal, UNEP GAR, UNDRR, METEOR)
+    try {
+      const { getRiskDataConnector } = await import('./riskDataConnector');
+      this.connectors.risk = getRiskDataConnector();
+      results.risk = await this.connectors.risk.connectAll();
+      const anyRiskConnected = Object.values(results.risk).some(r => r.success);
+      this.status.risk = { connected: anyRiskConnected, sources: results.risk };
+    } catch (error) {
+      console.warn('[DataIntegration] Risk data initialization failed:', error.message);
+      results.risk = { success: false, error: error.message };
+    }
+
+    // Initialize Exposure Data Connector (ESA WorldCover, SRTM, WorldPop, FAO)
+    try {
+      const { getExposureDataConnector } = await import('./exposureDataConnector');
+      this.connectors.exposure = getExposureDataConnector();
+      results.exposure = await this.connectors.exposure.connectAll();
+      const anyExposureConnected = Object.values(results.exposure).some(r => r.success);
+      this.status.exposure = { connected: anyExposureConnected, sources: results.exposure };
+    } catch (error) {
+      console.warn('[DataIntegration] Exposure data initialization failed:', error.message);
+      results.exposure = { success: false, error: error.message };
+    }
+
+    // Initialize Infrastructure Connector (OpenStreetMap, World Bank)
+    try {
+      const { getInfrastructureConnector } = await import('./infrastructureConnector');
+      this.connectors.infrastructure = getInfrastructureConnector();
+      results.infrastructure = await this.connectors.infrastructure.connectAll();
+      const anyInfraConnected = results.infrastructure.osm || results.infrastructure.worldbank;
+      this.status.infrastructure = { connected: anyInfraConnected, sources: results.infrastructure };
+    } catch (error) {
+      console.warn('[DataIntegration] Infrastructure initialization failed:', error.message);
+      results.infrastructure = { success: false, error: error.message };
+    }
+
+    // Initialize Climate Data Connector
+    try {
+      const { getClimateDataConnector } = await import('./climateDataConnector');
+      this.connectors.climate = getClimateDataConnector();
+      results.climate = await this.connectors.climate.connectAll();
+      const anyClimateConnected = Object.values(results.climate).some(v => v === true);
+      this.status.climate = { connected: anyClimateConnected, sources: results.climate };
+    } catch (error) {
+      console.warn('[DataIntegration] Climate data initialization failed:', error.message);
+      results.climate = { success: false, error: error.message };
+    }
+
     this.initialized = true;
     console.log('[DataIntegration] Initialization complete:', this.status);
 
@@ -136,7 +223,9 @@ class DataIntegrationService {
       hazard: [],
       exposure: [],
       vulnerability: [],
-      coping: []
+      coping: [],
+      infrastructure: [],
+      climate: []
     };
 
     // TCVMP layers
@@ -175,7 +264,102 @@ class DataIntegrationService {
       });
     }
 
+    // Risk Data layers (DRM, UNEP GAR, METEOR, DesInventar)
+    if (this.connectors.risk) {
+      const riskLayers = this.connectors.risk.getAllLayers();
+      riskLayers.forEach(layer => {
+        if (layer.category === 'hazard') {
+          layers.hazard.push({ ...layer, source: layer.sourceName });
+        } else if (layer.category === 'impact') {
+          layers.vulnerability.push({ ...layer, source: layer.sourceName });
+        }
+      });
+    }
+
+    // Exposure Data layers (ESA WorldCover, SRTM, WorldPop, FAO)
+    if (this.connectors.exposure) {
+      const exposureLayers = this.connectors.exposure.getAllLayers();
+      exposureLayers.forEach(layer => {
+        layers.exposure.push({ ...layer, source: layer.sourceName });
+      });
+    }
+
+    // Infrastructure layers (OpenStreetMap, World Bank)
+    if (this.connectors.infrastructure) {
+      const infraLayers = this.connectors.infrastructure.getAllLayers();
+      infraLayers.forEach(layer => {
+        if (layer.category === 'critical_infrastructure') {
+          layers.coping.push({ ...layer, source: layer.sourceName });
+        } else {
+          layers.infrastructure.push({ ...layer, source: layer.sourceName });
+        }
+      });
+    }
+
+    // Climate datasets
+    if (this.connectors.climate) {
+      const climateLayers = this.connectors.climate.getAllDatasets();
+      climateLayers.forEach(dataset => {
+        layers.climate.push({ ...dataset, source: dataset.sourceName });
+      });
+    }
+
     return layers;
+  }
+
+  /**
+   * Get OpenStreetMap infrastructure data
+   */
+  async getOSMInfrastructure(layerId, regionName) {
+    if (!this.connectors.infrastructure) {
+      throw new Error('Infrastructure connector not initialized');
+    }
+    return this.connectors.infrastructure.getInfrastructure(layerId, regionName);
+  }
+
+  /**
+   * Get critical infrastructure for a region
+   */
+  async getCriticalInfrastructure(regionName) {
+    if (!this.connectors.infrastructure) {
+      throw new Error('Infrastructure connector not initialized');
+    }
+    return this.connectors.infrastructure.getCriticalInfrastructure(regionName);
+  }
+
+  /**
+   * Get climate projections
+   */
+  async getClimateProjections(variable, scenario, period) {
+    if (!this.connectors.climate) {
+      throw new Error('Climate connector not initialized');
+    }
+    return this.connectors.climate.getClimateProjections(variable, scenario, period);
+  }
+
+  /**
+   * Get regional hazard data
+   */
+  async getRegionalHazardData(regionName, hazardTypes) {
+    if (!this.connectors.risk) {
+      throw new Error('Risk connector not initialized');
+    }
+    return this.connectors.risk.getRegionalHazardData(regionName, hazardTypes);
+  }
+
+  /**
+   * Get population and land cover exposure data
+   */
+  async getExposureData(regionName) {
+    if (!this.connectors.exposure) {
+      throw new Error('Exposure connector not initialized');
+    }
+    const [population, landCover, livestock] = await Promise.all([
+      this.connectors.exposure.getPopulationData(regionName),
+      this.connectors.exposure.getLandCoverData(regionName),
+      this.connectors.exposure.getLivestockData(regionName)
+    ]);
+    return { population, landCover, livestock };
   }
 
   /**
