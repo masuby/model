@@ -1,0 +1,248 @@
+/* Modified: VisualizationModal.css */
+.visualization-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modal-content {
+  background-color: white;
+  border-radius: 8px;
+  width: 90%;
+  max-width: 1200px;
+  max-height: 90vh;
+  overflow: auto;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  text-align: center;
+  align-content: center;
+  padding: 16px 20px;
+  border-bottom: 1px solid #e0e0e0;
+  background-color: #f8f9fa;
+  border-radius: 8px 8px 0 0;
+  flex-shrink: 0;
+}
+
+.modal-header h2 {
+  margin: 0;
+  color: #323130;
+  font-size: 1.5rem;
+}
+
+.close-btn {
+  background: none;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+  color: #605e5c;
+  padding: 0;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.close-btn:hover {
+  color: #323130;
+  background-color: #e0e0e0;
+  border-radius: 50%;
+}
+
+.controls {
+  display: flex;
+  gap: 15px;
+  padding: 15px 20px;
+  background-color: #f8f9fa;
+  border-bottom: 1px solid #e0e0e0;
+  flex-wrap: wrap;
+  flex-shrink: 0;
+}
+
+.control-group {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.control-group label {
+  font-weight: 500;
+  font-size: 0.9rem;
+  color: #323130;
+}
+
+.control-group select {
+  padding: 8px 12px;
+  border: 1px solid #ced4da;
+  border-radius: 4px;
+  background: white;
+  color: #495057;
+  cursor: pointer;
+  min-width: 150px;
+}
+
+.chart-container {
+  flex: 1;
+  padding: 0; /* Removed padding to allow map full height */
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.no-data {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 200px;
+  color: #6c757d;
+  font-style: italic;
+}
+
+/* Single Chart View */
+.single-chart-view {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.chart-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 15px;
+  margin-bottom: 20px;
+  padding: 15px 20px;
+  border-bottom: 1px solid #e0e0e0;
+  flex-shrink: 0;
+  position: relative;
+}
+
+.chart-header .data-column-selector {
+  flex: 1;
+  max-width: 500px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.back-btn {
+  background: #6c757d;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: all 0.3s ease;
+  white-space: nowrap;
+}
+
+.back-btn:hover {
+  background: #5a6268;
+}
+
+.chart-header h3 {
+  margin: 0;
+  color: #323130;
+  font-size: 1.3rem;
+  white-space: nowrap;
+}
+
+/* Map info */
+.map-info {
+  padding: 10px 15px;
+  background: #e7f3ff;
+  border-radius: 6px;
+  margin: 10px 20px;
+}
+
+.map-info p {
+  margin: 0;
+  color: #0066cc;
+  font-size: 0.9rem;
+}
+
+/* Ensure map fills container in modal */
+.chart-container .map-chart-container {
+  height: 100% !important;
+  min-height: 500px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .modal-content {
+    width: 95%;
+    height: 95%;
+  }
+  
+  .controls {
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  .control-group select {
+    min-width: 100%;
+  }
+  
+  .chart-header {
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 15px;
+  }
+
+  .chart-header .data-column-selector {
+    max-width: 100%;
+    order: 3;
+  }
+
+  .chart-container {
+    padding: 10px; /* Reduced padding on small screens */
+  }
+  
+  .chart-container .map-chart-container {
+    min-height: 400px;
+  }
+
+  .dropdown-toggle {
+    min-width: 250px;
+    max-width: 300px;
+  }
+  
+  .dropdown-menu {
+    min-width: 280px;
+    max-width: 320px;
+    left: 0;
+    transform: none;
+  }
+}
+
+.map-warning {
+  background-color: #fff3cd;
+  border: 1px solid #ffeaa7;
+  color: #856404;
+  padding: 12px;
+  margin: 15px 20px;
+  border-radius: 4px;
+  font-size: 0.9rem;
+}
+
+.map-warning strong {
+  font-weight: 600;
+}

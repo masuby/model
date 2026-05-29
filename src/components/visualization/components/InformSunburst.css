@@ -1,0 +1,136 @@
+/* INFORM Sunburst Chart Styles */
+.inform-sunburst {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  background: #fff;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.inform-sunburst.miniature {
+  padding: 0;
+}
+
+.sunburst-header {
+  padding: 16px 20px 8px;
+  border-bottom: 1px solid #eee;
+}
+
+.sunburst-header h3 {
+  margin: 0 0 4px 0;
+  font-size: 18px;
+  font-weight: 600;
+  color: #1a1a2e;
+}
+
+.sunburst-header .subtitle {
+  margin: 0;
+  font-size: 13px;
+  color: #666;
+}
+
+.breadcrumb {
+  padding: 8px 20px;
+  background: #f8f9fa;
+  font-size: 13px;
+  color: #666;
+  border-bottom: 1px solid #eee;
+}
+
+.breadcrumb .separator {
+  margin: 0 4px;
+  color: #999;
+}
+
+.breadcrumb .current {
+  font-weight: 600;
+  color: #1a1a2e;
+}
+
+.sunburst-chart {
+  flex: 1;
+  min-height: 400px;
+}
+
+.miniature .sunburst-chart {
+  min-height: 100%;
+}
+
+.sunburst-legend {
+  padding: 12px 20px;
+  border-top: 1px solid #eee;
+  background: #fafafa;
+}
+
+.sunburst-legend h4 {
+  margin: 0 0 8px 0;
+  font-size: 13px;
+  font-weight: 600;
+  color: #333;
+}
+
+.legend-items {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.legend-color {
+  width: 16px;
+  height: 16px;
+  border-radius: 3px;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.legend-label {
+  font-size: 12px;
+  color: #555;
+}
+
+.node-details {
+  padding: 12px 20px;
+  background: #f0f4f8;
+  border-top: 1px solid #e0e4e8;
+}
+
+.node-details h4 {
+  margin: 0 0 6px 0;
+  font-size: 14px;
+  font-weight: 600;
+  color: #1a1a2e;
+}
+
+.node-details p {
+  margin: 4px 0;
+  font-size: 13px;
+  color: #555;
+}
+
+.risk-badge {
+  display: inline-block;
+  margin-left: 8px;
+  padding: 2px 8px;
+  border-radius: 12px;
+  font-size: 11px;
+  font-weight: 600;
+  color: #fff;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .legend-items {
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .sunburst-chart {
+    min-height: 300px;
+  }
+}

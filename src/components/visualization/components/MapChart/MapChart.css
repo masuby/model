@@ -1,0 +1,527 @@
+/* Modified: MapChart.css */
+/* MapChart.css - Modularized for sub-components */
+
+/* Main Container - Full height and responsive */
+.map-chart-container {
+  width: 100%;
+  height: 100%;
+  min-height: 400px; /* Minimum height for visibility */
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  overflow: hidden;
+}
+
+.map-chart-container.miniature {
+  min-height: 400px;
+  height: 400px;
+}
+
+.chart-header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px 0;
+  background: #f8f9fa;
+  border-bottom: 1px solid #e0e0e0;
+  margin-bottom: 0;
+  width: 100%;
+  flex-shrink: 0;
+}
+
+/* Data Column Selector - Centered */
+.data-column-selector {
+  text-align: center;
+  padding: 10px;
+  background: #f8f9fa;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  position: relative;
+  width: 100%;
+  max-width: 600px;
+}
+
+/* Dropdown Toggle Button */
+.dropdown-toggle {
+  padding: 10px 16px;
+  border: 1px solid #ced4da;
+  border-radius: 4px;
+  background: white;
+  color: #495057;
+  cursor: pointer;
+  min-width: 300px;
+  max-width: 500px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.9rem;
+  transition: all 0.3s ease;
+}
+
+.dropdown-toggle:hover {
+  border-color: #0077b6;
+  background: #f8f9fa;
+}
+
+.dropdown-arrow {
+  transition: transform 0.3s ease;
+  font-size: 0.8rem;
+}
+
+.dropdown-arrow.open {
+  transform: rotate(180deg);
+}
+
+/* Dropdown Menu */
+.dropdown-menu {
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  background: white;
+  border: 1px solid #ced4da;
+  border-radius: 4px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  z-index: 1000;
+  min-width: 350px;
+  max-width: 500px;
+  max-height: 400px;
+  overflow-y: auto;
+  margin-top: 5px;
+}
+
+.dropdown-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 16px;
+  border-bottom: 1px solid #e9ecef;
+  background: #f8f9fa;
+  font-weight: 500;
+  font-size: 0.9rem;
+}
+
+.clear-all-btn {
+  background: none;
+  border: none;
+  color: #dc3545;
+  cursor: pointer;
+  font-size: 0.8rem;
+  text-decoration: underline;
+}
+
+.clear-all-btn:hover {
+  color: #c82333;
+}
+
+.dropdown-items {
+  padding: 8px 0;
+}
+
+.dropdown-item {
+  display: flex;
+  align-items: center;
+  padding: 8px 16px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  position: relative;
+}
+
+.dropdown-item:hover {
+  background-color: #f8f9fa;
+}
+
+.dropdown-item input[type="checkbox"] {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.checkmark {
+  position: relative;
+  height: 18px;
+  width: 18px;
+  background-color: #fff;
+  border: 2px solid #ced4da;
+  border-radius: 3px;
+  margin-right: 10px;
+  transition: all 0.3s ease;
+}
+
+.dropdown-item input[type="checkbox"]:checked ~ .checkmark {
+  background-color: #0077b6;
+  border-color: #0077b6;
+}
+
+.checkmark:after {
+  content: "";
+  position: absolute;
+  display: none;
+  left: 5px;
+  top: 2px;
+  width: 4px;
+  height: 8px;
+  border: solid white;
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+}
+
+.dropdown-item input[type="checkbox"]:checked ~ .checkmark:after {
+  display: block;
+}
+
+.column-name {
+  flex: 1;
+  font-size: 0.9rem;
+  color: #495057;
+}
+
+.dropdown-item input[type="checkbox"]:disabled ~ .column-name {
+  color: #6c757d;
+  opacity: 0.6;
+}
+
+.dropdown-item input[type="checkbox"]:disabled ~ .checkmark {
+  background-color: #e9ecef;
+  border-color: #ced4da;
+  cursor: not-allowed;
+}
+
+/* Map Content Layout - Full height */
+.map-content-full {
+  flex: 1;
+  height: 100%;
+  position: relative;
+  overflow: hidden;
+  min-height: 300px; /* Ensure minimum visibility */
+}
+
+.map-content-full.miniature {
+  height: 100%;
+  min-height: 300px;
+}
+
+/* Map Display Container */
+.map-display-container {
+  height: 100%;
+  width: 100%;
+  position: relative;
+}
+
+/* Hover Popup Styles */
+.popup-coords {
+  margin: 4px 0 0 0;
+  font-size: 0.85rem;
+  color: #666;
+}
+
+.hover-popup-container {
+  position: absolute;
+  background: white;
+  border-radius: 6px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  padding: 10px;
+  z-index: 1000;
+  min-width: 200px;
+  max-width: 300px;
+  pointer-events: none;
+  border: 1px solid #ddd;
+}
+
+.hover-popup-container::before {
+  content: '';
+  position: absolute;
+  top: -7px;
+  left: 21px;
+  border-width: 0 9px 9px 9px;
+  border-style: solid;
+  border-color: transparent transparent #ddd transparent;
+}
+
+.hover-popup-container::after {
+  content: '';
+  position: absolute;
+  top: -6px;
+  left: 21px;
+  border-width: 0 8px 8px 8px;
+  border-style: solid;
+  border-color: transparent transparent white transparent;
+}
+
+.popup-content h4 {
+  margin: 0 0 8px 0;
+  color: #0077b6;
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.popup-region {
+  margin: 0 0 6px 0;
+  font-size: 0.85rem;
+  color: #666;
+  font-style: italic;
+}
+
+.popup-data {
+  margin: 0;
+  font-size: 0.9rem;
+  color: #333;
+}
+
+.popup-data strong {
+  color: #0077b6;
+}
+
+/* Custom Markers */
+.custom-div-icon {
+  background: transparent;
+  border: none;
+  margin: 0;
+}
+
+.custom-marker {
+  background: rgba(30, 58, 138, 0.9);
+  color: white;
+  padding: 8px 12px;
+  border-radius: 8px;
+  text-align: center;
+  font-size: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  min-width: 120px;
+  max-width: 150px;
+  white-space: normal;
+  line-height: 1.2;
+}
+
+.custom-marker strong {
+  font-size: 13px;
+  display: block;
+  margin-bottom: 2px;
+}
+
+/* Data Warning */
+.data-warning {
+  text-align: center;
+  padding: 15px;
+  background: #fff3cd;
+  border: 1px solid #ffeaa7;
+  border-radius: 8px;
+  margin-top: 15px;
+  color: #856404;
+}
+
+.data-warning p {
+  margin: 0;
+  font-size: 0.9rem;
+}
+
+/* Selection info */
+.selection-info {
+  margin-top: 8px;
+  font-size: 0.85rem;
+  color: #666;
+  text-align: center;
+}
+
+.max-warning {
+  color: #dc3545;
+  font-weight: bold;
+  font-size: 0.8rem;
+}
+
+/* Focus controls */
+.focus-controls {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  background: #e3f2fd;
+  border-radius: 8px;
+  margin-bottom: 15px;
+  flex-shrink: 0;
+}
+
+.clear-focus-btn {
+  background: #0077b6;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.9rem;
+}
+
+.clear-focus-btn:hover {
+  background: #005a8c;
+}
+
+.focus-info {
+  font-weight: 500;
+  color: #0077b6;
+}
+
+/* Single legend with multiple sections */
+.legend-section {
+  margin-bottom: 10px;
+}
+
+.legend-section-separator {
+  border-top: 1px solid #ddd;
+  padding-top: 10px;
+  margin-top: 10px;
+}
+
+.legend-control {
+  background: white;
+  padding: 10px;
+  border-radius: 5px;
+  box-shadow: 0 1px 5px rgba(0,0,0,0.4);
+  font-size: 12px;
+  line-height: 18px;
+  z-index: 1000;
+  max-height: 400px;
+  overflow-y: auto;
+}
+
+.legend-title {
+  font-weight: bold;
+  margin-bottom: 5px;
+  text-align: center;
+  color: #333;
+  font-size: 11px;
+}
+
+.legend-body i {
+  width: 18px;
+  height: 18px;
+  float: left;
+  margin-right: 8px;
+  opacity: 0.7;
+}
+
+.legend-body {
+  line-height: 18px;
+  color: #555;
+}
+
+/* Click interaction styles */
+.region-clicked {
+  stroke: #1e3a8a;
+  stroke-width: 3;
+  stroke-opacity: 0.8;
+}
+
+.district-clicked {
+  stroke: #dc2626;
+  stroke-width: 2;
+  stroke-opacity: 0.8;
+}
+
+/* Map Attribution */
+.map-attribution {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  background: rgba(255, 255, 255, 0.8);
+  padding: 5px 8px;
+  border-radius: 4px;
+  font-size: 0.8rem;
+  z-index: 1000;
+  text-align: right;
+  max-width: 200px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .map-chart-container {
+    min-height: 350px;
+  }
+  
+  .map-chart-container.miniature {
+    min-height: 300px;
+    height: 300px;
+  }
+  
+  .map-content-full {
+    min-height: 250px;
+  }
+  
+  .map-content-full.miniature {
+    min-height: 250px;
+  }
+  
+  .dropdown-toggle {
+    min-width: 250px;
+    max-width: 300px;
+    font-size: 0.8rem;
+  }
+  
+  .dropdown-menu {
+    min-width: 280px;
+    max-width: 320px;
+    left: 0;
+    transform: none;
+  }
+  
+  .focus-controls {
+    flex-direction: column;
+    gap: 10px;
+    text-align: center;
+  }
+  
+  .map-attribution {
+    font-size: 0.7rem;
+    max-width: 150px;
+    padding: 3px 6px;
+    bottom: 5px;
+    right: 5px;
+  }
+}
+
+@media (max-width: 480px) {
+  .map-chart-container {
+    min-height: 300px;
+  }
+  
+  .map-chart-container.miniature {
+    min-height: 250px;
+    height: 250px;
+  }
+  
+  .map-content-full {
+    min-height: 200px;
+  }
+  
+  .map-content-full.miniature {
+    min-height: 200px;
+  }
+  
+  .dropdown-toggle {
+    min-width: 200px;
+    max-width: 250px;
+    font-size: 0.8rem;
+  }
+  
+  .dropdown-menu {
+    min-width: 240px;
+    max-width: 280px;
+    left: 0;
+    transform: none;
+  }
+  
+  .selection-info {
+    font-size: 0.8rem;
+  }
+  
+  .chart-header {
+    padding: 5px 0;
+  }
+  
+  .data-column-selector {
+    padding: 5px;
+    gap: 5px;
+  }
+}

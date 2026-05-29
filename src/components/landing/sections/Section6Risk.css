@@ -1,0 +1,1307 @@
+/* ===== SECTION 6: RISK STYLES ===== */
+
+.section6-risk {
+  animation: fadeIn 0.5s ease;
+}
+
+/* Header */
+.section6-risk .section-header {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.section6-risk .section-header h1 {
+  font-size: 36px;
+  font-weight: bold;
+  color: #1976D2;
+  margin-bottom: 8px;
+}
+
+.section6-risk .section-subtitle {
+  font-size: 20px;
+  color: #666;
+  font-weight: 500;
+}
+
+/* Definition Box */
+.risk-definition {
+  background: linear-gradient(135deg, #E3F2FD 0%, #BBDEFB 100%);
+  border: 4px solid #1976D2;
+  border-radius: 16px;
+  padding: 32px;
+  margin: 40px 0;
+  display: flex;
+  gap: 24px;
+  align-items: flex-start;
+  box-shadow: 0 6px 20px rgba(25, 118, 210, 0.15);
+}
+
+.risk-definition .definition-icon {
+  font-size: 48px;
+  flex-shrink: 0;
+}
+
+.risk-definition .definition-content h3 {
+  font-size: 26px;
+  color: #0D47A1;
+  margin-bottom: 16px;
+  font-weight: bold;
+}
+
+.risk-definition .inform-definition {
+  font-size: 17px;
+  line-height: 1.7;
+  margin-bottom: 12px;
+  background: white;
+  padding: 16px;
+  border-radius: 8px;
+  border-left: 5px solid #1976D2;
+}
+
+.risk-definition .definition-explanation {
+  font-size: 16px;
+  line-height: 1.6;
+  color: #333;
+  margin-bottom: 16px;
+}
+
+.risk-emphasis {
+  background: #FFF3E0;
+  padding: 16px;
+  border-radius: 8px;
+  border-left: 5px solid #FF9800;
+  font-size: 15px;
+  line-height: 1.6;
+  color: #333;
+}
+
+/* Complete Formula Reveal */
+.formula-reveal-section.complete {
+  margin: 50px 0;
+}
+
+.formula-reveal-section.complete .reveal-intro {
+  text-align: center;
+  margin-bottom: 32px;
+}
+
+.formula-reveal-section.complete .reveal-intro h2 {
+  font-size: 28px;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 16px;
+}
+
+.formula-reveal-section.complete .reveal-intro p {
+  font-size: 17px;
+  line-height: 1.6;
+  color: #555;
+  margin-bottom: 24px;
+}
+
+.reveal-button {
+  padding: 16px 32px;
+  border: none;
+  border-radius: 12px;
+  color: white;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.reveal-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+}
+
+.formula-box.complete-formula {
+  background: linear-gradient(135deg, #F3E5F5 0%, #E1BEE7 100%);
+  border: 5px solid #7B1FA2;
+  border-radius: 20px;
+  padding: 40px;
+  margin-top: 32px;
+  animation: formulaReveal 0.6s ease;
+  box-shadow: 0 8px 32px rgba(123, 31, 162, 0.2);
+}
+
+.formula-title {
+  text-align: center;
+  font-size: 20px;
+  font-weight: bold;
+  color: #6A1B9A;
+  letter-spacing: 1px;
+  margin-bottom: 24px;
+}
+
+.formula-equation.large {
+  display: flex;
+  justify-content: center;
+  margin: 32px 0;
+}
+
+.formula-equation.large .formula-text {
+  font-size: 32px;
+  font-weight: bold;
+  color: #4A148C;
+  background: white;
+  padding: 24px 40px;
+  border-radius: 12px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.formula-highlights-complete {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  margin: 32px 0;
+}
+
+.formula-highlight {
+  text-align: center;
+  padding: 20px;
+  border-radius: 12px;
+  background: white;
+  border: 3px solid;
+  transition: all 0.3s ease;
+}
+
+.formula-highlight.hazard {
+  border-color: #D32F2F;
+  background: #FFEBEE;
+}
+
+.formula-highlight.vulnerability {
+  border-color: #E65100;
+  background: #FFF3E0;
+}
+
+.formula-highlight.capacity {
+  border-color: #1976D2;
+  background: #E3F2FD;
+}
+
+.formula-highlight:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+}
+
+.highlight-arrow {
+  font-size: 28px;
+  margin-bottom: 8px;
+}
+
+.highlight-label {
+  font-size: 16px;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 8px;
+}
+
+.highlight-description {
+  font-size: 13px;
+  color: #666;
+  line-height: 1.4;
+}
+
+.formula-explanation.complete {
+  background: white;
+  padding: 32px;
+  border-radius: 12px;
+  margin-top: 32px;
+}
+
+.formula-explanation.complete h4 {
+  font-size: 22px;
+  color: #6A1B9A;
+  margin-bottom: 24px;
+  font-weight: bold;
+  text-align: center;
+}
+
+.geometric-comparison {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  margin: 24px 0;
+}
+
+.comparison-col {
+  padding: 24px;
+  border-radius: 12px;
+  border: 3px solid;
+}
+
+.comparison-col:first-child {
+  border-color: #D32F2F;
+  background: #FFEBEE;
+}
+
+.comparison-col:last-child {
+  border-color: #43A047;
+  background: #E8F5E9;
+}
+
+.comparison-title {
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 16px;
+  text-align: center;
+}
+
+.comparison-formula {
+  background: white;
+  padding: 16px;
+  border-radius: 8px;
+  text-align: center;
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: 16px;
+  font-family: 'Courier New', monospace;
+}
+
+.comparison-problem,
+.comparison-benefit {
+  font-size: 15px;
+  line-height: 1.6;
+  margin-bottom: 12px;
+  padding: 12px;
+  background: white;
+  border-radius: 6px;
+}
+
+.comparison-example {
+  font-size: 14px;
+  line-height: 1.5;
+  color: #555;
+  font-style: italic;
+  padding: 12px;
+  background: rgba(255, 255, 255, 0.6);
+  border-radius: 6px;
+}
+
+.geometric-insight {
+  background: #E8F5E9;
+  padding: 20px;
+  border-radius: 10px;
+  border-left: 6px solid #43A047;
+  margin-top: 24px;
+  font-size: 16px;
+  line-height: 1.7;
+  color: #333;
+}
+
+/* Tanzania Risk Score */
+.tanzania-risk-section {
+  margin: 50px 0;
+}
+
+.tanzania-risk-section h2 {
+  font-size: 28px;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 16px;
+}
+
+.section-intro {
+  font-size: 17px;
+  line-height: 1.6;
+  color: #555;
+  margin-bottom: 32px;
+}
+
+.risk-score-card {
+  background: white;
+  border-radius: 20px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  margin: 32px 0;
+}
+
+.score-main {
+  padding: 40px;
+  text-align: center;
+  border-bottom: 4px solid;
+  background: linear-gradient(135deg, #FFF3E0 0%, #FFE0B2 100%);
+}
+
+.score-label {
+  font-size: 18px;
+  color: #666;
+  margin-bottom: 16px;
+  font-weight: 600;
+}
+
+.score-value {
+  font-size: 72px;
+  font-weight: bold;
+  margin: 16px 0;
+  line-height: 1;
+}
+
+.score-classification {
+  display: inline-block;
+  padding: 12px 32px;
+  color: white;
+  font-size: 20px;
+  font-weight: bold;
+  border-radius: 8px;
+  margin: 16px 0;
+}
+
+.score-rank {
+  font-size: 16px;
+  color: #666;
+  margin-top: 16px;
+}
+
+.dimensions-breakdown {
+  padding: 40px;
+  background: white;
+}
+
+.dimensions-breakdown h4 {
+  font-size: 20px;
+  color: #333;
+  margin-bottom: 24px;
+  font-weight: bold;
+}
+
+.dimension-bars {
+  margin-bottom: 32px;
+}
+
+.dimension-bar {
+  margin: 20px 0;
+}
+
+.dimension-label {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 16px;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 12px;
+}
+
+.dimension-icon {
+  font-size: 24px;
+}
+
+.dimension-value-bar {
+  background: #E0E0E0;
+  height: 40px;
+  border-radius: 8px;
+  overflow: hidden;
+  position: relative;
+}
+
+.dimension-fill {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding-right: 16px;
+  transition: width 0.6s ease;
+  position: relative;
+}
+
+.dimension-fill.hazard {
+  background: linear-gradient(90deg, #EF5350 0%, #D32F2F 100%);
+}
+
+.dimension-fill.vulnerability {
+  background: linear-gradient(90deg, #FF7043 0%, #E65100 100%);
+}
+
+.dimension-fill.capacity {
+  background: linear-gradient(90deg, #42A5F5 0%, #1976D2 100%);
+}
+
+.dimension-score {
+  color: white;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.calculation-display {
+  background: #F5F5F5;
+  padding: 24px;
+  border-radius: 12px;
+  text-align: center;
+}
+
+.calculation-formula {
+  font-size: 20px;
+  font-weight: 600;
+  color: #333;
+  font-family: 'Courier New', monospace;
+}
+
+.context-box {
+  background: #E3F2FD;
+  padding: 24px;
+  border-radius: 12px;
+  border-left: 6px solid #1976D2;
+  margin: 32px 0;
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+}
+
+.context-icon {
+  font-size: 32px;
+  flex-shrink: 0;
+}
+
+.context-text {
+  font-size: 16px;
+  line-height: 1.7;
+  color: #333;
+}
+
+/* Risk Classification Levels */
+.classification-section {
+  margin: 50px 0;
+}
+
+.classification-section h2 {
+  font-size: 28px;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 16px;
+}
+
+.risk-levels-table {
+  background: white;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+}
+
+.risk-level-row {
+  display: grid;
+  grid-template-columns: 80px 200px 1fr auto;
+  align-items: center;
+  gap: 20px;
+  padding: 20px;
+  border-bottom: 2px solid #F0F0F0;
+  border-left: 5px solid;
+  transition: all 0.3s ease;
+}
+
+.risk-level-row:hover {
+  background: #F9F9F9;
+  transform: translateX(4px);
+}
+
+.risk-level-row.current {
+  background: #FFF3E0;
+  border-left-width: 8px;
+}
+
+.risk-level-row:last-child {
+  border-bottom: none;
+}
+
+.level-color {
+  width: 60px;
+  height: 60px;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+.level-info {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.level-name {
+  font-size: 18px;
+  font-weight: bold;
+  color: #333;
+}
+
+.level-range {
+  font-size: 14px;
+  color: #666;
+  font-family: 'Courier New', monospace;
+}
+
+.level-description {
+  font-size: 15px;
+  color: #555;
+  line-height: 1.5;
+}
+
+.current-indicator {
+  font-size: 16px;
+  font-weight: bold;
+  color: #FF9800;
+  padding: 8px 16px;
+  background: #FFF3E0;
+  border-radius: 6px;
+}
+
+/* Comparison Section */
+.comparison-section {
+  margin: 50px 0;
+}
+
+.comparison-section h2 {
+  font-size: 28px;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 24px;
+}
+
+.comparison-controls {
+  display: flex;
+  gap: 16px;
+  margin-bottom: 32px;
+  justify-content: center;
+}
+
+.comparison-tab {
+  padding: 14px 28px;
+  border: 3px solid #ddd;
+  border-radius: 12px;
+  background: white;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 16px;
+  font-weight: 600;
+  color: #666;
+}
+
+.comparison-tab:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.comparison-tab.active {
+  border-color: #1976D2;
+  background: #E3F2FD;
+  color: #1976D2;
+  box-shadow: 0 4px 12px rgba(25, 118, 210, 0.2);
+}
+
+.comparison-content {
+  background: white;
+  padding: 32px;
+  border-radius: 16px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+  animation: slideDown 0.3s ease;
+}
+
+.comparison-bars {
+  margin-bottom: 24px;
+}
+
+.comparison-bar-row {
+  display: grid;
+  grid-template-columns: 220px 1fr;
+  gap: 20px;
+  align-items: center;
+  margin: 16px 0;
+}
+
+.comparison-label {
+  font-size: 16px;
+  font-weight: 600;
+  color: #333;
+}
+
+.comparison-bar-container {
+  background: #E0E0E0;
+  height: 40px;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.comparison-bar-fill {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding-right: 16px;
+  transition: width 0.6s ease;
+}
+
+.comparison-score {
+  color: white;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.comparison-insight {
+  background: #E8F5E9;
+  padding: 20px;
+  border-radius: 10px;
+  border-left: 6px solid #43A047;
+  font-size: 15px;
+  line-height: 1.7;
+  color: #333;
+  margin-top: 24px;
+}
+
+.dimension-comparison-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  margin-bottom: 24px;
+}
+
+.dimension-comparison-card {
+  background: white;
+  border: 3px solid #E0E0E0;
+  border-radius: 12px;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.dimension-comparison-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+}
+
+.dimension-card-header {
+  color: white;
+  padding: 20px;
+  text-align: center;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.dimension-card-body {
+  padding: 20px;
+}
+
+.dimension-score-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px;
+  margin: 8px 0;
+  background: #F9F9F9;
+  border-radius: 6px;
+}
+
+.score-label {
+  font-size: 14px;
+  color: #666;
+}
+
+.score-value {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+/* Scenario Analysis */
+.scenario-section {
+  margin: 50px 0;
+  background: linear-gradient(135deg, #F3E5F5 0%, #E1BEE7 100%);
+  padding: 40px;
+  border-radius: 20px;
+  border: 4px solid #7B1FA2;
+  box-shadow: 0 6px 24px rgba(123, 31, 162, 0.15);
+}
+
+.scenario-section h2 {
+  font-size: 28px;
+  font-weight: bold;
+  color: #6A1B9A;
+  margin-bottom: 16px;
+  text-align: center;
+}
+
+.scenario-tool {
+  background: white;
+  padding: 32px;
+  border-radius: 16px;
+  margin-top: 24px;
+}
+
+.scenario-controls {
+  margin-bottom: 32px;
+}
+
+.scenario-slider {
+  margin: 24px 0;
+  display: grid;
+  grid-template-columns: 250px 1fr auto;
+  gap: 16px;
+  align-items: center;
+}
+
+.scenario-slider label {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 16px;
+  font-weight: 600;
+  color: #333;
+}
+
+.slider-icon {
+  font-size: 24px;
+}
+
+.slider-label {
+  flex: 1;
+}
+
+.slider {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 12px;
+  border-radius: 6px;
+  outline: none;
+  transition: opacity 0.2s;
+}
+
+.slider:hover {
+  opacity: 0.9;
+}
+
+.slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: white;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+  border: 3px solid;
+}
+
+.slider::-moz-range-thumb {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: white;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+  border: 3px solid;
+}
+
+.slider.hazard {
+  background: linear-gradient(90deg, #FFCDD2 0%, #EF5350 100%);
+}
+
+.slider.hazard::-webkit-slider-thumb {
+  border-color: #D32F2F;
+}
+
+.slider.hazard::-moz-range-thumb {
+  border-color: #D32F2F;
+}
+
+.slider.vulnerability {
+  background: linear-gradient(90deg, #FFE0B2 0%, #FF7043 100%);
+}
+
+.slider.vulnerability::-webkit-slider-thumb {
+  border-color: #E65100;
+}
+
+.slider.vulnerability::-moz-range-thumb {
+  border-color: #E65100;
+}
+
+.slider.capacity {
+  background: linear-gradient(90deg, #BBDEFB 0%, #42A5F5 100%);
+}
+
+.slider.capacity::-webkit-slider-thumb {
+  border-color: #1976D2;
+}
+
+.slider.capacity::-moz-range-thumb {
+  border-color: #1976D2;
+}
+
+.slider-value {
+  font-size: 20px;
+  font-weight: bold;
+  color: #333;
+  min-width: 50px;
+  text-align: right;
+}
+
+.scenario-result {
+  background: linear-gradient(135deg, #F3E5F5 0%, #E1BEE7 100%);
+  padding: 32px;
+  border-radius: 16px;
+  text-align: center;
+  margin: 32px 0;
+  border: 3px solid #7B1FA2;
+}
+
+.scenario-calculation {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+}
+
+.scenario-formula {
+  font-size: 22px;
+  font-weight: 600;
+  color: #333;
+  font-family: 'Courier New', monospace;
+}
+
+.scenario-equals {
+  font-size: 32px;
+  font-weight: bold;
+  color: #6A1B9A;
+}
+
+.scenario-risk-score {
+  font-size: 48px;
+  font-weight: bold;
+  padding: 20px 40px;
+  border-radius: 12px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+}
+
+.scenario-classification {
+  font-size: 24px;
+  font-weight: bold;
+  margin: 12px 0;
+}
+
+.scenario-description {
+  font-size: 16px;
+  color: #666;
+}
+
+.scenario-examples {
+  margin-top: 32px;
+}
+
+.scenario-examples h4 {
+  font-size: 18px;
+  color: #6A1B9A;
+  margin-bottom: 16px;
+  font-weight: bold;
+}
+
+.scenario-buttons {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 12px;
+}
+
+.scenario-preset-btn {
+  padding: 16px 20px;
+  border: 3px solid #7B1FA2;
+  border-radius: 10px;
+  background: white;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 15px;
+  font-weight: 600;
+  color: #6A1B9A;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+.scenario-preset-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(123, 31, 162, 0.2);
+  background: #F3E5F5;
+}
+
+.scenario-preset-btn.reset {
+  border-color: #9E9E9E;
+  color: #616161;
+}
+
+.scenario-preset-btn.reset:hover {
+  background: #F5F5F5;
+}
+
+.preset-hint {
+  font-size: 12px;
+  color: #999;
+  font-weight: normal;
+}
+
+/* Teaching Box: Risk is Manageable */
+.risk-manageable {
+  background: linear-gradient(135deg, #E8F5E9 0%, #C8E6C9 100%);
+  border: 4px solid #43A047;
+  border-radius: 16px;
+  padding: 40px;
+  margin: 50px 0;
+  box-shadow: 0 8px 24px rgba(67, 160, 71, 0.2);
+}
+
+.risk-manageable .teaching-icon {
+  font-size: 48px;
+  text-align: center;
+  margin-bottom: 16px;
+}
+
+.risk-manageable .teaching-content h3 {
+  font-size: 28px;
+  color: #2E7D32;
+  margin-bottom: 32px;
+  font-weight: bold;
+  text-align: center;
+}
+
+.manageable-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 24px;
+  margin: 32px 0;
+}
+
+.manageable-item {
+  background: white;
+  padding: 24px;
+  border-radius: 12px;
+  border: 3px solid #81C784;
+  transition: all 0.3s ease;
+}
+
+.manageable-item:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 6px 20px rgba(67, 160, 71, 0.2);
+  border-color: #43A047;
+}
+
+.manageable-icon {
+  font-size: 36px;
+  text-align: center;
+  margin-bottom: 12px;
+}
+
+.manageable-text strong {
+  display: block;
+  font-size: 18px;
+  color: #2E7D32;
+  margin-bottom: 8px;
+  text-align: center;
+}
+
+.manageable-text p {
+  font-size: 14px;
+  line-height: 1.6;
+  color: #555;
+  text-align: center;
+  margin: 0;
+}
+
+.action-pathways {
+  background: white;
+  padding: 28px;
+  border-radius: 12px;
+  margin: 32px 0;
+}
+
+.action-pathways h4 {
+  font-size: 20px;
+  color: #2E7D32;
+  margin-bottom: 20px;
+  font-weight: bold;
+  text-align: center;
+}
+
+.pathway-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 20px;
+}
+
+.pathway {
+  background: #F1F8E9;
+  padding: 20px;
+  border-radius: 10px;
+  border: 2px solid #AED581;
+  text-align: center;
+  transition: all 0.3s ease;
+}
+
+.pathway:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 4px 16px rgba(67, 160, 71, 0.15);
+  border-color: #7CB342;
+}
+
+.pathway-icon {
+  font-size: 36px;
+  margin-bottom: 12px;
+}
+
+.pathway strong {
+  display: block;
+  font-size: 16px;
+  color: #2E7D32;
+  margin-bottom: 8px;
+}
+
+.pathway p {
+  font-size: 13px;
+  line-height: 1.5;
+  color: #666;
+  margin: 0;
+}
+
+.manageable-conclusion {
+  background: #FFF9C4;
+  padding: 24px;
+  border-radius: 12px;
+  border-left: 6px solid #FBC02D;
+  font-size: 16px;
+  line-height: 1.7;
+  color: #333;
+  margin-top: 24px;
+}
+
+/* Section Summary */
+.risk-summary {
+  background: linear-gradient(135deg, #E3F2FD 0%, #BBDEFB 100%);
+  border: 4px solid #1976D2;
+  border-radius: 16px;
+  padding: 40px;
+  margin: 50px 0;
+  box-shadow: 0 6px 20px rgba(25, 118, 210, 0.15);
+}
+
+.risk-summary h3 {
+  font-size: 26px;
+  color: #0D47A1;
+  margin-bottom: 24px;
+  font-weight: bold;
+  text-align: center;
+}
+
+.summary-points {
+  background: white;
+  padding: 24px;
+  border-radius: 12px;
+  margin-bottom: 32px;
+}
+
+.summary-point {
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+  margin: 16px 0;
+  padding: 12px;
+  background: #F9F9F9;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+}
+
+.summary-point:hover {
+  background: #E3F2FD;
+  transform: translateX(4px);
+}
+
+.check-icon {
+  color: #43A047;
+  font-size: 22px;
+  font-weight: bold;
+  flex-shrink: 0;
+}
+
+.point-text {
+  line-height: 1.6;
+  color: #333;
+  font-size: 16px;
+}
+
+.module-completion {
+  background: linear-gradient(135deg, #FFF3E0 0%, #FFE0B2 100%);
+  padding: 32px;
+  border-radius: 16px;
+  border: 4px solid #FF9800;
+  text-align: center;
+}
+
+.completion-icon {
+  font-size: 64px;
+  margin-bottom: 16px;
+}
+
+.module-completion h3 {
+  font-size: 28px;
+  color: #E65100;
+  margin-bottom: 20px;
+  font-weight: bold;
+}
+
+.completion-message {
+  font-size: 17px;
+  line-height: 1.7;
+  color: #333;
+  margin-bottom: 24px;
+}
+
+.next-module-preview {
+  background: white;
+  padding: 24px;
+  border-radius: 12px;
+  border-left: 6px solid #FF9800;
+  text-align: left;
+}
+
+.next-module-preview h4 {
+  color: #E65100;
+  font-size: 20px;
+  margin-bottom: 12px;
+  font-weight: bold;
+}
+
+.next-module-preview p {
+  line-height: 1.7;
+  color: #333;
+  font-size: 15px;
+  margin: 0;
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes formulaReveal {
+  from {
+    opacity: 0;
+    transform: scale(0.95) translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .section6-risk .section-header h1 {
+    font-size: 28px;
+  }
+
+  .section6-risk .section-subtitle {
+    font-size: 18px;
+  }
+
+  .risk-definition {
+    flex-direction: column;
+    padding: 24px;
+  }
+
+  .risk-definition .definition-icon {
+    font-size: 36px;
+  }
+
+  .formula-equation.large .formula-text {
+    font-size: 24px;
+    padding: 20px 24px;
+  }
+
+  .formula-highlights-complete {
+    grid-template-columns: 1fr;
+  }
+
+  .geometric-comparison {
+    grid-template-columns: 1fr;
+  }
+
+  .score-value {
+    font-size: 56px;
+  }
+
+  .dimension-comparison-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .comparison-bar-row {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  .scenario-slider {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  .scenario-slider label {
+    justify-content: center;
+  }
+
+  .slider-value {
+    text-align: center;
+  }
+
+  .scenario-buttons {
+    grid-template-columns: 1fr;
+  }
+
+  .risk-level-row {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  .level-color {
+    width: 100%;
+    height: 40px;
+  }
+
+  .current-indicator {
+    text-align: center;
+  }
+
+  .manageable-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .pathway-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .scenario-section {
+    padding: 24px;
+  }
+
+  .risk-manageable {
+    padding: 24px;
+  }
+
+  .risk-summary {
+    padding: 24px;
+  }
+}

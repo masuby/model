@@ -1,0 +1,272 @@
+.dropdown-container {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  width: 100%;
+  max-width: 100%;
+}
+
+.add-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.add-column-section {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+  margin-top: 0.5rem;
+}
+
+.column-name-input {
+  padding: 0.5rem;
+  border: 1px solid #ced4da;
+  border-radius: 0.25rem;
+  flex: 1;
+}
+
+.add-column-btn {
+  padding: 0.5rem 1rem;
+  background: #00b4d8;
+  color: white;
+  border: none;
+  border-radius: 0.25rem;
+  cursor: pointer;
+  font-weight: 500;
+}
+
+.add-column-btn:hover {
+  background: #0096c7;
+}
+
+.save-cancel-buttons {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+}
+
+.save-btn {
+  padding: 0.5rem 1rem;
+  background: #28a745;
+  color: white;
+  border: none;
+  border-radius: 0.25rem;
+  cursor: pointer;
+  font-weight: 500;
+}
+
+.save-btn:hover {
+  background: #218838;
+}
+
+.cancel-btn {
+  padding: 0.5rem 1rem;
+  background: #dc3545;
+  color: white;
+  border: none;
+  border-radius: 0.25rem;
+  cursor: pointer;
+  font-weight: 500;
+}
+
+.cancel-btn:hover {
+  background: #c82333;
+}
+
+.add-row-btn {
+  padding: clamp(0.5rem, 2vw, 0.75rem) clamp(0.75rem, 2.5vw, 1rem);
+  background: #0077b6;
+  color: white;
+  border: none;
+  border-radius: clamp(0.25rem, 1vw, 0.5rem);
+  cursor: pointer;
+  font-weight: 500;
+  transition: background 0.2s;
+  font-size: clamp(0.875rem, 2vw, 1rem);
+  white-space: nowrap;
+}
+
+.add-row-btn:hover {
+  background: #005b8a;
+}
+
+.edit-mode-text {
+  margin: 0;
+  color: #6c757d;
+  font-style: italic;
+  font-size: clamp(0.8rem, 2vw, 0.9rem);
+  padding: 0.25rem 0;
+}
+
+.data-entry-table-container {
+  margin-top: 0.75rem;
+  overflow: auto;
+  max-height: min(50vh, 400px);
+  border: 1px solid #dee2e6;
+  border-radius: 0.5rem;
+  width: 100%;
+  max-width: 100vw;
+  box-sizing: border-box;
+}
+
+.data-entry-table-container table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: min-content;
+  table-layout: fixed;
+}
+
+.data-entry-table-container th {
+  background: #00b4d8;
+  color: white;
+  padding: clamp(0.5rem, 1.5vw, 0.75rem);
+  text-align: left;
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  font-size: clamp(0.8rem, 2vw, 0.9rem);
+  min-width: 80px;
+  max-width: 200px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.data-entry-table-container td {
+  border: 1px solid #dee2e6;
+  padding: clamp(0.4rem, 1.5vw, 0.6rem);
+  vertical-align: top;
+  min-width: 80px;
+  max-width: 200px;
+  overflow: hidden;
+}
+
+.data-entry-table-container input {
+  width: 100%;
+  padding: clamp(0.35rem, 1.5vw, 0.5rem);
+  border: 1px solid #ced4da;
+  border-radius: 0.25rem;
+  box-sizing: border-box;
+  font-size: clamp(0.8rem, 2vw, 0.9rem);
+}
+
+.data-entry-table-container input:focus {
+  outline: none;
+  border-color: #0077b6;
+  box-shadow: 0 0 0 2px rgba(0, 119, 182, 0.1);
+}
+
+/* Responsive layout for the dropdown container */
+@media (max-width: 768px) {
+  .dropdown-container {
+    align-items: stretch;
+  }
+  
+  .add-actions {
+    flex-direction: column;
+  }
+  
+  .add-column-section {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  
+  .save-cancel-buttons {
+    flex-direction: column;
+  }
+  
+  .data-entry-table-container {
+    max-height: 40vh;
+    max-width: 100vw;
+    margin-left: -1rem;
+    margin-right: -1rem;
+    border-radius: 0;
+    border-left: none;
+    border-right: none;
+  }
+  
+  .data-entry-table-container table {
+    min-width: 100%;
+  }
+  
+  .data-entry-table-container th,
+  .data-entry-table-container td {
+    min-width: 60px;
+    max-width: none;
+  }
+}
+
+@media (max-width: 480px) {
+  .data-entry-table-container {
+    max-height: 35vh;
+  }
+  
+  .data-entry-table-container th,
+  .data-entry-table-container td {
+    padding: 0.35rem;
+    font-size: 0.75rem;
+  }
+  
+  .data-entry-table-container input {
+    padding: 0.3rem;
+    font-size: 0.75rem;
+  }
+  
+  .dropdown-container select {
+    font-size: 14px; /* Prevent zoom on iOS */
+  }
+}
+
+/* For very wide tables - horizontal scroll only */
+@media (min-width: 1200px) {
+  .data-entry-table-container {
+    max-height: 55vh;
+  }
+}
+
+/* Dark mode support */
+@media (prefers-color-scheme: dark) {
+  .data-entry-table-container {
+    border-color: #4a5568;
+  }
+  
+  .data-entry-table-container th {
+    background: #2c5282;
+  }
+  
+  .data-entry-table-container td {
+    border-color: #4a5568;
+    background: #2d3748;
+    color: #e2e8f0;
+  }
+  
+  .data-entry-table-container input {
+    background: #1a202c;
+    border-color: #4a5568;
+    color: #e2e8f0;
+  }
+  
+  .edit-mode-text {
+    color: #a0aec0;
+  }
+  
+  .column-name-input {
+    background: #2d3748;
+    border-color: #4a5568;
+    color: #e2e8f0;
+  }
+}
+
+/* Print styles */
+@media print {
+  .data-entry-table-container {
+    max-height: none;
+    border: none;
+    overflow: visible;
+  }
+  
+  .add-row-btn, .add-column-btn, .save-btn, .cancel-btn {
+    display: none;
+  }
+}

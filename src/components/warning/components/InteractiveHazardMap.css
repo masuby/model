@@ -1,0 +1,589 @@
+/* INTERACTIVE HAZARD MAP STYLING */
+
+/* ========== MAP CONTAINER ========== */
+.interactive-hazard-map-container {
+  background: white;
+  border-radius: 12px;
+  padding: 24px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* ========== MAP CONTROLS ========== */
+.map-controls {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+  padding: 12px 16px;
+  background: #F5F7FA;
+  border-radius: 8px;
+}
+
+.map-mode-indicator {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.pmo-view-badge {
+  background: linear-gradient(135deg, #5C6BC0 0%, #3F51B5 100%);
+  color: white;
+  padding: 8px 16px;
+  border-radius: 20px;
+  font-size: 14px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.input-view-badge {
+  background: linear-gradient(135deg, #66BB6A 0%, #43A047 100%);
+  color: white;
+  padding: 8px 16px;
+  border-radius: 20px;
+  font-size: 14px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.current-hazard-indicator {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 8px 16px;
+  background: white;
+  border-radius: 8px;
+  border: 2px solid #E0E0E0;
+}
+
+.hazard-icon {
+  font-size: 24px;
+}
+
+.hazard-name {
+  font-size: 15px;
+  font-weight: 600;
+  color: #333;
+}
+
+.selection-count {
+  font-size: 13px;
+  color: #666;
+  background: #F5F7FA;
+  padding: 4px 12px;
+  border-radius: 12px;
+}
+
+/* ========== MAP LOADING ========== */
+.map-loading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 400px;
+  background: #F5F7FA;
+  border-radius: 12px;
+}
+
+.spinner {
+  border: 4px solid #E0E0E0;
+  border-top: 4px solid #FF9800;
+  border-radius: 50%;
+  width: 48px;
+  height: 48px;
+  animation: spin 1s linear infinite;
+  margin-bottom: 16px;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.map-loading p {
+  color: #666;
+  font-size: 15px;
+  font-weight: 500;
+}
+
+/* ========== LEAFLET MAP CUSTOMIZATION - RECONFIGURED FOR STABLE BOUNDARIES ========== */
+.leaflet-container {
+  font-family: inherit;
+  border-radius: 8px;
+  border: 2px solid #E0E0E0;
+  /* Critical: Ensure proper pointer events */
+  position: relative;
+  z-index: 1;
+}
+
+/* Ensure GeoJSON layers have proper pointer events */
+.leaflet-overlay-pane svg {
+  pointer-events: auto !important;
+}
+
+/* Ensure paths (districts) are clickable */
+.leaflet-overlay-pane path {
+  pointer-events: all !important;
+  cursor: pointer;
+}
+
+/* Prevent tile layer from capturing clicks */
+.leaflet-tile-pane {
+  pointer-events: none !important;
+}
+
+/* Ensure interactive elements work properly */
+.leaflet-interactive {
+  cursor: pointer !important;
+  pointer-events: all !important;
+}
+
+.custom-hazard-marker {
+  background: transparent !important;
+  border: none !important;
+}
+
+/* District tooltips */
+.district-tooltip {
+  font-family: inherit;
+  background: white;
+  border: 2px solid #FF9800;
+  border-radius: 8px;
+  padding: 8px 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.district-tooltip strong {
+  font-size: 14px;
+  color: #333;
+  display: block;
+  margin-bottom: 4px;
+}
+
+/* Hazard popup */
+.hazard-popup {
+  font-family: inherit;
+}
+
+.hazard-popup h4 {
+  margin: 0 0 12px 0;
+  color: #FF9800;
+  font-size: 16px;
+  border-bottom: 2px solid #FFE0B2;
+  padding-bottom: 8px;
+}
+
+.hazard-popup > div {
+  margin: 6px 0;
+  font-size: 13px;
+  color: #555;
+}
+
+.hazard-popup strong {
+  color: #333;
+  font-weight: 600;
+}
+
+/* ========== MAP LEGEND ========== */
+.map-legend-container {
+  margin-top: 20px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 20px;
+}
+
+.hazard-legend,
+.pmo-legend {
+  background: #F5F7FA;
+  border: 2px solid #E0E0E0;
+  border-radius: 12px;
+  padding: 16px;
+}
+
+.hazard-legend h4,
+.pmo-legend h4 {
+  margin: 0 0 12px 0;
+  font-size: 15px;
+  color: #333;
+  border-bottom: 2px solid #E0E0E0;
+  padding-bottom: 8px;
+}
+
+.hazard-legend h5 {
+  margin: 16px 0 8px 0;
+  font-size: 13px;
+  color: #666;
+  font-weight: 600;
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 8px 0;
+  font-size: 13px;
+  color: #555;
+}
+
+.legend-color {
+  width: 24px;
+  height: 24px;
+  border-radius: 4px;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  flex-shrink: 0;
+}
+
+.legend-icon {
+  font-size: 20px;
+  width: 24px;
+  text-align: center;
+  flex-shrink: 0;
+}
+
+.legend-divider {
+  height: 1px;
+  background: #E0E0E0;
+  margin: 12px 0;
+}
+
+/* ========== MAP INSTRUCTIONS ========== */
+.map-instructions {
+  margin-top: 16px;
+  padding: 12px 16px;
+  background: #E3F2FD;
+  border-left: 4px solid #2196F3;
+  border-radius: 8px;
+  font-size: 14px;
+  color: #555;
+  line-height: 1.6;
+}
+
+.map-instructions strong {
+  color: #1976D2;
+  font-weight: 600;
+}
+
+/* ========== RESPONSIVE ========== */
+@media (max-width: 768px) {
+  .map-controls {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 12px;
+  }
+
+  .current-hazard-indicator {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .map-legend-container {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ========== INTEGRATION WITH LAYER 1 ========== */
+.hazard-input-section {
+  margin-top: 24px;
+}
+
+.view-toggle {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 20px;
+  justify-content: center;
+}
+
+.view-toggle-btn {
+  padding: 10px 24px;
+  border: 2px solid #E0E0E0;
+  background: white;
+  color: #666;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.view-toggle-btn.active {
+  background: #FF9800;
+  color: white;
+  border-color: #FF9800;
+}
+
+.view-toggle-btn:hover:not(.active) {
+  background: #F5F7FA;
+  border-color: #FF9800;
+  color: #FF9800;
+}
+
+/* ========== DISTRICT SELECTION SUMMARY ========== */
+.district-selection-summary {
+  margin-top: 16px;
+  padding: 12px 16px;
+  background: #FFF3E0;
+  border-left: 4px solid #FF9800;
+  border-radius: 8px;
+}
+
+.district-selection-summary h4 {
+  margin: 0 0 8px 0;
+  font-size: 14px;
+  color: #F57C00;
+  font-weight: 600;
+}
+
+.selected-districts-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.selected-district-tag {
+  background: white;
+  border: 1px solid #FFB74D;
+  color: #F57C00;
+  padding: 4px 12px;
+  border-radius: 16px;
+  font-size: 12px;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.selected-district-tag .remove-btn {
+  cursor: pointer;
+  font-weight: 700;
+  color: #F57C00;
+  transition: color 0.2s ease;
+}
+
+.selected-district-tag .remove-btn:hover {
+  color: #E65100;
+}
+
+/* ========== AUTO-FIT BOUNDS ========== */
+.leaflet-control-zoom {
+  border: 2px solid #E0E0E0 !important;
+  border-radius: 8px !important;
+  overflow: hidden;
+}
+
+.leaflet-control-zoom a {
+  color: #FF9800 !important;
+  font-weight: 700;
+  transition: all 0.2s ease;
+}
+
+.leaflet-control-zoom a:hover {
+  background: #FF9800 !important;
+  color: white !important;
+}
+
+/* ========== ATTRIBUTION ========== */
+.leaflet-control-attribution {
+  font-size: 10px !important;
+  background: rgba(255, 255, 255, 0.9) !important;
+  border-radius: 4px !important;
+  padding: 4px 8px !important;
+}
+
+/* ========== DRAWING TOOLS ========== */
+.drawing-tools-controls {
+  background: linear-gradient(135deg, #f5f5f5 0%, #e8e8e8 100%);
+  padding: 16px;
+  border-radius: 12px;
+  margin-top: 16px;
+  border: 2px solid #9C27B0;
+  box-shadow: 0 4px 12px rgba(156, 39, 176, 0.15);
+}
+
+.drawing-tools-controls h4 {
+  margin: 0 0 12px 0;
+  color: #9C27B0;
+  font-size: 16px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.drawing-buttons {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-bottom: 12px;
+}
+
+.draw-btn {
+  background: white;
+  border: 2px solid #9C27B0;
+  color: #9C27B0;
+  padding: 8px 16px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.draw-btn:hover {
+  background: #9C27B0;
+  color: white;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(156, 39, 176, 0.3);
+}
+
+.draw-btn.active {
+  background: #9C27B0;
+  color: white;
+  box-shadow: 0 0 0 4px rgba(156, 39, 176, 0.2);
+}
+
+.draw-btn.clear-btn {
+  border-color: #F44336;
+  color: #F44336;
+}
+
+.draw-btn.clear-btn:hover {
+  background: #F44336;
+  color: white;
+}
+
+.drawing-hint {
+  background: #FFF3E0;
+  border: 2px solid #FF9800;
+  border-radius: 8px;
+  padding: 10px 14px;
+  margin-bottom: 12px;
+  color: #E65100;
+  font-size: 13px;
+  font-weight: 600;
+  text-align: center;
+  animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.7; }
+}
+
+.drawn-shapes-summary {
+  background: white;
+  border-radius: 8px;
+  padding: 12px;
+  border: 2px solid #9C27B0;
+  margin-top: 12px;
+}
+
+.drawn-shapes-summary strong {
+  display: block;
+  margin-bottom: 8px;
+  color: #9C27B0;
+  font-size: 14px;
+}
+
+.shapes-list {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.shape-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: #F5F5F5;
+  padding: 8px 12px;
+  border-radius: 6px;
+  border: 1px solid #E0E0E0;
+  transition: all 0.2s ease;
+}
+
+.shape-item:hover {
+  background: #EEEEEE;
+  border-color: #9C27B0;
+}
+
+.shape-type {
+  flex: 1;
+  font-size: 13px;
+  font-weight: 600;
+  color: #424242;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.shape-area {
+  font-size: 12px;
+  color: #757575;
+  font-weight: 500;
+}
+
+.remove-shape-btn {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  font-size: 14px;
+  padding: 4px;
+  transition: transform 0.2s ease;
+}
+
+.remove-shape-btn:hover {
+  transform: scale(1.2);
+}
+
+/* ========== DRAWN SHAPE MARKERS ========== */
+.drawn-point-marker {
+  animation: markerBounce 0.5s ease-out;
+}
+
+@keyframes markerBounce {
+  0% { transform: scale(0); }
+  50% { transform: scale(1.2); }
+  100% { transform: scale(1); }
+}
+
+/* ========== GEOGRAPHIC LAYER TOOLTIPS ========== */
+.water-tooltip {
+  background: linear-gradient(135deg, #1976D2, #0D47A1) !important;
+  color: white !important;
+  border: none !important;
+  border-radius: 6px !important;
+  padding: 6px 12px !important;
+  font-size: 12px !important;
+  font-weight: 600 !important;
+  box-shadow: 0 2px 8px rgba(25, 118, 210, 0.4) !important;
+}
+
+.water-tooltip::before {
+  border-top-color: #1976D2 !important;
+}
+
+.region-tooltip {
+  background: linear-gradient(135deg, #5D4037, #3E2723) !important;
+  color: white !important;
+  border: none !important;
+  border-radius: 6px !important;
+  padding: 6px 12px !important;
+  font-size: 12px !important;
+  font-weight: 600 !important;
+  box-shadow: 0 2px 8px rgba(93, 64, 55, 0.4) !important;
+}
+
+.region-tooltip::before {
+  border-top-color: #5D4037 !important;
+}

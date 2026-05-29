@@ -1,0 +1,751 @@
+/**
+ * MODULE 05: INFORM CLIMATE CHANGE - STYLES
+ */
+
+.module05-container {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #E8F5E9 0%, #C8E6C9 100%);
+  padding-bottom: 40px;
+}
+
+/* ========== MODULE HEADER ========== */
+.module05-header {
+  background: linear-gradient(135deg, #388E3C 0%, #2E7D32 100%);
+  color: white;
+  padding: 32px 40px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+}
+
+.module05-header .header-content {
+  max-width: 1400px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 32px;
+}
+
+.module05-header .module-title {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin: 0;
+}
+
+.module05-header .module-number {
+  font-size: 16px;
+  font-weight: 600;
+  opacity: 0.9;
+  letter-spacing: 1px;
+}
+
+.module05-header .module-name {
+  font-size: 36px;
+  font-weight: 800;
+  letter-spacing: -0.5px;
+}
+
+.module05-header .module-subtitle {
+  font-size: 18px;
+  opacity: 0.95;
+  margin: 8px 0 0 0;
+  font-weight: 400;
+}
+
+.climate-indicator {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(10px);
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-radius: 12px;
+  padding: 16px 24px;
+}
+
+.indicator-icon {
+  font-size: 48px;
+}
+
+.indicator-value {
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.indicator-label {
+  font-size: 14px;
+  opacity: 0.9;
+}
+
+/* ========== INFORM EXTENSION BANNER ========== */
+.inform-extension-banner {
+  background: linear-gradient(135deg, #FFF3E0 0%, #FFE0B2 100%);
+  border: 3px solid #FF9800;
+  border-radius: 12px;
+  padding: 20px 32px;
+  margin: 32px 40px;
+  display: flex;
+  gap: 20px;
+  align-items: start;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.extension-icon {
+  font-size: 36px;
+  flex-shrink: 0;
+}
+
+.extension-text strong {
+  display: block;
+  font-size: 16px;
+  color: #E65100;
+  margin-bottom: 8px;
+}
+
+.extension-text p {
+  margin: 0;
+  font-size: 14px;
+  color: #666;
+  line-height: 1.6;
+}
+
+/* ========== SELECTION PANEL ========== */
+.selection-panel {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 40px 32px;
+}
+
+.selection-section {
+  margin-bottom: 28px;
+}
+
+.selection-section h3 {
+  font-size: 18px;
+  color: #2E7D32;
+  margin-bottom: 16px;
+}
+
+.scenario-cards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+
+.scenario-card {
+  background: white;
+  border: 3px solid #E0E0E0;
+  border-radius: 10px;
+  padding: 20px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-align: center;
+  position: relative;
+}
+
+.scenario-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+}
+
+.scenario-card.active {
+  border-width: 4px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+}
+
+.scenario-icon {
+  font-size: 36px;
+  margin-bottom: 12px;
+}
+
+.scenario-name {
+  font-size: 15px;
+  font-weight: 700;
+  color: #333;
+  margin-bottom: 8px;
+}
+
+.scenario-description {
+  font-size: 12px;
+  color: #666;
+  margin-bottom: 12px;
+}
+
+.scenario-temp {
+  font-size: 14px;
+  font-weight: 700;
+  color: #F44336;
+}
+
+.selected-check {
+  position: absolute;
+  top: -10px;
+  right: 12px;
+  background: #4CAF50;
+  color: white;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  font-weight: 700;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+.horizon-buttons {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+}
+
+.horizon-btn {
+  background: white;
+  border: 3px solid #E0E0E0;
+  border-radius: 10px;
+  padding: 16px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-align: center;
+}
+
+.horizon-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.horizon-btn.active {
+  border-width: 4px;
+  font-weight: 700;
+}
+
+.horizon-label {
+  font-size: 13px;
+  font-weight: 600;
+  margin-bottom: 6px;
+}
+
+.horizon-period {
+  font-size: 11px;
+  color: #666;
+}
+
+/* ========== CLIMATE TABS ========== */
+.climate-tabs {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 40px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+  margin-bottom: 32px;
+}
+
+.climate-tab {
+  background: white;
+  border: 3px solid #E0E0E0;
+  border-radius: 10px;
+  padding: 16px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  font-size: 14px;
+  font-weight: 600;
+  color: #666;
+}
+
+.climate-tab:hover {
+  border-color: #4CAF50;
+  background: #F1F8E9;
+}
+
+.climate-tab.active {
+  background: linear-gradient(135deg, #4CAF50 0%, #388E3C 100%);
+  border-color: #2E7D32;
+  color: white;
+}
+
+.climate-tab .tab-icon {
+  font-size: 20px;
+}
+
+/* ========== CONTENT AREA ========== */
+.climate-content {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 40px;
+}
+
+.overview-view h2,
+.trends-view h2,
+.projections-view h2,
+.adaptation-view h2 {
+  font-size: 28px;
+  color: #2E7D32;
+  margin-bottom: 12px;
+}
+
+.overview-intro,
+.trends-intro,
+.projections-intro,
+.adaptation-intro {
+  font-size: 16px;
+  color: #666;
+  margin-bottom: 32px;
+}
+
+/* ========== AMPLIFICATION PATHWAYS ========== */
+.amplification-pathways {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  margin-bottom: 40px;
+}
+
+.pathway-card {
+  background: white;
+  border: 3px solid #4CAF50;
+  border-radius: 12px;
+  padding: 24px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.pathway-icon {
+  font-size: 48px;
+  margin-bottom: 16px;
+}
+
+.pathway-card h4 {
+  font-size: 18px;
+  color: #2E7D32;
+  margin: 0 0 8px 0;
+}
+
+.pathway-card p {
+  font-size: 14px;
+  color: #666;
+  margin-bottom: 12px;
+}
+
+.pathway-card ul {
+  margin: 0;
+  padding-left: 20px;
+}
+
+.pathway-card li {
+  font-size: 13px;
+  color: #555;
+  margin-bottom: 6px;
+}
+
+/* ========== HAZARDS GRID ========== */
+.hazards-overview {
+  margin-top: 40px;
+}
+
+.hazards-overview h3 {
+  font-size: 22px;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+.hazards-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+}
+
+.hazard-overview-card {
+  background: white;
+  border: 3px solid #E0E0E0;
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+}
+
+.hazard-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.hazard-icon {
+  font-size: 32px;
+}
+
+.hazard-name {
+  font-size: 16px;
+  font-weight: 700;
+  color: #333;
+}
+
+.hazard-indicators,
+.hazard-impacts {
+  margin-bottom: 12px;
+}
+
+.hazard-indicators strong,
+.hazard-impacts strong {
+  font-size: 13px;
+  color: #666;
+  display: block;
+  margin-bottom: 8px;
+}
+
+.hazard-indicators ul,
+.hazard-impacts ul {
+  margin: 0;
+  padding-left: 20px;
+}
+
+.hazard-indicators li,
+.hazard-impacts li {
+  font-size: 12px;
+  color: #555;
+  margin-bottom: 4px;
+}
+
+/* ========== TRENDS VIEW ========== */
+.trend-notice {
+  background: #E3F2FD;
+  border: 2px solid #2196F3;
+  border-radius: 8px;
+  padding: 16px;
+  margin-bottom: 32px;
+  display: flex;
+  gap: 16px;
+  align-items: center;
+}
+
+.notice-icon {
+  font-size: 28px;
+}
+
+.notice-text strong {
+  color: #1976D2;
+}
+
+.trends-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+.trend-card {
+  background: white;
+  border: 3px solid #E0E0E0;
+  border-radius: 12px;
+  padding: 24px;
+  text-align: center;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.trend-card h4 {
+  margin: 0 0 16px 0;
+  font-size: 16px;
+  color: #333;
+}
+
+.trend-value {
+  font-size: 48px;
+  font-weight: 800;
+  color: #F44336;
+  line-height: 1;
+  margin-bottom: 8px;
+}
+
+.trend-label {
+  font-size: 13px;
+  color: #999;
+  margin-bottom: 16px;
+}
+
+.trend-indicator {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+  border-radius: 20px;
+  font-size: 13px;
+  font-weight: 600;
+  margin-bottom: 16px;
+}
+
+.trend-indicator.increasing {
+  background: #FFEBEE;
+  color: #C62828;
+}
+
+.trend-indicator.decreasing {
+  background: #E3F2FD;
+  color: #1976D2;
+}
+
+.trend-description {
+  font-size: 13px;
+  color: #666;
+  line-height: 1.6;
+  text-align: left;
+}
+
+/* ========== PROJECTIONS VIEW ========== */
+.projection-summary {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  margin-bottom: 32px;
+}
+
+.summary-card {
+  background: white;
+  border: 3px solid #E0E0E0;
+  border-radius: 10px;
+  padding: 24px;
+  text-align: center;
+}
+
+.summary-label {
+  font-size: 13px;
+  color: #666;
+  margin-bottom: 12px;
+}
+
+.summary-value {
+  font-size: 32px;
+  font-weight: 800;
+}
+
+.projection-implications h3 {
+  font-size: 22px;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+.implications-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+}
+
+.implication-card {
+  background: white;
+  border: 3px solid #E0E0E0;
+  border-radius: 10px;
+  padding: 20px;
+}
+
+.implication-icon {
+  font-size: 36px;
+  margin-bottom: 12px;
+}
+
+.implication-card h4 {
+  font-size: 16px;
+  color: #333;
+  margin: 0 0 12px 0;
+}
+
+.implication-card p {
+  font-size: 13px;
+  color: #666;
+  line-height: 1.6;
+  margin: 0;
+}
+
+/* ========== ADAPTATION VIEW ========== */
+.adaptation-strategies {
+  display: grid;
+  gap: 20px;
+  margin-bottom: 40px;
+}
+
+.strategy-card {
+  background: white;
+  border: 3px solid #E0E0E0;
+  border-radius: 12px;
+  padding: 24px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+}
+
+.strategy-header {
+  display: flex;
+  gap: 20px;
+  align-items: start;
+  margin-bottom: 16px;
+}
+
+.strategy-title h4 {
+  font-size: 18px;
+  color: #333;
+  margin: 0 0 8px 0;
+}
+
+.strategy-meta {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.meta-item {
+  font-size: 12px;
+  color: #666;
+  background: #F5F5F5;
+  padding: 4px 10px;
+  border-radius: 12px;
+}
+
+.strategy-actions strong {
+  display: block;
+  font-size: 13px;
+  color: #666;
+  margin-bottom: 8px;
+}
+
+.strategy-actions ul {
+  margin: 0;
+  padding-left: 20px;
+}
+
+.strategy-actions li {
+  font-size: 13px;
+  color: #555;
+  margin-bottom: 6px;
+}
+
+.adaptation-priorities h3 {
+  font-size: 22px;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+.priorities-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+.priority-card {
+  background: white;
+  border-radius: 10px;
+  padding: 20px;
+  border: 3px solid;
+}
+
+.priority-card.urgent {
+  border-color: #F44336;
+  background: #FFEBEE;
+}
+
+.priority-card.medium {
+  border-color: #FF9800;
+  background: #FFF3E0;
+}
+
+.priority-card.long {
+  border-color: #4CAF50;
+  background: #E8F5E9;
+}
+
+.priority-label {
+  font-size: 14px;
+  font-weight: 700;
+  margin-bottom: 12px;
+}
+
+.priority-card ul {
+  margin: 0;
+  padding-left: 20px;
+}
+
+.priority-card li {
+  font-size: 13px;
+  margin-bottom: 8px;
+}
+
+/* ========== INTEGRATION PANEL ========== */
+.integration-panel {
+  background: white;
+  border: 3px solid #4CAF50;
+  border-radius: 12px;
+  padding: 28px;
+  max-width: 1400px;
+  margin: 40px auto 0;
+  margin-left: 40px;
+  margin-right: 40px;
+}
+
+.integration-panel h3 {
+  margin: 0 0 20px 0;
+  font-size: 20px;
+  color: #2E7D32;
+}
+
+.integration-flow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.integration-step {
+  flex: 1;
+  background: #F1F8E9;
+  border: 2px solid #4CAF50;
+  border-radius: 8px;
+  padding: 16px;
+  text-align: center;
+}
+
+.integration-step strong {
+  display: block;
+  font-size: 14px;
+  color: #2E7D32;
+  margin-bottom: 6px;
+}
+
+.integration-step p {
+  margin: 0;
+  font-size: 12px;
+  color: #666;
+}
+
+.flow-arrow {
+  font-size: 20px;
+  color: #4CAF50;
+  font-weight: 700;
+  padding: 0 12px;
+}
+
+/* ========== RESPONSIVE ========== */
+@media (max-width: 1024px) {
+  .scenario-cards,
+  .horizon-buttons,
+  .climate-tabs {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .amplification-pathways,
+  .trends-grid,
+  .projection-summary,
+  .priorities-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .hazards-grid,
+  .implications-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .integration-flow {
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .flow-arrow {
+    transform: rotate(90deg);
+  }
+}
