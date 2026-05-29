@@ -1,17 +1,12 @@
 /**
  * AUTHENTICATION SERVICE
  * Handles user authentication, authorization, and session management
- * Supports role-based access control for INFORM Tanzania Platform
- *
- * UPDATED: Now connects to Go backend API at /api/v1/auth/*
+ * for the INFORM Tanzania Platform. Backing store is mock data in
+ * localStorage; Supabase auth integration is wired separately via
+ * AuthContext and the Supabase client.
  */
 
-import apiClient, { setAuthToken, APIError } from './apiClient';
-
-// Configuration - set to true to use Go backend, false for mock data
-const USE_BACKEND_API = true;
-
-// User roles in the system (matches Go backend roles)
+// User roles in the system
 export const USER_ROLES = {
   ADMIN: 'admin',
   PMO_OFFICER: 'pmo_officer',
@@ -579,58 +574,6 @@ class AuthService {
     try {
       console.log('🔐 Attempting login for:', email, institution ? `(${institution})` : '');
 
-      if (USE_BACKEND_API) {
-        try {
-          // Call Go backend API
-          const response = await apiClient.post('/auth/login', { email, password });
-
-          if (response.success && response.data) {
-            const { token, user } = response.data;
-
-            // Store token for future API calls
-            setAuthToken(token);
-
-            // Map backend user to frontend format
-            const mappedUser = {
-              id: user.id.toString(),
-              email: user.email,
-              name: user.full_name,
-              role: this.mapBackendRole(user.role),
-              adm1Code: user.adm1_code,
-              createdAt: new Date().toISOString()
-            };
-
-            // Store user in memory and localStorage
-            this.currentUser = mappedUser;
-            this.sessionStartTime = Date.now();
-
-            localStorage.setItem('inform_user', JSON.stringify(mappedUser));
-            localStorage.setItem('inform_session', JSON.stringify({ startTime: this.sessionStartTime }));
-            localStorage.setItem('inform_remember_me', rememberMe.toString());
-
-            if (!rememberMe) {
-              this.startSessionTimeout();
-            }
-
-            console.log('✅ Login successful (API):', mappedUser.email, `(${mappedUser.role})`);
-
-            return {
-              success: true,
-              user: mappedUser,
-              message: 'Login successful'
-            };
-          }
-
-          // API returned error response
-          throw new Error(response.error || 'Login failed');
-        } catch (apiError) {
-          // If API call fails (network error, 404, etc.), fall back to mock data
-          console.warn('⚠️ Backend API unavailable, falling back to mock data:', apiError.message);
-          // Continue to mock data fallback below
-        }
-      }
-
-      // Fallback to mock data (if API is disabled or unavailable)
       await new Promise(resolve => setTimeout(resolve, 500));
 
       let user = MOCK_USERS.find(u => u.email === email);
@@ -678,19 +621,6 @@ class AuthService {
   }
 
   /**
-   * Map backend role to frontend role
-   */
-  mapBackendRole(backendRole) {
-    const roleMap = {
-      'admin': USER_ROLES.ADMIN,
-      'regional_committee': USER_ROLES.REGIONAL_COMMITTEE,
-      'ward_committee': USER_ROLES.WARD_COMMITTEE,
-      'viewer': USER_ROLES.VIEWER
-    };
-    return roleMap[backendRole] || backendRole;
-  }
-
-  /**
    * Register new user
    * @param {object} userData - User registration data
    * @returns {Promise<object>} Result object
@@ -699,28 +629,6 @@ class AuthService {
     try {
       console.log('📝 Registering new user:', userData.email);
 
-      if (USE_BACKEND_API) {
-        // Call Go backend API
-        const response = await apiClient.post('/auth/register', {
-          email: userData.email,
-          password: userData.password,
-          full_name: userData.name,
-          phone: userData.phone || '',
-          committee_id: userData.committeeId || null
-        });
-
-        if (response.success) {
-          console.log('✅ Registration successful (API):', userData.email);
-          return {
-            success: true,
-            message: response.message || 'Registration successful. Please login.'
-          };
-        }
-
-        throw new Error(response.error || 'Registration failed');
-      }
-
-      // Fallback to mock data
       await new Promise(resolve => setTimeout(resolve, 500));
 
       const existingUser = MOCK_USERS.find(u => u.email === userData.email);
@@ -763,16 +671,6 @@ class AuthService {
    */
   async logout() {
     console.log('🚪 Logging out:', this.currentUser?.email);
-
-    if (USE_BACKEND_API) {
-      try {
-        await apiClient.post('/auth/logout', {});
-      } catch (error) {
-        console.warn('Logout API call failed (continuing anyway):', error.message);
-      }
-      // Clear token
-      setAuthToken(null);
-    }
 
     this.clearSession();
     localStorage.removeItem('inform_remember_me');

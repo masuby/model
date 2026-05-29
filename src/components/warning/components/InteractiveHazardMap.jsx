@@ -10,7 +10,7 @@
  */
 
 import React, { useState, useEffect, useRef, useCallback } from 'react';
-import { MapContainer, TileLayer, GeoJSON, Marker, Popup, useMap, Circle, Rectangle, Polygon, FeatureGroup, useMapEvents, CircleMarker } from 'react-leaflet';
+import { MapContainer, TileLayer, GeoJSON, Marker, Popup, useMap, Circle, Rectangle, Polygon, FeatureGroup, useMapEvents, CircleMarker, ScaleControl } from 'react-leaflet';
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import './InteractiveHazardMap.css';
@@ -1669,10 +1669,31 @@ const InteractiveHazardMap = ({
             </Popup>
           </Marker>
         ))}
+
+        <ScaleControl position="bottomleft" imperial={false} />
       </MapContainer>
 
       {/* Map Legend */}
       <div className="map-legend-container">
+        {/* Always-visible warning levels key */}
+        {!showPMOView && (
+          <div className="hazard-legend warning-levels-key" style={{ marginBottom: 8 }}>
+            <h4>Warning Levels</h4>
+            <div className="legend-item">
+              <span className="legend-color" style={{ backgroundColor: '#FFEA00' }}></span>
+              <span>🟡 Advisory</span>
+            </div>
+            <div className="legend-item">
+              <span className="legend-color" style={{ backgroundColor: '#FF6D00' }}></span>
+              <span>🟠 Warning</span>
+            </div>
+            <div className="legend-item">
+              <span className="legend-color" style={{ backgroundColor: '#FF1744' }}></span>
+              <span>🔴 Major Warning</span>
+            </div>
+          </div>
+        )}
+
         {!showPMOView && selectedHazardType && (
           <div className="hazard-legend">
             <h4>Warning Level Selection</h4>

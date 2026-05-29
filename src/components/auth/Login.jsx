@@ -8,7 +8,7 @@ import { useState, useEffect } from 'react';
 import { useAuth } from '../../context/AuthContext';
 import { useNavigate } from 'react-router-dom';
 import { INSTITUTIONS, USER_ROLES } from '../../services/authService';
-import { getCommittees } from '../../services/committeeService';
+import { getCommittees } from '../../services/committeeSupabaseService';
 import './Auth.css';
 
 // Login types

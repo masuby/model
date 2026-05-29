@@ -4,7 +4,7 @@
  * Following INFORM/UN-OCHA international standards
  */
 import React, { useState, useEffect, useRef, useMemo } from 'react';
-import { MapContainer, TileLayer, GeoJSON, useMap } from 'react-leaflet';
+import { MapContainer, TileLayer, GeoJSON, useMap, ScaleControl } from 'react-leaflet';
 import L from 'leaflet';
 import {
   getRiskClass,
@@ -399,6 +399,8 @@ function InformChoroplethMap({
           />
 
           {mapBounds && <MapBoundsController bounds={mapBounds} />}
+
+          {!isMiniature && <ScaleControl position="bottomleft" imperial={false} />}
         </MapContainer>
 
         {!isMiniature && <MapLegend selectedIndicator={selectedIndicator} />}

@@ -10,9 +10,6 @@
  * - PMO review and approval workflow
  */
 
-import { createDataEntry, bulkCreateDataEntries } from './dataEntryService';
-import { getIndicators } from './indicatorService';
-
 // Excel Template Sheet Mappings
 // Maps our indicator system to the Excel template structure
 const EXCEL_TEMPLATE_MAPPINGS = {
