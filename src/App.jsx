@@ -12,6 +12,7 @@ import Module02InformRisk from "./components/inform-risk/Module02InformRisk";
 import Module03WarningSystem from "./components/warning/Module03WarningSystem";
 import Module04Severity from "./components/severity/Module04Severity";
 import Module05Climate from "./components/climate/Module05Climate";
+import WarningModule from "./pages/WarningModule";
 import Sidebar from "./components/navigation/Sidebar";
 import Dashboard from "./components/dashboard/Dashboard";
 import InstitutionDashboard from "./components/dashboard/InstitutionDashboard";
@@ -21,6 +22,9 @@ import DatabasePanel from "./components/admin/DatabasePanel";
 import DataManagementHub from "./components/admin/DataManagementHub";
 import LiveDataEntry from "./components/data-entry/LiveDataEntry";
 import DataManagementDashboard from "./components/warning/DataManagementDashboard";
+import MapsExplorer from "./pages/MapsExplorer";
+import IndicatorCatalog from "./pages/IndicatorCatalog";
+// HazardRiskDashboard removed - functionality integrated into existing Module02InformRisk and Module03WarningSystem
 import {
   USER_ROLES,
   canRoleAccessModule,
@@ -98,20 +102,23 @@ function MainApp() {
   const canAccess = (view) => {
     if (!user?.role) return false;
 
-    // Modules
-    if (view.startsWith('module')) {
+    // Modules (including special 'warning' module)
+    if (view.startsWith('module') || view === 'warning') {
       return canRoleAccessModule(user.role, view);
     }
 
     // Data views
-    if (['risk', 'warning', 'severity', 'climate'].includes(view)) {
+    if (['risk', 'severity', 'climate'].includes(view)) {
       return canRoleAccessDataView(user.role, view);
     }
 
-    // Tools
-    if (['analytics', 'database', 'data-entry'].includes(view)) {
+    // Tools (hazard-risk removed - integrated into Module02/Module03)
+    if (['analytics', 'database', 'data-entry', 'data-sources'].includes(view)) {
       return canRoleAccessTool(user.role, view);
     }
+
+    // Maps explorer + Indicator catalog are open to anyone who can access modules
+    if (view === 'maps' || view === 'indicator-catalog') return true;
 
     // Always allow dashboard and profile
     return ['dashboard', 'profile'].includes(view);
@@ -153,16 +160,24 @@ function MainApp() {
         return <Module04Severity activeWarnings={[]} riskData={null} />;
       case 'module05':
         return <Module05Climate riskData={null} />;
+      case 'warning':
+        return <WarningModule onNavigate={handleNavigation} />;
       case 'analytics':
         return <AnalyticsDashboard />;
+      case 'maps':
+        return <MapsExplorer />;
+      case 'indicator-catalog':
+        return <IndicatorCatalog />;
       case 'database':
         return <DataManagementHub />;
       case 'data-entry':
         return <LiveDataEntry onSubmit={(data) => console.log('Submitted:', data)} />;
       case 'data-sources':
         return <DataManagementDashboard />;
+      case 'hazard-risk':
+        // Redirect to Module03WarningSystem - Flood/Drought risk integrated there
+        return <Module03WarningSystem onNavigate={handleNavigation} />;
       case 'risk':
-      case 'warning':
       case 'severity':
       case 'climate':
         return <Home currentCategory={currentView} onNavigateToModule={handleNavigation} />;
@@ -219,9 +234,7 @@ function App() {
                 <Route
                   path="/*"
                   element={
-                    <ProtectedRoute>
-                      <MainApp />
-                    </ProtectedRoute>
+                    <MainApp />
                   }
                 />
 

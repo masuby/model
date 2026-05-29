@@ -5,9 +5,16 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
+    "dev:warning": "vite --open warning-app.html",
     "build": "vite build",
+    "build:warning": "vite build --mode warning",
+    "build:warning-only": "rm -rf dist && vite build && mkdir -p dist/warning && cp dist/warning.js dist/warning/ && cp warning-app.html dist/warning/index.html",
     "lint": "eslint .",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:ui": "vitest --ui",
     "preview": "vite preview",
+    "preview:warning": "vite preview --open",
     "predeploy": "npm run build",
     "deploy": "gh-pages -d dist"
   },
@@ -38,6 +45,7 @@
     "@types/react": "^19.2.2",
     "@types/react-dom": "^19.2.2",
     "@vitejs/plugin-react": "^5.0.4",
+    "@vitest/ui": "^4.1.7",
     "eslint": "^9.37.0",
     "eslint-plugin-react-hooks": "^7.0.0",
     "eslint-plugin-react-refresh": "^0.4.23",
@@ -45,6 +53,7 @@
     "globals": "^16.4.0",
     "shapefile": "^0.6.6",
     "shpjs": "^6.2.0",
-    "vite": "^7.1.10"
+    "vite": "^7.1.10",
+    "vitest": "^4.1.7"
   }
 }

@@ -8,6 +8,7 @@ import React, { useState, useEffect } from 'react';
 import { useAuth } from '../../context/AuthContext';
 import { useDatabase } from '../../contexts/DatabaseContext';
 import { USER_ROLES, INSTITUTIONS } from '../../services/authService';
+import { getSubmissions, isUsingSupabase } from '../../services/supabaseDataService';
 import InstitutionDataEntry from './tabs/InstitutionDataEntry';
 import RegionalDataView from './tabs/RegionalDataView';
 import PMOReviewPanel from './tabs/PMOReviewPanel';
@@ -165,35 +166,11 @@ function DataManagementHub() {
     loadAuditLogs();
   };
 
-  const loadSubmissions = () => {
+  const loadSubmissions = async () => {
     try {
-      const allSubmissions = [];
-      const seenIds = new Set();
-
-      // Scan all committee_submissions_* keys
-      Object.keys(localStorage)
-        .filter(k => k.startsWith('committee_submissions_'))
-        .forEach(key => {
-          const subs = JSON.parse(localStorage.getItem(key) || '[]');
-          subs.forEach(s => {
-            if (!seenIds.has(s.id)) {
-              seenIds.add(s.id);
-              allSubmissions.push(s);
-            }
-          });
-        });
-
-      // Also check all_pending_submissions for any missed
-      const globalPending = JSON.parse(localStorage.getItem('all_pending_submissions') || '[]');
-      globalPending.forEach(s => {
-        if (!seenIds.has(s.id)) {
-          seenIds.add(s.id);
-          allSubmissions.push(s);
-        }
-      });
-
-      // Sort newest first
-      allSubmissions.sort((a, b) => new Date(b.submittedAt) - new Date(a.submittedAt));
+      // Use Supabase service (falls back to localStorage)
+      const allSubmissions = await getSubmissions();
+      console.log(`📋 Loaded ${allSubmissions.length} submissions ${isUsingSupabase() ? 'from Supabase' : 'from localStorage'}`);
       setSubmissions(allSubmissions);
     } catch (error) {
       console.error('Failed to load submissions:', error);

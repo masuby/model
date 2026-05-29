@@ -1,0 +1,207 @@
+/* TanzaniaInformMap — styles */
+
+.tz-map-wrapper {
+  display: flex;
+  flex-direction: column;
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(15, 23, 42, 0.06);
+  font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+}
+
+/* ── Header ─────────────────────────────────────────────────────────── */
+.tz-map-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 12px 16px;
+  background: linear-gradient(180deg, #ffffff, #f1f5f9);
+  border-bottom: 1px solid #e2e8f0;
+  flex-wrap: wrap;
+}
+.tz-map-header-titles {
+  min-width: 0;
+}
+.tz-map-title {
+  font-size: 16px;
+  font-weight: 700;
+  color: #0f172a;
+  line-height: 1.2;
+}
+.tz-map-subtitle {
+  font-size: 12px;
+  color: #64748b;
+  margin-top: 2px;
+}
+.tz-map-controls {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+.tz-map-control {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  font-size: 11px;
+  color: #475569;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+.tz-map-control select {
+  background: #ffffff;
+  border: 1px solid #cbd5e1;
+  border-radius: 6px;
+  padding: 6px 10px;
+  font-size: 13px;
+  color: #0f172a;
+  cursor: pointer;
+  transition: border-color 0.15s;
+}
+.tz-map-control select:hover { border-color: #94a3b8; }
+.tz-map-control select:focus { outline: none; border-color: #2563eb; box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15); }
+
+/* ── Canvas ─────────────────────────────────────────────────────────── */
+.tz-map-canvas {
+  position: relative;
+  flex: 1;
+  min-height: 0;
+}
+
+.tz-map-loading {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(248, 250, 252, 0.6);
+  color: #475569;
+  font-size: 13px;
+  font-weight: 500;
+  pointer-events: none;
+  z-index: 500;
+}
+
+/* ── Legend ─────────────────────────────────────────────────────────── */
+.tz-map-legend {
+  position: absolute;
+  bottom: 24px;
+  left: 12px;
+  background: rgba(255, 255, 255, 0.96);
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  padding: 10px 12px;
+  box-shadow: 0 4px 16px rgba(15, 23, 42, 0.12);
+  font-size: 12px;
+  z-index: 600;
+  min-width: 180px;
+}
+.tz-map-legend-title {
+  font-size: 12px;
+  font-weight: 700;
+  color: #0f172a;
+  margin-bottom: 8px;
+  padding-bottom: 6px;
+  border-bottom: 1px solid #e2e8f0;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+.tz-map-legend-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 2px 0;
+}
+.tz-map-legend-swatch {
+  display: inline-block;
+  width: 14px;
+  height: 14px;
+  border-radius: 3px;
+  border: 1px solid rgba(15, 23, 42, 0.15);
+  flex: none;
+}
+.tz-map-legend-text {
+  color: #1e293b;
+  font-weight: 500;
+}
+.tz-map-legend-range {
+  color: #64748b;
+  font-weight: 400;
+  margin-left: 6px;
+}
+.tz-map-legend-na .tz-map-legend-text { color: #64748b; }
+
+/* ── Hover card (top-left, follows district hover) ──────────────────── */
+.tz-map-hover-card {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  background: rgba(15, 23, 42, 0.92);
+  color: #f8fafc;
+  border-radius: 8px;
+  padding: 8px 12px;
+  font-size: 13px;
+  line-height: 1.3;
+  box-shadow: 0 6px 18px rgba(15, 23, 42, 0.3);
+  z-index: 700;
+  pointer-events: none;
+  max-width: 220px;
+}
+.tz-map-hover-name { font-weight: 700; }
+.tz-map-hover-score { font-size: 12px; color: #fde68a; margin-top: 2px; }
+.tz-map-hover-na { font-size: 12px; color: #94a3b8; margin-top: 2px; }
+
+/* ── Region tooltip (centered) ──────────────────────────────────────── */
+.tz-map-region-tooltip {
+  background: rgba(15, 23, 42, 0.85);
+  color: #f8fafc;
+  border: none;
+  border-radius: 4px;
+  padding: 3px 6px;
+  font-size: 11px;
+  font-weight: 600;
+  box-shadow: none;
+}
+.tz-map-region-tooltip::before { display: none; }
+
+/* ── Leaflet popup tweaks (scoped via .tz-map-popup) ────────────────── */
+.tz-map-popup { font-family: inherit; }
+.tz-map-popup-title {
+  font-weight: 700;
+  font-size: 14px;
+  color: #0f172a;
+  margin-bottom: 6px;
+}
+.tz-map-popup-score {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  font-size: 12px;
+  color: #475569;
+}
+.tz-map-popup-badge {
+  display: inline-block;
+  padding: 3px 8px;
+  border-radius: 99px;
+  color: #ffffff;
+  font-size: 11px;
+  font-weight: 700;
+  width: fit-content;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+.tz-map-popup-na {
+  color: #94a3b8;
+  font-size: 12px;
+  font-style: italic;
+}
+
+/* ── Mobile ─────────────────────────────────────────────────────────── */
+@media (max-width: 600px) {
+  .tz-map-header { flex-direction: column; align-items: stretch; }
+  .tz-map-controls { width: 100%; }
+  .tz-map-control { flex: 1; }
+  .tz-map-legend { bottom: 12px; left: 12px; right: 12px; min-width: 0; }
+}

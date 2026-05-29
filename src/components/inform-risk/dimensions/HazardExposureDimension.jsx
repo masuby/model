@@ -3,13 +3,70 @@
  *
  * Shows all hazard types (Natural + Human) with their exposure levels
  * Based on Tanzania Country Model Template structure
+ *
+ * PRIORITY HAZARDS: Floods & Droughts
+ * Aligned with INFORM Risk Index Methodology and WMO Guidelines
  */
 
-import React, { useState } from 'react';
+import { useState, useEffect } from 'react';
 import './DimensionStyles.css';
+import { getHazardRiskService } from '../../../services/hazardRiskService';
 
 const HazardExposureDimension = ({ data }) => {
-  const [expandedCategory, setExpandedCategory] = useState('natural');
+  const [expandedCategory, setExpandedCategory] = useState('priority');
+  const [floodRisk, setFloodRisk] = useState(null);
+  const [droughtRisk, setDroughtRisk] = useState(null);
+
+  // Initialize risk service and calculate flood/drought risk
+  useEffect(() => {
+    const service = getHazardRiskService();
+
+    // Calculate risk based on data if available
+    if (data) {
+      const regionData = {
+        meteorological: {
+          daily_rainfall: data.natural?.heavyRainfall ? data.natural.heavyRainfall * 20 : 50,
+          rainfall_forecast: 60,
+          cumulative_rainfall: 110
+        },
+        hydrological: {
+          river_level: data.natural?.flood ? data.natural.flood * 0.5 : 1.0,
+          dam_reservoir: 70,
+          soil_saturation: 55
+        },
+        agricultural: {
+          ndvi: data.natural?.drought ? (1 - data.natural.drought / 10) * 0.5 + 0.2 : 0.5,
+          vci: data.natural?.drought ? 100 - data.natural.drought * 8 : 50,
+          dry_spell_days: data.natural?.drought ? data.natural.drought * 2 : 5
+        },
+        baseline: {
+          flood_hazard_zone: data.natural?.flood || 5,
+          drought_susceptibility: data.natural?.drought || 5
+        },
+        exposure: {
+          population: data.exposure?.totalPopulation || 5,
+          agricultural: data.exposure?.agriculturalLand || 5,
+          infrastructure: data.exposure?.criticalFacilities || 5
+        },
+        sensitivity: {
+          poverty: 5,
+          food_insecurity: 5,
+          water_access: 6,
+          health_vulnerability: 4
+        },
+        coping: {
+          early_warning: 6,
+          governance: 5,
+          infrastructure: 5,
+          social_protection: 4,
+          irrigation: 3
+        }
+      };
+
+      setFloodRisk(service.calculateFloodRisk(regionData));
+      setDroughtRisk(service.calculateDroughtRisk(regionData));
+    }
+  }, [data]);
 
   // Physical Exposure Indicators - Population and assets exposed to hazards
   const physicalExposureIndicators = [
@@ -125,8 +182,187 @@ const HazardExposureDimension = ({ data }) => {
         </div>
       </div>
 
-      {/* Hazard Categories - Natural first, then Human, then Exposure */}
+      {/* Hazard Categories - Priority Hazards first (Floods & Droughts) */}
       <div className="hazard-categories">
+
+        {/* PRIORITY: Flood & Drought Risk Assessment */}
+        <div className="hazard-category priority-hazards">
+          <div
+            className={`category-header ${expandedCategory === 'priority' ? 'expanded' : ''}`}
+            onClick={() => setExpandedCategory(expandedCategory === 'priority' ? null : 'priority')}
+            style={{ borderLeft: '4px solid #1976D2' }}
+          >
+            <div className="category-title">
+              <span className="category-icon">🎯</span>
+              <h3>Priority Hazards: Floods & Droughts</h3>
+              <span className="category-count">(INFORM Risk Assessment)</span>
+            </div>
+            <div className="category-score">
+              <span className="aggregate-score" style={{ color: '#1976D2' }}>
+                {floodRisk && droughtRisk
+                  ? Math.max(floodRisk.riskIndex, droughtRisk.riskIndex).toFixed(1)
+                  : 'N/A'}
+              </span>
+              <span className="expand-icon">{expandedCategory === 'priority' ? '▲' : '▼'}</span>
+            </div>
+          </div>
+
+          {expandedCategory === 'priority' && (
+            <div className="category-indicators">
+              <div className="exposure-explanation" style={{ background: '#E3F2FD', borderLeft: '4px solid #1976D2' }}>
+                <strong>Tanzania Priority Hazards</strong> - Following INFORM methodology and WMO Multi-Hazard
+                Early Warning System guidelines, Floods and Droughts are identified as the primary climate-related
+                hazards requiring systematic monitoring and risk assessment.
+              </div>
+
+              {/* Flood Risk Panel */}
+              {floodRisk && (
+                <div style={{
+                  background: `linear-gradient(135deg, ${floodRisk.alertLevel.color}15, ${floodRisk.alertLevel.color}05)`,
+                  border: `2px solid ${floodRisk.alertLevel.color}`,
+                  borderRadius: '12px',
+                  padding: '20px',
+                  marginBottom: '16px'
+                }}>
+                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '16px' }}>
+                    <h4 style={{ margin: 0, display: 'flex', alignItems: 'center', gap: '10px' }}>
+                      <span style={{ fontSize: '24px' }}>🌊</span>
+                      Flood Risk Assessment
+                    </h4>
+                    <div style={{
+                      padding: '6px 16px',
+                      background: floodRisk.alertLevel.color,
+                      color: 'white',
+                      borderRadius: '20px',
+                      fontWeight: 'bold',
+                      fontSize: '13px'
+                    }}>
+                      {floodRisk.alertLevel.name} - Level {floodRisk.alertLevel.level}
+                    </div>
+                  </div>
+
+                  <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '12px', marginBottom: '16px' }}>
+                    <div style={{ textAlign: 'center', padding: '12px', background: 'white', borderRadius: '8px' }}>
+                      <div style={{ fontSize: '28px', fontWeight: 'bold', color: floodRisk.alertLevel.color }}>
+                        {floodRisk.riskIndex}
+                      </div>
+                      <div style={{ fontSize: '11px', color: '#666' }}>Risk Index</div>
+                    </div>
+                    <div style={{ textAlign: 'center', padding: '12px', background: '#FFF3E0', borderRadius: '8px' }}>
+                      <div style={{ fontSize: '20px', fontWeight: 'bold', color: '#E65100' }}>
+                        {floodRisk.components.hazard}
+                      </div>
+                      <div style={{ fontSize: '11px', color: '#666' }}>Hazard</div>
+                    </div>
+                    <div style={{ textAlign: 'center', padding: '12px', background: '#E3F2FD', borderRadius: '8px' }}>
+                      <div style={{ fontSize: '20px', fontWeight: 'bold', color: '#1565C0' }}>
+                        {floodRisk.components.exposure}
+                      </div>
+                      <div style={{ fontSize: '11px', color: '#666' }}>Exposure</div>
+                    </div>
+                    <div style={{ textAlign: 'center', padding: '12px', background: '#FCE4EC', borderRadius: '8px' }}>
+                      <div style={{ fontSize: '20px', fontWeight: 'bold', color: '#C2185B' }}>
+                        {floodRisk.components.vulnerability}
+                      </div>
+                      <div style={{ fontSize: '11px', color: '#666' }}>Vulnerability</div>
+                    </div>
+                  </div>
+
+                  <div style={{ fontSize: '12px', color: '#666', marginBottom: '12px' }}>
+                    <strong>Response Actions ({floodRisk.alertLevel.status}):</strong>
+                    <ul style={{ margin: '8px 0', paddingLeft: '20px' }}>
+                      {floodRisk.responseActions.slice(0, 3).map((action, i) => (
+                        <li key={i}>{action}</li>
+                      ))}
+                    </ul>
+                  </div>
+                </div>
+              )}
+
+              {/* Drought Risk Panel */}
+              {droughtRisk && (
+                <div style={{
+                  background: `linear-gradient(135deg, ${droughtRisk.alertLevel.color}15, ${droughtRisk.alertLevel.color}05)`,
+                  border: `2px solid ${droughtRisk.alertLevel.color}`,
+                  borderRadius: '12px',
+                  padding: '20px',
+                  marginBottom: '16px'
+                }}>
+                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '16px' }}>
+                    <h4 style={{ margin: 0, display: 'flex', alignItems: 'center', gap: '10px' }}>
+                      <span style={{ fontSize: '24px' }}>☀️</span>
+                      Drought Risk Assessment
+                    </h4>
+                    <div style={{
+                      padding: '6px 16px',
+                      background: droughtRisk.alertLevel.color,
+                      color: 'white',
+                      borderRadius: '20px',
+                      fontWeight: 'bold',
+                      fontSize: '13px'
+                    }}>
+                      {droughtRisk.alertLevel.name} - Level {droughtRisk.alertLevel.level}
+                    </div>
+                  </div>
+
+                  <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '12px', marginBottom: '16px' }}>
+                    <div style={{ textAlign: 'center', padding: '12px', background: 'white', borderRadius: '8px' }}>
+                      <div style={{ fontSize: '28px', fontWeight: 'bold', color: droughtRisk.alertLevel.color }}>
+                        {droughtRisk.riskIndex}
+                      </div>
+                      <div style={{ fontSize: '11px', color: '#666' }}>Risk Index</div>
+                    </div>
+                    <div style={{ textAlign: 'center', padding: '12px', background: '#FFF3E0', borderRadius: '8px' }}>
+                      <div style={{ fontSize: '20px', fontWeight: 'bold', color: '#E65100' }}>
+                        {droughtRisk.components.hazard}
+                      </div>
+                      <div style={{ fontSize: '11px', color: '#666' }}>Hazard</div>
+                    </div>
+                    <div style={{ textAlign: 'center', padding: '12px', background: '#E3F2FD', borderRadius: '8px' }}>
+                      <div style={{ fontSize: '20px', fontWeight: 'bold', color: '#1565C0' }}>
+                        {droughtRisk.components.exposure}
+                      </div>
+                      <div style={{ fontSize: '11px', color: '#666' }}>Exposure</div>
+                    </div>
+                    <div style={{ textAlign: 'center', padding: '12px', background: '#FCE4EC', borderRadius: '8px' }}>
+                      <div style={{ fontSize: '20px', fontWeight: 'bold', color: '#C2185B' }}>
+                        {droughtRisk.components.vulnerability}
+                      </div>
+                      <div style={{ fontSize: '11px', color: '#666' }}>Vulnerability</div>
+                    </div>
+                  </div>
+
+                  <div style={{ fontSize: '12px', color: '#666', marginBottom: '12px' }}>
+                    <strong>Response Actions ({droughtRisk.alertLevel.status}):</strong>
+                    <ul style={{ margin: '8px 0', paddingLeft: '20px' }}>
+                      {droughtRisk.responseActions.slice(0, 3).map((action, i) => (
+                        <li key={i}>{action}</li>
+                      ))}
+                    </ul>
+                  </div>
+                </div>
+              )}
+
+              {/* INFORM Formula Reference */}
+              <div style={{
+                padding: '16px',
+                background: '#F5F5F5',
+                borderRadius: '8px',
+                fontSize: '12px',
+                color: '#666'
+              }}>
+                <strong>INFORM Risk Formula:</strong>
+                <div style={{ fontFamily: 'monospace', marginTop: '8px', padding: '8px', background: 'white', borderRadius: '4px' }}>
+                  Risk = (Hazard × Exposure × Vulnerability)^(1/3)
+                </div>
+                <div style={{ marginTop: '8px', fontSize: '11px' }}>
+                  <strong>Alert Levels:</strong> Level 4 (RED) ≥8.0 | Level 3 (ORANGE) ≥6.0 | Level 2 (YELLOW) ≥4.0 | Level 1 (GREEN) &lt;4.0
+                </div>
+              </div>
+            </div>
+          )}
+        </div>
+
         {/* Natural Hazards */}
         <div className="hazard-category">
           <div

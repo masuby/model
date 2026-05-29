@@ -35,6 +35,9 @@ import ReportExportButton from '../warning/components/ReportExportButton';
 // Committee Verified Data Panel - Next Generation
 import CommitteeVerifiedDataPanel from './CommitteeVerifiedDataPanel';
 
+// Supabase data service for approved risk data
+import { getApprovedRiskData as fetchApprovedRiskData, isUsingSupabase } from '../../services/supabaseDataService';
+
 // Risk Assessment Phases based on ISO 31000 and UNDRR Technical Guidance
 const RISK_ASSESSMENT_PHASES = [
   {
@@ -112,14 +115,7 @@ const Module02InformRisk = ({ onNavigate }) => {
   const [loading, setLoading] = useState(true);
   const [selectedPhase, setSelectedPhase] = useState('scoping');
 
-  // Load approved committee data from localStorage (uses new INFORM calculation format)
-  const getApprovedRiskData = () => {
-    try {
-      return JSON.parse(localStorage.getItem('inform_approved_risk_data') || '[]');
-    } catch {
-      return [];
-    }
-  };
+  // Load approved committee data from Supabase (falls back to localStorage)
 
   // Merge approved committee data into existing risk data
   const mergeApprovedData = (baseData, approvedSubmissions) => {
@@ -204,10 +200,10 @@ const Module02InformRisk = ({ onNavigate }) => {
         console.log('🚀 Loading INFORM Risk data from Excel...');
         let riskData = await parseInformRiskData(excelUrl);
 
-        // Merge approved committee data
-        const approvedData = getApprovedRiskData();
+        // Merge approved committee data from Supabase (or localStorage)
+        const approvedData = await fetchApprovedRiskData();
         if (approvedData.length > 0) {
-          console.log(`📊 Merging ${approvedData.length} approved committee submissions...`);
+          console.log(`📊 Merging ${approvedData.length} approved submissions ${isUsingSupabase() ? 'from Supabase' : 'from localStorage'}...`);
           riskData = mergeApprovedData(riskData, approvedData);
         }
 
@@ -220,9 +216,13 @@ const Module02InformRisk = ({ onNavigate }) => {
         let mockData = getMockTanzaniaData();
 
         // Still merge approved data even with mock
-        const approvedData = getApprovedRiskData();
-        if (approvedData.length > 0) {
-          mockData = mergeApprovedData(mockData, approvedData);
+        try {
+          const approvedData = await fetchApprovedRiskData();
+          if (approvedData.length > 0) {
+            mockData = mergeApprovedData(mockData, approvedData);
+          }
+        } catch (e) {
+          console.warn('Could not load approved data:', e);
         }
 
         setData(mockData);

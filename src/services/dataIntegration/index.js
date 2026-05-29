@@ -199,12 +199,24 @@ class DataIntegrationService {
     }
 
     this.initialized = true;
+
+    // Count total available layers (including sample data)
+    const allLayers = this.getAllAvailableLayers();
+    const totalLayers = Object.values(allLayers).reduce((sum, arr) => sum + arr.length, 0);
+
+    // Update status with layer counts
+    this.status.totalLayers = totalLayers;
+    this.status.sampleMode = !Object.values(this.status).some(s => s.connected || s.available);
+
     console.log('[DataIntegration] Initialization complete:', this.status);
+    console.log(`[DataIntegration] Total layers available: ${totalLayers} (${this.status.sampleMode ? 'sample mode' : 'live mode'})`);
 
     return {
-      success: Object.values(this.status).some(s => s.connected || s.available),
+      success: true, // Always success - sample data available as fallback
       status: this.status,
-      details: results
+      details: results,
+      totalLayers,
+      sampleMode: this.status.sampleMode
     };
   }
 
@@ -217,6 +229,7 @@ class DataIntegrationService {
 
   /**
    * Get all available layers across all sources
+   * Returns sample data when live connections are not available
    */
   getAllAvailableLayers() {
     const layers = {
@@ -304,7 +317,63 @@ class DataIntegrationService {
       });
     }
 
+    // If no layers from live connections, provide sample layers for UI display
+    if (Object.values(layers).every(arr => arr.length === 0)) {
+      return this.getSampleLayers();
+    }
+
     return layers;
+  }
+
+  /**
+   * Get sample layers for display when connections are not available
+   */
+  getSampleLayers() {
+    return {
+      hazard: [
+        { id: 'flood_hazard', name: 'Flood Hazard Index', source: 'TCVMP (PMO-DMD)', category: 'hazard', status: 'offline' },
+        { id: 'drought_hazard', name: 'Drought Hazard Index', source: 'TCVMP (PMO-DMD)', category: 'hazard', status: 'offline' },
+        { id: 'landslide_susceptibility', name: 'Landslide Susceptibility', source: 'UNEP GAR', category: 'hazard', status: 'offline' },
+        { id: 'river_flooding', name: 'River Flooding (100yr)', source: 'UNEP GAR', category: 'hazard', status: 'offline' },
+        { id: 'earthquake_pga', name: 'Seismic Hazard (PGA)', source: 'METEOR', category: 'hazard', status: 'offline' },
+        { id: 'historical_floods', name: 'Historical Flood Events', source: 'DRM Portal', category: 'hazard', status: 'offline' }
+      ],
+      exposure: [
+        { id: 'population_density', name: 'Population Density 2020', source: 'WorldPop', category: 'exposure', status: 'offline' },
+        { id: 'land_cover', name: 'Land Cover 2021', source: 'ESA WorldCover', category: 'exposure', status: 'offline' },
+        { id: 'elevation', name: 'Elevation (SRTM 30m)', source: 'NASA SRTM', category: 'exposure', status: 'offline' },
+        { id: 'crop_areas', name: 'Agricultural Areas', source: 'FAO', category: 'exposure', status: 'offline' },
+        { id: 'livestock', name: 'Livestock Density', source: 'FAO GLW', category: 'exposure', status: 'offline' },
+        { id: 'built_up', name: 'Built-up Areas', source: 'ESA WorldCover', category: 'exposure', status: 'offline' }
+      ],
+      vulnerability: [
+        { id: 'poverty_rate', name: 'Poverty Rate', source: 'NBS Tanzania', category: 'vulnerability', status: 'offline' },
+        { id: 'food_insecurity', name: 'Food Insecurity Index', source: 'WFP', category: 'vulnerability', status: 'offline' },
+        { id: 'malnutrition', name: 'Malnutrition Rate', source: 'UNICEF', category: 'vulnerability', status: 'offline' },
+        { id: 'disaster_mortality', name: 'Historical Disaster Mortality', source: 'DesInventar', category: 'vulnerability', status: 'offline' }
+      ],
+      coping: [
+        { id: 'health_facilities', name: 'Health Facilities', source: 'OpenStreetMap', category: 'coping', status: 'offline' },
+        { id: 'schools', name: 'Educational Facilities', source: 'OpenStreetMap', category: 'coping', status: 'offline' },
+        { id: 'emergency_services', name: 'Emergency Services', source: 'OpenStreetMap', category: 'coping', status: 'offline' },
+        { id: 'governance', name: 'Governance Index', source: 'World Bank', category: 'coping', status: 'offline' }
+      ],
+      infrastructure: [
+        { id: 'roads', name: 'Road Network', source: 'OpenStreetMap', category: 'infrastructure', status: 'offline' },
+        { id: 'railways', name: 'Railway Lines', source: 'OpenStreetMap', category: 'infrastructure', status: 'offline' },
+        { id: 'airports', name: 'Airports', source: 'OpenStreetMap', category: 'infrastructure', status: 'offline' },
+        { id: 'ports', name: 'Ports & Harbors', source: 'OpenStreetMap', category: 'infrastructure', status: 'offline' },
+        { id: 'power_grid', name: 'Power Infrastructure', source: 'OpenStreetMap', category: 'infrastructure', status: 'offline' },
+        { id: 'water_supply', name: 'Water Supply Points', source: 'OpenStreetMap', category: 'infrastructure', status: 'offline' }
+      ],
+      climate: [
+        { id: 'temp_change', name: 'Temperature Change (SSP2-4.5)', source: 'CMIP6', category: 'climate', status: 'offline' },
+        { id: 'precip_change', name: 'Precipitation Change', source: 'CMIP6', category: 'climate', status: 'offline' },
+        { id: 'sea_level_rise', name: 'Sea Level Rise Projection', source: 'IPCC', category: 'climate', status: 'offline' },
+        { id: 'extreme_heat', name: 'Extreme Heat Days', source: 'Copernicus', category: 'climate', status: 'offline' },
+        { id: 'drought_projection', name: 'Drought Frequency', source: 'World Bank Climate', category: 'climate', status: 'offline' }
+      ]
+    };
   }
 
   /**

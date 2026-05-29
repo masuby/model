@@ -1,18 +1,22 @@
 /**
  * PMO REVIEW PANEL
  * Professional approval interface for committee submissions
- * Uses official INFORM methodology for risk calculation
+ * Uses Supabase for real database storage (falls back to localStorage if not configured)
  */
 
 import React, { useState, useMemo } from 'react';
 import {
   calculateINFORMRisk,
   validateIndicatorValues,
-  storeApprovedRiskData,
   INDICATOR_DEFINITIONS,
   DIMENSION_STRUCTURE,
   getRiskColor
 } from '../../../services/informCalculationService';
+import {
+  approveSubmission,
+  rejectSubmission,
+  isUsingSupabase
+} from '../../../services/supabaseDataService';
 import './TabStyles.css';
 
 function PMOReviewPanel({ user, submissions, onRefresh }) {
@@ -37,62 +41,22 @@ function PMOReviewPanel({ user, submissions, onRefresh }) {
     return { validation, calculation };
   }, [selectedSubmission]);
 
-  // Update submission status in localStorage
-  const updateSubmissionStatus = (submissionId, newStatus, notes) => {
-    // Update in committee_submissions_*
-    Object.keys(localStorage)
-      .filter(k => k.startsWith('committee_submissions_'))
-      .forEach(key => {
-        const subs = JSON.parse(localStorage.getItem(key) || '[]');
-        const idx = subs.findIndex(s => s.id === submissionId);
-        if (idx !== -1) {
-          subs[idx].status = newStatus;
-          subs[idx].reviewedBy = user?.name || user?.email;
-          subs[idx].reviewedAt = new Date().toISOString();
-          subs[idx].reviewNotes = notes;
-          // Store calculated scores
-          if (calculatedResult?.calculation) {
-            subs[idx].calculatedScores = {
-              hazardScore: calculatedResult.calculation.dimensions.HAZARD?.score,
-              vulnerabilityScore: calculatedResult.calculation.dimensions.VULNERABILITY?.score,
-              lackOfCopingScore: calculatedResult.calculation.dimensions.COPING_CAPACITY?.score,
-              riskScore: calculatedResult.calculation.risk,
-              riskClass: calculatedResult.calculation.classification?.label
-            };
-          }
-          localStorage.setItem(key, JSON.stringify(subs));
-        }
-      });
-
-    // Also update in all_pending_submissions
-    const allPending = JSON.parse(localStorage.getItem('all_pending_submissions') || '[]');
-    const pendingIdx = allPending.findIndex(s => s.id === submissionId);
-    if (pendingIdx !== -1) {
-      allPending[pendingIdx].status = newStatus;
-      allPending[pendingIdx].reviewedBy = user?.name || user?.email;
-      allPending[pendingIdx].reviewedAt = new Date().toISOString();
-      allPending[pendingIdx].reviewNotes = notes;
-      localStorage.setItem('all_pending_submissions', JSON.stringify(allPending));
-    }
-  };
-
   const handleApprove = async () => {
     if (!selectedSubmission || !calculatedResult?.calculation) return;
 
     setProcessing(true);
     try {
-      // Update status
-      updateSubmissionStatus(selectedSubmission.id, 'approved', reviewComment);
+      // Use Supabase service (falls back to localStorage)
+      await approveSubmission(selectedSubmission.id, user);
 
-      // Store approved data for risk module using INFORM calculation
-      storeApprovedRiskData(selectedSubmission, calculatedResult.calculation, user);
+      console.log(`✅ Submission approved ${isUsingSupabase() ? 'in Supabase' : 'in localStorage'}`);
 
       setSelectedSubmission(null);
       setReviewComment('');
       if (onRefresh) onRefresh();
     } catch (error) {
       console.error('Approval failed:', error);
-      alert('Failed to approve submission');
+      alert('Failed to approve submission: ' + error.message);
     }
     setProcessing(false);
   };
@@ -104,13 +68,17 @@ function PMOReviewPanel({ user, submissions, onRefresh }) {
     }
     setProcessing(true);
     try {
-      updateSubmissionStatus(selectedSubmission.id, 'rejected', reviewComment);
+      // Use Supabase service (falls back to localStorage)
+      await rejectSubmission(selectedSubmission.id, user, reviewComment);
+
+      console.log(`✅ Submission rejected ${isUsingSupabase() ? 'in Supabase' : 'in localStorage'}`);
+
       setSelectedSubmission(null);
       setReviewComment('');
       if (onRefresh) onRefresh();
     } catch (error) {
       console.error('Rejection failed:', error);
-      alert('Failed to reject submission');
+      alert('Failed to reject submission: ' + error.message);
     }
     setProcessing(false);
   };

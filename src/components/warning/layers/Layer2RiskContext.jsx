@@ -24,22 +24,9 @@ const Layer2RiskContext = ({ riskData, activeWarnings }) => {
   const [sortBy, setSortBy] = useState('riskSensitivity'); // riskSensitivity, risk, vulnerability, etc.
   const [comparisonDistricts, setComparisonDistricts] = useState([]);
 
-  if (!riskData) {
-    return (
-      <div className="layer2-container">
-        <div className="layer-header">
-          <h2>🌍 Layer 2: Risk Context Integration</h2>
-          <p className="layer-description">Loading risk context from Module 02...</p>
-        </div>
-        <div className="loading-message">
-          <div className="spinner"></div>
-          <p>Loading Tanzania INFORM Risk data...</p>
-        </div>
-      </div>
-    );
-  }
-
-  const districts = riskData.subnational.adm2;
+  // Hooks must be called unconditionally. Default to empty list when riskData
+  // hasn't loaded yet, then short-circuit the render below.
+  const districts = riskData?.subnational?.adm2 ?? [];
 
   // Calculate risk sensitivity and add metrics for each district
   const enrichedDistricts = useMemo(() => {
@@ -139,6 +126,22 @@ const Layer2RiskContext = ({ riskData, activeWarnings }) => {
       alert('Maximum 4 districts for comparison');
     }
   };
+
+  // Loading state: render the spinner after all hooks have been invoked
+  if (!riskData) {
+    return (
+      <div className="layer2-container">
+        <div className="layer-header">
+          <h2>🌍 Layer 2: Risk Context Integration</h2>
+          <p className="layer-description">Loading risk context from Module 02...</p>
+        </div>
+        <div className="loading-message">
+          <div className="spinner"></div>
+          <p>Loading Tanzania INFORM Risk data...</p>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="layer2-container">

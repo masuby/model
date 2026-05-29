@@ -12,7 +12,8 @@
  */
 
 import { supabase, isSupabaseConfigured } from '../lib/supabase';
-import { calculateINFORMRisk, classifyRisk } from './informCalculationService';
+// Use the complete INFORM calculation engine with all 78 indicators
+import { calculateINFORMRisk, classifyRisk } from './informCalculationEngine';
 
 // ============================================================================
 // CONFIGURATION
@@ -163,16 +164,30 @@ export async function updateSubmissionStatus(id, status, reviewData = {}) {
 
 /**
  * Approve submission and add to official risk data
+ * Recalculates INFORM scores using official methodology
  */
 export async function approveSubmission(id, approver) {
   const submission = await getSubmissionById(id);
   if (!submission) throw new Error('Submission not found');
+
+  // Recalculate INFORM scores using official methodology
+  const calculation = calculateINFORMRisk(submission.indicators || {});
+  const riskClassification = classifyRisk(calculation.risk);
 
   // Update submission status
   await updateSubmissionStatus(id, 'approved', {
     reviewerName: approver?.name || approver?.email,
     notes: 'Approved and added to official risk profile'
   });
+
+  // Prepare scores from calculation
+  const scores = {
+    hazardScore: calculation.dimensions?.HAZARD?.score,
+    vulnerabilityScore: calculation.dimensions?.VULNERABILITY?.score,
+    copingScore: calculation.dimensions?.COPING_CAPACITY?.score,
+    riskScore: calculation.risk,
+    riskClass: riskClassification?.label
+  };
 
   // Create approved risk data entry
   if (isUsingSupabase()) {
@@ -184,12 +199,16 @@ export async function approveSubmission(id, approver) {
         district_code: submission.adm2Code || submission.districtCode,
         region_name: submission.adm1Name || submission.regionName,
         district_name: submission.adm2Name || submission.districtName,
-        hazard_score: submission.hazardScore,
-        vulnerability_score: submission.vulnerabilityScore,
-        coping_score: submission.copingScore,
-        risk_score: submission.riskScore,
-        risk_class: submission.riskClass,
-        dimension_details: submission.indicators,
+        hazard_score: scores.hazardScore,
+        vulnerability_score: scores.vulnerabilityScore,
+        coping_score: scores.copingScore,
+        risk_score: scores.riskScore,
+        risk_class: scores.riskClass,
+        // Store both indicators AND calculated dimensions for Risk Module
+        dimension_details: {
+          indicators: submission.indicators,
+          dimensions: calculation.dimensions
+        },
         source_type: submission.sourceType,
         source_name: submission.committeeName || submission.sourceName,
         approved_by_name: approver?.name || approver?.email,
@@ -199,11 +218,11 @@ export async function approveSubmission(id, approver) {
       .single();
 
     if (error) throw error;
-    return { submission, approvedData: data };
+    return { submission, approvedData: data, calculation };
   }
 
   // Fallback to localStorage
-  return approveLocalSubmission(submission, approver);
+  return approveLocalSubmission(submission, approver, calculation);
 }
 
 /**
@@ -455,6 +474,12 @@ function transformSupabaseSubmission(data) {
 
 function transformApprovedData(data) {
   if (!data) return null;
+
+  // Extract indicators and dimensions from dimension_details
+  const details = data.dimension_details || {};
+  const indicators = details.indicators || details; // Handle both old and new format
+  const dimensions = details.dimensions || null;
+
   return {
     id: data.id,
     submissionId: data.submission_id,
@@ -463,11 +488,12 @@ function transformApprovedData(data) {
     adm2Code: data.district_code,
     adm2Name: data.district_name,
     committeeName: data.source_name,
-    indicators: data.dimension_details,
+    indicators,
     calculated: {
       hazardScore: data.hazard_score,
       vulnerabilityScore: data.vulnerability_score,
       lackOfCopingScore: data.coping_score,
+      dimensions, // Include full dimension breakdown for Risk Module
       riskScore: data.risk_score,
       riskClass: data.risk_class
     },
@@ -573,11 +599,31 @@ function updateLocalSubmissionStatus(id, status, reviewData) {
   return { id, status, ...reviewData };
 }
 
-function approveLocalSubmission(submission, approver) {
-  // Store in approved data
+function approveLocalSubmission(submission, approver, calculation) {
+  // Build calculated scores structure that Risk Module expects
+  const calculated = {
+    hazardScore: calculation?.dimensions?.HAZARD?.score,
+    vulnerabilityScore: calculation?.dimensions?.VULNERABILITY?.score,
+    lackOfCopingScore: calculation?.dimensions?.COPING_CAPACITY?.score,
+    riskScore: calculation?.risk,
+    riskClass: calculation?.classification?.label,
+    dimensions: calculation?.dimensions
+  };
+
+  // Store in approved data with proper structure
   const approvedData = {
     id: `approved_${Date.now()}`,
-    ...submission,
+    submissionId: submission.id,
+    committeeId: submission.committeeId,
+    committeeName: submission.committeeName,
+    adm1Code: submission.adm1Code,
+    adm1Name: submission.adm1Name,
+    adm2Code: submission.adm2Code,
+    adm2Name: submission.adm2Name,
+    indicators: submission.indicators,
+    calculated,  // Risk Module expects this structure
+    submittedBy: submission.submittedBy,
+    submittedAt: submission.submittedAt,
     approvedBy: approver?.name || approver?.email,
     approvedAt: new Date().toISOString(),
     methodology: 'INFORM 2024'
@@ -587,7 +633,7 @@ function approveLocalSubmission(submission, approver) {
   existing.push(approvedData);
   localStorage.setItem(LOCAL_STORAGE_KEYS.APPROVED_DATA, JSON.stringify(existing));
 
-  return { submission, approvedData };
+  return { submission, approvedData, calculation };
 }
 
 function getLocalApprovedData() {

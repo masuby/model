@@ -124,6 +124,7 @@ export const ROLE_PERMISSIONS = {
 };
 
 // Module access by role - defines which modules each role can see
+// Note: Flood & Drought functionality integrated into Module02 (INFORM Risk) and Module03 (Warning System)
 export const MODULE_ACCESS = {
   [USER_ROLES.ADMIN]: {
     modules: ['module01', 'module02', 'module03', 'module04', 'module05'],
@@ -146,7 +147,7 @@ export const MODULE_ACCESS = {
     tools: []
   },
   [USER_ROLES.REGIONAL_COMMITTEE]: {
-    modules: ['module01'], // Education only
+    modules: ['module01', 'warning'], // Education + Warning System
     dataViews: [],
     tools: ['data-entry']
   },

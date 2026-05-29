@@ -22,6 +22,7 @@ import {
   POLICE_STATIONS
 } from '../data/mapLayersData';
 import InteractiveHazardMap from '../components/InteractiveHazardMap';
+import { getHazardRiskService } from '../../../services/hazardRiskService';
 
 // Baseline Risk options from Module 01 INFORM - All Hazards (Natural to Human-Induced)
 const BASELINE_RISK_OPTIONS = [
@@ -259,6 +260,73 @@ const Layer2RiskAnalysis = ({ riskData, activeWarnings, activeHazards }) => {
   const [selectedDistricts, setSelectedDistricts] = useState({}); // { districtName: warningLevel }
   const [expandedRegions, setExpandedRegions] = useState([]); // Track which regions are expanded
   const [hazardIntensity, setHazardIntensity] = useState(7);
+
+  // Dynamic Flood/Drought Risk from hazardRiskService
+  const [dynamicFloodRisk, setDynamicFloodRisk] = useState(null);
+  const [dynamicDroughtRisk, setDynamicDroughtRisk] = useState(null);
+
+  // Calculate dynamic flood/drought risk based on selected regions
+  useEffect(() => {
+    const riskService = getHazardRiskService();
+    if (selectedRegions.length > 0) {
+      const region = selectedRegions[0];
+      const regionData = {
+        meteorological: {
+          daily_rainfall: hazardIntensity * 15,
+          rainfall_forecast: hazardIntensity * 20,
+          cumulative_rainfall: 100 + hazardIntensity * 5
+        },
+        hydrological: {
+          river_level: hazardIntensity * 0.2,
+          dam_reservoir: 60 + hazardIntensity * 3,
+          soil_saturation: 40 + hazardIntensity * 4
+        },
+        agricultural: {
+          ndvi: 0.6 - (hazardIntensity * 0.03),
+          vci: 60 - (hazardIntensity * 4),
+          dry_spell_days: hazardIntensity
+        },
+        baseline: {
+          flood_hazard_zone: 5,
+          drought_susceptibility: 5
+        },
+        exposure: EXPOSURE_DATA[region] ? {
+          population: Math.min(10, EXPOSURE_DATA[region].population / 1000000),
+          agricultural: EXPOSURE_DATA[region].cropland === 'Very High' ? 8 : EXPOSURE_DATA[region].cropland === 'High' ? 6 : 4,
+          infrastructure: EXPOSURE_DATA[region].infrastructure === 'Very High' ? 8 : EXPOSURE_DATA[region].infrastructure === 'High' ? 6 : 4
+        } : { population: 5, agricultural: 5, infrastructure: 5 },
+        sensitivity: VULNERABILITY_DATA[region] ? {
+          poverty: VULNERABILITY_DATA[region].poverty * 10,
+          food_insecurity: VULNERABILITY_DATA[region].foodInsecurity * 10,
+          water_access: (1 - VULNERABILITY_DATA[region].waterAccess) * 10,
+          health_vulnerability: (1 - VULNERABILITY_DATA[region].healthAccess) * 10
+        } : { poverty: 5, food_insecurity: 5, water_access: 5, health_vulnerability: 5 },
+        coping: {
+          early_warning: 6,
+          governance: 5,
+          infrastructure: EXPOSURE_DATA[region]?.infrastructure === 'High' ? 7 : 4,
+          social_protection: 5,
+          irrigation: 3
+        }
+      };
+
+      setDynamicFloodRisk(riskService.calculateFloodRisk(regionData));
+      setDynamicDroughtRisk(riskService.calculateDroughtRisk(regionData));
+    } else {
+      // Calculate for national average
+      const nationalData = {
+        meteorological: { daily_rainfall: 50, rainfall_forecast: 60, cumulative_rainfall: 105 },
+        hydrological: { river_level: 1.0, dam_reservoir: 70, soil_saturation: 55 },
+        agricultural: { ndvi: 0.45, vci: 50, dry_spell_days: 8 },
+        baseline: { flood_hazard_zone: 5, drought_susceptibility: 5 },
+        exposure: { population: 5, agricultural: 5, infrastructure: 5 },
+        sensitivity: { poverty: 5, food_insecurity: 5, water_access: 5, health_vulnerability: 5 },
+        coping: { early_warning: 5, governance: 5, infrastructure: 5, social_protection: 5, irrigation: 3 }
+      };
+      setDynamicFloodRisk(riskService.calculateFloodRisk(nationalData));
+      setDynamicDroughtRisk(riskService.calculateDroughtRisk(nationalData));
+    }
+  }, [selectedRegions, hazardIntensity]);
 
   // Auto-populate regions and districts from active hazards (submitted from Layer1)
   useEffect(() => {
@@ -1022,6 +1090,113 @@ const Layer2RiskAnalysis = ({ riskData, activeWarnings, activeHazards }) => {
           <span className="indicator-label">Tanzania: {national.risk.toFixed(1)}</span>
         </div>
       </div>
+
+      {/* Dynamic Flood & Drought Risk Assessment */}
+      {(dynamicFloodRisk || dynamicDroughtRisk) && (
+        <div style={{
+          display: 'grid',
+          gridTemplateColumns: '1fr 1fr',
+          gap: '20px',
+          marginBottom: '24px',
+          padding: '20px',
+          background: '#f8f9fa',
+          borderRadius: '12px'
+        }}>
+          {/* Flood Risk */}
+          {dynamicFloodRisk && (
+            <div style={{
+              background: `linear-gradient(135deg, ${dynamicFloodRisk.alertLevel.color}10, white)`,
+              border: `2px solid ${dynamicFloodRisk.alertLevel.color}`,
+              borderRadius: '12px',
+              padding: '16px'
+            }}>
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '12px' }}>
+                <h4 style={{ margin: 0, display: 'flex', alignItems: 'center', gap: '8px', fontSize: '16px' }}>
+                  <span>🌊</span> Flood Risk
+                </h4>
+                <span style={{
+                  padding: '4px 12px',
+                  background: dynamicFloodRisk.alertLevel.color,
+                  color: 'white',
+                  borderRadius: '12px',
+                  fontSize: '12px',
+                  fontWeight: 'bold'
+                }}>
+                  {dynamicFloodRisk.alertLevel.name}
+                </span>
+              </div>
+              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '8px', marginBottom: '12px' }}>
+                <div style={{ textAlign: 'center', padding: '8px', background: 'white', borderRadius: '8px' }}>
+                  <div style={{ fontSize: '20px', fontWeight: 'bold', color: dynamicFloodRisk.alertLevel.color }}>{dynamicFloodRisk.riskIndex}</div>
+                  <div style={{ fontSize: '10px', color: '#666' }}>Risk</div>
+                </div>
+                <div style={{ textAlign: 'center', padding: '8px', background: '#FFF3E0', borderRadius: '8px' }}>
+                  <div style={{ fontSize: '16px', fontWeight: 'bold', color: '#E65100' }}>{dynamicFloodRisk.components.hazard}</div>
+                  <div style={{ fontSize: '10px', color: '#666' }}>H</div>
+                </div>
+                <div style={{ textAlign: 'center', padding: '8px', background: '#E3F2FD', borderRadius: '8px' }}>
+                  <div style={{ fontSize: '16px', fontWeight: 'bold', color: '#1565C0' }}>{dynamicFloodRisk.components.exposure}</div>
+                  <div style={{ fontSize: '10px', color: '#666' }}>E</div>
+                </div>
+                <div style={{ textAlign: 'center', padding: '8px', background: '#FCE4EC', borderRadius: '8px' }}>
+                  <div style={{ fontSize: '16px', fontWeight: 'bold', color: '#C2185B' }}>{dynamicFloodRisk.components.vulnerability}</div>
+                  <div style={{ fontSize: '10px', color: '#666' }}>V</div>
+                </div>
+              </div>
+              <div style={{ fontSize: '11px', color: '#666' }}>
+                <strong>Action:</strong> {dynamicFloodRisk.responseActions[0]}
+              </div>
+            </div>
+          )}
+
+          {/* Drought Risk */}
+          {dynamicDroughtRisk && (
+            <div style={{
+              background: `linear-gradient(135deg, ${dynamicDroughtRisk.alertLevel.color}10, white)`,
+              border: `2px solid ${dynamicDroughtRisk.alertLevel.color}`,
+              borderRadius: '12px',
+              padding: '16px'
+            }}>
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '12px' }}>
+                <h4 style={{ margin: 0, display: 'flex', alignItems: 'center', gap: '8px', fontSize: '16px' }}>
+                  <span>☀️</span> Drought Risk
+                </h4>
+                <span style={{
+                  padding: '4px 12px',
+                  background: dynamicDroughtRisk.alertLevel.color,
+                  color: 'white',
+                  borderRadius: '12px',
+                  fontSize: '12px',
+                  fontWeight: 'bold'
+                }}>
+                  {dynamicDroughtRisk.alertLevel.name}
+                </span>
+              </div>
+              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '8px', marginBottom: '12px' }}>
+                <div style={{ textAlign: 'center', padding: '8px', background: 'white', borderRadius: '8px' }}>
+                  <div style={{ fontSize: '20px', fontWeight: 'bold', color: dynamicDroughtRisk.alertLevel.color }}>{dynamicDroughtRisk.riskIndex}</div>
+                  <div style={{ fontSize: '10px', color: '#666' }}>Risk</div>
+                </div>
+                <div style={{ textAlign: 'center', padding: '8px', background: '#FFF3E0', borderRadius: '8px' }}>
+                  <div style={{ fontSize: '16px', fontWeight: 'bold', color: '#E65100' }}>{dynamicDroughtRisk.components.hazard}</div>
+                  <div style={{ fontSize: '10px', color: '#666' }}>H</div>
+                </div>
+                <div style={{ textAlign: 'center', padding: '8px', background: '#E3F2FD', borderRadius: '8px' }}>
+                  <div style={{ fontSize: '16px', fontWeight: 'bold', color: '#1565C0' }}>{dynamicDroughtRisk.components.exposure}</div>
+                  <div style={{ fontSize: '10px', color: '#666' }}>E</div>
+                </div>
+                <div style={{ textAlign: 'center', padding: '8px', background: '#FCE4EC', borderRadius: '8px' }}>
+                  <div style={{ fontSize: '16px', fontWeight: 'bold', color: '#C2185B' }}>{dynamicDroughtRisk.components.vulnerability}</div>
+                  <div style={{ fontSize: '10px', color: '#666' }}>V</div>
+                </div>
+              </div>
+              <div style={{ fontSize: '11px', color: '#666' }}>
+                <strong>Action:</strong> {dynamicDroughtRisk.responseActions[0]}
+              </div>
+            </div>
+          )}
+        </div>
+      )}
 
       {/* Quick Reference */}
       <div className="quick-reference">

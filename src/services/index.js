@@ -9,7 +9,7 @@ export { default as apiClient, setAuthToken, APIError } from './apiClient';
 // Authentication Service
 export { default as authService, USER_ROLES, INSTITUTIONS, REGIONS, ROLE_PERMISSIONS } from './authService';
 
-// Committee Service
+// Committee Service (Go Backend API)
 export {
   default as committeeService,
   getCommittees,
@@ -18,6 +18,21 @@ export {
   createCommittee,
   getCommitteeById
 } from './committeeService';
+
+// Committee Supabase Service (Supabase + localStorage fallback)
+export {
+  default as committeeSupabaseService,
+  getCommittees as getCommitteesSupabase,
+  getRegionalCommittees as getRegionalCommitteesSupabase,
+  getWardCommittees as getWardCommitteesSupabase,
+  getCommitteeById as getCommitteeByIdSupabase,
+  getCommitteeByAdm1,
+  createCommittee as createCommitteeSupabase,
+  updateCommittee,
+  submitCommitteeDataEntry,
+  getCommitteeSubmissions,
+  subscribeToCommitteeData
+} from './committeeSupabaseService';
 
 // Indicator Service
 export {
@@ -77,3 +92,24 @@ export {
   EXCEL_TEMPLATE_MAPPINGS,
   SUBMISSION_STATUS
 } from './unifiedDataEntryService';
+
+// Warning Service (Module 03 - Early Warning System)
+export {
+  default as warningService,
+  createHazardForecast,
+  getHazardForecasts,
+  createWarning,
+  getWarnings,
+  getActiveWarnings,
+  validateWarning,
+  generateWarningsForHazard,
+  calculateWarningScore,
+  classifyWarningLevel,
+  determineResponseLevel,
+  generateRecommendedActions,
+  subscribeToWarnings,
+  subscribeToForecasts,
+  WARNING_THRESHOLDS,
+  WARNING_COLORS,
+  HAZARD_TYPES
+} from './warningService';

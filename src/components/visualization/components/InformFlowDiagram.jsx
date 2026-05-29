@@ -271,6 +271,43 @@ function InformFlowDiagram({ data, adm1GeoJson, adm2GeoJson }) {
     return avg;
   }, [data, selectedArea, regions]);
 
+  // Get selected region for map filtering — must run unconditionally
+  const selectedRegion = useMemo(() => {
+    if (!selectedArea) return null;
+    if (regions.includes(selectedArea)) return selectedArea;
+    // Find region for selected district
+    const district = data.find(row => row.ADM2_NAME === selectedArea);
+    return district?.ADM1_NAME || null;
+  }, [selectedArea, regions, data]);
+
+  // Get comparison data for all selected comparison areas. Must precede the
+  // early returns below so this hook is invoked unconditionally.
+  const comparisonData = useMemo(() => {
+    const lookup = (areaName) => {
+      if (!areaName) return null;
+      if (regions.includes(areaName)) {
+        const regionData = data.filter(row => row.ADM1_NAME === areaName);
+        if (regionData.length === 0) return null;
+        const avg = {};
+        const columns = ['RISK', 'HAZARD', 'NATURAL', 'HUMAN', 'VULNERABILITY', 'LACK OF COPING CAPACITY'];
+        HAZARD_INDICATORS.forEach(h => columns.push(h.column));
+        columns.forEach(col => {
+          const values = regionData.map(row => parseFloat(row[col])).filter(v => !isNaN(v));
+          avg[col] = values.length > 0 ? values.reduce((a, b) => a + b, 0) / values.length : 0;
+        });
+        avg.ADM2_NAME = `${areaName} Region`;
+        avg.ADM1_NAME = areaName;
+        return avg;
+      }
+      return data.find(row => row.ADM2_NAME === areaName) || null;
+    };
+    return comparisonAreas.map(areaName => ({
+      name: areaName,
+      data: lookup(areaName),
+      isRegion: regions.includes(areaName)
+    })).filter(item => item.data !== null);
+  }, [comparisonAreas, data, regions]);
+
   if (!data || data.length === 0) {
     return (
       <div style={{ padding: '60px', textAlign: 'center' }}>
@@ -292,50 +329,6 @@ function InformFlowDiagram({ data, adm1GeoJson, adm2GeoJson }) {
 
   const hazardClass = getRiskClass(hazardValue);
   const riskClass = getRiskClass(risk);
-
-  // Get selected region for map filtering
-  const selectedRegion = useMemo(() => {
-    if (!selectedArea) return null;
-    if (regions.includes(selectedArea)) return selectedArea;
-    // Find region for selected district
-    const district = data.find(row => row.ADM2_NAME === selectedArea);
-    return district?.ADM1_NAME || null;
-  }, [selectedArea, regions, data]);
-
-  // Helper function to get data for any area (for comparison)
-  const getAreaData = (areaName) => {
-    if (!areaName) return null;
-
-    // Check if it's a region
-    if (regions.includes(areaName)) {
-      const regionData = data.filter(row => row.ADM1_NAME === areaName);
-      if (regionData.length === 0) return null;
-
-      const avg = {};
-      const columns = ['RISK', 'HAZARD', 'NATURAL', 'HUMAN', 'VULNERABILITY', 'LACK OF COPING CAPACITY'];
-      HAZARD_INDICATORS.forEach(h => columns.push(h.column));
-
-      columns.forEach(col => {
-        const values = regionData.map(row => parseFloat(row[col])).filter(v => !isNaN(v));
-        avg[col] = values.length > 0 ? values.reduce((a, b) => a + b, 0) / values.length : 0;
-      });
-      avg.ADM2_NAME = `${areaName} Region`;
-      avg.ADM1_NAME = areaName;
-      return avg;
-    }
-
-    // It's a district
-    return data.find(row => row.ADM2_NAME === areaName) || null;
-  };
-
-  // Get comparison data for all selected comparison areas
-  const comparisonData = useMemo(() => {
-    return comparisonAreas.map(areaName => ({
-      name: areaName,
-      data: getAreaData(areaName),
-      isRegion: regions.includes(areaName)
-    })).filter(item => item.data !== null);
-  }, [comparisonAreas, data, regions]);
 
   return (
     <div className="inform-flow-diagram" style={{
@@ -528,7 +521,7 @@ function InformFlowDiagram({ data, adm1GeoJson, adm2GeoJson }) {
             <div style={{ marginTop: '8px', fontSize: '13px', color: '#7f8c8d' }}>
               {areaLevel === 'country' && '🌍 Viewing: All 31 Regions'}
               {areaLevel === 'region' && `📍 Viewing: ${selectedRegion} Region Districts`}
-              {areaLevel === 'district' && `🏘️ Viewing: ${selectedAreaName} District Only`}
+              {areaLevel === 'district' && `🏘️ Viewing: ${selectedArea} District Only`}
             </div>
             {comparisonAreas.length > 0 && (
               <div style={{

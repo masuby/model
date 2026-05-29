@@ -26,7 +26,7 @@ const GEE_CONFIG = {
   MAX_PIXELS: 1e9,
 
   // API endpoints (if using a GEE backend service)
-  apiEndpoint: process.env.REACT_APP_GEE_API_URL || null
+  apiEndpoint: import.meta.env?.VITE_GEE_API_URL || null
 };
 
 // ============================================================================

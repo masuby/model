@@ -21,7 +21,26 @@ import {
   roundTo,
   arithmeticMean
 } from '../../database/formulas';
+import IndicatorGuide, { DataEntryGuideBanner } from './IndicatorGuide';
 import './LiveDataEntry.css';
+
+// Map LiveDataEntry's short indicator IDs to the canonical INFORM catalog IDs
+// in informIndicatorDefinitions.js, so the IndicatorGuide ℹ️ popover can
+// show authoritative PDF-sourced descriptions for each row.
+const CATALOG_ID_MAP = {
+  flood_exposure: 'flood_exposure',
+  drought_exposure: 'historic_drought_frequency',
+  earthquake_exposure: 'earthquake_exposure',
+  conflict_intensity: 'conflict_barometer',
+  development_deprivation: 'hdi',
+  inequality: 'wealth_inequality',
+  food_security: 'food_ipc_classification',
+  health_conditions: 'malaria_mortality',
+  drr_capacity: 'sendai_framework',
+  governance: 'government_effectiveness',
+  communication: 'cellphone_ownership',
+  physical_infrastructure: 'basic_drinking_water'
+};
 
 // Same indicators as CommitteeDashboard - keeps data in sync
 const INDICATORS = [
@@ -357,9 +376,13 @@ const LiveDataEntry = ({ onSubmit }) => {
       else valueColor = '#F44336';
     }
 
+    const catalogId = CATALOG_ID_MAP[indicator.id] ?? indicator.id;
     return (
       <tr key={indicator.id} className={index % 2 === 0 ? 'even-row' : 'odd-row'}>
-        <td className="indicator-name">{indicator.name}</td>
+        <td className="indicator-name">
+          {indicator.name}
+          <IndicatorGuide indicatorId={catalogId} />
+        </td>
         <td className="indicator-unit">{indicator.category}</td>
         <td className="indicator-value">
           <input
@@ -418,8 +441,18 @@ const LiveDataEntry = ({ onSubmit }) => {
     );
   };
 
+  // Open the Indicator Catalog in a new tab (it's mounted in App.jsx at view 'indicator-catalog')
+  const openCatalog = () => {
+    window.dispatchEvent(new CustomEvent('inform:navigate', { detail: 'indicator-catalog' }));
+    // Fallback: also try direct hash navigation if a router consumes it
+    window.location.hash = '#indicator-catalog';
+  };
+
   return (
     <div className="live-data-entry">
+      {/* Harmonization rules banner for regional data-collection teams */}
+      <DataEntryGuideBanner onOpenCatalog={openCatalog} />
+
       {/* Header with real-time scores */}
       <div className="entry-header">
         <div className="header-info">

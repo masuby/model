@@ -1,10 +1,11 @@
 /**
  * COMMITTEE DATA ENTRY
  * Form for committees to submit indicator data for their region/ward
+ * Uses Supabase for real database storage (falls back to localStorage if not configured)
  */
 
 import { useState } from 'react';
-import { arithmeticMean, roundTo, classifyRisk } from '../../database/formulas';
+import { createSubmission, isUsingSupabase } from '../../services/supabaseDataService';
 
 const CommitteeDataEntry = ({ user, indicators, onSubmissionComplete }) => {
   const [formData, setFormData] = useState({});
@@ -95,63 +96,25 @@ const CommitteeDataEntry = ({ user, indicators, onSubmissionComplete }) => {
     setSubmitting(true);
 
     try {
-      // Calculate INFORM scores from submitted data
-      const getValues = (dimensionId) => indicators
-        .filter(i => i.dimension === dimensionId)
-        .map(i => formData[i.id]?.value)
-        .filter(v => v !== undefined && v !== null && !isNaN(v));
-
-      const hazardValues = getValues('HAZARD');
-      const vulnValues = getValues('VULNERABILITY');
-      const ccValues = getValues('COPING_CAPACITY');
-
-      const hazardScore = hazardValues.length > 0 ? roundTo(arithmeticMean(hazardValues), 2) : null;
-      const vulnScore = vulnValues.length > 0 ? roundTo(arithmeticMean(vulnValues), 2) : null;
-      const ccScore = ccValues.length > 0 ? roundTo(10 - arithmeticMean(ccValues), 2) : null;
-
-      let riskScore = null;
-      let riskClass = null;
-      if (hazardScore !== null && vulnScore !== null && ccScore !== null) {
-        riskScore = roundTo(Math.pow(hazardScore * vulnScore * ccScore, 1/3), 2);
-        riskClass = classifyRisk(riskScore).label;
-      }
-
-      // Create submission object
-      const submission = {
-        id: Date.now().toString(),
+      // Create submission via Supabase service (falls back to localStorage if not configured)
+      const submission = await createSubmission({
         committeeId: user?.committeeId,
         committeeName: user?.committeeName,
         adm1Code: user?.adm1Code,
         adm1Name: user?.adm1Name,
         adm2Code: user?.adm2Code,
         adm2Name: user?.adm2Name,
-        submittedBy: user?.email,
-        submittedAt: new Date().toISOString(),
-        indicatorCount: Object.keys(formData).length,
+        submittedBy: user?.name || user?.email,
+        submittedByEmail: user?.email,
         indicators: formData,
-        scores: { hazardScore, vulnScore, ccScore, riskScore, riskClass },
-        status: 'pending',
-        reviewedBy: null,
-        reviewedAt: null,
-        reviewNotes: null
-      };
+        sourceType: 'committee'
+      });
 
-      // Save to localStorage (mock storage)
-      const existingSubmissions = JSON.parse(
-        localStorage.getItem(`committee_submissions_${user?.committeeId}`) || '[]'
-      );
-      existingSubmissions.unshift(submission);
-      localStorage.setItem(
-        `committee_submissions_${user?.committeeId}`,
-        JSON.stringify(existingSubmissions)
-      );
+      console.log(`✅ Submission saved ${isUsingSupabase() ? 'to Supabase' : 'to localStorage'}:`, submission);
 
-      // Also save to global pending submissions for PMO review
-      const allPending = JSON.parse(localStorage.getItem('all_pending_submissions') || '[]');
-      allPending.unshift(submission);
-      localStorage.setItem('all_pending_submissions', JSON.stringify(allPending));
-
-      console.log('✅ Submission saved:', submission);
+      // Get calculated scores from response
+      const riskScore = submission.riskScore;
+      const riskClass = submission.riskClass;
 
       // Show success
       setSubmitResult({

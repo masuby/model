@@ -2,12 +2,15 @@
  * COMMITTEE DASHBOARD
  * Dashboard for Regional and District/Ward Committee users
  * Shows committee-specific data entry, submissions, and status
+ *
+ * Uses complete 84 indicators from INFORM Tanzania Country Model
  */
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import { useAuth } from '../../context/AuthContext';
 import { USER_ROLES } from '../../services/authService';
 import CommitteeDataEntry from './CommitteeDataEntry';
+import { ALL_INDICATORS, COMPLETE_HIERARCHY } from '../../services/informIndicatorDefinitions';
 import './CommitteeDashboard.css';
 
 const CommitteeDashboard = () => {
@@ -47,21 +50,26 @@ const CommitteeDashboard = () => {
     }
   };
 
-  // INFORM Indicators that committees can submit data for
-  const indicators = [
-    { id: 'flood_exposure', name: 'Flood Exposure', dimension: 'HAZARD', category: 'Natural' },
-    { id: 'drought_exposure', name: 'Drought Exposure', dimension: 'HAZARD', category: 'Natural' },
-    { id: 'earthquake_exposure', name: 'Earthquake Exposure', dimension: 'HAZARD', category: 'Natural' },
-    { id: 'conflict_intensity', name: 'Conflict Intensity', dimension: 'HAZARD', category: 'Human' },
-    { id: 'development_deprivation', name: 'Development & Deprivation', dimension: 'VULNERABILITY', category: 'Socio-Economic' },
-    { id: 'inequality', name: 'Inequality', dimension: 'VULNERABILITY', category: 'Socio-Economic' },
-    { id: 'food_security', name: 'Food Security', dimension: 'VULNERABILITY', category: 'Vulnerable Groups' },
-    { id: 'health_conditions', name: 'Health Conditions', dimension: 'VULNERABILITY', category: 'Vulnerable Groups' },
-    { id: 'drr_capacity', name: 'DRR Capacity', dimension: 'COPING_CAPACITY', category: 'Institutional' },
-    { id: 'governance', name: 'Governance', dimension: 'COPING_CAPACITY', category: 'Institutional' },
-    { id: 'communication', name: 'Communication', dimension: 'COPING_CAPACITY', category: 'Infrastructure' },
-    { id: 'physical_infrastructure', name: 'Physical Infrastructure', dimension: 'COPING_CAPACITY', category: 'Infrastructure' },
-  ];
+  // Build complete indicators array from ALL_INDICATORS (84 indicators total)
+  const indicators = useMemo(() => {
+    return Object.values(ALL_INDICATORS).map(ind => ({
+      id: ind.id,
+      name: ind.name,
+      dimension: ind.dimension,
+      category: ind.category,
+      component: ind.component,
+      unit: ind.unit,
+      polarity: ind.polarity
+    }));
+  }, []);
+
+  // Get indicator count by dimension for display
+  const indicatorCounts = useMemo(() => ({
+    HAZARD: indicators.filter(i => i.dimension === 'HAZARD').length,
+    VULNERABILITY: indicators.filter(i => i.dimension === 'VULNERABILITY').length,
+    COPING_CAPACITY: indicators.filter(i => i.dimension === 'COPING_CAPACITY').length,
+    total: indicators.length
+  }), [indicators]);
 
   const tabs = [
     { id: 'overview', label: 'Overview', icon: '📊' },
@@ -222,8 +230,27 @@ const CommitteeDashboard = () => {
     <div className="indicators-view">
       <h3>INFORM Indicators for {user?.adm1Name}{user?.adm2Name ? ` - ${user.adm2Name}` : ''}</h3>
       <p className="indicators-description">
-        These are the indicators your committee can submit data for. Click on "Data Entry" to submit values.
+        Complete INFORM Tanzania indicator set: <strong>{indicatorCounts.total} indicators</strong> across 3 dimensions.
+        Click on "Data Entry" to submit values for your area.
       </p>
+
+      <div className="indicator-summary-cards">
+        <div className="summary-card hazard">
+          <span className="summary-icon">⚠️</span>
+          <span className="summary-count">{indicatorCounts.HAZARD}</span>
+          <span className="summary-label">Hazard Indicators</span>
+        </div>
+        <div className="summary-card vulnerability">
+          <span className="summary-icon">👥</span>
+          <span className="summary-count">{indicatorCounts.VULNERABILITY}</span>
+          <span className="summary-label">Vulnerability Indicators</span>
+        </div>
+        <div className="summary-card coping">
+          <span className="summary-icon">🛡️</span>
+          <span className="summary-count">{indicatorCounts.COPING_CAPACITY}</span>
+          <span className="summary-label">Coping Capacity Indicators</span>
+        </div>
+      </div>
 
       <div className="indicators-by-dimension">
         {['HAZARD', 'VULNERABILITY', 'COPING_CAPACITY'].map(dimension => (
@@ -231,12 +258,16 @@ const CommitteeDashboard = () => {
             <h4 className={`dimension-header ${dimension.toLowerCase()}`}>
               {dimension === 'HAZARD' ? '⚠️ Hazard & Exposure' :
                dimension === 'VULNERABILITY' ? '👥 Vulnerability' : '🛡️ Coping Capacity'}
+              <span className="indicator-count-badge">
+                {indicatorCounts[dimension]} indicators
+              </span>
             </h4>
             <div className="indicators-list">
               {indicators.filter(i => i.dimension === dimension).map(indicator => (
                 <div key={indicator.id} className="indicator-item">
                   <span className="indicator-name">{indicator.name}</span>
                   <span className="indicator-category">{indicator.category}</span>
+                  {indicator.unit && <span className="indicator-unit">{indicator.unit}</span>}
                 </div>
               ))}
             </div>

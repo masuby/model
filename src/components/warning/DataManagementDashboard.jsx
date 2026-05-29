@@ -431,10 +431,32 @@ const DataManagementDashboard = () => {
   const [lastSync, setLastSync] = useState(null);
   const [activeTab, setActiveTab] = useState('overview');
 
-  // Initialize service
+  // Initialize service and auto-load sample data
   useEffect(() => {
     const service = getDataIntegrationService();
     setIntegrationService(service);
+
+    // Auto-initialize to show sample layers immediately
+    const autoInit = async () => {
+      setIsInitializing(true);
+      try {
+        const result = await service.initialize();
+        setStatus(result.status);
+        setAvailableLayers(service.getAllAvailableLayers());
+        setLastSync(new Date());
+        console.log('[DataDashboard] Auto-initialized with', result.totalLayers, 'layers');
+      } catch (error) {
+        console.warn('[DataDashboard] Auto-init failed, using sample data');
+        // Use sample layers as fallback
+        setAvailableLayers(service.getSampleLayers ? service.getSampleLayers() : {
+          hazard: [], exposure: [], vulnerability: [], coping: [], infrastructure: [], climate: []
+        });
+      } finally {
+        setIsInitializing(false);
+      }
+    };
+
+    autoInit();
   }, []);
 
   // Initialize all connections
@@ -505,6 +527,22 @@ const DataManagementDashboard = () => {
           <p style={{ margin: '8px 0 0 0', color: '#666' }}>
             Connect to external data sources for real-time INFORM calculations
           </p>
+          {status.sampleMode && (
+            <div style={{
+              marginTop: '8px',
+              padding: '8px 12px',
+              background: '#FFF3E0',
+              borderRadius: '6px',
+              fontSize: '12px',
+              color: '#E65100',
+              display: 'inline-flex',
+              alignItems: 'center',
+              gap: '6px'
+            }}>
+              <span>📋</span>
+              Sample Mode: Showing available data layers (external APIs require server-side proxy)
+            </div>
+          )}
         </div>
         <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
           {lastSync && (
