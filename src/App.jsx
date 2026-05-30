@@ -75,7 +75,7 @@ function RiskRoute() {
 }
 
 function SeverityRoute() {
-  return <Module04Severity activeWarnings={[]} riskData={null} />;
+  return <Module04Severity />;
 }
 
 function App() {
