@@ -30,13 +30,13 @@ import { parseInformRiskData } from '../../services/informRiskDataService';
 import { getMockTanzaniaData, HAZARD_TYPES, OVERALL_RISK } from './mockData';
 
 // Report Export
-import ReportExportButton from '../warning/components/ReportExportButton';
+// ReportExportButton (warning module) archived in lean rebuild
 
 // Committee Verified Data Panel - Next Generation
 import CommitteeVerifiedDataPanel from './CommitteeVerifiedDataPanel';
 
 // Supabase data service for approved risk data
-import { getApprovedRiskData as fetchApprovedRiskData, isUsingSupabase } from '../../services/supabaseDataService';
+// Supabase submission merge archived in lean rebuild — Risk reads the curated dataset only
 
 // Risk Assessment Phases based on ISO 31000 and UNDRR Technical Guidance
 const RISK_ASSESSMENT_PHASES = [
@@ -198,33 +198,14 @@ const Module02InformRisk = ({ onNavigate }) => {
         setLoading(true);
         const excelUrl = '/data/tanzania-inform-risk.xlsx';
         console.log('🚀 Loading INFORM Risk data from Excel...');
-        let riskData = await parseInformRiskData(excelUrl);
-
-        // Merge approved committee data from Supabase (or localStorage)
-        const approvedData = await fetchApprovedRiskData();
-        if (approvedData.length > 0) {
-          console.log(`📊 Merging ${approvedData.length} approved submissions ${isUsingSupabase() ? 'from Supabase' : 'from localStorage'}...`);
-          riskData = mergeApprovedData(riskData, approvedData);
-        }
-
+        const riskData = await parseInformRiskData(excelUrl);
         setData(riskData);
         setLoading(false);
         console.log('✅ INFORM Risk data loaded successfully!');
       } catch (error) {
         console.error('❌ Error loading Excel data:', error);
         console.warn('⚠️ Falling back to mock data');
-        let mockData = getMockTanzaniaData();
-
-        // Still merge approved data even with mock
-        try {
-          const approvedData = await fetchApprovedRiskData();
-          if (approvedData.length > 0) {
-            mockData = mergeApprovedData(mockData, approvedData);
-          }
-        } catch (e) {
-          console.warn('Could not load approved data:', e);
-        }
-
+        const mockData = getMockTanzaniaData();
         setData(mockData);
         setLoading(false);
       }
@@ -284,13 +265,6 @@ const Module02InformRisk = ({ onNavigate }) => {
               <div className="risk-label">{classification.level} Risk</div>
               <div className="risk-range">{classification.range}</div>
             </div>
-            <ReportExportButton
-              reportType="risk"
-              reportData={data}
-              buttonStyle="secondary"
-              buttonText="Export Report"
-              onExportComplete={(format) => console.log(`📊 Risk assessment exported as ${format}`)}
-            />
           </div>
         </div>
       </header>

@@ -1,0 +1,39 @@
+/* Lean rebuild — minimal shell layout (3-module public app) */
+.lean-app {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: #f6f8fb;
+}
+
+.lean-topbar {
+  display: flex;
+  align-items: center;
+  gap: 28px;
+  padding: 14px 28px;
+  background: #fff;
+  border-bottom: 1px solid #e3e8ef;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.lean-brand {
+  font-size: 20px;
+  font-weight: 800;
+  color: #1f3a5f;
+  letter-spacing: 0.2px;
+}
+
+.lean-nav {
+  display: flex;
+  gap: 8px;
+}
+
+.lean-content {
+  flex: 1;
+  width: 100%;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 24px;
+}
