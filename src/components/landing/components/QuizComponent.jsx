@@ -1,6 +1,6 @@
 /**
- * Quiz Component for Module 01
- * One question per section, 83% pass threshold (5/6 correct)
+ * Quiz Component for the Education course.
+ * One question per section; the learner must answer it correctly to advance.
  */
 
 import React, { useState } from 'react';

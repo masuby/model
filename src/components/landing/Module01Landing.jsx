@@ -32,7 +32,6 @@ function Module01Landing({ onComplete }) {
   const [currentSection, setCurrentSection] = useState(1);
   const [completedSections, setCompletedSections] = useState([]);
   const [showQuiz, setShowQuiz] = useState(false);
-  const [quizResults, setQuizResults] = useState({});
 
   const CurrentSectionComponent = SECTIONS[currentSection - 1].component;
 
@@ -47,9 +46,7 @@ function Module01Landing({ onComplete }) {
     }
   };
 
-  const handleQuizComplete = (passed, results) => {
-    setQuizResults({ ...quizResults, [currentSection]: results });
-
+  const handleQuizComplete = (passed) => {
     if (passed) {
       // Mark section as completed
       if (!completedSections.includes(currentSection)) {
@@ -70,10 +67,6 @@ function Module01Landing({ onComplete }) {
       // Failed quiz - show review option
       setShowQuiz(false);
     }
-  };
-
-  const handleRetakeQuiz = () => {
-    setShowQuiz(true);
   };
 
   return (
