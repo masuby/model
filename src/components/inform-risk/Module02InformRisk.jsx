@@ -29,8 +29,6 @@ import CopingCapacityDimension from './dimensions/CopingCapacityDimension';
 import riskDataset from '../../data/tanzania-inform-risk.json';
 import { HAZARD_TYPES, OVERALL_RISK } from './hazardConstants';
 
-// Committee Verified Data Panel
-import CommitteeVerifiedDataPanel from './CommitteeVerifiedDataPanel';
 
 // Risk Assessment Phases based on ISO 31000 and UNDRR Technical Guidance
 const RISK_ASSESSMENT_PHASES = [
@@ -199,12 +197,6 @@ const Module02InformRisk = ({ onNavigate }) => {
         >
           🗺️ Risk
         </button>
-        <button
-          className={`nav-tab verified-tab ${selectedView === 'verified' ? 'active' : ''}`}
-          onClick={() => setSelectedView('verified')}
-        >
-          ✅ Verified Data
-        </button>
       </div>
 
       {/* Main Content */}
@@ -233,16 +225,6 @@ const Module02InformRisk = ({ onNavigate }) => {
             data={data}
             selectedDistrict={selectedDistrict}
             onSelectDistrict={setSelectedDistrict}
-          />
-        )}
-
-        {selectedView === 'verified' && (
-          <CommitteeVerifiedDataPanel
-            nationalData={national}
-            onSelectRegion={(region) => {
-              setSelectedDistrict(region);
-              setSelectedView('risk');
-            }}
           />
         )}
       </main>
