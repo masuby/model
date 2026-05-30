@@ -3,9 +3,20 @@ import { read, utils, write } from 'xlsx'
 
 const MAIN_BUCKET = 'excel-files'
 
+// Throw a clear, actionable error when storage is used without configuration,
+// instead of a cryptic "Cannot read properties of null (reading 'storage')".
+const requireSupabase = () => {
+  if (!supabase) {
+    throw new Error(
+      'Supabase storage is not configured (VITE_SUPABASE_URL / VITE_SUPABASE_ANON_KEY missing in this build).'
+    )
+  }
+  return supabase
+}
+
 // No initialization needed for public bucket
 export const initializeStorage = async () => {
-  return true
+  return Boolean(supabase)
 }
 
 // Upload Excel file to specific category folder
@@ -13,8 +24,8 @@ export const uploadExcelToStorage = async (file, categoryFolder, fileName = null
   try {
     const finalFileName = fileName || `model-${Date.now()}.xlsx`
     const filePath = `${categoryFolder}/${finalFileName}`
-    
-    const { data, error } = await supabase.storage
+
+    const { data, error } = await requireSupabase().storage
       .from(MAIN_BUCKET)
       .upload(filePath, file, {
         cacheControl: '3600',
@@ -33,8 +44,8 @@ export const uploadExcelToStorage = async (file, categoryFolder, fileName = null
 export const getExcelFromStorage = async (categoryFolder, fileName = 'model.xlsx') => {
   try {
     const filePath = `${categoryFolder}/${fileName}`
-    
-    const { data, error } = await supabase.storage
+
+    const { data, error } = await requireSupabase().storage
       .from(MAIN_BUCKET)
       .download(filePath)
 
@@ -63,6 +74,7 @@ export const getExcelFromStorage = async (categoryFolder, fileName = 'model.xlsx
 // List all Excel files in a category folder
 export const listExcelFiles = async (categoryFolder) => {
   try {
+    if (!supabase) return []
     const { data, error } = await supabase.storage
       .from(MAIN_BUCKET)
       .list(categoryFolder)
@@ -104,7 +116,7 @@ export const updateExcelInStorage = async (filePath, sheetsData) => {
     const blob = new Blob([excelBuffer], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' })
     
     // Upload updated file
-    const { data, error } = await supabase.storage
+    const { data, error } = await requireSupabase().storage
       .from(MAIN_BUCKET)
       .update(filePath, blob, {
         cacheControl: '3600'
@@ -121,7 +133,7 @@ export const updateExcelInStorage = async (filePath, sheetsData) => {
 // Delete Excel file from storage
 export const deleteExcelFile = async (filePath) => {
   try {
-    const { error } = await supabase.storage
+    const { error } = await requireSupabase().storage
       .from(MAIN_BUCKET)
       .remove([filePath])
 
@@ -136,7 +148,7 @@ export const deleteExcelFile = async (filePath) => {
 // Download Excel file directly
 export const downloadExcelFile = async (filePath, downloadName = null) => {
   try {
-    const { data, error } = await supabase.storage
+    const { data, error } = await requireSupabase().storage
       .from(MAIN_BUCKET)
       .download(filePath)
 
