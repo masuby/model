@@ -15,7 +15,7 @@
  * - Hazard-specific risk per district with dropdown selection
  */
 
-import React, { useState, useEffect, useMemo } from 'react';
+import React, { useState, useMemo } from 'react';
 import './Module02InformRisk.css';
 
 // Dimension components
@@ -23,20 +23,14 @@ import HazardExposureDimension from './dimensions/HazardExposureDimension';
 import VulnerabilityDimension from './dimensions/VulnerabilityDimension';
 import CopingCapacityDimension from './dimensions/CopingCapacityDimension';
 
-// Data service - parses Excel template
-import { parseInformRiskData } from '../../services/informRiskDataService';
+// Single curated dataset — generated from the authentic Tanzania INFORM Excel
+// (scripts/generate-risk-json.mjs). The faithful values the engine's excelParity
+// test validates. No runtime Excel parse, no mock/random fallback.
+import riskDataset from '../../data/tanzania-inform-risk.json';
+import { HAZARD_TYPES, OVERALL_RISK } from './hazardConstants';
 
-// Mock data service (fallback) and hazard types
-import { getMockTanzaniaData, HAZARD_TYPES, OVERALL_RISK } from './mockData';
-
-// Report Export
-// ReportExportButton (warning module) archived in lean rebuild
-
-// Committee Verified Data Panel - Next Generation
+// Committee Verified Data Panel
 import CommitteeVerifiedDataPanel from './CommitteeVerifiedDataPanel';
-
-// Supabase data service for approved risk data
-// Supabase submission merge archived in lean rebuild — Risk reads the curated dataset only
 
 // Risk Assessment Phases based on ISO 31000 and UNDRR Technical Guidance
 const RISK_ASSESSMENT_PHASES = [
@@ -109,109 +103,13 @@ const TEN_PRINCIPLES = [
 ];
 
 const Module02InformRisk = ({ onNavigate }) => {
-  const [data, setData] = useState(null);
+  const [data] = useState(riskDataset);
   const [selectedView, setSelectedView] = useState('overview');
   const [selectedDistrict, setSelectedDistrict] = useState(null);
-  const [loading, setLoading] = useState(true);
+  const [loading] = useState(false);
   const [selectedPhase, setSelectedPhase] = useState('scoping');
 
-  // Load approved committee data from Supabase (falls back to localStorage)
-
-  // Merge approved committee data into existing risk data
-  const mergeApprovedData = (baseData, approvedSubmissions) => {
-    if (!baseData || !approvedSubmissions?.length) return baseData;
-
-    const merged = JSON.parse(JSON.stringify(baseData)); // Deep clone
-
-    approvedSubmissions.forEach(approved => {
-      // Use calculated scores from INFORM methodology
-      const calc = approved.calculated;
-      if (!calc) return;
-
-      // Create district entry from approved data with full INFORM structure
-      const newEntry = {
-        admin: {
-          country: 'United Republic of Tanzania',
-          adm1Name: approved.adm1Name,
-          adm2Name: approved.adm2Name || approved.adm1Name,
-          iso3: 'TZA',
-          adm1Code: approved.adm1Code,
-          adm2Code: approved.adm2Code
-        },
-        hazardExposure: {
-          total: calc.hazardScore,
-          natural: calc.dimensions?.HAZARD?.categories?.Natural,
-          human: calc.dimensions?.HAZARD?.categories?.Human
-        },
-        vulnerability: {
-          total: calc.vulnerabilityScore,
-          socioEconomic: calc.dimensions?.VULNERABILITY?.categories?.['Socio-Economic'],
-          vulnerableGroups: calc.dimensions?.VULNERABILITY?.categories?.['Vulnerable Groups']
-        },
-        lackCopingCapacity: {
-          total: calc.lackOfCopingScore,
-          institutional: calc.dimensions?.COPING_CAPACITY?.categories?.Institutional,
-          infrastructure: calc.dimensions?.COPING_CAPACITY?.categories?.Infrastructure
-        },
-        risk: calc.riskScore,
-        classification: calc.riskClass,
-        _committeeSource: {
-          committeeName: approved.committeeName,
-          submittedBy: approved.submittedBy,
-          submittedAt: approved.submittedAt,
-          approvedAt: approved.approvedAt,
-          approvedBy: approved.approvedBy,
-          methodology: approved.methodology || 'INFORM 2024',
-          indicatorCount: Object.keys(approved.indicators || {}).length
-        }
-      };
-
-      // Merge into adm2 array
-      if (!merged.subnational) merged.subnational = {};
-      if (!merged.subnational.adm2) merged.subnational.adm2 = [];
-
-      // Find existing entry for this region/district
-      const existingIdx = merged.subnational.adm2.findIndex(d =>
-        d.admin?.adm1Name === approved.adm1Name &&
-        (approved.adm2Name ? d.admin?.adm2Name === approved.adm2Name : true)
-      );
-
-      if (existingIdx >= 0) {
-        // Override with committee-approved data
-        merged.subnational.adm2[existingIdx] = {
-          ...merged.subnational.adm2[existingIdx],
-          ...newEntry
-        };
-      } else {
-        // Add as new entry
-        merged.subnational.adm2.push(newEntry);
-      }
-    });
-
-    return merged;
-  };
-
-  // Load INFORM Risk data
-  useEffect(() => {
-    const loadData = async () => {
-      try {
-        setLoading(true);
-        const excelUrl = '/data/tanzania-inform-risk.xlsx';
-        console.log('🚀 Loading INFORM Risk data from Excel...');
-        const riskData = await parseInformRiskData(excelUrl);
-        setData(riskData);
-        setLoading(false);
-        console.log('✅ INFORM Risk data loaded successfully!');
-      } catch (error) {
-        console.error('❌ Error loading Excel data:', error);
-        console.warn('⚠️ Falling back to mock data');
-        const mockData = getMockTanzaniaData();
-        setData(mockData);
-        setLoading(false);
-      }
-    };
-    loadData();
-  }, []);
+  // Risk data is the curated dataset imported above — no async load, no fallback.
 
   // Calculate verification of INFORM formula
   const formulaVerification = useMemo(() => {

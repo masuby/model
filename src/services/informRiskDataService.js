@@ -104,45 +104,44 @@ export async function parseInformRiskData(fileUrl) {
       workbook = XLSX.readFile(fileUrl);
     }
 
-    const sheet = workbook.Sheets['INFORM SADC 2024'];
-
-    if (!sheet) {
-      throw new Error('Sheet "INFORM SADC 2024" not found in Excel file');
-    }
-
-    const data = XLSX.utils.sheet_to_json(sheet, { header: 1, defval: null });
-    console.log(`📊 Loaded ${data.length} rows from Excel`);
-
-    // Extract headers (row 0) and data rows (row 1+)
-    const headers = data[0];
-    const rows = data.slice(1);
-
-    // Parse all administrative units
-    const administrativeUnits = rows
-      .map(row => parseAdministrativeUnit(row, headers))
-      .filter(unit => unit.admin.iso3 === 'TZA'); // Filter only Tanzania
-
-    console.log(`🇹🇿 Parsed ${administrativeUnits.length} Tanzania administrative units`);
-
-    // Calculate national-level aggregates for Tanzania
-    const nationalData = calculateNationalAggregates(administrativeUnits);
-
-    return {
-      national: nationalData,
-      subnational: {
-        adm1: groupByAdm1(administrativeUnits),
-        adm2: administrativeUnits
-      },
-      metadata: {
-        totalUnits: administrativeUnits.length,
-        lastUpdated: new Date().toISOString(),
-        dataSource: 'Tanzania Country Model Template'
-      }
-    };
+    return transformWorkbook(workbook);
   } catch (error) {
     console.error('❌ Error parsing INFORM Risk data:', error);
     throw error;
   }
+}
+
+/**
+ * Transform a parsed XLSX workbook into the INFORM Risk data object.
+ * Shared by the browser parser and the Node build-time snapshot script,
+ * so there is exactly one transform implementation.
+ */
+export function transformWorkbook(workbook) {
+  const sheet = workbook.Sheets['INFORM SADC 2024'];
+  if (!sheet) {
+    throw new Error('Sheet "INFORM SADC 2024" not found in Excel file');
+  }
+
+  const data = XLSX.utils.sheet_to_json(sheet, { header: 1, defval: null });
+  const headers = data[0];
+  const rows = data.slice(1);
+
+  const administrativeUnits = rows
+    .map(row => parseAdministrativeUnit(row, headers))
+    .filter(unit => unit.admin.iso3 === 'TZA'); // Tanzania only
+
+  return {
+    national: calculateNationalAggregates(administrativeUnits),
+    subnational: {
+      adm1: groupByAdm1(administrativeUnits),
+      adm2: administrativeUnits
+    },
+    metadata: {
+      totalUnits: administrativeUnits.length,
+      lastUpdated: new Date().toISOString(),
+      dataSource: 'Tanzania Country Model Template'
+    }
+  };
 }
 
 /**
