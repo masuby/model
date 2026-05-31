@@ -1,5 +1,15 @@
 /* Risk district explorer — layout only; visual language comes from theme.css */
 
+/* Risk module header */
+.rk-header { display: flex; align-items: center; justify-content: space-between; gap: var(--s-5); margin-bottom: var(--s-4); }
+.rk-header-source { font-size: var(--fs-sm); margin: var(--s-2) 0 0; max-width: 620px; }
+.rk-header-badge {
+  display: flex; flex-direction: column; align-items: center; gap: var(--s-2);
+  border: 2px solid; border-radius: var(--r-lg); padding: var(--s-3) var(--s-5); min-width: 130px;
+}
+.rk-header-range { font-size: var(--fs-xs); }
+@media (max-width: 640px) { .rk-header { flex-direction: column; align-items: flex-start; } }
+
 .rx { display: flex; flex-direction: column; gap: var(--s-4); }
 
 .rx-controls-row { display: flex; align-items: center; gap: var(--s-5); flex-wrap: wrap; }

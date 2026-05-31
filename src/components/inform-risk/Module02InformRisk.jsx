@@ -149,22 +149,18 @@ const Module02InformRisk = ({ onNavigate }) => {
   return (
     <div className="module02-container">
       {/* Header */}
-      <header className="module02-header">
-        <div className="header-content">
-          <div className="header-left">
-            <h1>INFORM Risk Assessment</h1>
-            <p className="header-subtitle">Tanzania Index for Risk Management</p>
-            <p className="header-source">Source: Tanzania INFORM Country Model (INFORM methodology) — district values from the country model workbook</p>
-          </div>
-          <div className="header-right">
-            <div className="risk-badge" style={{ borderColor: classification.color }}>
-              <div className="risk-score" style={{ color: classification.color }}>
-                {national.risk.toFixed(1)}
-              </div>
-              <div className="risk-label">{classification.level} Risk</div>
-              <div className="risk-range">{classification.range}</div>
-            </div>
-          </div>
+      <header className="rk-header ui-card ui-card-pad">
+        <div className="rk-header-left">
+          <div className="ui-eyebrow">INFORM Risk Index · Tanzania</div>
+          <h1 className="ui-h1">National Risk Assessment</h1>
+          <p className="rk-header-source ui-muted">
+            Source: Tanzania INFORM Country Model — district values from the country-model workbook (INFORM methodology).
+          </p>
+        </div>
+        <div className="rk-header-badge" style={{ borderColor: classification.color }}>
+          <div className="ui-stat-num" style={{ color: classification.color }}>{national.risk.toFixed(1)}</div>
+          <span className="ui-badge" style={{ background: classification.color }}>{classification.level} Risk</span>
+          <div className="rk-header-range ui-muted">{classification.range}</div>
         </div>
       </header>
 
