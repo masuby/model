@@ -1,12 +1,13 @@
 /**
- * RiskExplorer — the redesigned district experience for the Risk module.
- * One harmonized view: choose a lens (overall risk / dimension / hazard type),
- * see it on the ADM2 choropleth, ranked in a sortable table, and drill into any
- * district's full INFORM breakdown. All values authentic from the country model.
+ * RiskExplorer — the district experience for the Risk module.
+ * Choose a lens (overall risk / a dimension), then drill into any of that
+ * dimension's indicators — via the dropdown or the visible indicator chips —
+ * to colour the choropleth + ranked table by it. Click a district for its full
+ * INFORM breakdown. Every value is authentic from the country model.
  */
 import React, { useMemo, useState } from 'react';
 import DistrictMap from './DistrictMap';
-import { DISTRICTS, METRICS, HAZARDS, getMetric, classifyRisk, round1 } from './riskModel';
+import { DISTRICTS, DIMENSION_TREE, DIM_KEYS, getMetric, scopeOf, classifyRisk, round1 } from './riskModel';
 import './RiskExplorer.css';
 
 const pct = (v) => `${Math.max(0, Math.min(100, ((v ?? 0) / 10) * 100))}%`;
@@ -32,8 +33,8 @@ function DistrictDetail({ d }) {
   const he = d.hazardExposure || {};
   const vu = d.vulnerability || {};
   const cc = d.lackCopingCapacity || {};
-  const topHazards = HAZARDS
-    .map((h) => ({ ...h, v: he.natural?.[h.key] }))
+  const topHazards = DIMENSION_TREE.hazard.components[0].indicators
+    .map((h) => ({ ...h, v: he.natural?.[h.k] }))
     .filter((h) => typeof h.v === 'number')
     .sort((a, b) => b.v - a.v)
     .slice(0, 4);
@@ -69,7 +70,7 @@ function DistrictDetail({ d }) {
         </div>
         <div className="rx-dim ui-card ui-card-pad">
           <div className="rx-dim-head"><span>Top hazards</span></div>
-          {topHazards.length ? topHazards.map((h) => <Bar key={h.key} value={h.v} label={`${h.icon} ${h.label}`} />)
+          {topHazards.length ? topHazards.map((h) => <Bar key={h.k} value={h.v} label={h.label} />)
             : <div className="ui-muted" style={{ fontSize: 'var(--fs-sm)' }}>No hazard data</div>}
         </div>
       </div>
@@ -77,12 +78,19 @@ function DistrictDetail({ d }) {
   );
 }
 
+const LENSES = [
+  { key: 'risk', scope: 'risk', label: 'Overall INFORM Risk' },
+  ...DIM_KEYS.map((k) => ({ key: `dim:${k}`, scope: k, label: DIMENSION_TREE[k].label })),
+];
+
 export default function RiskExplorer() {
   const [metricKey, setMetricKey] = useState('risk');
   const [selected, setSelected] = useState(null);
   const [sortDir, setSortDir] = useState('desc');
 
   const metric = getMetric(metricKey);
+  const activeScope = scopeOf(metricKey);
+  const tree = activeScope !== 'risk' ? DIMENSION_TREE[activeScope] : null;
 
   const ranked = useMemo(() => {
     const rows = DISTRICTS.map((d) => ({ d, v: metric.get(d) }));
@@ -93,35 +101,65 @@ export default function RiskExplorer() {
     return rows;
   }, [metric, sortDir]);
 
-  const primary = METRICS.filter((m) => m.group !== 'Hazard type');
-
   return (
     <div className="rx">
-      {/* Lens selector */}
+      {/* Lens + indicator selector */}
       <div className="rx-controls ui-card ui-card-pad">
         <div className="rx-controls-row">
           <span className="ui-eyebrow">Colour districts by</span>
           <div className="rx-chips">
-            {primary.map((m) => (
-              <button key={m.key} className={`ui-chip ${metricKey === m.key ? 'is-active' : ''}`} onClick={() => setMetricKey(m.key)}>
-                {m.label}
+            {LENSES.map((l) => (
+              <button
+                key={l.key}
+                className={`ui-chip ${activeScope === l.scope ? 'is-active' : ''}`}
+                onClick={() => setMetricKey(l.key)}
+              >
+                {l.label}
               </button>
             ))}
           </div>
-          <label className="rx-hazard-pick">
-            <span className="ui-eyebrow">or hazard type</span>
-            <select
-              className="ui-select"
-              value={metricKey.startsWith('hz:') ? metricKey : ''}
-              onChange={(e) => e.target.value && setMetricKey(e.target.value)}
-            >
-              <option value="">— pick a hazard —</option>
-              {HAZARDS.map((h) => (
-                <option key={h.key} value={`hz:${h.key}`}>{h.icon} {h.label}</option>
-              ))}
-            </select>
-          </label>
         </div>
+
+        {tree && (
+          <div className="rx-indicators">
+            <div className="rx-indicators-top">
+              <span className="ui-eyebrow">{tree.label} indicators</span>
+              <label className="rx-ind-pick">
+                <span className="ui-muted">Show indicator:</span>
+                <select className="ui-select" value={metricKey} onChange={(e) => setMetricKey(e.target.value)}>
+                  <option value={`dim:${activeScope}`}>Whole {tree.label} (dimension)</option>
+                  {tree.components.map((c) => (
+                    <optgroup key={c.name} label={c.name}>
+                      {c.indicators.map((ind) => (
+                        <option key={ind.k} value={`ind:${activeScope}:${ind.k}`}>{ind.label}</option>
+                      ))}
+                    </optgroup>
+                  ))}
+                </select>
+              </label>
+            </div>
+            {/* Visible, clickable indicator list grouped by component */}
+            {tree.components.map((c) => (
+              <div key={c.name} className="rx-ind-group">
+                <span className="rx-ind-group-name">{c.name}</span>
+                <div className="rx-ind-chips">
+                  {c.indicators.map((ind) => {
+                    const key = `ind:${activeScope}:${ind.k}`;
+                    return (
+                      <button
+                        key={ind.k}
+                        className={`rx-ind-chip ${metricKey === key ? 'is-active' : ''}`}
+                        onClick={() => setMetricKey(key)}
+                      >
+                        {ind.label}
+                      </button>
+                    );
+                  })}
+                </div>
+              </div>
+            ))}
+          </div>
+        )}
       </div>
 
       <div className="rx-main">
