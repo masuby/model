@@ -4,6 +4,7 @@ import { LanguageProvider } from "./contexts/LanguageContext";
 import Module01Landing from "./components/landing/Module01Landing";
 import Module02InformRisk from "./components/inform-risk/Module02InformRisk";
 import Module04Severity from "./components/severity/Module04Severity";
+import HomePage from "./components/home/HomePage";
 import "./theme.css";
 import "./App.css";
 import "./lean.css";
@@ -55,8 +56,9 @@ function TopNav() {
   });
   return (
     <header className="lean-topbar">
-      <div className="lean-brand">INFORM Tanzania</div>
+      <NavLink to="/" className="lean-brand">INFORM Tanzania</NavLink>
       <nav className="lean-nav">
+        <NavLink to="/" end className="lean-navlink" style={link}>Home</NavLink>
         <NavLink to="/education" className="lean-navlink" style={link}>Education</NavLink>
         <NavLink to="/risk" className="lean-navlink" style={link}>Risk</NavLink>
         <NavLink to="/severity" className="lean-navlink" style={link}>Severity</NavLink>
@@ -88,11 +90,11 @@ function App() {
             <TopNav />
             <main className="lean-content">
               <Routes>
+                <Route path="/" element={<HomePage />} />
                 <Route path="/education" element={<EducationRoute />} />
                 <Route path="/risk" element={<RiskRoute />} />
                 <Route path="/severity" element={<SeverityRoute />} />
-                <Route path="/" element={<Navigate to="/education" replace />} />
-                <Route path="*" element={<Navigate to="/education" replace />} />
+                <Route path="*" element={<Navigate to="/" replace />} />
               </Routes>
             </main>
           </div>

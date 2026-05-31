@@ -23,7 +23,9 @@
   font-weight: 800;
   color: #1f3a5f;
   letter-spacing: 0.2px;
+  text-decoration: none;
 }
+.lean-brand:hover { color: #1f6feb; }
 
 .lean-nav {
   display: flex;
