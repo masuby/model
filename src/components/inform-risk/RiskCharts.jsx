@@ -1,7 +1,9 @@
 /**
- * RiskCharts — downloadable visualization panel. Reacts to the active lens/
- * indicator: distribution (bar), the ranked profile (line), highest districts
- * (bar) and regional averages (bar). Each chart exports to PNG or CSV.
+ * RiskCharts — downloadable, academic (Excel-style) charts.
+ *  • Regional INFORM profile: a multi-series line (Risk + 3 dimensions) across
+ *    regions ordered by risk — fixed analytical overview.
+ *  • Distribution (bar) + Highest districts (bar): react to the active lens.
+ * Each chart exports to PNG or CSV.
  */
 import React, { useMemo } from 'react';
 import { DISTRICTS, classifyRisk, round1 } from './riskModel';
@@ -19,7 +21,30 @@ export default function RiskCharts({ metric }) {
   );
   const slug = metric.label.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
 
-  // Distribution across the 5 classes
+  // Regional means of the 4 INFORM measures, ordered by risk (for the line chart)
+  const regional = useMemo(() => {
+    const byReg = {};
+    DISTRICTS.forEach((d) => {
+      const r = (byReg[d.admin.adm1Name] = byReg[d.admin.adm1Name] || { risk: [], hazard: [], vuln: [], cope: [] });
+      if (typeof d.risk === 'number') r.risk.push(d.risk);
+      if (typeof d.hazardExposure?.total === 'number') r.hazard.push(d.hazardExposure.total);
+      if (typeof d.vulnerability?.total === 'number') r.vuln.push(d.vulnerability.total);
+      if (typeof d.lackCopingCapacity?.total === 'number') r.cope.push(d.lackCopingCapacity.total);
+    });
+    const mean = (a) => (a.length ? a.reduce((s, x) => s + x, 0) / a.length : null);
+    return Object.entries(byReg)
+      .map(([name, r]) => ({ name, risk: mean(r.risk), hazard: mean(r.hazard), vuln: mean(r.vuln), cope: mean(r.cope) }))
+      .sort((a, b) => (b.risk ?? 0) - (a.risk ?? 0));
+  }, []);
+
+  const lineSeries = [
+    { name: 'INFORM Risk', color: '#0f172a', values: regional.map((r) => round1(r.risk)) },
+    { name: 'Hazard & Exposure', color: '#FF9800', values: regional.map((r) => round1(r.hazard)) },
+    { name: 'Vulnerability', color: '#1f6feb', values: regional.map((r) => round1(r.vuln)) },
+    { name: 'Lack of Coping', color: '#7c3aed', values: regional.map((r) => round1(r.cope)) },
+  ];
+
+  // Distribution across the 5 classes (reactive)
   const dist = useMemo(() => {
     const counts = Object.fromEntries(CLASS_ORDER.map((c) => [c, 0]));
     rows.forEach(({ v }) => { const lvl = classifyRisk(v).level; counts[lvl] = (counts[lvl] || 0) + 1; });
@@ -27,30 +52,29 @@ export default function RiskCharts({ metric }) {
   }, [rows]);
   const distMax = Math.max(1, ...dist.map((d) => d.value));
 
-  // Ranked profile (line) — all districts high → low
-  const profile = useMemo(() => [...rows].map((r) => r.v).sort((a, b) => b - a), [rows]);
-
-  // Top districts (bar)
+  // Highest districts (reactive)
   const top = useMemo(
     () => [...rows].sort((a, b) => b.v - a.v).slice(0, 12)
       .map(({ d, v }) => ({ label: d.admin.adm2Name, sub: d.admin.adm1Name, value: v, color: classifyRisk(v).color })),
     [rows]
   );
 
-  // Regional averages (bar)
-  const regions = useMemo(() => {
-    const byReg = {};
-    rows.forEach(({ d, v }) => { (byReg[d.admin.adm1Name] = byReg[d.admin.adm1Name] || []).push(v); });
-    return Object.entries(byReg)
-      .map(([name, vs]) => ({ name, avg: vs.reduce((s, x) => s + x, 0) / vs.length, n: vs.length }))
-      .sort((a, b) => b.avg - a.avg).slice(0, 12)
-      .map((r) => ({ label: r.name, sub: `${r.n} districts`, value: round1(r.avg), color: classifyRisk(r.avg).color }));
-  }, [rows]);
-
-  const sortedRows = useMemo(() => [...rows].sort((a, b) => b.v - a.v), [rows]);
-
   return (
     <div className="rx-charts">
+      <div className="rc-wide">
+        <ChartCard
+          title="Regional INFORM profile"
+          subtitle="dimension means by region, ordered by overall risk"
+          filenameBase="inform-regional-profile"
+          csv={{
+            header: ['Region', 'INFORM Risk', 'Hazard & Exposure', 'Vulnerability', 'Lack of Coping'],
+            rows: regional.map((r) => [r.name, round1(r.risk), round1(r.hazard), round1(r.vuln), round1(r.cope)]),
+          }}
+        >
+          <LineChart series={lineSeries} xLabels={regional.map((r) => r.name)} />
+        </ChartCard>
+      </div>
+
       <ChartCard
         title="Distribution"
         subtitle={`${rows.length} districts by ${metric.label.toLowerCase()}`}
@@ -61,30 +85,12 @@ export default function RiskCharts({ metric }) {
       </ChartCard>
 
       <ChartCard
-        title="Ranked profile"
-        subtitle={`all ${rows.length} districts, high → low`}
-        filenameBase={`inform-${slug}-profile`}
-        csv={{ header: ['Rank', 'District', 'Region', metric.label], rows: sortedRows.map((r, i) => [i + 1, r.d.admin.adm2Name, r.d.admin.adm1Name, round1(r.v)]) }}
-      >
-        <LineChart values={profile} />
-      </ChartCard>
-
-      <ChartCard
         title="Highest districts"
-        subtitle="top 12"
+        subtitle={`top 12 by ${metric.label.toLowerCase()}`}
         filenameBase={`inform-${slug}-top-districts`}
         csv={{ header: ['District', 'Region', metric.label], rows: top.map((t) => [t.label, t.sub, t.value]) }}
       >
         <BarChart data={top} horizontal />
-      </ChartCard>
-
-      <ChartCard
-        title="By region"
-        subtitle="average · top 12"
-        filenameBase={`inform-${slug}-by-region`}
-        csv={{ header: ['Region', 'Districts', `Average ${metric.label}`], rows: regions.map((r) => [r.label, r.sub.replace(' districts', ''), r.value]) }}
-      >
-        <BarChart data={regions} horizontal />
       </ChartCard>
     </div>
   );

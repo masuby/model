@@ -72,6 +72,7 @@
 
 /* Charts panel */
 .rx-charts { display: grid; grid-template-columns: 1fr 1fr; gap: var(--s-4); }
+.rx-charts .rc-wide { grid-column: 1 / -1; }
 @media (max-width: 880px) { .rx-charts { grid-template-columns: 1fr; } }
 .rc-card { display: flex; flex-direction: column; }
 .rc-title { display: flex; align-items: baseline; justify-content: space-between; gap: var(--s-2); margin-bottom: var(--s-3); }
