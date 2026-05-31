@@ -7,6 +7,7 @@
  */
 import React, { useMemo, useState } from 'react';
 import DistrictMap from './DistrictMap';
+import RiskCharts from './RiskCharts';
 import { DISTRICTS, DIMENSION_TREE, DIM_KEYS, getMetric, scopeOf, classifyRisk, round1 } from './riskModel';
 import './RiskExplorer.css';
 
@@ -200,6 +201,8 @@ export default function RiskExplorer() {
           </div>
         </div>
       </div>
+
+      <RiskCharts metric={metric} onSelect={setSelected} />
 
       <div className="rx-detail-wrap ui-card ui-card-pad">
         <DistrictDetail d={selected} />
