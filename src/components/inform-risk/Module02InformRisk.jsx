@@ -153,6 +153,7 @@ const Module02InformRisk = ({ onNavigate }) => {
           <div className="header-left">
             <h1>INFORM Risk Assessment</h1>
             <p className="header-subtitle">Tanzania Index for Risk Management</p>
+            <p className="header-source">Source: Tanzania INFORM Country Model (official INFORM SADC 2024 dataset)</p>
           </div>
           <div className="header-right">
             <div className="risk-badge" style={{ borderColor: classification.color }}>

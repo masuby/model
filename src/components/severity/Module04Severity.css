@@ -3,7 +3,11 @@
 .sev-module { max-width: 1200px; margin: 0 auto; }
 
 .sev-module-head h1 { font-size: 28px; color: #1f3a5f; margin: 0 0 6px; }
-.sev-module-head p { color: #475569; max-width: 760px; line-height: 1.55; margin: 0 0 18px; }
+.sev-module-head p { color: #475569; max-width: 760px; line-height: 1.55; margin: 0 0 12px; }
+.sev-disclaimer {
+  background: #fff7ed; border-left: 3px solid #f59e0b; border-radius: 0 6px 6px 0;
+  padding: 8px 12px; font-size: 13px; color: #92400e; margin: 0 0 18px;
+}
 
 .sev-scenarios {
   display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin-bottom: 6px;

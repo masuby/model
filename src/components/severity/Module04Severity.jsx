@@ -73,10 +73,15 @@ export default function Module04Severity() {
           {' '}(its impact, the conditions of affected people, and response complexity),
           distinct from the Risk Index which estimates how likely a crisis is.
         </p>
+        <p className="sev-disclaimer">
+          The sample scenarios below use <strong>illustrative figures</strong> to
+          demonstrate the methodology — they are not official assessments. Enter
+          real figures for an actual crisis to compute its severity.
+        </p>
       </header>
 
       <section className="sev-scenarios">
-        <span className="sev-scenarios-label">Load a sample crisis:</span>
+        <span className="sev-scenarios-label">Load an illustrative scenario:</span>
         {SEVERITY_SCENARIOS.map((s) => (
           <button
             key={s.id}
