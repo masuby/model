@@ -1,0 +1,112 @@
+/* ============================================================================
+   INFORM Tanzania — unified design system (tokens + base components)
+   Imported globally; shared by Education, Risk, and Severity so the whole app
+   has one consistent visual language (spacing, type, colour, components).
+   ============================================================================ */
+
+:root {
+  /* Brand + ink */
+  --c-primary: #1f6feb;
+  --c-primary-dark: #1b4fa8;
+  --c-ink: #0f172a;
+  --c-body: #334155;
+  --c-muted: #64748b;
+  --c-faint: #94a3b8;
+
+  /* Surfaces + lines */
+  --c-bg: #f5f7fb;
+  --c-surface: #ffffff;
+  --c-surface-2: #f8fafc;
+  --c-line: #e6eaf0;
+  --c-line-strong: #d4dae3;
+
+  /* INFORM risk palette (Tanzania classes) */
+  --c-vlow: #2E7D32;
+  --c-low: #8BC34A;
+  --c-med: #FFC107;
+  --c-high: #FF9800;
+  --c-vhigh: #D32F2F;
+
+  /* Type scale */
+  --fs-display: 28px;
+  --fs-h1: 22px;
+  --fs-h2: 18px;
+  --fs-h3: 14px;
+  --fs-body: 14px;
+  --fs-sm: 13px;
+  --fs-xs: 11px;
+
+  /* Spacing scale */
+  --s-1: 4px;  --s-2: 8px;  --s-3: 12px; --s-4: 16px;
+  --s-5: 20px; --s-6: 24px; --s-8: 32px; --s-10: 40px;
+
+  /* Radius + shadow + motion */
+  --r-sm: 6px; --r-md: 10px; --r-lg: 14px; --r-pill: 999px;
+  --sh-1: 0 1px 2px rgba(15,23,42,.06), 0 1px 3px rgba(15,23,42,.04);
+  --sh-2: 0 4px 14px rgba(15,23,42,.08);
+  --ease: 160ms cubic-bezier(.4,0,.2,1);
+}
+
+/* ---- Section header ------------------------------------------------------ */
+.ui-eyebrow {
+  font-size: var(--fs-xs); font-weight: 700; letter-spacing: .8px;
+  text-transform: uppercase; color: var(--c-faint);
+}
+.ui-h1 { font-size: var(--fs-h1); font-weight: 800; color: var(--c-ink); margin: 0; }
+.ui-h2 { font-size: var(--fs-h2); font-weight: 700; color: var(--c-ink); margin: 0; }
+.ui-muted { color: var(--c-muted); }
+
+/* ---- Card / panel -------------------------------------------------------- */
+.ui-card {
+  background: var(--c-surface);
+  border: 1px solid var(--c-line);
+  border-radius: var(--r-lg);
+  box-shadow: var(--sh-1);
+}
+.ui-card-pad { padding: var(--s-5); }
+
+/* ---- Badge --------------------------------------------------------------- */
+.ui-badge {
+  display: inline-flex; align-items: center; gap: var(--s-1);
+  padding: 2px 10px; border-radius: var(--r-pill);
+  font-size: var(--fs-xs); font-weight: 700; color: #fff; line-height: 1.6;
+  white-space: nowrap;
+}
+
+/* ---- Score bar (set --val 0-100 and --col) ------------------------------- */
+.ui-bar { position: relative; height: 8px; border-radius: var(--r-pill); background: #eef2f7; overflow: hidden; }
+.ui-bar > i { position: absolute; inset: 0 auto 0 0; width: var(--val, 0%); background: var(--col, var(--c-primary)); border-radius: inherit; transition: width var(--ease); }
+
+/* ---- Stat ---------------------------------------------------------------- */
+.ui-stat { display: flex; flex-direction: column; gap: 2px; }
+.ui-stat-num { font-size: var(--fs-display); font-weight: 800; line-height: 1; }
+.ui-stat-label { font-size: var(--fs-xs); color: var(--c-muted); text-transform: uppercase; letter-spacing: .5px; }
+
+/* ---- Select / button ----------------------------------------------------- */
+.ui-select {
+  appearance: none; background: var(--c-surface); border: 1px solid var(--c-line-strong);
+  border-radius: var(--r-sm); padding: 8px 30px 8px 12px; font: inherit; color: var(--c-ink);
+  cursor: pointer; background-image: linear-gradient(45deg, transparent 50%, var(--c-muted) 50%), linear-gradient(135deg, var(--c-muted) 50%, transparent 50%);
+  background-position: calc(100% - 16px) 55%, calc(100% - 11px) 55%; background-size: 5px 5px, 5px 5px; background-repeat: no-repeat;
+}
+.ui-select:focus-visible, .ui-chip:focus-visible { outline: 3px solid var(--c-primary); outline-offset: 2px; }
+
+.ui-chip {
+  padding: 7px 14px; border: 1px solid var(--c-line-strong); background: var(--c-surface);
+  border-radius: var(--r-pill); cursor: pointer; font-size: var(--fs-sm); color: var(--c-ink);
+  transition: all var(--ease); white-space: nowrap;
+}
+.ui-chip:hover { border-color: var(--c-primary); }
+.ui-chip.is-active { background: var(--c-primary); color: #fff; border-color: var(--c-primary); }
+
+/* ---- Data table ---------------------------------------------------------- */
+.ui-table { width: 100%; border-collapse: collapse; font-size: var(--fs-sm); }
+.ui-table thead th {
+  text-align: left; font-size: var(--fs-xs); text-transform: uppercase; letter-spacing: .5px;
+  color: var(--c-muted); font-weight: 700; padding: 10px var(--s-3);
+  border-bottom: 1px solid var(--c-line); position: sticky; top: 0; background: var(--c-surface); cursor: pointer; user-select: none;
+}
+.ui-table tbody td { padding: 10px var(--s-3); border-bottom: 1px solid var(--c-surface-2); vertical-align: middle; }
+.ui-table tbody tr { cursor: pointer; transition: background var(--ease); }
+.ui-table tbody tr:hover { background: var(--c-surface-2); }
+.ui-table tbody tr.is-selected { background: #eaf2ff; box-shadow: inset 3px 0 0 var(--c-primary); }

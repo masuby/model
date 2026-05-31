@@ -29,7 +29,7 @@ import CopingCapacityDimension from './dimensions/CopingCapacityDimension';
 import riskDataset from '../../data/tanzania-inform-risk.json';
 import { classifyRisk } from './regionRisk';
 import { HAZARD_TYPES } from './hazardConstants';
-import RiskMap from './RiskMap';
+import RiskExplorer from './RiskExplorer';
 
 
 // Risk Assessment Phases based on ISO 31000 and UNDRR Technical Guidance
@@ -180,7 +180,7 @@ const Module02InformRisk = ({ onNavigate }) => {
           className={`nav-tab ${selectedView === 'map' ? 'active' : ''}`}
           onClick={() => setSelectedView('map')}
         >
-          🗺️ Map
+          🗺️ Districts
         </button>
         <button
           className={`nav-tab ${selectedView === 'hazard' ? 'active' : ''}`}
@@ -200,12 +200,6 @@ const Module02InformRisk = ({ onNavigate }) => {
         >
           🏛️ Coping Capacity
         </button>
-        <button
-          className={`nav-tab ${selectedView === 'risk' ? 'active' : ''}`}
-          onClick={() => setSelectedView('risk')}
-        >
-          📋 Risk by District
-        </button>
       </div>
 
       {/* Main Content */}
@@ -217,7 +211,7 @@ const Module02InformRisk = ({ onNavigate }) => {
           />
         )}
 
-        {selectedView === 'map' && <RiskMap />}
+        {selectedView === 'map' && <RiskExplorer />}
 
         {selectedView === 'hazard' && (
           <HazardExposureDimension data={national.dimensions.hazardExposure} />
@@ -229,14 +223,6 @@ const Module02InformRisk = ({ onNavigate }) => {
 
         {selectedView === 'coping' && (
           <CopingCapacityDimension data={national.dimensions.lackCopingCapacity} />
-        )}
-
-        {selectedView === 'risk' && (
-          <RiskSection
-            data={data}
-            selectedDistrict={selectedDistrict}
-            onSelectDistrict={setSelectedDistrict}
-          />
         )}
       </main>
 

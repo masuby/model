@@ -4,6 +4,7 @@ import { LanguageProvider } from "./contexts/LanguageContext";
 import Module01Landing from "./components/landing/Module01Landing";
 import Module02InformRisk from "./components/inform-risk/Module02InformRisk";
 import Module04Severity from "./components/severity/Module04Severity";
+import "./theme.css";
 import "./App.css";
 import "./lean.css";
 
