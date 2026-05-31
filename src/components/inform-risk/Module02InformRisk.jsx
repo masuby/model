@@ -175,7 +175,7 @@ const Module02InformRisk = ({ onNavigate }) => {
           className={`nav-tab ${selectedView === 'map' ? 'active' : ''}`}
           onClick={() => setSelectedView('map')}
         >
-          🗺️ Districts
+          🗺️ Explore Map
         </button>
         <button
           className={`nav-tab ${selectedView === 'hazard' ? 'active' : ''}`}

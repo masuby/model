@@ -51,6 +51,10 @@
 .rx-cat-dot { width: 11px; height: 11px; border-radius: 50%; }
 .rx-cat.is-active .rx-cat-dot { background: #fff !important; }
 .rx-cat-n { font-weight: 800; opacity: .7; font-size: var(--fs-xs); }
+.rx-cat:disabled { opacity: .45; cursor: not-allowed; }
+.rx-cat-sel { border-color: var(--c-primary); color: var(--c-primary); font-weight: 700; }
+.rx-cat-sel.is-active { background: var(--c-primary); border-color: var(--c-primary); color: #fff; }
+.rx-table-count { font-size: var(--fs-sm); font-weight: 600; }
 
 /* Full-width map */
 .rx-map-wrap { overflow: hidden; padding: 0; height: 560px; }

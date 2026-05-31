@@ -9,10 +9,10 @@ import districts from '../../data/tanzania-districts.json';
 import regions from '../../data/tanzania-regions.json';
 import { DISTRICT_BY_KEY, REGION_BY_KEY, NATIONAL_UNIT, districtKey, normRegion, classifyRisk, round1 } from './riskModel';
 
-export default function DistrictMap({ metric, selected, onSelect, filterClass, level = 'district' }) {
+export default function DistrictMap({ metric, selected, onSelect, filterClass, level = 'district', isolateKey }) {
   const geoRef = useRef(null);
   const geojson = level === 'district' ? districts : regions;
-  const key = `${metric.key}|${filterClass || 'all'}|${level}`;
+  const key = `${metric.key}|${filterClass || 'all'}|${level}|${isolateKey || ''}`;
 
   const unitOf = (f) => {
     if (level === 'district') return DISTRICT_BY_KEY[districtKey(f.properties.dist_name, f.properties.reg_name)];
@@ -29,8 +29,8 @@ export default function DistrictMap({ metric, selected, onSelect, filterClass, l
     const u = unitOf(f);
     const val = u ? metric.get(u) : null;
     const cls = classifyRisk(val);
-    const dimmed = filterClass && cls.level !== filterClass;
     const isSel = selected && u && keyOf(selected) === keyOf(u);
+    const dimmed = (filterClass && cls.level !== filterClass) || (isolateKey && keyOf(u) !== isolateKey);
     return {
       fillColor: cls.color,
       fillOpacity: val == null ? 0.18 : dimmed ? 0.12 : 0.85,

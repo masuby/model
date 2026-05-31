@@ -98,6 +98,7 @@ export default function RiskExplorer() {
   const [selected, setSelected] = useState(null);
   const [sortDir, setSortDir] = useState('desc');
   const [classFilter, setClassFilter] = useState(null);
+  const [selectedOnly, setSelectedOnly] = useState(false);
 
   const metric = getMetric(metricKey);
   const activeScope = scopeOf(metricKey);
@@ -105,7 +106,7 @@ export default function RiskExplorer() {
   const units = useMemo(() => unitsForLevel(level), [level]);
   const noun = LEVELS.find((l) => l.key === level)?.unitNoun || 'units';
 
-  const changeLevel = (lv) => { setLevel(lv); setSelected(null); setClassFilter(null); };
+  const changeLevel = (lv) => { setLevel(lv); setSelected(null); setClassFilter(null); setSelectedOnly(false); };
 
   const ranked = useMemo(() => {
     const rows = units.map((d) => ({ d, v: metric.get(d) }));
@@ -116,10 +117,10 @@ export default function RiskExplorer() {
     return rows;
   }, [units, metric, sortDir]);
 
-  const filtered = useMemo(
-    () => (classFilter ? ranked.filter((r) => classifyRisk(r.v).level === classFilter) : ranked),
-    [ranked, classFilter]
-  );
+  const filtered = useMemo(() => {
+    if (selectedOnly && selected) return ranked.filter((r) => r.d.admin.adm2Code === selected.admin.adm2Code);
+    return classFilter ? ranked.filter((r) => classifyRisk(r.v).level === classFilter) : ranked;
+  }, [ranked, classFilter, selectedOnly, selected]);
 
   return (
     <div className="rx">
@@ -191,20 +192,28 @@ export default function RiskExplorer() {
 
       {/* Category filter (map + table) */}
       <div className="rx-catbar ui-card ui-card-pad">
-        <span className="ui-eyebrow">View by category</span>
+        <span className="ui-eyebrow">View</span>
         <div className="rx-cats">
-          <button className={`rx-cat ${!classFilter ? 'is-active' : ''}`} onClick={() => setClassFilter(null)}>
+          <button className={`rx-cat ${!classFilter && !selectedOnly ? 'is-active' : ''}`} onClick={() => { setClassFilter(null); setSelectedOnly(false); }}>
             All <span className="rx-cat-n">{ranked.length}</span>
+          </button>
+          <button
+            className={`rx-cat rx-cat-sel ${selectedOnly ? 'is-active' : ''}`}
+            disabled={!selected}
+            title={selected ? `Show only ${selected.admin.adm2Name}` : 'Select a unit on the map or table first'}
+            onClick={() => { setSelectedOnly((s) => !s); setClassFilter(null); }}
+          >
+            ★ Selected{selected ? `: ${selected.admin.adm2Name}` : ''}
           </button>
           {CATEGORIES.map((c) => {
             const n = ranked.filter((r) => classifyRisk(r.v).level === c.level).length;
-            const on = classFilter === c.level;
+            const on = classFilter === c.level && !selectedOnly;
             return (
               <button
                 key={c.level}
                 className={`rx-cat ${on ? 'is-active' : ''}`}
                 style={on ? { background: c.color, borderColor: c.color, color: '#fff' } : { borderColor: c.color }}
-                onClick={() => setClassFilter(on ? null : c.level)}
+                onClick={() => { setClassFilter(on ? null : c.level); setSelectedOnly(false); }}
               >
                 <span className="rx-cat-dot" style={{ background: c.color }} />
                 {c.level} <span className="rx-cat-n">{n}</span>
@@ -216,15 +225,17 @@ export default function RiskExplorer() {
 
       {/* Wide map */}
       <div className="rx-map-wrap ui-card">
-        <DistrictMap metric={metric} selected={selected} onSelect={setSelected} filterClass={classFilter} level={level} />
+        <DistrictMap
+          metric={metric} selected={selected} onSelect={setSelected}
+          filterClass={selectedOnly ? null : classFilter} level={level}
+          isolateKey={selectedOnly && selected ? selected.admin.adm2Code : null}
+        />
       </div>
 
       {/* Wide table */}
       <div className="rx-table-wrap ui-card">
         <div className="rx-table-head">
-          <span className="ui-eyebrow">
-            {filtered.length} {noun}{classFilter ? ` · ${classFilter}` : ''} — ranked by {metric.label.toLowerCase()}
-          </span>
+          <span className="ui-muted rx-table-count">{filtered.length} {noun}</span>
           <button className="ui-chip" onClick={() => setSortDir((s) => (s === 'desc' ? 'asc' : 'desc'))}>
             {sortDir === 'desc' ? 'High → Low' : 'Low → High'}
           </button>
