@@ -99,6 +99,7 @@ export default function RiskExplorer() {
   const [sortDir, setSortDir] = useState('desc');
   const [classFilter, setClassFilter] = useState(null);
   const [selectedOnly, setSelectedOnly] = useState(false);
+  const [tableOpen, setTableOpen] = useState(true);
 
   const metric = getMetric(metricKey);
   const activeScope = scopeOf(metricKey);
@@ -236,10 +237,18 @@ export default function RiskExplorer() {
       <div className="rx-table-wrap ui-card">
         <div className="rx-table-head">
           <span className="ui-muted rx-table-count">{filtered.length} {noun}</span>
-          <button className="ui-chip" onClick={() => setSortDir((s) => (s === 'desc' ? 'asc' : 'desc'))}>
-            {sortDir === 'desc' ? 'High → Low' : 'Low → High'}
-          </button>
+          <div className="rx-table-actions">
+            {tableOpen && (
+              <button className="ui-chip" onClick={() => setSortDir((s) => (s === 'desc' ? 'asc' : 'desc'))}>
+                {sortDir === 'desc' ? 'High → Low' : 'Low → High'}
+              </button>
+            )}
+            <button className="ui-chip" onClick={() => setTableOpen((o) => !o)}>
+              {tableOpen ? 'Hide table ▲' : 'Show table ▼'}
+            </button>
+          </div>
         </div>
+        {tableOpen && (
         <div className="rx-table-scroll">
           <table className="ui-table">
             <thead>
@@ -269,6 +278,7 @@ export default function RiskExplorer() {
             </tbody>
           </table>
         </div>
+        )}
       </div>
 
       <RiskCharts metric={metric} selected={selected} />
