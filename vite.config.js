@@ -11,8 +11,7 @@ export default defineConfig({
   build: {
     rollupOptions: {
       input: {
-        main: path.resolve(__dirname, 'index.html'),
-        warning: path.resolve(__dirname, 'warning-app.html')
+        main: path.resolve(__dirname, 'index.html')
       },
       output: {
         dir: 'dist',

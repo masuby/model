@@ -104,45 +104,44 @@ export async function parseInformRiskData(fileUrl) {
       workbook = XLSX.readFile(fileUrl);
     }
 
-    const sheet = workbook.Sheets['INFORM SADC 2024'];
-
-    if (!sheet) {
-      throw new Error('Sheet "INFORM SADC 2024" not found in Excel file');
-    }
-
-    const data = XLSX.utils.sheet_to_json(sheet, { header: 1, defval: null });
-    console.log(`📊 Loaded ${data.length} rows from Excel`);
-
-    // Extract headers (row 0) and data rows (row 1+)
-    const headers = data[0];
-    const rows = data.slice(1);
-
-    // Parse all administrative units
-    const administrativeUnits = rows
-      .map(row => parseAdministrativeUnit(row, headers))
-      .filter(unit => unit.admin.iso3 === 'TZA'); // Filter only Tanzania
-
-    console.log(`🇹🇿 Parsed ${administrativeUnits.length} Tanzania administrative units`);
-
-    // Calculate national-level aggregates for Tanzania
-    const nationalData = calculateNationalAggregates(administrativeUnits);
-
-    return {
-      national: nationalData,
-      subnational: {
-        adm1: groupByAdm1(administrativeUnits),
-        adm2: administrativeUnits
-      },
-      metadata: {
-        totalUnits: administrativeUnits.length,
-        lastUpdated: new Date().toISOString(),
-        dataSource: 'Tanzania Country Model Template'
-      }
-    };
+    return transformWorkbook(workbook);
   } catch (error) {
     console.error('❌ Error parsing INFORM Risk data:', error);
     throw error;
   }
+}
+
+/**
+ * Transform a parsed XLSX workbook into the INFORM Risk data object.
+ * Shared by the browser parser and the Node build-time snapshot script,
+ * so there is exactly one transform implementation.
+ */
+export function transformWorkbook(workbook) {
+  const sheet = workbook.Sheets['INFORM SADC 2024'];
+  if (!sheet) {
+    throw new Error('Sheet "INFORM SADC 2024" not found in Excel file');
+  }
+
+  const data = XLSX.utils.sheet_to_json(sheet, { header: 1, defval: null });
+  const headers = data[0];
+  const rows = data.slice(1);
+
+  const administrativeUnits = rows
+    .map(row => parseAdministrativeUnit(row, headers))
+    .filter(unit => unit.admin.iso3 === 'TZA'); // Tanzania only
+
+  return {
+    national: calculateNationalAggregates(administrativeUnits),
+    subnational: {
+      adm1: groupByAdm1(administrativeUnits),
+      adm2: administrativeUnits
+    },
+    metadata: {
+      totalUnits: administrativeUnits.length,
+      lastUpdated: new Date().toISOString(),
+      dataSource: 'Tanzania Country Model Template'
+    }
+  };
 }
 
 /**
@@ -297,16 +296,17 @@ function groupByAdm1(units) {
 function getRiskClassification(riskScore) {
   if (riskScore === null || riskScore === undefined) return { level: 'Unknown', color: '#999' };
 
-  if (riskScore >= 0 && riskScore < 2) {
-    return { level: 'Very Low', color: '#43A047', range: '0.0 - 1.9' };
-  } else if (riskScore >= 2 && riskScore < 3.5) {
-    return { level: 'Low', color: '#8BC34A', range: '2.0 - 3.4' };
-  } else if (riskScore >= 3.5 && riskScore < 5) {
-    return { level: 'Medium', color: '#FFC107', range: '3.5 - 4.9' };
-  } else if (riskScore >= 5 && riskScore < 6.5) {
-    return { level: 'High', color: '#FF9800', range: '5.0 - 6.4' };
+  // Tanzania INFORM thresholds [2.5, 3.4, 4.3, 5.9, 10] (TZ_INFORM_model.xlsx)
+  if (riskScore < 2.5) {
+    return { level: 'Very Low', color: '#2E7D32', range: '0.0 - 2.4' };
+  } else if (riskScore < 3.4) {
+    return { level: 'Low', color: '#8BC34A', range: '2.5 - 3.3' };
+  } else if (riskScore < 4.3) {
+    return { level: 'Medium', color: '#FFC107', range: '3.4 - 4.2' };
+  } else if (riskScore < 5.9) {
+    return { level: 'High', color: '#FF9800', range: '4.3 - 5.8' };
   } else {
-    return { level: 'Very High', color: '#F44336', range: '6.5 - 10.0' };
+    return { level: 'Very High', color: '#D32F2F', range: '5.9 - 10.0' };
   }
 }
 

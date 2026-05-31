@@ -61,6 +61,11 @@
   opacity: 0.9;
   margin: 0;
 }
+.header-source {
+  font-size: 12px;
+  opacity: 0.75;
+  margin: 4px 0 0;
+}
 
 .risk-badge {
   background: white;

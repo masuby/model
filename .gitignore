@@ -72,3 +72,4 @@ Thumbs.db
 
 # CSV data files
 # *.csv
+.vercel

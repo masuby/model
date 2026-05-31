@@ -1,6 +1,6 @@
 /**
- * Quiz Component for Module 01
- * One question per section, 83% pass threshold (5/6 correct)
+ * Quiz Component for the Education course.
+ * One question per section; the learner must answer it correctly to advance.
  */
 
 import React, { useState } from 'react';
@@ -87,6 +87,16 @@ function QuizComponent({ sectionId, sectionTitle, onComplete }) {
   const [showExplanation, setShowExplanation] = useState(false);
 
   const question = QUIZ_QUESTIONS[sectionId];
+
+  // Guard: a section with no quiz question shouldn't crash the course.
+  if (!question) {
+    return (
+      <div className="quiz-container">
+        <p>No quiz for this section.</p>
+        <button onClick={() => onComplete?.(true)}>Continue</button>
+      </div>
+    );
+  }
 
   const handleSubmit = () => {
     setShowResult(true);
