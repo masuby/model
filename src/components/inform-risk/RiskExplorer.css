@@ -1,0 +1,58 @@
+/* Risk district explorer — layout only; visual language comes from theme.css */
+
+/* Risk module header */
+.rk-header { display: flex; align-items: center; justify-content: space-between; gap: var(--s-5); margin-bottom: var(--s-4); }
+.rk-header-source { font-size: var(--fs-sm); margin: var(--s-2) 0 0; max-width: 620px; }
+.rk-header-badge {
+  display: flex; flex-direction: column; align-items: center; gap: var(--s-2);
+  border: 2px solid; border-radius: var(--r-lg); padding: var(--s-3) var(--s-5); min-width: 130px;
+}
+.rk-header-range { font-size: var(--fs-xs); }
+@media (max-width: 640px) { .rk-header { flex-direction: column; align-items: flex-start; } }
+
+.rx { display: flex; flex-direction: column; gap: var(--s-4); }
+
+.rx-controls-row { display: flex; align-items: center; gap: var(--s-5); flex-wrap: wrap; }
+.rx-chips { display: flex; gap: var(--s-2); flex-wrap: wrap; }
+.rx-hazard-pick { display: flex; flex-direction: column; gap: var(--s-1); margin-left: auto; }
+
+.rx-main {
+  display: grid;
+  grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr);
+  gap: var(--s-4);
+  align-items: stretch;
+}
+@media (max-width: 900px) { .rx-main { grid-template-columns: 1fr; } }
+
+.rx-map-wrap { overflow: hidden; padding: 0; min-height: 460px; }
+.rx-map { position: relative; height: 100%; min-height: 460px; }
+.rx-map .leaflet-container { font: inherit; }
+
+.rx-legend {
+  position: absolute; right: 12px; bottom: 12px; z-index: 500;
+  padding: 8px 12px; display: flex; flex-direction: column; gap: 3px; font-size: var(--fs-xs);
+}
+.rx-legend-title { font-weight: 700; color: var(--c-ink); margin-bottom: 2px; }
+.rx-legend-row { display: flex; align-items: center; gap: 6px; color: var(--c-body); }
+.rx-legend-row i { width: 13px; height: 13px; border-radius: 3px; }
+
+.rx-table-wrap { display: flex; flex-direction: column; min-height: 460px; }
+.rx-table-head {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: var(--s-4) var(--s-4) var(--s-2);
+}
+.rx-table-scroll { overflow: auto; max-height: 520px; padding: 0 var(--s-2) var(--s-2); }
+.rx-td-name { font-weight: 600; color: var(--c-ink); }
+.rx-td-region { font-size: var(--fs-xs); }
+
+/* Detail */
+.rx-detail-empty { padding: var(--s-6); text-align: center; }
+.rx-detail-head { display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: var(--s-4); }
+.rx-detail-score { display: flex; align-items: center; gap: var(--s-3); font-size: 34px; font-weight: 800; line-height: 1; }
+.rx-detail-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: var(--s-3); }
+.rx-dim { display: flex; flex-direction: column; gap: var(--s-2); }
+.rx-dim-head { display: flex; align-items: center; justify-content: space-between; font-weight: 700; color: var(--c-ink); font-size: var(--fs-sm); margin-bottom: var(--s-1); }
+
+.rx-bar-row { display: flex; align-items: center; gap: var(--s-2); font-size: var(--fs-xs); }
+.rx-bar-label { width: 96px; color: var(--c-muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.rx-bar-val { width: 26px; text-align: right; font-weight: 700; color: var(--c-body); }

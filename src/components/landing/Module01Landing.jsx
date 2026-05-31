@@ -72,11 +72,9 @@ function Module01Landing({ onComplete }) {
   return (
     <div className="module01-landing">
       {/* Header */}
-      <header className="module01-header">
-        <div className="header-content">
-          <h1>Understanding Risk for Decision-Making in Tanzania</h1>
-          <p className="subtitle">INFORM Framework - Educational Module</p>
-        </div>
+      <header className="module01-header ui-card ui-card-pad">
+        <div className="ui-eyebrow">INFORM Framework · Guided Course</div>
+        <h1 className="ui-h1">Understanding Risk for Decision-Making in Tanzania</h1>
       </header>
 
       {/* Progress Bar */}
