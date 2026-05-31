@@ -67,12 +67,13 @@ export default function Module04Severity() {
 
   return (
     <div className="sev-module">
-      <header className="sev-module-head">
-        <h1>INFORM Severity</h1>
-        <p>
-          IASC INFORM Severity Index v6 — measures how severe a crisis <em>is</em>
-          {' '}(its impact, the conditions of affected people, and response complexity),
-          distinct from the Risk Index which estimates how likely a crisis is.
+      <header className="sev-module-head ui-card ui-card-pad">
+        <div className="ui-eyebrow">INFORM Severity Index v6 · IASC/JRC</div>
+        <h1 className="ui-h1">Crisis Severity Calculator</h1>
+        <p className="ui-muted">
+          Measures how severe a crisis <em>is</em> — its impact, the conditions of affected
+          people, and response complexity — distinct from the Risk Index, which estimates how
+          likely a crisis is.
         </p>
         <p className="sev-disclaimer">
           The sample scenarios below use <strong>illustrative figures</strong> to
