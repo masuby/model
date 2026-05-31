@@ -28,6 +28,7 @@ import CopingCapacityDimension from './dimensions/CopingCapacityDimension';
 // test validates. No runtime Excel parse, no mock/random fallback.
 import riskDataset from '../../data/tanzania-inform-risk.json';
 import { HAZARD_TYPES, OVERALL_RISK } from './hazardConstants';
+import RiskMap from './RiskMap';
 
 
 // Risk Assessment Phases based on ISO 31000 and UNDRR Technical Guidance
@@ -174,6 +175,12 @@ const Module02InformRisk = ({ onNavigate }) => {
           📚 Overview
         </button>
         <button
+          className={`nav-tab ${selectedView === 'map' ? 'active' : ''}`}
+          onClick={() => setSelectedView('map')}
+        >
+          🗺️ Map
+        </button>
+        <button
           className={`nav-tab ${selectedView === 'hazard' ? 'active' : ''}`}
           onClick={() => setSelectedView('hazard')}
         >
@@ -195,7 +202,7 @@ const Module02InformRisk = ({ onNavigate }) => {
           className={`nav-tab ${selectedView === 'risk' ? 'active' : ''}`}
           onClick={() => setSelectedView('risk')}
         >
-          🗺️ Risk
+          📋 Risk by District
         </button>
       </div>
 
@@ -207,6 +214,8 @@ const Module02InformRisk = ({ onNavigate }) => {
             onSelectPhase={setSelectedPhase}
           />
         )}
+
+        {selectedView === 'map' && <RiskMap />}
 
         {selectedView === 'hazard' && (
           <HazardExposureDimension data={national.dimensions.hazardExposure} />
