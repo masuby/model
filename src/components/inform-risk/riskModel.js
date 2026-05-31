@@ -111,10 +111,56 @@ export function getMetric(metricKey) {
 export const scopeOf = (metricKey) =>
   metricKey === 'risk' || !metricKey ? 'risk' : metricKey.split(':')[1];
 
-// ---- map join helpers (used by DistrictMap) -------------------------------
+// ---- map join helpers (used by the choropleth) ----------------------------
 export const districtKey = (distName, regName) => `${normRegion(distName)}|${normRegion(regName)}`;
 export const DISTRICT_BY_KEY = (() => {
   const idx = {};
   for (const d of DISTRICTS) idx[districtKey(d.admin.adm2Name, d.admin.adm1Name)] = d;
   return idx;
 })();
+
+// ---- aggregation to region / national level -------------------------------
+// Region and national "units" share the district shape (nested dimension →
+// component → indicator means), so every lens/indicator/chart works unchanged.
+const mean = (a) => { const xs = a.filter((v) => typeof v === 'number'); return xs.length ? xs.reduce((s, x) => s + x, 0) / xs.length : null; };
+function deepMean(objs) {
+  const valid = objs.filter(Boolean);
+  if (!valid.length) return null;
+  const out = {}; const keys = new Set();
+  valid.forEach((o) => Object.keys(o).forEach((k) => keys.add(k)));
+  for (const k of keys) {
+    const vals = valid.map((o) => o[k]).filter((v) => v != null);
+    if (!vals.length) { out[k] = null; continue; }
+    if (typeof vals[0] === 'number') out[k] = mean(vals);
+    else if (typeof vals[0] === 'object') out[k] = deepMean(vals);
+  }
+  return out;
+}
+function aggregateUnit(list, name, regionName, code) {
+  return {
+    admin: { adm2Name: name, adm1Name: regionName, adm2Code: code, iso3: 'TZA' },
+    hazardExposure: deepMean(list.map((d) => d.hazardExposure)),
+    vulnerability: deepMean(list.map((d) => d.vulnerability)),
+    lackCopingCapacity: deepMean(list.map((d) => d.lackCopingCapacity)),
+    risk: mean(list.map((d) => d.risk)),
+  };
+}
+export const REGION_UNITS = (() => {
+  const by = {};
+  DISTRICTS.forEach((d) => { (by[d.admin.adm1Name] = by[d.admin.adm1Name] || []).push(d); });
+  return Object.entries(by).map(([name, list]) => aggregateUnit(list, name, name, `R-${name}`));
+})();
+export const NATIONAL_UNIT = aggregateUnit(DISTRICTS, 'Tanzania', 'Tanzania', 'TZ');
+export const REGION_BY_KEY = (() => {
+  const idx = {};
+  REGION_UNITS.forEach((u) => { idx[normRegion(u.admin.adm2Name)] = u; });
+  return idx;
+})();
+export const LEVELS = [
+  { key: 'district', label: 'District (ADM2)', unitNoun: 'districts' },
+  { key: 'region', label: 'Region (ADM1)', unitNoun: 'regions' },
+  { key: 'national', label: 'National', unitNoun: 'national' },
+];
+export function unitsForLevel(level) {
+  return level === 'region' ? REGION_UNITS : level === 'national' ? [NATIONAL_UNIT] : DISTRICTS;
+}

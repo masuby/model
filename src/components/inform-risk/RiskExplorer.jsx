@@ -8,7 +8,7 @@
 import React, { useMemo, useState } from 'react';
 import DistrictMap from './DistrictMap';
 import RiskCharts from './RiskCharts';
-import { DISTRICTS, DIMENSION_TREE, DIM_KEYS, getMetric, scopeOf, classifyRisk, round1 } from './riskModel';
+import { DIMENSION_TREE, DIM_KEYS, getMetric, scopeOf, classifyRisk, round1, unitsForLevel, LEVELS } from './riskModel';
 import './RiskExplorer.css';
 
 const pct = (v) => `${Math.max(0, Math.min(100, ((v ?? 0) / 10) * 100))}%`;
@@ -93,6 +93,7 @@ const CATEGORIES = [
 ];
 
 export default function RiskExplorer() {
+  const [level, setLevel] = useState('district');
   const [metricKey, setMetricKey] = useState('risk');
   const [selected, setSelected] = useState(null);
   const [sortDir, setSortDir] = useState('desc');
@@ -101,15 +102,19 @@ export default function RiskExplorer() {
   const metric = getMetric(metricKey);
   const activeScope = scopeOf(metricKey);
   const tree = activeScope !== 'risk' ? DIMENSION_TREE[activeScope] : null;
+  const units = useMemo(() => unitsForLevel(level), [level]);
+  const noun = LEVELS.find((l) => l.key === level)?.unitNoun || 'units';
+
+  const changeLevel = (lv) => { setLevel(lv); setSelected(null); setClassFilter(null); };
 
   const ranked = useMemo(() => {
-    const rows = DISTRICTS.map((d) => ({ d, v: metric.get(d) }));
+    const rows = units.map((d) => ({ d, v: metric.get(d) }));
     rows.sort((a, b) => {
       const av = a.v ?? -1, bv = b.v ?? -1;
       return sortDir === 'desc' ? bv - av : av - bv;
     });
     return rows;
-  }, [metric, sortDir]);
+  }, [units, metric, sortDir]);
 
   const filtered = useMemo(
     () => (classFilter ? ranked.filter((r) => classifyRisk(r.v).level === classFilter) : ranked),
@@ -118,10 +123,17 @@ export default function RiskExplorer() {
 
   return (
     <div className="rx">
-      {/* Lens + indicator selector */}
+      {/* Level + lens + indicator selector */}
       <div className="rx-controls ui-card ui-card-pad">
+        <div className="rx-level-row">
+          <span className="ui-eyebrow">View at level</span>
+          <select className="ui-select rx-level-select" value={level} onChange={(e) => changeLevel(e.target.value)}>
+            {LEVELS.map((l) => <option key={l.key} value={l.key}>{l.label}</option>)}
+          </select>
+          <span className="ui-muted rx-level-count">{ranked.length} {noun}</span>
+        </div>
         <div className="rx-controls-row">
-          <span className="ui-eyebrow">Colour districts by</span>
+          <span className="ui-eyebrow">Colour {noun} by</span>
           <div className="rx-chips">
             {LENSES.map((l) => (
               <button
@@ -204,14 +216,14 @@ export default function RiskExplorer() {
 
       {/* Wide map */}
       <div className="rx-map-wrap ui-card">
-        <DistrictMap metric={metric} selected={selected} onSelect={setSelected} filterClass={classFilter} />
+        <DistrictMap metric={metric} selected={selected} onSelect={setSelected} filterClass={classFilter} level={level} />
       </div>
 
       {/* Wide table */}
       <div className="rx-table-wrap ui-card">
         <div className="rx-table-head">
           <span className="ui-eyebrow">
-            {filtered.length} districts{classFilter ? ` · ${classFilter}` : ''} — ranked by {metric.label.toLowerCase()}
+            {filtered.length} {noun}{classFilter ? ` · ${classFilter}` : ''} — ranked by {metric.label.toLowerCase()}
           </span>
           <button className="ui-chip" onClick={() => setSortDir((s) => (s === 'desc' ? 'asc' : 'desc'))}>
             {sortDir === 'desc' ? 'High → Low' : 'Low → High'}
@@ -221,7 +233,7 @@ export default function RiskExplorer() {
           <table className="ui-table">
             <thead>
               <tr>
-                <th>#</th><th>District</th><th>Region</th><th>{metric.label}</th>
+                <th>#</th><th>{level === 'region' ? 'Region' : level === 'national' ? 'Area' : 'District'}</th><th>Region</th><th>{metric.label}</th>
                 <th>Hazard</th><th>Vulnerability</th><th>Coping</th><th>Class</th>
               </tr>
             </thead>

@@ -13,6 +13,10 @@ export default function DistrictCharts({ district }) {
   const region = useMemo(() => {
     if (!district) return null;
     const peers = DISTRICTS.filter((d) => d.admin.adm1Name === district.admin.adm1Name);
+    if (!peers.length) {
+      // region/national unit: no ADM2 peers — fall back to the unit's own totals
+      return { hazard: district.hazardExposure?.total, vuln: district.vulnerability?.total, cope: district.lackCopingCapacity?.total, risk: district.risk };
+    }
     const mean = (sel) => {
       const xs = peers.map(sel).filter((x) => typeof x === 'number');
       return xs.length ? xs.reduce((s, x) => s + x, 0) / xs.length : null;
