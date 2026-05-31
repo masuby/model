@@ -12,8 +12,8 @@ import React from 'react';
 
 const AXIS = '#94a3b8';
 const GRID = '#edf1f6';
-const INK = '#0f172a';
-const MUTED = '#475569';
+const INK = '#0a0f1a';
+const MUTED = '#334155';
 
 export default function LineChart({ series, xLabels, max = 10, height = 360, yTitle = 'Score (0–10)', xTitle = 'Region (ordered by INFORM Risk →)', emphasize }) {
   const W = 780, padL = 56, padR = 22, padT = 46, padB = 92;

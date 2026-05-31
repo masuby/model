@@ -7,8 +7,8 @@ import React from 'react';
 
 const AXIS = '#94a3b8';
 const GRID = '#edf1f6';
-const INK = '#0f172a';
-const MUTED = '#475569';
+const INK = '#0a0f1a';
+const MUTED = '#334155';
 const FONT = 'Calibri, system-ui, sans-serif';
 
 export default function BarChart({ data, horizontal = false, max = 10, unit = '', height }) {
