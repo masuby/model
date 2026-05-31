@@ -202,7 +202,7 @@ export default function RiskExplorer() {
         </div>
       </div>
 
-      <RiskCharts metric={metric} onSelect={setSelected} />
+      <RiskCharts metric={metric} />
 
       <div className="rx-detail-wrap ui-card ui-card-pad">
         <DistrictDetail d={selected} />
