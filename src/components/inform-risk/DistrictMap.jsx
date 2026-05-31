@@ -9,11 +9,11 @@ import 'leaflet/dist/leaflet.css';
 import districts from '../../data/tanzania-districts.json';
 import { DISTRICT_BY_KEY, districtKey, classifyRisk, round1 } from './riskModel';
 
-export default function DistrictMap({ metric, selected, onSelect }) {
+export default function DistrictMap({ metric, selected, onSelect, filterClass }) {
   const geoRef = useRef(null);
 
-  // Re-key the GeoJSON layer when the metric changes so styles recompute.
-  const key = metric.key;
+  // Re-key the GeoJSON layer when the metric or filter changes so styles recompute.
+  const key = `${metric.key}|${filterClass || 'all'}`;
 
   const lookup = (feature) =>
     DISTRICT_BY_KEY[districtKey(feature.properties.dist_name, feature.properties.reg_name)];
@@ -21,12 +21,14 @@ export default function DistrictMap({ metric, selected, onSelect }) {
   const styleFor = (feature) => {
     const d = lookup(feature);
     const val = d ? metric.get(d) : null;
+    const cls = classifyRisk(val);
     const selKey = selected && districtKey(selected.admin.adm2Name, selected.admin.adm1Name);
     const fKey = districtKey(feature.properties.dist_name, feature.properties.reg_name);
+    const dimmed = filterClass && cls.level !== filterClass; // outside the chosen category
     return {
-      fillColor: classifyRisk(val).color,
-      fillOpacity: val == null ? 0.25 : 0.82,
-      color: selKey && selKey === fKey ? '#0f172a' : '#ffffff',
+      fillColor: cls.color,
+      fillOpacity: val == null ? 0.18 : dimmed ? 0.12 : 0.85,
+      color: selKey && selKey === fKey ? '#0f172a' : dimmed ? '#e2e8f0' : '#ffffff',
       weight: selKey && selKey === fKey ? 2.5 : 0.7,
     };
   };

@@ -10,11 +10,13 @@ import { DISTRICTS, classifyRisk, round1 } from './riskModel';
 import ChartCard from './charts/ChartCard';
 import BarChart from './charts/BarChart';
 import LineChart from './charts/LineChart';
+import DistrictCharts from './DistrictCharts';
 
 const CLASS_HEX = { 'Very Low': '#2E7D32', Low: '#8BC34A', Medium: '#FFC107', High: '#FF9800', 'Very High': '#D32F2F' };
 const CLASS_ORDER = ['Very Low', 'Low', 'Medium', 'High', 'Very High'];
+const SCOPE_SERIES = { risk: 'INFORM Risk', hazard: 'Hazard & Exposure', vulnerability: 'Vulnerability', coping: 'Lack of Coping' };
 
-export default function RiskCharts({ metric }) {
+export default function RiskCharts({ metric, selected }) {
   const rows = useMemo(
     () => DISTRICTS.map((d) => ({ d, v: metric.get(d) })).filter((x) => typeof x.v === 'number'),
     [metric]
@@ -59,19 +61,22 @@ export default function RiskCharts({ metric }) {
     [rows]
   );
 
+  const emphasize = SCOPE_SERIES[metric.scope];
+
   return (
+    <>
     <div className="rx-charts">
       <div className="rc-wide">
         <ChartCard
           title="Regional INFORM profile"
-          subtitle="dimension means by region, ordered by overall risk"
+          subtitle={`dimension means by region, ordered by overall risk${emphasize ? ` · highlighting ${emphasize}` : ''}`}
           filenameBase="inform-regional-profile"
           csv={{
             header: ['Region', 'INFORM Risk', 'Hazard & Exposure', 'Vulnerability', 'Lack of Coping'],
             rows: regional.map((r) => [r.name, round1(r.risk), round1(r.hazard), round1(r.vuln), round1(r.cope)]),
           }}
         >
-          <LineChart series={lineSeries} xLabels={regional.map((r) => r.name)} />
+          <LineChart series={lineSeries} xLabels={regional.map((r) => r.name)} emphasize={emphasize} />
         </ChartCard>
       </div>
 
@@ -93,5 +98,8 @@ export default function RiskCharts({ metric }) {
         <BarChart data={top} horizontal />
       </ChartCard>
     </div>
+
+    <DistrictCharts district={selected} />
+    </>
   );
 }

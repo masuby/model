@@ -15,7 +15,7 @@ const GRID = '#edf1f6';
 const INK = '#0f172a';
 const MUTED = '#475569';
 
-export default function LineChart({ series, xLabels, max = 10, height = 360, yTitle = 'Score (0–10)', xTitle = 'Region (ordered by INFORM Risk →)' }) {
+export default function LineChart({ series, xLabels, max = 10, height = 360, yTitle = 'Score (0–10)', xTitle = 'Region (ordered by INFORM Risk →)', emphasize }) {
   const W = 780, padL = 56, padR = 22, padT = 46, padB = 92;
   const H = height;
   const plotW = W - padL - padR, plotH = H - padT - padB;
@@ -67,12 +67,14 @@ export default function LineChart({ series, xLabels, max = 10, height = 360, yTi
 
       {/* series lines + markers */}
       {series.map((s) => {
+        const em = emphasize && s.name === emphasize;
+        const dim = emphasize && !em;
         const pts = s.values.map((v, i) => (v == null ? null : `${xOf(i).toFixed(1)},${yOf(v).toFixed(1)}`)).filter(Boolean).join(' ');
         return (
-          <g key={s.name}>
-            <polyline points={pts} fill="none" stroke={s.color} strokeWidth="1.8" strokeLinejoin="round" strokeLinecap="round" />
+          <g key={s.name} opacity={dim ? 0.4 : 1}>
+            <polyline points={pts} fill="none" stroke={s.color} strokeWidth={em ? 3.4 : 1.8} strokeLinejoin="round" strokeLinecap="round" />
             {s.values.map((v, i) => (v == null ? null : (
-              <circle key={i} cx={xOf(i)} cy={yOf(v)} r="2.6" fill="#fff" stroke={s.color} strokeWidth="1.4" />
+              <circle key={i} cx={xOf(i)} cy={yOf(v)} r={em ? 3.4 : 2.6} fill="#fff" stroke={s.color} strokeWidth={em ? 1.8 : 1.4} />
             )))}
           </g>
         );

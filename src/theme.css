@@ -27,14 +27,14 @@
   --c-high: #FF9800;
   --c-vhigh: #D32F2F;
 
-  /* Type scale */
-  --fs-display: 28px;
-  --fs-h1: 22px;
-  --fs-h2: 18px;
-  --fs-h3: 14px;
-  --fs-body: 14px;
-  --fs-sm: 13px;
-  --fs-xs: 11px;
+  /* Type scale (enlarged for readability) */
+  --fs-display: 32px;
+  --fs-h1: 25px;
+  --fs-h2: 20px;
+  --fs-h3: 16px;
+  --fs-body: 16px;
+  --fs-sm: 14px;
+  --fs-xs: 12px;
 
   /* Spacing scale */
   --s-1: 4px;  --s-2: 8px;  --s-3: 12px; --s-4: 16px;

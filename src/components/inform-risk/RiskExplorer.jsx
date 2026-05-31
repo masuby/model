@@ -84,10 +84,19 @@ const LENSES = [
   ...DIM_KEYS.map((k) => ({ key: `dim:${k}`, scope: k, label: DIMENSION_TREE[k].label })),
 ];
 
+const CATEGORIES = [
+  { level: 'Very Low', color: '#2E7D32' },
+  { level: 'Low', color: '#8BC34A' },
+  { level: 'Medium', color: '#FFC107' },
+  { level: 'High', color: '#FF9800' },
+  { level: 'Very High', color: '#D32F2F' },
+];
+
 export default function RiskExplorer() {
   const [metricKey, setMetricKey] = useState('risk');
   const [selected, setSelected] = useState(null);
   const [sortDir, setSortDir] = useState('desc');
+  const [classFilter, setClassFilter] = useState(null);
 
   const metric = getMetric(metricKey);
   const activeScope = scopeOf(metricKey);
@@ -101,6 +110,11 @@ export default function RiskExplorer() {
     });
     return rows;
   }, [metric, sortDir]);
+
+  const filtered = useMemo(
+    () => (classFilter ? ranked.filter((r) => classifyRisk(r.v).level === classFilter) : ranked),
+    [ranked, classFilter]
+  );
 
   return (
     <div className="rx">
@@ -163,46 +177,78 @@ export default function RiskExplorer() {
         )}
       </div>
 
-      <div className="rx-main">
-        <div className="rx-map-wrap ui-card">
-          <DistrictMap metric={metric} selected={selected} onSelect={setSelected} />
-        </div>
-
-        <div className="rx-table-wrap ui-card">
-          <div className="rx-table-head">
-            <span className="ui-eyebrow">Districts ranked by {metric.label.toLowerCase()}</span>
-            <button className="ui-chip" onClick={() => setSortDir((s) => (s === 'desc' ? 'asc' : 'desc'))}>
-              {sortDir === 'desc' ? 'High → Low' : 'Low → High'}
-            </button>
-          </div>
-          <div className="rx-table-scroll">
-            <table className="ui-table">
-              <thead>
-                <tr><th>#</th><th>District</th><th>{metric.label}</th><th>Class</th></tr>
-              </thead>
-              <tbody>
-                {ranked.map(({ d, v }, i) => {
-                  const cls = classifyRisk(v);
-                  const isSel = selected && selected.admin.adm2Code === d.admin.adm2Code;
-                  return (
-                    <tr key={d.admin.adm2Code} className={isSel ? 'is-selected' : ''} onClick={() => setSelected(d)}>
-                      <td className="ui-muted">{i + 1}</td>
-                      <td>
-                        <div className="rx-td-name">{d.admin.adm2Name}</div>
-                        <div className="rx-td-region ui-muted">{d.admin.adm1Name}</div>
-                      </td>
-                      <td><b style={{ color: cls.color }}>{round1(v) ?? '—'}</b></td>
-                      <td><span className="ui-badge" style={{ background: cls.color }}>{cls.level}</span></td>
-                    </tr>
-                  );
-                })}
-              </tbody>
-            </table>
-          </div>
+      {/* Category filter (map + table) */}
+      <div className="rx-catbar ui-card ui-card-pad">
+        <span className="ui-eyebrow">View by category</span>
+        <div className="rx-cats">
+          <button className={`rx-cat ${!classFilter ? 'is-active' : ''}`} onClick={() => setClassFilter(null)}>
+            All <span className="rx-cat-n">{ranked.length}</span>
+          </button>
+          {CATEGORIES.map((c) => {
+            const n = ranked.filter((r) => classifyRisk(r.v).level === c.level).length;
+            const on = classFilter === c.level;
+            return (
+              <button
+                key={c.level}
+                className={`rx-cat ${on ? 'is-active' : ''}`}
+                style={on ? { background: c.color, borderColor: c.color, color: '#fff' } : { borderColor: c.color }}
+                onClick={() => setClassFilter(on ? null : c.level)}
+              >
+                <span className="rx-cat-dot" style={{ background: c.color }} />
+                {c.level} <span className="rx-cat-n">{n}</span>
+              </button>
+            );
+          })}
         </div>
       </div>
 
-      <RiskCharts metric={metric} />
+      {/* Wide map */}
+      <div className="rx-map-wrap ui-card">
+        <DistrictMap metric={metric} selected={selected} onSelect={setSelected} filterClass={classFilter} />
+      </div>
+
+      {/* Wide table */}
+      <div className="rx-table-wrap ui-card">
+        <div className="rx-table-head">
+          <span className="ui-eyebrow">
+            {filtered.length} districts{classFilter ? ` · ${classFilter}` : ''} — ranked by {metric.label.toLowerCase()}
+          </span>
+          <button className="ui-chip" onClick={() => setSortDir((s) => (s === 'desc' ? 'asc' : 'desc'))}>
+            {sortDir === 'desc' ? 'High → Low' : 'Low → High'}
+          </button>
+        </div>
+        <div className="rx-table-scroll">
+          <table className="ui-table">
+            <thead>
+              <tr>
+                <th>#</th><th>District</th><th>Region</th><th>{metric.label}</th>
+                <th>Hazard</th><th>Vulnerability</th><th>Coping</th><th>Class</th>
+              </tr>
+            </thead>
+            <tbody>
+              {filtered.map(({ d, v }, i) => {
+                const cls = classifyRisk(v);
+                const isSel = selected && selected.admin.adm2Code === d.admin.adm2Code;
+                const cell = (x) => <td className="rx-td-num">{round1(x) ?? '—'}</td>;
+                return (
+                  <tr key={d.admin.adm2Code} className={isSel ? 'is-selected' : ''} onClick={() => setSelected(d)}>
+                    <td className="ui-muted">{i + 1}</td>
+                    <td className="rx-td-name">{d.admin.adm2Name}</td>
+                    <td className="ui-muted">{d.admin.adm1Name}</td>
+                    <td><b style={{ color: cls.color }}>{round1(v) ?? '—'}</b></td>
+                    {cell(d.hazardExposure?.total)}
+                    {cell(d.vulnerability?.total)}
+                    {cell(d.lackCopingCapacity?.total)}
+                    <td><span className="ui-badge" style={{ background: cls.color }}>{cls.level}</span></td>
+                  </tr>
+                );
+              })}
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <RiskCharts metric={metric} selected={selected} />
 
       <div className="rx-detail-wrap ui-card ui-card-pad">
         <DistrictDetail d={selected} />
