@@ -27,7 +27,7 @@
 .progress-tracker {
   display: flex;
   justify-content: space-between;
-  max-width: 1200px;
+  max-width: 100%;
   margin: 0 auto 20px;
   padding: 0 20px;
 }
@@ -108,7 +108,7 @@
   background: #e0e0e0;
   border-radius: 4px;
   overflow: hidden;
-  max-width: 1200px;
+  max-width: 100%;
   margin: 0 auto 12px;
 }
 
@@ -195,7 +195,7 @@
 
 /* ===== IMPORTANT NOTICE ===== */
 .important-notice {
-  max-width: 1200px;
+  max-width: 100%;
   margin: 20px auto 40px;
   padding: 20px 24px;
   background: #fff3cd;
