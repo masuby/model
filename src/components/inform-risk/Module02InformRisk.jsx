@@ -27,7 +27,8 @@ import CopingCapacityDimension from './dimensions/CopingCapacityDimension';
 // (scripts/generate-risk-json.mjs). The faithful values the engine's excelParity
 // test validates. No runtime Excel parse, no mock/random fallback.
 import riskDataset from '../../data/tanzania-inform-risk.json';
-import { HAZARD_TYPES, OVERALL_RISK } from './hazardConstants';
+import { classifyRisk } from './regionRisk';
+import { HAZARD_TYPES } from './hazardConstants';
 import RiskMap from './RiskMap';
 
 
@@ -143,7 +144,7 @@ const Module02InformRisk = ({ onNavigate }) => {
   }
 
   const { national } = data;
-  const { classification } = national;
+  const classification = classifyRisk(national.risk);
 
   return (
     <div className="module02-container">
@@ -153,7 +154,7 @@ const Module02InformRisk = ({ onNavigate }) => {
           <div className="header-left">
             <h1>INFORM Risk Assessment</h1>
             <p className="header-subtitle">Tanzania Index for Risk Management</p>
-            <p className="header-source">Source: Tanzania INFORM Country Model (official INFORM SADC 2024 dataset)</p>
+            <p className="header-source">Source: Tanzania INFORM Country Model (INFORM methodology) — district values from the country model workbook</p>
           </div>
           <div className="header-right">
             <div className="risk-badge" style={{ borderColor: classification.color }}>
@@ -454,10 +455,7 @@ const OverviewSection = ({ selectedPhase, onSelectPhase }) => {
  */
 const RiskSection = ({ data, selectedDistrict, onSelectDistrict }) => {
   const [analysisLevel, setAnalysisLevel] = useState('national');
-  const [selectedHazardType, setSelectedHazardType] = useState('overall');
-
-  // Get current hazard info
-  const currentHazardInfo = HAZARD_TYPES.find(h => h.id === selectedHazardType) || HAZARD_TYPES[0];
+  const selectedHazardType = 'overall'; // Risk module shows authentic overall INFORM risk only
 
   return (
     <div className="risk-section">
@@ -484,55 +482,6 @@ const RiskSection = ({ data, selectedDistrict, onSelectDistrict }) => {
           </select>
         </div>
 
-        {/* Risk View Type - Overall vs Specific Hazard */}
-        <div className="risk-view-selector" style={{ marginTop: '16px' }}>
-          <div className="overall-risk-button-container">
-            <button
-              className={`overall-risk-btn ${selectedHazardType === 'overall' ? 'active' : ''}`}
-              onClick={() => setSelectedHazardType('overall')}
-            >
-              <span className="btn-icon">{OVERALL_RISK.icon}</span>
-              <span className="btn-text">{OVERALL_RISK.name}</span>
-              <span className="btn-desc">{OVERALL_RISK.description}</span>
-            </button>
-          </div>
-
-          <div className="hazard-separator">
-            <span>OR</span>
-          </div>
-
-          {/* Hazard Risk Selector */}
-          <div className="level-dropdown-container hazard-selector">
-            <label className="level-label">
-              <span className="label-icon">🎯</span>
-              Select Hazard Risk:
-            </label>
-            <select
-              value={selectedHazardType === 'overall' ? '' : selectedHazardType}
-              onChange={e => {
-                if (e.target.value) setSelectedHazardType(e.target.value);
-              }}
-              className="level-dropdown hazard-dropdown"
-            >
-              <option value="">-- Select a specific hazard --</option>
-              {HAZARD_TYPES.map(hazard => (
-                <option key={hazard.id} value={hazard.id}>
-                  {hazard.icon} {hazard.name} - {hazard.description}
-                </option>
-              ))}
-            </select>
-          </div>
-        </div>
-
-        {/* Current Hazard Indicator */}
-        {selectedHazardType !== 'overall' && (
-          <div className="hazard-indicator-banner">
-            <span className="hazard-icon">{currentHazardInfo.icon}</span>
-            <span className="hazard-text">
-              Viewing <strong>{currentHazardInfo.name}</strong> specific risk data
-            </span>
-          </div>
-        )}
       </div>
 
       {/* National Overview View */}
@@ -555,8 +504,6 @@ const RiskSection = ({ data, selectedDistrict, onSelectDistrict }) => {
           districts={data.subnational?.adm2 || []}
           selectedDistrict={selectedDistrict}
           onSelectDistrict={onSelectDistrict}
-          selectedHazard={selectedHazardType}
-          onSelectHazard={setSelectedHazardType}
         />
       )}
     </div>
@@ -568,31 +515,12 @@ const RiskSection = ({ data, selectedDistrict, onSelectDistrict }) => {
  * Shows overall national risk profile
  */
 const NationalAnalysisView = ({ national, selectedHazard = 'overall' }) => {
-  const classification = national.classification;
+  const classification = classifyRisk(national.risk);
   const hazardInfo = HAZARD_TYPES.find(h => h.id === selectedHazard) || HAZARD_TYPES[0];
 
-  // Get hazard-specific risk score (simulated - in production would come from data)
-  const getHazardRisk = () => {
-    if (selectedHazard === 'overall') return national.risk;
-    // Simulated hazard-specific risks based on national risk
-    const hazardMultipliers = {
-      heavyRainfall: 1.15,
-      riverineFlood: 1.10,
-      flashFlood: 1.20,
-      drought: 1.25,
-      largeWaves: 0.75,
-      strongWinds: 0.85,
-      cyclone: 0.80,
-      earthquake: 0.60,
-      landslide: 0.70,
-      wildfire: 0.55,
-      epidemic: 1.10
-    };
-    return Math.min(10, national.risk * (hazardMultipliers[selectedHazard] || 1));
-  };
-
-  const displayRisk = getHazardRisk();
-  const displayClassification = getRiskClassification(displayRisk);
+  // Risk module shows authentic overall INFORM risk only.
+  const displayRisk = national.risk;
+  const displayClassification = classification;
 
   return (
     <div className="national-analysis-view">
@@ -757,9 +685,9 @@ const RegionalAnalysisView = ({ regions, districts, selectedHazard = 'overall' }
       }
       regionMap[regionName].districts.push(district);
       regionMap[regionName].totalRisk += district.risk || 0;
-      regionMap[regionName].hazardExposure += district.hazardExposure || 0;
-      regionMap[regionName].vulnerability += district.vulnerability || 0;
-      regionMap[regionName].lackCopingCapacity += district.lackCopingCapacity || 0;
+      regionMap[regionName].hazardExposure += district.hazardExposure?.total || 0;
+      regionMap[regionName].vulnerability += district.vulnerability?.total || 0;
+      regionMap[regionName].lackCopingCapacity += district.lackCopingCapacity?.total || 0;
     });
 
     // Calculate averages
@@ -987,6 +915,12 @@ const DistrictAnalysisSection = ({ districts, selectedDistrict, onSelectDistrict
         </div>
       </div>
 
+      {sortedDistricts.length === 0 && (
+        <div className="district-empty" style={{ padding: '32px', textAlign: 'center', color: '#64748b' }}>
+          No districts match the selected filter. Try a different risk level.
+        </div>
+      )}
+
       <div className="district-grid">
         {sortedDistricts.slice(0, 50).map((district, index) => {
           const hazardRisk = getHazardRisk(district, selectedHazard);
@@ -1049,26 +983,6 @@ const DistrictAnalysisSection = ({ districts, selectedDistrict, onSelectDistrict
         </div>
       )}
 
-      {/* Hazard Legend */}
-      <div className="hazard-legend">
-        <h4>Hazard Types Available</h4>
-        <div className="legend-items">
-          {HAZARD_TYPES.map(hazard => (
-            <button
-              key={hazard.id}
-              className={`legend-item ${selectedHazard === hazard.id ? 'active' : ''}`}
-              onClick={() => onSelectHazard?.(hazard.id)}
-              style={selectedHazard === hazard.id ? {
-                backgroundColor: getHazardColor(hazard.id),
-                color: 'white'
-              } : {}}
-            >
-              <span className="legend-icon">{hazard.icon}</span>
-              <span className="legend-name">{hazard.name}</span>
-            </button>
-          ))}
-        </div>
-      </div>
     </div>
   );
 };
@@ -1098,12 +1012,8 @@ function getHazardColor(hazardId) {
  * Helper: Get risk classification
  */
 function getRiskClassification(score) {
-  if (score === null || score === undefined) return { level: 'Unknown', color: '#999', range: 'N/A' };
-  if (score >= 0 && score < 2) return { level: 'Very Low', color: '#43A047', range: '0.0 - 1.9' };
-  if (score >= 2 && score < 3.5) return { level: 'Low', color: '#8BC34A', range: '2.0 - 3.4' };
-  if (score >= 3.5 && score < 5) return { level: 'Medium', color: '#FFC107', range: '3.5 - 4.9' };
-  if (score >= 5 && score < 6.5) return { level: 'High', color: '#FF9800', range: '5.0 - 6.4' };
-  return { level: 'Very High', color: '#F44336', range: '6.5 - 10.0' };
+  // Single source of truth: authoritative Tanzania classification (regionRisk.js)
+  return classifyRisk(score);
 }
 
 export default Module02InformRisk;

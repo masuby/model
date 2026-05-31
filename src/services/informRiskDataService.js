@@ -296,16 +296,17 @@ function groupByAdm1(units) {
 function getRiskClassification(riskScore) {
   if (riskScore === null || riskScore === undefined) return { level: 'Unknown', color: '#999' };
 
-  if (riskScore >= 0 && riskScore < 2) {
-    return { level: 'Very Low', color: '#43A047', range: '0.0 - 1.9' };
-  } else if (riskScore >= 2 && riskScore < 3.5) {
-    return { level: 'Low', color: '#8BC34A', range: '2.0 - 3.4' };
-  } else if (riskScore >= 3.5 && riskScore < 5) {
-    return { level: 'Medium', color: '#FFC107', range: '3.5 - 4.9' };
-  } else if (riskScore >= 5 && riskScore < 6.5) {
-    return { level: 'High', color: '#FF9800', range: '5.0 - 6.4' };
+  // Tanzania INFORM thresholds [2.5, 3.4, 4.3, 5.9, 10] (TZ_INFORM_model.xlsx)
+  if (riskScore < 2.5) {
+    return { level: 'Very Low', color: '#2E7D32', range: '0.0 - 2.4' };
+  } else if (riskScore < 3.4) {
+    return { level: 'Low', color: '#8BC34A', range: '2.5 - 3.3' };
+  } else if (riskScore < 4.3) {
+    return { level: 'Medium', color: '#FFC107', range: '3.4 - 4.2' };
+  } else if (riskScore < 5.9) {
+    return { level: 'High', color: '#FF9800', range: '4.3 - 5.8' };
   } else {
-    return { level: 'Very High', color: '#F44336', range: '6.5 - 10.0' };
+    return { level: 'Very High', color: '#D32F2F', range: '5.9 - 10.0' };
   }
 }
 

@@ -5,20 +5,14 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "dev:warning": "vite --open warning-app.html",
     "build": "vite build",
-    "build:warning": "vite build --mode warning",
-    "build:warning-only": "rm -rf dist && vite build && mkdir -p dist/warning && cp dist/warning.js dist/warning/ && cp warning-app.html dist/warning/index.html",
     "lint": "eslint .",
     "test": "vitest run",
     "test:watch": "vitest",
     "test:ui": "vitest --ui",
     "preview": "vite preview",
-    "preview:warning": "vite preview --open",
-    "predeploy": "npm run build",
-    "deploy": "gh-pages -d dist"
+    "generate:data": "node scripts/generate-risk-json.mjs"
   },
-  "homepage": "https://masuby.github.io/model",
   "dependencies": {
     "leaflet": "^1.9.4",
     "react": "^19.2.0",

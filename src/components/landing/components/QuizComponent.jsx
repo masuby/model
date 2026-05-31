@@ -88,6 +88,16 @@ function QuizComponent({ sectionId, sectionTitle, onComplete }) {
 
   const question = QUIZ_QUESTIONS[sectionId];
 
+  // Guard: a section with no quiz question shouldn't crash the course.
+  if (!question) {
+    return (
+      <div className="quiz-container">
+        <p>No quiz for this section.</p>
+        <button onClick={() => onComplete?.(true)}>Continue</button>
+      </div>
+    );
+  }
+
   const handleSubmit = () => {
     setShowResult(true);
     setShowExplanation(true);

@@ -37,3 +37,18 @@
   margin: 0 auto;
   padding: 24px;
 }
+
+/* Keyboard focus visibility on the primary nav (WCAG 2.4.7) */
+.lean-navlink:focus-visible {
+  outline: 3px solid #1f6feb;
+  outline-offset: 2px;
+  border-radius: 8px;
+}
+
+/* Mobile: let the topbar wrap and shrink instead of truncating */
+@media (max-width: 640px) {
+  .lean-topbar { gap: 10px 14px; padding: 10px 14px; flex-wrap: wrap; }
+  .lean-brand { font-size: 16px; }
+  .lean-nav { gap: 4px; flex-wrap: wrap; }
+  .lean-content { padding: 14px; }
+}

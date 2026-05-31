@@ -56,9 +56,9 @@ function TopNav() {
     <header className="lean-topbar">
       <div className="lean-brand">INFORM Tanzania</div>
       <nav className="lean-nav">
-        <NavLink to="/education" style={link}>Education</NavLink>
-        <NavLink to="/risk" style={link}>Risk</NavLink>
-        <NavLink to="/severity" style={link}>Severity</NavLink>
+        <NavLink to="/education" className="lean-navlink" style={link}>Education</NavLink>
+        <NavLink to="/risk" className="lean-navlink" style={link}>Risk</NavLink>
+        <NavLink to="/severity" className="lean-navlink" style={link}>Severity</NavLink>
       </nav>
     </header>
   );

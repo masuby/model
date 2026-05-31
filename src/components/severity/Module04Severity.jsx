@@ -34,6 +34,7 @@ function IndicatorInput({ id, value, onChange }) {
         min={def.refMin}
         max={def.refMax}
         step="any"
+        aria-label={`${def.name} (${def.unit}, range ${def.refMin} to ${def.refMax}${def.polarity === 'POSITIVE' ? ', higher values mean less severe' : ''})`}
         onChange={(e) => onChange(id, e.target.value === '' ? null : Number(e.target.value))}
       />
       <span className="sev-input-range">
