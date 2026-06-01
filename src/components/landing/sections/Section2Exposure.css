@@ -25,7 +25,7 @@
 
 /* INFORM Definition Box */
 .exposure-definition {
-  background: linear-gradient(135deg, #E3F2FD 0%, #BBDEFB 100%);
+  background: #E3F2FD;
   border: 4px solid #F57C00;
   border-radius: 16px;
   padding: 32px;
@@ -226,7 +226,7 @@
 
 /* Teaching Box - Exposure Types */
 .exposure-types {
-  background: linear-gradient(135deg, #FFF3E0 0%, #FFE0B2 100%);
+  background: #FFF3E0;
   border: 4px solid #F57C00;
   border-radius: 16px;
   padding: 32px;
@@ -361,7 +361,7 @@
 
 .district-card.selected {
   border-color: #F57C00;
-  background: linear-gradient(135deg, #FFF3E0 0%, white 100%);
+  background: #FFF3E0;
   box-shadow: 0 6px 24px rgba(245, 124, 0, 0.2);
 }
 
@@ -434,7 +434,7 @@
 
 /* District Details */
 .district-details {
-  background: linear-gradient(135deg, #FFF3E0 0%, #FFE0B2 100%);
+  background: #FFF3E0;
   border: 3px solid #F57C00;
   border-radius: 12px;
   padding: 28px;
@@ -487,7 +487,7 @@
 
 /* Tanzania Challenge Box */
 .tanzania-challenge {
-  background: linear-gradient(135deg, #FFF9C4 0%, #FFF59D 100%);
+  background: #FFF9C4;
   border: 4px solid #FFC107;
   border-radius: 16px;
   padding: 32px;
@@ -579,7 +579,7 @@
 
 /* Notice Box */
 .exposure-notice {
-  background: linear-gradient(135deg, #E8F5E9 0%, #C8E6C9 100%);
+  background: #E8F5E9;
   border: 4px solid #43A047;
   border-radius: 16px;
   padding: 28px 32px;
@@ -631,7 +631,7 @@
 
 /* Section Summary */
 .exposure-summary {
-  background: linear-gradient(135deg, #F3E5F5 0%, #E1BEE7 100%);
+  background: #F3E5F5;
   border: 4px solid #7B1FA2;
   border-radius: 16px;
   padding: 32px;

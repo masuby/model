@@ -25,7 +25,7 @@
 
 /* Definition Box */
 .sensitivity-definition {
-  background: linear-gradient(135deg, #FFF3E0 0%, #FFE0B2 100);
+  background: #FFF3E0;
   border: 4px solid #FF9800;
   border-radius: 16px;
   padding: 32px;
@@ -387,7 +387,7 @@
 
 /* Teaching Box: Disasters Not Natural */
 .disasters-not-natural {
-  background: linear-gradient(135deg, #FFF9C4 0%, #FFF59D 100%);
+  background: #FFF9C4;
   border: 4px solid #FFC107;
   border-radius: 16px;
   padding: 36px;
@@ -499,7 +499,7 @@
 
 /* Section Summary */
 .sensitivity-summary {
-  background: linear-gradient(135deg, #F3E5F5 0%, #E1BEE7 100%);
+  background: #F3E5F5;
   border: 4px solid #7B1FA2;
   border-radius: 16px;
   padding: 32px;

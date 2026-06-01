@@ -8,6 +8,7 @@ import 'leaflet/dist/leaflet.css';
 import districts from '../../data/tanzania-districts.json';
 import regions from '../../data/tanzania-regions.json';
 import { DISTRICT_BY_KEY, REGION_BY_KEY, NATIONAL_UNIT, districtKey, normRegion, classifyRisk, round1 } from './riskModel';
+import { RISK_CLASSES } from './riskConstants';
 
 export default function DistrictMap({ metric, selected, onSelect, filterClass, level = 'district', isolateKey }) {
   const geoRef = useRef(null);
@@ -55,10 +56,7 @@ export default function DistrictMap({ metric, selected, onSelect, filterClass, l
     });
   };
 
-  const legend = [
-    { level: 'Very Low', color: '#2E7D32' }, { level: 'Low', color: '#8BC34A' },
-    { level: 'Medium', color: '#FFC107' }, { level: 'High', color: '#FF9800' }, { level: 'Very High', color: '#D32F2F' },
-  ];
+  const legend = RISK_CLASSES;
 
   return (
     <div className="rx-map">

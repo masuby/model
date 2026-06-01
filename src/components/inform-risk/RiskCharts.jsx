@@ -11,9 +11,8 @@ import ChartCard from './charts/ChartCard';
 import BarChart from './charts/BarChart';
 import LineChart from './charts/LineChart';
 import DistrictCharts from './DistrictCharts';
+import { CLASS_COLOR as CLASS_HEX, CLASS_LABELS as CLASS_ORDER } from './riskConstants';
 
-const CLASS_HEX = { 'Very Low': '#2E7D32', Low: '#8BC34A', Medium: '#FFC107', High: '#FF9800', 'Very High': '#D32F2F' };
-const CLASS_ORDER = ['Very Low', 'Low', 'Medium', 'High', 'Very High'];
 const SCOPE_SERIES = { risk: 'INFORM Risk', hazard: 'Hazard & Exposure', vulnerability: 'Vulnerability', coping: 'Lack of Coping' };
 
 export default function RiskCharts({ metric, selected }) {

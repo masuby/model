@@ -9,6 +9,7 @@
  */
 
 import { useState, useEffect } from 'react';
+import { classifyRisk } from '../riskConstants';
 import './DimensionStyles.css';
 import { getHazardRiskService } from '../../../services/hazardRiskService';
 
@@ -218,7 +219,7 @@ const HazardExposureDimension = ({ data }) => {
               {/* Flood Risk Panel */}
               {floodRisk && (
                 <div style={{
-                  background: `linear-gradient(135deg, ${floodRisk.alertLevel.color}15, ${floodRisk.alertLevel.color}05)`,
+                  background: `${floodRisk.alertLevel.color}`,
                   border: `2px solid ${floodRisk.alertLevel.color}`,
                   borderRadius: '12px',
                   padding: '20px',
@@ -282,7 +283,7 @@ const HazardExposureDimension = ({ data }) => {
               {/* Drought Risk Panel */}
               {droughtRisk && (
                 <div style={{
-                  background: `linear-gradient(135deg, ${droughtRisk.alertLevel.color}15, ${droughtRisk.alertLevel.color}05)`,
+                  background: `${droughtRisk.alertLevel.color}`,
                   border: `2px solid ${droughtRisk.alertLevel.color}`,
                   borderRadius: '12px',
                   padding: '20px',
@@ -603,11 +604,7 @@ const ExposureIndicatorCard = ({ indicator }) => {
  * Helper: Get risk classification
  */
 function getRiskClassification(score) {
-  if (score >= 0 && score < 2) return { level: 'Very Low', color: '#43A047', range: '0.0 - 1.9' };
-  if (score >= 2 && score < 3.5) return { level: 'Low', color: '#8BC34A', range: '2.0 - 3.4' };
-  if (score >= 3.5 && score < 5) return { level: 'Medium', color: '#FFC107', range: '3.5 - 4.9' };
-  if (score >= 5 && score < 6.5) return { level: 'High', color: '#FF9800', range: '5.0 - 6.4' };
-  return { level: 'Very High', color: '#F44336', range: '6.5 - 10.0' };
+  return classifyRisk(score);
 }
 
 export default HazardExposureDimension;

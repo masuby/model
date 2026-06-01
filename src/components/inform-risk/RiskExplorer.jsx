@@ -84,13 +84,7 @@ const LENSES = [
   ...DIM_KEYS.map((k) => ({ key: `dim:${k}`, scope: k, label: DIMENSION_TREE[k].label })),
 ];
 
-const CATEGORIES = [
-  { level: 'Very Low', color: '#2E7D32' },
-  { level: 'Low', color: '#8BC34A' },
-  { level: 'Medium', color: '#FFC107' },
-  { level: 'High', color: '#FF9800' },
-  { level: 'Very High', color: '#D32F2F' },
-];
+import { RISK_CLASSES as CATEGORIES } from './riskConstants';
 
 export default function RiskExplorer() {
   const [level, setLevel] = useState('district');
