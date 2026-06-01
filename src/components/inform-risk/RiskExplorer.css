@@ -57,10 +57,16 @@
 .rx-table-count { font-size: var(--fs-sm); font-weight: 600; }
 .rx-table-actions { display: flex; align-items: center; gap: var(--s-2); }
 
-/* Full-width map */
-.rx-map-wrap { overflow: hidden; padding: 0; height: 560px; }
+/* Map row: map column + a side panel (regional trend) or a second map */
+.rx-maprow { display: grid; grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr); gap: var(--s-4); align-items: stretch; }
+@media (max-width: 980px) { .rx-maprow { grid-template-columns: 1fr; } }
+.rx-map-wrap { overflow: hidden; padding: 0; height: 480px; }
 .rx-map { position: relative; height: 100%; }
 .rx-map .leaflet-container { font: inherit; }
+.rx-side { display: flex; flex-direction: column; min-width: 0; }
+.rx-area-empty { display: flex; align-items: center; justify-content: center; height: 100%; text-align: center; padding: var(--s-6); }
+.rx-cat-split { border-color: var(--c-primary); color: var(--c-primary); font-weight: 700; }
+.rx-cat-split.is-active { background: var(--c-primary); color: #fff; border-color: var(--c-primary); }
 
 .rx-legend {
   position: absolute; right: 12px; bottom: 12px; z-index: 500;

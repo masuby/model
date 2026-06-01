@@ -280,10 +280,6 @@ const OverviewSection = ({ selectedPhase, onSelectPhase }) => {
           <div className="phase-details">
             {RISK_ASSESSMENT_PHASES.filter(p => p.id === selectedPhase).map(phase => (
               <div key={phase.id} className="phase-detail-card" style={{ borderLeftColor: phase.color }}>
-                <div className="detail-header">
-                  <span className="detail-icon">{phase.icon}</span>
-                  <h4>{phase.name}</h4>
-                </div>
                 <p className="detail-description">{phase.description}</p>
                 <ul className="detail-list">
                   {phase.details.map((detail, i) => (

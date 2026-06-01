@@ -8,6 +8,8 @@
 import React, { useMemo, useState } from 'react';
 import DistrictMap from './DistrictMap';
 import RiskCharts from './RiskCharts';
+import RegionalTrend from './RegionalTrend';
+import DistrictCharts from './DistrictCharts';
 import { DIMENSION_TREE, DIM_KEYS, getMetric, scopeOf, classifyRisk, round1, unitsForLevel, LEVELS } from './riskModel';
 import './RiskExplorer.css';
 
@@ -94,6 +96,7 @@ export default function RiskExplorer() {
   const [classFilter, setClassFilter] = useState(null);
   const [selectedOnly, setSelectedOnly] = useState(false);
   const [tableOpen, setTableOpen] = useState(true);
+  const [secondPanel, setSecondPanel] = useState(false);
 
   const metric = getMetric(metricKey);
   const activeScope = scopeOf(metricKey);
@@ -216,16 +219,50 @@ export default function RiskExplorer() {
             );
           })}
         </div>
+        <button
+          className={`rx-cat rx-cat-split ${secondPanel ? 'is-active' : ''}`}
+          style={{ marginLeft: 'auto' }}
+          onClick={() => setSecondPanel((s) => !s)}
+          title="Add a second panel that focuses on the selected area"
+        >
+          {secondPanel ? '⊟ Single panel' : '⊞ Split: area panel'}
+        </button>
       </div>
 
-      {/* Wide map */}
-      <div className="rx-map-wrap ui-card">
-        <DistrictMap
-          metric={metric} selected={selected} onSelect={setSelected}
-          filterClass={selectedOnly ? null : classFilter} level={level}
-          isolateKey={selectedOnly && selected ? selected.admin.adm2Code : null}
-        />
+      {/* Map row — default: map + regional trend beside it; split: two maps */}
+      <div className="rx-maprow">
+        <div className="rx-map-wrap ui-card">
+          <DistrictMap
+            metric={metric} selected={selected} onSelect={setSelected}
+            filterClass={selectedOnly ? null : classFilter} level={level}
+            isolateKey={selectedOnly && selected ? selected.admin.adm2Code : null}
+          />
+        </div>
+        {!secondPanel ? (
+          <div className="rx-side ui-card ui-card-pad">
+            <RegionalTrend metric={metric} height={440} />
+          </div>
+        ) : (
+          <div className="rx-map-wrap ui-card">
+            {selected ? (
+              <DistrictMap
+                metric={metric} selected={selected} onSelect={setSelected} level={level}
+                isolateKey={selected.admin.adm2Code} focusUnit={selected} baseLayer="streets"
+              />
+            ) : (
+              <div className="rx-area-empty ui-muted">Select an area on the map or table to focus this panel on it.</div>
+            )}
+          </div>
+        )}
       </div>
+
+      {/* Split view: trends below — regional under the main map, selected area under the area map */}
+      {secondPanel && (
+        <div className="rx-maprow">
+          <div className="rx-side ui-card ui-card-pad"><RegionalTrend metric={metric} height={300} /></div>
+          <div className="rx-side"><DistrictCharts district={selected} /></div>
+        </div>
+      )}
 
       {/* Wide table */}
       <div className="rx-table-wrap ui-card">
@@ -275,7 +312,9 @@ export default function RiskExplorer() {
         )}
       </div>
 
-      <RiskCharts metric={metric} selected={selected} />
+      <RiskCharts metric={metric} />
+
+      {!secondPanel && <DistrictCharts district={selected} />}
 
       <div className="rx-detail-wrap ui-card ui-card-pad">
         <DistrictDetail d={selected} />
