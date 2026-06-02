@@ -5,12 +5,30 @@
 
 import riskDataset from '../../data/tanzania-inform-risk.json';
 import { classifyRisk, normRegion } from './regionRisk';
+import { getOverrides } from './overrideStore';
 
 export { classifyRisk, normRegion };
 export const DATASET = riskDataset;
 export const DISTRICTS = riskDataset.subnational?.adm2 || [];
 export const NATIONAL = riskDataset.national;
 export const round1 = (v) => (typeof v === 'number' ? Math.round(v * 10) / 10 : null);
+
+// Apply locally-saved data edits (PMO/Admin direct or PMO-approved sector edits)
+// so the entire system — map, charts, tables, severity baseline — reflects them.
+// Edits set the three dimension totals; risk recomputes as ∛(H × V × LCC).
+(function applyEdits() {
+  const ovr = getOverrides();
+  if (!ovr || !Object.keys(ovr).length) return;
+  DISTRICTS.forEach((d) => {
+    const o = ovr[d.admin?.adm2Code];
+    if (!o) return;
+    if (typeof o.hazard === 'number' && d.hazardExposure) d.hazardExposure.total = o.hazard;
+    if (typeof o.vuln === 'number' && d.vulnerability) d.vulnerability.total = o.vuln;
+    if (typeof o.cope === 'number' && d.lackCopingCapacity) d.lackCopingCapacity.total = o.cope;
+    const h = d.hazardExposure?.total, v = d.vulnerability?.total, c = d.lackCopingCapacity?.total;
+    if ([h, v, c].every((x) => typeof x === 'number')) d.risk = Math.round(Math.cbrt(h * v * c) * 10) / 10;
+  });
+})();
 
 // Full hierarchy: each dimension → its components → each component's indicators.
 // `path` returns the component object on a district; indicator `k` is the field.

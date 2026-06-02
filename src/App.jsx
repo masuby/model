@@ -5,6 +5,7 @@ import Module01Landing from "./components/landing/Module01Landing";
 import Module02InformRisk from "./components/inform-risk/Module02InformRisk";
 import Module04Severity from "./components/severity/Module04Severity";
 import HomePage from "./components/home/HomePage";
+import DataEntry from "./components/data-entry/DataEntry";
 import "./theme.css";
 import "./App.css";
 import "./lean.css";
@@ -62,6 +63,7 @@ function TopNav() {
         <NavLink to="/education" className="lean-navlink" style={link}>Education</NavLink>
         <NavLink to="/risk" className="lean-navlink" style={link}>Risk</NavLink>
         <NavLink to="/severity" className="lean-navlink" style={link}>Severity</NavLink>
+        <NavLink to="/data-entry" className="lean-navlink" style={link}>Data Entry</NavLink>
       </nav>
     </header>
   );
@@ -94,6 +96,7 @@ function App() {
                 <Route path="/education" element={<EducationRoute />} />
                 <Route path="/risk" element={<RiskRoute />} />
                 <Route path="/severity" element={<SeverityRoute />} />
+                <Route path="/data-entry" element={<DataEntry />} />
                 <Route path="*" element={<Navigate to="/" replace />} />
               </Routes>
             </main>
