@@ -7,8 +7,9 @@ import { MapContainer, GeoJSON, TileLayer, useMap } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
 import districts from '../../data/tanzania-districts.json';
 import regions from '../../data/tanzania-regions.json';
+import councils from '../../data/tanzania-councils.json';
 import waterbodies from '../../data/tanzania-waterbodies.json';
-import { DISTRICT_BY_KEY, REGION_BY_KEY, NATIONAL_UNIT, districtKey, normRegion, classifyRisk, round1, provenanceFor } from './riskModel';
+import { DISTRICT_BY_KEY, REGION_BY_KEY, COUNCIL_BY_CODE, NATIONAL_UNIT, districtKey, normRegion, classifyRisk, round1, provenanceFor } from './riskModel';
 import { sourceLabel } from './indicatorSources';
 import { RISK_CLASSES } from './riskConstants';
 
@@ -65,18 +66,20 @@ function FitBounds({ bounds }) {
 
 export default function DistrictMap({ metric, selected, onSelect, filterClass, level = 'district', isolateKey, baseLayer = 'none', focusUnit }) {
   const geoRef = useRef(null);
-  const geojson = level === 'district' ? districts : regions;
+  const geojson = level === 'council' ? councils : level === 'district' ? districts : regions;
   const hasBase = baseLayer !== 'none' && BASEMAPS[baseLayer];
   const focusBounds = focusUnit ? unitBounds(focusUnit, level, geojson) : null;
   const key = `${metric.key}|${filterClass || 'all'}|${level}|${isolateKey || ''}|${baseLayer}`;
 
   const unitOf = (f) => {
+    if (level === 'council') return COUNCIL_BY_CODE[String(f.properties.code)];
     if (level === 'district') return DISTRICT_BY_KEY[districtKey(f.properties.dist_name, f.properties.reg_name)];
     if (level === 'region') return REGION_BY_KEY[normRegion(f.properties.reg_name)];
     return NATIONAL_UNIT;
   };
   const labelOf = (f) =>
-    level === 'district' ? { name: f.properties.dist_name, sub: f.properties.reg_name }
+    level === 'council' ? { name: f.properties.name, sub: f.properties.reg + (f.properties.isNew ? ' · data inherited from ' + (f.properties.parent || 'parent') : '') }
+    : level === 'district' ? { name: f.properties.dist_name, sub: f.properties.reg_name }
     : level === 'region' ? { name: f.properties.reg_name, sub: 'Region (ADM1)' }
     : { name: 'Tanzania', sub: 'National' };
   const keyOf = (u) => u && u.admin.adm2Code;

@@ -149,9 +149,14 @@ export default function RiskExplorer() {
             {LEVELS.map((l) => <option key={l.key} value={l.key}>{l.label}</option>)}
           </select>
           <span className="ui-muted rx-level-count">{ranked.length} {noun}</span>
+          {level === 'council' && (
+            <span className="ui-muted rx-admin-basis" title="The REAL 195 NBS 2022 councils (LGAs), official boundaries. 167 match an INFORM unit directly; the 28 new/split councils (Kibiti, Ubungo, Kigamboni, Mlimba…) inherit their parent district's data — shown on hover — until council-specific data exists. Never fabricated.">
+              · real NBS 2022 LGAs — 28 new inherit parent ⓘ
+            </span>
+          )}
           {level === 'district' && (
-            <span className="ui-muted rx-admin-basis" title="Risk data is on 170 INFORM SADC 2024 council-level units (includes urban + rural councils). Official NBS 2022 structure: 31 regions · 150 districts · 195 councils · 4,344 wards. The map draws 150 district polygons; reaching all 195 councils needs council-level source data (not fabricated).">
-              · INFORM SADC units — NBS 2022 has 195 councils ⓘ
+            <span className="ui-muted rx-admin-basis" title="170 INFORM SADC 2024 council-level units (urban + rural). Official NBS 2022: 31 regions · 150 districts · 195 councils · 4,344 wards. Switch to 'Council / LGA' for the real 195 councils.">
+              · INFORM 170 — switch to Council for the real 195 ⓘ
             </span>
           )}
         </div>

@@ -4,6 +4,7 @@
 // All values are authentic, straight from the country-model workbook.
 
 import riskDataset from '../../data/tanzania-inform-risk.json';
+import councilsGeo from '../../data/tanzania-councils.json';
 import { classifyRisk, normRegion } from './regionRisk';
 import { getOverrides } from './overrideStore';
 import { sourceFor } from './indicatorSources';
@@ -241,11 +242,28 @@ export const REGION_BY_KEY = (() => {
   REGION_UNITS.forEach((u) => { idx[normRegion(u.admin.adm2Name)] = u; });
   return idx;
 })();
+// Council / LGA level — the REAL 195 NBS-2022 councils. Each council shows its matched INFORM
+// unit's profile; the 28 new/split councils inherit their parent district's data (flagged
+// `_inherited`) until council-specific data exists. (Reconciliation in scripts/export-councils.py.)
+const ADM2_BY_NAME = (() => { const idx = {}; for (const d of DISTRICTS) idx[normRegion(d.admin.adm2Name)] = d; return idx; })();
+export const COUNCIL_UNITS = (councilsGeo.features || []).map((f) => {
+  const p = f.properties; const src = ADM2_BY_NAME[normRegion(p.src)];
+  if (!src) return null;
+  return {
+    admin: { adm2Name: p.name, adm1Name: p.reg, adm2Code: p.code, iso3: 'TZA' },
+    hazardExposure: src.hazardExposure, vulnerability: src.vulnerability, lackCopingCapacity: src.lackCopingCapacity,
+    risk: src.risk, facilities: src.facilities, drr: src.drr,
+    _inherited: p.isNew ? (p.parent || src.admin.adm2Name) : null, _councilCode: String(p.code),
+  };
+}).filter(Boolean);
+export const COUNCIL_BY_CODE = (() => { const idx = {}; COUNCIL_UNITS.forEach((u) => { idx[u._councilCode] = u; }); return idx; })();
+
 export const LEVELS = [
-  { key: 'district', label: 'District (ADM2)', unitNoun: 'districts' },
-  { key: 'region', label: 'Region (ADM1)', unitNoun: 'regions' },
+  { key: 'council', label: 'Council / LGA (195)', unitNoun: 'councils' },
+  { key: 'district', label: 'District — INFORM (170)', unitNoun: 'districts' },
+  { key: 'region', label: 'Region (31)', unitNoun: 'regions' },
   { key: 'national', label: 'National', unitNoun: 'national' },
 ];
 export function unitsForLevel(level) {
-  return level === 'region' ? REGION_UNITS : level === 'national' ? [NATIONAL_UNIT] : DISTRICTS;
+  return level === 'council' ? COUNCIL_UNITS : level === 'region' ? REGION_UNITS : level === 'national' ? [NATIONAL_UNIT] : DISTRICTS;
 }

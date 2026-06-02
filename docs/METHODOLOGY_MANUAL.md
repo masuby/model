@@ -255,13 +255,14 @@ Storage today is the browser (`localStorage`); the Supabase schema is ready for 
    documented INFORM baseline — clearly too high for a coastal city. The precautionary floor
    keeps documented values rather than silently lowering them, so it persists (the *computed*
    value is ~6.6). **Flagged for correction via Data Entry** (MoA/TMA), which now overrides it.
-5. **Administrative structure (audited).** **31 regions is correct** (matches NBS 2022). Risk data
-   is on **170 INFORM SADC 2024 council-level units** (includes separate urban + rural councils, e.g.
-   *Dodoma Urban* vs *Dodoma*). The official NBS 2022 geodatabase has **31 regions · 150 districts ·
-   195 councils · 4,344 wards**. The map draws the **150 district polygons**, so ~31 urban councils
-   share their district's shape and a few newer councils (Kibiti, Tanganyika, Ubungo, Kigamboni)
-   differ by boundary vintage (~139/170 units currently join a polygon). **Reaching all 195 councils
-   needs council-level INFORM data — not fabricated** (per policy). The explorer states this basis honestly.
+5. **Administrative structure (audited + reconciled).** **31 regions is correct** (NBS 2022). The
+   explorer now offers a **Council / LGA level showing the REAL 195 NBS 2022 councils** (official
+   geodatabase boundaries, Swahili names parsed): **167 match an INFORM unit directly; the 28
+   new/split councils** (Kibiti←Rufiji, Ubungo←Kinondoni, Kigamboni←Temeke, Mlimba/Ifakara←Kilombero,
+   Magharibi A/B←Magharibi…) **inherit their parent district's data — flagged on hover** — until
+   council-specific data exists (**never fabricated**). The INFORM **170-unit** and **31-region**
+   levels remain. Official NBS 2022: 31 regions · 150 districts · 195 councils · 4,344 wards.
+   Reconciliation: `scripts/export-councils.py` → `tanzania-councils.json` + `council_reconciliation.csv`.
 6. **Wildfire, earthquake, lightning, storms** are still INFORM baseline — not yet physically
    recomputed (MODIS/VIIRS fire, USGS seismicity are the next sources).
 7. **Standardization is relative to Tanzania** (min over our 150 districts), not INFORM's fixed
