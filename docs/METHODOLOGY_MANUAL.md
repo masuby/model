@@ -142,8 +142,14 @@ can raise a hazard, never lower it.
 
 ## 4. Vulnerability & Coping — current sources
 
-- **Development & poverty** — NBS Household Budget Survey 2017/18 (poverty headcount).
-- **Children health & nutrition** — TDHS 2022 (under-5 stunting).
+- **Development & poverty** — NBS Household Budget Survey 2017/18 (poverty headcount); already
+  differentiated by region (Kigoma/Geita/Kagera highest → Dar/Kilimanjaro lowest).
+- **Children health & nutrition** — TDHS 2022 (under-5 stunting; Iringa/Njombe/Rukwa highest).
+- **Health conditions (NEW)** — disease burden = **HIV** (THIS 2022-23: Njombe 11.4 % → Kigoma
+  1.7 %) + **malaria** (TDHS-MIS 2022: Tabora 23 %, Mtwara 20 %, Lake/West high; highlands ~0),
+  min-max blended, raise-only. `health_burden.csv`.
+- **Displaced people (NEW)** — **UNHCR 2024** refugees: Nyarugusu (Kasulu ~130 k) + Nduta
+  (Kibondo ~75 k) → these were **0**, now **10 / 8** (burden-scaled). `displaced_refugees.csv`.
 - **Livelihoods / food security** — wired to **MUCHALI / IPC** (MoA Food Security & Nutrition
   analysis). *We do not invent IPC phases;* the slot is ready for MoA to enter each round (§6).
 - **WASH** — derived from **real 2022-census water points & boreholes** (more resource → lower

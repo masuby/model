@@ -1,0 +1,32 @@
+reg_name,hiv_pct,malaria_pct,basis
+Njombe,11.4,3,THIS 2022-23 HIV highest; TDHS-MIS 2022 malaria low (highland)
+Iringa,8.8,3,THIS 2022-23 high HIV; highland low malaria
+Mbeya,8.0,4,THIS high HIV; low-moderate malaria
+Songwe,6.5,6,southern-highlands HIV; moderate malaria
+Rukwa,6.0,8,high HIV; western malaria
+Ruvuma,5.0,12,moderate HIV; southern malaria
+Shinyanga,5.5,13,Lake-zone HIV/malaria
+Tabora,5.0,23,TDHS-MIS 2022 highest malaria (23%)
+Mara,5.0,15,Lake-zone HIV + malaria
+Mwanza,5.0,14,Lake-zone
+Geita,5.0,17,Lake-zone high malaria
+Katavi,5.0,12,western
+Dar es Salaam,4.7,2,urban HIV; low malaria
+Tanga,5.0,7,coastal
+Morogoro,5.0,10,moderate
+Pwani,5.0,11,coastal malaria
+Lindi,3.9,14,southern malaria
+Mtwara,4.0,20,TDHS-MIS 2022 malaria 20%
+Kagera,4.0,17,Lake-zone malaria 17.5%
+Dodoma,3.5,1,central; near-zero malaria
+Manyara,2.0,4,northern; low
+Singida,3.0,1,central; near-zero malaria
+Simiyu,3.0,13,Lake-zone malaria
+Kilimanjaro,2.5,0.5,highland; near-zero malaria
+Arusha,2.5,0.5,highland; near-zero malaria
+Kigoma,1.7,16,THIS lowest HIV (1.7%); high western malaria
+Kaskazini Unguja,0.4,0.2,Zanzibar low HIV; malaria near-eliminated
+Kusini Unguja,0.4,0.2,Zanzibar
+Mjini Magharibi,0.6,0.2,Zanzibar urban
+Kaskazini Pemba,0.4,0.5,Pemba
+Kusini Pemba,0.4,0.5,Pemba

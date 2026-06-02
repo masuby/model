@@ -24,6 +24,7 @@ export const AUTHORITIES = {
   PMO: { label: 'PMO-DMD', full: "Prime Minister's Office — Disaster Management Dept" },
   DRRC: { label: 'DRR Coordinator', full: 'Regional / District DRR Coordinator' },
   MUCHALI: { label: 'MUCHALI / IPC', full: 'Tanzania Food Security & Nutrition Analysis System (IPC)' },
+  UNHCR: { label: 'UNHCR', full: 'UN Refugee Agency (refugee statistics)' },
   CHC: { label: 'CHC / ECMWF', full: 'CHIRPS v3 rainfall + ERA5 temperature (computed)' },
   INFORM: { label: 'INFORM SADC', full: 'INFORM Sub-national SADC 2024 baseline' },
 };
@@ -48,6 +49,8 @@ export const INDICATOR_SOURCE = {
   // Vulnerability
   'vulnerability:developmentPoverty': { by: 'NBS', dataset: 'Household Budget Survey 2017/18', method: 'poverty headcount' },
   'vulnerability:childrenHealthNutrition': { by: 'MOH', also: ['NBS'], dataset: 'TDHS-MIS 2022', method: 'under-5 stunting' },
+  'vulnerability:healthConditions': { by: 'MOH', also: ['NBS'], dataset: 'THIS 2022-23 (HIV) + TDHS-MIS 2022 (malaria)', method: 'disease-burden min-max blend' },
+  'vulnerability:displacedPeople': { by: 'UNHCR', also: ['PMO'], dataset: 'UNHCR 2024 — Nyarugusu/Nduta refugee camps', method: 'refugee burden-scaled' },
   'vulnerability:livelihoods': { by: 'MUCHALI', also: ['MOA'], dataset: 'IPC / MUCHALI acute food-insecurity rounds', method: 'food-insecurity phase' },
   'vulnerability:habitat': { by: 'NBS', dataset: '2022 PHC housing', method: 'housing & services' },
   // Lack of coping capacity — resources available

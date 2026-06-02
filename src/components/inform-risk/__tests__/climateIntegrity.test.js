@@ -83,6 +83,9 @@ describe('Hazard × Exposure flood + manual worked examples', () => {
     expect(byName('Lindi').hazardExposure.natural.stormsCyclone).toBeGreaterThanOrEqual(8);  // Lindi 1952
     expect(byName('Ngorongoro').hazardExposure.natural.volcano).toBeGreaterThanOrEqual(7);   // Ol Doinyo Lengai
     expect(byName('Nyamagana').hazardExposure.natural.lightning).toBeGreaterThanOrEqual(8);  // Mwanza, Lake shore
+    // Vulnerability: refugee-hosting districts (UNHCR Nyarugusu/Nduta) no longer show 0 displaced
+    expect(byName('Kasulu').vulnerability.vulnerableGroups.displacedPeople).toBeGreaterThanOrEqual(8);
+    expect(byName('Kibondo').vulnerability.vulnerableGroups.displacedPeople).toBeGreaterThanOrEqual(6);
   });
 
   it('computed districts carry real NBS 2022 exposure, national stays official', () => {

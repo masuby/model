@@ -43,6 +43,8 @@ const SRC = {
   'hazard:earthquake': ['INFORM SADC', 'INFORM seismic', 'baseline'],
   'vulnerability:developmentPoverty': ['NBS', 'Household Budget Survey 2017/18', 'poverty headcount'],
   'vulnerability:childrenHealthNutrition': ['MoH', 'TDHS 2022', 'under-5 stunting'],
+  'vulnerability:healthConditions': ['MoH / NBS', 'THIS 2022-23 (HIV) + TDHS-MIS 2022 (malaria)', 'disease-burden min-max blend'],
+  'vulnerability:displacedPeople': ['UNHCR / PMO-DMD', 'UNHCR 2024 (Nyarugusu/Nduta camps)', 'refugee burden-scaled'],
   'vulnerability:livelihoods': ['MUCHALI / IPC (MoA)', 'IPC acute food-insecurity rounds', 'food-insecurity phase'],
   'coping:wash': ['MoW', '2022 PHC water points & boreholes', 'resource availability, rank 2-8'],
   'coping:accessHealth': ['MoH', '2022 PHC health facilities', 'resource availability'],
