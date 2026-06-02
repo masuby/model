@@ -16,6 +16,29 @@ const BASEMAPS = {
   satellite: { url: 'https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', attribution: '© Esri' },
 };
 
+// Short, plain-language explanation per metric, shown in the hover tooltip.
+const METRIC_INFO = {
+  risk: 'Overall INFORM Risk = ∛(Hazard × Vulnerability × Lack of Coping).',
+  'dim:hazard': 'Hazard & Exposure — how likely/intense hazards are and what is exposed.',
+  'dim:vulnerability': 'Vulnerability — susceptibility of people & systems (poverty, health, vulnerable groups).',
+  'dim:coping': 'Lack of Coping Capacity — resources & institutions available to cope; higher means fewer.',
+  'ind:coping:drrImplementation': 'DRR implementation — disaster-risk-reduction capacity in place (plans, EOCC, ERT, EPRP). Higher = less in place.',
+  'ind:coping:governance': 'Governance — institutional capacity to manage disaster risk.',
+  'ind:coping:wash': 'WASH — water & sanitation resources available (from 2022-census water points & boreholes).',
+  'ind:coping:accessHealth': 'Access to health-care resources.',
+  'ind:coping:education': 'Education resources & access.',
+  'ind:coping:communication': 'Communication infrastructure.',
+  'ind:coping:economicCapacity': 'Economic capacity to prepare & respond.',
+  'ind:hazard:flood': 'Flood exposure — riverine & urban flooding.',
+  'ind:hazard:drought': 'Drought exposure — agricultural/meteorological drought.',
+  'ind:hazard:landslide': 'Landslide exposure — rainfall-triggered slope failure (highlands).',
+  'ind:hazard:coastalHazards': 'Coastal hazards — erosion, surge, sea-level rise.',
+  'ind:hazard:earthquake': 'Earthquake exposure — Rift Valley seismicity.',
+  'ind:hazard:stormsCyclone': 'Storms & tropical cyclone exposure.',
+  'ind:vulnerability:developmentPoverty': 'Development & poverty (Household Budget Survey).',
+  'ind:vulnerability:childrenHealthNutrition': 'Children health & nutrition — stunting (TDHS 2022).',
+};
+
 const norm = (s) => String(s || '').toLowerCase().replace(/[^a-z0-9]/g, '');
 function unitBounds(unit, level, geo) {
   if (!unit) return null;
@@ -91,9 +114,18 @@ export default function DistrictMap({ metric, selected, onSelect, filterClass, l
     const val = u ? metric.get(u) : null;
     const cls = classifyRisk(val);
     const lbl = labelOf(f);
+    const info = METRIC_INFO[metric.key];
+    const drr = u?.drr ? [u.drr.eocc && 'Regional EOCC', u.drr.eprp && 'EPRP', u.drr.aa && 'Drought Anticipatory Action'].filter(Boolean).join(' · ') : '';
+    const fac = u?.facilities ? `🏥 ${u.facilities.health.toLocaleString()} · 🏫 ${u.facilities.education.toLocaleString()} · 💧 ${u.facilities.water.toLocaleString()}` : '';
     layer.bindTooltip(
-      `<strong>${lbl.name}</strong><br/>${lbl.sub}<br/>${metric.label}: ${round1(val) ?? '—'}${val == null || isIndicator ? '' : ` · ${cls.level}`}`,
-      { sticky: true }
+      `<div class="rx-tip">
+        <div class="rx-tip-h"><strong>${lbl.name}</strong> <span>${lbl.sub}</span></div>
+        <div class="rx-tip-v">${metric.label}: <b>${round1(val) ?? '—'}</b>${val == null || isIndicator ? '' : ` · ${cls.level}`}</div>
+        ${info ? `<div class="rx-tip-d">${info}</div>` : ''}
+        ${drr ? `<div class="rx-tip-drr">🛡️ DRR: ${drr}</div>` : ''}
+        ${fac ? `<div class="rx-tip-f">${fac}</div>` : ''}
+      </div>`,
+      { sticky: true, className: 'rx-tip-wrap' }
     );
     layer.on({
       click: () => u && onSelect?.(u),
