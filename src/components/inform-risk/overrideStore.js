@@ -39,7 +39,7 @@ export function approve(id) {
   const p = getPending();
   const e = p.find((x) => x.id === id);
   if (e) {
-    saveDirect(e.code, { hazard: e.hazard, vuln: e.vuln, cope: e.cope }, `PMO — approved (${e.by || 'sector'})`);
+    saveDirect(e.code, { hazard: e.hazard, vuln: e.vuln, cope: e.cope, ind: e.ind }, `PMO — approved (${e.by || 'sector'})`);
     write(LS_PEND, p.filter((x) => x.id !== id));
   }
 }

@@ -23,7 +23,22 @@
 }
 .de-field input:focus, .de-field select:focus, .de-by:focus { outline: 2px solid var(--c-primary); outline-offset: 1px; }
 
-.de-preview { display: flex; align-items: center; justify-content: space-between; gap: var(--s-3); padding: var(--s-3) var(--s-4); background: var(--c-surface-2); border-radius: var(--r-md); }
+/* per-dimension editing + expandable indicators */
+.de-dim { border: 1px solid var(--c-line); border-radius: var(--r-md); padding: var(--s-3); margin-bottom: var(--s-3); }
+.de-dim-head { display: flex; align-items: center; gap: var(--s-3); }
+.de-dim-name { flex: 1; font-weight: 700; color: var(--c-ink); }
+.de-dim-total { width: 84px; padding: 8px 10px; border: 1px solid var(--c-line-strong); border-radius: var(--r-md); font-size: var(--fs-body); font-weight: 700; text-align: center; color: var(--c-ink); }
+.de-dim-total:focus { outline: 2px solid var(--c-primary); outline-offset: 1px; }
+.de-comp { margin-top: var(--s-3); }
+.de-comp-name { font-size: var(--fs-xs); font-weight: 700; text-transform: uppercase; letter-spacing: .4px; color: var(--c-muted); }
+.de-ind-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: var(--s-2); margin-top: 6px; }
+@media (max-width: 640px) { .de-ind-grid { grid-template-columns: 1fr; } }
+.de-ind { display: flex; align-items: center; justify-content: space-between; gap: var(--s-2); }
+.de-ind-label { font-size: var(--fs-sm); color: var(--c-body); }
+.de-ind input { width: 72px; padding: 6px 8px; border: 1px solid var(--c-line-strong); border-radius: var(--r-sm); text-align: center; font-size: var(--fs-sm); color: var(--c-ink); }
+.de-ind input:focus { outline: 2px solid var(--c-primary); outline-offset: 1px; }
+
+.de-preview { display: flex; align-items: center; justify-content: space-between; gap: var(--s-3); padding: var(--s-3) var(--s-4); background: var(--c-surface-2); border-radius: var(--r-md); margin-top: var(--s-2); }
 .de-risk { font-size: 30px; font-weight: 800; display: flex; align-items: center; gap: var(--s-2); }
 
 .de-actions { display: flex; gap: var(--s-3); margin-top: var(--s-4); align-items: center; flex-wrap: wrap; }

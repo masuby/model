@@ -83,11 +83,10 @@ export default function LineChart({ series, xLabels, max = 10, height = 420, yTi
         if (!pts.length) return null;
         const d = smoothPath(pts);
         return (
-          <g key={s.name} opacity={dim ? 0.38 : 1}>
-            {em && <path d={`${d} L${pts[pts.length - 1][0].toFixed(1)},${y0} L${pts[0][0].toFixed(1)},${y0} Z`} fill={s.color} opacity="0.08" />}
-            <path d={d} fill="none" stroke={s.color} strokeWidth={em ? 4 : 2.4} strokeLinejoin="round" strokeLinecap="round" />
+          <g key={s.name} opacity={dim ? 0.72 : 1}>
+            <path d={d} fill="none" stroke={s.color} strokeWidth={em ? 4 : 2.6} strokeLinejoin="round" strokeLinecap="round" />
             {pts.map(([cx, cy], i) => (
-              <circle key={i} cx={cx} cy={cy} r={em ? 4 : 3} fill="#fff" stroke={s.color} strokeWidth={em ? 2.2 : 1.6} />
+              <circle key={i} cx={cx} cy={cy} r={em ? 4.2 : 3.2} fill="#fff" stroke={s.color} strokeWidth={em ? 2.4 : 1.8} />
             ))}
           </g>
         );

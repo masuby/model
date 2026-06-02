@@ -13,23 +13,6 @@ export const DISTRICTS = riskDataset.subnational?.adm2 || [];
 export const NATIONAL = riskDataset.national;
 export const round1 = (v) => (typeof v === 'number' ? Math.round(v * 10) / 10 : null);
 
-// Apply locally-saved data edits (PMO/Admin direct or PMO-approved sector edits)
-// so the entire system — map, charts, tables, severity baseline — reflects them.
-// Edits set the three dimension totals; risk recomputes as ∛(H × V × LCC).
-(function applyEdits() {
-  const ovr = getOverrides();
-  if (!ovr || !Object.keys(ovr).length) return;
-  DISTRICTS.forEach((d) => {
-    const o = ovr[d.admin?.adm2Code];
-    if (!o) return;
-    if (typeof o.hazard === 'number' && d.hazardExposure) d.hazardExposure.total = o.hazard;
-    if (typeof o.vuln === 'number' && d.vulnerability) d.vulnerability.total = o.vuln;
-    if (typeof o.cope === 'number' && d.lackCopingCapacity) d.lackCopingCapacity.total = o.cope;
-    const h = d.hazardExposure?.total, v = d.vulnerability?.total, c = d.lackCopingCapacity?.total;
-    if ([h, v, c].every((x) => typeof x === 'number')) d.risk = Math.round(Math.cbrt(h * v * c) * 10) / 10;
-  });
-})();
-
 // Full hierarchy: each dimension → its components → each component's indicators.
 // `path` returns the component object on a district; indicator `k` is the field.
 export const DIMENSION_TREE = {
@@ -163,6 +146,48 @@ function aggregateUnit(list, name, regionName, code) {
     risk: mean(list.map((d) => d.risk)),
   };
 }
+// Apply locally-saved edits (PMO/Admin direct or PMO-approved sector edits) BEFORE
+// aggregating regions/national, so the whole system — map, indicator lens, charts,
+// tables, severity baseline — reflects them. Indicator edits recompute component
+// aggregates + dimension totals (mean); risk recomputes as ∛(H × V × LCC).
+const r1 = (v) => Math.round(v * 10) / 10;
+const setTotal = {
+  hazard: (d, v) => { if (d.hazardExposure) d.hazardExposure.total = v; },
+  vulnerability: (d, v) => { if (d.vulnerability) d.vulnerability.total = v; },
+  coping: (d, v) => { if (d.lackCopingCapacity) d.lackCopingCapacity.total = v; },
+};
+(function applyEdits() {
+  const ovr = getOverrides();
+  if (!ovr || !Object.keys(ovr).length) return;
+  DISTRICTS.forEach((d) => {
+    const o = ovr[d.admin?.adm2Code];
+    if (!o) return;
+    if (o.ind && Object.keys(o.ind).length) {
+      for (const [key, val] of Object.entries(o.ind)) {
+        const [dim, k] = key.split(':');
+        const tree = DIMENSION_TREE[dim];
+        if (!tree) continue;
+        for (const comp of tree.components) { const obj = comp.path(d); if (obj && k in obj) { obj[k] = val; break; } }
+      }
+      for (const dim of DIM_KEYS) {
+        const aggs = [];
+        for (const comp of DIMENSION_TREE[dim].components) {
+          const obj = comp.path(d); if (!obj) continue;
+          const vals = comp.indicators.map((ind) => obj[ind.k]).filter((x) => typeof x === 'number');
+          if (vals.length) { obj.aggregate = r1(mean(vals)); aggs.push(obj.aggregate); }
+          else if (typeof obj.aggregate === 'number') aggs.push(obj.aggregate);
+        }
+        if (aggs.length) setTotal[dim](d, r1(mean(aggs)));
+      }
+    }
+    if (typeof o.hazard === 'number') setTotal.hazard(d, o.hazard);
+    if (typeof o.vuln === 'number') setTotal.vulnerability(d, o.vuln);
+    if (typeof o.cope === 'number') setTotal.coping(d, o.cope);
+    const h = d.hazardExposure?.total, v = d.vulnerability?.total, c = d.lackCopingCapacity?.total;
+    if ([h, v, c].every((x) => typeof x === 'number')) d.risk = r1(Math.cbrt(h * v * c));
+  });
+})();
+
 export const REGION_UNITS = (() => {
   const by = {};
   DISTRICTS.forEach((d) => { (by[d.admin.adm1Name] = by[d.admin.adm1Name] || []).push(d); });
