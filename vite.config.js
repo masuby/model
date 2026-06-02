@@ -18,8 +18,12 @@ export default defineConfig({
       },
       output: {
         dir: 'dist',
-        entryFileNames: '[name].js',
-        chunkFileNames: '[name]-[hash].js'
+        // Everything hashed under /assets/ so each deploy is uniquely named and is covered by
+        // vercel.json's `assets` rewrite-exclusion + immutable cache. An unhashed root main.js
+        // was the recurring "deploy not visible" cause: browsers/edges served the cached entry.
+        entryFileNames: 'assets/[name]-[hash].js',
+        chunkFileNames: 'assets/[name]-[hash].js',
+        assetFileNames: 'assets/[name]-[hash][extname]'
       }
     }
   },
