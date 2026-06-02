@@ -155,14 +155,13 @@ export default function DataEntry() {
               <select value={region} onChange={(e) => setRegion(e.target.value)}>{REGIONS.map((r) => <option key={r} value={r}>{r}</option>)}</select>
             </label>
             <label className="de-field"><span className="de-field-label">Council / LGA</span>
-              <select value={code} onChange={(e) => setCode(e.target.value)}>{councils.map((c) => <option key={c.admin.adm2Code} value={c.admin.adm2Code}>{c.admin.adm2Name}{c._inherited ? ' ↳ inherits ' + c._inherited : ''}</option>)}</select>
+              <select value={code} onChange={(e) => setCode(e.target.value)}>{councils.map((c) => <option key={c.admin.adm2Code} value={c.admin.adm2Code}>{c.admin.adm2Name}</option>)}</select>
             </label>
           </div>
           {unit && (
             <p className="de-srcnote ui-muted">
-              Editing INFORM source unit <strong>{unit._srcName}</strong>
-              {unit._inherited ? ` · ${unit.admin.adm2Name} inherits ${unit._inherited}'s data` : ''}
-              {siblings.length ? ` · shared with ${siblings.map((s) => s.admin.adm2Name).join(', ')} — an edit updates ${siblings.length === 1 ? 'it' : 'them'} too` : ''}
+              Edits apply to district <strong>{unit._srcName}</strong>
+              {siblings.length ? `, shared with ${siblings.map((s) => s.admin.adm2Name).join(', ')}` : ''}
             </p>
           )}
 
@@ -188,12 +187,12 @@ export default function DataEntry() {
                         const noData = ind[ikey] == null;
                         return (
                           <label key={i.k} className={`de-ind ${noData ? 'is-nodata' : ''}`}>
-                            <span className="de-ind-label">{i.label}{noData && <em className="de-nodata"> · no data</em>}</span>
+                            <span className="de-ind-label">{i.label}{noData && <em className="de-nodata"> no data</em>}</span>
                             <div className="de-ind-input">
-                              <input type="number" min="0" max="10" step="0.1" placeholder="— no data" value={ind[ikey] ?? ''}
+                              <input type="number" min="0" max="10" step="0.1" placeholder="no data" value={ind[ikey] ?? ''}
                                 onChange={(e) => onIndChange(dim, i.k, e.target.value)} />
-                              <button type="button" className="de-clear" title="Set to NO DATA (null — excluded from the INFORM calculation, not treated as 0)"
-                                onClick={() => onIndChange(dim, i.k, '')} disabled={noData}>∅</button>
+                              <button type="button" className="de-clear" title="Set to no data (excluded from the calculation, not treated as 0)"
+                                onClick={() => onIndChange(dim, i.k, '')} disabled={noData}>Clear</button>
                             </div>
                           </label>
                         );
@@ -228,7 +227,7 @@ export default function DataEntry() {
             <input className="de-by" placeholder="Your name (optional)" value={by} onChange={(e) => setBy(e.target.value)} />
             <button className="ui-btn-primary" onClick={onSave}>{role === 'pmo' ? 'Save (apply directly)' : 'Submit for approval'}</button>
           </div>
-          {editCode && getOverrides()[editCode] && <div className="de-edited ui-muted">✎ This council's INFORM source unit has a saved edit.</div>}
+          {editCode && getOverrides()[editCode] && <div className="de-edited ui-muted">This council's INFORM source unit has a saved edit.</div>}
         </div>
 
         <div className="de-queue ui-card ui-card-pad">

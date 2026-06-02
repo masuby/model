@@ -177,36 +177,14 @@
   height: 100%;
 }
 
-/* Hazard Layer - Diagonal stripes */
-.hazard-pattern {
-  background: repeating-linear-gradient(
-    45deg,
-    rgba(211, 47, 47, 0.3),
-    rgba(211, 47, 47, 0.3) 20px,
-    rgba(211, 47, 47, 0.1) 20px,
-    rgba(211, 47, 47, 0.1) 40px
-  );
-}
+/* Hazard layer */
+.hazard-pattern { background: rgba(211, 47, 47, 0.16); }
 
-/* Population Layer - Dots pattern */
-.population-pattern {
-  background: radial-gradient(circle, rgba(25, 118, 210, 0.4) 2px, transparent 2px);
-  background-size: 20px 20px;
-}
+/* Population layer */
+.population-pattern { background: rgba(25, 118, 210, 0.16); }
 
-/* Exposure Layer - Combined effect */
-.exposure-pattern {
-  background:
-    repeating-linear-gradient(
-      45deg,
-      rgba(245, 124, 0, 0.2),
-      rgba(245, 124, 0, 0.2) 15px,
-      transparent 15px,
-      transparent 30px
-    ),
-    radial-gradient(circle, rgba(245, 124, 0, 0.3) 2px, transparent 2px);
-  background-size: auto, 15px 15px;
-}
+/* Exposure layer (hazard over population) */
+.exposure-pattern { background: rgba(245, 124, 0, 0.18); }
 
 .overlay-explanation {
   text-align: center;
@@ -305,7 +283,7 @@
 
 .divider-vertical {
   width: 2px;
-  background: linear-gradient(to bottom, transparent, #F57C00, transparent);
+  background: #F57C00;
   align-self: stretch;
 }
 

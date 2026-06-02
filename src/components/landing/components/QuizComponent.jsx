@@ -123,8 +123,8 @@ function QuizComponent({ sectionId, sectionTitle, onComplete }) {
           {!showResult
             ? 'Select the best answer and click Submit'
             : isCorrect
-              ? '✅ Correct! You may proceed to the next section.'
-              : '❌ Incorrect. Please review the explanation and try again.'}
+              ? 'Correct! You may proceed to the next section.'
+              : 'Incorrect. Please review the explanation and try again.'}
         </p>
       </div>
 
@@ -150,10 +150,10 @@ function QuizComponent({ sectionId, sectionTitle, onComplete }) {
               <span className="option-letter">{String.fromCharCode(65 + index)}</span>
               <span className="option-text">{option}</span>
               {showResult && index === question.correct && (
-                <span className="option-indicator">✓</span>
+                <span className="option-indicator"></span>
               )}
               {showResult && selectedAnswer === index && index !== question.correct && (
-                <span className="option-indicator">✗</span>
+                <span className="option-indicator"></span>
               )}
             </button>
           ))}
@@ -162,7 +162,7 @@ function QuizComponent({ sectionId, sectionTitle, onComplete }) {
         {showExplanation && (
           <div className={`quiz-explanation ${isCorrect ? 'correct-box' : 'incorrect-box'}`}>
             <div className="explanation-title">
-              {isCorrect ? '✅ Correct!' : '❌ Incorrect'}
+              {isCorrect ? 'Correct!' : 'Incorrect'}
             </div>
             <div className="explanation-text">
               {question.explanation}

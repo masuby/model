@@ -74,21 +74,21 @@ function Section2Exposure() {
       id: 0,
       title: 'Step 1: Hazard Zone',
       description: 'Areas where hazards can occur',
-      icon: '🌊',
+      icon: '',
       color: '#D32F2F'
     },
     {
       id: 1,
       title: 'Step 2: Population',
       description: 'Where people live and work',
-      icon: '👥',
+      icon: '',
       color: '#1976D2'
     },
     {
       id: 2,
       title: 'Step 3: Exposure',
       description: 'Overlap = People in hazard zones',
-      icon: '📍',
+      icon: '',
       color: '#F57C00'
     }
   ];
@@ -107,7 +107,7 @@ function Section2Exposure() {
 
       {/* INFORM Definition Box */}
       <div className="definition-box exposure-definition">
-        <div className="definition-icon">📍</div>
+        <div className="definition-icon"></div>
         <div className="definition-content">
           <h3>What is Exposure?</h3>
           <p className="inform-definition">
@@ -152,21 +152,21 @@ function Section2Exposure() {
           <div className="overlay-display">
             <div className={`overlay-layer hazard-layer ${overlayStep >= 0 ? 'visible' : ''}`}>
               <div className="layer-label" style={{ backgroundColor: '#D32F2F' }}>
-                🌊 Hazard Zone
+                Hazard Zone
               </div>
               <div className="layer-pattern hazard-pattern"></div>
             </div>
 
             <div className={`overlay-layer population-layer ${overlayStep >= 1 ? 'visible' : ''}`}>
               <div className="layer-label" style={{ backgroundColor: '#1976D2' }}>
-                👥 Population
+                Population
               </div>
               <div className="layer-pattern population-pattern"></div>
             </div>
 
             <div className={`overlay-layer exposure-layer ${overlayStep >= 2 ? 'visible' : ''}`}>
               <div className="layer-label" style={{ backgroundColor: '#F57C00' }}>
-                📍 Exposure (Overlap)
+                Exposure (Overlap)
               </div>
               <div className="layer-pattern exposure-pattern"></div>
             </div>
@@ -185,13 +185,13 @@ function Section2Exposure() {
 
       {/* Absolute vs Relative Exposure */}
       <div className="teaching-box exposure-types">
-        <div className="teaching-icon">🧠</div>
+        <div className="teaching-icon"></div>
         <div className="teaching-content">
           <h3>Two Ways to Measure Exposure</h3>
           <div className="exposure-comparison">
             <div className="exposure-type">
               <div className="exposure-type-header">
-                <span className="exposure-icon">🔢</span>
+                <span className="exposure-icon"></span>
                 <h4>Absolute Exposure</h4>
               </div>
               <p><strong>Definition:</strong> The total number of people in hazard zones</p>
@@ -207,7 +207,7 @@ function Section2Exposure() {
 
             <div className="exposure-type">
               <div className="exposure-type-header">
-                <span className="exposure-icon">📊</span>
+                <span className="exposure-icon"></span>
                 <h4>Relative Exposure</h4>
               </div>
               <p><strong>Definition:</strong> The percentage of population in hazard zones</p>
@@ -271,7 +271,7 @@ function Section2Exposure() {
 
         {selectedDistrict && (
           <div className="district-details">
-            <h3>📍 {selectedDistrict.name} - Detailed Exposure</h3>
+            <h3>{selectedDistrict.name} - Detailed Exposure</h3>
             <div className="details-grid">
               <div className="detail-item">
                 <div className="detail-label">Hazard Zone Area</div>
@@ -299,7 +299,7 @@ function Section2Exposure() {
 
       {/* Tanzania's Challenge Box */}
       <div className="teaching-box tanzania-challenge">
-        <div className="teaching-icon">⚠️</div>
+        <div className="teaching-icon"></div>
         <div className="teaching-content">
           <h3>Tanzania's Exposure Challenge</h3>
           <div className="challenge-formula">
@@ -327,7 +327,7 @@ function Section2Exposure() {
 
       {/* Important Notice: No Impact Yet */}
       <div className="notice-box exposure-notice">
-        <div className="notice-icon">💡</div>
+        <div className="notice-icon"></div>
         <div className="notice-content">
           <h4>Still Learning Concepts - No Impact Assessment Yet</h4>
           <p>
@@ -335,9 +335,9 @@ function Section2Exposure() {
             is in harm's way). But we still haven't mentioned:
           </p>
           <ul className="notice-list">
-            <li>❌ <strong>Vulnerability</strong> (why some suffer more)</li>
-            <li>❌ <strong>Impact severity</strong> (how bad it gets)</li>
-            <li>❌ <strong>Risk calculation</strong> (combining all factors)</li>
+            <li><strong>Vulnerability</strong> (why some suffer more)</li>
+            <li><strong>Impact severity</strong> (how bad it gets)</li>
+            <li><strong>Risk calculation</strong> (combining all factors)</li>
           </ul>
           <p className="notice-emphasis">
             <strong>Being exposed doesn't automatically mean disaster.</strong> The next sections will
@@ -348,30 +348,30 @@ function Section2Exposure() {
 
       {/* Section Summary */}
       <div className="section-summary exposure-summary">
-        <h3>📚 Section 2 Summary: Key Learnings</h3>
+        <h3>Section 2 Summary: Key Learnings</h3>
         <div className="summary-points">
           <div className="summary-point">
-            <span className="check-icon">✓</span>
+            <span className="check-icon"></span>
             <span className="point-text">
               <strong>Exposure</strong> is created when people live or work in hazard-prone areas
             </span>
           </div>
           <div className="summary-point">
-            <span className="check-icon">✓</span>
+            <span className="check-icon"></span>
             <span className="point-text">
               We measure exposure in two ways: <strong>absolute</strong> (total people) and
               <strong> relative</strong> (percentage)
             </span>
           </div>
           <div className="summary-point">
-            <span className="check-icon">✓</span>
+            <span className="check-icon"></span>
             <span className="point-text">
               Tanzania has <strong>high exposure</strong> in many districts due to population
               concentration in hazard zones
             </span>
           </div>
           <div className="summary-point">
-            <span className="check-icon">✓</span>
+            <span className="check-icon"></span>
             <span className="point-text">
               <strong>Location matters</strong> - the same hazard affects different numbers of
               people depending on where they live
@@ -379,7 +379,7 @@ function Section2Exposure() {
           </div>
         </div>
         <div className="next-section-preview">
-          <h4>🔜 Next Section: Sensitivity</h4>
+          <h4>Next Section: Sensitivity</h4>
           <p>
             We know <em>what hazards exist</em> and <em>who is exposed</em>. But why do the same
             hazards cause different levels of impact? Section 3 explores <strong>sensitivity</strong> -

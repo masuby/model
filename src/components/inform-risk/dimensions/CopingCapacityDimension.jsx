@@ -175,7 +175,7 @@ const CopingCapacityDimension = ({ data }) => {
         </p>
 
         <div className="important-notice lcc-notice">
-          <div className="notice-icon">⚠️</div>
+          <div className="notice-icon"></div>
           <div className="notice-text">
             <strong>Understanding "Lack of Coping Capacity":</strong> In the INFORM risk model, this dimension is
             expressed as <strong>Lack of</strong> Coping Capacity. This inversion is intentional - it ensures all
@@ -220,7 +220,7 @@ const CopingCapacityDimension = ({ data }) => {
             onClick={() => setExpandedCategory(expandedCategory === 'infrastructure' ? null : 'infrastructure')}
           >
             <div className="category-title">
-              <span className="category-icon">🏗️</span>
+              <span className="category-icon"></span>
               <h3>Infrastructure Capacity</h3>
               <span className="category-count">
                 ({infrastructureIndicators.filter(i => i.value !== null).length} indicators)
@@ -252,7 +252,7 @@ const CopingCapacityDimension = ({ data }) => {
             onClick={() => setExpandedCategory(expandedCategory === 'institutional' ? null : 'institutional')}
           >
             <div className="category-title">
-              <span className="category-icon">🏛️</span>
+              <span className="category-icon"></span>
               <h3>Institutional Capacity</h3>
               <span className="category-count">
                 ({institutionalIndicators.filter(i => i.value !== null).length} indicators)
@@ -280,7 +280,7 @@ const CopingCapacityDimension = ({ data }) => {
 
       {/* Overview Note */}
       <div className="methodology-note">
-        <h4>📊 Lack of Coping Capacity Overview</h4>
+        <h4>Lack of Coping Capacity Overview</h4>
         <p>
           The Lack of Coping Capacity dimension is aggregated using geometric mean in two steps:
         </p>
@@ -305,7 +305,7 @@ const CopingCapacityDimension = ({ data }) => {
         <div className="comparison-grid">
           <div className="comparison-card high-capacity">
             <div className="comparison-header">
-              <span className="comparison-icon">✅</span>
+              <span className="comparison-icon"></span>
               <h4>Strong Coping Capacity (Low Score)</h4>
             </div>
             <ul className="comparison-features">
@@ -322,7 +322,7 @@ const CopingCapacityDimension = ({ data }) => {
 
           <div className="comparison-card low-capacity">
             <div className="comparison-header">
-              <span className="comparison-icon">⚠️</span>
+              <span className="comparison-icon"></span>
               <h4>Weak Coping Capacity (High Score)</h4>
             </div>
             <ul className="comparison-features">
@@ -342,7 +342,7 @@ const CopingCapacityDimension = ({ data }) => {
       {/* Risk Management Message */}
       <div className="critical-teaching-box">
         <div className="teaching-header">
-          <span className="teaching-icon">💡</span>
+          <span className="teaching-icon"></span>
           <h4>Coping Capacity is Manageable</h4>
         </div>
         <p>

@@ -57,20 +57,20 @@ function DistrictDetail({ d }) {
 
       {d.facilities && (
         <div className="rx-facilities">
-          <span className="ui-eyebrow">Facilities · 2022 census</span>
-          <span title="Health facilities">🏥 {d.facilities.health.toLocaleString()}</span>
-          <span title="Schools">🏫 {d.facilities.education.toLocaleString()}</span>
-          <span title="Water points">💧 {d.facilities.water.toLocaleString()}</span>
-          <span title="Boreholes">⛲ {d.facilities.boreholes.toLocaleString()}</span>
+          <span className="ui-eyebrow">Facilities, 2022 census</span>
+          <span>Health {d.facilities.health.toLocaleString()}</span>
+          <span>Schools {d.facilities.education.toLocaleString()}</span>
+          <span>Water points {d.facilities.water.toLocaleString()}</span>
+          <span>Boreholes {d.facilities.boreholes.toLocaleString()}</span>
         </div>
       )}
       {d.hazardExposure?.exposure && (
         <div className="rx-facilities">
-          <span className="ui-eyebrow">Exposure · NBS 2022</span>
-          <span title="Population">👥 {d.hazardExposure.exposure.population?.toLocaleString()}</span>
-          <span title="Population density">{d.hazardExposure.exposure.density}/km²</span>
-          <span title="Exposure index 0–10">E&nbsp;{round1(d.hazardExposure.exposure.index)}</span>
-          {d.hazardExposure.events?.flood?.length ? <span title="Recorded flood years">🌊 {d.hazardExposure.events.flood.join(', ')}</span> : null}
+          <span className="ui-eyebrow">Exposure, NBS 2022</span>
+          <span>Population {d.hazardExposure.exposure.population?.toLocaleString()}</span>
+          <span>Density {d.hazardExposure.exposure.density}/km2</span>
+          <span>Exposure index {round1(d.hazardExposure.exposure.index)}</span>
+          {d.hazardExposure.events?.flood?.length ? <span>Recorded floods {d.hazardExposure.events.flood.join(', ')}</span> : null}
         </div>
       )}
 
@@ -150,13 +150,13 @@ export default function RiskExplorer() {
           </select>
           <span className="ui-muted rx-level-count">{ranked.length} {noun}</span>
           {level === 'council' && (
-            <span className="ui-muted rx-admin-basis" title="The REAL 195 NBS-2022 councils (LGAs). Hazard & Exposure is computed on EACH council's own polygon — CHIRPS v3 drought & heavy-rain, ERA5 heat, NBS-2022 council population ÷ council area — floored at the district's documented level (raise-only, never shown safer). Vulnerability & Coping stay district-level (HBS/TDHS/IPC surveys have no council breakdown); the 28 split councils inherit their parent district's V&C. Never fabricated.">
-              · 195 LGAs · Hazard computed per council; V&amp;C district-level ⓘ
+            <span className="ui-muted rx-admin-basis">
+              195 councils. Hazard and Exposure computed per council; Vulnerability and Coping at district level.
             </span>
           )}
           {level === 'district' && (
-            <span className="ui-muted rx-admin-basis" title="170 INFORM SADC 2024 council-level units (urban + rural). Official NBS 2022: 31 regions · 150 districts · 195 councils · 4,344 wards. Switch to 'Council / LGA' for the real 195 councils.">
-              · INFORM 170 — switch to Council for the real 195 ⓘ
+            <span className="ui-muted rx-admin-basis">
+              170 INFORM source units. Switch to Council for the 195 councils.
             </span>
           )}
         </div>
@@ -230,7 +230,7 @@ export default function RiskExplorer() {
             title={selected ? `Show only ${selected.admin.adm2Name}` : 'Select a unit on the map or table first'}
             onClick={() => { setSelectedOnly((s) => !s); setClassFilter(null); }}
           >
-            ★ Selected{selected ? `: ${selected.admin.adm2Name}` : ''}
+            Selected{selected ? `: ${selected.admin.adm2Name}` : ''}
           </button>
           {CATEGORIES.map((c) => {
             const n = ranked.filter((r) => classifyRisk(r.v).level === c.level).length;
@@ -254,7 +254,7 @@ export default function RiskExplorer() {
           onClick={() => setSecondPanel((s) => !s)}
           title="Add a second panel that focuses on the selected area"
         >
-          {secondPanel ? '⊟ Single panel' : '⊞ Split: area panel'}
+          {secondPanel ? 'Single panel' : 'Split panel'}
         </button>
       </div>
 
@@ -300,11 +300,11 @@ export default function RiskExplorer() {
           <div className="rx-table-actions">
             {tableOpen && (
               <button className="ui-chip" onClick={() => setSortDir((s) => (s === 'desc' ? 'asc' : 'desc'))}>
-                {sortDir === 'desc' ? 'High → Low' : 'Low → High'}
+                {sortDir === 'desc' ? 'High to Low' : 'Low to High'}
               </button>
             )}
             <button className="ui-chip" onClick={() => setTableOpen((o) => !o)}>
-              {tableOpen ? 'Hide table ▲' : 'Show table ▼'}
+              {tableOpen ? 'Hide table' : 'Show table'}
             </button>
           </div>
         </div>

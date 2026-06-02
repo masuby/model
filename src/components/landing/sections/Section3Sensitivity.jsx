@@ -13,25 +13,25 @@ function Section3Sensitivity() {
       housing: {
         type: 'Poor Housing',
         details: '75% mud/thatch construction, weak foundations',
-        icon: '🏚️',
+        icon: '',
         sensitivity: 'high'
       },
       health: {
         type: 'Weak Health',
         details: '45% child malnutrition, limited healthcare access',
-        icon: '🏥',
+        icon: '',
         sensitivity: 'high'
       },
       infrastructure: {
         type: 'No Drainage',
         details: 'No drainage system, dirt roads',
-        icon: '🚧',
+        icon: '',
         sensitivity: 'high'
       },
       economic: {
         type: 'High Poverty',
         details: '60% below poverty line, low income diversity',
-        icon: '💰',
+        icon: '',
         sensitivity: 'high'
       },
       outcome: 'HIGH IMPACT',
@@ -45,25 +45,25 @@ function Section3Sensitivity() {
       housing: {
         type: 'Strong Housing',
         details: '80% concrete/permanent construction, proper foundations',
-        icon: '🏘️',
+        icon: '',
         sensitivity: 'low'
       },
       health: {
         type: 'Good Health',
         details: '10% child malnutrition, good healthcare access',
-        icon: '⚕️',
+        icon: '',
         sensitivity: 'low'
       },
       infrastructure: {
         type: 'Good Drainage',
         details: 'Modern drainage system, paved roads',
-        icon: '🛣️',
+        icon: '',
         sensitivity: 'low'
       },
       economic: {
         type: 'Lower Poverty',
         details: '20% below poverty line, diverse livelihoods',
-        icon: '💼',
+        icon: '',
         sensitivity: 'low'
       },
       outcome: 'LOW IMPACT',
@@ -78,7 +78,7 @@ function Section3Sensitivity() {
     {
       id: 'housing',
       name: 'Housing Quality',
-      icon: '🏠',
+      icon: '',
       color: '#FF9800',
       indicators: [
         { label: 'Mud/thatch housing', value: '45%', risk: 'high' },
@@ -91,7 +91,7 @@ function Section3Sensitivity() {
     {
       id: 'health',
       name: 'Health Status',
-      icon: '❤️',
+      icon: '',
       color: '#E91E63',
       indicators: [
         { label: 'Child malnutrition (under-5)', value: '31%', risk: 'high' },
@@ -104,7 +104,7 @@ function Section3Sensitivity() {
     {
       id: 'infrastructure',
       name: 'Infrastructure',
-      icon: '🏗️',
+      icon: '',
       color: '#3F51B5',
       indicators: [
         { label: 'Drainage systems', value: '30%', risk: 'high' },
@@ -117,7 +117,7 @@ function Section3Sensitivity() {
     {
       id: 'economic',
       name: 'Economic Status',
-      icon: '💵',
+      icon: '',
       color: '#4CAF50',
       indicators: [
         { label: 'Below poverty line', value: '26%', risk: 'high' },
@@ -147,7 +147,7 @@ function Section3Sensitivity() {
 
       {/* Definition Box */}
       <div className="definition-box sensitivity-definition">
-        <div className="definition-icon">🎯</div>
+        <div className="definition-icon"></div>
         <div className="definition-content">
           <h3>What is Sensitivity?</h3>
           <p className="inform-definition">
@@ -184,7 +184,7 @@ function Section3Sensitivity() {
               backgroundColor: selectedDistrict === 'districtA' ? '#FFEBEE' : 'white'
             }}
           >
-            <span className="district-icon">📍</span>
+            <span className="district-icon"></span>
             District A (High Sensitivity)
           </button>
           <button
@@ -195,7 +195,7 @@ function Section3Sensitivity() {
               backgroundColor: selectedDistrict === 'both' ? '#FFF3E0' : 'white'
             }}
           >
-            <span className="district-icon">⚖️</span>
+            <span className="district-icon"></span>
             Compare Both
           </button>
           <button
@@ -206,7 +206,7 @@ function Section3Sensitivity() {
               backgroundColor: selectedDistrict === 'districtB' ? '#E8F5E9' : 'white'
             }}
           >
-            <span className="district-icon">📍</span>
+            <span className="district-icon"></span>
             District B (Low Sensitivity)
           </button>
         </div>
@@ -351,7 +351,7 @@ function Section3Sensitivity() {
 
       {/* Critical Teaching Box: Disasters Are Not Natural */}
       <div className="teaching-box disasters-not-natural">
-        <div className="teaching-icon">💡</div>
+        <div className="teaching-icon"></div>
         <div className="teaching-content">
           <h3>CRITICAL INSIGHT: "Disasters Are Not Natural"</h3>
           <div className="insight-explanation">
@@ -364,28 +364,28 @@ function Section3Sensitivity() {
             </p>
             <div className="disaster-causes">
               <div className="cause-item">
-                <span className="cause-icon">💰</span>
+                <span className="cause-icon"></span>
                 <div className="cause-text">
                   <strong>Poverty</strong>
                   <p>Inability to build safe homes or evacuate</p>
                 </div>
               </div>
               <div className="cause-item">
-                <span className="cause-icon">🏚️</span>
+                <span className="cause-icon"></span>
                 <div className="cause-text">
                   <strong>Poor Infrastructure</strong>
                   <p>Weak housing, no drainage, bad roads</p>
                 </div>
               </div>
               <div className="cause-item">
-                <span className="cause-icon">🏥</span>
+                <span className="cause-icon"></span>
                 <div className="cause-text">
                   <strong>Weak Health Systems</strong>
                   <p>Malnutrition, disease, limited healthcare</p>
                 </div>
               </div>
               <div className="cause-item">
-                <span className="cause-icon">⚖️</span>
+                <span className="cause-icon"></span>
                 <div className="cause-text">
                   <strong>Inequality</strong>
                   <p>Marginalized groups suffer disproportionately</p>
@@ -405,36 +405,36 @@ function Section3Sensitivity() {
 
       {/* Section Summary */}
       <div className="section-summary sensitivity-summary">
-        <h3>📚 Section 3 Summary: Key Learnings</h3>
+        <h3>Section 3 Summary: Key Learnings</h3>
         <div className="summary-points">
           <div className="summary-point">
-            <span className="check-icon">✓</span>
+            <span className="check-icon"></span>
             <span className="point-text">
               <strong>Sensitivity</strong> determines how severely people are affected when hazards occur
             </span>
           </div>
           <div className="summary-point">
-            <span className="check-icon">✓</span>
+            <span className="check-icon"></span>
             <span className="point-text">
               The <strong>same hazard</strong> can cause a <strong>disaster</strong> in one place and be
               <strong> manageable</strong> in another — sensitivity makes the difference
             </span>
           </div>
           <div className="summary-point">
-            <span className="check-icon">✓</span>
+            <span className="check-icon"></span>
             <span className="point-text">
               Key sensitivity factors: <strong>housing quality, health status, infrastructure, economic status</strong>
             </span>
           </div>
           <div className="summary-point">
-            <span className="check-icon">✓</span>
+            <span className="check-icon"></span>
             <span className="point-text">
               <strong>Disasters are NOT natural</strong> — they're created by poverty, inequality, and weak systems
             </span>
           </div>
         </div>
         <div className="next-section-preview">
-          <h4>🔜 Next Section: Vulnerability</h4>
+          <h4>Next Section: Vulnerability</h4>
           <p>
             We've learned how sensitivity affects impact. Now we'll explore <strong>vulnerability</strong> —
             the broader concept that INFORM uses to assess which communities are most at risk. This is where

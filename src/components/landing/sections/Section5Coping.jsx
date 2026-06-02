@@ -12,7 +12,7 @@ function Section5Coping() {
     prepare: {
       id: 'prepare',
       name: 'PREPARE',
-      icon: '🔔',
+      icon: '',
       color: '#1976D2',
       description: 'Actions taken before a disaster to reduce impact',
       activities: [
@@ -26,7 +26,7 @@ function Section5Coping() {
     respond: {
       id: 'respond',
       name: 'RESPOND',
-      icon: '🚨',
+      icon: '',
       color: '#D32F2F',
       description: 'Actions during and immediately after a disaster',
       activities: [
@@ -40,7 +40,7 @@ function Section5Coping() {
     recover: {
       id: 'recover',
       name: 'RECOVER',
-      icon: '🏗️',
+      icon: '',
       color: '#43A047',
       description: 'Actions to rebuild and strengthen after a disaster',
       activities: [
@@ -58,7 +58,7 @@ function Section5Coping() {
     {
       id: 'institutional',
       name: 'Institutional Capacity',
-      icon: '🏛️',
+      icon: '',
       color: '#3F51B5',
       description: 'Government systems and disaster management structures',
       indicators: [
@@ -72,7 +72,7 @@ function Section5Coping() {
     {
       id: 'infrastructure',
       name: 'Infrastructure',
-      icon: '🛣️',
+      icon: '',
       color: '#FF9800',
       description: 'Physical systems for communication, transport, and services',
       indicators: [
@@ -86,7 +86,7 @@ function Section5Coping() {
     {
       id: 'health',
       name: 'Health Services',
-      icon: '⚕️',
+      icon: '',
       color: '#E91E63',
       description: 'Medical capacity to handle mass casualties and epidemics',
       indicators: [
@@ -106,8 +106,8 @@ function Section5Coping() {
       color: '#43A047',
       examples: [
         {
-          hazard: '🌊 Flood (100mm rainfall)',
-          outcome: '✅ Managed Situation',
+          hazard: 'Flood (100mm rainfall)',
+          outcome: 'Managed Situation',
           details: [
             'Early warning issued 24h in advance',
             'Pre-positioned supplies distributed',
@@ -116,8 +116,8 @@ function Section5Coping() {
           ]
         },
         {
-          hazard: '🦠 Disease Outbreak',
-          outcome: '✅ Controlled Response',
+          hazard: 'Disease Outbreak',
+          outcome: 'Controlled Response',
           details: [
             'Surveillance detected outbreak early',
             'Isolation facilities activated',
@@ -132,8 +132,8 @@ function Section5Coping() {
       color: '#D32F2F',
       examples: [
         {
-          hazard: '🌊 Flood (100mm rainfall)',
-          outcome: '❌ CRISIS',
+          hazard: 'Flood (100mm rainfall)',
+          outcome: 'CRISIS',
           details: [
             'No warning system - people caught off guard',
             'No evacuation plan or shelters',
@@ -142,8 +142,8 @@ function Section5Coping() {
           ]
         },
         {
-          hazard: '🦠 Disease Outbreak',
-          outcome: '❌ CRISIS',
+          hazard: 'Disease Outbreak',
+          outcome: 'CRISIS',
           details: [
             'Outbreak detected after widespread transmission',
             'No isolation capacity or treatment supplies',
@@ -165,7 +165,7 @@ function Section5Coping() {
 
       {/* INFORM Definition Box */}
       <div className="definition-box coping-definition">
-        <div className="definition-icon">💪</div>
+        <div className="definition-icon"></div>
         <div className="definition-content">
           <h3>What is Coping Capacity?</h3>
           <p className="inform-definition">
@@ -192,10 +192,10 @@ function Section5Coping() {
 
         <div className="phases-selector">
           {[
-            { id: 'all', label: 'All Phases', icon: '🔄' },
-            { id: 'prepare', label: 'Prepare', icon: '🔔' },
-            { id: 'respond', label: 'Respond', icon: '🚨' },
-            { id: 'recover', label: 'Recover', icon: '🏗️' }
+            { id: 'all', label: 'All Phases', icon: '' },
+            { id: 'prepare', label: 'Prepare', icon: '' },
+            { id: 'respond', label: 'Respond', icon: '' },
+            { id: 'recover', label: 'Recover', icon: '' }
           ].map(phase => (
             <button
               key={phase.id}
@@ -280,9 +280,9 @@ function Section5Coping() {
 
         <div className="comparison-controls">
           {[
-            { id: 'both', label: 'Compare Both', icon: '⚖️' },
-            { id: 'high', label: 'High Capacity', icon: '✅' },
-            { id: 'low', label: 'Low Capacity', icon: '❌' }
+            { id: 'both', label: 'Compare Both', icon: '' },
+            { id: 'high', label: 'High Capacity', icon: '' },
+            { id: 'low', label: 'Low Capacity', icon: '' }
           ].map(view => (
             <button
               key={view.id}
@@ -339,7 +339,7 @@ function Section5Coping() {
       {/* INFORM Formula - Second Dimension Reveal */}
       <div className="formula-reveal-section">
         <div className="reveal-intro">
-          <h2>🔓 INFORM Formula: Second Dimension</h2>
+          <h2>INFORM Formula: Second Dimension</h2>
           <p>
             You've seen how <strong>Vulnerability</strong> increases risk. Now see how <strong>Lack of Coping Capacity</strong>
             works alongside it in the INFORM equation.
@@ -349,7 +349,7 @@ function Section5Coping() {
             onClick={() => setShowFormula(!showFormula)}
             style={{ backgroundColor: showFormula ? '#43A047' : '#1976D2' }}
           >
-            {showFormula ? '✓ Second Dimension Revealed' : '🔓 Reveal Second Dimension'}
+            {showFormula ? 'Second Dimension Revealed' : 'Reveal Second Dimension'}
           </button>
         </div>
 
@@ -363,11 +363,11 @@ function Section5Coping() {
             </div>
             <div className="formula-highlights">
               <div className="formula-highlight">
-                <div className="highlight-arrow">↑</div>
+                <div className="highlight-arrow"></div>
                 <div className="highlight-label vulnerability">V = Vulnerability</div>
               </div>
               <div className="formula-highlight">
-                <div className="highlight-arrow">↑</div>
+                <div className="highlight-arrow"></div>
                 <div className="highlight-label capacity">LCC = Lack of Coping Capacity</div>
               </div>
             </div>
@@ -375,28 +375,28 @@ function Section5Coping() {
               <h4>What This Means:</h4>
               <div className="explanation-grid">
                 <div className="explanation-item">
-                  <div className="explanation-icon">🔄</div>
+                  <div className="explanation-icon"></div>
                   <div className="explanation-text">
                     <strong>LCC = "Lack" of Capacity</strong>
                     <p>INFORM uses the inverse: Strong capacity = Low LCC</p>
                   </div>
                 </div>
                 <div className="explanation-item">
-                  <div className="explanation-icon">⚖️</div>
+                  <div className="explanation-icon"></div>
                   <div className="explanation-text">
                     <strong>Counterbalances Vulnerability</strong>
                     <p>High capacity can offset high vulnerability</p>
                   </div>
                 </div>
                 <div className="explanation-item">
-                  <div className="explanation-icon">📈</div>
+                  <div className="explanation-icon"></div>
                   <div className="explanation-text">
                     <strong>Can Be Strengthened</strong>
                     <p>Investment in systems and infrastructure reduces LCC and risk</p>
                   </div>
                 </div>
                 <div className="explanation-item">
-                  <div className="explanation-icon">🎯</div>
+                  <div className="explanation-icon"></div>
                   <div className="explanation-text">
                     <strong>Determines Crisis vs Management</strong>
                     <p>Capacity decides if a hazard overwhelms the country</p>
@@ -413,7 +413,7 @@ function Section5Coping() {
 
       {/* Teaching Box */}
       <div className="teaching-box capacity-teaching">
-        <div className="teaching-icon">🧠</div>
+        <div className="teaching-icon"></div>
         <div className="teaching-content">
           <h3>KEY INSIGHT: Coping Capacity Counterbalances Vulnerability</h3>
           <div className="teaching-scenario">
@@ -423,15 +423,15 @@ function Section5Coping() {
                 <h4>WITHOUT Strong Coping Capacity:</h4>
                 <div className="scenario-outcomes">
                   <div className="outcome-item">
-                    <span className="outcome-icon">☀️</span>
+                    <span className="outcome-icon"></span>
                     <span className="outcome-text">Drought → <strong>Famine</strong></span>
                   </div>
                   <div className="outcome-item">
-                    <span className="outcome-icon">🦠</span>
+                    <span className="outcome-icon"></span>
                     <span className="outcome-text">Epidemic → <strong>Mass Deaths</strong></span>
                   </div>
                   <div className="outcome-item">
-                    <span className="outcome-icon">🌊</span>
+                    <span className="outcome-icon"></span>
                     <span className="outcome-text">Flood → <strong>Displacement</strong></span>
                   </div>
                 </div>
@@ -441,15 +441,15 @@ function Section5Coping() {
                 <h4>WITH Strong Coping Capacity:</h4>
                 <div className="scenario-outcomes">
                   <div className="outcome-item">
-                    <span className="outcome-icon">☀️</span>
+                    <span className="outcome-icon"></span>
                     <span className="outcome-text">Drought → <strong>Managed food distribution</strong></span>
                   </div>
                   <div className="outcome-item">
-                    <span className="outcome-icon">🦠</span>
+                    <span className="outcome-icon"></span>
                     <span className="outcome-text">Epidemic → <strong>Controlled outbreak</strong></span>
                   </div>
                   <div className="outcome-item">
-                    <span className="outcome-icon">🌊</span>
+                    <span className="outcome-icon"></span>
                     <span className="outcome-text">Flood → <strong>Safe evacuation</strong></span>
                   </div>
                 </div>
@@ -468,41 +468,41 @@ function Section5Coping() {
 
       {/* Section Summary */}
       <div className="section-summary coping-summary">
-        <h3>📚 Section 5 Summary: Key Learnings</h3>
+        <h3>Section 5 Summary: Key Learnings</h3>
         <div className="summary-points">
           <div className="summary-point">
-            <span className="check-icon">✓</span>
+            <span className="check-icon"></span>
             <span className="point-text">
               <strong>Coping capacity</strong> is the ability to prepare, respond, and recover from disasters
             </span>
           </div>
           <div className="summary-point">
-            <span className="check-icon">✓</span>
+            <span className="check-icon"></span>
             <span className="point-text">
               INFORM measures capacity through <strong>three components</strong>: institutional, infrastructure, and health
             </span>
           </div>
           <div className="summary-point">
-            <span className="check-icon">✓</span>
+            <span className="check-icon"></span>
             <span className="point-text">
               <strong>Strong capacity counterbalances vulnerability</strong> — the same vulnerable population can avoid crisis with good coping systems
             </span>
           </div>
           <div className="summary-point">
-            <span className="check-icon">✓</span>
+            <span className="check-icon"></span>
             <span className="point-text">
               The INFORM formula uses <strong>Lack of Coping Capacity (LCC)</strong> as the second dimension of risk
             </span>
           </div>
           <div className="summary-point">
-            <span className="check-icon">✓</span>
+            <span className="check-icon"></span>
             <span className="point-text">
               <strong>Investing in capacity = Risk reduction</strong> — every improvement in systems and infrastructure saves lives
             </span>
           </div>
         </div>
         <div className="next-section-preview">
-          <h4>🔜 Final Section: Risk</h4>
+          <h4>Final Section: Risk</h4>
           <p>
             You've learned about <strong>Hazard and Exposure</strong>, <strong>Vulnerability</strong>, and <strong>Coping Capacity</strong>.
             Section 6 brings it all together — the <strong>complete INFORM Risk formula</strong>, how to calculate risk scores,

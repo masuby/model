@@ -11,29 +11,29 @@ import './Section1Hazard.css';
 const HAZARD_CATEGORIES = {
   natural: {
     title: 'Natural Hazards',
-    icon: '🌍',
+    icon: '',
     color: '#D32F2F',
     hazards: [
-      { id: 'rainfall', name: 'Heavy Rainfall', icon: '🌧️', frequency: 'Annual' },
-      { id: 'flood', name: 'Floods (Riverine and Flash)', icon: '🌊', frequency: 'Seasonal' },
-      { id: 'drought', name: 'Drought', icon: '☀️', frequency: '3-5 years' },
-      { id: 'cyclone', name: 'Cyclones', icon: '🌪️', frequency: 'Occasional' },
-      { id: 'waves', name: 'Large Waves (Coastal)', icon: '🌊', frequency: 'Seasonal' },
-      { id: 'wildfire', name: 'Wildfires', icon: '🔥', frequency: 'Dry season' },
-      { id: 'temperature', name: 'Extreme Temperatures', icon: '🌡️', frequency: 'Annual' },
-      { id: 'heatwave', name: 'Heat Waves', icon: '🌡️', frequency: 'Occasional' },
-      { id: 'volcano', name: 'Volcanic Activity', icon: '🌋', frequency: 'Rare' },
-      { id: 'earthquake', name: 'Earthquakes', icon: '🏔️', frequency: 'Rare' },
-      { id: 'landslide', name: 'Landslides', icon: '⛰️', frequency: 'Rainy season' },
+      { id: 'rainfall', name: 'Heavy Rainfall', icon: '', frequency: 'Annual' },
+      { id: 'flood', name: 'Floods (Riverine and Flash)', icon: '', frequency: 'Seasonal' },
+      { id: 'drought', name: 'Drought', icon: '', frequency: '3-5 years' },
+      { id: 'cyclone', name: 'Cyclones', icon: '', frequency: 'Occasional' },
+      { id: 'waves', name: 'Large Waves (Coastal)', icon: '', frequency: 'Seasonal' },
+      { id: 'wildfire', name: 'Wildfires', icon: '', frequency: 'Dry season' },
+      { id: 'temperature', name: 'Extreme Temperatures', icon: '', frequency: 'Annual' },
+      { id: 'heatwave', name: 'Heat Waves', icon: '', frequency: 'Occasional' },
+      { id: 'volcano', name: 'Volcanic Activity', icon: '', frequency: 'Rare' },
+      { id: 'earthquake', name: 'Earthquakes', icon: '', frequency: 'Rare' },
+      { id: 'landslide', name: 'Landslides', icon: '', frequency: 'Rainy season' },
     ]
   },
   human: {
     title: 'Human Hazards',
-    icon: '👥',
+    icon: '',
     color: '#C62828',
     hazards: [
-      { id: 'conflict', name: 'Conflict and Unrest', icon: '⚔️', frequency: 'Variable' },
-      { id: 'epidemic', name: 'Epidemics and Disease Outbreaks', icon: '🦠', frequency: 'Variable' },
+      { id: 'conflict', name: 'Conflict and Unrest', icon: '', frequency: 'Variable' },
+      { id: 'epidemic', name: 'Epidemics and Disease Outbreaks', icon: '', frequency: 'Variable' },
     ]
   }
 };
@@ -74,7 +74,7 @@ function Section1Hazard() {
 
       {/* Key Principle - Teaching Box */}
       <div className="teaching-box critical">
-        <div className="teaching-icon">⚠️</div>
+        <div className="teaching-icon"></div>
         <div className="teaching-content">
           <h4>CRITICAL LESSON</h4>
           <div className="teaching-divider"></div>
@@ -178,7 +178,7 @@ function Section1Hazard() {
 
       {/* Important No Impact Yet Notice */}
       <div className="no-impact-notice">
-        <div className="notice-icon">📌</div>
+        <div className="notice-icon"></div>
         <div className="notice-text">
           <strong>Important:</strong> At this stage, we are only identifying <strong>what can happen</strong>.
           <br />
@@ -203,7 +203,7 @@ function Section1Hazard() {
           </div>
           <div className="timeline-events">
             <div className="event-row floods">
-              <span className="event-type">🌊 Floods</span>
+              <span className="event-type">Floods</span>
               <div className="event-markers">
                 <div className="event-marker" style={{ left: '10%' }}></div>
                 <div className="event-marker" style={{ left: '30%' }}></div>
@@ -213,21 +213,21 @@ function Section1Hazard() {
               </div>
             </div>
             <div className="event-row drought">
-              <span className="event-type">☀️ Drought</span>
+              <span className="event-type">Drought</span>
               <div className="event-markers">
                 <div className="event-marker" style={{ left: '25%', width: '30%' }}></div>
                 <div className="event-marker" style={{ left: '65%', width: '25%' }}></div>
               </div>
             </div>
             <div className="event-row epidemics">
-              <span className="event-type">🦠 Epidemics</span>
+              <span className="event-type">Epidemics</span>
               <div className="event-markers">
                 <div className="event-marker" style={{ left: '15%' }}></div>
                 <div className="event-marker" style={{ left: '55%', width: '35%' }}></div>
               </div>
             </div>
             <div className="event-row cyclones">
-              <span className="event-type">🌪️ Cyclones</span>
+              <span className="event-type">Cyclones</span>
               <div className="event-markers">
                 <div className="event-marker" style={{ left: '40%' }}></div>
                 <div className="event-marker" style={{ left: '85%' }}></div>
@@ -246,10 +246,10 @@ function Section1Hazard() {
       <div className="section-summary">
         <h4>Section 1 Summary: What You Learned</h4>
         <ul>
-          <li>✓ Hazards are potentially damaging events (natural or human)</li>
-          <li>✓ Tanzania faces multiple hazard types with varying frequencies</li>
-          <li>✓ <strong>Hazards alone do NOT create disasters</strong></li>
-          <li>✓ Impact depends on exposure, vulnerability, and coping capacity (coming next!)</li>
+          <li>Hazards are potentially damaging events (natural or human)</li>
+          <li>Tanzania faces multiple hazard types with varying frequencies</li>
+          <li><strong>Hazards alone do NOT create disasters</strong></li>
+          <li>Impact depends on exposure, vulnerability, and coping capacity (coming next!)</li>
         </ul>
         <div className="next-preview">
           <strong>Next Section:</strong> EXPOSURE - Where hazards meet people

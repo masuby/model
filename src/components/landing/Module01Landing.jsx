@@ -90,7 +90,7 @@ function Module01Landing({ onComplete }) {
               }`}
             >
               <div className="step-circle">
-                {completedSections.includes(section.id) ? '✓' : section.id}
+                {completedSections.includes(section.id) ? '' : section.id}
               </div>
               <div className="step-label">
                 <div className="step-title">{section.title}</div>
@@ -168,7 +168,7 @@ function Module01Landing({ onComplete }) {
 
       {/* Important Notice */}
       <div className="important-notice">
-        <div className="notice-icon">⚠️</div>
+        <div className="notice-icon"></div>
         <div className="notice-content">
           <strong>INFORM is a decision-support tool</strong> for humanitarian and development actors.
           <br />

@@ -194,7 +194,7 @@ const HazardExposureDimension = ({ data }) => {
             style={{ borderLeft: '4px solid #1976D2' }}
           >
             <div className="category-title">
-              <span className="category-icon">🎯</span>
+              <span className="category-icon"></span>
               <h3>Priority Hazards: Floods & Droughts</h3>
               <span className="category-count">(INFORM Risk Assessment)</span>
             </div>
@@ -227,7 +227,7 @@ const HazardExposureDimension = ({ data }) => {
                 }}>
                   <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '16px' }}>
                     <h4 style={{ margin: 0, display: 'flex', alignItems: 'center', gap: '10px' }}>
-                      <span style={{ fontSize: '24px' }}>🌊</span>
+                      <span style={{ fontSize: '24px' }}></span>
                       Flood Risk Assessment
                     </h4>
                     <div style={{
@@ -291,7 +291,7 @@ const HazardExposureDimension = ({ data }) => {
                 }}>
                   <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '16px' }}>
                     <h4 style={{ margin: 0, display: 'flex', alignItems: 'center', gap: '10px' }}>
-                      <span style={{ fontSize: '24px' }}>☀️</span>
+                      <span style={{ fontSize: '24px' }}></span>
                       Drought Risk Assessment
                     </h4>
                     <div style={{
@@ -371,7 +371,7 @@ const HazardExposureDimension = ({ data }) => {
             onClick={() => setExpandedCategory(expandedCategory === 'natural' ? null : 'natural')}
           >
             <div className="category-title">
-              <span className="category-icon">🌍</span>
+              <span className="category-icon"></span>
               <h3>Natural Hazards</h3>
               <span className="category-count">({naturalHazards.filter(h => h.value !== null).length} indicators)</span>
             </div>
@@ -402,7 +402,7 @@ const HazardExposureDimension = ({ data }) => {
             onClick={() => setExpandedCategory(expandedCategory === 'human' ? null : 'human')}
           >
             <div className="category-title">
-              <span className="category-icon">⚠️</span>
+              <span className="category-icon"></span>
               <h3>Human Hazards</h3>
               <span className="category-count">({humanHazards.filter(h => h.value !== null).length} indicators)</span>
             </div>
@@ -433,7 +433,7 @@ const HazardExposureDimension = ({ data }) => {
             onClick={() => setExpandedCategory(expandedCategory === 'physical' ? null : 'physical')}
           >
             <div className="category-title">
-              <span className="category-icon">👥</span>
+              <span className="category-icon"></span>
               <h3>Physical Exposure</h3>
               <span className="category-count">({physicalExposureIndicators.filter(e => e.value !== null).length} indicators)</span>
             </div>
@@ -463,7 +463,7 @@ const HazardExposureDimension = ({ data }) => {
             onClick={() => setExpandedCategory(expandedCategory === 'geographical' ? null : 'geographical')}
           >
             <div className="category-title">
-              <span className="category-icon">🗺️</span>
+              <span className="category-icon"></span>
               <h3>Geographical Exposure</h3>
               <span className="category-count">({geographicalExposureIndicators.filter(e => e.value !== null).length} indicators)</span>
             </div>
@@ -490,7 +490,7 @@ const HazardExposureDimension = ({ data }) => {
 
       {/* Overview Note */}
       <div className="methodology-note">
-        <h4>📊 Hazard and Exposure Overview</h4>
+        <h4>Hazard and Exposure Overview</h4>
         <p>
           <strong>Hazard and Exposure</strong> combines four critical components:
         </p>

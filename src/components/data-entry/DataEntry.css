@@ -73,5 +73,5 @@
 .de-clear { border: 1px solid var(--c-line); background: var(--c-surface-2); border-radius: 6px; cursor: pointer; width: 28px; height: 30px; color: var(--c-muted); font-size: 14px; line-height: 1; flex: none; }
 .de-clear:hover:not(:disabled) { background: #fee2e2; border-color: #f87171; color: #b91c1c; }
 .de-clear:disabled { opacity: 0.35; cursor: default; }
-.de-ind.is-nodata input { background: repeating-linear-gradient(45deg, #f8fafc, #f8fafc 6px, #eef2f7 6px, #eef2f7 12px); }
+.de-ind.is-nodata input { background: #f1f5f9; }
 .de-nodata { color: #94a3b8; font-style: italic; font-weight: 400; }

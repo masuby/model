@@ -9,15 +9,15 @@ import './HomePage.css';
 
 const MODULES = [
   {
-    icon: '📚', title: 'Education', to: '/education', cta: 'Start the course',
+    icon: '', title: 'Education', to: '/education', cta: 'Start the course',
     desc: 'A guided course on the INFORM framework — hazard, exposure, vulnerability, coping capacity and risk — with a short quiz after each section.',
   },
   {
-    icon: '🗺️', title: 'Risk', to: '/risk', cta: 'Open the explorer',
+    icon: '', title: 'Risk', to: '/risk', cta: 'Open the explorer',
     desc: "Explore Tanzania's INFORM Risk at council, region and national level — by dimension or any single indicator — on the map, ranked tables and downloadable charts.",
   },
   {
-    icon: '🎯', title: 'Severity', to: '/severity', cta: 'Open the calculator',
+    icon: '', title: 'Severity', to: '/severity', cta: 'Open the calculator',
     desc: 'Measure how severe a crisis is with the IASC INFORM Severity Index v6 — its impact, the conditions of affected people, and response complexity.',
   },
 ];
@@ -48,7 +48,7 @@ export default function HomePage() {
             severity of crises — grounded in the global INFORM methodology.
           </p>
           <div className="home-cta">
-            <NavLink to="/education" className="home-btn home-btn-primary">Start the course →</NavLink>
+            <NavLink to="/education" className="home-btn home-btn-primary">Start the course</NavLink>
             <NavLink to="/risk" className="home-btn">Explore the map</NavLink>
           </div>
         </div>
@@ -62,10 +62,9 @@ export default function HomePage() {
       <section className="home-modules">
         {MODULES.map((m) => (
           <NavLink key={m.title} to={m.to} className="home-mod ui-card ui-card-pad">
-            <div className="home-mod-icon">{m.icon}</div>
             <h2 className="ui-h2">{m.title}</h2>
             <p className="home-mod-desc">{m.desc}</p>
-            <span className="home-mod-link">{m.cta} →</span>
+            <span className="home-mod-link">{m.cta}</span>
           </NavLink>
         ))}
       </section>

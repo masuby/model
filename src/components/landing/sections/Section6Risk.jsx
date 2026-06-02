@@ -97,7 +97,7 @@ function Section6Risk() {
 
       {/* INFORM Definition Box */}
       <div className="definition-box risk-definition">
-        <div className="definition-icon">🎲</div>
+        <div className="definition-icon"></div>
         <div className="definition-content">
           <h3>What is Risk?</h3>
           <p className="inform-definition">
@@ -119,7 +119,7 @@ function Section6Risk() {
       {/* Complete Formula Reveal */}
       <div className="formula-reveal-section complete">
         <div className="reveal-intro">
-          <h2>🔓 The Complete INFORM Risk Equation</h2>
+          <h2>The Complete INFORM Risk Equation</h2>
           <p>
             You've learned about <strong>Hazard and Exposure</strong>, <strong>Vulnerability</strong>,
             and <strong>Coping Capacity</strong>. Now see how INFORM combines all three dimensions
@@ -130,7 +130,7 @@ function Section6Risk() {
             onClick={() => setShowCompleteFormula(!showCompleteFormula)}
             style={{ backgroundColor: showCompleteFormula ? '#43A047' : '#1976D2' }}
           >
-            {showCompleteFormula ? '✓ Complete Formula Revealed' : '🔓 Click to Reveal Complete INFORM Formula'}
+            {showCompleteFormula ? 'Complete Formula Revealed' : 'Click to Reveal Complete INFORM Formula'}
           </button>
         </div>
 
@@ -144,17 +144,17 @@ function Section6Risk() {
             </div>
             <div className="formula-highlights-complete">
               <div className="formula-highlight hazard">
-                <div className="highlight-arrow">↑</div>
+                <div className="highlight-arrow"></div>
                 <div className="highlight-label">HAZARD & EXPOSURE</div>
                 <div className="highlight-description">What hazards + Who is exposed</div>
               </div>
               <div className="formula-highlight vulnerability">
-                <div className="highlight-arrow">↑</div>
+                <div className="highlight-arrow"></div>
                 <div className="highlight-label">VULNERABILITY</div>
                 <div className="highlight-description">Pre-existing susceptibility</div>
               </div>
               <div className="formula-highlight capacity">
-                <div className="highlight-arrow">↑</div>
+                <div className="highlight-arrow"></div>
                 <div className="highlight-label">LACK OF COPING CAPACITY</div>
                 <div className="highlight-description">Inability to manage disasters</div>
               </div>
@@ -163,7 +163,7 @@ function Section6Risk() {
               <h4>Why the Geometric Mean (Cube Root)?</h4>
               <div className="geometric-comparison">
                 <div className="comparison-col">
-                  <div className="comparison-title">❌ Arithmetic Mean (Average)</div>
+                  <div className="comparison-title">Arithmetic Mean (Average)</div>
                   <div className="comparison-formula">Risk = (H and E + V + LCC) ÷ 3</div>
                   <div className="comparison-problem">
                     <strong>Problem:</strong> High score in one dimension can be "cancelled out" by low scores in others
@@ -173,7 +173,7 @@ function Section6Risk() {
                   </div>
                 </div>
                 <div className="comparison-col">
-                  <div className="comparison-title">✓ Geometric Mean (Cube Root)</div>
+                  <div className="comparison-title">Geometric Mean (Cube Root)</div>
                   <div className="comparison-formula">Risk = (H and E × V × LCC)<sup>1/3</sup></div>
                   <div className="comparison-benefit">
                     <strong>Benefit:</strong> ALL dimensions matter equally — a high score in any dimension raises overall risk
@@ -216,7 +216,7 @@ function Section6Risk() {
             <div className="dimension-bars">
               <div className="dimension-bar">
                 <div className="dimension-label">
-                  <span className="dimension-icon">⚠️</span>
+                  <span className="dimension-icon"></span>
                   <span>Hazard and Exposure</span>
                 </div>
                 <div className="dimension-value-bar">
@@ -230,7 +230,7 @@ function Section6Risk() {
               </div>
               <div className="dimension-bar">
                 <div className="dimension-label">
-                  <span className="dimension-icon">🎯</span>
+                  <span className="dimension-icon"></span>
                   <span>Vulnerability</span>
                 </div>
                 <div className="dimension-value-bar">
@@ -244,7 +244,7 @@ function Section6Risk() {
               </div>
               <div className="dimension-bar">
                 <div className="dimension-label">
-                  <span className="dimension-icon">🛡️</span>
+                  <span className="dimension-icon"></span>
                   <span>Lack of Coping Capacity</span>
                 </div>
                 <div className="dimension-value-bar">
@@ -266,7 +266,7 @@ function Section6Risk() {
         </div>
 
         <div className="context-box">
-          <div className="context-icon">💡</div>
+          <div className="context-icon"></div>
           <div className="context-text">
             <strong>What This Means:</strong> {TANZANIA_RISK.context}
           </div>
@@ -294,7 +294,7 @@ function Section6Risk() {
               </div>
               <div className="level-description">{level.description}</div>
               {TANZANIA_RISK.classification.includes(level.level) && (
-                <div className="current-indicator">← Tanzania is here</div>
+                <div className="current-indicator"> Tanzania is here</div>
               )}
             </div>
           ))}
@@ -383,7 +383,7 @@ function Section6Risk() {
 
       {/* Interactive Scenario Analysis */}
       <div className="scenario-section">
-        <h2>🔬 Scenario Analysis: "What If?"</h2>
+        <h2>Scenario Analysis: "What If?"</h2>
         <p className="section-intro">
           Explore how changes to each dimension affect overall risk. Adjust the sliders to see
           how interventions in different areas could reduce Tanzania's risk score.
@@ -393,7 +393,7 @@ function Section6Risk() {
           <div className="scenario-controls">
             <div className="scenario-slider">
               <label>
-                <span className="slider-icon">⚠️</span>
+                <span className="slider-icon"></span>
                 <span className="slider-label">Hazard and Exposure</span>
               </label>
               <input
@@ -413,7 +413,7 @@ function Section6Risk() {
 
             <div className="scenario-slider">
               <label>
-                <span className="slider-icon">🎯</span>
+                <span className="slider-icon"></span>
                 <span className="slider-label">Vulnerability</span>
               </label>
               <input
@@ -433,7 +433,7 @@ function Section6Risk() {
 
             <div className="scenario-slider">
               <label>
-                <span className="slider-icon">🛡️</span>
+                <span className="slider-icon"></span>
                 <span className="slider-label">Lack of Coping Capacity</span>
               </label>
               <input
@@ -485,7 +485,7 @@ function Section6Risk() {
                   lackCoping: 3.9
                 })}
               >
-                📉 Reduce Vulnerability
+                Reduce Vulnerability
                 <span className="preset-hint">(V: 5.1 → 3.0)</span>
               </button>
               <button
@@ -496,7 +496,7 @@ function Section6Risk() {
                   lackCoping: 2.5
                 })}
               >
-                🛡️ Strengthen Coping
+                Strengthen Coping
                 <span className="preset-hint">(LCC: 3.9 → 2.5)</span>
               </button>
               <button
@@ -507,7 +507,7 @@ function Section6Risk() {
                   lackCoping: 2.5
                 })}
               >
-                ✅ Combined Interventions
+                Combined Interventions
                 <span className="preset-hint">(V & LCC both reduced)</span>
               </button>
               <button
@@ -518,7 +518,7 @@ function Section6Risk() {
                   lackCoping: 3.9
                 })}
               >
-                🔄 Reset to Tanzania Current
+                Reset to Tanzania Current
               </button>
             </div>
           </div>
@@ -527,33 +527,33 @@ function Section6Risk() {
 
       {/* Teaching Box: Risk is Manageable */}
       <div className="teaching-box risk-manageable">
-        <div className="teaching-icon">🎯</div>
+        <div className="teaching-icon"></div>
         <div className="teaching-content">
           <h3>KEY EMPHASIS: Risk is MANAGEABLE, Not Fixed</h3>
           <div className="manageable-grid">
             <div className="manageable-item">
-              <div className="manageable-icon">📊</div>
+              <div className="manageable-icon"></div>
               <div className="manageable-text">
                 <strong>Risk is Measurable</strong>
                 <p>The INFORM formula provides a scientific, comparable way to quantify disaster risk</p>
               </div>
             </div>
             <div className="manageable-item">
-              <div className="manageable-icon">🔍</div>
+              <div className="manageable-icon"></div>
               <div className="manageable-text">
                 <strong>Risk is Transparent</strong>
                 <p>Every component is based on observable, verifiable indicators</p>
               </div>
             </div>
             <div className="manageable-item">
-              <div className="manageable-icon">📉</div>
+              <div className="manageable-icon"></div>
               <div className="manageable-text">
                 <strong>Risk is Reducible</strong>
                 <p>We can lower risk by addressing vulnerability and strengthening coping capacity</p>
               </div>
             </div>
             <div className="manageable-item">
-              <div className="manageable-icon">🎯</div>
+              <div className="manageable-icon"></div>
               <div className="manageable-text">
                 <strong>Risk Guides Action</strong>
                 <p>Knowing the risk score helps prioritize where to invest in disaster prevention</p>
@@ -564,22 +564,22 @@ function Section6Risk() {
             <h4>Pathways to Reduce Tanzania's Risk:</h4>
             <div className="pathway-grid">
               <div className="pathway">
-                <div className="pathway-icon">🏥</div>
+                <div className="pathway-icon"></div>
                 <strong>Strengthen Health Systems</strong>
                 <p>Reduce vulnerability by improving maternal health, nutrition, and disease prevention</p>
               </div>
               <div className="pathway">
-                <div className="pathway-icon">🏫</div>
+                <div className="pathway-icon"></div>
                 <strong>Expand Education</strong>
                 <p>Reduce vulnerability through literacy, awareness, and understanding of risks</p>
               </div>
               <div className="pathway">
-                <div className="pathway-icon">🔔</div>
+                <div className="pathway-icon"></div>
                 <strong>Build Early Warning</strong>
                 <p>Reduce lack of coping by implementing multi-hazard early warning systems</p>
               </div>
               <div className="pathway">
-                <div className="pathway-icon">🚨</div>
+                <div className="pathway-icon"></div>
                 <strong>Invest in Response</strong>
                 <p>Reduce lack of coping through trained emergency services and infrastructure</p>
               </div>
@@ -595,34 +595,34 @@ function Section6Risk() {
 
       {/* Section Summary */}
       <div className="section-summary risk-summary">
-        <h3>📚 Section 6 Summary: Key Learnings</h3>
+        <h3>Section 6 Summary: Key Learnings</h3>
         <div className="summary-points">
           <div className="summary-point">
-            <span className="check-icon">✓</span>
+            <span className="check-icon"></span>
             <span className="point-text">
               <strong>Risk</strong> is the combination of hazard, exposure, vulnerability, and lack of coping capacity
             </span>
           </div>
           <div className="summary-point">
-            <span className="check-icon">✓</span>
+            <span className="check-icon"></span>
             <span className="point-text">
               The <strong>INFORM formula</strong> uses a geometric mean to ensure all dimensions matter equally
             </span>
           </div>
           <div className="summary-point">
-            <span className="check-icon">✓</span>
+            <span className="check-icon"></span>
             <span className="point-text">
               Tanzania's risk score is <strong>4.2 (Medium-High)</strong>, driven primarily by elevated vulnerability
             </span>
           </div>
           <div className="summary-point">
-            <span className="check-icon">✓</span>
+            <span className="check-icon"></span>
             <span className="point-text">
               Risk is <strong>measurable, transparent, and reducible</strong> — not random or inevitable
             </span>
           </div>
           <div className="summary-point">
-            <span className="check-icon">✓</span>
+            <span className="check-icon"></span>
             <span className="point-text">
               Scenario analysis shows how <strong>targeted interventions</strong> in vulnerability or coping capacity can significantly reduce overall risk
             </span>
@@ -630,7 +630,7 @@ function Section6Risk() {
         </div>
 
         <div className="module-completion">
-          <div className="completion-icon">🎓</div>
+          <div className="completion-icon"></div>
           <h3>Congratulations! You've Completed Module 01</h3>
           <p className="completion-message">
             You now understand the INFORM Risk Framework and how it applies to Tanzania.
@@ -639,7 +639,7 @@ function Section6Risk() {
             Tanzania's specific risk profile and early warning systems.
           </p>
           <div className="next-module-preview">
-            <h4>🔜 What's Next?</h4>
+            <h4>What's Next?</h4>
             <p>
               <strong>Module 02: INFORM Risk Assessment</strong> — Dive into Tanzania's council-level
               risk data (195 councils across 31 regions), explore hazard maps, and analyze vulnerability

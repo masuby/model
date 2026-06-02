@@ -28,7 +28,7 @@ export default function ChartCard({ title, subtitle, filenameBase, csv, children
         </span>
         <div className="rc-dl" onMouseLeave={() => setOpen(false)}>
           <button className="rc-dl-btn" onClick={() => setOpen((o) => !o)} aria-haspopup="true" aria-expanded={open}>
-            ⬇ Download
+            Download
           </button>
           {open && (
             <div className="rc-dl-menu ui-card">

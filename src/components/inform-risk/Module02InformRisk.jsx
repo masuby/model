@@ -36,7 +36,7 @@ const RISK_ASSESSMENT_PHASES = [
   {
     id: 'scoping',
     name: 'Scoping',
-    icon: '🎯',
+    icon: '',
     color: '#2196F3',
     description: 'Define objectives, context, and boundaries of the risk assessment',
     details: [
@@ -49,7 +49,7 @@ const RISK_ASSESSMENT_PHASES = [
   {
     id: 'identification',
     name: 'Risk Identification',
-    icon: '🔍',
+    icon: '',
     color: '#9C27B0',
     description: 'Identify relevant risks from existing knowledge and expert input',
     details: [
@@ -62,7 +62,7 @@ const RISK_ASSESSMENT_PHASES = [
   {
     id: 'analysis',
     name: 'Risk Analysis',
-    icon: '📊',
+    icon: '',
     color: '#FF9800',
     description: 'Analyze risk components, interlinkages, and potential consequences',
     details: [
@@ -75,7 +75,7 @@ const RISK_ASSESSMENT_PHASES = [
   {
     id: 'evaluation',
     name: 'Risk Evaluation',
-    icon: '⚖️',
+    icon: '',
     color: '#4CAF50',
     description: 'Identify urgent actions based on risk tolerability levels',
     details: [
@@ -89,16 +89,16 @@ const RISK_ASSESSMENT_PHASES = [
 
 // 10 Key Principles for Comprehensive Risk Assessment (UNDRR 2022)
 const TEN_PRINCIPLES = [
-  { icon: '👥', title: 'Human and Ecological Systems', description: 'Put risk to human and ecological systems at the centre' },
-  { icon: '🌡️', title: 'Climate Change Context', description: 'Fully account for the context of climate change' },
-  { icon: '🔗', title: 'Systemic Nature', description: 'Recognize the complex and systemic nature of risks' },
-  { icon: '🤝', title: 'Inclusive Governance', description: 'Apply inclusive risk governance approaches' },
-  { icon: '🔬', title: 'Multidisciplinary Approach', description: 'Use multidisciplinary approaches to identify measures' },
-  { icon: '📏', title: 'Risk Tolerance', description: 'Use the concept of risk tolerance for decision-making' },
-  { icon: '🌿', title: 'Nature-based Solutions', description: 'Address risks through Nature-based Solutions' },
-  { icon: '🔄', title: 'Cross-sector Integration', description: 'Integrate risk across sectors and levels' },
-  { icon: '📢', title: 'Risk Communication', description: 'Strengthen risk communication and knowledge' },
-  { icon: '♻️', title: 'Iterative Process', description: 'Use iterative and flexible processes' }
+  { icon: '', title: 'Human and Ecological Systems', description: 'Put risk to human and ecological systems at the centre' },
+  { icon: '', title: 'Climate Change Context', description: 'Fully account for the context of climate change' },
+  { icon: '', title: 'Systemic Nature', description: 'Recognize the complex and systemic nature of risks' },
+  { icon: '', title: 'Inclusive Governance', description: 'Apply inclusive risk governance approaches' },
+  { icon: '', title: 'Multidisciplinary Approach', description: 'Use multidisciplinary approaches to identify measures' },
+  { icon: '', title: 'Risk Tolerance', description: 'Use the concept of risk tolerance for decision-making' },
+  { icon: '', title: 'Nature-based Solutions', description: 'Address risks through Nature-based Solutions' },
+  { icon: '', title: 'Cross-sector Integration', description: 'Integrate risk across sectors and levels' },
+  { icon: '', title: 'Risk Communication', description: 'Strengthen risk communication and knowledge' },
+  { icon: '', title: 'Iterative Process', description: 'Use iterative and flexible processes' }
 ];
 
 const Module02InformRisk = ({ onNavigate }) => {
@@ -170,31 +170,31 @@ const Module02InformRisk = ({ onNavigate }) => {
           className={`nav-tab ${selectedView === 'overview' ? 'active' : ''}`}
           onClick={() => setSelectedView('overview')}
         >
-          📚 Overview
+          Overview
         </button>
         <button
           className={`nav-tab ${selectedView === 'map' ? 'active' : ''}`}
           onClick={() => setSelectedView('map')}
         >
-          🗺️ Explore Map
+          Explore Map
         </button>
         <button
           className={`nav-tab ${selectedView === 'hazard' ? 'active' : ''}`}
           onClick={() => setSelectedView('hazard')}
         >
-          ⚠️ Hazard and Exposure
+          Hazard and Exposure
         </button>
         <button
           className={`nav-tab ${selectedView === 'vulnerability' ? 'active' : ''}`}
           onClick={() => setSelectedView('vulnerability')}
         >
-          🛡️ Vulnerability
+          Vulnerability
         </button>
         <button
           className={`nav-tab ${selectedView === 'coping' ? 'active' : ''}`}
           onClick={() => setSelectedView('coping')}
         >
-          🏛️ Coping Capacity
+          Coping Capacity
         </button>
       </div>
 
@@ -241,7 +241,7 @@ const OverviewSection = ({ selectedPhase, onSelectPhase }) => {
           estimate future losses by conducting comprehensive risk assessments.
         </p>
         <div className="key-insight">
-          <span className="insight-icon">💡</span>
+          <span className="insight-icon"></span>
           <p>
             <strong>Hazards do not have to turn into disasters.</strong> A catastrophic disaster
             is not the inevitable consequence of a hazard event. Much can be done to reduce
@@ -318,7 +318,7 @@ const OverviewSection = ({ selectedPhase, onSelectPhase }) => {
         <h3>Components of Risk Assessment</h3>
         <div className="components-grid">
           <div className="component-card hazard">
-            <div className="component-icon">⚡</div>
+            <div className="component-icon"></div>
             <h4>Hazard</h4>
             <p>
               The probability of experiencing a certain intensity of hazard at a specific location.
@@ -326,7 +326,7 @@ const OverviewSection = ({ selectedPhase, onSelectPhase }) => {
             </p>
           </div>
           <div className="component-card exposure">
-            <div className="component-icon">🏘️</div>
+            <div className="component-icon"></div>
             <h4>Exposure</h4>
             <p>
               The stock of property, infrastructure, and populations exposed to a hazard.
@@ -334,7 +334,7 @@ const OverviewSection = ({ selectedPhase, onSelectPhase }) => {
             </p>
           </div>
           <div className="component-card vulnerability">
-            <div className="component-icon">🎯</div>
+            <div className="component-icon"></div>
             <h4>Vulnerability</h4>
             <p>
               The susceptibility to damage of assets exposed to hazard forces.
@@ -354,7 +354,7 @@ const OverviewSection = ({ selectedPhase, onSelectPhase }) => {
         <div className="dimensions-overview-grid">
           <div className="dimension-overview-card he">
             <div className="dim-header">
-              <span className="dim-icon">⚠️</span>
+              <span className="dim-icon"></span>
               <div className="dim-title">
                 <h4>Hazard and Exposure (H and E)</h4>
                 <span className="dim-acronym">First Dimension</span>
@@ -374,7 +374,7 @@ const OverviewSection = ({ selectedPhase, onSelectPhase }) => {
 
           <div className="dimension-overview-card v">
             <div className="dim-header">
-              <span className="dim-icon">🛡️</span>
+              <span className="dim-icon"></span>
               <div className="dim-title">
                 <h4>Vulnerability (V)</h4>
                 <span className="dim-acronym">Second Dimension</span>
@@ -394,7 +394,7 @@ const OverviewSection = ({ selectedPhase, onSelectPhase }) => {
 
           <div className="dimension-overview-card lcc">
             <div className="dim-header">
-              <span className="dim-icon">🏛️</span>
+              <span className="dim-icon"></span>
               <div className="dim-title">
                 <h4>Lack of Coping Capacity (LCC)</h4>
                 <span className="dim-acronym">Third Dimension</span>
