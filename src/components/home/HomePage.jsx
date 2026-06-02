@@ -4,7 +4,7 @@
  */
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import { NATIONAL, classifyRisk, round1 } from '../inform-risk/riskModel';
+import { NATIONAL, COUNCIL_UNITS, REGION_UNITS, DIMENSION_TREE, DIM_KEYS, classifyRisk, round1 } from '../inform-risk/riskModel';
 import './HomePage.css';
 
 const MODULES = [
@@ -14,7 +14,7 @@ const MODULES = [
   },
   {
     icon: '🗺️', title: 'Risk', to: '/risk', cta: 'Open the explorer',
-    desc: "Explore Tanzania's INFORM Risk at district, region and national level — by dimension or any single indicator — on the map, ranked tables and downloadable charts.",
+    desc: "Explore Tanzania's INFORM Risk at council, region and national level — by dimension or any single indicator — on the map, ranked tables and downloadable charts.",
   },
   {
     icon: '🎯', title: 'Severity', to: '/severity', cta: 'Open the calculator',
@@ -22,11 +22,17 @@ const MODULES = [
   },
 ];
 
+// Counts come straight from the model so the landing page can never drift from the
+// real NBS-2022 structure (195 councils → 31 regions) or claim indicators it doesn't have.
+const INDICATOR_COUNT = DIM_KEYS.reduce(
+  (n, dim) => n + DIMENSION_TREE[dim].components.reduce((m, c) => m + c.indicators.length, 0),
+  0,
+);
 const FACTS = [
-  { n: '3', label: 'INFORM dimensions' },
-  { n: '170', label: 'districts (ADM2)' },
-  { n: '31', label: 'regions (ADM1)' },
-  { n: '76', label: 'indicators' },
+  { n: String(DIM_KEYS.length), label: 'INFORM dimensions' },
+  { n: String(COUNCIL_UNITS.length), label: 'councils (LGAs)' },
+  { n: String(REGION_UNITS.length), label: 'regions (ADM1)' },
+  { n: String(INDICATOR_COUNT), label: 'indicators' },
 ];
 
 export default function HomePage() {
@@ -38,7 +44,7 @@ export default function HomePage() {
           <div className="ui-eyebrow">INFORM Subnational · Tanzania</div>
           <h1 className="home-title">Tanzania Index for Risk Management</h1>
           <p className="home-lead">
-            Understand disaster risk, explore it across every district, and measure the
+            Understand disaster risk, explore it across every council, and measure the
             severity of crises — grounded in the global INFORM methodology.
           </p>
           <div className="home-cta">
