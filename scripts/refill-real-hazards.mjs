@@ -31,7 +31,9 @@ const match = (u, { regions = [], names = [] }) => inReg(u, regions) || isDist(u
 
 const raiseH = (key, val, m) => D.forEach((u) => { if (match(u, m)) { const o = u.hazardExposure?.natural; if (o && key in o && val > (o[key] || 0)) { o[key] = val; tH.add(u); } } });
 const raiseV = (comp, key, val, m) => D.forEach((u) => { if (match(u, m)) { const o = u.vulnerability?.[comp]; if (o && key in o && val > (o[key] || 0)) { o[key] = val; tV.add(u); } } });
-const drm = (regions, { drr, gov }) => D.forEach((u) => { if (inReg(u, regions)) { const o = u.lackCopingCapacity?.institutional; if (o) { if (typeof o.drrImplementation === 'number') o.drrImplementation = Math.min(o.drrImplementation, drr); if (typeof o.governance === 'number') o.governance = Math.min(o.governance, gov); tC.add(u); } } });
+const improveCoping = (u, drr, gov) => { const o = u.lackCopingCapacity?.institutional; if (!o) return; if (typeof o.drrImplementation === 'number') o.drrImplementation = Math.min(o.drrImplementation, drr); if (typeof o.governance === 'number') o.governance = Math.min(o.governance, gov); tC.add(u); };
+const drm = (regions, v) => D.forEach((u) => { if (inReg(u, regions)) improveCoping(u, v.drr, v.gov); });
+const drmDistricts = (names, v) => D.forEach((u) => { if (isDist(u, names)) improveCoping(u, v.drr, v.gov); });
 
 // FLOOD
 raiseH('flood', 8.5, { names: ['Kilosa', 'Kilombero', 'Ulanga', 'Rufiji', 'Kyela'] });
@@ -64,8 +66,15 @@ raiseV('vulnerableGroups', 'childrenHealthNutrition', 8.5, { regions: ['Njombe',
 raiseV('vulnerableGroups', 'childrenHealthNutrition', 8.0, { regions: ['Songwe'] });
 raiseV('vulnerableGroups', 'childrenHealthNutrition', 7.5, { regions: ['Mbeya', 'Kigoma', 'Ruvuma', 'Katavi', 'Geita'] });
 
-// DRM coping investments (regional EOCC + ERT)
-drm(['Mwanza', 'Arusha', 'Dodoma', 'Mbeya'], { drr: 3.0, gov: 3.5 });
+// DRM coping — improves the INSTITUTIONAL (DRR/governance) component only, MODERATELY.
+// Risk still = ∛(H×V×LCC): a district with an EPRP but high hazard + vulnerability stays
+// high-risk. Strength: full regional EOCC+ERT (strongest) > drought Anticipatory Action +
+// EPRP > EPRP alone. min() means overlaps keep the strongest improvement.
+drm(['Mwanza', 'Arusha', 'Dodoma', 'Mbeya'], { drr: 3.0, gov: 3.5 }); // regional EOCC + ERT
+const EPRP = ['Nkasi', 'Sumbawanga', 'Hai', 'Kinondoni', 'Ilemela', 'Rufiji', 'Kyela', 'Handeni', 'Kishapu', 'Mwanga', 'Monduli', 'Longido', 'Simanjiro', 'Same', 'Micheweni', 'Kiteto', 'Kondoa', 'Mkalama', 'Meatu'];
+const AA_DROUGHT = ['Monduli', 'Longido', 'Simanjiro', 'Same', 'Micheweni', 'Kiteto', 'Kondoa', 'Handeni', 'Mkalama', 'Meatu'];
+drmDistricts(EPRP, { drr: 4.5, gov: 5.0 });        // Emergency Preparedness & Response Plan (moderate)
+drmDistricts(AA_DROUGHT, { drr: 3.8, gov: 4.5 });  // + drought Anticipatory Action plan (more)
 
 // recompute only the edited dimension per unit, then risk for any edited unit
 tH.forEach((u) => {
