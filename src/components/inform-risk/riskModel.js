@@ -217,6 +217,19 @@ export function provenanceFor(unit, dim, k) {
   return e ? { ...e, edited: true } : { ...sourceFor(dim, k), edited: false };
 }
 
+// Missing-data treatment, INFORM-style: a `null` indicator means NO DATA and is EXCLUDED from
+// every aggregation (mean/scaled-geomean filter to finite numbers); a `0` means a real measured
+// zero (e.g. no coastal-hazard exposure inland) and is included. dataCoverage reports the share
+// of the model's leaf indicators that actually have data for a unit — its reliability.
+export function dataCoverage(unit) {
+  let have = 0, total = 0;
+  for (const dim of DIM_KEYS) for (const comp of DIMENSION_TREE[dim].components) {
+    const obj = comp.path(unit);
+    for (const ind of comp.indicators) { total++; if (typeof obj?.[ind.k] === 'number' && isFinite(obj[ind.k])) have++; }
+  }
+  return total ? Math.round((have / total) * 100) : null;
+}
+
 export const REGION_UNITS = (() => {
   const by = {};
   DISTRICTS.forEach((d) => { (by[d.admin.adm1Name] = by[d.admin.adm1Name] || []).push(d); });

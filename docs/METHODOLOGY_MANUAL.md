@@ -186,6 +186,21 @@ GEOMEAN = √(6.49 × 9.37) = 7.80. dimension = (10 − 7.80)/9 × 10 = **2.4**.
 Then `Risk` is classed with the **Tanzania thresholds** (Very-Low < 2.5 < Low < 3.4 < Medium
 < 4.3 < High < 5.9 < Very-High).
 
+### 5.4 Missing data — no-data never distorts the score
+A blank indicator means **NO DATA** and is stored as `null`. Every aggregation (mean & scaled
+geomean) **excludes null entirely** — it is *not* read as 0:
+- `mean(5, 5, null) = 5` — not 3.33. **A no-data indicator can never pull a score up or down.**
+- `0` is different — a **real measured zero** (e.g. zero coastal-hazard exposure in landlocked
+  Dodoma) — and **is** included.
+- An all-no-data category drops out cleanly (`null`), so the dimension is the scaled-geomean of
+  the categories that actually have data.
+
+In **Data Entry**, clearing a field sets it back to no-data (`null`) — it removes data rather than
+zeroing it. Each district shows a **data-coverage %** (share of the 32 leaf indicators that have
+data) as a reliability cue — so a score built on sparse data is flagged for what it is. The
+ambiguous INFORM `economic` slot is deliberately left no-data everywhere (170/170 null) and by
+design affects nothing. *(Locked by tests in `climateIntegrity.test.js`.)*
+
 ---
 
 ## 6. Keying data in (Data Entry) — same formulas, with provenance

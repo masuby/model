@@ -10,7 +10,7 @@ import DistrictMap from './DistrictMap';
 import RiskCharts from './RiskCharts';
 import RegionalTrend from './RegionalTrend';
 import DistrictCharts from './DistrictCharts';
-import { DIMENSION_TREE, DIM_KEYS, getMetric, scopeOf, classifyRisk, round1, unitsForLevel, LEVELS } from './riskModel';
+import { DIMENSION_TREE, DIM_KEYS, getMetric, scopeOf, classifyRisk, round1, unitsForLevel, LEVELS, dataCoverage } from './riskModel';
 import './RiskExplorer.css';
 
 const pct = (v) => `${Math.max(0, Math.min(100, ((v ?? 0) / 10) * 100))}%`;
@@ -46,7 +46,7 @@ function DistrictDetail({ d }) {
     <div className="rx-detail">
       <div className="rx-detail-head">
         <div>
-          <div className="ui-eyebrow">{d.admin.adm1Name} Region · {d.admin.adm2Code}</div>
+          <div className="ui-eyebrow">{d.admin.adm1Name} Region · {d.admin.adm2Code}{dataCoverage(d) != null ? ` · ${dataCoverage(d)}% data coverage` : ''}</div>
           <h3 className="ui-h2">{d.admin.adm2Name}</h3>
         </div>
         <div className="rx-detail-score" style={{ color: cls.color }}>

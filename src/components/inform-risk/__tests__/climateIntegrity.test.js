@@ -99,3 +99,25 @@ describe('Hazard × Exposure flood + manual worked examples', () => {
     expect(isN(data.national?.risk ?? data.national?.informRisk)).toBe(true);
   });
 });
+
+describe('Missing-data treatment (INFORM: null = no-data excluded; 0 = real zero included)', () => {
+  it('null is excluded from aggregation; 0 is a real measured value', () => {
+    expect(mean([5, 5, null])).toBe(5);                 // not 3.33
+    expect(mean([5, 5, 0])).toBeCloseTo(3.33, 1);       // 0 is real
+    expect(mean([null, undefined, NaN])).toBeNull();    // all no-data -> null category
+  });
+  it('adding a no-data (null) indicator never changes a category aggregate', () => {
+    expect(mean([8, 4, 6])).toBe(mean([8, 4, 6, null]));
+  });
+  it("the all-null 'economic' indicator does not distort Vulnerability", () => {
+    let checked = 0;
+    for (const u of D) {
+      const vg = u.vulnerability?.vulnerableGroups; if (!vg || !isN(vg.aggregate)) continue;
+      const vals = Object.entries(vg).filter(([k]) => k !== 'aggregate').map(([, v]) => v);
+      expect(vg.aggregate).toBeCloseTo(r1(mean(vals)), 1);       // aggregate = mean of NON-null only
+      expect(vals.includes(null) || vals.includes(undefined)).toBe(true); // economic is no-data
+      checked++;
+    }
+    expect(checked).toBeGreaterThan(150);
+  });
+});
