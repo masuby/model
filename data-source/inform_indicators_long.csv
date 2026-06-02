@@ -231,7 +231,7 @@ TZ02,Arusha,TZ0201,Monduli,Hazard & Exposure,Human hazards,hazard:vehicleAcciden
 TZ02,Arusha,TZ0201,Monduli,Vulnerability,Socio-economic,vulnerability:developmentPoverty,Development Poverty,4.675,NBS,Household Budget Survey 2017/18,poverty headcount
 TZ02,Arusha,TZ0201,Monduli,Vulnerability,Socio-economic,vulnerability:economicDependency,Economic Dependency,3.333333333,INFORM SADC 2024,INFORM Sub-national SADC 2024,baseline
 TZ02,Arusha,TZ0201,Monduli,Vulnerability,Socio-economic,vulnerability:habitat,Habitat,5.1,INFORM SADC 2024,INFORM Sub-national SADC 2024,baseline
-TZ02,Arusha,TZ0201,Monduli,Vulnerability,Socio-economic,vulnerability:livelihoods,Livelihoods,4.2,MUCHALI / IPC (MoA),IPC acute food-insecurity rounds,food-insecurity phase
+TZ02,Arusha,TZ0201,Monduli,Vulnerability,Socio-economic,vulnerability:livelihoods,Livelihoods,9,MUCHALI / IPC (MoA),IPC acute food-insecurity rounds,food-insecurity phase
 TZ02,Arusha,TZ0201,Monduli,Vulnerability,Vulnerable groups,vulnerability:displacedPeople,Displaced People,0,UNHCR / PMO-DMD,UNHCR 2024 (Nyarugusu/Nduta camps),refugee burden-scaled
 TZ02,Arusha,TZ0201,Monduli,Vulnerability,Vulnerable groups,vulnerability:healthConditions,Health Conditions,1,MoH / NBS,THIS 2022-23 (HIV) + TDHS-MIS 2022 (malaria),disease-burden min-max blend
 TZ02,Arusha,TZ0201,Monduli,Vulnerability,Vulnerable groups,vulnerability:childrenHealthNutrition,Children Health Nutrition,4.075,MoH,TDHS 2022,under-5 stunting
@@ -314,7 +314,7 @@ TZ02,Arusha,TZ0204,Karatu,Hazard & Exposure,Human hazards,hazard:vehicleAccident
 TZ02,Arusha,TZ0204,Karatu,Vulnerability,Socio-economic,vulnerability:developmentPoverty,Development Poverty,4.675,NBS,Household Budget Survey 2017/18,poverty headcount
 TZ02,Arusha,TZ0204,Karatu,Vulnerability,Socio-economic,vulnerability:economicDependency,Economic Dependency,3.333333333,INFORM SADC 2024,INFORM Sub-national SADC 2024,baseline
 TZ02,Arusha,TZ0204,Karatu,Vulnerability,Socio-economic,vulnerability:habitat,Habitat,5.1,INFORM SADC 2024,INFORM Sub-national SADC 2024,baseline
-TZ02,Arusha,TZ0204,Karatu,Vulnerability,Socio-economic,vulnerability:livelihoods,Livelihoods,4.2,MUCHALI / IPC (MoA),IPC acute food-insecurity rounds,food-insecurity phase
+TZ02,Arusha,TZ0204,Karatu,Vulnerability,Socio-economic,vulnerability:livelihoods,Livelihoods,7,MUCHALI / IPC (MoA),IPC acute food-insecurity rounds,food-insecurity phase
 TZ02,Arusha,TZ0204,Karatu,Vulnerability,Vulnerable groups,vulnerability:displacedPeople,Displaced People,0,UNHCR / PMO-DMD,UNHCR 2024 (Nyarugusu/Nduta camps),refugee burden-scaled
 TZ02,Arusha,TZ0204,Karatu,Vulnerability,Vulnerable groups,vulnerability:healthConditions,Health Conditions,1,MoH / NBS,THIS 2022-23 (HIV) + TDHS-MIS 2022 (malaria),disease-burden min-max blend
 TZ02,Arusha,TZ0204,Karatu,Vulnerability,Vulnerable groups,vulnerability:childrenHealthNutrition,Children Health Nutrition,4.075,MoH,TDHS 2022,under-5 stunting
@@ -345,7 +345,7 @@ TZ02,Arusha,TZ0205,Ngorongoro,Hazard & Exposure,Human hazards,hazard:vehicleAcci
 TZ02,Arusha,TZ0205,Ngorongoro,Vulnerability,Socio-economic,vulnerability:developmentPoverty,Development Poverty,4.675,NBS,Household Budget Survey 2017/18,poverty headcount
 TZ02,Arusha,TZ0205,Ngorongoro,Vulnerability,Socio-economic,vulnerability:economicDependency,Economic Dependency,3.333333333,INFORM SADC 2024,INFORM Sub-national SADC 2024,baseline
 TZ02,Arusha,TZ0205,Ngorongoro,Vulnerability,Socio-economic,vulnerability:habitat,Habitat,5.1,INFORM SADC 2024,INFORM Sub-national SADC 2024,baseline
-TZ02,Arusha,TZ0205,Ngorongoro,Vulnerability,Socio-economic,vulnerability:livelihoods,Livelihoods,4.2,MUCHALI / IPC (MoA),IPC acute food-insecurity rounds,food-insecurity phase
+TZ02,Arusha,TZ0205,Ngorongoro,Vulnerability,Socio-economic,vulnerability:livelihoods,Livelihoods,7,MUCHALI / IPC (MoA),IPC acute food-insecurity rounds,food-insecurity phase
 TZ02,Arusha,TZ0205,Ngorongoro,Vulnerability,Vulnerable groups,vulnerability:displacedPeople,Displaced People,0,UNHCR / PMO-DMD,UNHCR 2024 (Nyarugusu/Nduta camps),refugee burden-scaled
 TZ02,Arusha,TZ0205,Ngorongoro,Vulnerability,Vulnerable groups,vulnerability:healthConditions,Health Conditions,1,MoH / NBS,THIS 2022-23 (HIV) + TDHS-MIS 2022 (malaria),disease-burden min-max blend
 TZ02,Arusha,TZ0205,Ngorongoro,Vulnerability,Vulnerable groups,vulnerability:childrenHealthNutrition,Children Health Nutrition,4.075,MoH,TDHS 2022,under-5 stunting
@@ -407,7 +407,7 @@ TZ02,Arusha,TZ0207,Longido,Hazard & Exposure,Human hazards,hazard:vehicleAcciden
 TZ02,Arusha,TZ0207,Longido,Vulnerability,Socio-economic,vulnerability:developmentPoverty,Development Poverty,4.675,NBS,Household Budget Survey 2017/18,poverty headcount
 TZ02,Arusha,TZ0207,Longido,Vulnerability,Socio-economic,vulnerability:economicDependency,Economic Dependency,3.333333333,INFORM SADC 2024,INFORM Sub-national SADC 2024,baseline
 TZ02,Arusha,TZ0207,Longido,Vulnerability,Socio-economic,vulnerability:habitat,Habitat,5.1,INFORM SADC 2024,INFORM Sub-national SADC 2024,baseline
-TZ02,Arusha,TZ0207,Longido,Vulnerability,Socio-economic,vulnerability:livelihoods,Livelihoods,4.2,MUCHALI / IPC (MoA),IPC acute food-insecurity rounds,food-insecurity phase
+TZ02,Arusha,TZ0207,Longido,Vulnerability,Socio-economic,vulnerability:livelihoods,Livelihoods,9,MUCHALI / IPC (MoA),IPC acute food-insecurity rounds,food-insecurity phase
 TZ02,Arusha,TZ0207,Longido,Vulnerability,Vulnerable groups,vulnerability:displacedPeople,Displaced People,0,UNHCR / PMO-DMD,UNHCR 2024 (Nyarugusu/Nduta camps),refugee burden-scaled
 TZ02,Arusha,TZ0207,Longido,Vulnerability,Vulnerable groups,vulnerability:healthConditions,Health Conditions,1,MoH / NBS,THIS 2022-23 (HIV) + TDHS-MIS 2022 (malaria),disease-burden min-max blend
 TZ02,Arusha,TZ0207,Longido,Vulnerability,Vulnerable groups,vulnerability:childrenHealthNutrition,Children Health Nutrition,4.075,MoH,TDHS 2022,under-5 stunting
@@ -469,7 +469,7 @@ TZ03,Kilimanjaro,TZ0302,Mwanga,Hazard & Exposure,Human hazards,hazard:vehicleAcc
 TZ03,Kilimanjaro,TZ0302,Mwanga,Vulnerability,Socio-economic,vulnerability:developmentPoverty,Development Poverty,2.7,NBS,Household Budget Survey 2017/18,poverty headcount
 TZ03,Kilimanjaro,TZ0302,Mwanga,Vulnerability,Socio-economic,vulnerability:economicDependency,Economic Dependency,2.333333333,INFORM SADC 2024,INFORM Sub-national SADC 2024,baseline
 TZ03,Kilimanjaro,TZ0302,Mwanga,Vulnerability,Socio-economic,vulnerability:habitat,Habitat,5.5,INFORM SADC 2024,INFORM Sub-national SADC 2024,baseline
-TZ03,Kilimanjaro,TZ0302,Mwanga,Vulnerability,Socio-economic,vulnerability:livelihoods,Livelihoods,0,MUCHALI / IPC (MoA),IPC acute food-insecurity rounds,food-insecurity phase
+TZ03,Kilimanjaro,TZ0302,Mwanga,Vulnerability,Socio-economic,vulnerability:livelihoods,Livelihoods,7,MUCHALI / IPC (MoA),IPC acute food-insecurity rounds,food-insecurity phase
 TZ03,Kilimanjaro,TZ0302,Mwanga,Vulnerability,Vulnerable groups,vulnerability:displacedPeople,Displaced People,0,UNHCR / PMO-DMD,UNHCR 2024 (Nyarugusu/Nduta camps),refugee burden-scaled
 TZ03,Kilimanjaro,TZ0302,Mwanga,Vulnerability,Vulnerable groups,vulnerability:healthConditions,Health Conditions,1.4,MoH / NBS,THIS 2022-23 (HIV) + TDHS-MIS 2022 (malaria),disease-burden min-max blend
 TZ03,Kilimanjaro,TZ0302,Mwanga,Vulnerability,Vulnerable groups,vulnerability:childrenHealthNutrition,Children Health Nutrition,2.75,MoH,TDHS 2022,under-5 stunting
@@ -500,7 +500,7 @@ TZ03,Kilimanjaro,TZ0303,Same,Hazard & Exposure,Human hazards,hazard:vehicleAccid
 TZ03,Kilimanjaro,TZ0303,Same,Vulnerability,Socio-economic,vulnerability:developmentPoverty,Development Poverty,2.7,NBS,Household Budget Survey 2017/18,poverty headcount
 TZ03,Kilimanjaro,TZ0303,Same,Vulnerability,Socio-economic,vulnerability:economicDependency,Economic Dependency,2.333333333,INFORM SADC 2024,INFORM Sub-national SADC 2024,baseline
 TZ03,Kilimanjaro,TZ0303,Same,Vulnerability,Socio-economic,vulnerability:habitat,Habitat,5.5,INFORM SADC 2024,INFORM Sub-national SADC 2024,baseline
-TZ03,Kilimanjaro,TZ0303,Same,Vulnerability,Socio-economic,vulnerability:livelihoods,Livelihoods,0,MUCHALI / IPC (MoA),IPC acute food-insecurity rounds,food-insecurity phase
+TZ03,Kilimanjaro,TZ0303,Same,Vulnerability,Socio-economic,vulnerability:livelihoods,Livelihoods,7,MUCHALI / IPC (MoA),IPC acute food-insecurity rounds,food-insecurity phase
 TZ03,Kilimanjaro,TZ0303,Same,Vulnerability,Vulnerable groups,vulnerability:displacedPeople,Displaced People,0,UNHCR / PMO-DMD,UNHCR 2024 (Nyarugusu/Nduta camps),refugee burden-scaled
 TZ03,Kilimanjaro,TZ0303,Same,Vulnerability,Vulnerable groups,vulnerability:healthConditions,Health Conditions,1.4,MoH / NBS,THIS 2022-23 (HIV) + TDHS-MIS 2022 (malaria),disease-burden min-max blend
 TZ03,Kilimanjaro,TZ0303,Same,Vulnerability,Vulnerable groups,vulnerability:childrenHealthNutrition,Children Health Nutrition,2.75,MoH,TDHS 2022,under-5 stunting
@@ -2384,7 +2384,7 @@ TZ13,Singida,TZ1303,Manyoni,Hazard & Exposure,Human hazards,hazard:vehicleAccide
 TZ13,Singida,TZ1303,Manyoni,Vulnerability,Socio-economic,vulnerability:developmentPoverty,Development Poverty,7,NBS,Household Budget Survey 2017/18,poverty headcount
 TZ13,Singida,TZ1303,Manyoni,Vulnerability,Socio-economic,vulnerability:economicDependency,Economic Dependency,4.1,INFORM SADC 2024,INFORM Sub-national SADC 2024,baseline
 TZ13,Singida,TZ1303,Manyoni,Vulnerability,Socio-economic,vulnerability:habitat,Habitat,4.6,INFORM SADC 2024,INFORM Sub-national SADC 2024,baseline
-TZ13,Singida,TZ1303,Manyoni,Vulnerability,Socio-economic,vulnerability:livelihoods,Livelihoods,3.6,MUCHALI / IPC (MoA),IPC acute food-insecurity rounds,food-insecurity phase
+TZ13,Singida,TZ1303,Manyoni,Vulnerability,Socio-economic,vulnerability:livelihoods,Livelihoods,7,MUCHALI / IPC (MoA),IPC acute food-insecurity rounds,food-insecurity phase
 TZ13,Singida,TZ1303,Manyoni,Vulnerability,Vulnerable groups,vulnerability:displacedPeople,Displaced People,0,UNHCR / PMO-DMD,UNHCR 2024 (Nyarugusu/Nduta camps),refugee burden-scaled
 TZ13,Singida,TZ1303,Manyoni,Vulnerability,Vulnerable groups,vulnerability:healthConditions,Health Conditions,1.7,MoH / NBS,THIS 2022-23 (HIV) + TDHS-MIS 2022 (malaria),disease-burden min-max blend
 TZ13,Singida,TZ1303,Manyoni,Vulnerability,Vulnerable groups,vulnerability:childrenHealthNutrition,Children Health Nutrition,2.575,MoH,TDHS 2022,under-5 stunting
@@ -2441,7 +2441,7 @@ TZ13,Singida,TZ1305,Ikungi,Hazard & Exposure,Human hazards,hazard:vehicleAcciden
 TZ13,Singida,TZ1305,Ikungi,Vulnerability,Socio-economic,vulnerability:developmentPoverty,Development Poverty,7,NBS,Household Budget Survey 2017/18,poverty headcount
 TZ13,Singida,TZ1305,Ikungi,Vulnerability,Socio-economic,vulnerability:economicDependency,Economic Dependency,4.1,INFORM SADC 2024,INFORM Sub-national SADC 2024,baseline
 TZ13,Singida,TZ1305,Ikungi,Vulnerability,Socio-economic,vulnerability:habitat,Habitat,4.6,INFORM SADC 2024,INFORM Sub-national SADC 2024,baseline
-TZ13,Singida,TZ1305,Ikungi,Vulnerability,Socio-economic,vulnerability:livelihoods,Livelihoods,3.6,MUCHALI / IPC (MoA),IPC acute food-insecurity rounds,food-insecurity phase
+TZ13,Singida,TZ1305,Ikungi,Vulnerability,Socio-economic,vulnerability:livelihoods,Livelihoods,7,MUCHALI / IPC (MoA),IPC acute food-insecurity rounds,food-insecurity phase
 TZ13,Singida,TZ1305,Ikungi,Vulnerability,Vulnerable groups,vulnerability:displacedPeople,Displaced People,0,UNHCR / PMO-DMD,UNHCR 2024 (Nyarugusu/Nduta camps),refugee burden-scaled
 TZ13,Singida,TZ1305,Ikungi,Vulnerability,Vulnerable groups,vulnerability:healthConditions,Health Conditions,1.7,MoH / NBS,THIS 2022-23 (HIV) + TDHS-MIS 2022 (malaria),disease-burden min-max blend
 TZ13,Singida,TZ1305,Ikungi,Vulnerability,Vulnerable groups,vulnerability:childrenHealthNutrition,Children Health Nutrition,2.575,MoH,TDHS 2022,under-5 stunting
@@ -2472,7 +2472,7 @@ TZ13,Singida,TZ1306,Mkalama,Hazard & Exposure,Human hazards,hazard:vehicleAccide
 TZ13,Singida,TZ1306,Mkalama,Vulnerability,Socio-economic,vulnerability:developmentPoverty,Development Poverty,7,NBS,Household Budget Survey 2017/18,poverty headcount
 TZ13,Singida,TZ1306,Mkalama,Vulnerability,Socio-economic,vulnerability:economicDependency,Economic Dependency,4.1,INFORM SADC 2024,INFORM Sub-national SADC 2024,baseline
 TZ13,Singida,TZ1306,Mkalama,Vulnerability,Socio-economic,vulnerability:habitat,Habitat,4.6,INFORM SADC 2024,INFORM Sub-national SADC 2024,baseline
-TZ13,Singida,TZ1306,Mkalama,Vulnerability,Socio-economic,vulnerability:livelihoods,Livelihoods,3.6,MUCHALI / IPC (MoA),IPC acute food-insecurity rounds,food-insecurity phase
+TZ13,Singida,TZ1306,Mkalama,Vulnerability,Socio-economic,vulnerability:livelihoods,Livelihoods,7,MUCHALI / IPC (MoA),IPC acute food-insecurity rounds,food-insecurity phase
 TZ13,Singida,TZ1306,Mkalama,Vulnerability,Vulnerable groups,vulnerability:displacedPeople,Displaced People,0,UNHCR / PMO-DMD,UNHCR 2024 (Nyarugusu/Nduta camps),refugee burden-scaled
 TZ13,Singida,TZ1306,Mkalama,Vulnerability,Vulnerable groups,vulnerability:healthConditions,Health Conditions,1.7,MoH / NBS,THIS 2022-23 (HIV) + TDHS-MIS 2022 (malaria),disease-burden min-max blend
 TZ13,Singida,TZ1306,Mkalama,Vulnerability,Vulnerable groups,vulnerability:childrenHealthNutrition,Children Health Nutrition,2.575,MoH,TDHS 2022,under-5 stunting
@@ -3867,7 +3867,7 @@ TZ21,Manyara,TZ2102,Hanang,Hazard & Exposure,Human hazards,hazard:vehicleAcciden
 TZ21,Manyara,TZ2102,Hanang,Vulnerability,Socio-economic,vulnerability:developmentPoverty,Development Poverty,5.95,NBS,Household Budget Survey 2017/18,poverty headcount
 TZ21,Manyara,TZ2102,Hanang,Vulnerability,Socio-economic,vulnerability:economicDependency,Economic Dependency,3.333333333,INFORM SADC 2024,INFORM Sub-national SADC 2024,baseline
 TZ21,Manyara,TZ2102,Hanang,Vulnerability,Socio-economic,vulnerability:habitat,Habitat,5.1,INFORM SADC 2024,INFORM Sub-national SADC 2024,baseline
-TZ21,Manyara,TZ2102,Hanang,Vulnerability,Socio-economic,vulnerability:livelihoods,Livelihoods,6.8,MUCHALI / IPC (MoA),IPC acute food-insecurity rounds,food-insecurity phase
+TZ21,Manyara,TZ2102,Hanang,Vulnerability,Socio-economic,vulnerability:livelihoods,Livelihoods,7,MUCHALI / IPC (MoA),IPC acute food-insecurity rounds,food-insecurity phase
 TZ21,Manyara,TZ2102,Hanang,Vulnerability,Vulnerable groups,vulnerability:displacedPeople,Displaced People,0,UNHCR / PMO-DMD,UNHCR 2024 (Nyarugusu/Nduta camps),refugee burden-scaled
 TZ21,Manyara,TZ2102,Hanang,Vulnerability,Vulnerable groups,vulnerability:healthConditions,Health Conditions,1.6,MoH / NBS,THIS 2022-23 (HIV) + TDHS-MIS 2022 (malaria),disease-burden min-max blend
 TZ21,Manyara,TZ2102,Hanang,Vulnerability,Vulnerable groups,vulnerability:childrenHealthNutrition,Children Health Nutrition,4.075,MoH,TDHS 2022,under-5 stunting
@@ -3898,7 +3898,7 @@ TZ21,Manyara,TZ2103,Mbulu,Hazard & Exposure,Human hazards,hazard:vehicleAccident
 TZ21,Manyara,TZ2103,Mbulu,Vulnerability,Socio-economic,vulnerability:developmentPoverty,Development Poverty,5.95,NBS,Household Budget Survey 2017/18,poverty headcount
 TZ21,Manyara,TZ2103,Mbulu,Vulnerability,Socio-economic,vulnerability:economicDependency,Economic Dependency,3.333333333,INFORM SADC 2024,INFORM Sub-national SADC 2024,baseline
 TZ21,Manyara,TZ2103,Mbulu,Vulnerability,Socio-economic,vulnerability:habitat,Habitat,5.1,INFORM SADC 2024,INFORM Sub-national SADC 2024,baseline
-TZ21,Manyara,TZ2103,Mbulu,Vulnerability,Socio-economic,vulnerability:livelihoods,Livelihoods,6.8,MUCHALI / IPC (MoA),IPC acute food-insecurity rounds,food-insecurity phase
+TZ21,Manyara,TZ2103,Mbulu,Vulnerability,Socio-economic,vulnerability:livelihoods,Livelihoods,7,MUCHALI / IPC (MoA),IPC acute food-insecurity rounds,food-insecurity phase
 TZ21,Manyara,TZ2103,Mbulu,Vulnerability,Vulnerable groups,vulnerability:displacedPeople,Displaced People,0,UNHCR / PMO-DMD,UNHCR 2024 (Nyarugusu/Nduta camps),refugee burden-scaled
 TZ21,Manyara,TZ2103,Mbulu,Vulnerability,Vulnerable groups,vulnerability:healthConditions,Health Conditions,1.6,MoH / NBS,THIS 2022-23 (HIV) + TDHS-MIS 2022 (malaria),disease-burden min-max blend
 TZ21,Manyara,TZ2103,Mbulu,Vulnerability,Vulnerable groups,vulnerability:childrenHealthNutrition,Children Health Nutrition,4.075,MoH,TDHS 2022,under-5 stunting
@@ -3929,7 +3929,7 @@ TZ21,Manyara,TZ2104,Simanjiro,Hazard & Exposure,Human hazards,hazard:vehicleAcci
 TZ21,Manyara,TZ2104,Simanjiro,Vulnerability,Socio-economic,vulnerability:developmentPoverty,Development Poverty,5.95,NBS,Household Budget Survey 2017/18,poverty headcount
 TZ21,Manyara,TZ2104,Simanjiro,Vulnerability,Socio-economic,vulnerability:economicDependency,Economic Dependency,3.333333333,INFORM SADC 2024,INFORM Sub-national SADC 2024,baseline
 TZ21,Manyara,TZ2104,Simanjiro,Vulnerability,Socio-economic,vulnerability:habitat,Habitat,5.1,INFORM SADC 2024,INFORM Sub-national SADC 2024,baseline
-TZ21,Manyara,TZ2104,Simanjiro,Vulnerability,Socio-economic,vulnerability:livelihoods,Livelihoods,6.8,MUCHALI / IPC (MoA),IPC acute food-insecurity rounds,food-insecurity phase
+TZ21,Manyara,TZ2104,Simanjiro,Vulnerability,Socio-economic,vulnerability:livelihoods,Livelihoods,7,MUCHALI / IPC (MoA),IPC acute food-insecurity rounds,food-insecurity phase
 TZ21,Manyara,TZ2104,Simanjiro,Vulnerability,Vulnerable groups,vulnerability:displacedPeople,Displaced People,0,UNHCR / PMO-DMD,UNHCR 2024 (Nyarugusu/Nduta camps),refugee burden-scaled
 TZ21,Manyara,TZ2104,Simanjiro,Vulnerability,Vulnerable groups,vulnerability:healthConditions,Health Conditions,1.6,MoH / NBS,THIS 2022-23 (HIV) + TDHS-MIS 2022 (malaria),disease-burden min-max blend
 TZ21,Manyara,TZ2104,Simanjiro,Vulnerability,Vulnerable groups,vulnerability:childrenHealthNutrition,Children Health Nutrition,4.075,MoH,TDHS 2022,under-5 stunting
@@ -3960,7 +3960,7 @@ TZ21,Manyara,TZ2105,Kiteto,Hazard & Exposure,Human hazards,hazard:vehicleAcciden
 TZ21,Manyara,TZ2105,Kiteto,Vulnerability,Socio-economic,vulnerability:developmentPoverty,Development Poverty,5.95,NBS,Household Budget Survey 2017/18,poverty headcount
 TZ21,Manyara,TZ2105,Kiteto,Vulnerability,Socio-economic,vulnerability:economicDependency,Economic Dependency,3.333333333,INFORM SADC 2024,INFORM Sub-national SADC 2024,baseline
 TZ21,Manyara,TZ2105,Kiteto,Vulnerability,Socio-economic,vulnerability:habitat,Habitat,5.1,INFORM SADC 2024,INFORM Sub-national SADC 2024,baseline
-TZ21,Manyara,TZ2105,Kiteto,Vulnerability,Socio-economic,vulnerability:livelihoods,Livelihoods,6.8,MUCHALI / IPC (MoA),IPC acute food-insecurity rounds,food-insecurity phase
+TZ21,Manyara,TZ2105,Kiteto,Vulnerability,Socio-economic,vulnerability:livelihoods,Livelihoods,7,MUCHALI / IPC (MoA),IPC acute food-insecurity rounds,food-insecurity phase
 TZ21,Manyara,TZ2105,Kiteto,Vulnerability,Vulnerable groups,vulnerability:displacedPeople,Displaced People,0,UNHCR / PMO-DMD,UNHCR 2024 (Nyarugusu/Nduta camps),refugee burden-scaled
 TZ21,Manyara,TZ2105,Kiteto,Vulnerability,Vulnerable groups,vulnerability:healthConditions,Health Conditions,1.6,MoH / NBS,THIS 2022-23 (HIV) + TDHS-MIS 2022 (malaria),disease-burden min-max blend
 TZ21,Manyara,TZ2105,Kiteto,Vulnerability,Vulnerable groups,vulnerability:childrenHealthNutrition,Children Health Nutrition,4.075,MoH,TDHS 2022,under-5 stunting

@@ -150,8 +150,11 @@ can raise a hazard, never lower it.
   min-max blended, raise-only. `health_burden.csv`.
 - **Displaced people (NEW)** — **UNHCR 2024** refugees: Nyarugusu (Kasulu ~130 k) + Nduta
   (Kibondo ~75 k) → these were **0**, now **10 / 8** (burden-scaled). `displaced_refugees.csv`.
-- **Livelihoods / food security** — wired to **MUCHALI / IPC** (MoA Food Security & Nutrition
-  analysis). *We do not invent IPC phases;* the slot is ready for MoA to enter each round (§6).
+- **Livelihoods / food security (NEW)** — **IPC / MUCHALI** Nov 2023–Oct 2024: **Longido &
+  Monduli in Phase 3 (Crisis)**, 16 more pastoral/semi-arid councils in Phase 2 (Stressed) —
+  raised raise-only. Only the **classified** councils get a value; the many baseline `0`s are
+  **no-data** (INFORM SADC didn't classify them) and are left as-is, never fabricated.
+  `food_security.csv`.
 - **WASH** — derived from **real 2022-census water points & boreholes** (more resource → lower
   "lack of coping"), rank-scaled 2–8.
 - **Access to health / education** — 2022 PHC facility counts.
