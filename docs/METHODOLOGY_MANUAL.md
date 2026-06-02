@@ -181,6 +181,13 @@ A low category **drags the dimension down** (geometric), unlike a plain average.
 scaled: (10−3.9)/10·9+1 = 6.49 ; (10−0.7)/10·9+1 = 9.37.
 GEOMEAN = √(6.49 × 9.37) = 7.80. dimension = (10 − 7.80)/9 × 10 = **2.4**. ✔ matches stored.
 
+> **Full end-to-end worked example** (real data, every indicator from raw value → standardisation →
+> 0-10 → category → dimension → risk, plus how the four levels harmonise): see
+> [`docs/WORKED_EXAMPLE.md`](WORKED_EXAMPLE.md), with the data tables in
+> `docs/worked_example_indicators.csv` and `docs/worked_example_levels.csv`. It uses Rufiji
+> (a documented flood district), its council Kibiti, and the Pwani region — regenerated from the live
+> dataset by `scripts/build-worked-example.mjs`.
+
 ### 5.3 Dimension → Risk: cube root
 > **Risk = ∛(Hazard × Vulnerability × LackOfCoping)**
 
