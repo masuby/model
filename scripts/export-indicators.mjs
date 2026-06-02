@@ -31,6 +31,7 @@ const SRC = {
   'hazard:exposure': ['NBS', '2022 PHC population', 'population density, log min-max'],
   'hazard:landslide': ['TMA / PMO-DMD', 'documented rainfall-triggered events', 'documented overlay'],
   'hazard:coastalHazards': ['TMA / PMO-DMD', 'coastal strip', 'documented overlay'],
+  'hazard:stormsCyclone': ['TMA / PMO-DMD', 'Cyclone Hidaya 2024 + Lindi 1952 + Zanzibar 1872', 'documented cyclone/storm exposure overlay'],
   'hazard:earthquake': ['INFORM SADC', 'INFORM seismic', 'baseline'],
   'vulnerability:developmentPoverty': ['NBS', 'Household Budget Survey 2017/18', 'poverty headcount'],
   'vulnerability:childrenHealthNutrition': ['MoH', 'TDHS 2022', 'under-5 stunting'],

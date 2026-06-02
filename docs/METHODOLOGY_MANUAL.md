@@ -118,12 +118,18 @@ a sparsely-populated but flood-prone district keeps its full documented hazard.
 > 2.1 — hiding known flood areas). That bug was caught by a before/after audit and fixed:
 > **exposure now amplifies only; a documented flood hazard is never lowered.**
 
-### 3.4 Fires, earthquake, landslide, coastal — honest status
-- **Wildfire, earthquake, lightning, volcano, storms, environmental degradation** are still the
-  **INFORM SADC 2024 baseline** values (not yet recomputed here). We did **not** fabricate
-  these. Wildfire, e.g., should later come from MODIS/VIIRS burned-area — flagged in §8.
-- **Landslide & coastal** keep their **documented** values (Hanang, Rungwe, Usambara; coastal
-  strip) — real but qualitative, editable, not yet a physical model.
+### 3.4 Storms & cyclone, fires, earthquake, landslide, coastal — status
+- **Storms & tropical cyclone (NEW — documented overlay):** graded coastal exposure from the
+  south (Mtwara, Lindi, Kilwa, Mafia — **Lindi cyclone 1952**, **Cyclone Hidaya 2024**) through
+  the central coast / Dar / Zanzibar (1872 Zanzibar cyclone) to the north. Source-tagged in
+  `storm_cyclone_exposure.csv`; raised only (never lowers). The INFORM baseline had ~0 here —
+  outdated after Hidaya (first cyclone to hit Tanzania: Mafia landfall, 120 km/h, 18,862 affected).
+- **Landslide & coastal hazards** keep their **documented** values (Hanang, Rungwe, Usambara;
+  coastal strip) — real but qualitative, editable.
+- **Wildfire, earthquake, lightning, volcano, environmental degradation** are still the **INFORM
+  SADC 2024 baseline** (not yet recomputed; not fabricated). Next per-hazard deep-dives: wildfire
+  from MODIS/VIIRS burned-area, earthquake from USGS seismicity (see §8). Each follows the same
+  pattern as storms: research → a source-tagged overlay CSV → raise-only via `apply-climate-hazards`.
 
 ---
 

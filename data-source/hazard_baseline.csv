@@ -1,0 +1,171 @@
+adm2_code,adm2_name,flood,drought,stormsCyclone
+TZ0101,Kondoa,3.8,7,0
+TZ0102,Mpwapwa,4.3,7,0
+TZ0103,Kongwa,1.9,7,0
+TZ0104,Chamwino,4.8,7,0
+TZ0105,Dodoma Urban,3.1,7,0
+TZ0106,Bahi,7.4,7,0
+TZ0107,Chemba,5.7,7,0
+TZ0201,Monduli,3.4,8.6,0
+TZ0202,Meru,3.8,8.6,0
+TZ0203,Arusha Urban,0,8.6,0
+TZ0204,Karatu,4.7,8.6,0
+TZ0205,Ngorongoro,4.7,8.6,0
+TZ0206,Arusha,1.2,8.6,0
+TZ0207,Longido,4.7,8.6,0
+TZ0301,Rombo,0,0.7,0
+TZ0302,Mwanga,7,0.7,0
+TZ0303,Same,7.1,0.7,0
+TZ0304,Moshi,6,0.7,0
+TZ0305,Hai,4.8,0.7,0
+TZ0306,Moshi Urban,0,0.7,0
+TZ0307,Siha,0,0.7,0
+TZ0401,Lushoto,1.9,4.3,0
+TZ0402,Korogwe,8,4.3,0
+TZ0403,Muheza,5.2,4.3,0
+TZ0404,Tanga Urban,6.3,4.3,0
+TZ0405,Pangani,9.8,4.3,0
+TZ0406,Handeni,3.8,4.3,0
+TZ0407,Kilindi,3.6,4.3,0
+TZ0408,Mkinga,,4.3,
+TZ0409,Korogwe Township Authority,8.9,4.3,0
+TZ0410,Handeni Mji,2.4,4.3,0
+TZ0501,Kilosa,8.5,0.7,0
+TZ0502,Morogoro,7,0.7,0
+TZ0503,Kilombero,8.5,0.7,0
+TZ0504,Ulanga,8.5,0.7,0
+TZ0505,Morogoro Urban,0,0.7,0
+TZ0506,Mvomero,7.2,0.7,0
+TZ0507,Gairo,7,0.7,0
+TZ0601,Bagamoyo,7,2.9,0
+TZ0602,Kibaha,6.8,2.9,0
+TZ0603,Kisarawe,4.7,2.9,0
+TZ0604,Mkuranga,7,2.9,0
+TZ0605,Rufiji,9,2.9,0
+TZ0606,Mafia,0,2.9,0
+TZ0607,Kibaha Urban,1.2,2.9,0
+TZ0701,Kinondoni,8,10,0
+TZ0702,Ilala,8,10,0
+TZ0703,Temeke,8,10,0
+TZ0801,Kilwa,7.5,0,0
+TZ0802,Lindi,7.1,0,0
+TZ0803,Nachingwea,4.6,0,0
+TZ0804,Liwale,7,0,0
+TZ0805,Ruangwa,4.5,0,0
+TZ0806,Lindi Urban,6.8,0,0
+TZ0901,Mtwara,8.2,0,10
+TZ0902,Newala,3.8,0,0
+TZ0903,Masasi,3.6,0,0
+TZ0904,Tandahimba,4.9,0,0
+TZ0905,Mtwara Urban,5.4,0,0
+TZ0906,Nanyumbu,4.6,0,0
+TZ0907,Masasi  Township Authority,0,0,0
+TZ1001,Tunduru,4.2,0,0
+TZ1002,Songea,3.8,0,0
+TZ1003,Mbinga,1.2,0,0
+TZ1004,Songea Urban,0,0,0
+TZ1005,Namtumbo,1.9,0,0
+TZ1006,Nyasa,4,0,0
+TZ1101,Iringa,6.7,0,0
+TZ1102,Mufindi,3.6,0,0
+TZ1103,Iringa Urban,6.7,0,0
+TZ1104,Kilolo,4.2,0,0
+TZ1105,Mafinga Township Authority,0,0,0
+TZ1201,Chunya,2.8,0,0
+TZ1202,Mbeya,0,0,0
+TZ1203,Kyela,10,0,0
+TZ1204,Rungwe,3.1,0,0
+TZ1207,Mbarali,8.4,0,0
+TZ1208,Mbeya Urban,0,0,0
+TZ1301,Iramba,6.2,7,0
+TZ1302,Singida,4,7,0
+TZ1303,Manyoni,7.4,7,0
+TZ1304,Singida Urban,5.7,7,0
+TZ1305,Ikungi,6.1,7,0
+TZ1306,Mkalama,5.4,7,0
+TZ1401,Nzega,4.9,6.5,0
+TZ1402,Igunga,6.6,6.5,0
+TZ1403,Uyui,6.2,0.7,0
+TZ1404,Urambo,2.8,0.7,0
+TZ1405,Sikonge,4.3,0.7,0
+TZ1406,Tabora Urban,3.1,0.7,0
+TZ1407,Kaliua,5.7,0.7,0
+TZ1501,Kalambo,3.8,0.7,0
+TZ1502,Sumbawanga,7.2,0.7,0
+TZ1503,Nkasi,6.1,0.7,0
+TZ1504,Sumbawanga Urban,0,0.7,0
+TZ1601,Kibondo,7.5,0,0
+TZ1602,Kasulu,7.5,0,0
+TZ1603,Kigoma,7.5,0,0
+TZ1604,Kigoma  Urban,7.5,0,0
+TZ1605,Uvinza,8.1,0,0
+TZ1606,Buhigwe,7.5,0,0
+TZ1607,Kakonko,7.5,0,0
+TZ1608,Kasulu Township Authority,7.5,0,0
+TZ1701,Shinyanga Urban,7.4,7,0
+TZ1702,Kishapu,7.4,7,0
+TZ1703,Shinyanga,5.1,7,0
+TZ1704,Kahama,4,7,0
+TZ1705,Kahama Township Authority,1.2,7,0
+TZ1801,Karagwe,4.7,0,0
+TZ1802,Bukoba,8.1,0,0
+TZ1803,Muleba,8,0,0
+TZ1804,Biharamulo,3.1,0,0
+TZ1805,Ngara,5.3,0,0
+TZ1806,Bukoba Urban,8.1,0,0
+TZ1807,Missenyi,7.1,0,0
+TZ1808,Kyerwa,6.1,0,0
+TZ1901,Ukerewe,8.5,0,0
+TZ1902,Magu,6.4,0,0
+TZ1903,Nyamagana,3.4,0,0
+TZ1904,Kwimba,3.1,0,0
+TZ1905,Sengerema,7.9,0,0
+TZ1906,Ilemela,7,0,0
+TZ1907,Misungwi,4.6,0,0
+TZ2001,Tarime,1.9,1.4,0
+TZ2002,Serengeti,3.8,1.4,0
+TZ2003,Musoma,6.9,1.4,0
+TZ2004,Bunda,7.1,1.4,0
+TZ2005,Musoma Urban,9.3,1.4,0
+TZ2006,Rorya,5.9,1.4,0
+TZ2007,Butiam,4.9,1.4,0
+TZ2101,Babati,5.6,6.4,0
+TZ2102,Hanang,5.6,6.4,0
+TZ2103,Mbulu,1.9,6.4,0
+TZ2104,Simanjiro,8.5,7,0
+TZ2105,Kiteto,3.6,7,0
+TZ2106,Babati Urban,3.4,6.4,0
+TZ2201,Njombe Urban,1.9,0.7,0
+TZ2202,Wanging'ombe,3.6,0.7,0
+TZ2203,Makete,2.8,0.7,0
+TZ2204,Njombe,0,0.7,0
+TZ2205,Ludewa,4.2,0.7,0
+TZ2206,Makambako Township Authority,0,0.7,0
+TZ2301,Mpanda Urban,5.4,0,0
+TZ2302,Mpanda,5.4,0,0
+TZ2303,Mlele,7.5,0,0
+TZ2401,Bariadi,4.9,7,0
+TZ2402,Itilima,1.9,7,0
+TZ2403,Meatu,7.5,7,0
+TZ2404,Maswa,3.4,7,0
+TZ2405,Busega,7.1,7,0
+TZ2501,Geita,6.1,2.1,0
+TZ2502,Nyang'hwale,4.9,2.1,0
+TZ2503,Mbogwe,2.8,2.1,0
+TZ2504,Bukombe,3.8,2.1,0
+TZ2505,Chato,7.2,2.1,0
+TZ2601,Songwe,7.7,0,0
+TZ2605,Ileje,1.9,0,0
+TZ2606,Mbozi,0,0,0
+TZ2609,Momba,7.4,0,0
+TZ2610,Tunduma,0,0,0
+TZ5101,Kaskazini A,0,2.9,0
+TZ5102,Kaskazini B,5.9,2.9,0
+TZ5201,Kati,4,1.4,0
+TZ5202,Kusini,5.5,1.4,0
+TZ5301,Magharibi,3.4,0,0
+TZ5302,Mjini,5.9,0,0
+TZ5401,Wete,7.5,5,0
+TZ5402,Micheweni,5,5,0
+TZ5501,Chake Chake,6.4,2.9,0
+TZ5502,Mkoani,7.1,2.9,0

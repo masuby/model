@@ -35,6 +35,7 @@ export const INDICATOR_SOURCE = {
   'hazard:flood': { by: 'PMO', also: ['TMA', 'MOW'], dataset: 'CHIRPS v3 daily + recorded floods', method: '>50/>100 mm event counts + events × exposure' },
   'hazard:landslide': { by: 'TMA', also: ['PMO'], dataset: 'documented rainfall-triggered events (highlands)', method: 'documented overlay' },
   'hazard:coastalHazards': { by: 'TMA', also: ['PMO'], dataset: 'coastal strip exposure', method: 'documented overlay' },
+  'hazard:stormsCyclone': { by: 'TMA', also: ['PMO'], dataset: 'Cyclone Hidaya 2024, Lindi cyclone 1952, Zanzibar 1872', method: 'documented cyclone/storm exposure overlay (coastal)' },
   'hazard:exposure': { by: 'NBS', dataset: '2022 PHC population', method: 'population density (rank-normalised)' },
   // Vulnerability
   'vulnerability:developmentPoverty': { by: 'NBS', dataset: 'Household Budget Survey 2017/18', method: 'poverty headcount' },

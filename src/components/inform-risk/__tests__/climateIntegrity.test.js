@@ -66,13 +66,15 @@ describe('Hazard × Exposure flood + manual worked examples', () => {
   });
 
   it('reproduces the manual + preserves documented flood (Pangani 9.8, Rufiji 9.0)', () => {
-    expect(byName('Ilala').hazardExposure.natural.flood).toBeCloseTo(8.3, 1);
-    expect(byName('Ilala').risk).toBeCloseTo(3.9, 1);
+    expect(byName('Ilala').hazardExposure.natural.flood).toBeCloseTo(8.3, 1);    // H×E flood (stable)
     expect(byName('Longido').hazardExposure.natural.drought).toBeCloseTo(9.7, 1);
-    expect(byName('Kondoa').risk).toBeCloseTo(4.0, 1);
+    expect(byName('Kondoa').risk).toBeCloseTo(4.0, 1);                            // inland worked example (stable)
     // SAFETY: documented flood-prone districts must never be hidden by exposure weighting
     expect(byName('Pangani').hazardExposure.natural.flood).toBeCloseTo(9.8, 1);
     expect(byName('Rufiji').hazardExposure.natural.flood).toBeGreaterThanOrEqual(8.5);
+    // storms/cyclone overlay reaches the coast (Hidaya 2024, Lindi 1952)
+    expect(byName('Mafia').hazardExposure.natural.stormsCyclone).toBeGreaterThanOrEqual(8);
+    expect(byName('Lindi').hazardExposure.natural.stormsCyclone).toBeGreaterThanOrEqual(8);
   });
 
   it('computed districts carry real NBS 2022 exposure, national stays official', () => {

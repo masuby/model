@@ -42,16 +42,22 @@ const expo = Object.fromEntries(readCsv('data-source/exposure_nbs2022.csv').map(
 const heavy = Object.fromEntries(readCsv('data-source/chirps_heavy_rain_events.csv').map((x) => [key(x.dist_name, x.reg_name), x]));
 const events = {};
 readCsv('data-source/flood_events.csv').forEach((x) => { const k = key(x.dist_name, x.reg_name); (events[k] = events[k] || []).push(+x.year); });
+const storms = Object.fromEntries(readCsv('data-source/storm_cyclone_exposure.csv').map((x) => [key(x.dist_name, x.reg_name), +x.storms_cyclone]));
+// STABLE documented baseline (pre-climate) — the floor for flood/drought/storms so apply is
+// idempotent (reruns can't ratchet values up). Regenerate from git if the baseline changes.
+const baseline = Object.fromEntries(readCsv('data-source/hazard_baseline.csv').map((x) => [x.adm2_code, x]));
 
 let n = 0; const unmatched = [];
 for (const u of D) {
   const k = key(u.admin.adm2Name, u.admin.adm1Name);
-  const ex = expo[k], dr = drought[k], hv = heavy[k], ev = (events[k] || []).sort();
-  if (!ex && !dr && !hv && !ev.length) { unmatched.push(u.admin.adm2Name); continue; }
+  const ex = expo[k], dr = drought[k], hv = heavy[k], ev = (events[k] || []).sort(), sc = storms[k];
+  if (!ex && !dr && !hv && !ev.length && !isN(sc)) { unmatched.push(u.admin.adm2Name); continue; }
   n++;
   const nat = u.hazardExposure.natural;
-  const baseFlood = isN(nat.flood) ? nat.flood : 0;        // documented baseline = a FLOOR (never hide)
-  const baseDrought = isN(nat.drought) ? nat.drought : 0;
+  const bl = baseline[u.admin.adm2Code] || {};             // stable documented floor (idempotent)
+  const baseFlood = isN(+bl.flood) ? +bl.flood : (isN(nat.flood) ? nat.flood : 0);
+  const baseDrought = isN(+bl.drought) ? +bl.drought : (isN(nat.drought) ? nat.drought : 0);
+  const baseStorms = isN(+bl.stormsCyclone) ? +bl.stormsCyclone : 0;
 
   // Exposure (NBS 2022) — a hazard modifier, editable in Data Entry
   if (ex) u.hazardExposure.exposure = { index: +ex.exposure_index, population: +ex.pop2022, density: Math.round(+ex.density), areaKm2: +ex.area_km2, _src: 'NBS 2022 PHC' };
@@ -69,6 +75,10 @@ for (const u of D) {
 
   // Drought = computed climate hazard, floored at the documented baseline (never hide a known drought).
   if (dr) nat.drought = r1(Math.max(+dr.drought_index, baseDrought));
+
+  // Storms & cyclone — documented coastal exposure overlay (Hidaya 2024, Lindi 1952, Zanzibar 1872).
+  // Raise only (precautionary), never lower the existing value.
+  if (isN(sc)) nat.stormsCyclone = Math.max(r1(sc), baseStorms);
 
   // Recompute the AUTHENTIC way
   nat.aggregate = r1(mean(catVals(nat)));
