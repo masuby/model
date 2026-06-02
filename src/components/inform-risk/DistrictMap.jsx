@@ -56,6 +56,21 @@ export default function DistrictMap({ metric, selected, onSelect, filterClass, l
     : { name: 'Tanzania', sub: 'National' };
   const keyOf = (u) => u && u.admin.adm2Code;
 
+  // Indicator lenses have 0–10 distributions unlike overall risk — colour them by
+  // their own quintiles so the real hotspots stand out (risk + dimension totals
+  // keep the authoritative INFORM class thresholds/colours).
+  const isIndicator = typeof metric.key === 'string' && metric.key.startsWith('ind:');
+  const relColor = (() => {
+    if (!isIndicator) return null;
+    const units = level === 'region' ? Object.values(REGION_BY_KEY) : level === 'national' ? [NATIONAL_UNIT] : Object.values(DISTRICT_BY_KEY);
+    const vals = units.map((u) => metric.get(u)).filter((v) => typeof v === 'number').sort((a, b) => a - b);
+    if (!vals.length) return () => '#cbd5e1';
+    const q = (p) => vals[Math.max(0, Math.min(vals.length - 1, Math.floor(p * (vals.length - 1))))];
+    const th = [q(0.2), q(0.4), q(0.6), q(0.8)];
+    const PAL = ['#2E7D32', '#8BC34A', '#FFC107', '#FF9800', '#D32F2F'];
+    return (v) => { if (v == null) return '#cbd5e1'; let i = 0; while (i < 4 && v > th[i]) i++; return PAL[i]; };
+  })();
+
   const styleFor = (f) => {
     const u = unitOf(f);
     const val = u ? metric.get(u) : null;
@@ -63,7 +78,7 @@ export default function DistrictMap({ metric, selected, onSelect, filterClass, l
     const isSel = selected && u && keyOf(selected) === keyOf(u);
     const dimmed = (filterClass && cls.level !== filterClass) || (isolateKey && keyOf(u) !== isolateKey);
     return {
-      fillColor: cls.color,
+      fillColor: relColor ? relColor(val) : cls.color,
       fillOpacity: val == null ? (hasBase ? 0.08 : 0.18) : dimmed ? 0.1 : (hasBase ? 0.6 : 0.85),
       color: isSel ? '#0f172a' : dimmed ? '#e2e8f0' : '#ffffff',
       weight: isSel ? 2.6 : level === 'district' ? 0.7 : 1.1,
@@ -76,7 +91,7 @@ export default function DistrictMap({ metric, selected, onSelect, filterClass, l
     const cls = classifyRisk(val);
     const lbl = labelOf(f);
     layer.bindTooltip(
-      `<strong>${lbl.name}</strong><br/>${lbl.sub}<br/>${metric.label}: ${round1(val) ?? '—'}${val == null ? '' : ` · ${cls.level}`}`,
+      `<strong>${lbl.name}</strong><br/>${lbl.sub}<br/>${metric.label}: ${round1(val) ?? '—'}${val == null || isIndicator ? '' : ` · ${cls.level}`}`,
       { sticky: true }
     );
     layer.on({
@@ -86,7 +101,9 @@ export default function DistrictMap({ metric, selected, onSelect, filterClass, l
     });
   };
 
-  const legend = RISK_CLASSES;
+  const legend = isIndicator
+    ? ['Lowest', 'Low', 'Medium', 'High', 'Highest'].map((level, i) => ({ level, color: ['#2E7D32', '#8BC34A', '#FFC107', '#FF9800', '#D32F2F'][i] }))
+    : RISK_CLASSES;
 
   return (
     <div className="rx-map">
@@ -96,7 +113,7 @@ export default function DistrictMap({ metric, selected, onSelect, filterClass, l
         <GeoJSON key={key} ref={geoRef} data={geojson} style={styleFor} onEachFeature={onEach} />
       </MapContainer>
       <div className="rx-legend ui-card">
-        <span className="rx-legend-title">{metric.label}</span>
+        <span className="rx-legend-title">{metric.label}{isIndicator ? ' (relative)' : ''}</span>
         {legend.map((l) => (
           <span key={l.level} className="rx-legend-row"><i style={{ background: l.color }} /> {l.level}</span>
         ))}
