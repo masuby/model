@@ -145,6 +145,9 @@
 .rc-hbar-track i { display: block; height: 100%; border-radius: inherit; transition: width var(--ease); }
 .rc-hbar-val { flex: 0 0 30px; text-align: right; font-weight: 800; font-size: var(--fs-sm); }
 
+.rx-facilities { display: flex; align-items: center; gap: var(--s-3); flex-wrap: wrap; padding: var(--s-2) var(--s-3); background: var(--c-surface-2); border-radius: var(--r-md); margin-bottom: var(--s-3); font-size: var(--fs-sm); font-weight: 600; color: var(--c-ink); }
+.rx-facilities .ui-eyebrow { font-weight: 700; }
+
 .rx-bar-row { display: flex; align-items: center; gap: var(--s-2); font-size: var(--fs-xs); }
 .rx-bar-label { width: 96px; color: var(--c-muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .rx-bar-val { width: 26px; text-align: right; font-weight: 700; color: var(--c-body); }

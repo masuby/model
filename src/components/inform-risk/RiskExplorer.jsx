@@ -55,6 +55,16 @@ function DistrictDetail({ d }) {
         </div>
       </div>
 
+      {d.facilities && (
+        <div className="rx-facilities">
+          <span className="ui-eyebrow">Facilities · 2022 census</span>
+          <span title="Health facilities">🏥 {d.facilities.health.toLocaleString()}</span>
+          <span title="Schools">🏫 {d.facilities.education.toLocaleString()}</span>
+          <span title="Water points">💧 {d.facilities.water.toLocaleString()}</span>
+          <span title="Boreholes">⛲ {d.facilities.boreholes.toLocaleString()}</span>
+        </div>
+      )}
+
       <div className="rx-detail-grid">
         <div className="rx-dim ui-card ui-card-pad">
           <div className="rx-dim-head"><span>Hazard &amp; Exposure</span><b style={{ color: classifyRisk(he.total).color }}>{round1(he.total) ?? '—'}</b></div>
