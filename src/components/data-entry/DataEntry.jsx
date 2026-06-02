@@ -165,13 +165,21 @@ export default function DataEntry() {
                   <div key={c.name} className="de-comp">
                     <span className="de-comp-name">{c.name}</span>
                     <div className="de-ind-grid">
-                      {c.indicators.map((i) => (
-                        <label key={i.k} className="de-ind">
-                          <span className="de-ind-label">{i.label}</span>
-                          <input type="number" min="0" max="10" step="0.1" value={ind[`${dim}:${i.k}`] ?? ''}
-                            onChange={(e) => onIndChange(dim, i.k, e.target.value)} />
-                        </label>
-                      ))}
+                      {c.indicators.map((i) => {
+                        const ikey = `${dim}:${i.k}`;
+                        const noData = ind[ikey] == null;
+                        return (
+                          <label key={i.k} className={`de-ind ${noData ? 'is-nodata' : ''}`}>
+                            <span className="de-ind-label">{i.label}{noData && <em className="de-nodata"> · no data</em>}</span>
+                            <div className="de-ind-input">
+                              <input type="number" min="0" max="10" step="0.1" placeholder="— no data" value={ind[ikey] ?? ''}
+                                onChange={(e) => onIndChange(dim, i.k, e.target.value)} />
+                              <button type="button" className="de-clear" title="Set to NO DATA (null — excluded from the INFORM calculation, not treated as 0)"
+                                onClick={() => onIndChange(dim, i.k, '')} disabled={noData}>∅</button>
+                            </div>
+                          </label>
+                        );
+                      })}
                     </div>
                   </div>
                 ))}
