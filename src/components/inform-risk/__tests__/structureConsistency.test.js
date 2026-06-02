@@ -66,3 +66,32 @@ describe('Real NBS-2022 structure is canonical (195 councils → 31 regions → 
     expect(unitsForLevel('district').length).toBe(DISTRICTS.length);
   });
 });
+
+describe('Council-level Hazard & Exposure — computed per council, raise-only', () => {
+  const key = (s) => String(s || '').toLowerCase().replace(/[^a-z]/g, '');
+  it('every council has a globally-unique code (guards the 12-of-195 collision bug)', () => {
+    const codes = COUNCIL_UNITS.map((c) => c.admin.adm2Code);
+    expect(new Set(codes).size).toBe(codes.length);   // all distinct
+    expect(codes.length).toBeGreaterThanOrEqual(195);
+  });
+
+  it('all 195 councils carry their OWN computed Hazard & Exposure (council population ÷ area)', () => {
+    const computed = COUNCIL_UNITS.filter((c) => c._councilHazard);
+    expect(computed.length).toBe(COUNCIL_UNITS.length);
+    for (const c of computed) {
+      expect(typeof c.hazardExposure?.exposure?.index).toBe('number');
+      expect(typeof c.hazardExposure?.exposure?.population).toBe('number');
+    }
+  });
+
+  it('council Hazard total & risk are raise-only — never below the source district', () => {
+    const dByName = {}; for (const d of DISTRICTS) dByName[key(d.admin.adm2Name)] = d;
+    const fails = [];
+    for (const c of COUNCIL_UNITS) {
+      const src = dByName[key(c._srcName)]; if (!src) continue;
+      if (typeof c.hazardExposure?.total === 'number' && c.hazardExposure.total < src.hazardExposure?.total - 0.06) fails.push(`${c.admin.adm2Name} hazard ${c.hazardExposure.total} < ${src.hazardExposure.total}`);
+      if (typeof c.risk === 'number' && c.risk < src.risk - 0.06) fails.push(`${c.admin.adm2Name} risk ${c.risk} < ${src.risk}`);
+    }
+    expect(fails).toEqual([]);
+  });
+});

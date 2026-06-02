@@ -80,7 +80,7 @@ export default function DistrictMap({ metric, selected, onSelect, filterClass, l
     return NATIONAL_UNIT;
   };
   const labelOf = (f) =>
-    level === 'council' ? { name: f.properties.name, sub: f.properties.reg + (f.properties.isNew ? ' · data inherited from ' + (f.properties.parent || 'parent') : '') }
+    level === 'council' ? { name: f.properties.name, sub: f.properties.reg + (f.properties.isNew ? ' · Vuln/Coping from ' + (f.properties.src || 'parent') : '') }
     : level === 'district' ? { name: f.properties.dist_name, sub: f.properties.reg_name }
     : level === 'region' ? { name: f.properties.reg_name, sub: 'Region (ADM1)' }
     : { name: 'Tanzania', sub: 'National' };

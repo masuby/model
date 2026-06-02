@@ -5,6 +5,7 @@
 
 import riskDataset from '../../data/tanzania-inform-risk.json';
 import councilsGeo from '../../data/tanzania-councils.json';
+import councilData from '../../data/tanzania-councils-data.json';
 import { classifyRisk, normRegion } from './regionRisk';
 import { getOverrides } from './overrideStore';
 import { sourceFor } from './indicatorSources';
@@ -277,14 +278,23 @@ const ADM2_BY_NAME = (() => { const idx = {}; for (const d of DISTRICTS) idx[nor
 export const COUNCIL_UNITS = (councilsGeo.features || []).map((f) => {
   const p = f.properties; const src = ADM2_BY_NAME[normRegion(p.src)];
   if (!src) return null;
+  // Council-specific Hazard & Exposure, computed on this council's OWN polygon (CHIRPS v3 drought/
+  // heavy-rain, ERA5 heat, NBS-2022 council population ÷ council area), floored at the district's
+  // documented level (raise-only). Vulnerability & Coping stay district-level (survey resolution —
+  // HBS/TDHS/IPC have no council breakdown), so councils sharing a district share those.
+  const cd = councilData[String(p.code)];
   return {
     admin: { adm2Name: p.name, adm1Name: p.reg, adm2Code: p.code, iso3: 'TZA' },
-    hazardExposure: src.hazardExposure, vulnerability: src.vulnerability, lackCopingCapacity: src.lackCopingCapacity,
-    risk: src.risk, facilities: src.facilities, drr: src.drr,
+    hazardExposure: cd?.hazardExposure || src.hazardExposure,
+    vulnerability: src.vulnerability,
+    lackCopingCapacity: src.lackCopingCapacity,
+    risk: cd?.risk ?? src.risk,
+    facilities: src.facilities, drr: src.drr,
     _inherited: p.isNew ? (p.parent || src.admin.adm2Name) : null, _councilCode: String(p.code),
-    // The underlying INFORM source (170) unit this council's data comes from. Edits in Data Entry
-    // are keyed by _srcCode so they flow through the single 170-resolution data backbone to every
-    // council that shares this source (we never fabricate per-council splits).
+    _councilHazard: !!cd,
+    // The underlying INFORM source (170) unit this council's Vulnerability & Coping come from. Data-
+    // Entry edits are keyed by _srcCode so they flow through the 170-resolution backbone to every
+    // council that shares this source (we never fabricate per-council survey splits).
     _srcCode: src.admin.adm2Code, _srcName: src.admin.adm2Name,
   };
 }).filter(Boolean);

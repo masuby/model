@@ -150,8 +150,8 @@ export default function RiskExplorer() {
           </select>
           <span className="ui-muted rx-level-count">{ranked.length} {noun}</span>
           {level === 'council' && (
-            <span className="ui-muted rx-admin-basis" title="The REAL 195 NBS 2022 councils (LGAs), official boundaries. 167 match an INFORM unit directly; the 28 new/split councils (Kibiti, Ubungo, Kigamboni, Mlimba…) inherit their parent district's data — shown on hover — until council-specific data exists. Never fabricated.">
-              · real NBS 2022 LGAs — 28 new inherit parent ⓘ
+            <span className="ui-muted rx-admin-basis" title="The REAL 195 NBS-2022 councils (LGAs). Hazard & Exposure is computed on EACH council's own polygon — CHIRPS v3 drought & heavy-rain, ERA5 heat, NBS-2022 council population ÷ council area — floored at the district's documented level (raise-only, never shown safer). Vulnerability & Coping stay district-level (HBS/TDHS/IPC surveys have no council breakdown); the 28 split councils inherit their parent district's V&C. Never fabricated.">
+              · 195 LGAs · Hazard computed per council; V&amp;C district-level ⓘ
             </span>
           )}
           {level === 'district' && (

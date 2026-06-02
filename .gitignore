@@ -74,3 +74,4 @@ Thumbs.db
 # *.csv
 .vercel
 data-source/_drought_cube.npz
+data-source/_council_climate_cube.npz
