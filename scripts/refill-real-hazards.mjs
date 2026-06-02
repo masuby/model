@@ -1,97 +1,94 @@
 /**
- * refill-real-hazards.mjs — overlay DOCUMENTED Tanzania hazard geography and DRM
- * coping investments onto the INFORM SADC 2024 baseline, then recompute category
- * aggregates (mean) → dimension totals (mean) → risk (∛H·V·LCC).
+ * refill-real-hazards.mjs — overlay DOCUMENTED, REPORTED Tanzania data onto the
+ * INFORM SADC 2024 baseline, then recompute each edited dimension's aggregates
+ * (mean) → total (mean of components) → risk (∛H·V·LCC). Hazards/vulnerability are
+ * only RAISED (max); coping is only IMPROVED (min "lack"). National figures stay at
+ * the official INFORM values. Run: node scripts/refill-real-hazards.mjs
  *
- * Grounded in: NBS 2022 census admin units; documented flood basins (Rufiji,
- * Kilombero, Kilosa, Kyela, Kigoma, Dar urban); landslide highlands (Rungwe/Mbeya,
- * Hanang/Mbulu, Lushoto/Usambara, Kilimanjaro/Pare); the Indian Ocean coastal strip;
- * central semi-arid drought belt (Dodoma, Singida, Shinyanga, Simiyu, pastoral
- * Arusha/Manyara); Rift Valley seismicity (Kagera 2016 Bukoba M5.9, SW highlands);
- * and PMO-DMD / EW4ALL DRM build-out (national EOCC Dodoma; regional EOCC + ERT in
- * Mwanza, Arusha, Dodoma, Mbeya). Hazards are only RAISED (max), coping only IMPROVED.
- * Run: node scripts/refill-real-hazards.mjs
+ * Sources (web-verified): NBS 2022 census; flood basins (Rufiji, Kilombero, Kilosa,
+ * Kyela, Kigoma, Dar urban); landslide highlands (Rungwe/Mbeya, Hanang/Mbulu,
+ * Lushoto/Usambara, Kilimanjaro/Pare); Indian Ocean coastal strip; central+pastoral
+ * drought (Dodoma/Singida/Shinyanga/Simiyu, Monduli/Longido/Ngorongoro/Kiteto/Simanjiro);
+ * Rift seismicity (Kagera 2016 Bukoba M5.9). Poverty — HBS 2017-18 (Geita ~40%,
+ * Shinyanga/Lindi >90% poor households, Kagera/Kigoma high). Stunting — TDHS 2022
+ * (Iringa 56.9%, Njombe 50.4%, Rukwa 49.8%, Southern Highlands). DRM coping — PMO-DMD
+ * EW4ALL regional EOCC + ERT (Mwanza, Arusha, Dodoma, Mbeya).
  */
 import { readFile, writeFile } from 'fs/promises';
 
 const FILE = 'src/data/tanzania-inform-risk.json';
 const r1 = (v) => Math.round(v * 10) / 10;
 const mean = (xs) => { const a = xs.filter((x) => typeof x === 'number'); return a.length ? a.reduce((s, x) => s + x, 0) / a.length : null; };
-const compMean = (obj) => mean(Object.entries(obj).filter(([k]) => k !== 'aggregate').map(([, v]) => v));
+const compMean = (o) => mean(Object.entries(o).filter(([k]) => k !== 'aggregate').map(([, v]) => v));
+const norm = (s) => String(s || '').toLowerCase().replace(/\s+/g, ' ').trim();
 
 const data = JSON.parse(await readFile(FILE, 'utf8'));
 const D = data.subnational.adm2;
-const touched = new Set();
-const norm = (s) => String(s || '').toLowerCase().replace(/\s+/g, ' ').trim();
+const tH = new Set(), tV = new Set(), tC = new Set();
 const inReg = (u, regs) => regs.map(norm).includes(norm(u.admin.adm1Name));
 const isDist = (u, names) => names.map(norm).includes(norm(u.admin.adm2Name));
+const match = (u, { regions = [], names = [] }) => inReg(u, regions) || isDist(u, names);
 
-// raise a natural-hazard indicator (only upward) for matching districts
-function raise(key, val, { regions = [], names = [] }) {
-  D.forEach((u) => {
-    if (inReg(u, regions) || isDist(u, names)) {
-      const n = u.hazardExposure?.natural; if (!n || !(key in n)) return;
-      const cur = typeof n[key] === 'number' ? n[key] : 0;
-      if (val > cur) { n[key] = val; touched.add(u); }
-    }
-  });
-}
-// improve coping (lower the institutional "lack" indicators) for DRM regions
-function drm(regions, { drr, gov }) {
-  D.forEach((u) => {
-    if (!inReg(u, regions)) return;
-    const inst = u.lackCopingCapacity?.institutional; if (!inst) return;
-    if (typeof inst.drrImplementation === 'number') inst.drrImplementation = Math.min(inst.drrImplementation, drr);
-    if (typeof inst.governance === 'number') inst.governance = Math.min(inst.governance, gov);
-    touched.add(u);
-  });
-}
+const raiseH = (key, val, m) => D.forEach((u) => { if (match(u, m)) { const o = u.hazardExposure?.natural; if (o && key in o && val > (o[key] || 0)) { o[key] = val; tH.add(u); } } });
+const raiseV = (comp, key, val, m) => D.forEach((u) => { if (match(u, m)) { const o = u.vulnerability?.[comp]; if (o && key in o && val > (o[key] || 0)) { o[key] = val; tV.add(u); } } });
+const drm = (regions, { drr, gov }) => D.forEach((u) => { if (inReg(u, regions)) { const o = u.lackCopingCapacity?.institutional; if (o) { if (typeof o.drrImplementation === 'number') o.drrImplementation = Math.min(o.drrImplementation, drr); if (typeof o.governance === 'number') o.governance = Math.min(o.governance, gov); tC.add(u); } } });
 
-// ---- FLOOD (riverine/urban) ----
-raise('flood', 8.5, { names: ['Kilosa', 'Kilombero', 'Ulanga', 'Rufiji', 'Kyela'] });
-raise('flood', 8.0, { regions: ['Dar-es-salaam'] });
-raise('flood', 7.5, { regions: ['Kigoma'] });
-raise('flood', 7.0, { names: ['Bagamoyo', 'Mkuranga', 'Mvomero', 'Gairo', 'Morogoro', 'Mbarali', 'Sumbawanga', 'Liwale', 'Kilwa', 'Malinyi'] });
+// FLOOD
+raiseH('flood', 8.5, { names: ['Kilosa', 'Kilombero', 'Ulanga', 'Rufiji', 'Kyela'] });
+raiseH('flood', 8.0, { regions: ['Dar-es-salaam'] });
+raiseH('flood', 7.5, { regions: ['Kigoma'] });
+raiseH('flood', 7.0, { names: ['Bagamoyo', 'Mkuranga', 'Mvomero', 'Gairo', 'Morogoro', 'Mbarali', 'Sumbawanga', 'Liwale', 'Kilwa', 'Malinyi'] });
+// LANDSLIDE
+raiseH('landslide', 8.5, { names: ['Rungwe', 'Mbeya', 'Hanang'] });
+raiseH('landslide', 8.0, { names: ['Mbulu', 'Babati', 'Lushoto', 'Korogwe', 'Muheza'] });
+raiseH('landslide', 7.0, { names: ['Rombo', 'Same', 'Moshi', 'Hai', 'Mwanga', 'Makete', 'Ludewa', 'Muleba'] });
+// COASTAL
+raiseH('coastalHazards', 7.5, { regions: ['Dar-es-salaam'], names: ['Bagamoyo', 'Mkuranga', 'Rufiji', 'Mafia'] });
+raiseH('coastalHazards', 7.0, { names: ['Tanga Urban', 'Pangani', 'Mkinga', 'Muheza', 'Kilwa', 'Lindi', 'Lindi Urban', 'Mtwara', 'Mtwara Urban'] });
+raiseH('coastalHazards', 6.5, { regions: ['Mjini Magharibi', 'Kaskazini Unguja', 'Kusini Unguja', 'Kaskazini Pemba', 'Kusini Pemba'] });
+// DROUGHT
+raiseH('drought', 7.0, { regions: ['Dodoma', 'Singida', 'Shinyanga', 'Simiyu'], names: ['Simanjiro', 'Kiteto'] });
+raiseH('drought', 6.5, { names: ['Monduli', 'Longido', 'Ngorongoro', 'Igunga', 'Nzega'] });
+// EARTHQUAKE
+raiseH('earthquake', 7.0, { names: ['Bukoba', 'Bukoba Urban', 'Missenyi', 'Muleba'] });
+raiseH('earthquake', 6.0, { regions: ['Mbeya', 'Rukwa', 'Songwe', 'Katavi', 'Kigoma'] });
 
-// ---- LANDSLIDE (highlands) ----
-raise('landslide', 8.5, { names: ['Rungwe', 'Mbeya', 'Hanang'] });
-raise('landslide', 8.0, { names: ['Mbulu', 'Babati', 'Lushoto', 'Korogwe', 'Muheza'] });
-raise('landslide', 7.0, { names: ['Rombo', 'Same', 'Moshi', 'Hai', 'Mwanga', 'Makete', 'Ludewa', 'Muleba'] });
+// VULNERABILITY — development & poverty (HBS 2017-18)
+raiseV('socioEconomic', 'developmentPoverty', 8.5, { regions: ['Geita'] });
+raiseV('socioEconomic', 'developmentPoverty', 8.0, { regions: ['Kagera', 'Shinyanga', 'Lindi'] });
+raiseV('socioEconomic', 'developmentPoverty', 7.5, { regions: ['Kigoma', 'Mtwara', 'Rukwa', 'Katavi'] });
+raiseV('socioEconomic', 'developmentPoverty', 7.0, { regions: ['Tabora', 'Singida', 'Simiyu', 'Dodoma'] });
+// VULNERABILITY — children health & nutrition (TDHS 2022 stunting)
+raiseV('vulnerableGroups', 'childrenHealthNutrition', 9.0, { regions: ['Iringa'] });
+raiseV('vulnerableGroups', 'childrenHealthNutrition', 8.5, { regions: ['Njombe', 'Rukwa'] });
+raiseV('vulnerableGroups', 'childrenHealthNutrition', 8.0, { regions: ['Songwe'] });
+raiseV('vulnerableGroups', 'childrenHealthNutrition', 7.5, { regions: ['Mbeya', 'Kigoma', 'Ruvuma', 'Katavi', 'Geita'] });
 
-// ---- COASTAL HAZARDS (Indian Ocean strip) ----
-raise('coastalHazards', 7.5, { regions: ['Dar-es-salaam'] });
-raise('coastalHazards', 7.5, { names: ['Bagamoyo', 'Mkuranga', 'Rufiji', 'Mafia'] });
-raise('coastalHazards', 7.0, { names: ['Tanga Urban', 'Pangani', 'Mkinga', 'Muheza', 'Kilwa', 'Lindi', 'Lindi Urban', 'Mtwara', 'Mtwara Urban'] });
-raise('coastalHazards', 6.5, { regions: ['Mjini Magharibi', 'Kaskazini Unguja', 'Kusini Unguja', 'Kaskazini Pemba', 'Kusini Pemba'] });
-
-// ---- DROUGHT (central semi-arid + pastoral) ----
-raise('drought', 7.0, { regions: ['Dodoma', 'Singida', 'Shinyanga', 'Simiyu'] });
-raise('drought', 7.0, { names: ['Simanjiro', 'Kiteto'] });
-raise('drought', 6.5, { names: ['Monduli', 'Longido', 'Ngorongoro', 'Igunga', 'Nzega'] });
-
-// ---- EARTHQUAKE (Rift Valley) ----
-raise('earthquake', 7.0, { names: ['Bukoba', 'Bukoba Urban', 'Missenyi', 'Muleba'] });
-raise('earthquake', 6.0, { regions: ['Mbeya', 'Rukwa', 'Songwe', 'Katavi', 'Kigoma'] });
-
-// ---- DRM coping investments (regional EOCC + ERT) ----
+// DRM coping investments (regional EOCC + ERT)
 drm(['Mwanza', 'Arusha', 'Dodoma', 'Mbeya'], { drr: 3.0, gov: 3.5 });
 
-// ---- recompute aggregates → totals → risk for every touched unit ----
-touched.forEach((u) => {
+// recompute only the edited dimension per unit, then risk for any edited unit
+tH.forEach((u) => {
   u.hazardExposure.natural.aggregate = r1(compMean(u.hazardExposure.natural));
   u.hazardExposure.human.aggregate = r1(compMean(u.hazardExposure.human));
   u.hazardExposure.total = r1(mean([u.hazardExposure.natural.aggregate, u.hazardExposure.human.aggregate]));
+});
+tV.forEach((u) => {
+  u.vulnerability.socioEconomic.aggregate = r1(compMean(u.vulnerability.socioEconomic));
+  u.vulnerability.vulnerableGroups.aggregate = r1(compMean(u.vulnerability.vulnerableGroups));
+  u.vulnerability.total = r1(mean([u.vulnerability.socioEconomic.aggregate, u.vulnerability.vulnerableGroups.aggregate]));
+});
+tC.forEach((u) => {
   u.lackCopingCapacity.infrastructure.aggregate = r1(compMean(u.lackCopingCapacity.infrastructure));
   u.lackCopingCapacity.institutional.aggregate = r1(compMean(u.lackCopingCapacity.institutional));
   u.lackCopingCapacity.total = r1(mean([u.lackCopingCapacity.infrastructure.aggregate, u.lackCopingCapacity.institutional.aggregate]));
+});
+const all = new Set([...tH, ...tV, ...tC]);
+all.forEach((u) => {
   const h = u.hazardExposure.total, v = u.vulnerability.total, c = u.lackCopingCapacity.total;
   if ([h, v, c].every((x) => typeof x === 'number')) u.risk = r1(Math.cbrt(h * v * c));
 });
 
-// NOTE: national figures stay at the official INFORM values (not a plain district
-// mean — INFORM national uses its own weighting). The explorer's national level is
-// aggregated from districts separately in riskModel.
-
-data.metadata = { ...(data.metadata || {}), refilled: 'documented TZ hazard hotspots + DRM coping (EOCC/ERT)' };
+data.metadata = { ...(data.metadata || {}), refilled: 'documented TZ hazards + poverty/stunting vulnerability + DRM coping' };
 await writeFile(FILE, JSON.stringify(data));
-console.log(`✓ refilled ${touched.size} districts (national figures left at official INFORM values).`);
+console.log(`✓ refilled — hazards:${tH.size} vulnerability:${tV.size} coping:${tC.size} (union ${all.size} of ${D.length}). National kept official.`);
