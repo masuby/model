@@ -255,14 +255,23 @@ Storage today is the browser (`localStorage`); the Supabase schema is ready for 
    documented INFORM baseline — clearly too high for a coastal city. The precautionary floor
    keeps documented values rather than silently lowering them, so it persists (the *computed*
    value is ~6.6). **Flagged for correction via Data Entry** (MoA/TMA), which now overrides it.
-5. **Administrative structure (audited + reconciled).** **31 regions is correct** (NBS 2022). The
-   explorer now offers a **Council / LGA level showing the REAL 195 NBS 2022 councils** (official
-   geodatabase boundaries, Swahili names parsed): **167 match an INFORM unit directly; the 28
-   new/split councils** (Kibiti←Rufiji, Ubungo←Kinondoni, Kigamboni←Temeke, Mlimba/Ifakara←Kilombero,
-   Magharibi A/B←Magharibi…) **inherit their parent district's data — flagged on hover** — until
-   council-specific data exists (**never fabricated**). The INFORM **170-unit** and **31-region**
-   levels remain. Official NBS 2022: 31 regions · 150 districts · 195 councils · 4,344 wards.
-   Reconciliation: `scripts/export-councils.py` → `tanzania-councils.json` + `council_reconciliation.csv`.
+5. **Administrative structure — the model now speaks the real NBS-2022 structure by default.**
+   The explorer, the ranked table, the charts and Data Entry all open on the **195 councils (LGAs)**,
+   aggregating to the **31 regions**, with the **official INFORM country value (4.1)** as the national
+   figure. This is a *consistent scaling of the same source*: the model was built from the INFORM
+   Tanzania **country-model workbook** (170 council-level units — the **reference/backing**), and the
+   195 NBS-2022 councils are derived from it. **195/195 councils carry data**: 167 match an INFORM unit
+   directly; **28 new/split councils** (Kibiti←Rufiji, Ubungo←Kinondoni, Kigamboni←Temeke,
+   Mlimba/Ifakara←Kilombero, Magharibi A/B…) **inherit their parent's data — flagged on hover/in the
+   list** — until council-specific data exists (**never fabricated**). Because the data is 170-resolution,
+   **34 INFORM source units back more than one council** (e.g. Mtwara → Mtwara District + Nanyamba Town +
+   Mtwara Mikindani Municipal); a **Data-Entry edit is keyed by that single source unit and flows to every
+   council that shares it** — Data Entry states which source unit it is editing and which councils it
+   updates. The **170 INFORM units remain available as a labelled "source/reference" level**; national and
+   regional figures aggregate from this distinct backbone (no double-counting of inherited/shared councils),
+   and the **national value is kept official**, never a unit-mean. Official NBS 2022: 31 regions · 150
+   districts · 195 councils · 4,344 wards. Reconciliation: `scripts/export-councils.py` →
+   `tanzania-councils.json` + `council_reconciliation.csv`.
 6. **Wildfire, earthquake, lightning, storms** are still INFORM baseline — not yet physically
    recomputed (MODIS/VIIRS fire, USGS seismicity are the next sources).
 7. **Standardization is relative to Tanzania** (min over our 150 districts), not INFORM's fixed

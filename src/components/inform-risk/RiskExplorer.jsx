@@ -30,7 +30,7 @@ function Bar({ value, label }) {
 
 function DistrictDetail({ d }) {
   if (!d) {
-    return <div className="rx-detail-empty ui-muted">Select a district on the map or table to see its full INFORM profile.</div>;
+    return <div className="rx-detail-empty ui-muted">Select an area on the map or table to see its full INFORM profile.</div>;
   }
   const cls = classifyRisk(d.risk);
   const he = d.hazardExposure || {};
@@ -108,7 +108,7 @@ const LENSES = [
 import { RISK_CLASSES as CATEGORIES } from './riskConstants';
 
 export default function RiskExplorer() {
-  const [level, setLevel] = useState('district');
+  const [level, setLevel] = useState('council');
   const [metricKey, setMetricKey] = useState('risk');
   const [selected, setSelected] = useState(null);
   const [sortDir, setSortDir] = useState('desc');
@@ -313,7 +313,7 @@ export default function RiskExplorer() {
           <table className="ui-table">
             <thead>
               <tr>
-                <th>#</th><th>{level === 'region' ? 'Region' : level === 'national' ? 'Area' : 'District'}</th><th>Region</th><th>{metric.label}</th>
+                <th>#</th><th>{level === 'region' ? 'Region' : level === 'national' ? 'Area' : level === 'council' ? 'Council / LGA' : 'INFORM unit'}</th><th>Region</th><th>{metric.label}</th>
                 <th>Hazard</th><th>Vulnerability</th><th>Coping</th><th>Class</th>
               </tr>
             </thead>
@@ -341,7 +341,7 @@ export default function RiskExplorer() {
         )}
       </div>
 
-      <RiskCharts metric={metric} />
+      <RiskCharts metric={metric} units={units} />
 
       {!secondPanel && <DistrictCharts district={selected} />}
 

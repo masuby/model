@@ -11,12 +11,15 @@
  * PMO-DMD, DRR Coordinator, MUCHALI/IPC) and shown when viewing the indicator.
  */
 import React, { useEffect, useMemo, useState } from 'react';
-import { DISTRICTS, DIMENSION_TREE, DIM_KEYS, classifyRisk, round1 } from '../inform-risk/riskModel';
+import { COUNCIL_UNITS, DIMENSION_TREE, DIM_KEYS, classifyRisk, round1 } from '../inform-risk/riskModel';
 import { AUTHORITIES } from '../inform-risk/indicatorSources';
 import { saveDirect, submit, getPending, approve, reject, resetAll, getOverrides } from '../inform-risk/overrideStore';
 import './DataEntry.css';
 
-const REGIONS = [...new Set(DISTRICTS.map((d) => d.admin.adm1Name))].sort();
+// Data Entry speaks the real NBS-2022 structure: 31 regions → 195 councils. Each council's data
+// comes from an underlying INFORM source (170) unit; edits are keyed by that source so they flow
+// through the single data backbone to every council that shares it (we never fabricate splits).
+const REGIONS = [...new Set(COUNCIL_UNITS.map((c) => c.admin.adm1Name))].sort();
 const TOTAL_KEY = { hazard: 'hazard', vulnerability: 'vuln', coping: 'cope' };
 const AUTH_OPTIONS = Object.entries(AUTHORITIES).filter(([k]) => k !== 'INFORM' && k !== 'CHC').map(([k, v]) => ({ k, ...v }));
 const DEFAULT_AUTH = { pmo: 'PMO', sector: 'MOW' };
@@ -35,9 +38,16 @@ function recomputeDim(dim, ind) {
 export default function DataEntry() {
   const [role, setRole] = useState('pmo');
   const [region, setRegion] = useState(REGIONS[0]);
-  const districts = useMemo(() => DISTRICTS.filter((d) => d.admin.adm1Name === region), [region]);
-  const [code, setCode] = useState(districts[0]?.admin.adm2Code);
-  const district = districts.find((d) => d.admin.adm2Code === code) || districts[0];
+  const councils = useMemo(() => COUNCIL_UNITS.filter((c) => c.admin.adm1Name === region), [region]);
+  const [code, setCode] = useState(councils[0]?.admin.adm2Code);
+  const unit = councils.find((c) => c.admin.adm2Code === code) || councils[0];
+  // Edits are keyed by the underlying INFORM source (170) unit so they flow through the data backbone
+  // to every council sharing it — and to the district/region/national views and charts.
+  const editCode = unit?._srcCode;
+  const siblings = useMemo(
+    () => (editCode ? COUNCIL_UNITS.filter((c) => c._srcCode === editCode && c.admin.adm2Code !== code) : []),
+    [editCode, code]
+  );
 
   const [vals, setVals] = useState({ hazard: null, vuln: null, cope: null });
   const [ind, setInd] = useState({});
@@ -50,21 +60,21 @@ export default function DataEntry() {
   const [needsApply, setNeedsApply] = useState(false);
   const [flash, setFlash] = useState('');
 
-  useEffect(() => { if (!districts.find((d) => d.admin.adm2Code === code)) setCode(districts[0]?.admin.adm2Code); }, [region]); // eslint-disable-line
+  useEffect(() => { if (!councils.find((c) => c.admin.adm2Code === code)) setCode(councils[0]?.admin.adm2Code); }, [region]); // eslint-disable-line
   useEffect(() => { setAuth(DEFAULT_AUTH[role] || 'PMO'); }, [role]);
 
   useEffect(() => {
-    if (!district) return;
-    setVals({ hazard: round1(district.hazardExposure?.total), vuln: round1(district.vulnerability?.total), cope: round1(district.lackCopingCapacity?.total) });
+    if (!unit) return;
+    setVals({ hazard: round1(unit.hazardExposure?.total), vuln: round1(unit.vulnerability?.total), cope: round1(unit.lackCopingCapacity?.total) });
     const m = {};
     for (const dim of DIM_KEYS) for (const c of DIMENSION_TREE[dim].components) for (const i of c.indicators) {
-      const v = c.path(district)?.[i.k];
+      const v = c.path(unit)?.[i.k];
       if (typeof v === 'number') m[`${dim}:${i.k}`] = round1(v);
     }
     setInd(m);
-    setExposure(round1(district.hazardExposure?.exposure?.index));
+    setExposure(round1(unit.hazardExposure?.exposure?.index));
     setTouched({});
-  }, [code, district]);
+  }, [code, unit]);
 
   const liveRisk = cbrt(vals.hazard, vals.vuln, vals.cope);
   const liveClass = classifyRisk(liveRisk);
@@ -79,7 +89,7 @@ export default function DataEntry() {
   };
 
   // Exposure edit → flood Hazard×Exposure = √(hazardFreq.flood × max(E,2)), then hazard recompute.
-  const hazardFreqFlood = district?.hazardExposure?.hazardFreq?.flood;
+  const hazardFreqFlood = unit?.hazardExposure?.hazardFreq?.flood;
   const onExposureChange = (raw) => {
     const e = raw === '' ? null : Number(raw);
     setExposure(e); setTouched((t) => ({ ...t, exposure: true }));
@@ -102,15 +112,16 @@ export default function DataEntry() {
     return out;
   };
   const onSave = () => {
-    if (!district) return;
-    if (role === 'pmo') { saveDirect(code, payload(), `${AUTHORITIES[auth]?.label || auth}${by ? ' — ' + by : ''}`); setNeedsApply(true); note(`Saved ${district.admin.adm2Name}. Apply to see it on the map.`); }
-    else { submit({ code, name: district.admin.adm2Name, region, ...payload(), by: `${AUTHORITIES[auth]?.label || auth}${by ? ' — ' + by : ''}` }); setPending(getPending()); note(`Submitted ${district.admin.adm2Name} for PMO approval.`); }
+    if (!unit || !editCode) return;
+    const stamp = `${AUTHORITIES[auth]?.label || auth}${by ? ' — ' + by : ''}`;
+    if (role === 'pmo') { saveDirect(editCode, payload(), stamp); setNeedsApply(true); note(`Saved ${unit.admin.adm2Name}. Apply to see it on the map.`); }
+    else { submit({ code: editCode, name: unit.admin.adm2Name, region, ...payload(), by: stamp }); setPending(getPending()); note(`Submitted ${unit.admin.adm2Name} for PMO approval.`); }
   };
   const onApprove = (id) => { approve(id); setPending(getPending()); setNeedsApply(true); note('Approved & applied.'); };
   const onReject = (id) => { reject(id); setPending(getPending()); note('Rejected.'); };
   const onReset = () => { if (confirm('Remove all local edits and pending submissions?')) { resetAll(); setPending([]); setNeedsApply(true); note('All edits cleared.'); } };
 
-  const exp = district?.hazardExposure?.exposure;
+  const exp = unit?.hazardExposure?.exposure;
 
   return (
     <div className="de">
@@ -143,10 +154,17 @@ export default function DataEntry() {
             <label className="de-field"><span className="de-field-label">Region</span>
               <select value={region} onChange={(e) => setRegion(e.target.value)}>{REGIONS.map((r) => <option key={r} value={r}>{r}</option>)}</select>
             </label>
-            <label className="de-field"><span className="de-field-label">District</span>
-              <select value={code} onChange={(e) => setCode(e.target.value)}>{districts.map((d) => <option key={d.admin.adm2Code} value={d.admin.adm2Code}>{d.admin.adm2Name}</option>)}</select>
+            <label className="de-field"><span className="de-field-label">Council / LGA</span>
+              <select value={code} onChange={(e) => setCode(e.target.value)}>{councils.map((c) => <option key={c.admin.adm2Code} value={c.admin.adm2Code}>{c.admin.adm2Name}{c._inherited ? ' ↳ inherits ' + c._inherited : ''}</option>)}</select>
             </label>
           </div>
+          {unit && (
+            <p className="de-srcnote ui-muted">
+              Editing INFORM source unit <strong>{unit._srcName}</strong>
+              {unit._inherited ? ` · ${unit.admin.adm2Name} inherits ${unit._inherited}'s data` : ''}
+              {siblings.length ? ` · shared with ${siblings.map((s) => s.admin.adm2Name).join(', ')} — an edit updates ${siblings.length === 1 ? 'it' : 'them'} too` : ''}
+            </p>
+          )}
 
           {DIM_KEYS.map((dim) => {
             const tree = DIMENSION_TREE[dim];
@@ -210,7 +228,7 @@ export default function DataEntry() {
             <input className="de-by" placeholder="Your name (optional)" value={by} onChange={(e) => setBy(e.target.value)} />
             <button className="ui-btn-primary" onClick={onSave}>{role === 'pmo' ? 'Save (apply directly)' : 'Submit for approval'}</button>
           </div>
-          {getOverrides()[code] && <div className="de-edited ui-muted">✎ This district has a saved edit.</div>}
+          {editCode && getOverrides()[editCode] && <div className="de-edited ui-muted">✎ This council's INFORM source unit has a saved edit.</div>}
         </div>
 
         <div className="de-queue ui-card ui-card-pad">

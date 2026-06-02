@@ -153,7 +153,8 @@ const Module02InformRisk = ({ onNavigate }) => {
           <div className="ui-eyebrow">INFORM Risk Index · Tanzania</div>
           <h1 className="ui-h1">National Risk Assessment</h1>
           <p className="rk-header-source ui-muted">
-            Source: Tanzania INFORM Country Model — district values from the country-model workbook (INFORM methodology).
+            Official INFORM Tanzania country value (INFORM methodology). Sub-national analysis is built from the INFORM
+            country-model workbook and presented on the real NBS-2022 structure — 31 regions · 195 councils.
           </p>
         </div>
         <div className="rk-header-badge" style={{ borderColor: classification.color }}>

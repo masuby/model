@@ -13,6 +13,8 @@
 .de-pickers, .de-fields { display: grid; grid-template-columns: 1fr 1fr; gap: var(--s-3); margin-bottom: var(--s-4); }
 .de-fields { grid-template-columns: 1fr 1fr 1fr; }
 @media (max-width: 640px) { .de-pickers, .de-fields { grid-template-columns: 1fr; } }
+.de-srcnote { margin: calc(-1 * var(--s-3)) 0 var(--s-4); font-size: var(--fs-sm); line-height: 1.4; }
+.de-srcnote strong { color: var(--ink, #1f3a5f); }
 
 .de-field { display: flex; flex-direction: column; gap: 4px; }
 .de-field-label { font-size: var(--fs-sm); font-weight: 600; color: var(--c-ink); }

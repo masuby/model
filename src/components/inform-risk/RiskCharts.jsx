@@ -9,10 +9,10 @@ import ChartCard from './charts/ChartCard';
 import BarChart from './charts/BarChart';
 import { CLASS_COLOR as CLASS_HEX, CLASS_LABELS as CLASS_ORDER } from './riskConstants';
 
-export default function RiskCharts({ metric }) {
+export default function RiskCharts({ metric, units = DISTRICTS }) {
   const rows = useMemo(
-    () => DISTRICTS.map((d) => ({ d, v: metric.get(d) })).filter((x) => typeof x.v === 'number'),
-    [metric]
+    () => units.map((d) => ({ d, v: metric.get(d) })).filter((x) => typeof x.v === 'number'),
+    [metric, units]
   );
   const slug = metric.label.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
 

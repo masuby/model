@@ -46,6 +46,8 @@ function unitBounds(unit, level, geo) {
   if (!unit) return null;
   const match = level === 'region'
     ? (f) => norm(f.properties.reg_name) === norm(unit.admin.adm2Name)
+    : level === 'council'
+    ? (f) => String(f.properties.code) === String(unit.admin.adm2Code)
     : (f) => norm(f.properties.dist_name) === norm(unit.admin.adm2Name) && norm(f.properties.reg_name) === norm(unit.admin.adm1Name);
   const feat = geo.features.find(match);
   if (!feat) return null;

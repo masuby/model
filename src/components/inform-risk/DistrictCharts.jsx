@@ -32,7 +32,7 @@ export default function DistrictCharts({ district }) {
   if (!district) {
     return (
       <div className="rx-dc-empty ui-card ui-card-pad ui-muted">
-        Select a district (on the map or in the table) to see its component breakdown and how it compares to the national and regional averages.
+        Select an area (on the map or in the table) to see its component breakdown and how it compares to the national and regional averages.
       </div>
     );
   }
@@ -61,7 +61,7 @@ export default function DistrictCharts({ district }) {
 
   return (
     <div className="rx-dc">
-      <div className="rx-dc-title ui-eyebrow">Selected district — {district.admin.adm2Name} ({district.admin.adm1Name})</div>
+      <div className="rx-dc-title ui-eyebrow">Selected — {district.admin.adm2Name} ({district.admin.adm1Name})</div>
       <div className="rx-dc-grid">
         <ChartCard
           title="Component breakdown"

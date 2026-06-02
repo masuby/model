@@ -236,7 +236,16 @@ export const REGION_UNITS = (() => {
   DISTRICTS.forEach((d) => { (by[d.admin.adm1Name] = by[d.admin.adm1Name] || []).push(d); });
   return Object.entries(by).map(([name, list]) => aggregateUnit(list, name, name, `R-${name}`));
 })();
-export const NATIONAL_UNIT = aggregateUnit(DISTRICTS, 'Tanzania', 'Tanzania', 'TZ');
+// National unit = the OFFICIAL INFORM Tanzania country values (risk 4.1) straight from the
+// country model — the authoritative reference, NOT a re-aggregation of the sub-national units
+// (which would drift toward a 170/195-mean). National figures are kept official per INFORM.
+export const NATIONAL_UNIT = {
+  admin: { adm2Name: 'Tanzania', adm1Name: 'Tanzania', adm2Code: 'TZ', iso3: 'TZA' },
+  hazardExposure: NATIONAL.dimensions.hazardExposure,
+  vulnerability: NATIONAL.dimensions.vulnerability,
+  lackCopingCapacity: NATIONAL.dimensions.lackCopingCapacity,
+  risk: NATIONAL.risk,
+};
 export const REGION_BY_KEY = (() => {
   const idx = {};
   REGION_UNITS.forEach((u) => { idx[normRegion(u.admin.adm2Name)] = u; });
@@ -254,15 +263,23 @@ export const COUNCIL_UNITS = (councilsGeo.features || []).map((f) => {
     hazardExposure: src.hazardExposure, vulnerability: src.vulnerability, lackCopingCapacity: src.lackCopingCapacity,
     risk: src.risk, facilities: src.facilities, drr: src.drr,
     _inherited: p.isNew ? (p.parent || src.admin.adm2Name) : null, _councilCode: String(p.code),
+    // The underlying INFORM source (170) unit this council's data comes from. Edits in Data Entry
+    // are keyed by _srcCode so they flow through the single 170-resolution data backbone to every
+    // council that shares this source (we never fabricate per-council splits).
+    _srcCode: src.admin.adm2Code, _srcName: src.admin.adm2Name,
   };
 }).filter(Boolean);
 export const COUNCIL_BY_CODE = (() => { const idx = {}; COUNCIL_UNITS.forEach((u) => { idx[u._councilCode] = u; }); return idx; })();
 
+// Levels, in canonical order. The REAL NBS-2022 administrative structure is the
+// default the model speaks in: 195 councils → 31 regions → the official national
+// INFORM value. The 170 INFORM units remain available as the *source/reference*
+// resolution (the country workbook the councils are built from) — never the headline.
 export const LEVELS = [
-  { key: 'council', label: 'Council / LGA (195)', unitNoun: 'councils' },
-  { key: 'district', label: 'District — INFORM (170)', unitNoun: 'districts' },
+  { key: 'council', label: 'Council / LGA — NBS 2022 (195)', unitNoun: 'councils' },
   { key: 'region', label: 'Region (31)', unitNoun: 'regions' },
-  { key: 'national', label: 'National', unitNoun: 'national' },
+  { key: 'national', label: 'National — official INFORM', unitNoun: 'national' },
+  { key: 'district', label: 'INFORM source units (170) — reference', unitNoun: 'INFORM units' },
 ];
 export function unitsForLevel(level) {
   return level === 'council' ? COUNCIL_UNITS : level === 'region' ? REGION_UNITS : level === 'national' ? [NATIONAL_UNIT] : DISTRICTS;
