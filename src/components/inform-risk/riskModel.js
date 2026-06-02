@@ -139,13 +139,32 @@ function deepMean(objs) {
   }
   return out;
 }
+const isNum = (x) => typeof x === 'number' && isFinite(x);
+// Recompute a deep-meaned dimension object the AUTHENTIC INFORM way (not a flat mean of totals):
+// category aggregate = mean of its (unit-averaged) indicators; dimension total = scaled geomean of
+// the category aggregates. (sgm/r1 are defined below but resolved at call time — aggregateUnit only
+// runs for REGION_UNITS, after they initialise.)
+function recomputeDimAgg(dimObj, cats) {
+  if (!dimObj) return null;
+  const aggs = [];
+  for (const c of cats) {
+    const co = dimObj[c]; if (!co) continue;
+    const m = mean(Object.entries(co).filter(([k]) => k !== 'aggregate').map(([, v]) => v));
+    co.aggregate = m;
+    if (isNum(m)) aggs.push(m);
+  }
+  dimObj.total = aggs.length ? r1(sgm(aggs)) : null;
+  return dimObj;
+}
 function aggregateUnit(list, name, regionName, code) {
+  const he = recomputeDimAgg(deepMean(list.map((d) => d.hazardExposure)), ['natural', 'human']);
+  const vu = recomputeDimAgg(deepMean(list.map((d) => d.vulnerability)), ['socioEconomic', 'vulnerableGroups']);
+  const cc = recomputeDimAgg(deepMean(list.map((d) => d.lackCopingCapacity)), ['infrastructure', 'institutional']);
+  const h = he?.total, v = vu?.total, c = cc?.total;
   return {
     admin: { adm2Name: name, adm1Name: regionName, adm2Code: code, iso3: 'TZA' },
-    hazardExposure: deepMean(list.map((d) => d.hazardExposure)),
-    vulnerability: deepMean(list.map((d) => d.vulnerability)),
-    lackCopingCapacity: deepMean(list.map((d) => d.lackCopingCapacity)),
-    risk: mean(list.map((d) => d.risk)),
+    hazardExposure: he, vulnerability: vu, lackCopingCapacity: cc,
+    risk: [h, v, c].every(isNum) ? r1(Math.cbrt(h * v * c)) : null,
   };
 }
 // Apply locally-saved edits (PMO/Admin direct or PMO-approved sector edits) BEFORE

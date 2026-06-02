@@ -641,9 +641,9 @@ function Section6Risk() {
           <div className="next-module-preview">
             <h4>🔜 What's Next?</h4>
             <p>
-              <strong>Module 02: INFORM Risk Assessment</strong> — Dive into Tanzania's district-level
-              risk data, explore hazard maps, and analyze vulnerability and coping capacity indicators
-              across all regions.
+              <strong>Module 02: INFORM Risk Assessment</strong> — Dive into Tanzania's council-level
+              risk data (195 councils across 31 regions), explore hazard maps, and analyze vulnerability
+              and coping capacity indicators.
             </p>
           </div>
         </div>

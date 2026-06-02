@@ -19,6 +19,8 @@ import { readFile, writeFile } from 'fs/promises';
 const FILE = 'src/data/tanzania-inform-risk.json';
 const r1 = (v) => Math.round(v * 10) / 10;
 const mean = (xs) => { const a = xs.filter((x) => typeof x === 'number'); return a.length ? a.reduce((s, x) => s + x, 0) / a.length : null; };
+// INFORM category→dimension is the scaled GEOMEAN (Excel Box 6), NOT the arithmetic mean.
+const sgm = (xs) => { const a = xs.filter((x) => typeof x === 'number' && isFinite(x)); if (!a.length) return null; const sc = a.map((x) => ((10 - x) / 10 * 9) + 1); return (10 - Math.exp(sc.reduce((s, x) => s + Math.log(x), 0) / sc.length)) / 9 * 10; };
 const compMean = (o) => mean(Object.entries(o).filter(([k]) => k !== 'aggregate').map(([, v]) => v));
 const norm = (s) => String(s || '').toLowerCase().replace(/\s+/g, ' ').trim();
 
@@ -80,17 +82,17 @@ drmDistricts(AA_DROUGHT, { drr: 3.8, gov: 4.5 });  // + drought Anticipatory Act
 tH.forEach((u) => {
   u.hazardExposure.natural.aggregate = r1(compMean(u.hazardExposure.natural));
   u.hazardExposure.human.aggregate = r1(compMean(u.hazardExposure.human));
-  u.hazardExposure.total = r1(mean([u.hazardExposure.natural.aggregate, u.hazardExposure.human.aggregate]));
+  u.hazardExposure.total = r1(sgm([u.hazardExposure.natural.aggregate, u.hazardExposure.human.aggregate]));
 });
 tV.forEach((u) => {
   u.vulnerability.socioEconomic.aggregate = r1(compMean(u.vulnerability.socioEconomic));
   u.vulnerability.vulnerableGroups.aggregate = r1(compMean(u.vulnerability.vulnerableGroups));
-  u.vulnerability.total = r1(mean([u.vulnerability.socioEconomic.aggregate, u.vulnerability.vulnerableGroups.aggregate]));
+  u.vulnerability.total = r1(sgm([u.vulnerability.socioEconomic.aggregate, u.vulnerability.vulnerableGroups.aggregate]));
 });
 tC.forEach((u) => {
   u.lackCopingCapacity.infrastructure.aggregate = r1(compMean(u.lackCopingCapacity.infrastructure));
   u.lackCopingCapacity.institutional.aggregate = r1(compMean(u.lackCopingCapacity.institutional));
-  u.lackCopingCapacity.total = r1(mean([u.lackCopingCapacity.infrastructure.aggregate, u.lackCopingCapacity.institutional.aggregate]));
+  u.lackCopingCapacity.total = r1(sgm([u.lackCopingCapacity.infrastructure.aggregate, u.lackCopingCapacity.institutional.aggregate]));
 });
 const all = new Set([...tH, ...tV, ...tC]);
 all.forEach((u) => {

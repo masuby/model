@@ -50,6 +50,19 @@ describe('INFORM authentic aggregation (Excel parity)', () => {
     }
     expect(fails).toEqual([]);
   });
+
+  // Guards ALL three dimensions (not just Hazard) — the gap that let Lack-of-Coping drift to a
+  // plain mean. category→dimension is the scaled geomean for Hazard, Vulnerability AND Coping.
+  it('EVERY dimension total = scaled GEOMEAN of its categories (all 3 dims, every unit)', () => {
+    const DIMCATS = { hazardExposure: ['natural', 'human'], vulnerability: ['socioEconomic', 'vulnerableGroups'], lackCopingCapacity: ['infrastructure', 'institutional'] };
+    const fails = [];
+    for (const u of D) for (const [dim, cs] of Object.entries(DIMCATS)) {
+      const dd = u[dim]; if (!dd || !isN(dd.total)) continue;
+      const g = sgm(cs.map((c) => dd[c]?.aggregate));
+      if (isN(g) && Math.abs(r1(g) - dd.total) > 0.11) fails.push(`${u.admin.adm2Name} ${dim}: sgm ${r1(g)} ≠ ${dd.total}`);
+    }
+    expect(fails).toEqual([]);
+  });
 });
 
 describe('Hazard × Exposure flood + manual worked examples', () => {

@@ -12,6 +12,8 @@ import { readFile, writeFile } from 'fs/promises';
 const FILE = 'src/data/tanzania-inform-risk.json';
 const r1 = (v) => Math.round(v * 10) / 10;
 const mean = (xs) => { const a = xs.filter((x) => typeof x === 'number'); return a.length ? a.reduce((s, x) => s + x, 0) / a.length : null; };
+// INFORM category→dimension is the scaled GEOMEAN (Excel Box 6), NOT the arithmetic mean.
+const sgm = (xs) => { const a = xs.filter((x) => typeof x === 'number' && isFinite(x)); if (!a.length) return null; const sc = a.map((x) => ((10 - x) / 10 * 9) + 1); return (10 - Math.exp(sc.reduce((s, x) => s + Math.log(x), 0) / sc.length)) / 9 * 10; };
 const compMean = (o) => mean(Object.entries(o).filter(([k]) => k !== 'aggregate').map(([, v]) => v));
 const norm = (s) => String(s || '').toLowerCase().replace(/[^a-z0-9]/g, '');
 
@@ -38,7 +40,7 @@ withWater.forEach((x, i) => { const pct = m > 1 ? i / (m - 1) : 0.5; x.u.lackCop
 withWater.forEach(({ u }) => {
   const infra = u.lackCopingCapacity.infrastructure;
   infra.aggregate = r1(compMean(infra));
-  u.lackCopingCapacity.total = r1(mean([infra.aggregate, u.lackCopingCapacity.institutional.aggregate]));
+  u.lackCopingCapacity.total = r1(sgm([infra.aggregate, u.lackCopingCapacity.institutional.aggregate]));
   const h = u.hazardExposure.total, v = u.vulnerability.total, c = u.lackCopingCapacity.total;
   if ([h, v, c].every((x) => typeof x === 'number')) u.risk = r1(Math.cbrt(h * v * c));
 });
