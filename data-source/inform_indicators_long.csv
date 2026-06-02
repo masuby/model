@@ -3790,32 +3790,32 @@ TZ20,Mara,TZ2006,Rorya,Lack of Coping Capacity,Infrastructure,coping:communicati
 TZ20,Mara,TZ2006,Rorya,Lack of Coping Capacity,Infrastructure,coping:education,Education,5.25,NBS / MoH,2022 PHC schools,resource availability
 TZ20,Mara,TZ2006,Rorya,Lack of Coping Capacity,Institutional,coping:drrImplementation,Drr Implementation,6.5,PMO-DMD / DRR Coordinator,EPRP / EOCC / Anticipatory-Action records,DRM investment overlay
 TZ20,Mara,TZ2006,Rorya,Lack of Coping Capacity,Institutional,coping:governance,Governance,5.25,PMO-DMD,INFORM SADC governance,baseline
-TZ20,Mara,TZ2007,Butiam,Hazard & Exposure,Natural hazards,hazard:coastalHazards,Coastal Hazards,0,TMA / PMO-DMD,coastal strip,documented overlay
-TZ20,Mara,TZ2007,Butiam,Hazard & Exposure,Natural hazards,hazard:drought,Drought,1.4,TMA / MoA,CHIRPS v3 1991-2024 + ERA5 t2m,"aridity+variability+SPEI+growing-season, min-max"
-TZ20,Mara,TZ2007,Butiam,Hazard & Exposure,Natural hazards,hazard:earthquake,Earthquake,0.5,INFORM SADC,INFORM seismic,baseline
-TZ20,Mara,TZ2007,Butiam,Hazard & Exposure,Natural hazards,hazard:environmentalDegradation,Environmental Degradation,4.1,INFORM SADC 2024,INFORM Sub-national SADC 2024,baseline
-TZ20,Mara,TZ2007,Butiam,Hazard & Exposure,Natural hazards,hazard:flood,Flood,4.9,PMO-DMD / TMA / MoW,CHIRPS v3 daily + recorded floods,"max(hazard, sqrt(hazard×exposure))"
-TZ20,Mara,TZ2007,Butiam,Hazard & Exposure,Natural hazards,hazard:landslide,Landslide,3.5,TMA / PMO-DMD,documented rainfall-triggered events,documented overlay
-TZ20,Mara,TZ2007,Butiam,Hazard & Exposure,Natural hazards,hazard:stormsCyclone,Storms Cyclone,0,TMA / PMO-DMD,Cyclone Hidaya 2024 + Lindi 1952 + Zanzibar 1872,documented cyclone/storm exposure overlay
-TZ20,Mara,TZ2007,Butiam,Hazard & Exposure,Natural hazards,hazard:volcano,Volcano,0,TMA / PMO-DMD,"Ol Doinyo Lengai, Rungwe, Kilimanjaro/Meru",documented overlay
-TZ20,Mara,TZ2007,Butiam,Hazard & Exposure,Natural hazards,hazard:wildfire,Wildfire,5.55,TMA / PMO-DMD,miombo dry-season fire regime,documented overlay
-TZ20,Mara,TZ2007,Butiam,Hazard & Exposure,Human hazards,hazard:conflictIntensity,Conflict Intensity,0,INFORM SADC 2024,INFORM Sub-national SADC 2024,baseline
-TZ20,Mara,TZ2007,Butiam,Hazard & Exposure,Human hazards,hazard:conflictRisk,Conflict Risk,0.7,INFORM SADC 2024,INFORM Sub-national SADC 2024,baseline
-TZ20,Mara,TZ2007,Butiam,Hazard & Exposure,Human hazards,hazard:internalViolence,Internal Violence,6.65,INFORM SADC 2024,INFORM Sub-national SADC 2024,baseline
-TZ20,Mara,TZ2007,Butiam,Vulnerability,Socio-economic,vulnerability:developmentPoverty,Development Poverty,8.3,NBS,Household Budget Survey 2017/18,poverty headcount
-TZ20,Mara,TZ2007,Butiam,Vulnerability,Socio-economic,vulnerability:economicDependency,Economic Dependency,4.5,INFORM SADC 2024,INFORM Sub-national SADC 2024,baseline
-TZ20,Mara,TZ2007,Butiam,Vulnerability,Socio-economic,vulnerability:habitat,Habitat,5.15,INFORM SADC 2024,INFORM Sub-national SADC 2024,baseline
-TZ20,Mara,TZ2007,Butiam,Vulnerability,Socio-economic,vulnerability:livelihoods,Livelihoods,0,MUCHALI / IPC (MoA),IPC acute food-insecurity rounds,food-insecurity phase
-TZ20,Mara,TZ2007,Butiam,Vulnerability,Vulnerable groups,vulnerability:displacedPeople,Displaced People,0,UNHCR / PMO-DMD,UNHCR 2024 (Nyarugusu/Nduta camps),refugee burden-scaled
-TZ20,Mara,TZ2007,Butiam,Vulnerability,Vulnerable groups,vulnerability:healthConditions,Health Conditions,5.3,MoH / NBS,THIS 2022-23 (HIV) + TDHS-MIS 2022 (malaria),disease-burden min-max blend
-TZ20,Mara,TZ2007,Butiam,Vulnerability,Vulnerable groups,vulnerability:childrenHealthNutrition,Children Health Nutrition,5.3,MoH,TDHS 2022,under-5 stunting
-TZ20,Mara,TZ2007,Butiam,Lack of Coping Capacity,Infrastructure,coping:accessHealth,Access Health,5.96,MoH,2022 PHC health facilities,resource availability
-TZ20,Mara,TZ2007,Butiam,Lack of Coping Capacity,Infrastructure,coping:economicCapacity,Economic Capacity,8.866666667,INFORM SADC 2024,INFORM Sub-national SADC 2024,baseline
-TZ20,Mara,TZ2007,Butiam,Lack of Coping Capacity,Infrastructure,coping:wash,Wash,7,MoW,2022 PHC water points & boreholes,"resource availability, rank 2-8"
-TZ20,Mara,TZ2007,Butiam,Lack of Coping Capacity,Infrastructure,coping:communication,Communication,6.9,INFORM SADC 2024,INFORM Sub-national SADC 2024,baseline
-TZ20,Mara,TZ2007,Butiam,Lack of Coping Capacity,Infrastructure,coping:education,Education,5.25,NBS / MoH,2022 PHC schools,resource availability
-TZ20,Mara,TZ2007,Butiam,Lack of Coping Capacity,Institutional,coping:drrImplementation,Drr Implementation,6.5,PMO-DMD / DRR Coordinator,EPRP / EOCC / Anticipatory-Action records,DRM investment overlay
-TZ20,Mara,TZ2007,Butiam,Lack of Coping Capacity,Institutional,coping:governance,Governance,5.25,PMO-DMD,INFORM SADC governance,baseline
+TZ20,Mara,TZ2007,Butiama,Hazard & Exposure,Natural hazards,hazard:coastalHazards,Coastal Hazards,0,TMA / PMO-DMD,coastal strip,documented overlay
+TZ20,Mara,TZ2007,Butiama,Hazard & Exposure,Natural hazards,hazard:drought,Drought,1.4,TMA / MoA,CHIRPS v3 1991-2024 + ERA5 t2m,"aridity+variability+SPEI+growing-season, min-max"
+TZ20,Mara,TZ2007,Butiama,Hazard & Exposure,Natural hazards,hazard:earthquake,Earthquake,0.5,INFORM SADC,INFORM seismic,baseline
+TZ20,Mara,TZ2007,Butiama,Hazard & Exposure,Natural hazards,hazard:environmentalDegradation,Environmental Degradation,4.1,INFORM SADC 2024,INFORM Sub-national SADC 2024,baseline
+TZ20,Mara,TZ2007,Butiama,Hazard & Exposure,Natural hazards,hazard:flood,Flood,4.9,PMO-DMD / TMA / MoW,CHIRPS v3 daily + recorded floods,"max(hazard, sqrt(hazard×exposure))"
+TZ20,Mara,TZ2007,Butiama,Hazard & Exposure,Natural hazards,hazard:landslide,Landslide,3.5,TMA / PMO-DMD,documented rainfall-triggered events,documented overlay
+TZ20,Mara,TZ2007,Butiama,Hazard & Exposure,Natural hazards,hazard:stormsCyclone,Storms Cyclone,0,TMA / PMO-DMD,Cyclone Hidaya 2024 + Lindi 1952 + Zanzibar 1872,documented cyclone/storm exposure overlay
+TZ20,Mara,TZ2007,Butiama,Hazard & Exposure,Natural hazards,hazard:volcano,Volcano,0,TMA / PMO-DMD,"Ol Doinyo Lengai, Rungwe, Kilimanjaro/Meru",documented overlay
+TZ20,Mara,TZ2007,Butiama,Hazard & Exposure,Natural hazards,hazard:wildfire,Wildfire,5.55,TMA / PMO-DMD,miombo dry-season fire regime,documented overlay
+TZ20,Mara,TZ2007,Butiama,Hazard & Exposure,Human hazards,hazard:conflictIntensity,Conflict Intensity,0,INFORM SADC 2024,INFORM Sub-national SADC 2024,baseline
+TZ20,Mara,TZ2007,Butiama,Hazard & Exposure,Human hazards,hazard:conflictRisk,Conflict Risk,0.7,INFORM SADC 2024,INFORM Sub-national SADC 2024,baseline
+TZ20,Mara,TZ2007,Butiama,Hazard & Exposure,Human hazards,hazard:internalViolence,Internal Violence,6.65,INFORM SADC 2024,INFORM Sub-national SADC 2024,baseline
+TZ20,Mara,TZ2007,Butiama,Vulnerability,Socio-economic,vulnerability:developmentPoverty,Development Poverty,8.3,NBS,Household Budget Survey 2017/18,poverty headcount
+TZ20,Mara,TZ2007,Butiama,Vulnerability,Socio-economic,vulnerability:economicDependency,Economic Dependency,4.5,INFORM SADC 2024,INFORM Sub-national SADC 2024,baseline
+TZ20,Mara,TZ2007,Butiama,Vulnerability,Socio-economic,vulnerability:habitat,Habitat,5.15,INFORM SADC 2024,INFORM Sub-national SADC 2024,baseline
+TZ20,Mara,TZ2007,Butiama,Vulnerability,Socio-economic,vulnerability:livelihoods,Livelihoods,0,MUCHALI / IPC (MoA),IPC acute food-insecurity rounds,food-insecurity phase
+TZ20,Mara,TZ2007,Butiama,Vulnerability,Vulnerable groups,vulnerability:displacedPeople,Displaced People,0,UNHCR / PMO-DMD,UNHCR 2024 (Nyarugusu/Nduta camps),refugee burden-scaled
+TZ20,Mara,TZ2007,Butiama,Vulnerability,Vulnerable groups,vulnerability:healthConditions,Health Conditions,5.3,MoH / NBS,THIS 2022-23 (HIV) + TDHS-MIS 2022 (malaria),disease-burden min-max blend
+TZ20,Mara,TZ2007,Butiama,Vulnerability,Vulnerable groups,vulnerability:childrenHealthNutrition,Children Health Nutrition,5.3,MoH,TDHS 2022,under-5 stunting
+TZ20,Mara,TZ2007,Butiama,Lack of Coping Capacity,Infrastructure,coping:accessHealth,Access Health,5.96,MoH,2022 PHC health facilities,resource availability
+TZ20,Mara,TZ2007,Butiama,Lack of Coping Capacity,Infrastructure,coping:economicCapacity,Economic Capacity,8.866666667,INFORM SADC 2024,INFORM Sub-national SADC 2024,baseline
+TZ20,Mara,TZ2007,Butiama,Lack of Coping Capacity,Infrastructure,coping:wash,Wash,7,MoW,2022 PHC water points & boreholes,"resource availability, rank 2-8"
+TZ20,Mara,TZ2007,Butiama,Lack of Coping Capacity,Infrastructure,coping:communication,Communication,6.9,INFORM SADC 2024,INFORM Sub-national SADC 2024,baseline
+TZ20,Mara,TZ2007,Butiama,Lack of Coping Capacity,Infrastructure,coping:education,Education,5.25,NBS / MoH,2022 PHC schools,resource availability
+TZ20,Mara,TZ2007,Butiama,Lack of Coping Capacity,Institutional,coping:drrImplementation,Drr Implementation,6.5,PMO-DMD / DRR Coordinator,EPRP / EOCC / Anticipatory-Action records,DRM investment overlay
+TZ20,Mara,TZ2007,Butiama,Lack of Coping Capacity,Institutional,coping:governance,Governance,5.25,PMO-DMD,INFORM SADC governance,baseline
 TZ21,Manyara,TZ2101,Babati,Hazard & Exposure,Exposure,hazard:exposure,Population Exposure,3.82,NBS,2022 PHC population,"population density, log min-max"
 TZ21,Manyara,TZ2101,Babati,Hazard & Exposure,Natural hazards,hazard:coastalHazards,Coastal Hazards,0,TMA / PMO-DMD,coastal strip,documented overlay
 TZ21,Manyara,TZ2101,Babati,Hazard & Exposure,Natural hazards,hazard:drought,Drought,7,TMA / MoA,CHIRPS v3 1991-2024 + ERA5 t2m,"aridity+variability+SPEI+growing-season, min-max"

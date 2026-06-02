@@ -255,9 +255,13 @@ Storage today is the browser (`localStorage`); the Supabase schema is ready for 
    documented INFORM baseline — clearly too high for a coastal city. The precautionary floor
    keeps documented values rather than silently lowering them, so it persists (the *computed*
    value is ~6.6). **Flagged for correction via Data Entry** (MoA/TMA), which now overrides it.
-5. **Coverage: 138 / 170 districts** got computed climate (those with map polygons). The other
-   32 keep their prior values. Boundary set is 150/170 vs the 184 councils (2022) — reconciling
-   to 184 needs the NBS council boundaries + council-level INFORM data.
+5. **Administrative structure (audited).** **31 regions is correct** (matches NBS 2022). Risk data
+   is on **170 INFORM SADC 2024 council-level units** (includes separate urban + rural councils, e.g.
+   *Dodoma Urban* vs *Dodoma*). The official NBS 2022 geodatabase has **31 regions · 150 districts ·
+   195 councils · 4,344 wards**. The map draws the **150 district polygons**, so ~31 urban councils
+   share their district's shape and a few newer councils (Kibiti, Tanganyika, Ubungo, Kigamboni)
+   differ by boundary vintage (~139/170 units currently join a polygon). **Reaching all 195 councils
+   needs council-level INFORM data — not fabricated** (per policy). The explorer states this basis honestly.
 6. **Wildfire, earthquake, lightning, storms** are still INFORM baseline — not yet physically
    recomputed (MODIS/VIIRS fire, USGS seismicity are the next sources).
 7. **Standardization is relative to Tanzania** (min over our 150 districts), not INFORM's fixed

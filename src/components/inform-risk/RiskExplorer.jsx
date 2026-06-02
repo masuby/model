@@ -149,6 +149,11 @@ export default function RiskExplorer() {
             {LEVELS.map((l) => <option key={l.key} value={l.key}>{l.label}</option>)}
           </select>
           <span className="ui-muted rx-level-count">{ranked.length} {noun}</span>
+          {level === 'district' && (
+            <span className="ui-muted rx-admin-basis" title="Risk data is on 170 INFORM SADC 2024 council-level units (includes urban + rural councils). Official NBS 2022 structure: 31 regions · 150 districts · 195 councils · 4,344 wards. The map draws 150 district polygons; reaching all 195 councils needs council-level source data (not fabricated).">
+              · INFORM SADC units — NBS 2022 has 195 councils ⓘ
+            </span>
+          )}
         </div>
         <div className="rx-controls-row">
           <span className="ui-eyebrow">Colour {noun} by</span>
