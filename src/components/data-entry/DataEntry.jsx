@@ -84,8 +84,8 @@ export default function DataEntry() {
     const e = raw === '' ? null : Number(raw);
     setExposure(e); setTouched((t) => ({ ...t, exposure: true }));
     if (typeof e === 'number' && typeof hazardFreqFlood === 'number') {
-      let flood = Math.sqrt(hazardFreqFlood * Math.max(e, 2));
-      if (district?.hazardExposure?.events?.flood?.length) flood = Math.max(flood, 5);
+      // exposure amplifies only; never below the documented/observed flood hazard
+      const flood = Math.max(hazardFreqFlood, Math.sqrt(hazardFreqFlood * Math.max(e, 0)));
       const next = { ...ind, 'hazard:flood': round1(flood) };
       setInd(next); setTouched((t) => ({ ...t, 'hazard:flood': true }));
       const total = recomputeDim('hazard', next);

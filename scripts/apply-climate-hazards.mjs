@@ -50,22 +50,25 @@ for (const u of D) {
   if (!ex && !dr && !hv && !ev.length) { unmatched.push(u.admin.adm2Name); continue; }
   n++;
   const nat = u.hazardExposure.natural;
+  const baseFlood = isN(nat.flood) ? nat.flood : 0;        // documented baseline = a FLOOR (never hide)
+  const baseDrought = isN(nat.drought) ? nat.drought : 0;
 
   // Exposure (NBS 2022) — a hazard modifier, editable in Data Entry
   if (ex) u.hazardExposure.exposure = { index: +ex.exposure_index, population: +ex.pop2022, density: Math.round(+ex.density), areaKm2: +ex.area_km2, _src: 'NBS 2022 PHC' };
   const E = u.hazardExposure.exposure?.index;
 
-  // Flood = Hazard × Exposure
-  if (hv || ev.length) {
-    const eventIdx = ev.length ? Math.min(10, 4 + 2 * ev.length) : 0;
-    const hazardFlood = Math.max(hv ? +hv.heavy_rain_index : 0, eventIdx);
-    u.hazardExposure.hazardFreq = { ...(u.hazardExposure.hazardFreq || {}), flood: r1(hazardFlood) };
-    let flood = Math.sqrt(hazardFlood * (isN(E) ? Math.max(E, 2) : 5));
-    if (ev.length) { flood = Math.max(flood, 5); u.hazardExposure.events = { flood: ev }; }
-    nat.flood = r1(flood);
-  }
-  // Drought = computed climate hazard (community / food-security relevant)
-  if (dr) nat.drought = r1(+dr.drought_index);
+  // Flood hazard = worst of DOCUMENTED + OBSERVED (heavy rain, recorded events). Exposure can
+  // only AMPLIFY it (dense areas), never lower it — a known flood-prone area is never hidden.
+  //   flood = max( hazard , √(hazard × exposure) )   → exposure raises only when E > hazard.
+  const eventIdx = ev.length ? Math.min(10, 4 + 2 * ev.length) : 0;
+  const heavyIdx = hv ? +hv.heavy_rain_index : 0;
+  const hazardFlood = Math.max(baseFlood, heavyIdx, eventIdx);
+  u.hazardExposure.hazardFreq = { ...(u.hazardExposure.hazardFreq || {}), flood: Math.round(hazardFlood * 100) / 100 };
+  nat.flood = r1(Math.max(hazardFlood, isN(E) ? Math.sqrt(hazardFlood * E) : 0));
+  if (ev.length) u.hazardExposure.events = { flood: ev };
+
+  // Drought = computed climate hazard, floored at the documented baseline (never hide a known drought).
+  if (dr) nat.drought = r1(Math.max(+dr.drought_index, baseDrought));
 
   // Recompute the AUTHENTIC way
   nat.aggregate = r1(mean(catVals(nat)));

@@ -146,7 +146,7 @@
 .rc-hbar-val { flex: 0 0 30px; text-align: right; font-weight: 800; font-size: var(--fs-sm); }
 
 /* rich map tooltip */
-.leaflet-tooltip.rx-tip-wrap { max-width: 270px; white-space: normal; padding: 9px 11px; border-radius: 10px; box-shadow: var(--sh-2); border: 1px solid var(--c-line); }
+.leaflet-tooltip.rx-tip-wrap { width: 300px; max-width: 300px; white-space: normal; padding: 10px 13px; border-radius: 8px; box-shadow: var(--sh-2); border: 1px solid var(--c-line); }
 .rx-tip-h { display: flex; gap: 6px; align-items: baseline; flex-wrap: wrap; }
 .rx-tip-h strong { font-size: var(--fs-sm); color: var(--c-ink); }
 .rx-tip-h span { font-size: var(--fs-xs); color: var(--c-muted); }
@@ -155,6 +155,7 @@
 .rx-tip-drr { font-size: var(--fs-xs); color: #15803d; margin-top: 5px; font-weight: 700; }
 .rx-tip-f { font-size: var(--fs-xs); color: var(--c-body); margin-top: 5px; }
 .rx-tip-src { font-size: var(--fs-xs); color: #1d4ed8; margin-top: 5px; font-weight: 600; }
+.rx-tip-meta { font-size: var(--fs-xs); color: var(--c-body); margin-top: 5px; }
 
 .rx-facilities { display: flex; align-items: center; gap: var(--s-3); flex-wrap: wrap; padding: var(--s-2) var(--s-3); background: var(--c-surface-2); border-radius: var(--r-md); margin-bottom: var(--s-3); font-size: var(--fs-sm); font-weight: 600; color: var(--c-ink); }
 .rx-facilities .ui-eyebrow { font-weight: 700; }

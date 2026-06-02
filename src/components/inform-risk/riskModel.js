@@ -172,15 +172,14 @@ const sgm = (a) => {
   DISTRICTS.forEach((d) => {
     const o = ovr[d.admin?.adm2Code];
     if (!o) return;
-    // Exposure edit → recompute flood Hazard×Exposure = √(hazardFreq.flood × max(E,2)).
+    // Exposure edit → flood = max(hazard, √(hazard × exposure)). Exposure only AMPLIFIES;
+    // it never lowers the documented/observed flood hazard (hf) — a known flood area stays flagged.
     if (typeof o.exposure === 'number' && d.hazardExposure) {
       d.hazardExposure.exposure = { ...(d.hazardExposure.exposure || {}), index: o.exposure };
       const hf = d.hazardExposure.hazardFreq?.flood;
       const floodEdited = o.ind && 'hazard:flood' in o.ind;
       if (typeof hf === 'number' && !floodEdited && d.hazardExposure.natural) {
-        let flood = Math.sqrt(hf * Math.max(o.exposure, 2));
-        if (d.hazardExposure.events?.flood?.length) flood = Math.max(flood, 5);
-        d.hazardExposure.natural.flood = r1(flood);
+        d.hazardExposure.natural.flood = r1(Math.max(hf, Math.sqrt(hf * Math.max(o.exposure, 0))));
       }
     }
     // Apply edited indicator leaves.

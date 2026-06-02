@@ -84,6 +84,10 @@ Result (top): Longido 9.7, Simanjiro 9.1, Singida 8.7, Hanang 8.7, Kondoa 8.6 �
 pastoral north + semi-arid centre. Bottom: Rungwe 0.5, Kyela 0.5, Mafia 1.5 — the wet
 highlands/islands. *(Script: `scripts/compute-drought-spi-spei.py`.)*
 
+The computed value is **floored at the documented baseline** (`drought = max(computed,
+documented)`) — like flood, a known drought is never lowered, only raised where the climate
+evidence is stronger.
+
 ### 3.2 Heavy rainfall & flood (computed — CHIRPS daily + recorded events)
 Two ingredients:
 1. **Heavy-rain index** — count of days where the district-mean rainfall exceeds **50 mm**
@@ -95,15 +99,24 @@ Two ingredients:
 The **physical flood hazard** = `max(heavy-rain index, event index)` — so a coastal cloudburst
 zone *or* a documented river-flood district both score high.
 
-### 3.3 Flood = Hazard × Exposure
-INFORM hazard is **Hazard × Exposure**, not hazard alone. Flood becomes:
+### 3.3 Flood = Hazard, amplified by Exposure (never lowered)
+INFORM hazard is **Hazard × Exposure** — but exposure must only ever **raise** a flood
+score, never hide a flood-prone place. So:
 
-> **flood = √( hazardFlood × max(exposure, 2) )**, and ≥ 5 wherever floods are on record.
+> **hazardFlood = max( documented flood , heavy-rain index , recorded-event index )**
+> **flood = max( hazardFlood , √(hazardFlood × exposure) )**
 
-**Worked example — Ilala (Dar):** heavy-rain 4.0, but 2 recorded floods (2011, 2018) →
-event index 8 → hazardFlood = max(4.0, 8) = **8**. Exposure 8.66. flood = √(8 × 8.66) =
-√69.3 = **8.3**. Dense + flood-prone = high.
-**Longido:** hazardFlood 0.1, exposure 2.1 → flood = √(0.1 × 2.1) = **0.5**. Dry + empty = low.
+Exposure lifts the score only where population *exceeds* the hazard (dense flood cities);
+a sparsely-populated but flood-prone district keeps its full documented hazard.
+
+- **Ilala (Dar):** heavy-rain 4.0, 2 recorded floods (2011, 2018) → event index 8 →
+  hazardFlood = **8**. Exposure 8.66 → √(8 × 8.66) = 8.3 → flood = max(8, 8.3) = **8.3**.
+- **Pangani (coastal, flood-prone but sparse):** documented hazard 9.8, exposure 2.9 →
+  √(9.8 × 2.9) = 5.3 → flood = max(9.8, 5.3) = **9.8 — preserved.**
+
+> ⚠️ An earlier draft multiplied flood *down* by exposure (Pangani 9.8 → 3.3, Korogwe 8 →
+> 2.1 — hiding known flood areas). That bug was caught by a before/after audit and fixed:
+> **exposure now amplifies only; a documented flood hazard is never lowered.**
 
 ### 3.4 Fires, earthquake, landslide, coastal — honest status
 - **Wildfire, earthquake, lightning, volcano, storms, environmental degradation** are still the
@@ -133,21 +146,21 @@ event index 8 → hazardFlood = max(4.0, 8) = **8**. Exposure 8.66. flood = √(
 
 ### 5.1 Indicator → Category: MEAN
 `category = average of its indicators` (ignoring blanks). E.g. Kondoa Natural-hazards =
-mean(drought 8.6, flood 0.7, earthquake 10, landslide 4.7, wildfire 4.75, …) = **3.7**.
+mean(drought 8.6, flood 3.8, earthquake 10, landslide 4.7, wildfire 4.75, …) = **4.0**.
 
 ### 5.2 Category → Dimension: INFORM scaled geometric mean (Excel Box 6)
 > **dimension = (10 − GEOMEAN( (10−c₁)/10·9 + 1 , (10−c₂)/10·9 + 1 , … )) / 9 × 10**
 
 A low category **drags the dimension down** (geometric), unlike a plain average.
 
-**Worked example — Kondoa Hazard:** Natural 3.7, Human 0.7.
-scaled: (10−3.7)/10·9+1 = 6.67 ; (10−0.7)/10·9+1 = 9.37.
-GEOMEAN = √(6.67 × 9.37) = 7.91. dimension = (10 − 7.91)/9 × 10 = **2.3**. ✔ matches stored.
+**Worked example — Kondoa Hazard:** Natural 4.0, Human 0.7.
+scaled: (10−4.0)/10·9+1 = 6.4 ; (10−0.7)/10·9+1 = 9.37.
+GEOMEAN = √(6.4 × 9.37) = 7.74. dimension = (10 − 7.74)/9 × 10 = **2.5**. ✔ matches stored.
 
 ### 5.3 Dimension → Risk: cube root
 > **Risk = ∛(Hazard × Vulnerability × LackOfCoping)**
 
-**Kondoa:** ∛(2.3 × 5.5 × 4.6) = ∛58.2 = **3.9** (High). ✔
+**Kondoa:** ∛(2.5 × 5.5 × 4.6) = ∛63.3 = **4.0** (Medium). ✔
 
 Then `Risk` is classed with the **Tanzania thresholds** (Very-Low < 2.5 < Low < 3.4 < Medium
 < 4.3 < High < 5.9 < Very-High).
@@ -199,9 +212,10 @@ Storage today is the browser (`localStorage`); the Supabase schema is ready for 
 3. **Some values sit close together** (e.g. several semi-arid districts ~8.4–8.7 drought).
    That is real similarity, not precision — min-max preserves true spacing rather than forcing
    a spread. Don't over-read 0.1 differences.
-4. **A few values look high for their place** — e.g. Ilala (Dar) drought 6.6. Coastal rainfall
-   is *variable* even when plentiful, so the variability/SPEI terms lift it. Debatable; weights
-   are tunable here. *Flag for discussion.*
+4. **Dar es Salaam drought = 10 (documented artifact).** Ilala/Temeke carry drought 10 from the
+   documented INFORM baseline — clearly too high for a coastal city. The precautionary floor
+   keeps documented values rather than silently lowering them, so it persists (the *computed*
+   value is ~6.6). **Flagged for correction via Data Entry** (MoA/TMA), which now overrides it.
 5. **Coverage: 138 / 170 districts** got computed climate (those with map polygons). The other
    32 keep their prior values. Boundary set is 150/170 vs the 184 councils (2022) — reconciling
    to 184 needs the NBS council boundaries + council-level INFORM data.
@@ -209,6 +223,10 @@ Storage today is the browser (`localStorage`); the Supabase schema is ready for 
    recomputed (MODIS/VIIRS fire, USGS seismicity are the next sources).
 7. **Standardization is relative to Tanzania** (min over our 150 districts), not INFORM's fixed
    global reference values. Fine for a national tool; note when comparing to global INFORM.
+8. **Precautionary by design.** Flood and drought are *floored* at the documented baseline —
+   computed evidence can **raise** a hazard but never **lower** it. This errs toward flagging
+   risk (safer for planning) at the cost of keeping a few possibly-overstated documented values
+   (see #4). A before/after audit confirms **0 districts** had flood or risk-class lowered.
 
 *Everything in this list is editable in Data Entry and improvable in code — that is the point
 of writing it down.*

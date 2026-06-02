@@ -117,29 +117,31 @@ export default function DistrictMap({ metric, selected, onSelect, filterClass, l
     const lbl = labelOf(f);
     const info = METRIC_INFO[metric.key];
     const drr = u?.drr ? [u.drr.eocc && 'Regional EOCC', u.drr.eprp && 'EPRP', u.drr.aa && 'Drought Anticipatory Action'].filter(Boolean).join(' · ') : '';
-    const fac = u?.facilities ? `🏥 ${u.facilities.health.toLocaleString()} · 🏫 ${u.facilities.education.toLocaleString()} · 💧 ${u.facilities.water.toLocaleString()}` : '';
+    const fac = u?.facilities ? `Health ${u.facilities.health.toLocaleString()} · Schools ${u.facilities.education.toLocaleString()} · Water ${u.facilities.water.toLocaleString()}` : '';
     // Data source for the active indicator lens (a Data-Entry edit's stamp, else the registry baseline).
     const parts = isIndicator ? metric.key.split(':') : [];
     const prov = isIndicator && u ? provenanceFor(u, parts[1], parts[2]) : null;
-    const src = prov ? `${prov.edited ? '✎ Updated by' : '📎 Source:'} ${sourceLabel(prov)}` : '';
-    const floods = parts[2] === 'flood' && u?.hazardExposure?.events?.flood?.length ? `🌊 Recorded floods: ${u.hazardExposure.events.flood.join(', ')}` : '';
-    const expo = u?.hazardExposure?.exposure ? `👥 ${u.hazardExposure.exposure.population?.toLocaleString()} people · ${u.hazardExposure.exposure.density}/km²` : '';
+    const src = prov ? `${prov.edited ? 'Updated' : 'Source'}: ${sourceLabel(prov)}` : '';
+    const floods = parts[2] === 'flood' && u?.hazardExposure?.events?.flood?.length ? `Recorded floods: ${u.hazardExposure.events.flood.join(', ')}` : '';
+    const expo = u?.hazardExposure?.exposure ? `Population ${u.hazardExposure.exposure.population?.toLocaleString()} · ${u.hazardExposure.exposure.density}/km²` : '';
     layer.bindTooltip(
       `<div class="rx-tip">
         <div class="rx-tip-h"><strong>${lbl.name}</strong> <span>${lbl.sub}</span></div>
         <div class="rx-tip-v">${metric.label}: <b>${round1(val) ?? '—'}</b>${val == null || isIndicator ? '' : ` · ${cls.level}`}</div>
         ${info ? `<div class="rx-tip-d">${info}</div>` : ''}
         ${src ? `<div class="rx-tip-src">${src}</div>` : ''}
-        ${floods ? `<div class="rx-tip-drr">${floods}</div>` : ''}
-        ${drr ? `<div class="rx-tip-drr">🛡️ DRR: ${drr}</div>` : ''}
+        ${floods ? `<div class="rx-tip-meta">${floods}</div>` : ''}
+        ${drr ? `<div class="rx-tip-meta">DRR: ${drr}</div>` : ''}
         ${expo ? `<div class="rx-tip-f">${expo}</div>` : ''}
         ${fac ? `<div class="rx-tip-f">${fac}</div>` : ''}
       </div>`,
       { sticky: true, className: 'rx-tip-wrap' }
     );
+    // Hover highlight only the active selection — dimmed (filtered/non-isolated) areas stay put.
+    const isDimmed = (filterClass && cls.level !== filterClass) || (isolateKey && keyOf(u) !== isolateKey);
     layer.on({
       click: () => u && onSelect?.(u),
-      mouseover: (e) => e.target.setStyle({ weight: 2.4 }),
+      mouseover: (e) => { if (!isDimmed) e.target.setStyle({ weight: 2.4 }); },
       mouseout: () => geoRef.current && geoRef.current.resetStyle(layer),
     });
   };
