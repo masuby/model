@@ -2,11 +2,14 @@ import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 import path from 'path'
 
+const BUILD_STAMP = `${(process.env.VERCEL_GIT_COMMIT_SHA || 'local').slice(0, 7)} · ${new Date().toISOString().slice(0, 16).replace('T', ' ')} UTC`;
+
 // https://vite.dev/config/
 export default defineConfig({
   plugins: [react()],
   assetsInclude: ['**/*.xlsx'],
   base: '/',  // Custom domain: inform.co.tz
+  define: { __BUILD__: JSON.stringify(BUILD_STAMP) },
 
   build: {
     rollupOptions: {

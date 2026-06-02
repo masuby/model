@@ -10,6 +10,9 @@ import "./theme.css";
 import "./App.css";
 import "./lean.css";
 
+// Build stamp injected at build time (vite define) — lets anyone confirm exactly what's live.
+const BUILD = typeof __BUILD__ !== 'undefined' ? __BUILD__ : 'local';
+
 // Error Boundary to catch and display runtime errors
 class ErrorBoundary extends Component {
   constructor(props) {
@@ -65,6 +68,9 @@ function TopNav() {
         <NavLink to="/severity" className="lean-navlink" style={link}>Severity</NavLink>
         <NavLink to="/data-entry" className="lean-navlink" style={link}>Data Entry</NavLink>
       </nav>
+      <span title="Deployed build — confirms exactly which version is live" style={{ marginLeft: "auto", alignSelf: "center", fontSize: "11px", color: "#94a3b8", whiteSpace: "nowrap", fontFamily: "monospace" }}>
+        build {BUILD}
+      </span>
     </header>
   );
 }
