@@ -1,27 +1,35 @@
 /**
- * DataEntry — edit the INFORM model and feed it into the whole system.
+ * DataEntry — edit the INFORM model and feed it into the whole system, the AUTHENTIC way.
  *  • PMO / Admin: edits apply directly.   • Sector officer: edits need PMO approval.
- * Edit each dimension's score directly, or expand it to fill its individual
- * indicators (Hazard/Vulnerability/Coping) — the dimension total recomputes as the
- * mean of its indicators and risk as ∛(H × V × LCC). After "Apply", edits flow into
- * the map (incl. the indicator lens), charts and tables. Persistence is this browser
- * (localStorage); cross-device multi-user is the Supabase backend (supabase/setup.sql).
+ * Edit any dimension's score, or expand it to fill individual indicators
+ * (Hazard / Vulnerability / Coping), PLUS the population Exposure that drives the
+ * flood Hazard×Exposure. Aggregation mirrors the Excel exactly:
+ *   indicator → category : arithmetic MEAN
+ *   category  → dimension : INFORM scaled GEOMEAN (Box 6)
+ *   dimension → risk      : ∛(H × V × LCC)
+ * Every edit is stamped with the responsible authority (NBS, TMA, MoW, MoH, MoA,
+ * PMO-DMD, DRR Coordinator, MUCHALI/IPC) and shown when viewing the indicator.
  */
 import React, { useEffect, useMemo, useState } from 'react';
 import { DISTRICTS, DIMENSION_TREE, DIM_KEYS, classifyRisk, round1 } from '../inform-risk/riskModel';
+import { AUTHORITIES } from '../inform-risk/indicatorSources';
 import { saveDirect, submit, getPending, approve, reject, resetAll, getOverrides } from '../inform-risk/overrideStore';
 import './DataEntry.css';
 
 const REGIONS = [...new Set(DISTRICTS.map((d) => d.admin.adm1Name))].sort();
 const TOTAL_KEY = { hazard: 'hazard', vulnerability: 'vuln', coping: 'cope' };
-const cbrt = (h, v, c) => ([h, v, c].every((x) => typeof x === 'number') ? round1(Math.cbrt(h * v * c)) : null);
+const AUTH_OPTIONS = Object.entries(AUTHORITIES).filter(([k]) => k !== 'INFORM' && k !== 'CHC').map(([k, v]) => ({ k, ...v }));
+const DEFAULT_AUTH = { pmo: 'PMO', sector: 'MOW' };
 
+const cbrt = (h, v, c) => ([h, v, c].every((x) => typeof x === 'number') ? round1(Math.cbrt(h * v * c)) : null);
 const meanOf = (xs) => { const a = xs.filter((x) => typeof x === 'number'); return a.length ? a.reduce((s, x) => s + x, 0) / a.length : null; };
+// INFORM scaled geometric mean (Excel Box 6) — category → dimension.
+const sgm = (a) => { const xs = a.filter((x) => typeof x === 'number' && isFinite(x)); if (!xs.length) return null; const sc = xs.map((x) => ((10 - x) / 10 * 9) + 1); return (10 - Math.exp(sc.reduce((s, x) => s + Math.log(x), 0) / sc.length)) / 9 * 10; };
 function recomputeDim(dim, ind) {
   const aggs = DIMENSION_TREE[dim].components
     .map((c) => meanOf(c.indicators.map((i) => ind[`${dim}:${i.k}`])))
     .filter((x) => x != null);
-  return aggs.length ? round1(meanOf(aggs)) : null;
+  return aggs.length ? round1(sgm(aggs)) : null;   // category=MEAN above, dimension=scaled GEOMEAN
 }
 
 export default function DataEntry() {
@@ -33,6 +41,9 @@ export default function DataEntry() {
 
   const [vals, setVals] = useState({ hazard: null, vuln: null, cope: null });
   const [ind, setInd] = useState({});
+  const [exposure, setExposure] = useState(null);
+  const [auth, setAuth] = useState('PMO');
+  const [touched, setTouched] = useState({});
   const [open, setOpen] = useState('');
   const [by, setBy] = useState('');
   const [pending, setPending] = useState(getPending());
@@ -40,6 +51,7 @@ export default function DataEntry() {
   const [flash, setFlash] = useState('');
 
   useEffect(() => { if (!districts.find((d) => d.admin.adm2Code === code)) setCode(districts[0]?.admin.adm2Code); }, [region]); // eslint-disable-line
+  useEffect(() => { setAuth(DEFAULT_AUTH[role] || 'PMO'); }, [role]);
 
   useEffect(() => {
     if (!district) return;
@@ -50,6 +62,8 @@ export default function DataEntry() {
       if (typeof v === 'number') m[`${dim}:${i.k}`] = round1(v);
     }
     setInd(m);
+    setExposure(round1(district.hazardExposure?.exposure?.index));
+    setTouched({});
   }, [code, district]);
 
   const liveRisk = cbrt(vals.hazard, vals.vuln, vals.cope);
@@ -59,20 +73,44 @@ export default function DataEntry() {
   const onIndChange = (dim, k, raw) => {
     const val = raw === '' ? null : Number(raw);
     const next = { ...ind, [`${dim}:${k}`]: val };
-    setInd(next);
+    setInd(next); setTouched((t) => ({ ...t, [`${dim}:${k}`]: true }));
     const total = recomputeDim(dim, next);
     if (total != null) setVals((s) => ({ ...s, [TOTAL_KEY[dim]]: total }));
   };
 
-  const payload = () => ({ hazard: vals.hazard, vuln: vals.vuln, cope: vals.cope, ind });
+  // Exposure edit → flood Hazard×Exposure = √(hazardFreq.flood × max(E,2)), then hazard recompute.
+  const hazardFreqFlood = district?.hazardExposure?.hazardFreq?.flood;
+  const onExposureChange = (raw) => {
+    const e = raw === '' ? null : Number(raw);
+    setExposure(e); setTouched((t) => ({ ...t, exposure: true }));
+    if (typeof e === 'number' && typeof hazardFreqFlood === 'number') {
+      let flood = Math.sqrt(hazardFreqFlood * Math.max(e, 2));
+      if (district?.hazardExposure?.events?.flood?.length) flood = Math.max(flood, 5);
+      const next = { ...ind, 'hazard:flood': round1(flood) };
+      setInd(next); setTouched((t) => ({ ...t, 'hazard:flood': true }));
+      const total = recomputeDim('hazard', next);
+      if (total != null) setVals((s) => ({ ...s, hazard: total }));
+    }
+  };
+
+  const payload = () => {
+    const indSrc = {};
+    for (const k of Object.keys(touched)) if (k !== 'exposure' && k in ind) indSrc[k] = { by: auth, ts: Date.now() };
+    const out = { hazard: vals.hazard, vuln: vals.vuln, cope: vals.cope, ind };
+    if (Object.keys(indSrc).length) out.indSrc = indSrc;
+    if (touched.exposure && typeof exposure === 'number') { out.exposure = exposure; out.expSrc = { by: auth, ts: Date.now() }; }
+    return out;
+  };
   const onSave = () => {
     if (!district) return;
-    if (role === 'pmo') { saveDirect(code, payload(), by || 'PMO / Admin'); setNeedsApply(true); note(`Saved ${district.admin.adm2Name}. Apply to see it on the map.`); }
-    else { submit({ code, name: district.admin.adm2Name, region, ...payload(), by: by || 'Sector officer' }); setPending(getPending()); note(`Submitted ${district.admin.adm2Name} for PMO approval.`); }
+    if (role === 'pmo') { saveDirect(code, payload(), `${AUTHORITIES[auth]?.label || auth}${by ? ' — ' + by : ''}`); setNeedsApply(true); note(`Saved ${district.admin.adm2Name}. Apply to see it on the map.`); }
+    else { submit({ code, name: district.admin.adm2Name, region, ...payload(), by: `${AUTHORITIES[auth]?.label || auth}${by ? ' — ' + by : ''}` }); setPending(getPending()); note(`Submitted ${district.admin.adm2Name} for PMO approval.`); }
   };
   const onApprove = (id) => { approve(id); setPending(getPending()); setNeedsApply(true); note('Approved & applied.'); };
   const onReject = (id) => { reject(id); setPending(getPending()); note('Rejected.'); };
   const onReset = () => { if (confirm('Remove all local edits and pending submissions?')) { resetAll(); setPending([]); setNeedsApply(true); note('All edits cleared.'); } };
+
+  const exp = district?.hazardExposure?.exposure;
 
   return (
     <div className="de">
@@ -80,7 +118,7 @@ export default function DataEntry() {
         <div>
           <div className="ui-eyebrow">INFORM model · data entry</div>
           <h1 className="ui-h1">Edit & approve INFORM data</h1>
-          <p className="ui-muted">Set a district's dimension score directly, or expand it to fill the individual indicators. PMO/Admin edits apply directly; sector edits need PMO approval.</p>
+          <p className="ui-muted">Set a dimension score, or expand it to fill indicators — Hazard, <strong>Exposure</strong>, Vulnerability, Coping. Aggregation follows the Excel: indicator→category mean, category→dimension scaled geometric mean, risk = ∛(H×V×LCC). Every edit is stamped with its source.</p>
         </div>
         <div className="de-role">
           <span className="ui-eyebrow">I am</span>
@@ -118,7 +156,7 @@ export default function DataEntry() {
                 <div className="de-dim-head">
                   <span className="de-dim-name">{tree.label}</span>
                   <input className="de-dim-total" type="number" min="0" max="10" step="0.1" value={vals[tk] ?? ''}
-                    onChange={(e) => setVals((s) => ({ ...s, [tk]: e.target.value === '' ? null : Number(e.target.value) }))} />
+                    onChange={(e) => { setVals((s) => ({ ...s, [tk]: e.target.value === '' ? null : Number(e.target.value) })); setTouched((t) => ({ ...t, [`${dim}:_total`]: true })); }} />
                   <button className="ui-chip de-dim-toggle" onClick={() => setOpen(open === dim ? '' : dim)}>
                     {open === dim ? 'Hide indicators' : 'Fill indicators'}
                   </button>
@@ -137,6 +175,17 @@ export default function DataEntry() {
                     </div>
                   </div>
                 ))}
+                {dim === 'hazard' && (
+                  <div className="de-exposure">
+                    <div className="de-exposure-row">
+                      <span className="de-exposure-label">Exposure · population</span>
+                      <input className="de-dim-total" type="number" min="0" max="10" step="0.1" value={exposure ?? ''} onChange={(e) => onExposureChange(e.target.value)} />
+                    </div>
+                    <span className="ui-muted de-exposure-hint">
+                      {exp ? `${exp.population?.toLocaleString()} people · ${exp.density}/km² (NBS 2022)` : 'population exposure index 0–10'} → drives flood = √(hazard × exposure)
+                    </span>
+                  </div>
+                )}
               </div>
             );
           })}
@@ -147,7 +196,10 @@ export default function DataEntry() {
           </div>
 
           <div className="de-actions">
-            <input className="de-by" placeholder="Your name / institution (optional)" value={by} onChange={(e) => setBy(e.target.value)} />
+            <label className="de-field de-auth"><span className="de-field-label">Data source / authority</span>
+              <select value={auth} onChange={(e) => setAuth(e.target.value)}>{AUTH_OPTIONS.map((a) => <option key={a.k} value={a.k}>{a.label} — {a.full}</option>)}</select>
+            </label>
+            <input className="de-by" placeholder="Your name (optional)" value={by} onChange={(e) => setBy(e.target.value)} />
             <button className="ui-btn-primary" onClick={onSave}>{role === 'pmo' ? 'Save (apply directly)' : 'Submit for approval'}</button>
           </div>
           {getOverrides()[code] && <div className="de-edited ui-muted">✎ This district has a saved edit.</div>}
@@ -161,7 +213,7 @@ export default function DataEntry() {
             <div key={e.id} className="de-pend">
               <div>
                 <div className="de-pend-name">{e.name} <span className="ui-muted">({e.region})</span></div>
-                <div className="ui-muted de-pend-vals">H {round1(e.hazard)} · V {round1(e.vuln)} · C {round1(e.cope)} → Risk {cbrt(e.hazard, e.vuln, e.cope)} · by {e.by}</div>
+                <div className="ui-muted de-pend-vals">H {round1(e.hazard)} · V {round1(e.vuln)} · C {round1(e.cope)} → Risk {cbrt(e.hazard, e.vuln, e.cope)} · {e.by}</div>
               </div>
               {role === 'pmo'
                 ? <div className="de-pend-btns"><button className="ui-chip" onClick={() => onApprove(e.id)}>Approve</button><button className="ui-chip" onClick={() => onReject(e.id)}>Reject</button></div>
@@ -172,7 +224,7 @@ export default function DataEntry() {
         </div>
       </div>
 
-      <p className="de-foot ui-muted">Edits flow into the map, charts and tables across the app. Cross-device multi-user persistence connects to the Supabase backend — schema ready in <code>supabase/setup.sql</code>.</p>
+      <p className="de-foot ui-muted">Edits flow into the map, charts and tables. Aggregation matches the INFORM Excel; see the methodology manual for the standardization & formulas. Cross-device persistence connects to the Supabase backend.</p>
     </div>
   );
 }

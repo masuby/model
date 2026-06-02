@@ -1,0 +1,10 @@
+indicator,authority,dataset,method
+hazard:drought,TMA / MoA,CHIRPS v3 1991-2024 + ERA5 t2m,aridity + variability + SPEI-12 depth + growing-season failure, min-max 0-10
+hazard:flood,PMO-DMD / TMA / MoW,CHIRPS v3 daily 2015-2024 + recorded floods,max(>50/>100mm count index, event index) x exposure (geom. mean)
+hazard:exposure,NBS,2022 PHC population,population density, log min-max 0-10
+vulnerability:developmentPoverty,NBS,HBS 2017/18,poverty headcount
+vulnerability:childrenHealthNutrition,MoH,TDHS 2022,under-5 stunting
+vulnerability:livelihoods,MUCHALI / IPC,IPC food-insecurity rounds,food-insecurity phase
+coping:wash,MoW,2022 PHC water points & boreholes,resource availability, rank 2-8
+coping:accessHealth,MoH,2022 PHC health facilities,resource availability
+coping:drrImplementation,PMO-DMD / DRR Coordinator,EPRP / EOCC / Anticipatory-Action records,DRM investment overlay

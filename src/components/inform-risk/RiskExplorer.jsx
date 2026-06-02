@@ -64,6 +64,15 @@ function DistrictDetail({ d }) {
           <span title="Boreholes">⛲ {d.facilities.boreholes.toLocaleString()}</span>
         </div>
       )}
+      {d.hazardExposure?.exposure && (
+        <div className="rx-facilities">
+          <span className="ui-eyebrow">Exposure · NBS 2022</span>
+          <span title="Population">👥 {d.hazardExposure.exposure.population?.toLocaleString()}</span>
+          <span title="Population density">{d.hazardExposure.exposure.density}/km²</span>
+          <span title="Exposure index 0–10">E&nbsp;{round1(d.hazardExposure.exposure.index)}</span>
+          {d.hazardExposure.events?.flood?.length ? <span title="Recorded flood years">🌊 {d.hazardExposure.events.flood.join(', ')}</span> : null}
+        </div>
+      )}
 
       <div className="rx-detail-grid">
         <div className="rx-dim ui-card ui-card-pad">

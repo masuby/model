@@ -1,0 +1,226 @@
+# INFORM Tanzania — Methodology & Data-Integrity Manual
+
+**Living document. Honest by design.** This explains, end to end, how a raw measurement
+(a population count, a rainfall record, a flood event) becomes a 0–10 indicator, how
+indicators combine into the INFORM Risk, and how a Data-Entry edit travels the same path.
+Where a method is approximate, or a value looks too close to a neighbour, it is **flagged
+here openly** so we can improve it together — not hidden. Numbers below are real, taken
+from the current dataset (`src/data/tanzania-inform-risk.json`).
+
+---
+
+## 1. The risk journey (one picture)
+
+```
+ raw data ──standardize──▶ indicator 0–10 ──MEAN──▶ category 0–10
+        └────────────────────────────────────────────────┘
+ category 0–10 ──scaled GEOMEAN (Excel Box 6)──▶ dimension 0–10
+ Hazard&Exposure · Vulnerability · Lack-of-Coping ──∛(H×V×LCC)──▶ RISK 0–10 ──▶ class
+```
+
+Three rules, taken **exactly from the Tanzania INFORM Excel** (`TZ_INFORM_model.xlsx`, locked
+by `excelParity.test.js`):
+
+| Step | Method | Where |
+|---|---|---|
+| indicator → category | **arithmetic MEAN** | `AVERAGEIFS` in Excel |
+| category → dimension | **INFORM scaled geometric mean** | Excel Box 6 (below) |
+| dimension → risk | **∛(H × V × LCC)** (geometric mean) | INFORM Risk index |
+
+The same three rules run in the offline build (`scripts/apply-climate-hazards.mjs`) **and**
+live in the app when you edit (`riskModel.applyEdits`) — so a computed value and an edited
+value behave identically.
+
+---
+
+## 2. Standardization: turning a raw number into 0–10
+
+Every indicator must sit on the same 0–10 scale ("higher = more risk") before it can be
+combined. We use **min-max** scaling across Tanzania's districts:
+
+> **idx = (value − min) / (max − min) × 10**
+
+For quantities that are highly skewed (a few huge cities, many small rural areas) we take
+the **log first** (log min-max), so the scale is not dominated by one outlier:
+
+> **idx = (log₁₀value − log₁₀min) / (log₁₀max − log₁₀min) × 10**
+
+### Worked example — population → Exposure (your "3900" question)
+Exposure is **population density** (people per km²), log-scaled because Dar (4,600/km²)
+dwarfs pastoral Longido (22/km²).
+
+- Ilala (Dar): density 4,643/km² → log₁₀ = 3.667 → **exposure 8.66**
+- Kondoa: density 54/km² → log₁₀ = 1.73 → **exposure 3.19**
+- Longido: density 22/km² → log₁₀ = 1.34 → **exposure 2.10**
+
+So a district of (say) 3,900 people in a 1,300 km² ward = density 3.0/km² → near the bottom
+of the scale; the *same* 3,900 people in 5 km² = 780/km² → high. **Exposure is about
+concentration, not the raw headcount.** (Population comes from the NBS 2022 census, per
+council, summed to the district — see §7.)
+
+### Why min-max and not "rank"
+An earlier draft ranked districts (1st, 2nd, …). That spreads everything evenly but
+**invents differences where the data is flat** — it once put random districts top of the
+drought list. Min-max keeps the *real* spacing: if two districts are genuinely similar,
+their scores stay close (and yes, sometimes they look "too close" — that is honest, see §8).
+
+---
+
+## 3. Hazard indicators — what we compute, honestly
+
+### 3.1 Drought (computed — CHIRPS v3 + ERA5)
+Drought is **slow** and hits communities through **failed growing seasons** (→ food
+insecurity, IPC/MUCHALI). SPI/SPEI *frequency* is ~16 % everywhere by construction, so it
+can NOT rank where drought is worse. Instead we blend four real signals, each min-maxed:
+
+> **drought = minmax( 0.30·aridity + 0.20·variability + 0.15·SPEI-depth + 0.35·season-failure ) × 10**
+
+- **aridity** = low mean annual rainfall (1991–2024 CHIRPS v3)
+- **variability** = interannual rainfall CV
+- **SPEI-depth** = mean magnitude of SPEI-12 during droughts (uses ERA5 temperature → Thornthwaite PET)
+- **season-failure** = how often the main 4-month rainy season falls below 80 % of normal
+
+Result (top): Longido 9.7, Simanjiro 9.1, Singida 8.7, Hanang 8.7, Kondoa 8.6 — the real
+pastoral north + semi-arid centre. Bottom: Rungwe 0.5, Kyela 0.5, Mafia 1.5 — the wet
+highlands/islands. *(Script: `scripts/compute-drought-spi-spei.py`.)*
+
+### 3.2 Heavy rainfall & flood (computed — CHIRPS daily + recorded events)
+Two ingredients:
+1. **Heavy-rain index** — count of days where the district-mean rainfall exceeds **50 mm**
+   (heavy) and **100 mm** (very heavy), per year, 2015–2024 daily CHIRPS, min-maxed (very-heavy
+   weighted ×2). Top: the Pemba/Zanzibar coast (Mkoani 14 heavy days/yr).
+2. **Recorded floods** — a documented, *editable* event list (`data-source/flood_events.csv`)
+   with sources (DesInventar / EM-DAT / PMO-DMD / news). `event index = min(10, 4 + 2 × #events)`.
+
+The **physical flood hazard** = `max(heavy-rain index, event index)` — so a coastal cloudburst
+zone *or* a documented river-flood district both score high.
+
+### 3.3 Flood = Hazard × Exposure
+INFORM hazard is **Hazard × Exposure**, not hazard alone. Flood becomes:
+
+> **flood = √( hazardFlood × max(exposure, 2) )**, and ≥ 5 wherever floods are on record.
+
+**Worked example — Ilala (Dar):** heavy-rain 4.0, but 2 recorded floods (2011, 2018) →
+event index 8 → hazardFlood = max(4.0, 8) = **8**. Exposure 8.66. flood = √(8 × 8.66) =
+√69.3 = **8.3**. Dense + flood-prone = high.
+**Longido:** hazardFlood 0.1, exposure 2.1 → flood = √(0.1 × 2.1) = **0.5**. Dry + empty = low.
+
+### 3.4 Fires, earthquake, landslide, coastal — honest status
+- **Wildfire, earthquake, lightning, volcano, storms, environmental degradation** are still the
+  **INFORM SADC 2024 baseline** values (not yet recomputed here). We did **not** fabricate
+  these. Wildfire, e.g., should later come from MODIS/VIIRS burned-area — flagged in §8.
+- **Landslide & coastal** keep their **documented** values (Hanang, Rungwe, Usambara; coastal
+  strip) — real but qualitative, editable, not yet a physical model.
+
+---
+
+## 4. Vulnerability & Coping — current sources
+
+- **Development & poverty** — NBS Household Budget Survey 2017/18 (poverty headcount).
+- **Children health & nutrition** — TDHS 2022 (under-5 stunting).
+- **Livelihoods / food security** — wired to **MUCHALI / IPC** (MoA Food Security & Nutrition
+  analysis). *We do not invent IPC phases;* the slot is ready for MoA to enter each round (§6).
+- **WASH** — derived from **real 2022-census water points & boreholes** (more resource → lower
+  "lack of coping"), rank-scaled 2–8.
+- **Access to health / education** — 2022 PHC facility counts.
+- **DRR implementation** — EPRP / regional EOCC / drought Anticipatory-Action records (the
+  districts you provided) lower the institutional "lack of coping".
+- Indicators not yet localized keep the INFORM SADC 2024 baseline.
+
+---
+
+## 5. Aggregation — the exact formulas
+
+### 5.1 Indicator → Category: MEAN
+`category = average of its indicators` (ignoring blanks). E.g. Kondoa Natural-hazards =
+mean(drought 8.6, flood 0.7, earthquake 10, landslide 4.7, wildfire 4.75, …) = **3.7**.
+
+### 5.2 Category → Dimension: INFORM scaled geometric mean (Excel Box 6)
+> **dimension = (10 − GEOMEAN( (10−c₁)/10·9 + 1 , (10−c₂)/10·9 + 1 , … )) / 9 × 10**
+
+A low category **drags the dimension down** (geometric), unlike a plain average.
+
+**Worked example — Kondoa Hazard:** Natural 3.7, Human 0.7.
+scaled: (10−3.7)/10·9+1 = 6.67 ; (10−0.7)/10·9+1 = 9.37.
+GEOMEAN = √(6.67 × 9.37) = 7.91. dimension = (10 − 7.91)/9 × 10 = **2.3**. ✔ matches stored.
+
+### 5.3 Dimension → Risk: cube root
+> **Risk = ∛(Hazard × Vulnerability × LackOfCoping)**
+
+**Kondoa:** ∛(2.3 × 5.5 × 4.6) = ∛58.2 = **3.9** (High). ✔
+
+Then `Risk` is classed with the **Tanzania thresholds** (Very-Low < 2.5 < Low < 3.4 < Medium
+< 4.3 < High < 5.9 < Very-High).
+
+---
+
+## 6. Keying data in (Data Entry) — same formulas, with provenance
+
+1. Pick **role** (PMO/Admin apply directly; Sector officer submits for approval), region, district.
+2. Edit a **dimension score** directly, or **Fill indicators** to set each 0–10 leaf — for
+   **Hazard, Exposure, Vulnerability, Coping**.
+3. **Exposure** has its own box; changing it instantly recomputes flood = √(hazard × exposure)
+   and the Hazard score — the live preview uses the *same* mean → scaled-geomean → ∛ chain.
+4. Choose the **Data source / authority** (NBS, TMA, MoW, MoH, MoA, PMO-DMD, DRR Coordinator,
+   MUCHALI/IPC). Each edited indicator is **stamped** with that authority + date.
+5. **Save / Submit → Apply.** The edit flows to the map, charts, tables. Hover the indicator
+   and it shows **"✎ Updated by MoW · 2026-06"**; un-edited indicators show the registry source
+   (e.g. **"📎 Source: TMA (+MoA, CHC) · CHIRPS v3 …"**).
+
+Storage today is the browser (`localStorage`); the Supabase schema is ready for multi-user.
+
+---
+
+## 7. Data sources (per indicator)
+
+| Indicator | Authority | Dataset | How standardized |
+|---|---|---|---|
+| Drought | TMA / MoA | CHIRPS v3 1991-2024 + ERA5 t2m | aridity+variability+SPEI-depth+season-fail, min-max |
+| Flood | PMO-DMD / TMA / MoW | CHIRPS v3 daily + recorded floods | max(>50/100 mm count, events) × exposure |
+| Exposure | NBS | 2022 PHC population | density, **log** min-max |
+| Poverty | NBS | HBS 2017/18 | INFORM baseline |
+| Stunting | MoH | TDHS 2022 | INFORM baseline |
+| Food security | MUCHALI / IPC (MoA) | IPC rounds | *to be entered* |
+| WASH | MoW | 2022 PHC water/boreholes | resource availability 2–8 |
+| Health/Education access | MoH / NBS | 2022 PHC facilities | resource availability |
+| DRR implementation | PMO-DMD / DRR Coordinator | EPRP/EOCC/AA records | investment overlay |
+| Wildfire, earthquake, etc. | INFORM SADC 2024 | INFORM | baseline (not yet recomputed) |
+
+---
+
+## 8. Honest limitations — the "to-improve" list (flag & discuss)
+
+1. **Drought exposure is agricultural, not urban.** We multiply *flood* by population exposure
+   but **not drought** — multiplying drought by urban density would wrongly demote pastoral
+   communities (Longido). Better: cropland/livestock exposure. *Open.*
+2. **Heavy-rain uses CHIRPS v2.0 daily** (on-disk, 2015–2024) right now; the national **v3**
+   daily is downloading and will be swapped in. Extreme-day counts are near-identical, but it
+   is not yet the v3 we use for drought. *In progress.*
+3. **Some values sit close together** (e.g. several semi-arid districts ~8.4–8.7 drought).
+   That is real similarity, not precision — min-max preserves true spacing rather than forcing
+   a spread. Don't over-read 0.1 differences.
+4. **A few values look high for their place** — e.g. Ilala (Dar) drought 6.6. Coastal rainfall
+   is *variable* even when plentiful, so the variability/SPEI terms lift it. Debatable; weights
+   are tunable here. *Flag for discussion.*
+5. **Coverage: 138 / 170 districts** got computed climate (those with map polygons). The other
+   32 keep their prior values. Boundary set is 150/170 vs the 184 councils (2022) — reconciling
+   to 184 needs the NBS council boundaries + council-level INFORM data.
+6. **Wildfire, earthquake, lightning, storms** are still INFORM baseline — not yet physically
+   recomputed (MODIS/VIIRS fire, USGS seismicity are the next sources).
+7. **Standardization is relative to Tanzania** (min over our 150 districts), not INFORM's fixed
+   global reference values. Fine for a national tool; note when comparing to global INFORM.
+
+*Everything in this list is editable in Data Entry and improvable in code — that is the point
+of writing it down.*
+
+---
+
+## 9. Risk over time (snapshots)
+
+Risk is reported **"as of"** a date (`metadata.asOf`, currently the baseline). The plan to
+turn this into a time series — dated snapshots, **emerging** (risk ↑) vs **improving** (risk ↓)
+detection, and a Δrisk map — is in **[RISK_OVER_TIME_PLAN.md](RISK_OVER_TIME_PLAN.md)**.
+Foundation already in place: every Data-Entry edit is timestamped with its authority, the
+CHIRPS inputs are inherently temporal (1991–2024), and the trend-chart components exist — so
+future seasonal refreshes can be compared to spot communities whose risk is rising before it
+becomes a disaster.

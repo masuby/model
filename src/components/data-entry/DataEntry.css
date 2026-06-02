@@ -55,3 +55,12 @@
 .de-reset { background: none; border: none; cursor: pointer; margin-top: var(--s-4); text-decoration: underline; font-size: var(--fs-sm); }
 .de-foot { font-size: var(--fs-sm); }
 .de-foot code { background: var(--c-surface-2); padding: 1px 6px; border-radius: 4px; }
+
+/* Exposure (population → flood H×E) */
+.de-exposure { margin-top: var(--s-2); padding: var(--s-3); background: var(--c-surface-2); border-radius: var(--r-md); border: 1px dashed var(--c-line); }
+.de-exposure-row { display: flex; align-items: center; justify-content: space-between; gap: var(--s-3); }
+.de-exposure-label { font-weight: 600; color: var(--c-ink); font-size: var(--fs-sm); }
+.de-exposure-hint { display: block; margin-top: 4px; font-size: 12px; }
+/* Authority / source picker */
+.de-auth { flex: 1; min-width: 240px; }
+.de-auth select { width: 100%; }

@@ -1,0 +1,151 @@
+dist_name,reg_name,area_km2,pop2022,density,exposure_index
+Chake Chake,Kusini Pemba,227.2,136298,599.9,6.15
+Mkoani,Kusini Pemba,264.2,135052,511.2,5.95
+Kaskazini B,Kaskazini Unguja,221.4,99921,451.4,5.8
+Kaskazini A,Kaskazini Unguja,242.6,157369,648.6,6.24
+Rombo,Kilimanjaro,1475.5,275314,186.6,4.72
+Momba,Songwe,4809.5,259781,54.0,3.2
+Songwe,Songwe,11030.9,229129,20.8,2.03
+Same,Kilimanjaro,6147.3,300303,48.9,3.08
+Njombe,Njombe,7863.6,437919,55.7,3.24
+Mbozi,Songwe,3817.0,510599,133.8,4.31
+Mwanga,Kilimanjaro,1969.1,148763,75.6,3.61
+Ludewa,Njombe,5872.2,151361,25.8,2.29
+Ileje,Songwe,1866.0,125869,67.5,3.47
+Hai,Kilimanjaro,898.9,240999,268.1,5.16
+Makete,Njombe,4082.7,109160,26.7,2.34
+Moshi,Kilimanjaro,1434.9,757536,527.9,5.99
+Misungwi,Mwanza,2600.8,467867,179.9,4.67
+Wanging'ombe,Njombe,3446.1,191506,55.6,3.23
+Siha,Kilimanjaro,1190.2,139019,116.8,4.14
+Kigamboni,Dar es Salaam,561.0,317902,566.7,6.08
+Nyamagana,Mwanza,183.0,594834,3249.7,8.22
+Temeke,Dar es Salaam,152.6,1346674,8822.5,9.44
+Kwimba,Mwanza,3237.7,480025,148.3,4.44
+Sengerema,Mwanza,3144.6,425415,135.3,4.32
+Ubungo,Dar es Salaam,272.3,1086912,3991.9,8.47
+Ilemela,Mwanza,248.9,509687,2048.0,7.65
+Ilala,Dar es Salaam,355.3,1649912,4643.2,8.66
+Ukerewe,Mwanza,604.3,387815,641.8,6.23
+Kinondoni,Dar es Salaam,268.2,982328,3663.0,8.37
+Namtumbo,Ruvuma,21933.1,271368,12.4,1.39
+Nzega,Tabora,7866.2,699691,88.9,3.81
+Magu,Mwanza,1533.2,421119,274.7,5.19
+Uyui,Tabora,11453.6,562588,49.1,3.08
+Songea,Ruvuma,14624.2,464486,31.8,2.55
+Igunga,Tabora,7071.6,546204,77.2,3.64
+Tunduru,Ruvuma,18643.0,412054,22.1,2.1
+Sikonge,Tabora,26500.1,335686,12.7,1.42
+Nyasa,Ruvuma,3230.0,191193,59.2,3.31
+Urambo,Tabora,5436.8,260322,47.9,3.05
+Mbinga,Ruvuma,4730.5,444478,94.0,3.88
+Kaliua,Tabora,15761.9,678447,43.0,2.92
+Tabora,Tabora,1468.7,308741,210.2,4.86
+Micheweni,Kaskazini Pemba,203.4,123379,606.5,6.16
+Mkinga,Tanga,2707.2,146802,54.2,3.2
+Wete,Kaskazini Pemba,300.3,148712,495.2,5.91
+Kiteto,Manyara,12900.0,352305,27.3,2.36
+Geita,Geita,4871.5,1396885,286.7,5.24
+Lushoto,Tanga,4313.1,350958,81.4,3.7
+Korogwe,Tanga,3440.4,359421,104.5,4.01
+Mbogwe,Geita,2131.9,362855,170.2,4.61
+Muheza,Tanga,1532.7,238260,155.4,4.49
+Hanang,Manyara,3592.2,367391,102.3,3.98
+Nyang'hwale,Geita,1600.7,225803,141.1,4.38
+Tanga,Tanga,596.0,393429,660.1,6.27
+Babati,Manyara,5608.0,504772,90.0,3.82
+Chato,Geita,2999.6,584963,195.0,4.77
+Pangani,Tanga,1798.0,75642,42.1,2.89
+Simanjiro,Manyara,19355.5,291169,15.0,1.63
+Bukombe,Geita,8015.3,407102,50.8,3.12
+Handeni,Tanga,7426.6,493321,66.4,3.45
+Missenyi,Kagera,2828.7,245394,86.8,3.78
+Mbulu,Manyara,3883.4,376865,97.0,3.92
+Kilindi,Tanga,7029.6,398391,56.7,3.26
+Biharamulo,Kagera,7360.4,457114,62.1,3.37
+Muleba,Kagera,3450.8,637659,184.8,4.71
+Kyerwa,Kagera,2559.6,412910,161.3,4.54
+Ngara,Kagera,3279.3,383092,116.8,4.14
+Bukoba,Kagera,1711.7,467386,273.1,5.18
+Karagwe,Kagera,5176.4,385744,74.5,3.59
+Kishapu,Shinyanga,4249.6,335483,78.9,3.66
+Mkalama,Singida,3092.0,255514,82.6,3.72
+Shinyanga,Shinyanga,4090.1,683355,167.1,4.58
+Manyoni,Singida,28679.6,279069,9.7,1.1
+Kahama,Shinyanga,8143.4,453654,55.7,3.24
+Ikungi,Singida,8530.9,411262,48.2,3.06
+Iramba,Singida,4481.6,328912,73.4,3.57
+Singida,Singida,3212.3,517354,161.1,4.54
+Magharibi A,Mjini Magharibi,106.1,329645,3105.8,8.16
+Magharibi B,Mjini Magharibi,106.9,344517,3222.0,8.21
+Bunda,Mara,3049.2,426792,140.0,4.37
+Butiama,Mara,1964.4,281656,143.4,4.4
+Mjini,Mjini Magharibi,15.8,219007,13897.6,10.0
+Serengeti,Mara,11243.4,340349,30.3,2.49
+Musoma,Mara,1336.3,430837,322.4,5.39
+Rorya,Mara,2006.0,354490,176.7,4.65
+Chemba,Dodoma,7459.2,339333,45.5,2.99
+Kilombero,Morogoro,13162.8,582960,44.3,2.96
+Busega,Simiyu,1431.4,282167,197.1,4.79
+Bahi,Dodoma,5413.6,322526,59.6,3.32
+Morogoro,Morogoro,11918.5,859145,72.1,3.55
+Dodoma,Dodoma,2591.2,765179,295.3,5.28
+Kilosa,Morogoro,11746.4,617032,52.5,3.16
+Tarime,Mara,1529.7,537891,351.6,5.49
+Meatu,Simiyu,8880.6,366941,41.3,2.87
+Chamwino,Dodoma,9128.6,486176,53.3,3.18
+Maswa,Simiyu,3674.3,427864,116.4,4.14
+Kongwa,Dodoma,3925.2,443867,113.1,4.1
+Gairo,Morogoro,2046.9,258205,126.1,4.24
+Bariadi,Simiyu,5466.2,644312,117.9,4.16
+Mpwapwa,Dodoma,7405.9,403247,54.4,3.21
+Mvomero,Morogoro,7660.6,421741,55.1,3.22
+Itilima,Simiyu,4690.5,419213,89.4,3.82
+Kondoa,Dodoma,6051.9,325297,53.8,3.19
+Malinyi,Morogoro,9523.0,225126,23.6,2.19
+Ulanga,Morogoro,13985.6,232895,16.7,1.76
+Nanyumbu,Mtwara,5262.5,204323,38.8,2.79
+Tandahimba,Mtwara,2095.5,299073,142.7,4.39
+Masasi,Mtwara,4800.1,452363,94.2,3.88
+Newala,Mtwara,1948.2,241288,123.9,4.22
+Mtwara,Mtwara,3924.7,305276,77.8,3.65
+Kigoma,Kigoma,1259.5,455180,361.4,5.53
+Kasulu,Kigoma,8018.2,776088,96.8,3.91
+Mbarali,Mbeya,13208.1,446336,33.8,2.62
+Kibondo,Kigoma,13379.4,362922,27.1,2.35
+Rungwe,Mbeya,2124.8,273536,128.7,4.26
+Kyela,Mbeya,787.8,266426,338.2,5.45
+Mbeya,Mbeya,2996.1,912862,304.7,5.32
+Kakonko,Kigoma,2217.7,178419,80.5,3.69
+Chunya,Mbeya,19085.3,344471,18.0,1.86
+Buhigwe,Kigoma,1525.3,240005,157.3,4.51
+Uvinza,Kigoma,10349.1,458353,44.3,2.96
+Kusini,Kusini Unguja,367.0,63156,172.1,4.62
+Kati,Kusini Unguja,513.2,132717,258.6,5.12
+Kibaha,Pwani,2328.1,388727,167.0,4.58
+Ngorongoro,Arusha,15055.0,273549,18.2,1.86
+Kisarawe,Pwani,4705.8,159226,33.8,2.63
+Arusha,Arusha,278.8,1067149,3827.1,8.42
+Longido,Arusha,7977.0,175915,22.1,2.1
+Bagamoyo,Pwani,8480.6,205478,24.2,2.22
+Karatu,Arusha,3113.2,280454,90.1,3.83
+Mafia,Pwani,495.6,66180,133.5,4.31
+Mlele,Katavi,23473.0,118818,5.1,0.3
+Monduli,Arusha,6937.6,227585,32.8,2.59
+Kibiti,Pwani,3727.4,195638,52.5,3.16
+Tanganyika,Katavi,16306.3,371836,22.8,2.14
+Arumeru,Arusha,2591.0,331603,128.0,4.26
+Mkuranga,Pwani,3170.4,533033,168.1,4.59
+Mpanda,Katavi,6485.6,662304,102.1,3.98
+Rufiji,Pwani,9197.1,159906,17.4,1.81
+Nachingwea,Lindi,5576.9,233655,41.9,2.89
+Liwale,Lindi,34380.2,136505,4.0,0.0
+Ruangwa,Lindi,2566.5,185573,72.3,3.56
+Kilwa,Lindi,15371.6,297676,19.4,1.94
+Lindi,Lindi,6971.1,174126,25.0,2.25
+Kalambo,Rukwa,5641.3,316783,56.2,3.25
+Sumbawanga,Rukwa,6109.2,798316,130.7,4.28
+Iringa,Iringa,20188.1,517844,25.7,2.29
+Nkasi,Rukwa,9585.3,425420,44.4,2.96
+Mufindi,Iringa,8255.3,411325,49.8,3.1
+Kilolo,Iringa,9255.2,263559,28.5,2.41

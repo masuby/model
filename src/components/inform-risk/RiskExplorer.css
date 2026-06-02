@@ -154,6 +154,7 @@
 .rx-tip-d { font-size: var(--fs-xs); color: var(--c-muted); margin-top: 5px; line-height: 1.4; }
 .rx-tip-drr { font-size: var(--fs-xs); color: #15803d; margin-top: 5px; font-weight: 700; }
 .rx-tip-f { font-size: var(--fs-xs); color: var(--c-body); margin-top: 5px; }
+.rx-tip-src { font-size: var(--fs-xs); color: #1d4ed8; margin-top: 5px; font-weight: 600; }
 
 .rx-facilities { display: flex; align-items: center; gap: var(--s-3); flex-wrap: wrap; padding: var(--s-2) var(--s-3); background: var(--c-surface-2); border-radius: var(--r-md); margin-bottom: var(--s-3); font-size: var(--fs-sm); font-weight: 600; color: var(--c-ink); }
 .rx-facilities .ui-eyebrow { font-weight: 700; }

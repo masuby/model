@@ -6,6 +6,7 @@
 import riskDataset from '../../data/tanzania-inform-risk.json';
 import { classifyRisk, normRegion } from './regionRisk';
 import { getOverrides } from './overrideStore';
+import { sourceFor } from './indicatorSources';
 
 export { classifyRisk, normRegion };
 export const DATASET = riskDataset;
@@ -156,20 +157,41 @@ const setTotal = {
   vulnerability: (d, v) => { if (d.vulnerability) d.vulnerability.total = v; },
   coping: (d, v) => { if (d.lackCopingCapacity) d.lackCopingCapacity.total = v; },
 };
+const DIRECT = { hazard: 'hazard', vulnerability: 'vuln', coping: 'cope' };
+// INFORM scaled geometric mean (Excel Box 6 / informCalculationEngine) — the authentic
+// category→dimension aggregation: a low category drags the dimension down (geometric).
+const sgm = (a) => {
+  const xs = a.filter((x) => typeof x === 'number' && isFinite(x));
+  if (!xs.length) return null;
+  const sc = xs.map((x) => ((10 - x) / 10 * 9) + 1);
+  return (10 - Math.exp(sc.reduce((s, x) => s + Math.log(x), 0) / sc.length)) / 9 * 10;
+};
 (function applyEdits() {
   const ovr = getOverrides();
   if (!ovr || !Object.keys(ovr).length) return;
   DISTRICTS.forEach((d) => {
     const o = ovr[d.admin?.adm2Code];
     if (!o) return;
-    if (o.ind && Object.keys(o.ind).length) {
-      for (const [key, val] of Object.entries(o.ind)) {
-        const [dim, k] = key.split(':');
-        const tree = DIMENSION_TREE[dim];
-        if (!tree) continue;
-        for (const comp of tree.components) { const obj = comp.path(d); if (obj && k in obj) { obj[k] = val; break; } }
+    // Exposure edit → recompute flood Hazard×Exposure = √(hazardFreq.flood × max(E,2)).
+    if (typeof o.exposure === 'number' && d.hazardExposure) {
+      d.hazardExposure.exposure = { ...(d.hazardExposure.exposure || {}), index: o.exposure };
+      const hf = d.hazardExposure.hazardFreq?.flood;
+      const floodEdited = o.ind && 'hazard:flood' in o.ind;
+      if (typeof hf === 'number' && !floodEdited && d.hazardExposure.natural) {
+        let flood = Math.sqrt(hf * Math.max(o.exposure, 2));
+        if (d.hazardExposure.events?.flood?.length) flood = Math.max(flood, 5);
+        d.hazardExposure.natural.flood = r1(flood);
       }
-      for (const dim of DIM_KEYS) {
+    }
+    // Apply edited indicator leaves.
+    if (o.ind) for (const [key, val] of Object.entries(o.ind)) {
+      const [dim, k] = key.split(':'); const tree = DIMENSION_TREE[dim]; if (!tree) continue;
+      for (const comp of tree.components) { const obj = comp.path(d); if (obj && k in obj) { obj[k] = val; break; } }
+    }
+    // Recompute the AUTHENTIC way: category = MEAN of indicators, dimension = scaled GEOMEAN.
+    for (const dim of DIM_KEYS) {
+      const edited = (o.ind && Object.keys(o.ind).some((kk) => kk.startsWith(dim + ':'))) || (dim === 'hazard' && typeof o.exposure === 'number');
+      if (edited) {
         const aggs = [];
         for (const comp of DIMENSION_TREE[dim].components) {
           const obj = comp.path(d); if (!obj) continue;
@@ -177,16 +199,24 @@ const setTotal = {
           if (vals.length) { obj.aggregate = r1(mean(vals)); aggs.push(obj.aggregate); }
           else if (typeof obj.aggregate === 'number') aggs.push(obj.aggregate);
         }
-        if (aggs.length) setTotal[dim](d, r1(mean(aggs)));
+        if (aggs.length) setTotal[dim](d, r1(sgm(aggs)));
       }
+      if (typeof o[DIRECT[dim]] === 'number') setTotal[dim](d, o[DIRECT[dim]]); // explicit total edit wins
     }
-    if (typeof o.hazard === 'number') setTotal.hazard(d, o.hazard);
-    if (typeof o.vuln === 'number') setTotal.vulnerability(d, o.vuln);
-    if (typeof o.cope === 'number') setTotal.coping(d, o.cope);
     const h = d.hazardExposure?.total, v = d.vulnerability?.total, c = d.lackCopingCapacity?.total;
     if ([h, v, c].every((x) => typeof x === 'number')) d.risk = r1(Math.cbrt(h * v * c));
+    // Provenance for viewing (per-indicator edit source; registry default applied at view time).
+    if (o.indSrc) d._prov = { ...(d._prov || {}), ...o.indSrc };
+    if (typeof o.exposure === 'number' && o.expSrc) d._prov = { ...(d._prov || {}), 'hazard:exposure': o.expSrc };
   });
 })();
+
+// Resolve an indicator's data source on a unit: a Data-Entry edit's stamped source if
+// present, else the registry baseline (indicatorSources). dim = hazard|vulnerability|coping.
+export function provenanceFor(unit, dim, k) {
+  const e = unit?._prov?.[`${dim}:${k}`];
+  return e ? { ...e, edited: true } : { ...sourceFor(dim, k), edited: false };
+}
 
 export const REGION_UNITS = (() => {
   const by = {};
