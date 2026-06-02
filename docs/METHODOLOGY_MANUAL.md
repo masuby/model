@@ -221,9 +221,9 @@ Storage today is the browser (`localStorage`); the Supabase schema is ready for 
 1. **Drought exposure is agricultural, not urban.** We multiply *flood* by population exposure
    but **not drought** — multiplying drought by urban density would wrongly demote pastoral
    communities (Longido). Better: cropland/livestock exposure. *Open.*
-2. **Heavy-rain uses CHIRPS v2.0 daily** (on-disk, 2015–2024) right now; the national **v3**
-   daily is downloading and will be swapped in. Extreme-day counts are near-identical, but it
-   is not yet the v3 we use for drought. *In progress.*
+2. **Heavy-rain now uses CHIRPS v3 daily** (2015–2024, national download complete, ~96 % day
+   coverage). Earlier drafts used v2.0 daily; v3 gives slightly lower extreme-day counts but the
+   same spatial pattern (Pemba/Zanzibar/Mafia coast highest).
 3. **Some values sit close together** (e.g. several semi-arid districts ~8.4–8.7 drought).
    That is real similarity, not precision — min-max preserves true spacing rather than forcing
    a spread. Don't over-read 0.1 differences.
@@ -243,11 +243,14 @@ Storage today is the browser (`localStorage`); the Supabase schema is ready for 
    risk (safer for planning) at the cost of keeping a few possibly-overstated documented values
    (see #4). A before/after audit confirms **0 districts** had flood or risk-class lowered.
 9. **Risk evolves as the model is completed — by design.** Populating previously-blank hazards
-   (storms, heatwave, lightning, volcano, zoonoses) raised High-risk districts from **18 → 38**,
+   (storms, heatwave, lightning, volcano, zoonoses, earthquake-refine, wildfire-refine, plus the
+   technological hazards road-accidents & hazmat) raised High-risk districts from **18 → 43**,
    all raise-only (a value-audit confirms **0 districts below their documented baseline**). The
-   coast (cyclone + heat) and the Lake-Victoria zone (lightning + flood) are the main risers.
-   Deepening **vulnerability & coping** next will shift it again — toward a more complete picture,
-   not drift. Every change is traceable to a sourced indicator.
+   coast (cyclone + heat), the Lake-Victoria zone (lightning + flood) and the western rift
+   (earthquake) are the main risers. **Technological hazards (vehicleAccidents, hazmat) are kept
+   deliberately moderate** — human hazards carry 50 % of the Hazard dimension, so road accidents
+   should not dominate *disaster* risk. Deepening **vulnerability & coping** next will shift it
+   again — toward a more complete picture, not drift. Every change is traceable to a sourced indicator.
 
 *Everything in this list is editable in Data Entry and improvable in code — that is the point
 of writing it down.*

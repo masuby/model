@@ -1,151 +1,151 @@
 dist_name,reg_name,heavy_days_yr,vheavy_days_yr,heavy_rain_index
-Chake Chake,Kusini Pemba,9.9,2.5,6.21
-Mkoani,Kusini Pemba,14.2,4.9,10.0
-Kaskazini B,Kaskazini Unguja,8.4,2.3,5.42
-Kaskazini A,Kaskazini Unguja,11.1,4.0,7.96
-Rombo,Kilimanjaro,5.8,0.3,2.67
+Chake Chake,Kusini Pemba,7.5,2.3,8.64
+Mkoani,Kusini Pemba,9.2,2.4,10.0
+Kaskazini B,Kaskazini Unguja,6.4,1.2,6.29
+Kaskazini A,Kaskazini Unguja,4.8,0.6,4.29
+Rombo,Kilimanjaro,4.0,0.1,3.0
 Momba,Songwe,0.0,0.0,0.0
-Songwe,Songwe,0.2,0.0,0.08
-Same,Kilimanjaro,1.0,0.0,0.42
-Njombe,Njombe,1.3,0.1,0.62
+Songwe,Songwe,0.4,0.0,0.29
+Same,Kilimanjaro,0.3,0.0,0.21
+Njombe,Njombe,0.6,0.0,0.43
 Mbozi,Songwe,0.0,0.0,0.0
-Mwanga,Kilimanjaro,1.4,0.2,0.75
-Ludewa,Njombe,0.6,0.0,0.25
-Ileje,Songwe,2.6,0.1,1.17
-Hai,Kilimanjaro,3.5,0.7,2.04
-Makete,Njombe,0.8,0.0,0.33
-Moshi,Kilimanjaro,4.0,0.5,2.08
-Misungwi,Mwanza,0.1,0.0,0.04
-Wanging'ombe,Njombe,0.1,0.0,0.04
-Siha,Kilimanjaro,4.5,0.6,2.38
-Kigamboni,Dar es Salaam,7.1,1.7,4.38
-Nyamagana,Mwanza,0.2,0.0,0.08
-Temeke,Dar es Salaam,8.3,1.9,5.04
-Kwimba,Mwanza,0.1,0.0,0.04
-Sengerema,Mwanza,0.2,0.0,0.08
-Ubungo,Dar es Salaam,5.8,1.4,3.58
-Ilemela,Mwanza,0.0,0.0,0.0
-Ilala,Dar es Salaam,6.9,1.4,4.04
-Ukerewe,Mwanza,0.5,0.0,0.21
-Kinondoni,Dar es Salaam,5.4,1.1,3.17
-Namtumbo,Ruvuma,0.4,0.0,0.17
-Nzega,Tabora,1.0,0.1,0.5
-Magu,Mwanza,0.0,0.0,0.0
-Uyui,Tabora,0.8,0.0,0.33
-Songea,Ruvuma,0.5,0.0,0.21
-Igunga,Tabora,0.4,0.0,0.17
-Tunduru,Ruvuma,0.3,0.0,0.12
-Sikonge,Tabora,0.4,0.0,0.17
-Nyasa,Ruvuma,0.1,0.0,0.04
-Urambo,Tabora,1.1,0.1,0.54
-Mbinga,Ruvuma,0.0,0.0,0.0
-Kaliua,Tabora,1.0,0.1,0.5
-Tabora,Tabora,1.7,0.1,0.79
-Micheweni,Kaskazini Pemba,12.6,4.2,8.75
-Mkinga,Tanga,4.5,1.0,2.71
-Wete,Kaskazini Pemba,12.9,3.5,8.29
-Kiteto,Manyara,0.2,0.0,0.08
-Geita,Geita,0.1,0.0,0.04
-Lushoto,Tanga,2.2,0.3,1.17
-Korogwe,Tanga,2.1,0.3,1.12
-Mbogwe,Geita,0.1,0.0,0.04
-Muheza,Tanga,6.8,1.9,4.42
-Hanang,Manyara,0.2,0.1,0.17
-Nyang'hwale,Geita,0.2,0.0,0.08
-Tanga,Tanga,6.8,2.0,4.5
-Babati,Manyara,0.3,0.0,0.12
-Chato,Geita,0.1,0.0,0.04
-Pangani,Tanga,6.4,1.3,3.75
-Simanjiro,Manyara,0.4,0.0,0.17
-Bukombe,Geita,0.2,0.0,0.08
-Handeni,Tanga,3.5,0.6,1.96
-Missenyi,Kagera,0.3,0.0,0.12
-Mbulu,Manyara,0.2,0.0,0.08
-Kilindi,Tanga,1.1,0.2,0.62
-Biharamulo,Kagera,0.4,0.0,0.17
-Muleba,Kagera,0.4,0.0,0.17
-Kyerwa,Kagera,0.2,0.0,0.08
-Ngara,Kagera,0.3,0.0,0.12
-Bukoba,Kagera,0.8,0.0,0.33
-Karagwe,Kagera,0.2,0.0,0.08
-Kishapu,Shinyanga,0.1,0.0,0.04
-Mkalama,Singida,0.0,0.0,0.0
-Shinyanga,Shinyanga,0.2,0.0,0.08
+Mwanga,Kilimanjaro,0.5,0.0,0.36
+Ludewa,Njombe,0.3,0.0,0.21
+Ileje,Songwe,2.7,0.7,2.93
+Hai,Kilimanjaro,1.6,0.0,1.14
+Makete,Njombe,0.5,0.0,0.36
+Moshi,Kilimanjaro,1.6,0.0,1.14
+Misungwi,Mwanza,0.3,0.0,0.21
+Wanging'ombe,Njombe,0.0,0.0,0.0
+Siha,Kilimanjaro,1.8,0.0,1.29
+Kigamboni,Dar es Salaam,2.8,0.2,2.29
+Nyamagana,Mwanza,0.2,0.0,0.14
+Temeke,Dar es Salaam,2.3,0.0,1.64
+Kwimba,Mwanza,0.1,0.0,0.07
+Sengerema,Mwanza,0.3,0.0,0.21
+Ubungo,Dar es Salaam,1.1,0.0,0.79
+Ilemela,Mwanza,0.2,0.0,0.14
+Ilala,Dar es Salaam,2.1,0.0,1.5
+Ukerewe,Mwanza,0.8,0.0,0.57
+Kinondoni,Dar es Salaam,1.1,0.0,0.79
+Namtumbo,Ruvuma,0.3,0.0,0.21
+Nzega,Tabora,0.9,0.1,0.79
+Magu,Mwanza,0.4,0.0,0.29
+Uyui,Tabora,0.9,0.0,0.64
+Songea,Ruvuma,0.3,0.0,0.21
+Igunga,Tabora,0.6,0.0,0.43
+Tunduru,Ruvuma,0.1,0.0,0.07
+Sikonge,Tabora,0.8,0.1,0.71
+Nyasa,Ruvuma,1.0,0.0,0.71
+Urambo,Tabora,1.1,0.1,0.93
+Mbinga,Ruvuma,0.9,0.0,0.64
+Kaliua,Tabora,0.6,0.0,0.43
+Tabora,Tabora,2.3,0.1,1.79
+Micheweni,Kaskazini Pemba,4.7,1.0,4.79
+Mkinga,Tanga,1.7,0.3,1.64
+Wete,Kaskazini Pemba,6.3,1.5,6.64
+Kiteto,Manyara,0.1,0.0,0.07
+Geita,Geita,0.3,0.0,0.21
+Lushoto,Tanga,0.8,0.0,0.57
+Korogwe,Tanga,0.6,0.1,0.57
+Mbogwe,Geita,0.1,0.0,0.07
+Muheza,Tanga,2.7,0.3,2.36
+Hanang,Manyara,0.2,0.0,0.14
+Nyang'hwale,Geita,0.4,0.0,0.29
+Tanga,Tanga,2.9,0.7,3.07
+Babati,Manyara,0.2,0.0,0.14
+Chato,Geita,0.3,0.0,0.21
+Pangani,Tanga,1.3,0.2,1.21
+Simanjiro,Manyara,0.1,0.0,0.07
+Bukombe,Geita,0.3,0.0,0.21
+Handeni,Tanga,0.7,0.1,0.64
+Missenyi,Kagera,0.3,0.0,0.21
+Mbulu,Manyara,0.2,0.0,0.14
+Kilindi,Tanga,0.5,0.0,0.36
+Biharamulo,Kagera,0.0,0.0,0.0
+Muleba,Kagera,0.4,0.0,0.29
+Kyerwa,Kagera,0.1,0.0,0.07
+Ngara,Kagera,0.1,0.0,0.07
+Bukoba,Kagera,0.4,0.0,0.29
+Karagwe,Kagera,0.1,0.0,0.07
+Kishapu,Shinyanga,0.1,0.0,0.07
+Mkalama,Singida,0.2,0.0,0.14
+Shinyanga,Shinyanga,0.4,0.0,0.29
 Manyoni,Singida,0.0,0.0,0.0
-Kahama,Shinyanga,0.3,0.0,0.12
-Ikungi,Singida,0.0,0.0,0.0
-Iramba,Singida,0.2,0.0,0.08
-Singida,Singida,0.1,0.0,0.04
-Magharibi A,Mjini Magharibi,4.1,0.2,1.88
-Magharibi B,Mjini Magharibi,4.7,0.8,2.62
-Bunda,Mara,0.0,0.0,0.0
-Butiama,Mara,0.0,0.0,0.0
+Kahama,Shinyanga,0.3,0.0,0.21
+Ikungi,Singida,0.1,0.0,0.07
+Iramba,Singida,0.5,0.0,0.36
+Singida,Singida,0.1,0.0,0.07
+Magharibi A,Mjini Magharibi,5.6,0.6,4.86
+Magharibi B,Mjini Magharibi,5.0,0.5,4.29
+Bunda,Mara,0.1,0.0,0.07
+Butiama,Mara,0.1,0.0,0.07
 Mjini,Mjini Magharibi,0.0,0.0,0.0
 Serengeti,Mara,0.0,0.0,0.0
-Musoma,Mara,0.0,0.0,0.0
-Rorya,Mara,0.0,0.0,0.0
-Chemba,Dodoma,0.2,0.0,0.08
-Kilombero,Morogoro,2.2,0.1,1.0
-Busega,Simiyu,0.0,0.0,0.0
-Bahi,Dodoma,0.3,0.0,0.12
-Morogoro,Morogoro,1.1,0.0,0.46
-Dodoma,Dodoma,0.4,0.0,0.17
-Kilosa,Morogoro,0.8,0.1,0.42
-Tarime,Mara,0.0,0.0,0.0
-Meatu,Simiyu,0.0,0.0,0.0
-Chamwino,Dodoma,0.0,0.0,0.0
-Maswa,Simiyu,0.2,0.0,0.08
-Kongwa,Dodoma,0.3,0.0,0.12
-Gairo,Morogoro,0.8,0.2,0.5
-Bariadi,Simiyu,0.0,0.0,0.0
-Mpwapwa,Dodoma,0.3,0.0,0.12
-Mvomero,Morogoro,0.5,0.1,0.29
-Itilima,Simiyu,0.0,0.0,0.0
-Kondoa,Dodoma,0.4,0.0,0.17
-Malinyi,Morogoro,2.7,0.1,1.21
-Ulanga,Morogoro,1.6,0.2,0.83
-Nanyumbu,Mtwara,0.0,0.0,0.0
-Tandahimba,Mtwara,0.7,0.1,0.38
-Masasi,Mtwara,0.2,0.0,0.08
-Newala,Mtwara,0.5,0.0,0.21
-Mtwara,Mtwara,1.2,0.1,0.58
-Kigoma,Kigoma,0.3,0.0,0.12
-Kasulu,Kigoma,0.3,0.0,0.12
+Musoma,Mara,0.2,0.0,0.14
+Rorya,Mara,0.1,0.0,0.07
+Chemba,Dodoma,0.0,0.0,0.0
+Kilombero,Morogoro,1.0,0.1,0.86
+Busega,Simiyu,0.3,0.0,0.21
+Bahi,Dodoma,0.0,0.0,0.0
+Morogoro,Morogoro,0.8,0.0,0.57
+Dodoma,Dodoma,0.2,0.0,0.14
+Kilosa,Morogoro,0.5,0.0,0.36
+Tarime,Mara,0.2,0.0,0.14
+Meatu,Simiyu,0.2,0.0,0.14
+Chamwino,Dodoma,0.1,0.0,0.07
+Maswa,Simiyu,0.5,0.0,0.36
+Kongwa,Dodoma,0.0,0.0,0.0
+Gairo,Morogoro,0.2,0.0,0.14
+Bariadi,Simiyu,0.3,0.0,0.21
+Mpwapwa,Dodoma,0.1,0.0,0.07
+Mvomero,Morogoro,0.3,0.0,0.21
+Itilima,Simiyu,0.2,0.0,0.14
+Kondoa,Dodoma,0.0,0.0,0.0
+Malinyi,Morogoro,1.1,0.1,0.93
+Ulanga,Morogoro,0.7,0.2,0.79
+Nanyumbu,Mtwara,0.1,0.0,0.07
+Tandahimba,Mtwara,1.3,0.0,0.93
+Masasi,Mtwara,0.5,0.0,0.36
+Newala,Mtwara,1.2,0.0,0.86
+Mtwara,Mtwara,1.2,0.3,1.29
+Kigoma,Kigoma,0.2,0.1,0.29
+Kasulu,Kigoma,0.3,0.0,0.21
 Mbarali,Mbeya,0.0,0.0,0.0
-Kibondo,Kigoma,0.6,0.0,0.25
-Rungwe,Mbeya,2.7,0.2,1.29
-Kyela,Mbeya,2.8,0.2,1.33
-Mbeya,Mbeya,0.1,0.0,0.04
-Kakonko,Kigoma,0.2,0.0,0.08
-Chunya,Mbeya,0.1,0.0,0.04
-Buhigwe,Kigoma,0.4,0.0,0.17
-Uvinza,Kigoma,0.2,0.0,0.08
-Kusini,Kusini Unguja,3.1,0.0,1.29
-Kati,Kusini Unguja,3.1,0.1,1.38
-Kibaha,Pwani,4.1,0.3,1.96
-Ngorongoro,Arusha,0.0,0.0,0.0
-Kisarawe,Pwani,2.5,0.3,1.29
-Arusha,Arusha,3.6,0.5,1.92
-Longido,Arusha,0.3,0.0,0.12
-Bagamoyo,Pwani,2.6,0.2,1.25
-Karatu,Arusha,0.0,0.0,0.0
-Mafia,Pwani,2.1,0.0,0.88
-Mlele,Katavi,0.1,0.0,0.04
-Monduli,Arusha,0.4,0.0,0.17
-Kibiti,Pwani,4.0,0.6,2.17
-Tanganyika,Katavi,0.3,0.0,0.12
-Arumeru,Arusha,2.6,0.2,1.25
-Mkuranga,Pwani,5.1,0.9,2.88
-Mpanda,Katavi,0.2,0.0,0.08
-Rufiji,Pwani,1.4,0.0,0.58
-Nachingwea,Lindi,0.4,0.0,0.17
-Liwale,Lindi,0.4,0.0,0.17
-Ruangwa,Lindi,1.2,0.0,0.5
-Kilwa,Lindi,1.4,0.0,0.58
-Lindi,Lindi,1.6,0.0,0.67
-Kalambo,Rukwa,0.3,0.0,0.12
-Sumbawanga,Rukwa,0.4,0.0,0.17
+Kibondo,Kigoma,0.2,0.0,0.14
+Rungwe,Mbeya,2.6,0.6,2.71
+Kyela,Mbeya,5.5,1.1,5.5
+Mbeya,Mbeya,0.4,0.0,0.29
+Kakonko,Kigoma,0.1,0.0,0.07
+Chunya,Mbeya,0.0,0.0,0.0
+Buhigwe,Kigoma,0.4,0.1,0.43
+Uvinza,Kigoma,0.2,0.0,0.14
+Kusini,Kusini Unguja,4.9,0.7,4.5
+Kati,Kusini Unguja,4.9,0.7,4.5
+Kibaha,Pwani,0.7,0.0,0.5
+Ngorongoro,Arusha,0.1,0.0,0.07
+Kisarawe,Pwani,0.7,0.0,0.5
+Arusha,Arusha,0.8,0.0,0.57
+Longido,Arusha,0.3,0.0,0.21
+Bagamoyo,Pwani,0.3,0.0,0.21
+Karatu,Arusha,0.1,0.0,0.07
+Mafia,Pwani,7.7,1.1,7.07
+Mlele,Katavi,0.2,0.1,0.29
+Monduli,Arusha,0.3,0.0,0.21
+Kibiti,Pwani,1.2,0.0,0.86
+Tanganyika,Katavi,0.1,0.0,0.07
+Arumeru,Arusha,0.7,0.0,0.5
+Mkuranga,Pwani,1.9,0.0,1.36
+Mpanda,Katavi,0.2,0.0,0.14
+Rufiji,Pwani,0.2,0.0,0.14
+Nachingwea,Lindi,0.2,0.0,0.14
+Liwale,Lindi,0.0,0.0,0.0
+Ruangwa,Lindi,0.8,0.0,0.57
+Kilwa,Lindi,0.7,0.0,0.5
+Lindi,Lindi,0.6,0.2,0.71
+Kalambo,Rukwa,0.2,0.0,0.14
+Sumbawanga,Rukwa,0.1,0.0,0.07
 Iringa,Iringa,0.0,0.0,0.0
-Nkasi,Rukwa,0.1,0.0,0.04
-Mufindi,Iringa,0.9,0.1,0.46
-Kilolo,Iringa,1.3,0.1,0.62
+Nkasi,Rukwa,0.2,0.0,0.14
+Mufindi,Iringa,0.3,0.1,0.36
+Kilolo,Iringa,0.5,0.1,0.5

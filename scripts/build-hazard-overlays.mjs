@@ -41,6 +41,31 @@ const RULES = {
     districts: { Monduli: 7, Longido: 7, Ngorongoro: 7, Kiteto: 7, Simanjiro: 6, Hanang: 6, Mbulu: 6, Karatu: 6,
       Babati: 6, Same: 6, Mwanga: 5 },
   },
+  earthquake: {
+    basis: 'East African Rift seismicity — western branch highest (Tanganyika-Rukwa, PGA>0.32g); 2016 Kagera Mw5.9',
+    regions: { Rukwa: 9, Katavi: 8, Kigoma: 8, Mbeya: 8, Songwe: 8, Kagera: 7, Njombe: 6, Arusha: 6, Manyara: 6,
+      Kilimanjaro: 6, Singida: 5, Iringa: 5, Ruvuma: 4 },
+    districts: { Sumbawanga: 9, Nkasi: 9, Kalambo: 9, Mpanda: 8, Mlele: 8, Tanganyika: 8, Bukoba: 8, Muleba: 7,
+      Missenyi: 7, Mbozi: 8, Ileje: 8, Momba: 8, Kyela: 8, Rungwe: 7, Busekelo: 7, Ngorongoro: 7, Longido: 6, Monduli: 6 },
+  },
+  wildfire: {
+    basis: 'Miombo woodland fire regime — western/southern dry-season burning (MODIS/VIIRS refine pending)',
+    regions: { Tabora: 6, Katavi: 6, Rukwa: 6, Ruvuma: 6, Lindi: 5, Morogoro: 5, Iringa: 5, Mbeya: 5, Singida: 5,
+      Songwe: 5, Kigoma: 5, Njombe: 5, Manyara: 4, Dodoma: 4 },
+    districts: { Sikonge: 7, Urambo: 7, Kaliua: 7, Uyui: 6, Tunduru: 7, Namtumbo: 7, Liwale: 7, Nachingwea: 6, Chunya: 6 },
+  },
+  vehicleAccidents: {  // human/technological hazard — kept moderate (not a primary disaster driver)
+    basis: 'Major highway corridors (TANZAM/A104, A7 Dar-Mwanza) + urban traffic (police road-accident data)',
+    regions: { 'Dar es Salaam': 5, Morogoro: 4, Pwani: 4, Dodoma: 3, Singida: 3, Mbeya: 4, Iringa: 3, Arusha: 4,
+      Kilimanjaro: 4, Tanga: 3, Mwanza: 4, Manyara: 3 },
+    districts: { Ilala: 5, Kinondoni: 5, Temeke: 5, Ubungo: 5, Kigamboni: 4, Chalinze: 6, Kibaha: 5, Bagamoyo: 4,
+      Morogoro: 5, Kilosa: 4, Mbeya: 5, Arusha: 5, Moshi: 4, Dodoma: 4, Nyamagana: 4, Babati: 3 },
+  },
+  hazardousMaterial: {  // human/technological hazard — localized, kept moderate
+    basis: 'Industrial (Dar), gold/mercury mining (Geita/Kahama/Mara), gas & petroleum (Mtwara/Lindi, Dar port/pipeline)',
+    districts: { Ilala: 4, Kinondoni: 4, Temeke: 6, Kigamboni: 5, Ubungo: 4, Geita: 5, Chato: 4, Mbogwe: 4, Kahama: 5,
+      Msalala: 4, Tarime: 4, Mtwara: 5, Kilwa: 4, Lindi: 4, Nyamagana: 4, Ilemela: 4, Chunya: 5, Mbeya: 4, Mpanda: 4 },
+  },
 };
 
 const rows = [['dist_name', 'reg_name', 'indicator', 'value', 'basis']];
