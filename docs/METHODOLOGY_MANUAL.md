@@ -118,18 +118,25 @@ a sparsely-populated but flood-prone district keeps its full documented hazard.
 > 2.1 — hiding known flood areas). That bug was caught by a before/after audit and fixed:
 > **exposure now amplifies only; a documented flood hazard is never lowered.**
 
-### 3.4 Storms & cyclone, fires, earthquake, landslide, coastal — status
-- **Storms & tropical cyclone (NEW — documented overlay):** graded coastal exposure from the
-  south (Mtwara, Lindi, Kilwa, Mafia — **Lindi cyclone 1952**, **Cyclone Hidaya 2024**) through
-  the central coast / Dar / Zanzibar (1872 Zanzibar cyclone) to the north. Source-tagged in
-  `storm_cyclone_exposure.csv`; raised only (never lowers). The INFORM baseline had ~0 here —
-  outdated after Hidaya (first cyclone to hit Tanzania: Mafia landfall, 120 km/h, 18,862 affected).
-- **Landslide & coastal hazards** keep their **documented** values (Hanang, Rungwe, Usambara;
-  coastal strip) — real but qualitative, editable.
-- **Wildfire, earthquake, lightning, volcano, environmental degradation** are still the **INFORM
-  SADC 2024 baseline** (not yet recomputed; not fabricated). Next per-hazard deep-dives: wildfire
-  from MODIS/VIIRS burned-area, earthquake from USGS seismicity (see §8). Each follows the same
-  pattern as storms: research → a source-tagged overlay CSV → raise-only via `apply-climate-hazards`.
+### 3.4 Other hazards — deepened one by one (all raise-only)
+Each is floored at the documented baseline (`hazard_baseline.csv`) — computed/overlay evidence
+can raise a hazard, never lower it.
+- **Storms & tropical cyclone** — coastal exposure overlay graded south→north: **Cyclone Hidaya
+  2024** (Mafia landfall, 18,862 affected), **Lindi cyclone 1952**, Zanzibar 1872. The INFORM
+  baseline had ~0 here — outdated after Hidaya (first cyclone to hit Tanzania).
+- **Heatwave (new — computed)** — ERA5 temperature climatology (hot coast/lowlands → cool
+  highlands), capped at 6.5 (Tanzania heat is moderate, not Sahel-extreme). `heatwave_era5.csv`.
+- **Lightning (new — overlay)** — Lake Victoria basin, one of Earth's top flash-density hotspots
+  (NASA LIS/OTD; ~3,000–5,000 thunderstorm deaths/yr in the basin); shore districts 8–9.
+- **Volcano (new — overlay)** — Ol Doinyo Lengai (active, Lake Natron), Rungwe Volcanic Province,
+  Kilimanjaro & Meru (dormant).
+- **Zoonoses / plants & pests (new — overlay)** — 2020 desert-locust invasion (north), fall
+  armyworm (maize belts), livestock disease (pastoral), tsetse (western miombo).
+- **Earthquake, landslide, coastal hazards, wildfire, environmental degradation** keep their
+  **documented / INFORM SADC** values (earthquake already follows the rift; the others are
+  differentiated). Next: wildfire from MODIS/VIIRS, earthquake refine from USGS — same overlay pattern.
+- **Vulnerability & coping** indicators are the next dimensions to deepen — so the Risk total will
+  keep evolving as the model becomes more complete. That is expected and documented, not drift.
 
 ---
 
@@ -152,21 +159,23 @@ a sparsely-populated but flood-prone district keeps its full documented hazard.
 
 ### 5.1 Indicator → Category: MEAN
 `category = average of its indicators` (ignoring blanks). E.g. Kondoa Natural-hazards =
-mean(drought 8.6, flood 3.8, earthquake 10, landslide 4.7, wildfire 4.75, …) = **4.0**.
+mean(drought 8.6, flood 3.8, earthquake 10, landslide 4.7, wildfire 4.75, lightning 3,
+zoonoses 4, heatwave 3.3, …) = **3.9**. *(Adding real low hazards like lightning/heat can
+nudge the mean — INFORM averages all hazard types; it never falls below the documented baseline.)*
 
 ### 5.2 Category → Dimension: INFORM scaled geometric mean (Excel Box 6)
 > **dimension = (10 − GEOMEAN( (10−c₁)/10·9 + 1 , (10−c₂)/10·9 + 1 , … )) / 9 × 10**
 
 A low category **drags the dimension down** (geometric), unlike a plain average.
 
-**Worked example — Kondoa Hazard:** Natural 4.0, Human 0.7.
-scaled: (10−4.0)/10·9+1 = 6.4 ; (10−0.7)/10·9+1 = 9.37.
-GEOMEAN = √(6.4 × 9.37) = 7.74. dimension = (10 − 7.74)/9 × 10 = **2.5**. ✔ matches stored.
+**Worked example — Kondoa Hazard:** Natural 3.9, Human 0.7.
+scaled: (10−3.9)/10·9+1 = 6.49 ; (10−0.7)/10·9+1 = 9.37.
+GEOMEAN = √(6.49 × 9.37) = 7.80. dimension = (10 − 7.80)/9 × 10 = **2.4**. ✔ matches stored.
 
 ### 5.3 Dimension → Risk: cube root
 > **Risk = ∛(Hazard × Vulnerability × LackOfCoping)**
 
-**Kondoa:** ∛(2.5 × 5.5 × 4.6) = ∛63.3 = **4.0** (Medium). ✔
+**Kondoa:** ∛(2.4 × 5.5 × 4.6) = ∛60.7 = **3.9** (Medium). ✔
 
 Then `Risk` is classed with the **Tanzania thresholds** (Very-Low < 2.5 < Low < 3.4 < Medium
 < 4.3 < High < 5.9 < Very-High).
@@ -233,6 +242,12 @@ Storage today is the browser (`localStorage`); the Supabase schema is ready for 
    computed evidence can **raise** a hazard but never **lower** it. This errs toward flagging
    risk (safer for planning) at the cost of keeping a few possibly-overstated documented values
    (see #4). A before/after audit confirms **0 districts** had flood or risk-class lowered.
+9. **Risk evolves as the model is completed — by design.** Populating previously-blank hazards
+   (storms, heatwave, lightning, volcano, zoonoses) raised High-risk districts from **18 → 38**,
+   all raise-only (a value-audit confirms **0 districts below their documented baseline**). The
+   coast (cyclone + heat) and the Lake-Victoria zone (lightning + flood) are the main risers.
+   Deepening **vulnerability & coping** next will shift it again — toward a more complete picture,
+   not drift. Every change is traceable to a sourced indicator.
 
 *Everything in this list is editable in Data Entry and improvable in code — that is the point
 of writing it down.*

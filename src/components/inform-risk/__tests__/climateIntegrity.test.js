@@ -65,16 +65,24 @@ describe('Hazard × Exposure flood + manual worked examples', () => {
     expect(fails).toEqual([]);
   });
 
-  it('reproduces the manual + preserves documented flood (Pangani 9.8, Rufiji 9.0)', () => {
-    expect(byName('Ilala').hazardExposure.natural.flood).toBeCloseTo(8.3, 1);    // H×E flood (stable)
-    expect(byName('Longido').hazardExposure.natural.drought).toBeCloseTo(9.7, 1);
-    expect(byName('Kondoa').risk).toBeCloseTo(4.0, 1);                            // inland worked example (stable)
-    // SAFETY: documented flood-prone districts must never be hidden by exposure weighting
+  it('stable computed/documented indicators (not the moving risk total)', () => {
+    expect(byName('Ilala').hazardExposure.natural.flood).toBeCloseTo(8.3, 1);     // H×E flood
+    expect(byName('Longido').hazardExposure.natural.drought).toBeCloseTo(9.7, 1); // computed drought
+    expect(byName('Kondoa').hazardExposure.natural.drought).toBeCloseTo(8.6, 1);
+    expect(byName('Kondoa').hazardExposure.natural.flood).toBeCloseTo(3.8, 1);    // documented preserved
+    // SAFETY: documented flood-prone districts are never hidden by exposure weighting
     expect(byName('Pangani').hazardExposure.natural.flood).toBeCloseTo(9.8, 1);
     expect(byName('Rufiji').hazardExposure.natural.flood).toBeGreaterThanOrEqual(8.5);
-    // storms/cyclone overlay reaches the coast (Hidaya 2024, Lindi 1952)
-    expect(byName('Mafia').hazardExposure.natural.stormsCyclone).toBeGreaterThanOrEqual(8);
-    expect(byName('Lindi').hazardExposure.natural.stormsCyclone).toBeGreaterThanOrEqual(8);
+  });
+
+  it('newly-populated hazard layers reach their real geographies', () => {
+    const filled = (k) => D.filter((u) => typeof u.hazardExposure?.natural?.[k] === 'number' && u.hazardExposure.natural[k] > 0).length;
+    expect(filled('heatwave')).toBeGreaterThan(120);                              // computed (ERA5)
+    expect(filled('lightning')).toBeGreaterThan(100);                            // Lake Victoria basin
+    expect(byName('Mafia').hazardExposure.natural.stormsCyclone).toBeGreaterThanOrEqual(8);  // Hidaya 2024
+    expect(byName('Lindi').hazardExposure.natural.stormsCyclone).toBeGreaterThanOrEqual(8);  // Lindi 1952
+    expect(byName('Ngorongoro').hazardExposure.natural.volcano).toBeGreaterThanOrEqual(7);   // Ol Doinyo Lengai
+    expect(byName('Nyamagana').hazardExposure.natural.lightning).toBeGreaterThanOrEqual(8);  // Mwanza, Lake shore
   });
 
   it('computed districts carry real NBS 2022 exposure, national stays official', () => {

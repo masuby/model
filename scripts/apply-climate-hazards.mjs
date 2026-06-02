@@ -46,12 +46,16 @@ const storms = Object.fromEntries(readCsv('data-source/storm_cyclone_exposure.cs
 // STABLE documented baseline (pre-climate) — the floor for flood/drought/storms so apply is
 // idempotent (reruns can't ratchet values up). Regenerate from git if the baseline changes.
 const baseline = Object.fromEntries(readCsv('data-source/hazard_baseline.csv').map((x) => [x.adm2_code, x]));
+const heatwave = Object.fromEntries(readCsv('data-source/heatwave_era5.csv').map((x) => [key(x.dist_name, x.reg_name), +x.heatwave_index]));
+const overlays = {};
+readCsv('data-source/hazard_overlays.csv').forEach((x) => { const k = key(x.dist_name, x.reg_name); (overlays[k] = overlays[k] || []).push({ ind: x.indicator, val: +x.value }); });
+const NAT_KEYS = new Set(['drought', 'flood', 'earthquake', 'landslide', 'wildfire', 'stormsCyclone', 'coastalHazards', 'heatwave', 'lightning', 'environmentalDegradation', 'volcano', 'zoonoses']);
 
 let n = 0; const unmatched = [];
 for (const u of D) {
   const k = key(u.admin.adm2Name, u.admin.adm1Name);
   const ex = expo[k], dr = drought[k], hv = heavy[k], ev = (events[k] || []).sort(), sc = storms[k];
-  if (!ex && !dr && !hv && !ev.length && !isN(sc)) { unmatched.push(u.admin.adm2Name); continue; }
+  if (!ex && !dr && !hv && !ev.length && !isN(sc) && !isN(heatwave[k]) && !overlays[k]) { unmatched.push(u.admin.adm2Name); continue; }
   n++;
   const nat = u.hazardExposure.natural;
   const bl = baseline[u.admin.adm2Code] || {};             // stable documented floor (idempotent)
@@ -79,6 +83,17 @@ for (const u of D) {
   // Storms & cyclone — documented coastal exposure overlay (Hidaya 2024, Lindi 1952, Zanzibar 1872).
   // Raise only (precautionary), never lower the existing value.
   if (isN(sc)) nat.stormsCyclone = Math.max(r1(sc), baseStorms);
+
+  // Heatwave — computed from ERA5 temperature, floored at the documented baseline.
+  const hw = heatwave[k];
+  if (isN(hw)) nat.heatwave = Math.max(r1(hw), isN(+bl.heatwave) ? +bl.heatwave : 0);
+  // Documented hazard overlays (lightning, volcano, zoonoses, …) — raise only, floored at baseline.
+  for (const o of (overlays[k] || [])) {
+    if (!isN(o.val)) continue;
+    const floor = NAT_KEYS.has(o.ind) ? (isN(+bl[o.ind]) ? +bl[o.ind] : 0) : (isN(+bl['h_' + o.ind]) ? +bl['h_' + o.ind] : 0);
+    const target = NAT_KEYS.has(o.ind) ? nat : u.hazardExposure.human;
+    if (target) target[o.ind] = Math.max(r1(o.val), floor);
+  }
 
   // Recompute the AUTHENTIC way
   nat.aggregate = r1(mean(catVals(nat)));

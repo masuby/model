@@ -1,0 +1,151 @@
+dist_name,reg_name,mean_temp_c,hot3_c,heatwave_index
+Chake Chake,Kusini Pemba,26.1,27.3,6.03
+Mkoani,Kusini Pemba,26.2,27.4,6.09
+Kaskazini B,Kaskazini Unguja,26.3,27.6,6.18
+Kaskazini A,Kaskazini Unguja,26.1,27.2,6.0
+Rombo,Kilimanjaro,16.1,17.4,0.55
+Momba,Songwe,22.7,25.1,4.5
+Songwe,Songwe,21.8,24.2,4.02
+Same,Kilimanjaro,22.0,23.7,3.93
+Njombe,Njombe,17.1,19.1,1.3
+Mbozi,Songwe,20.3,22.4,3.12
+Mwanga,Kilimanjaro,23.2,25.2,4.67
+Ludewa,Njombe,19.5,21.7,2.66
+Ileje,Songwe,19.0,21.2,2.41
+Hai,Kilimanjaro,17.5,19.1,1.41
+Makete,Njombe,15.0,16.5,0.0
+Moshi,Kilimanjaro,24.1,26.2,5.19
+Misungwi,Mwanza,23.3,24.0,4.35
+Wanging'ombe,Njombe,19.2,20.7,2.32
+Siha,Kilimanjaro,19.1,20.4,2.22
+Kigamboni,Dar es Salaam,26.4,27.9,6.29
+Nyamagana,Mwanza,23.4,23.8,4.32
+Temeke,Dar es Salaam,26.1,27.8,6.19
+Kwimba,Mwanza,23.3,24.2,4.43
+Sengerema,Mwanza,23.0,23.4,4.11
+Ubungo,Dar es Salaam,25.9,27.5,6.03
+Ilemela,Mwanza,23.4,23.8,4.32
+Ilala,Dar es Salaam,26.1,27.8,6.19
+Ukerewe,Mwanza,23.6,24.1,4.46
+Kinondoni,Dar es Salaam,26.0,27.5,6.08
+Namtumbo,Ruvuma,22.1,24.6,4.19
+Nzega,Tabora,23.4,25.0,4.67
+Magu,Mwanza,23.5,23.9,4.37
+Uyui,Tabora,23.3,25.0,4.64
+Songea,Ruvuma,21.1,23.5,3.61
+Igunga,Tabora,24.6,26.0,5.28
+Tunduru,Ruvuma,23.5,25.8,4.92
+Sikonge,Tabora,23.7,25.8,4.97
+Nyasa,Ruvuma,20.3,22.8,3.22
+Urambo,Tabora,23.6,25.5,4.84
+Mbinga,Ruvuma,20.8,23.3,3.46
+Kaliua,Tabora,23.5,25.3,4.76
+Tabora,Tabora,23.7,25.5,4.86
+Micheweni,Kaskazini Pemba,26.1,27.2,6.03
+Mkinga,Tanga,25.9,27.6,6.06
+Wete,Kaskazini Pemba,26.1,27.2,6.03
+Kiteto,Manyara,21.0,22.5,3.34
+Geita,Geita,22.1,22.8,3.71
+Lushoto,Tanga,23.3,24.9,4.61
+Korogwe,Tanga,22.6,25.1,4.47
+Mbogwe,Geita,23.0,24.1,4.31
+Muheza,Tanga,25.0,27.3,5.74
+Hanang,Manyara,19.2,20.5,2.28
+Nyang'hwale,Geita,22.8,23.6,4.12
+Tanga,Tanga,26.0,27.9,6.17
+Babati,Manyara,21.2,23.1,3.52
+Chato,Geita,23.3,23.7,4.27
+Pangani,Tanga,25.7,27.8,6.05
+Simanjiro,Manyara,20.7,22.7,3.29
+Bukombe,Geita,22.8,24.2,4.3
+Handeni,Tanga,23.5,25.4,4.79
+Missenyi,Kagera,21.0,21.4,3.03
+Mbulu,Manyara,19.1,20.2,2.18
+Kilindi,Tanga,20.6,22.5,3.19
+Biharamulo,Kagera,21.7,22.3,3.46
+Muleba,Kagera,21.0,21.4,3.0
+Kyerwa,Kagera,21.1,21.6,3.09
+Ngara,Kagera,21.0,21.9,3.12
+Bukoba,Kagera,21.1,21.5,3.06
+Karagwe,Kagera,21.0,21.4,3.01
+Kishapu,Shinyanga,24.6,26.0,5.29
+Mkalama,Singida,22.0,23.3,3.82
+Shinyanga,Shinyanga,24.0,25.3,4.92
+Manyoni,Singida,22.2,24.0,4.07
+Kahama,Shinyanga,23.3,24.6,4.52
+Ikungi,Singida,22.1,23.5,3.91
+Iramba,Singida,23.0,24.6,4.46
+Singida,Singida,20.2,21.6,2.84
+Magharibi A,Mjini Magharibi,26.3,27.6,6.18
+Magharibi B,Mjini Magharibi,26.5,28.0,6.36
+Bunda,Mara,22.8,23.5,4.09
+Butiama,Mara,22.0,22.6,3.62
+Mjini,Mjini Magharibi,26.5,28.0,6.36
+Serengeti,Mara,22.3,23.1,3.83
+Musoma,Mara,23.6,24.0,4.44
+Rorya,Mara,22.9,23.3,4.08
+Chemba,Dodoma,22.3,23.7,4.0
+Kilombero,Morogoro,24.7,27.1,5.6
+Busega,Simiyu,23.2,23.9,4.31
+Bahi,Dodoma,24.3,25.9,5.13
+Morogoro,Morogoro,22.9,24.8,4.46
+Dodoma,Dodoma,22.8,24.3,4.32
+Kilosa,Morogoro,23.8,25.8,5.0
+Tarime,Mara,22.4,23.1,3.87
+Meatu,Simiyu,22.9,24.2,4.32
+Chamwino,Dodoma,23.3,24.7,4.55
+Maswa,Simiyu,23.0,24.1,4.31
+Kongwa,Dodoma,21.9,23.3,3.79
+Gairo,Morogoro,20.0,21.8,2.83
+Bariadi,Simiyu,22.8,23.7,4.15
+Mpwapwa,Dodoma,21.8,23.6,3.84
+Mvomero,Morogoro,24.8,26.7,5.5
+Itilima,Simiyu,21.8,22.7,3.59
+Kondoa,Dodoma,21.0,22.5,3.33
+Malinyi,Morogoro,23.1,25.2,4.63
+Ulanga,Morogoro,24.9,26.8,5.57
+Nanyumbu,Mtwara,25.9,27.8,6.11
+Tandahimba,Mtwara,23.9,25.3,4.87
+Masasi,Mtwara,24.7,26.3,5.37
+Newala,Mtwara,23.8,25.3,4.85
+Mtwara,Mtwara,25.1,26.4,5.51
+Kigoma,Kigoma,23.1,24.0,4.31
+Kasulu,Kigoma,22.5,24.2,4.19
+Mbarali,Mbeya,22.9,24.9,4.49
+Kibondo,Kigoma,22.5,24.0,4.16
+Rungwe,Mbeya,18.4,20.4,2.02
+Kyela,Mbeya,21.5,23.9,3.85
+Mbeya,Mbeya,17.8,19.6,1.63
+Kakonko,Kigoma,22.0,23.1,3.77
+Chunya,Mbeya,20.8,22.7,3.31
+Buhigwe,Kigoma,21.2,22.5,3.39
+Uvinza,Kigoma,21.4,22.8,3.5
+Kusini,Kusini Unguja,26.5,27.9,6.32
+Kati,Kusini Unguja,26.5,28.0,6.36
+Kibaha,Pwani,26.0,27.7,6.11
+Ngorongoro,Arusha,20.1,21.1,2.68
+Kisarawe,Pwani,25.3,27.0,5.72
+Arusha,Arusha,21.2,23.6,3.67
+Longido,Arusha,21.4,22.8,3.49
+Bagamoyo,Pwani,25.5,27.2,5.85
+Karatu,Arusha,21.6,23.0,3.62
+Mafia,Pwani,26.3,27.6,6.17
+Mlele,Katavi,22.8,25.0,4.5
+Monduli,Arusha,21.8,23.5,3.83
+Kibiti,Pwani,25.9,27.5,6.02
+Tanganyika,Katavi,20.4,22.0,3.03
+Arumeru,Arusha,18.4,20.2,1.97
+Mkuranga,Pwani,26.2,28.0,6.27
+Mpanda,Katavi,23.5,25.5,4.83
+Rufiji,Pwani,26.7,28.4,6.5
+Nachingwea,Lindi,25.2,26.8,5.65
+Liwale,Lindi,24.7,26.2,5.33
+Ruangwa,Lindi,24.1,25.4,4.97
+Kilwa,Lindi,25.6,26.8,5.76
+Lindi,Lindi,24.8,26.0,5.34
+Kalambo,Rukwa,19.3,21.4,2.55
+Sumbawanga,Rukwa,18.4,20.1,1.92
+Iringa,Iringa,24.7,26.5,5.45
+Nkasi,Rukwa,20.6,22.3,3.14
+Mufindi,Iringa,16.7,18.5,1.02
+Kilolo,Iringa,18.6,20.7,2.16
