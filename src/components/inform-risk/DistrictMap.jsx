@@ -7,6 +7,7 @@ import { MapContainer, GeoJSON, TileLayer, useMap } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
 import districts from '../../data/tanzania-districts.json';
 import regions from '../../data/tanzania-regions.json';
+import waterbodies from '../../data/tanzania-waterbodies.json';
 import { DISTRICT_BY_KEY, REGION_BY_KEY, NATIONAL_UNIT, districtKey, normRegion, classifyRisk, round1 } from './riskModel';
 import { RISK_CLASSES } from './riskConstants';
 
@@ -111,6 +112,8 @@ export default function DistrictMap({ metric, selected, onSelect, filterClass, l
         {hasBase && <TileLayer key={baseLayer} url={BASEMAPS[baseLayer].url} attribution={BASEMAPS[baseLayer].attribution} />}
         {focusBounds && <FitBounds bounds={focusBounds} />}
         <GeoJSON key={key} ref={geoRef} data={geojson} style={styleFor} onEachFeature={onEach} />
+        {/* Real water bodies (2022 PHC geodatabase) — lakes/ocean for geographic context */}
+        <GeoJSON data={waterbodies} interactive={false} style={() => ({ fillColor: '#a7cdf0', fillOpacity: 0.55, color: '#5b9bd5', weight: 0.5 })} />
       </MapContainer>
       <div className="rx-legend ui-card">
         <span className="rx-legend-title">{metric.label}{isIndicator ? ' (relative)' : ''}</span>
