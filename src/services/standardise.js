@@ -94,11 +94,12 @@ const kind = (label) => {
  * @param denomById { [indicatorId]: denominator } for the indicators with a denominator
  * @returns { score, component, category, dimension:{H,V,C}, risk }
  */
-export function computeFromRaw(rawById, denomById = {}) {
-  // (5) standardise every used indicator that has a raw value
+export function computeFromRaw(rawById, { specs = SPEC, denomById = {} } = {}) {
+  // (5) standardise every used indicator that has a raw value. The indicator SET is the spec - the
+  //     engine never hardcodes it, so adding (a new spec row, Use=Yes) or deleting (Use=No) just works.
   const score = {};
-  for (const id of Object.keys(SPEC)) {
-    const s = SPEC[id];
+  for (const id of Object.keys(specs)) {
+    const s = specs[id];
     if (s.use !== 'Yes' || !(id in rawById)) continue;
     const v = standardise(rawById[id], s, denomById[id]);
     if (v != null) score[id] = v;
@@ -106,7 +107,7 @@ export function computeFromRaw(rawById, denomById = {}) {
   // (6) component = AVERAGE of its standardised indicators
   const compVals = {}, compMeta = {};
   for (const id of Object.keys(score)) {
-    const s = SPEC[id];
+    const s = specs[id];
     (compVals[s.component] = compVals[s.component] || []).push(score[id]);
     compMeta[s.component] = { category: s.category, dimension: s.dimension };
   }
