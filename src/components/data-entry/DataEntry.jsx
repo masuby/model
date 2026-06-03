@@ -14,6 +14,7 @@ import React, { useEffect, useMemo, useState } from 'react';
 import { COUNCIL_UNITS, DIMENSION_TREE, DIM_KEYS, classifyRisk, round1 } from '../inform-risk/riskModel';
 import { AUTHORITIES } from '../inform-risk/indicatorSources';
 import { saveDirect, submit, getPending, approve, reject, resetAll, getOverrides } from '../inform-risk/overrideStore';
+import RawDataEntry from './RawDataEntry';
 import './DataEntry.css';
 
 // Data Entry speaks the real NBS-2022 structure: 31 regions → 195 councils. Each council's data
@@ -37,6 +38,7 @@ function recomputeDim(dim, ind) {
 
 export default function DataEntry() {
   const [role, setRole] = useState('pmo');
+  const [mode, setMode] = useState('scores');
   const [region, setRegion] = useState(REGIONS[0]);
   const councils = useMemo(() => COUNCIL_UNITS.filter((c) => c.admin.adm1Name === region), [region]);
   const [code, setCode] = useState(councils[0]?.admin.adm2Code);
@@ -140,6 +142,12 @@ export default function DataEntry() {
         </div>
       </header>
 
+      <div className="de-mode">
+        <button className={`ui-chip ${mode === 'scores' ? 'is-active' : ''}`} onClick={() => setMode('scores')}>Enter scores (0-10)</button>
+        <button className={`ui-chip ${mode === 'actual' ? 'is-active' : ''}`} onClick={() => setMode('actual')}>Enter actual values → standardised</button>
+      </div>
+
+      {mode === 'actual' ? <RawDataEntry /> : (<>
       {needsApply && (
         <div className="de-apply ui-card ui-card-pad">
           <span>Edits saved. <strong>Apply</strong> to push them across the system (map, charts, tables).</span>
@@ -250,6 +258,7 @@ export default function DataEntry() {
       </div>
 
       <p className="de-foot ui-muted">Edits flow into the map, charts and tables. Aggregation matches the INFORM Excel; see the methodology manual for the standardization and formulas. Cross-device persistence connects to the Supabase backend.</p>
+      </>)}
     </div>
   );
 }
