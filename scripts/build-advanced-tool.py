@@ -19,7 +19,8 @@ standardiser shows 0-10 (the proven INFORM pipeline). The component then aggrega
 only TMA rainfall is available for landslide and GST susceptibility is blank, the component is simply the
 TMA evidence; it does not become "the case" for everyone, and a missing source never drags the number down.
 
-Output: public/INFORM_TZ_Advanced_Tool.xlsx  (a separate download, NOT shared with the normal tool).
+Output: inform_sheets/INFORM_TZ_Advanced_Tool.xlsx  (a LOCAL file in the INFORM data folder - NOT served
+online; a separate workbook from the normal tool, kept local, never downloadable from the public website).
 """
 import csv, os
 import openpyxl
@@ -164,7 +165,7 @@ entry.protection = SheetProtection(sheet=True, selectLockedCells=False, selectUn
 sc.protection = SheetProtection(sheet=True, selectLockedCells=False, selectUnlockedCells=False)
 comp_sheet.protection = SheetProtection(sheet=True, selectLockedCells=False, selectUnlockedCells=False)
 
-out = os.path.join(ROOT, 'public/INFORM_TZ_Advanced_Tool.xlsx')
+out = os.path.join(ROOT, 'inform_sheets/INFORM_TZ_Advanced_Tool.xlsx')
 wb.save(out)
 from collections import Counter
 print('wrote', out)

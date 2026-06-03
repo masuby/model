@@ -11,7 +11,8 @@ ACTUAL VALUE column is unlocked; everything else is protected so the standardise
 The ADVANCED version (v2) is the same tool with extra sector sub-indicator rows (SPEI, soil moisture,
 water levels, biomass) in a research tab - built later, on top of this.
 
-Output: public/INFORM_TZ_Collection_Tool.xlsx  (downloadable from the site to send to sectors).
+Output: inform_sheets/INFORM_TZ_Collection_Tool.xlsx  (a LOCAL file in the INFORM data folder - NOT served
+online; you send it to sectors directly, it is not downloadable from the public website).
 """
 import json, os, csv
 import openpyxl
@@ -172,7 +173,7 @@ sc.protection = SheetProtection(sheet=True, selectLockedCells=False, selectUnloc
 # public/INFORM_TZ_Advanced_Tool.xlsx, built by scripts/build-advanced-tool.py. It is NOT a hidden tab
 # here: this shared NORMAL file stays purely the regional INFORM. (data-source/inform_advanced_spec.csv.)
 
-out = os.path.join(ROOT, 'public/INFORM_TZ_Collection_Tool.xlsx')
+out = os.path.join(ROOT, 'inform_sheets/INFORM_TZ_Collection_Tool.xlsx')
 wb.save(out)
 print('council rows:', len(councils))
 print('wrote', out)
