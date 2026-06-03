@@ -26,8 +26,11 @@ aridity, interannual variability, SPEI drought depth, and growing-season failure
 **initial vs advanced** comparison, the **impact**, and the **gap** the advancement closes. We show the
 initial drought layer was spatially incoherent (the central semi-arid zone under-rated at ~4/10, a coastal
 city over-rated at 10/10), whereas the advanced layer tracks observed rainfall and the food-security
-geography. The flood, heatwave and exposure advancements are summarised; engine-level refinements (IQR
-capping of recomputed indicators, custom vs data-range references) are deferred to future work by design.
+geography. The flood, heatwave and exposure advancements are summarised. Finally we open a **living, four-tier v2
+issue register** (Section 8) - engine-fidelity, hazard-evidence, exposure/vulnerability resolution, and
+validation - and the three cross-cutting insights (stable references, hazard-specific exposure, outcome
+validation) that anchor it (Section 9). Every item is a proposal for a future, separately-validated INFORM
+Calc Engine v2; none changes the v1 engine running today.
 
 # 1. Introduction
 
@@ -177,17 +180,97 @@ correct (pastoral Longido/Monduli), the advancement merely confirms and slightly
 initial layer was wrong-high (the Dar artifact), raise-only deliberately does **not** advance it down - that
 case is handled separately as a documented correction.
 
-# 8. Limitations and future work (engine stays as INFORM)
+# 8. The v2 roadmap - a structured issue register
 
-- **Engine refinements deferred:** apply the workbook's **Tukey IQR capping** to our recomputed series, and
-  decide per indicator between **Tanzania data-range** and **INFORM custom (fixed global/SADC) references**.
-  These change absolute 0-10 values and so are reserved for a future, separately-validated revision.
-- **Drought exposure:** drought is currently a pure hazard; pairing it with **agricultural** exposure
-  (cropland/livestock, not urban population) is future work.
-- **Weights:** the 0.30/0.20/0.15/0.35 blend is an explicit choice; a sensitivity analysis is planned.
-- **Wildfire, lightning, storms** remain documented overlays pending physical computation (MODIS/VIIRS,
-  flash-density, cyclone tracks); the USGS catalogue was used only to **cross-check** (not replace) the
-  earthquake overlay.
+The advancements above open a **living register** of issues to resolve in INFORM Calc Engine v2. Each is
+recorded with the same discipline: what the workbook (or INFORM) does, what v1 does today, the proposed v2
+method, and the expected impact. The register runs in four tiers, from "make the standardisation literally
+match the workbook" to "advance the science of the hazard layers" to "prove the index predicts reality".
+Nothing here changes the v1 engine; each item is implemented only after separate validation.
+
+## Tier 1 - Engine fidelity (close the last standardisation gap with the workbook)
+
+v1 reproduces the workbook's **aggregation** exactly - mean, scaled geomean, cube root, verified 0/195. The
+remaining gap is in the **standardisation** of our *recomputed* indicators (the companion
+`INFORM_CALCULATION_ENGINE.docx` flags A-G). v2 closes it:
+
+| # | Issue | Workbook | v1 today | v2 method | Impact |
+|---|---|---|---|---|---|
+| B | **Outlier capping** | Tukey Q1-1.5·IQR / Q3+1.5·IQR before min-max, a **per-indicator toggle** | no cap on recomputed series | replicate the workbook's exact outlier-detection set; cap to the fence | stops one extreme unit stretching a Tanzania-relative min-max |
+| D/I | **Reference range and temporal stability** | Data Range **or Custom fixed** reference | Data Range over Tanzania | adopt the per-indicator Custom references; use **fixed** references for anything tracked over time | a unit's score stops drifting when *other* units update - the key to trend monitoring |
+| A | **Denominators** | explicit per-capita / per-area denominator | rates built directly | verify each denominator matches the workbook | small, indicator-specific |
+| C | **Transform set** | per-indicator Log / Exp / None | Log for density only | match Log/Exp/None indicator-by-indicator | corrects skew handling per layer |
+| F | **Indicator use-set** | `useIndicator = Yes/No` filter | null-exclusion | reconcile the exact included-indicator list per dimension | which leaves count in a category |
+| G | **Class breakpoints** | per-dimension threshold table | global risk bands | confirm the exact per-dimension breakpoints | class/colour only, not the score |
+
+## Tier 2 - Hazard evidence (apply the drought template to every documented overlay)
+
+Several hazards are still **documented overlays** (expert-placed, not computed). v2 advances each the way
+drought was advanced - computed from an authoritative observational product, standardised by the unchanged
+engine, applied **raise-only**:
+
+| Hazard | v1 overlay | v2 evidence | Standard metric | Source |
+|---|---|---|---|---|
+| **Earthquake** | rift-proximity | probabilistic seismic hazard | PGA at 475-yr return period | USGS / GEM / GSHAP [13] |
+| **Flood** | event counts × exposure | return-period inundation | 1-in-100-yr flood extent/depth | JRC GloFAS / global flood maps [14] |
+| **Wildfire** | miombo dry-season | active-fire + burned-area climatology | annual fire density | MODIS/VIIRS MCD64 [15] |
+| **Conflict / violence** | documented | event intensity and fatalities | ACLED event rate | ACLED [16] |
+| **Lightning** | Lake Victoria overlay | flash-density grid | flashes km^-2 yr^-1 | NASA LIS/OTD [17] |
+| **Storms / cyclone** | documented coastal | track density / return period | cyclone passage frequency | IBTrACS [18] |
+| **Heatwave** | ERA5 climatology, capped | heat-health threshold days | days > 90th-pct Tmax; WBGT | ERA5 + heat-health [19] |
+
+## Tier 3 - Exposure and vulnerability resolution
+
+| Issue | v1 today | v2 method |
+|---|---|---|
+| **Hazard-specific exposure** | one population-density layer multiplies every hazard | pair each hazard with its own exposure - drought with cropland, livestock and rural population; flood with floodplain population - not generic density |
+| **Council-resolution vulnerability** | 195 councils inherit district survey values | small-area estimation (model-based) for council-level vulnerability where surveys allow |
+| **Live food security** | IPC/MUCHALI entered per round | automated IPC-round ingestion so livelihoods refreshes itself |
+
+## Tier 4 - Methodology and validation (scientific credibility)
+
+| Issue | v1 today | v2 method |
+|---|---|---|
+| **Reliability gating** | data-coverage % shown, not enforced | a confidence tier per unit; annotate or suppress scores below a minimum coverage |
+| **Uncertainty** | point scores | propagate input uncertainty (CHIRPS error, survey sampling) to a risk **band** |
+| **Validation** | face validity vs IPC geography | quantitative validation against observed losses and displacement (EM-DAT, DesInventar Tanzania) [20] |
+| **Sensitivity** | drought weights an explicit choice | full sensitivity analysis of which indicators and weights move risk |
+| **Weighting (deviation-flagged)** | equal weights within a category (INFORM default) | explore expert/data-driven weights as a **separate, validated** option - never silently |
+
+# 9. Cross-cutting insights for v2
+
+Three insights run across the register and shape the v2 design.
+
+**1. Temporal comparability is a reference-range problem.** A Data-Range min-max re-standardises *every*
+unit whenever *any* unit's data changes, so a district's score can move even when its own reality did not.
+For a model meant to answer "is this place getting riskier?", that is a defect. v2's adoption of **fixed
+reference ranges** (Tier 1, #D/I) is therefore not cosmetic - it is what makes year-on-year and
+pre/post-intervention comparison valid. This is the single most consequential engine-fidelity decision.
+
+**2. Exposure must be hazard-specific or it misleads.** v1 multiplies hazards by one population-density
+layer. But drought's exposure is **agricultural** - cropland, livestock, rural livelihoods - not urban
+population; a dense coastal city is highly *flood* and *heat* exposed but not *drought* exposed. Using a
+single exposure layer is exactly what produced the Dar-es-Salaam drought artifact (Table 2). Hazard-specific
+exposure (Tier 3) is the structural fix behind that symptom, not a cosmetic one.
+
+**3. A risk index is only as credible as its validation.** The drought advancement is justified by face
+validity against IPC/MUCHALI geography; that is necessary but not sufficient. v2 must validate the risk
+score **quantitatively** against independent outcomes - recorded disaster losses, displacement,
+food-insecurity caseloads - so "risk" is demonstrably predictive, not merely plausible. Without this, every
+advancement is an assertion; with it, the model earns operational trust.
+
+Stable references, hazard-specific exposure, and outcome validation are the backbone of INFORM Calc
+Engine v2.
+
+# 10. Limitations of this proposal
+
+- **Weights** for the drought blend (0.30/0.20/0.15/0.35) are an explicit modelling choice; the sensitivity
+  analysis (Tier 4) is what will defend or revise them.
+- **Raise-only** is honest but asymmetric: it cannot correct a documented-but-too-high value (the Dar
+  artifact), which is handled separately as a Data-Entry correction, not an advancement.
+- The **register is not exhaustive** and is expected to grow; it is a working backlog, not a finished spec.
+- Every Tier-2/3/4 item is **unvalidated** until its own evidence passes review - listing it here is a
+  commitment to test it, not a claim that it is already right.
 
 # References
 
@@ -203,3 +286,11 @@ case is handled separately as a documented correction.
 [10] Thornthwaite, C. W. (1948). An approach toward a rational classification of climate. *Geographical Review* 38, 55-94.
 [11] Vicente-Serrano, S. M., Begueria, S. & Lopez-Moreno, J. I. (2010). A multiscalar drought index sensitive to global warming: the SPEI. *Journal of Climate* 23, 1696-1718.
 [12] McKee, T. B., Doesken, N. J. & Kleist, J. (1993). The relationship of drought frequency and duration to time scales. *Proc. 8th Conf. on Applied Climatology*, 179-184.
+[13] Pagani, M. et al. (2018). Global Earthquake Model (GEM) seismic hazard map; Giardini, D. et al. (1999). The GSHAP global seismic hazard map. *Annali di Geofisica* 42, 1225-1230.
+[14] Dottori, F. et al. (2016). Development and evaluation of a framework for global flood hazard mapping. *Advances in Water Resources* 94, 87-102 (JRC GloFAS).
+[15] Giglio, L. et al. (2018). The Collection 6 MODIS burned area mapping algorithm and product (MCD64A1). *Remote Sensing of Environment* 217, 72-85.
+[16] Raleigh, C. et al. (2010). Introducing ACLED: an Armed Conflict Location and Event Dataset. *Journal of Peace Research* 47, 651-660.
+[17] Albrecht, R. I. et al. (2016). Where are the lightning hotspots on Earth? *Bulletin of the American Meteorological Society* 97, 2051-2068 (LIS/OTD).
+[18] Knapp, K. R. et al. (2010). The International Best Track Archive for Climate Stewardship (IBTrACS). *Bulletin of the American Meteorological Society* 91, 363-376.
+[19] Mora, C. et al. (2017). Global risk of deadly heat. *Nature Climate Change* 7, 501-506.
+[20] Guha-Sapir, D., Below, R. & Hoyois, P. EM-DAT: The CRED/OFDA International Disaster Database; UNDRR DesInventar Sendai disaster-loss database.
