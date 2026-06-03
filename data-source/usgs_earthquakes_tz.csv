@@ -1,0 +1,555 @@
+time,latitude,longitude,depth,mag,magType,nst,gap,dmin,rms,net,id,updated,place,type,horizontalError,depthError,magError,magNst,status,locationSource,magSource
+2005-12-05T12:19:56.620Z,-6.224,29.83,22,6.8,mwc,561,20,,0.98,us,usp000e5jx,2022-07-14T13:15:06.505Z,"76 km ESE of Kalemie, Democratic Republic of the Congo",earthquake,,,,,reviewed,us,hrv
+1960-09-22T09:05:38.410Z,-3.536,29.031,13.7,6.54,mw,,,,,iscgem,iscgem880379,2022-04-26T16:36:24.272Z,"19 km SW of Uvira, Democratic Republic of the Congo",earthquake,,3.6,0.39,,reviewed,iscgem,iscgem
+2000-10-02T02:25:31.310Z,-7.977,30.709,34,6.5,mwb,415,,,1.13,us,usp000a14k,2022-04-29T19:18:18.249Z,"15 km W of Nkove, Tanzania",earthquake,,,,,reviewed,us,us
+1964-05-07T05:45:32.240Z,-4.035,35.132,30.9,6.5,mw,,,,,iscgem,iscgem867524,2025-12-19T18:11:28.930Z,"28 km W of Dongobesh, Tanzania",earthquake,,4.5,0.2,,reviewed,iscgem,iscgem
+1985-05-14T18:11:08.950Z,-10.562,41.424,10,6.4,mw,,,,0.9,us,usp0002eu6,2022-04-27T22:47:26.258Z,"120 km E of Madimba, Tanzania",earthquake,,,,,reviewed,us,nc
+1960-09-22T09:14:59.820Z,-3.25,29.16,15,6.35,mw,,,,,iscgem,iscgem880380,2022-04-26T16:36:29.442Z,"16 km N of Uvira, Democratic Republic of the Congo",earthquake,,25,0.2,,reviewed,iscgem,iscgem
+2002-10-24T06:08:37.980Z,-1.884,29.004,11,6.2,mwc,345,,,1.05,us,usp000bf6u,2022-05-02T16:12:38.083Z,"34 km SW of Goma, Democratic Republic of the Congo",earthquake,,,,,reviewed,us,hrv
+1985-05-14T13:24:57.830Z,-10.61,41.423,10,6,mw,,,,0.9,us,usp0002etu,2022-04-27T22:47:24.429Z,"121 km E of Madimba, Tanzania",earthquake,,,,,reviewed,us,hrv
+2009-12-19T23:19:15.550Z,-10.108,33.818,6,6,mwc,301,34.9,,1.05,us,usp000h56x,2022-07-15T23:01:40.673Z,"23 km SSW of Karonga, Malawi",earthquake,,,,,reviewed,us,us
+2020-08-12T17:13:16.180Z,-7.3327,39.8126,17.55,6,mww,,26,5.245,0.99,us,us6000bdg8,2025-12-22T19:05:09.946Z,"66 km NNE of Kilindoni, Tanzania",earthquake,9.5,2.9,0.047,43,reviewed,us,us
+2009-12-08T03:08:57.240Z,-9.948,33.878,8,5.9,mwc,305,23.5,,0.97,us,usp000h4v7,2022-07-15T22:14:07.034Z,"6 km WSW of Karonga, Malawi",earthquake,,,,,reviewed,us,us
+2017-02-24T00:32:17.800Z,-8.4404,30.0305,30,5.9,mww,,16,7.03,1.2,us,us20008lww,2022-05-07T11:14:49.704Z,"40 km E of Kaputa, Zambia",earthquake,7.4,1.7,0.053,34,reviewed,us,us
+1994-08-18T00:45:47.200Z,-7.433,31.751,25.2,5.9,mwb,,,,1,us,usp0006h32,2022-04-28T17:34:12.953Z,"55 km ENE of Chala, Tanzania",earthquake,,,,,reviewed,us,us
+1997-09-21T18:13:22.780Z,-7.36,30.37,10,5.9,mwc,,,,1.08,us,usp00087ua,2022-04-29T17:01:20.562Z,"26 km WNW of Kirando, Tanzania",earthquake,,,,,reviewed,us,hrv
+2007-07-17T14:10:42.460Z,-2.734,36.362,8,5.9,mwb,280,55.8,,1.16,us,usp000fgey,2022-07-14T05:42:36.108Z,"37 km W of Longido, Tanzania",earthquake,,,,,reviewed,us,us
+2008-02-03T07:34:12.180Z,-2.296,28.9,10,5.9,mwb,415,19.5,,0.78,us,usp000fy21,2022-07-13T22:29:52.942Z,"20 km N of Cyangugu, Rwanda",earthquake,,,,,reviewed,us,us
+2016-09-10T12:27:33.410Z,-1.0355,31.6181,40,5.9,mww,,21,5.634,0.88,us,us10006nkx,2022-05-03T17:58:43.815Z,"27 km ENE of Nsunga, Tanzania",earthquake,8.9,1.9,,,reviewed,us,us
+1960-09-22T05:38:14.960Z,-3.672,29.146,15,5.86,mw,,,,,iscgem,iscgem880378,2022-04-26T16:36:18.686Z,"30 km S of Uvira, Democratic Republic of the Congo",earthquake,,25,0.38,,reviewed,iscgem,iscgem
+2009-12-06T17:36:36.010Z,-10.126,33.87,9,5.8,mwb,206,23.3,,0.88,us,usp000h4ta,2022-07-15T22:07:19.452Z,"22 km SSW of Karonga, Malawi",earthquake,,,,,reviewed,us,us
+2007-03-28T21:17:10.650Z,-6.268,29.673,8,5.8,mwc,330,39.5,,0.79,us,usp000f7r2,2022-07-14T07:04:56.323Z,"63 km SE of Kalemie, Democratic Republic of the Congo",earthquake,,,,,reviewed,us,gcmt
+1986-06-29T21:47:59.670Z,-5.336,29.539,20.2,5.8,mw,,,,1.1,us,usp0002vjn,2022-04-27T22:15:54.261Z,"51 km S of Kigoma, Tanzania",earthquake,,,,,reviewed,us,hrv
+2015-08-07T01:25:02.540Z,-2.1412,28.8973,11,5.8,mww,,20,2.392,0.87,us,us10002zzn,2022-07-31T22:46:21.357Z,"37 km N of Cyangugu, Rwanda",earthquake,8.4,1.8,,,reviewed,us,us
+1962-03-08T21:38:34.190Z,-3.571,28.935,10,5.78,mw,,,,,iscgem,iscgem874336,2022-04-26T16:08:29.448Z,"29 km SW of Uvira, Democratic Republic of the Congo",earthquake,,25,0.2,,reviewed,iscgem,iscgem
+1961-11-12T02:15:18.480Z,0.375,29.436,30,5.75,mw,,,,,iscgem,iscgem877673,2022-04-26T16:24:35.902Z,"13 km SSW of Beni, Democratic Republic of the Congo",earthquake,,1.2,0.2,,reviewed,iscgem,iscgem
+1976-09-19T14:59:43.700Z,-11.056,32.857,27,5.7,ms,,,,,us,usp0000jgu,2025-12-19T20:17:30.502Z,"36 km WNW of Chama, Zambia",earthquake,,,,,reviewed,us,us
+2008-08-27T06:46:19.480Z,-10.751,41.469,10,5.7,mwc,336,48.2,,0.92,us,usp000gfp7,2022-05-02T20:15:19.882Z,"130 km ESE of Madimba, Tanzania",earthquake,,,,,reviewed,us,us
+1985-02-23T14:45:35.940Z,-6.966,30.928,10,5.7,mb,,,,0.8,us,usp0002c60,2022-04-27T21:27:50.478Z,"36 km WNW of Usevia, Tanzania",earthquake,,,,69,reviewed,us,us
+1985-06-28T07:32:20.050Z,-10.614,41.238,10,5.6,mw,,,,1.4,us,usp0002g7u,2022-04-27T22:46:24.062Z,"101 km ESE of Madimba, Tanzania",earthquake,,,,,reviewed,us,hrv
+2007-12-08T19:55:19.370Z,-7.558,37.646,6,5.6,mwc,209,27.7,,0.98,us,usp000fu2j,2022-05-02T20:53:49.110Z,"14 km SSW of Kisanga, Tanzania",earthquake,,,,,reviewed,us,gcmt
+1999-05-07T14:07:28.740Z,-7.491,31.683,10,5.6,mb,,,,0.68,us,usp00097gz,2022-04-29T18:24:01.896Z,"47 km ENE of Chala, Tanzania",earthquake,,,,121,reviewed,us,us
+1977-12-15T23:20:53.600Z,-4.761,34.913,33,5.6,ms,,,,,us,usp0000s3b,2025-12-19T20:04:56.998Z,"11 km SSE of Ilongero, Tanzania",earthquake,,,,,reviewed,us,us
+2009-12-12T02:27:03.780Z,-9.942,33.911,10,5.5,mwc,175,41.2,,1,us,usp000h4z6,2022-05-02T21:29:42.022Z,"2 km WSW of Karonga, Malawi",earthquake,,,,,reviewed,us,gcmt
+2019-03-21T09:15:40.309Z,-7.9143,32.1088,22,5.5,mww,,74,7.391,1.47,us,us1000jjp9,2025-12-22T18:06:29.784Z,"54 km E of Sumbawanga, Tanzania",earthquake,8.9,1.9,0.061,26,reviewed,us,us
+1975-09-21T09:22:04.000Z,-7.907,31.611,33,5.5,mb,,,,,us,usp0000cwc,2020-08-26T00:33:07.057Z,"6 km N of Sumbawanga, Tanzania",earthquake,,,,,reviewed,us,us
+2002-02-20T19:07:17.100Z,-7.679,31.895,38.5,5.5,mwc,247,,,0.74,us,usp000ayuq,2022-05-02T15:45:31.573Z,"44 km NE of Sumbawanga, Tanzania",earthquake,,,,,reviewed,us,hrv
+2005-12-09T23:30:23.930Z,-6.176,29.709,10,5.5,mwc,296,37.1,,0.68,us,usp000e5w1,2022-05-02T18:08:12.374Z,"62 km ESE of Kalemie, Democratic Republic of the Congo",earthquake,,,,,reviewed,us,hrv
+2002-11-04T03:19:18.380Z,-5.525,36.035,10,5.5,ms,229,,,1.08,us,usp000bg4f,2022-05-02T16:15:28.364Z,"58 km N of Msanga, Tanzania",earthquake,,,,9,reviewed,us,us
+2023-08-08T15:31:18.374Z,-5.4436,34.9505,7,5.5,mww,117,29,4.348,0.58,us,us6000kynh,2023-10-17T22:01:28.040Z,"39 km SSE of Ikungi, Tanzania",earthquake,6.71,1.797,0.063,24,reviewed,us,us
+1990-03-13T23:05:29.420Z,-3.994,39.925,10,5.5,mw,,,,1,us,usp00046jr,2022-04-28T19:55:43.106Z,"29 km ENE of Mombasa, Kenya",earthquake,,,,,reviewed,us,hrv
+1990-05-15T16:24:19.510Z,-3.075,35.891,5,5.5,mw,,,,1.1,us,usp00049b3,2022-04-28T19:49:09.991Z,"30 km N of Mto wa Mbu, Tanzania",earthquake,,,,,reviewed,us,hrv
+2002-05-18T15:15:08.800Z,-2.907,33.733,10,5.5,mwc,172,,,0.94,us,usp000b4j1,2022-05-02T15:58:49.360Z,"25 km ENE of Malya, Tanzania",earthquake,,,,,reviewed,us,hrv
+2015-08-07T01:28:37.120Z,-2.0913,28.9515,10,5.5,mwc,,28,2.319,0.77,us,us10002zzr,2022-07-31T22:47:16.574Z,"43 km N of Cyangugu, Rwanda",earthquake,6.1,1.8,,,reviewed,us,gcmt
+2002-10-24T07:12:18.400Z,-1.822,28.979,10,5.5,ms,232,,,0.81,us,usp000bf75,2022-05-02T16:12:39.351Z,"28 km SSW of Sake, Democratic Republic of the Congo",earthquake,,,,97,reviewed,us,us
+1989-09-05T20:49:34.400Z,-11.732,34.45,10,5.4,mw,,,,0.9,us,usp0003z8w,2022-04-28T20:10:59.489Z,"22 km SE of Nkhata Bay, Malawi",earthquake,,,,,reviewed,us,hrv
+1985-05-14T19:54:42.200Z,-10.705,41.345,10,5.4,mb,,,,0.9,us,usp0002eud,2022-04-27T22:47:27.598Z,"115 km ESE of Madimba, Tanzania",earthquake,,,,57,reviewed,us,us
+2009-11-14T04:47:02.630Z,-6.852,29.841,10,5.4,mwc,173,23.1,,0.83,us,usp000h41a,2022-05-02T21:26:16.270Z,"66 km W of Karema, Tanzania",earthquake,,,,,reviewed,us,gcmt
+2019-09-09T00:38:46.339Z,-6.4714,30.7391,25,5.4,mww,,22,5.83,1.19,us,us70005dj8,2025-12-22T18:16:08.634Z,"39 km WSW of Mpanda, Tanzania",earthquake,5.4,1.6,0.066,22,reviewed,us,us
+2008-03-06T07:35:35.370Z,-5.414,36.013,10,5.4,mwc,52,54.9,,0.99,us,usp000g0ua,2025-12-22T15:37:01.863Z,"62 km SSE of Kondoa, Tanzania",earthquake,,,,,reviewed,us,gcmt
+1966-10-30T05:05:34.450Z,-3.615,29.921,15,5.4,mw,,,,,iscgem,iscgem842935,2022-04-26T23:09:24.755Z,"20 km S of Gitega, Burundi",earthquake,,25,0.2,,reviewed,iscgem,iscgem
+1990-05-15T15:21:26.260Z,-3.225,35.744,5,5.4,mw,,,,1.3,us,usp00049b1,2022-04-28T19:49:04.867Z,"14 km NE of Kiratu, Tanzania",earthquake,,,,,reviewed,us,hrv
+2007-07-15T20:42:11.520Z,-2.88,36.161,10,5.4,mwc,235,28.5,,1.09,us,usp000fg9a,2022-07-14T05:49:19.048Z,"56 km NW of Monduli, Tanzania",earthquake,,,,,reviewed,us,gcmt
+2007-08-20T02:56:48.010Z,-2.71,36.292,10,5.4,mwc,246,33.3,,0.93,us,usp000fk8b,2022-07-14T03:58:01.830Z,"45 km W of Longido, Tanzania",earthquake,,0,,,reviewed,us,gcmt
+1990-09-04T01:48:00.760Z,-0.479,29.085,10,5.4,mw,,,,1.1,us,usp0004e9r,2022-04-28T19:37:03.642Z,"72 km SSW of Butembo, Democratic Republic of the Congo",earthquake,,,,,reviewed,us,hrv
+1977-12-29T11:50:38.000Z,0.013,29.683,33,5.4,ms,,,,,us,usp0000s9d,2014-11-06T23:21:46.160Z,"42 km WSW of Kilembe, Uganda",earthquake,,,,,reviewed,us,us
+1968-06-29T11:48:18.770Z,-1.055,29.235,15,5.35,mw,,,,,iscgem,iscgem821373,2022-04-26T22:31:43.104Z,"49 km WSW of Ntungamo, Uganda",earthquake,,25,0.2,,reviewed,iscgem,iscgem
+1972-02-13T10:02:43.070Z,-4.463,34.047,15,5.31,mw,,,,,iscgem,iscgem776171,2022-04-26T20:55:50.029Z,"20 km WSW of Shelui, Tanzania",earthquake,,25,0.3,,reviewed,iscgem,iscgem
+1965-04-25T10:01:10.730Z,-2.526,28.919,15,5.31,mw,,,,,iscgem,iscgem858015,2022-04-26T23:41:37.747Z,"4 km SSE of Cyangugu, Rwanda",earthquake,,3,0.22,,reviewed,iscgem,iscgem
+2014-11-02T18:25:40.980Z,-10.9587,29.7368,10,5.3,mb,,62,4.55,0.86,us,usc000stin,2022-07-27T06:30:15.725Z,"49 km NNE of Samfya, Zambia",earthquake,7,1.6,0.072,75,reviewed,us,us
+1985-05-30T08:32:17.520Z,-10.657,41.355,10,5.3,mw,,,,1,us,usp0002fay,2025-12-19T21:21:26.562Z,"115 km ESE of Madimba, Tanzania",earthquake,,,,,reviewed,us,hrv
+2009-12-06T17:58:15.460Z,-10.171,33.968,10,5.3,mb,114,66.1,,0.95,us,usp000h4tf,2022-05-02T21:29:09.046Z,"26 km S of Karonga, Malawi",earthquake,,,,53,reviewed,us,us
+2010-08-03T19:42:13.160Z,-9.5,39.064,10,5.3,mwc,165,42.1,,0.95,us,usp000hhev,2022-07-18T17:36:25.527Z,"56 km N of Mbekenyera, Tanzania",earthquake,,,,,reviewed,us,gcmt
+1979-11-21T04:50:39.200Z,-8.962,32.056,33,5.3,mb,,,,,us,usp0001442,2014-11-06T23:22:07.629Z,"43 km S of Laela, Tanzania",earthquake,,,,,reviewed,us,us
+1984-08-25T20:37:49.880Z,-8.749,32.458,10,5.3,mw,,,,1,us,usp00026qu,2022-04-27T23:15:28.882Z,"49 km ESE of Laela, Tanzania",earthquake,,,,,reviewed,us,hrv
+2009-11-14T04:50:17.290Z,-6.779,29.823,10,5.3,mwc,236,29.8,,0.84,us,usp000h41b,2022-07-15T20:57:51.131Z,"68 km W of Karema, Tanzania",earthquake,,,,,reviewed,us,gcmt
+2017-04-29T10:53:21.990Z,-6.1338,29.9229,10,5.3,mww,,38,5.555,0.74,us,us10008m05,2022-05-03T18:58:45.429Z,"83 km ESE of Kalemie, Democratic Republic of the Congo",earthquake,6.2,1.8,0.089,12,reviewed,us,us
+2006-01-09T20:59:38.340Z,-6.099,29.743,25.6,5.3,mwc,123,70.7,,0.78,us,usp000e7xs,2022-05-02T18:11:13.866Z,"62 km ESE of Kalemie, Democratic Republic of the Congo",earthquake,,,,,reviewed,us,hrv
+1998-03-28T21:59:56.170Z,-6.024,29.525,10,5.3,mwc,,,,1.01,us,usp0008j67,2022-04-29T17:22:11.585Z,"37 km ESE of Kalemie, Democratic Republic of the Congo",earthquake,,,,,reviewed,us,hrv
+1983-05-09T16:15:20.050Z,-4.213,37.779,16.9,5.3,mb,,,,0.9,us,usp0001v6s,2022-04-28T00:01:02.914Z,"10 km SW of Mwembe, Tanzania",earthquake,,3.9,,35,reviewed,us,us
+1983-12-11T09:02:54.800Z,-4.07,32.327,10,5.3,mb,,,,1,us,usp00020dq,2022-04-27T23:40:34.429Z,"40 km SW of Kahama, Tanzania",earthquake,,,,35,reviewed,us,us
+1978-01-29T21:41:36.700Z,-3.929,29.35,10,5.3,mb,,,,,us,usp0000srv,2014-11-06T23:21:46.787Z,"11 km WNW of Rumonge, Burundi",earthquake,,,,,reviewed,us,us
+1993-04-11T19:41:42.430Z,-3.846,35.638,28.1,5.3,mb,,,,1,us,usp0005r13,2022-04-28T18:16:00.648Z,"11 km E of Mbulu, Tanzania",earthquake,,,,52,reviewed,us,us
+2007-07-15T11:24:21.440Z,-2.933,36.241,10,5.3,mwc,286,39.7,,1.24,us,usp000fg7m,2022-07-14T05:50:55.755Z,"46 km NNW of Monduli, Tanzania",earthquake,,,,,reviewed,us,gcmt
+2007-07-17T18:27:51.390Z,-2.782,36.19,10,5.3,mwc,131,32.3,,0.94,us,usp000fgfb,2022-07-14T05:40:57.123Z,"56 km W of Longido, Tanzania",earthquake,,,,,reviewed,us,gcmt
+2007-12-23T13:45:27.390Z,-2.777,36.201,10,5.3,mwb,232,32.3,,1.08,us,usp000fv2y,2022-07-13T23:44:08.029Z,"55 km W of Longido, Tanzania",earthquake,,,,,reviewed,us,us
+1977-01-06T18:33:43.500Z,-2.509,28.702,21,5.3,mb,,,,,us,usp0000m36,2022-04-27T16:39:16.407Z,"9 km W of Kabare, Democratic Republic of the Congo",earthquake,,,,,reviewed,us,us
+2008-02-14T02:07:46.770Z,-2.404,28.918,10,5.3,mwc,274,51.7,,0.75,us,usp000fyva,2022-07-13T22:08:15.501Z,"8 km N of Cyangugu, Rwanda",earthquake,,,,,reviewed,us,gcmt
+2008-10-05T00:02:12.630Z,-1.126,29.118,4,5.3,mwb,149,66,,1.17,us,usp000gjbn,2022-05-02T21:03:55.625Z,"50 km N of Sake, Democratic Republic of the Congo",earthquake,,,,,reviewed,us,us
+2017-07-30T07:02:29.170Z,-0.22,29.7824,10,5.3,mww,,26,1.028,0.62,us,us2000a2mp,2022-08-07T13:13:09.235Z,"52 km SSW of Kilembe, Uganda",earthquake,3,1.8,0.08,15,reviewed,us,us
+2001-06-29T23:40:00.850Z,0.292,29.972,10,5.3,mwc,102,,,1.07,us,usp000ahq6,2022-04-29T19:24:44.394Z,"11 km NNW of Kilembe, Uganda",earthquake,,,,,reviewed,us,hrv
+2006-04-27T04:18:28.140Z,0.338,30.078,10,5.2,mwc,242,65.9,,0.77,us,usp000efkj,2022-05-02T18:16:45.317Z,"17 km NNE of Kilembe, Uganda",earthquake,,,,,reviewed,us,hrv
+2002-07-16T14:50:14.460Z,-11.65,41.071,10,5.2,mwc,108,,,0.85,us,usp000b87m,2022-05-02T16:03:53.655Z,"86 km ESE of Mocímboa, Mozambique",earthquake,,,,,reviewed,us,hrv
+2016-04-12T15:16:46.610Z,-10.7675,41.4346,10,5.2,mb,,36,9.006,1,us,us20005hen,2025-12-22T17:28:15.331Z,"127 km ESE of Madimba, Tanzania",earthquake,4.4,1.7,0.05,131,reviewed,us,us
+1982-04-29T20:20:20.050Z,-10.644,41.381,10,5.2,mb,,,,1,us,usp0001m0h,2025-12-19T21:44:59.579Z,"117 km ESE of Madimba, Tanzania",earthquake,,,,31,reviewed,us,us
+2009-12-06T18:00:01.050Z,-10.024,33.866,10,5.2,mwc,102,35.1,,0.97,us,usp000h4tg,2022-05-02T21:29:09.972Z,"12 km SW of Karonga, Malawi",earthquake,,,,,reviewed,us,gcmt
+2002-08-31T22:52:33.190Z,-9.737,34.313,10,5.2,mwc,46,,,0.93,us,usp000bb10,2022-05-02T16:07:33.117Z,"22 km WNW of Mlangali, Tanzania",earthquake,,,,,reviewed,us,hrv
+1989-02-09T23:49:16.160Z,-8.548,29.836,35.4,5.2,mb,,,,0.9,us,usp0003rq7,2022-04-28T20:24:30.109Z,"21 km ESE of Kaputa, Zambia",earthquake,,,,42,reviewed,us,us
+2009-09-26T13:26:37.600Z,-7.533,30.452,10,5.2,mwc,117,40.1,,0.94,us,usp000h1vu,2022-05-02T21:21:40.809Z,"20 km SW of Kirando, Tanzania",earthquake,,0,,,reviewed,us,gcmt
+1999-05-07T02:10:41.990Z,-7.506,31.605,10,5.2,mb,,,,0.67,us,usp00097g2,2022-04-29T18:24:00.830Z,"38 km ENE of Chala, Tanzania",earthquake,,,,59,reviewed,us,us
+1977-01-04T20:44:39.400Z,-7.435,38.518,33,5.2,mb,,,,,us,usp0000m2c,2022-04-27T16:38:56.120Z,"39 km SW of Maneromango, Tanzania",earthquake,,,,,reviewed,us,us
+1976-08-29T00:30:10.500Z,-7.386,30.866,33,5.2,mb,,,,,us,usp0000j38,2014-11-06T23:21:36.935Z,"24 km NW of Namanyere, Tanzania",earthquake,,,,,reviewed,us,us
+2008-12-14T09:43:10.730Z,-7.346,30.128,10,5.2,mwc,67,59.4,,0.81,us,usp000gqjy,2022-07-14T22:08:42.155Z,"52 km W of Kirando, Tanzania",earthquake,,,,,reviewed,us,gcmt
+2005-12-06T05:53:08.980Z,-6.081,29.642,10,5.2,mwc,197,39.1,,0.77,us,usp000e5mx,2022-05-02T18:08:04.140Z,"51 km ESE of Kalemie, Democratic Republic of the Congo",earthquake,,,,,reviewed,us,hrv
+1976-01-19T08:05:47.900Z,-5.462,28.736,33,5.2,mb,,,,,us,usp0000ejh,2014-11-06T23:21:33.585Z,"73 km NW of Kalemie, Democratic Republic of the Congo",earthquake,,,,,reviewed,us,us
+1996-12-20T03:53:22.230Z,-5.288,35.828,10,5.2,mwc,,,,1.11,us,usp0007uqd,2022-04-29T16:38:19.133Z,"43 km S of Kondoa, Tanzania",earthquake,,,,,reviewed,us,hrv
+2008-09-15T15:50:51.510Z,-4.979,30.149,10,5.2,mwc,65,91.3,,0.74,us,usp000gh3p,2022-05-02T21:03:15.436Z,"30 km WNW of Uvinza, Tanzania",earthquake,,,,,reviewed,us,gcmt
+1991-02-22T22:06:11.110Z,-3.972,35.811,10,5.2,mw,,,,1,us,usp0004n9t,2022-04-28T19:24:12.165Z,"6 km NE of Magugu, Tanzania",earthquake,,,,,reviewed,us,hrv
+1982-07-03T23:21:12.070Z,-3.737,28.951,10,5.2,mb,,,,1,us,usp0001n8s,2022-04-28T00:31:05.594Z,"43 km SSW of Uvira, Democratic Republic of the Congo",earthquake,,,,51,reviewed,us,us
+1979-10-25T17:58:31.500Z,-3.412,29.07,33,5.2,mb,,,,,us,usp00013q7,2022-04-27T14:53:27.386Z,"7 km WSW of Uvira, Democratic Republic of the Congo",earthquake,,,,,reviewed,us,us
+2007-08-18T07:44:02.030Z,-2.825,36.207,10,5.2,mwc,198,32.3,,1.29,us,usp000fk3n,2022-07-14T04:10:04.288Z,"55 km W of Longido, Tanzania",earthquake,,,,,reviewed,us,gcmt
+2007-07-18T17:25:52.290Z,-2.774,36.094,10,5.2,mwc,85,42,,1.13,us,usp000fgjs,2022-07-14T05:37:37.737Z,"67 km W of Longido, Tanzania",earthquake,,0,,,reviewed,us,gcmt
+2007-07-26T18:54:37.190Z,-2.677,36.012,10,5.2,mwc,90,56.7,,0.98,us,usp000fh56,2022-07-14T05:25:55.346Z,"76 km W of Longido, Tanzania",earthquake,,,,,reviewed,us,gcmt
+1977-04-14T14:36:23.400Z,-2.456,28.94,33,5.2,mb,,,,,us,usp0000ndn,2014-11-06T23:21:40.960Z,"4 km NE of Cyangugu, Rwanda",earthquake,,,,,reviewed,us,us
+2003-03-20T06:15:20.580Z,-2.418,29.56,10,5.2,mwc,237,57.3,,0.83,us,usp000bt35,2022-05-02T16:28:14.866Z,"Rwanda - Burundi region",earthquake,,,,,reviewed,us,hrv
+2002-12-23T02:50:38.270Z,-1.724,34.971,10,5.2,mwc,89,,,0.92,us,usp000bm7m,2022-05-02T16:20:57.461Z,"33 km ENE of Mugumu, Tanzania",earthquake,,,,,reviewed,us,hrv
+2002-01-22T15:32:05.590Z,-1.515,28.993,10,5.2,mwc,58,,,1.05,us,usp000awz7,2022-05-02T15:42:28.045Z,"8 km NW of Sake, Democratic Republic of the Congo",earthquake,,,,,reviewed,us,hrv
+2003-08-05T18:56:50.710Z,-0.521,29.446,10,5.2,mwc,150,85.5,,1.33,us,usp000c479,2022-05-02T16:40:15.963Z,"46 km NNW of Ntungamo, Uganda",earthquake,,,,,reviewed,us,hrv
+1967-10-14T23:29:30.010Z,-3.37,38.025,15,5.17,mw,,,,,iscgem,iscgem830319,2022-04-26T22:46:04.947Z,"37 km W of Wundanyi, Kenya",earthquake,,25,0.3,,reviewed,iscgem,iscgem
+1966-10-05T08:34:41.220Z,0.009,29.84,22.1,5.17,mw,,,,,iscgem,iscgem842196,2025-12-19T18:21:32.239Z,"28 km SW of Kilembe, Uganda",earthquake,,4.5,0.3,,reviewed,iscgem,iscgem
+1995-07-20T05:08:25.800Z,-12.402,41.41,10,5.1,mb,,,,0.9,us,usp00070sm,2014-11-07T00:58:22.277Z,"115 km ENE of Pemba, Mozambique",earthquake,,,,73,reviewed,us,us
+1978-01-08T06:31:52.800Z,-12.094,34.27,33,5.1,mb,,,,,us,usp0000sdd,2016-11-09T21:37:28.235Z,"53 km S of Nkhata Bay, Malawi",earthquake,,,,,reviewed,us,us
+2018-06-05T22:55:28.800Z,-11.94,40.9658,10,5.1,mb,,41,8.915,0.75,us,us1000ejah,2022-05-03T19:16:05.306Z,"96 km SE of Mocímboa, Mozambique",earthquake,7.4,1.8,0.067,71,reviewed,us,us
+1976-10-05T06:25:27.000Z,-10.946,41.295,33,5.1,mb,,,,,us,usp0000jrz,2014-11-06T23:21:37.619Z,"111 km ENE of Mocímboa, Mozambique",earthquake,,,,,reviewed,us,us
+1985-06-24T14:19:22.370Z,-10.713,41.159,10,5.1,mb,,,,1.1,us,usp0002g43,2014-11-07T00:36:45.428Z,"96 km ESE of Madimba, Tanzania",earthquake,,,,11,reviewed,us,us
+2009-12-06T18:29:14.980Z,-10.131,33.915,10,5.1,mwc,142,33.9,,0.92,us,usp000h4tj,2022-05-02T21:29:15.906Z,"21 km S of Karonga, Malawi",earthquake,,,,,reviewed,us,gcmt
+2009-12-06T19:36:41.640Z,-10.105,33.947,10,5.1,mb,62,45.4,,1,us,usp000h4tp,2022-05-02T21:29:16.973Z,"19 km S of Karonga, Malawi",earthquake,,0,,25,reviewed,us,us
+2014-12-31T19:47:36.010Z,-10.0274,33.8632,14.93,5.1,mb,,45,7.608,0.89,us,usc000tb03,2022-05-03T17:08:58.684Z,"12 km SW of Karonga, Malawi",earthquake,11.1,3.5,0.072,64,reviewed,us,us
+2015-08-19T22:15:47.760Z,-9.6935,28.6437,14.91,5.1,mb,,28,5.568,0.62,us,us100033iu,2022-08-01T00:51:15.800Z,"39 km SSW of Nchelenge, Zambia",earthquake,7.7,3.5,0.05,132,reviewed,us,us
+1994-04-24T09:52:57.600Z,-9.052,30.396,29.7,5.1,mb,,,,0.8,us,usp0006bj6,2022-04-28T17:46:31.872Z,"46 km NE of Mporokoso, Zambia",earthquake,,,,51,reviewed,us,us
+1985-09-03T16:42:01.470Z,-8.81,32.841,33,5.1,mb,,,,1.3,us,usp0002jd3,2014-11-07T00:37:06.994Z,"26 km NW of Mlowo, Tanzania",earthquake,,,,6,reviewed,us,us
+1985-11-28T17:40:44.850Z,-8.669,30.002,10,5.1,mb,,,,0.9,us,usp0002nb8,2022-04-27T22:32:40.594Z,"43 km ESE of Kaputa, Zambia",earthquake,,,,26,reviewed,us,us
+2020-08-13T14:54:54.766Z,-7.3547,39.8115,10,5.1,mww,,83,5.266,1.07,us,us6000be26,2025-12-22T18:40:25.827Z,"64 km NNE of Kilindoni, Tanzania",earthquake,9.9,1.9,0.086,13,reviewed,us,us
+2005-12-08T11:51:22.840Z,-6.547,29.509,10,5.1,mwc,25,107.2,,0.88,us,usp000e5su,2022-05-02T18:08:41.441Z,"74 km SSE of Kalemie, Democratic Republic of the Congo",earthquake,,,,,reviewed,us,hrv
+1977-07-06T08:48:38.200Z,-6.181,29.539,33,5.1,mb,,,,,us,usp0000pmh,2022-04-27T16:18:26.013Z,"46 km SE of Kalemie, Democratic Republic of the Congo",earthquake,,,,,reviewed,us,us
+2017-10-22T06:05:12.970Z,-6.0932,30.7397,10,5.1,mww,,43,5.454,0.5,us,us1000avii,2022-08-07T20:18:47.954Z,"45 km NW of Mpanda, Tanzania",earthquake,8.4,1.8,0.089,12,reviewed,us,us
+2003-04-10T16:03:56.080Z,-5.555,29.507,10,5.1,mwc,107,59.4,,0.81,us,usp000buvv,2022-05-02T16:29:22.864Z,"55 km NE of Kalemie, Democratic Republic of the Congo",earthquake,,,,,reviewed,us,hrv
+2016-07-13T03:01:14.300Z,-5.5088,35.966,10,5.1,mb,,31,3.752,0.98,us,us10006361,2022-05-03T18:40:29.270Z,"60 km N of Msanga, Tanzania",earthquake,8.5,1.8,0.061,87,reviewed,us,us
+2003-06-14T03:10:23.120Z,-5.507,36.072,10,5.1,mwc,143,65.9,,1.08,us,usp000bztx,2022-05-02T16:37:40.582Z,"59 km WSW of Kibaya, Tanzania",earthquake,,,,,reviewed,us,hrv
+1975-03-26T03:40:48.200Z,-5.45,30.207,33,5.1,mb,,,,,us,usp0000ace,2025-12-19T20:32:46.544Z,"43 km SSW of Uvinza, Tanzania",earthquake,,,,,reviewed,us,us
+2023-09-05T15:42:20.864Z,-5.4349,34.9283,10,5.1,mww,64,56,4.358,0.5,us,us7000ktfe,2023-11-17T19:47:49.040Z,"37 km SSE of Ikungi, Tanzania",earthquake,8.6,1.85,0.098,10,reviewed,us,us
+2014-10-31T17:04:58.240Z,-5.4184,35.8954,10,5.1,mb,,55,4.251,0.84,us,usb000ss3p,2022-07-27T06:22:03.192Z,"58 km SSE of Kondoa, Tanzania",earthquake,7.1,1.8,0.053,121,reviewed,us,us
+1993-07-23T19:01:33.110Z,-5.023,35.907,33,5.1,ms,,,,0.9,us,usp0005x8n,2022-04-28T18:07:58.203Z,"19 km SE of Kondoa, Tanzania",earthquake,,,,10,reviewed,us,us
+1975-08-06T07:37:30.400Z,-4.369,35.903,32,5.1,mb,,,,,us,usp0000cbp,2014-11-06T23:21:31.593Z,"12 km SSE of Galappo, Tanzania",earthquake,,,,,reviewed,us,us
+1983-03-21T19:17:44.860Z,-4.355,35.276,15.6,5.1,mb,,,,1.3,us,usp0001ttt,2022-04-28T00:10:43.154Z,"20 km SW of Bashanet, Tanzania",earthquake,,5.3,,10,reviewed,us,us
+2010-04-08T23:57:43.690Z,-4.18,35.193,26.3,5.1,mwc,93,48.4,,1.1,us,usp000hb0j,2022-07-16T10:11:13.226Z,"23 km NNE of Basotu, Tanzania",earthquake,,,,,reviewed,us,gcmt
+2009-02-03T15:48:53.420Z,-3.895,34.853,10,5.1,mb,65,57.2,,1.09,us,usp000gte5,2022-07-15T02:41:26.031Z,"58 km NNW of Basotu, Tanzania",earthquake,,,,35,reviewed,us,us
+1990-04-05T19:20:44.160Z,-2.927,35.891,10,5.1,mw,,,,1.2,us,usp00047gg,2022-04-28T19:51:06.882Z,"46 km N of Mto wa Mbu, Tanzania",earthquake,,,,,reviewed,us,hrv
+2002-01-21T04:39:21.620Z,-1.776,29.041,10,5.1,mwc,97,,,0.97,us,usp000aww9,2022-05-02T15:42:17.679Z,"22 km S of Sake, Democratic Republic of the Congo",earthquake,,,,,reviewed,us,hrv
+2002-01-20T00:14:44.390Z,-1.681,28.981,10,5.1,mwc,77,,,0.97,us,usp000awtc,2022-05-02T15:42:16.175Z,"13 km SSW of Sake, Democratic Republic of the Congo",earthquake,,,,,reviewed,us,hrv
+1995-04-29T11:50:52.560Z,-1.315,28.605,10,5.1,mb,,,,1.2,us,usp0006whz,2022-04-29T17:28:56.131Z,"56 km WNW of Sake, Democratic Republic of the Congo",earthquake,,,,56,reviewed,us,us
+1989-01-01T17:16:41.780Z,-11.54,41.064,10,5,mb,,,,1.3,us,usp0003qdn,2014-11-07T00:43:22.229Z,"81 km ESE of Mocímboa, Mozambique",earthquake,,,,6,reviewed,us,us
+1979-11-04T21:12:00.800Z,-11.324,34.433,33,5,mb,,,,,us,usp00013ux,2014-11-06T23:22:07.101Z,"34 km SW of Liuli, Tanzania",earthquake,,,,,reviewed,us,us
+2024-11-24T07:58:36.433Z,-11.2689,34.7704,10,5,mb,61,49,7.545,0.8,us,us6000p7ec,2025-01-30T17:00:33.040Z,"1 km NNE of Mbamba Bay, Tanzania",earthquake,8.28,1.795,0.082,47,reviewed,us,us
+2020-08-24T07:03:49.166Z,-11.1806,34.5975,10,5,mb,,41,7.451,0.56,us,us6000bjm1,2025-12-22T18:40:54.079Z,"11 km SSW of Liuli, Tanzania",earthquake,9.1,1.8,0.062,83,reviewed,us,us
+1980-02-18T07:00:44.200Z,-10.986,41.16,33,5,mb,,,,,us,usp00015hd,2014-11-06T23:24:17.950Z,"95 km ENE of Mocímboa, Mozambique",earthquake,,,,,reviewed,us,us
+2017-03-29T20:37:03.800Z,-10.9531,41.051,10,5,mb,,53,9.044,0.86,us,us10008d53,2022-05-03T18:14:29.470Z,"86 km ENE of Mocímboa, Mozambique",earthquake,8.2,1.8,0.054,111,reviewed,us,us
+2018-08-21T05:47:57.440Z,-10.7251,41.3524,10,5,mb,,51,8.937,1.04,us,us1000geen,2018-11-01T17:50:52.040Z,"117 km ESE of Madimba, Tanzania",earthquake,5.4,1.9,0.115,24,reviewed,us,us
+1985-06-24T14:04:44.390Z,-10.692,41.224,10,5,mb,,,,1.1,us,usp0002g41,2014-11-07T00:36:45.347Z,"102 km ESE of Madimba, Tanzania",earthquake,,,,13,reviewed,us,us
+1985-06-24T13:41:24.210Z,-10.642,41.096,10,5,mb,,,,1.1,us,usp0002g40,2014-11-07T00:36:45.344Z,"87 km ESE of Madimba, Tanzania",earthquake,,,,11,reviewed,us,us
+1985-09-17T10:57:10.770Z,-10.576,41.094,10,5,mb,,,,1.5,us,usp0002jup,2014-11-07T00:37:10.766Z,"85 km ESE of Madimba, Tanzania",earthquake,,,,2,reviewed,us,us
+2005-01-04T19:58:06.890Z,-10.407,41.494,29.4,5,mwc,101,70.2,,1.07,us,usp000dcjd,2025-12-19T23:18:50.966Z,"127 km E of Madimba, Tanzania",earthquake,,,,,reviewed,us,hrv
+2005-01-04T19:44:12.020Z,-10.354,41.012,10,5,mb,16,116.3,,1.34,us,usp000dcjc,2014-11-07T01:24:34.248Z,"74 km E of Madimba, Tanzania",earthquake,,0,,7,reviewed,us,us
+2009-12-07T03:35:40.400Z,-10.132,33.908,10,5,mb,58,54,,0.84,us,usp000h4u4,2022-05-02T21:29:18.555Z,"22 km S of Karonga, Malawi",earthquake,,,,19,reviewed,us,us
+2009-12-07T09:31:44.750Z,-10.113,33.837,10,5,mwc,83,66.1,,0.98,us,usp000h4ue,2022-05-02T21:29:24.694Z,"Malawi",earthquake,,,,,reviewed,us,gcmt
+2003-05-21T06:22:44.920Z,-10.021,34.199,29,5,mb,75,63.1,,0.75,us,usp000bxnf,2022-05-02T16:33:25.744Z,"30 km ESE of Karonga, Malawi",earthquake,,,,30,reviewed,us,us
+2009-12-07T18:16:32.440Z,-9.998,33.844,10,5,mwc,31,70,,1.17,us,usp000h4ut,2022-05-02T22:32:47.026Z,"12 km SW of Karonga, Malawi",earthquake,,,,,reviewed,us,gcmt
+1986-04-28T18:09:57.450Z,-8.667,38.949,10,5,mb,,,,1.1,us,usp0002tad,2014-11-07T00:38:16.058Z,"78 km SSE of Utete, Tanzania",earthquake,,,,8,reviewed,us,us
+2006-07-13T05:36:36.690Z,-8.355,30.317,29.9,5,mwc,114,69.8,,0.88,us,usp000engr,2022-05-02T15:33:04.817Z,"73 km E of Kaputa, Zambia",earthquake,,,,,reviewed,us,hrv
+2009-07-20T23:01:12.630Z,-6.546,29.913,10,5,mb,95,40.8,,0.87,us,usp000gzg5,2022-05-02T21:12:56.379Z,"65 km WNW of Karema, Tanzania",earthquake,,,,50,reviewed,us,us
+2005-12-08T03:16:34.030Z,-6.279,29.512,10,5,mwc,92,57,,0.96,us,usp000e5rr,2022-05-02T18:08:40.254Z,"50 km SE of Kalemie, Democratic Republic of the Congo",earthquake,,,,,reviewed,us,hrv
+2005-01-15T05:13:10.670Z,-5.991,39.221,10,5,mwc,127,47,,0.88,us,usp000ddcd,2022-07-14T18:45:25.707Z,"13 km SW of Gamba, Tanzania",earthquake,,,,,reviewed,us,hrv
+2023-02-17T09:26:09.033Z,-5.6106,35.2169,10,5,mb,104,41,4.287,0.46,us,us6000jpl6,2023-04-22T21:33:16.040Z,"30 km N of Kintinku, Tanzania",earthquake,8.57,1.871,0.06,87,reviewed,us,us
+1986-07-10T05:02:20.430Z,-5.515,29.019,10,5,mb,,,,1.5,us,usp0002vwb,2014-11-07T00:38:40.808Z,"51 km NNW of Kalemie, Democratic Republic of the Congo",earthquake,,,,4,reviewed,us,us
+1993-07-23T18:54:53.160Z,-5.469,35.784,10,5,mb,,,,1,us,usp0005x8m,2022-04-28T18:07:56.401Z,"62 km S of Kondoa, Tanzania",earthquake,,,,21,reviewed,us,us
+2010-04-26T11:54:34.120Z,-5.44,35.877,10,5,mb,50,47.9,,1.08,us,usp000hbxj,2022-07-16T11:59:07.389Z,"60 km S of Kondoa, Tanzania",earthquake,,,,19,reviewed,us,us
+1995-12-08T23:40:49.490Z,-4.474,38.794,10,5,mb,,,,0.9,us,usp00078na,2022-04-29T19:49:43.409Z,"53 km NNW of Mlalo, Tanzania",earthquake,,,,58,reviewed,us,us
+1990-09-18T04:55:42.030Z,-4.061,29.483,10,5,mb,,,,1,us,usp0004eus,2022-04-28T19:38:29.765Z,"10 km SSE of Rumonge, Burundi",earthquake,,,,34,reviewed,us,us
+2009-02-16T08:24:21.980Z,-3.949,34.843,10,5,mwc,59,57.9,,0.74,us,usp000gu2f,2022-07-15T01:46:06.265Z,"53 km NNW of Basotu, Tanzania",earthquake,,,,,reviewed,us,gcmt
+1982-07-04T02:22:14.080Z,-3.778,28.917,10,5,mb,,,,1,us,usp0001n8x,2022-04-28T00:31:17.271Z,"48 km SSW of Uvira, Democratic Republic of the Congo",earthquake,,,,32,reviewed,us,us
+2020-08-24T14:13:13.708Z,-3.7469,29.2579,10,5,mb,,93,3.456,0.79,us,us6000bjrj,2021-01-24T18:09:09.282Z,"32 km NW of Rumonge, Burundi",earthquake,8.3,1.9,0.066,73,reviewed,us,us
+2017-09-15T17:45:46.800Z,-2.72,28.8046,12.23,5,mb,,45,2.856,0.67,us,us2000anhd,2022-08-07T17:34:11.686Z,"24 km S of Kabare, Democratic Republic of the Congo",earthquake,8.5,4.2,0.053,112,reviewed,us,us
+1981-05-21T08:53:59.300Z,-2.698,28.661,33,5,mb,,,,0.8,us,usp0001dsu,2014-11-07T00:29:30.137Z,"26 km SSW of Kabare, Democratic Republic of the Congo",earthquake,,,,2,reviewed,us,us
+2017-11-30T21:48:35.640Z,-2.6188,28.7075,10,5,mww,,65,8.667,0.62,us,us1000bjky,2022-05-03T19:52:37.716Z,"16 km SW of Kabare, Democratic Republic of the Congo",earthquake,4,1.8,0.098,10,reviewed,us,us
+1985-06-28T22:46:19.800Z,-2.465,28.911,10,5,mw,,,,0.8,us,usp0002g8f,2016-11-09T22:51:54.275Z,"2 km N of Cyangugu, Rwanda",earthquake,,,,,reviewed,us,hrv
+2008-02-03T10:56:09.740Z,-2.403,28.973,10,5,mwc,127,26.9,,1.05,us,usp000fy26,2022-07-13T22:28:14.661Z,"11 km NE of Cyangugu, Rwanda",earthquake,,,,,reviewed,us,gcmt
+2002-10-24T08:03:15.810Z,-2.013,29.014,10,5,mb,35,,,0.92,us,usp000bf78,2022-05-02T16:13:08.640Z,"37 km W of Kibuye, Rwanda",earthquake,,,,16,reviewed,us,us
+2010-06-13T12:13:24.650Z,-0.201,34.489,10,5,mwc,150,45.6,,0.91,us,usp000hdxv,2022-07-16T15:29:54.970Z,"32 km WSW of Kisumu, Kenya",earthquake,,,,,reviewed,us,gcmt
+2006-05-29T15:30:37.850Z,0.343,30.114,23.9,4.9,mwc,85,82.7,,0.8,us,usp000ej88,2016-11-10T01:23:07.876Z,"17 km N of Kasese, Uganda",earthquake,,,,,reviewed,us,hrv
+1994-03-20T02:12:35.120Z,0.462,30.17,19.4,4.9,mb,,,,0.8,us,usp00069xx,2014-11-07T00:55:10.177Z,"24 km SSW of Fort Portal, Uganda",earthquake,,,,41,reviewed,us,us
+2001-01-31T19:15:30.350Z,0.466,29.494,27.7,4.9,mb,78,,,1.09,us,usp000a8sp,2022-04-29T19:06:59.358Z,"3 km SE of Beni, Democratic Republic of the Congo",earthquake,,,,42,reviewed,us,us
+1974-10-04T17:04:52.600Z,-11.55,34.202,33,4.9,mb,,,,,us,usp0000891,2014-11-06T23:21:26.675Z,"11 km WNW of Nkhata Bay, Malawi",earthquake,,,,,reviewed,us,us
+1986-01-24T22:30:08.510Z,-11.348,34.384,10,4.9,mb,,,,1,us,usp0002qda,2014-11-07T00:37:48.636Z,"30 km NNE of Nkhata Bay, Malawi",earthquake,,,,8,reviewed,us,us
+1985-05-15T10:59:21.710Z,-10.95,41.331,10,4.9,mb,,,,1.1,us,usp0002ev9,2014-11-07T00:36:35.204Z,"114 km ENE of Mocímboa, Mozambique",earthquake,,,,14,reviewed,us,us
+1985-12-03T06:29:05.740Z,-10.544,41.034,10,4.9,mb,,,,0.7,us,usp0002ngq,2014-11-07T00:37:34.891Z,"78 km ESE of Madimba, Tanzania",earthquake,,,,2,reviewed,us,us
+2009-12-11T04:49:09.390Z,-10.087,33.861,10,4.9,mwc,120,41.7,,1,us,usp000h4y9,2016-11-10T02:21:29.115Z,"18 km SSW of Karonga, Malawi",earthquake,,,,,reviewed,us,gcmt
+2006-02-06T18:50:44.440Z,-9.88,28.56,10,4.9,mb,35,66.2,,0.96,us,usp000e9nc,2022-05-02T18:12:16.916Z,"57 km W of Kawambwa, Zambia",earthquake,,,,52,reviewed,us,us
+1992-05-17T02:38:32.360Z,-9.86,34.021,28,4.9,mb,,,,1.6,us,usp00057ge,2014-11-07T00:50:38.102Z,"12 km NE of Karonga, Malawi",earthquake,,,,5,reviewed,us,us
+1987-10-13T19:47:09.270Z,-9.327,40.903,10,4.9,mb,,,,1.3,us,usp0003987,2014-11-07T00:41:05.117Z,"130 km NE of Mtwara, Tanzania",earthquake,,,,9,reviewed,us,us
+1985-04-23T12:29:25.500Z,-8.832,29.333,10,4.9,mb,,,,1.3,us,usp0002e2r,2014-11-07T00:36:27.930Z,"54 km SW of Kaputa, Zambia",earthquake,,,,5,reviewed,us,us
+1980-05-31T05:15:41.200Z,-8.726,32.347,10,4.9,mb,,,,,us,usp00017uv,2022-04-28T01:38:52.274Z,"37 km ESE of Laela, Tanzania",earthquake,,,,,reviewed,us,us
+1973-04-08T00:28:18.700Z,-8.487,32.189,33,4.9,mb,,,,,us,usp00001ab,2014-11-06T23:21:11.032Z,"17 km ENE of Laela, Tanzania",earthquake,,,,,reviewed,us,us
+1999-04-06T04:16:45.200Z,-8.424,39.262,10,4.9,mb,,,,0.73,us,usp00095vd,2014-11-07T01:07:24.413Z,"57 km S of Mbumi, Tanzania",earthquake,,,,34,reviewed,us,us
+2017-03-19T10:35:24.710Z,-8.1973,38.1675,14.52,4.9,mb,,76,5.801,1.41,us,us20008t5l,2017-06-12T19:46:49.040Z,"Tanzania",earthquake,9.4,4.8,0.092,37,reviewed,us,us
+2013-06-08T03:18:27.590Z,-8.046,32.19,10.3,4.9,mb,85,39,,0.64,us,usc000hiy9,2022-05-03T16:22:00.082Z,"59 km NNE of Laela, Tanzania",earthquake,,2.3,,57,reviewed,us,us
+2006-11-25T06:53:31.560Z,-7.737,30.499,10,4.9,mb,18,79.3,,1.19,us,usp000eysp,2014-11-07T01:30:56.835Z,"37 km SSW of Kirando, Tanzania",earthquake,,,,2,reviewed,us,us
+2004-12-08T08:50:31.790Z,-7.394,30.443,10,4.9,mb,24,60.1,,1,us,usp000daac,2014-11-07T01:24:15.066Z,"17 km W of Kirando, Tanzania",earthquake,,,,4,reviewed,us,us
+1994-11-12T12:18:00.050Z,-6.947,29.916,21.7,4.9,mb,,,,0.9,us,usp0006nez,2022-04-28T17:20:22.391Z,"59 km WSW of Karema, Tanzania",earthquake,,,,22,reviewed,us,us
+2002-11-04T08:25:54.560Z,-5.779,36.082,10,4.9,mb,50,,,1.19,us,usp000bg86,2014-11-07T01:16:58.081Z,"30 km N of Msanga, Tanzania",earthquake,,,,16,reviewed,us,us
+2000-12-15T10:01:19.940Z,-5.506,29.622,10,4.9,mb,28,,,1.38,us,usp000a63z,2014-11-07T01:11:43.992Z,"67 km NE of Kalemie, Democratic Republic of the Congo",earthquake,,,,6,reviewed,us,us
+2023-02-16T15:13:54.926Z,-5.4577,35.0044,10,4.9,mb,92,31,4.32,0.5,us,us6000jpe3,2024-01-18T19:21:48.073Z,"43 km N of Kilimatinde, Tanzania",earthquake,5.02,1.796,0.064,81,reviewed,us,us
+2009-01-20T11:50:17.740Z,-5.414,35.743,10,4.9,mb,31,48.1,,1.12,us,usp000gswk,2022-05-02T20:14:45.586Z,"57 km S of Kondoa, Tanzania",earthquake,,,,10,reviewed,us,us
+2003-12-07T00:11:02.270Z,-5.4,35.415,10,4.9,mb,57,110.3,,1.38,us,usp000cepz,2022-05-02T16:55:40.511Z,"57 km NNE of Kintinku, Tanzania",earthquake,,,,30,reviewed,us,us
+2023-04-14T23:44:36.867Z,-5.3218,34.9162,10,4.9,mb,85,40,4.289,0.47,us,us6000k4kz,2023-06-17T21:36:55.040Z,"26 km SE of Ikungi, Tanzania",earthquake,7.98,1.838,0.063,80,reviewed,us,us
+2020-03-13T18:37:43.377Z,-4.8695,38.5887,10,4.9,mb,,32,2.552,0.6,us,us60008f7y,2025-12-22T18:31:03.267Z,"20 km N of Maramba, Tanzania",earthquake,7.6,1.8,0.063,87,reviewed,us,us
+2011-04-15T08:49:33.260Z,-4.249,35.735,10,4.9,mb,126,56.2,,0.82,us,usp000j002,2022-07-19T12:25:08.095Z,"3 km SSW of Babati, Tanzania",earthquake,,,,40,reviewed,us,us
+1982-03-12T04:33:56.780Z,-4.058,28.825,10,4.9,mb,,,,0.9,us,usp0001k2w,2022-04-28T00:41:03.819Z,"68 km W of Rumonge, Burundi",earthquake,,,,24,reviewed,us,us
+2007-12-23T12:56:13.020Z,-4.043,39.253,10,4.9,mwc,108,39.4,,0.87,us,usp000fv2v,2022-07-13T23:47:28.359Z,"12 km NNW of Kinango, Kenya",earthquake,,,,,reviewed,us,gcmt
+1993-09-03T10:50:54.070Z,-3.995,34.059,33,4.9,ms,,,,0.5,us,usp0005zpc,2014-11-07T00:53:54.258Z,"Lake Victoria region, Tanzania",earthquake,,,,1,reviewed,us,us
+1995-02-27T12:22:44.850Z,-3.836,39.763,33,4.9,mb,,,,1,us,usp0006tm2,2020-04-16T18:47:22.459Z,"19 km SSW of Takaungu, Kenya",earthquake,,,,24,reviewed,us,us
+1979-07-02T20:37:33.500Z,-3.742,29.211,33,4.9,mb,,,,,us,usp00011p9,2022-04-27T14:59:46.904Z,"35 km NW of Rumonge, Burundi",earthquake,,,,,reviewed,us,us
+2002-05-29T11:11:28.820Z,-3.08,33.902,10,4.9,mb,60,,,0.94,us,usp000b562,2022-05-02T16:00:02.186Z,"17 km NE of Nyalikungu, Tanzania",earthquake,,,,37,reviewed,us,us
+1990-07-26T05:15:43.920Z,-2.948,35.854,10,4.9,mb,,,,0.9,us,usp0004cj2,2022-04-28T19:44:49.482Z,"44 km N of Mto wa Mbu, Tanzania",earthquake,,,,36,reviewed,us,us
+2019-10-30T20:57:51.097Z,-2.9338,28.598,10,4.9,mb,,104,8.833,0.89,us,us600068q0,2025-12-22T18:21:32.503Z,"52 km SSW of Kabare, Democratic Republic of the Congo",earthquake,7,1.9,0.097,33,reviewed,us,us
+1981-05-21T09:42:58.190Z,-2.812,28.73,33,4.9,mb,,,,1,us,usp0001dsv,2022-04-27T23:02:27.688Z,"35 km S of Kabare, Democratic Republic of the Congo",earthquake,,,,14,reviewed,us,us
+2007-09-08T14:15:33.000Z,-2.644,36.109,10,4.9,mwc,89,51.8,,1.03,us,usp000fmq1,2022-07-14T03:17:32.588Z,"66 km W of Longido, Tanzania",earthquake,,,,,reviewed,us,gcmt
+2007-07-18T11:11:16.560Z,-2.634,36.002,11.3,4.9,mb,23,56.7,,1,us,usp000fgj4,2014-11-07T01:32:59.878Z,"78 km W of Longido, Tanzania",earthquake,,29.9,,2,reviewed,us,us
+2007-07-16T14:23:34.360Z,-2.633,35.991,10,4.9,mb,19,77,,0.95,us,usp000fgc5,2022-05-02T20:22:08.647Z,"79 km W of Longido, Tanzania",earthquake,,,,6,reviewed,us,us
+2007-08-24T23:45:55.000Z,-2.614,36.224,10,4.9,mb,58,83.7,,0.83,us,usp000fkmm,2014-11-07T01:33:22.584Z,"54 km WNW of Longido, Tanzania",earthquake,,0,,27,reviewed,us,us
+1993-09-28T22:30:49.770Z,-2.526,28.602,10,4.9,mb,,,,1.5,us,usp000616h,2014-11-07T00:54:03.369Z,"21 km W of Kabare, Democratic Republic of the Congo",earthquake,,,,37,reviewed,us,us
+2008-02-03T11:00:07.080Z,-2.294,28.983,10,4.9,mb,59,87.4,,1.13,us,usp000fy27,2014-11-07T01:34:52.992Z,"22 km NNE of Cyangugu, Rwanda",earthquake,,,,23,reviewed,us,us
+1978-10-06T04:12:02.400Z,-1.961,28.97,33,4.9,mb,,,,,us,usp0000wvx,2022-04-27T15:23:45.593Z,"42 km SW of Gisenyi, Rwanda",earthquake,,,,,reviewed,us,us
+2010-01-28T23:52:30.520Z,-0.901,29.198,10,4.9,mwc,114,45,,0.94,us,usp000h6r2,2022-07-16T01:36:50.782Z,"50 km W of Ntungamo, Uganda",earthquake,,,,,reviewed,us,gcmt
+1986-07-15T15:03:03.680Z,-12.073,40.774,10,4.8,mb,,,,1.2,us,usp0002w1y,2014-11-07T00:38:41.993Z,"95 km SSE of Mocímboa, Mozambique",earthquake,,,,4,reviewed,us,us
+1997-10-10T06:25:55.910Z,-11.791,28.7,33,4.8,mb,,,,1.53,us,usp00088ty,2014-11-07T01:03:40.867Z,"68 km SSW of Mansa, Zambia",earthquake,,,,4,reviewed,us,us
+1984-09-01T13:59:40.460Z,-11.402,34.5,10,4.8,mb,,,,1.4,us,usp00026xh,2014-11-07T00:35:22.930Z,"31 km WSW of Mbamba Bay, Tanzania",earthquake,,,,1,reviewed,us,us
+1991-09-01T22:34:33.280Z,-10.821,41.252,29.1,4.8,mb,,,,1,us,usp0004w4y,2014-11-07T00:49:11.747Z,"110 km ESE of Madimba, Tanzania",earthquake,,,,38,reviewed,us,us
+1985-05-27T04:34:50.810Z,-10.67,41.231,10,4.8,mb,,,,1,us,usp0002f7v,2014-11-07T00:36:37.076Z,"102 km ESE of Madimba, Tanzania",earthquake,,,,16,reviewed,us,us
+1985-06-28T08:06:04.360Z,-10.456,40.979,10,4.8,mb,,,,0.5,us,usp0002g7y,2014-11-07T00:36:45.918Z,"70 km E of Madimba, Tanzania",earthquake,,,,1,reviewed,us,us
+2004-03-14T14:07:56.240Z,-10.403,34.426,10,4.8,mwc,51,69.9,,1.01,us,usp000cpxr,2016-11-10T00:28:40.496Z,"18 km WNW of Manda, Tanzania",earthquake,,,,,reviewed,us,hrv
+2009-12-06T17:55:13.780Z,-10.012,33.984,10,4.8,mb,40,76.3,,1.14,us,usp000h4te,2014-11-07T01:40:14.605Z,"10 km SSE of Karonga, Malawi",earthquake,,0,,9,reviewed,us,us
+1987-01-28T01:47:28.750Z,-9.972,33.715,10,4.8,mb,,,,0.7,us,usp00031ze,2014-11-07T00:39:41.024Z,"24 km W of Karonga, Malawi",earthquake,,,,4,reviewed,us,us
+1992-05-17T03:10:14.870Z,-9.953,34.24,31.7,4.8,mb,,,,1.3,us,usp00057gf,2014-11-07T00:50:38.105Z,"33 km E of Karonga, Malawi",earthquake,,,,5,reviewed,us,us
+1980-03-05T22:50:34.800Z,-9.725,32.737,33,4.8,mb,,,,,us,usp00015up,2022-04-28T01:41:27.474Z,"42 km S of Nakonde, Zambia",earthquake,,,,,reviewed,us,us
+1986-10-21T17:04:47.470Z,-8.614,31.242,10,4.8,mb,,,,1.4,us,usp0002z6x,2014-11-07T00:39:10.942Z,"21 km NE of Mpulungu, Zambia",earthquake,,,,1,reviewed,us,us
+2000-10-05T23:08:34.520Z,-8.038,30.52,33,4.8,mb,47,,,0.95,us,usp000a1av,2014-11-07T01:11:14.169Z,"37 km WSW of Nkove, Tanzania",earthquake,,,,32,reviewed,us,us
+2000-10-07T01:39:08.350Z,-7.995,30.68,33,4.8,mb,62,,,0.95,us,usp000a1ck,2022-04-29T18:54:28.039Z,"19 km WSW of Nkove, Tanzania",earthquake,,,,51,reviewed,us,us
+2008-01-19T13:30:31.180Z,-7.602,37.773,10,4.8,mb,44,104.6,,1.45,us,usp000fx12,2014-11-07T01:34:43.810Z,"19 km SSE of Kisanga, Tanzania",earthquake,,,,21,reviewed,us,us
+1977-04-11T16:12:19.400Z,-7.445,30.501,33,4.8,mb,,,,,us,usp0000nbq,2022-04-27T16:29:02.713Z,"11 km WSW of Kirando, Tanzania",earthquake,,,,,reviewed,us,us
+2015-09-08T23:43:27.130Z,-7.1361,39.821,10,4.8,mb,,67,5.065,1.05,us,us20003hga,2022-08-01T04:08:40.247Z,"59 km ESE of Vikindu, Tanzania",earthquake,8.5,1.8,0.07,63,reviewed,us,us
+2011-06-10T08:28:13.360Z,-7.081,39.635,10,4.8,mb,34,59.5,,1.15,us,usp000j2y1,2022-07-19T17:26:37.623Z,"38 km ESE of Vikindu, Tanzania",earthquake,,,,13,reviewed,us,us
+2001-07-13T19:23:55.540Z,-6.883,30.917,10,4.8,mb,67,,,0.75,us,usp000ajfr,2014-11-07T01:13:16.745Z,"42 km NW of Usevia, Tanzania",earthquake,,,,36,reviewed,us,us
+2001-08-26T17:56:13.080Z,-5.726,36.067,10,4.8,mb,39,,,0.94,us,usp000an3e,2014-11-07T01:13:37.035Z,"36 km N of Msanga, Tanzania",earthquake,,,,21,reviewed,us,us
+1999-02-06T23:27:00.520Z,-5.646,29.284,10,4.8,mb,,,,1.13,us,usp00092cw,2014-11-07T01:06:59.368Z,"34 km NNE of Kalemie, Democratic Republic of the Congo",earthquake,,,,6,reviewed,us,us
+2023-08-08T20:28:13.104Z,-5.3107,34.8895,10,4.8,mb,62,57,4.301,1.27,us,us6000kyqp,2023-10-17T22:01:28.040Z,"23 km SE of Ikungi, Tanzania",earthquake,9.11,1.865,0.08,48,reviewed,us,us
+1996-12-21T08:34:03.720Z,-5.215,35.545,10,4.8,mb,,,,1.19,us,usp0007us2,2014-11-07T01:01:48.531Z,"43 km SW of Kondoa, Tanzania",earthquake,,,,7,reviewed,us,us
+2023-08-04T22:06:16.244Z,-5.1108,29.6299,10,4.8,mb,71,49,4.614,0.46,us,us6000kxz5,2023-10-07T21:38:58.040Z,"25 km S of Kigoma, Tanzania",earthquake,8.96,1.84,0.066,72,reviewed,us,us
+2014-11-11T03:20:49.330Z,-4.9202,29.4305,13.73,4.8,mb,,83,4.483,0.57,us,usc000sw6h,2022-07-27T07:22:27.168Z,"22 km WSW of Kigoma, Tanzania",earthquake,7.6,4.2,0.081,51,reviewed,us,us
+2024-05-02T08:27:09.459Z,-4.8683,29.4774,10,4.8,mb,67,61,16.268,0.64,us,us6000mvnr,2024-07-15T03:58:25.040Z,"16 km W of Kigoma, Tanzania",earthquake,9.75,1.514,0.07,63,reviewed,us,us
+2016-03-22T10:56:17.410Z,-4.3984,35.9659,10,4.8,mb,,68,2.899,0.88,us,us20005bph,2022-08-02T15:27:35.317Z,"19 km SE of Galappo, Tanzania",earthquake,7.7,1.3,0.082,46,reviewed,us,us
+2011-09-20T02:21:47.350Z,-4.279,34.261,14.2,4.8,mb,76,60.7,,1.22,us,usp000j8aa,2014-11-07T01:45:55.902Z,"11 km W of Kiomboi, Tanzania",earthquake,,19.9,,29,reviewed,us,us
+2019-08-20T06:54:58.929Z,-4.2194,36.872,10,4.8,mb,,85,2.186,0.92,us,us600057pe,2019-11-08T22:13:36.040Z,"7 km WSW of Naberera, Tanzania",earthquake,8.3,1.9,0.103,30,reviewed,us,us
+2003-09-01T00:39:03.020Z,-4.198,30.074,10,4.8,mb,20,131.7,,1.22,us,usp000c6du,2014-11-07T01:19:39.130Z,"30 km ESE of Makamba, Burundi",earthquake,,,,5,reviewed,us,us
+2015-12-19T13:26:05.280Z,-3.7944,28.5538,10,4.8,mb,,73,3.849,0.78,us,us100048cu,2016-03-12T02:29:17.040Z,"78 km SW of Uvira, Democratic Republic of the Congo",earthquake,4,1.9,0.103,29,reviewed,us,us
+2003-04-05T22:48:19.950Z,-3.615,29.75,10,4.8,mb,53,118.3,,1.23,us,usp000bug2,2022-05-02T16:28:51.121Z,"12 km SSE of Mwaro, Burundi",earthquake,,,,40,reviewed,us,us
+1993-08-11T17:11:34.720Z,-3.527,29.36,21.2,4.8,mb,,,,0.7,us,usp0005yce,2014-11-07T00:53:42.654Z,"16 km S of Bujumbura, Burundi",earthquake,,,,35,reviewed,us,us
+1989-07-15T11:06:08.850Z,-3.401,34.444,10,4.8,mb,,,,1.4,us,usp0003xbj,2014-11-07T00:44:33.254Z,"47 km SE of Kisesa, Tanzania",earthquake,,,,6,reviewed,us,us
+2021-08-31T02:35:17.298Z,-3.359,32.3119,10,4.8,mb,,57,3.158,0.8,us,us7000f60h,2021-11-06T20:28:42.040Z,"33 km NNE of Masumbwe, Tanzania",earthquake,8.9,1.9,0.065,73,reviewed,us,us
+2007-08-07T10:23:02.660Z,-2.865,35.993,10,4.8,mb,15,90.4,,0.89,us,usp000fj3f,2014-11-07T01:33:12.919Z,"55 km NNE of Mto wa Mbu, Tanzania",earthquake,,0,,1,reviewed,us,us
+2007-07-18T10:29:17.270Z,-2.736,35.927,10,4.8,mb,20,69.4,,1.29,us,usp000fghz,2014-11-07T01:32:59.846Z,"68 km N of Mto wa Mbu, Tanzania",earthquake,,,,5,reviewed,us,us
+2017-12-02T17:20:26.390Z,-2.6951,28.6601,12.33,4.8,mww,,53,8.727,0.74,us,us1000bkbx,2018-02-20T09:06:12.040Z,"26 km SSW of Kabare, Democratic Republic of the Congo",earthquake,8.6,4.4,0.103,9,reviewed,us,us
+2016-09-23T16:11:56.610Z,-2.6498,29.0598,10,4.8,mb,,92,2.636,0.93,us,us10006s1p,2020-07-10T15:10:03.025Z,"24 km SE of Cyangugu, Rwanda",earthquake,8.7,1.9,0.082,46,reviewed,us,us
+2008-02-03T11:37:48.980Z,-2.503,28.981,10,4.8,mb,62,72.2,,0.78,us,usp000fy2a,2022-07-13T22:26:40.448Z,"8 km ESE of Cyangugu, Rwanda",earthquake,,,,18,reviewed,us,us
+2002-10-24T10:19:22.030Z,-2.02,28.975,10,4.8,mb,45,,,1.01,us,usp000bf7u,2014-11-07T01:16:48.618Z,"41 km W of Kibuye, Rwanda",earthquake,,,,24,reviewed,us,us
+1994-03-09T08:25:05.580Z,-1.803,29.795,33,4.8,mb,,,,0.8,us,usp00069eq,2014-11-07T00:55:07.617Z,"14 km N of Eglise Catholique, Centrale GIKO, Rwanda",earthquake,,,,17,reviewed,us,us
+1977-01-14T02:52:34.700Z,-1.71,28.948,33,4.8,mb,,,,,us,usp0000m5u,2014-11-06T23:21:39.322Z,"18 km SW of Sake, Democratic Republic of the Congo",earthquake,,,,,reviewed,us,us
+1987-01-16T19:40:03.360Z,-1.581,28.767,10,4.8,mb,,,,1.5,us,usp00031qs,2014-11-07T00:39:39.602Z,"30 km W of Sake, Democratic Republic of the Congo",earthquake,,,,3,reviewed,us,us
+2021-03-11T01:47:13.775Z,-1.5683,34.2551,10,4.8,mb,,60,2.591,0.49,us,us7000di0h,2021-05-21T19:49:16.040Z,"27 km SSW of Tarime, Tanzania",earthquake,7.5,1.9,0.114,24,reviewed,us,us
+2012-11-20T16:23:49.100Z,-0.379,29.928,16.7,4.8,mb,36,78.6,,1,us,usp000jvvy,2022-05-03T15:59:04.587Z,"51 km N of Rukungiri, Uganda",earthquake,,5.2,,15,reviewed,us,us
+2002-01-04T13:02:18.850Z,-0.136,29.758,10,4.8,mb,65,,,0.95,us,usp000avts,2022-05-02T15:40:20.737Z,"46 km SW of Kilembe, Uganda",earthquake,,,,27,reviewed,us,us
+1989-01-05T05:08:14.860Z,0.229,29.962,10,4.8,mb,,,,1,us,usp0003qhs,2014-11-07T00:43:23.904Z,"6 km WNW of Kilembe, Uganda",earthquake,,,,17,reviewed,us,us
+1984-07-17T09:23:50.200Z,-0.19,29.698,5,4.7,mb,,,,0.8,us,usp00025tb,2014-11-07T00:35:11.895Z,"55 km SW of Kilembe, Uganda",earthquake,,,,3,reviewed,us,us
+2015-11-25T09:38:12.570Z,-0.1635,29.7271,10,4.7,mb,,85,1.1,0.7,us,us100041ch,2022-08-01T20:19:40.507Z,"51 km SW of Kilembe, Uganda",earthquake,7.2,1.8,0.152,13,reviewed,us,us
+2001-09-24T01:29:07.430Z,0.104,35.979,10,4.7,mb,43,,,1.14,us,usp000appn,2014-11-07T01:13:50.174Z,"28 km ENE of Eldama Ravine, Kenya",earthquake,,,,24,reviewed,us,us
+1990-12-15T20:56:51.300Z,0.18,29.529,18.2,4.7,mb,,,,1.1,us,usp0004j6j,2014-11-07T00:47:37.127Z,"26 km E of Butembo, Democratic Republic of the Congo",earthquake,,,,21,reviewed,us,us
+2018-04-23T16:17:23.730Z,-12.4428,34.376,10,4.7,mb,,83,6.637,0.64,us,us1000dvz4,2018-07-25T21:36:06.040Z,"54 km N of Nkhotakota, Malawi",earthquake,6.9,1.9,0.133,18,reviewed,us,us
+1991-05-30T09:34:43.220Z,-11.205,32.624,10,4.7,mb,,,,1.5,us,usp0004s97,2014-11-07T00:48:38.085Z,"57 km W of Chama, Zambia",earthquake,,,,1,reviewed,us,us
+1973-07-18T19:39:13.000Z,-11.192,34.447,10,4.7,mb,,,,,us,usp00002rr,2014-11-06T23:21:14.874Z,"23 km WSW of Liuli, Tanzania",earthquake,,,,,reviewed,us,us
+1985-05-19T11:32:22.930Z,-10.813,41.365,10,4.7,mb,,,,1.1,us,usp0002eze,2014-11-07T00:36:36.117Z,"121 km ESE of Madimba, Tanzania",earthquake,,,,5,reviewed,us,us
+1985-07-19T13:40:38.200Z,-10.724,41.052,10,4.7,mb,,,,1.3,us,usp0002gx1,2014-11-07T00:36:52.678Z,"86 km ESE of Madimba, Tanzania",earthquake,,,,8,reviewed,us,us
+1985-06-28T08:38:14.990Z,-10.693,41.104,10,4.7,mb,,,,1.3,us,usp0002g80,2014-11-07T00:36:45.921Z,"90 km ESE of Madimba, Tanzania",earthquake,,,,10,reviewed,us,us
+1985-06-28T07:57:00.600Z,-10.617,40.96,10,4.7,mb,,,,1,us,usp0002g7x,2014-11-07T00:36:45.916Z,"72 km ESE of Madimba, Tanzania",earthquake,,,,4,reviewed,us,us
+1985-05-23T16:11:48.540Z,-10.6,40.922,10,4.7,mb,,,,1.3,us,usp0002f49,2014-11-07T00:36:36.677Z,"68 km ESE of Madimba, Tanzania",earthquake,,,,9,reviewed,us,us
+2004-08-21T20:11:48.900Z,-10.592,34.425,10,4.7,mwc,65,52.9,,0.86,us,usp000d2ma,2016-11-10T00:43:34.881Z,"22 km SW of Manda, Tanzania",earthquake,,0,,,reviewed,us,hrv
+2010-12-16T08:01:09.030Z,-9.079,41.104,10,4.7,mb,21,119.1,,1.24,us,usp000hqzm,2014-11-07T01:43:08.178Z,"165 km NE of Mtwara, Tanzania",earthquake,,,,4,reviewed,us,us
+1988-01-12T11:40:17.900Z,-8.783,32.604,10,4.7,mb,,,,1.4,us,usp0003c04,2014-11-07T00:41:30.610Z,"48 km WNW of Mlowo, Tanzania",earthquake,,,,4,reviewed,us,us
+2018-01-17T06:57:43.290Z,-8.7118,32.4847,10,4.7,mb,,141,7.761,0.8,us,us2000crdu,2018-04-10T01:11:43.040Z,"50 km ESE of Laela, Tanzania",earthquake,8.7,1.9,0.152,13,reviewed,us,us
+2024-02-29T05:04:44.098Z,-8.5691,30.4179,10,4.7,mb,40,63,7.015,0.81,us,us6000mfrt,2024-05-10T21:25:55.040Z,"79 km WNW of Mpulungu, Zambia",earthquake,9.23,1.869,0.101,30,reviewed,us,us
+2021-10-15T05:49:29.090Z,-8.5332,32.1593,10,4.7,mb,,100,8.005,0.81,us,us6000fute,2021-12-25T22:58:35.040Z,"12 km ENE of Laela, Tanzania",earthquake,9.6,1.9,0.106,27,reviewed,us,us
+1999-06-03T11:09:45.070Z,-8.469,38.559,33,4.7,mb,,,,1.18,us,usp000997p,2014-11-07T01:07:50.384Z,"57 km SSW of Utete, Tanzania",earthquake,,,,3,reviewed,us,us
+2020-04-15T13:40:48.935Z,-8.3761,38.6226,10,4.7,mb,,64,6.005,0.76,us,us70008wrp,2020-07-09T14:31:07.040Z,"45 km SSW of Utete, Tanzania",earthquake,9.8,1.9,0.087,40,reviewed,us,us
+2019-04-24T10:05:56.604Z,-8.143,29.5543,10,4.7,mb,,82,7.216,0.42,us,us70003b9j,2019-07-13T18:42:36.040Z,"37 km NNW of Kaputa, Zambia",earthquake,7.6,1.9,0.137,16,reviewed,us,us
+2000-10-02T09:38:48.880Z,-8.053,30.273,33,4.7,mb,13,,,1.2,us,usp000a152,2014-11-07T01:11:12.211Z,"64 km W of Nkove, Tanzania",earthquake,,,,5,reviewed,us,us
+2017-04-05T06:24:01.430Z,-8.0282,30.7625,10,4.7,mb,,127,7.377,0.94,us,us10008gm1,2017-06-23T07:26:31.040Z,"12 km SW of Nkove, Tanzania",earthquake,10,1.9,0.183,9,reviewed,us,us
+1998-01-11T06:32:56.400Z,-7.955,30.626,33,4.7,mb,,,,0.9,us,usp0008e33,2014-11-07T01:04:19.179Z,"24 km W of Nkove, Tanzania",earthquake,,,,8,reviewed,us,us
+2018-03-03T04:40:09.590Z,-7.6209,38.1373,10,4.7,mb,,49,5.228,0.96,us,us2000dbkf,2018-05-27T01:06:10.040Z,"52 km ESE of Kisanga, Tanzania",earthquake,8,1.7,0.081,46,reviewed,us,us
+1973-04-15T13:13:33.400Z,-7.183,30.274,36,4.7,mb,,,,,us,usp00001ds,2022-04-27T18:54:41.324Z,"44 km SSW of Karema, Tanzania",earthquake,,,,,reviewed,us,us
+2003-06-30T20:42:10.250Z,-6.825,29.802,25.4,4.7,mb,71,93.4,,0.89,us,usp000c1bn,2014-11-07T01:19:01.140Z,"70 km W of Karema, Tanzania",earthquake,,,,37,reviewed,us,us
+2014-01-08T22:07:31.040Z,-6.5157,30.987,10,4.7,mb,,65,5.879,0.9,us,usc000lyyv,2014-03-15T03:38:40.000Z,"21 km SSW of Mpanda, Tanzania",earthquake,,1.9,0.106,28,reviewed,us,us
+2007-05-22T21:48:00.290Z,-6.447,30.819,10,4.7,mb,72,142,,0.75,us,usp000fchd,2014-11-07T01:32:30.846Z,"29 km WSW of Mpanda, Tanzania",earthquake,,,,34,reviewed,us,us
+2005-12-15T22:08:29.760Z,-6.263,29.554,10,4.7,mb,54,127.4,,0.89,us,usp000e678,2014-11-07T01:27:54.212Z,"52 km SE of Kalemie, Democratic Republic of the Congo",earthquake,,,,30,reviewed,us,us
+2012-12-25T19:18:29.460Z,-6.131,29.708,10,4.7,mb,51,71.6,,0.99,us,usp000jxd9,2014-11-07T01:49:39.678Z,"60 km ESE of Kalemie, Democratic Republic of the Congo",earthquake,,,,17,reviewed,us,us
+2005-12-05T23:15:28.800Z,-6.091,29.516,10,4.7,mb,36,69.6,,0.83,us,usp000e5m2,2014-11-07T01:27:51.148Z,"38 km ESE of Kalemie, Democratic Republic of the Congo",earthquake,,,,14,reviewed,us,us
+1981-12-21T10:02:38.200Z,-5.77,29.837,33,4.7,mb,,,,1,us,usp0001hjh,2014-11-07T00:30:32.742Z,"73 km ENE of Kalemie, Democratic Republic of the Congo",earthquake,,,,6,reviewed,us,us
+1981-05-17T13:08:26.290Z,-5.76,29.435,33,4.7,mb,,,,0.8,us,usp0001dqn,2025-12-19T21:51:22.455Z,"33 km NE of Kalemie, Democratic Republic of the Congo",earthquake,,,,4,reviewed,us,us
+1991-03-19T20:29:34.870Z,-5.754,35.629,33,4.7,mb,,,,1,us,usp0004p98,2014-11-07T00:48:13.149Z,"46 km ENE of Kintinku, Tanzania",earthquake,,,,3,reviewed,us,us
+2002-11-27T23:33:26.870Z,-5.553,35.613,10,4.7,mb,25,,,1.17,us,usp000bjjn,2014-11-07T01:17:11.870Z,"55 km NE of Kintinku, Tanzania",earthquake,,,,9,reviewed,us,us
+2024-10-04T08:53:02.196Z,-5.5274,34.2383,9.441,4.7,mb,37,70,5.306,0.62,us,us6000nwgr,2024-12-14T14:50:29.040Z,"33 km NW of Itigi, Tanzania",earthquake,10.45,4.648,0.106,27,reviewed,us,us
+2002-10-13T02:08:05.380Z,-5.523,35.781,10,4.7,mb,20,,,1.35,us,usp000bedz,2014-11-07T01:16:44.997Z,"64 km NNW of Msanga, Tanzania",earthquake,,,,10,reviewed,us,us
+2002-04-10T20:18:27.490Z,-5.445,30.181,33,4.7,mb,20,,,0.5,us,usp000b24u,2014-11-07T01:15:23.821Z,"44 km SSW of Uvinza, Tanzania",earthquake,,,,16,reviewed,us,us
+2003-01-10T23:45:45.510Z,-5.427,35.784,33,4.7,mb,7,,,0.29,us,usp000bncd,2014-11-07T01:17:34.283Z,"58 km S of Kondoa, Tanzania",earthquake,,,,1,reviewed,us,us
+2002-10-13T04:46:32.840Z,-5.414,35.928,10,4.7,mb,22,,,1.07,us,usp000bee9,2014-11-07T01:16:45.024Z,"59 km SSE of Kondoa, Tanzania",earthquake,,,,6,reviewed,us,us
+2002-07-10T11:04:05.140Z,-5.409,35.81,10,4.7,mb,39,,,0.75,us,usp000b7vp,2014-11-07T01:16:02.349Z,"56 km S of Kondoa, Tanzania",earthquake,,,,23,reviewed,us,us
+2023-08-27T13:53:37.872Z,-5.3811,34.8727,10,4.7,mb,22,93,4.361,1.01,us,us7000krch,2023-11-04T21:35:36.040Z,"Tanzania",earthquake,7.76,1.534,0.142,15,reviewed,us,us
+2023-09-23T16:52:07.724Z,-5.3189,29.8743,10,4.7,mb,19,113,4.764,0.73,us,us7000kxnu,2023-12-02T23:01:11.040Z,"56 km SSE of Kigoma, Tanzania",earthquake,7.17,1.911,0.137,16,reviewed,us,us
+2022-09-05T22:11:25.365Z,-4.9343,35.1796,10,4.7,mb,52,56,3.835,0.7,us,us7000i5hd,2022-11-15T19:06:09.040Z,"33 km E of Mungaa, Tanzania",earthquake,5.43,1.874,0.081,46,reviewed,us,us
+2023-02-08T15:32:40.086Z,-4.914,39.3912,10,4.7,mb,46,68,2.872,0.41,us,us6000jmiw,2023-09-10T20:16:42.705Z,"Kenya",earthquake,9.54,1.635,0.094,34,reviewed,us,us
+1997-11-21T23:24:07.070Z,-4.827,29.383,10,4.7,mb,,,,0.74,us,usp0008b3j,2014-11-07T01:03:56.502Z,"27 km WNW of Kigoma, Tanzania",earthquake,,,,1,reviewed,us,us
+2006-06-10T20:25:19.230Z,-4.807,29.402,10,4.7,mb,75,121.2,,0.68,us,usp000ek3d,2014-11-07T01:29:21.058Z,"26 km WNW of Kigoma, Tanzania",earthquake,,,,35,reviewed,us,us
+2008-06-19T07:25:16.980Z,-4.617,29.495,10,4.7,mb,68,97.7,,0.79,us,usp000ga2a,2014-11-07T01:36:23.193Z,"29 km NW of Mwandiga, Tanzania",earthquake,,0,,35,reviewed,us,us
+2012-10-02T09:32:48.380Z,-4.572,35.892,10,4.7,mb,69,68.5,,1.32,us,usp000jtdd,2014-11-07T01:49:00.746Z,"34 km S of Galappo, Tanzania",earthquake,,,,18,reviewed,us,us
+1991-02-15T22:31:03.100Z,-4.379,28.518,10,4.7,mb,,,,0.6,us,usp0004mzm,2014-11-07T00:48:00.226Z,"111 km WSW of Rumonge, Burundi",earthquake,,,,6,reviewed,us,us
+2022-02-14T04:04:51.026Z,-4.3271,29.3112,10,4.7,mb,,54,3.965,0.76,us,us7000gkp1,2022-04-30T14:18:10.040Z,"41 km SSW of Rumonge, Burundi",earthquake,9.1,1.8,0.076,52,reviewed,us,us
+1986-09-27T04:50:15.950Z,-4.188,37.681,10,4.7,mb,,,,1,us,usp0002ye9,2014-11-07T00:39:03.575Z,"14 km SSW of Same, Tanzania",earthquake,,,,15,reviewed,us,us
+1988-06-10T10:07:32.970Z,-4.097,33.609,10,4.7,mb,,,,1.4,us,usp0003gv9,2014-11-07T00:42:18.775Z,"14 km SW of Igurubi, Tanzania",earthquake,,,,3,reviewed,us,us
+2009-10-07T01:40:48.570Z,-3.97,34.766,10,4.7,mb,65,41.1,,0.95,us,usp000h2fb,2014-11-07T01:39:52.928Z,"55 km NE of Kiomboi, Tanzania",earthquake,,,,22,reviewed,us,us
+1984-10-07T03:55:54.550Z,-3.923,37.924,10,4.7,mb,,,,1.4,us,usp00027z5,2014-11-07T00:35:33.351Z,"23 km N of Kisiwani, Tanzania",earthquake,,,,4,reviewed,us,us
+2011-04-03T04:37:59.500Z,-3.635,29.601,10,4.7,mb,54,70.2,,1.48,us,usp000hz64,2022-07-19T11:10:58.819Z,"17 km SW of Mwaro, Burundi",earthquake,,,,27,reviewed,us,us
+1984-08-22T06:16:34.460Z,-3.595,29.158,10,4.7,mb,,,,0.8,us,usp00026kz,2014-11-07T00:35:19.728Z,"22 km S of Uvira, Democratic Republic of the Congo",earthquake,,,,11,reviewed,us,us
+2009-10-15T05:13:41.000Z,-3.514,35.148,10,4.7,ml,4,168.3,,,us,usp000h2zk,2014-11-07T01:39:56.080Z,"48 km SW of Ngorongoro, Tanzania",earthquake,,,,,reviewed,pre,pre
+2018-03-24T21:18:39.710Z,-3.4273,32.3906,10,4.7,mb,,64,3.256,0.67,us,us1000d8q5,2022-08-08T01:32:05.221Z,"32 km NE of Masumbwe, Tanzania",earthquake,8.5,1.9,0.078,49,reviewed,us,us
+2004-02-24T02:14:34.030Z,-3.393,29.558,10,4.7,mb,71,106.1,,1.03,us,usp000cmxd,2020-09-18T19:49:57.463Z,"14 km SSW of Muramvya, Burundi",earthquake,,0,,33,reviewed,us,us
+2019-03-24T16:21:15.480Z,-3.0654,38.162,10,4.7,mb,,83,0.711,0.5,us,us1000jl0h,2019-06-06T18:54:24.040Z,"41 km S of Mtito Andei, Kenya",earthquake,5.9,1.9,0.099,31,reviewed,us,us
+2007-07-31T21:09:21.710Z,-2.898,36.292,10,4.7,mb,66,101,,1.28,us,usp000fhj7,2022-07-14T05:19:12.935Z,"47 km NNW of Monduli, Tanzania",earthquake,,,,33,reviewed,us,us
+2007-12-24T09:30:11.260Z,-2.895,36.154,10,4.7,mb,23,87,,1.27,us,usp000fv52,2014-11-07T01:34:28.629Z,"55 km NW of Monduli, Tanzania",earthquake,,,,1,reviewed,us,us
+2004-05-16T11:21:46.020Z,-2.877,29.49,10,4.7,mb,14,89.4,,1.01,us,usp000cv7e,2014-11-07T01:22:19.873Z,"16 km WNW of Kayanza, Burundi",earthquake,,0,,1,reviewed,us,us
+2007-08-05T12:55:49.870Z,-2.736,36.003,10,4.7,mb,53,56.6,,1.16,us,usp000fhy4,2014-11-07T01:33:12.301Z,"69 km NNE of Mto wa Mbu, Tanzania",earthquake,,,,13,reviewed,us,us
+1997-11-11T22:42:51.810Z,-2.727,28.912,10,4.7,mb,,,,1.11,us,usp0008agr,2014-11-07T01:03:53.572Z,"26 km S of Cyangugu, Rwanda",earthquake,,,,1,reviewed,us,us
+2007-07-16T13:48:29.760Z,-2.727,36.001,10,4.7,mb,18,69.2,,1.31,us,usp000fgbz,2014-11-07T01:32:58.520Z,"70 km NNE of Mto wa Mbu, Tanzania",earthquake,,,,2,reviewed,us,us
+2007-07-22T00:36:24.480Z,-2.726,35.894,10,4.7,mb,12,97.9,,1.39,us,usp000fgu0,2014-11-07T01:33:02.187Z,"69 km N of Mto wa Mbu, Tanzania",earthquake,,,,2,reviewed,us,us
+1997-02-11T07:38:37.910Z,-2.723,29.112,10,4.7,mb,,,,1.17,us,usp0007x2s,2014-11-07T01:02:08.137Z,"18 km N of Cibitoke, Burundi",earthquake,,,,4,reviewed,us,us
+2007-09-10T00:26:43.640Z,-2.683,36.119,10,4.7,mb,46,69,,0.89,us,usp000fmtd,2014-11-07T01:33:32.291Z,"64 km W of Longido, Tanzania",earthquake,,,,20,reviewed,us,us
+2016-10-24T23:30:00.710Z,-2.6056,29.0218,10,4.7,mb,,93,2.627,0.86,us,us20007gih,2022-05-03T04:08:30.053Z,"18 km SE of Cyangugu, Rwanda",earthquake,11.5,1.9,0.086,41,reviewed,us,us
+2008-02-05T17:29:08.340Z,-2.526,28.89,10,4.7,mb,21,102.4,,0.97,us,usp000fy8c,2014-11-07T01:34:54.186Z,"4 km SSW of Cyangugu, Rwanda",earthquake,,,,5,reviewed,us,us
+2008-02-15T04:04:53.050Z,-2.423,28.82,10,4.7,mb,83,101.3,,0.6,us,usp000fyyc,2014-11-07T01:34:57.230Z,"7 km NNW of Bukavu, Democratic Republic of the Congo",earthquake,,,,40,reviewed,us,us
+2007-07-30T11:54:53.380Z,-2.394,36.395,10,4.7,mb,13,141.4,,0.78,us,usp000fhem,2014-11-07T01:33:05.406Z,"46 km WNW of Namanga, Tanzania",earthquake,,,,3,reviewed,us,us
+2002-10-24T11:40:17.830Z,-2.015,28.973,10,4.7,mb,33,,,0.68,us,usp000bf7z,2014-11-07T01:16:48.631Z,"41 km W of Kibuye, Rwanda",earthquake,,,,20,reviewed,us,us
+2002-01-21T10:55:03.720Z,-1.903,29.117,10,4.7,mb,36,,,1,us,usp000awwk,2022-05-02T15:42:19.161Z,"27 km SW of Gisenyi, Rwanda",earthquake,,,,10,reviewed,us,us
+2002-12-13T13:24:25.940Z,-1.852,29.041,10,4.7,mb,23,,,0.78,us,usp000bkmb,2014-11-07T01:17:21.140Z,"28 km SW of Goma, Democratic Republic of the Congo",earthquake,,,,8,reviewed,us,us
+2021-05-26T03:46:31.637Z,-1.7237,29.4006,10,4.7,mb,,73,1.74,0.81,us,us7000e6aq,2021-07-31T22:09:50.040Z,"16 km E of Gisenyi, Rwanda",earthquake,8.6,1.5,0.102,29,reviewed,us,us
+2002-01-17T20:01:29.260Z,-1.684,29.077,15.4,4.7,mb,40,,,0.95,us,usp000awns,2022-05-02T15:42:13.103Z,"12 km SSE of Sake, Democratic Republic of the Congo",earthquake,,,,23,reviewed,us,us
+1978-04-05T17:46:10.500Z,-1.647,36.937,25,4.7,mb,,,,,us,usp0000txp,2020-08-26T19:43:19.589Z,"21 km SSW of Athi River, Kenya",earthquake,,,,,reviewed,us,us
+2021-05-24T08:37:25.450Z,-1.5912,29.2293,10,4.7,mb,,72,1.8,0.94,us,us6000efhz,2021-07-31T22:09:13.040Z,"9 km N of Goma, Democratic Republic of the Congo",earthquake,7.9,1.9,0.129,18,reviewed,us,us
+2021-05-25T09:03:00.255Z,-1.5761,29.4806,10,4.7,mb,,82,1.586,0.58,us,us7000e622,2022-01-05T07:14:42.773Z,"19 km WSW of Musanze, Rwanda",earthquake,4.9,1.9,0.087,40,reviewed,us,us
+2002-10-26T12:56:47.710Z,-1.572,29.155,10,4.7,mb,46,,,0.61,us,usp000bfdj,2014-11-07T01:16:49.191Z,"12 km E of Sake, Democratic Republic of the Congo",earthquake,,,,23,reviewed,us,us
+2012-02-02T02:54:03.230Z,-1.369,28.575,10,4.7,mb,37,91.3,,1.35,us,usp000je9f,2014-11-07T01:46:55.689Z,"56 km WNW of Sake, Democratic Republic of the Congo",earthquake,,,,9,reviewed,us,us
+2008-10-01T14:15:53.510Z,-0.806,33.743,24.7,4.7,mb,46,69.9,,1.12,us,usp000gj2x,2022-07-14T20:32:59.262Z,"77 km N of Musoma, Tanzania",earthquake,,,,20,reviewed,us,us
+2023-03-27T18:20:35.388Z,-0.6618,29.3042,14.775,4.7,mb,45,66,1.435,1.12,us,us6000k03l,2023-06-03T22:06:02.040Z,"Lake Edward region, Congo-Uganda",earthquake,8.31,3.849,0.089,44,reviewed,us,us
+2021-10-16T00:23:26.733Z,-0.3396,29.7956,10,4.7,mb,,60,0.978,0.53,us,us6000fv2x,2021-12-25T22:58:37.040Z,"57 km NNW of Rukungiri, Uganda",earthquake,6.8,1.9,0.085,42,reviewed,us,us
+1980-03-14T21:39:10.300Z,-12.425,41.216,10,4.6,mb,,,,,us,usp000160m,2014-11-06T23:24:19.062Z,"97 km NE of Pemba, Mozambique",earthquake,,,,,reviewed,us,us
+2018-11-20T15:24:13.130Z,-12.2345,41.2532,10,4.6,mb,,77,8.509,0.91,us,us1000hx3y,2019-02-02T20:02:31.040Z,"114 km NE of Pemba, Mozambique",earthquake,9.6,1.9,0.273,7,reviewed,us,us
+2018-09-09T11:48:24.370Z,-11.8441,41.0171,10,4.6,mb,,64,9.311,0.98,us,us2000hgq7,2018-11-14T17:40:19.040Z,"93 km SE of Mocímboa, Mozambique",earthquake,10.2,1.9,0.151,13,reviewed,us,us
+2016-09-07T04:24:33.820Z,-11.4511,34.3603,10,4.6,mb,,133,7.109,0.57,us,us10006mlq,2016-12-03T02:54:46.040Z,"18 km NNE of Nkhata Bay, Malawi",earthquake,11.3,1.9,0.137,16,reviewed,us,us
+2023-10-29T01:35:24.433Z,-11.2572,29.8425,10,4.6,mb,42,70,4.309,0.53,us,us7000l7ab,2024-01-10T06:01:06.040Z,"33 km ENE of Samfya, Zambia",earthquake,6.64,1.85,0.103,28,reviewed,us,us
+1977-02-06T11:54:05.500Z,-11.245,34.088,33,4.6,mb,,,,,us,usp0000mg4,2014-11-06T23:21:39.790Z,"25 km NNE of Mzuzu, Malawi",earthquake,,,,,reviewed,us,us
+1986-08-04T11:12:57.360Z,-11.002,34.484,10,4.6,mb,,,,1.4,us,usp0002wv9,2014-11-07T00:38:48.602Z,"18 km WNW of Liuli, Tanzania",earthquake,,,,2,reviewed,us,us
+1995-02-04T16:39:23.050Z,-10.803,41.26,10,4.6,mb,,,,1.3,us,usp0006sc5,2014-11-07T00:57:16.958Z,"110 km ESE of Madimba, Tanzania",earthquake,,,,20,reviewed,us,us
+1985-09-20T04:05:48.850Z,-10.658,41.106,10,4.6,mb,,,,0.8,us,usp0002jxm,2014-11-07T00:37:11.217Z,"89 km ESE of Madimba, Tanzania",earthquake,,,,1,reviewed,us,us
+1985-06-28T08:25:00.020Z,-10.632,41.154,10,4.6,mb,,,,0.8,us,usp0002g7z,2014-11-07T00:36:45.919Z,"93 km ESE of Madimba, Tanzania",earthquake,,,,2,reviewed,us,us
+1985-06-24T14:23:51.460Z,-10.6,41.148,10,4.6,mb,,,,1,us,usp0002g44,2014-11-07T00:36:45.432Z,"91 km ESE of Madimba, Tanzania",earthquake,,,,4,reviewed,us,us
+2015-06-09T22:53:23.810Z,-10.3107,41.3267,10,4.6,mb,,64,8.546,0.43,us,us10002k9d,2015-08-10T13:08:27.040Z,"109 km E of Madimba, Tanzania",earthquake,4.3,1.9,0.173,10,reviewed,us,us
+2009-11-22T20:39:09.230Z,-10.158,33.769,10,4.6,mb,48,54.3,,1.12,us,usp000h4ay,2014-11-07T01:40:08.206Z,"30 km SW of Karonga, Malawi",earthquake,,,,19,reviewed,us,us
+1985-06-28T14:55:58.860Z,-10.105,40.659,10,4.6,mb,,,,0.9,us,usp0002g86,2014-11-07T00:36:45.937Z,"Tanzania",earthquake,,,,2,reviewed,us,us
+2009-12-07T18:09:38.700Z,-10.079,33.756,10,4.6,mb,46,69.2,,1.14,us,usp000h4us,2014-11-07T01:40:14.854Z,"25 km SW of Karonga, Malawi",earthquake,,,,19,reviewed,us,us
+2010-02-13T15:20:48.840Z,-10.035,33.839,10,4.6,mb,34,67.1,,1.2,us,usp000h78u,2014-11-07T01:40:42.341Z,"15 km SW of Karonga, Malawi",earthquake,,0,,3,reviewed,us,us
+2010-09-05T02:07:59.360Z,-10.02,33.863,10,4.6,mb,36,65.8,,1.07,us,usp000hk8n,2014-11-07T01:42:24.075Z,"12 km SW of Karonga, Malawi",earthquake,,,,15,reviewed,us,us
+2009-12-11T20:06:24.600Z,-10,33.847,10,4.6,mb,54,45.2,,1.19,us,usp000h4yu,2014-11-07T01:40:15.877Z,"11 km SW of Karonga, Malawi",earthquake,,,,15,reviewed,us,us
+2009-12-06T17:43:52.330Z,-9.933,33.908,10,4.6,mb,19,75.9,,0.77,us,usp000h4td,2014-11-07T01:40:14.602Z,"2 km W of Karonga, Malawi",earthquake,,0,,1,reviewed,us,us
+1997-06-12T05:08:27.000Z,-9.752,31.646,10,4.6,mb,,,,1.12,us,usp00083e1,2014-11-07T01:02:55.628Z,"55 km NNE of Mungwi, Zambia",earthquake,,,,2,reviewed,us,us
+2001-08-17T02:10:29.470Z,-9.385,33.318,10,4.6,mb,17,,,1.83,us,usp000amkg,2014-11-07T01:13:34.148Z,"14 km E of Itumba, Tanzania",earthquake,,,,9,reviewed,us,us
+2013-11-07T13:39:22.960Z,-8.882,29.2072,10,4.6,mb,,82,6.434,1.35,us,usb000ku0x,2014-01-17T00:29:11.000Z,"67 km SW of Kaputa, Zambia",earthquake,,1.9,0.183,,reviewed,us,us
+2010-03-06T20:00:42.350Z,-8.834,32.563,10,4.6,mb,28,63,,1.15,us,usp000h8ux,2014-11-07T01:40:56.730Z,"49 km WNW of Mlowo, Tanzania",earthquake,,,,1,reviewed,us,us
+1984-11-25T15:42:15.030Z,-8.735,32.588,10,4.6,mb,,,,1.3,us,usp00029ey,2014-11-07T00:35:44.754Z,"52 km NW of Mlowo, Tanzania",earthquake,,,,3,reviewed,us,us
+2007-11-09T14:56:00.100Z,-8.546,32.258,10,4.6,mb,17,69.5,,1.1,us,usp000fs91,2014-11-07T01:34:08.856Z,"23 km E of Laela, Tanzania",earthquake,,,,4,reviewed,us,us
+2017-02-27T12:02:20.430Z,-8.5248,29.9092,34.22,4.6,mb,,65,6.919,0.99,us,us100087i7,2017-05-24T02:48:09.040Z,"27 km ESE of Kaputa, Zambia",earthquake,9.7,5.1,0.109,25,reviewed,us,us
+2012-03-31T06:12:07.030Z,-8.455,30.286,10,4.6,mb,18,97.1,,1.1,us,usp000jh1a,2014-11-07T01:47:20.866Z,"68 km E of Kaputa, Zambia",earthquake,,,,5,reviewed,us,us
+2001-08-26T19:45:11.330Z,-7.637,35.251,10,4.6,mb,24,,,0.84,us,usp000an3k,2014-11-07T01:13:37.110Z,"47 km SSE of Mafinga, Tanzania",earthquake,,,,9,reviewed,us,us
+2012-01-26T01:53:32.620Z,-7.547,30.332,10,4.6,mb,20,140.1,,0.96,us,usp000jdzg,2014-11-07T01:46:50.478Z,"32 km WSW of Kirando, Tanzania",earthquake,,,,7,reviewed,us,us
+1997-09-21T22:48:06.110Z,-7.332,30.345,10,4.6,mb,,,,0.57,us,usp00087us,2014-11-07T01:03:30.513Z,"29 km WNW of Kirando, Tanzania",earthquake,,,,1,reviewed,us,us
+1984-09-08T22:38:05.560Z,-6.65,30.814,10,4.6,mb,,,,0.8,us,usp000277f,2014-11-07T00:35:25.957Z,"44 km SW of Mpanda, Tanzania",earthquake,,,,1,reviewed,us,us
+2010-09-07T15:45:15.110Z,-6.567,30.781,10,4.6,mb,12,108,,1.48,us,usp000hkde,2014-11-07T01:42:24.870Z,"40 km SW of Mpanda, Tanzania",earthquake,,0,,2,reviewed,us,us
+1981-05-31T13:01:51.350Z,-6.481,31.042,33,4.6,mb,,,,1.1,us,usp0001dys,2014-11-07T00:29:32.030Z,"15 km SSW of Mpanda, Tanzania",earthquake,,,,8,reviewed,us,us
+2018-08-26T20:46:41.130Z,-6.4494,30.9922,10,4.6,mb,,79,5.814,0.53,us,us2000h891,2018-11-01T17:51:05.040Z,"14 km SW of Mpanda, Tanzania",earthquake,9.3,1.9,0.107,26,reviewed,us,us
+2006-07-30T07:59:44.850Z,-6.319,29.773,10,4.6,mb,62,71.6,,0.88,us,usp000epw7,2014-11-07T01:29:48.898Z,"76 km ESE of Kalemie, Democratic Republic of the Congo",earthquake,,,,23,reviewed,us,us
+1975-09-21T02:28:24.800Z,-5.926,34.537,33,4.6,mb,,,,,us,usp0000cw5,2014-11-06T23:21:32.084Z,"25 km SSE of Itigi, Tanzania",earthquake,,,,,reviewed,us,us
+2001-03-25T18:54:11.380Z,-5.695,35.898,10,4.6,mb,40,,,1.12,us,usp000ac19,2014-11-07T01:12:25.509Z,"42 km NNW of Msanga, Tanzania",earthquake,,,,18,reviewed,us,us
+2003-01-20T04:21:19.130Z,-5.597,36.004,10,4.6,mb,14,,,1.39,us,usp000bnvg,2014-11-07T01:17:36.614Z,"50 km N of Msanga, Tanzania",earthquake,,,,2,reviewed,us,us
+2007-07-16T01:46:26.540Z,-5.594,35.783,10,4.6,mb,12,100.2,,0.91,us,usp000fg9x,2014-11-07T01:32:58.306Z,"57 km NNW of Msanga, Tanzania",earthquake,,,,1,reviewed,us,us
+2009-08-14T12:06:55.980Z,-5.484,29.797,32.8,4.6,mb,43,87.8,,0.93,us,usp000h0c4,2014-11-07T01:39:30.574Z,"69 km SSE of Kigoma, Tanzania",earthquake,,,,10,reviewed,us,us
+2006-03-12T08:17:34.210Z,-5.475,35.716,10,4.6,mb,25,93.7,,1.24,us,usp000ec06,2014-11-07T01:28:30.988Z,"64 km S of Kondoa, Tanzania",earthquake,,,,8,reviewed,us,us
+2023-08-27T11:00:19.985Z,-5.4436,34.8787,10,4.6,mb,37,56,4.399,0.66,us,us7000krbn,2023-11-04T21:35:36.040Z,"36 km SSE of Ikungi, Tanzania",earthquake,7.63,1.427,0.111,24,reviewed,us,us
+2014-10-31T16:50:01.680Z,-5.3739,35.8833,10,4.6,mb,,96,4.21,0.64,us,usb000ss3v,2015-01-20T09:03:06.040Z,"Tanzania",earthquake,9,1.9,0.245,6,reviewed,us,us
+2012-10-31T15:15:07.090Z,-5.362,34.788,10,4.6,mb,35,57.2,,1.24,us,usp000juup,2014-11-07T01:49:12.318Z,"25 km S of Ikungi, Tanzania",earthquake,,0,,11,reviewed,us,us
+2023-03-22T20:47:16.879Z,-5.3006,34.964,10,4.6,mb,16,115,4.24,0.5,us,us6000k0ba,2023-05-26T21:54:01.040Z,"28 km SE of Ikungi, Tanzania",earthquake,9.18,1.917,0.244,5,reviewed,us,us
+1997-02-23T01:39:31.260Z,-5.295,34.818,10,4.6,mb,,,,1.09,us,usp0007xny,2014-11-07T01:02:10.920Z,"Tanzania",earthquake,,,,14,reviewed,us,us
+2003-03-10T23:26:25.390Z,-5.256,35.95,10,4.6,mb,16,157.5,,0.98,us,usp000bsck,2014-11-07T01:18:02.975Z,"43 km SSE of Kondoa, Tanzania",earthquake,,,,4,reviewed,us,us
+2018-08-22T05:30:34.720Z,-4.7772,34.8912,10,4.6,mb,,88,3.958,1.05,us,us1000gf6m,2022-08-08T07:22:57.975Z,"12 km SSE of Ilongero, Tanzania",earthquake,9,1.9,0.102,29,reviewed,us,us
+2020-06-02T05:44:13.311Z,-4.632,35.8795,10,4.6,mb,,56,3.124,0.85,us,us6000a4pm,2020-08-15T20:20:03.040Z,"31 km NNE of Kondoa, Tanzania",earthquake,8.9,1.9,0.086,40,reviewed,us,us
+2010-07-24T00:00:50.960Z,-4.523,35.966,10,4.6,mb,31,55.6,,1.2,us,usp000hgms,2014-11-07T01:42:00.018Z,"31 km SSE of Galappo, Tanzania",earthquake,,,,9,reviewed,us,us
+1992-12-13T05:07:40.660Z,-4.113,32.254,33,4.6,mb,,,,1.7,us,usp0005j7s,2014-11-07T00:52:02.429Z,"49 km SW of Kahama, Tanzania",earthquake,,,,7,reviewed,us,us
+2009-10-06T18:31:52.900Z,-4.043,34.867,10,4.6,mb,30,73,,1.09,us,usp000h2ew,2014-11-07T01:39:52.883Z,"43 km NW of Basotu, Tanzania",earthquake,,,,12,reviewed,us,us
+2023-01-20T21:30:51.083Z,-3.9917,34.3521,10,4.6,mb,61,70,4.027,0.42,us,us7000j5wu,2023-03-31T19:45:45.040Z,"30 km N of Kiomboi, Tanzania",earthquake,8.81,1.889,0.08,47,reviewed,us,us
+2009-10-26T01:39:28.400Z,-3.793,34.767,10,4.6,ml,4,165.9,,,us,usp000h3dt,2014-11-07T01:39:58.595Z,"Lake Victoria region, Tanzania",earthquake,,,,,reviewed,pre,pre
+2022-08-30T16:09:35.731Z,-3.7406,35.6078,10,4.6,mb,34,75,2.793,0.59,us,us7000i3ql,2022-11-06T04:37:26.040Z,"14 km NE of Mbulu, Tanzania",earthquake,8.52,1.903,0.132,19,reviewed,us,us
+2013-08-22T17:13:41.150Z,-3.6655,35.7779,10.82,4.6,mb,,76,2.92,0.92,us,usb000jagc,2013-10-25T20:09:41.000Z,"33 km NE of Mbulu, Tanzania",earthquake,,2.7,0.193,,reviewed,us,us
+2013-08-21T08:30:25.240Z,-3.2716,36.3428,15.68,4.6,mb,,113,2.316,1.23,us,usb000j81h,2022-07-25T23:13:45.907Z,"Tanzania",earthquake,,6.2,0.544,,reviewed,us,us
+1974-02-18T09:59:45.700Z,-3.246,29.487,5,4.6,mb,,,,,us,usp00005b9,2014-11-06T23:21:22.888Z,"13 km W of Muramvya, Burundi",earthquake,,,,,reviewed,us,us
+2022-09-12T23:04:53.757Z,-2.8625,35.9753,10,4.6,mb,15,124,1.821,0.61,us,us7000i9hb,2022-11-19T23:03:39.040Z,"55 km NNE of Mto wa Mbu, Tanzania",earthquake,5.56,1.933,0.273,4,reviewed,us,us
+2007-07-14T12:23:27.940Z,-2.845,36.067,10,4.6,mb,25,46.1,,1.29,us,usp000fg57,2014-11-07T01:32:57.446Z,"60 km NNE of Mto wa Mbu, Tanzania",earthquake,,,,14,reviewed,us,us
+2007-07-15T21:10:07.950Z,-2.81,36.106,10,4.6,mb,72,51.7,,1.33,us,usp000fg9d,2014-11-07T01:32:58.177Z,"66 km NNE of Mto wa Mbu, Tanzania",earthquake,,,,26,reviewed,us,us
+2013-06-03T09:53:11.000Z,-2.695,36,9.9,4.6,mb,22,45,,1.01,us,usp000k132,2014-11-07T01:51:00.075Z,"74 km NNE of Mto wa Mbu, Tanzania",earthquake,,2.8,,10,reviewed,us,us
+2017-12-05T00:22:49.690Z,-2.6583,28.967,10,4.6,mb,,68,8.419,0.73,us,us1000bl7t,2018-02-28T02:32:26.040Z,"20 km SSE of Cyangugu, Rwanda",earthquake,5.1,1.8,0.087,39,reviewed,us,us
+2007-08-20T07:15:35.790Z,-2.622,36.12,10,4.6,mb,18,78,,1.4,us,usp000fk8w,2014-11-07T01:33:19.668Z,"65 km W of Longido, Tanzania",earthquake,,,,1,reviewed,us,us
+2007-07-25T15:39:07.770Z,-2.514,36.218,10,4.6,mb,15,90.6,,0.99,us,usp000fh2r,2014-11-07T01:33:03.537Z,"58 km WNW of Longido, Tanzania",earthquake,,0,,3,reviewed,us,us
+2008-02-04T00:24:35.140Z,-2.432,28.88,10,4.6,mb,64,72,,1.06,us,usp000fy3w,2014-11-07T01:34:53.428Z,"6 km NNW of Cyangugu, Rwanda",earthquake,,,,20,reviewed,us,us
+2008-02-27T02:07:59.140Z,-2.392,28.966,10,4.6,mb,18,112.5,,0.54,us,usp000g032,2014-11-07T01:35:04.323Z,"12 km NNE of Cyangugu, Rwanda",earthquake,,,,2,reviewed,us,us
+2000-09-12T16:51:17.530Z,-2.265,28.739,10,4.6,mb,44,,,1.01,us,usp000a057,2014-11-07T01:11:04.714Z,"26 km NNW of Kabare, Democratic Republic of the Congo",earthquake,,,,13,reviewed,us,us
+2007-09-07T23:20:00.520Z,-2.239,28.73,10,4.6,mb,75,84,,0.76,us,usp000fmnq,2014-11-07T01:33:31.653Z,"29 km NNW of Kabare, Democratic Republic of the Congo",earthquake,,,,37,reviewed,us,us
+2002-01-19T17:09:29.170Z,-1.931,29.579,10,4.6,mb,35,,,1.32,us,usp000awsk,2020-09-18T18:41:35.595Z,"25 km W of Eglise Catholique, Centrale GIKO, Rwanda",earthquake,,,,21,reviewed,us,us
+2024-07-16T17:32:54.726Z,-1.8615,36.2298,10,4.6,mb,47,57,0.857,0.64,us,us7000mzmk,2024-09-28T22:42:03.040Z,"7 km NW of Magadi, Kenya",earthquake,6.53,1.851,0.112,24,reviewed,us,us
+2002-01-21T01:19:32.600Z,-1.726,28.854,10,4.6,mb,40,,,1.28,us,usp000awvx,2022-05-02T15:42:50.900Z,"26 km SW of Sake, Democratic Republic of the Congo",earthquake,,,,18,reviewed,us,us
+1991-02-24T19:31:53.140Z,-1.68,28.772,10,4.6,mb,,,,1,us,usp0004ncr,2014-11-07T00:48:04.996Z,"32 km WSW of Sake, Democratic Republic of the Congo",earthquake,,,,19,reviewed,us,us
+2002-01-30T00:33:09.140Z,-1.633,28.886,10,4.6,mblg,9,,,1.15,us,usp000axec,2014-11-07T01:14:46.565Z,"18 km WSW of Sake, Democratic Republic of the Congo",earthquake,,,,,reviewed,us,us
+2023-06-15T09:04:04.318Z,-1.0046,29.254,10,4.6,mb,37,71,1.537,0.77,us,us7000k8m5,2023-08-21T04:18:58.040Z,"46 km WSW of Ntungamo, Uganda",earthquake,9.79,1.88,0.116,22,reviewed,us,us
+2021-06-17T17:49:08.034Z,-0.6614,33.406,10,4.6,mb,,78,2.668,0.57,us,us7000edwz,2021-08-26T21:59:30.040Z,"102 km NNW of Musoma, Tanzania",earthquake,5.6,1.9,0.07,60,reviewed,us,us
+2003-08-25T02:05:57.990Z,-0.512,29.309,10,4.6,mb,49,93.8,,0.83,us,usp000c5vf,2014-11-07T01:19:35.136Z,"55 km NW of Ntungamo, Uganda",earthquake,,,,34,reviewed,us,us
+2023-08-24T22:01:04.441Z,-0.3355,29.7329,10,4.6,mb,40,93,1.04,0.75,us,us7000kqt1,2023-10-28T19:15:37.040Z,"60 km NNW of Rukungiri, Uganda",earthquake,11.02,1.905,0.098,31,reviewed,us,us
+2022-03-06T08:59:49.382Z,-0.1771,29.8078,10,4.6,mb,,66,1.021,0.48,us,us6000h2ih,2022-05-14T21:52:18.040Z,"47 km SSW of Kilembe, Uganda",earthquake,6.4,1.9,0.122,21,reviewed,us,us
+2023-02-28T09:30:19.645Z,0.2079,30.0065,10,4.6,mb,9,143,1.087,1.16,us,us7000ji5y,2023-05-08T01:59:53.040Z,"1 km NW of Kilembe, Uganda",earthquake,10.33,1.762,0.273,4,reviewed,us,us
+1988-01-02T09:05:52.210Z,0.482,30.149,10,4.6,m,,,,1.5,us,usp0003br5,2014-11-07T00:41:27.777Z,"24 km SW of Fort Portal, Uganda",earthquake,,,,,reviewed,us,bul
+2019-08-06T16:58:31.114Z,0.0359,30.1201,10,4.6,mb,,79,6.225,0.88,us,us600051g7,2020-01-28T22:50:30.510Z,"16 km SSE of Kasese, Uganda",earthquake,11.1,1.9,0.117,22,reviewed,us,us
+2013-07-05T13:42:21.200Z,-0.191,29.809,10,4.6,mb,14,88,,0.54,us,usp000k1r1,2014-11-07T01:51:13.733Z,"48 km SSW of Kilembe, Uganda",earthquake,,,,7,reviewed,us,us
+1994-05-22T00:50:20.280Z,0.011,29.928,10,4.6,mb,,,,0.7,us,usp0006cww,2014-11-07T00:55:30.052Z,"22 km SSW of Kilembe, Uganda",earthquake,,,,21,reviewed,us,us
+2020-01-28T22:32:06.045Z,-0.2431,29.7646,10,4.6,mb,,80,1.036,0.99,us,us60007ik2,2022-08-08T18:10:47.194Z,"56 km SSW of Kilembe, Uganda",earthquake,7.1,1.9,0.112,24,reviewed,us,us
+2015-09-12T12:32:04.290Z,0.3971,29.664,18.36,4.5,mb,,101,1.462,0.38,us,us20003npt,2022-08-01T09:04:26.796Z,"23 km ESE of Beni, Democratic Republic of the Congo",earthquake,9.5,3.8,0.163,11,reviewed,us,us
+1994-03-29T22:59:21.190Z,0.487,30.166,10,4.5,mb,,,,0.5,us,usp0006ac8,2014-11-07T00:55:11.504Z,"22 km SSW of Fort Portal, Uganda",earthquake,,,,14,reviewed,us,us
+2014-10-31T01:05:02.410Z,0.4918,29.9951,10,4.5,mb,,70,1.316,1.2,us,usb000srwl,2022-07-27T06:19:08.077Z,"14 km NE of Margherita, Uganda",earthquake,9.4,1.9,0.102,44,reviewed,us,us
+2023-03-04T08:54:56.092Z,0.3734,30.1049,10,4.5,mb,28,54,1.157,0.59,us,us7000jit7,2023-05-08T02:00:44.040Z,"21 km N of Kasese, Uganda",earthquake,6.75,1.735,0.132,17,reviewed,us,us
+2024-08-03T03:17:01.697Z,0.3286,30.4899,10,4.5,mb,22,71,0.957,1.27,us,us6000nhsp,2024-10-11T19:39:09.040Z,"16 km NNE of Kamwenge, Uganda",earthquake,4.07,1.923,0.144,14,reviewed,us,us
+2005-03-13T03:04:22.890Z,0.19,29.883,10,4.5,mb,16,100.6,,1.31,us,usp000dj37,2014-11-07T01:25:13.795Z,"14 km W of Kilembe, Uganda",earthquake,,,,3,reviewed,us,us
+2010-12-27T22:10:08.350Z,0.175,33.334,10,4.5,mb,12,89.8,,1.32,us,usp000hs5d,2014-11-07T01:43:15.885Z,"32 km SSE of Jinja, Uganda",earthquake,,,,3,reviewed,us,us
+1990-08-11T02:34:22.270Z,0.165,33.118,33,4.5,mb,,,,1.8,us,usp0004d7q,2014-11-07T00:46:55.795Z,"30 km SE of Lugazi, Uganda",earthquake,,,,3,reviewed,us,us
+2024-01-19T05:24:28.976Z,-0.0016,29.6423,10,4.5,mb,13,93,1.248,0.61,us,us6000m593,2024-03-29T17:37:55.040Z,"42 km ESE of Butembo, Democratic Republic of the Congo",earthquake,9.3,1.948,0.171,10,reviewed,us,us
+2017-04-10T08:17:33.660Z,-0.1582,29.8514,15.08,4.5,mb,,159,0.99,0.69,us,us10008ili,2017-07-05T18:09:55.040Z,"43 km SSW of Kilembe, Uganda",earthquake,8.9,5.9,0.128,18,reviewed,us,us
+2018-11-20T19:33:22.980Z,-12.3431,41.2243,10,4.5,mb,,61,8.447,1.35,us,us1000hx46,2019-02-02T20:02:31.040Z,"103 km NE of Pemba, Mozambique",earthquake,3.8,1.8,0.098,31,reviewed,us,us
+2022-03-21T06:49:26.786Z,-11.8061,41.0086,10,4.5,mb,,60,8.987,0.46,us,us6000h6c9,2022-05-28T18:35:22.040Z,"89 km SE of Mocímboa, Mozambique",earthquake,3.3,1.9,0.106,28,reviewed,us,us
+2012-06-27T03:35:19.440Z,-11.439,34.448,10,4.5,mb,27,90.6,,0.69,us,usp000jn9j,2014-11-07T01:48:09.602Z,"25 km NE of Nkhata Bay, Malawi",earthquake,,,,6,reviewed,us,us
+2018-06-04T06:38:29.350Z,-11.3487,29.4623,10,4.5,mb,,48,4.097,0.8,us,us1000elae,2018-08-29T16:33:33.040Z,"10 km W of Samfya, Zambia",earthquake,9.6,1.9,0.088,38,reviewed,us,us
+1986-06-29T07:52:24.890Z,-11.333,40.47,10,4.5,mb,,,,1,us,usp0002vhg,2014-11-07T00:38:35.500Z,"13 km E of Mocímboa, Mozambique",earthquake,,,,1,reviewed,us,us
+1985-06-24T11:59:29.060Z,-10.787,41.12,10,4.5,mb,,,,1.1,us,usp0002g3w,2014-11-07T00:36:45.331Z,"96 km ESE of Madimba, Tanzania",earthquake,,,,2,reviewed,us,us
+1986-06-23T00:07:56.400Z,-10.703,40.343,10,4.5,mb,,,,0.9,us,usp0002var,2014-11-07T00:38:34.198Z,"33 km S of Madimba, Tanzania",earthquake,,,,1,reviewed,us,us
+1985-06-30T17:58:50.460Z,-10.634,41.054,10,4.5,mb,,,,0.7,us,usp0002g9x,2014-11-07T00:36:46.183Z,"83 km ESE of Madimba, Tanzania",earthquake,,,,2,reviewed,us,us
+1985-06-21T02:29:05.330Z,-10.628,41.091,10,4.5,mb,,,,0.9,us,usp0002g0y,2014-11-07T00:36:44.573Z,"86 km ESE of Madimba, Tanzania",earthquake,,,,2,reviewed,us,us
+1987-03-27T10:12:51.360Z,-10.587,41.057,10,4.5,mb,,,,0.7,us,usp00033p9,2014-11-07T00:40:07.340Z,"81 km ESE of Madimba, Tanzania",earthquake,,,,4,reviewed,us,us
+2009-08-10T22:54:46.840Z,-10.563,34.377,10,4.5,mb,37,49.4,,0.93,us,usp000h062,2022-07-15T15:37:46.046Z,"24 km WSW of Manda, Tanzania",earthquake,,,,7,reviewed,us,us
+1985-06-23T02:54:00.670Z,-10.562,41.003,10,4.5,mb,,,,1,us,usp0002g2j,2014-11-07T00:36:45.129Z,"75 km ESE of Madimba, Tanzania",earthquake,,,,3,reviewed,us,us
+1985-06-28T11:10:29.490Z,-10.551,40.936,10,4.5,mb,,,,0.9,us,usp0002g82,2014-11-07T00:36:45.927Z,"68 km ESE of Madimba, Tanzania",earthquake,,,,2,reviewed,us,us
+1985-06-24T14:11:13.170Z,-10.551,41.044,10,4.5,mb,,,,0.9,us,usp0002g42,2014-11-07T00:36:45.418Z,"79 km ESE of Madimba, Tanzania",earthquake,,,,3,reviewed,us,us
+2024-05-04T18:05:40.031Z,-10.4992,34.1498,10,4.5,mb,60,81,9.808,0.75,us,us6000mwci,2025-01-30T10:33:58.828Z,"12 km NNE of Livingstonia, Malawi",earthquake,10.16,1.876,0.074,54,reviewed,us,us
+1999-09-01T04:07:53.740Z,-10.163,34.179,10,4.5,mb,,,,1.32,us,usp0009dwk,2014-11-07T01:08:23.346Z,"37 km SE of Karonga, Malawi",earthquake,,,,15,reviewed,us,us
+2009-11-25T21:14:31.190Z,-9.959,33.791,10,4.5,mb,46,53.7,,1.21,us,usp000h4dx,2014-11-07T01:40:08.778Z,"15 km W of Karonga, Malawi",earthquake,,,,11,reviewed,us,us
+2009-12-07T18:32:57.310Z,-9.956,33.645,10,4.5,mb,9,81.4,,1.43,us,usp000h4uu,2014-11-07T01:40:14.864Z,"31 km W of Karonga, Malawi",earthquake,,,,5,reviewed,us,us
+2009-12-06T17:40:12.560Z,-9.894,34.142,10,4.5,mb,15,65,,1.27,us,usp000h4tb,2014-11-07T01:40:14.597Z,"23 km E of Karonga, Malawi",earthquake,,,,1,reviewed,us,us
+1980-09-26T00:05:42.300Z,-9.866,34.257,33,4.5,mb,,,,,us,usp00019zc,2014-11-06T23:24:26.167Z,"29 km WSW of Mlangali, Tanzania",earthquake,,,,,reviewed,us,us
+1997-02-04T14:39:51.480Z,-8.76,28.718,10,4.5,mb,,,,1.66,us,usp0007ws7,2014-11-07T01:02:06.136Z,"64 km N of Nchelenge, Zambia",earthquake,,,,1,reviewed,us,us
+1973-05-03T02:27:13.000Z,-8.452,32.758,33,4.5,mb,,,,,us,usp00001pf,2014-11-06T23:21:12.224Z,"65 km NNW of Mlowo, Tanzania",earthquake,,,,,reviewed,us,us
+2001-09-18T11:00:59.380Z,-7.544,31.482,10,4.5,mb,20,,,0.91,us,usp000apdm,2014-11-07T01:13:49.044Z,"24 km E of Chala, Tanzania",earthquake,,,,4,reviewed,us,us
+2008-09-10T10:15:23.020Z,-7.462,30.453,10,4.5,mb,13,71.5,,1.15,us,usp000ggse,2014-11-07T01:37:10.345Z,"16 km WSW of Kirando, Tanzania",earthquake,,,,1,reviewed,us,us
+2009-10-26T02:08:46.600Z,-7.412,36.144,10,4.5,ml,4,214.2,,,us,usp000h3du,2014-11-07T01:39:58.596Z,"31 km NNE of Ilula, Tanzania",earthquake,,,,,reviewed,pre,pre
+2024-03-18T13:14:20.054Z,-7.3443,39.3449,10,4.5,mb,31,88,5.119,0.89,us,us6000mjkm,2025-05-07T07:41:29.537Z,"29 km SSE of Mkuranga, Tanzania",earthquake,11.57,1.669,0.139,15,reviewed,us,us
+2020-10-06T19:11:34.103Z,-7.2708,39.7923,10,4.5,mb,,59,5.181,0.5,us,us6000c679,2020-12-12T22:28:43.040Z,"61 km ESE of Vikindu, Tanzania",earthquake,9.4,1.9,0.078,52,reviewed,us,us
+2012-01-29T01:55:27.600Z,-7.142,30.391,10,4.5,mb,25,106.9,,1.04,us,usp000je41,2014-11-07T01:46:51.584Z,"35 km S of Karema, Tanzania",earthquake,,,,8,reviewed,us,us
+2009-12-28T06:48:15.660Z,-7.024,29.96,10,4.5,mb,33,65.1,,1.03,us,usp000h5e6,2014-11-07T01:40:19.057Z,"57 km WSW of Karema, Tanzania",earthquake,,,,4,reviewed,us,us
+1992-02-25T20:10:27.150Z,-6.911,39.924,10,4.5,mb,,,,0.8,us,usp00053gb,2014-11-07T00:50:08.169Z,"67 km SE of Sokoni, Tanzania",earthquake,,,,2,reviewed,us,us
+1973-01-14T13:36:59.800Z,-6.854,30.302,33,4.5,mb,,,,,us,usp000004z,2014-11-06T23:21:07.670Z,"15 km WSW of Karema, Tanzania",earthquake,,,,,reviewed,us,us
+2018-03-05T22:16:58.390Z,-6.687,35.3591,10,4.5,mb,,90,5.063,0.58,us,us2000dcl2,2018-06-08T05:12:10.040Z,"70 km NNE of Mafinga, Tanzania",earthquake,9.6,1.9,0.125,19,reviewed,us,us
+2007-04-01T15:23:32.650Z,-6.499,29.976,10,4.5,mb,21,73.2,,1.42,us,usp000f82j,2014-11-07T01:32:01.524Z,"62 km NW of Karema, Tanzania",earthquake,,0,,3,reviewed,us,us
+2022-06-07T06:21:59.691Z,-6.4812,30.898,10,4.5,mb,45,107,5.842,0.4,us,us7000hgim,2022-08-13T21:51:55.040Z,"24 km SW of Mpanda, Tanzania",earthquake,11.3,1.9,0.091,35,reviewed,us,us
+2016-08-17T14:29:33.240Z,-6.3527,32.9846,10,4.5,mb,,60,6.136,0.6,us,us10006ft6,2016-11-15T02:21:52.040Z,"83 km SSE of Sikonge, Tanzania",earthquake,6.7,1.9,0.139,15,reviewed,us,us
+2022-02-18T17:11:33.127Z,-6.3031,31.0686,10,4.5,mb,,71,5.673,0.71,us,us7000glzz,2022-04-30T14:18:27.040Z,"4 km N of Mpanda, Tanzania",earthquake,9.5,1,0.081,53,reviewed,us,us
+2012-09-26T13:14:21.650Z,-5.769,35.886,10,4.5,mb,34,67.6,,1.34,us,usp000jt00,2014-11-07T01:48:55.210Z,"35 km NNW of Msanga, Tanzania",earthquake,,,,6,reviewed,us,us
+2006-08-22T21:24:14.330Z,-5.74,29.294,10,4.5,mb,20,122.7,,1.17,us,usp000erht,2014-11-07T01:30:00.832Z,"25 km NNE of Kalemie, Democratic Republic of the Congo",earthquake,,,,3,reviewed,us,us
+2004-08-10T03:06:10.430Z,-5.721,35.389,10,4.5,mb,11,112.6,,1.14,us,usp000d1v9,2014-11-07T01:23:10.667Z,"24 km NE of Kintinku, Tanzania",earthquake,,,,4,reviewed,us,us
+2012-09-26T13:18:56.980Z,-5.665,35.669,10,4.5,mb,9,248.2,,0.73,us,usp000jt01,2014-11-07T01:48:55.214Z,"Tanzania",earthquake,,,,2,reviewed,us,us
+2016-07-21T17:15:09.100Z,-5.6644,35.9952,10,4.5,mb,,116,3.867,1.03,us,us20006hst,2016-09-17T01:27:53.040Z,"42 km N of Msanga, Tanzania",earthquake,14,2,0.18,9,reviewed,us,us
+2001-09-11T02:57:52.400Z,-5.659,29.401,10,4.5,mb,15,,,1.01,us,usp000anzj,2014-11-07T01:13:46.467Z,"39 km NE of Kalemie, Democratic Republic of the Congo",earthquake,,,,6,reviewed,us,us
+2001-11-27T00:20:30.540Z,-5.552,29.372,10,4.5,mb,18,,,1.04,us,usp000atj4,2014-11-07T01:14:18.994Z,"Lake Tanganyika region, Dem. Republic of the Congo-Tanzania",earthquake,,,,9,reviewed,us,us
+2004-10-27T17:30:43.350Z,-5.518,35.939,10,4.5,mb,21,148.5,,1.04,us,usp000d772,2014-11-07T01:23:49.784Z,"59 km N of Msanga, Tanzania",earthquake,,,,7,reviewed,us,us
+2019-06-10T06:59:37.929Z,-5.5008,29.4335,5,4.5,mb,,116,5.037,0.88,us,us600040sj,2019-08-27T17:48:04.040Z,"56 km NNE of Kalemie, Democratic Republic of the Congo",earthquake,9.7,1.9,0.131,17,reviewed,us,us
+2017-10-30T12:14:33.190Z,-5.4845,35.8673,10,4.5,mb,,74,3.788,1.04,us,us1000ayre,2022-08-07T20:36:19.655Z,"65 km NNW of Msanga, Tanzania",earthquake,9.4,1.9,0.116,22,reviewed,us,us
+2013-07-27T05:21:23.220Z,-5.468,35.64,10,4.5,mb,11,135,,1.35,us,usb000itlk,2014-11-07T01:51:20.616Z,"64 km NE of Kintinku, Tanzania",earthquake,,,,5,reviewed,us,us
+2019-06-06T07:01:08.282Z,-5.4327,35.9346,10,4.5,mb,,155,3.707,0.83,us,us600040bq,2019-08-27T17:47:38.040Z,"61 km SSE of Kondoa, Tanzania",earthquake,8.1,2,0.157,12,reviewed,us,us
+2023-08-08T22:32:45.821Z,-5.4322,34.9861,10,4.5,mb,19,146,4.315,0.72,us,us7000knpp,2023-10-17T22:01:28.040Z,"41 km SE of Ikungi, Tanzania",earthquake,5.96,1.93,0.163,11,reviewed,us,us
+2023-08-08T17:24:49.904Z,-5.4097,34.9557,10,4.5,mb,45,88,4.321,1.07,us,us7000knpl,2023-10-17T22:01:28.040Z,"37 km SE of Ikungi, Tanzania",earthquake,7.05,0.857,0.101,32,reviewed,us,us
+2019-06-05T23:13:49.404Z,-5.4027,35.9215,10,4.5,mb,,74,3.69,0.68,us,us70003yjx,2019-08-27T17:47:37.040Z,"57 km SSE of Kondoa, Tanzania",earthquake,8.7,1.9,0.1,29,reviewed,us,us
+2005-07-22T15:39:36.860Z,-5.351,29.809,10,4.5,mb,17,68.8,,1.16,us,usp000dvpg,2014-11-07T01:26:31.682Z,"56 km SSE of Kigoma, Tanzania",earthquake,,,,6,reviewed,us,us
+2023-08-11T17:22:24.586Z,-5.3321,34.9064,13.808,4.5,mb,27,112,4.303,0.76,us,us6000kzfp,2023-10-17T22:01:30.040Z,"26 km SE of Ikungi, Tanzania",earthquake,5.12,4.797,0.124,19,reviewed,us,us
+2010-05-05T00:03:14.300Z,-5.305,35.909,10,4.5,mb,30,74.6,,1.25,us,usp000hcb4,2022-07-16T12:45:13.730Z,"46 km SSE of Kondoa, Tanzania",earthquake,,,,7,reviewed,us,us
+2017-02-05T09:54:40.800Z,-5.0291,39.2566,14.98,4.5,mb,,148,2.915,0.58,us,us20008kgz,2017-05-09T01:24:27.040Z,"18 km ENE of Tanga, Tanzania",earthquake,15.9,5.9,0.157,12,reviewed,us,us
+2022-03-26T17:55:04.216Z,-5.0021,35.0151,10,4.5,mb,,110,4.003,0.34,us,us7000gyqp,2022-06-04T20:42:07.040Z,"Tanzania",earthquake,8.3,1.9,0.27,5,reviewed,us,us
+2008-02-14T15:31:02.170Z,-4.804,39.306,10,4.5,mb,19,60.6,,0.74,us,usp000fywv,2014-11-07T01:34:57.088Z,"19 km SSW of Shimoni, Kenya",earthquake,,,,3,reviewed,us,us
+2011-02-21T23:59:18.650Z,-4.622,35.702,10,4.5,mb,24,108.7,,0.77,us,usp000huvs,2014-11-07T01:43:42.084Z,"30 km SE of Endasak, Tanzania",earthquake,,,,5,reviewed,us,us
+2023-04-09T23:33:06.730Z,-4.4776,35.0866,10,4.5,mb,38,72,3.625,0.68,us,us6000k35q,2023-06-17T21:36:42.040Z,"12 km S of Basotu, Tanzania",earthquake,8.46,1.924,0.118,21,reviewed,us,us
+2020-06-02T05:48:59.488Z,-4.4214,35.6219,10,4.5,mb,,96,3.168,1.01,us,us6000a8ns,2020-08-15T20:20:03.040Z,"11 km E of Endasak, Tanzania",earthquake,5.9,1.9,0.132,17,reviewed,us,us
+2013-03-10T03:00:17.550Z,-4.348,29.123,10,4.5,mb,28,116.1,,0.87,us,usb000fi66,2022-07-24T19:57:41.990Z,"54 km SW of Rumonge, Burundi",earthquake,,,,6,reviewed,us,us
+2024-08-27T21:48:22.009Z,-4.2815,35.1136,10,4.5,mb,24,140,3.792,0.58,us,us6000nn4g,2024-11-09T21:18:31.040Z,"10 km NNE of Basotu, Tanzania",earthquake,13.52,1.934,0.145,15,reviewed,us,us
+2023-08-02T22:00:08.152Z,-4.2799,35.2579,10,4.5,mb,43,85,3.372,0.3,us,us6000kxea,2023-10-07T21:38:56.040Z,"18 km WSW of Bashanet, Tanzania",earthquake,7.07,1.635,0.097,31,reviewed,us,us
+2009-02-15T07:29:01.750Z,-4.052,34.878,10,4.5,mb,16,131.4,,1.12,us,usp000gu0h,2014-11-07T01:38:24.281Z,"41 km NNW of Basotu, Tanzania",earthquake,,,,3,reviewed,us,us
+2010-01-11T03:39:38.310Z,-4.024,34.87,10,4.5,mb,25,125.9,,1.07,us,usp000h5y7,2014-11-07T01:40:26.415Z,"44 km NNW of Basotu, Tanzania",earthquake,,,,6,reviewed,us,us
+2009-02-15T23:55:59.690Z,-4.023,34.966,10,4.5,mb,28,58.3,,0.69,us,usp000gu20,2014-11-07T01:38:24.498Z,"40 km NNW of Basotu, Tanzania",earthquake,,,,4,reviewed,us,us
+2009-10-06T18:35:28.140Z,-4.02,34.714,10,4.5,mb,38,72.7,,1.23,us,usp000h2ey,2014-11-07T01:39:52.888Z,"47 km NE of Kiomboi, Tanzania",earthquake,,,,21,reviewed,us,us
+2024-01-20T02:04:43.435Z,-3.8598,35.6806,10,4.5,mb,23,107,2.791,1.2,us,us7000ltzd,2024-03-29T17:37:57.040Z,"16 km E of Mbulu, Tanzania",earthquake,4.41,1.91,0.172,11,reviewed,us,us
+2009-10-24T09:55:49.500Z,-3.766,35.846,10,4.5,ml,4,184.7,,,us,usp000h3bw,2014-11-07T01:39:58.222Z,"29 km NNE of Magugu, Tanzania",earthquake,,,,,reviewed,pre,pre
+2021-01-24T17:07:04.619Z,-3.4673,29.5045,10,4.5,mb,,87,3.101,1.27,us,us7000d2xs,2021-04-13T17:07:26.040Z,"18 km ESE of Bujumbura, Burundi",earthquake,7.1,1.9,0.135,16,reviewed,us,us
+2004-02-24T07:00:02.490Z,-3.409,29.597,10,4.5,mb,18,107.2,,1.43,us,usp000cn0b,2014-11-07T01:21:26.211Z,"15 km S of Muramvya, Burundi",earthquake,,0,,4,reviewed,us,us
+2024-12-16T14:02:40.711Z,-3.2712,35.8467,10,4.5,mb,17,133,2.241,0.9,us,us6000ph96,2025-02-27T17:30:47.040Z,"8 km N of Mto wa Mbu, Tanzania",earthquake,8.87,1.813,0.205,7,reviewed,us,us
+2018-01-02T19:49:20.890Z,-3.2108,28.7226,10,4.5,mb,,99,3.282,1.19,us,us2000cka1,2018-03-23T23:16:48.040Z,"50 km WNW of Uvira, Democratic Republic of the Congo",earthquake,9.3,1.7,0.204,7,reviewed,us,us
+2013-06-03T03:24:42.120Z,-2.944,36.1,9.8,4.5,mb,16,70,,1.46,us,us2013qzcu,2014-11-07T01:50:59.927Z,"52 km NNE of Mto wa Mbu, Tanzania",earthquake,,3.1,,15,reviewed,us,us
+2018-08-05T10:58:27.860Z,-2.9203,35.5791,14.39,4.5,mb,,85,2.081,0.9,us,us1000g5sz,2022-09-13T10:17:58.886Z,"36 km NNE of Ngorongoro, Tanzania",earthquake,7.4,4.8,0.104,27,reviewed,us,us
+2022-12-13T08:44:48.855Z,-2.8622,35.9288,10,4.5,mb,16,92,1.843,1.04,us,us6000j92t,2023-02-18T22:04:08.040Z,"54 km N of Mto wa Mbu, Tanzania",earthquake,5.52,1.917,0.205,7,reviewed,us,us
+2019-04-19T08:56:46.548Z,-2.8428,28.6319,10,4.5,mb,,119,3.063,0.78,us,us70003cjl,2019-06-26T20:54:55.040Z,"42 km SSW of Kabare, Democratic Republic of the Congo",earthquake,10.9,1.9,0.181,9,reviewed,us,us
+2007-07-18T16:46:07.540Z,-2.793,36.061,10,4.5,mb,13,77.6,,1.42,us,usp000fgjn,2014-11-07T01:32:59.928Z,"65 km NNE of Mto wa Mbu, Tanzania",earthquake,,0,,1,reviewed,us,us
+2007-07-17T06:11:41.560Z,-2.744,36.038,10,4.5,mb,22,58.9,,1.29,us,usp000fgdz,2014-11-07T01:32:58.830Z,"70 km NNE of Mto wa Mbu, Tanzania",earthquake,,,,10,reviewed,us,us
+2007-08-05T08:47:00.680Z,-2.734,35.998,10,4.5,mb,23,56.6,,0.75,us,usp000fhxb,2014-11-07T01:33:11.990Z,"70 km NNE of Mto wa Mbu, Tanzania",earthquake,,,,8,reviewed,us,us
+2007-07-18T08:48:26.900Z,-2.691,36.036,10,4.5,mb,21,77.7,,1.36,us,usp000fghq,2014-11-07T01:32:59.832Z,"73 km W of Longido, Tanzania",earthquake,,,,9,reviewed,us,us
+2016-09-23T15:07:46.650Z,-2.6653,28.9891,10,4.5,mb,,99,2.694,0.61,us,us10006txj,2016-12-14T03:17:44.040Z,"Lac Kivu region, Democratic Republic of the Congo",earthquake,11.2,2,0.156,12,reviewed,us,us
+2002-09-09T14:13:27.930Z,-2.567,28.867,10,4.5,mb,16,,,0.83,us,usp000bbty,2014-11-07T01:16:29.388Z,"8 km SSE of Bukavu, Democratic Republic of the Congo",earthquake,,,,4,reviewed,us,us
+2023-09-24T14:21:54.966Z,-2.351,29.4757,10,4.5,mb,22,89,2.147,1.08,us,us7000kxts,2025-01-12T16:31:00.690Z,"16 km NNW of Nzega, Rwanda",earthquake,5.72,1.898,0.135,16,reviewed,us,us
+2007-07-12T15:31:42.980Z,-2.268,35.868,10,4.5,mb,24,85.3,,1.49,us,usp000fg1d,2014-11-07T01:32:56.962Z,"61 km SW of Magadi, Kenya",earthquake,,,,5,reviewed,us,us
+1992-03-01T11:15:12.400Z,-2.239,29.144,10,4.5,mb,,,,1.1,us,usp00053pf,2014-11-07T00:50:10.745Z,"30 km SW of Kibuye, Rwanda",earthquake,,,,7,reviewed,us,us
+2021-09-07T01:48:21.527Z,-2.1446,28.8862,10,4.5,mb,,75,2.403,0.54,us,us7000f8r0,2021-11-17T17:26:21.040Z,"37 km N of Cyangugu, Rwanda",earthquake,8.6,1.8,0.131,17,reviewed,us,us
+2012-04-17T02:01:19.760Z,-2.141,37.544,10,4.5,mb,25,107.4,,0.98,us,usp000jj3n,2014-11-07T01:47:33.082Z,"38 km SSW of Makueni Boma, Kenya",earthquake,,,,5,reviewed,us,us
+2005-01-30T21:16:09.890Z,-1.976,28.965,10,4.5,mb,29,99,,0.95,us,usp000df8g,2014-11-07T01:24:49.942Z,"43 km WNW of Kibuye, Rwanda",earthquake,,0,,19,reviewed,us,us
+2021-05-26T23:26:58.082Z,-1.855,29.2957,12.86,4.5,mb,,131,1.905,1.15,us,us6000eglj,2021-07-31T22:10:06.040Z,"17 km SSE of Gisenyi, Rwanda",earthquake,9.9,2.9,0.136,16,reviewed,us,us
+2021-05-23T13:07:55.737Z,-1.8121,29.3863,10,4.5,mb,,86,1.808,0.49,us,us6000efgf,2021-07-31T22:08:53.040Z,"18 km SE of Gisenyi, Rwanda",earthquake,10,1.9,0.118,22,reviewed,us,us
+2021-05-26T23:19:33.292Z,-1.7819,29.3238,12.91,4.5,mb,,110,1.836,0.47,us,us6000eexu,2021-07-31T22:10:05.040Z,"11 km SE of Gisenyi, Rwanda",earthquake,11.7,5.3,0.115,22,reviewed,us,us
+2021-05-26T16:07:17.587Z,-1.7731,29.304,10,4.5,mb,,176,1.846,0.73,us,us6000egl6,2021-07-31T22:09:58.040Z,"9 km SE of Gisenyi, Rwanda",earthquake,13.5,2,0.171,10,reviewed,us,us
+2021-05-25T08:19:55.526Z,-1.7687,29.3804,10,4.5,mb,,107,1.784,0.67,us,us6000efl0,2021-07-31T22:09:34.040Z,"15 km ESE of Gisenyi, Rwanda",earthquake,10.6,1.9,0.241,5,reviewed,us,us
+2021-05-26T17:32:56.193Z,-1.7394,29.2551,12.65,4.5,mb,,93,1.864,0.48,us,us6000egl4,2021-07-31T22:10:00.040Z,"4 km S of Gisenyi, Rwanda",earthquake,11.5,5.3,0.163,11,reviewed,us,us
+2021-05-27T09:33:54.317Z,-1.7149,29.3823,10,4.5,mb,,86,1.749,1.29,us,us6000ef10,2021-07-31T22:10:13.040Z,"14 km E of Gisenyi, Rwanda",earthquake,9.7,1.9,0.121,20,reviewed,us,us
+2021-05-23T20:38:56.907Z,-1.6519,29.2368,10,4.5,mb,,56,1.827,1.14,us,us7000e5l6,2021-07-31T22:09:01.040Z,"2 km NNE of Goma, Democratic Republic of the Congo",earthquake,5.8,1.9,0.121,21,reviewed,us,us
+2021-02-09T23:25:47.181Z,-1.1904,28.6712,10,4.5,mb,,83,2.147,0.74,us,us6000dg2e,2021-05-24T12:25:33.321Z,"59 km NW of Sake, Democratic Republic of the Congo",earthquake,5.2,1.9,0.121,20,reviewed,us,us
+2000-10-05T10:08:24.020Z,-1.152,28.71,10,4.5,mb,6,,,0.85,us,usp000a19w,2014-11-07T01:11:13.940Z,"59 km NW of Sake, Democratic Republic of the Congo",earthquake,,,,2,reviewed,us,us
+1988-05-07T05:05:33.930Z,-0.467,30.006,10,4.5,mb,,,,0.9,us,usp0003fqx,2014-11-07T00:42:06.226Z,"41 km N of Rukungiri, Uganda",earthquake,,,,6,reviewed,us,us
+2021-10-16T04:46:05.740Z,-0.3636,29.9453,10,4.5,mb,,160,0.827,0.66,us,us6000fw7d,2021-12-25T22:58:54.040Z,"52 km N of Rukungiri, Uganda",earthquake,8.3,1.9,0.27,4,reviewed,us,us
+1990-12-20T18:37:44.190Z,-0.318,29.46,33,4.5,mb,,,,1,us,usp0004jda,2014-11-07T00:47:38.230Z,"54 km SSE of Butembo, Democratic Republic of the Congo",earthquake,,,,1,reviewed,us,us
