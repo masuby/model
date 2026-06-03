@@ -147,7 +147,7 @@ export default function DataEntry() {
         <button className={`ui-chip ${mode === 'actual' ? 'is-active' : ''}`} onClick={() => setMode('actual')}>Enter actual values → standardised</button>
       </div>
 
-      {mode === 'actual' ? <RawDataEntry /> : (<>
+      {mode === 'actual' ? <RawDataEntry role={role} onSaved={() => setNeedsApply(true)} /> : (<>
       {needsApply && (
         <div className="de-apply ui-card ui-card-pad">
           <span>Edits saved. <strong>Apply</strong> to push them across the system (map, charts, tables).</span>
