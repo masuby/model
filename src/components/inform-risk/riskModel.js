@@ -165,7 +165,7 @@ function aggregateUnit(list, name, regionName, code) {
   return {
     admin: { adm2Name: name, adm1Name: regionName, adm2Code: code, iso3: 'TZA' },
     hazardExposure: he, vulnerability: vu, lackCopingCapacity: cc,
-    risk: [h, v, c].every(isNum) ? r1(Math.cbrt(h * v * c)) : null,
+    risk: [h, v, c].every(isNum) ? r1(Math.pow(h, 1 / 3) * Math.pow(v, 1 / 3) * Math.pow(c, 1 / 3)) : null,
   };
 }
 // Apply locally-saved edits (PMO/Admin direct or PMO-approved sector edits) BEFORE
@@ -179,13 +179,16 @@ const setTotal = {
   coping: (d, v) => { if (d.lackCopingCapacity) d.lackCopingCapacity.total = v; },
 };
 const DIRECT = { hazard: 'hazard', vulnerability: 'vuln', coping: 'cope' };
-// INFORM scaled geometric mean (Excel Box 6 / informCalculationEngine) - the authentic
-// category→dimension aggregation: a low category drags the dimension down (geometric).
+// INFORM scaled geometric mean — written EXACTLY as the Excel "INFORM SADC 2024" dimension cell
+// (Z4/AK4/AU4), read from the workbook's hidden engine sheets:
+//   dimension = ROUND( (10 - GEOMEAN( (10-c)/10*9+1  for each category c )) / 9 * 10 , 1 )
+//   where GEOMEAN(x1..xn) = (x1 * x2 * ... * xn)^(1/n)   ← product form, the literal Excel expression.
+// (the ROUND to 1 dp is applied by the caller via r1, matching the workbook.)
 const sgm = (a) => {
   const xs = a.filter((x) => typeof x === 'number' && isFinite(x));
   if (!xs.length) return null;
-  const sc = xs.map((x) => ((10 - x) / 10 * 9) + 1);
-  return (10 - Math.exp(sc.reduce((s, x) => s + Math.log(x), 0) / sc.length)) / 9 * 10;
+  const sc = xs.map((x) => ((10 - x) / 10 * 9) + 1);          // (10 - c)/10 * 9 + 1
+  return (10 - Math.pow(sc.reduce((p, x) => p * x, 1), 1 / sc.length)) / 9 * 10;  // (10 - GEOMEAN)/9*10
 };
 (function applyEdits() {
   const ovr = getOverrides();
@@ -224,7 +227,7 @@ const sgm = (a) => {
       if (typeof o[DIRECT[dim]] === 'number') setTotal[dim](d, o[DIRECT[dim]]); // explicit total edit wins
     }
     const h = d.hazardExposure?.total, v = d.vulnerability?.total, c = d.lackCopingCapacity?.total;
-    if ([h, v, c].every((x) => typeof x === 'number')) d.risk = r1(Math.cbrt(h * v * c));
+    if ([h, v, c].every((x) => typeof x === 'number')) d.risk = r1(Math.pow(h, 1 / 3) * Math.pow(v, 1 / 3) * Math.pow(c, 1 / 3));
     // Provenance for viewing (per-indicator edit source; registry default applied at view time).
     if (o.indSrc) d._prov = { ...(d._prov || {}), ...o.indSrc };
     if (typeof o.exposure === 'number' && o.expSrc) d._prov = { ...(d._prov || {}), 'hazard:exposure': o.expSrc };

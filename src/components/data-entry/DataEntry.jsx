@@ -24,10 +24,10 @@ const TOTAL_KEY = { hazard: 'hazard', vulnerability: 'vuln', coping: 'cope' };
 const AUTH_OPTIONS = Object.entries(AUTHORITIES).filter(([k]) => k !== 'INFORM' && k !== 'CHC').map(([k, v]) => ({ k, ...v }));
 const DEFAULT_AUTH = { pmo: 'PMO', sector: 'MOW' };
 
-const cbrt = (h, v, c) => ([h, v, c].every((x) => typeof x === 'number') ? round1(Math.cbrt(h * v * c)) : null);
+const cbrt = (h, v, c) => ([h, v, c].every((x) => typeof x === 'number') ? round1(Math.pow(h, 1 / 3) * Math.pow(v, 1 / 3) * Math.pow(c, 1 / 3)) : null);
 const meanOf = (xs) => { const a = xs.filter((x) => typeof x === 'number'); return a.length ? a.reduce((s, x) => s + x, 0) / a.length : null; };
 // INFORM scaled geometric mean (Excel Box 6) - category → dimension.
-const sgm = (a) => { const xs = a.filter((x) => typeof x === 'number' && isFinite(x)); if (!xs.length) return null; const sc = xs.map((x) => ((10 - x) / 10 * 9) + 1); return (10 - Math.exp(sc.reduce((s, x) => s + Math.log(x), 0) / sc.length)) / 9 * 10; };
+const sgm = (a) => { const xs = a.filter((x) => typeof x === 'number' && isFinite(x)); if (!xs.length) return null; const sc = xs.map((x) => ((10 - x) / 10 * 9) + 1); return (10 - Math.pow(sc.reduce((p, x) => p * x, 1), 1 / sc.length)) / 9 * 10; };
 function recomputeDim(dim, ind) {
   const aggs = DIMENSION_TREE[dim].components
     .map((c) => meanOf(c.indicators.map((i) => ind[`${dim}:${i.k}`])))

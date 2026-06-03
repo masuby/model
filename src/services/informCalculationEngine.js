@@ -157,23 +157,24 @@ export function informScaledGeomean(values, weights = null) {
   });
   if (valid.length === 0) return null;
 
-  // Step 1: rescale 0–10 → 1–10 via inversion
+  // Step 1: rescale 0–10 → 1–10 via inversion   ((10 - val)/10*9 + 1)
   const scaled = valid.map(v => ((10 - v) / 10 * 9) + 1);
 
-  // Step 2: weighted geometric mean
+  // Step 2: geometric mean — written EXACTLY as the Excel GEOMEAN(x1,…,xn) = (x1*x2*…*xn)^(1/n)
+  // (product form, the workbook's literal expression; weights default to 1 = unweighted GEOMEAN).
   const totalW = ws.reduce((s, w) => s + w, 0);
-  const logSum = scaled.reduce((acc, val, i) => acc + Math.log(val) * ws[i], 0);
-  const geo = Math.exp(logSum / totalW);
+  const product = scaled.reduce((p, val, i) => p * Math.pow(val, ws[i]), 1);
+  const geo = Math.pow(product, 1 / totalW);
 
   // Step 3: rescale back to 0–10
   return (10 - geo) / 9 * 10;
 }
 
-/** Plain (unscaled) geometric mean — used for diagnostic / extension code only. */
+/** Plain (unscaled) geometric mean — Excel GEOMEAN(x1..xn) = (x1*x2*…*xn)^(1/n). */
 export function geometricMean(values) {
   const v = values.filter(x => isFiniteNumber(x) && x > 0);
   if (v.length === 0) return null;
-  return Math.exp(v.reduce((s, x) => s + Math.log(x), 0) / v.length);
+  return Math.pow(v.reduce((p, x) => p * x, 1), 1 / v.length);
 }
 
 export function aggregate(values, method, weights = null) {

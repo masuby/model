@@ -29,7 +29,7 @@ const isN = (x) => typeof x === 'number' && isFinite(x);
 const r1 = (x) => Math.round(x * 10) / 10;
 const num = (x) => { const v = +x; return isFinite(v) ? v : null; };
 const mean = (a) => { const v = a.filter(isN); return v.length ? v.reduce((s, x) => s + x, 0) / v.length : null; };
-const sgm = (a) => { const v = a.filter(isN); if (!v.length) return null; const sc = v.map((x) => ((10 - x) / 10 * 9) + 1); return (10 - Math.exp(sc.reduce((s, x) => s + Math.log(x), 0) / sc.length)) / 9 * 10; };
+const sgm = (a) => { const v = a.filter(isN); if (!v.length) return null; const sc = v.map((x) => ((10 - x) / 10 * 9) + 1); return (10 - Math.pow(sc.reduce((p, x) => p * x, 1), 1 / sc.length)) / 9 * 10; };
 const normR = (s) => String(s || '').toLowerCase().replace(/[^a-z]/g, '');
 const clone = (o) => JSON.parse(JSON.stringify(o));
 
@@ -74,7 +74,7 @@ for (const f of councils.features) {
   // Vulnerability & Coping are the district's (survey resolution) — riskModel references the live
   // district object so Data-Entry edits flow through; we store only the council-specific hazard + risk.
   const h = he.total, v = src.vulnerability?.total, c = src.lackCopingCapacity?.total;
-  const cRisk = [h, v, c].every(isN) ? r1(Math.cbrt(h * v * c)) : src.risk;
+  const cRisk = [h, v, c].every(isN) ? r1(Math.pow(h, 1 / 3) * Math.pow(v, 1 / 3) * Math.pow(c, 1 / 3)) : src.risk;
 
   out[code] = { hazardExposure: he, risk: cRisk };
   made++;

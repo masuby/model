@@ -13,7 +13,7 @@ import data from '../../../data/tanzania-inform-risk.json';
 const D = data.subnational.adm2;
 const isN = (x) => typeof x === 'number' && isFinite(x);
 const mean = (a) => { const v = a.filter(isN); return v.length ? v.reduce((s, x) => s + x, 0) / v.length : null; };
-const sgm = (a) => { const v = a.filter(isN); if (!v.length) return null; const sc = v.map((x) => ((10 - x) / 10 * 9) + 1); return (10 - Math.exp(sc.reduce((s, x) => s + Math.log(x), 0) / sc.length)) / 9 * 10; };
+const sgm = (a) => { const v = a.filter(isN); if (!v.length) return null; const sc = v.map((x) => ((10 - x) / 10 * 9) + 1); return (10 - Math.pow(sc.reduce((p, x) => p * x, 1), 1 / sc.length)) / 9 * 10; };
 const r1 = (x) => Math.round(x * 10) / 10;
 const cat = (o) => Object.entries(o).filter(([k]) => k !== 'aggregate').map(([, v]) => v);
 const byName = (nm) => D.find((u) => u.admin.adm2Name.toLowerCase().replace(/[^a-z]/g, '') === nm.toLowerCase().replace(/[^a-z]/g, ''));
@@ -35,7 +35,7 @@ describe('INFORM authentic aggregation (Excel parity)', () => {
     for (const u of D) {
       const h = u.hazardExposure?.total, v = u.vulnerability?.total, c = u.lackCopingCapacity?.total;
       if (![h, v, c].every(isN) || !isN(u.risk)) continue;
-      tot++; if (Math.abs(r1(Math.cbrt(h * v * c)) - u.risk) < 0.06) ok++;
+      tot++; if (Math.abs(r1(Math.pow(h, 1 / 3) * Math.pow(v, 1 / 3) * Math.pow(c, 1 / 3)) - u.risk) < 0.06) ok++;
     }
     expect(ok).toBe(tot);
   });

@@ -16,7 +16,7 @@ const D = risk.subnational.adm2; const byName = (n) => D.find((d) => d.admin.adm
 const isN = (x) => typeof x === 'number' && isFinite(x);
 const r2 = (x) => (isN(x) ? Math.round(x * 100) / 100 : '');
 const mean = (a) => { const v = a.filter(isN); return v.length ? v.reduce((s, x) => s + x, 0) / v.length : null; };
-const sgm = (a) => { const v = a.filter(isN); if (!v.length) return null; const sc = v.map((x) => ((10 - x) / 10 * 9) + 1); return (10 - Math.exp(sc.reduce((s, x) => s + Math.log(x), 0) / sc.length)) / 9 * 10; };
+const sgm = (a) => { const v = a.filter(isN); if (!v.length) return null; const sc = v.map((x) => ((10 - x) / 10 * 9) + 1); return (10 - Math.pow(sc.reduce((p, x) => p * x, 1), 1 / sc.length)) / 9 * 10; };
 
 const ru = byName('Rufiji');
 const droughtRaw = readCsv('data-source/chirps_drought_spi_spei.csv').find((r) => /rufiji/i.test(r.dist_name)) || {};
@@ -95,10 +95,10 @@ const regC = r2(sgm([regAgg((d) => d.lackCopingCapacity.infrastructure.aggregate
 const lvl = [['level', 'unit', 'how_it_is_built', 'Hazard&Exposure', 'Vulnerability', 'LackOfCoping', 'risk_cbrt']];
 lvl.push(['council (195)', 'Kibiti', 'Hazard computed on Kibiti polygon (raise-only vs district); Vuln & Coping = Rufiji district', r2(kib.hazardExposure.total), r2(ru.vulnerability.total), r2(ru.lackCopingCapacity.total), r2(kib.risk)]);
 lvl.push(['district (170)', 'Rufiji', 'indicator->category mean, category->dimension sgm, risk cbrt', r2(ru.hazardExposure.total), r2(ru.vulnerability.total), r2(ru.lackCopingCapacity.total), r2(ru.risk)]);
-lvl.push(['region (31)', `Pwani (${pwReg.length} districts)`, 'mean of district indicators, then re-run sgm + cbrt', regH, regV, regC, r2(Math.cbrt(regH * regV * regC))]);
+lvl.push(['region (31)', `Pwani (${pwReg.length} districts)`, 'mean of district indicators, then re-run sgm + cbrt', regH, regV, regC, r2(Math.pow(regH, 1 / 3) * Math.pow(regV, 1 / 3) * Math.pow(regC, 1 / 3))]);
 lvl.push(['national', 'Tanzania', 'official INFORM country value (not a unit mean)', risk.national.hazardExposure, risk.national.vulnerability, risk.national.lackCopingCapacity, risk.national.risk]);
 fs.writeFileSync(ROOT + 'docs/worked_example_levels.csv', lvl.map((r) => r.map((x) => `"${x}"`).join(',')).join('\n'));
 
 console.log('wrote docs/worked_example_indicators.csv (' + (rows.length - 1) + ' rows) + docs/worked_example_levels.csv');
 console.log('\nRufiji chain: H', ru.hazardExposure.total, 'V', ru.vulnerability.total, 'LCC', ru.lackCopingCapacity.total, '-> risk', ru.risk, '= cbrt(', ru.hazardExposure.total, '*', ru.vulnerability.total, '*', ru.lackCopingCapacity.total, ') =', r2(Math.cbrt(ru.hazardExposure.total * ru.vulnerability.total * ru.lackCopingCapacity.total)));
-console.log('Pwani region: H', regH, 'V', regV, 'LCC', regC, '-> risk', r2(Math.cbrt(regH * regV * regC)));
+console.log('Pwani region: H', regH, 'V', regV, 'LCC', regC, '-> risk', r2(Math.pow(regH, 1 / 3) * Math.pow(regV, 1 / 3) * Math.pow(regC, 1 / 3)));

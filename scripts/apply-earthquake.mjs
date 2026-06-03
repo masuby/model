@@ -15,7 +15,7 @@ const readCsv = (p) => { const l = fs.readFileSync(ROOT + p, 'utf8').trim().spli
 const isN = (x) => typeof x === 'number' && isFinite(x);
 const r1 = (x) => Math.round(x * 10) / 10;
 const mean = (a) => { const v = a.filter(isN); return v.length ? v.reduce((s, x) => s + x, 0) / v.length : null; };
-const sgm = (a) => { const v = a.filter(isN); if (!v.length) return null; const sc = v.map((x) => ((10 - x) / 10 * 9) + 1); return (10 - Math.exp(sc.reduce((s, x) => s + Math.log(x), 0) / sc.length)) / 9 * 10; };
+const sgm = (a) => { const v = a.filter(isN); if (!v.length) return null; const sc = v.map((x) => ((10 - x) / 10 * 9) + 1); return (10 - Math.pow(sc.reduce((p, x) => p * x, 1), 1 / sc.length)) / 9 * 10; };
 const norm = (s) => String(s || '').toLowerCase().replace(/[^a-z]/g, '');
 const NAT = ['drought', 'flood', 'earthquake', 'landslide', 'wildfire', 'stormsCyclone', 'coastalHazards', 'heatwave', 'lightning', 'environmentalDegradation', 'volcano', 'zoonoses'];
 
@@ -39,7 +39,7 @@ for (const u of D) {
     if (natVals.length) nat.aggregate = r1(mean(natVals));
     if (u.hazardExposure.human) u.hazardExposure.total = r1(sgm([nat.aggregate, u.hazardExposure.human.aggregate]));
     const h = u.hazardExposure.total, v = u.vulnerability?.total, c = u.lackCopingCapacity?.total;
-    if ([h, v, c].every(isN)) u.risk = r1(Math.cbrt(h * v * c));
+    if ([h, v, c].every(isN)) u.risk = r1(Math.pow(h, 1 / 3) * Math.pow(v, 1 / 3) * Math.pow(c, 1 / 3));
   }
 }
 fs.writeFileSync(ROOT + 'src/data/tanzania-inform-risk.json', JSON.stringify(data));

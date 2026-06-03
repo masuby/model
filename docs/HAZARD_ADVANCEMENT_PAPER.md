@@ -2,6 +2,15 @@
 % INFORM Tanzania (inform.co.tz)
 % 2026-06-03
 
+> **Status - proposal for INFORM Calc Engine v2.** The operational model (**v1**) keeps the INFORM
+> aggregation engine **exactly** as the official Excel workbook - verified formula-by-formula, written in
+> the code in the workbook's own literal form (product `GEOMEAN`, product of cube roots, `AVERAGE`,
+> min-max). The advancements documented in this paper are a **proposal**; once validated ("when it
+> passes") they are implemented as **INFORM Calc Engine v2**. In short: **v1 = exact INFORM now; v2 =
+> these advancements next**. This is one of three documents - (1) the operational **Manual**, (2) the
+> **Exact-formula reference** (`INFORM_CALCULATION_ENGINE.docx`, what v1 runs), and (3) this **Paper**
+> (the v2 proposal).
+
 # Abstract
 
 The INFORM Subnational Risk Index aggregates standardised (0-10) hazard, vulnerability and lack-of-coping

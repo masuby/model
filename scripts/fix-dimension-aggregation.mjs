@@ -12,7 +12,7 @@ const PATH = 'src/data/tanzania-inform-risk.json';
 const data = JSON.parse(fs.readFileSync(PATH, 'utf8'));
 const isN = (x) => typeof x === 'number' && isFinite(x);
 const r1 = (x) => Math.round(x * 10) / 10;
-const sgm = (a) => { const v = a.filter(isN); if (!v.length) return null; const sc = v.map((x) => ((10 - x) / 10 * 9) + 1); return (10 - Math.exp(sc.reduce((s, x) => s + Math.log(x), 0) / sc.length)) / 9 * 10; };
+const sgm = (a) => { const v = a.filter(isN); if (!v.length) return null; const sc = v.map((x) => ((10 - x) / 10 * 9) + 1); return (10 - Math.pow(sc.reduce((p, x) => p * x, 1), 1 / sc.length)) / 9 * 10; };
 const DIMS = { hazardExposure: ['natural', 'human'], vulnerability: ['socioEconomic', 'vulnerableGroups'], lackCopingCapacity: ['infrastructure', 'institutional'] };
 const agg = (co) => (isN(co?.aggregate) ? co.aggregate : null);
 
@@ -30,7 +30,7 @@ for (const u of D) {
   }
   const h = u.hazardExposure?.total, v = u.vulnerability?.total, c = u.lackCopingCapacity?.total;
   if ([h, v, c].every(isN)) {
-    const nr = r1(Math.cbrt(h * v * c));
+    const nr = r1(Math.pow(h, 1 / 3) * Math.pow(v, 1 / 3) * Math.pow(c, 1 / 3));
     if (isN(oldRisk) && Math.abs(nr - oldRisk) >= 0.05) { if (nr > oldRisk) riskUp++; else { riskDown++; if (downs.length < 12) downs.push(`${u.admin.adm2Name}: ${oldRisk} → ${nr}`); } }
     u.risk = nr;
   }

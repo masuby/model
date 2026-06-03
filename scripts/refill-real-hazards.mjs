@@ -20,7 +20,7 @@ const FILE = 'src/data/tanzania-inform-risk.json';
 const r1 = (v) => Math.round(v * 10) / 10;
 const mean = (xs) => { const a = xs.filter((x) => typeof x === 'number'); return a.length ? a.reduce((s, x) => s + x, 0) / a.length : null; };
 // INFORM category→dimension is the scaled GEOMEAN (Excel Box 6), NOT the arithmetic mean.
-const sgm = (xs) => { const a = xs.filter((x) => typeof x === 'number' && isFinite(x)); if (!a.length) return null; const sc = a.map((x) => ((10 - x) / 10 * 9) + 1); return (10 - Math.exp(sc.reduce((s, x) => s + Math.log(x), 0) / sc.length)) / 9 * 10; };
+const sgm = (xs) => { const a = xs.filter((x) => typeof x === 'number' && isFinite(x)); if (!a.length) return null; const sc = a.map((x) => ((10 - x) / 10 * 9) + 1); return (10 - Math.pow(sc.reduce((p, x) => p * x, 1), 1 / sc.length)) / 9 * 10; };
 const compMean = (o) => mean(Object.entries(o).filter(([k]) => k !== 'aggregate').map(([, v]) => v));
 const norm = (s) => String(s || '').toLowerCase().replace(/\s+/g, ' ').trim();
 
@@ -97,7 +97,7 @@ tC.forEach((u) => {
 const all = new Set([...tH, ...tV, ...tC]);
 all.forEach((u) => {
   const h = u.hazardExposure.total, v = u.vulnerability.total, c = u.lackCopingCapacity.total;
-  if ([h, v, c].every((x) => typeof x === 'number')) u.risk = r1(Math.cbrt(h * v * c));
+  if ([h, v, c].every((x) => typeof x === 'number')) u.risk = r1(Math.pow(h, 1 / 3) * Math.pow(v, 1 / 3) * Math.pow(c, 1 / 3));
 });
 
 data.metadata = { ...(data.metadata || {}), refilled: 'documented TZ hazards + poverty/stunting vulnerability + DRM coping' };

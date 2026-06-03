@@ -27,7 +27,7 @@ const r1 = (v) => Math.round(v * 10) / 10;
 const isN = (x) => typeof x === 'number' && isFinite(x);
 const mean = (a) => { const v = a.filter(isN); return v.length ? v.reduce((s, x) => s + x, 0) / v.length : null; };
 // INFORM scaled geometric mean (Excel Box 6): (10 − GEOMEAN((10−v)/10·9+1…)) / 9 · 10
-const sgm = (a) => { const v = a.filter(isN); if (!v.length) return null; const sc = v.map((x) => ((10 - x) / 10 * 9) + 1); return (10 - Math.exp(sc.reduce((s, x) => s + Math.log(x), 0) / sc.length)) / 9 * 10; };
+const sgm = (a) => { const v = a.filter(isN); if (!v.length) return null; const sc = v.map((x) => ((10 - x) / 10 * 9) + 1); return (10 - Math.pow(sc.reduce((p, x) => p * x, 1), 1 / sc.length)) / 9 * 10; };
 const catVals = (o) => Object.entries(o).filter(([k]) => k !== 'aggregate').map(([, v]) => v);
 function readCsv(p) {
   const lines = readFileSync(p, 'utf8').trim().split('\n');
@@ -100,7 +100,7 @@ for (const u of D) {
   if (u.hazardExposure.human) u.hazardExposure.human.aggregate = r1(mean(catVals(u.hazardExposure.human)));
   u.hazardExposure.total = r1(sgm([nat.aggregate, u.hazardExposure.human?.aggregate]));
   const H = u.hazardExposure.total, V = u.vulnerability?.total, C = u.lackCopingCapacity?.total;
-  if ([H, V, C].every(isN)) u.risk = r1(Math.cbrt(H * V * C));
+  if ([H, V, C].every(isN)) u.risk = r1(Math.pow(H, 1 / 3) * Math.pow(V, 1 / 3) * Math.pow(C, 1 / 3));
 }
 
 data.metadata = {
