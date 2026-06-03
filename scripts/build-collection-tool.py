@@ -112,8 +112,58 @@ for j, w in enumerate(widths, 1):
 # protect everything except the ACTUAL VALUE column
 ws.protection = SheetProtection(sheet=True, autoFilter=False, formatCells=False, selectLockedCells=True, selectUnlockedCells=True)
 
+# ---- Sheets 3 + 4: 195-COUNCIL capture (production resolution) ----
+# Council Entry = the 195 NBS councils (rows) x indicators (cols), one unlocked value per cell.
+# Council 0-10  = the same grid with the VALIDATED locked standardiser formula per cell. Unfilled cells
+# stay blank (the model uses the foundation - bottom-up). Formula identical to the proven Data Entry sheet.
+from openpyxl.utils import get_column_letter
+geo = json.load(open(os.path.join(ROOT, 'src/data/tanzania-councils.json')))
+councils = sorted({(str(f['properties'].get('reg') or f['properties'].get('adm1Name') or ''),
+                    str(f['properties'].get('name') or ''), str(f['properties'].get('code') or ''))
+                   for f in geo['features']})
+entry = wb.create_sheet('Council Entry'); sc = wb.create_sheet('Council 0-10')
+entry.sheet_view.showGridLines = False; sc.sheet_view.showGridLines = False
+meta_rows = ['Indicator', 'Unit', 'Sector', 'Transform', 'Ref Min', 'Ref Max', 'Direction', 'Fence Lo', 'Fence Hi']
+HEADR = 10  # column-title row; councils start at HEADR+1
+for r, lbl in enumerate(meta_rows, 1):
+    entry.cell(r, 3, lbl).font = Font(size=9, italic=True, color='64748B')
+for j, ttl in enumerate(['Region', 'Council', 'Code'], 1):
+    for sh in (entry, sc):
+        c = sh.cell(HEADR, j, ttl); c.font = Font(bold=True, color='FFFFFF', size=10); c.fill = HEAD
+for ci, s in enumerate(rows):
+    col = 4 + ci; L = get_column_letter(col)
+    sgn = 'Decrease Risk' if str(s['sign']).startswith('Dec') else 'Increase Risk'
+    flo = s.get('fence_lo') if s.get('outlier') == 'Yes' else None
+    fhi = s.get('fence_hi') if s.get('outlier') == 'Yes' else None
+    for r, v in enumerate([s['name'], s.get('unit') or 'value', sector_of(s['component']), s.get('transform') or 'None',
+                           s.get('resolved_min'), s.get('resolved_max'), sgn, flo, fhi], 1):
+        entry.cell(r, col, v).font = Font(size=9)
+    for sh in (entry, sc):
+        c = sh.cell(HEADR, col, s['name']); c.font = Font(bold=True, color='FFFFFF', size=9); c.fill = HEAD
+        sh.column_dimensions[L].width = 13
+for ri, (reg, name, code) in enumerate(councils):
+    r = HEADR + 1 + ri
+    for sh in (entry, sc):
+        sh.cell(r, 1, reg); sh.cell(r, 2, name); sh.cell(r, 3, code)
+    for ci, s in enumerate(rows):
+        col = 4 + ci; L = get_column_letter(col)
+        ec = entry.cell(r, col); ec.fill = INPUT; ec.protection = openpyxl.styles.Protection(locked=False)
+        val = f"'Council Entry'!{L}{r}"; tf = f"'Council Entry'!{L}$4"; mn = f"'Council Entry'!{L}$5"
+        mx = f"'Council Entry'!{L}$6"; sg = f"'Council Entry'!{L}$7"; flc = f"'Council Entry'!{L}$8"; fhc = f"'Council Entry'!{L}$9"
+        cap = f"IF(AND(ISNUMBER({flc}),ISNUMBER({fhc})),MAX(MIN({val},{fhc}),{flc}),{val})"
+        x = f'IF({tf}="Logarithm",LN(0.001+{cap}),IF({tf}="Exponential",EXP({cap}),{cap}))'
+        base = f"10*(({x})-{mn})/({mx}-{mn})"
+        expr = f'IF({sg}="Decrease Risk",10-{base},{base})'
+        sc.cell(r, col, f'=IF({val}="","",IFERROR(MAX(0,MIN(10,ROUND({expr},1))),"No data"))').font = Font(size=9, color='1F6F3D')
+for sh in (entry, sc):
+    sh.freeze_panes = 'D11'
+    sh.column_dimensions['A'].width = 16; sh.column_dimensions['B'].width = 22; sh.column_dimensions['C'].width = 8
+entry.protection = SheetProtection(sheet=True, selectLockedCells=True, selectUnlockedCells=True)
+sc.protection = SheetProtection(sheet=True)
+
 out = os.path.join(ROOT, 'public/INFORM_TZ_Collection_Tool.xlsx')
 wb.save(out)
+print('council rows:', len(councils))
 print('wrote', out)
 print('indicators (rows):', len(rows))
 from collections import Counter
