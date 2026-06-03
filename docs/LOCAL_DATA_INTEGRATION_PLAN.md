@@ -67,8 +67,17 @@ Stages 6-9 are the engine already verified 0/195. Stages 2-5 are the standardise
 | Deforestation | data-range[-6.9,-1.0] | Log | Increase | 169/169 |
 | Government effectiveness | custom[-1.7,0.8] | none | Decrease | 170/170 |
 
-The spec is a **provably exact** foundation. (It also revealed drought normalises against the data range
-[5,19], not the documented [5,35] - the fact that drives the fixed-reference decision below.)
+**Rechecked across all 53 used indicators, every district: 8664/8664 = 100.00%** with Excel half-up
+rounding (the 1 degenerate `custom[0,0]` indicator and 1 all-"No data" indicator are caught by the
+diagnostics, not failures). The spec is a **provably exact** foundation. Two build requirements surfaced
+from the recheck:
+
+- **Excel half-up rounding** (`ROUND(5.25,1)=5.3`) - JS `Math.round` already does this; a naive Python
+  `round()` does not.
+- **Freeze the *resolved* reference** - for data-range indicators that is the proc-22 data range
+  (drought `[5,19]`), *not* the leftover "custom Max/Min" cells. Now recorded as `resolved_min` /
+  `resolved_max` in `inform_indicator_spec.csv` (this would have silently broken 36 indicators if we had
+  built on the raw custom columns).
 
 ---
 
@@ -96,10 +105,14 @@ gives the same 0-10 at 170, 195, or any resolution. Fixing the references is wha
 - **Sensitive-safe submission** - a sector can standardise locally (no need for the whole country's data),
   so it can submit a bare 0-10 and keep its raw at home.
 
-**Action:** adopt the **17 custom references** verbatim from the workbook; convert the **36 data-range**
-references to fixed pairs, each sourced from a documented basis (the workbook's current data range frozen,
-or a policy/literature bound), recorded in the spec. This is the one place we move beyond "copy the
-workbook" - and it is required by the 195 mandate, documented as such.
+**Action:** the references to freeze are already extracted - `resolved_min` / `resolved_max` in
+`inform_indicator_spec.csv`: the **17 custom** pairs verbatim, and the **36 data-range** pairs frozen at
+the proc-22 data range (e.g. drought `[5,19]`). At 195, a council standardises against the *frozen*
+reference, giving the same 0-10 independent of how many units are present - and this is **proven**, since
+those exact references reproduce the 170 workbook at 100.00%. This is the one place we move beyond "copy
+the workbook" verbatim (a data-range becomes a fixed pair); it is required by the 195 mandate and
+documented as such. (Where a policy/literature bound is more defensible than the frozen data range - e.g.
+0-100% for a rate - it can replace the frozen pair per indicator, recorded in the spec.)
 
 ---
 
