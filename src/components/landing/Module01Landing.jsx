@@ -132,7 +132,7 @@ function Module01Landing({ onComplete }) {
           onClick={handlePrevious}
           disabled={currentSection === 1}
         >
-          ◄ Previous
+          Previous
         </button>
 
         {!showQuiz && !completedSections.includes(currentSection) && (
@@ -152,7 +152,7 @@ function Module01Landing({ onComplete }) {
               setShowQuiz(false);
             }}
           >
-            Next ►
+            Next 
           </button>
         )}
 
@@ -161,7 +161,7 @@ function Module01Landing({ onComplete }) {
             className="nav-button complete"
             onClick={onComplete}
           >
-            Continue to INFORM Risk Module ►
+            Continue to INFORM Risk Module 
           </button>
         )}
       </footer>

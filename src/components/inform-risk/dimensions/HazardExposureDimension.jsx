@@ -204,7 +204,7 @@ const HazardExposureDimension = ({ data }) => {
                   ? Math.max(floodRisk.riskIndex, droughtRisk.riskIndex).toFixed(1)
                   : 'N/A'}
               </span>
-              <span className="expand-icon">{expandedCategory === 'priority' ? '▲' : '▼'}</span>
+              <span className="expand-icon">{expandedCategory === 'priority' ? '' : ''}</span>
             </div>
           </div>
 
@@ -216,18 +216,25 @@ const HazardExposureDimension = ({ data }) => {
                 hazards requiring systematic monitoring and risk assessment.
               </div>
 
+              <p style={{ fontSize: '13px', color: '#475569', margin: '0 0 18px', lineHeight: 1.55 }}>
+                For each hazard the <strong>Risk Index</strong> combines its three drivers - <strong>Hazard</strong>,
+                <strong> Exposure</strong> and <strong>Vulnerability</strong>. The coloured level (Green, Yellow, Orange,
+                Red) is the operational alert tier: Green is normal, Red is the highest alert.
+              </p>
+
               {/* Flood Risk Panel */}
               {floodRisk && (
                 <div style={{
-                  background: `${floodRisk.alertLevel.color}`,
-                  border: `2px solid ${floodRisk.alertLevel.color}`,
+                  background: '#ffffff',
+                  border: '1px solid #e6eaf0',
+                  borderLeft: `6px solid ${floodRisk.alertLevel.color}`,
                   borderRadius: '12px',
-                  padding: '20px',
-                  marginBottom: '16px'
+                  padding: '24px',
+                  marginBottom: '20px',
+                  boxShadow: '0 2px 8px rgba(15,23,42,0.05)'
                 }}>
                   <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '16px' }}>
-                    <h4 style={{ margin: 0, display: 'flex', alignItems: 'center', gap: '10px' }}>
-                      <span style={{ fontSize: '24px' }}></span>
+                    <h4 style={{ margin: 0, fontSize: '17px', fontWeight: 700, color: '#0f172a' }}>
                       Flood Risk Assessment
                     </h4>
                     <div style={{
@@ -242,35 +249,35 @@ const HazardExposureDimension = ({ data }) => {
                     </div>
                   </div>
 
-                  <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '12px', marginBottom: '16px' }}>
-                    <div style={{ textAlign: 'center', padding: '12px', background: 'white', borderRadius: '8px' }}>
-                      <div style={{ fontSize: '28px', fontWeight: 'bold', color: floodRisk.alertLevel.color }}>
+                  <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '16px', marginBottom: '20px' }}>
+                    <div style={{ textAlign: 'center', padding: '18px 10px', background: '#f8fafc', border: '1px solid #eef2f7', borderRadius: '10px' }}>
+                      <div style={{ fontSize: '32px', fontWeight: 800, color: floodRisk.alertLevel.color }}>
                         {floodRisk.riskIndex}
                       </div>
-                      <div style={{ fontSize: '11px', color: '#666' }}>Risk Index</div>
+                      <div style={{ fontSize: '12px', color: '#475569', fontWeight: 600, marginTop: '4px' }}>Risk Index</div>
                     </div>
-                    <div style={{ textAlign: 'center', padding: '12px', background: '#FFF3E0', borderRadius: '8px' }}>
-                      <div style={{ fontSize: '20px', fontWeight: 'bold', color: '#E65100' }}>
+                    <div style={{ textAlign: 'center', padding: '18px 10px', background: '#f8fafc', border: '1px solid #eef2f7', borderRadius: '10px' }}>
+                      <div style={{ fontSize: '22px', fontWeight: 700, color: '#1f3a5f' }}>
                         {floodRisk.components.hazard}
                       </div>
-                      <div style={{ fontSize: '11px', color: '#666' }}>Hazard</div>
+                      <div style={{ fontSize: '12px', color: '#475569', fontWeight: 600, marginTop: '4px' }}>Hazard</div>
                     </div>
-                    <div style={{ textAlign: 'center', padding: '12px', background: '#E3F2FD', borderRadius: '8px' }}>
-                      <div style={{ fontSize: '20px', fontWeight: 'bold', color: '#1565C0' }}>
+                    <div style={{ textAlign: 'center', padding: '18px 10px', background: '#f8fafc', border: '1px solid #eef2f7', borderRadius: '10px' }}>
+                      <div style={{ fontSize: '22px', fontWeight: 700, color: '#1f3a5f' }}>
                         {floodRisk.components.exposure}
                       </div>
-                      <div style={{ fontSize: '11px', color: '#666' }}>Exposure</div>
+                      <div style={{ fontSize: '12px', color: '#475569', fontWeight: 600, marginTop: '4px' }}>Exposure</div>
                     </div>
-                    <div style={{ textAlign: 'center', padding: '12px', background: '#FCE4EC', borderRadius: '8px' }}>
-                      <div style={{ fontSize: '20px', fontWeight: 'bold', color: '#C2185B' }}>
+                    <div style={{ textAlign: 'center', padding: '18px 10px', background: '#f8fafc', border: '1px solid #eef2f7', borderRadius: '10px' }}>
+                      <div style={{ fontSize: '22px', fontWeight: 700, color: '#1f3a5f' }}>
                         {floodRisk.components.vulnerability}
                       </div>
-                      <div style={{ fontSize: '11px', color: '#666' }}>Vulnerability</div>
+                      <div style={{ fontSize: '12px', color: '#475569', fontWeight: 600, marginTop: '4px' }}>Vulnerability</div>
                     </div>
                   </div>
 
-                  <div style={{ fontSize: '12px', color: '#666', marginBottom: '12px' }}>
-                    <strong>Response Actions ({floodRisk.alertLevel.status}):</strong>
+                  <div style={{ fontSize: '13px', color: '#334155', marginBottom: '4px', lineHeight: 1.55 }}>
+                    <strong style={{ color: '#0f172a' }}>Response actions ({floodRisk.alertLevel.status}):</strong>
                     <ul style={{ margin: '8px 0', paddingLeft: '20px' }}>
                       {floodRisk.responseActions.slice(0, 3).map((action, i) => (
                         <li key={i}>{action}</li>
@@ -283,15 +290,16 @@ const HazardExposureDimension = ({ data }) => {
               {/* Drought Risk Panel */}
               {droughtRisk && (
                 <div style={{
-                  background: `${droughtRisk.alertLevel.color}`,
-                  border: `2px solid ${droughtRisk.alertLevel.color}`,
+                  background: '#ffffff',
+                  border: '1px solid #e6eaf0',
+                  borderLeft: `6px solid ${droughtRisk.alertLevel.color}`,
                   borderRadius: '12px',
-                  padding: '20px',
-                  marginBottom: '16px'
+                  padding: '24px',
+                  marginBottom: '20px',
+                  boxShadow: '0 2px 8px rgba(15,23,42,0.05)'
                 }}>
                   <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '16px' }}>
-                    <h4 style={{ margin: 0, display: 'flex', alignItems: 'center', gap: '10px' }}>
-                      <span style={{ fontSize: '24px' }}></span>
+                    <h4 style={{ margin: 0, fontSize: '17px', fontWeight: 700, color: '#0f172a' }}>
                       Drought Risk Assessment
                     </h4>
                     <div style={{
@@ -306,35 +314,35 @@ const HazardExposureDimension = ({ data }) => {
                     </div>
                   </div>
 
-                  <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '12px', marginBottom: '16px' }}>
-                    <div style={{ textAlign: 'center', padding: '12px', background: 'white', borderRadius: '8px' }}>
-                      <div style={{ fontSize: '28px', fontWeight: 'bold', color: droughtRisk.alertLevel.color }}>
+                  <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '16px', marginBottom: '20px' }}>
+                    <div style={{ textAlign: 'center', padding: '18px 10px', background: '#f8fafc', border: '1px solid #eef2f7', borderRadius: '10px' }}>
+                      <div style={{ fontSize: '32px', fontWeight: 800, color: droughtRisk.alertLevel.color }}>
                         {droughtRisk.riskIndex}
                       </div>
-                      <div style={{ fontSize: '11px', color: '#666' }}>Risk Index</div>
+                      <div style={{ fontSize: '12px', color: '#475569', fontWeight: 600, marginTop: '4px' }}>Risk Index</div>
                     </div>
-                    <div style={{ textAlign: 'center', padding: '12px', background: '#FFF3E0', borderRadius: '8px' }}>
-                      <div style={{ fontSize: '20px', fontWeight: 'bold', color: '#E65100' }}>
+                    <div style={{ textAlign: 'center', padding: '18px 10px', background: '#f8fafc', border: '1px solid #eef2f7', borderRadius: '10px' }}>
+                      <div style={{ fontSize: '22px', fontWeight: 700, color: '#1f3a5f' }}>
                         {droughtRisk.components.hazard}
                       </div>
-                      <div style={{ fontSize: '11px', color: '#666' }}>Hazard</div>
+                      <div style={{ fontSize: '12px', color: '#475569', fontWeight: 600, marginTop: '4px' }}>Hazard</div>
                     </div>
-                    <div style={{ textAlign: 'center', padding: '12px', background: '#E3F2FD', borderRadius: '8px' }}>
-                      <div style={{ fontSize: '20px', fontWeight: 'bold', color: '#1565C0' }}>
+                    <div style={{ textAlign: 'center', padding: '18px 10px', background: '#f8fafc', border: '1px solid #eef2f7', borderRadius: '10px' }}>
+                      <div style={{ fontSize: '22px', fontWeight: 700, color: '#1f3a5f' }}>
                         {droughtRisk.components.exposure}
                       </div>
-                      <div style={{ fontSize: '11px', color: '#666' }}>Exposure</div>
+                      <div style={{ fontSize: '12px', color: '#475569', fontWeight: 600, marginTop: '4px' }}>Exposure</div>
                     </div>
-                    <div style={{ textAlign: 'center', padding: '12px', background: '#FCE4EC', borderRadius: '8px' }}>
-                      <div style={{ fontSize: '20px', fontWeight: 'bold', color: '#C2185B' }}>
+                    <div style={{ textAlign: 'center', padding: '18px 10px', background: '#f8fafc', border: '1px solid #eef2f7', borderRadius: '10px' }}>
+                      <div style={{ fontSize: '22px', fontWeight: 700, color: '#1f3a5f' }}>
                         {droughtRisk.components.vulnerability}
                       </div>
-                      <div style={{ fontSize: '11px', color: '#666' }}>Vulnerability</div>
+                      <div style={{ fontSize: '12px', color: '#475569', fontWeight: 600, marginTop: '4px' }}>Vulnerability</div>
                     </div>
                   </div>
 
-                  <div style={{ fontSize: '12px', color: '#666', marginBottom: '12px' }}>
-                    <strong>Response Actions ({droughtRisk.alertLevel.status}):</strong>
+                  <div style={{ fontSize: '13px', color: '#334155', marginBottom: '4px', lineHeight: 1.55 }}>
+                    <strong style={{ color: '#0f172a' }}>Response actions ({droughtRisk.alertLevel.status}):</strong>
                     <ul style={{ margin: '8px 0', paddingLeft: '20px' }}>
                       {droughtRisk.responseActions.slice(0, 3).map((action, i) => (
                         <li key={i}>{action}</li>
@@ -377,7 +385,7 @@ const HazardExposureDimension = ({ data }) => {
             </div>
             <div className="category-score">
               <span className="aggregate-score">{data.natural.aggregate?.toFixed(2) || 'N/A'}</span>
-              <span className="expand-icon">{expandedCategory === 'natural' ? '▲' : '▼'}</span>
+              <span className="expand-icon">{expandedCategory === 'natural' ? '' : ''}</span>
             </div>
           </div>
 
@@ -408,7 +416,7 @@ const HazardExposureDimension = ({ data }) => {
             </div>
             <div className="category-score">
               <span className="aggregate-score">{data.human.aggregate?.toFixed(2) || 'N/A'}</span>
-              <span className="expand-icon">{expandedCategory === 'human' ? '▲' : '▼'}</span>
+              <span className="expand-icon">{expandedCategory === 'human' ? '' : ''}</span>
             </div>
           </div>
 
@@ -439,7 +447,7 @@ const HazardExposureDimension = ({ data }) => {
             </div>
             <div className="category-score">
               <span className="aggregate-score">{physicalExposureAggregate?.toFixed(2) || 'N/A'}</span>
-              <span className="expand-icon">{expandedCategory === 'physical' ? '▲' : '▼'}</span>
+              <span className="expand-icon">{expandedCategory === 'physical' ? '' : ''}</span>
             </div>
           </div>
 
@@ -469,7 +477,7 @@ const HazardExposureDimension = ({ data }) => {
             </div>
             <div className="category-score">
               <span className="aggregate-score">{geographicalExposureAggregate?.toFixed(2) || 'N/A'}</span>
-              <span className="expand-icon">{expandedCategory === 'geographical' ? '▲' : '▼'}</span>
+              <span className="expand-icon">{expandedCategory === 'geographical' ? '' : ''}</span>
             </div>
           </div>
 

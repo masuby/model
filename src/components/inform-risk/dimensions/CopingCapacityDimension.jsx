@@ -228,7 +228,7 @@ const CopingCapacityDimension = ({ data }) => {
             </div>
             <div className="category-score">
               <span className="aggregate-score">{infrastructureAggregate?.toFixed(2) || 'N/A'}</span>
-              <span className="expand-icon">{expandedCategory === 'infrastructure' ? '▲' : '▼'}</span>
+              <span className="expand-icon">{expandedCategory === 'infrastructure' ? '' : ''}</span>
             </div>
           </div>
 
@@ -260,7 +260,7 @@ const CopingCapacityDimension = ({ data }) => {
             </div>
             <div className="category-score">
               <span className="aggregate-score">{institutionalAggregate?.toFixed(2) || 'N/A'}</span>
-              <span className="expand-icon">{expandedCategory === 'institutional' ? '▲' : '▼'}</span>
+              <span className="expand-icon">{expandedCategory === 'institutional' ? '' : ''}</span>
             </div>
           </div>
 

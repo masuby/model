@@ -185,7 +185,7 @@ function QuizComponent({ sectionId, sectionTitle, onComplete }) {
             className={`quiz-continue-btn ${isCorrect ? 'success' : 'retry'}`}
             onClick={handleContinue}
           >
-            {isCorrect ? 'Continue to Next Section ►' : '◄ Review Section and Retry'}
+            {isCorrect ? 'Continue to Next Section ' : 'Review Section and Retry'}
           </button>
         )}
       </div>
