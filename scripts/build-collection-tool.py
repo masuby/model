@@ -24,15 +24,20 @@ SPEC = json.load(open(os.path.join(ROOT, 'src/data/inform-indicator-spec.json'))
 # responsible Tanzanian sector per component (who fills it locally). Global-foundation indicators are
 # pre-filled by the centre; here we tag the sector that would provide LOCAL data.
 def norm(s): return ''.join(ch for ch in str(s).lower() if ch.isalpha())
+# ONE key Tanzanian stakeholder per indicator - the institution that OWNS the data (deep institutional
+# assessment; no shared slashes). Weather/climate=TMA, geology=GST, environment=NEMC, forests=TFS,
+# agriculture/food=MoA, security/refugees=MoHA, police=TPF, statistics=NBS, finance=MoFP, health=MoH,
+# water=MoW, telecom=TCRA, education=MoEST, disaster-mgmt=PMO-DMD, local-government=PO-RALG.
 SECTOR = {
-    'drought': 'TMA', 'flood': 'PMO-DMD', 'earthquake': 'TMA/GST', 'environmentaldegradation': 'NEMC',
-    'soilerosion': 'NEMC', 'wildfire': 'TFS/TMA', 'stormscyclone': 'TMA', 'volcano': 'TMA/GST',
-    'coastalhazards': 'TMA', 'landslide': 'TMA', 'conflictrisk': 'PMO-DMD', 'conflictintensity': 'PMO-DMD',
-    'internalviolence': 'TPF/PMO-DMD',
-    'developmentpoverty': 'NBS', 'economicdependency': 'NBS/MoFP', 'habitat': 'NBS', 'livelihoods': 'MUCHALI/IPC',
-    'displacedpeople': 'UNHCR/PMO-DMD', 'healthconditions': 'MoH', 'childrenhealthandnutrition': 'MoH/TFNC',
-    'accesstohealthcare': 'MoH', 'economiccapacity': 'NBS/MoFP', 'wash': 'MoW', 'communication': 'TCRA',
-    'education': 'MoEST/NBS', 'drrimplementation': 'PMO-DMD', 'governance': 'PMO-DMD',
+    'drought': 'TMA', 'flood': 'TMA', 'stormscyclone': 'TMA', 'lightning': 'TMA', 'heatwave': 'TMA',
+    'earthquake': 'GST', 'landslide': 'GST', 'volcano': 'GST',
+    'environmentaldegradation': 'NEMC', 'soilerosion': 'NEMC', 'coastalhazards': 'NEMC', 'hazardousmaterial': 'NEMC',
+    'wildfire': 'TFS', 'zoonosesplantspests': 'MoA',
+    'conflictrisk': 'MoHA', 'conflictintensity': 'MoHA', 'internalviolence': 'TPF', 'vehicleaccidents': 'TPF',
+    'developmentpoverty': 'NBS', 'economicdependency': 'MoFP', 'habitat': 'NBS', 'livelihoods': 'MoA',
+    'displacedpeople': 'MoHA', 'healthconditions': 'MoH', 'childrenhealthandnutrition': 'MoH', 'economic': 'NBS',
+    'accesstohealthcare': 'MoH', 'economiccapacity': 'NBS', 'wash': 'MoW', 'communication': 'TCRA',
+    'education': 'MoEST', 'drrimplementation': 'PMO-DMD', 'governance': 'PO-RALG',
 }
 def sector_of(component): return SECTOR.get(norm(component), 'INFORM (global)')
 
