@@ -481,13 +481,14 @@ class INFORMRiskService {
 
     // 4. INFORM Risk Formula
     const riskIndex = Math.pow(hazardScore * exposureScore * vulnerabilityScore, 1/3);
-    const normalizedRisk = Math.min(10, Math.max(0, riskIndex));
+    // Round to the displayed precision FIRST so the alert level/colour always matches the shown number
+    const normalizedRisk = Math.round(Math.min(10, Math.max(0, riskIndex)) * 10) / 10;
 
     // 5. Determine Alert Level and Response
     const alertLevel = this._getAlertLevel(normalizedRisk);
 
     return {
-      riskIndex: Math.round(normalizedRisk * 10) / 10,
+      riskIndex: normalizedRisk,
       alertLevel,
       components: {
         hazard: Math.round(hazardScore * 10) / 10,
@@ -511,11 +512,12 @@ class INFORMRiskService {
     const { sensitivity, lackOfCoping, vulnerabilityScore } = this._calculateVulnerability(regionData, 'drought');
 
     const riskIndex = Math.pow(hazardScore * exposureScore * vulnerabilityScore, 1/3);
-    const normalizedRisk = Math.min(10, Math.max(0, riskIndex));
+    // Round to the displayed precision FIRST so the alert level/colour always matches the shown number
+    const normalizedRisk = Math.round(Math.min(10, Math.max(0, riskIndex)) * 10) / 10;
     const alertLevel = this._getAlertLevel(normalizedRisk);
 
     return {
-      riskIndex: Math.round(normalizedRisk * 10) / 10,
+      riskIndex: normalizedRisk,
       alertLevel,
       components: {
         hazard: Math.round(hazardScore * 10) / 10,
