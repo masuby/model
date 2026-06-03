@@ -5,7 +5,7 @@
       "destination": "https://api.inform.co.tz/api/:path*"
     },
     {
-      "source": "/((?!assets|favicon|static|.*\\.(xlsx|xls|csv|zip)$).*)",
+      "source": "/((?!assets|favicon|static|.*\\.).*)",
       "destination": "/index.html"
     }
   ],
