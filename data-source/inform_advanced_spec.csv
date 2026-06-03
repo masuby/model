@@ -1,9 +1,26 @@
 id,dimension,category,component,sector,name,unit,transform,resolved_min,resolved_max,sign,weight,basis
-HA.NAT.DR-ARID,Hazards & Exposure,Natural,Drought,TMA,Aridity (P/PET),ratio,None,0,0.65,Decrease Risk,0.30,UNEP 1992 World Atlas of Desertification - aridity gradient (semi-arid 0.2-0.5)
-HA.NAT.DR-CV,Hazards & Exposure,Natural,Drought,TMA,Rainfall variability (CV),ratio,None,0.1,0.35,Increase Risk,0.20,Nicholson 2017 - East African rainfall is among the world's most variable
-HA.NAT.DR-SPEI,Hazards & Exposure,Natural,Drought,TMA,SPEI drought depth,index,None,0,3,Increase Risk,0.15,Vicente-Serrano 2010 SPEI (depth of SPEI-12 < -1; Thornthwaite PET)
-HA.NAT.DR-SEAS,Hazards & Exposure,Natural,Drought,MoA,Growing-season failure frequency,fraction,None,0,0.5,Increase Risk,0.35,IPC/MUCHALI - failure of the main 4-month season < 80% of normal drives food crises
-HA.NAT.DR-SOIL,Hazards & Exposure,Natural,Drought,MoA,Soil moisture,%,None,0,50,Decrease Risk,0,Additional (MoA) - lower soil moisture = drier; research weight TBD
-HA.NAT.DR-WLEV,Hazards & Exposure,Natural,Drought,MoW,Water levels (% of normal),%,None,0,100,Decrease Risk,0,Additional (MoW) - reservoir/river levels below normal; research weight TBD
-HA.NAT.HW-DAYS,Hazards & Exposure,Natural,Heatwave,TMA,Heat-health days (> 90th pct Tmax),days,None,0,60,Increase Risk,1,Mora 2017 Nature Clim. Change - days above a deadly-heat threshold (ERA5 Tmax)
-HA.NAT.LI-FLASH,Hazards & Exposure,Natural,Lightning,TMA,Flash density,flashes/km2/yr,None,0,30,Increase Risk,1,Albrecht 2016 BAMS - NASA LIS/OTD lightning flash density (Lake Victoria basin hotspot)
+HA.NAT.DR-SPEI,Hazards & Exposure,Natural,Drought,TMA,SPEI-12 drought depth,index,None,0,3,Increase Risk,0.25,Vicente-Serrano 2010 SPEI - depth of SPEI-12 below -1 (Thornthwaite PET from ERA5 t2m)
+HA.NAT.DR-ARID,Hazards & Exposure,Natural,Drought,TMA,Aridity (P/PET),ratio,None,0,0.65,Decrease Risk,0.15,UNEP 1992 World Atlas of Desertification - semi-arid 0.2-0.5; lower P/PET = drier
+HA.NAT.DR-CV,Hazards & Exposure,Natural,Drought,TMA,Rainfall variability (CV),ratio,None,0.1,0.35,Increase Risk,0.15,Nicholson 2017 - East African rainfall among the world's most variable
+HA.NAT.DR-SEAS,Hazards & Exposure,Natural,Drought,MoA,Growing-season failure frequency,fraction,None,0,0.5,Increase Risk,0.20,IPC/MUCHALI - main season < 80% of normal drives food crises
+HA.NAT.DR-NDVI,Hazards & Exposure,Natural,Drought,MoA,Vegetation/biomass anomaly (NDVI z),index,None,-2,1,Decrease Risk,0.10,MODIS/Sentinel NDVI anomaly - negative greenness = vegetation stress
+HA.NAT.DR-SOIL,Hazards & Exposure,Natural,Drought,MoA,Soil moisture,%,None,0,50,Decrease Risk,0.10,Root-zone soil moisture - lower = drier (MoA agromet)
+HA.NAT.DR-WLEV,Hazards & Exposure,Natural,Drought,MoW,Water levels (% of normal),%,None,0,100,Decrease Risk,0.05,Reservoir/river levels below normal (MoW gauging)
+HA.NAT.FL-R50,Hazards & Exposure,Natural,Flood,TMA,Extreme wet days (>50 mm),days/yr,None,0,20,Increase Risk,0.30,CHIRPS v3 daily - mean annual count of days above 50 mm (heavy-rain trigger)
+HA.NAT.FL-R100,Hazards & Exposure,Natural,Flood,TMA,Very-heavy days (>100 mm),days/yr,None,0,8,Increase Risk,0.15,CHIRPS v3 daily - days above 100 mm (very-heavy intensity)
+HA.NAT.FL-WLEV,Hazards & Exposure,Natural,Flood,MoW,River peak above normal,m,None,0,5,Increase Risk,0.20,MoW river gauging - flood-stage exceedance height
+HA.NAT.FL-BASIN,Hazards & Exposure,Natural,Flood,BWB,Basin flood records,events/decade,None,0,10,Increase Risk,0.20,Basin Water Boards (Rufiji/Wami-Ruvu/Lake Victoria/Pangani...) - recorded basin floods
+HA.NAT.FL-EVENT,Hazards & Exposure,Natural,Flood,PMO-DMD,Recorded flood impact events,events/decade,None,0,10,Increase Risk,0.15,PMO-DMD/DesInventar - documented flood disasters with impact
+HA.NAT.LS-SUSC,Hazards & Exposure,Natural,Landslide,GST,Landslide susceptibility,index 0-1,None,0,1,Increase Risk,0.55,GST hotspots (Hanang/Uluguru/Rungwe/Mbeya highlands) - geology + slope
+HA.NAT.LS-RAIN,Hazards & Exposure,Natural,Landslide,TMA,Triggering rainfall (max 5-day),mm,None,0,300,Increase Risk,0.45,TMA antecedent rainfall - the meteorological landslide trigger
+HA.NAT.ST-FREQ,Hazards & Exposure,Natural,Storms & Cyclone,TMA,Cyclone/strong-wind frequency,events/decade,None,0,8,Increase Risk,0.60,IBTrACS - tropical cyclone / strong-wind events on the coast
+HA.NAT.ST-WIND,Hazards & Exposure,Natural,Storms & Cyclone,TMA,Extreme wind speed,m/s,None,10,35,Increase Risk,0.40,TMA - annual maximum sustained wind
+HA.NAT.EQ-PGA,Hazards & Exposure,Natural,Earthquake,GST,Seismic hazard (PGA 475-yr),g,None,0,0.4,Increase Risk,0.70,GSHAP/East African Rift - peak ground acceleration 10%/50yr
+HA.NAT.EQ-HIST,Hazards & Exposure,Natural,Earthquake,GST,Historical seismicity density,events/100yr,None,0,50,Increase Risk,0.30,GST seismic catalogue - historical earthquake density (Rift belt)
+HA.NAT.CO-WAVE,Hazards & Exposure,Natural,Coastal hazards,TMA,Significant wave height (Hs 99th pct),m,None,0,4,Increase Risk,0.25,ERA5/WaveWatch III - extreme nearshore wave energy (monsoon + cyclone swell)
+HA.NAT.CO-WIND,Hazards & Exposure,Natural,Coastal hazards,TMA,Extreme onshore wind,m/s,None,10,30,Increase Risk,0.20,TMA coastal stations - strong onshore wind driving surge and overtopping
+HA.NAT.CO-SURGE,Hazards & Exposure,Natural,Coastal hazards,TMA,Storm-surge frequency,events/decade,None,0,8,Increase Risk,0.20,TMA - coastal storm-surge / abnormal sea-level events (Kilwa/Mtwara/Dar/Tanga)
+HA.NAT.CO-EROS,Hazards & Exposure,Natural,Coastal hazards,NEMC,Shoreline retreat / erosion rate,m/yr,None,0,5,Increase Risk,0.20,NEMC coastal monitoring - shoreline erosion (Bagamoyo/Pangani/Dar/Zanzibar channel)
+HA.NAT.CO-MANG,Hazards & Exposure,Natural,Coastal hazards,NEMC,Mangrove loss (protective buffer),%/decade,None,0,30,Increase Risk,0.15,NEMC - mangrove decline removes the natural coastal buffer, raising exposure
+HA.NAT.HW-DAYS,Hazards & Exposure,Natural,Heatwave,TMA,Heat-health days (> 90th pct Tmax),days/yr,None,0,60,Increase Risk,1.0,Mora 2017 Nature Clim. Change - days above a deadly-heat threshold (ERA5 Tmax)
+HA.NAT.LI-FLASH,Hazards & Exposure,Natural,Lightning,TMA,Flash density,flashes/km2/yr,None,0,30,Increase Risk,1.0,Albrecht 2016 BAMS - NASA LIS/OTD flash density (Lake Victoria basin hotspot)

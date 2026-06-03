@@ -168,40 +168,13 @@ for sh in (entry, sc):
 entry.protection = SheetProtection(sheet=True, selectLockedCells=False, selectUnlockedCells=False)
 sc.protection = SheetProtection(sheet=True, selectLockedCells=False, selectUnlockedCells=False)
 
-# ---- Sheet 5: ADVANCED (research) - v2, fully UNLOCKED ----
-# The locked NORMAL/Council sheets above are the regional INFORM, untouched. This tab lets sectors RESEARCH
-# advancements: extra sub-indicators (SPEI, soil moisture, MoW water levels) and INFORM gaps (heatwave,
-# lightning), with literature-cited references + proposed weights. Same standardiser engine; everything editable.
-adv = list(csv.DictReader(open(os.path.join(ROOT, 'data-source/inform_advanced_spec.csv'))))
-aw = wb.create_sheet('Advanced (research)'); aw.sheet_view.showGridLines = False
-aw.sheet_state = 'hidden'  # NOT shared/seen by sectors; kept as a complete sheet "down" in the file for us
-aw.cell(1, 1, 'ADVANCED (research) - v2 PROPOSAL.  The locked NORMAL + Council sheets are the regional INFORM, unchanged.').font = Font(bold=True, size=11, color='B45309')
-aw.cell(2, 1, 'Refine an indicator with extra sub-indicators, or fill an INFORM gap. References are literature-cited and PROPOSED (so are the weights); when validated they get enforced. Everything on this tab is editable.').font = Font(size=9, italic=True, color='64748B')
-AHEAD = ['Component', 'Sector', 'Indicator', 'Unit', 'Transform', 'Ref Min', 'Ref Max', 'Direction', 'Weight', 'Basis (literature)', 'ACTUAL VALUE', '0-10 (auto)']
-ADVFILL = PatternFill('solid', fgColor='B45309')
-hr = 4
-for j, h in enumerate(AHEAD, 1):
-    c = aw.cell(hr, j, h); c.font = Font(bold=True, color='FFFFFF', size=10); c.fill = ADVFILL; c.alignment = Alignment(horizontal='center', wrap_text=True)
-for i, a in enumerate(adv):
-    r = hr + 1 + i
-    direction = 'protective' if str(a['sign']).startswith('Dec') else 'risk'
-    for j, v in enumerate([a['component'], a['sector'], a['name'], a['unit'], a['transform'],
-                           float(a['resolved_min']), float(a['resolved_max']), direction, float(a['weight']), a['basis']], 1):
-        aw.cell(r, j, v).font = Font(size=9)
-    aw.cell(r, 11).fill = INPUT  # ACTUAL VALUE
-    g, mn, mx, sg, av = f'E{r}', f'F{r}', f'G{r}', f'H{r}', f'K{r}'
-    x = f'IF({g}="Logarithm",LN(0.001+{av}),IF({g}="Exponential",EXP({av}),{av}))'
-    base = f'10*(({x})-{mn})/({mx}-{mn})'
-    expr = f'IF({sg}="protective",10-{base},{base})'
-    aw.cell(r, 12, f'=IF({av}="","",IFERROR(MAX(0,MIN(10,ROUND({expr},1))),"No data"))').font = Font(size=9, bold=True, color='1F6F3D')
-aw.freeze_panes = 'A5'
-for j, w in enumerate([16, 14, 28, 12, 10, 9, 9, 11, 8, 42, 14, 11], 1):
-    aw.column_dimensions[get_column_letter(j)].width = w
-# (no SheetProtection - fully unlocked for research)
+# NOTE: ADVANCED (v2, the exploded multi-source baskets) is now a SEPARATE workbook -
+# public/INFORM_TZ_Advanced_Tool.xlsx, built by scripts/build-advanced-tool.py. It is NOT a hidden tab
+# here: this shared NORMAL file stays purely the regional INFORM. (data-source/inform_advanced_spec.csv.)
 
 out = os.path.join(ROOT, 'public/INFORM_TZ_Collection_Tool.xlsx')
 wb.save(out)
-print('council rows:', len(councils), '| advanced research rows:', len(adv))
+print('council rows:', len(councils))
 print('wrote', out)
 print('indicators (rows):', len(rows))
 from collections import Counter
