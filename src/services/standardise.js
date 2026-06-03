@@ -104,15 +104,21 @@ export function computeFromRaw(rawById, { specs = SPEC, denomById = {} } = {}) {
     const v = standardise(rawById[id], s, denomById[id]);
     if (v != null) score[id] = v;
   }
-  // (6) component = AVERAGE of its standardised indicators
+  // (6) component = WEIGHTED average of its standardised indicators. weight defaults to 1, so NORMAL (v1,
+  //     the workbook) is byte-identical unweighted INFORM; ADVANCED multi-source baskets (drought =
+  //     0.30 aridity + 0.20 variability + ...) set weights. Missing sub-indicators just drop out (graceful).
   const compVals = {}, compMeta = {};
   for (const id of Object.keys(score)) {
     const s = specs[id];
-    (compVals[s.component] = compVals[s.component] || []).push(score[id]);
+    (compVals[s.component] = compVals[s.component] || []).push([score[id], isNum(Number(s.weight)) ? Number(s.weight) : 1]);
     compMeta[s.component] = { category: s.category, dimension: s.dimension };
   }
   const component = {};
-  for (const c of Object.keys(compVals)) component[c] = mean(compVals[c]);
+  for (const c of Object.keys(compVals)) {
+    const it = compVals[c].filter(([v, w]) => isNum(v) && isNum(w) && w > 0);
+    const tw = it.reduce((a, [, w]) => a + w, 0);
+    component[c] = tw ? it.reduce((a, [v, w]) => a + v * w, 0) / tw : null;
+  }
   // (7) category = AVERAGE of its components
   const catVals = {}, catDim = {};
   for (const c of Object.keys(component)) {

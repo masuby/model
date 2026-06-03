@@ -56,4 +56,19 @@ describe('indicator flexibility (add / delete / spec-driven)', () => {
     const council = computeFromRaw({ ...unit.raw }); // a council inheriting the district's raw
     expect(council.risk).toBe(district.risk);
   });
+
+  it('ADVANCED: a weighted multi-source basket aggregates by weight, and falls back gracefully', () => {
+    const base = { dimension: 'Hazards & Exposure', category: 'Natural', component: 'Drought',
+      denominator: 'None', outlier: 'No', transform: 'None', normalisation: 'Custom', sign: 'Increase Risk', use: 'Yes' };
+    const specs = clone(ALL_SPECS);
+    specs['HA.NAT.DR-FRE'].weight = 0.5;                                    // legacy FAO frequency, weighted
+    specs['HA.NAT.DR-SPEI'] = { ...base, id: 'HA.NAT.DR-SPEI', resolved_min: 0, resolved_max: 3, weight: 0.3 };
+    specs['HA.NAT.DR-ARID'] = { ...base, id: 'HA.NAT.DR-ARID', resolved_min: 0, resolved_max: 1, weight: 0.2 };
+    const legacyOnly = computeFromRaw(unit.raw, { specs });                 // SPEI/aridity blank -> FAO alone
+    const basket = computeFromRaw({ ...unit.raw, 'HA.NAT.DR-SPEI': 1.5, 'HA.NAT.DR-ARID': 0.5 }, { specs });
+    // SPEI 5.0 + aridity 5.0 sit above the legacy drought, so the weighted basket RAISES the component
+    expect(basket.component['Drought']).toBeGreaterThan(legacyOnly.component['Drought']);
+    // graceful: with the new sub-indicators absent, the component still computes from the legacy alone
+    expect(legacyOnly.component['Drought']).toBeGreaterThan(0);
+  });
 });
