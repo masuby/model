@@ -111,7 +111,7 @@ widths = [16, 18, 30, 30, 12, 10, 11, 9, 9, 11, 14, 11]
 for j, w in enumerate(widths, 1):
     ws.column_dimensions[openpyxl.utils.get_column_letter(j)].width = w
 # protect everything except the ACTUAL VALUE column
-ws.protection = SheetProtection(sheet=True, autoFilter=False, formatCells=False, selectLockedCells=True, selectUnlockedCells=True)
+ws.protection = SheetProtection(sheet=True, selectLockedCells=False, selectUnlockedCells=False)
 
 # ---- Sheets 3 + 4: 195-COUNCIL capture (production resolution) ----
 # Council Entry = the 195 NBS councils (rows) x indicators (cols), one unlocked value per cell.
@@ -159,8 +159,9 @@ for ri, (reg, name, code) in enumerate(councils):
 for sh in (entry, sc):
     sh.freeze_panes = 'D11'
     sh.column_dimensions['A'].width = 16; sh.column_dimensions['B'].width = 22; sh.column_dimensions['C'].width = 8
-entry.protection = SheetProtection(sheet=True, selectLockedCells=True, selectUnlockedCells=True)
-sc.protection = SheetProtection(sheet=True)
+# protect the sheet but ALLOW selecting/editing unlocked (yellow) cells - selectUnlockedCells=False
+entry.protection = SheetProtection(sheet=True, selectLockedCells=False, selectUnlockedCells=False)
+sc.protection = SheetProtection(sheet=True, selectLockedCells=False, selectUnlockedCells=False)
 
 # ---- Sheet 5: ADVANCED (research) - v2, fully UNLOCKED ----
 # The locked NORMAL/Council sheets above are the regional INFORM, untouched. This tab lets sectors RESEARCH
