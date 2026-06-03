@@ -71,3 +71,63 @@ export function standardise(raw, spec, denomValue = null) {
 /** Convenience: standardise by indicator id. */
 export const standardiseById = (id, raw, denomValue = null) =>
   standardise(raw, indicatorSpec(id), denomValue);
+
+// ---- the full pipeline: raw values -> risk, exactly as the workbook -------------------------------
+const mean = (a) => { const v = a.filter(isNum); return v.length ? v.reduce((s, x) => s + x, 0) / v.length : null; };
+// scaled geometric mean (the workbook dimension formula), product form
+const sgm = (a) => {
+  const xs = a.filter(isNum); if (!xs.length) return null;
+  const sc = xs.map((x) => ((10 - x) / 10 * 9) + 1);
+  return (10 - Math.pow(sc.reduce((p, x) => p * x, 1), 1 / sc.length)) / 9 * 10;
+};
+const r1 = (x) => round1(x);
+const kind = (label) => {
+  const l = String(label).toLowerCase();
+  return l.includes('hazard') ? 'H' : l.includes('vulner') ? 'V' : l.includes('coping') ? 'C' : null;
+};
+
+/**
+ * Compute the full INFORM hierarchy from RAW values, exactly as the workbook:
+ *   raw -> standardise (per spec) -> component AVERAGEIFS(Use=Yes) -> category AVERAGE ->
+ *   dimension scaled GEOMEAN -> risk cube-root.
+ * @param rawById   { [indicatorId]: rawValue }  (sector-keyed actual values, natural units)
+ * @param denomById { [indicatorId]: denominator } for the indicators with a denominator
+ * @returns { score, component, category, dimension:{H,V,C}, risk }
+ */
+export function computeFromRaw(rawById, denomById = {}) {
+  // (5) standardise every used indicator that has a raw value
+  const score = {};
+  for (const id of Object.keys(SPEC)) {
+    const s = SPEC[id];
+    if (s.use !== 'Yes' || !(id in rawById)) continue;
+    const v = standardise(rawById[id], s, denomById[id]);
+    if (v != null) score[id] = v;
+  }
+  // (6) component = AVERAGE of its standardised indicators
+  const compVals = {}, compMeta = {};
+  for (const id of Object.keys(score)) {
+    const s = SPEC[id];
+    (compVals[s.component] = compVals[s.component] || []).push(score[id]);
+    compMeta[s.component] = { category: s.category, dimension: s.dimension };
+  }
+  const component = {};
+  for (const c of Object.keys(compVals)) component[c] = mean(compVals[c]);
+  // (7) category = AVERAGE of its components
+  const catVals = {}, catDim = {};
+  for (const c of Object.keys(component)) {
+    const m = compMeta[c];
+    (catVals[m.category] = catVals[m.category] || []).push(component[c]);
+    catDim[m.category] = m.dimension;
+  }
+  const category = {};
+  for (const cat of Object.keys(catVals)) category[cat] = mean(catVals[cat]);
+  // (8) dimension = scaled GEOMEAN of its categories
+  const dimVals = {};
+  for (const cat of Object.keys(category)) (dimVals[catDim[cat]] = dimVals[catDim[cat]] || []).push(category[cat]);
+  const dimension = {};
+  for (const dim of Object.keys(dimVals)) { const k = kind(dim); if (k) dimension[k] = r1(sgm(dimVals[dim])); }
+  // (9) risk = cube-root of the three dimensions
+  const { H, V, C } = dimension;
+  const risk = [H, V, C].every(isNum) ? r1(Math.pow(H, 1 / 3) * Math.pow(V, 1 / 3) * Math.pow(C, 1 / 3)) : null;
+  return { score, component, category, dimension, risk };
+}

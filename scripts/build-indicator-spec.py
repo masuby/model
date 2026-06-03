@@ -56,15 +56,16 @@ for iid, cip in ipc.items():
     cp12 = p12c.get(iid)
     spec[iid] = dict(
         id=iid, name=ip.cell(2, cip).value, dimension=ip.cell(6, cip).value, component=ip.cell(5, cip).value,
-        keyed_at=keyed.get(iid, 'global-extract'), resolution=idd.cell(6, iddc[iid]).value if iid in iddc else None,
+        category=idd.cell(5, iddc[iid]).value if iid in iddc else None,
+        keyed_at=keyed.get(iid, 'global-extract'), resolution=idd.cell(7, iddc[iid]).value if iid in iddc else None,
         unit=ip.cell(7, cip).value, denominator=ip.cell(8, cip).value, outlier=ip.cell(9, cip).value,
         fence_lo=num(p12.cell(9, cp12).value) if cp12 else None, fence_hi=num(p12.cell(8, cp12).value) if cp12 else None,
         transform=ip.cell(10, cip).value, normalisation=norm,
         resolved_min=num(rmin), resolved_max=num(rmax), sign=ip.cell(14, cip).value, use=ip.cell(15, cip).value)
 
 # CSV (human-auditable)
-cols = ['id', 'name', 'dimension', 'component', 'keyed_at', 'resolution', 'unit', 'denominator', 'outlier',
-        'fence_lo', 'fence_hi', 'transform', 'normalisation', 'resolved_min', 'resolved_max', 'sign', 'use']
+cols = ['id', 'name', 'dimension', 'category', 'component', 'keyed_at', 'resolution', 'unit', 'denominator',
+        'outlier', 'fence_lo', 'fence_hi', 'transform', 'normalisation', 'resolved_min', 'resolved_max', 'sign', 'use']
 with open(os.path.join(ROOT, 'data-source/inform_indicator_spec.csv'), 'w', newline='') as f:
     w = csv.DictWriter(f, fieldnames=cols); w.writeheader()
     for s in spec.values():
@@ -102,5 +103,32 @@ for iid, s in spec.items():
 with open(os.path.join(ROOT, 'src/services/__tests__/standardise.fixture.json'), 'w') as f:
     json.dump(fixture, f)
 
+# Pipeline fixture: per district, the raw values by id + the workbook's stored dimension totals and risk
+# (INFORM SADC 2024: HAZARD col 26, VULNERABILITY col 37, LACK OF COPING col 47, RISK col 48).
+sadc = wb['INFORM SADC 2024']
+sadc_r = {}
+for r in range(2, sadc.max_row + 1):
+    n = sadc.cell(r, 3).value
+    if n and str(n).strip() not in sadc_r:
+        sadc_r[str(n).strip()] = r
+pipe = []
+for d, rrow in idd_rows.items():
+    if d not in sadc_r:
+        continue
+    raw = {}
+    for iid, s in spec.items():
+        if s['use'] != 'Yes' or iid not in iddc:
+            continue
+        v = idd.cell(rrow, iddc[iid]).value
+        if isinstance(v, (int, float)):
+            raw[iid] = v
+    sr = sadc_r[d]
+    H, V, C, R = (sadc.cell(sr, col).value for col in (26, 37, 47, 48))
+    if all(isinstance(z, (int, float)) for z in (H, V, C, R)):
+        pipe.append(dict(district=d, raw=raw, hazard=H, vulnerability=V, coping=C, risk=R))
+with open(os.path.join(ROOT, 'src/services/__tests__/pipeline.fixture.json'), 'w') as f:
+    json.dump(pipe, f)
+
 print('spec: %d indicators (%d used)' % (len(spec), sum(1 for s in spec.values() if s['use'] == 'Yes')))
-print('fixture rows: %d' % len(fixture))
+print('standardise fixture rows: %d' % len(fixture))
+print('pipeline fixture districts: %d' % len(pipe))
