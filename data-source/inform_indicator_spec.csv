@@ -1,0 +1,79 @@
+id,name,dimension,component,keyed_at,resolution,year,unit,data_type,valid_range,denominator,outlier,transform,normalisation,custom_min,custom_max,sign,use
+HA.NAT.CH-ERO,Coastal Erosion,Hazards & Exposure,Coastal hazards,Adm2,,,meters / year,Float,-0.3-0,None,No,None,Custom,-0.3,0.0,Decrease Risk,Yes
+HA.NAT.CH-SEA,Sea Level Rise,Hazards & Exposure,Coastal hazards,National,,,,,,,,,,,,,
+HA.NAT.DR-FRE,Historic Drought Frequency,Hazards & Exposure,Drought,Adm1,,,years,Float,5-35,None,No,None,Data range,5.0,35.0,Increase Risk,Yes
+HA.NAT.EQ-EXP,Earthquake exposure,Hazards & Exposure,Earthquake,Adm2,,,index,Float,0-1,None,No,None,Data range,0.0,1.0,Increase Risk,Yes
+HA.NAT.ED-DEF,Deforestation - Treecover Loss,Hazards & Exposure,Environmental Degradation,Adm2,,,%,Float,0-100,None,No,Logarithm,Data range,-6.9,-0.5,Increase Risk,Yes
+HA.NAT.DE-ERO,Soil Erosion,Hazards & Exposure,Environmental Degradation,National,,,Mg/ha/yr,,,None,No,None,Data range,0.0,43.5,Increase Risk,Yes
+HA.NAT.FL-EXP,Flood exposure,Hazards & Exposure,Flood,Adm2,,,%,Float,0-100,None,No,Logarithm,Data range,-6.9,-0.1,Increase Risk,Yes
+HA.NAT.HW-EXP,Heatwave exposure,Hazards & Exposure,Heatwave,National,,,,,,,,,,,,,
+HA.NAT.LS-EXP,Landslide exposure,Hazards & Exposure,Landslide,Adm2,,,%,Float,0-100,None,No,Logarithm,Data range,-6.9,0.0,Increase Risk,Yes
+HA.NAT.LI-CAS,Lightning casualities,Hazards & Exposure,Lightning,National,,,,,,,,,,,,,
+HA.NAT.ST-TC2,Cyclone exposure - max speed,Hazards & Exposure,Storms & Cyclone,Adm2,,,%,Float,0-100,None,No,None,Data range,0.0,41.1,Increase Risk,Yes
+HA.NAT.ST-TC,Cyclone exposure,Hazards & Exposure,Storms & Cyclone,Adm1,,,%,Float,0-100,None,No,None,Custom,0.0,100.9,Increase Risk,No
+HA.NAT.ST-ST,Storm exposure,Hazards & Exposure,Storms & Cyclone,Adm1,,,%,Float,0-100,None,No,None,Data range,0.0,197.8,Increase Risk,No
+HA.NAT.VC-EXP,Volcano exposure,Hazards & Exposure,Volcano,Adm1,,,index,Integer,0-4,None,No,None,Data range,0.0,4.0,Increase Risk,Yes
+HA.NAT.WF-BURN,Burned Area,Hazards & Exposure,Wildfire,Adm1,,,%,Float,0-100,None,No,None,Data range,0.0,77.5,Increase Risk,Yes
+HA.NAT.WF-FWI,Fire Weather Index,Hazards & Exposure,Wildfire,Adm1,,,index,Float,0-200,None,No,None,Data range,0.0,188.0,Increase Risk,Yes
+HA.NAT.ZPP-AD,Animal Diseases,Hazards & Exposure,"Zoonoses, Plants & Pests",National,,,,,,,,,,,,,
+HA.NAT.ZPP-PD,Plant Diseases,Hazards & Exposure,"Zoonoses, Plants & Pests",National,,,,,,,,,,,,,
+HA.NAT.ZPP-PE,Pests,Hazards & Exposure,"Zoonoses, Plants & Pests",National,,,,,,,,,,,,,
+HA.HUM.CR-GCRI,GCRI derived Conflict probability,Hazards & Exposure,Conflict Risk,National,,,%,Float,0-100,None,No,None,Custom,0.0,99.1,Increase Risk,Yes
+HA.HUM.CI-CBAR,Conflict Barometer,Hazards & Exposure,Conflict Intensity,Adm1,,,Index,Integer,0-5,None,No,None,Custom,0.0,5.0,Increase Risk,Yes
+HA.HUM.HMAT,Hazardous Material,Hazards & Exposure,Hazardous Material,global-extract,,,,,,,,,,,,,
+HA.HUM.VIO-EVE,Number of Events,Hazards & Exposure,Internal Violence,Adm1,,,Number,Integer,0-∞,None,No,Logarithm,Data range,0.0,8.9,Increase Risk,Yes
+HA.HUM.VIO-FAT,Number of Fatalities,Hazards & Exposure,Internal Violence,Adm1,,,Number,Integer,0-∞,None,No,Logarithm,Data range,-6.9,9.3,Increase Risk,Yes
+HA.HUM.ACC,Vehicle Accidents,Hazards & Exposure,Vehicle Accidents,global-extract,,,,,,,,,,,,,
+VU.SE.POV-HDI,Human Development Index,Vulnerability,Development & Poverty,Adm1,,,index,Float,0-1,None,No,None,Data range,0.4,0.8,Decrease Risk,Yes
+VU.SE.POV-MPI,Multidimensional Poverty Index,Vulnerability,Development & Poverty,Adm1,,,index,Float,0-1,None,No,None,Data range,0.0,0.6,Increase Risk,Yes
+VU.SE.POV-GDI,Gender Development Index,Vulnerability,Development & Poverty,Adm1,,,index,,,None,No,None,Data range,0.8,1.1,Decrease Risk,Yes
+VU.SE.POV-GINI,Wealth Inequality,Vulnerability,Development & Poverty,Adm1,,,index,,,None,No,None,Data range,0.1,0.5,Increase Risk,Yes
+VU.SE.DEP-ODA,Net ODA received (% of GNI),Vulnerability,Economic Dependency,National,,,%,,,None,No,None,Custom,0.2,14.5,Increase Risk,Yes
+VU.SE.DEP-REM,Personal remittances,Vulnerability,Economic Dependency,National,,,%,,,None,Yes,None,Custom,0.0,6.4,Increase Risk,Yes
+VU.SE.DEP-DR,Dependency Ratio,Vulnerability,Economic Dependency,Adm1,,,ratio,,,None,No,None,Data range,34.5,159.3,Increase Risk,Yes
+VU.SE.HAB-INF,Population in informal settlements,Vulnerability,Habitat,National,,,%,,,None,No,None,Custom,17.0,78.4,Increase Risk,Yes
+VU.SE.HAB-RISK,Number of homes in high-risk areas,Vulnerability,Habitat,National,,,,,,,,,,,,,
+VU.SE.HAB-URB,Urban Population,Vulnerability,Habitat,Adm1,,,%,,,None,No,None,Data range,0.0,100.0,Increase Risk,Yes
+VU.SE.LV-FS,Food Security - Insufficient food,Vulnerability,Livelihoods,Adm1,,,% pop phase 2 or higher,Float,0-100,None,No,None,Data range,0.0,149.2,Increase Risk,Yes
+VU.SE.LV-IPC,Food Security - IPC Classification,Vulnerability,Livelihoods,Adm1,,,,Integer,1-5,,,,,,,,
+VU.VG.DP-IDP,Internal Displaced People,Vulnerability,Displaced People,Adm1,,,number of people,Integer,0-∞,None,No,Logarithm,Data range,-6.9,14.6,Increase Risk,Yes
+VU.VG.DP-REF,Refugees and asylum-seekers,Vulnerability,Displaced People,National,,,number of people,,,,,,,,,,
+VU.VG.HC-LEXP,Life Expectancy,Vulnerability,Health Conditions,National,,,years,Float,40-85,None,No,None,Data range,49.2,74.0,Decrease Risk,Yes
+VU.VG.HC-CHO,Cholera Reported Cases,Vulnerability,Health Conditions,National,,,,,,,,,,,,,
+VU.VG.HC-MALAMORT,Malaria - mortality rate,Vulnerability,Health Conditions,National,,,,,,,,,,,,,
+VU.VG.HC-MALAPREV,Malaria prevalence,Vulnerability,Health Conditions,Adm1,,,max malaria prevalence per person,,,None,No,None,Data range,0.0,0.5,Increase Risk,Yes
+VU.VG.HC-MEASLES,Measles Incidence,Vulnerability,Health Conditions,National,,,"per 1,000,000 population",,,None,No,None,Custom,2.9,1595.4,Increase Risk,Yes
+VU.VG.HC-TUB,Tuberculosis Incidence,Vulnerability,Health Conditions,National,,,,,,,,,,,,,
+VU.VG.HC-DST,DST Prevalence,Vulnerability,Health Conditions,National,,,,,,,,,,,,,
+VU.VG.HC-DISAB,People living with disabilities,Vulnerability,Health Conditions,National,,,,,,,,,,,,,
+VU.VG.HC-CHR,People living with chronic ilnesses,Vulnerability,Health Conditions,National,,,,,,,,,,,,,
+VU.VG.CH-MORTNEO,Neonatal mortality,Vulnerability,Children Health and Nutrition,Adm1,,,"per 1,000 live births ",,,None,No,None,Data range,4.3,49.9,Increase Risk,Yes
+VU.VG.CH-MORTINF,Infant mortality,Vulnerability,Children Health and Nutrition,Adm1,,,"per 1,000 live births ",,,None,No,None,Data range,6.7,94.5,Increase Risk,Yes
+VU.VG.CH-MORTCH,Child mortality,Vulnerability,Children Health and Nutrition,Adm1,,,"per 1,000 live births ",Float,0-200,None,No,None,Data range,3.7,71.6,Increase Risk,Yes
+VU.VG.CH-UW,Children Underweight,Vulnerability,Children Health and Nutrition,Adm1,,,%,Float,0-60,None,No,None,Data range,2.6,35.4,Increase Risk,Yes
+VU.VG.ECO-DISAFF,People affected by natural disasters,Vulnerability,Economic,National,,,,,,,,,,,,,
+VU.VG.ECO-UNEMP,Unemployed population (15 - 59 years old),Vulnerability,Economic,National,,,,,,,,,,,,,
+VU.VG.ECO-FEMHH,Female headed households,Vulnerability,Economic,National,,,,,,,,,,,,,
+VU.VG.ECO-CHILDHH,Child headed households,Vulnerability,Economic,National,,,,,,,,,,,,,
+CC.INF.HC-EXP,Health expenditure per capita,Coping Capacity,Access to health care,National,,,US$ per capita,,,None,No,None,Custom,19.3,758.2,Decrease Risk,Yes
+CC.INF.HC-BCG,BCG Immunization Coverage,Coping Capacity,Access to health care,Adm1,,,%,Float,0-100,None,No,None,Data range,42.0,100.0,Decrease Risk,Yes
+CC.INF.HC-DTP,DTP3 Immunization Coverage,Coping Capacity,Access to health care,Adm1,,,%,,,None,No,None,Data range,12.7,98.7,Decrease Risk,Yes
+CC.INF.HC-MEASLES,Measles Immunization Coverage,Coping Capacity,Access to health care,Adm1,,,%,,,None,No,None,Data range,24.4,98.7,Decrease Risk,Yes
+CC.INF.HC-PHY,Physicians density,Coping Capacity,Access to health care,National,,,"per 10,000 population",,,None,Yes,None,Custom,0.5,6.8,Decrease Risk,Yes
+CC.INF.HC-FAC,Density of health facilities,Coping Capacity,Access to health care,Adm1,,,per capita,,,Population,Yes,None,Custom,0.0,0.0,Decrease Risk,Yes
+CC.INF.ECO-INC,Household income,Coping Capacity,Economic capacity,National,,,US$ per capita,,,None,No,None,Custom,369.9,12866.6,Decrease Risk,Yes
+CC.INF.ECO-IWI,International Wealth Index,Coping Capacity,Economic capacity,Adm1,,,index,,,None,No,None,Data range,11.1,90.3,Decrease Risk,Yes
+CC.INF.ECO-GDP,Gross National Income per capita,Coping Capacity,Economic capacity,Adm1,,,Log - Thousands of US$,,,None,No,None,Data range,6.5,10.1,Decrease Risk,Yes
+CC.INF.WASH-SAN,People using at least basic sanitation services (% of population),Coping Capacity,WASH,National,,,%,Float,0-100,None,No,None,Custom,15.0,99.0,Decrease Risk,Yes
+CC.INF.WASH-WF,People using at least basic drinking water services (% of population),Coping Capacity,WASH,National,,,%,,,None,No,None,Custom,35.0,99.0,Decrease Risk,Yes
+CC.INF.COM-ROAD,Percentage of unpaved roads,Coping Capacity,Communication,National,,,,,,,,,,,,,
+CC.INF.COM-ELEC,Access to electricity,Coping Capacity,Communication,Adm1,,,%,Float,0-100,None,No,None,Data range,1.2,100.0,Decrease Risk,Yes
+CC.INF.COM-INT,Internet access,Coping Capacity,Communication,Adm1,,,%,,,None,No,None,Data range,0.1,69.3,Decrease Risk,Yes
+CC.INF.COM-PHONE,Cellphone ownership,Coping Capacity,Communication,Adm1,,,%,,,None,No,None,Data range,21.5,98.8,Decrease Risk,Yes
+CC.INF.EDU-YRS,Mean years at school,Coping Capacity,Education,Adm1,,,years,,,None,No,None,Data range,1.5,13.9,Decrease Risk,Yes
+CC.INF.EDU-ALIT,Adult literacy rate,Coping Capacity,Education,National,,,%,,,None,No,None,Custom,60.0,96.2,Decrease Risk,Yes
+CC.INS.DRR-SEN,Sendai Framework for Action,Coping Capacity,DRR implementation,National,,,index,,,None,No,None,Custom,0.0,1.0,Decrease Risk,Yes
+CC.INS.DRR-TCK,Traditional Community Knowledge,Coping Capacity,DRR implementation,National,,,,,,,,,,,,,
+CC.INS.DRR-EWS,Early Warning System,Coping Capacity,DRR implementation,National,,,number of people,,,None,No,None,Custom,0.0,989030.0,Decrease Risk,Yes
+CC.INS.GOV-EFF,Government effectiveness,Coping Capacity,Governance,National,,,index,Float,0-1,None,No,None,Custom,-1.7,0.8,Decrease Risk,Yes
+CC.INS.GOV-SCI,Subnational Corruption Index,Coping Capacity,Governance,Adm1,,,index,,,None,No,None,Data range,13.9,79.5,Decrease Risk,Yes
