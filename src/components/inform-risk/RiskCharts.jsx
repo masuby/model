@@ -1,5 +1,5 @@
 /**
- * RiskCharts — the two reactive, downloadable bar charts (distribution + highest
+ * RiskCharts - the two reactive, downloadable bar charts (distribution + highest
  * units) for the active lens/indicator. The regional line lives in RegionalTrend
  * and the per-unit charts in DistrictCharts; the explorer lays them out.
  */

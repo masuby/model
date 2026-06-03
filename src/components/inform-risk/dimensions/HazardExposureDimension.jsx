@@ -4,7 +4,7 @@
  * Shows all hazard types (Natural + Human) with their exposure levels
  * Based on Tanzania Country Model Template structure
  *
- * PRIORITY HAZARDS: Floods & Droughts
+ * PRIORITY HAZARDS: Floods and Droughts
  * Aligned with INFORM Risk Index Methodology and WMO Guidelines
  */
 
@@ -123,7 +123,7 @@ const HazardExposureDimension = ({ data }) => {
     { id: 'stormsCyclone', name: 'Storms and Cyclone', value: data.natural.stormsCyclone, unit: 'Index' },
     { id: 'volcano', name: 'Volcano', value: data.natural.volcano, unit: 'Index' },
     { id: 'wildfire', name: 'Wildfire', value: data.natural.wildfire, unit: 'Index' },
-    { id: 'zoonoses', name: 'Zoonoses, Plants & Pests', value: data.natural.zoonoses, unit: 'Index' }
+    { id: 'zoonoses', name: 'Zoonoses, Plants and Pests', value: data.natural.zoonoses, unit: 'Index' }
   ];
 
   // Human Hazards from Excel template
@@ -183,10 +183,10 @@ const HazardExposureDimension = ({ data }) => {
         </div>
       </div>
 
-      {/* Hazard Categories - Priority Hazards first (Floods & Droughts) */}
+      {/* Hazard Categories - Priority Hazards first (Floods and Droughts) */}
       <div className="hazard-categories">
 
-        {/* PRIORITY: Flood & Drought Risk Assessment */}
+        {/* PRIORITY: Flood and Drought Risk Assessment */}
         <div className="hazard-category priority-hazards">
           <div
             className={`category-header ${expandedCategory === 'priority' ? 'expanded' : ''}`}
@@ -195,7 +195,7 @@ const HazardExposureDimension = ({ data }) => {
           >
             <div className="category-title">
               <span className="category-icon"></span>
-              <h3>Priority Hazards: Floods & Droughts</h3>
+              <h3>Priority Hazards: Floods and Droughts</h3>
               <span className="category-count">(INFORM Risk Assessment)</span>
             </div>
             <div className="category-score">

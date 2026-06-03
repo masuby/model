@@ -179,7 +179,7 @@ const CopingCapacityDimension = ({ data }) => {
           <div className="notice-text">
             <strong>Understanding "Lack of Coping Capacity":</strong> In the INFORM risk model, this dimension is
             expressed as <strong>Lack of</strong> Coping Capacity. This inversion is intentional - it ensures all
-            three INFORM dimensions (Hazard & Exposure, Vulnerability, Lack of Coping Capacity) work in the same
+            three INFORM dimensions (Hazard and Exposure, Vulnerability, Lack of Coping Capacity) work in the same
             direction: <em>higher scores = higher risk</em>. A score of 8.0 means the country has very limited
             capacity to cope with disasters (high lack), while a score of 2.0 indicates strong coping capacity (low lack).
           </div>

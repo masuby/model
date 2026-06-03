@@ -1,5 +1,5 @@
 /**
- * RegionalTrend — the "Regional INFORM profile" multi-series line (Risk + 3
+ * RegionalTrend - the "Regional INFORM profile" multi-series line (Risk + 3
  * dimensions across regions, ordered by risk), highlighting the active lens.
  * Extracted so it can sit beside the map (default) or below it (split view).
  */
@@ -8,7 +8,7 @@ import { DISTRICTS, round1 } from './riskModel';
 import ChartCard from './charts/ChartCard';
 import LineChart from './charts/LineChart';
 
-const SCOPE_SERIES = { risk: 'INFORM Risk', hazard: 'Hazard & Exposure', vulnerability: 'Vulnerability', coping: 'Lack of Coping' };
+const SCOPE_SERIES = { risk: 'INFORM Risk', hazard: 'Hazard and Exposure', vulnerability: 'Vulnerability', coping: 'Lack of Coping' };
 
 export default function RegionalTrend({ metric, height = 360 }) {
   const regional = useMemo(() => {
@@ -28,7 +28,7 @@ export default function RegionalTrend({ metric, height = 360 }) {
 
   const series = [
     { name: 'INFORM Risk', color: '#0f172a', values: regional.map((r) => round1(r.risk)) },
-    { name: 'Hazard & Exposure', color: '#FF9800', values: regional.map((r) => round1(r.hazard)) },
+    { name: 'Hazard and Exposure', color: '#FF9800', values: regional.map((r) => round1(r.hazard)) },
     { name: 'Vulnerability', color: '#1f6feb', values: regional.map((r) => round1(r.vuln)) },
     { name: 'Lack of Coping', color: '#7c3aed', values: regional.map((r) => round1(r.cope)) },
   ];
@@ -40,7 +40,7 @@ export default function RegionalTrend({ metric, height = 360 }) {
       subtitle={`dimension means by region, ordered by overall risk${emphasize ? ` · highlighting ${emphasize}` : ''}`}
       filenameBase="inform-regional-profile"
       csv={{
-        header: ['Region', 'INFORM Risk', 'Hazard & Exposure', 'Vulnerability', 'Lack of Coping'],
+        header: ['Region', 'INFORM Risk', 'Hazard and Exposure', 'Vulnerability', 'Lack of Coping'],
         rows: regional.map((r) => [r.name, round1(r.risk), round1(r.hazard), round1(r.vuln), round1(r.cope)]),
       }}
     >

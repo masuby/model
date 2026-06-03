@@ -1,5 +1,5 @@
 /**
- * DistrictCharts — selection-responsive charts that update when a district is
+ * DistrictCharts - selection-responsive charts that update when a district is
  * picked on the map/table: its component breakdown (bar) and a District vs
  * National vs Region comparison across the INFORM dimensions (line). Downloadable.
  */
@@ -14,7 +14,7 @@ export default function DistrictCharts({ district }) {
     if (!district) return null;
     const peers = DISTRICTS.filter((d) => d.admin.adm1Name === district.admin.adm1Name);
     if (!peers.length) {
-      // region/national unit: no ADM2 peers — fall back to the unit's own totals
+      // region/national unit: no ADM2 peers - fall back to the unit's own totals
       return { hazard: district.hazardExposure?.total, vuln: district.vulnerability?.total, cope: district.lackCopingCapacity?.total, risk: district.risk };
     }
     const mean = (sel) => {
@@ -50,7 +50,7 @@ export default function DistrictCharts({ district }) {
     { label: 'Institutional', value: cc.institutional?.aggregate },
   ].map((c) => ({ ...c, value: round1(c.value), color: classifyRisk(c.value).color }));
 
-  const xLabels = ['Hazard & Exposure', 'Vulnerability', 'Lack of Coping', 'INFORM Risk'];
+  const xLabels = ['Hazard and Exposure', 'Vulnerability', 'Lack of Coping', 'INFORM Risk'];
   const series = [
     { name: district.admin.adm2Name, color: '#1f6feb', values: [round1(he.total), round1(vu.total), round1(cc.total), round1(district.risk)] },
     { name: `${district.admin.adm1Name} region`, color: '#7c3aed', values: [round1(region.hazard), round1(region.vuln), round1(region.cope), round1(region.risk)] },
@@ -61,11 +61,11 @@ export default function DistrictCharts({ district }) {
 
   return (
     <div className="rx-dc">
-      <div className="rx-dc-title ui-eyebrow">Selected — {district.admin.adm2Name} ({district.admin.adm1Name})</div>
+      <div className="rx-dc-title ui-eyebrow">Selected - {district.admin.adm2Name} ({district.admin.adm1Name})</div>
       <div className="rx-dc-grid">
         <ChartCard
           title="Component breakdown"
-          subtitle={`${district.admin.adm2Name} — by INFORM component`}
+          subtitle={`${district.admin.adm2Name} - by INFORM component`}
           filenameBase={`${base}-components`}
           csv={{ header: ['Component', 'Score'], rows: comps.map((c) => [c.label, c.value]) }}
         >

@@ -11,7 +11,7 @@ describe('Severity sample scenarios', () => {
       expect(r.dimensions.IMPACT.score).not.toBeNull();
       expect(r.dimensions.CONDITIONS.score).not.toBeNull();
       expect(r.dimensions.COMPLEXITY.score).not.toBeNull();
-      // valid 0–5 severity with a class, not flagged preliminary
+      // valid 0-5 severity with a class, not flagged preliminary
       expect(r.severity).toBeGreaterThanOrEqual(0);
       expect(r.severity).toBeLessThanOrEqual(5);
       expect(r.classification?.label).toBeTruthy();

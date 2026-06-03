@@ -106,7 +106,7 @@ function Section6Risk() {
             crises requiring international assistance.
           </p>
           <p className="definition-explanation">
-            Risk is NOT random or unpredictable — it can be <strong>measured, compared, and reduced</strong>.
+            Risk is NOT random or unpredictable - it can be <strong>measured, compared, and reduced</strong>.
             The INFORM Risk Index provides a scientific framework for understanding and addressing disaster risk.
           </p>
           <div className="risk-emphasis">
@@ -145,7 +145,7 @@ function Section6Risk() {
             <div className="formula-highlights-complete">
               <div className="formula-highlight hazard">
                 <div className="highlight-arrow"></div>
-                <div className="highlight-label">HAZARD & EXPOSURE</div>
+                <div className="highlight-label">HAZARD and EXPOSURE</div>
                 <div className="highlight-description">What hazards + Who is exposed</div>
               </div>
               <div className="formula-highlight vulnerability">
@@ -176,7 +176,7 @@ function Section6Risk() {
                   <div className="comparison-title">Geometric Mean (Cube Root)</div>
                   <div className="comparison-formula">Risk = (H and E × V × LCC)<sup>1/3</sup></div>
                   <div className="comparison-benefit">
-                    <strong>Benefit:</strong> ALL dimensions matter equally — a high score in any dimension raises overall risk
+                    <strong>Benefit:</strong> ALL dimensions matter equally - a high score in any dimension raises overall risk
                   </div>
                   <div className="comparison-example">
                     Same example: H and E=9, V=1, LCC=1 → Risk = 2.1 (low, accurately reflects low V and LCC)
@@ -508,7 +508,7 @@ function Section6Risk() {
                 })}
               >
                 Combined Interventions
-                <span className="preset-hint">(V & LCC both reduced)</span>
+                <span className="preset-hint">(V and LCC both reduced)</span>
               </button>
               <button
                 className="scenario-preset-btn reset"
@@ -618,7 +618,7 @@ function Section6Risk() {
           <div className="summary-point">
             <span className="check-icon"></span>
             <span className="point-text">
-              Risk is <strong>measurable, transparent, and reducible</strong> — not random or inevitable
+              Risk is <strong>measurable, transparent, and reducible</strong> - not random or inevitable
             </span>
           </div>
           <div className="summary-point">
@@ -634,14 +634,14 @@ function Section6Risk() {
           <h3>Congratulations! You've Completed Module 01</h3>
           <p className="completion-message">
             You now understand the INFORM Risk Framework and how it applies to Tanzania.
-            You've learned that disasters are not natural — they result from measurable,
+            You've learned that disasters are not natural - they result from measurable,
             addressable conditions. Armed with this knowledge, you're ready to explore
             Tanzania's specific risk profile and early warning systems.
           </p>
           <div className="next-module-preview">
             <h4>What's Next?</h4>
             <p>
-              <strong>Module 02: INFORM Risk Assessment</strong> — Dive into Tanzania's council-level
+              <strong>Module 02: INFORM Risk Assessment</strong> - Dive into Tanzania's council-level
               risk data (195 councils across 31 regions), explore hazard maps, and analyze vulnerability
               and coping capacity indicators.
             </p>

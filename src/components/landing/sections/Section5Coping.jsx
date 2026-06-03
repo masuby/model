@@ -275,7 +275,7 @@ function Section5Coping() {
       <div className="comparison-section">
         <h2>Capacity Makes the Difference</h2>
         <p className="comparison-intro">
-          <strong>Same hazard, same exposure, same vulnerability</strong> — but <strong>different coping capacity</strong> leads to vastly different outcomes:
+          <strong>Same hazard, same exposure, same vulnerability</strong> - but <strong>different coping capacity</strong> leads to vastly different outcomes:
         </p>
 
         <div className="comparison-controls">
@@ -485,7 +485,7 @@ function Section5Coping() {
           <div className="summary-point">
             <span className="check-icon"></span>
             <span className="point-text">
-              <strong>Strong capacity counterbalances vulnerability</strong> — the same vulnerable population can avoid crisis with good coping systems
+              <strong>Strong capacity counterbalances vulnerability</strong> - the same vulnerable population can avoid crisis with good coping systems
             </span>
           </div>
           <div className="summary-point">
@@ -497,7 +497,7 @@ function Section5Coping() {
           <div className="summary-point">
             <span className="check-icon"></span>
             <span className="point-text">
-              <strong>Investing in capacity = Risk reduction</strong> — every improvement in systems and infrastructure saves lives
+              <strong>Investing in capacity = Risk reduction</strong> - every improvement in systems and infrastructure saves lives
             </span>
           </div>
         </div>
@@ -505,7 +505,7 @@ function Section5Coping() {
           <h4>Final Section: Risk</h4>
           <p>
             You've learned about <strong>Hazard and Exposure</strong>, <strong>Vulnerability</strong>, and <strong>Coping Capacity</strong>.
-            Section 6 brings it all together — the <strong>complete INFORM Risk formula</strong>, how to calculate risk scores,
+            Section 6 brings it all together - the <strong>complete INFORM Risk formula</strong>, how to calculate risk scores,
             and how Tanzania uses this framework for decision-making.
           </p>
         </div>

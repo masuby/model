@@ -1,7 +1,7 @@
 /**
- * RiskExplorer — the district experience for the Risk module.
+ * RiskExplorer - the district experience for the Risk module.
  * Choose a lens (overall risk / a dimension), then drill into any of that
- * dimension's indicators — via the dropdown or the visible indicator chips —
+ * dimension's indicators - via the dropdown or the visible indicator chips -
  * to colour the choropleth + ranked table by it. Click a district for its full
  * INFORM breakdown. Every value is authentic from the country model.
  */
@@ -18,12 +18,12 @@ const pct = (v) => `${Math.max(0, Math.min(100, ((v ?? 0) / 10) * 100))}%`;
 function Bar({ value, label }) {
   const cls = classifyRisk(value);
   return (
-    <div className="rx-bar-row" title={`${label}: ${round1(value) ?? '—'}`}>
+    <div className="rx-bar-row" title={`${label}: ${round1(value) ?? '-'}`}>
       <span className="rx-bar-label">{label}</span>
       <span className="ui-bar" style={{ flex: 1 }}>
         <i style={{ '--val': pct(value), '--col': cls.color }} />
       </span>
-      <span className="rx-bar-val">{round1(value) ?? '—'}</span>
+      <span className="rx-bar-val">{round1(value) ?? '-'}</span>
     </div>
   );
 }
@@ -76,17 +76,17 @@ function DistrictDetail({ d }) {
 
       <div className="rx-detail-grid">
         <div className="rx-dim ui-card ui-card-pad">
-          <div className="rx-dim-head"><span>Hazard &amp; Exposure</span><b style={{ color: classifyRisk(he.total).color }}>{round1(he.total) ?? '—'}</b></div>
+          <div className="rx-dim-head"><span>Hazard and Exposure</span><b style={{ color: classifyRisk(he.total).color }}>{round1(he.total) ?? '-'}</b></div>
           <Bar value={he.natural?.aggregate} label="Natural" />
           <Bar value={he.human?.aggregate} label="Human" />
         </div>
         <div className="rx-dim ui-card ui-card-pad">
-          <div className="rx-dim-head"><span>Vulnerability</span><b style={{ color: classifyRisk(vu.total).color }}>{round1(vu.total) ?? '—'}</b></div>
+          <div className="rx-dim-head"><span>Vulnerability</span><b style={{ color: classifyRisk(vu.total).color }}>{round1(vu.total) ?? '-'}</b></div>
           <Bar value={vu.socioEconomic?.aggregate} label="Socio-economic" />
           <Bar value={vu.vulnerableGroups?.aggregate} label="Vulnerable groups" />
         </div>
         <div className="rx-dim ui-card ui-card-pad">
-          <div className="rx-dim-head"><span>Lack of Coping</span><b style={{ color: classifyRisk(cc.total).color }}>{round1(cc.total) ?? '—'}</b></div>
+          <div className="rx-dim-head"><span>Lack of Coping</span><b style={{ color: classifyRisk(cc.total).color }}>{round1(cc.total) ?? '-'}</b></div>
           <Bar value={cc.infrastructure?.aggregate} label="Infrastructure" />
           <Bar value={cc.institutional?.aggregate} label="Institutional" />
         </div>
@@ -258,7 +258,7 @@ export default function RiskExplorer() {
         </button>
       </div>
 
-      {/* Map row — default: map + regional trend beside it; split: two maps */}
+      {/* Map row - default: map + regional trend beside it; split: two maps */}
       <div className="rx-maprow">
         <div className="rx-map-wrap ui-card">
           <DistrictMap
@@ -285,7 +285,7 @@ export default function RiskExplorer() {
         )}
       </div>
 
-      {/* Split view: trends below — regional under the main map, selected area under the area map */}
+      {/* Split view: trends below - regional under the main map, selected area under the area map */}
       {secondPanel && (
         <div className="rx-maprow">
           <div className="rx-side ui-card ui-card-pad"><RegionalTrend metric={metric} height={300} /></div>
@@ -321,13 +321,13 @@ export default function RiskExplorer() {
               {filtered.map(({ d, v }, i) => {
                 const cls = classifyRisk(v);
                 const isSel = selected && selected.admin.adm2Code === d.admin.adm2Code;
-                const cell = (x) => <td className="rx-td-num">{round1(x) ?? '—'}</td>;
+                const cell = (x) => <td className="rx-td-num">{round1(x) ?? '-'}</td>;
                 return (
                   <tr key={d.admin.adm2Code} className={isSel ? 'is-selected' : ''} onClick={() => setSelected(d)}>
                     <td className="ui-muted">{i + 1}</td>
                     <td className="rx-td-name">{d.admin.adm2Name}</td>
                     <td className="ui-muted">{d.admin.adm1Name}</td>
-                    <td><b style={{ color: cls.color }}>{round1(v) ?? '—'}</b></td>
+                    <td><b style={{ color: cls.color }}>{round1(v) ?? '-'}</b></td>
                     {cell(d.hazardExposure?.total)}
                     {cell(d.vulnerability?.total)}
                     {cell(d.lackCopingCapacity?.total)}

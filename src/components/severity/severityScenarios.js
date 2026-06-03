@@ -2,7 +2,7 @@
  * Curated sample crisis scenarios for the INFORM Severity calculator.
  * Each is a complete set of raw values for the 24 IASC v6 indicators
  * (see informSeverityDefinitions.js) so the engine returns a full,
- * non-preliminary score. These are illustrative Tanzania scenarios — the
+ * non-preliminary score. These are illustrative Tanzania scenarios - the
  * "dataset" the Severity module visualises; users can also edit any value.
  *
  * baseline_inform_risk defaults to Tanzania's national INFORM Risk (≈4.1),
@@ -12,7 +12,7 @@
 export const SEVERITY_SCENARIOS = [
   {
     id: 'rufiji_floods',
-    name: 'Rufiji & Coastal Floods (severe)',
+    name: 'Rufiji and Coastal Floods (severe)',
     description: 'Rapid-onset riverine + coastal flooding across 12 districts.',
     values: {
       people_in_scope: 850000, people_affected_pct: 42, people_in_need: 320000,
@@ -45,7 +45,7 @@ export const SEVERITY_SCENARIOS = [
   {
     id: 'urban_fire',
     name: 'Localized Urban Fire (minor)',
-    description: 'Single-ward settlement fire — contained, well-resourced response.',
+    description: 'Single-ward settlement fire - contained, well-resourced response.',
     values: {
       people_in_scope: 2500, people_affected_pct: 3, people_in_need: 800,
       people_in_dire_need: 120, geographic_scope: 1,

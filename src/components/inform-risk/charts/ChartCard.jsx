@@ -1,5 +1,5 @@
 /**
- * ChartCard — frames a chart with a title and a download menu (PNG + CSV).
+ * ChartCard - frames a chart with a title and a download menu (PNG + CSV).
  * Grabs the inner <svg> for PNG export; takes the data for CSV export.
  */
 import React, { useRef, useState } from 'react';

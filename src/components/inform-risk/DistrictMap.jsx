@@ -1,5 +1,5 @@
 /**
- * DistrictMap — level-aware INFORM choropleth. Renders ADM2 districts, ADM1
+ * DistrictMap - level-aware INFORM choropleth. Renders ADM2 districts, ADM1
  * regions, or the national view, coloured by the active metric. No tile layer.
  */
 import React, { useRef, useEffect } from 'react';
@@ -21,24 +21,24 @@ const BASEMAPS = {
 // Short, plain-language explanation per metric, shown in the hover tooltip.
 const METRIC_INFO = {
   risk: 'Overall INFORM Risk = ∛(Hazard × Vulnerability × Lack of Coping).',
-  'dim:hazard': 'Hazard & Exposure — how likely/intense hazards are and what is exposed.',
-  'dim:vulnerability': 'Vulnerability — susceptibility of people & systems (poverty, health, vulnerable groups).',
-  'dim:coping': 'Lack of Coping Capacity — resources & institutions available to cope; higher means fewer.',
-  'ind:coping:drrImplementation': 'DRR implementation — disaster-risk-reduction capacity in place (plans, EOCC, ERT, EPRP). Higher = less in place.',
-  'ind:coping:governance': 'Governance — institutional capacity to manage disaster risk.',
-  'ind:coping:wash': 'WASH — water & sanitation resources available (from 2022-census water points & boreholes).',
+  'dim:hazard': 'Hazard and Exposure - how likely/intense hazards are and what is exposed.',
+  'dim:vulnerability': 'Vulnerability - susceptibility of people and systems (poverty, health, vulnerable groups).',
+  'dim:coping': 'Lack of Coping Capacity - resources and institutions available to cope; higher means fewer.',
+  'ind:coping:drrImplementation': 'DRR implementation - disaster-risk-reduction capacity in place (plans, EOCC, ERT, EPRP). Higher = less in place.',
+  'ind:coping:governance': 'Governance - institutional capacity to manage disaster risk.',
+  'ind:coping:wash': 'WASH - water and sanitation resources available (from 2022-census water points and boreholes).',
   'ind:coping:accessHealth': 'Access to health-care resources.',
-  'ind:coping:education': 'Education resources & access.',
+  'ind:coping:education': 'Education resources and access.',
   'ind:coping:communication': 'Communication infrastructure.',
-  'ind:coping:economicCapacity': 'Economic capacity to prepare & respond.',
-  'ind:hazard:flood': 'Flood exposure — riverine & urban flooding.',
-  'ind:hazard:drought': 'Drought exposure — agricultural/meteorological drought.',
-  'ind:hazard:landslide': 'Landslide exposure — rainfall-triggered slope failure (highlands).',
-  'ind:hazard:coastalHazards': 'Coastal hazards — erosion, surge, sea-level rise.',
-  'ind:hazard:earthquake': 'Earthquake exposure — Rift Valley seismicity.',
-  'ind:hazard:stormsCyclone': 'Storms & tropical cyclone exposure.',
-  'ind:vulnerability:developmentPoverty': 'Development & poverty (Household Budget Survey).',
-  'ind:vulnerability:childrenHealthNutrition': 'Children health & nutrition — stunting (TDHS 2022).',
+  'ind:coping:economicCapacity': 'Economic capacity to prepare and respond.',
+  'ind:hazard:flood': 'Flood exposure - riverine and urban flooding.',
+  'ind:hazard:drought': 'Drought exposure - agricultural/meteorological drought.',
+  'ind:hazard:landslide': 'Landslide exposure - rainfall-triggered slope failure (highlands).',
+  'ind:hazard:coastalHazards': 'Coastal hazards - erosion, surge, sea-level rise.',
+  'ind:hazard:earthquake': 'Earthquake exposure - Rift Valley seismicity.',
+  'ind:hazard:stormsCyclone': 'Storms and tropical cyclone exposure.',
+  'ind:vulnerability:developmentPoverty': 'Development and poverty (Household Budget Survey).',
+  'ind:vulnerability:childrenHealthNutrition': 'Children health and nutrition - stunting (TDHS 2022).',
 };
 
 const norm = (s) => String(s || '').toLowerCase().replace(/[^a-z0-9]/g, '');
@@ -86,7 +86,7 @@ export default function DistrictMap({ metric, selected, onSelect, filterClass, l
     : { name: 'Tanzania', sub: 'National' };
   const keyOf = (u) => u && u.admin.adm2Code;
 
-  // Indicator lenses have 0–10 distributions unlike overall risk — colour them by
+  // Indicator lenses have 0-10 distributions unlike overall risk - colour them by
   // their own quintiles so the real hotspots stand out (risk + dimension totals
   // keep the authoritative INFORM class thresholds/colours).
   const isIndicator = typeof metric.key === 'string' && metric.key.startsWith('ind:');
@@ -132,7 +132,7 @@ export default function DistrictMap({ metric, selected, onSelect, filterClass, l
     layer.bindTooltip(
       `<div class="rx-tip">
         <div class="rx-tip-h"><strong>${lbl.name}</strong> <span>${lbl.sub}</span></div>
-        <div class="rx-tip-v">${metric.label}: <b>${round1(val) ?? '—'}</b>${val == null || isIndicator ? '' : ` · ${cls.level}`}</div>
+        <div class="rx-tip-v">${metric.label}: <b>${round1(val) ?? '-'}</b>${val == null || isIndicator ? '' : ` · ${cls.level}`}</div>
         ${info ? `<div class="rx-tip-d">${info}</div>` : ''}
         ${src ? `<div class="rx-tip-src">${src}</div>` : ''}
         ${floods ? `<div class="rx-tip-meta">${floods}</div>` : ''}
@@ -142,7 +142,7 @@ export default function DistrictMap({ metric, selected, onSelect, filterClass, l
       </div>`,
       { sticky: true, className: 'rx-tip-wrap' }
     );
-    // Hover highlight only the active selection — dimmed (filtered/non-isolated) areas stay put.
+    // Hover highlight only the active selection - dimmed (filtered/non-isolated) areas stay put.
     const isDimmed = (filterClass && cls.level !== filterClass) || (isolateKey && keyOf(u) !== isolateKey);
     layer.on({
       click: () => u && onSelect?.(u),
@@ -161,7 +161,7 @@ export default function DistrictMap({ metric, selected, onSelect, filterClass, l
         {hasBase && <TileLayer key={baseLayer} url={BASEMAPS[baseLayer].url} attribution={BASEMAPS[baseLayer].attribution} />}
         {focusBounds && <FitBounds bounds={focusBounds} />}
         <GeoJSON key={key} ref={geoRef} data={geojson} style={styleFor} onEachFeature={onEach} />
-        {/* Real water bodies (2022 PHC geodatabase) — lakes/ocean for geographic context */}
+        {/* Real water bodies (2022 PHC geodatabase) - lakes/ocean for geographic context */}
         <GeoJSON data={waterbodies} interactive={false} style={() => ({ fillColor: '#a7cdf0', fillOpacity: 0.55, color: '#5b9bd5', weight: 0.5 })} />
       </MapContainer>
       <div className="rx-legend ui-card">

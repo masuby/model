@@ -41,11 +41,19 @@
   --s-5: 20px; --s-6: 24px; --s-8: 32px; --s-10: 40px;
 
   /* Radius + shadow + motion */
-  --r-sm: 6px; --r-md: 10px; --r-lg: 14px; --r-pill: 999px;
-  --sh-1: 0 1px 2px rgba(15,23,42,.06), 0 1px 3px rgba(15,23,42,.04);
-  --sh-2: 0 4px 14px rgba(15,23,42,.08);
+  --r-sm: 8px; --r-md: 12px; --r-lg: 16px; --r-pill: 999px;
+  --sh-1: 0 1px 2px rgba(15,23,42,.04), 0 2px 6px rgba(15,23,42,.05);
+  --sh-2: 0 6px 22px rgba(15,23,42,.08);
   --ease: 160ms cubic-bezier(.4,0,.2,1);
+  --font: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, system-ui, 'Helvetica Neue', sans-serif;
 }
+
+/* Smarter type rendering across the whole app + tabular figures for all data/numbers */
+html { -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; text-rendering: optimizeLegibility; }
+body { font-family: var(--font); letter-spacing: -0.005em; }
+h1, h2, h3, .ui-h1, .ui-h2, .ui-h3 { letter-spacing: -0.02em; }
+.ui-stat-num, .home-fact-num, .home-stat-num, .rx-td-num, .de-dim-total, .ui-table td, .rx-detail-score,
+input[type='number'], .home-fact-num, .rk-header-badge { font-variant-numeric: tabular-nums; font-feature-settings: 'tnum'; }
 
 /* ---- Section header ------------------------------------------------------ */
 .ui-eyebrow {

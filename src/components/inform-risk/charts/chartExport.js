@@ -1,4 +1,4 @@
-// Chart download helpers — export an SVG node to PNG, or data to CSV.
+// Chart download helpers - export an SVG node to PNG, or data to CSV.
 // SVG charts use explicit hex colours (not CSS vars) so the rasterised PNG
 // keeps its colours when serialised standalone.
 

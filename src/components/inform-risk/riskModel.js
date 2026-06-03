@@ -1,4 +1,4 @@
-// Risk presentation model — the full INFORM hierarchy (dimension → component →
+// Risk presentation model - the full INFORM hierarchy (dimension → component →
 // indicator) for Tanzania districts, plus the metric resolver the explorer uses
 // to colour the map/table by overall risk, a dimension, or any single indicator.
 // All values are authentic, straight from the country-model workbook.
@@ -20,7 +20,7 @@ export const round1 = (v) => (typeof v === 'number' ? Math.round(v * 10) / 10 : 
 // `path` returns the component object on a district; indicator `k` is the field.
 export const DIMENSION_TREE = {
   hazard: {
-    label: 'Hazard & Exposure',
+    label: 'Hazard and Exposure',
     total: (d) => d.hazardExposure?.total,
     components: [
       {
@@ -28,10 +28,10 @@ export const DIMENSION_TREE = {
         indicators: [
           { k: 'drought', label: 'Drought' }, { k: 'flood', label: 'Flood' },
           { k: 'earthquake', label: 'Earthquake' }, { k: 'landslide', label: 'Landslide' },
-          { k: 'wildfire', label: 'Wildfire' }, { k: 'stormsCyclone', label: 'Storms & Cyclone' },
+          { k: 'wildfire', label: 'Wildfire' }, { k: 'stormsCyclone', label: 'Storms and Cyclone' },
           { k: 'coastalHazards', label: 'Coastal hazards' }, { k: 'heatwave', label: 'Heatwave' },
           { k: 'lightning', label: 'Lightning' }, { k: 'environmentalDegradation', label: 'Env. Degradation' },
-          { k: 'volcano', label: 'Volcano' }, { k: 'zoonoses', label: 'Zoonoses, Plants & Pests' },
+          { k: 'volcano', label: 'Volcano' }, { k: 'zoonoses', label: 'Zoonoses, Plants and Pests' },
         ],
       },
       {
@@ -51,7 +51,7 @@ export const DIMENSION_TREE = {
       {
         name: 'Socio-economic', path: (d) => d.vulnerability?.socioEconomic,
         indicators: [
-          { k: 'developmentPoverty', label: 'Development & Poverty' }, { k: 'economicDependency', label: 'Economic Dependency' },
+          { k: 'developmentPoverty', label: 'Development and Poverty' }, { k: 'economicDependency', label: 'Economic Dependency' },
           { k: 'habitat', label: 'Habitat' }, { k: 'livelihoods', label: 'Livelihoods' },
         ],
       },
@@ -59,7 +59,7 @@ export const DIMENSION_TREE = {
         name: 'Vulnerable groups', path: (d) => d.vulnerability?.vulnerableGroups,
         indicators: [
           { k: 'displacedPeople', label: 'Displaced People' }, { k: 'healthConditions', label: 'Health Conditions' },
-          { k: 'childrenHealthNutrition', label: 'Children Health & Nutrition' }, { k: 'economic', label: 'Economic' },
+          { k: 'childrenHealthNutrition', label: 'Children Health and Nutrition' }, { k: 'economic', label: 'Economic' },
         ],
       },
     ],
@@ -143,7 +143,7 @@ function deepMean(objs) {
 const isNum = (x) => typeof x === 'number' && isFinite(x);
 // Recompute a deep-meaned dimension object the AUTHENTIC INFORM way (not a flat mean of totals):
 // category aggregate = mean of its (unit-averaged) indicators; dimension total = scaled geomean of
-// the category aggregates. (sgm/r1 are defined below but resolved at call time — aggregateUnit only
+// the category aggregates. (sgm/r1 are defined below but resolved at call time - aggregateUnit only
 // runs for REGION_UNITS, after they initialise.)
 function recomputeDimAgg(dimObj, cats) {
   if (!dimObj) return null;
@@ -169,8 +169,8 @@ function aggregateUnit(list, name, regionName, code) {
   };
 }
 // Apply locally-saved edits (PMO/Admin direct or PMO-approved sector edits) BEFORE
-// aggregating regions/national, so the whole system — map, indicator lens, charts,
-// tables, severity baseline — reflects them. Indicator edits recompute component
+// aggregating regions/national, so the whole system - map, indicator lens, charts,
+// tables, severity baseline - reflects them. Indicator edits recompute component
 // aggregates + dimension totals (mean); risk recomputes as ∛(H × V × LCC).
 const r1 = (v) => Math.round(v * 10) / 10;
 const setTotal = {
@@ -179,7 +179,7 @@ const setTotal = {
   coping: (d, v) => { if (d.lackCopingCapacity) d.lackCopingCapacity.total = v; },
 };
 const DIRECT = { hazard: 'hazard', vulnerability: 'vuln', coping: 'cope' };
-// INFORM scaled geometric mean (Excel Box 6 / informCalculationEngine) — the authentic
+// INFORM scaled geometric mean (Excel Box 6 / informCalculationEngine) - the authentic
 // category→dimension aggregation: a low category drags the dimension down (geometric).
 const sgm = (a) => {
   const xs = a.filter((x) => typeof x === 'number' && isFinite(x));
@@ -194,7 +194,7 @@ const sgm = (a) => {
     const o = ovr[d.admin?.adm2Code];
     if (!o) return;
     // Exposure edit → flood = max(hazard, √(hazard × exposure)). Exposure only AMPLIFIES;
-    // it never lowers the documented/observed flood hazard (hf) — a known flood area stays flagged.
+    // it never lowers the documented/observed flood hazard (hf) - a known flood area stays flagged.
     if (typeof o.exposure === 'number' && d.hazardExposure) {
       d.hazardExposure.exposure = { ...(d.hazardExposure.exposure || {}), index: o.exposure };
       const hf = d.hazardExposure.hazardFreq?.flood;
@@ -241,7 +241,7 @@ export function provenanceFor(unit, dim, k) {
 // Missing-data treatment, INFORM-style: a `null` indicator means NO DATA and is EXCLUDED from
 // every aggregation (mean/scaled-geomean filter to finite numbers); a `0` means a real measured
 // zero (e.g. no coastal-hazard exposure inland) and is included. dataCoverage reports the share
-// of the model's leaf indicators that actually have data for a unit — its reliability.
+// of the model's leaf indicators that actually have data for a unit - its reliability.
 export function dataCoverage(unit) {
   let have = 0, total = 0;
   for (const dim of DIM_KEYS) for (const comp of DIMENSION_TREE[dim].components) {
@@ -257,7 +257,7 @@ export const REGION_UNITS = (() => {
   return Object.entries(by).map(([name, list]) => aggregateUnit(list, name, name, `R-${name}`));
 })();
 // National unit = the OFFICIAL INFORM Tanzania country values (risk 4.1) straight from the
-// country model — the authoritative reference, NOT a re-aggregation of the sub-national units
+// country model - the authoritative reference, NOT a re-aggregation of the sub-national units
 // (which would drift toward a 170/195-mean). National figures are kept official per INFORM.
 export const NATIONAL_UNIT = {
   admin: { adm2Name: 'Tanzania', adm1Name: 'Tanzania', adm2Code: 'TZ', iso3: 'TZA' },
@@ -271,16 +271,16 @@ export const REGION_BY_KEY = (() => {
   REGION_UNITS.forEach((u) => { idx[normRegion(u.admin.adm2Name)] = u; });
   return idx;
 })();
-// Council / LGA level — the REAL 195 NBS-2022 councils. Each council shows its matched INFORM
+// Council / LGA level - the REAL 195 NBS-2022 councils. Each council shows its matched INFORM
 // unit's profile; the 28 new/split councils inherit their parent district's data (flagged
 // `_inherited`) until council-specific data exists. (Reconciliation in scripts/export-councils.py.)
 const ADM2_BY_NAME = (() => { const idx = {}; for (const d of DISTRICTS) idx[normRegion(d.admin.adm2Name)] = d; return idx; })();
 export const COUNCIL_UNITS = (councilsGeo.features || []).map((f) => {
   const p = f.properties; const src = ADM2_BY_NAME[normRegion(p.src)];
   if (!src) return null;
-  // Council-specific Hazard & Exposure, computed on this council's OWN polygon (CHIRPS v3 drought/
+  // Council-specific Hazard and Exposure, computed on this council's OWN polygon (CHIRPS v3 drought/
   // heavy-rain, ERA5 heat, NBS-2022 council population ÷ council area), floored at the district's
-  // documented level (raise-only). Vulnerability & Coping stay district-level (survey resolution —
+  // documented level (raise-only). Vulnerability and Coping stay district-level (survey resolution -
   // HBS/TDHS/IPC have no council breakdown), so councils sharing a district share those.
   const cd = councilData[String(p.code)];
   return {
@@ -292,7 +292,7 @@ export const COUNCIL_UNITS = (councilsGeo.features || []).map((f) => {
     facilities: src.facilities, drr: src.drr,
     _inherited: p.isNew ? (p.parent || src.admin.adm2Name) : null, _councilCode: String(p.code),
     _councilHazard: !!cd,
-    // The underlying INFORM source (170) unit this council's Vulnerability & Coping come from. Data-
+    // The underlying INFORM source (170) unit this council's Vulnerability and Coping come from. Data-
     // Entry edits are keyed by _srcCode so they flow through the 170-resolution backbone to every
     // council that shares this source (we never fabricate per-council survey splits).
     _srcCode: src.admin.adm2Code, _srcName: src.admin.adm2Name,
@@ -303,12 +303,12 @@ export const COUNCIL_BY_CODE = (() => { const idx = {}; COUNCIL_UNITS.forEach((u
 // Levels, in canonical order. The REAL NBS-2022 administrative structure is the
 // default the model speaks in: 195 councils → 31 regions → the official national
 // INFORM value. The 170 INFORM units remain available as the *source/reference*
-// resolution (the country workbook the councils are built from) — never the headline.
+// resolution (the country workbook the councils are built from) - never the headline.
 export const LEVELS = [
-  { key: 'council', label: 'Council / LGA — NBS 2022 (195)', unitNoun: 'councils' },
+  { key: 'council', label: 'Council / LGA - NBS 2022 (195)', unitNoun: 'councils' },
   { key: 'region', label: 'Region (31)', unitNoun: 'regions' },
-  { key: 'national', label: 'National — official INFORM', unitNoun: 'national' },
-  { key: 'district', label: 'INFORM source units (170) — reference', unitNoun: 'INFORM units' },
+  { key: 'national', label: 'National - official INFORM', unitNoun: 'national' },
+  { key: 'district', label: 'INFORM source units (170) - reference', unitNoun: 'INFORM units' },
 ];
 export function unitsForLevel(level) {
   return level === 'council' ? COUNCIL_UNITS : level === 'region' ? REGION_UNITS : level === 'national' ? [NATIONAL_UNIT] : DISTRICTS;

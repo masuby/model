@@ -1,5 +1,5 @@
 /**
- * DataEntry — edit the INFORM model and feed it into the whole system, the AUTHENTIC way.
+ * DataEntry - edit the INFORM model and feed it into the whole system, the AUTHENTIC way.
  *  • PMO / Admin: edits apply directly.   • Sector officer: edits need PMO approval.
  * Edit any dimension's score, or expand it to fill individual indicators
  * (Hazard / Vulnerability / Coping), PLUS the population Exposure that drives the
@@ -26,7 +26,7 @@ const DEFAULT_AUTH = { pmo: 'PMO', sector: 'MOW' };
 
 const cbrt = (h, v, c) => ([h, v, c].every((x) => typeof x === 'number') ? round1(Math.cbrt(h * v * c)) : null);
 const meanOf = (xs) => { const a = xs.filter((x) => typeof x === 'number'); return a.length ? a.reduce((s, x) => s + x, 0) / a.length : null; };
-// INFORM scaled geometric mean (Excel Box 6) — category → dimension.
+// INFORM scaled geometric mean (Excel Box 6) - category → dimension.
 const sgm = (a) => { const xs = a.filter((x) => typeof x === 'number' && isFinite(x)); if (!xs.length) return null; const sc = xs.map((x) => ((10 - x) / 10 * 9) + 1); return (10 - Math.exp(sc.reduce((s, x) => s + Math.log(x), 0) / sc.length)) / 9 * 10; };
 function recomputeDim(dim, ind) {
   const aggs = DIMENSION_TREE[dim].components
@@ -42,7 +42,7 @@ export default function DataEntry() {
   const [code, setCode] = useState(councils[0]?.admin.adm2Code);
   const unit = councils.find((c) => c.admin.adm2Code === code) || councils[0];
   // Edits are keyed by the underlying INFORM source (170) unit so they flow through the data backbone
-  // to every council sharing it — and to the district/region/national views and charts.
+  // to every council sharing it - and to the district/region/national views and charts.
   const editCode = unit?._srcCode;
   const siblings = useMemo(
     () => (editCode ? COUNCIL_UNITS.filter((c) => c._srcCode === editCode && c.admin.adm2Code !== code) : []),
@@ -113,11 +113,11 @@ export default function DataEntry() {
   };
   const onSave = () => {
     if (!unit || !editCode) return;
-    const stamp = `${AUTHORITIES[auth]?.label || auth}${by ? ' — ' + by : ''}`;
+    const stamp = `${AUTHORITIES[auth]?.label || auth}${by ? ' - ' + by : ''}`;
     if (role === 'pmo') { saveDirect(editCode, payload(), stamp); setNeedsApply(true); note(`Saved ${unit.admin.adm2Name}. Apply to see it on the map.`); }
     else { submit({ code: editCode, name: unit.admin.adm2Name, region, ...payload(), by: stamp }); setPending(getPending()); note(`Submitted ${unit.admin.adm2Name} for PMO approval.`); }
   };
-  const onApprove = (id) => { approve(id); setPending(getPending()); setNeedsApply(true); note('Approved & applied.'); };
+  const onApprove = (id) => { approve(id); setPending(getPending()); setNeedsApply(true); note('Approved and applied.'); };
   const onReject = (id) => { reject(id); setPending(getPending()); note('Rejected.'); };
   const onReset = () => { if (confirm('Remove all local edits and pending submissions?')) { resetAll(); setPending([]); setNeedsApply(true); note('All edits cleared.'); } };
 
@@ -128,8 +128,8 @@ export default function DataEntry() {
       <header className="de-head ui-card ui-card-pad">
         <div>
           <div className="ui-eyebrow">INFORM model · data entry</div>
-          <h1 className="ui-h1">Edit & approve INFORM data</h1>
-          <p className="ui-muted">Set a dimension score, or expand it to fill indicators — Hazard, <strong>Exposure</strong>, Vulnerability, Coping. Aggregation follows the Excel: indicator→category mean, category→dimension scaled geometric mean, risk = ∛(H×V×LCC). Every edit is stamped with its source.</p>
+          <h1 className="ui-h1">Edit and approve INFORM data</h1>
+          <p className="ui-muted">Set a dimension score, or expand it to fill indicators - Hazard, <strong>Exposure</strong>, Vulnerability, Coping. Aggregation follows the Excel: indicator→category mean, category→dimension scaled geometric mean, risk = ∛(H×V×LCC). Every edit is stamped with its source.</p>
         </div>
         <div className="de-role">
           <span className="ui-eyebrow">I am</span>
@@ -207,7 +207,7 @@ export default function DataEntry() {
                       <input className="de-dim-total" type="number" min="0" max="10" step="0.1" value={exposure ?? ''} onChange={(e) => onExposureChange(e.target.value)} />
                     </div>
                     <span className="ui-muted de-exposure-hint">
-                      {exp ? `${exp.population?.toLocaleString()} people · ${exp.density}/km² (NBS 2022)` : 'population exposure index 0–10'} → drives flood = √(hazard × exposure)
+                      {exp ? `${exp.population?.toLocaleString()} people · ${exp.density}/km² (NBS 2022)` : 'population exposure index 0-10'} → drives flood = √(hazard × exposure)
                     </span>
                   </div>
                 )}
@@ -217,12 +217,12 @@ export default function DataEntry() {
 
           <div className="de-preview">
             <span className="ui-muted">Computed INFORM Risk = ∛(H × V × LCC)</span>
-            <div className="de-risk" style={{ color: liveClass.color }}>{liveRisk ?? '—'} <span className="ui-badge" style={{ background: liveClass.color }}>{liveClass.level}</span></div>
+            <div className="de-risk" style={{ color: liveClass.color }}>{liveRisk ?? '-'} <span className="ui-badge" style={{ background: liveClass.color }}>{liveClass.level}</span></div>
           </div>
 
           <div className="de-actions">
             <label className="de-field de-auth"><span className="de-field-label">Data source / authority</span>
-              <select value={auth} onChange={(e) => setAuth(e.target.value)}>{AUTH_OPTIONS.map((a) => <option key={a.k} value={a.k}>{a.label} — {a.full}</option>)}</select>
+              <select value={auth} onChange={(e) => setAuth(e.target.value)}>{AUTH_OPTIONS.map((a) => <option key={a.k} value={a.k}>{a.full} ({a.label})</option>)}</select>
             </label>
             <input className="de-by" placeholder="Your name (optional)" value={by} onChange={(e) => setBy(e.target.value)} />
             <button className="ui-btn-primary" onClick={onSave}>{role === 'pmo' ? 'Save (apply directly)' : 'Submit for approval'}</button>
@@ -249,7 +249,7 @@ export default function DataEntry() {
         </div>
       </div>
 
-      <p className="de-foot ui-muted">Edits flow into the map, charts and tables. Aggregation matches the INFORM Excel; see the methodology manual for the standardization & formulas. Cross-device persistence connects to the Supabase backend.</p>
+      <p className="de-foot ui-muted">Edits flow into the map, charts and tables. Aggregation matches the INFORM Excel; see the methodology manual for the standardization and formulas. Cross-device persistence connects to the Supabase backend.</p>
     </div>
   );
 }

@@ -1,5 +1,5 @@
 /**
- * HomePage — the landing page for INFORM Tanzania. Introduces the platform and
+ * HomePage - the landing page for INFORM Tanzania. Introduces the platform and
  * routes to the three modules. Clean, flat (no gradients), on the design system.
  */
 import React from 'react';
@@ -10,15 +10,15 @@ import './HomePage.css';
 const MODULES = [
   {
     icon: '', title: 'Education', to: '/education', cta: 'Start the course',
-    desc: 'A guided course on the INFORM framework — hazard, exposure, vulnerability, coping capacity and risk — with a short quiz after each section.',
+    desc: 'A guided course on the INFORM framework - hazard, exposure, vulnerability, coping capacity and risk - with a short quiz after each section.',
   },
   {
     icon: '', title: 'Risk', to: '/risk', cta: 'Open the explorer',
-    desc: "Explore Tanzania's INFORM Risk at council, region and national level — by dimension or any single indicator — on the map, ranked tables and downloadable charts.",
+    desc: "Explore Tanzania's INFORM Risk at council, region and national level - by dimension or any single indicator - on the map, ranked tables and downloadable charts.",
   },
   {
     icon: '', title: 'Severity', to: '/severity', cta: 'Open the calculator',
-    desc: 'Measure how severe a crisis is with the IASC INFORM Severity Index v6 — its impact, the conditions of affected people, and response complexity.',
+    desc: 'Measure how severe a crisis is with the IASC INFORM Severity Index v6 - its impact, the conditions of affected people, and response complexity.',
   },
 ];
 
@@ -45,7 +45,7 @@ export default function HomePage() {
           <h1 className="home-title">Tanzania Index for Risk Management</h1>
           <p className="home-lead">
             Understand disaster risk, explore it across every council, and measure the
-            severity of crises — grounded in the global INFORM methodology.
+            severity of crises - grounded in the global INFORM methodology.
           </p>
           <div className="home-cta">
             <NavLink to="/education" className="home-btn home-btn-primary">Start the course</NavLink>
@@ -79,7 +79,7 @@ export default function HomePage() {
       </section>
 
       <p className="home-foot ui-muted">
-        Source: Tanzania INFORM Country Model (INFORM methodology). An educational and operational tool — not an official emergency alert system.
+        Source: Tanzania INFORM Country Model (INFORM methodology). An educational and operational tool - not an official emergency alert system.
       </p>
     </div>
   );

@@ -19,7 +19,7 @@ import './SeverityScorecard.css';
 const DIM_ORDER = ['IMPACT', 'CONDITIONS', 'COMPLEXITY'];
 
 function fmt(v, d = 2) {
-  return v === null || v === undefined || Number.isNaN(v) ? '—' : Number(v).toFixed(d);
+  return v === null || v === undefined || Number.isNaN(v) ? '-' : Number(v).toFixed(d);
 }
 
 function DimensionCard({ dimId, data }) {
@@ -92,7 +92,7 @@ export default function SeverityScorecard({ result, title = 'INFORM Severity Ass
           </div>
         </div>
         <div className="sev-scorecard-final">
-          <div className="sev-scorecard-final-label">Final Severity (0–5)</div>
+          <div className="sev-scorecard-final-label">Final Severity (0-5)</div>
           <div
             className="sev-scorecard-final-score"
             style={{ background: cls?.color ?? '#94a3b8' }}
@@ -107,7 +107,7 @@ export default function SeverityScorecard({ result, title = 'INFORM Severity Ass
         <div className="sev-scorecard-formula">
           <code>{result.formula.expression}</code>
           {result.formula.preliminary && (
-            <span className="sev-scorecard-preliminary">Preliminary — not all 3 dimensions present</span>
+            <span className="sev-scorecard-preliminary">Preliminary - not all 3 dimensions present</span>
           )}
         </div>
       )}

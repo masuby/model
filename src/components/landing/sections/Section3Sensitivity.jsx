@@ -359,7 +359,7 @@ function Section3Sensitivity() {
               <strong>Natural hazards are inevitable.</strong> Floods, droughts, and cyclones will always occur.
             </p>
             <p className="insight-main">
-              But <strong>DISASTERS</strong> — the death, displacement, and suffering — are <strong>NOT natural</strong>.
+              But <strong>DISASTERS</strong> - the death, displacement, and suffering - are <strong>NOT natural</strong>.
               They are created by:
             </p>
             <div className="disaster-causes">
@@ -417,7 +417,7 @@ function Section3Sensitivity() {
             <span className="check-icon"></span>
             <span className="point-text">
               The <strong>same hazard</strong> can cause a <strong>disaster</strong> in one place and be
-              <strong> manageable</strong> in another — sensitivity makes the difference
+              <strong> manageable</strong> in another - sensitivity makes the difference
             </span>
           </div>
           <div className="summary-point">
@@ -429,14 +429,14 @@ function Section3Sensitivity() {
           <div className="summary-point">
             <span className="check-icon"></span>
             <span className="point-text">
-              <strong>Disasters are NOT natural</strong> — they're created by poverty, inequality, and weak systems
+              <strong>Disasters are NOT natural</strong> - they're created by poverty, inequality, and weak systems
             </span>
           </div>
         </div>
         <div className="next-section-preview">
           <h4>Next Section: Vulnerability</h4>
           <p>
-            We've learned how sensitivity affects impact. Now we'll explore <strong>vulnerability</strong> —
+            We've learned how sensitivity affects impact. Now we'll explore <strong>vulnerability</strong> -
             the broader concept that INFORM uses to assess which communities are most at risk. This is where
             we'll start to see the <strong>INFORM formula</strong> taking shape.
           </p>

@@ -1,5 +1,5 @@
 /**
- * LineChart — academic / Excel-style multi-series SVG line chart with smooth
+ * LineChart - academic / Excel-style multi-series SVG line chart with smooth
  * curves, drawn axes + tick marks, gridlines, axis titles, a legend, markers and
  * an area fill under the highlighted series. Dependency-free; explicit hex so it
  * exports cleanly to PNG.
@@ -25,7 +25,7 @@ function smoothPath(pts) {
   return d;
 }
 
-export default function LineChart({ series, xLabels, max = 10, height = 420, yTitle = 'Score (0–10)', xTitle = 'Region (ordered by INFORM Risk →)', emphasize }) {
+export default function LineChart({ series, xLabels, max = 10, height = 420, yTitle = 'Score (0-10)', xTitle = 'Region (ordered by INFORM Risk →)', emphasize }) {
   const W = 820, padL = 64, padR = 24, padT = 54, padB = 104;
   const H = height;
   const plotW = W - padL - padR, plotH = H - padT - padB;

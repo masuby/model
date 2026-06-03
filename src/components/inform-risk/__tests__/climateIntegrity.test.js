@@ -1,5 +1,5 @@
 /**
- * climateIntegrity.test.js — guards that the shipped dataset is AUTHENTIC to the INFORM
+ * climateIntegrity.test.js - guards that the shipped dataset is AUTHENTIC to the INFORM
  * methodology (matches TZ_INFORM_model.xlsx) and to docs/METHODOLOGY_MANUAL.md:
  *   indicator → category : arithmetic MEAN
  *   category  → dimension: INFORM scaled GEOMEAN (Excel Box 6)
@@ -51,7 +51,7 @@ describe('INFORM authentic aggregation (Excel parity)', () => {
     expect(fails).toEqual([]);
   });
 
-  // Guards ALL three dimensions (not just Hazard) — the gap that let Lack-of-Coping drift to a
+  // Guards ALL three dimensions (not just Hazard) - the gap that let Lack-of-Coping drift to a
   // plain mean. category→dimension is the scaled geomean for Hazard, Vulnerability AND Coping.
   it('EVERY dimension total = scaled GEOMEAN of its categories (all 3 dims, every unit)', () => {
     const DIMCATS = { hazardExposure: ['natural', 'human'], vulnerability: ['socioEconomic', 'vulnerableGroups'], lackCopingCapacity: ['infrastructure', 'institutional'] };
@@ -66,7 +66,7 @@ describe('INFORM authentic aggregation (Excel parity)', () => {
 });
 
 describe('Hazard × Exposure flood + manual worked examples', () => {
-  it('flood = max(hazard, √(hazard × exposure)) — exposure amplifies only, never hides', () => {
+  it('flood = max(hazard, √(hazard × exposure)) - exposure amplifies only, never hides', () => {
     const fails = [];
     for (const u of D) {
       const he = u.hazardExposure, hf = he?.hazardFreq?.flood, E = he?.exposure?.index;

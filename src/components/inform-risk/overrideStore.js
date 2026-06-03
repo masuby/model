@@ -1,11 +1,11 @@
 /**
- * overrideStore — local persistence for INFORM data edits, with a simple
+ * overrideStore - local persistence for INFORM data edits, with a simple
  * approval flow. PMO/Admin edits are applied directly; Sector edits become
  * pending submissions a PMO approves. Approved/PMO edits are merged into the
- * dataset (riskModel) so the whole system — map, charts, tables — reflects them.
+ * dataset (riskModel) so the whole system - map, charts, tables - reflects them.
  *
  * Storage is this browser's localStorage (single-device). Cross-device, real
- * multi-user persistence is the Supabase backend (supabase/setup.sql) — when a
+ * multi-user persistence is the Supabase backend (supabase/setup.sql) - when a
  * project exists, swap these read/write calls for Supabase queries.
  */
 const LS_OVR = 'inform_overrides_v1';   // { adm2Code: { hazard, vuln, cope, _by, _ts } }
@@ -39,7 +39,7 @@ export function approve(id) {
   const p = getPending();
   const e = p.find((x) => x.id === id);
   if (e) {
-    saveDirect(e.code, { hazard: e.hazard, vuln: e.vuln, cope: e.cope, ind: e.ind, exposure: e.exposure, indSrc: e.indSrc, expSrc: e.expSrc }, `PMO — approved (${e.by || 'sector'})`);
+    saveDirect(e.code, { hazard: e.hazard, vuln: e.vuln, cope: e.cope, ind: e.ind, exposure: e.exposure, indSrc: e.indSrc, expSrc: e.expSrc }, `PMO - approved (${e.by || 'sector'})`);
     write(LS_PEND, p.filter((x) => x.id !== id));
   }
 }

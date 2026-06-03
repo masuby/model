@@ -23,7 +23,7 @@ import HazardExposureDimension from './dimensions/HazardExposureDimension';
 import VulnerabilityDimension from './dimensions/VulnerabilityDimension';
 import CopingCapacityDimension from './dimensions/CopingCapacityDimension';
 
-// Single curated dataset — generated from the authentic Tanzania INFORM Excel
+// Single curated dataset - generated from the authentic Tanzania INFORM Excel
 // (scripts/generate-risk-json.mjs). The faithful values the engine's excelParity
 // test validates. No runtime Excel parse, no mock/random fallback.
 import riskDataset from '../../data/tanzania-inform-risk.json';
@@ -108,7 +108,7 @@ const Module02InformRisk = ({ onNavigate }) => {
   const [loading] = useState(false);
   const [selectedPhase, setSelectedPhase] = useState('scoping');
 
-  // Risk data is the curated dataset imported above — no async load, no fallback.
+  // Risk data is the curated dataset imported above - no async load, no fallback.
 
   // Calculate verification of INFORM formula
   const formulaVerification = useMemo(() => {
@@ -154,7 +154,7 @@ const Module02InformRisk = ({ onNavigate }) => {
           <h1 className="ui-h1">National Risk Assessment</h1>
           <p className="rk-header-source ui-muted">
             Official INFORM Tanzania country value (INFORM methodology). Sub-national analysis is built from the INFORM
-            country-model workbook and presented on the real NBS-2022 structure — 31 regions · 195 councils.
+            country-model workbook and presented on the real NBS-2022 structure - 31 regions · 195 councils.
           </p>
         </div>
         <div className="rk-header-badge" style={{ borderColor: classification.color }}>

@@ -1,5 +1,5 @@
 /**
- * BarChart — academic / Excel-style SVG bar chart (vertical column or horizontal
+ * BarChart - academic / Excel-style SVG bar chart (vertical column or horizontal
  * bar): drawn axes with tick marks, gridlines, value labels. Explicit hex so it
  * exports cleanly to PNG. data: [{ label, sub?, value, color }].
  */
@@ -40,7 +40,7 @@ export default function BarChart({ data, horizontal = false, max = 10, unit = ''
               {d.sub && <text x={x0 - 8} y={y + rowH / 2 + 10} textAnchor="end" fontSize="9.5" fill={MUTED}>{d.sub}</text>}
               <rect x={x0} y={y + 6} width={w} height={rowH - 13} fill={d.color} />
               <text x={x0 + w + 6} y={y + rowH / 2 + 2} fontSize="12" fontWeight="700" fill={INK}>
-                {d.value == null ? '—' : Math.round(d.value * 10) / 10}{unit}
+                {d.value == null ? '-' : Math.round(d.value * 10) / 10}{unit}
               </text>
             </g>
           );

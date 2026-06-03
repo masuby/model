@@ -1,5 +1,5 @@
 /**
- * structureConsistency.test.js — guards that the model speaks the REAL NBS-2022
+ * structureConsistency.test.js - guards that the model speaks the REAL NBS-2022
  * administrative structure consistently, and never silently regresses to "170":
  *   • the canonical/default level is the 195 councils (LGAs);
  *   • all 195 councils carry data, each tracing to an INFORM source (170) unit;
@@ -27,7 +27,7 @@ describe('Real NBS-2022 structure is canonical (195 councils → 31 regions → 
     expect(COUNCIL_UNITS.length).toBeGreaterThanOrEqual(195);
     for (const c of COUNCIL_UNITS) {
       expect(typeof c.risk).toBe('number');
-      expect(c._srcCode).toBeTruthy();   // override key — edits flow through the 170 backbone
+      expect(c._srcCode).toBeTruthy();   // override key - edits flow through the 170 backbone
       expect(c._srcName).toBeTruthy();
     }
   });
@@ -67,7 +67,7 @@ describe('Real NBS-2022 structure is canonical (195 councils → 31 regions → 
   });
 });
 
-describe('Council-level Hazard & Exposure — computed per council, raise-only', () => {
+describe('Council-level Hazard and Exposure - computed per council, raise-only', () => {
   const key = (s) => String(s || '').toLowerCase().replace(/[^a-z]/g, '');
   it('every council has a globally-unique code (guards the 12-of-195 collision bug)', () => {
     const codes = COUNCIL_UNITS.map((c) => c.admin.adm2Code);
@@ -75,7 +75,7 @@ describe('Council-level Hazard & Exposure — computed per council, raise-only',
     expect(codes.length).toBeGreaterThanOrEqual(195);
   });
 
-  it('all 195 councils carry their OWN computed Hazard & Exposure (council population ÷ area)', () => {
+  it('all 195 councils carry their OWN computed Hazard and Exposure (council population ÷ area)', () => {
     const computed = COUNCIL_UNITS.filter((c) => c._councilHazard);
     expect(computed.length).toBe(COUNCIL_UNITS.length);
     for (const c of computed) {
@@ -84,7 +84,7 @@ describe('Council-level Hazard & Exposure — computed per council, raise-only',
     }
   });
 
-  it('council Hazard total & risk are raise-only — never below the source district', () => {
+  it('council Hazard total and risk are raise-only - never below the source district', () => {
     const dByName = {}; for (const d of DISTRICTS) dByName[key(d.admin.adm2Name)] = d;
     const fails = [];
     for (const c of COUNCIL_UNITS) {
