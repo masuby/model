@@ -319,14 +319,12 @@ export function calculateDimension(dimensionId, indicatorValues) {
 
   const categoryResults = {};
   const scoreValues = [];
-  const scoreWeights = [];
 
   for (const [catId, cat] of Object.entries(dim.categories)) {
     const result = calculateCategory(dimensionId, catId, indicatorValues);
     categoryResults[catId] = result;
     if (result.score !== null) {
       scoreValues.push(result.score);
-      scoreWeights.push(cat.weight ?? 0.5);
     }
   }
 
@@ -341,8 +339,10 @@ export function calculateDimension(dimensionId, indicatorValues) {
   } else if (method === 'MEAN') {
     score = meanAggregation(scoreValues);
   } else {
-    // GEOMEAN — INFORM scaled, with category weights
-    score = informScaledGeomean(scoreValues, scoreWeights);
+    // GEOMEAN — INFORM scaled, UNWEIGHTED to match the workbook (the official model weights its two
+    // categories equally). Category weighting is a v2 proposal, applied only as a flagged deviation,
+    // never silently - so an unequal cat.weight can no longer drift the dimension off the workbook.
+    score = informScaledGeomean(scoreValues);
   }
 
   return {
@@ -523,7 +523,8 @@ export function calculateINFORMRisk(indicatorValues, opts = {}) {
   const H = dimensionScores.HAZARD;
   const V = dimensionScores.VULNERABILITY;
   const LCC = dimensionScores.COPING_CAPACITY;
-  if (isFiniteNumber(H) && isFiniteNumber(V) && isFiniteNumber(LCC) && H > 0 && V > 0 && LCC > 0) {
+  // No `> 0` guard: a 0 dimension yields risk 0 (0^(1/3) = 0), exactly as the workbook formula.
+  if (isFiniteNumber(H) && isFiniteNumber(V) && isFiniteNumber(LCC)) {
     const risk = Math.pow(H, 1 / 3) * Math.pow(V, 1 / 3) * Math.pow(LCC, 1 / 3);
     result.risk = roundTo(risk, 1);  // Excel rounds to 1 decimal
     result.classification = classifyRisk(result.risk, scheme);

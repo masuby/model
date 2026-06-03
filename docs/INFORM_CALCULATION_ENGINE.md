@@ -186,6 +186,10 @@ class = IF(x<t1, 0, IF(x<t2, 1, IF(x<t3, 2, IF(x<t4, 3, 4))))     # 0..4 = Very 
 | E | Diagnostics | skew/kurtosis reported | not reported | add to justify transforms |
 | F | Indicator use-set | `useIndicator="Yes"` filter | null-exclusion | reconcile the included-indicator list |
 | G | Class breakpoints | per-dimension thresholds | risk bands | confirm exact breakpoints |
+| H | Missing whole category | dimension blanks (AVERAGE errors) | falls back to the present category | v2: replicate the blank, or document the fallback |
+| I | Dimension = 0 | risk = 0 (0^(1/3)=0) | **aligned** (was null via a >0 guard) | **resolved Jun 2026** - guard dropped |
+| J | Category weighting | hardwired unweighted | **aligned** (was a 0.5 pass-through in the formal engine) | **resolved Jun 2026** - dimension geomean unweighted; weighting = flagged v2 deviation |
+| K | Two engines of record | one workbook | golden fixture now guards both `riskModel` + `informCalculationEngine` | v2: converge to one engine |
 
 **Already confirmed identical:** component/category **mean**, dimension **scaled geomean**, risk **cube
 root**, min-max **method**, log-transform **method**, risk-sign **inversion**, "No data" = **null**.

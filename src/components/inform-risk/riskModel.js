@@ -165,7 +165,7 @@ function aggregateUnit(list, name, regionName, code) {
   return {
     admin: { adm2Name: name, adm1Name: regionName, adm2Code: code, iso3: 'TZA' },
     hazardExposure: he, vulnerability: vu, lackCopingCapacity: cc,
-    risk: [h, v, c].every(isNum) ? r1(Math.pow(h, 1 / 3) * Math.pow(v, 1 / 3) * Math.pow(c, 1 / 3)) : null,
+    risk: [h, v, c].every(isNum) ? riskScore(h, v, c) : null,
   };
 }
 // Apply locally-saved edits (PMO/Admin direct or PMO-approved sector edits) BEFORE
@@ -173,6 +173,10 @@ function aggregateUnit(list, name, regionName, code) {
 // tables, severity baseline - reflects them. Indicator edits recompute component
 // aggregates + dimension totals (mean); risk recomputes as ∛(H × V × LCC).
 const r1 = (v) => Math.round(v * 10) / 10;
+// INFORM risk = the literal Excel cube-root product  ROUND(H^(1/3) * V^(1/3) * LCC^(1/3), 1).
+// Exported alongside sgm so the LIVE engine is guarded by the same workbook-golden fixture as the
+// formal engine. No `> 0` guard: a 0 dimension yields risk 0 (0^(1/3) = 0), exactly as the workbook.
+export const riskScore = (h, v, c) => r1(Math.pow(h, 1 / 3) * Math.pow(v, 1 / 3) * Math.pow(c, 1 / 3));
 const setTotal = {
   hazard: (d, v) => { if (d.hazardExposure) d.hazardExposure.total = v; },
   vulnerability: (d, v) => { if (d.vulnerability) d.vulnerability.total = v; },
@@ -184,7 +188,7 @@ const DIRECT = { hazard: 'hazard', vulnerability: 'vuln', coping: 'cope' };
 //   dimension = ROUND( (10 - GEOMEAN( (10-c)/10*9+1  for each category c )) / 9 * 10 , 1 )
 //   where GEOMEAN(x1..xn) = (x1 * x2 * ... * xn)^(1/n)   ← product form, the literal Excel expression.
 // (the ROUND to 1 dp is applied by the caller via r1, matching the workbook.)
-const sgm = (a) => {
+export const sgm = (a) => {
   const xs = a.filter((x) => typeof x === 'number' && isFinite(x));
   if (!xs.length) return null;
   const sc = xs.map((x) => ((10 - x) / 10 * 9) + 1);          // (10 - c)/10 * 9 + 1
@@ -227,7 +231,7 @@ const sgm = (a) => {
       if (typeof o[DIRECT[dim]] === 'number') setTotal[dim](d, o[DIRECT[dim]]); // explicit total edit wins
     }
     const h = d.hazardExposure?.total, v = d.vulnerability?.total, c = d.lackCopingCapacity?.total;
-    if ([h, v, c].every((x) => typeof x === 'number')) d.risk = r1(Math.pow(h, 1 / 3) * Math.pow(v, 1 / 3) * Math.pow(c, 1 / 3));
+    if ([h, v, c].every((x) => typeof x === 'number')) d.risk = riskScore(h, v, c);
     // Provenance for viewing (per-indicator edit source; registry default applied at view time).
     if (o.indSrc) d._prov = { ...(d._prov || {}), ...o.indSrc };
     if (typeof o.exposure === 'number' && o.expSrc) d._prov = { ...(d._prov || {}), 'hazard:exposure': o.expSrc };

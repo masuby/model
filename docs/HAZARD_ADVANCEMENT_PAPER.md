@@ -203,6 +203,23 @@ remaining gap is in the **standardisation** of our *recomputed* indicators (the 
 | F | **Indicator use-set** | `useIndicator = Yes/No` filter | null-exclusion | reconcile the exact included-indicator list per dimension | which leaves count in a category |
 | G | **Class breakpoints** | per-dimension threshold table | global risk bands | confirm the exact per-dimension breakpoints | class/colour only, not the score |
 
+### Tier 1b - sparse-data fidelity and engine convergence (June 2026 audit)
+
+A code audit of the two engines - the live `riskModel` and the formal `informCalculationEngine` -
+surfaced four fidelity points on sparse or degenerate data. Two were aligned to the workbook
+immediately (behaviour-neutral on the fully-populated dataset); two remain v2 decisions.
+
+| Finding | Workbook | Was | Now / v2 |
+|---|---|---|---|
+| **Dimension = 0 -> risk** | 0 (`0^(1/3)=0`) | formal engine returned null via a `>0` guard; the live engine already returned 0 | **Resolved** - guard dropped, both engines now return 0 |
+| **Category weighting** | unweighted (equal) | formal engine passed 0.5/0.5 weights into the geomean (identical at equal, divergent if changed) | **Resolved** - dimension geomean hardwired unweighted; weighting is a flagged v2 deviation only |
+| **Missing whole category** | category `AVERAGE` errors, dimension blanks | both engines degrade to the single present category | **v2 decision** - replicate the blank (strict) or keep the graceful fallback and document it |
+| **Two engines of record** | one workbook | live `riskModel` and formal `informCalculationEngine` agree on populated data, diverge on edge cases | **Partly** - the workbook-golden fixture now guards **both**; converging to one engine is v2 |
+
+Equal weights and full data masked all four; only an explicit audit against the workbook's own
+sparse-data behaviour exposes them. The golden fixture (the workbook's cached rows) is now the
+regression guard pinning **both** engines to the workbook.
+
 ## Tier 2 - Hazard evidence (apply the drought template to every documented overlay)
 
 Several hazards are still **documented overlays** (expert-placed, not computed). v2 advances each the way
