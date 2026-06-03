@@ -69,9 +69,10 @@ for i, (txt, sz, bold) in enumerate(intro, 1):
     c = how.cell(i, 1, txt); c.font = Font(size=sz, bold=bold, color='1F3A5F' if bold else '000000')
 how.column_dimensions['A'].width = 100
 
-# ---- Sheet 2: Data Entry ----
+# ---- Data Entry (per-indicator) - kept as a HIDDEN reference, superseded by the 195-Council capture ----
 ws = wb.create_sheet('Data Entry')
 ws.sheet_view.showGridLines = False
+ws.sheet_state = 'hidden'
 headers = ['Sector', 'Dimension', 'Component', 'Indicator', 'Unit', 'Level', 'Transform',
            'Ref Min', 'Ref Max', 'Direction', 'ACTUAL VALUE', '0-10 (auto)']
 HEAD = PatternFill('solid', fgColor='1F3A5F'); thin = Side(style='thin', color='D0D7E2')
@@ -167,6 +168,7 @@ sc.protection = SheetProtection(sheet=True)
 # lightning), with literature-cited references + proposed weights. Same standardiser engine; everything editable.
 adv = list(csv.DictReader(open(os.path.join(ROOT, 'data-source/inform_advanced_spec.csv'))))
 aw = wb.create_sheet('Advanced (research)'); aw.sheet_view.showGridLines = False
+aw.sheet_state = 'hidden'  # NOT shared/seen by sectors; kept as a complete sheet "down" in the file for us
 aw.cell(1, 1, 'ADVANCED (research) - v2 PROPOSAL.  The locked NORMAL + Council sheets are the regional INFORM, unchanged.').font = Font(bold=True, size=11, color='B45309')
 aw.cell(2, 1, 'Refine an indicator with extra sub-indicators, or fill an INFORM gap. References are literature-cited and PROPOSED (so are the weights); when validated they get enforced. Everything on this tab is editable.').font = Font(size=9, italic=True, color='64748B')
 AHEAD = ['Component', 'Sector', 'Indicator', 'Unit', 'Transform', 'Ref Min', 'Ref Max', 'Direction', 'Weight', 'Basis (literature)', 'ACTUAL VALUE', '0-10 (auto)']
