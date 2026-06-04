@@ -128,7 +128,19 @@ Genuinely **not** per-council (use region/national proxy, labelled): stunting, H
 
 ---
 
-*Compiled from a six-domain deep data hunt. Every value above is traceable to a named producer + dataset
-+ year. The benchmark dataset (`*_Benchmark.xlsx`) is filled from the official INFORM workbook (NORMAL)
-and the on-disk EO computations (ADVANCED); this register is the roadmap for authentically closing the
-remaining gaps without fabricating a single council number.*
+## I. Round 2 — council-granular sources (population / TCVMP / TASAF / IPC / JICA)
+
+- **Population (2022 PHC) — EXTRACTED & VALIDATED.** Per-council 2022 census population for all 195 councils in `data-source/population_2022_councils.csv`. Sum = **61,741,120 — exactly the official URT total** (mainland 59,851,347 + Zanzibar 1,889,773); agrees with on-disk `council_climate.pop2022` within 10% on every matched name. Source: NBS 2022 PHC Administrative Units Population Distribution Report (parsed via citypopulation.de). This is the authentic council **denominator** for derived indicators (TASAF intensity, facility density, exposure). Finer paths: NBS council-level projections 2023–2050 (per-council PDFs), NBS 5-level census shapefiles, WorldPop/GRID3 100 m for ward allocation.
+- **TCVMP — Tanzania Climate Vulnerability Mapping Platform** (`tcvmp.pmo.go.tz`). Official PMO-DMD + Global Center on Adaptation index (IMF RSF-funded, 2024): **40+ climate indicators** (temp, precip, drought, flood, tropical-cyclone wind, landslide, sea-level rise, wet-bulb…) at **adm0→adm3 (all 3,285 wards)**, historical 1971–2020 + SSP126/245/370/585 projections. **Visualization-only — no public download or API** (confirmed by fetch). It is a **parallel government vulnerability index** → a benchmark / integration target, not a downloadable dataset; bulk data needs a formal request to PMO-DMD/GCA.
+- **TASAF / PSSN poverty** (council/village-native, the route below region). Per-council poor-household counts exist in the **Unified Registry of Beneficiaries** (administered village→mtaa/shehia→council); PSSN II ≈ **1.3–1.4M households / ~5M people across 186 PAAs** + Zanzibar; **PSSN III (Mar 2026) targets ~100 poorest councils** (an internal council poverty ranking exists). NOT a machine-readable file. Confirmed published fragments: **Mbeya 7 councils = 37,789 HH; Dar es Salaam 3 councils = 1,535 HH** (Ilala 594, Ubungo 437, Kinondoni 304). Authentic indicator: `PSSN beneficiary HH ÷ 2022-census council HH` (min-max standardized; a *targeted-poverty intensity*, not an absolute rate). Extraction path: parse TASAF quarterly-report PDFs (Oct–Dec 2022) + NBS PSSN2 IE Baseline 2022; or formal registry request.
+- **IPC / MUCHALI food security** (council = assessed subset). Council × phase × population is in a **machine-readable HDX CSV** (`united-republic-of-tanzania-acute-food-insecurity-country-data`). Assessed subset **shrinking 28→21→16 councils** (funding). Only **Longido & Monduli (Arusha)** reached area-Phase-3 in the window (Nov 2023–Apr 2024, ~900k in Phase 3+ nationally); Feb–May 2025 all 16 = Phase 2 (466k in Phase 3 within them). **Hard rule:** join phases only to named councils; unassessed councils = NULL, never Phase 1.
+- **JICA** (OpenJICAReport, PDF). Dar es Salaam Urban Transport Master Plan 2018 (Msimbazi flood basin ~1.6M people; Dar pop → ~10M by 2030s); National Irrigation Master Plan 2018 (potential 29.4M ha — drought/agriculture base); rural water-supply plans (Mwanza/Mara, 428 villages + 57 schemes).
+- **Tooling:** WebFetch is available to the main loop (the round-1/2 subagents' was blocked). The IPC HDX CSV, TASAF quarterly PDFs, and NBS per-ward census tables are therefore now extractable on request — the next authentic fills (council food phase, TASAF poverty intensity) are unblocked.
+
+---
+
+*Compiled from an eight-corner deep data hunt (two rounds). Every value above is traceable to a named
+producer + dataset + year. The benchmark dataset (`*_Benchmark.xlsx`) is filled from the official INFORM
+workbook (NORMAL) and the on-disk EO computations (ADVANCED); `population_2022_councils.csv` adds the
+validated census denominator; this register is the roadmap for authentically closing the remaining gaps
+without fabricating a single council number.*
