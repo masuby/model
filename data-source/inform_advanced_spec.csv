@@ -11,10 +11,10 @@ HA.NAT.FL-R100,Hazards & Exposure,Natural,Flood,TMA,Very-heavy days (>100 mm),da
 HA.NAT.FL-WLEV,Hazards & Exposure,Natural,Flood,MoW,River peak above normal,m,None,0,5,Increase Risk,0.20,MoW river gauging - flood-stage exceedance height
 HA.NAT.FL-BASIN,Hazards & Exposure,Natural,Flood,BWB,Basin flood records,events/decade,None,0,10,Increase Risk,0.20,Basin Water Boards (Rufiji/Wami-Ruvu/Lake Victoria/Pangani...) - recorded basin floods
 HA.NAT.FL-EVENT,Hazards & Exposure,Natural,Flood,PMO-DMD,Recorded flood impact events,events/decade,None,0,10,Increase Risk,0.15,PMO-DMD/DesInventar - documented flood disasters with impact
-HA.NAT.LS-SUSC,Hazards & Exposure,Natural,Landslide,GST,Landslide susceptibility,index 0-1,None,0,1,Increase Risk,0.55,GST hotspots (Hanang/Uluguru/Rungwe/Mbeya highlands) - geology + slope
-HA.NAT.LS-RAIN,Hazards & Exposure,Natural,Landslide,TMA,Triggering rainfall (max 5-day),mm,None,0,300,Increase Risk,0.45,TMA antecedent rainfall - the meteorological landslide trigger
+HA.NAT.LS-SUSC,Hazards & Exposure,Natural,Landslide,GST,Slope susceptibility (mean),degrees,None,0.6,16,Increase Risk,0.55,SRTM mean slope per council (GEE) - steeper terrain = more landslide-prone (Usambara/S.Highlands/Kilimanjaro highest)
+HA.NAT.LS-RAIN,Hazards & Exposure,Natural,Landslide,TMA,Triggering rainfall (max 1-day),mm,None,33,200,Increase Risk,0.45,CHIRPS daily mean-annual Rx1day 2015-2023 (GEE) - the meteorological landslide trigger
 HA.NAT.ST-FREQ,Hazards & Exposure,Natural,Storms & Cyclone,TMA,Cyclone/strong-wind frequency,events/decade,None,0,8,Increase Risk,0.60,IBTrACS - tropical cyclone / strong-wind events on the coast
-HA.NAT.ST-WIND,Hazards & Exposure,Natural,Storms & Cyclone,TMA,Extreme wind speed,m/s,None,10,35,Increase Risk,0.40,TMA - annual maximum sustained wind
+HA.NAT.ST-WIND,Hazards & Exposure,Natural,Storms & Cyclone,TMA,Extreme wind speed,m/s,None,3,15,Increase Risk,0.40,ERA5-Land daily max 10m wind 2015-2023 (GEE) - islands/coast highest
 HA.NAT.EQ-PGA,Hazards & Exposure,Natural,Earthquake,GST,Seismic hazard (PGA 475-yr),g,None,0,0.4,Increase Risk,0.70,GSHAP/East African Rift - peak ground acceleration 10%/50yr
 HA.NAT.EQ-HIST,Hazards & Exposure,Natural,Earthquake,GST,Historical seismicity density,events/100yr,None,0,50,Increase Risk,0.30,GST seismic catalogue - historical earthquake density (Rift belt)
 HA.NAT.CO-WAVE,Hazards & Exposure,Natural,Coastal hazards,TMA,Significant wave height (Hs 99th pct),m,None,0,4,Increase Risk,0.25,ERA5/WaveWatch III - extreme nearshore wave energy (monsoon + cyclone swell)
@@ -22,5 +22,5 @@ HA.NAT.CO-WIND,Hazards & Exposure,Natural,Coastal hazards,TMA,Extreme onshore wi
 HA.NAT.CO-SURGE,Hazards & Exposure,Natural,Coastal hazards,TMA,Storm-surge frequency,events/decade,None,0,8,Increase Risk,0.20,TMA - coastal storm-surge / abnormal sea-level events (Kilwa/Mtwara/Dar/Tanga)
 HA.NAT.CO-EROS,Hazards & Exposure,Natural,Coastal hazards,NEMC,Shoreline retreat / erosion rate,m/yr,None,0,5,Increase Risk,0.20,NEMC coastal monitoring - shoreline erosion (Bagamoyo/Pangani/Dar/Zanzibar channel)
 HA.NAT.CO-MANG,Hazards & Exposure,Natural,Coastal hazards,NEMC,Mangrove loss (protective buffer),%/decade,None,0,30,Increase Risk,0.15,NEMC - mangrove decline removes the natural coastal buffer, raising exposure
-HA.NAT.HW-DAYS,Hazards & Exposure,Natural,Heatwave,TMA,Heat-health days (> 90th pct Tmax),days/yr,None,0,60,Increase Risk,1.0,Mora 2017 Nature Clim. Change - days above a deadly-heat threshold (ERA5 Tmax)
+HA.NAT.HW-DAYS,Hazards & Exposure,Natural,Heatwave,TMA,Hot days (Tmax > 35C),days/yr,None,0,35,Increase Risk,1.0,ERA5-Land daily Tmax > 35C 2015-2023 (GEE) - hot SE/interior lowlands highest; highlands ~0
 HA.NAT.LI-FLASH,Hazards & Exposure,Natural,Lightning,TMA,Flash density,flashes/km2/yr,None,0,30,Increase Risk,1.0,Albrecht 2016 BAMS - NASA LIS/OTD flash density (Lake Victoria basin hotspot)

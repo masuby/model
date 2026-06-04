@@ -52,6 +52,10 @@ def _load(fn, col):
 ndvi_c = _load('ndvi_councils.csv', 'ndvi')
 soil_c = _load('soil_moisture_councils.csv', 'ssm')
 flood_c = _load('flood_s1_councils.csv', 'floodfreq')
+heat_c = _load('heatwave_councils.csv', 'hotdays')
+wind_c = _load('wind_councils.csv', 'windmax')
+slope_c = _load('landslide_slope_councils.csv', 'slope')
+rain_c = _load('rain_trigger_councils.csv', 'rx1day')
 
 def num(x):
     try: return float(x)
@@ -70,6 +74,14 @@ def values_for(code, tool_name):
         out[name2id['Mean NDVI (greenness)']] = num(ndvi_c.get(code))
     if code in soil_c:
         out[name2id['Soil moisture']] = num(soil_c.get(code))
+    if code in heat_c:
+        out[name2id['Hot days (Tmax > 35C)']] = num(heat_c.get(code))
+    if code in wind_c:
+        out[name2id['Extreme wind speed']] = num(wind_c.get(code))
+    if code in slope_c:
+        out[name2id['Slope susceptibility (mean)']] = num(slope_c.get(code))
+    if code in rain_c:
+        out[name2id['Triggering rainfall (max 1-day)']] = num(rain_c.get(code))
     # NOTE: Sentinel-1 flood (flood_c) intentionally NOT wired in - the simple VV<-17dB threshold
     # failed validation (flags soda-lakes/salt-flats e.g. Ngorongoro/Lake Natron as 'water', not floods).
     # Kept as a flagged research artifact (flood_s1_councils.csv); needs the Paper-1 change-detection method.
