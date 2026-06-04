@@ -21,6 +21,7 @@
  * (src/services/__tests__/standardise.golden.test.js).
  */
 import SPEC from '../data/inform-indicator-spec.json';
+import ADV from '../data/inform-advanced-spec.json';
 
 /** The full standardisation spec for an indicator id (e.g. 'HA.NAT.DR-FRE'), or null. */
 export const indicatorSpec = (id) => SPEC[id] || null;
@@ -137,4 +138,33 @@ export function computeFromRaw(rawById, { specs = SPEC, denomById = {} } = {}) {
   const { H, V, C } = dimension;
   const risk = [H, V, C].every(isNum) ? r1(Math.pow(H, 1 / 3) * Math.pow(V, 1 / 3) * Math.pow(C, 1 / 3)) : null;
   return { score, component, category, dimension, risk };
+}
+
+// ---- ADVANCED: the exploded multi-source model -----------------------------------------------------
+/**
+ * The exploded multi-source sub-indicators (inform-advanced-spec.json), each carrying its component +
+ * weight: drought = SPEI + aridity + rainfall-CV + season-failure + NDVI + soil moisture; flood = >50/
+ * >100 mm days; landslide = slope + rain; heatwave = hot-days; storms = extreme wind; earthquake =
+ * historical seismicity; (coastal, lightning, drought-water-levels are declared but data-pending).
+ */
+export const ADVANCED_SPECS = ADV;
+
+/**
+ * The advanced model spec = the genuine INFORM (every normal indicator) MERGED with the exploded baskets,
+ * by id (no id collisions). For an exploded hazard component, the legacy INFORM indicator and the basket
+ * sub-indicators aggregate TOGETHER (weighted). So when no advanced data is present the legacy carries the
+ * component and the result is the genuine INFORM (8664/8664) unchanged; when advanced data is present the
+ * basket refines it - "advanced while still accommodating normal".
+ */
+export const ADVANCED_MERGED = { ...SPEC, ...ADV };
+
+/**
+ * Compute the full INFORM hierarchy in ADVANCED mode using the SAME engine on the richer merged spec:
+ *   raw + exploded sub-indicators -> component = WEIGHTED average over the members PRESENT (a blank is
+ *   skipped, never biases) -> category AVERAGE -> dimension scaled GEOMEAN -> risk cube-root.
+ * @param rawById  { [id]: rawValue } - may hold both normal raw and advanced sub-indicator values
+ * @returns { score, component, category, dimension:{H,V,C}, risk }
+ */
+export function computeAdvanced(rawById, { denomById = {} } = {}) {
+  return computeFromRaw(rawById, { specs: ADVANCED_MERGED, denomById });
 }
