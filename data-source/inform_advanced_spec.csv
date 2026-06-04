@@ -3,8 +3,8 @@ HA.NAT.DR-SPEI,Hazards & Exposure,Natural,Drought,TMA,SPEI-12 drought depth,inde
 HA.NAT.DR-ARID,Hazards & Exposure,Natural,Drought,TMA,Aridity (P/PET),ratio,None,0.5,2.8,Decrease Risk,0.15,CHIRPS v3 P / Thornthwaite PET (ERA5 t2m) 1991-2020 council climatology; data range 0.53-2.8; lower=drier
 HA.NAT.DR-CV,Hazards & Exposure,Natural,Drought,TMA,Rainfall variability (CV),ratio,None,0.1,0.35,Increase Risk,0.15,Nicholson 2017 - East African rainfall among the world's most variable
 HA.NAT.DR-SEAS,Hazards & Exposure,Natural,Drought,MoA,Growing-season failure frequency,fraction,None,0,0.5,Increase Risk,0.20,IPC/MUCHALI - main season < 80% of normal drives food crises
-HA.NAT.DR-NDVI,Hazards & Exposure,Natural,Drought,MoA,Vegetation/biomass anomaly (NDVI z),index,None,-2,1,Decrease Risk,0.10,MODIS/Sentinel NDVI anomaly - negative greenness = vegetation stress
-HA.NAT.DR-SOIL,Hazards & Exposure,Natural,Drought,MoA,Soil moisture,%,None,0,50,Decrease Risk,0.10,Root-zone soil moisture - lower = drier (MoA agromet)
+HA.NAT.DR-NDVI,Hazards & Exposure,Natural,Drought,MoA,Mean NDVI (greenness),index,None,0.25,0.7,Decrease Risk,0.10,MODIS MOD13Q1 NDVI 250m 2001-2020 mean greenness (GEE); lower=sparser vegetation=drier
+HA.NAT.DR-SOIL,Hazards & Exposure,Natural,Drought,MoA,Soil moisture,mm,None,4,26,Decrease Risk,0.10,NASA-USDA SMAP 10km surface soil moisture (ssm mm) 2015-2022 mean (GEE); lower=drier
 HA.NAT.DR-WLEV,Hazards & Exposure,Natural,Drought,MoW,Water levels (% of normal),%,None,0,100,Decrease Risk,0.05,Reservoir/river levels below normal (MoW gauging)
 HA.NAT.FL-R50,Hazards & Exposure,Natural,Flood,TMA,Extreme wet days (>50 mm),days/yr,None,0,20,Increase Risk,0.30,CHIRPS v3 daily - mean annual count of days above 50 mm (heavy-rain trigger)
 HA.NAT.FL-R100,Hazards & Exposure,Natural,Flood,TMA,Very-heavy days (>100 mm),days/yr,None,0,8,Increase Risk,0.15,CHIRPS v3 daily - days above 100 mm (very-heavy intensity)

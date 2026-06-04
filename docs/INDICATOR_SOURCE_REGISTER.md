@@ -148,9 +148,10 @@ The hydrology project `kai_hydro` (papers 1 flood-mapping, 2 rainfall-thresholds
 - **SPEI depth / rainfall CV / season-failure — HAVE** (`chirps_drought_spi_spei.csv`, already in the advanced benchmark).
 - **Heavy rain >50/>100 mm — HAVE** (CHIRPS v3 daily, per-council, in the advanced benchmark). Paper 2 (rainfall thresholds, Rufiji/Kilosa) gives flood-trigger return periods to calibrate these.
 - **Temperature & wind — on disk** (ERA5 t2m monthly; ERA5 winds in the regCM5 ERA5 cubes) → heatwave heat-days + storm wind extremes computable next (per-district climatology).
-- **NDVI (vegetation drought stress) — GAP, needs GEE** (USGS FEWS eMODIS 250 m / Sentinel-2 / MODIS via `kai_hydro/gee_scripts`). Not local.
-- **Soil moisture — GAP, needs download** (ERA5-Land volumetric soil water / ESA-CCI / SMAP). Not in the local ERA5-TZ cubes (precip-only).
-- **Sentinel flood events — Paper 1.** kai_hydro Paper 1 flood-mapping (Sentinel-1/JRC Global Surface Water; Rufiji/Kilombero) provides flood extent/exposure — the authentic per-district flood-hazard upgrade; reads pending (path-restricted to subagents, accessible directly).
+- **NDVI (vegetation drought stress) — COMPUTED (GEE).** MODIS MOD13Q1 250 m mean greenness 2001–2020 per council (`ndvi_councils.csv`, 0.29–0.66) → DR-NDVI. Map product: `inform_sheets/satellite_maps/ndvi_mean.tif`.
+- **Soil moisture — COMPUTED (GEE).** NASA-USDA SMAP 10 km surface soil moisture (ssm mm) 2015–2022 per council (`soil_moisture_councils.csv`, 3.9–25.4 mm) → DR-SOIL. Map: `inform_sheets/satellite_maps/soil_ssm_mean.tif`.
+- **Sentinel-1 flood frequency — COMPUTED but FAILED VALIDATION → EXCLUDED.** COPERNICUS/S1_GRD VV wet-season water fraction (<−17 dB) minus JRC permanent water (`flood_s1_councils.csv`). Validation against known flood geography FAILED: the top-ranked councils are Ngorongoro, Monduli, Longido, Meatu, Bariadi (semi-arid) — not Rufiji/Kibiti/Kilombero. Cause = the simple −17 dB threshold flags smooth DRY surfaces (Lake Natron soda flats, salt/clay pans, radar shadow) as "water". Real Sentinel-1 data, but a confounded proxy → **NOT wired into the benchmark.** Kept as a flagged research artifact; needs the Paper-1 method (dry-vs-wet change detection + terrain/water-body masking) to be trustworthy.
+- NDVI + soil computed by `scripts/compute-gee-eo.py` on Earth Engine (project ee-bonephaceedson); validated against TZ geography; raster products kept in `inform_sheets/satellite_maps/`.
 
 *All climate computations use the same authentic CHIRPS v3 / ERA5 records as the published kai_hydro papers; nothing is synthesised.*
 

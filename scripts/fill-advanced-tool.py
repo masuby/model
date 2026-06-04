@@ -45,6 +45,13 @@ quake = {norm(r['dist_name']): r for r in csv.DictReader(open(os.path.join(ROOT,
 # aridity computed per council (CHIRPS v3 + ERA5 t2m Thornthwaite); keyed by council code
 ARIDF = os.path.join(ROOT, 'data-source/aridity_councils.csv')
 aridity = {r['code']: r['aridity_index'] for r in csv.DictReader(open(ARIDF))} if os.path.exists(ARIDF) else {}
+# GEE EO per council (NDVI greenness, SMAP soil moisture, Sentinel-1 flood frequency); keyed by code
+def _load(fn, col):
+    p = os.path.join(ROOT, 'data-source', fn)
+    return {r['code']: r[col] for r in csv.DictReader(open(p))} if os.path.exists(p) else {}
+ndvi_c = _load('ndvi_councils.csv', 'ndvi')
+soil_c = _load('soil_moisture_councils.csv', 'ssm')
+flood_c = _load('flood_s1_councils.csv', 'floodfreq')
 
 def num(x):
     try: return float(x)
@@ -59,6 +66,13 @@ def values_for(code, tool_name):
         out[name2id['Very-heavy days (>100 mm)']] = num(c.get('vheavy_days_yr'))
     if code in aridity:  # per-council aridity P/PET (CHIRPS v3 + ERA5 Thornthwaite)
         out[name2id['Aridity (P/PET)']] = num(aridity.get(code))
+    if code in ndvi_c:   # GEE EO (MODIS NDVI, SMAP soil moisture, Sentinel-1 flood)
+        out[name2id['Mean NDVI (greenness)']] = num(ndvi_c.get(code))
+    if code in soil_c:
+        out[name2id['Soil moisture']] = num(soil_c.get(code))
+    # NOTE: Sentinel-1 flood (flood_c) intentionally NOT wired in - the simple VV<-17dB threshold
+    # failed validation (flags soda-lakes/salt-flats e.g. Ngorongoro/Lake Natron as 'water', not floods).
+    # Kept as a flagged research artifact (flood_s1_councils.csv); needs the Paper-1 change-detection method.
     du = norm(data_unit(code, tool_name))
     d = drought.get(du)
     if d:
