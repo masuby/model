@@ -42,6 +42,9 @@ def data_unit(code, tool_name):
 # ---- authentic sources ----
 drought = {norm(r['dist_name']): r for r in csv.DictReader(open(os.path.join(ROOT, 'data-source/chirps_drought_spi_spei.csv')))}
 quake = {norm(r['dist_name']): r for r in csv.DictReader(open(os.path.join(ROOT, 'data-source/earthquake_usgs.csv')))}
+# aridity computed per council (CHIRPS v3 + ERA5 t2m Thornthwaite); keyed by council code
+ARIDF = os.path.join(ROOT, 'data-source/aridity_councils.csv')
+aridity = {r['code']: r['aridity_index'] for r in csv.DictReader(open(ARIDF))} if os.path.exists(ARIDF) else {}
 
 def num(x):
     try: return float(x)
@@ -54,6 +57,8 @@ def values_for(code, tool_name):
     if c:  # per-council CHIRPS daily heavy-rain counts
         out[name2id['Extreme wet days (>50 mm)']] = num(c.get('heavy_days_yr'))
         out[name2id['Very-heavy days (>100 mm)']] = num(c.get('vheavy_days_yr'))
+    if code in aridity:  # per-council aridity P/PET (CHIRPS v3 + ERA5 Thornthwaite)
+        out[name2id['Aridity (P/PET)']] = num(aridity.get(code))
     du = norm(data_unit(code, tool_name))
     d = drought.get(du)
     if d:

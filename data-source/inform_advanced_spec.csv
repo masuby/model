@@ -1,6 +1,6 @@
 id,dimension,category,component,sector,name,unit,transform,resolved_min,resolved_max,sign,weight,basis
 HA.NAT.DR-SPEI,Hazards & Exposure,Natural,Drought,TMA,SPEI-12 drought depth,index,None,0,3,Increase Risk,0.25,Vicente-Serrano 2010 SPEI - depth of SPEI-12 below -1 (Thornthwaite PET from ERA5 t2m)
-HA.NAT.DR-ARID,Hazards & Exposure,Natural,Drought,TMA,Aridity (P/PET),ratio,None,0,0.65,Decrease Risk,0.15,UNEP 1992 World Atlas of Desertification - semi-arid 0.2-0.5; lower P/PET = drier
+HA.NAT.DR-ARID,Hazards & Exposure,Natural,Drought,TMA,Aridity (P/PET),ratio,None,0.5,2.8,Decrease Risk,0.15,CHIRPS v3 P / Thornthwaite PET (ERA5 t2m) 1991-2020 council climatology; data range 0.53-2.8; lower=drier
 HA.NAT.DR-CV,Hazards & Exposure,Natural,Drought,TMA,Rainfall variability (CV),ratio,None,0.1,0.35,Increase Risk,0.15,Nicholson 2017 - East African rainfall among the world's most variable
 HA.NAT.DR-SEAS,Hazards & Exposure,Natural,Drought,MoA,Growing-season failure frequency,fraction,None,0,0.5,Increase Risk,0.20,IPC/MUCHALI - main season < 80% of normal drives food crises
 HA.NAT.DR-NDVI,Hazards & Exposure,Natural,Drought,MoA,Vegetation/biomass anomaly (NDVI z),index,None,-2,1,Decrease Risk,0.10,MODIS/Sentinel NDVI anomaly - negative greenness = vegetation stress

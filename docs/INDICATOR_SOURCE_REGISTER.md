@@ -139,6 +139,23 @@ Genuinely **not** per-council (use region/national proxy, labelled): stunting, H
 
 ---
 
+## J. Climate computations & seasonality (kai_hydro / CHIRPS v3 + ERA5)
+
+The hydrology project `kai_hydro` (papers 1 flood-mapping, 2 rainfall-thresholds, 6 seasonal-regimes) and the on-disk climate cubes (CHIRPS v3 monthly tif + daily nc, ERA5 t2m monthly 1991–2025, ERA5-TZ precipitation 0.05°) drive the advanced climate indicators.
+
+- **Seasonality (Paper 6) — INTEGRATED.** `data-source/seasonality_zones.csv`: per-region seasonal regime across the **8 TMA rainfall zones** (35 yr CHIRPS, Kaijage et al. 2025) — regime (bimodal/unimodal), Walsh–Lawler **Seasonality Index (SI)**, Fourier **bimodality A₂/A₁**, **OND/MAM ratio**, annual mm, and Mann–Kendall trend. Bimodal (MAM long rains + OND short rains, Jan–Feb *Kipupwe* dry): LVB, NEH (Manyara/Kilimanjaro), NCO (coast + Zanzibar). Unimodal (Nov–Apr *Msimu*): WES, CEN, SWH, SOU, SCO + Arusha. Significant wetting: LVB +8.9, WES +7.4 mm/yr. Use: a disaster-risk **seasonality modifier** — bimodal zones have two flood/drought windows; unimodal zones one long exposure season; internal boundaries (N. Kigoma, N. Morogoro) flagged.
+- **Aridity (P/PET) — COMPUTED.** `scripts/compute-aridity.py` → `data-source/aridity_councils.csv`: per-council UNEP aridity = annual CHIRPS v3 P (1991–2020 climatology) ÷ Thornthwaite PET from ERA5 t2m (lat daylight-corrected). Fills `HA.NAT.DR-ARID` in the advanced benchmark (was a gap). Lower = drier (central semi-arid Dodoma/Singida lowest).
+- **SPEI depth / rainfall CV / season-failure — HAVE** (`chirps_drought_spi_spei.csv`, already in the advanced benchmark).
+- **Heavy rain >50/>100 mm — HAVE** (CHIRPS v3 daily, per-council, in the advanced benchmark). Paper 2 (rainfall thresholds, Rufiji/Kilosa) gives flood-trigger return periods to calibrate these.
+- **Temperature & wind — on disk** (ERA5 t2m monthly; ERA5 winds in the regCM5 ERA5 cubes) → heatwave heat-days + storm wind extremes computable next (per-district climatology).
+- **NDVI (vegetation drought stress) — GAP, needs GEE** (USGS FEWS eMODIS 250 m / Sentinel-2 / MODIS via `kai_hydro/gee_scripts`). Not local.
+- **Soil moisture — GAP, needs download** (ERA5-Land volumetric soil water / ESA-CCI / SMAP). Not in the local ERA5-TZ cubes (precip-only).
+- **Sentinel flood events — Paper 1.** kai_hydro Paper 1 flood-mapping (Sentinel-1/JRC Global Surface Water; Rufiji/Kilombero) provides flood extent/exposure — the authentic per-district flood-hazard upgrade; reads pending (path-restricted to subagents, accessible directly).
+
+*All climate computations use the same authentic CHIRPS v3 / ERA5 records as the published kai_hydro papers; nothing is synthesised.*
+
+---
+
 *Compiled from an eight-corner deep data hunt (two rounds). Every value above is traceable to a named
 producer + dataset + year. The benchmark dataset (`*_Benchmark.xlsx`) is filled from the official INFORM
 workbook (NORMAL) and the on-disk EO computations (ADVANCED); `population_2022_councils.csv` adds the

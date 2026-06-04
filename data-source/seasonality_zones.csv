@@ -1,0 +1,32 @@
+region,zone,zone_name,regime,seasonality_index_SI,bimodality_A2_A1,ond_mam_ratio,annual_mm,trend_mm_yr,trend_significant,rains_pattern,source
+Kagera,LVB,Lake Victoria Basin,bimodal,0.608,,0.838,1019,8.94,yes,MAM long rains + OND short rains; Jan-Feb dry (Kipupwe),Kaijage et al. 2025 Paper6 (CHIRPS 1991-2025) zone-level
+Geita,LVB,Lake Victoria Basin,bimodal,0.608,,0.838,1019,8.94,yes,MAM long rains + OND short rains; Jan-Feb dry (Kipupwe),Kaijage et al. 2025 Paper6 zone-level
+Mwanza,LVB,Lake Victoria Basin,bimodal,0.608,,0.838,1019,8.94,yes,MAM long rains + OND short rains; Jan-Feb dry (Kipupwe),Kaijage et al. 2025 Paper6 zone-level
+Simiyu,LVB,Lake Victoria Basin,bimodal,0.608,,0.838,1019,8.94,yes,MAM long rains + OND short rains; Jan-Feb dry (Kipupwe),Kaijage et al. 2025 Paper6 zone-level
+Mara,LVB,Lake Victoria Basin,bimodal,0.608,,0.838,1019,8.94,yes,MAM long rains + OND short rains; Jan-Feb dry (Kipupwe),Kaijage et al. 2025 Paper6 zone-level
+Shinyanga,LVB,Lake Victoria Basin,bimodal,0.608,,0.838,1019,8.94,yes,MAM long rains + OND short rains; Jan-Feb dry (Kipupwe),Kaijage et al. 2025 Paper6 zone-level
+Kigoma,WES,Western,unimodal,0.848,,1.060,1043,7.35,yes,Nov-Apr single wet season (Msimu); N. Kigoma districts bimodal,Kaijage et al. 2025 Paper6 zone-level
+Tabora,WES,Western,unimodal,0.848,,1.060,1043,7.35,yes,Nov-Apr single wet season (Msimu),Kaijage et al. 2025 Paper6 zone-level
+Katavi,WES,Western,unimodal,0.848,,1.060,1043,7.35,yes,Nov-Apr single wet season (Msimu),Kaijage et al. 2025 Paper6 zone-level
+Singida,CEN,Central,unimodal,0.984,,0.880,715,6.88,no,Nov-Apr single wet season (Msimu); driest zone,Kaijage et al. 2025 Paper6 zone-level
+Dodoma,CEN,Central,unimodal,0.984,,0.880,715,6.88,no,Nov-Apr single wet season (Msimu); driest zone,Kaijage et al. 2025 Paper6 zone-level
+Arusha,NEH,NE Highland,unimodal,0.758,0.491,0.598,799,14.81,yes,Functionally unimodal Apr peak (region-level),Kaijage et al. 2025 Paper6 region-level
+Manyara,NEH,NE Highland,bimodal,0.778,0.333,0.598,790,15.00,yes,MAM long rains + OND short rains; Jan-Feb dry,Kaijage et al. 2025 Paper6 region-level
+Kilimanjaro,NEH,NE Highland,bimodal,0.614,0.912,0.598,964,11.48,yes,MAM long rains + OND short rains; Jan-Feb dry,Kaijage et al. 2025 Paper6 region-level
+Njombe,SWH,SW Highland,unimodal,0.937,,0.801,1008,2.67,no,Nov-Apr single wet season (Msimu),Kaijage et al. 2025 Paper6 zone-level
+Iringa,SWH,SW Highland,unimodal,0.937,,0.801,1008,2.67,no,Nov-Apr single wet season (Msimu),Kaijage et al. 2025 Paper6 zone-level
+Mbeya,SWH,SW Highland,unimodal,0.937,,0.801,1008,2.67,no,Nov-Apr single wet season (Msimu),Kaijage et al. 2025 Paper6 zone-level
+Rukwa,SWH,SW Highland,unimodal,0.937,,0.801,1008,2.67,no,Nov-Apr single wet season (Msimu),Kaijage et al. 2025 Paper6 zone-level
+Songwe,SWH,SW Highland,unimodal,0.937,,0.801,1008,2.67,no,Nov-Apr single wet season (Msimu) [split from Mbeya],Kaijage et al. 2025 Paper6 zone-level (assigned with Mbeya)
+Ruvuma,SOU,Southern,unimodal,0.952,,0.613,1068,-6.75,no,Nov-Apr single wet season (Msimu),Kaijage et al. 2025 Paper6 zone-level
+Mtwara,SCO,Southern Coast,unimodal,0.891,0.542,0.614,960,-7.37,no,Nov-Apr single wet season; deepening inter-season gap,Kaijage et al. 2025 Paper6 region-level
+Lindi,SCO,Southern Coast,unimodal,0.766,0.406,0.614,1037,-3.58,no,Nov-Apr single wet season,Kaijage et al. 2025 Paper6 region-level
+Tanga,NCO,Northern Coast,bimodal,0.540,1.187,0.488,1068,13.81,yes,MAM long rains + OND short rains; Jan-Feb dry,Kaijage et al. 2025 Paper6 region-level
+Dar es Salaam,NCO,Northern Coast,bimodal,0.684,1.184,0.488,1065,-7.27,no,MAM long rains + OND short rains; Jan-Feb dry,Kaijage et al. 2025 Paper6 region-level
+Pwani,NCO,Northern Coast,bimodal,0.587,0.825,0.488,1098,5.50,no,MAM long rains + OND short rains; Jan-Feb dry,Kaijage et al. 2025 Paper6 region-level
+Morogoro,NCO,Northern Coast,bimodal,0.797,0.322,0.488,1132,-2.76,no,Bimodal N. districts / unimodal S. districts (internal boundary),Kaijage et al. 2025 Paper6 region-level
+Kaskazini Unguja,NCO,Northern Coast,bimodal,0.707,1.165,0.488,1241,16.56,yes,MAM long rains + OND short rains; Jan-Feb dry,Kaijage et al. 2025 Paper6 region-level
+Kusini Unguja,NCO,Northern Coast,bimodal,0.814,1.026,0.488,670,-6.60,no,MAM long rains + OND short rains; Jan-Feb dry,Kaijage et al. 2025 Paper6 region-level
+Mjini Magharibi,NCO,Northern Coast,bimodal,0.716,1.146,0.488,722,15.41,yes,MAM long rains + OND short rains; Jan-Feb dry,Kaijage et al. 2025 Paper6 region-level
+Kaskazini Pemba,NCO,Northern Coast,bimodal,0.708,1.534,0.488,1331,-5.90,no,MAM long rains + OND short rains; Jan-Feb dry,Kaijage et al. 2025 Paper6 region-level
+Kusini Pemba,NCO,Northern Coast,bimodal,0.672,1.096,0.488,1281,-10.14,no,MAM long rains + OND short rains; Jan-Feb dry,Kaijage et al. 2025 Paper6 region-level
