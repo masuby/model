@@ -1,5 +1,6 @@
-import React, { Component } from "react";
+import React, { Component, useState } from "react";
 import { BrowserRouter, Routes, Route, Navigate, NavLink, useNavigate } from "react-router-dom";
+import Login, { isAuthed, logout } from "./components/auth/Login";
 import { LanguageProvider } from "./contexts/LanguageContext";
 import Module01Landing from "./components/landing/Module01Landing";
 import Module02InformRisk from "./components/inform-risk/Module02InformRisk";
@@ -71,8 +72,18 @@ function TopNav() {
       <span title="Deployed build — confirms exactly which version is live" style={{ marginLeft: "auto", alignSelf: "center", fontSize: "11px", color: "#94a3b8", whiteSpace: "nowrap", fontFamily: "monospace" }}>
         build {BUILD}
       </span>
+      <button onClick={logout} title="Sign out" style={{ marginLeft: "14px", alignSelf: "center", padding: "6px 12px", borderRadius: "8px", border: "1px solid #d0d7e2", background: "#fff", color: "#1f3a5f", fontWeight: 600, cursor: "pointer", fontSize: "13px" }}>
+        Sign out
+      </button>
     </header>
   );
+}
+
+// Access gate — shows the login screen on landing until the correct password is entered.
+function Gate({ children }) {
+  const [authed, setAuthed] = useState(() => isAuthed());
+  if (!authed) return <Login onAuth={() => setAuthed(true)} />;
+  return children;
 }
 
 function EducationRoute() {
@@ -92,6 +103,7 @@ function SeverityRoute() {
 function App() {
   return (
     <ErrorBoundary>
+      <Gate>
       <BrowserRouter basename="/">
         <LanguageProvider>
           <div className="lean-app">
@@ -109,6 +121,7 @@ function App() {
           </div>
         </LanguageProvider>
       </BrowserRouter>
+      </Gate>
     </ErrorBoundary>
   );
 }
