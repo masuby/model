@@ -69,8 +69,11 @@ export default function App() {
   return (
     <DataProvider>
       <TooltipProvider delayDuration={150}>
-        <RouterProvider router={router} />
-        <ThemedToaster />
+        {/* The shared catalogues load asynchronously on first paint (see src/i18n). */}
+        <React.Suspense fallback={<div className="min-h-dvh bg-background" />}>
+          <RouterProvider router={router} />
+          <ThemedToaster />
+        </React.Suspense>
       </TooltipProvider>
     </DataProvider>
   );

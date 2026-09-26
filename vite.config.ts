@@ -36,7 +36,7 @@ export default defineConfig({
         ],
       },
       workbox: {
-        globPatterns: ['**/*.{js,css,html,svg,png,ico,woff2}'],
+        globPatterns: ['**/*.{js,css,html,svg,png,ico,woff2,json}'],
         globIgnores: ['**/model.xlsx'],
         maximumFileSizeToCacheInBytes: 4 * 1024 * 1024,
         navigateFallback: '/index.html',
@@ -93,6 +93,8 @@ export default defineConfig({
     include: ['src/**/*.test.{ts,tsx}'],
     // Full-page render tests (jsdom + the whole model) need more than the 5 s default on CI runners.
     testTimeout: 30_000,
+    // Tests always run in local demo mode — never against a real Supabase project from .env.local.
+    env: { VITE_SUPABASE_URL: '', VITE_SUPABASE_PUBLISHABLE_KEY: '', VITE_SUPABASE_ANON_KEY: '' },
     // Component tests opt into the DOM with a `// @vitest-environment jsdom` file header.
     setupFiles: ['src/test/setup.ts'],
   },

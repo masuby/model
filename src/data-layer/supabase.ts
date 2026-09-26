@@ -4,57 +4,58 @@
  * security-definer function, which checks the reviewer's role and writes the approved values
  * atomically with an audit entry.
  */
-import { createClient, type SupabaseClient } from '@supabase/supabase-js';
+import type { SupabaseClient as BaseClient } from '@supabase/supabase-js';
+import type { Database, Json } from './database.types';
 import type { EditRef, Overrides } from '@/engine/risk/types';
 import type { AuditEntry, Change, NewSubmission, Profile, Repository, Submission, SubmissionStatus } from './types';
+
+export type SupabaseClient = BaseClient<Database>;
 
 const url = import.meta.env.VITE_SUPABASE_URL as string | undefined;
 const key = (import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY ?? import.meta.env.VITE_SUPABASE_ANON_KEY) as string | undefined;
 
 export const supabaseConfigured = Boolean(url && key);
 
-let client: SupabaseClient | null = null;
-export function getSupabase(): SupabaseClient | null {
+/**
+ * Create the client. The SDK (~60 KB gzipped) is imported dynamically, so visitors of a deployment
+ * without Supabase (demo mode) never download it.
+ */
+export async function createSupabaseClient(): Promise<SupabaseClient | null> {
   if (!supabaseConfigured) return null;
-  client ??= createClient(url!, key!, { auth: { persistSession: true, autoRefreshToken: true, storageKey: 'inform.auth' } });
-  return client;
+  const { createClient } = await import('@supabase/supabase-js');
+  return createClient<Database>(url!, key!, { auth: { persistSession: true, autoRefreshToken: true, storageKey: 'inform.auth' } });
 }
 
-interface ValueRow {
-  unit_id: string;
-  ref: string;
-  value: number | null;
-  authority: string | null;
-  dataset: string | null;
-  note: string | null;
-  author_name: string | null;
-  updated_at: string;
-}
-interface SubmissionRow {
-  id: string;
-  unit_id: string;
-  unit_name: string;
-  region: string;
-  changes: Change[];
-  authority: string;
-  dataset: string | null;
-  note: string | null;
-  author_id: string | null;
-  author_name: string;
-  status: SubmissionStatus;
-  created_at: string;
-  reviewed_at: string | null;
-  reviewer_name: string | null;
-  review_note: string | null;
-}
-interface AuditRow {
-  id: number;
-  at: string;
-  actor_name: string | null;
-  action: AuditEntry['action'];
-  unit_id: string | null;
-  unit_name: string | null;
-  detail: string | null;
+type Tables = Database['public']['Tables'];
+type SubmissionRow = Tables['submissions']['Row'];
+type AuditRow = Tables['audit_log']['Row'];
+
+const REF_RE = /^(hazard|vulnerability|coping):[A-Za-z]+$/;
+const STATUSES: readonly SubmissionStatus[] = ['pending', 'approved', 'rejected'];
+const ACTIONS: ReadonlyArray<AuditEntry['action']> = ['submitted', 'approved', 'rejected', 'reverted', 'imported', 'reset'];
+
+/** Validate the JSON `changes` column instead of trusting its shape (it is written by clients). */
+export function parseChanges(json: Json): Change[] {
+  if (!Array.isArray(json)) return [];
+  const out: Change[] = [];
+  for (const item of json) {
+    if (!item || typeof item !== 'object' || Array.isArray(item)) continue;
+    const ref = item.ref;
+    const value = item.value;
+    if (typeof ref !== 'string' || !REF_RE.test(ref)) continue;
+    if (value !== null && (typeof value !== 'number' || !Number.isFinite(value))) continue;
+    const previous = typeof item.previous === 'number' ? item.previous : item.previous === null ? null : undefined;
+    const raw = item.raw && typeof item.raw === 'object' && !Array.isArray(item.raw) ? item.raw : null;
+    out.push({
+      ref: ref as EditRef,
+      value: value as number | null,
+      ...(previous !== undefined ? { previous } : {}),
+      ...(raw && typeof raw.specId === 'string' && (typeof raw.value === 'number' || typeof raw.value === 'string')
+        ? { raw: { specId: raw.specId, value: raw.value, unit: typeof raw.unit === 'string' ? raw.unit : null } }
+        : {}),
+    });
+  }
+  return out;
 }
 
 const toSubmission = (r: SubmissionRow): Submission => ({
@@ -62,13 +63,13 @@ const toSubmission = (r: SubmissionRow): Submission => ({
   unitId: r.unit_id,
   unitName: r.unit_name,
   region: r.region,
-  changes: r.changes,
+  changes: parseChanges(r.changes),
   authority: r.authority,
   dataset: r.dataset,
   note: r.note,
   authorId: r.author_id,
   authorName: r.author_name,
-  status: r.status,
+  status: STATUSES.includes(r.status as SubmissionStatus) ? (r.status as SubmissionStatus) : 'pending',
   createdAt: r.created_at,
   reviewedAt: r.reviewed_at,
   reviewerName: r.reviewer_name,
@@ -84,7 +85,7 @@ export function createSupabaseRepository(sb: SupabaseClient): Repository {
   return {
     mode: 'supabase',
     async getOverrides() {
-      const rows = must(await sb.from('indicator_values').select('unit_id, ref, value, authority, dataset, note, author_name, updated_at')) as ValueRow[];
+      const rows = must(await sb.from('indicator_values').select('unit_id, ref, value, authority, dataset, note, author_name, updated_at'));
       const out: Overrides = {};
       for (const r of rows) {
         (out[r.unit_id] ??= {})[r.ref as EditRef] = {
@@ -105,7 +106,7 @@ export function createSupabaseRepository(sb: SupabaseClient): Repository {
         sb.from('submissions').select('*').eq('status', 'pending').order('created_at', { ascending: true }),
         sb.from('submissions').select('*').neq('status', 'pending').order('created_at', { ascending: false }).limit(500),
       ]);
-      const rows = [...(must(pending) as SubmissionRow[]), ...(must(decided) as SubmissionRow[])];
+      const rows = [...must(pending), ...must(decided)];
       return rows.map(toSubmission).sort((a, b) => b.createdAt.localeCompare(a.createdAt));
     },
     async submit(input: NewSubmission, author: Profile) {
@@ -116,7 +117,7 @@ export function createSupabaseRepository(sb: SupabaseClient): Repository {
             unit_id: input.unitId,
             unit_name: input.unitName,
             region: input.region,
-            changes: input.changes,
+            changes: input.changes as unknown as Json,
             authority: input.authority,
             dataset: input.dataset ?? null,
             note: input.note ?? null,
@@ -128,18 +129,18 @@ export function createSupabaseRepository(sb: SupabaseClient): Repository {
       return toSubmission(row);
     },
     async review(id, decision, _reviewer, note) {
-      must(await sb.rpc('review_submission', { p_id: id, p_decision: decision, p_note: note ?? null }));
+      must(await sb.rpc('review_submission', { p_id: id, p_decision: decision, p_note: note }));
     },
     async revert(unitId, ref) {
-      must(await sb.rpc('revert_value', { p_unit_id: unitId, p_ref: ref, p_unit_name: null }));
+      must(await sb.rpc('revert_value', { p_unit_id: unitId, p_ref: ref }));
     },
     async listAudit(limit = 100) {
-      const rows = must(await sb.from('audit_log').select('*').order('at', { ascending: false }).limit(limit)) as AuditRow[];
+      const rows: AuditRow[] = must(await sb.from('audit_log').select('*').order('at', { ascending: false }).limit(limit));
       return rows.map((r) => ({
         id: String(r.id),
         at: r.at,
         actor: r.actor_name ?? '—',
-        action: r.action,
+        action: ACTIONS.includes(r.action as AuditEntry['action']) ? (r.action as AuditEntry['action']) : 'submitted',
         unitId: r.unit_id ?? undefined,
         unitName: r.unit_name ?? undefined,
         detail: r.detail ?? undefined,

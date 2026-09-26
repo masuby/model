@@ -13,7 +13,7 @@
  *   • National — the OFFICIAL INFORM Tanzania country figure (4.1), never a re-aggregation.
  */
 import riskDataset from '@/data/tanzania-inform-risk.json';
-import councilsGeo from '@/data/tanzania-councils.json';
+import councilIndex from '@/data/tanzania-councils-index.json';
 import councilHazardData from '@/data/tanzania-councils-data.json';
 import { DIMENSIONS, DIMENSION_KEYS, type DimensionKey } from './hierarchy';
 import { dimensionScore, isNum, mean, riskScore, round1 } from './math';
@@ -60,7 +60,8 @@ const DATASET = riskDataset as unknown as {
   metadata: { asOf?: string; lastUpdated?: string };
 };
 const COUNCIL_HAZARD = councilHazardData as unknown as Record<string, { hazardExposure: RawUnit['hazardExposure']; risk: number }>;
-const COUNCIL_FEATURES = (councilsGeo as unknown as { features: Array<{ properties: CouncilFeatureProps }> }).features;
+/** Council attributes without geometry (scripts/build-council-index.mjs) — keeps boundaries out of the app shell. */
+const COUNCIL_FEATURES = (councilIndex as unknown as CouncilFeatureProps[]).map((properties) => ({ properties }));
 
 /** Normalise a place name for joins ("Dar-es-salaam" ≡ "Dar es Salaam"). */
 export const placeKey = (name: string | null | undefined): string => String(name ?? '').toLowerCase().replace(/[^a-z0-9]/g, '');

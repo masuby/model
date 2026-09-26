@@ -102,7 +102,7 @@ export default function HomePage() {
               <React.Suspense fallback={<Skeleton className="size-full rounded-none" />}>
                 <RiskMap model={model} level="council" metric={riskMetric} className="size-full" showZoom={false} fitPadding={24} onSelect={(u) => navigate(`/area/${u.id}`)} />
               </React.Suspense>
-              <div className="glass absolute top-4 left-4 flex items-center gap-4 rounded-2xl p-3 pr-4 shadow-lg">
+              <div className="glass absolute top-4 left-4 z-[450] flex items-center gap-4 rounded-2xl p-3 pr-4 shadow-lg">
                 <ScoreGauge value={model.national.risk} size={112} />
                 <div>
                   <div className="text-xs font-medium text-muted-foreground">{t('nationalRisk')}</div>
@@ -110,7 +110,7 @@ export default function HomePage() {
                   <div className="mt-1.5 max-w-36 text-[11px] leading-snug text-muted-foreground">{t('nationalNote')}</div>
                 </div>
               </div>
-              <div className="glass absolute right-4 bottom-4 rounded-xl px-3 py-2 text-xs font-medium shadow-lg">
+              <div className="glass absolute right-4 bottom-4 z-[450] rounded-xl px-3 py-2 text-xs font-medium shadow-lg">
                 <div className="mb-1.5 text-muted-foreground">{t('mapCaption')}</div>
                 <div className="flex gap-1">
                   {CLASS_KEYS.map((k) => (

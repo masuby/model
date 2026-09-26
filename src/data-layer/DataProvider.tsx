@@ -9,7 +9,7 @@ import * as React from 'react';
 import { buildModel } from '@/engine/risk/model';
 import type { EditRef, Overrides, RiskModel } from '@/engine/risk/types';
 import { createLocalRepository } from './local';
-import { createSupabaseRepository, getSupabase, supabaseConfigured } from './supabase';
+import { createSupabaseClient, createSupabaseRepository, supabaseConfigured } from './supabase';
 import type { NewSubmission, Profile, Repository, Role } from './types';
 
 export const queryClient = new QueryClient({
@@ -33,6 +33,10 @@ interface DataContextValue {
 }
 
 const DataContext = React.createContext<DataContextValue | null>(null);
+
+/** The Supabase client, created once before first render when (and only when) Supabase is configured. */
+const SB = await createSupabaseClient();
+const getSupabase = () => SB;
 
 const DEMO_KEY = 'inform.demoRole';
 const demoProfile = (role: Role): Profile => ({

@@ -10,10 +10,10 @@ import L from 'leaflet';
 import * as React from 'react';
 import { GeoJSON, MapContainer, TileLayer, useMap } from 'react-leaflet';
 import { useTranslation } from 'react-i18next';
-import councilsGeo from '@/data/tanzania-councils.json';
-import districtsGeo from '@/data/tanzania-districts.json';
-import regionsGeo from '@/data/tanzania-regions.json';
-import waterGeo from '@/data/tanzania-waterbodies.json';
+import councilsUrl from '@/data/tanzania-councils.json?url';
+import districtsUrl from '@/data/tanzania-districts.json?url';
+import regionsUrl from '@/data/tanzania-regions.json?url';
+import waterUrl from '@/data/tanzania-waterbodies.json?url';
 import type { ClassKey } from '@/engine/risk/classes';
 import { metricColor, type Metric } from '@/engine/risk/metrics';
 import { placeKey } from '@/engine/risk/model';
@@ -44,12 +44,42 @@ const TZ_BOUNDS: L.LatLngBoundsExpression = [
 ];
 
 type Props0 = Record<string, string | number | boolean | null | undefined>;
-const GEO: Record<Exclude<Level, 'national'> | 'national', FeatureCollection<Geometry, Props0>> = {
-  council: councilsGeo as unknown as FeatureCollection<Geometry, Props0>,
-  region: regionsGeo as unknown as FeatureCollection<Geometry, Props0>,
-  national: regionsGeo as unknown as FeatureCollection<Geometry, Props0>,
-  source: districtsGeo as unknown as FeatureCollection<Geometry, Props0>,
-};
+type Geo = FeatureCollection<Geometry, Props0>;
+
+/**
+ * Boundaries are static files fetched on demand (and cached by the service worker), so the app bundle
+ * carries no geometry and each level downloads only what it draws. One request per file per session.
+ */
+const GEO_URL: Record<Level | 'water', string> = { council: councilsUrl, region: regionsUrl, national: regionsUrl, source: districtsUrl, water: waterUrl };
+const geoCache = new Map<string, Promise<Geo>>();
+function loadGeo(key: Level | 'water'): Promise<Geo> {
+  const url = GEO_URL[key];
+  if (!geoCache.has(url)) {
+    geoCache.set(
+      url,
+      fetch(url).then((r) => {
+        if (!r.ok) throw new Error(`Failed to load boundaries (${r.status})`);
+        return r.json() as Promise<Geo>;
+      }),
+    );
+  }
+  return geoCache.get(url)!;
+}
+function useGeo(key: Level | 'water'): Geo | null {
+  const [geo, setGeo] = React.useState<{ key: string; data: Geo } | null>(null);
+  React.useEffect(() => {
+    let alive = true;
+    loadGeo(key).then(
+      (data) => alive && setGeo({ key, data }),
+      () => geoCache.delete(GEO_URL[key]),
+    );
+    return () => {
+      alive = false;
+    };
+  }, [key]);
+  return geo && geo.key === key ? geo.data : null;
+}
+const EMPTY: Geo = { type: 'FeatureCollection', features: [] };
 
 /** Resolve the unit behind a boundary feature at a level. */
 function useUnitResolver(model: RiskModel, level: Level) {
@@ -115,7 +145,9 @@ export default function RiskMap({
 }: Props) {
   const { t, i18n } = useTranslation();
   const theme = resolveTheme(usePrefs((s) => s.theme));
-  const geo = GEO[level];
+  const loadedGeo = useGeo(level);
+  const water = useGeo('water');
+  const geo = loadedGeo ?? EMPTY;
   const unitOf = useUnitResolver(model, level);
   const layerRef = React.useRef<L.GeoJSON | null>(null);
 
@@ -150,7 +182,7 @@ export default function RiskMap({
       const u = f ? unitOf(f) : null;
       if (u && selectedIds.includes(u.id)) (l as L.Path).bringToFront();
     });
-  }, [metric, selectedIds, filterClass, theme, style, unitOf, model]);
+  }, [metric, selectedIds, filterClass, theme, style, unitOf, model, loadedGeo]);
 
   const tooltipHtml = React.useCallback((f: Feature<Geometry, Props0>) => {
     const { metric: m, unitOf: uo, t: tr, lang, tooltipHint: hint } = live.current;
@@ -231,16 +263,18 @@ export default function RiskMap({
       >
         <Resizer padding={fitPadding} keepFit={!focusId} />
         {basemap !== 'none' && <TileLayer key={theme} url={tiles} attribution='&copy; OpenStreetMap &copy; CARTO' />}
-        <GeoJSON key={level} ref={layerRef} data={geo} style={style as L.StyleFunction} onEachFeature={onEach as (f: Feature, l: L.Layer) => void} />
-        <GeoJSON
-          key={`water-${theme}`}
-          data={waterGeo as unknown as FeatureCollection}
-          interactive={false}
-          style={() => {
-            const css = getComputedStyle(document.documentElement);
-            return { fillColor: css.getPropertyValue('--map-water').trim(), fillOpacity: 1, color: css.getPropertyValue('--map-water-stroke').trim(), weight: 0.6 };
-          }}
-        />
+        {loadedGeo && <GeoJSON key={level} ref={layerRef} data={geo} style={style as L.StyleFunction} onEachFeature={onEach as (f: Feature, l: L.Layer) => void} />}
+        {water && (
+          <GeoJSON
+            key={`water-${theme}`}
+            data={water}
+            interactive={false}
+            style={() => {
+              const css = getComputedStyle(document.documentElement);
+              return { fillColor: css.getPropertyValue('--map-water').trim(), fillOpacity: 1, color: css.getPropertyValue('--map-water-stroke').trim(), weight: 0.6 };
+            }}
+          />
+        )}
         <FitTo bounds={focusBounds} padding={fitPadding} />
       </MapContainer>
     </div>

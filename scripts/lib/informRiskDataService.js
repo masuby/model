@@ -133,7 +133,8 @@ export function transformWorkbook(workbook) {
   return {
     national: calculateNationalAggregates(administrativeUnits),
     subnational: {
-      adm1: groupByAdm1(administrativeUnits),
+      // adm2 is the single source of truth. (A per-region adm1 mirror used to be emitted here; the
+      // apply-* scripts never updated it, so it went stale — group by admin.adm1Name when needed.)
       adm2: administrativeUnits
     },
     metadata: {

@@ -208,6 +208,11 @@ begin
   values (auth.uid(), reviewer, 'reverted', p_unit_id, p_unit_name, p_ref);
 end $$;
 
+-- Trigger-only functions are never callable through the API.
+revoke all on function public.handle_new_user() from public, anon, authenticated;
+revoke all on function public.normalise_submission() from public, anon, authenticated;
+revoke all on function public.log_submission() from public, anon, authenticated;
+
 revoke all on function public.review_submission(uuid, text, text) from public, anon;
 revoke all on function public.revert_value(text, text, text) from public, anon;
 grant execute on function public.review_submission(uuid, text, text) to authenticated;
