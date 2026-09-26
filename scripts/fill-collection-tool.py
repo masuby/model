@@ -23,7 +23,7 @@ SPEC = json.load(open(os.path.join(ROOT, 'src/data/inform-indicator-spec.json'))
 name2id = {s['name']: s['id'] for s in SPEC.values() if s['use'] == 'Yes'}
 
 # ---- authentic raw per workbook unit (the official INFORM figures) ----
-pf = json.load(open(os.path.join(ROOT, 'src/services/__tests__/pipeline.fixture.json')))
+pf = json.load(open(os.path.join(ROOT, 'src/engine/risk/__tests__/fixtures/pipeline.fixture.json')))
 raw_by_unit = {norm(r['district']): r['raw'] for r in pf}
 
 # ---- council -> workbook unit map (the model's own reconciliation) ----

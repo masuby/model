@@ -1,0 +1,149 @@
+{
+  "appName": "INFORM Tanzania",
+  "tagline": "Sub-national risk and crisis severity",
+  "informRisk": "INFORM Risk",
+  "nav": {
+    "home": "Home",
+    "explore": "Risk explorer",
+    "insights": "Insights",
+    "severity": "Crisis severity",
+    "learn": "Learn",
+    "methodology": "Methodology",
+    "data": "Data portal",
+    "menu": "Menu",
+    "skipToContent": "Skip to content"
+  },
+  "theme": {
+    "label": "Theme",
+    "light": "Day",
+    "dark": "Night",
+    "system": "System",
+    "toggle": "Switch between day and night"
+  },
+  "language": {
+    "label": "Language"
+  },
+  "search": {
+    "placeholder": "Search a council or region…",
+    "open": "Search",
+    "empty": "No place matches “{{q}}”.",
+    "councils": "Councils",
+    "regions": "Regions",
+    "pages": "Pages",
+    "hint": "Press {{key}} to search"
+  },
+  "classes": {
+    "veryLow": "Very low",
+    "low": "Low",
+    "medium": "Medium",
+    "high": "High",
+    "veryHigh": "Very high",
+    "noData": "No data"
+  },
+  "dimensions": {
+    "hazard": "Hazard & Exposure",
+    "vulnerability": "Vulnerability",
+    "coping": "Lack of Coping Capacity",
+    "hazardShort": "Hazard",
+    "vulnerabilityShort": "Vulnerability",
+    "copingShort": "Lack of coping",
+    "hazardDesc": "How likely and how intense natural and human-made hazards are, and how many people are in harm’s way.",
+    "vulnerabilityDesc": "How susceptible people are to harm: poverty, health, food insecurity, displacement and other vulnerable groups.",
+    "copingDesc": "How much the area lacks the resources and institutions to cope with and recover from a disaster. Higher means fewer resources."
+  },
+  "categories": {
+    "natural": "Natural hazards",
+    "human": "Human hazards",
+    "socioEconomic": "Socio-economic",
+    "vulnerableGroups": "Vulnerable groups",
+    "infrastructure": "Infrastructure",
+    "institutional": "Institutional"
+  },
+  "levels": {
+    "council": "Council",
+    "councils": "Councils",
+    "region": "Region",
+    "regions": "Regions",
+    "national": "National",
+    "source": "INFORM source unit",
+    "sources": "INFORM source units (reference)"
+  },
+  "units": {
+    "people": "people",
+    "perKm2": "per km²",
+    "km2": "km²"
+  },
+  "actions": {
+    "open": "Open",
+    "close": "Close",
+    "back": "Back",
+    "next": "Next",
+    "previous": "Previous",
+    "cancel": "Cancel",
+    "save": "Save",
+    "submit": "Submit",
+    "reset": "Reset",
+    "clear": "Clear",
+    "download": "Download",
+    "downloadCsv": "Download CSV",
+    "downloadPng": "Download image",
+    "print": "Print",
+    "share": "Copy link",
+    "copied": "Link copied",
+    "viewProfile": "View profile",
+    "compare": "Compare",
+    "learnMore": "Learn more",
+    "tryAgain": "Try again",
+    "signIn": "Sign in",
+    "signOut": "Sign out",
+    "apply": "Apply",
+    "remove": "Remove",
+    "edit": "Edit",
+    "showAll": "Show all",
+    "showLess": "Show less"
+  },
+  "labels": {
+    "score": "Score",
+    "rank": "Rank",
+    "class": "Class",
+    "population": "Population",
+    "density": "Density",
+    "area": "Area",
+    "source": "Source",
+    "updated": "Updated",
+    "coverage": "Data coverage",
+    "region": "Region",
+    "of": "of",
+    "outOf": "out of {{max}}",
+    "asOf": "Data as of {{date}}",
+    "official": "Official",
+    "edited": "Updated",
+    "inherited": "Inherits data from {{parent}}",
+    "sharedSource": "Vulnerability and coping data come from {{source}}",
+    "national": "National",
+    "yes": "Yes",
+    "no": "No"
+  },
+  "footer": {
+    "about": "INFORM Tanzania applies the INFORM methodology of the European Commission Joint Research Centre and partners to every council in Tanzania.",
+    "disclaimer": "Scores are composite indicators that support, not replace, local knowledge and official assessments.",
+    "build": "Build {{build}}",
+    "methodology": "Methodology",
+    "sources": "Data sources",
+    "github": "Source code",
+    "rights": "Open data and open methodology."
+  },
+  "states": {
+    "loading": "Loading…",
+    "error": "Something went wrong.",
+    "errorDetail": "The page hit an unexpected error. You can try again, or return home.",
+    "notFound": "Page not found",
+    "notFoundDetail": "The page you are looking for does not exist or has moved.",
+    "goHome": "Go home",
+    "empty": "Nothing to show yet."
+  },
+  "a11y": {
+    "mapOf": "Map of Tanzania coloured by {{metric}}",
+    "selected": "Selected"
+  }
+}
