@@ -525,6 +525,11 @@
         "title": "Baadhi ya data hupitwa na wakati haraka",
         "now": "Takwimu za wakimbizi, kwa mfano, zinaakisi idadi ya kambi ya 2024; kufungwa kwa kambi tangu hapo bado hakujaakisiwa. Data zilizopitwa na wakati zimewekwa alama katika rejista ya vyanzo.",
         "next": "picha za data zenye tarehe na ratiba ya kusasisha kwa kila kiashiria, ili kila alama iripotiwe “hadi tarehe” ya data yake."
+      },
+      "bimodal": {
+        "title": "Msimu wa ukame katika nyanda za juu zenye misimu miwili ya mvua",
+        "now": "Kielelezo cha ukame hupima msimu kinaoutambua kuwa msimu mkuu wa mvua. Katika halmashauri chache za nyanda za juu zenye misimu miwili, huchagua mvua fupi zisizotabirika (Oktoba–Januari) badala ya mvua ndefu za kuaminika, jambo linalokuza ukame: Lushoto inapata 10.0 katika kipimo cha 0–10. Chukulia kwa tahadhari ukame wa juu sana katika halmashauri za nyanda za juu zenye mvua nyingi.",
+        "next": "Pima misimu yote miwili ya mvua katika maeneo yenye misimu miwili (au msimu muhimu kwa riziki za wenyeji) na thibitisha dhidi ya historia ya usalama wa chakula ya MUCHALI/IPC."
       }
     },
     "closingTitle": "Ramani ya hatua, si kanusho",

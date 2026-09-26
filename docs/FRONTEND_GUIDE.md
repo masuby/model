@@ -44,6 +44,19 @@ state/prefs.ts  theme, language, learning progress (persisted)
 6. **Typed.** No `any`. `npx tsc -p tsconfig.app.json --noEmit` and `npx vitest run` must pass.
 7. **Honest.** Illustrative content is labelled as such; data provenance is shown where values appear.
 
+## Conventions added during QA
+
+- `Progress` requires a `label` (accessible name).
+- Dimension colours: `DIMENSION_COLORS` for fills/strokes, `DIMENSION_TEXT` (theme-aware CSS variables)
+  for any text — the bright fills fail contrast as text.
+- Class fills: take text colour from `onClassColor(hex)`; never hard-code white on a class colour.
+- Map overlays positioned over `RiskMap` need `z-[450]` (Leaflet panes sit at z-index 400).
+- Translations load lazily per namespace: always declare the namespace in `useTranslation('<ns>')`
+  (prefixed keys like `t('learn:x')` only resolve if that namespace is already loaded).
+- QA before merging UI work: `node scripts/qa-a11y.mjs` (axe, both themes) and
+  `node scripts/qa-screenshots.mjs` (full-page screenshots, both themes, both languages, 390/1440 px)
+  against `npx vite preview --port 4173`.
+
 ## Visual language
 
 - Cards: `Card` (rounded-2xl, soft shadow). Sections: `SectionHeading` with an eyebrow.

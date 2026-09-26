@@ -17,13 +17,17 @@ INFORM Tanzania is a static single-page app. **Vercel** is the single production
 The footer shows the deployed commit and build time (`build <sha> · <time>`) so anyone can confirm
 what is live.
 
-## 2. Supabase (shared Data portal — optional)
+## 2. Supabase (shared Data portal)
 
-Without Supabase the Data portal runs in demo mode (browser-local). To enable real multi-user data:
+Production project: **inform-tanzania** (ref `eovhjdkwtxuidndypozp`, region `eu-west-1`,
+URL `https://eovhjdkwtxuidndypozp.supabase.co`). Migrations `0001`–`0003` are applied and the role model
+was verified end-to-end against it (sector / reviewer / admin / anonymous — 15/15 checks).
+
+Without Supabase keys the Data portal runs in demo mode (browser-local). To set up a new environment:
 
 1. Create a project (region close to users; `eu-west-1` or `ap-south-1` are reasonable from Tanzania).
-2. Open *SQL editor* and run `supabase/migrations/0001_init.sql` (idempotent), or with the CLI:
-   `supabase db push`.
+2. Apply `supabase/migrations/0001_init.sql`, `0002_harden.sql` and `0003_fix_profile_policy_and_grants.sql`
+   in order (SQL editor, or `supabase db push` with the CLI).
 3. *Authentication → URL configuration*: set the Site URL to `https://inform.co.tz` and add
    `https://inform.co.tz/data` (and your preview URL pattern) to the redirect allow-list — magic links
    return to `/data`.
@@ -35,7 +39,11 @@ Without Supabase the Data portal runs in demo mode (browser-local). To enable re
    update public.profiles set role = 'sector', institution = 'TMA' where id = '<user uuid>';
    update public.profiles set role = 'pmo' where id = '<reviewer uuid>';
    ```
-6. Run the Security Advisor in the Supabase dashboard; the schema enables RLS on every table.
+6. Run the Security Advisor in the Supabase dashboard; the schema enables RLS on every table. The two
+   remaining advisor notes (`review_submission`, `revert_value` executable by signed-in users) are
+   intentional: they are the approval API and re-check the caller's role server-side.
+7. Regenerate `src/data-layer/database.types.ts` after any schema change
+   (`npx supabase gen types typescript --project-id <ref>`).
 
 ### Roles
 

@@ -525,6 +525,11 @@
         "title": "Some inputs age quickly",
         "now": "Refugee figures, for example, reflect 2024 camp populations; camp closures since then are not yet reflected. Outdated inputs are flagged in the source register.",
         "next": "dated snapshots and a refresh calendar per indicator, so every score is reported “as of” its data."
+      },
+      "bimodal": {
+        "title": "Drought season in bimodal highlands",
+        "now": "The drought index scores the season it detects as the main rainy season. In a few bimodal highland councils it picks the erratic short rains (October–January) instead of the reliable long rains, which inflates drought: Lushoto computes to 10.0 on the 0–10 scale. Treat very high drought in wet highland councils with caution.",
+        "next": "Score both rainy seasons in bimodal areas (or the season that matters for local livelihoods) and validate against MUCHALI/IPC food-security history."
       }
     },
     "closingTitle": "A roadmap, not a disclaimer",

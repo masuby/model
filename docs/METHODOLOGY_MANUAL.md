@@ -265,6 +265,12 @@ Storage today is the browser (`localStorage`); the Supabase schema is ready for 
    documented INFORM baseline — clearly too high for a coastal city. The precautionary floor
    keeps documented values rather than silently lowering them, so it persists (the *computed*
    value is ~6.6). **Flagged for correction via Data Entry** (MoA/TMA), which now overrides it.
+4b. **Drought season in bimodal highlands (artefact).** The drought index scores the season it detects as
+   the main rainy season. In some bimodal highland councils it selects the erratic short rains (Oct–Jan)
+   instead of the reliable long rains: **Lushoto computes to 10.0** (season-failure 0.35, SPEI 1.56), which
+   is implausible for the wet Usambara highlands. *Open* — score both seasons in bimodal areas (or the
+   livelihood-relevant one) and validate against MUCHALI/IPC history; meanwhile read very high drought in
+   wet highland councils with caution.
 5. **Administrative structure — the model now speaks the real NBS-2022 structure by default.**
    The explorer, the ranked table, the charts and Data Entry all open on the **195 councils (LGAs)**,
    aggregating to the **31 regions**, with the **official INFORM country value (4.1)** as the national
@@ -275,11 +281,14 @@ Storage today is the browser (`localStorage`); the Supabase schema is ready for 
    Mlimba/Ifakara←Kilombero, Magharibi A/B…) **inherit their parent's data — flagged on hover/in the
    list** — until council-specific data exists (**never fabricated**). Because the data is 170-resolution,
    **34 INFORM source units back more than one council** (e.g. Mtwara → Mtwara District + Nanyamba Town +
-   Mtwara Mikindani Municipal); a **Data-Entry edit is keyed by that single source unit and flows to every
-   council that shares it** — Data Entry states which source unit it is editing and which councils it
-   updates. The **170 INFORM units remain available as a labelled "source/reference" level**; national and
-   regional figures aggregate from this distinct backbone (no double-counting of inherited/shared councils),
-   and the **national value is kept official**, never a unit-mean. Official NBS 2022: 31 regions · 150
+   Mtwara Mikindani Municipal). Each council has its **own Hazard & Exposure** (computed on its own polygon), so
+   **hazard edits apply to that council**; **Vulnerability & Coping edits are keyed by the shared source unit and
+   flow to every council that shares it** — the Data portal shows which unit receives each change and which
+   councils it updates. Council risk is computed live as ∛(H × V × LCC), so approved edits reach the map,
+   regions and profiles immediately. **Regions aggregate from their councils the INFORM way** (indicator means →
+   categories → scaled geomean → cube root; facilities summed over distinct source units, so no double
+   counting). The **170 INFORM units remain available as a labelled "source/reference" level**, and the
+   **national value is kept official**, never a unit-mean. Official NBS 2022: 31 regions · 150
    districts · 195 councils · 4,344 wards. Reconciliation: `scripts/export-councils.py` →
    `tanzania-councils.json` + `council_reconciliation.csv`.
 6. **Wildfire, earthquake, lightning, storms** are still INFORM baseline — not yet physically

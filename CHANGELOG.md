@@ -29,6 +29,19 @@ day/night themes, a shared data backend and several methodological corrections.
 - Indicator lenses use an absolute 0–10 colour ramp instead of relative quintiles, so maps are
   comparable across indicators.
 
+### Data corrections
+
+- **Census population for three councils.** The climate pipeline's name matcher missed Ilala
+  (Dar es Salaam City), Mwanza City and Busokelo and fell back to area-apportioned estimates
+  (e.g. Mwanza City 58,096 instead of 594,834). All 195 councils now carry the NBS 2022 figures
+  (total 61,741,120 = the official PHC total) and exposure is recomputed
+  (`scripts/fix-council-population.py`). Exposure index: Mwanza City 5.3 → 8.2, Dar es Salaam City
+  8.2 → 8.6, Busokelo 3.3 → 4.3; no risk class changed.
+- **Region facilities** no longer double-count districts that were split into several councils.
+- Removed `subnational.adm1`, a stale, unused per-region copy of the district data (every record
+  differed from the canonical `adm2`).
+- Documented a drought-season artefact in bimodal highlands (Lushoto = 10.0).
+
 ### Platform
 
 - TypeScript (strict), Tailwind CSS v4, Radix UI, React Router 7, TanStack Query, Recharts, Motion.
@@ -37,7 +50,11 @@ day/night themes, a shared data backend and several methodological corrections.
 - Data layer with two backends: browser-local demo mode (clearly labelled; migrates old edits) and
   Supabase (accounts, roles, approval queue, audit log, row-level security, server-side approval).
 - Installable, offline-capable app (PWA): the app and data work without a connection once visited.
-- Code-split routes and vendor chunks (the old app shipped a single 2.1 MB bundle).
+- Code-split routes and vendor chunks; translations loaded per page and language; map boundaries
+  fetched per level; Supabase SDK loaded only when configured. First load: 134 KB gzip of app code
+  (the old app shipped a single 2.1 MB bundle).
+- Accessibility: axe-core WCAG 2.1 AA audit of every page in both themes — no serious or critical
+  violations; keyboard navigation; labelled controls; no horizontal overflow at 360 px.
 - Security headers (CSP, HSTS, frame denial), CI quality gate (typecheck, lint, tests, build);
   Vercel is the single host. Obsolete GitHub Pages / Netlify / self-host configs archived.
 

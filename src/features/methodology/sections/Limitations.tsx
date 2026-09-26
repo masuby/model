@@ -16,6 +16,7 @@ const ITEMS: ReadonlyArray<{ key: string; status: Status }> = [
   { key: 'drought', status: 'open' },
   { key: 'relative', status: 'open' },
   { key: 'floor', status: 'open' },
+  { key: 'bimodal', status: 'open' },
   { key: 'inherit', status: 'inProgress' },
   { key: 'surveys', status: 'planned' },
   { key: 'sentinel', status: 'open' },
