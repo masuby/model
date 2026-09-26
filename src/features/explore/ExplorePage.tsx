@@ -1,17 +1,19 @@
 /**
  * Risk Explorer (/explore) — the flagship screen.
  *
- * Desktop (≥1024 px): a 380 px control panel on the left and a full-bleed map on the right with glass
- * overlays (lens header, view toolbar, area card, comparison tray). Table view swaps the map for a
- * sortable ranking. Mobile: the map fills the screen, controls and the area card live in a non-modal
- * bottom sheet. All view state lives in the query string, so every view is a shareable link.
+ * Desktop (≥1024 px): a 392 px control panel on the left and a full-bleed map on the right with a few
+ * solid floating panels (a compact map key, the view toolbar, the area card, the comparison). Table view
+ * swaps the map for a sortable ranking; there nothing floats — the area card docks as a column on the
+ * right and the comparison docks under the table. Mobile: the map fills the screen, controls and the area
+ * card live in a non-modal bottom sheet. All view state lives in the query string, so every view is a
+ * shareable link. No animation library: state changes are instant or short CSS transitions.
  */
-import { AnimatePresence, motion, MotionConfig } from 'motion/react';
+import { FilterX } from 'lucide-react';
 import * as React from 'react';
 import { useTranslation } from 'react-i18next';
 import { useModel } from '@/data-layer/DataProvider';
 import { formatScore } from '@/lib/utils';
-import { AreaActions, AreaBody, AreaCardOverlay, AreaHeader } from './components/AreaCard';
+import { AreaActions, AreaBody, AreaCardPanel, AreaHeader } from './components/AreaCard';
 import { MiniLegend, ScaleInfo } from './components/bits';
 import { CompareTray } from './components/CompareTray';
 import { ControlPanel } from './components/ControlPanel';
@@ -24,20 +26,18 @@ import { ViewToolbar } from './components/ViewToolbar';
 import { ExploreProvider, useExplore } from './lib/ExploreContext';
 import { useElementHeight, useHeaderHeight, useMediaQuery } from './lib/hooks';
 
-const EASE = [0.2, 0.7, 0.2, 1] as const;
-
-/** Area card + comparison tray, positioned inside the current stage (map or table body). */
-function StageOverlays({ top }: { top: number }) {
+/** Map view: the area card and the comparison tray float over the map. */
+function MapOverlays() {
   const { compare, state } = useExplore();
   const [trayRef, trayH] = useElementHeight<HTMLDivElement>();
   // Leave room for the OpenStreetMap attribution when the street basemap is on.
-  const trayBottom = state.view === 'map' && state.basemap === 'streets' ? 30 : 16;
+  const trayBottom = state.basemap === 'streets' ? 30 : 16;
   const bottom = compare.length && trayH ? trayBottom + trayH + 12 : 16;
   return (
     <>
-      <AreaCardOverlay top={top} bottom={bottom} />
+      <AreaCardPanel placement="floating" style={{ top: 72, bottom }} />
       <div ref={trayRef} className="pointer-events-none absolute inset-x-4 z-20 flex justify-center" style={{ bottom: trayBottom }}>
-        <AnimatePresence>{compare.length > 0 && <CompareTray key="tray" className="pointer-events-auto w-full max-w-3xl" />}</AnimatePresence>
+        {compare.length > 0 && <CompareTray className="pointer-events-auto w-full max-w-3xl" />}
       </div>
     </>
   );
@@ -49,70 +49,72 @@ function DesktopExplorer() {
   const wide = useMediaQuery('(min-width: 1280px)');
   return (
     <div className="flex h-full">
-      <motion.aside
-        initial={{ opacity: 0, x: -20 }}
-        animate={{ opacity: 1, x: 0 }}
-        transition={{ duration: 0.4, ease: EASE }}
-        aria-label={t('panel.label')}
-        className="relative z-30 flex w-[380px] shrink-0 flex-col border-r border-border bg-card/85 shadow-[var(--shadow-soft)] backdrop-blur-xl"
-      >
+      <aside aria-label={t('panel.label')} className="relative z-30 flex w-[392px] shrink-0 flex-col border-r border-border bg-background">
         <ControlPanel variant="desktop" />
-      </motion.aside>
+      </aside>
 
       <section aria-label={t('stage.label')} className="relative min-w-0 flex-1 overflow-hidden">
         <MapStage hidden={state.view === 'table'} />
 
-        <AnimatePresence initial={false}>
-          {state.view === 'map' && (
-            <motion.div key="map-ui" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.2 }} className="pointer-events-none absolute inset-0 z-20">
-              <LensHeader className="pointer-events-auto absolute top-4 left-4" />
-              <motion.div
-                initial={{ opacity: 0, y: -8 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.35, delay: 0.15, ease: EASE }}
-                className="glass pointer-events-auto absolute top-4 right-4 rounded-2xl p-1.5 shadow-lg"
-              >
+        {state.view === 'map' ? (
+          <>
+            <div className="pointer-events-none absolute inset-0 z-20">
+              {/* On narrower desktops the area card needs the room: the panel already has the full legend. */}
+              {!(selected && !wide) && <LensHeader className="pointer-events-auto absolute top-4 left-4" />}
+              <div className="glass pointer-events-auto absolute top-4 right-4 rounded-lg p-1">
                 <ViewToolbar compact={!wide} />
-              </motion.div>
-            </motion.div>
-          )}
-        </AnimatePresence>
-
-        <AnimatePresence>
-          {state.view === 'table' && (
-            <RankingTable key="table" overlays={<StageOverlays top={16} />} bottomPad={compare.length ? 196 : 0} rightPad={selected && wide ? 392 : 0} />
-          )}
-        </AnimatePresence>
-
-        {state.view === 'map' && <StageOverlays top={72} />}
+              </div>
+            </div>
+            <MapOverlays />
+          </>
+        ) : (
+          <div className="absolute inset-0 z-20">
+            <RankingTable
+              aside={selected ? <AreaCardPanel placement="docked" /> : null}
+              footer={compare.length > 0 ? <CompareTray placement="docked" className="shrink-0" /> : null}
+            />
+          </div>
+        )}
       </section>
     </div>
   );
 }
 
 function ControlsPeek() {
-  const { t } = useTranslation('explore');
-  const { state, metric, stats, metricLabel } = useExplore();
+  const { t } = useTranslation(['explore', 'common']);
+  const { state, metric, stats, metricLabel, actions } = useExplore();
   return (
     <div className="px-4 pb-3">
-      <div className="-mx-4 flex gap-1.5 overflow-x-auto px-4 pt-0.5 pb-1.5 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden" role="group" aria-label={t('lens.label')}>
+      {/* The lens tabs scroll sideways; the fade at the right edge says there is more. */}
+      <div
+        className="-mx-4 flex gap-5 overflow-x-auto border-b border-border px-4 [mask-image:linear-gradient(to_right,black_calc(100%-24px),transparent)] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+        role="group"
+        aria-label={t('lens.label')}
+      >
         <LensChips />
         <IndicatorPicker variant="chip" />
+        <span aria-hidden className="w-2 shrink-0" />
       </div>
-      <div className="mt-1.5 flex items-end gap-2">
+      <div className="mt-3 flex items-end gap-2">
         <div className="min-w-0 flex-1">
-          <div className="mb-1 flex items-baseline justify-between gap-2 text-[11px]">
-            <span className="truncate font-semibold">
+          <div className="mb-1 flex items-baseline justify-between gap-2 text-xs">
+            <span className="truncate font-medium">
               {t(`level.${state.level}`)} · {metricLabel(metric)}
             </span>
             <span className="shrink-0 text-muted-foreground">
-              {t('stats.mean')} <b className="num text-foreground">{formatScore(stats.mean)}</b>
+              {t('stats.mean')} <b className="num font-semibold text-foreground">{formatScore(stats.mean)}</b>
             </span>
           </div>
           <MiniLegend />
         </div>
-        <ScaleInfo align="end" />
+        <ScaleInfo align="end" className="mb-5" />
       </div>
+      {state.cls && (
+        <button type="button" onClick={() => actions.setClass(null)} className="mt-2 inline-flex items-center gap-1.5 text-xs font-medium text-primary hover:underline">
+          <FilterX className="size-3.5" aria-hidden />
+          {t('legend.filtered', { cls: t(`common:classes.${state.cls}`) })} · {t('legend.clearFilter')}
+        </button>
+      )}
     </div>
   );
 }
@@ -127,15 +129,19 @@ function MobileExplorer() {
       <MapStage hidden={state.view === 'table'} />
 
       {state.view === 'map' && (
-        <motion.div initial={{ opacity: 0, y: -8 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.3, ease: EASE }} className="absolute inset-x-3 top-3 z-30 flex items-start gap-2">
+        <div className="absolute inset-x-3 top-3 z-30 flex items-start gap-2">
           <PlaceSearch glass className="min-w-0 flex-1" />
-          <div className="glass shrink-0 rounded-xl p-1 shadow-lg">
+          <div className="glass shrink-0 rounded-lg p-0.5">
             <ViewToolbar compact />
           </div>
-        </motion.div>
+        </div>
       )}
 
-      <AnimatePresence>{state.view === 'table' && <RankingTable key="table" bottomPad={220} />}</AnimatePresence>
+      {state.view === 'table' && (
+        <div className="absolute inset-0 z-20">
+          <RankingTable bottomPad={220} />
+        </div>
+      )}
 
       <MobileSheet
         label={selected ? t('card.label', { name: selected.name }) : t('panel.label')}
@@ -155,7 +161,7 @@ function MobileExplorer() {
         }
       >
         {selected ? (
-          <div key={selected.id} className="px-4 pt-4 pb-10">
+          <div key={selected.id} className="px-4 pt-5 pb-10">
             <AreaBody unit={selected} />
           </div>
         ) : (
@@ -181,12 +187,10 @@ export default function ExplorePage() {
   }, [t]);
 
   return (
-    <MotionConfig reducedMotion="user">
-      <ExploreProvider model={model} isDesktop={isDesktop}>
-        <div className="relative overflow-hidden bg-background" style={{ height: `calc(100dvh - ${headerH}px)` }}>
-          {isDesktop ? <DesktopExplorer /> : <MobileExplorer />}
-        </div>
-      </ExploreProvider>
-    </MotionConfig>
+    <ExploreProvider model={model} isDesktop={isDesktop}>
+      <div className="relative overflow-hidden bg-background" style={{ height: `calc(100dvh - ${headerH}px)` }}>
+        {isDesktop ? <DesktopExplorer /> : <MobileExplorer />}
+      </div>
+    </ExploreProvider>
   );
 }

@@ -1,16 +1,15 @@
-import { Skeleton } from '@/components/ui/primitives';
+import { PageContainer } from '@/components/layout/Page';
+import { Skeleton } from '@/components/ui/overlays';
 
+/** Quiet placeholder while a page's code loads: title and text lines, no box grid. */
 export function PageLoader() {
   return (
-    <div className="mx-auto max-w-[1440px] px-4 py-10 sm:px-6" aria-busy="true">
-      <Skeleton className="h-8 w-64" />
-      <Skeleton className="mt-3 h-4 w-96 max-w-full" />
-      <div className="mt-8 grid gap-4 md:grid-cols-3">
-        <Skeleton className="h-40" />
-        <Skeleton className="h-40" />
-        <Skeleton className="h-40" />
-      </div>
-      <Skeleton className="mt-4 h-[420px]" />
+    <div aria-busy="true" className="border-b border-border">
+      <PageContainer className="pt-12 pb-10 sm:pt-16">
+        <Skeleton className="h-10 w-2/3 max-w-xl rounded-md" />
+        <Skeleton className="mt-5 h-4 w-full max-w-2xl rounded" />
+        <Skeleton className="mt-2.5 h-4 w-4/5 max-w-xl rounded" />
+      </PageContainer>
     </div>
   );
 }

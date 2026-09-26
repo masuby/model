@@ -66,7 +66,6 @@ const DYNAMIC = [
   ...['unknownUnit', 'unknownIndicator', 'badValue', 'unsupportedUnit', 'badSubmission'].map((k) => `tools.issueKinds.${k}`),
   ...['submitted', 'approved', 'rejected', 'reverted', 'imported', 'reset'].map((k) => `activity.actions.${k}`),
   ...['scores', 'raw', 'paste', 'queue', 'mine', 'approved', 'activity'].map((k) => `tabs.${k}`),
-  ...['enter', 'review', 'live'].flatMap((k) => [`steps.${k}`, `steps.${k}Desc`]),
   ...EDITABLE_FIELDS.map((f) => `indicators:${f.key}`),
   ...['hazard', 'vulnerability', 'coping'].flatMap((d) => [`common:dimensions.${d}`, `common:dimensions.${d}Short`]),
   ...['natural', 'human', 'socioEconomic', 'vulnerableGroups', 'infrastructure', 'institutional'].map((c) => `common:categories.${c}`),

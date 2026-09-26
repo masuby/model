@@ -1,13 +1,12 @@
-/** The choropleth (lazy Leaflet) plus the desktop lens header overlay. */
+/** The choropleth (lazy Leaflet) plus the desktop map key overlay. */
 import { FilterX, LoaderCircle } from 'lucide-react';
-import { AnimatePresence, motion } from 'motion/react';
 import * as React from 'react';
 import { useTranslation } from 'react-i18next';
 import type { Metric } from '@/engine/risk/metrics';
 import type { Unit } from '@/engine/risk/types';
-import { cn, formatScore } from '@/lib/utils';
+import { cn } from '@/lib/utils';
 import { useExplore } from '../lib/ExploreContext';
-import { MiniLegend, ScaleInfo } from './bits';
+import { MapKey } from './bits';
 
 const RiskMap = React.lazy(() => import('@/components/map/RiskMap'));
 
@@ -23,7 +22,7 @@ function MapLoading() {
   const { t } = useTranslation('explore');
   return (
     <div className="flex size-full items-center justify-center bg-[var(--map-bg)]">
-      <div className="flex items-center gap-2 rounded-full border border-border bg-card/80 px-4 py-2 text-sm text-muted-foreground shadow-sm backdrop-blur">
+      <div className="flex items-center gap-2 text-sm text-muted-foreground">
         <LoaderCircle className="size-4 animate-spin" aria-hidden />
         {t('map.loading')}
       </div>
@@ -33,7 +32,7 @@ function MapLoading() {
 
 export function MapStage({ hidden = false }: { hidden?: boolean }) {
   const { t } = useTranslation('explore');
-  const { model, state, metric, focusId, isDesktop, actions } = useExplore();
+  const { model, state, metric, focusId, isDesktop, actions, compare } = useExplore();
   const selectedIds = React.useMemo(() => [...new Set([...(state.id ? [state.id] : []), ...state.cmp])], [state.id, state.cmp]);
   const onSelect = (u: Unit) => (u.id === state.id ? actions.deselect() : actions.select(u));
   // RiskMap translates `labelKey` inside the namespace ('common' | 'indicators'), but parseMetric's
@@ -57,66 +56,36 @@ export function MapStage({ hidden = false }: { hidden?: boolean }) {
           basemap={state.basemap}
           className="size-full"
           tooltipHint={t('map.hint')}
-          fitPadding={isDesktop ? 40 : 20}
+          fitPadding={
+            // Keep the target clear of floating UI: lens key (top-left), area card (right) and the
+            // comparison tray (bottom) on desktop; the search bar and bottom sheet on phones.
+            isDesktop
+              ? { topLeft: [48, 104], bottomRight: [state.id && state.view === 'map' ? 416 : 48, compare.length ? 168 : 48] }
+              : { topLeft: [16, 72], bottomRight: [16, 190] }
+          }
         />
       </React.Suspense>
     </div>
   );
 }
 
-/** Glass card on the map: level, active lens, mean vs. national, compact legend / class filter. */
+/**
+ * Compact floating key on the desktop map: the lens name and its colour key. Counts, statistics, the
+ * national figure and the class filter live in the panel beside it, so they are not repeated here.
+ */
 export function LensHeader({ className }: { className?: string }) {
   const { t } = useTranslation(['explore', 'common']);
-  const { model, metric, stats, state, units, selected, actions, metricLabel } = useExplore();
-  const national = metric.get(model.national);
+  const { metric, state, actions, metricLabel } = useExplore();
   return (
-    <motion.div
-      initial={{ opacity: 0, y: -8 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.35, delay: 0.1, ease: [0.2, 0.7, 0.2, 1] }}
-      className={cn(
-        'glass w-[300px] rounded-2xl p-4 shadow-lg transition-[max-width] duration-300',
-        // Leave room for the 360 px area card on narrower desktops.
-        selected ? 'max-w-[calc(100%-360px-3rem)]' : 'max-w-[calc(100%-2rem)]',
-        className,
-      )}
-    >
-      <div className="flex items-start justify-between gap-2">
-        <div className="min-w-0">
-          <div className="text-[11px] font-semibold tracking-[0.14em] text-muted-foreground uppercase">
-            {t(`level.${state.level}`)} · <span className="num">{units.length}</span>
-          </div>
-          <AnimatePresence mode="wait" initial={false}>
-            <motion.div
-              key={metric.key}
-              initial={{ opacity: 0, y: 4 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -4 }}
-              transition={{ duration: 0.16 }}
-              className="mt-1 font-display text-lg leading-tight font-bold"
-            >
-              {metricLabel(metric)}
-            </motion.div>
-          </AnimatePresence>
-        </div>
-        <ScaleInfo className="-mt-1 -mr-1" />
-      </div>
-      <div className="mt-2 flex flex-wrap gap-x-4 gap-y-1 text-xs text-muted-foreground">
-        <span>
-          {t('stats.mean')} <b className="num text-foreground">{formatScore(stats.mean)}</b>
-        </span>
-        <span>
-          {t('stats.nationalShort')} <b className="num text-foreground">{formatScore(national)}</b>
-        </span>
-      </div>
-      <MiniLegend className="mt-3" />
-      {metric.kind === 'indicator' && <p className="mt-2 text-[10px] leading-snug text-muted-foreground">{t('legend.continuousShort')}</p>}
+    <div className={cn('glass w-[240px] max-w-[calc(100%-2rem)] rounded-lg px-3.5 pt-2.5 pb-3', className)}>
+      <div className="text-sm leading-snug font-semibold">{metricLabel(metric)}</div>
+      <MapKey className="mt-2" />
       {state.cls && (
-        <button type="button" onClick={() => actions.setClass(null)} className="mt-2 inline-flex items-center gap-1.5 text-[11px] font-semibold text-primary hover:underline">
+        <button type="button" onClick={() => actions.setClass(null)} className="mt-2.5 inline-flex items-center gap-1.5 text-xs font-medium text-primary hover:underline">
           <FilterX className="size-3.5" aria-hidden />
           {t('legend.filtered', { cls: t(`common:classes.${state.cls}`) })} · {t('legend.clearFilter')}
         </button>
       )}
-    </motion.div>
+    </div>
   );
 }

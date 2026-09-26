@@ -3,13 +3,13 @@
  * (council / region / nation), paste "name <tab , ; |> value" lines (or values only, in template order),
  * check the live preview (matching, issues, class changes), then submit in batches.
  */
-import { AlertTriangle, CheckCircle2, ClipboardCopy, ClipboardPaste, Download, Eraser, Info, Loader2, Send, XCircle } from 'lucide-react';
+import { CheckCircle2, ClipboardCopy, Download, Eraser, Loader2, Send, XCircle } from 'lucide-react';
 import * as React from 'react';
 import { useTranslation } from 'react-i18next';
 import { toast } from 'sonner';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { Card } from '@/components/ui/card';
 import { Dialog, DialogContent, Progress, Segmented, Select, SelectGroup, SelectItem, Textarea } from '@/components/ui/primitives';
 import { useModel } from '@/data-layer/DataProvider';
 import type { NewSubmission } from '@/data-layer/types';
@@ -145,15 +145,13 @@ export function BulkPaste() {
   const shared = targetKind(ref) === 'source';
 
   return (
-    <div className="space-y-6">
-      <div className="grid gap-6 xl:grid-cols-[minmax(0,5fr)_minmax(0,7fr)]">
-        {/* ------------------------------------------------------------ Setup */}
-        <Card>
-          <CardHeader>
-            <CardTitle className="text-lg">{t('paste.setupTitle')}</CardTitle>
-            <CardDescription>{t('paste.setupLead')}</CardDescription>
-          </CardHeader>
-          <CardContent className="space-y-5">
+    <div className="space-y-12">
+      <div className="grid gap-10 xl:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] xl:gap-12">
+        {/* ------------------------------------------------------------ Setup (one flat form panel) */}
+        <Card className="self-start p-5 sm:p-6">
+          <h3 className="text-lg font-semibold">{t('paste.setupTitle')}</h3>
+          <p className="mt-1 text-sm leading-relaxed text-muted-foreground">{t('paste.setupLead')}</p>
+          <div className="mt-6 space-y-5">
             <div>
               <span className="text-sm font-medium">{t('paste.indicator')}</span>
               <div className="mt-1.5">
@@ -185,9 +183,7 @@ export function BulkPaste() {
               </div>
               <p className="mt-1.5 text-xs text-muted-foreground">{t(`paste.levelHelp.${level}`)}</p>
             </div>
-            <Callout icon={<Info />} tone={shared ? 'info' : 'success'}>
-              {shared ? t('paste.targetShared') : t('paste.targetCouncil')}
-            </Callout>
+            <Callout>{shared ? t('paste.targetShared') : t('paste.targetCouncil')}</Callout>
             <div>
               <div className="flex flex-wrap items-center justify-between gap-2">
                 <label htmlFor="paste-text" className="text-sm font-medium">
@@ -223,52 +219,50 @@ export function BulkPaste() {
                 </Button>
               )}
             </div>
-          </CardContent>
+          </div>
         </Card>
 
         {/* ------------------------------------------------------------ Preview */}
-        <div className="min-w-0 space-y-4">
+        <div className="min-w-0 space-y-6">
           {!deferred.trim() ? (
-            <EmptyState icon={<ClipboardPaste />} title={t('paste.emptyTitle')} description={t('paste.emptyLead')} className="h-full" />
+            <EmptyState className="border-t border-border pt-6" title={t('paste.emptyTitle')} description={t('paste.emptyLead')} />
           ) : (
             <>
-              <div className="grid grid-cols-2 gap-3 sm:grid-cols-4" aria-live="polite">
-                <Chip tone="primary" label={t('paste.chips.ready')} value={statusCount('ready')} />
-                <Chip tone="muted" label={t('paste.chips.unchanged')} value={statusCount('unchanged')} />
-                <Chip tone={statusCount('conflict') ? 'danger' : 'muted'} label={t('paste.chips.conflicts')} value={statusCount('conflict')} />
-                <Chip tone={errorIssues ? 'danger' : 'muted'} label={t('paste.chips.issues')} value={plan.issues.length} />
-              </div>
+              <dl className="grid grid-cols-2 gap-y-5 border-y border-border py-5 sm:grid-cols-4 sm:divide-x sm:divide-border" aria-live="polite">
+                <Figure label={t('paste.chips.ready')} value={statusCount('ready')} />
+                <Figure label={t('paste.chips.unchanged')} value={statusCount('unchanged')} />
+                <Figure label={t('paste.chips.conflicts')} value={statusCount('conflict')} danger={statusCount('conflict') > 0} />
+                <Figure label={t('paste.chips.issues')} value={plan.issues.length} danger={errorIssues > 0} />
+              </dl>
               {plan.ready.length > 0 && (
                 <Callout tone={summary.up ? 'warning' : 'info'} title={t('paste.impactTitle', { count: summary.councils })}>
                   {summary.up || summary.down ? t('paste.impactClasses', { up: summary.up, down: summary.down }) : t('paste.impactNoClass')}
                 </Callout>
               )}
-              {plan.positional && (
-                <Callout tone="warning" icon={<AlertTriangle />}>
-                  {t('paste.positional', { count: plan.targets.length, level: t(`paste.levels.${level}`).toLowerCase() })}
-                </Callout>
-              )}
+              {plan.positional && <Callout tone="warning">{t('paste.positional', { count: plan.targets.length, level: t(`paste.levels.${level}`).toLowerCase() })}</Callout>}
               {plan.issues.length > 0 && <IssueList issues={plan.issues} />}
               {plan.targets.length > 0 && (
-                <Card className="overflow-hidden">
-                  <div className="overflow-x-auto">
-                    <table className="w-full min-w-[560px] text-sm">
+                <div>
+                  {/* `relative` keeps the sr-only caption inside the scroll box; below `sm` the status moves next
+                      to the unit name so every column fits a phone. */}
+                  <div className="relative overflow-x-auto border-y border-border">
+                    <table className="w-full text-sm sm:min-w-[560px]">
                       <caption className="sr-only">{t('paste.previewCaption', { indicator: indicatorName })}</caption>
-                      <thead className="bg-muted/60 text-xs text-muted-foreground">
-                        <tr>
-                          <th scope="col" className="px-4 py-2.5 text-left font-medium">
+                      <thead className="text-xs text-muted-foreground">
+                        <tr className="border-b border-border">
+                          <th scope="col" className="py-2.5 pr-2 text-left font-medium sm:pr-3">
                             {t('paste.cols.unit')}
                           </th>
-                          <th scope="col" className="px-3 py-2.5 text-right font-medium">
+                          <th scope="col" className="px-2 py-2.5 text-right font-medium sm:px-3">
                             {t('paste.cols.current')}
                           </th>
-                          <th scope="col" className="px-3 py-2.5 text-right font-medium">
+                          <th scope="col" className="px-2 py-2.5 text-right font-medium sm:px-3">
                             {t('paste.cols.new')}
                           </th>
-                          <th scope="col" className="px-3 py-2.5 text-right font-medium">
+                          <th scope="col" className="py-2.5 pl-2 text-right font-medium sm:px-3">
                             {t('changes.delta')}
                           </th>
-                          <th scope="col" className="px-4 py-2.5 text-right font-medium">
+                          <th scope="col" className="hidden py-2.5 pl-3 text-right font-medium sm:table-cell">
                             {t('paste.cols.status')}
                           </th>
                         </tr>
@@ -281,54 +275,56 @@ export function BulkPaste() {
                     </table>
                   </div>
                   {sorted.length > PREVIEW_ROWS && (
-                    <div className="border-t border-border px-4 py-2.5 text-center">
+                    <div className="pt-2 text-center">
                       <Button variant="ghost" size="sm" onClick={() => setShowAll((s) => !s)}>
                         {showAll ? t('common:actions.showLess') : t('paste.showAll', { count: sorted.length })}
                       </Button>
                     </div>
                   )}
-                </Card>
+                </div>
               )}
             </>
           )}
         </div>
       </div>
 
-      {/* ------------------------------------------------------------ Submit */}
-      <Card>
-        <CardHeader>
-          <CardTitle className="text-lg">{t('submit.title')}</CardTitle>
-          <CardDescription>{reviewer ? t('paste.leadReviewer') : t('paste.leadSector')}</CardDescription>
-        </CardHeader>
-        <CardContent className="grid gap-6 lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)]">
-          <MetaFields
-            idPrefix="paste"
-            meta={meta}
-            onChange={(patch) => setMeta((m) => ({ ...m, ...patch }))}
-            authority={authority}
-            suggested={suggested}
-            noteRequired={noteRequired}
-            noteHint={t('paste.noteHint')}
-            errors={errors}
-            showErrors={showErrors}
-          />
-          <div className="flex flex-col justify-between gap-4 rounded-2xl bg-muted/40 p-5">
-            <dl className="grid grid-cols-2 gap-4 text-sm">
+      {/* ------------------------------------------------------------ Submit (a ruled section, as in the entry tabs) */}
+      <section aria-labelledby="paste-submit-title">
+        <h3 id="paste-submit-title" className="border-b border-border pb-3 font-display text-xl font-semibold sm:text-[1.4rem]">
+          {t('submit.title')}
+        </h3>
+        <p className="mt-4 max-w-2xl text-sm leading-relaxed text-muted-foreground">{reviewer ? t('paste.leadReviewer') : t('paste.leadSector')}</p>
+        <div className="mt-6 grid gap-8 lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)] lg:gap-0 lg:divide-x lg:divide-border">
+          <div className="lg:pr-12">
+            <MetaFields
+              idPrefix="paste"
+              meta={meta}
+              onChange={(patch) => setMeta((m) => ({ ...m, ...patch }))}
+              authority={authority}
+              suggested={suggested}
+              noteRequired={noteRequired}
+              noteHint={t('paste.noteHint')}
+              errors={errors}
+              showErrors={showErrors}
+            />
+          </div>
+          <div className="flex flex-col gap-6 border-t border-border pt-6 lg:border-t-0 lg:pt-0 lg:pl-12">
+            <dl className="grid grid-cols-2 gap-x-6 gap-y-5 text-sm">
               <div>
-                <dt className="text-xs text-muted-foreground">{t('paste.indicator')}</dt>
-                <dd className="mt-0.5 font-semibold">{indicatorName}</dd>
+                <dt className="text-muted-foreground">{t('paste.indicator')}</dt>
+                <dd className="mt-1 font-semibold">{indicatorName}</dd>
               </div>
               <div>
-                <dt className="text-xs text-muted-foreground">{t('paste.level')}</dt>
-                <dd className="mt-0.5 font-semibold">{t(`paste.levels.${level}`)}</dd>
+                <dt className="text-muted-foreground">{t('paste.level')}</dt>
+                <dd className="mt-1 font-semibold">{t(`paste.levels.${level}`)}</dd>
               </div>
-              <div>
-                <dt className="text-xs text-muted-foreground">{t('paste.submissions')}</dt>
-                <dd className="num mt-0.5 font-display text-2xl font-extrabold">{formatNumber(inputs.length, i18n.language)}</dd>
+              <div className="border-t border-border pt-4">
+                <dt className="text-muted-foreground">{t('paste.submissions')}</dt>
+                <dd className="num mt-1 text-3xl font-semibold tracking-tight">{formatNumber(inputs.length, i18n.language)}</dd>
               </div>
-              <div>
-                <dt className="text-xs text-muted-foreground">{t('paste.councilsAffected')}</dt>
-                <dd className="num mt-0.5 font-display text-2xl font-extrabold">{formatNumber(summary.councils, i18n.language)}</dd>
+              <div className="border-t border-border pt-4">
+                <dt className="text-muted-foreground">{t('paste.councilsAffected')}</dt>
+                <dd className="num mt-1 text-3xl font-semibold tracking-tight">{formatNumber(summary.councils, i18n.language)}</dd>
               </div>
             </dl>
             {progress && (
@@ -338,7 +334,7 @@ export function BulkPaste() {
               </div>
             )}
             {failures.length > 0 && (
-              <div role="alert" className="max-h-40 overflow-y-auto rounded-xl border border-danger/30 bg-danger/5 p-3 text-xs">
+              <div role="alert" className="max-h-40 overflow-y-auto border-l-2 border-danger pl-4 text-xs">
                 <p className="font-semibold text-danger">{t('paste.failures', { count: failures.length })}</p>
                 <ul className="mt-1 list-disc space-y-0.5 pl-4 text-muted-foreground">
                   {failures.map((f) => (
@@ -347,19 +343,19 @@ export function BulkPaste() {
                 </ul>
               </div>
             )}
-            <Button size="lg" onClick={onReview} disabled={!inputs.length || busy}>
+            <Button size="lg" className="w-full sm:w-auto sm:self-start" onClick={onReview} disabled={!inputs.length || busy}>
               {busy ? <Loader2 className="animate-spin" aria-hidden /> : <Send aria-hidden />}
               {reviewer ? t('paste.applyButton', { count: inputs.length }) : t('paste.sendButton', { count: inputs.length })}
             </Button>
           </div>
-        </CardContent>
-      </Card>
+        </div>
+      </section>
 
       <Dialog open={confirmOpen} onOpenChange={(o) => !busy && setConfirmOpen(o)}>
         <DialogContent title={t('paste.confirmTitle')} description={reviewer ? t('confirm.leadReviewer') : t('confirm.leadSector')}>
           <div className="space-y-4 p-5 text-sm">
             <p>{t('paste.confirmLead', { count: inputs.length, indicator: indicatorName, councils: summary.councils })}</p>
-            <dl className="grid gap-3 rounded-xl bg-muted/50 p-4 sm:grid-cols-2">
+            <dl className="grid gap-x-6 gap-y-3 border-t border-border pt-4 sm:grid-cols-2">
               <div>
                 <dt className="text-xs text-muted-foreground">{t('meta.authority')}</dt>
                 <dd className="mt-0.5 font-medium">{authName(authority)}</dd>
@@ -391,18 +387,12 @@ export function BulkPaste() {
   );
 }
 
-function Chip({ label, value, tone }: { label: string; value: number; tone: 'primary' | 'muted' | 'danger' }) {
+/** One count in the preview's figure row (a rule between figures, no box). Danger colour only for problems. */
+function Figure({ label, value, danger = false }: { label: string; value: number; danger?: boolean }) {
   return (
-    <div
-      className={cn(
-        'rounded-xl border px-3 py-2.5',
-        tone === 'primary' && 'border-primary/30 bg-primary/5',
-        tone === 'danger' && 'border-danger/30 bg-danger/5',
-        tone === 'muted' && 'border-border bg-card',
-      )}
-    >
-      <div className="text-[11px] font-medium text-muted-foreground">{label}</div>
-      <div className={cn('num font-display text-xl font-extrabold', tone === 'primary' && 'text-primary', tone === 'danger' && 'text-danger')}>{value}</div>
+    <div className="px-0 odd:pr-4 even:border-l even:border-border even:pl-4 sm:border-l-0 sm:px-5 sm:first:pl-0 sm:last:pr-0">
+      <dt className="text-sm text-muted-foreground">{label}</dt>
+      <dd className={cn('num mt-1 text-2xl font-semibold tracking-tight', danger && 'text-danger')}>{value}</dd>
     </div>
   );
 }
@@ -410,13 +400,16 @@ function Chip({ label, value, tone }: { label: string; value: number; tone: 'pri
 function TargetRow({ target: tg }: { target: PlanTarget }) {
   const { t } = useTranslation(['data', 'common']);
   return (
-    <tr className={cn('align-top', tg.status === 'conflict' && 'bg-danger/[0.04]', tg.status === 'unchanged' && 'text-muted-foreground')}>
-      <td className="px-4 py-2.5">
+    <tr className={cn('align-top', tg.status === 'conflict' && 'bg-danger/[0.05]', tg.status === 'unchanged' && 'text-muted-foreground')}>
+      <td className="py-2.5 pr-2 sm:pr-3">
         <div className="flex flex-wrap items-center gap-1.5">
           <span className="font-medium text-foreground">{tg.unitName}</span>
-          {tg.level === 'source' && <Badge className="px-2 text-[10px]">{t('levels.source')}</Badge>}
+          <span className={cn('text-xs font-medium sm:hidden', tg.status === 'ready' ? 'text-success' : tg.status === 'conflict' ? 'text-danger' : 'text-muted-foreground')}>
+            {t(`paste.status.${tg.status}`)}
+          </span>
+          {tg.level === 'source' && <Badge variant="secondary" className="px-2 text-[11px]">{t('levels.source')}</Badge>}
           {tg.loose && (
-            <Badge variant="warning" className="px-2 text-[10px]">
+            <Badge variant="warning" className="px-2 text-[11px]">
               {t('paste.loose')}
             </Badge>
           )}
@@ -427,21 +420,21 @@ function TargetRow({ target: tg }: { target: PlanTarget }) {
           {` · ${t('paste.line', { count: tg.lineNos.length, lines: tg.lineNos.join(', ') })}`}
         </div>
       </td>
-      <td className="px-3 py-2.5 text-right">
+      <td className="px-2 py-2.5 text-right sm:px-3">
         <ScoreValue value={tg.previous} className="font-normal" />
       </td>
-      <td className="px-3 py-2.5 text-right">
+      <td className="px-2 py-2.5 text-right sm:px-3">
         {tg.status === 'conflict' ? (
           <span className="num text-xs text-danger">{tg.conflictValues?.map((v) => (v == null ? '—' : v.toFixed(1))).join(' / ')}</span>
         ) : (
           <ScoreValue value={tg.value} />
         )}
-        {tg.rounded && <div className="text-[10px] text-muted-foreground">{t('paste.rounded')}</div>}
+        {tg.rounded && <div className="text-xs text-muted-foreground">{t('paste.rounded')}</div>}
       </td>
-      <td className="px-3 py-2.5 text-right">{tg.status === 'ready' ? <Delta value={scoreDelta(tg.previous, tg.value)} /> : null}</td>
-      <td className="px-4 py-2.5 text-right">
+      <td className="py-2.5 pl-2 text-right sm:px-3">{tg.status === 'ready' ? <Delta value={scoreDelta(tg.previous, tg.value)} /> : null}</td>
+      <td className="hidden py-2.5 pl-3 text-right sm:table-cell">
         {tg.status === 'ready' && (
-          <Badge variant="default" className="gap-1">
+          <Badge variant="success" className="gap-1">
             <CheckCircle2 aria-hidden /> {t('paste.status.ready')}
           </Badge>
         )}
@@ -461,17 +454,14 @@ function IssueList({ issues }: { issues: PasteIssue[] }) {
   const [open, setOpen] = React.useState(false);
   const shown = open ? issues : issues.slice(0, 6);
   return (
-    <Card className="overflow-hidden">
-      <div className="flex items-center gap-2 border-b border-border px-4 py-3">
-        <AlertTriangle className="size-4 text-warning" aria-hidden />
-        <h4 className="text-sm font-semibold">{t('paste.issuesTitle', { count: issues.length })}</h4>
-      </div>
-      <ul className="divide-y divide-border text-sm">
+    <section aria-labelledby="paste-issues-title">
+      <h4 id="paste-issues-title" className="text-sm font-semibold">
+        {t('paste.issuesTitle', { count: issues.length })}
+      </h4>
+      <ul className="mt-2 divide-y divide-border border-y border-border text-sm">
         {shown.map((i) => (
-          <li key={`${i.lineNo}-${i.kind}`} className="flex gap-3 px-4 py-2.5">
-            <span className={cn('num mt-0.5 shrink-0 rounded-md px-1.5 py-0.5 text-[11px] font-semibold', i.severity === 'error' ? 'bg-danger/10 text-danger' : 'bg-warning/10 text-warning')}>
-              {t('paste.lineShort', { n: i.lineNo })}
-            </span>
+          <li key={`${i.lineNo}-${i.kind}`} className="grid grid-cols-[4.5rem_minmax(0,1fr)] gap-3 py-2.5">
+            <span className={cn('num pt-px text-xs font-semibold', i.severity === 'error' ? 'text-danger' : 'text-warning')}>{t('paste.lineShort', { n: i.lineNo })}</span>
             <div className="min-w-0">
               <p>
                 {t(`paste.issues.${i.kind}`, { suggestion: i.suggestion ?? '', candidates: (i.candidates ?? []).join(', ') })}
@@ -483,12 +473,12 @@ function IssueList({ issues }: { issues: PasteIssue[] }) {
         ))}
       </ul>
       {issues.length > 6 && (
-        <div className="border-t border-border px-4 py-2 text-center">
+        <div className="pt-2 text-center">
           <Button variant="ghost" size="sm" onClick={() => setOpen((o) => !o)}>
             {open ? t('common:actions.showLess') : t('paste.showAllIssues', { count: issues.length })}
           </Button>
         </div>
       )}
-    </Card>
+    </section>
   );
 }

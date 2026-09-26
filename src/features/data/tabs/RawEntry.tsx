@@ -2,26 +2,26 @@
  * Enter measured values: the officer keys actual values in their natural units for the 53 workbook
  * indicators; each is standardised live to 0–10 exactly as the INFORM workbook, rolled up into its
  * workbook component and mapped onto the model leaf — then submitted with its raw provenance.
+ * Same layout as score entry: rows, then the submit section; the live preview sticks beside both.
  */
-import { Calculator, CircleSlash, FlaskConical, MapPinned, RotateCcw, TrendingDown, TrendingUp } from 'lucide-react';
+import { CircleSlash, RotateCcw, TrendingDown, TrendingUp } from 'lucide-react';
 import * as React from 'react';
 import { useTranslation } from 'react-i18next';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/primitives';
 import { useModel } from '@/data-layer/DataProvider';
 import type { IndicatorSpec } from '@/engine/risk/standardise';
 import type { EditRef, Unit } from '@/engine/risk/types';
 import { cn, formatNumber, formatScore } from '@/lib/utils';
-import { Callout, Delta, EmptyState, ScoreValue } from '../components/common';
+import { Callout, Delta, EmptyState, ROW_TINT, ScoreValue } from '../components/common';
 import { CouncilContextCard, DiscardDialog } from '../components/CouncilPicker';
 import { ImpactPreview } from '../components/ImpactPreview';
 import { EMPTY_META, EntrySubmitCard, type MetaState } from '../components/SubmitPanel';
 import { componentScores, encodeRaw, increasesRisk, isComputable, naturalRange, parseRawNumber, rawGroups, specKey, standardiseRaw, unitKey, type RawComponent } from '../lib/raw';
 import { sameScore, scoreDelta } from '../lib/scores';
 import { currentValue, impactOf, siblingsOf, sourceValues, targetKind, type DraftChange, type ValueMap } from '../lib/targets';
-import { MobileSubmitBar, usePendingRefs } from './ScoreEntry';
+import { MobileSubmitBar, PreviewAside, usePendingRefs } from './ScoreEntry';
 
 const GROUPS = rawGroups();
 const SPEC_TO_REF = new Map<string, EditRef>(GROUPS.flatMap((g) => g.components.flatMap((c) => (c.ref ? c.specs.map((s) => [s.id, c.ref!] as const) : []))));
@@ -60,7 +60,7 @@ export function RawEntry({ councilId, onCouncilChange }: { councilId: string | n
   );
 
   return (
-    <div className="space-y-5">
+    <div className="space-y-8">
       <CouncilContextCard
         idPrefix="raw"
         council={council}
@@ -71,7 +71,7 @@ export function RawEntry({ councilId, onCouncilChange }: { councilId: string | n
       {council ? (
         <RawForm council={council} rows={rows} setRow={setRow} clearRefs={clearRefs} meta={meta} setMeta={setMeta} />
       ) : (
-        <EmptyState icon={<MapPinned />} title={t('scores.emptyTitle')} description={t('raw.emptyLead')} />
+        <EmptyState className="pt-2" title={t('scores.emptyTitle')} description={t('raw.emptyLead')} />
       )}
       <DiscardDialog
         open={switchTo != null}
@@ -157,29 +157,28 @@ function RawForm({
   const total = GROUPS.reduce((s, g) => s + g.components.reduce((a, c) => a + c.specs.length, 0), 0);
 
   return (
-    <div className={cn('grid gap-6 lg:grid-cols-[minmax(0,1fr)_minmax(320px,400px)]', changes.length > 0 && 'pb-24 lg:pb-0')}>
-      <div className="min-w-0 space-y-5">
-        <Callout icon={<FlaskConical />} title={t('raw.introTitle')}>
-          {t('raw.introLead')}
-        </Callout>
-        <div className="flex flex-wrap items-center justify-between gap-3">
-          <p className="text-sm text-muted-foreground" aria-live="polite">
-            {t('raw.filled', { filled, total })}
-            {errorCount > 0 && <span className="ml-2 font-medium text-danger">{t('scores.errorCount', { count: errorCount })}</span>}
-          </p>
-          {filled + errorCount > 0 && (
-            <Button variant="ghost" size="sm" onClick={() => clearRefs('all')}>
-              <RotateCcw /> {t('scores.clearAll')}
-            </Button>
-          )}
+    <div className={cn('grid gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(320px,400px)] xl:gap-x-14', changes.length > 0 && 'pb-24 lg:pb-0')}>
+      <div className="min-w-0 space-y-12 lg:col-start-1 lg:row-start-1">
+        <div className="space-y-5">
+          <Callout title={t('raw.introTitle')}>{t('raw.introLead')}</Callout>
+          <div className="flex flex-wrap items-center justify-between gap-3">
+            <p className="text-sm text-muted-foreground" aria-live="polite">
+              {t('raw.filled', { filled, total })}
+              {errorCount > 0 && <span className="ml-2 font-medium text-danger">{t('scores.errorCount', { count: errorCount })}</span>}
+            </p>
+            {filled + errorCount > 0 && (
+              <Button variant="ghost" size="sm" onClick={() => clearRefs('all')}>
+                <RotateCcw /> {t('scores.clearAll')}
+              </Button>
+            )}
+          </div>
         </div>
-        {GROUPS.map((g, gi) => (
-          <Card key={g.key} className="overflow-hidden">
-            <div className="border-b border-border px-5 py-4">
-              <div className="text-[11px] font-semibold tracking-[0.14em] text-muted-foreground uppercase">{['H', 'V', 'LCC'][gi]}</div>
-              <h3 className="text-lg font-bold">{t(`common:dimensions.${g.key}`)}</h3>
-            </div>
-            <div className="divide-y divide-border">
+        {GROUPS.map((g) => (
+          <section key={g.key} aria-labelledby={`raw-dim-${g.key}`}>
+            <h3 id={`raw-dim-${g.key}`} className="border-b border-border pb-3 font-display text-xl font-semibold sm:text-[1.4rem]">
+              {t(`common:dimensions.${g.key}`)}
+            </h3>
+            <div className="divide-y divide-border border-b border-border">
               {g.components.map((c) => (
                 <ComponentBlock
                   key={c.name}
@@ -193,57 +192,69 @@ function RawForm({
                 />
               ))}
             </div>
-          </Card>
+          </section>
         ))}
       </div>
 
-      <aside id="raw-submit" className="scroll-mt-24 space-y-4 lg:sticky lg:top-24 lg:max-h-[calc(100dvh-7rem)] lg:self-start lg:overflow-y-auto lg:pr-1" aria-label={t('preview.eyebrow')}>
-        <ImpactPreview unitName={council.name} impact={impact} count={changes.length} siblings={siblingImpacts} />
-        {comps.length > 0 && (
-          <Card>
-            <CardHeader>
-              <CardTitle className="flex items-center gap-2 text-base">
-                <Calculator className="size-4 text-primary" aria-hidden /> {t('raw.mappingTitle')}
-              </CardTitle>
-            </CardHeader>
-            <CardContent>
-              <ul className="space-y-2 text-sm">
-                {comps.map((c) => {
-                  const cur = currentValue(council, c.ref);
-                  const [dim, key] = c.ref.split(':');
-                  return (
-                    <li key={c.ref} className="flex items-center justify-between gap-3">
-                      <span className="min-w-0">
-                        <span className="block truncate font-medium">{t(`indicators:${key}`)}</span>
-                        <span className="block text-xs text-muted-foreground">{t(`common:dimensions.${dim}Short`)}</span>
-                      </span>
-                      <span className="num flex shrink-0 items-center gap-1.5">
-                        <ScoreValue value={cur} className="text-muted-foreground" /> → <ScoreValue value={c.score} />
-                        <Delta value={scoreDelta(cur, c.score)} />
-                      </span>
-                    </li>
-                  );
-                })}
-              </ul>
-            </CardContent>
-          </Card>
-        )}
-        <EntrySubmitCard
-          idPrefix="raw"
-          council={council}
-          changes={changes}
-          impact={impact}
-          meta={meta}
-          setMeta={setMeta}
-          blocking={errorCount}
-          onSubmitted={(refs) => clearRefs(refs)}
-        />
-      </aside>
+      <PreviewAside id="raw-preview" label={t('preview.eyebrow')}>
+        <ImpactPreview unitName={council.name} impact={impact} count={changes.length} siblings={siblingImpacts} submitTarget="raw-submit" />
+      </PreviewAside>
 
-      <MobileSubmitBar count={changes.length} before={impact.before.risk} after={impact.after.risk} target="raw-submit" />
+      <EntrySubmitCard
+        idPrefix="raw"
+        council={council}
+        changes={changes}
+        impact={impact}
+        meta={meta}
+        setMeta={setMeta}
+        blocking={errorCount}
+        onSubmitted={(refs) => clearRefs(refs)}
+        className="lg:col-start-1 lg:row-start-2"
+      >
+        {comps.length > 0 && (
+          <section aria-labelledby="raw-mapping-title" className="mt-6">
+            <h4 id="raw-mapping-title" className="text-sm font-medium text-muted-foreground">
+              {t('raw.mappingTitle')}
+            </h4>
+            <ul className="mt-1.5 divide-y divide-border border-y border-border text-sm">
+              {comps.map((c) => {
+                const cur = currentValue(council, c.ref);
+                const [dim, key] = c.ref.split(':');
+                return (
+                  <li key={c.ref} className="flex items-center justify-between gap-3 py-2">
+                    <span className="min-w-0">
+                      <span className="block truncate font-medium">{t(`indicators:${key}`)}</span>
+                      <span className="block text-xs text-muted-foreground">{t(`common:dimensions.${dim}Short`)}</span>
+                    </span>
+                    <span className="num flex shrink-0 items-center gap-1.5">
+                      <ScoreValue value={cur} className="font-normal text-muted-foreground" />
+                      <span className="text-muted-foreground" aria-hidden>
+                        →
+                      </span>
+                      <ScoreValue value={c.score} />
+                      <Delta value={scoreDelta(cur, c.score)} />
+                    </span>
+                  </li>
+                );
+              })}
+            </ul>
+          </section>
+        )}
+      </EntrySubmitCard>
+
+      <MobileSubmitBar count={changes.length} before={impact.before.risk} after={impact.after.risk} target="raw-preview" />
     </div>
   );
 }
+
+/** "Storms & Cyclone" and "Storms & cyclones" are the same name for this purpose. */
+const looseName = (s: string) =>
+  s
+    .toLowerCase()
+    .split(/[^a-z0-9]+/)
+    .filter(Boolean)
+    .map((w) => w.replace(/s$/, ''))
+    .join(' ');
 
 function ComponentBlock({
   comp,
@@ -266,22 +277,26 @@ function ComponentBlock({
   const leafKey = comp.leaf?.indicator.key;
   const current = comp.ref ? currentValue(council, comp.ref) : null;
   const shared = comp.ref ? targetKind(comp.ref) === 'source' : false;
+  const title = leafKey ? t(`indicators:${leafKey}`) : comp.name;
+  // The workbook component line only earns its place when its name differs from the heading.
+  const showComponent = looseName(comp.name) !== looseName(title);
+  const subText = [showComponent ? t('raw.component', { name: comp.name }) : null, shared ? (siblings ? t('raw.sharedTarget', { count: siblings }) : t('raw.sharedTargetAlone')) : null]
+    .filter(Boolean)
+    .join(' · ');
+  const sub = subText.charAt(0).toUpperCase() + subText.slice(1);
   return (
-    <section className="py-2" aria-labelledby={`comp-${specKey(comp.name)}`}>
-      <div className="flex flex-wrap items-center justify-between gap-2 px-5 pt-3 pb-1">
+    <section className="py-4" aria-labelledby={`comp-${specKey(comp.name)}`}>
+      <div className="flex flex-wrap items-center justify-between gap-2 pb-1">
         <div className="min-w-0">
           <h4 id={`comp-${specKey(comp.name)}`} className="flex flex-wrap items-center gap-1.5 text-sm font-semibold">
-            {leafKey ? t(`indicators:${leafKey}`) : comp.name}
+            {title}
             {pending && (
-              <Badge variant="warning" className="px-2 text-[10px] font-semibold" title={t('scores.pendingTip')}>
+              <Badge variant="warning" className="px-2 text-[11px] font-semibold" title={t('scores.pendingTip')}>
                 {t('scores.pending')}
               </Badge>
             )}
           </h4>
-          <p className="text-xs text-muted-foreground">
-            {t('raw.component', { name: comp.name })}
-            {shared && ` · ${siblings ? t('raw.sharedTarget', { count: siblings }) : t('raw.sharedTargetAlone')}`}
-          </p>
+          {sub && <p className="text-xs text-muted-foreground">{sub}</p>}
         </div>
         <div className="flex items-center gap-1.5 text-sm">
           <span className="text-xs text-muted-foreground">{t('scores.current')}</span>
@@ -289,13 +304,13 @@ function ComponentBlock({
           {score != null && (
             <>
               <span aria-hidden>→</span>
-              <span className="num font-bold text-primary">{formatScore(score)}</span>
+              <span className="num font-semibold">{formatScore(score)}</span>
               <Delta value={scoreDelta(current, score)} />
             </>
           )}
         </div>
       </div>
-      <ul>
+      <ul className="mt-1">
         {comp.specs.map((s) => (
           <SpecRow key={s.id} spec={s} ev={evals.get(s.id)} setRow={setRow} />
         ))}
@@ -327,12 +342,12 @@ const SpecRow = React.memo(function SpecRow({ spec, ev, setRow }: SpecRowProps) 
   const keyedAt = spec.keyed_at ? t(`raw.keyedAt.${spec.keyed_at}`, { defaultValue: spec.keyed_at }) : null;
 
   return (
-    <li className={cn('grid grid-cols-[minmax(0,1fr)_auto] items-center gap-x-4 gap-y-1.5 px-5 py-2.5', ev?.error && 'bg-danger/[0.05]', ev?.score != null && 'bg-primary/[0.04]')}>
+    <li className={cn('grid grid-cols-[minmax(0,1fr)_auto] items-center gap-x-4 gap-y-1.5 py-2.5', ev?.error ? ROW_TINT.error : ev?.score != null ? ROW_TINT.changed : undefined)}>
       <div className="min-w-0">
         <label htmlFor={id} className="text-sm">
           {name}
         </label>
-        <div className="mt-0.5 flex flex-wrap gap-x-3 gap-y-0.5 text-[11px] text-muted-foreground">
+        <div className="mt-0.5 flex flex-wrap gap-x-3 gap-y-0.5 text-xs text-muted-foreground">
           <span>{unit}</span>
           {range && <span className="num">{t('raw.reference', { min: fmt(range[0]), max: fmt(range[1]) })}</span>}
           <span className="inline-flex items-center gap-1">
@@ -358,12 +373,10 @@ const SpecRow = React.memo(function SpecRow({ spec, ev, setRow }: SpecRowProps) 
             />
             <span className="w-14 text-right" aria-live="polite">
               {ev?.score != null ? (
-                <Badge variant="default" className="num px-2" aria-label={t('raw.scoreAria', { score: formatScore(ev.score) })}>
+                <span className="num text-sm font-semibold" aria-label={t('raw.scoreAria', { score: formatScore(ev.score) })}>
                   {formatScore(ev.score)}
-                </Badge>
-              ) : (
-                <span className="text-xs text-muted-foreground">—</span>
-              )}
+                </span>
+              ) : null}
             </span>
           </>
         ) : (
@@ -377,7 +390,7 @@ const SpecRow = React.memo(function SpecRow({ spec, ev, setRow }: SpecRowProps) 
           {t('raw.errors.notNumber')}
         </p>
       )}
-      {ev?.readsAs && !ev.error && <p className="col-span-2 text-[11px] text-muted-foreground">{t('raw.readsAs', { value: ev.readsAs })}</p>}
+      {ev?.readsAs && !ev.error && <p className="col-span-2 text-xs text-muted-foreground">{t('raw.readsAs', { value: ev.readsAs })}</p>}
     </li>
   );
 }, sameSpecRow);

@@ -5,7 +5,7 @@ import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 import { Dialog as DialogPrimitive } from 'radix-ui';
 import { ClassDot } from '@/components/risk/RiskBadge';
-import { Kbd } from '@/components/ui/primitives';
+import { Kbd } from '@/components/ui/overlays';
 import { useModel } from '@/data-layer/DataProvider';
 import { formatScore } from '@/lib/utils';
 
@@ -18,24 +18,6 @@ const PAGES = [
   { to: '/methodology', key: 'methodology', icon: FileText },
   { to: '/data', key: 'data', icon: Database },
 ] as const;
-
-export function useCommandPalette() {
-  const [open, setOpen] = React.useState(false);
-  React.useEffect(() => {
-    const onKey = (e: KeyboardEvent) => {
-      if ((e.key === 'k' || e.key === 'K') && (e.metaKey || e.ctrlKey)) {
-        e.preventDefault();
-        setOpen((o) => !o);
-      } else if (e.key === '/' && !(e.target instanceof HTMLInputElement) && !(e.target instanceof HTMLTextAreaElement)) {
-        e.preventDefault();
-        setOpen(true);
-      }
-    };
-    window.addEventListener('keydown', onKey);
-    return () => window.removeEventListener('keydown', onKey);
-  }, []);
-  return { open, setOpen };
-}
 
 export function CommandPalette({ open, onOpenChange }: { open: boolean; onOpenChange: (o: boolean) => void }) {
   const { t } = useTranslation();
@@ -51,11 +33,11 @@ export function CommandPalette({ open, onOpenChange }: { open: boolean; onOpenCh
   return (
     <DialogPrimitive.Root open={open} onOpenChange={onOpenChange}>
       <DialogPrimitive.Portal>
-        <DialogPrimitive.Overlay className="fixed inset-0 z-[1500] bg-slate-950/40 backdrop-blur-sm" />
-        <DialogPrimitive.Content className="fixed top-[12vh] left-1/2 z-[1501] w-[min(calc(100vw-2rem),40rem)] -translate-x-1/2 overflow-hidden rounded-2xl border border-border bg-elevated shadow-2xl data-[state=open]:animate-fade-up">
+        <DialogPrimitive.Overlay className="fixed inset-0 z-[1500] bg-slate-950/50 data-[state=open]:animate-fade-in" />
+        <DialogPrimitive.Content className="fixed top-[12vh] left-1/2 z-[1501] w-[min(calc(100vw-2rem),40rem)] -translate-x-1/2 overflow-hidden rounded-lg border border-border bg-elevated shadow-[var(--shadow-lift)]">
           <DialogPrimitive.Title className="sr-only">{t('search.open')}</DialogPrimitive.Title>
           <DialogPrimitive.Description className="sr-only">{t('search.placeholder')}</DialogPrimitive.Description>
-          <Command label={t('search.open')} loop className="[&_[cmdk-group-heading]]:px-3 [&_[cmdk-group-heading]]:pt-3 [&_[cmdk-group-heading]]:pb-1.5 [&_[cmdk-group-heading]]:text-[11px] [&_[cmdk-group-heading]]:font-semibold [&_[cmdk-group-heading]]:tracking-wider [&_[cmdk-group-heading]]:text-muted-foreground [&_[cmdk-group-heading]]:uppercase">
+          <Command label={t('search.open')} loop className="[&_[cmdk-group-heading]]:px-3 [&_[cmdk-group-heading]]:pt-3 [&_[cmdk-group-heading]]:pb-1.5 [&_[cmdk-group-heading]]:text-xs [&_[cmdk-group-heading]]:font-medium [&_[cmdk-group-heading]]:text-muted-foreground">
             <div className="flex items-center gap-3 border-b border-border px-4">
               <Search className="size-5 text-muted-foreground" />
               <Command.Input value={q} onValueChange={setQ} autoFocus placeholder={t('search.placeholder')} className="h-14 flex-1 bg-transparent text-base outline-none placeholder:text-muted-foreground" />
@@ -91,7 +73,7 @@ function Item({ value, onSelect, icon, label, hint, score }: { value: string; on
     <Command.Item
       value={value}
       onSelect={onSelect}
-      className="flex cursor-pointer items-center gap-3 rounded-xl px-3 py-2.5 text-sm data-[selected=true]:bg-muted [&_svg]:size-4 [&_svg]:text-muted-foreground"
+      className="flex cursor-pointer items-center gap-3 rounded-md px-3 py-2.5 text-sm data-[selected=true]:bg-muted [&_svg]:size-4 [&_svg]:text-muted-foreground"
     >
       {icon}
       <span className="flex-1 truncate font-medium">{label}</span>

@@ -1,65 +1,123 @@
-import { Check, Info, Lightbulb, MapPin, Sparkles, TriangleAlert, type LucideIcon } from 'lucide-react';
-import { motion } from 'motion/react';
+import * as React from 'react';
 import { useTranslation } from 'react-i18next';
 import { cn } from '@/lib/utils';
 import type { Block, CalloutTone } from '../content';
-import { WIDGETS } from '../widgets';
+import type { WidgetId } from '../course';
+import { WIDGET_HEIGHT, WIDGETS } from '../widgets';
 import { Figure } from './Figures';
 import { RichText } from './RichText';
 
-const TONES: Record<CalloutTone, { icon: LucideIcon; box: string; icon_: string }> = {
-  key: { icon: Lightbulb, box: 'border-primary/25 bg-primary/[0.06]', icon_: 'bg-primary text-primary-foreground' },
-  tz: { icon: MapPin, box: 'border-emerald-500/30 bg-emerald-500/[0.07]', icon_: 'bg-emerald-600 text-white' },
-  warn: { icon: TriangleAlert, box: 'border-warning/35 bg-warning/[0.08]', icon_: 'bg-warning text-white dark:text-slate-900' },
-  tip: { icon: Sparkles, box: 'border-violet-500/25 bg-violet-500/[0.06]', icon_: 'bg-violet-600 text-white' },
-  fact: { icon: Info, box: 'border-sky-500/25 bg-sky-500/[0.06]', icon_: 'bg-sky-600 text-white' },
+/**
+ * Callouts are notes set off by a left rule. One emphasis weight (`foreground/70`) is reserved for
+ * "Key idea" (and the lesson's Key takeaways); only "watch out" carries a (state) colour.
+ */
+const RULE: Record<CalloutTone, string> = {
+  key: 'border-foreground/70',
+  tz: 'border-border',
+  warn: 'border-warning',
+  tip: 'border-border',
+  fact: 'border-border',
 };
 
-const reveal = { initial: { opacity: 0, y: 10 }, whileInView: { opacity: 1, y: 0 }, viewport: { once: true, margin: '-40px' }, transition: { duration: 0.4 } } as const;
+/**
+ * Blocks drawn between a top and a bottom hairline carry `data-ruled`. Two of them in a row share one
+ * rule (the second drops its top rule and closes the gap); the lesson section drops the bottom rule of
+ * a ruled block that ends it, and a Figure drops its top rule after one.
+ */
+const RULED = 'my-8 border-y border-border [[data-ruled]+&]:-mt-8 [[data-ruled]+&]:border-t-0';
+
+/** Space reserved while a widget's code loads — about the widget's own height, so the text below does not jump. */
+function WidgetFallback({ id }: { id: WidgetId }) {
+  const h = WIDGET_HEIGHT[id];
+  return (
+    <div
+      className="my-10 h-[var(--wh)] rounded-lg border border-border sm:h-[var(--wh-sm)] md:h-[var(--wh-md)]"
+      style={{ '--wh': h.base, '--wh-sm': h.sm, '--wh-md': h.md } as React.CSSProperties}
+      aria-hidden
+    />
+  );
+}
+
+/**
+ * Split a formula into pieces that may only break between them, most preferably at "=", then at a
+ * top-level "+"/"−", then at a top-level "×"/"÷" — never inside a bracket or an operand.
+ * Returns the right-hand pieces with their operator in front ("= …", "+ …", "× …").
+ */
+function splitTopLevel(text: string, ops: string[]): string[] {
+  const out: string[] = [];
+  let depth = 0;
+  let start = 0;
+  for (let i = 0; i < text.length; i++) {
+    const c = text[i];
+    if (c === '(' || c === '[') depth++;
+    else if (c === ')' || c === ']') depth = Math.max(0, depth - 1);
+    else if (depth === 0 && c === ' ' && ops.includes(text[i + 1]) && text[i + 2] === ' ') {
+      out.push(text.slice(start, i));
+      start = i + 1;
+    }
+  }
+  out.push(text.slice(start));
+  return out.filter((s) => s.trim() !== '');
+}
+
+/**
+ * A formula set like displayed maths: each side of "=" is an inline block, and so is each "+"/"−"
+ * term inside it, so a line breaks at the weakest link first; inside a term, only at "×"/"÷".
+ */
+function FormulaText({ text }: { text: string }) {
+  const join = (parts: React.ReactNode[]) => parts.map((p, i) => <React.Fragment key={i}>{i > 0 && ' '}{p}</React.Fragment>);
+  return (
+    <>
+      {join(
+        splitTopLevel(text, ['=']).map((side, i) => (
+          <span key={i} className="inline-block max-w-full">
+            {join(
+              splitTopLevel(side, ['+', '−']).map((term, j) => (
+                <span key={j} className="inline-block max-w-full">
+                  {join(
+                    splitTopLevel(term, ['×', '÷']).map((factor, k) => (
+                      <span key={k} className="whitespace-nowrap">
+                        {factor}
+                      </span>
+                    )),
+                  )}
+                </span>
+              )),
+            )}
+          </span>
+        )),
+      )}
+    </>
+  );
+}
 
 export function BlockView({ block }: { block: Block }) {
   const { t } = useTranslation('learn');
   switch (block.type) {
     case 'p':
       return (
-        <p className="my-4 text-[1.0625rem] leading-8 text-foreground/85">
+        <p className="my-5 text-[1.0625rem] leading-8 text-foreground/90">
           <RichText text={block.text} />
         </p>
       );
-    case 'callout': {
-      const tone = TONES[block.tone];
+    case 'callout':
       return (
-        <motion.aside {...reveal} className={cn('relative my-6 overflow-hidden rounded-2xl border p-4 pl-5 sm:p-5', tone.box)}>
-          {block.tone === 'tz' && <div className="flag-rule absolute inset-x-0 top-0 h-1" aria-hidden />}
-          <div className="flex gap-3.5">
-            <span className={cn('mt-0.5 inline-flex size-8 shrink-0 items-center justify-center rounded-xl shadow-sm', tone.icon_)}>
-              <tone.icon className="size-4" aria-hidden />
-            </span>
-            <div className="min-w-0">
-              <div className="text-xs font-bold tracking-wider text-foreground/70 uppercase">{block.title ?? t(`callout.${block.tone}`)}</div>
-              <p className="mt-1 leading-relaxed text-foreground/90">
-                <RichText text={block.text} />
-              </p>
-            </div>
-          </div>
-        </motion.aside>
+        <aside className={cn('my-8 border-l-2 py-0.5 pl-5', RULE[block.tone])}>
+          <p className="text-sm font-semibold text-foreground">{block.title ?? t(`callout.${block.tone}`)}</p>
+          <p className="mt-1 leading-relaxed text-foreground/85">
+            <RichText text={block.text} />
+          </p>
+        </aside>
       );
-    }
     case 'list': {
       const Tag = block.style === 'number' ? 'ol' : 'ul';
       return (
-        <Tag className="my-5 grid gap-2.5">
+        <Tag className="my-6 grid gap-3">
           {block.items.map((item, i) => (
-            <li key={i} className="flex gap-3 leading-relaxed text-foreground/85">
-              {block.style === 'number' ? (
-                <span className="num mt-0.5 inline-flex size-6 shrink-0 items-center justify-center rounded-full bg-primary/10 text-xs font-bold text-primary">{i + 1}</span>
-              ) : block.style === 'check' ? (
-                <span className="mt-1 inline-flex size-5 shrink-0 items-center justify-center rounded-full bg-success/15 text-success">
-                  <Check className="size-3" strokeWidth={3} aria-hidden />
-                </span>
-              ) : (
-                <span className="mt-2.5 size-1.5 shrink-0 rounded-full bg-primary" aria-hidden />
-              )}
+            <li key={i} className="grid grid-cols-[1.5rem_1fr] leading-relaxed text-foreground/90">
+              <span className="num pt-px text-sm text-muted-foreground" aria-hidden>
+                {block.style === 'number' ? `${i + 1}.` : '—'}
+              </span>
               <span>
                 <RichText text={item} />
               </span>
@@ -70,42 +128,46 @@ export function BlockView({ block }: { block: Block }) {
     }
     case 'terms':
       return (
-        <dl className="my-6 grid gap-3">
+        <dl data-ruled="" className={cn(RULED, 'divide-y divide-border')}>
           {block.items.map((it, i) => (
-            <motion.div key={i} {...reveal} transition={{ duration: 0.35, delay: i * 0.05 }} className="rounded-2xl border border-border bg-card p-4">
-              <dt className="font-display font-bold">{it.term}</dt>
-              <dd className="mt-1 text-sm leading-relaxed text-muted-foreground">
+            <div key={i} className="grid gap-1 py-4 sm:grid-cols-[11rem_1fr] sm:gap-6">
+              <dt className="font-semibold">{it.term}</dt>
+              <dd className="text-sm leading-relaxed text-muted-foreground sm:text-[0.9375rem]">
                 <RichText text={it.def} />
               </dd>
-            </motion.div>
+            </div>
           ))}
         </dl>
       );
     case 'compare':
       return (
-        <div className={cn('my-6 grid gap-3', block.items.length >= 3 ? 'sm:grid-cols-3' : 'sm:grid-cols-2')}>
+        <div data-ruled="" className={cn(RULED, 'grid gap-y-6 py-6 sm:divide-x sm:divide-border', block.items.length >= 3 ? 'sm:grid-cols-3' : 'sm:grid-cols-2')}>
           {block.items.map((it, i) => (
-            <motion.div key={i} {...reveal} transition={{ duration: 0.35, delay: i * 0.06 }} className="rounded-2xl border border-border bg-card p-4 shadow-[var(--shadow-soft)]">
-              <div className="font-display font-bold">{it.title}</div>
-              <p className="mt-1.5 text-sm leading-relaxed text-muted-foreground">
+            <div key={i} className={cn(i > 0 && 'border-t border-border pt-6 sm:border-t-0 sm:pt-0', 'sm:px-6 sm:first:pl-0 sm:last:pr-0')}>
+              <h3 className="text-base font-semibold">{it.title}</h3>
+              <p className="mt-1.5 text-sm leading-relaxed text-muted-foreground sm:text-[0.9375rem]">
                 <RichText text={it.text} />
               </p>
-            </motion.div>
+            </div>
           ))}
         </div>
       );
     case 'formula':
       return (
-        <figure className="my-6">
-          <div className="overflow-x-auto rounded-2xl border border-dashed border-primary/30 bg-primary/[0.04] px-4 py-4 text-center font-mono text-sm font-semibold text-balance text-foreground sm:px-5 sm:text-lg">
-            <span className="sm:whitespace-nowrap">{block.text}</span>
+        <figure data-ruled="" className={cn(RULED, 'py-6 text-center')}>
+          <div className="overflow-x-auto font-display text-xl leading-relaxed sm:text-2xl">
+            <FormulaText text={block.text} />
           </div>
-          {block.caption && <figcaption className="mt-2 text-center text-xs text-muted-foreground">{block.caption}</figcaption>}
+          {block.caption && <figcaption className="mt-2 text-sm text-muted-foreground">{block.caption}</figcaption>}
         </figure>
       );
     case 'widget': {
       const W = WIDGETS[block.id];
-      return <W />;
+      return (
+        <React.Suspense fallback={<WidgetFallback id={block.id} />}>
+          <W />
+        </React.Suspense>
+      );
     }
     case 'figure':
       return <Figure id={block.id} caption={block.caption} />;

@@ -6,10 +6,18 @@ export function cn(...inputs: ClassValue[]): string {
   return twMerge(clsx(inputs));
 }
 
+// Building an Intl formatter is far slower than using one, and tables format thousands of values.
+const numberFormats = new Map<string, Intl.NumberFormat>();
+const dateFormats = new Map<string, Intl.DateTimeFormat>();
+const intlLocale = (lang: string) => (lang === 'sw' ? 'sw-TZ' : 'en-GB');
+
 /** Locale-aware number formatting (Swahili uses the same digits; grouping differs). */
 export function formatNumber(value: number | null | undefined, lang = 'en', opts: Intl.NumberFormatOptions = {}): string {
   if (typeof value !== 'number' || !Number.isFinite(value)) return '—';
-  return new Intl.NumberFormat(lang === 'sw' ? 'sw-TZ' : 'en-GB', opts).format(value);
+  const key = intlLocale(lang) + JSON.stringify(opts);
+  let f = numberFormats.get(key);
+  if (!f) numberFormats.set(key, (f = new Intl.NumberFormat(intlLocale(lang), opts)));
+  return f.format(value);
 }
 
 /** A 0–10 (or 0–5) score with one decimal, or an em dash. */
@@ -26,7 +34,10 @@ export function formatDate(iso: string | number | Date | null | undefined, lang 
   if (!iso) return '—';
   const d = iso instanceof Date ? iso : new Date(iso);
   if (Number.isNaN(d.getTime())) return '—';
-  return new Intl.DateTimeFormat(lang === 'sw' ? 'sw-TZ' : 'en-GB', opts).format(d);
+  const key = intlLocale(lang) + JSON.stringify(opts);
+  let f = dateFormats.get(key);
+  if (!f) dateFormats.set(key, (f = new Intl.DateTimeFormat(intlLocale(lang), opts)));
+  return f.format(d);
 }
 
 /** Stable slug for ids/URLs. */

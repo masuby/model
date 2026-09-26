@@ -25,7 +25,15 @@ export function ViewToolbar({ compact = false, className }: { compact?: boolean;
         ]}
       />
       {state.view === 'map' && (
-        <Tooltip content={t('basemap.label')} side="bottom">
+        <Tooltip
+          content={
+            <>
+              <span className="block font-medium">{t('basemap.label')}</span>
+              <span className="block opacity-80">{t('basemap.hint')}</span>
+            </>
+          }
+          side="bottom"
+        >
           <Button
             variant={streets ? 'secondary' : 'ghost'}
             size="icon-sm"

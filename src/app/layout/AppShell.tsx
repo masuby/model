@@ -3,14 +3,19 @@ import * as React from 'react';
 import { useTranslation } from 'react-i18next';
 import { Link, NavLink, Outlet, useLocation } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
-import { Dialog, DialogTrigger, Kbd, SheetContent } from '@/components/ui/primitives';
+import { Dialog, DialogTrigger, Kbd, SheetContent } from '@/components/ui/overlays';
 import { useData } from '@/data-layer/DataProvider';
 import { cn } from '@/lib/utils';
-import { CommandPalette, useCommandPalette } from './CommandPalette';
+import { useCommandPalette } from './useCommandPalette';
 import { LanguageSwitcher } from './LanguageSwitcher';
 import { prefetchRoute } from '../routes';
 import { Logo } from './Logo';
 import { ThemeToggle, useThemeSync } from './ThemeToggle';
+
+/** The search palette (cmdk + its index) is fetched the first time it opens, or on hover of the search box. */
+const loadPalette = () => import('./CommandPalette');
+const CommandPalette = React.lazy(() => loadPalette().then((m) => ({ default: m.CommandPalette })));
+const preloadPalette = () => void loadPalette();
 
 export const NAV = [
   { to: '/explore', key: 'explore' },
@@ -23,7 +28,13 @@ export const NAV = [
 
 function ScrollToTop() {
   const { pathname } = useLocation();
+  const initial = React.useRef(true);
   React.useEffect(() => {
+    // Not on first load: the page is already at the top, and scrolling would force a layout mid-render.
+    if (initial.current) {
+      initial.current = false;
+      return;
+    }
     window.scrollTo({ top: 0, behavior: 'instant' as ScrollBehavior });
   }, [pathname]);
   return null;
@@ -67,21 +78,21 @@ function Header({ onSearch }: { onSearch: () => void }) {
   const isMac = typeof navigator !== 'undefined' && /Mac|iPhone|iPad/.test(navigator.platform);
 
   return (
-    <header className="site-header sticky top-0 z-[1000] border-b border-border bg-background/95 supports-[backdrop-filter]:bg-background/85 supports-[backdrop-filter]:backdrop-blur">
+    <header className="site-header sticky top-0 z-[1000] border-b border-border bg-background">
       <div className="mx-auto flex h-16 max-w-[1320px] items-center gap-3 px-4 sm:px-6 lg:px-8">
-        <Link to="/" className="rounded-xl focus-visible:outline-2" aria-label={t('appName')}>
+        <Link to="/" className="rounded-md focus-visible:outline-2" aria-label={t('appName')}>
           <Logo />
         </Link>
 
-        <nav className="ml-4 hidden items-center gap-0.5 lg:flex" aria-label="Main">
+        <nav className="ml-2 hidden items-center lg:flex xl:ml-4" aria-label={t('nav.main')}>
           {NAV.map((n) => (
             <NavLink
               key={n.to}
               to={n.to}
               className={({ isActive }) =>
                 cn(
-                  'relative px-3 py-2 text-sm font-medium text-muted-foreground transition-colors hover:text-foreground',
-                  isActive && 'text-foreground after:absolute after:inset-x-3 after:-bottom-[13px] after:h-0.5 after:bg-foreground',
+                  'relative px-2 py-2 text-sm font-medium whitespace-nowrap text-muted-foreground transition-colors hover:text-foreground xl:px-3',
+                  isActive && 'text-foreground after:absolute after:inset-x-2 after:-bottom-[13px] after:h-0.5 after:bg-foreground xl:after:inset-x-3',
                 )
               }
             >
@@ -90,29 +101,31 @@ function Header({ onSearch }: { onSearch: () => void }) {
           ))}
         </nav>
 
-        <div className="ml-auto flex items-center gap-1">
+        <div className="ml-auto flex items-center gap-0.5 sm:gap-1">
           <button
             type="button"
             onClick={onSearch}
-            className="hidden h-9 w-56 items-center gap-2 rounded-md border border-border bg-background px-3 text-sm text-muted-foreground transition-colors hover:border-input hover:text-foreground md:flex xl:w-64"
+            onPointerEnter={preloadPalette}
+            onFocus={preloadPalette}
+            className="hidden h-9 w-56 items-center gap-2 rounded-md border border-border bg-background px-3 text-sm text-muted-foreground transition-colors hover:border-input hover:text-foreground md:flex lg:w-40 xl:w-60"
           >
             <Search className="size-4" />
             <span className="flex-1 truncate text-left">{t('search.placeholder')}</span>
             <Kbd>{isMac ? '⌘K' : 'Ctrl K'}</Kbd>
           </button>
-          <Button variant="ghost" size="icon" className="md:hidden" onClick={onSearch} aria-label={t('search.open')}>
+          <Button variant="ghost" size="icon" className="size-9 md:hidden" onClick={onSearch} onPointerDown={preloadPalette} aria-label={t('search.open')}>
             <Search />
           </Button>
           <LanguageSwitcher />
           <ThemeToggle />
           <Dialog open={mobileOpen} onOpenChange={setMobileOpen}>
             <DialogTrigger asChild>
-              <Button variant="ghost" size="icon" className="lg:hidden" aria-label={t('nav.menu')}>
+              <Button variant="ghost" size="icon" className="size-9 lg:hidden" aria-label={t('nav.menu')}>
                 <Menu />
               </Button>
             </DialogTrigger>
             <SheetContent side="right" title={<Logo />}>
-              <nav className="flex flex-col gap-1 p-3" aria-label="Mobile">
+              <nav className="flex flex-col gap-1 p-3" aria-label={t('nav.mobile')}>
                 {[{ to: '/', key: 'home' } as const, ...NAV].map((n) => (
                   <NavLink
                     key={n.to}
@@ -204,11 +217,16 @@ export function AppShell() {
       <ScrollToTop />
       <DocumentTitle />
       <Header onSearch={() => palette.setOpen(true)} />
-      <main id="main" className="flex-1">
+      {/* Reserve a full viewport while a page loads so the footer never jumps into view (no layout shift). */}
+      <main id="main" className="min-h-[calc(100dvh-var(--header-h))] flex-1">
         <Outlet />
       </main>
       {!fullBleed && <Footer />}
-      <CommandPalette open={palette.open} onOpenChange={palette.setOpen} />
+      {palette.used && (
+        <React.Suspense fallback={null}>
+          <CommandPalette open={palette.open} onOpenChange={palette.setOpen} />
+        </React.Suspense>
+      )}
     </div>
   );
 }

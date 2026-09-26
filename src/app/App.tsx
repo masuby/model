@@ -2,8 +2,9 @@ import * as React from 'react';
 import { useTranslation } from 'react-i18next';
 import { createBrowserRouter, Link, Navigate, RouterProvider, useRouteError } from 'react-router-dom';
 import { Toaster } from 'sonner';
+import { PageContainer } from '@/components/layout/Page';
 import { Button } from '@/components/ui/button';
-import { TooltipProvider } from '@/components/ui/primitives';
+import { TooltipProvider } from '@/components/ui/overlays';
 import { DataProvider } from '@/data-layer/DataProvider';
 import { resolveTheme, usePrefs } from '@/state/prefs';
 import { AppShell } from './layout/AppShell';
@@ -23,18 +24,20 @@ function RouteError() {
   const error = useRouteError() as Error | undefined;
   const { t } = useTranslation();
   return (
-    <div className="mx-auto flex max-w-xl flex-col items-center px-6 py-24 text-center">
-      <div className="rounded-2xl bg-danger/10 px-3 py-1 text-xs font-semibold text-danger">Error</div>
-      <h1 className="mt-4 text-3xl font-bold">{t('states.error')}</h1>
-      <p className="mt-3 text-muted-foreground">{t('states.errorDetail')}</p>
-      {error?.message && <pre className="mt-6 w-full overflow-auto rounded-xl bg-muted p-4 text-left text-xs">{error.message}</pre>}
-      <div className="mt-8 flex gap-3">
-        <Button onClick={() => window.location.reload()}>{t('actions.tryAgain')}</Button>
-        <Button variant="outline" asChild>
-          <Link to="/">{t('states.goHome')}</Link>
-        </Button>
+    <PageContainer className="py-24 sm:py-32">
+      <div className="max-w-xl">
+        <p className="text-sm font-medium text-danger">{t('states.errorLabel')}</p>
+        <h1 className="mt-3 text-[2.4rem] leading-tight">{t('states.error')}</h1>
+        <p className="mt-4 text-lg leading-relaxed text-muted-foreground">{t('states.errorDetail')}</p>
+        {error?.message && <pre className="mt-6 w-full overflow-auto rounded-md border border-border bg-muted p-4 text-left text-xs">{error.message}</pre>}
+        <div className="mt-10 flex flex-wrap gap-3 border-t border-border pt-8">
+          <Button onClick={() => window.location.reload()}>{t('actions.tryAgain')}</Button>
+          <Button variant="outline" asChild>
+            <Link to="/">{t('states.goHome')}</Link>
+          </Button>
+        </div>
       </div>
-    </div>
+    </PageContainer>
   );
 }
 

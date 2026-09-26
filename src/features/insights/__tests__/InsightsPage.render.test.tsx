@@ -2,8 +2,11 @@
 /**
  * Render smoke test: the whole Insights page mounts with real data in both languages, every chart
  * produces an SVG surface, the matrix sorts, and React logs no errors (keys, nesting, etc.).
+ *
+ * Chart sections are code-split and mounted progressively after the first paint, so each test first
+ * waits until every section has rendered.
  */
-import { act, cleanup, fireEvent, render, screen, within } from '@testing-library/react';
+import { act, cleanup, fireEvent, render, screen, waitFor, within } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
 import i18n from '@/i18n';
 import { TooltipProvider } from '@/components/ui/primitives';
@@ -73,6 +76,18 @@ function renderPage() {
   );
 }
 
+const SECTION_IDS = ['kpis', 'regions', 'dimensions', 'hazards', 'classes', 'drivers', 'coverage', 'correlation'];
+
+/** Wait until every story section has mounted its heading (chart sections load after the first paint). */
+async function allSectionsRendered(container: HTMLElement) {
+  await waitFor(
+    () => {
+      for (const id of SECTION_IDS) expect(container.querySelector(`section#${id} h2`)).not.toBeNull();
+    },
+    { timeout: SLOW },
+  );
+}
+
 const RAW_KEY = /(?<![A-Za-z])(kpi|regions|scatter|matrix|classes|drivers|coverage|correlation|findings|notes|nav|lens)\.[a-z][a-zA-Z]+/;
 
 describe('InsightsPage', () => {
@@ -85,7 +100,9 @@ describe('InsightsPage', () => {
       const { container } = renderPage();
 
       expect(screen.getByRole('heading', { level: 1, name: i18n.t('insights:title') })).toBeInTheDocument();
-      for (const id of ['kpis', 'regions', 'dimensions', 'hazards', 'classes', 'drivers', 'coverage', 'correlation']) expect(container.querySelector(`section#${id}`)).not.toBeNull();
+      // Every section anchor exists from the first paint (the sticky nav links to them).
+      for (const id of SECTION_IDS) expect(container.querySelector(`section#${id}`)).not.toBeNull();
+      await allSectionsRendered(container);
 
       // Hazard matrix: a header row plus one row per region.
       const model = buildModel();
@@ -106,7 +123,8 @@ describe('InsightsPage', () => {
   it(
     'sorts the hazard matrix by a column',
     async () => {
-      renderPage();
+      const { container } = renderPage();
+      await allSectionsRendered(container);
       const table = screen.getByRole('table');
       const rows = hazardMatrix(buildModel().regions);
       const firstRow = () => within(within(table).getAllByRole('row')[1]).getByRole('rowheader');
@@ -130,8 +148,23 @@ describe('InsightsPage', () => {
     async () => {
       await act(() => i18n.changeLanguage('sw'));
       const { container } = renderPage();
+      await allSectionsRendered(container);
       expect(screen.getByRole('heading', { level: 1 })).toHaveTextContent(i18n.t('insights:title', { lng: 'sw' }));
-      expect(screen.getAllByText(/Kinachoonyeshwa:/).length).toBeGreaterThanOrEqual(8);
+      // Every section heading and every chart's figure note is in Kiswahili.
+      const sw = (key: string, opts?: Record<string, unknown>) => i18n.t(`insights:${key}`, { lng: 'sw', ...opts });
+      const titles: Record<string, string> = {
+        kpis: 'findings.title',
+        regions: 'regions.title',
+        dimensions: 'scatter.title',
+        hazards: 'matrix.title',
+        classes: 'classes.title',
+        drivers: 'drivers.title',
+        coverage: 'coverage.title',
+        correlation: 'correlation.title',
+      };
+      for (const [id, key] of Object.entries(titles)) expect(container.querySelector(`section#${id} h2`)).toHaveTextContent(sw(key));
+      for (const key of ['regions.caption', 'classes.caption', 'correlation.caption', 'coverage.histCaption']) expect(screen.getByText(sw(key))).toBeInTheDocument();
+      expect(container.querySelector('#coverage')).toHaveTextContent(sw('coverage.showSources'));
       expect(container.textContent).not.toMatch(RAW_KEY);
     },
     SLOW,

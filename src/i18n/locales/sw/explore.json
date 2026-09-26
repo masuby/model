@@ -1,5 +1,4 @@
 {
-  "eyebrow": "Hatari ya INFORM · Tanzania",
   "title": "Chunguza hatari",
   "lead": "Paka ramani ya Tanzania rangi kwa hatari kwa ujumla, kwa kipimo, au kwa kiashiria chochote kati ya {{count}}. Chagua eneo uone kinachoendesha alama yake.",
   "panel": {
@@ -15,6 +14,7 @@
   "search": {
     "label": "Tafuta halmashauri au mkoa",
     "placeholder": "Tafuta halmashauri au mkoa…",
+    "placeholderShort": "Tafuta eneo…",
     "results": "Maeneo yanayolingana",
     "empty": "Hakuna eneo linalolingana na “{{q}}”."
   },
@@ -23,7 +23,6 @@
     "council": "Halmashauri",
     "region": "Mikoa",
     "source": "Vitengo vya INFORM",
-    "ref": "rejea",
     "reference": "Rejea",
     "note": {
       "council": "Halmashauri {{count}} (NBS 2022) — ngazi kuu. Vitisho na Mfiduo hukokotolewa kwa kila halmashauri; udhaifu na uwezo wa kukabiliana hutoka kwenye kitengo cha chanzo cha INFORM cha halmashauri husika.",
@@ -36,6 +35,7 @@
     "indicator": "Kiashiria kimoja",
     "indicatorChip": "Kiashiria…",
     "pickIndicator": "Chagua kiashiria…",
+    "selected": "kimechaguliwa",
     "searchIndicator": "Tafuta viashiria…",
     "noIndicator": "Hakuna kiashiria kinacholingana.",
     "scoresFor": "Alama zinazoonyeshwa ni za {{name}}.",
@@ -75,7 +75,7 @@
     "more": "Soma kuhusu mbinu →"
   },
   "stats": {
-    "label": "Takwimu · {{metric}}",
+    "label": "Takwimu",
     "mean": "Wastani",
     "min": "Chini zaidi",
     "max": "Juu zaidi",
@@ -88,11 +88,10 @@
     "distribution": "Mgawanyo"
   },
   "ranking": {
-    "label": "Maeneo ya juu · {{metric}}",
+    "label": "Maeneo ya juu",
     "openTable": "Fungua orodha kamili ya nafasi"
   },
   "basemap": {
-    "section": "Ramani",
     "label": "Ramani ya mitaa",
     "hint": "Muktadha wa OpenStreetMap chini ya rangi"
   },

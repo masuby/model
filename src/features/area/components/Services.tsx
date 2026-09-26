@@ -1,57 +1,51 @@
-import { CircleCheck, CircleDashed, CircleX, Droplets, GraduationCap, HeartPulse, Waves } from 'lucide-react';
+/**
+ * Capacity on the ground: facility counts as a full-width row of key figures (with per-capita rates),
+ * then the three disaster-risk-reduction arrangements — as columns separated by vertical rules when
+ * any district has a record, or as one short ruled definition list when nothing is recorded yet (the
+ * lead already says so; three "Not recorded" columns would only repeat it).
+ */
+import { CircleCheck, CircleDashed, CircleX } from 'lucide-react';
 import * as React from 'react';
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { KeyFigures, Note } from '@/components/layout/Page';
 import { Progress } from '@/components/ui/primitives';
 import type { Facilities } from '@/engine/risk/types';
 import { cn, formatNumber } from '@/lib/utils';
 import { per10k, servicesFor, type AreaView, type ServicesInfo } from '../lib';
-import { Reveal } from './bits';
+import { SubHeading } from './bits';
 
-const TILES: Array<{ key: keyof Facilities; icon: React.ComponentType<{ className?: string }>; tint: string }> = [
-  { key: 'health', icon: HeartPulse, tint: 'bg-danger/10 text-danger' },
-  { key: 'education', icon: GraduationCap, tint: 'bg-primary/10 text-primary' },
-  { key: 'water', icon: Droplets, tint: 'bg-success/12 text-success' },
-  { key: 'boreholes', icon: Waves, tint: 'bg-warning/12 text-warning' },
-];
-
+const FACILITIES: ReadonlyArray<keyof Facilities> = ['health', 'education', 'water', 'boreholes'];
 const DRR_KEYS = ['eprp', 'aa', 'eocc'] as const;
 
-function DrrItem({ k, info }: { k: (typeof DRR_KEYS)[number]; info: ServicesInfo }) {
+/** One arrangement's recorded status (only rendered when at least one district has a record). */
+function DrrItem({ k, info, className }: { k: (typeof DRR_KEYS)[number]; info: ServicesInfo; className?: string }) {
   const { t } = useTranslation(['area', 'common']);
   const aggregate = info.basis === 'aggregate';
   const n = info.drr[k];
   const recorded = info.drr.recorded;
 
-  let status: 'yes' | 'no' | 'unknown' | 'partial';
-  if (!recorded) status = 'unknown';
-  else if (!aggregate) status = n ? 'yes' : 'no';
-  else status = n === recorded ? 'yes' : n === 0 ? 'no' : 'partial';
+  const status: 'yes' | 'no' | 'partial' = !aggregate ? (n ? 'yes' : 'no') : n === recorded ? 'yes' : n === 0 ? 'no' : 'partial';
   const Icon = status === 'yes' ? CircleCheck : status === 'no' ? CircleX : CircleDashed;
   const tone = status === 'yes' ? 'text-success' : status === 'no' ? 'text-danger' : 'text-muted-foreground';
 
   return (
-    <li className="flex gap-3 py-4 first:pt-0 last:pb-0">
-      <Icon className={cn('mt-0.5 size-5 shrink-0', tone)} aria-hidden />
-      <div className="min-w-0 flex-1">
-        <div className="flex flex-wrap items-baseline justify-between gap-x-3 gap-y-1">
-          <span className="font-semibold">
-            {t(`services.drr.${k}.name`)} <span className="text-xs font-medium text-muted-foreground">({t(`services.drr.${k}.abbr`)})</span>
-          </span>
-          <span className={cn('text-xs font-semibold', tone)}>
-            {!recorded
-              ? t('services.drr.notRecorded')
-              : aggregate
-                ? t('services.drr.countOf', { n, total: recorded })
-                : n
-                  ? t('services.drr.inPlace')
-                  : t('services.drr.notInPlace')}
-          </span>
-        </div>
-        <p className="mt-0.5 text-xs leading-relaxed text-muted-foreground">{t(`services.drr.${k}.desc`)}</p>
-        {aggregate && recorded > 0 && <Progress value={(n / recorded) * 100} label={t(`services.drr.${k}.desc`)} className="mt-2 h-1.5" indicatorClassName="bg-success" />}
+    <li className={cn('py-5 md:py-0', className)}>
+      <div className="text-sm text-muted-foreground">{t(`services.drr.${k}.abbr`)}</div>
+      <h4 className="mt-1 text-base leading-snug font-semibold">{t(`services.drr.${k}.name`)}</h4>
+      <div className={cn('mt-3 flex items-center gap-2 text-sm font-medium', tone)}>
+        <Icon className="size-4 shrink-0" aria-hidden />
+        {aggregate ? t('services.drr.countOf', { n, total: recorded }) : n ? t('services.drr.inPlace') : t('services.drr.notInPlace')}
       </div>
+      {aggregate && (
+        <Progress
+          value={(n / recorded) * 100}
+          label={t('services.drr.progressLabel', { abbr: t(`services.drr.${k}.abbr`), n, total: recorded })}
+          className="mt-2.5 h-1 rounded-none"
+          indicatorClassName="rounded-none bg-success"
+        />
+      )}
+      <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{t(`services.drr.${k}.desc`)}</p>
     </li>
   );
 }
@@ -71,7 +65,7 @@ export function Services({ view }: { view: AreaView }) {
       <>
         {t('services.basis.source', { count: info.sharedBy ?? 1 })}{' '}
         {info.sourceId && (
-          <Link to={`/area/${info.sourceId}`} className="font-semibold text-primary underline-offset-4 hover:underline">
+          <Link to={`/area/${info.sourceId}`} className="font-medium text-primary underline-offset-4 hover:underline">
             {info.sourceName}
           </Link>
         )}
@@ -80,73 +74,72 @@ export function Services({ view }: { view: AreaView }) {
       t('services.basis.aggregate', { count: info.districts, with: info.withFacilities })
     );
 
+  const figures = info.facilities
+    ? FACILITIES.map((key) => {
+        const value = info.facilities![key];
+        const rate = per10k(value, info.population);
+        const natRate = per10k(nat.facilities?.[key], nat.population);
+        return {
+          label: t(`services.facilities.${key}`),
+          value: formatNumber(value, lang),
+          sub:
+            rate != null ? (
+              <>
+                <span className="num text-foreground">{formatNumber(rate, lang)}</span> {t('services.per10k')}
+                {!isNational && natRate != null && (
+                  <span className="block">
+                    {t('services.national')} <span className="num">{formatNumber(natRate, lang)}</span>
+                  </span>
+                )}
+              </>
+            ) : undefined,
+        };
+      })
+    : null;
+
   return (
-    <div className="grid gap-6 lg:grid-cols-[minmax(0,1.35fr)_minmax(0,1fr)] print:grid-cols-1">
-      <Reveal>
-        <Card className="h-full">
-          <CardHeader>
-            <CardTitle className="text-lg">{t('services.facilitiesTitle')}</CardTitle>
-            <CardDescription>{basis}</CardDescription>
-          </CardHeader>
-          <CardContent>
-            {info.facilities ? (
-              <div className="grid gap-3 sm:grid-cols-2 print:grid-cols-4">
-                {TILES.map(({ key, icon: Icon, tint }) => {
-                  const value = info.facilities![key];
-                  const rate = per10k(value, info.population);
-                  const natRate = per10k(nat.facilities?.[key], nat.population);
-                  return (
-                    <div key={key} className="rounded-2xl border border-border bg-background/40 p-4 print:break-inside-avoid">
-                      <div className="flex items-center justify-between gap-2">
-                        <span className="text-xs font-medium text-muted-foreground">{t(`services.facilities.${key}`)}</span>
-                        <span className={cn('inline-flex size-8 items-center justify-center rounded-lg', tint)}>
-                          <Icon className="size-4" />
-                        </span>
-                      </div>
-                      <div className="num mt-2 font-display text-3xl font-extrabold tracking-tight">{formatNumber(value, lang)}</div>
-                      {rate != null && (
-                        <div className="mt-1 text-xs text-muted-foreground">
-                          <span className="num font-semibold text-foreground">{formatNumber(rate, lang)}</span> {t('services.per10k')}
-                          {!isNational && natRate != null && (
-                            <span className="block">
-                              {t('services.national')} <span className="num">{formatNumber(natRate, lang)}</span>
-                            </span>
-                          )}
-                        </div>
-                      )}
-                    </div>
-                  );
-                })}
+    <div className="grid gap-16">
+      <div>
+        <SubHeading title={t('services.facilitiesTitle')} lead={basis} />
+        {figures ? (
+          <KeyFigures className="mt-8 border-t border-border pt-6 [&_dd:first-of-type]:text-[1.75rem] lg:[&_dd:first-of-type]:text-[2.1rem]" items={figures} />
+        ) : (
+          <Note className="mt-6">{t('services.noFacilities')}</Note>
+        )}
+        <p className="mt-6 text-xs leading-relaxed text-muted-foreground">{t('services.facilitiesSource')}</p>
+      </div>
+
+      <div className="print:break-inside-avoid">
+        <SubHeading
+          title={t('services.drrTitle')}
+          lead={
+            info.basis === 'aggregate'
+              ? t('services.drrLeadAggregate', { recorded: info.drr.recorded, total: info.districts })
+              : info.drr.recorded
+                ? t('services.drrLead')
+                : t('services.drrLeadNone')
+          }
+        />
+        {info.drr.recorded > 0 ? (
+          <ul className="mt-6 grid divide-y divide-border border-y border-border md:grid-cols-3 md:divide-x md:divide-y-0 md:py-6 print:grid-cols-3 print:divide-x print:divide-y-0">
+            {DRR_KEYS.map((k, i) => (
+              <DrrItem key={k} k={k} info={info} className={i === 0 ? 'md:pr-8' : i === 1 ? 'md:px-8' : 'md:pl-8'} />
+            ))}
+          </ul>
+        ) : (
+          <dl className="mt-6 divide-y divide-border border-y border-border text-sm">
+            {DRR_KEYS.map((k) => (
+              <div key={k} className="grid gap-x-8 gap-y-1 py-3.5 sm:grid-cols-[minmax(0,20rem)_minmax(0,1fr)]">
+                <dt className="font-medium">
+                  {t(`services.drr.${k}.name`)} <span className="font-normal text-muted-foreground">({t(`services.drr.${k}.abbr`)})</span>
+                </dt>
+                <dd className="leading-relaxed text-muted-foreground">{t(`services.drr.${k}.desc`)}</dd>
               </div>
-            ) : (
-              <p className="rounded-xl border border-dashed border-border px-4 py-6 text-center text-sm text-muted-foreground">{t('services.noFacilities')}</p>
-            )}
-            <p className="mt-4 text-[11px] leading-relaxed text-muted-foreground">{t('services.facilitiesSource')}</p>
-          </CardContent>
-        </Card>
-      </Reveal>
-      <Reveal delay={0.06}>
-        <Card className="h-full">
-          <CardHeader>
-            <CardTitle className="text-lg">{t('services.drrTitle')}</CardTitle>
-            <CardDescription>
-              {info.basis === 'aggregate'
-                ? t('services.drrLeadAggregate', { recorded: info.drr.recorded, total: info.districts })
-                : info.drr.recorded
-                  ? t('services.drrLead')
-                  : t('services.drrLeadNone')}
-            </CardDescription>
-          </CardHeader>
-          <CardContent>
-            <ul className="divide-y divide-border">
-              {DRR_KEYS.map((k) => (
-                <DrrItem key={k} k={k} info={info} />
-              ))}
-            </ul>
-            <p className="mt-4 text-[11px] leading-relaxed text-muted-foreground">{t('services.drrSource')}</p>
-          </CardContent>
-        </Card>
-      </Reveal>
+            ))}
+          </dl>
+        )}
+        <p className="mt-6 text-xs leading-relaxed text-muted-foreground">{t('services.drrSource')}</p>
+      </div>
     </div>
   );
 }

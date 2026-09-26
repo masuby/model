@@ -1,24 +1,22 @@
 /**
- * Review queue (PMO / admin): every pending submission as a card with its target unit, author,
+ * Review queue (PMO / admin): every pending submission as a ruled list item with its target unit, author,
  * provenance, a previous → proposed diff (flagging values that changed since submission) and the
  * class impact on every affected council. Approve / reject one by one or in bulk. The decision is
  * enforced server-side (Supabase `review_submission` re-checks the reviewer role).
  */
-import { Check, CheckCheck, Inbox, Loader2, MessageSquareText, Search, X } from 'lucide-react';
-import { AnimatePresence, motion } from 'motion/react';
+import { Check, CheckCheck, Loader2, MessageSquareText, Search, X } from 'lucide-react';
 import * as React from 'react';
 import { useTranslation } from 'react-i18next';
 import { toast } from 'sonner';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
-import { Card } from '@/components/ui/card';
 import { Dialog, DialogContent, Input, Progress, Textarea } from '@/components/ui/primitives';
 import { useData, useModel, useReview } from '@/data-layer/DataProvider';
 import type { Submission } from '@/data-layer/types';
 import type { RiskModel } from '@/engine/risk/types';
 import { cn } from '@/lib/utils';
 import { ChangeTable } from '../components/ChangeTable';
-import { Checkbox, EmptyState, ErrorState, LevelBadge, ListSkeleton } from '../components/common';
+import { Checkbox, EmptyState, ErrorState, LevelBadge, ListSkeleton, ROW_TINT } from '../components/common';
 import { ImpactList } from '../components/ImpactPreview';
 import { NOTE_MAX, useAuthorityName } from '../components/SubmitPanel';
 import { isOwnSubmission, useBatchOps, usePendingQueue } from '../hooks';
@@ -81,12 +79,12 @@ export function ReviewQueue() {
 
   if (query.isLoading) return <ListSkeleton rows={3} />;
   if (query.isError) return <ErrorState error={query.error} onRetry={() => void query.refetch()} />;
-  if (!pending.length) return <EmptyState icon={<Inbox />} title={t('review.emptyTitle')} description={t('review.emptyLead')} />;
+  if (!pending.length) return <EmptyState title={t('review.emptyTitle')} description={t('review.emptyLead')} />;
 
   return (
-    <div className="space-y-4">
-      <div className="flex flex-col gap-3 rounded-2xl border border-border bg-card p-3 shadow-[var(--shadow-soft)] sm:flex-row sm:items-center">
-        <label className="flex items-center gap-2 px-1 text-sm font-medium">
+    <div>
+      <div className="flex flex-col gap-3 border-b border-border pb-4 sm:flex-row sm:items-center">
+        <label className="flex items-center gap-2.5 text-sm font-medium">
           <Checkbox checked={allVisibleSelected} onChange={(e) => toggleAll(e.target.checked)} aria-label={t('review.selectAll')} />
           <span className="whitespace-nowrap">{selectedIds.length ? t('review.selected', { count: selectedIds.length }) : t('review.selectAll')}</span>
         </label>
@@ -104,21 +102,19 @@ export function ReviewQueue() {
         </div>
       </div>
 
-      <p className="text-sm text-muted-foreground" aria-live="polite">
+      <p className="mt-4 mb-2 text-sm text-muted-foreground" aria-live="polite">
         {t('review.count', { count: filtered.length, total: pending.length })}
       </p>
 
-      <ul className="space-y-4">
-        <AnimatePresence initial={false}>
-          {visible.map((s) => (
-            <motion.li key={s.id} layout initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, height: 0, marginTop: 0 }} transition={{ duration: 0.2 }}>
-              <ReviewCard submission={s} model={model} selected={selected.has(s.id)} onSelect={(on) => toggle(s.id, on)} />
-            </motion.li>
-          ))}
-        </AnimatePresence>
+      <ul className="divide-y divide-border border-y border-border">
+        {visible.map((s) => (
+          <li key={s.id}>
+            <ReviewItem submission={s} model={model} selected={selected.has(s.id)} onSelect={(on) => toggle(s.id, on)} />
+          </li>
+        ))}
       </ul>
       {filtered.length > limit && (
-        <div className="text-center">
+        <div className="mt-6 text-center">
           <Button variant="outline" onClick={() => setLimit((l) => l + PAGE)}>
             {t('review.more', { count: filtered.length - limit })}
           </Button>
@@ -157,7 +153,7 @@ export function ReviewQueue() {
   );
 }
 
-function ReviewCard({ submission: s, model, selected, onSelect }: { submission: Submission; model: RiskModel; selected: boolean; onSelect: (on: boolean) => void }) {
+function ReviewItem({ submission: s, model, selected, onSelect }: { submission: Submission; model: RiskModel; selected: boolean; onSelect: (on: boolean) => void }) {
   const { t, i18n } = useTranslation(['data', 'common']);
   const { profile, mode: dataMode } = useData();
   const review = useReview();
@@ -182,28 +178,26 @@ function ReviewCard({ submission: s, model, selected, onSelect }: { submission: 
   };
 
   return (
-    <Card className={cn('overflow-hidden transition-shadow', selected && 'ring-2 ring-primary/40')}>
-      <div className="flex items-start gap-3 px-5 pt-5">
-        <Checkbox className="mt-1" checked={selected} onChange={(e) => onSelect(e.target.checked)} aria-label={t('review.selectOne', { name: s.unitName })} />
-        <div className="min-w-0 flex-1">
-          <div className="flex flex-wrap items-center gap-2">
-            <h3 className="text-base font-bold">{s.unitName}</h3>
-            <LevelBadge unit={unit} />
-            {!unit && <Badge variant="warning">{t('review.unknownUnit')}</Badge>}
-            {own && <Badge variant="outline">{t('review.own')}</Badge>}
-          </div>
-          <p className="mt-0.5 text-xs text-muted-foreground">
-            {s.region} · {t('review.byLine', { author: s.authorName })} ·{' '}
-            <time dateTime={s.createdAt} title={dateTime(s.createdAt, i18n.language)}>
-              {relativeTime(s.createdAt, i18n.language)}
-            </time>
-          </p>
-          {sharing.length > 0 && <p className="mt-1 text-xs text-muted-foreground">{t('confirm.appliesTo', { names: sharing.map((c) => c.name).join(', ') })}</p>}
+    <article aria-labelledby={`review-${s.id}`} className={cn('grid grid-cols-[auto_minmax(0,1fr)] gap-x-4 py-6', selected && ROW_TINT.changed)}>
+      <Checkbox className="mt-1" checked={selected} onChange={(e) => onSelect(e.target.checked)} aria-label={t('review.selectOne', { name: s.unitName })} />
+      <div className="min-w-0">
+        <div className="flex flex-wrap items-center gap-2">
+          <h3 id={`review-${s.id}`} className="text-base font-semibold">
+            {s.unitName}
+          </h3>
+          <LevelBadge unit={unit} />
+          {!unit && <Badge variant="warning">{t('review.unknownUnit')}</Badge>}
+          {own && <Badge variant="outline">{t('review.own')}</Badge>}
         </div>
-      </div>
+        <p className="mt-0.5 text-sm text-muted-foreground">
+          {s.region} · {t('review.byLine', { author: s.authorName })} ·{' '}
+          <time dateTime={s.createdAt} title={dateTime(s.createdAt, i18n.language)}>
+            {relativeTime(s.createdAt, i18n.language)}
+          </time>
+        </p>
+        {sharing.length > 0 && <p className="mt-1 text-xs text-muted-foreground">{t('confirm.appliesTo', { names: sharing.map((c) => c.name).join(', ') })}</p>}
 
-      <div className="space-y-3 px-5 py-4">
-        <dl className="flex flex-wrap gap-x-6 gap-y-1 text-xs">
+        <dl className="mt-3 flex flex-wrap gap-x-6 gap-y-1 text-sm">
           <div>
             <dt className="inline text-muted-foreground">{t('meta.authority')}: </dt>
             <dd className="inline font-medium">{authName(s.authority)}</dd>
@@ -215,47 +209,48 @@ function ReviewCard({ submission: s, model, selected, onSelect }: { submission: 
             </div>
           )}
         </dl>
-        {s.note && (
-          <blockquote className="flex gap-2 rounded-xl border-l-4 border-primary/40 bg-muted/40 px-3 py-2 text-sm">
-            <MessageSquareText className="mt-0.5 size-4 shrink-0 text-muted-foreground" aria-hidden />
-            <span className="whitespace-pre-wrap">{s.note}</span>
-          </blockquote>
-        )}
-        <ChangeTable changes={s.changes} currentOf={unit ? (ref) => currentValue(unit, ref) : undefined} caption={s.unitName} />
-        <ImpactList impacts={impacts} />
-      </div>
+        {s.note && <blockquote className="mt-3 max-w-3xl border-l-2 border-border pl-4 text-sm leading-relaxed whitespace-pre-wrap">{s.note}</blockquote>}
 
-      <div className="border-t border-border bg-muted/20 px-5 py-3">
-        {mode ? (
-          <div className="space-y-2">
-            <label htmlFor={noteId} className="text-sm font-medium">
-              {mode === 'rejected' ? t('review.reasonRequired') : t('review.noteOptional')}
-            </label>
-            <Textarea id={noteId} autoFocus value={note} maxLength={NOTE_MAX} onChange={(e) => setNote(e.target.value)} placeholder={t('review.notePlaceholder')} className="min-h-20" />
-            <div className="flex flex-wrap justify-end gap-2">
-              <Button variant="ghost" size="sm" onClick={() => setMode(null)} disabled={busy}>
-                {t('common:actions.cancel')}
+        <div className={cn('mt-5 grid gap-6', impacts.length > 0 && 'xl:grid-cols-[minmax(0,3fr)_minmax(0,2fr)] xl:gap-10')}>
+          <div className="min-w-0">
+            <h4 className="text-sm font-medium text-muted-foreground">{t('review.changesTitle', { count: s.changes.length })}</h4>
+            <ChangeTable className="mt-1.5" changes={s.changes} currentOf={unit ? (ref) => currentValue(unit, ref) : undefined} caption={s.unitName} />
+          </div>
+          <ImpactList impacts={impacts} />
+        </div>
+
+        <div className="mt-5">
+          {mode ? (
+            <div className="max-w-2xl space-y-2">
+              <label htmlFor={noteId} className="text-sm font-medium">
+                {mode === 'rejected' ? t('review.reasonRequired') : t('review.noteOptional')}
+              </label>
+              <Textarea id={noteId} autoFocus value={note} maxLength={NOTE_MAX} onChange={(e) => setNote(e.target.value)} placeholder={t('review.notePlaceholder')} className="min-h-20" />
+              <div className="flex flex-wrap justify-end gap-2">
+                <Button variant="ghost" size="sm" onClick={() => setMode(null)} disabled={busy}>
+                  {t('common:actions.cancel')}
+                </Button>
+                <Button variant={mode === 'approved' ? 'success' : 'danger'} size="sm" onClick={() => decide(mode)} disabled={busy || (mode === 'rejected' && !note.trim())}>
+                  {busy ? <Loader2 className="animate-spin" aria-hidden /> : mode === 'approved' ? <Check aria-hidden /> : <X aria-hidden />}
+                  {mode === 'approved' ? t('review.approve') : t('review.reject')}
+                </Button>
+              </div>
+            </div>
+          ) : (
+            <div className="flex flex-wrap items-center gap-2">
+              <Button variant="success" size="sm" onClick={() => decide('approved')} disabled={busy}>
+                {busy ? <Loader2 className="animate-spin" aria-hidden /> : <Check aria-hidden />} {t('review.approve')}
               </Button>
-              <Button variant={mode === 'approved' ? 'success' : 'danger'} size="sm" onClick={() => decide(mode)} disabled={busy || (mode === 'rejected' && !note.trim())}>
-                {busy ? <Loader2 className="animate-spin" aria-hidden /> : mode === 'approved' ? <Check aria-hidden /> : <X aria-hidden />}
-                {mode === 'approved' ? t('review.approve') : t('review.reject')}
+              <Button variant="outline" size="sm" onClick={() => setMode('rejected')} disabled={busy}>
+                <X /> {t('review.reject')}…
+              </Button>
+              <Button variant="ghost" size="sm" onClick={() => setMode('approved')} disabled={busy}>
+                <MessageSquareText /> {t('review.approveWithNote')}
               </Button>
             </div>
-          </div>
-        ) : (
-          <div className="flex flex-wrap items-center justify-end gap-2">
-            <Button variant="ghost" size="sm" onClick={() => setMode('approved')} disabled={busy}>
-              <MessageSquareText /> {t('review.approveWithNote')}
-            </Button>
-            <Button variant="outline" size="sm" onClick={() => setMode('rejected')} disabled={busy}>
-              <X /> {t('review.reject')}…
-            </Button>
-            <Button variant="success" size="sm" onClick={() => decide('approved')} disabled={busy}>
-              {busy ? <Loader2 className="animate-spin" aria-hidden /> : <Check aria-hidden />} {t('review.approve')}
-            </Button>
-          </div>
-        )}
+          )}
+        </div>
       </div>
-    </Card>
+    </article>
   );
 }

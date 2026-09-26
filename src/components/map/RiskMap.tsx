@@ -21,6 +21,11 @@ import type { Level, RiskModel, Unit } from '@/engine/risk/types';
 import { formatNumber, formatScore } from '@/lib/utils';
 import { resolveTheme, usePrefs } from '@/state/prefs';
 
+/** Uniform padding in px, or Leaflet-style corner paddings [x, y]. */
+export type MapPadding = number | { topLeft: [number, number]; bottomRight: [number, number] };
+const paddingOptions = (p: MapPadding): L.FitBoundsOptions =>
+  typeof p === 'number' ? { padding: [p, p] } : { paddingTopLeft: p.topLeft, paddingBottomRight: p.bottomRight };
+
 type Props = {
   model: RiskModel;
   level: Level;
@@ -34,7 +39,11 @@ type Props = {
   className?: string;
   /** Extra line for the tooltip, e.g. "Click to add". */
   tooltipHint?: string;
-  fitPadding?: number;
+  /**
+   * Space to keep clear when fitting the country or flying to a selection: a number (all sides) or
+   * per-corner padding so floating panels (legend, area card, trays, sheets) never cover the target.
+   */
+  fitPadding?: MapPadding;
   showZoom?: boolean;
 };
 
@@ -92,18 +101,21 @@ function useUnitResolver(model: RiskModel, level: Level) {
   }, [model, level]);
 }
 
-function FitTo({ bounds, padding }: { bounds: L.LatLngBoundsExpression | null; padding: number }) {
+function FitTo({ bounds, padding }: { bounds: L.LatLngBoundsExpression | null; padding: MapPadding }) {
   const map = useMap();
+  const padKey = JSON.stringify(padding); // compared by value: inline objects must not re-trigger a flight
   React.useEffect(() => {
-    if (bounds) map.flyToBounds(bounds, { padding: [padding, padding], duration: 0.6, maxZoom: 9 });
-  }, [bounds, map, padding]);
+    if (bounds) map.flyToBounds(bounds, { ...paddingOptions(JSON.parse(padKey) as MapPadding), duration: 0.5, maxZoom: 8 });
+  }, [bounds, map, padKey]);
   return null;
 }
 
 /** Keeps the map sized to its container; refits to Tanzania until the user has panned or zoomed. */
-function Resizer({ padding, keepFit }: { padding: number; keepFit: boolean }) {
+function Resizer({ padding, keepFit }: { padding: MapPadding; keepFit: boolean }) {
   const map = useMap();
+  const padKey = JSON.stringify(padding);
   React.useEffect(() => {
+    const pad = JSON.parse(padKey) as MapPadding;
     const el = map.getContainer();
     let userMoved = false;
     const mark = () => {
@@ -114,7 +126,7 @@ function Resizer({ padding, keepFit }: { padding: number; keepFit: boolean }) {
       map.invalidateSize();
       if (!userMoved && keepFit) {
         map.off('zoomstart', mark);
-        map.fitBounds(TZ_BOUNDS, { padding: [padding, padding], animate: false });
+        map.fitBounds(TZ_BOUNDS, { ...paddingOptions(pad), animate: false });
         map.on('zoomstart', mark);
       }
     };
@@ -124,7 +136,7 @@ function Resizer({ padding, keepFit }: { padding: number; keepFit: boolean }) {
       ro.disconnect();
       map.off('dragstart zoomstart', mark);
     };
-  }, [map, padding, keepFit]);
+  }, [map, padKey, keepFit]);
   return null;
 }
 
@@ -166,7 +178,8 @@ export default function RiskMap({
     return {
       fillColor: metricColor(m, v),
       fillOpacity: v == null ? 0.25 : dimmed ? 0.12 : basemap === 'none' ? 0.9 : 0.7,
-      color: selected ? (th === 'dark' ? '#ffffff' : '#0b1324') : stroke,
+      // Class fills are the same in both themes, so the selection outline is too (dark, AA on every fill).
+      color: selected ? '#0b1324' : stroke,
       weight: selected ? 2.8 : level === 'region' || level === 'national' ? 1.2 : 0.6,
       opacity: dimmed ? 0.4 : 1,
     };
@@ -220,7 +233,7 @@ export default function RiskMap({
       },
       mouseover: (e: L.LeafletMouseEvent) => {
         const p = e.target as L.Path;
-        p.setStyle({ weight: 2.4, color: live.current.theme === 'dark' ? '#e2e8f0' : '#0b1324' });
+        p.setStyle({ weight: 2.4, color: '#0b1324' });
         p.bringToFront();
       },
       mouseout: (e: L.LeafletMouseEvent) => {

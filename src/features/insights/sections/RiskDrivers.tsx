@@ -2,7 +2,7 @@ import * as React from 'react';
 import { useTranslation } from 'react-i18next';
 import { Bar, BarChart, CartesianGrid, LabelList, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts';
 import { ChartCard } from '@/components/charts/ChartCard';
-import { DIMENSION_COLORS, DIMENSION_TEXT } from '@/components/charts/theme';
+import { DIMENSION_COLORS } from '@/components/charts/theme';
 import { Segmented } from '@/components/ui/primitives';
 import { DIMENSION_KEYS, type DimensionKey } from '@/engine/risk/hierarchy';
 import type { RiskModel } from '@/engine/risk/types';
@@ -10,9 +10,9 @@ import { formatNumber, formatScore } from '@/lib/utils';
 import { indicatorStats, topDriverCounts, type DriverCount, type IndicatorStat } from '../analytics';
 import { useBarShape } from '../marks';
 import { useInsightTheme } from '../theme';
-import { CategoryTick, InsightSection, Legend, TooltipCard, TooltipRow, WhatThisShows, useMediaQuery } from '../ui';
+import { AboveBarTick, backedValueLabel, CategoryTick, FigureNote, InsightSection, Legend, TooltipCard, TooltipRow, useMediaQuery } from '../ui';
 
-const BAR_RADIUS: [number, number, number, number] = [0, 4, 4, 0];
+const BAR_RADIUS: [number, number, number, number] = [0, 2, 2, 0];
 type DimFilter = 'all' | DimensionKey;
 
 interface DriverDatum extends DriverCount {
@@ -81,16 +81,31 @@ export function RiskDrivers({ model }: { model: RiskModel }) {
   }, [stats, dim, t]);
 
   const shape = useBarShape({ colorOf: dimColor, radius: BAR_RADIUS, activeStroke: th.ink });
+  const valueLabel = React.useMemo(() => backedValueLabel(th.surface), [th.surface]);
   const indicatorLabel = React.useCallback((raw: string) => t(`indicators:${raw.split(':')[1] ?? raw}`), [t]);
-  const tick = (p: { x?: number | string; y?: number | string; payload?: { value?: unknown } }) => (
-    <CategoryTick x={p.x} y={p.y} payload={p.payload} fill={th.text} maxChars={narrow ? 16 : 26} labelOf={indicatorLabel} />
-  );
+
+  // Phones: each indicator name sits on its own line above its bar (full width, no truncation).
+  // Larger screens: a name column wide enough for nearly every indicator name.
+  const yAxis = narrow
+    ? {
+        width: 1,
+        tick: (p: { x?: number | string; y?: number | string; payload?: { value?: unknown } }) => (
+          <AboveBarTick y={p.y} payload={p.payload} fill={th.text} maxChars={56} labelOf={indicatorLabel} left={9} />
+        ),
+      }
+    : {
+        width: 210,
+        tick: (p: { x?: number | string; y?: number | string; payload?: { value?: unknown } }) => (
+          <CategoryTick x={p.x} y={p.y} payload={p.payload} fill={th.text} maxChars={34} labelOf={indicatorLabel} />
+        ),
+      };
+  const row = narrow ? { driver: 36, mean: 36, driverBar: 12, meanBar: 12 } : { driver: 26, mean: 24, driverBar: 16, meanBar: 14 };
 
   const lead = drivers[0];
   const highestMean = React.useMemo(() => [...stats].filter((s) => s.mean !== null).sort((a, b) => (b.mean ?? 0) - (a.mean ?? 0))[0], [stats]);
 
-  const legend = DIMENSION_KEYS.map((k) => ({ key: k, color: DIMENSION_TEXT[k], label: t(`common:dimensions.${k}`) }));
-  const yWidth = narrow ? 112 : 176;
+  // Legend swatches mirror the bar marks (dimension colours); the label text stays in ink.
+  const legend = DIMENSION_KEYS.map((k) => ({ key: k, color: DIMENSION_COLORS[k], label: t(`common:dimensions.${k}`) }));
 
   const driverCsv = React.useMemo(
     () => [
@@ -107,25 +122,48 @@ export function RiskDrivers({ model }: { model: RiskModel }) {
     [stats, t],
   );
 
+  const filter = (className: string) => (
+    <Segmented<DimFilter>
+      size="sm"
+      className={className}
+      aria-label={t('drivers.filter')}
+      value={dim}
+      onValueChange={setDim}
+      options={[
+        { value: 'all', label: t('drivers.all') },
+        { value: 'hazard', label: t('common:dimensions.hazardShort') },
+        { value: 'vulnerability', label: t('common:dimensions.vulnerabilityShort') },
+        { value: 'coping', label: t('common:dimensions.copingShort') },
+      ]}
+    />
+  );
+
   return (
-    <InsightSection id="drivers" index={6} eyebrow={t('drivers.eyebrow')} title={t('drivers.title')} lead={t('drivers.lead')}>
-      <div className="grid gap-4 xl:grid-cols-2 xl:items-start">
-        <ChartCard title={t('drivers.countTitle')} description={t('drivers.countSub', { total })} csv={driverCsv} filename="top-risk-drivers">
-          <div style={{ height: drivers.length * 26 + 40 }}>
+    <InsightSection id="drivers" title={t('drivers.title')} lead={t('drivers.lead')}>
+      {/* Two figures side by side on wide screens; a shared subgrid keeps their plots level. */}
+      <div className="grid gap-12 xl:grid-cols-2 xl:gap-x-14 xl:gap-y-0">
+        <ChartCard
+          className="xl:row-span-2 xl:grid xl:grid-rows-subgrid"
+          title={t('drivers.countTitle')}
+          description={t('drivers.countSub', { total })}
+          csv={driverCsv}
+          filename="top-risk-drivers"
+        >
+          <div style={{ height: drivers.length * row.driver + 40 }}>
             <ResponsiveContainer width="100%" height="100%">
-              <BarChart data={drivers} layout="vertical" margin={{ top: 4, right: 36, bottom: 4, left: 0 }} barCategoryGap={6}>
+              <BarChart data={drivers} layout="vertical" margin={{ top: narrow ? 14 : 4, right: 36, bottom: 4, left: narrow ? 8 : 0 }} barCategoryGap={6}>
                 <CartesianGrid horizontal={false} stroke={th.grid} />
                 <XAxis type="number" allowDecimals={false} tick={th.tick} stroke={th.axis} tickLine={false} />
-                <YAxis type="category" dataKey="id" width={yWidth} interval={0} tickLine={false} axisLine={false} tick={tick} />
+                <YAxis type="category" dataKey="id" width={yAxis.width} interval={0} tickLine={false} axisLine={false} tick={yAxis.tick} />
                 <Tooltip cursor={{ fill: th.cursor }} content={<DriverTooltip total={total} />} />
-                <Bar dataKey="count" maxBarSize={16} shape={shape}>
-                  <LabelList dataKey="label" position="right" fill={th.text} fontSize={11} offset={6} />
+                <Bar dataKey="count" maxBarSize={row.driverBar} shape={shape} isAnimationActive={false}>
+                  <LabelList dataKey="label" position="right" fill={th.text} fontSize={11} offset={6} content={valueLabel} />
                 </Bar>
               </BarChart>
             </ResponsiveContainer>
           </div>
           <Legend className="mt-3" items={legend} aria-label={t('drivers.legend')} />
-          <WhatThisShows>
+          <FigureNote>
             {lead
               ? t('drivers.countCaption', {
                   indicator: t(`indicators:${lead.key}`),
@@ -133,44 +171,33 @@ export function RiskDrivers({ model }: { model: RiskModel }) {
                   pct: formatNumber(lead.count / Math.max(1, total), i18n.language, { style: 'percent', maximumFractionDigits: 0 }),
                 })
               : t('drivers.countCaptionEmpty')}
-          </WhatThisShows>
+          </FigureNote>
         </ChartCard>
 
         <ChartCard
+          className="xl:row-span-2 xl:grid xl:grid-rows-subgrid"
           title={t('drivers.meanTitle')}
           description={t('drivers.meanSub')}
           csv={meanCsv}
           filename="indicator-means"
-          actions={
-            <Segmented<DimFilter>
-              size="sm"
-              aria-label={t('drivers.filter')}
-              value={dim}
-              onValueChange={setDim}
-              options={[
-                { value: 'all', label: t('drivers.all') },
-                { value: 'hazard', label: 'H' },
-                { value: 'vulnerability', label: 'V' },
-                { value: 'coping', label: 'LCC' },
-              ]}
-            />
-          }
+          actions={filter('hidden sm:inline-flex')}
         >
-          <div style={{ height: means.length * 24 + 40 }}>
+          {filter('mb-4 sm:hidden')}
+          <div style={{ height: means.length * row.mean + 40 }}>
             <ResponsiveContainer width="100%" height="100%">
-              <BarChart data={means} layout="vertical" margin={{ top: 4, right: 52, bottom: 4, left: 0 }} barCategoryGap={5}>
+              <BarChart data={means} layout="vertical" margin={{ top: narrow ? 14 : 4, right: 52, bottom: 4, left: narrow ? 8 : 0 }} barCategoryGap={5}>
                 <CartesianGrid horizontal={false} stroke={th.grid} />
                 <XAxis type="number" domain={[0, 10]} ticks={[0, 2, 4, 6, 8, 10]} tick={th.tick} stroke={th.axis} tickLine={false} />
-                <YAxis type="category" dataKey="id" width={yWidth} interval={0} tickLine={false} axisLine={false} tick={tick} />
+                <YAxis type="category" dataKey="id" width={yAxis.width} interval={0} tickLine={false} axisLine={false} tick={yAxis.tick} />
                 <Tooltip cursor={{ fill: th.cursor }} content={<MeanTooltip />} />
-                <Bar dataKey="value" maxBarSize={14} shape={shape}>
-                  <LabelList dataKey="label" position="right" fill={th.text} fontSize={11} offset={6} />
+                <Bar dataKey="value" maxBarSize={row.meanBar} shape={shape} isAnimationActive={false}>
+                  <LabelList dataKey="label" position="right" fill={th.text} fontSize={11} offset={6} content={valueLabel} />
                 </Bar>
               </BarChart>
             </ResponsiveContainer>
           </div>
           <Legend className="mt-3" items={dim === 'all' ? legend : legend.filter((l) => l.key === dim)} aria-label={t('drivers.legend')} />
-          <WhatThisShows>
+          <FigureNote>
             {highestMean
               ? t('drivers.meanCaption', {
                   indicator: t(`indicators:${highestMean.key}`),
@@ -178,7 +205,7 @@ export function RiskDrivers({ model }: { model: RiskModel }) {
                   dimension: t(`common:dimensions.${highestMean.dim}`),
                 })
               : t('drivers.countCaptionEmpty')}
-          </WhatThisShows>
+          </FigureNote>
         </ChartCard>
       </div>
     </InsightSection>

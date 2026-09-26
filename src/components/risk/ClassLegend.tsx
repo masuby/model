@@ -29,7 +29,7 @@ export function ClassLegend({
         const dim = active && !isActive;
         const content = (
           <>
-            <span className="size-3 shrink-0 rounded-[4px] ring-1 ring-black/10" style={{ background: CLASS_COLORS[k] }} />
+            <span className="inline-block size-2.5 shrink-0 rounded-[2px]" style={{ background: CLASS_COLORS[k] }} />
             <span className="flex-1 truncate text-left">{t(`classes.${k}`)}</span>
             <span className="num text-[11px] text-muted-foreground">{counts ? (counts[k] ?? 0) : ranges[i]}</span>
           </>
@@ -52,7 +52,7 @@ export function ClassLegend({
         );
       })}
       <li className="flex items-center gap-2 px-2 py-1 text-xs text-muted-foreground">
-        <span className="size-3 rounded-[4px]" style={{ background: NO_DATA_COLOR }} />
+        <span className="inline-block size-2.5 shrink-0 rounded-[2px]" style={{ background: NO_DATA_COLOR }} />
         {t('classes.noData')}
       </li>
     </ul>
@@ -63,7 +63,7 @@ export function ClassLegend({
 export function RampLegend({ className }: { className?: string }) {
   return (
     <div className={cn('flex flex-col gap-1.5', className)}>
-      <div className="h-2.5 w-full rounded-full" style={{ background: `linear-gradient(90deg, ${RAMP_STOPS.join(',')})` }} />
+      <div className="h-2 w-full" style={{ background: `linear-gradient(90deg, ${RAMP_STOPS.join(',')})` }} />
       <div className="num flex justify-between text-[11px] text-muted-foreground">
         <span>0</span>
         <span>2.5</span>

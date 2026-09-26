@@ -1,5 +1,4 @@
 import { ArrowRight } from 'lucide-react';
-import { AnimatePresence, motion } from 'motion/react';
 import * as React from 'react';
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
@@ -10,8 +9,8 @@ import { isNum } from '@/engine/risk/math';
 import { rampColor } from '@/engine/risk/metrics';
 import { indicatorValue } from '@/engine/risk/model';
 import { sourceFor, sourceLabel } from '@/engine/risk/sources';
-import { cn, formatScore } from '@/lib/utils';
-import { WidgetFrame } from '../components/WidgetKit';
+import { formatScore } from '@/lib/utils';
+import { Chip, Finding, WidgetFrame } from '../components/WidgetKit';
 
 const QUICK = ['flood', 'drought', 'earthquake', 'landslide', 'lightning'] as const;
 const TOP_N = 5;
@@ -38,28 +37,19 @@ export default function HazardHotspots() {
       description={t('widgets.hazardHotspots.lead')}
       footer={
         <>
-          <span className="font-semibold">{t('common:labels.source')}:</span> {sourceLabel(sourceFor('hazard', key))}. {t('widgets.hazardHotspots.relative')}
+          <span className="font-medium text-foreground/80">{t('common:labels.source')}:</span> {sourceLabel(sourceFor('hazard', key))}. {t('widgets.hazardHotspots.relative')}
         </>
       }
     >
-      <div className="flex flex-col gap-3 sm:flex-row sm:items-end">
+      <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
         <div className="flex flex-wrap gap-1.5" role="group" aria-label={t('widgets.hazardHotspots.quick')}>
           {QUICK.map((k) => (
-            <button
-              key={k}
-              type="button"
-              aria-pressed={key === k}
-              onClick={() => setKey(k)}
-              className={cn(
-                'rounded-full border px-3 py-1.5 text-xs font-semibold transition-all',
-                key === k ? 'border-primary bg-primary text-primary-foreground shadow-sm shadow-primary/25' : 'border-border bg-background text-muted-foreground hover:border-primary/40 hover:text-foreground',
-              )}
-            >
+            <Chip key={k} active={key === k} onClick={() => setKey(k)}>
               {t(`indicators:${k}`)}
-            </button>
+            </Chip>
           ))}
         </div>
-        <div className="sm:ml-auto sm:w-56">
+        <div className="sm:ml-auto sm:w-44 sm:shrink-0">
           <Select value={key} onValueChange={setKey} aria-label={t('widgets.hazardHotspots.pick')}>
             {hazard.categories.map((cat) => (
               <SelectGroup key={cat.key} label={t(`common:categories.${cat.key}`)}>
@@ -74,34 +64,36 @@ export default function HazardHotspots() {
         </div>
       </div>
 
-      <p className="mt-4 text-sm text-muted-foreground">{t(`indicators:desc.${key}`, { defaultValue: '' })}</p>
+      <p className="mt-4 text-sm leading-relaxed text-muted-foreground">{t(`indicators:desc.${key}`, { defaultValue: '' })}</p>
 
-      <ol className="mt-4 grid gap-2" aria-live="polite">
-        <AnimatePresence initial={false} mode="popLayout">
-          {top.map(({ u, v }, i) => (
-            <motion.li key={`${key}-${u.id}`} layout initial={{ opacity: 0, x: -8 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0 }} transition={{ duration: 0.3, delay: i * 0.04 }}>
-              <Link to={`/area/${u.id}`} className="group flex items-center gap-3 rounded-2xl border border-border bg-background/60 px-3 py-2.5 transition-colors hover:border-primary/40 hover:bg-muted/60">
-                <span className={cn('num flex size-7 shrink-0 items-center justify-center rounded-full text-xs font-bold', i === 0 ? 'bg-primary text-primary-foreground' : 'bg-muted text-muted-foreground')}>{i + 1}</span>
-                <div className="min-w-0 flex-1">
-                  <div className="truncate text-sm font-semibold group-hover:text-primary">{u.name}</div>
-                  <div className="truncate text-[11px] text-muted-foreground">{u.region}</div>
-                </div>
-                <div className="hidden h-2 w-32 overflow-hidden rounded-full bg-muted sm:block" aria-hidden>
-                  <motion.div className="h-full rounded-full" initial={{ width: 0 }} animate={{ width: `${(v / 10) * 100}%` }} transition={{ duration: 0.6, delay: 0.1 + i * 0.04 }} style={{ background: rampColor(v) }} />
-                </div>
-                <span className="num w-9 text-right font-display text-base font-bold">{formatScore(v)}</span>
-                <ArrowRight className="size-4 shrink-0 text-muted-foreground transition-transform group-hover:translate-x-0.5" aria-hidden />
-              </Link>
-            </motion.li>
-          ))}
-        </AnimatePresence>
+      <ol className="mt-4 divide-y divide-border border-y border-border" aria-live="polite">
+        {top.map(({ u, v }, i) => (
+          <li key={`${key}-${u.id}`}>
+            <Link to={`/area/${u.id}`} className="group grid grid-cols-[1.5rem_minmax(0,1fr)_auto_auto] items-center gap-3 py-3 sm:grid-cols-[1.5rem_minmax(0,1fr)_8rem_2.5rem_1rem]">
+              <span className="num text-sm text-muted-foreground">{i + 1}</span>
+              <span className="min-w-0">
+                <span className="block truncate text-sm font-medium group-hover:text-primary group-hover:underline group-hover:underline-offset-4">{u.name}</span>
+                <span className="block truncate text-xs text-muted-foreground">{u.region}</span>
+              </span>
+              <span className="hidden h-1.5 bg-muted sm:block" aria-hidden>
+                <span className="block h-full" style={{ width: `${(v / 10) * 100}%`, background: rampColor(v) }} />
+              </span>
+              <span className="num text-right font-semibold">{formatScore(v)}</span>
+              <ArrowRight className="size-3.5 text-muted-foreground transition-transform duration-150 group-hover:translate-x-0.5 group-hover:text-primary" aria-hidden />
+            </Link>
+          </li>
+        ))}
       </ol>
 
-      <div className="mt-4 flex flex-wrap gap-x-5 gap-y-1 text-xs text-muted-foreground">
+      <div className="mt-3 flex flex-wrap gap-x-5 gap-y-1 text-xs text-muted-foreground">
         <span>{t('widgets.hazardHotspots.coverage', { n: withData, total: model.councils.length })}</span>
         {tiedAtTop > 1 && max != null && <span className="font-medium text-warning">{t('widgets.hazardHotspots.ties', { n: tiedAtTop, value: formatScore(max) })}</span>}
       </div>
-      {key === 'drought' && <p className="mt-3 rounded-xl border border-warning/30 bg-warning/10 px-3 py-2 text-xs leading-relaxed text-foreground">{t('widgets.hazardHotspots.droughtNote')}</p>}
+      {key === 'drought' && (
+        <Finding tone="warning" className="mt-4 text-xs">
+          {t('widgets.hazardHotspots.droughtNote')}
+        </Finding>
+      )}
     </WidgetFrame>
   );
 }

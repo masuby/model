@@ -1,24 +1,26 @@
 /**
  * Enter scores: pick a council, type new 0–10 values (or mark "no data") for any of the 32 indicators
- * and the exposure index, see the live effect on H / V / LCC / Risk, and submit. Vulnerability & Coping
- * rows are clearly marked as shared with the council's INFORM source unit (and its sibling councils).
+ * and the exposure index, see the live effect on H / V / LCC / Risk, and submit. One note above
+ * Vulnerability explains that Vulnerability & Coping are stored on the council's INFORM source unit (and
+ * so also change its sibling councils).
+ *
+ * Layout: the rows and then the submit section in the main column; the live preview is the one bordered
+ * panel, sticky beside both on wide screens (it never hides the submit step inside an inner scroll).
  */
-import { Ban, Info, ListFilter, MapPinned, RotateCcw, Share2, Users } from 'lucide-react';
+import { Ban, Info, RotateCcw } from 'lucide-react';
 import * as React from 'react';
 import { useTranslation } from 'react-i18next';
-import { ClassBadge } from '@/components/risk/RiskBadge';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
-import { Card } from '@/components/ui/card';
 import { Input, Switch, Tooltip } from '@/components/ui/primitives';
 import { useModel } from '@/data-layer/DataProvider';
 import { DIMENSIONS, type DimensionDef } from '@/engine/risk/hierarchy';
 import { authorityLabel, sourceFor, sourceLabel } from '@/engine/risk/sources';
 import type { EditRef, Unit } from '@/engine/risk/types';
 import { cn, formatDate, formatScore } from '@/lib/utils';
-import { Callout, Delta, EmptyState } from '../components/common';
+import { Callout, Delta, EmptyState, ROW_TINT } from '../components/common';
 import { CouncilContextCard, DiscardDialog } from '../components/CouncilPicker';
-import { ImpactPreview } from '../components/ImpactPreview';
+import { BeforeAfter, ImpactPreview } from '../components/ImpactPreview';
 import { EMPTY_META, EntrySubmitCard, type MetaState } from '../components/SubmitPanel';
 import { useMySubmissions } from '../hooks';
 import { countDirty, evaluateRow, isRowDirty, type DraftRows, type RowDraft, type RowEval } from '../lib/draft';
@@ -66,12 +68,12 @@ export function ScoreEntry({ councilId, onCouncilChange }: { councilId: string |
   );
 
   return (
-    <div className="space-y-5">
+    <div className="space-y-8">
       <CouncilContextCard idPrefix="scores" council={council} onChange={requestSwitch} title={t('scores.pickTitle')} description={t('scores.pickLead')} />
       {council ? (
         <ScoreForm council={council} rows={rows} setRow={setRow} clearRefs={clearRefs} meta={meta} setMeta={setMeta} />
       ) : (
-        <EmptyState icon={<MapPinned />} title={t('scores.emptyTitle')} description={t('scores.emptyLead')} />
+        <EmptyState className="pt-2" title={t('scores.emptyTitle')} description={t('scores.emptyLead')} />
       )}
       <DiscardDialog
         open={switchTo != null}
@@ -118,10 +120,13 @@ function ScoreForm({
     return Object.keys(vc).length ? siblings.map((s) => ({ unit: s, ...impactOf(s, vc) })) : [];
   }, [siblings, values]);
   const dirty = countDirty(rows);
+  // The shared-storage note is shown once: above the first Vulnerability / Coping section on screen.
+  const isVisible = (ref: EditRef) => !changedOnly || isRowDirty(evals.get(ref)?.draft);
+  const sharedNoteDim = DIMENSIONS.find((d) => d.key !== 'hazard' && d.categories.some((c) => c.indicators.some((i) => isVisible(`${d.key}:${i.key}` as EditRef))))?.key;
 
   return (
-    <div className={cn('grid gap-6 lg:grid-cols-[minmax(0,1fr)_minmax(320px,400px)]', changes.length > 0 && 'pb-24 lg:pb-0')}>
-      <div className="min-w-0 space-y-5">
+    <div className={cn('grid gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(320px,400px)] xl:gap-x-14', changes.length > 0 && 'pb-24 lg:pb-0')}>
+      <div className="min-w-0 space-y-12 lg:col-start-1 lg:row-start-1">
         <div className="flex flex-wrap items-center justify-between gap-3">
           <p className="text-sm text-muted-foreground" aria-live="polite">
             {changes.length ? t('scores.changeCount', { count: changes.length }) : t('scores.hint')}
@@ -130,9 +135,7 @@ function ScoreForm({
           <div className="flex items-center gap-3">
             <label className="flex items-center gap-2 text-sm">
               <Switch checked={changedOnly} onCheckedChange={setChangedOnly} aria-label={t('scores.changedOnly')} />
-              <span className="inline-flex items-center gap-1">
-                <ListFilter className="size-4 text-muted-foreground" aria-hidden /> {t('scores.changedOnly')}
-              </span>
+              <span>{t('scores.changedOnly')}</span>
             </label>
             {dirty > 0 && (
               <Button variant="ghost" size="sm" onClick={() => clearRefs('all')}>
@@ -141,11 +144,10 @@ function ScoreForm({
             )}
           </div>
         </div>
-        {changedOnly && dirty === 0 && <p className="rounded-xl border border-dashed border-border p-6 text-center text-sm text-muted-foreground">{t('scores.noneChanged')}</p>}
-        {DIMENSIONS.map((d, i) => (
+        {changedOnly && dirty === 0 && <p className="border-y border-border py-6 text-sm text-muted-foreground">{t('scores.noneChanged')}</p>}
+        {DIMENSIONS.map((d) => (
           <DimensionCard
             key={d.key}
-            index={i}
             def={d}
             council={council}
             siblings={siblings}
@@ -157,26 +159,56 @@ function ScoreForm({
             setRow={setRow}
             floodEdited={!!evals.get('hazard:flood')?.change}
             pendingRefs={pendingRefs}
+            sharedNote={d.key === sharedNoteDim}
           />
         ))}
       </div>
 
-      <aside id="score-submit" className="scroll-mt-24 space-y-4 lg:sticky lg:top-24 lg:max-h-[calc(100dvh-7rem)] lg:self-start lg:overflow-y-auto lg:pr-1" aria-label={t('preview.eyebrow')}>
-        <ImpactPreview unitName={council.name} impact={impact} count={changes.length} siblings={siblingImpacts} />
-        <EntrySubmitCard idPrefix="scores" council={council} changes={changes} impact={impact} meta={meta} setMeta={setMeta} blocking={errorCount} onSubmitted={(refs) => clearRefs(refs)} />
-      </aside>
+      <PreviewAside id="score-preview" label={t('preview.eyebrow')}>
+        <ImpactPreview unitName={council.name} impact={impact} count={changes.length} siblings={siblingImpacts} submitTarget="scores-submit" />
+      </PreviewAside>
 
-      <MobileSubmitBar count={changes.length} before={impact.before.risk} after={impact.after.risk} target="score-submit" />
+      <EntrySubmitCard
+        idPrefix="scores"
+        council={council}
+        changes={changes}
+        impact={impact}
+        meta={meta}
+        setMeta={setMeta}
+        blocking={errorCount}
+        onSubmitted={(refs) => clearRefs(refs)}
+        className="lg:col-start-1 lg:row-start-2"
+      />
+
+      <MobileSubmitBar count={changes.length} before={impact.before.risk} after={impact.after.risk} target="score-preview" />
     </div>
   );
 }
 
-/** Phone-only sticky summary that jumps to the preview/submit panel. */
+/**
+ * The live-preview panel beside an entry form: the one bordered box of the tab. On wide screens it sticks
+ * beside the rows and the submit section (grid rows 1-2); if a short window cannot fit it, it scrolls on
+ * its own and is keyboard-focusable. On phones it sits between the rows and the submit section.
+ */
+export function PreviewAside({ id, label, children }: { id: string; label: string; children: React.ReactNode }) {
+  return (
+    <aside
+      id={id}
+      aria-label={label}
+      tabIndex={0}
+      className="min-w-0 scroll-mt-24 self-start rounded-lg border border-border bg-card focus-visible:outline-2 focus-visible:outline-ring/40 lg:sticky lg:top-24 lg:col-start-2 lg:row-span-2 lg:row-start-1 lg:max-h-[calc(100dvh-7rem)] lg:overflow-y-auto"
+    >
+      {children}
+    </aside>
+  );
+}
+
+/** Phone-only sticky summary that jumps to the preview (the submit section follows it). */
 export function MobileSubmitBar({ count, before, after, target }: { count: number; before: number | null; after: number | null; target: string }) {
   const { t } = useTranslation('data');
   if (!count) return null;
   return (
-    <div className="glass fixed inset-x-3 bottom-3 z-40 flex animate-fade-up items-center justify-between gap-3 rounded-2xl px-4 py-3 shadow-[var(--shadow-lift)] lg:hidden">
+    <div className="fixed inset-x-3 bottom-3 z-40 flex items-center justify-between gap-3 rounded-lg border border-border bg-elevated px-4 py-3 shadow-[var(--shadow-lift)] lg:hidden">
       <div className="min-w-0 text-sm">
         <div className="font-semibold">{t('scores.changeCount', { count })}</div>
         <div className="num flex items-center gap-1.5 text-xs text-muted-foreground">
@@ -192,7 +224,6 @@ export function MobileSubmitBar({ count, before, after, target }: { count: numbe
 }
 
 function DimensionCard({
-  index,
   def,
   council,
   siblings,
@@ -204,8 +235,8 @@ function DimensionCard({
   setRow,
   floodEdited,
   pendingRefs,
+  sharedNote,
 }: {
-  index: number;
   def: DimensionDef;
   council: Unit;
   siblings: Unit[];
@@ -217,59 +248,48 @@ function DimensionCard({
   setRow: (ref: EditRef, patch: Partial<RowDraft> | null) => void;
   floodEdited: boolean;
   pendingRefs: ReadonlySet<string>;
+  /** Show the note that Vulnerability & Coping are stored on the source unit (once per form). */
+  sharedNote: boolean;
 }) {
   const { t } = useTranslation(['data', 'common']);
-  const shared = def.key !== 'hazard';
   const visible = (ref: EditRef) => !changedOnly || isRowDirty(evals.get(ref)?.draft);
   const cats = def.categories.map((c) => ({ key: c.key, refs: c.indicators.map((i) => `${def.key}:${i.key}` as EditRef).filter(visible) })).filter((c) => c.refs.length);
   const showExposure = def.key === 'hazard' && visible(EXPOSURE_REF);
   if (!cats.length && !showExposure) return null;
 
+  const titleId = `dim-${def.key}-title`;
   return (
-    <Card className="overflow-hidden">
-      <div className="flex flex-wrap items-center justify-between gap-3 border-b border-border px-5 py-4">
-        <div>
-          <div className="text-[11px] font-semibold tracking-[0.14em] text-muted-foreground uppercase">{['H', 'V', 'LCC'][index]}</div>
-          <h3 className="text-lg font-bold">{t(`common:dimensions.${def.key}`)}</h3>
-        </div>
-        <div className="flex items-center gap-1.5">
-          <ClassBadge value={before} scale={def.scale} showScore size="sm" className={cn(hasChanges && before !== after && 'opacity-60')} />
-          {hasChanges && before !== after && (
-            <>
-              <span className="text-muted-foreground" aria-hidden>
-                →
-              </span>
-              <ClassBadge value={after} scale={def.scale} showScore size="sm" />
-            </>
-          )}
-        </div>
+    <section aria-labelledby={titleId}>
+      <div className="flex flex-wrap items-center justify-between gap-3 border-b border-border pb-3">
+        <h3 id={titleId} className="font-display text-xl font-semibold sm:text-[1.4rem]">
+          {t(`common:dimensions.${def.key}`)}
+        </h3>
+        <BeforeAfter before={before} after={hasChanges ? after : before} scale={def.scale} />
       </div>
-      {shared && (
-        <Callout className="mx-5 mt-4" icon={<Share2 />} title={t('scores.sharedTitle', { source: council.sourceName ?? council.name })}>
+      {sharedNote && (
+        <Callout className="mt-4" title={t('scores.sharedTitle', { source: council.sourceName ?? council.name })}>
           {siblings.length
             ? t('scores.sharedSiblings', { count: siblings.length, names: listNames(siblings.map((s) => s.name), 4, (n) => t('context.andMore', { count: n })) })
             : t('scores.sharedAlone', { council: council.name })}
         </Callout>
       )}
       {cats.map((c) => (
-        <fieldset key={c.key} className="mt-2">
-          <legend className="px-5 pt-3 pb-1 text-xs font-semibold tracking-wider text-muted-foreground uppercase">{t(`common:categories.${c.key}`)}</legend>
-          <ul className="divide-y divide-border">
+        <fieldset key={c.key} className="mt-6">
+          <legend className="pb-2 text-sm font-medium text-muted-foreground">{t(`common:categories.${c.key}`)}</legend>
+          <ul className="divide-y divide-border border-y border-border">
             {c.refs.map((ref) => (
-              <IndicatorRow key={ref} ev={evals.get(ref)!} council={council} shared={shared} siblings={siblings.length} setRow={setRow} pending={pendingRefs.has(ref)} />
+              <IndicatorRow key={ref} ev={evals.get(ref)!} council={council} setRow={setRow} pending={pendingRefs.has(ref)} />
             ))}
           </ul>
         </fieldset>
       ))}
       {showExposure && (
-        <fieldset className="mt-2 border-t border-border">
-          <legend className="px-5 pt-3 pb-1 text-xs font-semibold tracking-wider text-muted-foreground uppercase">{t('scores.exposureGroup')}</legend>
-          <ul>
+        <fieldset className="mt-6">
+          <legend className="pb-2 text-sm font-medium text-muted-foreground">{t('scores.exposureGroup')}</legend>
+          <ul className="border-y border-border">
             <IndicatorRow
               ev={evals.get(EXPOSURE_REF)!}
               council={council}
-              shared={false}
-              siblings={0}
               setRow={setRow}
               pending={pendingRefs.has(EXPOSURE_REF)}
               note={floodEdited ? t('scores.exposureFloodEdited') : t('scores.exposureNote')}
@@ -277,16 +297,13 @@ function DimensionCard({
           </ul>
         </fieldset>
       )}
-      <div className="h-2" />
-    </Card>
+    </section>
   );
 }
 
 interface IndicatorRowProps {
   ev: RowEval;
   council: Unit;
-  shared: boolean;
-  siblings: number;
   setRow: (ref: EditRef, patch: Partial<RowDraft> | null) => void;
   pending: boolean;
   note?: string;
@@ -295,8 +312,6 @@ interface IndicatorRowProps {
 /** Rows only re-render when their own draft/value changes (typing in one row must stay instant). */
 const sameRow = (a: IndicatorRowProps, b: IndicatorRowProps) =>
   a.council === b.council &&
-  a.shared === b.shared &&
-  a.siblings === b.siblings &&
   a.setRow === b.setRow &&
   a.note === b.note &&
   a.pending === b.pending &&
@@ -305,7 +320,7 @@ const sameRow = (a: IndicatorRowProps, b: IndicatorRowProps) =>
   a.ev.error === b.ev.error &&
   a.ev.change?.value === b.ev.change?.value;
 
-const IndicatorRow = React.memo(function IndicatorRow({ ev, council, shared, siblings, setRow, pending, note }: IndicatorRowProps) {
+const IndicatorRow = React.memo(function IndicatorRow({ ev, council, setRow, pending, note }: IndicatorRowProps) {
   const { t, i18n } = useTranslation(['data', 'common', 'indicators']);
   const { field, current, draft, error, change } = ev;
   const ref = field.ref;
@@ -325,9 +340,8 @@ const IndicatorRow = React.memo(function IndicatorRow({ ev, council, shared, sib
   return (
     <li
       className={cn(
-        'grid grid-cols-[minmax(0,1fr)_auto] items-center gap-x-4 gap-y-2 px-5 py-3 transition-colors sm:grid-cols-[minmax(0,1fr)_auto_auto]',
-        change && 'bg-primary/[0.05]',
-        error && 'bg-danger/[0.05]',
+        'grid grid-cols-[minmax(0,1fr)_auto] items-center gap-x-4 gap-y-2 py-3 sm:grid-cols-[minmax(0,1fr)_auto_8.5rem]',
+        error ? ROW_TINT.error : change ? ROW_TINT.changed : undefined,
       )}
     >
       <div className="col-span-2 min-w-0 sm:col-span-1">
@@ -342,37 +356,22 @@ const IndicatorRow = React.memo(function IndicatorRow({ ev, council, shared, sib
               </button>
             </Tooltip>
           )}
-          {shared && (
-            <Tooltip content={siblings ? t('scores.sharedTip', { count: siblings }) : t('scores.sharedTipAlone')}>
-              <Badge variant="secondary" className="shrink-0 cursor-default gap-1 px-2 text-[10px]" tabIndex={0}>
-                <Users aria-hidden /> {t('scores.shared')}
-              </Badge>
-            </Tooltip>
-          )}
-          {stamp && (
-            <Badge variant="success" className="shrink-0 px-2 text-[10px]">
-              {t('common:labels.edited')}
-            </Badge>
-          )}
           {pending && (
-            <Badge variant="warning" className="shrink-0 px-2 text-[10px]" title={t('scores.pendingTip')}>
+            <Badge variant="warning" className="shrink-0 px-2 text-[11px]" title={t('scores.pendingTip')}>
               {t('scores.pending')}
             </Badge>
           )}
         </div>
-        <div className="mt-0.5 truncate text-xs text-muted-foreground" title={provenance}>
+        <div className={cn('mt-0.5 truncate text-xs', stamp ? 'font-medium text-foreground' : 'text-muted-foreground')} title={provenance}>
           {provenance}
         </div>
         {note && <div className="mt-0.5 text-xs text-muted-foreground">{note}</div>}
       </div>
 
       <div className="flex items-center gap-2.5">
-        <div className="w-12 text-right" title={t('scores.current')}>
+        <div className="w-14 text-right" title={t('scores.current')}>
           <span className="sr-only">{t('scores.current')}: </span>
-          <span className={cn('num text-sm font-semibold', current == null && 'text-xs font-normal text-muted-foreground italic')}>{current == null ? t('common:classes.noData') : formatScore(current)}</span>
-          <div className="mt-1 h-1 w-full overflow-hidden rounded-full bg-muted" aria-hidden>
-            <div className="h-full rounded-full bg-primary/50" style={{ width: `${((current ?? 0) / 10) * 100}%` }} />
-          </div>
+          <span className={cn('num text-sm font-medium', current == null && 'text-xs font-normal text-muted-foreground italic')}>{current == null ? t('common:classes.noData') : formatScore(current)}</span>
         </div>
         <span className="text-muted-foreground" aria-hidden>
           →

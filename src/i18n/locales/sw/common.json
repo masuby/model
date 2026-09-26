@@ -11,7 +11,9 @@
     "methodology": "Mbinu",
     "data": "Lango la data",
     "menu": "Menyu",
-    "skipToContent": "Ruka hadi maudhui"
+    "skipToContent": "Ruka hadi maudhui",
+    "main": "Kuu",
+    "mobile": "Menyu kuu"
   },
   "theme": {
     "label": "Mwonekano",
@@ -100,7 +102,8 @@
     "remove": "Ondoa",
     "edit": "Hariri",
     "showAll": "Onyesha yote",
-    "showLess": "Onyesha machache"
+    "showLess": "Onyesha machache",
+    "printPdf": "Chapisha au hifadhi kama PDF"
   },
   "labels": {
     "score": "Alama",
@@ -140,7 +143,8 @@
     "notFound": "Ukurasa haupatikani",
     "notFoundDetail": "Ukurasa unaoutafuta haupo au umehamishwa.",
     "goHome": "Nenda mwanzo",
-    "empty": "Hakuna cha kuonyesha bado."
+    "empty": "Hakuna cha kuonyesha bado.",
+    "errorLabel": "Hitilafu imetokea"
   },
   "a11y": {
     "mapOf": "Ramani ya Tanzania iliyopakwa rangi kwa {{metric}}",

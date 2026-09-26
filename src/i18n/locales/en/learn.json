@@ -1,9 +1,9 @@
 {
   "overview": {
-    "eyebrow": "Free course · {{lessons}} lessons · about {{minutes}} minutes",
+    "kicker": "A free, self-paced course",
     "eyebrowShort": "Learn",
     "title": "Understand disaster risk in Tanzania",
-    "lead": "Seven short, hands-on lessons on the INFORM method — hazard, exposure, vulnerability, coping capacity, risk and crisis severity — built on Tanzania’s real data. Try every idea on live council figures, then check yourself with a quick quiz.",
+    "lead": "Seven short, hands-on lessons on how INFORM measures hazard, exposure, vulnerability, coping capacity, risk and crisis severity, using Tanzania’s real data. Try each idea on live council figures, then check yourself with a quick quiz.",
     "methodology": "Read the methodology",
     "start": "Start the course",
     "continue": "Continue with lesson {{n}}",
@@ -14,16 +14,17 @@
       "questions": "Quiz questions"
     },
     "progressLabel": "{{pct}}% of the course completed",
-    "complete": "complete",
     "yourProgress": "Your progress",
     "lessonsDone": "{{done}} of {{total}} lessons",
-    "noScoreYet": "Pass a lesson quiz to see your average score.",
-    "avgScore": "Average quiz score {{score}}%",
-    "savedLocally": "Progress is saved in this browser only — no account needed.",
+    "avgLabel": "Average quiz score",
+    "nextLabel": "Next step",
+    "startHere": "Start here",
+    "savedLocally": "Your progress is saved in this browser. No account is needed.",
     "reset": "Reset progress",
     "resetTitle": "Reset your course progress?",
     "resetBody": "This clears every completed lesson and quiz score saved in this browser. It cannot be undone.",
     "resetConfirm": "Yes, reset",
+    "howTitle": "How the course works",
     "how": {
       "read": {
         "title": "Read",
@@ -35,31 +36,24 @@
       },
       "quiz": {
         "title": "Pass the quiz",
-        "body": "Three or four questions with instant feedback. Get two thirds right to unlock the next lesson."
+        "body": "Three or four questions with instant feedback. Get two thirds right to mark the lesson complete."
       }
     },
-    "pathEyebrow": "Your learning path",
-    "pathTitle": "Seven lessons, one clear picture",
+    "pathTitle": "The seven lessons",
     "pathLead": "Take them in order or jump to what you need. Each lesson ends with a short quiz.",
     "minutes_one": "{{count}} min",
     "minutes_other": "{{count}} min",
-    "liveWidget": "Live data",
-    "finalStep": "Final step",
     "certReady": "You have completed every lesson. Your certificate is ready to print.",
     "certLocked_one": "Complete {{count}} more lesson to unlock your printable certificate.",
     "certLocked_other": "Complete {{count}} more lessons to unlock your printable certificate.",
-    "seeWhatsLeft": "See what’s left",
-    "aboutTitle": "About this course.",
-    "about": "Lessons follow the INFORM methodology of the European Commission’s Joint Research Centre and partners, as implemented for Tanzania in this app. Every number shown comes from the live model; illustrative scenarios are labelled as such. The course supports — it does not replace — official guidance and local knowledge."
+    "aboutTitle": "About this course",
+    "about": "Lessons follow the INFORM methodology of the European Commission’s Joint Research Centre and partners, as implemented for Tanzania in this app. Every number comes from the live model, and illustrative scenarios are labelled as such. The course supports official guidance and local knowledge; it does not replace them."
   },
   "status": {
     "completed": "completed",
     "completedScore": "Completed · {{score}}%",
     "upNext": "Up next",
-    "notStarted": "Not started",
-    "review": "Review",
-    "continue": "Continue",
-    "start": "Start"
+    "ready": "Ready"
   },
   "nav": {
     "label": "Course lessons",
@@ -71,8 +65,7 @@
     "pager": "Lesson navigation",
     "previous": "Previous lesson",
     "next": "Next lesson",
-    "finish": "Finish the course",
-    "locked": "Pass the quiz ({{mark}} of {{total}} correct) to unlock the next lesson."
+    "finish": "Finish the course"
   },
   "lesson": {
     "of": "Lesson {{n}} of {{total}}",
@@ -129,8 +122,8 @@
     "pickCouncil": "Council",
     "try": "Try:",
     "national": "Tanzania (national)",
-    "nationalMarker": "The dark marker shows Tanzania’s national value ({{value}}).",
-    "markerHint": "Dark markers on the bars show national values.",
+    "nationalMarker": "The vertical tick shows Tanzania’s national value ({{value}}).",
+    "markerHint": "Vertical ticks on the bars show national values.",
     "topDriver": "Biggest driver here: {{indicator}} ({{value}}).",
     "sharedSource": "Vulnerability and coping data come from the INFORM unit “{{source}}”, shared with neighbouring councils.",
     "ownSource": "Vulnerability and coping data come from the INFORM unit “{{source}}”."
@@ -251,7 +244,7 @@
       "footer": "A brief is a starting point for discussion with the district disaster management committee, not a verdict.",
       "progress": "{{done}} of {{total}} checked",
       "rank": "Rank {{rank}} of {{n}} councils",
-      "driverIs": "Driven mainly by {{dim}} — “{{cls}}” on its own scale. The marks show the national values.",
+      "driverIs": "Driven mainly by {{dim}} — “{{cls}}” on its own scale. Vertical ticks show the national values.",
       "coverage": "{{pct}}% of indicators have data.",
       "coverageLevel": {
         "good": "Good",
@@ -308,7 +301,9 @@
       "coping": "Lack of coping",
       "copingQ": "Can they manage?",
       "risk": "Risk",
-      "riskQ": "How likely is serious harm?"
+      "riskQ": "How likely is serious harm?",
+      "times": "times",
+      "equals": "equals"
     },
     "ladder": {
       "indicators": "Indicators",
@@ -323,11 +318,18 @@
     },
     "thresholds": {
       "caption": "INFORM class ranges for Tanzania by scale",
-      "scale": "Scale"
+      "scale": "Scale",
+      "class": "Class",
+      "short": {
+        "risk": "Risk",
+        "hazard": "H&E",
+        "vulnerability": "V",
+        "coping": "LCC"
+      }
     },
     "severity": {
       "geoPart": "{{pct}}% geometric part",
-      "linearPart": "{{pct}}%",
+      "linearPart": "{{pct}}% added directly",
       "impact": "Impact",
       "conditions": "Conditions",
       "complexity": "Complexity"
@@ -335,6 +337,7 @@
   },
   "completion": {
     "notYetTitle": "Almost there",
+    "waitingTitle": "Your certificate is waiting",
     "notYetBody_one": "Complete {{count}} more lesson to unlock your certificate.",
     "notYetBody_other": "Complete {{count}} more lessons to unlock your certificate.",
     "title": "Congratulations — course complete!",

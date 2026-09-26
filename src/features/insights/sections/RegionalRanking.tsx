@@ -1,11 +1,9 @@
-import { ArrowRight } from 'lucide-react';
 import * as React from 'react';
 import { useTranslation } from 'react-i18next';
 import { Link, useNavigate } from 'react-router-dom';
 import { Bar, BarChart, CartesianGrid, LabelList, ReferenceLine, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts';
 import { ChartCard } from '@/components/charts/ChartCard';
-import { ClassBadge, ClassDot } from '@/components/risk/RiskBadge';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { ClassDot } from '@/components/risk/RiskBadge';
 import { Segmented } from '@/components/ui/primitives';
 import { classify } from '@/engine/risk/classes';
 import type { RiskModel, Unit } from '@/engine/risk/types';
@@ -13,23 +11,9 @@ import { formatScore } from '@/lib/utils';
 import { LENSES, lensScale, lensValue, rankUnits, type LensKey, type RankRow } from '../analytics';
 import { useBarShape } from '../marks';
 import { useInsightTheme } from '../theme';
-import { CategoryTick, InsightSection, TooltipCard, TooltipRow, WhatThisShows, useMediaQuery } from '../ui';
+import { Aside, backedValueLabel, CategoryTick, FigureNote, InsightSection, LENS_LABEL, LENS_SHORT, SubHeading, TooltipCard, TooltipRow, useMediaQuery } from '../ui';
 
-export const LENS_LABEL: Record<LensKey, string> = {
-  risk: 'common:informRisk',
-  hazard: 'common:dimensions.hazard',
-  vulnerability: 'common:dimensions.vulnerability',
-  coping: 'common:dimensions.coping',
-};
-export const LENS_SHORT: Record<LensKey, string> = {
-  risk: 'insights:lens.risk',
-  hazard: 'common:dimensions.hazardShort',
-  vulnerability: 'common:dimensions.vulnerabilityShort',
-  coping: 'common:dimensions.copingShort',
-};
-const LENS_ABBR: Record<LensKey, string> = { risk: 'R', hazard: 'H', vulnerability: 'V', coping: 'LCC' };
-
-const BAR_RADIUS: [number, number, number, number] = [0, 4, 4, 0];
+const BAR_RADIUS: [number, number, number, number] = [0, 2, 2, 0];
 
 interface Datum extends RankRow {
   label: string;
@@ -77,6 +61,7 @@ export function RegionalRanking({ model }: { model: RiskModel }) {
 
   const colorOf = React.useCallback((p: unknown) => (p as Datum).color, []);
   const shape = useBarShape({ colorOf, radius: BAR_RADIUS, activeStroke: th.ink });
+  const valueLabel = React.useMemo(() => backedValueLabel(th.surface), [th.surface]);
 
   const riskClassLabel = React.useCallback((v: number | null) => {
     const c = classify(v);
@@ -104,29 +89,20 @@ export function RegionalRanking({ model }: { model: RiskModel }) {
   return (
     <InsightSection
       id="regions"
-      index={2}
-      eyebrow={t('regions.eyebrow')}
       title={t('regions.title')}
       lead={t('regions.lead')}
       actions={
         <Segmented<LensKey>
           size="sm"
+          className="flex-wrap"
           aria-label={t('lens.label')}
           value={lens}
           onValueChange={setLens}
-          options={LENSES.map((l) => ({
-            value: l,
-            label: (
-              <>
-                <span className="sm:hidden">{LENS_ABBR[l]}</span>
-                <span className="hidden sm:inline">{t(LENS_SHORT[l])}</span>
-              </>
-            ),
-          }))}
+          options={LENSES.map((l) => ({ value: l, label: t(LENS_SHORT[l]) }))}
         />
       }
     >
-      <div className="grid gap-4 lg:grid-cols-[minmax(0,1.75fr)_minmax(0,1fr)] lg:items-start">
+      <div className="grid gap-12 lg:grid-cols-[minmax(0,1.8fr)_minmax(0,1fr)] lg:items-start lg:gap-14">
         <ChartCard
           title={t('regions.chartTitle', { measure: t(LENS_LABEL[lens]) })}
           description={t('regions.chartSub')}
@@ -142,11 +118,11 @@ export function RegionalRanking({ model }: { model: RiskModel }) {
                 <YAxis
                   type="category"
                   dataKey="name"
-                  width={narrow ? 92 : 124}
+                  width={narrow ? 108 : 124}
                   interval={0}
                   tickLine={false}
                   axisLine={false}
-                  tick={(p) => <CategoryTick x={p.x} y={p.y} payload={p.payload} fill={th.text} maxChars={narrow ? 13 : 19} />}
+                  tick={(p) => <CategoryTick x={p.x} y={p.y} payload={p.payload} fill={th.text} maxChars={narrow ? 18 : 20} />}
                 />
                 <Tooltip cursor={{ fill: th.cursor }} content={<RankTooltip lens={lens} />} />
                 {typeof national === 'number' && (
@@ -158,59 +134,63 @@ export function RegionalRanking({ model }: { model: RiskModel }) {
                     label={{ value: t('regions.nationalRef', { value: formatScore(national) }), position: 'top', fill: th.text, fontSize: 11 }}
                   />
                 )}
-                <Bar dataKey="value" maxBarSize={16} shape={shape} cursor="pointer" onClick={(d) => navigate(`/area/${(d.payload as Datum).id}`)}>
-                  <LabelList dataKey="label" position="right" fill={th.text} fontSize={11} offset={6} />
+                <Bar dataKey="value" maxBarSize={16} shape={shape} cursor="pointer" isAnimationActive={false} onClick={(d) => navigate(`/area/${(d.payload as Datum).id}`)}>
+                  {/* Backed labels: the national line breaks around them instead of striking through. */}
+                  <LabelList dataKey="label" position="right" fill={th.text} fontSize={11} offset={6} content={valueLabel} />
                 </Bar>
               </BarChart>
             </ResponsiveContainer>
           </div>
-          <WhatThisShows>{t('regions.caption')}</WhatThisShows>
+          <FigureNote>{t('regions.caption')}</FigureNote>
         </ChartCard>
 
-        <Card>
-          <CardHeader>
-            <CardTitle>{t('regions.summaryTitle', { measure: t(LENS_SHORT[lens]) })}</CardTitle>
-          </CardHeader>
-          <CardContent className="grid gap-6">
-            <RankList title={t('regions.highest')} rows={top} lens={lens} offset={0} />
-            <RankList title={t('regions.lowest')} rows={bottom} lens={lens} offset={valued.length - 1} descending />
-            <dl className="grid grid-cols-2 gap-3 border-t border-border pt-5">
-              <div>
-                <dt className="text-xs text-muted-foreground">{t('regions.spread')}</dt>
-                <dd className="num mt-1 font-display text-2xl font-extrabold">{formatScore(spread)}</dd>
-                <dd className="text-[11px] text-muted-foreground">{t('regions.spreadSub')}</dd>
-              </div>
-              <div>
-                <dt className="text-xs text-muted-foreground">{t('regions.above')}</dt>
-                <dd className="num mt-1 font-display text-2xl font-extrabold">
-                  {above ?? '—'}
-                  <span className="text-sm font-semibold text-muted-foreground"> / {valued.length}</span>
-                </dd>
-                <dd className="text-[11px] text-muted-foreground">{t('regions.aboveSub', { value: formatScore(national) })}</dd>
-              </div>
-            </dl>
-          </CardContent>
-        </Card>
+        <Aside title={t('regions.summaryTitle', { measure: t(LENS_SHORT[lens]) })}>
+          <RankList title={t('regions.highest')} rows={top} lens={lens} offset={0} />
+          <RankList title={t('regions.lowest')} rows={bottom} lens={lens} offset={valued.length - 1} descending />
+          <dl className="mt-8 grid grid-cols-2 divide-x divide-border">
+            <div className="pr-5">
+              <dt className="text-sm text-muted-foreground">{t('regions.spread')}</dt>
+              <dd className="num mt-1 text-2xl font-semibold tracking-tight">{formatScore(spread)}</dd>
+              <dd className="mt-1 text-xs leading-snug text-muted-foreground">{t('regions.spreadSub')}</dd>
+            </div>
+            <div className="pl-5">
+              <dt className="text-sm text-muted-foreground">{t('regions.above')}</dt>
+              <dd className="num mt-1 text-2xl font-semibold tracking-tight">
+                {above ?? '—'}
+                <span className="text-base font-medium text-muted-foreground"> / {valued.length}</span>
+              </dd>
+              <dd className="mt-1 text-xs leading-snug text-muted-foreground">{t('regions.aboveSub', { value: formatScore(national) })}</dd>
+            </div>
+          </dl>
+        </Aside>
       </div>
     </InsightSection>
   );
 }
 
 function RankList({ title, rows, lens, offset, descending }: { title: string; rows: RankRow[]; lens: LensKey; offset: number; descending?: boolean }) {
+  const { t } = useTranslation(['insights', 'common']);
+  const scale = lensScale(lens);
   return (
-    <div>
-      <h4 className="mb-2 text-xs font-semibold tracking-wider text-muted-foreground uppercase">{title}</h4>
-      <ol className="grid gap-1">
-        {rows.map((r, i) => (
-          <li key={r.id}>
-            <Link to={`/area/${r.id}`} className="group flex items-center gap-3 rounded-lg px-2 py-1.5 transition-colors hover:bg-muted">
-              <span className="num w-5 text-xs font-bold text-muted-foreground">{descending ? offset - i + 1 : offset + i + 1}</span>
-              <span className="min-w-0 flex-1 truncate text-sm font-semibold group-hover:text-primary">{r.name}</span>
-              <ClassBadge value={r.value} scale={lensScale(lens)} showScore size="sm" />
-              <ArrowRight className="size-3.5 text-muted-foreground opacity-0 transition-opacity group-hover:opacity-100" aria-hidden />
-            </Link>
-          </li>
-        ))}
+    <div className="mt-6">
+      <SubHeading>{title}</SubHeading>
+      <ol className="mt-2 divide-y divide-border border-y border-border">
+        {rows.map((r, i) => {
+          const c = classify(r.value, scale);
+          return (
+            <li key={r.id}>
+              <Link to={`/area/${r.id}`} className="group grid grid-cols-[1.5rem_minmax(0,1fr)_auto] items-center gap-3 py-2.5">
+                <span className="num text-sm text-muted-foreground">{descending ? offset - i + 1 : offset + i + 1}</span>
+                <span className="truncate font-medium underline-offset-4 group-hover:text-primary group-hover:underline">{r.name}</span>
+                <span className="flex items-center gap-2 text-sm">
+                  <ClassDot value={r.value} scale={scale} />
+                  <span className="text-muted-foreground">{c ? t(`common:classes.${c.key}`) : t('common:classes.noData')}</span>
+                  <span className="num w-8 text-right font-semibold">{formatScore(r.value)}</span>
+                </span>
+              </Link>
+            </li>
+          );
+        })}
       </ol>
     </div>
   );

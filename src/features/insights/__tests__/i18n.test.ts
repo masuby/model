@@ -74,5 +74,6 @@ describe('insights i18n', () => {
     }
     for (const r of RESOLUTIONS) for (const fam of ['coverage.res', 'coverage.resDesc']) expect(has(SW, `${fam}.${r}`) && has(EN, `${fam}.${r}`)).toBe(true);
     for (const s of ['none', 'weak', 'moderate', 'strong', 'veryStrong']) expect(has(SW, `correlation.strength.${s}`) && has(EN, `correlation.strength.${s}`)).toBe(true);
+    for (const k of ['hazard', 'vulnerability', 'coping', 'risk']) expect(has(SW, `abbr.${k}`) && has(EN, `abbr.${k}`)).toBe(true);
   });
 });

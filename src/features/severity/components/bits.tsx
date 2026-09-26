@@ -1,25 +1,14 @@
-/** Small shared presentation pieces for the severity page. */
-import { motion } from 'motion/react';
+/** Small shared presentation pieces for the severity page (docs/DESIGN_LANGUAGE.md: rules, not boxes). */
+import { RadioGroup } from 'radix-ui';
 import * as React from 'react';
 import { useTranslation } from 'react-i18next';
-import type { SeverityDimensionKey } from '@/engine/severity/definitions';
+import { Kicker } from '@/components/layout/Page';
 import { severityCategory } from '@/engine/severity/engine';
 import { cn, formatScore } from '@/lib/utils';
 import { isNum, ON_SEVERITY } from '../lib';
 
-export const FADE = {
-  initial: { opacity: 0, y: 14 },
-  whileInView: { opacity: 1, y: 0 },
-  viewport: { once: true, margin: '-60px' },
-  transition: { duration: 0.45 },
-} as const;
-
-/** Accent per severity dimension (distinct from the severity ramp so they never read as a score). */
-export const DIM_ACCENT: Record<SeverityDimensionKey, { text: string; soft: string; ring: string; hex: string }> = {
-  impact: { text: 'text-rose-700 dark:text-rose-400', soft: 'bg-rose-500/10', ring: 'ring-rose-500/25', hex: '#e11d48' },
-  conditions: { text: 'text-amber-700 dark:text-amber-400', soft: 'bg-amber-500/10', ring: 'ring-amber-500/25', hex: '#f59e0b' },
-  complexity: { text: 'text-violet-600 dark:text-violet-400', soft: 'bg-violet-500/10', ring: 'ring-violet-500/25', hex: '#8b5cf6' },
-};
+/** Number of steps in the calculator (shown as "Step n of 6"). */
+export const STEP_COUNT = 6;
 
 /** Pill with the severity category (1–5) of a 0–5 score, coloured by the official ramp. */
 export function SeverityChip({ score, showScore = false, size = 'md', className }: { score: number | null | undefined; showScore?: boolean; size?: 'sm' | 'md' | 'lg'; className?: string }) {
@@ -28,8 +17,8 @@ export function SeverityChip({ score, showScore = false, size = 'md', className 
   return (
     <span
       className={cn(
-        'inline-flex items-center gap-1.5 rounded-full font-semibold whitespace-nowrap ring-1 ring-black/5',
-        size === 'sm' ? 'px-2 py-0.5 text-[11px]' : size === 'lg' ? 'px-3.5 py-1.5 text-sm' : 'px-2.5 py-1 text-xs',
+        'inline-flex items-center gap-1.5 rounded-full font-semibold whitespace-nowrap',
+        size === 'sm' ? 'px-2 py-0.5 text-[11px]' : size === 'lg' ? 'px-3 py-1 text-sm' : 'px-2.5 py-0.5 text-xs',
         !c && 'bg-muted text-muted-foreground',
         className,
       )}
@@ -41,17 +30,17 @@ export function SeverityChip({ score, showScore = false, size = 'md', className 
   );
 }
 
-/** 0–5 bar coloured by the severity category of its value. */
+/** Flat 0–5 bar coloured by the severity category of its value. */
 export function SeverityMeter({ value, className, thin }: { value: number | null | undefined; className?: string; thin?: boolean }) {
   const c = severityCategory(isNum(value) ? value : null);
   return (
-    <div className={cn('w-full overflow-hidden rounded-full bg-muted', thin ? 'h-1.5' : 'h-2', className)} aria-hidden>
-      <div className="h-full rounded-full transition-[width] duration-700 ease-out" style={{ width: `${isNum(value) ? (Math.max(0, Math.min(5, value)) / 5) * 100 : 0}%`, background: c?.color ?? 'transparent' }} />
+    <div className={cn('w-full bg-muted', thin ? 'h-1' : 'h-1.5', className)} aria-hidden>
+      <div className="h-full transition-[width] duration-150" style={{ width: `${isNum(value) ? (Math.max(0, Math.min(5, value)) / 5) * 100 : 0}%`, background: c?.color ?? 'transparent' }} />
     </div>
   );
 }
 
-/** Step section with a numbered badge. */
+/** One step of the calculator: a ruled section with a plain "Step n of 6" label and a serif title. */
 export function Step({
   n,
   id,
@@ -62,35 +51,34 @@ export function Step({
   className,
 }: {
   n: number;
-  id?: string;
+  id: string;
   title: React.ReactNode;
   description?: React.ReactNode;
   actions?: React.ReactNode;
   children: React.ReactNode;
   className?: string;
 }) {
+  const { t } = useTranslation('severity');
   return (
-    <motion.section {...FADE} id={id} aria-labelledby={id ? `${id}-title` : undefined} className={cn('scroll-mt-24', className)}>
-      <div className="mb-4 flex flex-wrap items-start gap-x-3 gap-y-2">
-        <span className="flex size-8 shrink-0 items-center justify-center rounded-full bg-primary/10 font-display text-sm font-bold text-primary ring-1 ring-primary/20" aria-hidden>
-          {n}
-        </span>
-        <div className="min-w-0 flex-1">
-          <h2 id={id ? `${id}-title` : undefined} className="text-xl font-bold sm:text-2xl">
+    <section id={id} aria-labelledby={`${id}-title`} className={cn('scroll-mt-24 border-t border-border pt-10 first:border-t-0 first:pt-0', className)}>
+      <div className="mb-8">
+        <Kicker className="num mb-2">{t('steps.kicker', { n, total: STEP_COUNT })}</Kicker>
+        <div className="flex flex-wrap items-baseline justify-between gap-x-6 gap-y-2">
+          <h2 id={`${id}-title`} className="min-w-0 text-[1.5rem] leading-tight text-balance sm:text-[1.75rem]">
             {title}
           </h2>
-          {description && <p className="mt-1 max-w-2xl text-sm leading-relaxed text-muted-foreground">{description}</p>}
+          {actions && <div className="flex shrink-0 flex-wrap items-center gap-2">{actions}</div>}
         </div>
-        {actions && <div className="flex shrink-0 flex-wrap items-center gap-2">{actions}</div>}
+        {description && <p className="mt-2.5 max-w-2xl leading-relaxed text-muted-foreground">{description}</p>}
       </div>
       {children}
-    </motion.section>
+    </section>
   );
 }
 
-/** Small weight tag, e.g. "⅔". */
+/** Plain weight label, e.g. "⅔" (no chip). */
 export function WeightTag({ children, className }: { children: React.ReactNode; className?: string }) {
-  return <span className={cn('num inline-flex items-center rounded-md bg-muted px-1.5 py-0.5 text-[10px] font-semibold text-muted-foreground', className)}>{children}</span>;
+  return <span className={cn('num text-xs font-normal whitespace-nowrap text-muted-foreground', className)}>{children}</span>;
 }
 
 /** Fraction label for a weight (1/3 → "⅓", 2/3 → "⅔", 1/2 → "½", else a percentage). */
@@ -102,3 +90,18 @@ export function fractionLabel(w: number): string {
 }
 
 export const severityColor = (score: number | null | undefined) => severityCategory(isNum(score) ? score : null)?.color ?? null;
+
+/** Radio circle drawn inside a row that is itself a Radix radio item (the parent must carry `group`). */
+export function RadioMark({ className }: { className?: string }) {
+  return (
+    <span
+      className={cn(
+        'flex size-[18px] shrink-0 items-center justify-center rounded-full border-[1.5px] border-muted-foreground/60 transition-colors duration-150 group-hover:border-foreground group-data-[state=checked]:border-primary',
+        className,
+      )}
+      aria-hidden
+    >
+      <RadioGroup.Indicator className="size-2 rounded-full bg-primary" />
+    </span>
+  );
+}

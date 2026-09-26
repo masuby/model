@@ -3,7 +3,7 @@
  * Smoke test: the page renders in both languages with no missing translation keys, shows the engine's
  * score for the default scenario, formats typed numbers, and lists missing inputs for a blank form.
  */
-import { act, cleanup, fireEvent, render, screen, within } from '@testing-library/react';
+import { act, cleanup, fireEvent, render, screen, waitFor, within } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
 import { afterEach, beforeAll, describe, expect, it, vi } from 'vitest';
 import { TooltipProvider } from '@/components/ui/primitives';
@@ -13,7 +13,7 @@ import { SEVERITY_SCENARIOS } from '@/engine/severity/scenarios';
 import i18n from '@/i18n';
 import SeverityPage from '../SeverityPage';
 
-vi.mock('@/components/map/RiskMap', () => ({ default: () => <div data-testid="risk-map" /> }));
+vi.mock('@/components/map/StaticMap', () => ({ default: () => <div data-testid="static-map" /> }));
 
 const missing: string[] = [];
 
@@ -79,6 +79,8 @@ describe('SeverityPage', () => {
       const results = within(document.getElementById('sev-results')!);
       expect(results.getByText(i18n.t('severity:results.announce', { score: expected.severity!.toFixed(1), category: i18n.t(`common:classes.${expected.category}`) }))).toBeInTheDocument();
       expect(screen.getAllByRole('radio').length).toBeGreaterThanOrEqual(4);
+      // The table and methodology mount once the browser is idle.
+      await waitFor(() => expect(document.querySelector('[data-deferred="pending"]')).toBeNull());
       expect(missing).toEqual([]);
     });
   }

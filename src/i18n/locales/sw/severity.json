@@ -4,15 +4,15 @@
     "title": "Ukali wa janga",
     "lead": "Hatari ya INFORM inaonyesha mahali janga lingeleta madhara makubwa zaidi kabla halijatokea. Ukali wa INFORM hupima uzito wa janga linaloendelea: athari zake, hali za watu walioathirika na utata wa kukabiliana nalo.",
     "methodCta": "Jinsi inavyokokotolewa",
-    "riskSub": "Kabla ya janga · 0–10 · fungua ramani ya hatari",
-    "severityName": "Ukali wa INFORM",
-    "severitySub": "Wakati wa janga · 0–5 · kikokotoo hiki",
-    "here": "Uko hapa"
+    "before": "Kabla ya janga",
+    "during": "Wakati wa janga",
+    "riskCta": "Fungua ramani ya hatari",
+    "severityName": "Ukali wa INFORM"
   },
-  "illustrative": "Mfano",
   "illustrativeTitle": "Haya ni matukio ya mfano, si data rasmi.",
   "illustrativeNote": "Yanatumia ukubwa unaowezekana ili kuonyesha jinsi mbinu inavyofanya kazi. Badilisha kila takwimu kwa data iliyotathminiwa kabla ya kutumia matokeo katika ripoti ya hali.",
   "steps": {
+    "kicker": "Hatua {{n}} kati ya {{total}}",
     "dimScore": "Alama",
     "scenario": {
       "title": "Anza na tukio",
@@ -26,7 +26,7 @@
       "lead": "Janga ni kubwa kiasi gani? Ukubwa wa eneo lililoathirika na watu wanaoishi humo (kijiografia, ⅓), pamoja na watu walioathirika, waliohama makazi au waliopoteza maisha (kibinadamu, ⅔)."
     },
     "conditions": {
-      "lead": "Hali za watu walioathirika ni mbaya kiasi gani? Kadiria idadi ya watu walio katika kila kiwango cha hali za kibinadamu."
+      "lead": "Hali za watu walioathirika ni mbaya kiasi gani? Wagawe watu wote walio katika eneo lililoathirika kwenye viwango vitano vya hali za kibinadamu (INFORM Severity, Jedwali 1). Watu walio katika viwango 3–5 ndio wenye mahitaji; kiwango 1 hujazwa chenyewe kama watu waliobaki."
     },
     "complexity": {
       "lead": "Ni vigumu kiasi gani kukabiliana na janga? Muktadha wa kimuundo (jamii na usalama) na mazingira ya utendaji katika eneo husika."
@@ -59,8 +59,7 @@
     },
     "custom": {
       "name": "Fomu tupu / maalum",
-      "blurb": "Anza na fomu tupu. Viashiria vya kimuundo vya kitaifa vinabaki vimejazwa.",
-      "cta": "Weka takwimu zako"
+      "blurb": "Anza na fomu tupu. Viashiria vya kimuundo vya kitaifa vinabaki vimejazwa."
     }
   },
   "area": {
@@ -94,7 +93,6 @@
   "sub": {
     "geographicalLead": "Ukubwa wa janga kwa eneo na kwa idadi ya watu.",
     "humanLead": "Madhara ya moja kwa moja kwa watu. Asilimia hukokotolewa zenyewe.",
-    "conditionsLead": "Wagawe watu wote walio katika eneo lililoathirika kwenye viwango vitano vya hali za kibinadamu (INFORM Severity, Jedwali 1). Watu walio katika viwango 3–5 ndio wenye mahitaji; kiwango 1 hujazwa chenyewe kama watu waliobaki.",
     "societySafetyLead": "Viashiria vya kimuundo vya kitaifa vya Tanzania, vimejazwa kutoka vyanzo vya umma. Vibadilishe ikiwa ushahidi wa eneo lililoathirika unaonyesha tofauti.",
     "operatingEnvironmentLead": "Nani ameathirika, na ni vigumu kiasi gani kwa misaada na watu kufikiana."
   },
@@ -196,28 +194,28 @@
     "fatalRate": "{{v}} kwa kila watu 10,000 walioathirika"
   },
   "level": {
-    "short": "Kiwango {{n}}",
-    "inputLabel": "Watu katika kiwango {{n}} ({{name}})",
-    "5": {
-      "name": "Mbaya kupindukia",
-      "desc": "Vifo au madhara yasiyoweza kurekebishwa yameenea. Hali ya maisha imeporomoka na njia zote za kukabiliana zimekwisha."
-    },
-    "4": {
-      "name": "Mbaya sana",
-      "desc": "Hali ya maisha imevunjika. Watu wanaishi kwa kutegemea misaada ya kibinadamu au mbinu za dharura; kuna madhara makubwa ya kimwili na kiakili."
-    },
-    "3": {
-      "name": "Mbaya kiasi",
-      "desc": "Hali ya maisha inazorota. Baadhi ya mahitaji ya msingi hayawezi kutimizwa bila mbinu za dharura, kama kuuza mali za uzalishaji."
+    "1": {
+      "name": "Hakuna au kidogo",
+      "desc": "Hali ya maisha inakubalika; mahitaji ya msingi yanatimizwa bila mbinu zenye madhara. Hukokotolewa kama watu waliobaki katika eneo."
     },
     "2": {
       "name": "Chini ya shinikizo",
       "desc": "Hali ya maisha iko chini ya shinikizo. Mahitaji ya msingi yanatimizwa tu kwa mbinu zinazodhoofisha njia za kujipatia kipato."
     },
-    "1": {
-      "name": "Hakuna au kidogo",
-      "desc": "Hali ya maisha inakubalika; mahitaji ya msingi yanatimizwa bila mbinu zenye madhara. Hukokotolewa kama watu waliobaki katika eneo."
-    }
+    "3": {
+      "name": "Mbaya kiasi",
+      "desc": "Hali ya maisha inazorota. Baadhi ya mahitaji ya msingi hayawezi kutimizwa bila mbinu za dharura, kama kuuza mali za uzalishaji."
+    },
+    "4": {
+      "name": "Mbaya sana",
+      "desc": "Hali ya maisha imevunjika. Watu wanaishi kwa kutegemea misaada ya kibinadamu au mbinu za dharura; kuna madhara makubwa ya kimwili na kiakili."
+    },
+    "5": {
+      "name": "Mbaya kupindukia",
+      "desc": "Vifo au madhara yasiyoweza kurekebishwa yameenea. Hali ya maisha imeporomoka na njia zote za kukabiliana zimekwisha."
+    },
+    "short": "Kiwango {{n}}",
+    "inputLabel": "Watu katika kiwango {{n}} ({{name}})"
   },
   "conditions": {
     "inNeedTag": "Wenye mahitaji",
@@ -346,6 +344,7 @@
   "results": {
     "eyebrow": "Matokeo ya papo hapo",
     "title": "Kielelezo cha Ukali cha INFORM",
+    "scenarioIllustrative": "{{name}} · mfano",
     "category": "Daraja {{level}} kati ya 5",
     "announce": "Ukali {{score}}, {{category}}",
     "incomplete": "Haijakamilika",
@@ -359,9 +358,8 @@
     "weightInG": "{{w}} ndani ya G",
     "formula": "Fomula kwa namba zako",
     "formulaLhs": "Ukali",
-    "formulaHint": "G ni wastani wa kijiometri wenye uzito wa INFORM: hugeuza alama, huchukua wastani wa kijiometri kisha hugeuza tena, hivyo kipimo kimoja chenye ukali mkubwa hakififishwi na wastani.",
+    "formulaHint": "G(Athari, Hali za kibinadamu) ni wastani wa kijiometri wenye uzito wa INFORM, kwa uzito wa ⅓ na ⅔: hugeuza alama, huchukua wastani wa kijiometri kisha hugeuza tena, hivyo kipimo kimoja chenye ukali mkubwa hakififishwi na wastani.",
     "reliability": "Uaminifu",
-    "reliabilityAria": "Uaminifu {{score}} kati ya 5",
     "completeness": "Ukamilifu wa data",
     "completenessSub": "viashiria {{have}} kati ya {{total}}",
     "sourceReliability": "Uaminifu wa vyanzo",
@@ -372,6 +370,7 @@
     "reliabilityNote": "Huripotiwa pamoja na kielelezo; haibadilishi alama ya ukali.",
     "export": "Hamisha",
     "copy": "Nakili muhtasari wa ripoti ya hali",
+    "copyShort": "Nakili muhtasari",
     "copied": "Muhtasari umenakiliwa. Ubandike kwenye ripoti yako ya hali.",
     "copyFailed": "Imeshindikana kunakili.",
     "mobileCta": "Matokeo kamili"
@@ -419,7 +418,7 @@
     "dimWeight": "uzito {{w}}",
     "legendG": "wastani wa kijiometri wenye uzito wa INFORM (uliogeuzwa, hivyo thamani za juu hutawala)",
     "legendMean": "wastani wa kawaida",
-    "live": "Alama zilizo kwenye visanduku hubadilika papo hapo kulingana na taarifa zako.",
+    "live": "Alama hubadilika papo hapo kulingana na taarifa zako.",
     "cards": {
       "normalise": {
         "title": "Pima kila kiashiria",

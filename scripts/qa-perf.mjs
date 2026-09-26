@@ -2,14 +2,15 @@
  * qa-perf.mjs — page-load performance on a production build, emulating a mid-range phone on 4G
  * (4× CPU slowdown, ~9 Mbps / 60 ms RTT). Reports FCP, LCP, total blocking time proxy, JS bytes.
  *   npx vite build && npx vite preview --port 4173
- *   node scripts/qa-perf.mjs [baseUrl] [--runs=3]
+ *   node scripts/qa-perf.mjs [baseUrl] [--runs=3] [--only=/severity,/]
  */
 import { chromium } from 'playwright';
 
 const args = process.argv.slice(2);
 const BASE = args.find((a) => !a.startsWith('--')) ?? 'http://localhost:4173';
 const RUNS = Number((args.find((a) => a.startsWith('--runs=')) ?? '--runs=3').split('=')[1]);
-const ROUTES = ['/', '/explore', '/area/C041', '/insights', '/severity', '/learn', '/methodology', '/data'];
+const ONLY = args.find((a) => a.startsWith('--only='));
+const ROUTES = ONLY ? ONLY.slice(7).split(',') : ['/', '/explore', '/area/C041', '/insights', '/severity', '/learn', '/methodology', '/data'];
 
 const median = (xs) => {
   const s = [...xs].sort((a, b) => a - b);
@@ -49,7 +50,11 @@ for (const route of ROUTES) {
       }).observe({ type: 'longtask', buffered: true });
     });
     const t0 = Date.now();
-    await page.goto(BASE + route, { waitUntil: 'networkidle', timeout: 120_000 });
+    await page.goto(BASE + route, { waitUntil: 'domcontentloaded', timeout: 120_000 });
+    // "Content visible" = the page's own heading has rendered (not the shell or a loader).
+    await page.waitForSelector('main h1, main h2', { timeout: 60_000 });
+    const content = Date.now() - t0;
+    await page.waitForLoadState('networkidle', { timeout: 120_000 });
     const load = Date.now() - t0;
     await page.waitForTimeout(500);
     const m = await page.evaluate(() => ({
@@ -57,7 +62,7 @@ for (const route of ROUTES) {
       lcp: window.__lcp,
       tbt: window.__longTasks,
     }));
-    samples.push({ ...m, load, jsKB: Math.round(jsBytes / 1024), totalKB: Math.round(allBytes / 1024) });
+    samples.push({ ...m, content, load, jsKB: Math.round(jsBytes / 1024), totalKB: Math.round(allBytes / 1024) });
     await ctx.close();
   }
   const row = {
@@ -65,11 +70,12 @@ for (const route of ROUTES) {
     fcp: Math.round(median(samples.map((s) => s.fcp))),
     lcp: Math.round(median(samples.map((s) => s.lcp))),
     tbt: Math.round(median(samples.map((s) => s.tbt))),
+    content: Math.round(median(samples.map((s) => s.content))),
     idle: Math.round(median(samples.map((s) => s.load))),
     jsKB: median(samples.map((s) => s.jsKB)),
     totalKB: median(samples.map((s) => s.totalKB)),
   };
   rows.push(row);
-  console.log(`${route.padEnd(14)} FCP ${String(row.fcp).padStart(5)} ms   LCP ${String(row.lcp).padStart(5)} ms   TBT ${String(row.tbt).padStart(5)} ms   network-idle ${String(row.idle).padStart(6)} ms   JS ${row.jsKB} KB   total ${row.totalKB} KB`);
+  console.log(`${route.padEnd(14)} FCP ${String(row.fcp).padStart(5)} ms   LCP ${String(row.lcp).padStart(5)} ms   content ${String(row.content).padStart(5)} ms   TBT ${String(row.tbt).padStart(5)} ms   idle ${String(row.idle).padStart(6)} ms   JS ${row.jsKB} KB   total ${row.totalKB} KB`);
 }
 await browser.close();

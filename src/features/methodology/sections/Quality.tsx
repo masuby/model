@@ -1,13 +1,10 @@
-import { CircleAlert, CircleCheck, FlaskConical, Terminal } from 'lucide-react';
-import { motion } from 'motion/react';
+import { CircleAlert, CircleCheck } from 'lucide-react';
 import * as React from 'react';
 import { useTranslation } from 'react-i18next';
-import { Card } from '@/components/ui/card';
 import { useModel } from '@/data-layer/DataProvider';
 import { cn, formatNumber } from '@/lib/utils';
 import { ADVANCED_COUNT, SPEC_STATS, VERIFIED } from '../data';
 import { consistency } from '../derive';
-import { fadeIn } from '../tokens';
 import { DocSection } from '../ui';
 
 const CHECKS = ['standardise', 'pipeline', 'parity', 'invariants', 'flexibility', 'advanced', 'severity'] as const;
@@ -37,80 +34,58 @@ export function QualitySection() {
     parity: t('quality.rows', { n: VERIFIED.workbookRows }),
     advanced: `${ADVANCED_COUNT}`,
   };
-  const vars = {
-    used: SPEC_STATS.used,
-    units: VERIFIED.pipelineUnits,
-    councils: model.councils.length,
-    regions: model.regions.length,
-    inherited,
-    n: ADVANCED_COUNT,
-  };
+  const vars = { used: SPEC_STATS.used, units: VERIFIED.pipelineUnits, councils: model.councils.length, regions: model.regions.length, inherited, n: ADVANCED_COUNT };
 
   return (
-    <DocSection id="quality" number="10" eyebrow={t('sections.quality')} title={t('quality.title')} lead={t('quality.lead')}>
-      <motion.div {...fadeIn}>
-        <Card className={cn('relative overflow-hidden p-5 sm:p-6', pass ? 'border-success/30' : 'border-danger/40')}>
-          <div className={cn('pointer-events-none absolute -top-20 -right-20 size-56 rounded-full blur-3xl', pass ? 'bg-success/15' : 'bg-danger/15')} aria-hidden />
-          <div className="relative flex flex-col gap-5 md:flex-row md:items-center md:justify-between">
-            <div className="max-w-xl">
-              <div className={cn('inline-flex items-center gap-1.5 rounded-full px-2.5 py-1 text-xs font-semibold', pass ? 'bg-success/12 text-success' : 'bg-danger/12 text-danger')}>
-                {pass ? <CircleCheck className="size-3.5" aria-hidden /> : <CircleAlert className="size-3.5" aria-hidden />}
-                {pass ? t('quality.live.pass') : t('quality.live.fail')}
-              </div>
-              <h3 className="mt-3 text-lg font-bold">{t('quality.live.title')}</h3>
-              <p className="mt-1 text-sm leading-relaxed text-muted-foreground">{t('quality.live.body')}</p>
+    <DocSection id="quality" label={t('sections.quality')} title={t('quality.title')} lead={t('quality.lead')}>
+      {/* Live self-check: a statement and two figures, set between rules. */}
+      <div className="grid gap-8 border-y border-border py-7 md:grid-cols-[minmax(0,1fr)_auto] md:items-center md:gap-12">
+        <div className="max-w-xl">
+          <h3 className="text-base font-semibold">{t('quality.live.title')}</h3>
+          <p className="mt-1.5 text-sm leading-relaxed text-muted-foreground">{t('quality.live.body')}</p>
+          <p className={cn('mt-3 flex items-center gap-1.5 text-sm font-medium', pass ? 'text-success' : 'text-danger')}>
+            {pass ? <CircleCheck className="size-4" aria-hidden /> : <CircleAlert className="size-4" aria-hidden />}
+            {pass ? t('quality.live.pass') : t('quality.live.fail')}
+          </p>
+        </div>
+        <dl className="grid grid-cols-2 md:flex md:divide-x md:divide-border" aria-live="polite">
+          {(
+            [
+              ['dims', live.dims],
+              ['risk', live.risk],
+            ] as const
+          ).map(([k, v], i) => (
+            <div key={k} className={cn('min-w-0 md:px-8 md:last:pr-0', i === 1 && 'border-l border-border pl-5 md:border-l-0')}>
+              <dt className="text-sm text-muted-foreground">{t(`quality.live.${k}`)}</dt>
+              <dd className="num mt-1 font-display text-[2.1rem] leading-none font-semibold tracking-tight whitespace-nowrap">
+                {v.ok}
+                <span className="text-lg font-normal text-muted-foreground"> / {v.total}</span>
+              </dd>
             </div>
-            <dl className="grid shrink-0 grid-cols-2 gap-6" aria-live="polite">
-              <div>
-                <dt className="text-xs text-muted-foreground">{t('quality.live.dims')}</dt>
-                <dd className="num mt-1 font-display text-3xl font-extrabold tracking-tight">
-                  {live.dims.ok}
-                  <span className="text-lg text-muted-foreground"> / {live.dims.total}</span>
-                </dd>
-              </div>
-              <div>
-                <dt className="text-xs text-muted-foreground">{t('quality.live.risk')}</dt>
-                <dd className="num mt-1 font-display text-3xl font-extrabold tracking-tight">
-                  {live.risk.ok}
-                  <span className="text-lg text-muted-foreground"> / {live.risk.total}</span>
-                </dd>
-              </div>
-            </dl>
-          </div>
-        </Card>
-      </motion.div>
-
-      <ul className="mt-6 grid gap-3 md:grid-cols-2">
-        {CHECKS.map((c, i) => (
-          <motion.li key={c} {...fadeIn} transition={{ ...fadeIn.transition, delay: (i % 2) * 0.05 }}>
-            <Card className="flex h-full gap-4 p-5">
-              <span className="mt-0.5 inline-flex size-8 shrink-0 items-center justify-center rounded-full bg-success/12 text-success">
-                <CircleCheck className="size-4" aria-hidden />
-              </span>
-              <div className="min-w-0 flex-1">
-                <div className="flex flex-wrap items-baseline justify-between gap-x-3 gap-y-1">
-                  <h3 className="font-semibold">{t(`quality.checks.${c}.title`)}</h3>
-                  {stat[c] && <span className="num font-display text-sm font-extrabold text-success">{stat[c]}</span>}
-                </div>
-                <p className="mt-1 text-sm leading-relaxed text-muted-foreground">{t(`quality.checks.${c}.body`, vars)}</p>
-                <code className="mt-2 inline-block rounded-md bg-muted px-1.5 py-0.5 font-mono text-[10.5px] text-muted-foreground">{FILES[c]}</code>
-              </div>
-            </Card>
-          </motion.li>
-        ))}
-      </ul>
-
-      <div className="mt-6 flex flex-col gap-3 rounded-2xl border border-dashed border-border p-4 text-sm sm:flex-row sm:items-center">
-        <span className="inline-flex items-center gap-2 font-semibold">
-          <FlaskConical className="size-4 text-primary" aria-hidden />
-          {t('quality.reproduce')}
-        </span>
-        <code className="inline-flex items-center gap-2 rounded-lg bg-muted px-3 py-1.5 font-mono text-xs">
-          <Terminal className="size-3.5 text-muted-foreground" aria-hidden />
-          npx vitest run
-        </code>
-        <span className="text-xs text-muted-foreground">{t('quality.reproduceHint')}</span>
+          ))}
+        </dl>
       </div>
+
+      <dl className="mt-12 divide-y divide-border border-b border-border">
+        {CHECKS.map((c) => (
+          <div key={c} className="grid gap-2 py-5 md:grid-cols-[17rem_minmax(0,1fr)] md:gap-10">
+            <dt>
+              <span className="block text-sm font-semibold">{t(`quality.checks.${c}.title`)}</span>
+              {stat[c] && <span className="num mt-1 block text-sm text-muted-foreground">{stat[c]}</span>}
+            </dt>
+            <dd className="min-w-0">
+              <p className="max-w-[68ch] text-sm leading-relaxed text-foreground/85">{t(`quality.checks.${c}.body`, vars)}</p>
+              <code className="mt-1.5 block font-mono text-[11.5px] break-words text-muted-foreground">{FILES[c]}</code>
+            </dd>
+          </div>
+        ))}
+      </dl>
+
+      <p className="mt-8 flex flex-wrap items-baseline gap-x-3 gap-y-2 text-sm">
+        <span className="font-medium">{t('quality.reproduce')}</span>
+        <code className="rounded-md bg-muted px-2 py-0.5 font-mono text-[13px]">npx vitest run</code>
+        <span className="text-muted-foreground">{t('quality.reproduceHint')}</span>
+      </p>
     </DocSection>
   );
 }

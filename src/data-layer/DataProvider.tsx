@@ -37,9 +37,18 @@ const DataContext = React.createContext<DataContextValue | null>(null);
 /**
  * The Supabase client is created in the background — the app renders immediately with the shipped
  * dataset and picks up approved edits and the session as soon as the SDK has loaded (never blocking
- * first paint). In demo mode nothing is downloaded at all.
+ * first paint). The SDK download waits for the page's load event and an idle moment, so it never competes
+ * with the route's own code. In demo mode nothing is downloaded at all.
  */
-const sbPromise: Promise<SupabaseClient | null> = supabaseConfigured ? createSupabaseClient() : Promise.resolve(null);
+function afterLoad(): Promise<void> {
+  if (typeof window === 'undefined') return Promise.resolve();
+  return new Promise((resolve) => {
+    const idle = () => (typeof window.requestIdleCallback === 'function' ? window.requestIdleCallback(() => resolve(), { timeout: 1500 }) : window.setTimeout(resolve, 200));
+    if (document.readyState === 'complete') idle();
+    else window.addEventListener('load', idle, { once: true });
+  });
+}
+const sbPromise: Promise<SupabaseClient | null> = supabaseConfigured ? afterLoad().then(createSupabaseClient) : Promise.resolve(null);
 let SB: SupabaseClient | null = null;
 void sbPromise.then((c) => {
   SB = c;
@@ -194,10 +203,25 @@ export function useOverrides() {
   return useQuery({ queryKey: ['overrides', repo.mode], queryFn: () => repo.getOverrides() });
 }
 
-/** The INFORM model with all approved edits applied. Falls back to the shipped dataset while loading. */
+/** One model per overrides object, however many components ask for it. */
+const modelCache = new WeakMap<object, RiskModel>();
+const EMPTY_OVERRIDES = {};
+function toModel(data: unknown): RiskModel {
+  if (!data || typeof data !== 'object' || !Object.keys(data).length) return BASE_MODEL;
+  let model = modelCache.get(data);
+  if (!model) modelCache.set(data, (model = buildModel(data as Overrides)));
+  return model;
+}
+
+/**
+ * The INFORM model with all approved edits applied. Falls back to the shipped dataset while loading.
+ * Subscribes through `select`, so a page only re-renders when the model itself changes (not when the
+ * overrides query settles with no edits).
+ */
 export function useModel(): RiskModel {
-  const { data } = useOverrides();
-  return React.useMemo(() => (data && Object.keys(data).length ? buildModel(data as Overrides) : BASE_MODEL), [data]);
+  const { repo } = useData();
+  const { data } = useQuery({ queryKey: ['overrides', repo.mode], queryFn: () => repo.getOverrides(), select: toModel, placeholderData: EMPTY_OVERRIDES });
+  return data ?? BASE_MODEL;
 }
 
 export function useSubmissions() {

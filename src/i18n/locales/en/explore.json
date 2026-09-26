@@ -1,5 +1,4 @@
 {
-  "eyebrow": "INFORM Risk · Tanzania",
   "title": "Risk explorer",
   "lead": "Colour Tanzania by overall risk, a dimension or any of {{count}} indicators. Select an area to see what drives its score.",
   "panel": {
@@ -15,6 +14,7 @@
   "search": {
     "label": "Find a council or region",
     "placeholder": "Find a council or region…",
+    "placeholderShort": "Search places…",
     "results": "Matching places",
     "empty": "No place matches “{{q}}”."
   },
@@ -23,7 +23,6 @@
     "council": "Councils",
     "region": "Regions",
     "source": "INFORM units",
-    "ref": "ref.",
     "reference": "Reference",
     "note": {
       "council": "{{count}} councils (NBS 2022) — the headline level. Hazard & Exposure is computed for each council; vulnerability and coping come from the council’s INFORM source unit.",
@@ -36,6 +35,7 @@
     "indicator": "Single indicator",
     "indicatorChip": "Indicator…",
     "pickIndicator": "Choose an indicator…",
+    "selected": "selected",
     "searchIndicator": "Search indicators…",
     "noIndicator": "No indicator matches.",
     "scoresFor": "Scores shown for {{name}}.",
@@ -75,7 +75,7 @@
     "more": "Read the methodology →"
   },
   "stats": {
-    "label": "Statistics · {{metric}}",
+    "label": "Statistics",
     "mean": "Mean",
     "min": "Lowest",
     "max": "Highest",
@@ -88,11 +88,10 @@
     "distribution": "Distribution"
   },
   "ranking": {
-    "label": "Top areas · {{metric}}",
+    "label": "Top areas",
     "openTable": "Open the full ranking"
   },
   "basemap": {
-    "section": "Map",
     "label": "Street basemap",
     "hint": "OpenStreetMap context under the colours"
   },

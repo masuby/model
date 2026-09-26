@@ -51,21 +51,22 @@ export function ChangeTable({
   const label = useRefLabel();
   const rawText = useRawText();
   return (
-    <div className={cn('overflow-x-auto rounded-xl border border-border', className)}>
-      <table className="w-full min-w-[420px] text-sm">
+    // `relative` keeps the sr-only caption (absolutely positioned) inside the scroll box on phones.
+    <div className={cn('relative overflow-x-auto border-y border-border', className)}>
+      <table className="w-full text-sm sm:min-w-[420px]">
         {caption && <caption className="sr-only">{caption}</caption>}
-        <thead className="bg-muted/60 text-xs text-muted-foreground">
-          <tr>
-            <th scope="col" className="px-3 py-2 text-left font-medium">
+        <thead className="text-xs text-muted-foreground">
+          <tr className="border-b border-border">
+            <th scope="col" className="py-2 pr-2 text-left font-medium sm:pr-3">
               {t('changes.indicator')}
             </th>
-            <th scope="col" className="px-3 py-2 text-right font-medium">
+            <th scope="col" className="px-2 py-2 text-right font-medium sm:px-3">
               {t('changes.previous')}
             </th>
-            <th scope="col" className="px-3 py-2 text-right font-medium">
+            <th scope="col" className="px-2 py-2 text-right font-medium sm:px-3">
               {t('changes.proposed')}
             </th>
-            <th scope="col" className="px-3 py-2 text-right font-medium">
+            <th scope="col" className="py-2 pl-2 text-right font-medium sm:pl-3">
               {t('changes.delta')}
             </th>
           </tr>
@@ -78,25 +79,25 @@ export function ChangeTable({
             const stale = current !== undefined && c.previous !== undefined && !sameScore(current, c.previous);
             return (
               <tr key={c.ref} className="align-top">
-                <td className="px-3 py-2.5">
+                <td className="py-2.5 pr-2 sm:pr-3">
                   <div className="font-medium">{l.name}</div>
                   <div className="text-xs text-muted-foreground">{l.dim}</div>
                   {raw && (
-                    <div className="mt-1 inline-flex items-center gap-1 text-xs text-muted-foreground">
-                      <FlaskConical className="size-3" aria-hidden /> {raw}
+                    <div className="mt-1 flex items-start gap-1 text-xs text-muted-foreground">
+                      <FlaskConical className="mt-0.5 size-3 shrink-0" aria-hidden /> {raw}
                     </div>
                   )}
                   {stale && (
-                    <div className="mt-1 flex items-center gap-1 text-xs font-medium text-warning">
-                      <AlertTriangle className="size-3" aria-hidden /> {t('changes.stale', { value: formatScore(current) })}
+                    <div className="mt-1 flex items-start gap-1 text-xs font-medium text-warning">
+                      <AlertTriangle className="mt-0.5 size-3 shrink-0" aria-hidden /> {t('changes.stale', { value: formatScore(current) })}
                     </div>
                   )}
                 </td>
-                <td className="px-3 py-2.5 text-right text-muted-foreground">{c.previous === undefined ? '—' : <ScoreValue value={c.previous} />}</td>
-                <td className="px-3 py-2.5 text-right">
+                <td className="px-2 py-2.5 text-right text-muted-foreground sm:px-3">{c.previous === undefined ? '—' : <ScoreValue value={c.previous} />}</td>
+                <td className="px-2 py-2.5 text-right sm:px-3">
                   <ScoreValue value={c.value} className="text-foreground" />
                 </td>
-                <td className="px-3 py-2.5 text-right">
+                <td className="py-2.5 pl-2 text-right sm:pl-3">
                   <Delta value={c.previous === undefined ? null : scoreDelta(c.previous, c.value)} />
                 </td>
               </tr>

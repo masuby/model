@@ -3,14 +3,24 @@ import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 import { Bar, BarChart, CartesianGrid, LabelList, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts';
 import { ChartCard } from '@/components/charts/ChartCard';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { CLASS_COLORS, CLASS_KEYS, classRanges, type ClassKey } from '@/engine/risk/classes';
 import type { RiskModel } from '@/engine/risk/types';
 import { formatNumber } from '@/lib/utils';
 import { classCounts, classDistributionByRegion, type DistributionRow } from '../analytics';
 import { useBarShape } from '../marks';
 import { useInsightTheme } from '../theme';
-import { CategoryTick, InsightSection, Legend, TooltipCard, TooltipRow, WhatThisShows, useMediaQuery } from '../ui';
+import { Aside, backedValueLabel, CategoryTick, FigureNote, InsightSection, Legend, TooltipCard, TooltipRow, useMediaQuery } from '../ui';
+
+/**
+ * Every class list, legend and stack on this page runs Very high → Very low. In the bars that puts the
+ * High and Very High share on the common left baseline, so it compares directly across regions.
+ */
+const ORDER: readonly ClassKey[] = [...CLASS_KEYS].reverse();
+
+/** Round class marker, as ClassDot draws it, for a class key rather than a score. */
+function ClassKeyDot({ k }: { k: ClassKey }) {
+  return <span className="inline-block size-2.5 shrink-0 rounded-[2px]" style={{ background: CLASS_COLORS[k] }} aria-hidden />;
+}
 
 type Datum = DistributionRow & Record<ClassKey, number> & { highLabel: string };
 
@@ -21,7 +31,7 @@ function DistributionTooltip({ active, payload }: { active?: boolean; payload?: 
   const pct = (n: number) => formatNumber(d.total ? n / d.total : 0, i18n.language, { style: 'percent', maximumFractionDigits: 0 });
   return (
     <TooltipCard title={d.name} subtitle={t('classes.tooltipTotal', { count: d.total })}>
-      {[...CLASS_KEYS].reverse().map((k) =>
+      {ORDER.map((k) =>
         d.counts[k] ? <TooltipRow key={k} color={CLASS_COLORS[k]} label={t(`common:classes.${k}`)} value={`${d.counts[k]} · ${pct(d.counts[k])}`} /> : null,
       )}
       <div className="mt-1 border-t border-border pt-1.5">
@@ -63,6 +73,8 @@ export function ClassDistribution({ model }: { model: RiskModel }) {
     veryHigh: useBarShape({ colorOf: colorFns.veryHigh, gap: th.surface }),
   } satisfies Record<ClassKey, unknown>;
 
+  const valueLabel = React.useMemo(() => backedValueLabel(th.surface), [th.surface]);
+
   const csv = React.useMemo(
     () => [
       [t('common:labels.region'), 'id', t('classes.councils'), ...CLASS_KEYS.map((k) => t(`common:classes.${k}`)), t('classes.highShare')],
@@ -74,8 +86,8 @@ export function ClassDistribution({ model }: { model: RiskModel }) {
   const height = rows.length * 24 + 44;
 
   return (
-    <InsightSection id="classes" index={5} eyebrow={t('classes.eyebrow')} title={t('classes.title')} lead={t('classes.lead')}>
-      <div className="grid gap-4 lg:grid-cols-[minmax(0,1.75fr)_minmax(0,1fr)] lg:items-start">
+    <InsightSection id="classes" title={t('classes.title')} lead={t('classes.lead')}>
+      <div className="grid gap-12 lg:grid-cols-[minmax(0,1.8fr)_minmax(0,1fr)] lg:items-start lg:gap-14">
         <ChartCard title={t('classes.chartTitle')} description={t('classes.chartSub')} csv={csv} filename="class-distribution-by-region">
           <p className="sr-only">{t('classes.aria', { all: allHigh.length, none: noneHigh.length, total: rows.length })}</p>
           <div style={{ height }}>
@@ -94,14 +106,14 @@ export function ClassDistribution({ model }: { model: RiskModel }) {
                 <YAxis
                   type="category"
                   dataKey="name"
-                  width={narrow ? 92 : 124}
+                  width={narrow ? 108 : 124}
                   interval={0}
                   tickLine={false}
                   axisLine={false}
-                  tick={(p) => <CategoryTick x={p.x} y={p.y} payload={p.payload} fill={th.text} maxChars={narrow ? 13 : 19} />}
+                  tick={(p) => <CategoryTick x={p.x} y={p.y} payload={p.payload} fill={th.text} maxChars={narrow ? 18 : 20} />}
                 />
                 <Tooltip cursor={{ fill: th.cursor }} content={<DistributionTooltip />} />
-                {CLASS_KEYS.map((k, i) => (
+                {ORDER.map((k, i) => (
                   <Bar
                     key={k}
                     dataKey={k}
@@ -112,7 +124,7 @@ export function ClassDistribution({ model }: { model: RiskModel }) {
                     isAnimationActive={false}
                     onClick={(d) => navigate(`/area/${(d.payload as Datum).id}`)}
                   >
-                    {i === CLASS_KEYS.length - 1 && <LabelList dataKey="highLabel" position="right" fill={th.ink} fontSize={11} fontWeight={600} offset={8} />}
+                    {i === ORDER.length - 1 && <LabelList dataKey="highLabel" position="right" fill={th.ink} fontSize={11} fontWeight={600} offset={8} content={valueLabel} />}
                   </Bar>
                 ))}
               </BarChart>
@@ -121,47 +133,42 @@ export function ClassDistribution({ model }: { model: RiskModel }) {
           <Legend
             className="mt-3"
             aria-label={t('classes.legend')}
-            items={CLASS_KEYS.map((k) => ({ key: k, color: CLASS_COLORS[k], label: t(`common:classes.${k}`) }))}
+            items={ORDER.map((k) => ({ key: k, color: CLASS_COLORS[k], label: t(`common:classes.${k}`) }))}
           />
-          <WhatThisShows>{t('classes.caption')}</WhatThisShows>
+          <FigureNote>{t('classes.caption')}</FigureNote>
         </ChartCard>
 
-        <Card>
-          <CardHeader>
-            <CardTitle>{t('classes.nationalTitle')}</CardTitle>
-          </CardHeader>
-          <CardContent>
-            <div className="flex h-4 gap-[2px] overflow-hidden rounded-full" role="img" aria-label={CLASS_KEYS.map((k) => `${t(`common:classes.${k}`)}: ${national[k]}`).join(', ')}>
-              {CLASS_KEYS.map((k) => (national[k] ? <div key={k} style={{ width: `${(national[k] / Math.max(1, total)) * 100}%`, background: CLASS_COLORS[k] }} /> : null))}
-            </div>
-            <ul className="mt-5 grid gap-2.5">
-              {[...CLASS_KEYS].reverse().map((k, i) => (
-                <li key={k} className="flex items-center gap-3">
-                  <span className="size-3 shrink-0 rounded-[4px]" style={{ background: CLASS_COLORS[k] }} aria-hidden />
-                  <span className="flex-1 text-sm">
-                    {t(`common:classes.${k}`)}
-                    <span className="ml-1.5 text-[11px] text-muted-foreground">{ranges[CLASS_KEYS.length - 1 - i]}</span>
-                  </span>
-                  <span className="num text-sm font-semibold">{national[k]}</span>
-                  <span className="num w-12 text-right text-xs text-muted-foreground">{formatNumber(total ? national[k] / total : 0, lang, { style: 'percent', maximumFractionDigits: 0 })}</span>
-                </li>
-              ))}
-            </ul>
-            <div className="mt-6 grid gap-3 border-t border-border pt-5 text-sm">
-              <p>
-                <span className="num font-display text-2xl font-extrabold">{allHigh.length}</span>{' '}
-                <span className="text-muted-foreground">{t('classes.allHigh', { count: allHigh.length, total: rows.length })}</span>
+        <Aside title={t('classes.nationalTitle')}>
+          <div className="mt-5 flex h-3 gap-0.5 overflow-hidden" role="img" aria-label={ORDER.map((k) => `${t(`common:classes.${k}`)}: ${national[k]}`).join(', ')}>
+            {ORDER.map((k) => (national[k] ? <div key={k} style={{ width: `${(national[k] / Math.max(1, total)) * 100}%`, background: CLASS_COLORS[k] }} /> : null))}
+          </div>
+          <ul className="mt-5 divide-y divide-border border-y border-border text-sm">
+            {ORDER.map((k, i) => (
+              <li key={k} className="grid grid-cols-[minmax(0,1fr)_auto_3.5rem] items-center gap-3 py-2.5">
+                <span className="flex min-w-0 items-center gap-2.5">
+                  <ClassKeyDot k={k} />
+                  {t(`common:classes.${k}`)}
+                  <span className="num text-xs text-muted-foreground">{ranges[CLASS_KEYS.length - 1 - i]}</span>
+                </span>
+                <span className="num text-right font-medium">{national[k]}</span>
+                <span className="num text-right text-muted-foreground">{formatNumber(total ? national[k] / total : 0, lang, { style: 'percent', maximumFractionDigits: 0 })}</span>
+              </li>
+            ))}
+          </ul>
+          <div className="mt-8 grid gap-5">
+            <div>
+              <p className="flex items-baseline gap-3">
+                <span className="num text-2xl font-semibold tracking-tight">{allHigh.length}</span>
+                <span className="text-sm text-muted-foreground">{t('classes.allHigh', { count: allHigh.length, total: rows.length })}</span>
               </p>
-              {allHigh.length > 0 && (
-                <p className="text-xs leading-relaxed text-muted-foreground">{allHigh.map((r) => r.name).join(' · ')}</p>
-              )}
-              <p>
-                <span className="num font-display text-2xl font-extrabold">{noneHigh.length}</span>{' '}
-                <span className="text-muted-foreground">{t('classes.noneHigh', { count: noneHigh.length, total: rows.length })}</span>
-              </p>
+              {allHigh.length > 0 && <p className="mt-1.5 text-xs leading-relaxed text-muted-foreground">{allHigh.map((r) => r.name).join(' · ')}</p>}
             </div>
-          </CardContent>
-        </Card>
+            <p className="flex items-baseline gap-3">
+              <span className="num text-2xl font-semibold tracking-tight">{noneHigh.length}</span>
+              <span className="text-sm text-muted-foreground">{t('classes.noneHigh', { count: noneHigh.length, total: rows.length })}</span>
+            </p>
+          </div>
+        </Aside>
       </div>
     </InsightSection>
   );

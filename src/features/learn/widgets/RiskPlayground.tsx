@@ -1,24 +1,18 @@
-import { CircleCheck, Scale } from 'lucide-react';
-import { motion } from 'motion/react';
+import { Check } from 'lucide-react';
 import * as React from 'react';
 import { useTranslation } from 'react-i18next';
+import { DIMENSION_COLORS } from '@/components/charts/theme';
 import { ClassBadge } from '@/components/risk/RiskBadge';
-import { ScoreGauge } from '@/components/risk/ScoreGauge';
 import { useModel } from '@/data-layer/DataProvider';
-import { classify, NO_DATA_COLOR } from '@/engine/risk/classes';
+import { CLASS_COLORS, CLASS_KEYS, classify, NO_DATA_COLOR, THRESHOLDS } from '@/engine/risk/classes';
 import { DIMENSIONS, type DimensionKey } from '@/engine/risk/hierarchy';
 import { isNum, mean, riskScore, round1 } from '@/engine/risk/math';
 import { cn, formatScore } from '@/lib/utils';
-import { CouncilPicker, LabeledSlider, WidgetFrame } from '../components/WidgetKit';
+import { Chip, CouncilPicker, LabeledSlider, WidgetFrame } from '../components/WidgetKit';
 
 type Dims = Record<DimensionKey, number>;
 type Loaded = { kind: 'national' } | { kind: 'council'; id: string } | { kind: 'preset'; key: string };
 const SHORT: Record<DimensionKey, string> = { hazard: 'H', vulnerability: 'V', coping: 'LCC' };
-const ACCENT: Record<DimensionKey, { bar: string; thumb: string }> = {
-  hazard: { bar: 'bg-amber-500', thumb: 'border-amber-500' },
-  vulnerability: { bar: 'bg-rose-500', thumb: 'border-rose-500' },
-  coping: { bar: 'bg-emerald-500', thumb: 'border-emerald-500' },
-};
 const PRESETS: Array<{ key: string; dims: Dims }> = [
   { key: 'extreme', dims: { hazard: 9, vulnerability: 1, coping: 1 } },
   { key: 'balanced', dims: { hazard: 5, vulnerability: 5, coping: 5 } },
@@ -43,6 +37,10 @@ export default function RiskPlayground() {
   const product = dims.hazard * dims.vulnerability * dims.coping;
   const gap = isNum(risk) ? Math.round((arith - risk) * 10) / 10 : 0;
 
+  // One polite announcement once the sliders settle (not one per 0.1 step on top of the slider's own value).
+  const riskCls = classify(risk, 'risk');
+  const announcement = useSettled(`${t('common:informRisk')} ${formatScore(risk)}${riskCls ? `, ${t(`common:classes.${riskCls.key}`)}` : ''}`, 400);
+
   const loadedUnit = loaded?.kind === 'council' ? model.byId.get(loaded.id) : loaded?.kind === 'national' ? model.national : null;
   const matches = loadedUnit && DIMENSIONS.every((d) => loadedUnit.dims[d.key].score === dims[d.key]) && isNum(loadedUnit.risk) && loadedUnit.risk === risk ? loadedUnit : null;
 
@@ -52,40 +50,43 @@ export default function RiskPlayground() {
     setCouncilId('');
   };
 
-  const loadCouncil = (id: string) => {
-    const u = model.byId.get(id);
-    setCouncilId(id);
-    if (!u) return;
-    setDims({ hazard: u.dims.hazard.score ?? 0, vulnerability: u.dims.vulnerability.score ?? 0, coping: u.dims.coping.score ?? 0 });
-    setLoaded({ kind: 'council', id });
-  };
+  // Stable, so the memoised council picker does not re-render on every slider move.
+  const loadCouncil = React.useCallback(
+    (id: string) => {
+      const u = model.byId.get(id);
+      setCouncilId(id);
+      if (!u) return;
+      setDims({ hazard: u.dims.hazard.score ?? 0, vulnerability: u.dims.vulnerability.score ?? 0, coping: u.dims.coping.score ?? 0 });
+      setLoaded({ kind: 'council', id });
+    },
+    [model],
+  );
 
   return (
     <WidgetFrame title={t('widgets.riskPlayground.title')} description={t('widgets.riskPlayground.lead')} kind="engine" footer={t('widgets.riskPlayground.footer')}>
       {/* Presets & council loader */}
-      <div className="flex flex-col gap-3 lg:flex-row lg:items-end">
+      <div className="flex flex-col gap-4">
         <div className="flex flex-wrap gap-1.5" role="group" aria-label={t('widgets.riskPlayground.presets')}>
-          <PresetButton active={loaded?.kind === 'national'} onClick={() => applyPreset(nationalDims, { kind: 'national' })}>
+          <Chip active={loaded?.kind === 'national'} onClick={() => applyPreset(nationalDims, { kind: 'national' })}>
             {t('widgets.riskPlayground.preset.national')}
-          </PresetButton>
+          </Chip>
           {PRESETS.map((p) => (
-            <PresetButton key={p.key} active={loaded?.kind === 'preset' && loaded.key === p.key} onClick={() => applyPreset(p.dims, { kind: 'preset', key: p.key })}>
+            <Chip key={p.key} active={loaded?.kind === 'preset' && loaded.key === p.key} onClick={() => applyPreset(p.dims, { kind: 'preset', key: p.key })}>
               {t(`widgets.riskPlayground.preset.${p.key}`)}
-            </PresetButton>
+            </Chip>
           ))}
         </div>
-        <CouncilPicker className="lg:ml-auto lg:w-64" value={councilId} onChange={loadCouncil} label={t('widgets.riskPlayground.load')} placeholder={t('widgets.riskPlayground.choose')} />
+        <CouncilPicker className="sm:max-w-xs" value={councilId} onChange={loadCouncil} label={t('widgets.riskPlayground.load')} placeholder={t('widgets.riskPlayground.choose')} />
       </div>
 
-      <div className="mt-6 grid gap-8 md:grid-cols-[minmax(0,1fr)_minmax(0,15rem)] md:items-center">
-        <div className="grid gap-6">
+      <div className="mt-7 grid gap-8 border-t border-border pt-7 md:grid-cols-[minmax(0,1fr)_minmax(0,14rem)] md:gap-0 md:divide-x md:divide-border">
+        <div className="grid gap-6 md:pr-8">
           {DIMENSIONS.map((d) => (
             <LabeledSlider
               key={d.key}
               label={
                 <span>
-                  <span className="mr-1.5 inline-flex h-5 min-w-8 items-center justify-center rounded-md bg-muted px-1 font-mono text-[11px] font-bold">{SHORT[d.key]}</span>
-                  {t(`common:dimensions.${d.key}`)}
+                  {t(`common:dimensions.${d.key}`)} <span className="font-normal text-muted-foreground">({SHORT[d.key]})</span>
                 </span>
               }
               value={dims[d.key]}
@@ -95,44 +96,46 @@ export default function RiskPlayground() {
                 setCouncilId('');
               }}
               valueText={formatScore(dims[d.key])}
-              accentClassName={ACCENT[d.key].bar}
-              thumbClassName={ACCENT[d.key].thumb}
+              color={DIMENSION_COLORS[d.key]}
               hint={<ClassBadge value={dims[d.key]} scale={d.scale} size="sm" />}
             />
           ))}
         </div>
 
-        <div className="flex flex-col items-center rounded-3xl border border-border bg-background/60 p-4 text-center" aria-live="polite">
-          <div className="text-xs font-semibold tracking-wider text-muted-foreground uppercase">{t('common:informRisk')}</div>
-          <ScoreGauge value={risk} size={190} className="mt-1" />
-          <ClassBadge value={risk} size="lg" className="mt-2" />
+        <div className="border-t border-border pt-6 md:border-t-0 md:pt-0 md:pl-8">
+          <p role="status" className="sr-only">
+            {announcement}
+          </p>
+          <div className="text-sm text-muted-foreground">{t('common:informRisk')}</div>
+          <div className="mt-1 flex items-center gap-3">
+            <span className="num font-display text-6xl leading-none font-semibold tracking-tight">{formatScore(risk)}</span>
+            <ClassBadge value={risk} />
+          </div>
+          <ClassScale value={risk} className="mt-5" />
           {matches && (
-            <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="mt-3 flex items-start gap-1.5 text-left text-xs text-success">
-              <CircleCheck className="mt-0.5 size-3.5 shrink-0" aria-hidden />
+            <p className="mt-4 flex items-start gap-1.5 text-xs leading-relaxed text-success">
+              <Check className="mt-0.5 size-3.5 shrink-0" aria-hidden />
               <span>{t('widgets.riskPlayground.matches', { name: matches.name, score: formatScore(matches.risk) })}</span>
-            </motion.p>
+            </p>
           )}
         </div>
       </div>
 
       {/* The formula with live numbers */}
-      <div className="mt-6 overflow-x-auto rounded-2xl border border-dashed border-border bg-muted/40 px-4 py-3 text-center font-mono text-sm">
-        <span className="whitespace-nowrap">
-          ∛({formatScore(dims.hazard)} × {formatScore(dims.vulnerability)} × {formatScore(dims.coping)}) = ∛{product.toFixed(1)} = <strong className="text-primary">{formatScore(risk)}</strong>
+      <div className="mt-7 overflow-x-auto border-y border-border py-4 text-center font-display text-lg">
+        <span className="num whitespace-nowrap">
+          ∛({formatScore(dims.hazard)} × {formatScore(dims.vulnerability)} × {formatScore(dims.coping)}) = ∛{product.toFixed(1)} = <strong className="font-semibold">{formatScore(risk)}</strong>
         </span>
       </div>
 
       {/* Geometric vs arithmetic */}
-      <div className="mt-6 rounded-2xl border border-violet-500/25 bg-gradient-to-br from-violet-500/10 to-transparent p-4 sm:p-5">
-        <div className="flex items-center gap-2 text-sm font-bold">
-          <Scale className="size-4 text-violet-600 dark:text-violet-400" aria-hidden />
-          {t('widgets.riskPlayground.whyTitle')}
-        </div>
-        <div className="mt-4 grid gap-3">
+      <div className="mt-7">
+        <h4 className="text-base font-semibold">{t('widgets.riskPlayground.whyTitle')}</h4>
+        <div className="mt-4 grid gap-4">
           <MeanBar label={t('widgets.riskPlayground.geo')} sub="∛(H × V × LCC)" value={risk} strong />
           <MeanBar label={t('widgets.riskPlayground.arith')} sub="(H + V + LCC) ÷ 3" value={arith} />
         </div>
-        <p className="mt-4 text-sm leading-relaxed">
+        <p className="mt-4 text-sm leading-relaxed text-foreground/90">
           {gap >= 0.5
             ? t('widgets.riskPlayground.gapBig', { gap: formatScore(gap) })
             : gap > 0
@@ -144,38 +147,61 @@ export default function RiskPlayground() {
   );
 }
 
-function PresetButton({ active, onClick, children }: { active: boolean; onClick: () => void; children: React.ReactNode }) {
+/** The 0–10 risk scale cut at the workbook's class thresholds, with a marker at the score. */
+function ClassScale({ value, className }: { value: number | null; className?: string }) {
+  const bounds = [0, ...THRESHOLDS.risk, 10];
   return (
-    <button
-      type="button"
-      aria-pressed={active}
-      onClick={onClick}
-      className={cn(
-        'rounded-full border px-3 py-1.5 text-xs font-semibold transition-all',
-        active ? 'border-primary bg-primary text-primary-foreground shadow-sm shadow-primary/25' : 'border-border bg-background text-muted-foreground hover:border-primary/40 hover:text-foreground',
-      )}
-    >
-      {children}
-    </button>
+    <div className={className} aria-hidden>
+      <div className="relative">
+        <div className="flex h-2 gap-px">
+          {CLASS_KEYS.map((k, i) => (
+            <div key={k} style={{ width: `${((bounds[i + 1] - bounds[i]) / 10) * 100}%`, background: CLASS_COLORS[k] }} />
+          ))}
+        </div>
+        {isNum(value) && <span className="absolute -top-1 h-4 w-0.5 -translate-x-1/2 bg-foreground transition-[left] duration-150" style={{ left: `${(value / 10) * 100}%` }} />}
+      </div>
+      <div className="num mt-1.5 flex justify-between text-[11px] text-muted-foreground">
+        <span>0</span>
+        <span>10</span>
+      </div>
+    </div>
   );
 }
 
+/**
+ * Returns `value` once it has stopped changing for `delay` ms. Starts empty, so nothing is announced
+ * on page load — only after the learner has moved something.
+ */
+function useSettled(value: string, delay: number): string {
+  const [settled, setSettled] = React.useState('');
+  const first = React.useRef(value);
+  React.useEffect(() => {
+    if (value === first.current && settled === '') return;
+    const h = window.setTimeout(() => setSettled(value), delay);
+    return () => window.clearTimeout(h);
+  }, [value, delay, settled]);
+  return settled;
+}
+
+/** One of the two means: label with its formula beneath, class and score on the label's line, and a bar. */
 function MeanBar({ label, sub, value, strong = false }: { label: string; sub: string; value: number | null; strong?: boolean }) {
   const { t } = useTranslation('common');
   const c = classify(value, 'risk');
   return (
     <div>
-      <div className="mb-1 flex flex-wrap items-baseline justify-between gap-2 text-sm">
-        <span className={cn(strong ? 'font-bold' : 'font-medium text-muted-foreground')}>
-          {label} <span className="ml-1 font-mono text-[11px] text-muted-foreground">{sub}</span>
+      <div className="mb-2 flex items-baseline justify-between gap-3 text-sm">
+        <span className="min-w-0">
+          <span className={cn('block', strong ? 'font-semibold' : 'font-medium text-foreground/85')}>{label}</span>
+          <span className="block text-xs text-muted-foreground">{sub}</span>
         </span>
-        <span className="flex items-center gap-2">
-          <span className="text-[11px] text-muted-foreground">{c ? t(`classes.${c.key}`) : ''}</span>
-          <span className="num font-display text-lg font-extrabold">{formatScore(value)}</span>
+        <span className="flex shrink-0 items-baseline gap-2">
+          <span className="text-xs text-muted-foreground">{c ? t(`classes.${c.key}`) : ''}</span>
+          <span className={cn('num text-lg tracking-tight', strong ? 'font-semibold' : 'font-medium')}>{formatScore(value)}</span>
         </span>
       </div>
-      <div className="h-3 overflow-hidden rounded-full bg-muted">
-        <motion.div className="h-full rounded-full" initial={false} animate={{ width: `${((value ?? 0) / 10) * 100}%` }} transition={{ type: 'spring', stiffness: 120, damping: 20 }} style={{ background: c?.color ?? NO_DATA_COLOR, opacity: strong ? 1 : 0.55 }} />
+      {/* Both bars in the full class colour; INFORM's own mean is drawn heavier. */}
+      <div className={cn('bg-muted', strong ? 'h-2.5' : 'h-1.5')}>
+        <div className="h-full transition-[width] duration-150" style={{ width: `${((value ?? 0) / 10) * 100}%`, background: c?.color ?? NO_DATA_COLOR }} />
       </div>
     </div>
   );

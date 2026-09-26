@@ -3,19 +3,19 @@
  * entry: validate → confirm dialog (exact submissions and targets) → `useSubmit` per submission
  * (reviewers apply immediately; sector officers send for review) → toast.
  */
-import { Loader2, Send, Split } from 'lucide-react';
+import { Loader2, Send } from 'lucide-react';
 import * as React from 'react';
 import { useTranslation } from 'react-i18next';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import { toast } from 'sonner';
 import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Dialog, DialogContent, Input, Label, Select, SelectItem, Textarea } from '@/components/ui/primitives';
 import { useData, useModel, useSubmit } from '@/data-layer/DataProvider';
 import { canReview, canSubmit, type NewSubmission } from '@/data-layer/types';
 import type { DimensionKey } from '@/engine/risk/hierarchy';
 import { AUTHORITIES, AUTHORITY_KEYS, INDICATOR_SOURCES, sourceFor, type AuthorityKey } from '@/engine/risk/sources';
 import type { EditRef, Unit } from '@/engine/risk/types';
+import { cn } from '@/lib/utils';
 import { errorMessage } from '../lib/batch';
 import { buildSubmissions, sharingCouncils, type DraftChange, type Impact } from '../lib/targets';
 import { ChangeTable } from './ChangeTable';
@@ -84,6 +84,7 @@ export function MetaFields({
   noteHint,
   errors,
   showErrors,
+  columns = false,
 }: {
   idPrefix: string;
   meta: MetaState;
@@ -94,12 +95,14 @@ export function MetaFields({
   noteHint?: string;
   errors: MetaErrors;
   showErrors: boolean;
+  /** Authority and dataset side by side (note full width) from `sm` up. */
+  columns?: boolean;
 }) {
   const { t } = useTranslation('data');
   const authName = useAuthorityName();
   const id = (s: string) => `${idPrefix}-${s}`;
   return (
-    <div className="space-y-4">
+    <div className={columns ? 'grid gap-x-6 gap-y-5 sm:grid-cols-2' : 'space-y-4'}>
       <div>
         <span className="text-sm font-medium">
           {t('meta.authority')} <span className="text-danger" aria-hidden>*</span>
@@ -140,7 +143,7 @@ export function MetaFields({
           ))}
         </datalist>
       </div>
-      <div>
+      <div className={cn(columns && 'sm:col-span-2')}>
         <div className="flex items-baseline justify-between gap-2">
           <Label htmlFor={id('note')}>
             {t('meta.note')}{' '}
@@ -152,7 +155,7 @@ export function MetaFields({
               <span className="font-normal text-muted-foreground">({t('meta.recommended')})</span>
             )}
           </Label>
-          <span className={`num text-[11px] ${meta.note.length > NOTE_MAX ? 'text-danger' : 'text-muted-foreground'}`}>
+          <span className={`num text-xs ${meta.note.length > NOTE_MAX ? 'text-danger' : 'text-muted-foreground'}`}>
             {meta.note.length}/{NOTE_MAX}
           </span>
         </div>
@@ -202,14 +205,14 @@ export function ConfirmSubmitDialog({
   return (
     <Dialog open={open} onOpenChange={(o) => !busy && onOpenChange(o)}>
       <DialogContent className="max-w-2xl" title={t('confirm.title')} description={reviewer ? t('confirm.leadReviewer') : t('confirm.leadSector')}>
-        <div className="space-y-6 p-5">
+        <div className="space-y-7 p-5">
           {submissions.map((s, i) => {
             const unit = model.byId.get(s.unitId);
             const sharing = unit?.level === 'source' ? sharingCouncils(model, unit.id) : [];
             return (
               <section key={`${s.unitId}-${i}`} aria-labelledby={`confirm-${i}`} className="space-y-2">
-                <div className="flex flex-wrap items-center gap-2">
-                  <span className="num flex size-6 items-center justify-center rounded-full bg-primary/10 text-xs font-bold text-primary">{i + 1}</span>
+                <div className="flex flex-wrap items-baseline gap-2">
+                  {submissions.length > 1 && <span className="num text-sm text-muted-foreground">{i + 1}.</span>}
                   <h3 id={`confirm-${i}`} className="font-semibold">
                     {s.unitName}
                   </h3>
@@ -221,7 +224,7 @@ export function ConfirmSubmitDialog({
             );
           })}
           {first && (
-            <dl className="grid gap-3 rounded-xl bg-muted/50 p-4 text-sm sm:grid-cols-2">
+            <dl className="grid gap-x-6 gap-y-3 border-t border-border pt-4 text-sm sm:grid-cols-2">
               <div>
                 <dt className="text-xs text-muted-foreground">{t('meta.authority')}</dt>
                 <dd className="mt-0.5 font-medium">{authName(first.authority)}</dd>
@@ -252,8 +255,10 @@ export function ConfirmSubmitDialog({
 }
 
 /**
- * Submit card for one council's drafted changes. Hazard and Vulnerability/Coping changes become two
- * submissions (council vs shared source unit) via `buildSubmissions`.
+ * Submit section for one council's drafted changes: the last section of the entry form (heading over a
+ * rule, like the dimension sections — no box). Hazard and Vulnerability/Coping changes become two
+ * submissions (council vs shared source unit) via `buildSubmissions`. `children` render between the lead
+ * and the fields (measured-value entry lists how its values map onto model indicators there).
  */
 export function EntrySubmitCard({
   idPrefix,
@@ -264,6 +269,8 @@ export function EntrySubmitCard({
   setMeta,
   blocking,
   onSubmitted,
+  className,
+  children,
 }: {
   idPrefix: string;
   council: Unit;
@@ -275,6 +282,8 @@ export function EntrySubmitCard({
   blocking: number;
   /** Called with the refs that were submitted successfully. */
   onSubmitted: (refs: EditRef[]) => void;
+  className?: string;
+  children?: React.ReactNode;
 }) {
   const { t } = useTranslation(['data', 'common']);
   const model = useModel();
@@ -345,12 +354,13 @@ export function EntrySubmitCard({
   };
 
   return (
-    <Card>
-      <CardHeader>
-        <CardTitle className="text-lg">{t('submit.title')}</CardTitle>
-        <CardDescription>{reviewer ? t('submit.leadReviewer') : t('submit.leadSector')}</CardDescription>
-      </CardHeader>
-      <CardContent className="space-y-4">
+    <section id={`${idPrefix}-submit`} aria-labelledby={`${idPrefix}-submit-title`} className={cn('min-w-0 scroll-mt-24', className)}>
+      <h3 id={`${idPrefix}-submit-title`} className="border-b border-border pb-3 font-display text-xl font-semibold sm:text-[1.4rem]">
+        {t('submit.title')}
+      </h3>
+      <p className="mt-4 max-w-2xl text-sm leading-relaxed text-muted-foreground">{reviewer ? t('submit.leadReviewer') : t('submit.leadSector')}</p>
+      {children}
+      <div className="mt-6 space-y-5">
         <MetaFields
           idPrefix={idPrefix}
           meta={meta}
@@ -360,24 +370,23 @@ export function EntrySubmitCard({
           noteRequired={noteRequired}
           errors={errors}
           showErrors={showErrors}
+          columns
         />
         {showErrors && blocking > 0 && (
           <p role="alert" className="text-sm font-medium text-danger">
             {t('submit.fixErrors', { count: blocking })}
           </p>
         )}
-        {submissions.length > 1 && (
-          <Callout icon={<Split />} title={t('submit.splitTitle', { count: submissions.length })}>
-            {t('submit.splitLead')}
-          </Callout>
-        )}
-        <Button className="w-full" size="lg" onClick={onReview} disabled={!allowed || !changes.length || busy}>
-          <Send aria-hidden />
-          {reviewer ? t('submit.reviewApply', { count: changes.length }) : t('submit.reviewSend', { count: changes.length })}
-        </Button>
-        {!changes.length && <p className="text-center text-xs text-muted-foreground">{t('submit.nothing')}</p>}
-      </CardContent>
+        {submissions.length > 1 && <Callout title={t('submit.splitTitle', { count: submissions.length })}>{t('submit.splitLead')}</Callout>}
+        <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:gap-5">
+          <Button className="w-full sm:w-auto" size="lg" onClick={onReview} disabled={!allowed || !changes.length || busy}>
+            <Send aria-hidden />
+            {reviewer ? t('submit.reviewApply', { count: changes.length }) : t('submit.reviewSend', { count: changes.length })}
+          </Button>
+          {!changes.length && <p className="text-sm text-muted-foreground">{t('submit.nothing')}</p>}
+        </div>
+      </div>
       <ConfirmSubmitDialog open={confirmOpen} onOpenChange={setConfirmOpen} submissions={submissions} reviewer={reviewer} busy={busy} onConfirm={onConfirm} />
-    </Card>
+    </section>
   );
 }

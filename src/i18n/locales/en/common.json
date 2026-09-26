@@ -11,7 +11,9 @@
     "methodology": "Methodology",
     "data": "Data portal",
     "menu": "Menu",
-    "skipToContent": "Skip to content"
+    "skipToContent": "Skip to content",
+    "main": "Main",
+    "mobile": "Main menu"
   },
   "theme": {
     "label": "Theme",
@@ -100,7 +102,8 @@
     "remove": "Remove",
     "edit": "Edit",
     "showAll": "Show all",
-    "showLess": "Show less"
+    "showLess": "Show less",
+    "printPdf": "Print or save as PDF"
   },
   "labels": {
     "score": "Score",
@@ -140,7 +143,8 @@
     "notFound": "Page not found",
     "notFoundDetail": "The page you are looking for does not exist or has moved.",
     "goHome": "Go home",
-    "empty": "Nothing to show yet."
+    "empty": "Nothing to show yet.",
+    "errorLabel": "Something went wrong"
   },
   "a11y": {
     "mapOf": "Map of Tanzania coloured by {{metric}}",

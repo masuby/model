@@ -1,10 +1,9 @@
-import { ArrowRight, TriangleAlert } from 'lucide-react';
+import { ArrowRight } from 'lucide-react';
 import * as React from 'react';
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
-import { Bar, BarChart, CartesianGrid, Label, LabelList, Pie, PieChart, ResponsiveContainer, Tooltip, XAxis, YAxis, type LabelProps } from 'recharts';
+import { Bar, BarChart, CartesianGrid, LabelList, Pie, PieChart, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts';
 import { ChartCard } from '@/components/charts/ChartCard';
-import { Button } from '@/components/ui/button';
 import { ALL_INDICATORS } from '@/engine/risk/hierarchy';
 import { sourceFor, sourceLabel } from '@/engine/risk/sources';
 import type { RiskModel } from '@/engine/risk/types';
@@ -12,9 +11,9 @@ import { formatNumber } from '@/lib/utils';
 import { coverageHistogram, LOCAL_RESOLUTIONS, resolutionBreakdown, type CoverageBin, type Resolution, type ResolutionGroup } from '../analytics';
 import { useBarShape } from '../marks';
 import { useInsightTheme } from '../theme';
-import { InsightSection, TooltipCard, TooltipRow, WhatThisShows } from '../ui';
+import { backedValueLabel, FigureNote, InsightSection, TooltipCard, TooltipRow } from '../ui';
 
-const COL_RADIUS: [number, number, number, number] = [4, 4, 0, 0];
+const COL_RADIUS: [number, number, number, number] = [2, 2, 0, 0];
 
 interface BinDatum extends CoverageBin {
   name: string;
@@ -68,24 +67,7 @@ export function DataCoverage({ model }: { model: RiskModel }) {
 
   const seriesColor = React.useCallback(() => th.series, [th.series]);
   const colShape = useBarShape({ colorOf: seriesColor, radius: COL_RADIUS, activeStroke: th.ink });
-
-  const renderCentre = React.useCallback(
-    (props: LabelProps) => {
-      const vb = props.viewBox as { cx?: number; cy?: number } | undefined;
-      if (typeof vb?.cx !== 'number' || typeof vb?.cy !== 'number') return <g />;
-      return (
-        <g>
-          <text x={vb.cx} y={vb.cy - 4} textAnchor="middle" fill={th.ink} fontSize={28} fontWeight={800}>
-            {`${local}/${nInd}`}
-          </text>
-          <text x={vb.cx} y={vb.cy + 16} textAnchor="middle" fill={th.text} fontSize={11}>
-            {t('coverage.centre')}
-          </text>
-        </g>
-      );
-    },
-    [local, nInd, t, th.ink, th.text],
-  );
+  const valueLabel = React.useMemo(() => backedValueLabel(th.surface), [th.surface]);
 
   const binCsv = React.useMemo(() => [[t('coverage.share'), t('coverage.indicatorsWithData'), t('coverage.councils')], ...bins.map((b) => [b.coverage, b.have, b.count])], [bins, t]);
   const resCsv = React.useMemo(
@@ -102,9 +84,16 @@ export function DataCoverage({ model }: { model: RiskModel }) {
   const pct = (x: number) => formatNumber(x, lang, { style: 'percent', maximumFractionDigits: 0 });
 
   return (
-    <InsightSection id="coverage" index={7} eyebrow={t('coverage.eyebrow')} title={t('coverage.title')} lead={t('coverage.lead')}>
-      <div className="grid gap-4 lg:grid-cols-2 lg:items-start">
-        <ChartCard title={t('coverage.histTitle')} description={t('coverage.histSub', { total: nInd })} csv={binCsv} filename="data-coverage">
+    <InsightSection id="coverage" title={t('coverage.title')} lead={t('coverage.lead')}>
+      {/* Two figures side by side on large screens; a shared subgrid keeps their plots level. */}
+      <div className="grid gap-12 lg:grid-cols-2 lg:gap-x-14 lg:gap-y-0">
+        <ChartCard
+          className="lg:row-span-2 lg:grid lg:grid-rows-subgrid"
+          title={t('coverage.histTitle')}
+          description={t('coverage.histSub', { total: nInd })}
+          csv={binCsv}
+          filename="data-coverage"
+        >
           <div className="h-[300px]">
             <ResponsiveContainer width="100%" height="100%">
               <BarChart data={bins} margin={{ top: 22, right: 8, bottom: 22, left: -12 }} barCategoryGap="22%">
@@ -118,31 +107,39 @@ export function DataCoverage({ model }: { model: RiskModel }) {
                 />
                 <YAxis allowDecimals={false} tick={th.tick} stroke={th.axis} tickLine={false} axisLine={false} />
                 <Tooltip cursor={{ fill: th.cursor }} content={<CoverageTooltip total={nInd} />} />
-                <Bar dataKey="count" maxBarSize={44} shape={colShape}>
-                  <LabelList dataKey="count" position="top" fill={th.text} fontSize={11} fontWeight={600} offset={6} />
+                <Bar dataKey="count" maxBarSize={44} shape={colShape} isAnimationActive={false}>
+                  <LabelList dataKey="count" position="top" fill={th.text} fontSize={11} fontWeight={600} offset={6} content={valueLabel} />
                 </Bar>
               </BarChart>
             </ResponsiveContainer>
           </div>
-          <dl className="mt-3 grid grid-cols-2 gap-3">
-            <div className="rounded-xl bg-muted/60 px-3 py-2.5">
-              <dt className="text-[11px] text-muted-foreground">{t('coverage.median')}</dt>
-              <dd className="num font-display text-xl font-extrabold">{median === null ? '—' : `${median}%`}</dd>
+          <dl className="mt-6 grid grid-cols-2 divide-x divide-border border-t border-border pt-4">
+            <div className="pr-5">
+              <dt className="text-sm text-muted-foreground">{t('coverage.median')}</dt>
+              <dd className="num mt-1 text-2xl font-semibold tracking-tight">{median === null ? '—' : `${median}%`}</dd>
             </div>
-            <div className="rounded-xl bg-muted/60 px-3 py-2.5">
-              <dt className="text-[11px] text-muted-foreground">{t('coverage.atLeast90')}</dt>
-              <dd className="num font-display text-xl font-extrabold">
+            <div className="pl-5">
+              <dt className="text-sm text-muted-foreground">{t('coverage.atLeast90')}</dt>
+              <dd className="num mt-1 text-2xl font-semibold tracking-tight">
                 {atLeast90}
-                <span className="text-sm font-semibold text-muted-foreground"> / {councils}</span>
+                <span className="text-base font-medium text-muted-foreground"> / {councils}</span>
               </dd>
             </div>
           </dl>
-          <WhatThisShows>{t('coverage.histCaption', { median: median ?? '—', total: nInd })}</WhatThisShows>
+          <FigureNote>{t('coverage.histCaption')}</FigureNote>
         </ChartCard>
 
-        <ChartCard title={t('coverage.resTitle')} description={t('coverage.resSub')} csv={resCsv} filename="indicator-provenance">
-          <div className="grid items-center gap-4 sm:grid-cols-[220px_minmax(0,1fr)]">
-            <div className="mx-auto h-[220px] w-[220px]">
+        <ChartCard
+          className="lg:row-span-2 lg:grid lg:grid-rows-subgrid"
+          title={t('coverage.resTitle')}
+          description={t('coverage.resSub')}
+          csv={resCsv}
+          filename="indicator-provenance"
+        >
+          <div className="grid items-start gap-6 sm:grid-cols-[200px_minmax(0,1fr)]">
+            {/* The ring is Recharts; its centre figure is plain HTML laid over it (Recharts 3 does not
+                render a centred <Label> inside a Pie). */}
+            <div className="relative mx-auto size-[200px]">
               <ResponsiveContainer width="100%" height="100%">
                 <PieChart>
                   <Tooltip content={<ResolutionTooltip />} />
@@ -150,71 +147,71 @@ export function DataCoverage({ model }: { model: RiskModel }) {
                     data={groups}
                     dataKey="count"
                     nameKey="resolution"
-                    innerRadius="64%"
+                    innerRadius="66%"
                     outerRadius="96%"
                     paddingAngle={2}
-                    cornerRadius={4}
+                    cornerRadius={1}
                     stroke={th.surface}
                     strokeWidth={2}
                     startAngle={90}
                     endAngle={-270}
                     isAnimationActive={false}
-                  >
-                    <Label position="center" content={renderCentre} />
-                  </Pie>
+                  />
                 </PieChart>
               </ResponsiveContainer>
+              <div className="pointer-events-none absolute inset-0 grid place-content-center justify-items-center text-center">
+                <span className="num text-[1.75rem] leading-none font-semibold tracking-tight">
+                  {local}
+                  <span className="text-base font-medium text-muted-foreground">/{nInd}</span>
+                </span>
+                <span className="mt-1.5 max-w-24 text-xs leading-snug text-muted-foreground">{t('coverage.centre')}</span>
+              </div>
             </div>
-            <ul className="grid gap-3">
+            <ul className="divide-y divide-border border-y border-border">
               {groups.map((g) => (
-                <li key={g.resolution}>
-                  <div className="flex items-center gap-2">
-                    <span className="size-3 shrink-0 rounded-[4px]" style={{ background: g.fill }} aria-hidden />
-                    <span className="flex-1 text-sm font-semibold">{t(`coverage.res.${g.resolution}`)}</span>
-                    <span className="num text-sm font-bold">{g.count}</span>
-                    <span className="num w-10 text-right text-xs text-muted-foreground">{pct(g.count / nInd)}</span>
+                <li key={g.resolution} className="py-3">
+                  <div className="flex items-center gap-2.5 text-sm">
+                    <span className="size-2.5 shrink-0" style={{ background: g.fill }} aria-hidden />
+                    <span className="flex-1 font-medium">{t(`coverage.res.${g.resolution}`)}</span>
+                    <span className="num font-semibold">{g.count}</span>
+                    <span className="num w-10 text-right text-muted-foreground">{pct(g.count / nInd)}</span>
                   </div>
-                  <div className="mt-1 flex flex-wrap gap-1 pl-5">
-                    {g.indicators.map((l) => (
-                      <span
-                        key={`${l.dimension.key}:${l.indicator.key}`}
-                        title={sourceLabel(sourceFor(l.dimension.key, l.indicator.key))}
-                        className="rounded-full border border-border bg-background px-2 py-0.5 text-[11px] text-muted-foreground"
-                      >
-                        {t(`indicators:${l.indicator.key}`)}
-                      </span>
-                    ))}
-                  </div>
+                  <p className="mt-1 pl-5 text-xs leading-relaxed text-muted-foreground">{g.indicators.map((l) => t(`indicators:${l.indicator.key}`)).join(', ')}</p>
+                  {/* Each indicator's source, in reach on every device and from the keyboard (no hover-only tooltips). */}
+                  <details className="mt-1.5 pl-5 text-xs">
+                    <summary className="w-fit cursor-pointer font-medium text-primary underline-offset-4 hover:underline">
+                      {t('coverage.showSources')}
+                      <span className="sr-only">: {t(`coverage.res.${g.resolution}`)}</span>
+                    </summary>
+                    <ul className="mt-2 mb-1 space-y-1 border-l border-border pl-3 leading-relaxed text-muted-foreground">
+                      {g.indicators.map((l) => (
+                        <li key={`${l.dimension.key}:${l.indicator.key}`}>
+                          <span className="text-foreground">{t(`indicators:${l.indicator.key}`)}</span> — {sourceLabel(sourceFor(l.dimension.key, l.indicator.key))}
+                        </li>
+                      ))}
+                    </ul>
+                  </details>
                 </li>
               ))}
             </ul>
           </div>
-          <WhatThisShows>{t('coverage.resCaption', { local, total: nInd, pct: pct(local / nInd) })}</WhatThisShows>
+          <FigureNote>{t('coverage.resCaption', { local, total: nInd, pct: pct(local / nInd) })}</FigureNote>
         </ChartCard>
       </div>
 
-      <div className="mt-4 flex flex-col gap-4 rounded-2xl border border-warning/30 bg-warning/6 p-5 sm:flex-row sm:items-start sm:p-6">
-        <span className="inline-flex size-10 shrink-0 items-center justify-center rounded-xl bg-warning/12 text-warning">
-          <TriangleAlert className="size-5" aria-hidden />
-        </span>
-        <div className="min-w-0 flex-1">
-          <h3 className="font-display text-base font-semibold">{t('coverage.honestTitle')}</h3>
-          <p className="mt-1.5 text-sm leading-relaxed text-muted-foreground">
-            {t('coverage.honestBody', { national: count('national'), overlay: count('overlay'), region: count('region'), total: nInd })}
-          </p>
-          <div className="mt-4 flex flex-wrap gap-2">
-            <Button size="sm" variant="outline" asChild>
-              <Link to="/methodology">
-                {t('coverage.readMethod')} <ArrowRight />
-              </Link>
-            </Button>
-            <Button size="sm" variant="ghost" asChild>
-              <Link to="/data">
-                {t('coverage.contribute')} <ArrowRight />
-              </Link>
-            </Button>
-          </div>
-        </div>
+      <div className="mt-14 max-w-3xl border-l-2 border-warning pl-5">
+        <h3 className="text-base font-semibold">{t('coverage.honestTitle')}</h3>
+        <p className="mt-2 text-sm leading-relaxed text-pretty text-muted-foreground">
+          {t('coverage.honestBody', { national: count('national'), overlay: count('overlay'), region: count('region'), total: nInd })}
+        </p>
+        <p className="mt-4 flex flex-wrap gap-x-6 gap-y-2 text-sm font-medium">
+          <Link to="/methodology" className="inline-flex items-center gap-1 text-primary underline-offset-4 hover:underline">
+            {t('coverage.readMethod')} <ArrowRight className="size-3.5" aria-hidden />
+          </Link>
+          <Link to="/data" className="inline-flex items-center gap-1 text-primary underline-offset-4 hover:underline">
+            {t('coverage.contribute')} <ArrowRight className="size-3.5" aria-hidden />
+          </Link>
+        </p>
       </div>
     </InsightSection>
   );

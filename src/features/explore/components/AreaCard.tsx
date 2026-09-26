@@ -1,27 +1,27 @@
 /**
- * The selected area: header (name, class, badges), body (risk gauge, rank, dimensions vs. region or
- * national, top drivers, people, data coverage, provenance notices) and actions (profile, compare).
- * Rendered as a glass overlay on desktop and inside the bottom sheet on mobile.
+ * The selected area: header (name, class, flags), body (rank, where the score sits on its class scale,
+ * dimensions vs. region or national, top drivers, people, data coverage, provenance notes) and actions
+ * (profile, compare). A flat floating panel over the desktop map, a docked column beside the ranking
+ * table, and the bottom sheet on mobile. Sections are separated by hairline rules; the dimension and
+ * driver rows share one row style.
  */
-import { ArrowRight, Database, GitCompareArrows, Layers, Link2, MapPinned, Paintbrush, Pencil, Split, X } from 'lucide-react';
-import { AnimatePresence, motion } from 'motion/react';
+import { ArrowRight, GitCompareArrows, MapPinned, Paintbrush, Pencil, X } from 'lucide-react';
 import * as React from 'react';
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
-import { DIMENSION_COLORS } from '@/components/charts/theme';
-import { DimensionBars } from '@/components/risk/DimensionBars';
-import { ClassBadge } from '@/components/risk/RiskBadge';
-import { ScoreGauge } from '@/components/risk/ScoreGauge';
+import { ClassBadge, ClassDot } from '@/components/risk/RiskBadge';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Progress } from '@/components/ui/primitives';
+import { classify, NO_DATA_COLOR } from '@/engine/risk/classes';
+import { DIMENSIONS } from '@/engine/risk/hierarchy';
 import { parseMetric, rampColor } from '@/engine/risk/metrics';
 import { dataCoverage, topDrivers, unitsAt } from '@/engine/risk/model';
 import type { Unit } from '@/engine/risk/types';
 import { cn, formatNumber, formatScore } from '@/lib/utils';
 import { coverageCounts, editCount, MAX_COMPARE, rankUnits, referenceUnit } from '../lib/explore';
 import { useExplore } from '../lib/ExploreContext';
-import { Notice, ScorePill, SectionTitle } from './bits';
+import { ClassScale, MetricValue, Notice, SectionTitle } from './bits';
 
 const RISK = parseMetric('risk');
 
@@ -31,23 +31,23 @@ export function AreaHeader({ unit, onClose }: { unit: Unit; onClose: () => void 
   return (
     <div className="flex items-start gap-3">
       <div className="min-w-0 flex-1">
-        <div className="truncate text-[11px] font-semibold tracking-[0.14em] text-primary uppercase">
+        <p className="truncate text-sm text-muted-foreground">
           {t(`common:levels.${unit.level}`)}
           {unit.level !== 'region' && ` · ${unit.region}`}
-        </div>
-        <h2 className="mt-1 text-xl leading-tight font-extrabold text-balance">{unit.name}</h2>
-        <div className="mt-2 flex flex-wrap items-center gap-1.5">
+        </p>
+        <h2 className="mt-0.5 text-[1.4rem] leading-tight text-balance">{unit.name}</h2>
+        <div className="mt-2.5 flex flex-wrap items-center gap-1.5">
           <ClassBadge value={unit.risk} showScore size="sm" />
           {edits > 0 && (
-            <Badge title={t('card.editedNote', { count: edits })}>
+            <Badge variant="outline" title={t('card.editedNote', { count: edits })}>
               <Pencil /> {t('common:labels.edited')}
             </Badge>
           )}
-          {unit.level === 'source' && <Badge variant="warning">{t('level.reference')}</Badge>}
-          {unit.inheritedFrom && <Badge variant="secondary">{t('card.inheritedBadge')}</Badge>}
+          {unit.level === 'source' && <Badge variant="outline">{t('level.reference')}</Badge>}
+          {unit.inheritedFrom && <Badge variant="outline">{t('card.inheritedBadge')}</Badge>}
         </div>
       </div>
-      <Button variant="ghost" size="icon-sm" onClick={onClose} aria-label={t('card.close')} className="-mt-1 -mr-1 shrink-0">
+      <Button variant="ghost" size="icon-sm" onClick={onClose} aria-label={t('card.close')} className="-mt-1 -mr-2 shrink-0">
         <X />
       </Button>
     </div>
@@ -86,15 +86,19 @@ export function AreaActions({ unit, className }: { unit: Unit; className?: strin
   );
 }
 
-function Fact({ label, value, sub }: { label: string; value: React.ReactNode; sub?: React.ReactNode }) {
+/** A labelled figure in a row of figures separated by vertical rules. */
+function Figure({ label, children, sub, className }: { label: React.ReactNode; children: React.ReactNode; sub?: React.ReactNode; className?: string }) {
   return (
-    <div className="min-w-0 rounded-xl bg-muted/50 px-2.5 py-2">
-      <div className="truncate text-[10px] font-medium text-muted-foreground">{label}</div>
-      <div className="num mt-0.5 truncate font-display text-sm font-bold">{value}</div>
-      {sub && <div className="truncate text-[10px] text-muted-foreground">{sub}</div>}
+    <div className={cn('flex min-w-0 flex-col', className)}>
+      <dt className="line-clamp-2 text-xs text-muted-foreground">{label}</dt>
+      <dd className="num mt-auto flex items-baseline gap-1.5 truncate pt-1 text-lg leading-tight font-semibold">{children}</dd>
+      {sub && <dd className="truncate text-xs text-muted-foreground">{sub}</dd>}
     </div>
   );
 }
+
+const ruled = (i: number, n: number) => (i === 0 ? 'pr-3' : i === n - 1 ? 'pl-3' : 'px-3');
+const pct = (v: number | null | undefined) => (typeof v === 'number' ? Math.max(0, Math.min(100, v * 10)) : 0);
 
 export function AreaBody({ unit }: { unit: Unit }) {
   const { t, i18n } = useTranslation(['explore', 'common', 'indicators']);
@@ -112,54 +116,117 @@ export function AreaBody({ unit }: { unit: Unit }) {
   const pop = unit.exposure?.population;
   const density = unit.exposure?.density;
   const area = unit.exposure?.areaKm2 ?? (pop && density ? pop / density : null);
+  const referenceLabel = reference.level === 'national' ? t('card.national') : t('card.regionRisk', { name: reference.name });
+
+  const riskLens = metric.kind === 'risk';
+  const referenceValue = (
+    <span className="inline-flex items-center gap-1.5">
+      <ClassDot value={reference.risk} className="size-2 ring-0" />
+      {formatScore(reference.risk)}
+    </span>
+  );
+
+  // Two figures side by side. With a dimension or indicator lens the lens takes the second column and
+  // the reference moves to its own ruled row, so no label has to be cut short.
+  const headline: Array<{ key: string; label: React.ReactNode; value: React.ReactNode }> = [
+    {
+      key: 'rank',
+      label: t('card.rank'),
+      value: (
+        <>
+          {riskRank ?? '—'}
+          <span className="text-sm font-normal text-muted-foreground">/ {peers.length}</span>
+        </>
+      ),
+    },
+    riskLens
+      ? { key: 'ref', label: <span title={referenceLabel}>{referenceLabel}</span>, value: referenceValue }
+      : {
+          key: 'lens',
+          label: <span title={metricLabel(metric)}>{metricLabel(metric)}</span>,
+          value: (
+            <>
+              <MetricValue metric={metric} value={metric.get(unit)} />
+              {lensRank && <span className="text-sm font-normal text-muted-foreground">#{lensRank}</span>}
+            </>
+          ),
+        },
+  ];
 
   return (
-    <div className="space-y-6">
-      {/* Headline */}
-      <div className="flex items-center gap-3">
-        <ScoreGauge value={unit.risk} size={132} label={t('common:informRisk')} className="shrink-0" />
-        <dl className="min-w-0 flex-1 space-y-2.5">
-          <div>
-            <dt className="text-[11px] text-muted-foreground">{t('card.rank')}</dt>
-            <dd className="num font-display text-lg leading-tight font-extrabold">
-              {riskRank ?? '—'}
-              <span className="text-xs font-medium text-muted-foreground"> / {peers.length}</span>
-            </dd>
-          </div>
-          {metric.kind !== 'risk' && (
-            <div>
-              <dt className="truncate text-[11px] text-muted-foreground">{metricLabel(metric)}</dt>
-              <dd className="mt-0.5 flex items-center gap-2">
-                <ScorePill value={metric.get(unit)} metric={metric} />
-                {lensRank && <span className="num text-xs font-semibold text-muted-foreground">#{lensRank}</span>}
-              </dd>
-            </div>
-          )}
-          <div>
-            <dt className="truncate text-[11px] text-muted-foreground">{reference.level === 'national' ? t('card.national') : t('card.regionRisk', { name: reference.name })}</dt>
-            <dd className="num flex items-center gap-2 text-sm font-bold">
-              {formatScore(reference.risk)}
-              <ClassBadge value={reference.risk} size="sm" />
-            </dd>
-          </div>
+    <div className="divide-y divide-border">
+      {/* Headline: rank, reference, and where the score sits on the risk classes */}
+      <section className="pb-6">
+        <dl className="grid grid-cols-2 divide-x divide-border">
+          {headline.map((f, i) => (
+            <Figure key={f.key} label={f.label} className={ruled(i, headline.length)}>
+              {f.value}
+            </Figure>
+          ))}
         </dl>
-      </div>
+        {!riskLens && (
+          <dl className="mt-4 flex items-baseline justify-between gap-3 border-t border-border pt-3 text-sm">
+            <dt className="min-w-0 text-muted-foreground">
+              {referenceLabel} · {t('abbr.risk')}
+            </dt>
+            <dd className="num shrink-0 font-semibold">{referenceValue}</dd>
+          </dl>
+        )}
+        <ClassScale value={unit.risk} className="mt-5" />
+      </section>
 
       {/* Dimensions */}
-      <section>
-        <SectionTitle>{t('card.dimensions')}</SectionTitle>
-        <DimensionBars unit={unit} compare={reference} compact />
-        <p className="mt-2.5 flex items-center gap-2 text-[11px] text-muted-foreground">
-          <span aria-hidden className="inline-block h-3 w-0.5 rounded-full bg-foreground/70" />
+      <section className="py-6">
+        <SectionTitle as="h3" className="mb-2">
+          {t('card.dimensions')}
+        </SectionTitle>
+        <ul>
+          {DIMENSIONS.map((d) => {
+            const v = unit.dims[d.key].score;
+            const ref = reference.dims[d.key]?.score;
+            const c = classify(v, d.scale);
+            return (
+              <li key={d.key} className="py-2">
+                <span className="flex items-baseline justify-between gap-2">
+                  <span className="truncate text-sm font-medium">{t(`common:dimensions.${d.key}`)}</span>
+                  <span className="num text-sm font-semibold">
+                    {formatScore(v)}
+                    {typeof ref === 'number' && (
+                      <span className="sr-only">
+                        {' '}
+                        ({reference.name}: {formatScore(ref)})
+                      </span>
+                    )}
+                  </span>
+                </span>
+                <span className="relative mt-1.5 block h-1 bg-muted">
+                  <span className="block h-full" style={{ width: `${pct(v)}%`, background: c?.color ?? NO_DATA_COLOR }} />
+                  {typeof ref === 'number' && (
+                    <span
+                      aria-hidden
+                      title={`${reference.name}: ${formatScore(ref)}`}
+                      className="absolute top-1/2 h-3 w-0.5 -translate-x-1/2 -translate-y-1/2 bg-foreground/70"
+                      style={{ left: `${pct(ref)}%` }}
+                    />
+                  )}
+                </span>
+              </li>
+            );
+          })}
+        </ul>
+        <p className="mt-2 flex items-center gap-2 text-xs text-muted-foreground">
+          <span aria-hidden className="inline-block h-3 w-0.5 bg-foreground/70" />
           {reference.level === 'national' ? t('card.markerNational') : t('card.markerRegion', { name: reference.name })}
         </p>
       </section>
 
       {/* Drivers */}
       {drivers.length > 0 && (
-        <section>
-          <SectionTitle>{t('card.drivers')}</SectionTitle>
-          <ul className="-mx-2 space-y-0.5">
+        <section className="py-6">
+          <SectionTitle as="h3" className="mb-2">
+            {t('card.drivers')}
+          </SectionTitle>
+          <ul className="-mx-2">
             {drivers.map((d) => {
               const key = `ind:${d.dim}:${d.key}`;
               const active = metric.key === key;
@@ -170,20 +237,19 @@ export function AreaBody({ unit }: { unit: Unit }) {
                     aria-pressed={active}
                     onClick={() => actions.setMetric(key)}
                     title={t('card.colourBy', { name: t(`indicators:${d.key}`) })}
-                    className={cn('group w-full rounded-xl px-2 py-1.5 text-left transition-colors hover:bg-muted/70', active && 'bg-primary/[0.07]')}
+                    className={cn('group w-full rounded-md px-2 py-2 text-left transition-colors duration-150 hover:bg-muted/70', active && 'bg-muted')}
                   >
-                    <span className="flex items-center justify-between gap-2">
-                      <span className="flex min-w-0 items-center gap-2">
-                        <span aria-hidden className="size-2 shrink-0 rounded-full" style={{ background: DIMENSION_COLORS[d.dim] }} />
-                        <span className="truncate text-[13px] font-semibold">{t(`indicators:${d.key}`)}</span>
+                    <span className="flex items-baseline justify-between gap-2">
+                      <span className="flex min-w-0 items-center gap-1.5">
+                        <span className={cn('truncate text-sm', active ? 'font-semibold' : 'font-medium')}>{t(`indicators:${d.key}`)}</span>
                         <Paintbrush className="size-3 shrink-0 text-muted-foreground opacity-0 transition-opacity group-hover:opacity-100 group-focus-visible:opacity-100" aria-hidden />
                       </span>
-                      <span className="num font-display text-sm font-bold">{formatScore(d.value)}</span>
+                      <span className="num text-sm font-semibold">{formatScore(d.value)}</span>
                     </span>
-                    <span className="mt-1 block h-1.5 overflow-hidden rounded-full bg-muted">
-                      <span className="block h-full rounded-full" style={{ width: `${d.value * 10}%`, background: rampColor(d.value) }} />
+                    <span className="mt-1.5 block h-1 bg-muted">
+                      <span className="block h-full" style={{ width: `${pct(d.value)}%`, background: rampColor(d.value) }} />
                     </span>
-                    <span className="mt-0.5 block truncate text-[11px] text-muted-foreground">
+                    <span className="mt-1 block truncate text-xs text-muted-foreground">
                       {t(`common:dimensions.${d.dim}Short`)} · {t(`common:categories.${d.category}`)}
                     </span>
                   </button>
@@ -191,87 +257,94 @@ export function AreaBody({ unit }: { unit: Unit }) {
               );
             })}
           </ul>
-          <p className="mt-1.5 text-[11px] text-muted-foreground">{t('card.driversHint')}</p>
+          <p className="mt-2 text-xs leading-relaxed text-muted-foreground">{t('card.driversHint')}</p>
         </section>
       )}
 
       {/* People */}
-      <section>
-        <SectionTitle>{t('card.people')}</SectionTitle>
-        <div className="grid grid-cols-3 gap-2">
-          <Fact label={t('common:labels.population')} value={formatNumber(pop, lang)} />
-          <Fact label={t('common:labels.density')} value={formatNumber(density, lang, { maximumFractionDigits: 0 })} sub={t('common:units.perKm2')} />
-          <Fact label={t('common:labels.area')} value={formatNumber(area, lang, { maximumFractionDigits: 0 })} sub={t('common:units.km2')} />
-        </div>
+      <section className="py-6">
+        <SectionTitle as="h3" className="mb-3">
+          {t('card.people')}
+        </SectionTitle>
+        <dl className="grid grid-cols-3 divide-x divide-border">
+          <Figure label={t('common:labels.population')} className={ruled(0, 3)}>
+            {formatNumber(pop, lang)}
+          </Figure>
+          <Figure label={t('common:labels.density')} sub={t('common:units.perKm2')} className={ruled(1, 3)}>
+            {formatNumber(density, lang, { maximumFractionDigits: 0 })}
+          </Figure>
+          <Figure label={t('common:labels.area')} sub={t('common:units.km2')} className={ruled(2, 3)}>
+            {formatNumber(area, lang, { maximumFractionDigits: 0 })}
+          </Figure>
+        </dl>
         {unit.exposure?.source && (
-          <p className="mt-1.5 truncate text-[11px] text-muted-foreground" title={unit.exposure.source}>
+          <p className="mt-3 truncate text-xs text-muted-foreground" title={unit.exposure.source}>
             {t('card.popSource', { source: unit.exposure.source })}
           </p>
         )}
       </section>
 
       {/* Coverage */}
-      <section>
-        <SectionTitle>{t('common:labels.coverage')}</SectionTitle>
-        <div className="flex items-center gap-3">
-          <Progress value={coverage} label={t('common:labels.coverage')} className="h-1.5 flex-1" indicatorClassName={coverage >= 80 ? 'bg-success' : coverage >= 60 ? 'bg-warning' : 'bg-danger'} />
-          <span className="num text-sm font-bold">{coverage}%</span>
+      <section className="py-6">
+        <div className="mb-2 flex items-baseline justify-between gap-3">
+          <SectionTitle as="h3" className="mb-0 min-h-0">
+            {t('common:labels.coverage')}
+          </SectionTitle>
+          <span className="num text-sm font-semibold">{coverage}%</span>
         </div>
-        <p className="mt-1 text-[11px] text-muted-foreground">{t('card.coverageDetail', { have, total })}</p>
+        <Progress
+          value={coverage}
+          label={t('common:labels.coverage')}
+          className="h-1 rounded-none"
+          indicatorClassName={cn('rounded-none', coverage >= 80 ? 'bg-success' : coverage >= 60 ? 'bg-warning' : 'bg-danger')}
+        />
+        <p className="mt-2 text-xs text-muted-foreground">{t('card.coverageDetail', { have, total })}</p>
       </section>
 
-      {/* Provenance notices */}
-      <div className="space-y-2">
-        {unit.inheritedFrom && <Notice icon={<Split />} tone="warning">{t('common:labels.inherited', { parent: unit.inheritedFrom })}</Notice>}
-        {unit.level === 'council' && unit.sourceName && <Notice icon={<Link2 />}>{t('common:labels.sharedSource', { source: unit.sourceName })}</Notice>}
-        {unit.level === 'region' && <Notice icon={<Layers />}>{t('card.regionNote', { count: unit.members ?? 0 })}</Notice>}
-        {unit.level === 'source' && (
-          <Notice icon={<Database />} tone="warning">
-            {t('card.sourceNote')}
-          </Notice>
-        )}
-        {edits > 0 && (
-          <Notice icon={<Pencil />} tone="primary">
-            {t('card.editedNote', { count: edits })}
-          </Notice>
-        )}
-      </div>
+      {/* Provenance notes */}
+      {(unit.inheritedFrom || (unit.level === 'council' && unit.sourceName) || unit.level === 'region' || unit.level === 'source' || edits > 0) && (
+        <section className="space-y-3 pt-6">
+          {unit.inheritedFrom && <Notice tone="warning">{t('common:labels.inherited', { parent: unit.inheritedFrom })}</Notice>}
+          {unit.level === 'council' && unit.sourceName && <Notice>{t('common:labels.sharedSource', { source: unit.sourceName })}</Notice>}
+          {unit.level === 'region' && <Notice>{t('card.regionNote', { count: unit.members ?? 0 })}</Notice>}
+          {unit.level === 'source' && <Notice tone="warning">{t('card.sourceNote')}</Notice>}
+          {edits > 0 && <Notice tone="primary">{t('card.editedNote', { count: edits })}</Notice>}
+        </section>
+      )}
     </div>
   );
 }
 
-/** Desktop overlay card. */
-export function AreaCardOverlay({ top, bottom }: { top: number; bottom: number }) {
+/**
+ * Desktop area panel with a fixed header and actions and a scrolling body: `floating` over the map (a
+ * flat panel with a small lift), `docked` as a ruled column beside the ranking table.
+ */
+export function AreaCardPanel({ placement, style }: { placement: 'floating' | 'docked'; style?: React.CSSProperties }) {
   const { t } = useTranslation('explore');
   const { selected, actions } = useExplore();
+  if (!selected) return null;
   return (
-    <AnimatePresence>
-      {selected && (
-        <motion.aside
-          key="area-card"
-          aria-label={t('card.label', { name: selected.name })}
-          initial={{ opacity: 0, x: 28, scale: 0.98, top, bottom }}
-          animate={{ opacity: 1, x: 0, scale: 1, top, bottom }}
-          exit={{ opacity: 0, x: 28, scale: 0.98 }}
-          transition={{ duration: 0.28, ease: [0.2, 0.7, 0.2, 1] }}
-          onKeyDown={(e) => {
-            if (e.key === 'Escape' && !e.defaultPrevented) actions.deselect();
-          }}
-          className="absolute right-4 z-30 flex w-[360px] max-w-[calc(100%-2rem)] flex-col overflow-hidden rounded-2xl border border-border/70 bg-card/90 shadow-[var(--shadow-lift)] backdrop-blur-xl"
-        >
-          <motion.div key={selected.id} initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.2 }} className="flex min-h-0 flex-1 flex-col">
-            <div className="shrink-0 border-b border-border/70 p-4">
-              <AreaHeader unit={selected} onClose={actions.deselect} />
-            </div>
-            <div className="min-h-0 flex-1 overflow-y-auto overscroll-contain p-4">
-              <AreaBody unit={selected} />
-            </div>
-            <div className="shrink-0 border-t border-border/70 bg-card/60 p-3">
-              <AreaActions unit={selected} />
-            </div>
-          </motion.div>
-        </motion.aside>
-      )}
-    </AnimatePresence>
+    <aside
+      aria-label={t('card.label', { name: selected.name })}
+      style={style}
+      onKeyDown={(e) => {
+        if (e.key === 'Escape' && !e.defaultPrevented) actions.deselect();
+      }}
+      className={
+        placement === 'floating'
+          ? 'glass absolute right-4 z-30 flex w-[360px] max-w-[calc(100%-2rem)] flex-col overflow-hidden rounded-lg'
+          : 'flex w-[320px] shrink-0 flex-col border-l border-border bg-background xl:w-[360px]'
+      }
+    >
+      <div className="shrink-0 border-b border-border px-5 pt-4 pb-4">
+        <AreaHeader unit={selected} onClose={actions.deselect} />
+      </div>
+      <div key={selected.id} className="min-h-0 flex-1 overflow-y-auto overscroll-contain px-5 pt-5 pb-6">
+        <AreaBody unit={selected} />
+      </div>
+      <div className="shrink-0 border-t border-border px-4 py-3">
+        <AreaActions unit={selected} />
+      </div>
+    </aside>
   );
 }

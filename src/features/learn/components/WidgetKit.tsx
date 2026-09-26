@@ -1,9 +1,8 @@
 /**
- * Small building blocks shared by the lesson widgets: the widget frame, a council picker, an
- * accessible labelled slider and a 0–10 indicator bar that shows "no data" honestly.
+ * Small building blocks shared by the lesson widgets: the widget panel (the one bordered box a lesson
+ * section may hold), a council picker, an accessible labelled slider, a 0–10 indicator bar that shows
+ * "no data" honestly, unboxed figures and flat toggle chips. See docs/DESIGN_LANGUAGE.md.
  */
-import { Database, FlaskConical, MousePointerClick } from 'lucide-react';
-import { motion } from 'motion/react';
 import { Slider as SliderPrimitive } from 'radix-ui';
 import * as React from 'react';
 import { useTranslation } from 'react-i18next';
@@ -15,6 +14,7 @@ import { cn, formatScore } from '@/lib/utils';
 
 /* ------------------------------------------------------------------------------------------------ */
 
+/** The single flat panel an interactive lesson widget sits in: title row, body, source line. */
 export function WidgetFrame({
   title,
   description,
@@ -31,43 +31,35 @@ export function WidgetFrame({
   className?: string;
 }) {
   const { t } = useTranslation('learn');
-  const kindBadge =
-    kind === 'live' ? (
-      <span className="inline-flex items-center gap-1 rounded-full bg-success/12 px-2 py-0.5 text-[11px] font-semibold text-success">
-        <Database className="size-3" aria-hidden /> {t('widget.live')}
-      </span>
-    ) : kind === 'engine' ? (
-      <span className="inline-flex items-center gap-1 rounded-full bg-primary/10 px-2 py-0.5 text-[11px] font-semibold text-primary">
-        <Database className="size-3" aria-hidden /> {t('widget.engine')}
-      </span>
-    ) : (
-      <span className="inline-flex items-center gap-1 rounded-full bg-warning/12 px-2 py-0.5 text-[11px] font-semibold text-warning">
-        <FlaskConical className="size-3" aria-hidden /> {t('widget.illustrative')}
-      </span>
-    );
   return (
-    <motion.figure
-      initial={{ opacity: 0, y: 14 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: '-60px' }}
-      transition={{ duration: 0.45 }}
-      className={cn('not-prose my-8 overflow-hidden rounded-3xl border border-primary/25 bg-card shadow-[var(--shadow-lift)]', className)}
-    >
-      <div className="relative border-b border-border bg-gradient-to-br from-primary/10 via-primary/[0.03] to-transparent px-5 py-4 sm:px-6">
-        <div className="flex flex-wrap items-center gap-2">
-          <span className="inline-flex items-center gap-1.5 rounded-full bg-primary px-2.5 py-0.5 text-[11px] font-bold tracking-wide text-primary-foreground uppercase">
-            <MousePointerClick className="size-3" aria-hidden /> {t('widget.tryIt')}
-          </span>
-          {kindBadge}
-        </div>
-        <figcaption>
-          <h3 className="mt-2.5 text-lg font-bold">{title}</h3>
-          {description && <p className="mt-1 text-sm leading-relaxed text-muted-foreground">{description}</p>}
-        </figcaption>
-      </div>
+    <figure className={cn('not-prose my-10 rounded-lg border border-border bg-card', className)}>
+      <figcaption className="border-b border-border px-5 pt-5 pb-4 sm:px-6">
+        <p className="text-sm text-muted-foreground">
+          {t('widget.tryIt')} <span aria-hidden>·</span>{' '}
+          <span className={cn(kind === 'illustrative' && 'font-medium text-warning')}>{t(`widget.${kind}`)}</span>
+        </p>
+        <h3 className="mt-1 text-lg leading-snug font-semibold text-balance">{title}</h3>
+        {description && <p className="mt-1.5 max-w-2xl text-sm leading-relaxed text-muted-foreground">{description}</p>}
+      </figcaption>
       <div className="p-5 sm:p-6">{children}</div>
-      {footer && <div className="border-t border-border bg-muted/40 px-5 py-3 text-xs leading-relaxed text-muted-foreground sm:px-6">{footer}</div>}
-    </motion.figure>
+      {footer && <div className="border-t border-border px-5 py-3.5 text-xs leading-relaxed text-muted-foreground sm:px-6">{footer}</div>}
+    </figure>
+  );
+}
+
+/** A widget's result sentence, set off by a left rule (no tinted box). */
+export function Finding({ children, tone = 'neutral', className, ...rest }: { children: React.ReactNode; tone?: 'neutral' | 'success' | 'warning'; className?: string } & React.HTMLAttributes<HTMLDivElement>) {
+  return (
+    <div
+      className={cn(
+        'border-l-2 pl-4 text-sm leading-relaxed text-foreground/90',
+        tone === 'success' ? 'border-success' : tone === 'warning' ? 'border-warning' : 'border-border',
+        className,
+      )}
+      {...rest}
+    >
+      {children}
+    </div>
   );
 }
 
@@ -87,7 +79,11 @@ export function useCouncil(defaultName: string): [Unit, (id: string) => void] {
   return [unit, setId];
 }
 
-export function CouncilPicker({
+/**
+ * Council select grouped by region. Memoised: the list holds ~200 items, and the widgets re-render on
+ * every slider move, so the picker only re-renders when its own props change.
+ */
+export const CouncilPicker = React.memo(function CouncilPicker({
   value,
   onChange,
   label,
@@ -111,7 +107,7 @@ export function CouncilPicker({
   }, [model]);
   return (
     <div className={cn('min-w-0', className)}>
-      <span className="mb-1.5 block text-xs font-semibold text-muted-foreground">{label}</span>
+      <span className="mb-1.5 block text-sm text-muted-foreground">{label}</span>
       <Select value={value} onValueChange={onChange} aria-label={label} placeholder={placeholder}>
         {groups.map(([region, list]) => (
           <SelectGroup key={region} label={region}>
@@ -125,13 +121,14 @@ export function CouncilPicker({
       </Select>
     </div>
   );
-}
+});
 
 /* ------------------------------------------------------------------------------------------------ */
 
 /**
  * Radix slider with a properly labelled thumb (role="slider", aria-label, aria-valuetext),
  * so screen-reader users hear "Hazard & Exposure, 6.2" rather than a bare number.
+ * `color` fills the range with a data colour (e.g. a dimension colour); by default it is the control colour.
  */
 export function LabeledSlider({
   label,
@@ -141,8 +138,7 @@ export function LabeledSlider({
   max = 10,
   step = 0.1,
   valueText,
-  accentClassName = 'bg-primary',
-  thumbClassName = 'border-primary',
+  color,
   className,
   hint,
 }: {
@@ -153,8 +149,7 @@ export function LabeledSlider({
   max?: number;
   step?: number;
   valueText: string;
-  accentClassName?: string;
-  thumbClassName?: string;
+  color?: string;
   className?: string;
   hint?: React.ReactNode;
 }) {
@@ -162,12 +157,12 @@ export function LabeledSlider({
   return (
     <div className={className}>
       <div className="mb-2 flex items-baseline justify-between gap-3">
-        <span id={id} className="text-sm font-semibold">
+        <span id={id} className="text-sm font-medium">
           {label}
         </span>
-        <span className="flex items-center gap-2">
+        <span className="flex items-center gap-2.5">
           {hint}
-          <span className="num font-display text-lg font-extrabold">{valueText}</span>
+          <span className="num text-lg font-semibold tracking-tight">{valueText}</span>
         </span>
       </div>
       <SliderPrimitive.Root
@@ -178,13 +173,17 @@ export function LabeledSlider({
         step={step}
         onValueChange={(v) => onChange(v[0])}
       >
-        <SliderPrimitive.Track className="relative h-2 grow overflow-hidden rounded-full bg-muted">
-          <SliderPrimitive.Range className={cn('absolute h-full rounded-full', accentClassName)} />
+        <SliderPrimitive.Track className="relative h-1.5 grow overflow-hidden rounded-full bg-muted">
+          <SliderPrimitive.Range className={cn('absolute h-full rounded-full', !color && 'bg-primary')} style={color ? { background: color } : undefined} />
         </SliderPrimitive.Track>
         <SliderPrimitive.Thumb
           aria-labelledby={id}
           aria-valuetext={valueText}
-          className={cn('block size-5 rounded-full border-2 bg-card shadow-md transition-transform hover:scale-110 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring', thumbClassName)}
+          className={cn(
+            'block size-[18px] rounded-full border-2 bg-card shadow-sm transition-transform duration-150 hover:scale-110 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring',
+            !color && 'border-primary',
+          )}
+          style={color ? { borderColor: color } : undefined}
         />
       </SliderPrimitive.Root>
     </div>
@@ -198,37 +197,50 @@ export function IndicatorBar({ label, value, highlight = false, reference, refer
   const { t } = useTranslation('common');
   const has = typeof value === 'number' && Number.isFinite(value);
   return (
-    <div className={cn('rounded-xl px-2 py-1.5 transition-colors', highlight && 'bg-primary/[0.06] ring-1 ring-primary/20')}>
+    <div className="py-1.5">
       <div className="mb-1 flex items-baseline justify-between gap-2 text-xs">
-        <span className={cn('min-w-0 truncate font-medium', highlight && 'font-semibold')}>{label}</span>
-        {has ? (
-          <span className="num font-display text-sm font-bold">{formatScore(value)}</span>
-        ) : (
-          <span className="rounded-full border border-dashed border-border px-1.5 text-[10px] font-semibold text-muted-foreground">{t('classes.noData')}</span>
-        )}
+        <span className={cn('min-w-0 truncate', highlight ? 'font-semibold text-foreground' : 'text-foreground/85')}>{label}</span>
+        {has ? <span className={cn('num text-sm', highlight ? 'font-semibold' : 'font-medium')}>{formatScore(value)}</span> : <span className="text-[11px] text-muted-foreground">{t('classes.noData')}</span>}
       </div>
-      <div className="relative h-1.5 w-full rounded-full bg-muted">
+      <div className="relative h-1.5 w-full bg-muted">
         {has ? (
-          <motion.div className="h-full rounded-full" initial={false} animate={{ width: `${(value / 10) * 100}%` }} transition={{ duration: 0.5 }} style={{ background: rampColor(value) }} />
+          <div className="h-full transition-[width] duration-150" style={{ width: `${(value / 10) * 100}%`, background: rampColor(value) }} />
         ) : (
-          <div className="h-full w-full rounded-full [background:repeating-linear-gradient(45deg,var(--input)_0_4px,transparent_4px_8px)]" />
+          <div className="h-full w-full [background:repeating-linear-gradient(45deg,var(--input)_0_4px,transparent_4px_8px)]" />
         )}
         {typeof reference === 'number' && (
-          <span title={referenceLabel} className="absolute top-1/2 h-3 w-0.5 -translate-y-1/2 rounded-full bg-foreground/60" style={{ left: `${(reference / 10) * 100}%` }} />
+          <span title={referenceLabel} className="absolute top-1/2 h-3 w-0.5 -translate-y-1/2 bg-foreground/70" style={{ left: `${(reference / 10) * 100}%` }} />
         )}
       </div>
     </div>
   );
 }
 
-/** Small key/value tile. */
+/** One unboxed figure: small label, a number, an optional unit line. Place several in a ruled row. */
 export function Fact({ label, value, sub, className }: { label: React.ReactNode; value: React.ReactNode; sub?: React.ReactNode; className?: string }) {
   return (
-    <div className={cn('rounded-2xl border border-border bg-background/60 p-3', className)}>
-      <div className="text-[11px] font-medium text-muted-foreground">{label}</div>
-      <div className="num mt-0.5 font-display text-xl font-extrabold tracking-tight">{value}</div>
-      {sub && <div className="mt-0.5 text-[11px] text-muted-foreground">{sub}</div>}
+    <div className={cn('min-w-0', className)}>
+      <div className="text-xs text-muted-foreground">{label}</div>
+      <div className="num mt-1 text-xl font-semibold tracking-tight">{value}</div>
+      {sub && <div className="mt-0.5 text-xs text-muted-foreground">{sub}</div>}
     </div>
+  );
+}
+
+/** A flat toggle button (aria-pressed) for presets and quick picks. */
+export function Chip({ active, onClick, children }: { active: boolean; onClick: () => void; children: React.ReactNode }) {
+  return (
+    <button
+      type="button"
+      aria-pressed={active}
+      onClick={onClick}
+      className={cn(
+        'rounded-md border px-2.5 py-1 text-sm transition-colors duration-150',
+        active ? 'border-foreground/70 bg-muted font-medium text-foreground' : 'border-border text-muted-foreground hover:border-foreground/40 hover:text-foreground',
+      )}
+    >
+      {children}
+    </button>
   );
 }
 
@@ -241,20 +253,11 @@ export function QuickPicks({ names, value, onPick, label, className }: { names: 
   }, [model, names]);
   return (
     <div role="group" aria-label={label} className={cn('flex flex-wrap items-center gap-1.5', className)}>
-      <span className="mr-1 text-xs font-medium text-muted-foreground">{label}</span>
+      <span className="mr-1 text-sm text-muted-foreground">{label}</span>
       {units.map((u) => (
-        <button
-          key={u.id}
-          type="button"
-          aria-pressed={u.id === value}
-          onClick={() => onPick(u.id)}
-          className={cn(
-            'rounded-full border px-2.5 py-1 text-xs font-semibold transition-colors',
-            u.id === value ? 'border-primary bg-primary/10 text-primary' : 'border-border bg-background text-muted-foreground hover:border-primary/40 hover:text-foreground',
-          )}
-        >
+        <Chip key={u.id} active={u.id === value} onClick={() => onPick(u.id)}>
           {u.name}
-        </button>
+        </Chip>
       ))}
     </div>
   );

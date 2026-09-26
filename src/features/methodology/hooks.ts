@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { flushSync } from 'react-dom';
 import { useLocation } from 'react-router-dom';
 
 const prefersReducedMotion = () => typeof window !== 'undefined' && !!window.matchMedia?.('(prefers-reduced-motion: reduce)').matches;
@@ -28,12 +29,9 @@ export function useHashScroll(): void {
   }, [hash]);
 }
 
-/**
- * Scroll-spy: the id of the last section whose top has passed `offset` px from the viewport top,
- * plus reading progress (0–1) through the document.
- */
-export function useScrollSpy(ids: readonly string[], offset = 140): { active: string; progress: number } {
-  const [state, setState] = React.useState<{ active: string; progress: number }>({ active: ids[0] ?? '', progress: 0 });
+/** Scroll-spy: the id of the last section whose top has passed `offset` px from the viewport top. */
+export function useScrollSpy(ids: readonly string[], offset = 140): string {
+  const [active, setActive] = React.useState<string>(ids[0] ?? '');
 
   React.useEffect(() => {
     let frame = 0;
@@ -44,11 +42,9 @@ export function useScrollSpy(ids: readonly string[], offset = 140): { active: st
         const el = document.getElementById(id);
         if (el && el.getBoundingClientRect().top - offset <= 0) current = id;
       }
-      const doc = document.documentElement;
-      const max = doc.scrollHeight - window.innerHeight;
+      const max = document.documentElement.scrollHeight - window.innerHeight;
       if (max > 0 && window.scrollY >= max - 4) current = ids[ids.length - 1] ?? current;
-      const progress = max > 0 ? Math.min(1, Math.max(0, window.scrollY / max)) : 0;
-      setState((s) => (s.active === current && Math.abs(s.progress - progress) < 0.005 ? s : { active: current, progress }));
+      setActive(current);
     };
     const onScroll = () => {
       if (!frame) frame = window.requestAnimationFrame(measure);
@@ -63,5 +59,33 @@ export function useScrollSpy(ids: readonly string[], offset = 140): { active: st
     };
   }, [ids, offset]);
 
-  return state;
+  return active;
+}
+
+/**
+ * Mount far-below-the-fold content after the first paint, in `stages` batches: the page paints its header
+ * and opening sections at once, and each later batch renders in a background transition a couple of
+ * frames after the previous one, so no single task blocks the page for long. Returns how many batches
+ * are mounted (0 … stages). `immediate` (arriving on a `#section` link) mounts everything at once so the
+ * target can be scrolled to; printing does too, and `showAll` does so synchronously.
+ */
+export function useDeferredMount(immediate: boolean, stages: number): [number, () => void] {
+  const [stage, setStage] = React.useState(immediate ? stages : 0);
+  const showAll = React.useCallback(() => flushSync(() => setStage(stages)), [stages]);
+
+  React.useEffect(() => {
+    if (stage >= stages) return;
+    let second = 0;
+    const first = window.requestAnimationFrame(() => {
+      second = window.requestAnimationFrame(() => React.startTransition(() => setStage((s) => Math.min(stages, s + 1))));
+    });
+    window.addEventListener('beforeprint', showAll);
+    return () => {
+      window.cancelAnimationFrame(first);
+      window.cancelAnimationFrame(second);
+      window.removeEventListener('beforeprint', showAll);
+    };
+  }, [stage, stages, showAll]);
+
+  return [immediate ? stages : stage, showAll];
 }

@@ -83,23 +83,6 @@ export function Section({ className, children, id, ruled = true }: { className?:
   );
 }
 
-/**
- * One key figure: a large number with a label, set off by a left hairline. Place several in a grid or
- * `KeyFigures` row — never inside individual boxes.
- */
-export function Stat({ label, value, sub, icon, className }: { label: React.ReactNode; value: React.ReactNode; sub?: React.ReactNode; icon?: React.ReactNode; className?: string }) {
-  return (
-    <div className={cn('border-l border-border py-1 pl-4 sm:pl-5', className)}>
-      <div className="flex items-center gap-1.5 text-sm text-muted-foreground">
-        {icon && <span className="[&_svg]:size-3.5" aria-hidden>{icon}</span>}
-        <span>{label}</span>
-      </div>
-      <div className="num mt-1.5 text-3xl font-semibold tracking-tight sm:text-[2.1rem]">{value}</div>
-      {sub && <div className="mt-1 text-sm text-muted-foreground">{sub}</div>}
-    </div>
-  );
-}
-
 /** A row of key figures separated by vertical rules (wraps to two columns on small screens). */
 export function KeyFigures({ items, className }: { items: Array<{ label: React.ReactNode; value: React.ReactNode; sub?: React.ReactNode }>; className?: string }) {
   return (

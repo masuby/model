@@ -3,26 +3,18 @@
  * approve it. Role-aware tabs: enter scores, measured values or bulk paste; review queue; my
  * submissions; approved changes (with revert); activity. Works in local demo mode (browser only) and
  * against the shared Supabase backend (RLS + server-side approval).
+ *
+ * Layout follows docs/DESIGN_LANGUAGE.md: a plain header whose key figures (separated by rules) close it,
+ * the access note, then straight into the work — underline tabs (a labelled native select on phones, so
+ * the active section is always visible), or just the approved changes when that is all a visitor can see.
+ * Score entry (the contributors' landing tab) ships with the page; measured values, bulk paste and the
+ * review queue load on demand and are prefetched on tab hover/focus.
  */
-import {
-  BadgeCheck,
-  ClipboardPaste,
-  Clock3,
-  FileClock,
-  History,
-  Inbox,
-  Map as MapIcon,
-  PenLine,
-  Ruler,
-  ShieldCheck,
-  SlidersHorizontal,
-  Sparkles,
-  type LucideIcon,
-} from 'lucide-react';
+import { ChevronDown } from 'lucide-react';
 import * as React from 'react';
 import { useTranslation } from 'react-i18next';
 import { useSearchParams } from 'react-router-dom';
-import { PageContainer, PageHeader, Stat } from '@/components/layout/Page';
+import { KeyFigures, PageContainer, PageHeader } from '@/components/layout/Page';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/primitives';
 import { useData, useModel, useOverrides } from '@/data-layer/DataProvider';
 import { formatDate, formatNumber } from '@/lib/utils';
@@ -33,28 +25,39 @@ import { useMySubmissions, usePendingQueue, usePermissions } from './hooks';
 import { relativeTime } from './lib/format';
 import { ActivityLog } from './tabs/ActivityLog';
 import { ApprovedChanges } from './tabs/ApprovedChanges';
-import { BulkPaste } from './tabs/BulkPaste';
 import { MySubmissions } from './tabs/MySubmissions';
-import { RawEntry } from './tabs/RawEntry';
-import { ReviewQueue } from './tabs/ReviewQueue';
 import { ScoreEntry } from './tabs/ScoreEntry';
 
 type TabKey = 'scores' | 'raw' | 'paste' | 'queue' | 'mine' | 'approved' | 'activity';
 interface TabDef {
   key: TabKey;
-  icon: LucideIcon;
   show: (p: { canSubmit: boolean; canReview: boolean }) => boolean;
 }
 
 const TABS: readonly TabDef[] = [
-  { key: 'scores', icon: SlidersHorizontal, show: (p) => p.canSubmit },
-  { key: 'raw', icon: Ruler, show: (p) => p.canSubmit },
-  { key: 'paste', icon: ClipboardPaste, show: (p) => p.canSubmit },
-  { key: 'queue', icon: Inbox, show: (p) => p.canReview },
-  { key: 'mine', icon: FileClock, show: (p) => p.canSubmit },
-  { key: 'approved', icon: BadgeCheck, show: () => true },
-  { key: 'activity', icon: History, show: (p) => p.canReview },
+  { key: 'scores', show: (p) => p.canSubmit },
+  { key: 'raw', show: (p) => p.canSubmit },
+  { key: 'paste', show: (p) => p.canSubmit },
+  { key: 'queue', show: (p) => p.canReview },
+  { key: 'mine', show: (p) => p.canSubmit },
+  { key: 'approved', show: () => true },
+  { key: 'activity', show: (p) => p.canReview },
 ];
+/** Reviewers land on their queue, so it leads their tab row. */
+const REVIEWER_ORDER: readonly TabKey[] = ['queue', 'scores', 'raw', 'paste', 'mine', 'approved', 'activity'];
+
+/** Tools split out of the page chunk. Import promises are cached, so prefetching is free. */
+const LOADERS = {
+  raw: () => import('./tabs/RawEntry'),
+  paste: () => import('./tabs/BulkPaste'),
+  queue: () => import('./tabs/ReviewQueue'),
+};
+const RawEntry = React.lazy(() => LOADERS.raw().then((m) => ({ default: m.RawEntry })));
+const BulkPaste = React.lazy(() => LOADERS.paste().then((m) => ({ default: m.BulkPaste })));
+const ReviewQueue = React.lazy(() => LOADERS.queue().then((m) => ({ default: m.ReviewQueue })));
+const prefetch = (key: TabKey) => {
+  if (key in LOADERS) void LOADERS[key as keyof typeof LOADERS]().catch(() => undefined);
+};
 
 export default function DataPortalPage() {
   const { t, i18n } = useTranslation(['data', 'common']);
@@ -66,7 +69,10 @@ export default function DataPortalPage() {
   const { mine } = useMySubmissions();
   const [params, setParams] = useSearchParams();
 
-  const tabs = React.useMemo(() => TABS.filter((tab) => tab.show({ canSubmit: perms.canSubmit, canReview: perms.canReview })), [perms.canSubmit, perms.canReview]);
+  const tabs = React.useMemo(() => {
+    const shown = TABS.filter((tab) => tab.show({ canSubmit: perms.canSubmit, canReview: perms.canReview }));
+    return perms.canReview ? [...shown].sort((a, b) => REVIEWER_ORDER.indexOf(a.key) - REVIEWER_ORDER.indexOf(b.key)) : shown;
+  }, [perms.canSubmit, perms.canReview]);
   // Deterministic landing tab per role (no jump once data loads): reviewers start on their queue.
   const defaultTab: TabKey = perms.canReview ? 'queue' : perms.canSubmit ? 'scores' : 'approved';
   const requested = params.get('tab') as TabKey | null;
@@ -74,6 +80,17 @@ export default function DataPortalPage() {
   const councilParam = params.get('council');
   const councilId = councilParam && model.byId.get(councilParam)?.level === 'council' ? councilParam : null;
   const [visited, setVisited] = React.useState<ReadonlySet<TabKey>>(() => new Set([active]));
+  const listRef = React.useRef<HTMLDivElement>(null);
+
+  // Where the tab row scrolls sideways (tablet widths), keep the active tab in view — horizontally only,
+  // so a deep link never makes the page jump.
+  React.useEffect(() => {
+    const list = listRef.current;
+    const el = list?.querySelector<HTMLElement>('[data-state="active"]');
+    if (!list || !el || list.scrollWidth <= list.clientWidth) return;
+    const left = el.getBoundingClientRect().left - list.getBoundingClientRect().left + list.scrollLeft;
+    list.scrollTo({ left: Math.max(0, left - (list.clientWidth - el.offsetWidth) / 2) });
+  }, [active, authLoading, tabs.length]);
 
   const setParam = React.useCallback(
     (key: string, value: string | null) =>
@@ -106,6 +123,27 @@ export default function DataPortalPage() {
     return { values, units: Object.keys(overrides.data ?? {}).length, latest };
   }, [overrides.data]);
   const awaiting = perms.canReview ? pending.length : mine.filter((s) => s.status === 'pending').length;
+  const worker = perms.canSubmit || perms.canReview;
+  // Only figures that say something for this person: no "awaiting" for visitors, no empty "0 / —" pair
+  // while the official baseline is still untouched.
+  const figures = [
+    stats.values > 0
+      ? { label: t('stats.values'), value: formatNumber(stats.values, i18n.language), sub: t('stats.valuesSub', { count: stats.units }) }
+      : { label: t('stats.inUse'), value: t('stats.baseline'), sub: t('stats.baselineSub') },
+    ...(worker
+      ? [{ label: t('stats.awaiting'), value: formatNumber(awaiting, i18n.language), sub: perms.canReview ? t('stats.awaitingReviewer') : t('stats.awaitingMine') }]
+      : []),
+    { label: t('stats.councils'), value: formatNumber(model.councils.length, i18n.language), sub: t('stats.councilsSub', { sources: model.sources.length }) },
+    ...(stats.latest
+      ? [
+          {
+            label: t('stats.latest'),
+            value: formatDate(stats.latest, i18n.language, { day: 'numeric', month: 'short' }),
+            sub: t('stats.latestSub', { when: relativeTime(stats.latest, i18n.language) }),
+          },
+        ]
+      : []),
+  ];
 
   const gate = (node: React.ReactNode) =>
     overrides.isLoading ? <ListSkeleton rows={2} /> : overrides.isError ? <ErrorState error={overrides.error} onRetry={() => void overrides.refetch()} /> : node;
@@ -120,46 +158,59 @@ export default function DataPortalPage() {
     activity: () => <ActivityLog />,
   };
 
+  const tabLabel = (key: TabKey) => t(`tabs.${key}`);
+
   return (
     <div>
       <PageHeader eyebrow={t('page.eyebrow')} title={t('page.title')} description={t('page.lead')} actions={<DataToolsMenu />}>
-        <WorkflowSteps />
+        <KeyFigures className="mt-10 border-t border-border pt-7" items={figures} />
       </PageHeader>
 
-      <PageContainer className="space-y-6 py-8">
+      <PageContainer className="pt-10 pb-20 sm:pt-12">
         <AccessPanel />
 
-        <div className="grid grid-cols-2 gap-3 lg:grid-cols-4">
-          <Stat label={t('stats.values')} value={formatNumber(stats.values, i18n.language)} sub={t('stats.valuesSub', { count: stats.units })} icon={<BadgeCheck />} />
-          <Stat
-            label={t('stats.awaiting')}
-            value={profile ? formatNumber(awaiting, i18n.language) : '—'}
-            sub={perms.canReview ? t('stats.awaitingReviewer') : perms.canSubmit ? t('stats.awaitingMine') : t('stats.awaitingNone')}
-            icon={<Clock3 />}
-          />
-          <Stat label={t('stats.councils')} value={formatNumber(model.councils.length, i18n.language)} sub={t('stats.councilsSub', { sources: model.sources.length })} icon={<MapIcon />} />
-          <Stat
-            label={t('stats.latest')}
-            value={stats.latest ? formatDate(stats.latest, i18n.language, { day: 'numeric', month: 'short' }) : '—'}
-            sub={stats.latest ? t('stats.latestSub', { when: relativeTime(stats.latest, i18n.language) }) : t('stats.latestNone')}
-            icon={<Sparkles />}
-          />
-        </div>
+        {profile && !perms.canSubmit && <ContributorAccess className="mt-14" />}
 
-        {profile && !perms.canSubmit && <ContributorAccess />}
-
-        {authLoading ? (
-          <ListSkeleton rows={2} />
-        ) : (
-          <Tabs value={active} onValueChange={onTab}>
-            <div className="-mx-4 overflow-x-auto px-4 pb-1 sm:mx-0 sm:px-0">
-              <TabsList className="w-max" aria-label={t('tabs.label')}>
+        <div className="mt-12">
+          {authLoading ? (
+            <ListSkeleton rows={2} />
+          ) : tabs.length === 1 ? (
+            // One section only (visitors): a plain heading, not a one-item tab row.
+            <section aria-labelledby="data-section-title" className="border-t border-border pt-10">
+              <h2 id="data-section-title" className="text-[1.6rem] leading-tight">
+                {tabLabel(tabs[0].key)}
+              </h2>
+              <div className="mt-6">{body[tabs[0].key]()}</div>
+            </section>
+          ) : (
+            <Tabs value={active} onValueChange={onTab}>
+              {/* Phones: a labelled native select, so the current section and every other one are visible. */}
+              <div className="border-b border-border pb-5 md:hidden">
+                <label htmlFor="data-section" className="text-sm text-muted-foreground">
+                  {t('tabs.select')}
+                </label>
+                <div className="relative mt-1.5">
+                  <select
+                    id="data-section"
+                    value={active}
+                    onChange={(e) => onTab(e.target.value)}
+                    className="h-11 w-full appearance-none rounded-md border border-input bg-background pr-10 pl-3 text-base font-medium text-foreground focus-visible:border-ring focus-visible:outline-2 focus-visible:outline-ring/40"
+                  >
+                    {tabs.map((tab) => (
+                      <option key={tab.key} value={tab.key}>
+                        {tab.key === 'queue' && pending.length > 0 ? `${tabLabel(tab.key)} (${pending.length} ${t('tabs.pendingSr')})` : tabLabel(tab.key)}
+                      </option>
+                    ))}
+                  </select>
+                  <ChevronDown className="pointer-events-none absolute top-1/2 right-3 size-4 -translate-y-1/2 text-muted-foreground" aria-hidden />
+                </div>
+              </div>
+              <TabsList ref={listRef} className="relative hidden w-full gap-6 md:flex" aria-label={t('tabs.label')}>
                 {tabs.map((tab) => (
-                  <TabsTrigger key={tab.key} value={tab.key} className="px-3.5 py-2">
-                    <tab.icon aria-hidden />
-                    {t(`tabs.${tab.key}`)}
+                  <TabsTrigger key={tab.key} value={tab.key} onPointerEnter={() => prefetch(tab.key)} onFocus={() => prefetch(tab.key)}>
+                    {tabLabel(tab.key)}
                     {tab.key === 'queue' && pending.length > 0 && (
-                      <span className="num ml-0.5 inline-flex min-w-5 items-center justify-center rounded-full bg-primary px-1.5 text-[10px] leading-5 font-bold text-primary-foreground">
+                      <span className="num relative ml-0.5 inline-flex min-w-5 items-center justify-center rounded-full bg-muted px-1.5 text-xs leading-5 font-semibold text-foreground">
                         {pending.length}
                         <span className="sr-only"> {t('tabs.pendingSr')}</span>
                       </span>
@@ -167,44 +218,17 @@ export default function DataPortalPage() {
                   </TabsTrigger>
                 ))}
               </TabsList>
-            </div>
-            {tabs.map((tab) =>
-              visited.has(tab.key) || tab.key === active ? (
-                <TabsContent key={tab.key} value={tab.key} forceMount className="mt-6 animate-fade-up data-[state=inactive]:hidden">
-                  {body[tab.key]()}
-                </TabsContent>
-              ) : null,
-            )}
-          </Tabs>
-        )}
+              {tabs.map((tab) =>
+                visited.has(tab.key) || tab.key === active ? (
+                  <TabsContent key={tab.key} value={tab.key} forceMount className="mt-8 data-[state=inactive]:hidden">
+                    <React.Suspense fallback={<ListSkeleton rows={2} />}>{body[tab.key]()}</React.Suspense>
+                  </TabsContent>
+                ) : null,
+              )}
+            </Tabs>
+          )}
+        </div>
       </PageContainer>
     </div>
-  );
-}
-
-function WorkflowSteps() {
-  const { t } = useTranslation('data');
-  const steps = [
-    { icon: PenLine, key: 'enter' },
-    { icon: ShieldCheck, key: 'review' },
-    { icon: MapIcon, key: 'live' },
-  ] as const;
-  return (
-    <ol className="mt-8 grid gap-3 sm:grid-cols-3" aria-label={t('steps.label')}>
-      {steps.map((s, i) => (
-        <li key={s.key} className="relative flex items-start gap-3 rounded-2xl border border-border bg-card/80 p-4 shadow-xs backdrop-blur">
-          <span className="flex size-9 shrink-0 items-center justify-center rounded-xl bg-primary/10 text-primary">
-            <s.icon className="size-4" aria-hidden />
-          </span>
-          <div className="min-w-0">
-            <p className="text-sm font-semibold">
-              <span className="num mr-1.5 text-muted-foreground">{i + 1}.</span>
-              {t(`steps.${s.key}`)}
-            </p>
-            <p className="mt-0.5 text-xs leading-relaxed text-muted-foreground">{t(`steps.${s.key}Desc`)}</p>
-          </div>
-        </li>
-      ))}
-    </ol>
   );
 }

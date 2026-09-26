@@ -1,7 +1,7 @@
 import { Languages } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 import { Button } from '@/components/ui/button';
-import { DropdownMenu, DropdownMenuContent, DropdownMenuLabel, DropdownMenuRadioGroup, DropdownMenuRadioItem, DropdownMenuTrigger } from '@/components/ui/primitives';
+import { DropdownMenu, DropdownMenuContent, DropdownMenuLabel, DropdownMenuRadioGroup, DropdownMenuRadioItem, DropdownMenuTrigger } from '@/components/ui/overlays';
 import { LANGUAGES } from '@/i18n';
 import { usePrefs, type Language } from '@/state/prefs';
 
@@ -13,9 +13,9 @@ export function LanguageSwitcher() {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <Button variant="ghost" size="md" className="gap-1.5 px-2.5" aria-label={t('language.label')}>
-          <Languages />
-          <span className="text-xs font-bold tracking-wide">{current.short}</span>
+        <Button variant="ghost" size="md" className="h-9 gap-1.5 px-2 sm:h-10 sm:px-2.5" aria-label={t('language.label')}>
+          <Languages className="hidden sm:block" />
+          <span className="text-xs font-semibold">{current.short}</span>
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent>

@@ -1,17 +1,16 @@
 /**
  * Shared body for the Vulnerability (lesson 3) and Lack of Coping Capacity (lesson 4) widgets:
  * a council's dimension score on its own class scale, its categories and indicators, and where the
- * data come from.
+ * data come from. Laid out with rules — no nested boxes.
  */
-import { Info } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
-import { ClassBadge } from '@/components/risk/RiskBadge';
 import { ScoreBar } from '@/components/risk/DimensionBars';
+import { ClassBadge } from '@/components/risk/RiskBadge';
 import { useModel } from '@/data-layer/DataProvider';
 import { DIMENSION_BY_KEY } from '@/engine/risk/hierarchy';
 import { topDrivers } from '@/engine/risk/model';
 import type { Unit } from '@/engine/risk/types';
-import { formatScore } from '@/lib/utils';
+import { cn, formatScore } from '@/lib/utils';
 import { IndicatorBar } from '../components/WidgetKit';
 import { dataOrigin } from '../decisions';
 
@@ -26,32 +25,32 @@ export function DimensionProfile({ unit, dim, reference }: { unit: Unit; dim: 'v
 
   return (
     <div>
-      <div className="flex flex-col gap-4 rounded-2xl border border-border bg-background/50 p-4 sm:flex-row sm:items-center">
-        <div className="shrink-0">
-          <div className="text-xs font-medium text-muted-foreground">{t(`common:dimensions.${dim}`)}</div>
+      <div className="grid gap-5 border-y border-border py-5 sm:grid-cols-[auto_minmax(0,1fr)] sm:items-center sm:gap-8">
+        <div>
+          <div className="text-sm text-muted-foreground">{t(`common:dimensions.${dim}`)}</div>
           <div className="mt-1 flex items-center gap-3">
-            <span className="num font-display text-4xl font-extrabold tracking-tight">{formatScore(d.score)}</span>
+            <span className="num font-display text-4xl font-semibold tracking-tight">{formatScore(d.score)}</span>
             <ClassBadge value={d.score} scale={def.scale} />
           </div>
         </div>
-        <div className="min-w-0 flex-1">
+        <div className="min-w-0">
           <ScoreBar label={unit.name} value={d.score} dim={dim} reference={national.dims[dim].score} referenceLabel={t('learn:widget.national')} />
           <p className="mt-2 text-xs text-muted-foreground">{t('learn:widget.nationalMarker', { value: formatScore(national.dims[dim].score) })}</p>
         </div>
       </div>
 
-      <div className="mt-4 grid gap-4 md:grid-cols-2">
-        {def.categories.map((cat) => {
+      <div className="mt-6 grid gap-y-6 md:grid-cols-2 md:divide-x md:divide-border">
+        {def.categories.map((cat, i) => {
           const c = d.categories[cat.key];
           return (
-            <div key={cat.key} className="rounded-2xl border border-border p-3">
-              <div className="mb-2 flex items-baseline justify-between px-2">
-                <h4 className="text-sm font-bold">{t(`common:categories.${cat.key}`)}</h4>
+            <div key={cat.key} className={cn(i === 0 ? 'md:pr-6' : 'md:pl-6')}>
+              <div className="mb-1 flex items-baseline justify-between gap-3 border-b border-border pb-2">
+                <h4 className="text-sm font-semibold">{t(`common:categories.${cat.key}`)}</h4>
                 <span className="num text-xs text-muted-foreground">
-                  {t('common:labels.score')} <span className="font-display text-sm font-bold text-foreground">{formatScore(c?.score)}</span>
+                  {t('common:labels.score')} <span className="text-sm font-semibold text-foreground">{formatScore(c?.score)}</span>
                 </span>
               </div>
-              <div className="grid gap-1">
+              <div>
                 {cat.indicators.map((ind) => (
                   <IndicatorBar
                     key={ind.key}
@@ -68,21 +67,14 @@ export function DimensionProfile({ unit, dim, reference }: { unit: Unit; dim: 'v
         })}
       </div>
 
-      <div className="mt-4 grid gap-2 text-xs leading-relaxed text-muted-foreground sm:grid-cols-2">
-        {top && (
-          <p className="rounded-xl bg-primary/5 px-3 py-2 text-foreground">
-            {t('learn:widget.topDriver', { indicator: t(`indicators:${top.key}`), value: formatScore(top.value) })}
-          </p>
-        )}
-        <p className="flex items-start gap-2 rounded-xl bg-muted/60 px-3 py-2">
-          <Info className="mt-0.5 size-3.5 shrink-0" aria-hidden />
-          <span>
-            {origin === 'inherited'
-              ? t('common:labels.inherited', { parent: unit.inheritedFrom ?? '' })
-              : origin === 'shared'
-                ? t('learn:widget.sharedSource', { source: unit.sourceName ?? '' })
-                : t('learn:widget.ownSource', { source: unit.sourceName ?? unit.name })}
-          </span>
+      <div className="mt-6 grid gap-2 border-t border-border pt-4 text-xs leading-relaxed text-muted-foreground">
+        {top && <p className="font-medium text-foreground">{t('learn:widget.topDriver', { indicator: t(`indicators:${top.key}`), value: formatScore(top.value) })}</p>}
+        <p>
+          {origin === 'inherited'
+            ? t('common:labels.inherited', { parent: unit.inheritedFrom ?? '' })
+            : origin === 'shared'
+              ? t('learn:widget.sharedSource', { source: unit.sourceName ?? '' })
+              : t('learn:widget.ownSource', { source: unit.sourceName ?? unit.name })}
         </p>
       </div>
     </div>

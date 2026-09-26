@@ -27,7 +27,8 @@ export async function exportSvgAsPng(svg: SVGSVGElement, filename: string, scale
       if (v) el.style.setProperty(p, v);
     }
   });
-  const bg = getComputedStyle(document.documentElement).getPropertyValue('--card').trim() || '#ffffff';
+  // Figures sit on the page, so the export background is the page colour (not the card colour).
+  const bg = getComputedStyle(document.documentElement).getPropertyValue('--background').trim() || '#ffffff';
   const data = new XMLSerializer().serializeToString(clone);
   const img = new Image();
   const url = URL.createObjectURL(new Blob([data], { type: 'image/svg+xml;charset=utf-8' }));
@@ -83,7 +84,7 @@ export function ChartCard({
   // A figure sits on the page under a hairline rule — no box (docs/DESIGN_LANGUAGE.md §7).
   return (
     <figure className={cn('flex flex-col border-t border-border pt-5', className)}>
-      <figcaption className="mb-4 flex items-start justify-between gap-3">
+      <figcaption className="mb-4 flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
         <div className="min-w-0">
           <h3 className="text-base font-semibold leading-snug">{title}</h3>
           {description && <p className="mt-1 text-sm leading-relaxed text-muted-foreground">{description}</p>}

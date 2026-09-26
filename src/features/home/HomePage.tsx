@@ -123,16 +123,16 @@ export default function HomePage() {
               </div>
             ))}
           </div>
-          <p className="mt-10 border-t border-border pt-6 font-display text-xl text-balance sm:text-2xl">
-            {t('formula.result', {
-              h: formatScore(national.dims.hazard.score),
-              v: formatScore(national.dims.vulnerability.score),
-              c: formatScore(national.dims.coping.score),
-              r: formatScore(national.risk),
-            })}
-            <span className="ml-3 align-middle">
-              <ClassBadge value={national.risk} size="sm" />
+          <p className="mt-10 flex flex-wrap items-center gap-x-3 gap-y-2 border-t border-border pt-6 font-display text-xl sm:text-2xl">
+            <span className="whitespace-nowrap">
+              {t('formula.result', {
+                h: formatScore(national.dims.hazard.score),
+                v: formatScore(national.dims.vulnerability.score),
+                c: formatScore(national.dims.coping.score),
+                r: formatScore(national.risk),
+              })}
             </span>
+            <ClassBadge value={national.risk} size="sm" />
           </p>
         </Section>
 
@@ -187,7 +187,7 @@ export default function HomePage() {
                     <tr key={k}>
                       <td className="py-2.5">
                         <span className="flex items-center gap-2.5">
-                          <span className="size-2.5" style={{ background: CLASS_COLORS[k] }} aria-hidden />
+                          <span className="inline-block size-2.5 shrink-0 rounded-[2px]" style={{ background: CLASS_COLORS[k] }} aria-hidden />
                           {t(`common:classes.${k}`)}
                         </span>
                       </td>

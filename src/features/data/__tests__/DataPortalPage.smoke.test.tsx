@@ -52,7 +52,9 @@ describe('DataPortalPage (local demo mode)', { timeout: 60_000 }, () => {
     expect(screen.getByText(/Demo mode/)).toBeInTheDocument();
     expect(screen.getByText('Want to contribute data?')).toBeInTheDocument();
     expect(screen.queryByRole('tab', { name: /Enter scores/ })).not.toBeInTheDocument();
-    expect(screen.getByRole('tab', { name: /Approved changes/ })).toBeInTheDocument();
+    // Visitors have a single section, shown under a plain heading rather than a one-item tab row.
+    expect(screen.queryByRole('tab')).not.toBeInTheDocument();
+    expect(screen.getByRole('heading', { name: 'Approved changes' })).toBeInTheDocument();
     expect(await screen.findByText('The official baseline is in use')).toBeInTheDocument();
   });
 

@@ -1,56 +1,90 @@
 /** "Colour by" controls: overall risk + the three dimensions, and a searchable indicator picker. */
 import { Command } from 'cmdk';
-import { Check, ChevronsUpDown, RotateCcw, Search } from 'lucide-react';
+import { Check, ChevronDown, ChevronsUpDown, Search } from 'lucide-react';
 import * as React from 'react';
 import { useTranslation } from 'react-i18next';
-import { DIMENSION_COLORS } from '@/components/charts/theme';
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/primitives';
 import { DIMENSIONS } from '@/engine/risk/hierarchy';
-import { parseMetric, RAMP_STOPS, rampColor } from '@/engine/risk/metrics';
+import { parseMetric, rampColor } from '@/engine/risk/metrics';
 import { indicatorValue } from '@/engine/risk/model';
 import { sourceFor, sourceLabel } from '@/engine/risk/sources';
 import { cn, formatScore } from '@/lib/utils';
 import { useExplore } from '../lib/ExploreContext';
-import { LENSES, ScorePill } from './bits';
+import { LENSES, MetricValue } from './bits';
 
-/** 2×2 tiles (desktop panel / expanded sheet). Scores are for the selected area, else the official national figure. */
-export function LensTiles() {
+/** Radio-style marker (visual only — the row itself carries the state). */
+function RadioMark({ on }: { on: boolean }) {
+  return (
+    <span
+      aria-hidden
+      className={cn(
+        'grid size-4 shrink-0 place-items-center rounded-full border transition-colors duration-150',
+        on ? 'border-primary' : 'border-input group-hover:border-muted-foreground',
+      )}
+    >
+      {on && <span className="size-2 rounded-full bg-primary" />}
+    </span>
+  );
+}
+
+const ROW = 'group -mx-2 flex w-[calc(100%+1rem)] items-center gap-3 rounded-md px-2 py-2 text-left transition-colors duration-150 hover:bg-muted/70';
+
+/**
+ * The lens list (desktop panel): the four headline lenses as a radio group (arrow keys move and select,
+ * one tab stop), then the indicator picker as a fifth row. Scores are for the selected area, else the
+ * official national figure.
+ */
+export function LensTiles({ labelledBy }: { labelledBy?: string }) {
   const { t } = useTranslation('explore');
   const { model, metric, selected, actions, metricLabel } = useExplore();
   const ref = selected ?? model.national;
+  const radios = React.useRef<Array<HTMLButtonElement | null>>([]);
+  const activeIndex = LENSES.findIndex((l) => l.key === metric.key);
+  const onKeyDown = (e: React.KeyboardEvent<HTMLButtonElement>, i: number) => {
+    const step = e.key === 'ArrowDown' || e.key === 'ArrowRight' ? 1 : e.key === 'ArrowUp' || e.key === 'ArrowLeft' ? -1 : 0;
+    if (!step) return;
+    e.preventDefault();
+    const next = (i + step + LENSES.length) % LENSES.length;
+    radios.current[next]?.focus();
+    actions.setMetric(LENSES[next].key);
+  };
   return (
     <div>
-      <div className="grid grid-cols-2 gap-2">
-        {LENSES.map((l) => {
+      <ul role="radiogroup" aria-labelledby={labelledBy} aria-label={labelledBy ? undefined : t('lens.label')} className="space-y-0.5">
+        {LENSES.map((l, i) => {
           const m = parseMetric(l.key);
           const active = metric.key === l.key;
           return (
-            <button
-              key={l.key}
-              type="button"
-              aria-pressed={active}
-              onClick={() => actions.setMetric(l.key)}
-              className={cn(
-                'group relative flex min-h-[74px] flex-col justify-between overflow-hidden rounded-xl border bg-card py-2.5 pr-2.5 pl-3.5 text-left transition-all duration-200 hover:-translate-y-px hover:shadow-[var(--shadow-soft)]',
-                active ? 'border-primary/50 bg-primary/[0.05] shadow-[var(--shadow-soft)] ring-2 ring-primary/25' : 'border-border hover:border-foreground/15',
-              )}
-            >
-              <span aria-hidden className="absolute inset-y-2 left-1.5 w-[3px] rounded-full" style={{ background: l.color }} />
-              <span className="text-[13px] leading-snug font-semibold">{metricLabel(m)}</span>
-              <span className="mt-2 flex items-center justify-between gap-2">
-                <ScorePill value={m.get(ref)} scale={m.scale} />
-                {active && <Check className="size-4 text-primary" aria-hidden />}
-              </span>
-            </button>
+            <li key={l.key} role="none">
+              <button
+                ref={(el) => {
+                  radios.current[i] = el;
+                }}
+                type="button"
+                role="radio"
+                aria-checked={active}
+                tabIndex={active || (activeIndex < 0 && i === 0) ? 0 : -1}
+                onClick={() => actions.setMetric(l.key)}
+                onKeyDown={(e) => onKeyDown(e, i)}
+                className={ROW}
+              >
+                <RadioMark on={active} />
+                <span className={cn('min-w-0 flex-1 truncate text-sm', active ? 'font-semibold' : 'font-medium')}>{metricLabel(m)}</span>
+                <MetricValue metric={m} value={m.get(ref)} className={cn('text-sm', active ? 'font-semibold' : 'text-muted-foreground')} />
+              </button>
+            </li>
           );
         })}
+      </ul>
+      <div className="mt-0.5">
+        <IndicatorPicker />
       </div>
-      <p className="mt-2 text-[11px] text-muted-foreground">{selected ? t('lens.scoresFor', { name: selected.name }) : t('lens.scoresNational')}</p>
+      <p className="mt-3 text-xs leading-relaxed text-muted-foreground">{selected ? t('lens.scoresFor', { name: selected.name }) : t('lens.scoresNational')}</p>
     </div>
   );
 }
 
-/** Horizontal chips (mobile sheet peek). */
+/** Underline tabs for the mobile sheet peek. */
 export function LensChips() {
   const { model, metric, selected, actions, metricLabel } = useExplore();
   const ref = selected ?? model.national;
@@ -66,13 +100,12 @@ export function LensChips() {
             aria-pressed={active}
             onClick={() => actions.setMetric(l.key)}
             className={cn(
-              'inline-flex shrink-0 items-center gap-2 rounded-full border py-1 pr-1 pl-2.5 text-xs font-semibold whitespace-nowrap transition-colors',
-              active ? 'border-primary/50 bg-primary/10 text-foreground ring-1 ring-primary/30' : 'border-border bg-card text-muted-foreground hover:text-foreground',
+              '-mb-px inline-flex shrink-0 items-center gap-2 border-b-2 pt-1 pb-2.5 text-sm whitespace-nowrap transition-colors duration-150',
+              active ? 'border-foreground font-semibold text-foreground' : 'border-transparent font-medium text-muted-foreground hover:text-foreground',
             )}
           >
-            <span aria-hidden className="size-2 rounded-full" style={{ background: l.color }} />
             {metricLabel(m, true)}
-            <ScorePill value={m.get(ref)} scale={m.scale} size="xs" className="rounded-full" />
+            <MetricValue metric={m} value={m.get(ref)} className="text-xs font-normal text-muted-foreground" />
           </button>
         );
       })}
@@ -88,37 +121,37 @@ export function IndicatorPicker({ variant = 'field' }: { variant?: 'field' | 'ch
   const ref = selected ?? model.national;
   const active = metric.kind === 'indicator' ? { dim: metric.dimension!, key: metric.indicator! } : null;
   const activeLabel = active ? t(`indicators:${active.key}`) : null;
-  const gradient = `linear-gradient(135deg, ${RAMP_STOPS.join(',')})`;
 
   const trigger =
     variant === 'field' ? (
-      <button
-        type="button"
-        className={cn(
-          'flex w-full items-center gap-3 rounded-xl border bg-card px-3 py-2.5 text-left shadow-xs transition-colors hover:bg-muted/60',
-          active ? 'border-primary/50 ring-2 ring-primary/25' : 'border-border',
-        )}
-      >
-        <span aria-hidden className="size-8 shrink-0 rounded-lg ring-1 ring-black/5" style={{ background: gradient }} />
+      <button type="button" aria-haspopup="dialog" className={ROW}>
+        <RadioMark on={!!active} />
         <span className="min-w-0 flex-1">
-          <span className="block text-[11px] font-medium text-muted-foreground">
-            {active ? `${t(`common:dimensions.${active.dim}Short`)} · ${t('lens.indicator')}` : t('lens.indicator')}
+          <span className={cn('block truncate text-sm', active ? 'font-semibold' : 'font-medium')}>
+            {activeLabel ?? t('lens.indicator')}
+            {active && <span className="sr-only"> ({t('lens.selected')})</span>}
           </span>
-          <span className={cn('block truncate text-sm font-semibold', !active && 'text-muted-foreground')}>{activeLabel ?? t('lens.pickIndicator')}</span>
+          <span className="block truncate text-xs text-muted-foreground">
+            {active ? `${t(`common:dimensions.${active.dim}Short`)} · ${t('lens.indicator')}` : t('lens.pickIndicator')}
+          </span>
         </span>
+        {active && <MetricValue metric={metric} value={metric.get(ref)} className="text-sm font-semibold" />}
         <ChevronsUpDown className="size-4 shrink-0 text-muted-foreground" />
       </button>
     ) : (
       <button
         type="button"
+        aria-haspopup="dialog"
         className={cn(
-          'inline-flex max-w-52 shrink-0 items-center gap-2 rounded-full border py-1 pr-2.5 pl-1 text-xs font-semibold whitespace-nowrap transition-colors',
-          active ? 'border-primary/50 bg-primary/10 text-foreground ring-1 ring-primary/30' : 'border-border bg-card text-muted-foreground hover:text-foreground',
+          '-mb-px inline-flex max-w-52 shrink-0 items-center gap-1.5 border-b-2 pt-1 pb-2.5 text-sm whitespace-nowrap transition-colors duration-150',
+          active ? 'border-foreground font-semibold text-foreground' : 'border-transparent font-medium text-muted-foreground hover:text-foreground',
         )}
       >
-        <span aria-hidden className="size-5 shrink-0 rounded-full ring-1 ring-black/5" style={{ background: gradient }} />
-        <span className="truncate">{activeLabel ?? t('lens.indicatorChip')}</span>
-        <ChevronsUpDown className="size-3.5 shrink-0 opacity-60" />
+        <span className="truncate">
+          {activeLabel ?? t('lens.indicatorChip')}
+          {active && <span className="sr-only"> ({t('lens.selected')})</span>}
+        </span>
+        <ChevronDown className="size-3.5 shrink-0 opacity-70" />
       </button>
     );
 
@@ -129,7 +162,7 @@ export function IndicatorPicker({ variant = 'field' }: { variant?: 'field' | 'ch
         <Command
           label={t('lens.pickIndicator')}
           loop
-          className="[&_[cmdk-group-heading]]:px-2.5 [&_[cmdk-group-heading]]:pt-2.5 [&_[cmdk-group-heading]]:pb-1 [&_[cmdk-group-heading]]:text-[11px] [&_[cmdk-group-heading]]:font-semibold [&_[cmdk-group-heading]]:tracking-wider [&_[cmdk-group-heading]]:text-muted-foreground [&_[cmdk-group-heading]]:uppercase"
+          className="[&_[cmdk-group-heading]]:px-2.5 [&_[cmdk-group-heading]]:pt-3 [&_[cmdk-group-heading]]:pb-1 [&_[cmdk-group-heading]]:text-xs [&_[cmdk-group-heading]]:font-medium [&_[cmdk-group-heading]]:text-muted-foreground"
         >
           <div className="flex items-center gap-2 border-b border-border px-3">
             <Search className="size-4 text-muted-foreground" aria-hidden />
@@ -139,16 +172,7 @@ export function IndicatorPicker({ variant = 'field' }: { variant?: 'field' | 'ch
             <Command.Empty className="px-3 py-8 text-center text-sm text-muted-foreground">{t('lens.noIndicator')}</Command.Empty>
             {DIMENSIONS.flatMap((d) =>
               d.categories.map((c) => (
-                <Command.Group
-                  key={`${d.key}:${c.key}`}
-                  value={`${d.key}:${c.key}`}
-                  heading={
-                    <span className="flex items-center gap-1.5">
-                      <span aria-hidden className="size-1.5 rounded-full" style={{ background: DIMENSION_COLORS[d.key] }} />
-                      {t(`common:dimensions.${d.key}Short`)} · {t(`common:categories.${c.key}`)}
-                    </span>
-                  }
-                >
+                <Command.Group key={`${d.key}:${c.key}`} value={`${d.key}:${c.key}`} heading={`${t(`common:dimensions.${d.key}Short`)} · ${t(`common:categories.${c.key}`)}`}>
                   {c.indicators.map((ind) => {
                     const v = indicatorValue(ref, d.key, ind.key);
                     const isActive = active?.dim === d.key && active.key === ind.key;
@@ -161,11 +185,13 @@ export function IndicatorPicker({ variant = 'field' }: { variant?: 'field' | 'ch
                           actions.setMetric(`ind:${d.key}:${ind.key}`);
                           setOpen(false);
                         }}
-                        className="flex cursor-pointer items-center gap-2.5 rounded-lg px-2.5 py-2 text-sm data-[selected=true]:bg-muted"
+                        className="flex cursor-pointer items-center gap-2.5 rounded-md px-2.5 py-2 text-sm data-[selected=true]:bg-muted"
                       >
-                        <span aria-hidden className="size-2.5 shrink-0 rounded-full ring-1 ring-black/10" style={{ background: rampColor(v) }} />
                         <span className={cn('min-w-0 flex-1 truncate', isActive && 'font-semibold')}>{t(`indicators:${ind.key}`)}</span>
-                        <span className="num text-xs font-semibold text-muted-foreground">{formatScore(v)}</span>
+                        <span className="num inline-flex items-center gap-1.5 text-xs text-muted-foreground">
+                          <span aria-hidden className="size-2 shrink-0 rounded-full" style={{ background: rampColor(v) }} />
+                          {formatScore(v)}
+                        </span>
                         <Check className={cn('size-4 text-primary', !isActive && 'invisible')} aria-hidden />
                       </Command.Item>
                     );
@@ -174,30 +200,29 @@ export function IndicatorPicker({ variant = 'field' }: { variant?: 'field' | 'ch
               )),
             )}
           </Command.List>
-          <div className="border-t border-border px-3 py-2 text-[11px] text-muted-foreground">{selected ? t('lens.valuesFor', { name: selected.name }) : t('lens.valuesNational')}</div>
+          <div className="border-t border-border px-3 py-2 text-xs text-muted-foreground">{selected ? t('lens.valuesFor', { name: selected.name }) : t('lens.valuesNational')}</div>
         </Command>
       </PopoverContent>
     </Popover>
   );
 }
 
-/** Description + provenance of the active indicator lens. */
+/** Description + provenance of the active indicator lens, as a ruled note. */
 export function IndicatorDetails() {
   const { t } = useTranslation(['explore', 'indicators']);
   const { metric, actions } = useExplore();
   if (metric.kind !== 'indicator' || !metric.dimension || !metric.indicator) return null;
   const src = sourceFor(metric.dimension, metric.indicator);
   return (
-    <div className="mt-2.5 rounded-xl border border-dashed border-border bg-muted/40 p-3 text-xs leading-relaxed">
+    <div className="mt-4 border-l-2 border-border pl-4 text-sm leading-relaxed">
       <p className="text-muted-foreground">{t(`indicators:desc.${metric.indicator}`)}</p>
-      <dl className="mt-2.5 grid grid-cols-[auto_1fr] gap-x-3 gap-y-1">
-        <dt className="font-semibold text-foreground">{t('lens.source')}</dt>
+      <dl className="mt-3 grid grid-cols-[auto_1fr] gap-x-4 gap-y-1 text-xs">
+        <dt className="font-medium text-foreground">{t('lens.source')}</dt>
         <dd className="text-muted-foreground">{sourceLabel(src)}</dd>
-        <dt className="font-semibold text-foreground">{t('lens.resolution')}</dt>
+        <dt className="font-medium text-foreground">{t('lens.resolution')}</dt>
         <dd className="text-muted-foreground">{t(`resolution.${src.resolution}`)}</dd>
       </dl>
-      <button type="button" onClick={() => actions.setMetric('risk')} className="mt-2.5 inline-flex items-center gap-1.5 font-semibold text-primary hover:underline">
-        <RotateCcw className="size-3.5" aria-hidden />
+      <button type="button" onClick={() => actions.setMetric('risk')} className="mt-3 text-sm font-medium text-primary hover:underline">
         {t('lens.backToRisk')}
       </button>
     </div>

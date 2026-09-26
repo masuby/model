@@ -14,10 +14,11 @@ app/            App.tsx (router, providers), layout/ (AppShell, header, footer, 
 components/
   ui/           design-system primitives: Button, Card, Badge, primitives.tsx (Tabs, Select, Tooltip,
                 Dialog, SheetContent, DropdownMenu, Popover, Switch, Slider, Segmented, Progress, Input…)
-  layout/       Page.tsx → PageContainer, PageHeader, SectionHeading, Stat
-  risk/         ClassBadge, ClassDot, ScoreGauge, ClassLegend, RampLegend, DimensionBars, ScoreBar
-  map/          RiskMap (the only Leaflet map — lazy-load it with React.lazy)
-  charts/       ChartCard (PNG/CSV export), theme.tsx (useChartTheme, ChartTooltip, DIMENSION_COLORS)
+  layout/       Page.tsx → PageContainer, PageHeader, Section, SectionHeading, Kicker, KeyFigures, Note
+  risk/         ClassBadge, ClassDot, ClassLegend, RampLegend, DimensionBars, ScoreBar
+  map/          StaticMap (light SVG choropleth) and RiskMap (Leaflet, pan/zoom) — lazy-load both
+  charts/       ChartCard (flat figure with PNG/CSV export), theme.tsx (useChartTheme, ChartTooltip,
+                DIMENSION_COLORS for fills, DIMENSION_TEXT for text)
 data-layer/     DataProvider (useModel, useData, useSubmit, useReview…), local + Supabase repositories
 engine/risk/    INFORM Risk engine: math, classes, hierarchy, standardise, model, metrics, sources
 engine/severity INFORM Severity Index engine: definitions, engine, scenarios
@@ -53,6 +54,13 @@ state/prefs.ts  theme, language, learning progress (persisted)
 - Map overlays positioned over `RiskMap` need `z-[450]` (Leaflet panes sit at z-index 400).
 - Translations load lazily per namespace: always declare the namespace in `useTranslation('<ns>')`
   (prefixed keys like `t('learn:x')` only resolve if that namespace is already loaded).
+- Speed (keep the shell light): code under `src/app/` imports UI from `@/components/ui/overlays`, never
+  the `primitives` barrel, so form controls stay out of the entry bundle. Heavy libraries (recharts,
+  leaflet, supabase-js, xlsx) are only ever reached through `import()`; after a build, `dist/index.html`
+  must modulepreload `vendor-react` only. Content far below the fold mounts at idle (Severity table and
+  methodology, area charts). Do not read layout (`scrollHeight`, `getBoundingClientRect`…) synchronously
+  in an effect on mount; let a `ResizeObserver` report it. `useModel()` re-renders only when the model
+  changes. Measure with `node scripts/qa-perf.mjs [--only=/route]`.
 - QA before merging UI work: `node scripts/qa-a11y.mjs` (axe, both themes) and
   `node scripts/qa-screenshots.mjs` (full-page screenshots, both themes, both languages, 390/1440 px)
   against `npx vite preview --port 4173`.

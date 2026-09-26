@@ -1,47 +1,54 @@
+/**
+ * Ranked place lists (siblings, member councils, related units): a short summary row of figures and a
+ * ruled ranked list, set directly on the page. The current area is marked in text and with a left rule
+ * (every row carries the same rule, transparent, so the columns stay aligned within the list's edges).
+ */
 import { ArrowRight } from 'lucide-react';
+import * as React from 'react';
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
-import { ClassDot } from '@/components/risk/RiskBadge';
-import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { classify, NO_DATA_COLOR } from '@/engine/risk/classes';
 import { isNum } from '@/engine/risk/math';
 import type { Unit } from '@/engine/risk/types';
 import { cn, formatScore } from '@/lib/utils';
-import { placeListsFor, type AreaView, type PlaceList } from '../lib';
-import { Reveal } from './bits';
+import type { AreaView, PlaceList } from '../lib';
+import { SubHeading } from './bits';
 
 function Row({ u, rank, current }: { u: Unit; rank: number; current: boolean }) {
   const { t } = useTranslation(['area', 'common']);
   const c = classify(u.risk);
   const inner = (
     <>
-      <span className="num w-6 shrink-0 text-right text-sm font-bold text-muted-foreground">{rank}</span>
-      <ClassDot value={u.risk} />
-      <div className="min-w-0 flex-1">
-        <div className={cn('truncate font-semibold', !current && 'group-hover:text-primary')}>{u.name}</div>
-        {u.inheritedFrom && <div className="truncate text-xs text-muted-foreground">{t('places.inherits', { parent: u.inheritedFrom })}</div>}
-      </div>
-      {current && <Badge className="shrink-0">{t('places.thisArea')}</Badge>}
-      <div className="hidden w-28 shrink-0 sm:block" aria-hidden>
-        <div className="h-1.5 overflow-hidden rounded-full bg-muted">
-          <div className="h-full rounded-full" style={{ width: `${((u.risk ?? 0) / 10) * 100}%`, background: c?.color ?? NO_DATA_COLOR }} />
-        </div>
-      </div>
-      <span className="num w-9 shrink-0 text-right font-display text-base font-bold">{formatScore(u.risk)}</span>
-      <span className="sr-only">{c ? t(`common:classes.${c.key}`) : t('common:classes.noData')}</span>
-      {current ? <span className="size-4 shrink-0" /> : <ArrowRight className="size-4 shrink-0 text-muted-foreground transition-transform group-hover:translate-x-0.5" aria-hidden />}
+      <span className="num text-sm text-muted-foreground">{rank}</span>
+      <span className="min-w-0">
+        <span className={cn('block truncate', current ? 'font-semibold' : 'font-medium group-hover:text-primary group-hover:underline group-hover:underline-offset-4')}>{u.name}</span>
+        {(current || u.inheritedFrom) && (
+          <span className="block truncate text-xs text-muted-foreground">
+            {current && t('places.thisArea')}
+            {current && u.inheritedFrom && ' · '}
+            {u.inheritedFrom && t('places.inherits', { parent: u.inheritedFrom })}
+          </span>
+        )}
+      </span>
+      <span className="hidden h-1.5 bg-muted sm:block" aria-hidden>
+        <span className="block h-full" style={{ width: `${((u.risk ?? 0) / 10) * 100}%`, background: c?.color ?? NO_DATA_COLOR }} />
+      </span>
+      <span className="num text-right font-semibold">
+        {formatScore(u.risk)}
+        <span className="sr-only"> {c ? t(`common:classes.${c.key}`) : t('common:classes.noData')}</span>
+      </span>
     </>
   );
+  const grid = 'grid grid-cols-[1.75rem_minmax(0,1fr)_2.75rem] items-center gap-x-4 border-l-2 py-3 pl-3 sm:grid-cols-[1.75rem_minmax(0,1fr)_7rem_2.75rem]';
   return (
-    <li className="break-inside-avoid">
+    <li className="break-inside-avoid border-b border-border">
       {current ? (
-        <div aria-current="page" className="flex items-center gap-3 rounded-xl bg-primary/8 px-3 py-2.5 ring-1 ring-primary/25">
+        <div aria-current="page" className={cn(grid, 'border-foreground')}>
           {inner}
         </div>
       ) : (
-        <Link to={`/area/${u.id}`} className="group flex items-center gap-3 rounded-xl px-3 py-2.5 transition-colors hover:bg-muted/70">
+        <Link to={`/area/${u.id}`} className={cn(grid, 'group border-transparent')}>
           {inner}
         </Link>
       )}
@@ -49,68 +56,66 @@ function Row({ u, rank, current }: { u: Unit; rank: number; current: boolean }) 
   );
 }
 
-function PlaceCard({ list, view }: { list: PlaceList; view: AreaView }) {
+function PlaceBlock({ list, view, wide }: { list: PlaceList; view: AreaView; wide: boolean }) {
   const { t } = useTranslation(['area', 'common']);
   const { unit, region } = view;
-  const scores = list.units.map((u) => u.risk).filter(isNum);
-  const avg = scores.length ? scores.reduce((a, b) => a + b, 0) / scores.length : null;
-  const min = scores.length ? Math.min(...scores) : null;
-  const max = scores.length ? Math.max(...scores) : null;
+  const stats = React.useMemo(() => {
+    const scores = list.units.map((u) => u.risk).filter(isNum);
+    return {
+      avg: scores.length ? scores.reduce((a, b) => a + b, 0) / scores.length : null,
+      min: scores.length ? Math.min(...scores) : null,
+      max: scores.length ? Math.max(...scores) : null,
+    };
+  }, [list]);
   const regionName = unit.level === 'region' ? unit.name : unit.region;
   const long = list.units.length > 12;
+  const summary = [
+    { label: t('places.count'), value: list.units.length },
+    { label: t('places.average'), value: formatScore(stats.avg) },
+    { label: t('places.range'), value: `${formatScore(stats.min)}–${formatScore(stats.max)}` },
+  ];
 
   return (
-    <Card className="h-full">
-      <CardHeader className="flex-row items-start justify-between gap-3">
-        <div className="min-w-0">
-          <CardTitle className="text-lg">{t(`places.${list.kind}.title`, { region: regionName, name: unit.name })}</CardTitle>
-          <CardDescription className="mt-1">{t(`places.${list.kind}.desc`, { region: regionName, name: unit.name })}</CardDescription>
-        </div>
+    // A single list gets a summary column beside it; several lists stack their summary above.
+    <div className={cn(wide && 'grid gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(0,2.2fr)] lg:gap-16')}>
+      <div>
+        <SubHeading title={t(`places.${list.kind}.title`, { region: regionName, name: unit.name })} lead={t(`places.${list.kind}.desc`, { region: regionName, name: unit.name })} />
+        <dl className={cn('mt-6 divide-y divide-border border-y border-border text-sm', !wide && 'max-w-sm')}>
+          {summary.map((s) => (
+            <div key={s.label} className="flex items-baseline justify-between gap-4 py-2.5">
+              <dt className="text-muted-foreground">{s.label}</dt>
+              <dd className="num text-base font-semibold">{s.value}</dd>
+            </div>
+          ))}
+        </dl>
         {list.kind === 'siblings' && region && (
-          <Button variant="outline" size="sm" asChild className="no-print shrink-0">
+          <Button variant="outline" size="sm" asChild className="no-print mt-6">
             <Link to={`/area/${region.id}`}>
               {t('places.regionProfile')} <ArrowRight />
             </Link>
           </Button>
         )}
-      </CardHeader>
-      <CardContent>
-        <dl className="mb-4 grid grid-cols-3 gap-3 rounded-xl bg-muted/50 px-4 py-3 text-center">
-          <div>
-            <dt className="text-[11px] text-muted-foreground">{t('places.count')}</dt>
-            <dd className="num font-display text-lg font-extrabold">{list.units.length}</dd>
-          </div>
-          <div>
-            <dt className="text-[11px] text-muted-foreground">{t('places.average')}</dt>
-            <dd className="num font-display text-lg font-extrabold">{formatScore(avg)}</dd>
-          </div>
-          <div>
-            <dt className="text-[11px] text-muted-foreground">{t('places.range')}</dt>
-            <dd className="num font-display text-lg font-extrabold">
-              {formatScore(min)}–{formatScore(max)}
-            </dd>
-          </div>
-        </dl>
-        <ol className={cn('grid gap-0.5', long && 'lg:block lg:columns-2 lg:gap-6')}>
-          {list.units.map((u, i) => (
-            <Row key={u.id} u={u} rank={i + 1} current={u.id === unit.id} />
-          ))}
-        </ol>
-        {list.kind === 'members' && <p className="mt-4 text-xs text-muted-foreground">{t('places.membersNote')}</p>}
-      </CardContent>
-    </Card>
+        {list.kind === 'members' && <p className="mt-6 text-sm leading-relaxed text-muted-foreground">{t('places.membersNote')}</p>}
+      </div>
+
+      <ol className={cn('border-t border-border', !wide && 'mt-8', long && wide && 'xl:columns-2 xl:gap-x-12')}>
+        {list.units.map((u, i) => (
+          <Row key={u.id} u={u} rank={i + 1} current={u.id === unit.id} />
+        ))}
+      </ol>
+    </div>
   );
 }
 
-export function Places({ view }: { view: AreaView }) {
-  const lists = placeListsFor(view.model, view.unit).filter((l) => l.units.length > 0);
+export function Places({ view, lists }: { view: AreaView; lists: PlaceList[] }) {
   if (!lists.length) return null;
+  const wide = lists.length === 1;
   return (
-    <div className={cn('grid gap-6', lists.length > 1 && 'lg:grid-cols-2')}>
+    <div className={cn('grid gap-16', !wide && 'lg:grid-cols-2 lg:gap-0 lg:divide-x lg:divide-border')}>
       {lists.map((l, i) => (
-        <Reveal key={l.kind} delay={i * 0.06} className="h-full">
-          <PlaceCard list={l} view={view} />
-        </Reveal>
+        <div key={l.kind} className={cn(!wide && (i === 0 ? 'lg:pr-12' : 'lg:pl-12'))}>
+          <PlaceBlock list={l} view={view} wide={wide} />
+        </div>
       ))}
     </div>
   );

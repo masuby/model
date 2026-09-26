@@ -136,8 +136,8 @@ export function NumberField({
       </div>
       <div
         className={cn(
-          'flex h-10 items-stretch overflow-hidden rounded-xl border border-input bg-card shadow-xs transition-colors focus-within:border-ring focus-within:outline-2 focus-within:outline-ring/40',
-          error ? 'border-danger focus-within:border-danger' : warning ? 'border-warning/70' : '',
+          'flex h-10 items-stretch overflow-hidden rounded-md border border-input bg-background transition-colors duration-150 focus-within:border-ring focus-within:outline-2 focus-within:outline-ring/40',
+          error ? 'border-danger focus-within:border-danger' : warning ? 'border-warning' : '',
         )}
       >
         <input
@@ -157,9 +157,9 @@ export function NumberField({
             setError(null);
           }}
           onChange={handleChange}
-          className="num min-w-0 flex-1 bg-transparent px-3 text-right text-sm font-semibold text-foreground placeholder:font-normal placeholder:text-muted-foreground focus-visible:outline-none"
+          className="num min-w-0 flex-1 bg-transparent px-3 text-right text-[15px] font-medium text-foreground placeholder:font-normal placeholder:text-muted-foreground focus-visible:outline-none"
         />
-        {unit && <span className="flex shrink-0 items-center border-l border-border bg-muted/60 px-3 text-xs font-medium whitespace-nowrap text-muted-foreground">{unit}</span>}
+        {unit && <span className="flex shrink-0 items-center pr-3 pl-1 text-xs whitespace-nowrap text-muted-foreground">{unit}</span>}
       </div>
       {error ? (
         <p id={`${id}-msg`} role="alert" className="text-xs font-medium text-danger">

@@ -94,8 +94,11 @@ on top of the bundled dataset at runtime.
 
 ## Contributing
 
-Read [`docs/FRONTEND_GUIDE.md`](docs/FRONTEND_GUIDE.md). Every user-visible string must exist in both
-`en` and `sw`; never hard-code INFORM numbers or classes; `npm run check` must pass.
+Read [`docs/DESIGN_LANGUAGE.md`](docs/DESIGN_LANGUAGE.md) (editorial, few boxes, colour for data only) and
+[`docs/FRONTEND_GUIDE.md`](docs/FRONTEND_GUIDE.md). Every user-visible string must exist in both `en` and
+`sw`; never hard-code INFORM numbers or classes; `npm run check` must pass. Before merging UI work run
+`node scripts/qa-a11y.mjs`, `node scripts/qa-screenshots.mjs` and `node scripts/qa-perf.mjs` against
+`npx vite preview --port 4173`.
 
 ## Licence and attribution
 

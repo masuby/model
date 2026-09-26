@@ -44,28 +44,15 @@
   --shadow-soft: 0 0 #0000;
   --shadow-lift: 0 1px 2px rgb(15 23 42 / 0.06), 0 12px 32px -12px rgb(15 23 42 / 0.28);
 
-  --animate-fade-up: fade-up 0.5s cubic-bezier(0.2, 0.7, 0.2, 1) both;
-  --animate-pulse-ring: pulse-ring 2.4s cubic-bezier(0.2, 0.7, 0.2, 1) infinite;
+  /* Overlays fade in quickly; nothing slides or pulses (docs/DESIGN_LANGUAGE.md §6). */
+  --animate-fade-in: fade-in 120ms ease-out both;
 
-  @keyframes fade-up {
+  @keyframes fade-in {
     from {
       opacity: 0;
-      transform: translateY(8px);
     }
     to {
       opacity: 1;
-      transform: none;
-    }
-  }
-  @keyframes pulse-ring {
-    0% {
-      box-shadow: 0 0 0 0 rgb(29 109 235 / 0.35);
-    }
-    70% {
-      box-shadow: 0 0 0 14px rgb(29 109 235 / 0);
-    }
-    100% {
-      box-shadow: 0 0 0 0 rgb(29 109 235 / 0);
     }
   }
 }
@@ -207,10 +194,6 @@
 }
 
 @layer components {
-  /* Retired decorative background (kept as a no-op so stray usages render plain). */
-  .bg-grid {
-    background-image: none;
-  }
   .text-balance {
     text-wrap: balance;
   }
@@ -245,11 +228,6 @@
   body {
     background: #fff !important;
   }
-  /* Scroll-triggered fade-ins that were never scrolled into view must still print. */
-  [style*='opacity'] {
-    opacity: 1 !important;
-    transform: none !important;
-  }
 }
 
 /* ---- Leaflet, themed ---------------------------------------------------------------------------- */
@@ -259,7 +237,7 @@
 }
 .leaflet-control-zoom {
   border: 1px solid var(--border) !important;
-  border-radius: 12px !important;
+  border-radius: 6px !important;
   overflow: hidden;
   box-shadow: var(--shadow-soft) !important;
 }
@@ -272,7 +250,7 @@
   background: var(--elevated);
   color: var(--foreground);
   border: 1px solid var(--border);
-  border-radius: 12px;
+  border-radius: 6px;
   box-shadow: var(--shadow-lift);
   padding: 0;
 }

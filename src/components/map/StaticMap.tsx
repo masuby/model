@@ -92,7 +92,10 @@ export default function StaticMap({
   };
 
   return (
-    <div className={cn('relative select-none', className)} onPointerLeave={() => setHover(null)}>
+    <div
+      className={cn('relative select-none', focusId && 'overflow-hidden rounded-md border border-border bg-[var(--map-bg)]', className)}
+      onPointerLeave={() => setHover(null)}
+    >
       <svg ref={svgRef} viewBox={viewBox} className="size-full" role="img" aria-label={label} preserveAspectRatio="xMidYMid meet">
         <g>
           {set.units.map((p) => {
@@ -130,10 +133,17 @@ export default function StaticMap({
               return u && selected.has(u.id);
             })
             .map((p) => (
-              <path key={`sel-${p.id}`} d={p.d} fill="none" stroke="var(--foreground)" strokeWidth={2} vectorEffect="non-scaling-stroke" />
+              // Class fills are identical in both themes, so the outline is too: dark line over a light halo.
+              <g key={`sel-${p.id}`}>
+                <path d={p.d} fill="none" stroke="#ffffff" strokeOpacity={0.9} strokeWidth={4.5} vectorEffect="non-scaling-stroke" />
+                <path d={p.d} fill="none" stroke="#0b1324" strokeWidth={2} vectorEffect="non-scaling-stroke" />
+              </g>
             ))}
           {hover && (
-            <path d={set.units.find((p) => unitFor(p.id)?.id === hover.unit.id)?.d} fill="none" stroke="var(--foreground)" strokeWidth={1.4} vectorEffect="non-scaling-stroke" />
+            <g>
+              <path d={set.units.find((p) => unitFor(p.id)?.id === hover.unit.id)?.d} fill="none" stroke="#ffffff" strokeOpacity={0.85} strokeWidth={3} vectorEffect="non-scaling-stroke" />
+              <path d={set.units.find((p) => unitFor(p.id)?.id === hover.unit.id)?.d} fill="none" stroke="#0b1324" strokeWidth={1.4} vectorEffect="non-scaling-stroke" />
+            </g>
           )}
         </g>
       </svg>

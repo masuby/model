@@ -1,22 +1,19 @@
-import { motion } from 'motion/react';
 import * as React from 'react';
 import { useTranslation } from 'react-i18next';
 import { DIMENSION_COLORS } from '@/components/charts/theme';
 import { ClassBadge } from '@/components/risk/RiskBadge';
-import { Card } from '@/components/ui/card';
 import { mean, riskScore, scaledGeomean } from '@/engine/risk/math';
 import { cn, formatScore } from '@/lib/utils';
-import { fadeIn } from '../tokens';
 import { DocSection, P } from '../ui';
 
 function RangeField({ id, label, value, onChange, color }: { id: string; label: string; value: number; onChange: (v: number) => void; color: string }) {
   return (
     <div>
       <div className="flex items-center justify-between gap-2 text-xs">
-        <label htmlFor={id} className="font-medium">
+        <label htmlFor={id} className="text-[13px]">
           {label}
         </label>
-        <span className="num font-display text-sm font-bold">{value.toFixed(1)}</span>
+        <span className="num text-sm font-semibold">{value.toFixed(1)}</span>
       </div>
       <input
         id={id}
@@ -26,8 +23,15 @@ function RangeField({ id, label, value, onChange, color }: { id: string; label: 
         step={0.1}
         value={value}
         onChange={(e) => onChange(Number(e.target.value))}
-        className="mt-1.5 h-5 w-full cursor-pointer"
-        style={{ accentColor: color }}
+        className={cn(
+          'mt-2 h-5 w-full cursor-pointer appearance-none bg-transparent',
+          // A hairline track and a solid thumb in the dimension's colour — the same in every browser and theme.
+          '[&::-webkit-slider-runnable-track]:h-[3px] [&::-webkit-slider-runnable-track]:rounded-full [&::-webkit-slider-runnable-track]:bg-border',
+          '[&::-webkit-slider-thumb]:-mt-[6.5px] [&::-webkit-slider-thumb]:size-4 [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:border-2 [&::-webkit-slider-thumb]:border-background [&::-webkit-slider-thumb]:bg-[var(--thumb)] [&::-webkit-slider-thumb]:ring-1 [&::-webkit-slider-thumb]:ring-[var(--thumb)]',
+          '[&::-moz-range-track]:h-[3px] [&::-moz-range-track]:rounded-full [&::-moz-range-track]:bg-border',
+          '[&::-moz-range-thumb]:size-3 [&::-moz-range-thumb]:rounded-full [&::-moz-range-thumb]:border-2 [&::-moz-range-thumb]:border-background [&::-moz-range-thumb]:bg-[var(--thumb)]',
+        )}
+        style={{ '--thumb': color } as React.CSSProperties}
       />
     </div>
   );
@@ -37,24 +41,20 @@ function ResultBar({ label, value, emphasis, extra }: { label: string; value: nu
   return (
     <div>
       <div className="flex items-baseline justify-between gap-2">
-        <span className={cn('text-xs', emphasis ? 'font-semibold' : 'text-muted-foreground')}>{label}</span>
-        <span className="flex items-center gap-2">
+        <span className={cn('text-[13px]', emphasis ? 'font-medium' : 'text-muted-foreground')}>{label}</span>
+        <span className="flex items-center gap-2.5">
           {extra}
-          <span className={cn('num font-display font-extrabold', emphasis ? 'text-xl' : 'text-lg text-muted-foreground')}>{formatScore(value)}</span>
+          <span className={cn('num font-display leading-none font-semibold', emphasis ? 'text-2xl' : 'text-xl text-muted-foreground')}>{formatScore(value)}</span>
         </span>
       </div>
-      <div className="mt-1.5 h-2.5 overflow-hidden rounded-full bg-muted">
-        <div className={cn('h-full rounded-full transition-[width] duration-300', emphasis ? 'bg-primary' : 'bg-muted-foreground/45')} style={{ width: `${((value ?? 0) / 10) * 100}%` }} />
+      <div className="mt-2 h-1.5 bg-muted">
+        <div className={cn('h-full transition-[width] duration-150', emphasis ? 'bg-foreground' : 'bg-muted-foreground/45')} style={{ width: `${((value ?? 0) / 10) * 100}%` }} />
       </div>
     </div>
   );
 }
 
-const RISK_PRESETS = {
-  balanced: [5, 5, 5],
-  oneLow: [9, 8, 0.5],
-  oneHigh: [10, 2, 2],
-} as const;
+const RISK_PRESETS = { balanced: [5, 5, 5], oneLow: [9, 8, 0.5], oneHigh: [10, 2, 2] } as const;
 
 export function GeometricSection() {
   const { t } = useTranslation(['methodology', 'common']);
@@ -69,78 +69,72 @@ export function GeometricSection() {
   const keys = ['hazard', 'vulnerability', 'coping'] as const;
 
   return (
-    <DocSection id="geometric" number="04" eyebrow={t('sections.geometric')} title={t('geometric.title')} lead={t('geometric.lead')}>
+    <DocSection id="geometric" label={t('sections.geometric')} title={t('geometric.title')} lead={t('geometric.lead')}>
       <div className="space-y-5">
         <P>{t('geometric.p1')}</P>
         <P>{t('geometric.p2')}</P>
       </div>
 
-      <div className="mt-8 grid gap-4 lg:grid-cols-2">
-        <motion.div {...fadeIn}>
-          <Card className="h-full p-5 sm:p-6">
-            <div className="text-xs font-semibold tracking-[0.14em] text-primary uppercase">{t('geometric.tryIt')}</div>
-            <h3 className="mt-1 text-lg font-bold">{t('geometric.riskPanel')}</h3>
-            <div className="mt-3 flex flex-wrap gap-1.5" role="group" aria-label={t('geometric.presets')}>
-              {(Object.keys(RISK_PRESETS) as Array<keyof typeof RISK_PRESETS>).map((k) => {
-                const p = RISK_PRESETS[k];
-                const on = p.every((x, i) => x === dims[i]);
-                return (
-                  <button
-                    key={k}
-                    type="button"
-                    aria-pressed={on}
-                    onClick={() => setDims([p[0], p[1], p[2]])}
-                    className={cn('rounded-full border px-3 py-1 text-xs font-medium transition-colors', on ? 'border-primary bg-primary/10 text-primary' : 'border-border text-muted-foreground hover:bg-muted hover:text-foreground')}
-                  >
-                    {t(`geometric.preset.${k}`)}
-                  </button>
-                );
-              })}
-            </div>
-            <div className="mt-5 space-y-4">
-              {keys.map((k, i) => (
-                <RangeField
+      <div className="mt-12 grid gap-12 border-t border-border lg:grid-cols-2 lg:gap-0 lg:divide-x lg:divide-border">
+        <div className="pt-8 lg:pr-10">
+          <h3 className="text-base font-semibold">{t('geometric.riskPanel')}</h3>
+          <div className="mt-3 flex flex-wrap items-center gap-1.5" role="group" aria-label={t('geometric.presets')}>
+            <span className="mr-1 text-[13px] text-muted-foreground" aria-hidden>
+              {t('geometric.presets')}:
+            </span>
+            {(Object.keys(RISK_PRESETS) as Array<keyof typeof RISK_PRESETS>).map((k) => {
+              const p = RISK_PRESETS[k];
+              const on = p.every((x, i) => x === dims[i]);
+              return (
+                <button
                   key={k}
-                  id={`${id}-d${i}`}
-                  label={t(`common:dimensions.${k}`)}
-                  value={dims[i]}
-                  color={DIMENSION_COLORS[k]}
-                  onChange={(v) => setDims((d) => d.map((x, j) => (j === i ? v : x)) as [number, number, number])}
-                />
-              ))}
-            </div>
-            <div className="mt-6 space-y-4 rounded-xl border border-border bg-muted/30 p-4" aria-live="polite">
-              <ResultBar label={t('geometric.arithmetic')} value={arith} />
-              <ResultBar label={t('geometric.geometric')} value={geo} emphasis extra={<ClassBadge value={geo} size="sm" />} />
-            </div>
-            <p className="mt-4 text-sm leading-relaxed text-muted-foreground">{t('geometric.riskNote')}</p>
-          </Card>
-        </motion.div>
+                  type="button"
+                  aria-pressed={on}
+                  onClick={() => setDims([p[0], p[1], p[2]])}
+                  className={cn(
+                    // Same preset-toggle style as the Learn course (WidgetKit Chip).
+                    'rounded-md border px-2.5 py-1 text-sm transition-colors duration-150',
+                    on ? 'border-foreground/70 bg-muted font-medium text-foreground' : 'border-border text-muted-foreground hover:border-foreground/40 hover:text-foreground',
+                  )}
+                >
+                  {t(`geometric.preset.${k}`)}
+                </button>
+              );
+            })}
+          </div>
+          <div className="mt-6 space-y-4">
+            {keys.map((k, i) => (
+              <RangeField
+                key={k}
+                id={`${id}-d${i}`}
+                label={t(`common:dimensions.${k}`)}
+                value={dims[i]}
+                color={DIMENSION_COLORS[k]}
+                onChange={(v) => setDims((d) => d.map((x, j) => (j === i ? v : x)) as [number, number, number])}
+              />
+            ))}
+          </div>
+          <div className="mt-7 space-y-5 border-t border-border pt-5" aria-live="polite">
+            <ResultBar label={t('geometric.arithmetic')} value={arith} />
+            <ResultBar label={t('geometric.geometric')} value={geo} emphasis extra={<ClassBadge value={geo} size="sm" />} />
+          </div>
+          <p className="mt-5 text-sm leading-relaxed text-muted-foreground">{t('geometric.riskNote')}</p>
+        </div>
 
-        <motion.div {...fadeIn} transition={{ ...fadeIn.transition, delay: 0.06 }}>
-          <Card className="h-full p-5 sm:p-6">
-            <div className="text-xs font-semibold tracking-[0.14em] text-primary uppercase">{t('geometric.tryIt')}</div>
-            <h3 className="mt-1 text-lg font-bold">{t('geometric.dimPanel')}</h3>
-            <p className="mt-3 text-xs leading-relaxed text-muted-foreground">{t('geometric.dimHint')}</p>
-            <div className="mt-5 space-y-4">
-              {(['natural', 'human'] as const).map((k, i) => (
-                <RangeField
-                  key={k}
-                  id={`${id}-c${i}`}
-                  label={t(`common:categories.${k}`)}
-                  value={cats[i]}
-                  color={DIMENSION_COLORS.hazard}
-                  onChange={(v) => setCats((c) => (i === 0 ? [v, c[1]] : [c[0], v]))}
-                />
-              ))}
-            </div>
-            <div className="mt-6 space-y-4 rounded-xl border border-border bg-muted/30 p-4" aria-live="polite">
-              <ResultBar label={t('geometric.arithmetic')} value={catArith} />
-              <ResultBar label={t('geometric.scaledGeo')} value={catGeo} emphasis extra={<ClassBadge value={catGeo} scale="hazard" size="sm" />} />
-            </div>
-            <p className="mt-4 text-sm leading-relaxed text-muted-foreground">{t('geometric.dimNote')}</p>
-          </Card>
-        </motion.div>
+        <div className="border-t border-border pt-8 lg:border-t-0 lg:pl-10">
+          <h3 className="text-base font-semibold">{t('geometric.dimPanel')}</h3>
+          <p className="mt-3 text-[13px] leading-relaxed text-muted-foreground">{t('geometric.dimHint')}</p>
+          <div className="mt-6 space-y-4">
+            {(['natural', 'human'] as const).map((k, i) => (
+              <RangeField key={k} id={`${id}-c${i}`} label={t(`common:categories.${k}`)} value={cats[i]} color={DIMENSION_COLORS.hazard} onChange={(v) => setCats((c) => (i === 0 ? [v, c[1]] : [c[0], v]))} />
+            ))}
+          </div>
+          <div className="mt-7 space-y-5 border-t border-border pt-5" aria-live="polite">
+            <ResultBar label={t('geometric.arithmetic')} value={catArith} />
+            <ResultBar label={t('geometric.scaledGeo')} value={catGeo} emphasis extra={<ClassBadge value={catGeo} scale="hazard" size="sm" />} />
+          </div>
+          <p className="mt-5 text-sm leading-relaxed text-muted-foreground">{t('geometric.dimNote')}</p>
+        </div>
       </div>
     </DocSection>
   );

@@ -1,93 +1,160 @@
-/** The explorer's control panel: level, lens, legend & class filter, statistics, ranking preview, map options. */
-import { ArrowRight, FilterX, Table2 } from 'lucide-react';
-import { motion } from 'motion/react';
+/**
+ * The explorer's control panel: level, lens, legend & class filter, statistics and a ranking preview.
+ * One column of sections separated by hairline rules — no boxes. On desktop the level switch sits in the
+ * fixed header under the search, so every level is visible on the first screen.
+ */
+import { ArrowRight, FilterX } from 'lucide-react';
 import * as React from 'react';
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
-import { ClassLegend, RampLegend } from '@/components/risk/ClassLegend';
 import { Button } from '@/components/ui/button';
-import { Segmented, Switch } from '@/components/ui/primitives';
+import { Segmented } from '@/components/ui/primitives';
+import { CLASS_COLORS, CLASS_KEYS, classRanges, NO_DATA_COLOR } from '@/engine/risk/classes';
 import { ALL_INDICATORS } from '@/engine/risk/hierarchy';
-import { cn, formatDate, formatScore } from '@/lib/utils';
+import { RAMP_STOPS } from '@/engine/risk/metrics';
+import { cn, formatDate } from '@/lib/utils';
 import { EXPLORE_LEVELS, matchesClass, sortUnits, type ExploreLevel } from '../lib/explore';
 import { useExplore } from '../lib/ExploreContext';
-import { MetricDot, ScaleInfo, SectionTitle } from './bits';
-import { IndicatorDetails, IndicatorPicker, LensTiles } from './LensPicker';
+import { MetricValue, ScaleInfo, SectionTitle } from './bits';
+import { IndicatorDetails, LensTiles } from './LensPicker';
 import { PlaceSearch } from './PlaceSearch';
 import { Distribution, StatsBlock } from './StatsBlock';
 
-const enter = (i: number) => ({
-  initial: { opacity: 0, y: 10 },
-  animate: { opacity: 1, y: 0 },
-  transition: { duration: 0.35, delay: 0.05 + i * 0.045, ease: [0.2, 0.7, 0.2, 1] as const },
-});
-
-function Section({ id, index, title, action, children }: { id: string; index: number; title: React.ReactNode; action?: React.ReactNode; children: React.ReactNode }) {
+function Section({ id, title, action, children, pad }: { id: string; title: React.ReactNode; action?: React.ReactNode; children: React.ReactNode; pad: string }) {
   return (
-    <motion.section aria-labelledby={id} {...enter(index)}>
+    <section aria-labelledby={id} className={cn('border-t border-border py-7 first:border-t-0', pad)}>
       <SectionTitle id={id} action={action}>
         {title}
       </SectionTitle>
       {children}
-    </motion.section>
+    </section>
   );
 }
 
-export function LevelControl() {
+function useLevelCounts(): Record<ExploreLevel, number> {
+  const { model } = useExplore();
+  return { council: model.councils.length, region: model.regions.length, source: model.sources.length };
+}
+
+/** Councils / Regions / INFORM units, with the number of areas under each label. */
+export function LevelSwitch({ className }: { className?: string }) {
   const { t } = useTranslation(['explore', 'common']);
-  const { model, state, actions } = useExplore();
-  const counts: Record<ExploreLevel, number> = { council: model.councils.length, region: model.regions.length, source: model.sources.length };
+  const { state, actions } = useExplore();
+  const counts = useLevelCounts();
   return (
-    <div>
-      <Segmented<ExploreLevel>
-        size="sm"
-        value={state.level}
-        onValueChange={actions.setLevel}
-        aria-label={t('level.label')}
-        className="grid w-full grid-cols-3 [&>button]:justify-center [&>button]:py-1.5"
-        options={EXPLORE_LEVELS.map((l) => ({
-          value: l,
-          label: (
-            <span className="flex flex-col items-center leading-tight">
-              <span className="text-center whitespace-normal">{t(`level.${l}`)}</span>
-              <span className="num mt-0.5 text-[10px] font-semibold text-muted-foreground">
-                {counts[l]}
-                {l === 'source' && ` · ${t('level.ref')}`}
-              </span>
-            </span>
-          ),
-        }))}
-      />
-      <p className="mt-2 text-[11px] leading-relaxed text-muted-foreground">
-        {state.level === 'source' && <span className="mr-1.5 rounded bg-warning/15 px-1.5 py-px text-[10px] font-bold tracking-wide text-warning uppercase">{t('level.reference')}</span>}
-        {t(`level.note.${state.level}`, { count: counts[state.level] })}
-      </p>
+    <Segmented<ExploreLevel>
+      size="sm"
+      value={state.level}
+      onValueChange={actions.setLevel}
+      aria-label={t('level.label')}
+      className={cn('grid w-full grid-cols-3 [&>button]:justify-center [&>button]:py-1.5', className)}
+      options={EXPLORE_LEVELS.map((l) => ({
+        value: l,
+        label: (
+          <span className="flex flex-col items-center leading-tight">
+            <span className="text-center text-[13px] whitespace-normal">{t(`level.${l}`)}</span>
+            <span className="num mt-0.5 text-xs font-normal text-muted-foreground">{counts[l]}</span>
+          </span>
+        ),
+      }))}
+    />
+  );
+}
+
+/** What the current level is (and, for INFORM units, that it is a reference level). */
+export function LevelNote({ className }: { className?: string }) {
+  const { t } = useTranslation('explore');
+  const { state } = useExplore();
+  const counts = useLevelCounts();
+  return (
+    <p className={cn('text-xs leading-relaxed text-muted-foreground', className)}>
+      {state.level === 'source' && <span className="font-medium text-warning">{t('level.reference')} · </span>}
+      {t(`level.note.${state.level}`, { count: counts[state.level] })}
+    </p>
+  );
+}
+
+function Share({ value, total, color, dim }: { value: number; total: number; color: string; dim?: boolean }) {
+  return (
+    <span aria-hidden className={cn('h-1.5 bg-muted transition-opacity duration-150', dim && 'opacity-40')}>
+      <span className="block h-full" style={{ width: `${(value / total) * 100}%`, background: color }} />
+    </span>
+  );
+}
+
+/**
+ * Legend that is also the distribution and the class filter: swatch, class, range, count, share.
+ * With a filter on, the other rows fade only their colour marks — the text keeps full contrast.
+ */
+function ClassFilterLegend() {
+  const { t } = useTranslation(['explore', 'common']);
+  const { metric, stats, state, actions } = useExplore();
+  const counts = stats.classCounts;
+  const ranges = classRanges(metric.scale ?? 'risk');
+  const total = Math.max(1, stats.total);
+  const missing = stats.total - stats.withData;
+  const row = 'grid w-full grid-cols-[0.75rem_1fr_4.25rem_2rem_3.25rem] items-center gap-2.5 rounded-md px-2 py-1.5 text-left text-sm';
+  return (
+    <div role="group" aria-label={t('legend.filterLabel')}>
+      <ul className="-mx-2 space-y-px">
+        {[...CLASS_KEYS].reverse().map((k) => {
+          const i = CLASS_KEYS.indexOf(k);
+          const count = counts?.[k] ?? 0;
+          const active = state.cls === k;
+          const dim = !!state.cls && !active;
+          return (
+            <li key={k}>
+              <button
+                type="button"
+                aria-pressed={active}
+                aria-label={t('legend.classCount', { cls: t(`common:classes.${k}`), count })}
+                onClick={() => actions.setClass(active ? null : k)}
+                className={cn(row, 'transition-colors duration-150 hover:bg-muted/70', active && 'bg-muted')}
+              >
+                <span aria-hidden className={cn('size-3 transition-opacity duration-150', dim && 'opacity-40')} style={{ background: CLASS_COLORS[k] }} />
+                <span className={cn('truncate', active ? 'font-semibold' : 'font-medium', dim && 'text-muted-foreground')}>{t(`common:classes.${k}`)}</span>
+                <span className="num text-right text-xs text-muted-foreground">{ranges[i]}</span>
+                <span className={cn('num text-right font-medium', dim && 'text-muted-foreground')}>{count}</span>
+                <Share value={count} total={total} color={CLASS_COLORS[k]} dim={dim} />
+              </button>
+            </li>
+          );
+        })}
+        {missing > 0 && (
+          <li className={cn(row, 'text-muted-foreground')}>
+            <span aria-hidden className="size-3" style={{ background: NO_DATA_COLOR }} />
+            <span className="truncate">{t('common:classes.noData')}</span>
+            <span />
+            <span className="num text-right">{missing}</span>
+            <Share value={missing} total={total} color={NO_DATA_COLOR} />
+          </li>
+        )}
+      </ul>
+      <p className="mt-3 text-xs text-muted-foreground">{t('legend.filterHint')}</p>
     </div>
   );
 }
 
 function LegendBlock() {
   const { t } = useTranslation(['explore', 'common']);
-  const { metric, stats, state, actions } = useExplore();
+  const { metric } = useExplore();
   if (metric.kind === 'indicator') {
     return (
       <div>
-        <RampLegend />
-        <div className="mt-1 flex justify-between text-[11px] text-muted-foreground">
-          <span>{t('legend.lower')}</span>
-          <span>{t('legend.higher')}</span>
+        <div className="h-2.5" style={{ background: `linear-gradient(90deg, ${RAMP_STOPS.join(',')})` }} />
+        <div className="num mt-1.5 flex justify-between text-xs text-muted-foreground">
+          <span>0 · {t('legend.lower')}</span>
+          <span>5</span>
+          <span>
+            {t('legend.higher')} · 10
+          </span>
         </div>
-        <Distribution className="mt-4" />
-        <p className="mt-3 rounded-lg bg-muted/60 px-2.5 py-2 text-[11px] leading-relaxed text-muted-foreground">{t('legend.continuousNote')}</p>
+        <Distribution className="mt-6" />
+        <p className="mt-5 border-l-2 border-border pl-3 text-xs leading-relaxed text-muted-foreground">{t('legend.continuousNote')}</p>
       </div>
     );
   }
-  return (
-    <div>
-      <ClassLegend scale={metric.scale ?? 'risk'} counts={stats.classCounts ?? undefined} active={state.cls} onToggle={actions.setClass} />
-      <p className="mt-2 px-2 text-[11px] text-muted-foreground">{t('legend.filterHint')}</p>
-    </div>
-  );
+  return <ClassFilterLegend />;
 }
 
 export function RankingPreview({ limit = 8 }: { limit?: number }) {
@@ -103,139 +170,135 @@ export function RankingPreview({ limit = 8 }: { limit?: number }) {
       ).slice(0, limit),
     [units, metric, state.cls, limit],
   );
-  if (!rows.length) return <p className="rounded-xl border border-dashed border-border px-3 py-6 text-center text-xs text-muted-foreground">{t('table.empty')}</p>;
+  if (!rows.length) return <p className="py-2 text-sm text-muted-foreground">{t('table.empty')}</p>;
   return (
     <div>
-      <ol className="divide-y divide-border overflow-hidden rounded-xl border border-border bg-card">
-        {rows.map((u) => (
-          <li key={u.id}>
-            <button
-              type="button"
-              onClick={() => actions.select(u, { focus: true })}
-              aria-current={selected?.id === u.id ? 'true' : undefined}
-              className={cn('flex w-full items-center gap-3 px-3 py-2 text-left transition-colors hover:bg-muted/60', selected?.id === u.id && 'bg-primary/[0.07]')}
-            >
-              <span className="num w-5 shrink-0 text-xs font-bold text-muted-foreground">{ranks.get(u.id)}</span>
-              <span className="min-w-0 flex-1">
-                <span className="block truncate text-[13px] font-semibold">{u.name}</span>
-                {u.level !== 'region' && <span className="block truncate text-[11px] text-muted-foreground">{u.region}</span>}
-              </span>
-              <span className="num flex items-center gap-1.5 font-display text-sm font-bold">
-                <MetricDot metric={metric} value={metric.get(u)} />
-                {formatScore(metric.get(u))}
-              </span>
-            </button>
-          </li>
-        ))}
+      <ol className="space-y-px">
+        {rows.map((u) => {
+          const isSel = selected?.id === u.id;
+          return (
+            <li key={u.id}>
+              <button
+                type="button"
+                onClick={() => actions.select(u, { focus: true })}
+                aria-current={isSel ? 'true' : undefined}
+                className={cn(
+                  'group -mx-2 grid w-[calc(100%+1rem)] grid-cols-[1.5rem_1fr_auto] items-center gap-3 rounded-md px-2 py-2 text-left transition-colors duration-150 hover:bg-muted/70',
+                  isSel && 'bg-muted',
+                )}
+              >
+                <span className="num text-xs text-muted-foreground">{ranks.get(u.id)}</span>
+                <span className="min-w-0">
+                  <span className={cn('block truncate text-sm', isSel ? 'font-semibold' : 'font-medium')}>{u.name}</span>
+                  {u.level !== 'region' && <span className="block truncate text-xs text-muted-foreground">{u.region}</span>}
+                </span>
+                <MetricValue metric={metric} value={metric.get(u)} className={cn('text-sm', isSel ? 'font-semibold' : 'font-medium')} />
+              </button>
+            </li>
+          );
+        })}
       </ol>
-      <Button variant="outline" size="sm" className="mt-2 w-full" onClick={() => actions.setView('table')}>
-        <Table2 /> {t('ranking.openTable')}
+      <Button variant="link" size="sm" className="mt-3 h-auto gap-1.5 px-0" onClick={() => actions.setView('table')}>
+        {t('ranking.openTable')} <ArrowRight />
       </Button>
     </div>
   );
 }
 
-function BasemapToggle() {
-  const { t } = useTranslation('explore');
-  const { state, actions } = useExplore();
-  const id = React.useId();
-  return (
-    <div className="flex items-center justify-between gap-3 rounded-xl border border-border bg-card px-3 py-2.5">
-      <label htmlFor={id} className="min-w-0 cursor-pointer">
-        <span className="block text-sm font-medium">{t('basemap.label')}</span>
-        <span className="block text-[11px] text-muted-foreground">{t('basemap.hint')}</span>
-      </label>
-      <Switch id={id} checked={state.basemap === 'streets'} onCheckedChange={(c) => actions.setBasemap(c ? 'streets' : 'none')} />
-    </div>
-  );
-}
-
-/** Panel body. `desktop` adds the title block and search; `sheet` is the mobile bottom-sheet body. */
+/** Panel body. `desktop` adds the title block, search and level switch; `sheet` is the mobile bottom-sheet body. */
 export function ControlPanel({ variant }: { variant: 'desktop' | 'sheet' }) {
   const { t, i18n } = useTranslation(['explore', 'common']);
-  const { model, metric, state, actions, metricLabel } = useExplore();
+  const { model, metric, state, actions } = useExplore();
   const uid = React.useId();
-  let i = 0;
+  const desktop = variant === 'desktop';
+  const pad = desktop ? 'px-6' : 'px-5';
+  // In the sheet the peek already shows the class legend (with counts) and filters by class, so the
+  // body keeps the legend section only for indicators (ramp, histogram and the continuous-scale note).
+  const showLegend = desktop || metric.kind === 'indicator';
 
   const body = (
-    <div className={cn('space-y-7', variant === 'desktop' ? 'px-5 pt-5 pb-8' : 'px-4 pt-2 pb-8')}>
-      <Section id={`${uid}-level`} index={i++} title={t('level.label')}>
-        <LevelControl />
-      </Section>
+    <div className={desktop ? undefined : 'pb-6'}>
+      {desktop ? (
+        <LevelNote className={cn('pt-5 pb-6', pad)} />
+      ) : (
+        <Section id={`${uid}-level`} title={t('level.label')} pad={pad}>
+          <LevelSwitch />
+          <LevelNote className="mt-3" />
+        </Section>
+      )}
 
-      <Section id={`${uid}-lens`} index={i++} title={t('lens.label')}>
-        <LensTiles />
-        <div className="mt-3">
-          <IndicatorPicker />
+      {/* On mobile the sheet's peek already holds the lens tabs; the body only adds the indicator note. */}
+      {desktop ? (
+        <Section id={`${uid}-lens`} title={t('lens.label')} pad={pad}>
+          <LensTiles labelledBy={`${uid}-lens`} />
           <IndicatorDetails />
-        </div>
-      </Section>
+        </Section>
+      ) : (
+        metric.kind === 'indicator' && (
+          <div className={cn('border-t border-border pt-3 pb-7', pad)}>
+            <IndicatorDetails />
+          </div>
+        )
+      )}
 
-      <Section
-        id={`${uid}-legend`}
-        index={i++}
-        title={t('legend.label')}
-        action={
-          <span className="flex items-center gap-1">
-            {state.cls && (
-              <Button variant="ghost" size="sm" className="h-7 px-2 text-xs" onClick={() => actions.setClass(null)}>
-                <FilterX /> {t('legend.clearFilter')}
-              </Button>
-            )}
-            <ScaleInfo align="end" />
-          </span>
-        }
-      >
-        <LegendBlock />
-      </Section>
+      {showLegend && (
+        <Section
+          id={`${uid}-legend`}
+          title={t('legend.label')}
+          pad={pad}
+          action={
+            <span className="flex items-center gap-1">
+              {state.cls && (
+                <Button variant="ghost" size="sm" className="h-7 px-2 text-xs" onClick={() => actions.setClass(null)}>
+                  <FilterX /> {t('legend.clearFilter')}
+                </Button>
+              )}
+              <ScaleInfo align="end" />
+            </span>
+          }
+        >
+          <LegendBlock />
+        </Section>
+      )}
 
-      <Section id={`${uid}-stats`} index={i++} title={t('stats.label', { metric: metricLabel(metric) })}>
+      <Section id={`${uid}-stats`} title={t('stats.label')} pad={pad}>
         <StatsBlock />
       </Section>
 
       {state.view === 'map' && (
-        <Section id={`${uid}-rank`} index={i++} title={t('ranking.label', { metric: metricLabel(metric, true) })}>
-          <RankingPreview limit={variant === 'desktop' ? 8 : 5} />
+        <Section id={`${uid}-rank`} title={t('ranking.label')} pad={pad}>
+          <RankingPreview limit={desktop ? 8 : 5} />
         </Section>
       )}
 
-      <Section id={`${uid}-map`} index={i++} title={t('basemap.section')}>
-        <BasemapToggle />
-      </Section>
-
-      <p className="text-[11px] leading-relaxed text-muted-foreground">
-        {t('footer.asOf', { date: formatDate(`${model.asOf}-01`, i18n.language, { month: 'long', year: 'numeric' }) })} ·{' '}
-        <Link to="/methodology" className="font-semibold text-primary hover:underline">
-          {t('footer.methodology')}
-        </Link>
-      </p>
+      <footer className={cn('space-y-1.5 border-t border-border py-6 text-xs leading-relaxed text-muted-foreground', pad)}>
+        <p>
+          {t('footer.asOf', { date: formatDate(`${model.asOf}-01`, i18n.language, { month: 'long', year: 'numeric' }) })} · {t('footer.method')}
+        </p>
+        <p className="flex flex-wrap gap-x-4 gap-y-1">
+          <Link to="/methodology" className="font-medium text-primary hover:underline">
+            {t('footer.methodology')}
+          </Link>
+          <Link to="/learn" className="inline-flex items-center gap-1 font-medium text-primary hover:underline">
+            {t('footer.learn')} <ArrowRight className="size-3" aria-hidden />
+          </Link>
+        </p>
+      </footer>
     </div>
   );
 
-  if (variant === 'sheet') return body;
+  if (!desktop) return body;
 
   return (
     <>
       {/* z-10 and no overflow clipping here, so the search dropdown can overlap the scroll area below. */}
-      <div className="relative z-10 shrink-0 border-b border-border px-5 pt-5 pb-4">
-        <div aria-hidden className="pointer-events-none absolute inset-0 overflow-hidden">
-          <div className="bg-grid absolute inset-0 [mask-image:linear-gradient(to_bottom,black,transparent)]" />
-          <div className="absolute -top-20 -right-16 size-48 rounded-full bg-primary/10 blur-3xl" />
-        </div>
-        <motion.div className="relative" {...enter(0)}>
-          <div className="text-[11px] font-semibold tracking-[0.16em] text-primary uppercase">{t('eyebrow')}</div>
-          <h1 className="mt-1.5 text-2xl font-extrabold">{t('title')}</h1>
-          <p className="mt-1.5 text-[13px] leading-relaxed text-muted-foreground">{t('lead', { count: ALL_INDICATORS.length })}</p>
-          <PlaceSearch className="mt-4" />
-        </motion.div>
+      <div className="relative z-10 shrink-0 border-b border-border px-6 pt-7 pb-5">
+        <h1 className="text-[1.85rem] leading-[1.1]">{t('title')}</h1>
+        <p className="mt-2.5 text-sm leading-relaxed text-muted-foreground">{t('lead', { count: ALL_INDICATORS.length })}</p>
+        <PlaceSearch className="mt-5" />
+        <LevelSwitch className="mt-3" />
       </div>
-      <div className="min-h-0 flex-1 overflow-y-auto overscroll-contain [scrollbar-gutter:stable]">{body}</div>
-      <div className="flex shrink-0 items-center justify-between gap-2 border-t border-border px-5 py-2.5 text-[11px] text-muted-foreground">
-        <span className="truncate">{t('footer.method')}</span>
-        <Link to="/learn" className="inline-flex shrink-0 items-center gap-1 font-semibold text-primary hover:underline">
-          {t('footer.learn')} <ArrowRight className="size-3" />
-        </Link>
-      </div>
+      <div className="min-h-0 flex-1 overflow-y-auto overscroll-contain [scrollbar-width:thin]">{body}</div>
     </>
   );
 }

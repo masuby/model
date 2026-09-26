@@ -2,8 +2,9 @@
  * Insights-local chart theme: extends the shared `useChartTheme()` with the surface/ink colours the
  * page needs for mark gaps, rings and SVG-only exports, plus the validated resolution ramp.
  *
- * Surface/ink values mirror the `--card`, `--foreground` and `--muted` tokens in `src/styles/index.css`
- * (SVG attributes and PNG export cannot rely on CSS variables).
+ * Charts sit directly on the page (no card), so the surface mirrors `--background`; ink and neutral mirror
+ * `--foreground` and `--muted` in `src/styles/index.css` (SVG attributes and PNG export cannot rely on
+ * CSS variables).
  */
 import * as React from 'react';
 import { useChartTheme } from '@/components/charts/theme';
@@ -34,8 +35,8 @@ export function useInsightTheme() {
   return React.useMemo(
     () => ({
       ...th,
-      /** Chart surface (= --card) — used for 2px gaps between touching marks and rings around dots. */
-      surface: th.dark ? '#0d1526' : '#ffffff',
+      /** Chart surface (= --background) — used for 2px gaps between touching marks and rings around dots. */
+      surface: th.dark ? '#0a0f1a' : '#ffffff',
       /** Primary ink (= --foreground). */
       ink: th.dark ? '#e7ecf5' : '#0b1324',
       /** Neutral fill for empty cells / the diverging midpoint (≈ --muted). */

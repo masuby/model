@@ -28,9 +28,8 @@ export function Logo({ compact = false }: { compact?: boolean }) {
     <span className="flex items-center gap-2.5">
       <LogoMark />
       {!compact && (
-        <span className="flex flex-col leading-none">
-          <span className="font-display text-[15px] font-extrabold tracking-tight">INFORM</span>
-          <span className="text-[11px] font-semibold tracking-[0.18em] text-muted-foreground uppercase">Tanzania</span>
+        <span className="font-display text-[1.05rem] leading-none font-semibold tracking-tight whitespace-nowrap sm:text-[1.2rem]">
+          INFORM <span className="font-normal text-muted-foreground">Tanzania</span>
         </span>
       )}
     </span>

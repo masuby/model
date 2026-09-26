@@ -1,17 +1,18 @@
 // @vitest-environment jsdom
-import { render, screen } from '@testing-library/react';
+import { act, render, screen } from '@testing-library/react';
 import { MemoryRouter, Route, Routes } from 'react-router-dom';
 import type * as Recharts from 'recharts';
-import { beforeAll, describe, expect, it, vi } from 'vitest';
+import { beforeAll, beforeEach, describe, expect, it, vi } from 'vitest';
 import '@/i18n';
 import i18n from '@/i18n';
 import { TooltipProvider } from '@/components/ui/primitives';
 import { DataProvider } from '@/data-layer/DataProvider';
 import { buildModel } from '@/engine/risk/model';
 import AreaPage from './AreaPage';
+import { loadCharts } from './components/ChartSlot';
 
-// Leaflet needs a real layout engine; the locator map is covered by its own component.
-vi.mock('@/components/map/RiskMap', () => ({ default: () => <div data-testid="risk-map" /> }));
+// The SVG locator zooms with getBBox, which jsdom lacks; the map is covered by its own component.
+vi.mock('@/components/map/StaticMap', () => ({ default: () => <div data-testid="static-map" /> }));
 
 // jsdom has no layout: give every chart a fixed size so the custom SVG shapes actually render.
 vi.mock('recharts', async (importOriginal) => {
@@ -24,17 +25,33 @@ vi.mock('recharts', async (importOriginal) => {
   };
 });
 
-beforeAll(() => {
-  class Noop {
-    observe() {}
-    unobserve() {}
-    disconnect() {}
-    takeRecords() {
-      return [];
-    }
+class Noop {
+  observe(_target?: Element) {}
+  unobserve() {}
+  disconnect() {}
+  takeRecords() {
+    return [];
   }
+}
+
+/** Reports every observed element as on screen — as if the reader had scrolled the whole page. */
+class InViewObserver extends Noop {
+  private readonly cb: IntersectionObserverCallback;
+  constructor(cb: IntersectionObserverCallback) {
+    super();
+    this.cb = cb;
+  }
+  override observe(target: Element) {
+    this.cb([{ isIntersecting: true, target, boundingClientRect: target.getBoundingClientRect() } as unknown as IntersectionObserverEntry], this as unknown as IntersectionObserver);
+  }
+}
+
+beforeAll(() => {
   vi.stubGlobal('ResizeObserver', Noop);
-  vi.stubGlobal('IntersectionObserver', Noop);
+});
+
+beforeEach(() => {
+  vi.stubGlobal('IntersectionObserver', InViewObserver);
 });
 
 const model = buildModel();
@@ -55,6 +72,11 @@ function renderAt(id: string) {
 
 // Full-page renders are heavy in jsdom (and slower still when the whole suite runs in parallel).
 describe('AreaPage', { timeout: 90_000 }, () => {
+  // In the app the chart module is prefetched while the browser is idle; warm it the same way here so
+  // chart sections render synchronously when they mount (and before printing).
+  beforeAll(async () => {
+    await loadCharts();
+  });
   const council = model.councils.find((c) => c.inheritedFrom) ?? model.councils[0];
   const region = model.regions[0];
   const source = model.sources[0];
@@ -82,6 +104,23 @@ describe('AreaPage', { timeout: 90_000 }, () => {
     renderAt(council.id);
     expect(screen.getByText('Kila kiashiria na chanzo chake')).toBeInTheDocument();
     await i18n.changeLanguage('en');
+  });
+
+  it('defers heavy sections until they near the viewport, and renders them all before printing', async () => {
+    await i18n.changeLanguage('en');
+    vi.stubGlobal('IntersectionObserver', Noop); // nothing ever scrolls into view
+    renderAt(council.id);
+    // Section headings are always there (the nav and print need them); the heavy content is not yet.
+    expect(screen.getByText('Every indicator, with its source', { selector: 'h2' })).toBeInTheDocument();
+    expect(document.querySelectorAll('svg.recharts-surface')).toHaveLength(0);
+    expect(screen.queryByRole('table', { name: /All indicators for/ })).not.toBeInTheDocument();
+
+    act(() => {
+      window.dispatchEvent(new Event('beforeprint'));
+    });
+    expect(document.querySelectorAll('svg.recharts-surface').length).toBeGreaterThanOrEqual(3);
+    expect(screen.getByRole('table', { name: /All indicators for/ })).toBeInTheDocument();
+    expect(document.querySelector('.area-deferred')).toBeNull();
   });
 
   it('shows a friendly not-found state for unknown ids', async () => {

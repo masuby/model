@@ -39,6 +39,19 @@ export const SECTIONS: readonly SectionDef[] = [
 ];
 export const SECTION_IDS: readonly string[] = SECTIONS.map((s) => s.id);
 
+/** Document numbering as printed: "3" for a section, "3.1" for its first sub-section. */
+export const DISPLAY_NUMBERS: ReadonlyMap<string, string> = (() => {
+  const m = new Map<string, string>();
+  let subs = 0;
+  for (const s of SECTIONS) {
+    const n = String(Number(s.number));
+    subs = s.depth ? subs + 1 : 0;
+    m.set(s.id, s.depth ? `${n}.${subs}` : n);
+  }
+  return m;
+})();
+export const displayNumber = (id: string): string => DISPLAY_NUMBERS.get(id) ?? '';
+
 /** i18n key of a section title (`sections.<camel>`). */
 export const sectionKey = (id: string) => `sections.${id.replace(/-(\w)/g, (_, c: string) => c.toUpperCase())}`;
 
@@ -329,20 +342,28 @@ export const REFERENCES: readonly Reference[] = [
 /* Small numeric helpers                                                                              */
 /* ------------------------------------------------------------------------------------------------ */
 
-/** A weight as a vulgar fraction when it is one (⅓, ½, ⅔ …), otherwise a percentage. */
+/**
+ * A weight in one plain notation, matching the formulas: a simple fraction when it is one ("1/3", "2/3"),
+ * otherwise a decimal ("0.7", "0.3").
+ */
 export function fractionLabel(w: number): string {
-  const known: Array<[number, string]> = [
-    [1, '1'],
-    [1 / 2, '½'],
-    [1 / 3, '⅓'],
-    [2 / 3, '⅔'],
-    [1 / 4, '¼'],
-    [3 / 4, '¾'],
-    [0.7, '70%'],
-    [0.3, '30%'],
-  ];
-  const hit = known.find(([v]) => Math.abs(v - w) < 1e-9);
-  return hit ? hit[1] : `${Math.round(w * 100)}%`;
+  for (const den of [2, 3, 4]) {
+    const num = Math.round(w * den);
+    if (num > 0 && num < den && Math.abs(num / den - w) < 1e-9) return `${num}/${den}`;
+  }
+  return String(Number(w.toFixed(2)));
+}
+
+/** A "YYYY-MM" data date as a month and year in the reader's language ("June 2026", "Juni 2026"). */
+export function formatMonth(asOf: string | null | undefined, lang: string): string {
+  const m = /^(\d{4})-(\d{2})/.exec(asOf ?? '');
+  if (!m) return asOf ?? '';
+  const date = new Date(Number(m[1]), Number(m[2]) - 1, 1);
+  try {
+    return new Intl.DateTimeFormat(lang.startsWith('sw') ? 'sw-TZ' : 'en-GB', { month: 'long', year: 'numeric' }).format(date);
+  } catch {
+    return asOf ?? '';
+  }
 }
 
 /** Fixed-decimal formatting for intermediate values in formulas. */

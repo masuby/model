@@ -52,15 +52,15 @@ export function ScoreBar({
         <span className={cn('font-medium', compact ? 'text-xs' : 'text-sm')}>{label}</span>
         <span className="num flex items-baseline gap-1.5">
           {hint}
-          <span className={cn('font-display font-bold', compact ? 'text-sm' : 'text-base')}>{formatScore(value)}</span>
+          <span className={cn('num font-semibold', compact ? 'text-sm' : 'text-base')}>{formatScore(value)}</span>
         </span>
       </div>
-      <div className={cn('relative w-full overflow-visible rounded-full bg-muted', compact ? 'h-1.5' : 'h-2.5')}>
-        <div className="h-full rounded-full transition-[width] duration-700 ease-out" style={{ width: `${pct}%`, background: c?.color ?? NO_DATA_COLOR }} />
+      <div className={cn('relative w-full overflow-visible bg-muted', compact ? 'h-1' : 'h-1.5')}>
+        <div className="h-full transition-[width] duration-150" style={{ width: `${pct}%`, background: c?.color ?? NO_DATA_COLOR }} />
         {typeof reference === 'number' && (
           <span
             title={referenceLabel ? `${referenceLabel}: ${formatScore(reference)}` : formatScore(reference)}
-            className="absolute top-1/2 h-[180%] w-0.5 -translate-y-1/2 rounded-full bg-foreground/70"
+            className="absolute top-1/2 h-[260%] w-px -translate-y-1/2 bg-foreground/80"
             style={{ left: `${(reference / max) * 100}%` }}
           />
         )}

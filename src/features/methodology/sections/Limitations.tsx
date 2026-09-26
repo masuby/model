@@ -1,13 +1,9 @@
-import { ArrowRight, Route } from 'lucide-react';
-import { motion } from 'motion/react';
 import * as React from 'react';
 import { useTranslation } from 'react-i18next';
-import { Card } from '@/components/ui/card';
 import { useModel } from '@/data-layer/DataProvider';
 import { ALL_INDICATORS } from '@/engine/risk/hierarchy';
 import { cn } from '@/lib/utils';
-import { fadeIn } from '../tokens';
-import { Callout, DocSection, P } from '../ui';
+import { Callout, DocSection } from '../ui';
 
 type Status = 'open' | 'inProgress' | 'planned';
 
@@ -24,11 +20,8 @@ const ITEMS: ReadonlyArray<{ key: string; status: Status }> = [
   { key: 'freshness', status: 'inProgress' },
 ];
 
-const STATUS_STYLE: Record<Status, string> = {
-  open: 'bg-warning/12 text-warning',
-  inProgress: 'bg-primary/10 text-primary',
-  planned: 'bg-muted text-muted-foreground',
-};
+/** Status is state, so it may carry colour — as a small dot beside a plain word, never a tinted pill. */
+const STATUS_DOT: Record<Status, string> = { open: 'bg-warning', inProgress: 'bg-primary', planned: 'border border-muted-foreground' };
 
 export function LimitationsSection() {
   const { t } = useTranslation('methodology');
@@ -36,45 +29,39 @@ export function LimitationsSection() {
   const vars = React.useMemo(() => {
     const perSource = new Map<string, number>();
     for (const c of model.councils) if (c.sourceId) perSource.set(c.sourceId, (perSource.get(c.sourceId) ?? 0) + 1);
-    return {
-      inherited: model.councils.filter((c) => c.inheritedFrom).length,
-      shared: [...perSource.values()].filter((n) => n > 1).length,
-      groups: ALL_INDICATORS.length,
-    };
+    return { inherited: model.councils.filter((c) => c.inheritedFrom).length, shared: [...perSource.values()].filter((n) => n > 1).length, groups: ALL_INDICATORS.length };
   }, [model]);
 
   return (
-    <DocSection id="limitations" number="11" eyebrow={t('sections.limitations')} title={t('limitations.title')} lead={t('limitations.lead')}>
-      <ul className="grid gap-4 lg:grid-cols-2">
+    <DocSection id="limitations" label={t('sections.limitations')} title={t('limitations.title')} lead={t('limitations.lead')}>
+      <ol className="border-y border-border">
         {ITEMS.map((item, i) => (
-          <motion.li key={item.key} {...fadeIn} transition={{ ...fadeIn.transition, delay: (i % 2) * 0.05 }}>
-            <Card className="flex h-full flex-col p-5">
-              <div className="flex items-start justify-between gap-3">
-                <h3 className="font-semibold text-balance">{t(`limitations.items.${item.key}.title`, vars)}</h3>
-                <span className={cn('shrink-0 rounded-full px-2.5 py-0.5 text-[11px] font-semibold whitespace-nowrap', STATUS_STYLE[item.status])}>{t(`limitations.status.${item.status}`)}</span>
+          <li key={item.key} className="grid gap-x-6 border-t border-border py-6 first:border-t-0 sm:grid-cols-[2rem_minmax(0,1fr)]">
+            <span className="num hidden pt-px text-sm text-muted-foreground sm:block" aria-hidden>
+              {i + 1}
+            </span>
+            <div className="min-w-0">
+              <div className="flex flex-col gap-1.5 sm:flex-row sm:items-baseline sm:justify-between sm:gap-6">
+                <h3 className="text-base font-semibold text-balance">{t(`limitations.items.${item.key}.title`, vars)}</h3>
+                <span className="inline-flex shrink-0 items-center gap-1.5 text-[13px] whitespace-nowrap text-muted-foreground">
+                  <span className={cn('size-1.5 rounded-full', STATUS_DOT[item.status])} aria-hidden />
+                  {t(`limitations.status.${item.status}`)}
+                </span>
               </div>
-              <div className="mt-3 text-[11px] font-semibold tracking-wider text-muted-foreground uppercase">{t('limitations.today')}</div>
-              <p className="mt-1 text-sm leading-relaxed text-foreground/85">{t(`limitations.items.${item.key}.now`, vars)}</p>
-              <div className="mt-auto pt-4">
-                <div className="flex gap-2.5 rounded-xl bg-muted/60 p-3 text-sm leading-relaxed">
-                  <ArrowRight className="mt-0.5 size-4 shrink-0 text-primary" aria-hidden />
-                  <div>
-                    <span className="font-semibold">{t('limitations.next')} </span>
-                    <span className="text-muted-foreground">{t(`limitations.items.${item.key}.next`, vars)}</span>
-                  </div>
-                </div>
-              </div>
-            </Card>
-          </motion.li>
+              <dl className="mt-3 grid gap-x-5 gap-y-2 text-sm leading-relaxed sm:grid-cols-[6.5rem_minmax(0,1fr)]">
+                <dt className="text-muted-foreground">{t('limitations.today')}</dt>
+                <dd className="max-w-[68ch] text-foreground/85">{t(`limitations.items.${item.key}.now`, vars)}</dd>
+                <dt className="text-muted-foreground">{t('limitations.next')}</dt>
+                <dd className="max-w-[68ch] text-muted-foreground">{t(`limitations.items.${item.key}.next`, vars)}</dd>
+              </dl>
+            </div>
+          </li>
         ))}
-      </ul>
-      <Callout tone="tip" className="mt-6" title={t('limitations.closingTitle')}>
-        <span className="flex items-start gap-2">
-          <Route className="mt-0.5 size-4 shrink-0 text-success" aria-hidden />
-          <span>{t('limitations.closing')}</span>
-        </span>
+      </ol>
+      <Callout className="mt-10" title={t('limitations.closingTitle')}>
+        {t('limitations.closing')}
       </Callout>
-      <P className="mt-4 text-xs text-muted-foreground sm:text-xs">{t('limitations.sourcesNote')}</P>
+      <p className="mt-6 max-w-[72ch] text-xs leading-relaxed text-muted-foreground">{t('limitations.sourcesNote')}</p>
     </DocSection>
   );
 }

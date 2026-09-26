@@ -4,15 +4,15 @@
     "title": "Crisis severity",
     "lead": "INFORM Risk shows where a crisis would hit hardest before it happens. INFORM Severity measures how serious an unfolding crisis is: its impact, the conditions of the people affected and the complexity of the response.",
     "methodCta": "How it is calculated",
-    "riskSub": "Before a crisis · 0–10 · open the risk explorer",
-    "severityName": "INFORM Severity",
-    "severitySub": "During a crisis · 0–5 · this calculator",
-    "here": "You are here"
+    "before": "Before a crisis",
+    "during": "During a crisis",
+    "riskCta": "Open the risk explorer",
+    "severityName": "INFORM Severity"
   },
-  "illustrative": "Illustrative",
   "illustrativeTitle": "Illustrative scenarios, not official data.",
   "illustrativeNote": "They use plausible magnitudes to demonstrate the method. Replace every figure with assessed data before using a result in a situation report.",
   "steps": {
+    "kicker": "Step {{n}} of {{total}}",
     "dimScore": "Score",
     "scenario": {
       "title": "Start from a scenario",
@@ -26,7 +26,7 @@
       "lead": "How big is the crisis? The size of the affected area and the people living there (geographical, ⅓), and the people affected, displaced or killed (human, ⅔)."
     },
     "conditions": {
-      "lead": "How bad are the conditions of the people affected? Estimate how many people are at each level of humanitarian conditions."
+      "lead": "How bad are the conditions of the people affected? Place everyone in the affected area on the five levels of humanitarian conditions (INFORM Severity, Table 1). People at levels 3–5 are the people in need; level 1 is filled in automatically as the remainder."
     },
     "complexity": {
       "lead": "How hard is it to respond? The structural context (society and safety) and the operating environment on the ground."
@@ -59,8 +59,7 @@
     },
     "custom": {
       "name": "Blank / custom",
-      "blurb": "Start from an empty form. The national structural indicators stay pre-filled.",
-      "cta": "Enter your own figures"
+      "blurb": "Start from an empty form. The national structural indicators stay pre-filled."
     }
   },
   "area": {
@@ -94,7 +93,6 @@
   "sub": {
     "geographicalLead": "The scale of the crisis in space and population.",
     "humanLead": "Direct effects on people. The percentages are derived automatically.",
-    "conditionsLead": "Place everyone in the affected area on the five levels of humanitarian conditions (INFORM Severity, Table 1). People at levels 3–5 are the people in need; level 1 is filled in automatically as the remainder.",
     "societySafetyLead": "National structural indicators for Tanzania, pre-filled from public sources. Edit them if local evidence for the affected area differs.",
     "operatingEnvironmentLead": "Who is affected, and how hard it is for aid and people to reach each other."
   },
@@ -196,28 +194,28 @@
     "fatalRate": "{{v}} per 10,000 people affected"
   },
   "level": {
-    "short": "Level {{n}}",
-    "inputLabel": "People at level {{n}} ({{name}})",
-    "5": {
-      "name": "Extreme",
-      "desc": "Widespread loss of life or irreversible harm. Living standards have collapsed and coping options are exhausted."
-    },
-    "4": {
-      "name": "Severe",
-      "desc": "Living standards have broken down. Survival depends on humanitarian aid or emergency coping; serious physical and mental harm."
-    },
-    "3": {
-      "name": "Moderate",
-      "desc": "Living standards are degrading. Some basic needs cannot be met without crisis coping, such as selling productive assets."
+    "1": {
+      "name": "None or minimal",
+      "desc": "Acceptable living standards; basic needs are met without harmful coping. Calculated as the rest of the people in the area."
     },
     "2": {
       "name": "Stressed",
       "desc": "Living standards are under stress. Basic needs are met only through coping that erodes livelihoods."
     },
-    "1": {
-      "name": "None or minimal",
-      "desc": "Acceptable living standards; basic needs are met without harmful coping. Calculated as the rest of the people in the area."
-    }
+    "3": {
+      "name": "Moderate",
+      "desc": "Living standards are degrading. Some basic needs cannot be met without crisis coping, such as selling productive assets."
+    },
+    "4": {
+      "name": "Severe",
+      "desc": "Living standards have broken down. Survival depends on humanitarian aid or emergency coping; serious physical and mental harm."
+    },
+    "5": {
+      "name": "Extreme",
+      "desc": "Widespread loss of life or irreversible harm. Living standards have collapsed and coping options are exhausted."
+    },
+    "short": "Level {{n}}",
+    "inputLabel": "People at level {{n}} ({{name}})"
   },
   "conditions": {
     "inNeedTag": "In need",
@@ -346,6 +344,7 @@
   "results": {
     "eyebrow": "Live result",
     "title": "INFORM Severity Index",
+    "scenarioIllustrative": "{{name}} · illustrative",
     "category": "Category {{level}} of 5",
     "announce": "Severity {{score}}, {{category}}",
     "incomplete": "Incomplete",
@@ -359,9 +358,8 @@
     "weightInG": "{{w}} in G",
     "formula": "The formula with your numbers",
     "formulaLhs": "Severity",
-    "formulaHint": "G is INFORM’s weighted geometric mean: it inverts, averages geometrically and inverts back, so one very severe dimension is not averaged away.",
+    "formulaHint": "G(Impact, Humanitarian conditions) is INFORM’s weighted geometric mean, with weights ⅓ and ⅔: it inverts, averages geometrically and inverts back, so one very severe dimension is not averaged away.",
     "reliability": "Reliability",
-    "reliabilityAria": "Reliability {{score}} out of 5",
     "completeness": "Data completeness",
     "completenessSub": "{{have}} of {{total}} indicators",
     "sourceReliability": "Source reliability",
@@ -372,6 +370,7 @@
     "reliabilityNote": "Reported alongside the index; it never changes the severity score.",
     "export": "Export",
     "copy": "Copy summary for a situation report",
+    "copyShort": "Copy summary",
     "copied": "Summary copied. Paste it into your situation report.",
     "copyFailed": "Could not copy to the clipboard.",
     "mobileCta": "Full result"
@@ -419,7 +418,7 @@
     "dimWeight": "weight {{w}}",
     "legendG": "INFORM weighted geometric mean (inverted, so high values dominate)",
     "legendMean": "arithmetic mean",
-    "live": "Scores in the boxes update live with your inputs.",
+    "live": "Scores update live with your inputs.",
     "cards": {
       "normalise": {
         "title": "Scale every indicator",

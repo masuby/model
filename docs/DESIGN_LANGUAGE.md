@@ -56,7 +56,7 @@ If a pattern is common on AI-generated landing pages, it is probably wrong here.
 ## 7. Charts, tables, maps
 
 - A chart sits directly on the page under a title row (title, one-line caption, export menu) with a
-  hairline above it (`Figure`) — not inside a card.
+  hairline above it (`ChartCard`) — not inside a card.
 - Tables: hairline rows, no zebra, sticky header where long, numbers right-aligned.
 - Maps: a floating legend panel (small, bordered, solid background) is fine; nothing else floats.
 
@@ -67,6 +67,7 @@ If a pattern is common on AI-generated landing pages, it is probably wrong here.
 
 ## Building blocks
 
-`Card` (flat), `Figure` (chart section), `KeyFigures` (numbers with vertical rules), `SectionHeading`
-(rule + serif title + lead), `PageHeader` (plain title block), `Note` (left-rule note), `StaticMap`
-(lightweight SVG choropleth for non-interactive or click-only maps).
+`Card` (flat), `ChartCard` (a figure: title row over a hairline, no box), `KeyFigures` (numbers with
+vertical rules), `Section` + `SectionHeading` (rule + serif title + lead), `PageHeader` (plain title block),
+`Kicker` (plain small label), `Note` (left-rule note), `StaticMap` (lightweight SVG choropleth for
+non-interactive or click-only maps) and `RiskMap` (Leaflet, for pan/zoom exploration only).

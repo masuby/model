@@ -1,9 +1,9 @@
 {
   "overview": {
-    "eyebrow": "Kozi ya bure · masomo {{lessons}} · takriban dakika {{minutes}}",
+    "kicker": "Kozi ya bure, ya kujisomea",
     "eyebrowShort": "Jifunze",
     "title": "Elewa hatari za maafa nchini Tanzania",
-    "lead": "Masomo saba mafupi ya vitendo kuhusu mbinu ya INFORM — vitisho, mfiduo, udhaifu, uwezo wa kukabiliana, hatari na ukali wa janga — yaliyojengwa juu ya data halisi za Tanzania. Jaribu kila wazo kwa takwimu hai za halmashauri, kisha jipime kwa jaribio fupi.",
+    "lead": "Masomo saba mafupi ya vitendo kuhusu jinsi INFORM inavyopima vitisho, mfiduo, udhaifu, uwezo wa kukabiliana, hatari na ukali wa janga, kwa kutumia data halisi za Tanzania. Jaribu kila wazo kwa takwimu hai za halmashauri, kisha jipime kwa jaribio fupi.",
     "methodology": "Soma mbinu",
     "start": "Anza kozi",
     "continue": "Endelea na somo la {{n}}",
@@ -14,16 +14,17 @@
       "questions": "Maswali ya majaribio"
     },
     "progressLabel": "{{pct}}% ya kozi imekamilika",
-    "complete": "imekamilika",
     "yourProgress": "Maendeleo yako",
     "lessonsDone": "Masomo {{done}} kati ya {{total}}",
-    "noScoreYet": "Faulu jaribio la somo ili kuona wastani wa alama zako.",
-    "avgScore": "Wastani wa alama za majaribio {{score}}%",
-    "savedLocally": "Maendeleo yanahifadhiwa kwenye kivinjari hiki tu — huhitaji akaunti.",
+    "avgLabel": "Wastani wa alama za majaribio",
+    "nextLabel": "Hatua inayofuata",
+    "startHere": "Anza hapa",
+    "savedLocally": "Maendeleo yako yanahifadhiwa kwenye kivinjari hiki. Huhitaji akaunti.",
     "reset": "Futa maendeleo",
     "resetTitle": "Ungependa kufuta maendeleo yako ya kozi?",
     "resetBody": "Hatua hii inafuta masomo yote uliyokamilisha na alama za majaribio zilizohifadhiwa kwenye kivinjari hiki. Haiwezi kurudishwa.",
     "resetConfirm": "Ndiyo, futa",
+    "howTitle": "Jinsi kozi inavyofanya kazi",
     "how": {
       "read": {
         "title": "Soma",
@@ -35,31 +36,24 @@
       },
       "quiz": {
         "title": "Faulu jaribio",
-        "body": "Maswali matatu au manne yenye majibu ya papo hapo. Pata theluthi mbili sahihi ili kufungua somo linalofuata."
+        "body": "Maswali matatu au manne yenye majibu ya papo hapo. Pata theluthi mbili sahihi ili kukamilisha somo."
       }
     },
-    "pathEyebrow": "Njia yako ya kujifunza",
-    "pathTitle": "Masomo saba, picha moja iliyo wazi",
+    "pathTitle": "Masomo saba",
     "pathLead": "Yasome kwa mpangilio au ruka moja kwa moja kwenye unachohitaji. Kila somo linamalizika kwa jaribio fupi.",
     "minutes_one": "dak. {{count}}",
     "minutes_other": "dak. {{count}}",
-    "liveWidget": "Data hai",
-    "finalStep": "Hatua ya mwisho",
     "certReady": "Umekamilisha masomo yote. Cheti chako kiko tayari kuchapishwa.",
     "certLocked_one": "Kamilisha somo {{count}} zaidi ili kufungua cheti chako cha kuchapisha.",
     "certLocked_other": "Kamilisha masomo {{count}} zaidi ili kufungua cheti chako cha kuchapisha.",
-    "seeWhatsLeft": "Ona kilichobaki",
-    "aboutTitle": "Kuhusu kozi hii.",
-    "about": "Masomo yanafuata mbinu ya INFORM ya Kituo cha Pamoja cha Utafiti (JRC) cha Tume ya Ulaya na washirika wake, kama ilivyotekelezwa kwa Tanzania katika programu hii. Kila namba inayoonyeshwa inatoka kwenye modeli hai; mifano ya kufikirika imewekewa lebo hivyo. Kozi hii inasaidia — haichukui nafasi ya — miongozo rasmi na maarifa ya wenyeji."
+    "aboutTitle": "Kuhusu kozi hii",
+    "about": "Masomo yanafuata mbinu ya INFORM ya Kituo cha Pamoja cha Utafiti (JRC) cha Tume ya Ulaya na washirika wake, kama ilivyotekelezwa kwa Tanzania katika programu hii. Kila namba inatoka kwenye modeli hai, na mifano ya kufikirika imewekewa lebo hivyo. Kozi hii inasaidia miongozo rasmi na maarifa ya wenyeji, lakini haichukui nafasi yake."
   },
   "status": {
     "completed": "imekamilika",
     "completedScore": "Imekamilika · {{score}}%",
     "upNext": "Linalofuata",
-    "notStarted": "Halijaanzwa",
-    "review": "Pitia",
-    "continue": "Endelea",
-    "start": "Anza"
+    "ready": "Tayari"
   },
   "nav": {
     "label": "Masomo ya kozi",
@@ -71,8 +65,7 @@
     "pager": "Urambazaji wa masomo",
     "previous": "Somo lililotangulia",
     "next": "Somo linalofuata",
-    "finish": "Maliza kozi",
-    "locked": "Faulu jaribio (majibu {{mark}} sahihi kati ya {{total}}) ili kufungua somo linalofuata."
+    "finish": "Maliza kozi"
   },
   "lesson": {
     "of": "Somo {{n}} kati ya {{total}}",
@@ -129,8 +122,8 @@
     "pickCouncil": "Halmashauri",
     "try": "Jaribu:",
     "national": "Tanzania (kitaifa)",
-    "nationalMarker": "Alama nyeusi inaonyesha thamani ya kitaifa ya Tanzania ({{value}}).",
-    "markerHint": "Alama nyeusi kwenye mistari zinaonyesha thamani za kitaifa.",
+    "nationalMarker": "Alama ya wima inaonyesha thamani ya kitaifa ya Tanzania ({{value}}).",
+    "markerHint": "Alama za wima kwenye mistari zinaonyesha thamani za kitaifa.",
     "topDriver": "Kichocheo kikubwa hapa: {{indicator}} ({{value}}).",
     "sharedSource": "Data za udhaifu na uwezo wa kukabiliana zinatoka kwenye kitengo cha INFORM “{{source}}”, kinachoshirikiwa na halmashauri jirani.",
     "ownSource": "Data za udhaifu na uwezo wa kukabiliana zinatoka kwenye kitengo cha INFORM “{{source}}”."
@@ -251,7 +244,7 @@
       "footer": "Muhtasari ni mahali pa kuanzia majadiliano na kamati ya wilaya ya usimamizi wa maafa, si hukumu ya mwisho.",
       "progress": "{{done}} kati ya {{total}} vimehakikiwa",
       "rank": "Nafasi ya {{rank}} kati ya halmashauri {{n}}",
-      "driverIs": "Inaendeshwa zaidi na {{dim}} — “{{cls}}” kwenye kipimo chake. Alama nyeusi zinaonyesha thamani za kitaifa.",
+      "driverIs": "Inaendeshwa zaidi na {{dim}} — “{{cls}}” kwenye kipimo chake. Alama za wima zinaonyesha thamani za kitaifa.",
       "coverage": "Viashiria {{pct}}% vina data.",
       "coverageLevel": {
         "good": "Nzuri",
@@ -308,7 +301,9 @@
       "coping": "Ukosefu wa uwezo",
       "copingQ": "Wanaweza kukabiliana?",
       "risk": "Hatari",
-      "riskQ": "Uwezekano wa madhara makubwa ni upi?"
+      "riskQ": "Uwezekano wa madhara makubwa ni upi?",
+      "times": "mara",
+      "equals": "ni sawa na"
     },
     "ladder": {
       "indicators": "Viashiria",
@@ -323,11 +318,18 @@
     },
     "thresholds": {
       "caption": "Viwango vya madaraja ya INFORM kwa Tanzania kwa kila kipimo",
-      "scale": "Kipimo"
+      "scale": "Kipimo",
+      "class": "Daraja",
+      "short": {
+        "risk": "Hatari",
+        "hazard": "H&E",
+        "vulnerability": "V",
+        "coping": "LCC"
+      }
     },
     "severity": {
       "geoPart": "{{pct}}% sehemu ya kijiometri",
-      "linearPart": "{{pct}}%",
+      "linearPart": "{{pct}}% inayoongezwa moja kwa moja",
       "impact": "Athari",
       "conditions": "Hali",
       "complexity": "Utata"
@@ -335,6 +337,7 @@
   },
   "completion": {
     "notYetTitle": "Karibu kufika",
+    "waitingTitle": "Cheti chako kinakusubiri",
     "notYetBody_one": "Kamilisha somo {{count}} zaidi ili kufungua cheti chako.",
     "notYetBody_other": "Kamilisha masomo {{count}} zaidi ili kufungua cheti chako.",
     "title": "Hongera — umekamilisha kozi!",

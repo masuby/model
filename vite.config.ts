@@ -36,21 +36,23 @@ export default defineConfig({
         ],
       },
       workbox: {
-        globPatterns: ['**/*.{js,css,html,svg,png,ico,woff2,json}'],
-        globIgnores: ['**/model.xlsx'],
-        maximumFileSizeToCacheInBytes: 4 * 1024 * 1024,
+        // Precache only the app shell (≈ 0.3 MB): a first visit on mobile data must not silently download
+        // the whole site. Page code, map geometry and translations are cached as they are used, so every
+        // page a visitor has opened keeps working offline.
+        globPatterns: ['index.html', 'assets/index-*.{js,css}', 'assets/vendor-react-*.js', 'assets/*latin-wght-normal*.woff2', '*.{svg,ico}'],
         navigateFallback: '/index.html',
         navigateFallbackDenylist: [/^\/assets\//, /\.[a-z0-9]+$/i],
         runtimeCaching: [
           {
+            // Hashed build assets never change: cache-first, bounded.
+            urlPattern: ({ url, sameOrigin }) => sameOrigin && url.pathname.startsWith('/assets/'),
+            handler: 'CacheFirst',
+            options: { cacheName: 'assets', expiration: { maxEntries: 200, maxAgeSeconds: 60 * 60 * 24 * 60 } },
+          },
+          {
             urlPattern: ({ url }) => url.hostname.endsWith('basemaps.cartocdn.com'),
             handler: 'CacheFirst',
             options: { cacheName: 'basemap-tiles', expiration: { maxEntries: 800, maxAgeSeconds: 60 * 60 * 24 * 30 } },
-          },
-          {
-            urlPattern: ({ url }) => url.hostname === 'fonts.googleapis.com' || url.hostname === 'fonts.gstatic.com',
-            handler: 'StaleWhileRevalidate',
-            options: { cacheName: 'google-fonts', expiration: { maxEntries: 30, maxAgeSeconds: 60 * 60 * 24 * 365 } },
           },
         ],
       },
@@ -63,7 +65,7 @@ export default defineConfig({
   // Pre-bundle the heavy, lazily-imported dependencies up front so the dev server never re-optimises
   // (and stalls) mid-session when a route first imports them.
   optimizeDeps: {
-    include: ['recharts', 'leaflet', 'react-leaflet', 'motion/react', 'radix-ui', 'cmdk', 'sonner', '@supabase/supabase-js', '@tanstack/react-query', 'i18next', 'react-i18next', 'lucide-react', 'zustand', 'zustand/middleware'],
+    include: ['recharts', 'leaflet', 'react-leaflet', 'radix-ui', 'cmdk', 'sonner', '@supabase/supabase-js', '@tanstack/react-query', 'i18next', 'react-i18next', 'lucide-react', 'zustand', 'zustand/middleware'],
   },
   build: {
     target: 'es2022',
@@ -77,6 +79,11 @@ export default defineConfig({
         assetFileNames: 'assets/[name]-[hash][extname]',
         manualChunks(id) {
           if (!id.includes('node_modules')) return undefined;
+          // Tiny helpers shared by the shell and the heavy lazy libraries. Left unassigned, Rollup puts them
+          // in the first manual chunk that uses them, and the entry would then preload all of recharts and
+          // supabase-js just to get clsx or tslib.
+          if (/node_modules[\\/](clsx|tslib|use-sync-external-store|react-is|scheduler)[\\/]/.test(id)) return 'vendor-react';
+          if (/node_modules[\\/]\.pnpm[\\/](clsx|tslib|use-sync-external-store|react-is|scheduler)@/.test(id)) return 'vendor-react';
           if (id.includes('leaflet')) return 'vendor-map';
           if (id.includes('recharts') || id.includes('d3-') || id.includes('victory')) return 'vendor-charts';
           if (id.includes('@supabase')) return 'vendor-supabase';

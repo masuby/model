@@ -2,7 +2,7 @@ import { Laptop, Moon, Sun } from 'lucide-react';
 import * as React from 'react';
 import { useTranslation } from 'react-i18next';
 import { Button } from '@/components/ui/button';
-import { DropdownMenu, DropdownMenuContent, DropdownMenuLabel, DropdownMenuRadioGroup, DropdownMenuRadioItem, DropdownMenuTrigger, Tooltip } from '@/components/ui/primitives';
+import { DropdownMenu, DropdownMenuContent, DropdownMenuLabel, DropdownMenuRadioGroup, DropdownMenuRadioItem, DropdownMenuTrigger, Tooltip } from '@/components/ui/overlays';
 import { resolveTheme, usePrefs, type ThemePref } from '@/state/prefs';
 
 /** Keeps <html class="dark"> in sync with the preference and the OS setting. */
@@ -34,9 +34,9 @@ export function ThemeToggle() {
     <DropdownMenu>
       <Tooltip content={t('theme.toggle')}>
         <DropdownMenuTrigger asChild>
-          <Button variant="ghost" size="icon" aria-label={t('theme.toggle')} className="relative">
-            <Sun className={`transition-all duration-300 ${resolved === 'dark' ? 'scale-0 -rotate-90' : 'scale-100 rotate-0'}`} />
-            <Moon className={`absolute transition-all duration-300 ${resolved === 'dark' ? 'scale-100 rotate-0' : 'scale-0 rotate-90'}`} />
+          <Button variant="ghost" size="icon" aria-label={t('theme.toggle')} className="relative size-9 sm:size-10">
+            <Sun className={`transition-transform duration-150 ${resolved === 'dark' ? 'scale-0' : 'scale-100'}`} />
+            <Moon className={`absolute transition-transform duration-150 ${resolved === 'dark' ? 'scale-100' : 'scale-0'}`} />
           </Button>
         </DropdownMenuTrigger>
       </Tooltip>

@@ -4,6 +4,8 @@
  *   a) CategoryChart     — the six INFORM categories vs region and national (radar or bars)
  *   b) IndicatorChart    — every indicator of one dimension, coloured by the continuous 0–10 ramp
  *   c) DistributionChart — beeswarm of all peers' INFORM Risk with this unit highlighted
+ * View controls sit in a row under each caption (not beside it), so captions keep the full width on
+ * phones; the title row holds only the export menu.
  */
 import * as React from 'react';
 import { useTranslation } from 'react-i18next';
@@ -40,15 +42,19 @@ import type { Unit } from '@/engine/risk/types';
 import { cn, formatScore, slug } from '@/lib/utils';
 import { beeswarm, type AreaView } from '../lib';
 import { DIM_SHORT, nationalColor, REGION_COLOR, unitColor, useMediaQuery } from './bits';
+import { useDeferred } from './Deferred';
 
 type TickProps = { x: number | string; y: number | string; payload: { value: unknown }; textAnchor?: string };
+
+/** First-render width for charts mounted on the way to print (A4 content width at 96 dpi). */
+const PRINT_WIDTH = 680;
 
 const truncate = (s: string, n: number) => (s.length > n ? `${s.slice(0, n - 1).trimEnd()}…` : s);
 
 /** Tooltip shell matching ChartTooltip's look, for charts that need custom rows. */
 function TipShell({ title, sub, children }: { title: React.ReactNode; sub?: React.ReactNode; children: React.ReactNode }) {
   return (
-    <div className="min-w-44 rounded-xl border border-border bg-elevated px-3 py-2 text-xs shadow-[var(--shadow-lift)]">
+    <div className="min-w-44 rounded-md border border-border bg-elevated px-3 py-2 text-xs shadow-[var(--shadow-lift)]">
       <div className="font-semibold text-foreground">{title}</div>
       {sub && <div className="text-[11px] text-muted-foreground">{sub}</div>}
       <div className="mt-1.5 grid gap-1">{children}</div>
@@ -65,6 +71,11 @@ function TipRow({ color, label, value, dashed }: { color?: string; label: React.
       <span className="num font-semibold text-foreground">{value}</span>
     </div>
   );
+}
+
+/** A row of view controls under a chart's caption. Hidden on paper (the chart shows the current view). */
+function Controls({ children }: { children: React.ReactNode }) {
+  return <div className="no-print mb-4 flex flex-wrap items-center gap-x-6 gap-y-3 text-xs text-muted-foreground">{children}</div>;
 }
 
 /** Legend entry: swatch (dot, bar or dashed line) + label. Identity is never colour alone. */
@@ -88,32 +99,43 @@ export function CategoryChart({ view }: { view: AreaView }) {
   const th = useChartTheme();
   const wide = useMediaQuery('(min-width: 640px)');
   const [mode, setMode] = React.useState<'radar' | 'bars'>('radar');
+  const { printing } = useDeferred();
   const { unit, region, categories, national } = view;
   const hasNational = unit.level !== 'national';
 
-  const data = categories.map((c) => ({
-    cat: c.key,
-    dim: c.dim,
-    label: t(`cats.${c.key}`),
-    full: t(`common:categories.${c.key}`),
-    unit: c.value,
-    region: c.region,
-    national: c.national,
-  }));
-  const fullByLabel = new Map(data.map((d) => [d.label, `${d.full} · ${t(`common:dimensions.${d.dim}Short`)}`]));
+  const { data, fullByLabel, series, order, csv } = React.useMemo(() => {
+    const data = categories.map((c) => ({
+      cat: c.key,
+      dim: c.dim,
+      label: t(`cats.${c.key}`),
+      full: t(`common:categories.${c.key}`),
+      unit: c.value,
+      region: c.region,
+      national: c.national,
+    }));
+    const fullByLabel = new Map(data.map((d) => [d.label, `${d.full} · ${t(`common:dimensions.${d.dim}Short`)}`]));
+    const series = [
+      { key: 'unit' as const, name: unit.name, color: unitColor(th.dark), fill: 0.22, dashed: false },
+      ...(region ? [{ key: 'region' as const, name: region.name, color: REGION_COLOR, fill: 0.06, dashed: false }] : []),
+      ...(hasNational ? [{ key: 'national' as const, name: t('breadcrumb.country'), color: nationalColor(th.dark), fill: 0, dashed: true }] : []),
+    ];
+    const order = series.map((s) => s.key as string);
+    const csv = [
+      [t('csv.dimension'), t('csv.category'), ...series.map((s) => s.name)],
+      ...data.map((d) => [t(`common:dimensions.${d.dim}`), d.full, ...series.map((s) => (d[s.key] == null ? '' : formatScore(d[s.key])))]),
+    ];
+    return { data, fullByLabel, series, order, csv };
+  }, [categories, unit.name, region, hasNational, th.dark, t]);
 
-  const series = [
-    { key: 'unit' as const, name: unit.name, color: unitColor(th.dark), fill: 0.22, dashed: false },
-    ...(region ? [{ key: 'region' as const, name: region.name, color: REGION_COLOR, fill: 0.06, dashed: false }] : []),
-    ...(hasNational ? [{ key: 'national' as const, name: t('breadcrumb.country'), color: nationalColor(th.dark), fill: 0, dashed: true }] : []),
-  ];
-
-  const order = series.map((s) => s.key as string);
-
-  const csv = [
-    [t('csv.dimension'), t('csv.category'), ...series.map((s) => s.name)],
-    ...data.map((d) => [t(`common:dimensions.${d.dim}`), d.full, ...series.map((s) => (d[s.key] == null ? '' : formatScore(d[s.key])))]),
-  ];
+  // Upright scale labels (Recharts would rotate them along the 60° axis); the centre "0" is left out.
+  const radiusTick = (p: TickProps) =>
+    p.payload.value === 0 ? (
+      <g />
+    ) : (
+      <text x={p.x} y={p.y} dx={5} dy={-2} textAnchor="start" fontSize={9} fill={th.tick.fill} className="num">
+        {String(p.payload.value)}
+      </text>
+    );
 
   return (
     <ChartCard
@@ -122,7 +144,8 @@ export function CategoryChart({ view }: { view: AreaView }) {
       description={hasNational ? t('charts.categories.desc') : t('charts.categories.descNational')}
       csv={csv}
       filename={`${slug(unit.name)}-categories`}
-      actions={
+    >
+      <Controls>
         <Segmented
           size="sm"
           aria-label={t('charts.categories.modeLabel')}
@@ -133,15 +156,15 @@ export function CategoryChart({ view }: { view: AreaView }) {
             { value: 'bars', label: t('charts.categories.bars') },
           ]}
         />
-      }
-    >
+      </Controls>
       <div role="img" aria-label={t('charts.categories.aria', { name: unit.name })}>
-        <ResponsiveContainer width="100%" height={340}>
+        <ResponsiveContainer width="100%" height={340} initialDimension={printing ? { width: PRINT_WIDTH, height: 340 } : undefined}>
           {mode === 'radar' ? (
             <RadarChart data={data} outerRadius={wide ? '74%' : '62%'} margin={{ top: 8, right: 16, bottom: 8, left: 16 }}>
               <PolarGrid stroke={th.grid} />
               <PolarAngleAxis dataKey="label" tick={{ ...th.tick, fontSize: wide ? 11 : 10, fontWeight: 600 }} />
-              <PolarRadiusAxis domain={[0, 10]} tickCount={6} angle={90} tick={{ ...th.tick, fontSize: 9 }} axisLine={false} />
+              {/* Spokes sit at 90°, 30°, −30°…; 60° puts the scale between Natural and Human, clear of both labels. */}
+              <PolarRadiusAxis domain={[0, 10]} tickCount={3} angle={60} tick={radiusTick} axisLine={false} />
               {/* Drawn back-to-front so the area itself sits on top; tooltip keeps reading order. */}
               {[...series].reverse().map((s) => (
                 <Radar
@@ -154,8 +177,7 @@ export function CategoryChart({ view }: { view: AreaView }) {
                   strokeWidth={2}
                   strokeDasharray={s.dashed ? '5 4' : undefined}
                   dot={s.dashed ? false : { r: 3, fill: s.color, strokeWidth: 0 }}
-                  isAnimationActive
-                  animationDuration={700}
+                  isAnimationActive={false}
                 />
               ))}
               <Tooltip itemSorter={(item) => order.indexOf(String(item.dataKey))} content={<ChartTooltip labelFormatter={(l) => fullByLabel.get(String(l)) ?? l} />} />
@@ -166,7 +188,7 @@ export function CategoryChart({ view }: { view: AreaView }) {
               <XAxis type="number" domain={[0, 10]} ticks={[0, 2, 4, 6, 8, 10]} tick={th.tick} stroke={th.axis} />
               <YAxis type="category" dataKey="label" width={wide ? 120 : 92} tick={{ ...th.tick, fontWeight: 600 }} tickLine={false} axisLine={false} interval={0} />
               {series.map((s) => (
-                <Bar key={s.key} dataKey={s.key} name={s.name} fill={s.color} fillOpacity={s.dashed ? 0.55 : 1} radius={[0, 4, 4, 0]} maxBarSize={12} isAnimationActive animationDuration={600} />
+                <Bar key={s.key} dataKey={s.key} name={s.name} fill={s.color} fillOpacity={s.dashed ? 0.55 : 1} radius={[0, 4, 4, 0]} maxBarSize={12} isAnimationActive={false} />
               ))}
               <Tooltip cursor={{ fill: th.cursor }} content={<ChartTooltip labelFormatter={(l) => fullByLabel.get(String(l)) ?? l} />} />
             </BarChart>
@@ -200,6 +222,7 @@ interface IndicatorDatum {
 export function IndicatorChart({ view }: { view: AreaView }) {
   const { t } = useTranslation(['area', 'common', 'indicators']);
   const th = useChartTheme();
+  const { printing } = useDeferred();
   const wide = useMediaQuery('(min-width: 640px)');
   const { unit, region, rows } = view;
   const [dim, setDim] = React.useState<DimensionKey>('hazard');
@@ -209,17 +232,21 @@ export function IndicatorChart({ view }: { view: AreaView }) {
   const refColor = activeRef === 'region' ? REGION_COLOR : nationalColor(th.dark);
   const refName = activeRef === 'region' ? (region?.name ?? '') : t('breadcrumb.country');
 
-  const data: IndicatorDatum[] = rows
-    .filter((r) => r.dim === dim)
-    .map((r) => ({
-      indicator: r.key,
-      name: t(`indicators:${r.key}`),
-      category: t(`common:categories.${r.category}`),
-      value: r.value,
-      plot: r.value ?? 0,
-      refValue: activeRef === 'region' ? r.region : activeRef === 'national' ? r.national : null,
-    }))
-    .sort((a, b) => (b.value ?? -1) - (a.value ?? -1));
+  const data: IndicatorDatum[] = React.useMemo(
+    () =>
+      rows
+        .filter((r) => r.dim === dim)
+        .map((r) => ({
+          indicator: r.key,
+          name: t(`indicators:${r.key}`),
+          category: t(`common:categories.${r.category}`),
+          value: r.value,
+          plot: r.value ?? 0,
+          refValue: activeRef === 'region' ? r.region : activeRef === 'national' ? r.national : null,
+        }))
+        .sort((a, b) => (b.value ?? -1) - (a.value ?? -1)),
+    [rows, dim, activeRef, t],
+  );
   const missing = data.filter((d) => d.value == null).length;
   const surface = th.dark ? '#0d1526' : '#ffffff';
 
@@ -284,45 +311,48 @@ export function IndicatorChart({ view }: { view: AreaView }) {
       description={t('charts.indicators.desc')}
       csv={csv}
       filename={`${slug(unit.name)}-${dim}-indicators`}
-      actions={
-        <Segmented
-          size="sm"
-          aria-label={t('charts.indicators.dimLabel')}
-          value={dim}
-          onValueChange={setDim}
-          options={DIMENSIONS.map((d) => ({
-            value: d.key,
-            label: (
-              <>
-                <span className="inline-block size-2 rounded-full" style={{ background: DIMENSION_COLORS[d.key] }} aria-hidden />
-                <span className="sm:hidden">{DIM_SHORT[d.key]}</span>
-                <span className="hidden sm:inline">{t(`common:dimensions.${d.key}Short`)}</span>
-              </>
-            ),
-          }))}
-        />
-      }
     >
-      {refOptions.length > 1 && (
-        <div className="no-print mb-3 flex items-center gap-2 text-xs text-muted-foreground">
-          <span>{t('charts.indicators.compareWith')}</span>
+      <Controls>
+        <span className="flex items-center gap-2">
+          <span>{t('charts.indicators.dimLabel')}</span>
           <Segmented
             size="sm"
-            aria-label={t('charts.indicators.compareWith')}
-            value={activeRef ?? 'national'}
-            onValueChange={setRefKind}
-            options={refOptions.map((r) => ({ value: r, label: r === 'region' ? (region?.name ?? '') : t('breadcrumb.country') }))}
+            aria-label={t('charts.indicators.dimLabel')}
+            value={dim}
+            onValueChange={setDim}
+            options={DIMENSIONS.map((d) => ({
+              value: d.key,
+              label: (
+                <>
+                  <span className="inline-block size-2 rounded-full" style={{ background: DIMENSION_COLORS[d.key] }} aria-hidden />
+                  <span className="sm:hidden">{DIM_SHORT[d.key]}</span>
+                  <span className="hidden sm:inline">{t(`common:dimensions.${d.key}Short`)}</span>
+                </>
+              ),
+            }))}
           />
-        </div>
-      )}
+        </span>
+        {refOptions.length > 1 && (
+          <span className="flex items-center gap-2">
+            <span>{t('charts.indicators.compareWith')}</span>
+            <Segmented
+              size="sm"
+              aria-label={t('charts.indicators.compareWith')}
+              value={activeRef ?? 'national'}
+              onValueChange={setRefKind}
+              options={refOptions.map((r) => ({ value: r, label: r === 'region' ? (region?.name ?? '') : t('breadcrumb.country') }))}
+            />
+          </span>
+        )}
+      </Controls>
       <div role="img" aria-label={t('charts.indicators.aria', { dim: t(`common:dimensions.${dim}`), name: unit.name })}>
-        <ResponsiveContainer width="100%" height={data.length * 30 + 44}>
+        <ResponsiveContainer width="100%" height={data.length * 30 + 44} initialDimension={printing ? { width: PRINT_WIDTH, height: data.length * 30 + 44 } : undefined}>
           <BarChart data={data} layout="vertical" margin={{ top: 6, right: 40, bottom: 4, left: 4 }} barCategoryGap={7}>
             <CartesianGrid horizontal={false} stroke={th.grid} />
             <XAxis type="number" domain={[0, 10]} ticks={[0, 2.5, 5, 7.5, 10]} tick={th.tick} stroke={th.axis} />
             <YAxis type="category" dataKey="name" width={wide ? 190 : 118} tick={tick} tickLine={false} axisLine={false} interval={0} />
             <Tooltip cursor={{ fill: th.cursor }} content={tip} />
-            <Bar dataKey="plot" background={{ fill: 'transparent' }} shape={shape} isAnimationActive animationDuration={600} />
+            <Bar dataKey="plot" background={{ fill: 'transparent' }} shape={shape} isAnimationActive={false} />
           </BarChart>
         </ResponsiveContainer>
       </div>
@@ -362,6 +392,7 @@ interface DotDatum {
 export function DistributionChart({ view }: { view: AreaView }) {
   const { t } = useTranslation(['area', 'common']);
   const th = useChartTheme();
+  const { printing } = useDeferred();
   const navigate = useNavigate();
   const wide = useMediaQuery('(min-width: 640px)');
   const { unit, peers, model, national, rank } = view;
@@ -373,19 +404,22 @@ export function DistributionChart({ view }: { view: AreaView }) {
 
   // Minimum horizontal gap (in score units) so dots in a lane never overlap at the chart's smallest width.
   const { points, maxLane } = React.useMemo(() => beeswarm(pool, (u) => u.risk, wide ? 0.2 : 0.26), [pool, wide]);
-  const data: DotDatum[] = points.map((p) => ({
-    x: p.x,
-    y: p.y,
-    unitId: p.item.id,
-    name: p.item.name,
-    region: p.item.region,
-    group: p.item.id === unit.id ? 'self' : showRegion && placeKey(p.item.region) === regionKey ? 'region' : 'other',
-  }));
-  const groups = {
-    other: data.filter((d) => d.group === 'other'),
-    region: data.filter((d) => d.group === 'region'),
-    self: data.filter((d) => d.group === 'self'),
-  };
+  const { data, groups } = React.useMemo(() => {
+    const data: DotDatum[] = points.map((p) => ({
+      x: p.x,
+      y: p.y,
+      unitId: p.item.id,
+      name: p.item.name,
+      region: p.item.region,
+      group: p.item.id === unit.id ? 'self' : showRegion && placeKey(p.item.region) === regionKey ? 'region' : 'other',
+    }));
+    const groups = {
+      other: data.filter((d) => d.group === 'other'),
+      region: data.filter((d) => d.group === 'region'),
+      self: data.filter((d) => d.group === 'self'),
+    };
+    return { data, groups };
+  }, [points, unit.id, showRegion, regionKey]);
   const lane = Math.max(1, maxLane);
   const height = Math.max(200, Math.min(340, (2 * lane + 2) * (wide ? 13 : 11) + 70));
   const surface = th.dark ? '#0d1526' : '#ffffff';
@@ -398,13 +432,18 @@ export function DistributionChart({ view }: { view: AreaView }) {
       if (p.cx == null || p.cy == null) return <g />;
       return <circle cx={p.cx} cy={p.cy} r={r} fill={fill} stroke={surface} strokeWidth={1.25} style={{ cursor: 'pointer' }} />;
     };
+  // The own-score label sits above the whole swarm (in the top margin), haloed, with a leader line
+  // down to the dot — never on top of neighbouring dots.
+  const LABEL_Y = 14;
   const selfShape = (p: { cx?: number; cy?: number }) => {
     if (p.cx == null || p.cy == null) return <g />;
+    const ink = th.dark ? '#e7ecf5' : '#0b1324';
     return (
       <g>
+        {p.cy - 9 > LABEL_Y + 5 && <line x1={p.cx} x2={p.cx} y1={LABEL_Y + 5} y2={p.cy - 9} stroke={ink} strokeWidth={1} opacity={0.6} />}
         <circle cx={p.cx} cy={p.cy} r={13} fill={uc} opacity={0.18} />
         <circle cx={p.cx} cy={p.cy} r={7} fill={uc} stroke={surface} strokeWidth={2} />
-        <text x={p.cx} y={p.cy - 18} textAnchor="middle" fontSize={11} fontWeight={800} fill={th.dark ? '#e7ecf5' : '#0b1324'}>
+        <text x={p.cx} y={LABEL_Y} textAnchor="middle" fontSize={11} fontWeight={800} fill={ink} stroke={surface} strokeWidth={3} paintOrder="stroke" className="num">
           {formatScore(unit.risk)}
         </text>
       </g>
@@ -428,7 +467,10 @@ export function DistributionChart({ view }: { view: AreaView }) {
   };
 
   const bounds = [0, ...THRESHOLDS.risk, 10];
-  const csv = [[t('csv.name'), t('csv.region'), t('common:informRisk'), t('csv.highlight')], ...[...data].sort((a, b) => b.x - a.x).map((d) => [d.name, d.region, formatScore(d.x), t(`charts.distribution.group.${d.group}`)])];
+  const csv = React.useMemo(
+    () => [[t('csv.name'), t('csv.region'), t('common:informRisk'), t('csv.highlight')], ...[...data].sort((a, b) => b.x - a.x).map((d) => [d.name, d.region, formatScore(d.x), t(`charts.distribution.group.${d.group}`)])],
+    [data, t],
+  );
 
   return (
     <ChartCard
@@ -446,7 +488,7 @@ export function DistributionChart({ view }: { view: AreaView }) {
             : t('charts.distribution.ariaNational', { count: pool.length, score: formatScore(national.risk) })
         }
       >
-        <ResponsiveContainer width="100%" height={height}>
+        <ResponsiveContainer width="100%" height={height} initialDimension={printing ? { width: PRINT_WIDTH, height } : undefined}>
           <ScatterChart margin={{ top: 26, right: 12, bottom: 4, left: 12 }}>
             {CLASS_KEYS.map((k, i) => (
               <ReferenceArea key={k} x1={bounds[i]} x2={bounds[i + 1]} fill={CLASS_COLORS[k]} fillOpacity={th.dark ? 0.1 : 0.13} strokeOpacity={0} ifOverflow="hidden" />

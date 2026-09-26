@@ -1,14 +1,12 @@
-import { ArrowRight, Database, Flag, GitMerge, MapPinned, RefreshCw } from 'lucide-react';
-import { motion } from 'motion/react';
 import * as React from 'react';
 import { useTranslation } from 'react-i18next';
 import { ClassBadge } from '@/components/risk/RiskBadge';
-import { Card } from '@/components/ui/card';
 import { useModel } from '@/data-layer/DataProvider';
 import { mean } from '@/engine/risk/math';
-import { cn, formatScore } from '@/lib/utils';
-import { fadeIn } from '../tokens';
-import { Callout, DocSection, Fn, Formula, Line, N, Op, P, Paren, SubHeading } from '../ui';
+import { formatScore } from '@/lib/utils';
+import { Callout, DocSection, Fn, Formula, Line, N, Op, P, Paren, Sep, SubHeading, Txt } from '../ui';
+
+const LEVELS = ['sources', 'councils', 'regions', 'national'] as const;
 
 export function LevelsSection() {
   const { t } = useTranslation(['methodology', 'common']);
@@ -25,78 +23,74 @@ export function LevelsSection() {
     .map((c) => `${c.name} ← ${c.inheritedFrom}`)
     .join(', ');
 
-  const cards = [
-    { key: 'sources', icon: Database, count: model.sources.length, body: t('levels.sources.body', { n: model.sources.length }), tone: 'bg-slate-500/10 text-slate-700 dark:text-slate-300' },
-    { key: 'councils', icon: MapPinned, count: model.councils.length, body: t('levels.councils.body', { n: model.councils.length }), tone: 'bg-primary/10 text-primary' },
-    { key: 'regions', icon: GitMerge, count: model.regions.length, body: t('levels.regions.body', { n: model.regions.length }), tone: 'bg-violet-500/10 text-violet-700 dark:text-violet-300' },
-    {
-      key: 'national',
-      icon: Flag,
-      count: formatScore(model.national.risk),
-      body: t('levels.national.body', { value: formatScore(model.national.risk) }),
-      tone: 'bg-amber-500/12 text-amber-800 dark:text-amber-300',
-    },
-  ] as const;
+  const figure: Record<(typeof LEVELS)[number], React.ReactNode> = { sources: model.sources.length, councils: model.councils.length, regions: model.regions.length, national: formatScore(model.national.risk) };
+  const body: Record<(typeof LEVELS)[number], string> = {
+    sources: t('levels.sources.body', { n: model.sources.length }),
+    councils: t('levels.councils.body', { n: model.councils.length }),
+    regions: t('levels.regions.body', { n: model.regions.length }),
+    national: t('levels.national.body', { value: formatScore(model.national.risk) }),
+  };
 
   const missingExample = mean([5, 5, null]);
 
   return (
-    <DocSection id="levels" number="06" eyebrow={t('sections.levels')} title={t('levels.title')} lead={t('levels.lead')}>
-      <ol className="grid gap-3 md:grid-cols-2 2xl:grid-cols-4">
-        {cards.map((c, i) => (
-          <motion.li key={c.key} {...fadeIn} transition={{ ...fadeIn.transition, delay: i * 0.05 }} className="relative">
-            <Card className={cn('h-full p-5', c.key === 'councils' && 'border-primary/30')}>
-              <div className="flex items-center justify-between gap-2">
-                <span className={cn('inline-flex size-9 items-center justify-center rounded-xl', c.tone)}>
-                  <c.icon className="size-4.5" aria-hidden />
-                </span>
-                {c.key === 'national' ? <ClassBadge value={model.national.risk} size="sm" /> : <span className="text-[11px] font-semibold tracking-wider text-muted-foreground uppercase">{t(`levels.${c.key}.tag`)}</span>}
-              </div>
-              <div className="mt-3 flex items-baseline gap-2">
-                <span className="num font-display text-3xl font-extrabold tracking-tight">{c.count}</span>
-                <span className="text-sm font-semibold">{t(`levels.${c.key}.title`)}</span>
-              </div>
-              <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{c.body}</p>
-              {c.key === 'councils' && (
-                <p className="mt-3 rounded-lg bg-warning/10 px-3 py-2 text-xs leading-relaxed text-foreground/85">
+    <DocSection id="levels" label={t('sections.levels')} title={t('levels.title')} lead={t('levels.lead')}>
+      <ol className="border-y border-border">
+        {LEVELS.map((k, i) => (
+          <li key={k} className="grid gap-x-8 gap-y-2 border-t border-border py-6 first:border-t-0 sm:grid-cols-[9rem_minmax(0,1fr)]">
+            <div className="flex items-baseline gap-3 sm:block">
+              <span className="num font-display text-[2.4rem] leading-none font-semibold tracking-tight">{figure[k]}</span>
+              {k === 'national' && <ClassBadge value={model.national.risk} size="sm" className="sm:mt-2.5 sm:flex sm:w-fit" />}
+            </div>
+            <div className="min-w-0">
+              <h3 className="flex flex-wrap items-baseline gap-x-3 text-base font-semibold">
+                <span className="sr-only">{i + 1}. </span>
+                {t(`levels.${k}.title`)}
+                {k !== 'national' && <span className="text-sm font-normal text-muted-foreground">{t(`levels.${k}.tag`)}</span>}
+              </h3>
+              <p className="mt-1.5 max-w-[68ch] text-sm leading-relaxed text-muted-foreground">{body[k]}</p>
+              {k === 'councils' && (
+                <Callout tone="caution" className="mt-3 text-foreground/85">
                   {t('levels.councils.inherited', { n: inherited.length, examples })}
-                </p>
+                </Callout>
               )}
-            </Card>
-            {i < 2 && <ArrowRight className="absolute top-1/2 -right-2.5 z-10 hidden size-5 -translate-y-1/2 rounded-full bg-background text-muted-foreground 2xl:block" aria-hidden />}
-          </motion.li>
+            </div>
+          </li>
         ))}
       </ol>
 
-      <div className="mt-10 grid gap-8 lg:grid-cols-2">
-        <div>
+      <div className="mt-14 grid gap-12 lg:grid-cols-2 lg:gap-0 lg:divide-x lg:divide-border">
+        <div className="lg:pr-10">
           <SubHeading>{t('levels.missing.title')}</SubHeading>
-          <P className="mt-2 text-sm sm:text-[15px]">{t('levels.missing.body')}</P>
-          <Formula label={t('levels.missing.formula', { result: formatScore(missingExample) })} className="mt-4">
+          <P className="mt-2 text-[15px]">{t('levels.missing.body')}</P>
+          <Formula label={t('levels.missing.formula', { result: formatScore(missingExample) })} className="mt-5">
             <Line>
               <Fn>mean</Fn>
               <Paren>
-                <N>5</N>, <N>5</N>, <span className="font-sans text-[0.8em] text-muted-foreground not-italic">{t('levels.missing.noData')}</span>
+                <N>5</N>
+                <Sep />
+                <N>5</N>
+                <Sep />
+                <Txt>{t('levels.missing.noData')}</Txt>
               </Paren>
               <Op>=</Op>
               <N strong>{formatScore(missingExample)}</N>
-              <span className="ml-3 font-sans text-[0.8em] text-muted-foreground not-italic">{t('levels.missing.not')}</span>
+              <span className="pl-2">
+                <Txt>{t('levels.missing.not')}</Txt>
+              </span>
             </Line>
           </Formula>
         </div>
-        <div>
+        <div className="border-t border-border pt-10 lg:border-t-0 lg:pt-0 lg:pl-10">
           <SubHeading>{t('levels.propagate.title')}</SubHeading>
-          <P className="mt-2 text-sm sm:text-[15px]">{t('levels.propagate.body')}</P>
-          <Callout tone="note" className="mt-4" title={t('levels.shared.title')}>
+          <P className="mt-2 text-[15px]">{t('levels.propagate.body')}</P>
+          <Callout className="mt-5" title={t('levels.shared.title')}>
             {t('levels.shared.body', { n: shared })}
           </Callout>
         </div>
       </div>
 
-      <div className="mt-6 flex items-start gap-3 rounded-2xl border border-dashed border-border px-4 py-3 text-xs leading-relaxed text-muted-foreground">
-        <RefreshCw className="mt-0.5 size-4 shrink-0 text-primary" aria-hidden />
-        <span>{t('levels.liveNote', { edits: model.editCount })}</span>
-      </div>
+      <p className="mt-12 max-w-[72ch] text-[13px] leading-relaxed text-muted-foreground">{t('levels.liveNote', { edits: model.editCount })}</p>
     </DocSection>
   );
 }

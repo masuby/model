@@ -110,7 +110,9 @@ describe('ExplorePage — desktop', () => {
   it('mounts the panel, lens tiles, legend, statistics and the map', async () => {
     await renderAt();
     expect(screen.getByRole('heading', { level: 1, name: 'Risk explorer' })).toBeInTheDocument();
-    expect(screen.getByRole('button', { name: /INFORM Risk/, pressed: true })).toBeInTheDocument();
+    // The headline lenses are a radio group labelled by the "Colour by" heading.
+    const lenses = screen.getByRole('radiogroup', { name: 'Colour by' });
+    expect(within(lenses).getByRole('radio', { name: /INFORM Risk/, checked: true })).toBeInTheDocument();
     expect(screen.getByRole('combobox', { name: 'Find a council or region' })).toBeInTheDocument();
     expect(screen.getByText('Legend & filter')).toBeInTheDocument();
     const map = screen.getByTestId('map');
@@ -142,7 +144,13 @@ describe('ExplorePage — desktop', () => {
 
   it('switches lens and class filter through the URL', async () => {
     await renderAt();
-    fireEvent.click(screen.getByRole('button', { name: /^Hazard & Exposure/ }));
+    fireEvent.click(screen.getByRole('radio', { name: /^Hazard & Exposure/ }));
+    expect(params().get('metric')).toBe('dim:hazard');
+    expect(screen.getByRole('radio', { name: /^Hazard & Exposure/, checked: true })).toBeInTheDocument();
+    // Radio-group keyboard model: arrow keys move to the next lens and select it.
+    fireEvent.keyDown(screen.getByRole('radio', { name: /^Hazard & Exposure/ }), { key: 'ArrowDown' });
+    expect(params().get('metric')).toBe('dim:vulnerability');
+    fireEvent.keyDown(screen.getByRole('radio', { name: /^Vulnerability/ }), { key: 'ArrowUp' });
     expect(params().get('metric')).toBe('dim:hazard');
     fireEvent.click(screen.getAllByRole('button', { name: /^High:/ })[0]);
     expect(params().get('class')).toBe('high');
@@ -188,6 +196,14 @@ describe('ExplorePage — desktop', () => {
     expect(createUrl).toHaveBeenCalledTimes(1);
     expect(click).toHaveBeenCalled();
     click.mockRestore();
+  }, SLOW);
+
+  it('table view docks the area card and the comparison beside and under the rows', async () => {
+    await renderAt(`?level=council&view=table&id=${council.id}&cmp=${council.id},${other.id}`);
+    const table = screen.getByRole('region', { name: 'Ranking table' });
+    expect(within(table).getByRole('complementary', { name: `Details for ${council.name}` })).toBeInTheDocument();
+    expect(within(table).getByRole('region', { name: 'Comparison' })).toBeInTheDocument();
+    expect(within(table).getByRole('button', { name: /Show on map/ })).toBeInTheDocument();
   }, SLOW);
 
   it('jump-to search selects a region and switches level', async () => {

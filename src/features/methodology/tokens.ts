@@ -1,24 +1,25 @@
-import type { Resolution } from './data';
+import type { KeyedLevel, Resolution } from './data';
 
-/** Subtle entry motion for blocks as they scroll into view (reduced motion is honoured by MotionConfig). */
-export const fadeIn = {
-  initial: { opacity: 0, y: 14 },
-  whileInView: { opacity: 1, y: 0 },
-  viewport: { once: true, margin: '-60px' },
-  transition: { duration: 0.45, ease: [0.2, 0.7, 0.2, 1] as const },
+/**
+ * Data resolution, encoded by shape and value rather than by teal shade alone, so the five marks stay
+ * distinct at 10 px: council = filled dark teal, district = filled mid teal, region = teal ring, national =
+ * filled grey, documented overlay = dashed ring (an overlay is not a measurement). Every mark is at least
+ * 3:1 against the page in both themes (WCAG 1.4.11) and always sits next to a text label or an sr-only name.
+ */
+export const RESOLUTION_CLASS: Record<Resolution, string> = {
+  council: 'bg-[#0f5f58] dark:bg-[#8ee0d4]',
+  district: 'bg-[#2a8f83] dark:bg-[#3f9a8e]',
+  region: 'border-2 border-[#3d8f85] dark:border-[#5bbfb2]',
+  national: 'bg-[#6b7280] dark:bg-[#8b95a7]',
+  overlay: 'border-[1.5px] border-dashed border-muted-foreground',
 };
 
-/** Colour coding for data resolution — always paired with a text label. */
-export const RESOLUTION_STYLE: Record<Resolution, { chip: string; dot: string }> = {
-  council: { chip: 'bg-emerald-500/12 text-emerald-700 dark:text-emerald-300', dot: 'bg-emerald-500' },
-  district: { chip: 'bg-sky-500/12 text-sky-700 dark:text-sky-300', dot: 'bg-sky-500' },
-  region: { chip: 'bg-violet-500/12 text-violet-700 dark:text-violet-300', dot: 'bg-violet-500' },
-  national: { chip: 'bg-slate-500/15 text-slate-700 dark:text-slate-300', dot: 'bg-slate-400' },
-  overlay: { chip: 'bg-amber-500/15 text-amber-800 dark:text-amber-300', dot: 'bg-amber-500' },
+/**
+ * Keyed level of a workbook indicator, for the proportion bar and its legend: dark teal (district/council,
+ * ADM2), mid teal (region, ADM1), grey (national). Each fill is at least 3:1 against the page in both themes.
+ */
+export const LEVEL_CLASS: Record<KeyedLevel, string> = {
+  adm2: 'bg-[#0f5f58] dark:bg-[#8ee0d4]',
+  adm1: 'bg-[#3d8f85] dark:bg-[#3f9a8e]',
+  national: 'bg-[#6b7280] dark:bg-[#8b95a7]',
 };
-
-/** Accent per pipeline phase / severity dimension (text + tinted surface, both themes). */
-export const PHASE_STYLE = {
-  standardise: { ring: 'border-sky-500/40 bg-sky-500/10 text-sky-700 dark:text-sky-300', line: 'bg-sky-500/30' },
-  aggregate: { ring: 'border-violet-500/40 bg-violet-500/10 text-violet-700 dark:text-violet-300', line: 'bg-violet-500/30' },
-} as const;

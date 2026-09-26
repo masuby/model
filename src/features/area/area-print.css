@@ -2,8 +2,8 @@
  * Print / "Save as PDF" styles for the Area Profile (scoped to .area-report).
  * The global stylesheet already hides the app header, footer and `.no-print`. Here we:
  *   • force the light tokens even when the viewer is in night mode (paper is white),
- *   • reveal scroll-animated sections that may not have entered the viewport yet,
- *   • keep colours (class fills, bars, map) and avoid splitting cards across pages.
+ *   • keep data colours (class fills, bars, map) and avoid splitting figures and rows across pages,
+ *   • collapse any deferred placeholder (content is rendered before printing — see Deferred.tsx).
  */
 @media print {
   @page {
@@ -33,6 +33,10 @@
     --map-water-stroke: #6aa6dc;
     --map-stroke: #ffffff;
     --grid: rgb(15 23 42 / 0.05);
+    --dim-hazard-text: #c2410c;
+    --dim-vulnerability-text: #6d28d9;
+    --dim-coping-text: #0369a1;
+    --dim-risk-text: #be123c;
     color-scheme: light;
     background: #ffffff;
     color: var(--foreground);
@@ -45,40 +49,46 @@
     -webkit-print-color-adjust: exact;
     print-color-adjust: exact;
     box-shadow: none !important;
-    backdrop-filter: none !important;
   }
 
-  /* Motion wrappers start transparent until scrolled into view — never on paper. */
-  .area-report .area-reveal {
-    opacity: 1 !important;
-    transform: none !important;
+  .area-report .area-deferred {
+    display: none !important;
   }
 
   .area-report section {
     break-inside: auto;
   }
   .area-report h2,
-  .area-report h3 {
+  .area-report h3,
+  .area-report h4,
+  .area-report .area-heading {
     break-after: avoid;
   }
-  .area-report .rounded-2xl,
-  .area-report .rounded-3xl,
-  .area-report tr {
+  .area-report .area-heading {
     break-inside: avoid;
   }
-  /* Long cards (the indicator table, the driver list) may flow across pages. */
+  .area-report figure,
+  .area-report article,
+  .area-report tr,
+  .area-report li {
+    break-inside: avoid;
+  }
+  /* Long blocks (the indicator table, the driver list) may flow across pages. */
   .area-report .area-breakable {
     break-inside: auto !important;
+  }
+
+  /* Sticky table headers print in place (the browser repeats <thead> on each page). */
+  .area-report th {
+    position: static !important;
+  }
+  .area-report thead th {
+    border-bottom: 1px solid var(--border);
   }
 
   /* Links print as text. */
   .area-report a {
     color: inherit !important;
     text-decoration: none !important;
-  }
-
-  /* Leaflet: keep the locator crisp and without controls. */
-  .area-report .leaflet-control-container {
-    display: none !important;
   }
 }

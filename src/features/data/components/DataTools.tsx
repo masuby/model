@@ -3,7 +3,7 @@
  * export (validated, re-submitted as PENDING submissions — never written straight into approved values)
  * and reset all browser-local data.
  */
-import { AlertTriangle, ChevronDown, Download, FileJson, Loader2, Trash2, Upload, Wrench } from 'lucide-react';
+import { ChevronDown, Download, FileJson, Loader2, Trash2, Upload, Wrench } from 'lucide-react';
 import * as React from 'react';
 import { useTranslation } from 'react-i18next';
 import { toast } from 'sonner';
@@ -144,15 +144,15 @@ function ImportDialog({ open, onOpenChange }: { open: boolean; onOpenChange: (o:
         <div className="space-y-4 p-5">
           <label
             htmlFor="import-file"
-            className="flex cursor-pointer flex-col items-center gap-2 rounded-2xl border-2 border-dashed border-border bg-muted/30 px-4 py-8 text-center transition-colors hover:border-primary/50 hover:bg-primary/5"
+            className="flex cursor-pointer flex-col items-center gap-1.5 rounded-lg border border-dashed border-input px-4 py-7 text-center transition-colors hover:border-foreground/40 hover:bg-muted/40 has-[:focus-visible]:outline-2 has-[:focus-visible]:outline-offset-2 has-[:focus-visible]:outline-ring"
           >
-            <FileJson className="size-8 text-primary" aria-hidden />
+            <FileJson className="size-5 text-muted-foreground" aria-hidden />
             <span className="text-sm font-semibold">{file ? file.name : t('tools.chooseFile')}</span>
             <span className="text-xs text-muted-foreground">{t('tools.fileHint', { size: formatNumber(MAX_IMPORT_BYTES / 1024 / 1024, i18n.language) })}</span>
             <input ref={inputRef} id="import-file" type="file" accept=".json,application/json" className="sr-only" onChange={(e) => void onFile(e.target.files?.[0])} />
           </label>
           {error && (
-            <Callout tone="danger" icon={<AlertTriangle />}>
+            <Callout tone="danger">
               <span role="alert">{t(`tools.errors.${error}`)}</span>
             </Callout>
           )}
@@ -174,8 +174,8 @@ function ImportDialog({ open, onOpenChange }: { open: boolean; onOpenChange: (o:
                 {t('tools.planLead', { unchanged: plan.unchanged })}
               </Callout>
               {plan.issues.length > 0 && (
-                <div className="rounded-xl border border-warning/30 bg-warning/5 p-3 text-xs">
-                  <p className="font-semibold text-warning">{t('tools.issues', { count: plan.issues.length })}</p>
+                <div className="border-l-2 border-warning pl-4 text-xs">
+                  <p className="font-semibold text-foreground">{t('tools.issues', { count: plan.issues.length })}</p>
                   <ul className="mt-1 max-h-32 space-y-0.5 overflow-y-auto text-muted-foreground">
                     {plan.issues.slice(0, 50).map((i, n) => (
                       <li key={n}>
@@ -232,7 +232,7 @@ function ResetDialog({ open, onOpenChange }: { open: boolean; onOpenChange: (o: 
     >
       <DialogContent title={t('tools.resetTitle')} description={t('tools.resetLead')}>
         <div className="space-y-4 p-5">
-          <Callout tone="danger" icon={<AlertTriangle />} title={t('tools.resetWarnTitle')}>
+          <Callout tone="danger" title={t('tools.resetWarnTitle')}>
             {t('tools.resetWarn')}
           </Callout>
           <label className="flex items-center gap-2 text-sm">

@@ -1,10 +1,9 @@
-import { ArrowRight } from 'lucide-react';
 import * as React from 'react';
 import { useTranslation } from 'react-i18next';
 import { Link, useNavigate } from 'react-router-dom';
 import { CartesianGrid, ReferenceArea, ReferenceLine, ResponsiveContainer, Scatter, ScatterChart, Tooltip, XAxis, YAxis, ZAxis, type ScatterShapeProps } from 'recharts';
 import { ChartCard } from '@/components/charts/ChartCard';
-import { ClassBadge, ClassDot } from '@/components/risk/RiskBadge';
+import { ClassDot } from '@/components/risk/RiskBadge';
 import { Select, SelectItem } from '@/components/ui/primitives';
 import { CLASS_COLORS, CLASS_KEYS, classify, THRESHOLDS, type ClassKey } from '@/engine/risk/classes';
 import { isNum } from '@/engine/risk/math';
@@ -12,7 +11,7 @@ import type { RiskModel } from '@/engine/risk/types';
 import { formatCompact, formatNumber, formatScore } from '@/lib/utils';
 import { classCounts, HIGH_INDEX } from '../analytics';
 import { useInsightTheme } from '../theme';
-import { InsightSection, Legend, TooltipCard, TooltipRow, WhatThisShows, useMediaQuery } from '../ui';
+import { Aside, FigureNote, InsightSection, Legend, SubHeading, TooltipCard, TooltipRow, useMediaQuery } from '../ui';
 
 interface Point {
   id: string;
@@ -116,7 +115,7 @@ export function DimensionScatter({ model }: { model: RiskModel }) {
       const r = Math.max(3, p.width / 2);
       const dimmed = focus !== ALL && d.region !== focus;
       return (
-        <g opacity={dimmed ? 0.14 : 1} style={{ cursor: 'pointer', transition: 'opacity 200ms ease' }} onClick={() => navigate(`/area/${d.id}`)}>
+        <g opacity={dimmed ? 0.14 : 1} style={{ cursor: 'pointer', transition: 'opacity 150ms ease' }} onClick={() => navigate(`/area/${d.id}`)}>
           {/* Hit target ≥ 24px so small bubbles are easy to hover and click. */}
           <circle cx={p.cx} cy={p.cy} r={Math.max(r, 12)} fill="transparent" />
           <circle cx={p.cx} cy={p.cy} r={r} fill={d.color} fillOpacity={p.isActive ? 1 : 0.85} stroke={p.isActive ? th.ink : th.surface} strokeWidth={p.isActive ? 2 : 1.25} />
@@ -139,8 +138,6 @@ export function DimensionScatter({ model }: { model: RiskModel }) {
   return (
     <InsightSection
       id="dimensions"
-      index={3}
-      eyebrow={t('scatter.eyebrow')}
       title={t('scatter.title')}
       lead={t('scatter.lead')}
       actions={
@@ -154,7 +151,7 @@ export function DimensionScatter({ model }: { model: RiskModel }) {
         </Select>
       }
     >
-      <div className="grid gap-4 xl:grid-cols-[minmax(0,1.9fr)_minmax(0,1fr)] xl:items-start">
+      <div className="grid gap-12 xl:grid-cols-[minmax(0,1.9fr)_minmax(0,1fr)] xl:items-start xl:gap-14">
         <ChartCard title={t('scatter.chartTitle')} description={t('scatter.chartSub')} csv={csv} filename="hazard-vulnerability-bubbles">
           <p className="sr-only">{t('scatter.aria', { count: hot.length, total: points.length })}</p>
           <div className="h-[380px] sm:h-[480px]">
@@ -219,41 +216,47 @@ export function DimensionScatter({ model }: { model: RiskModel }) {
               {t('scatter.sizeLegend')}
             </div>
           </div>
-          <WhatThisShows>{t('scatter.caption', { h: formatScore(H_HIGH), v: formatScore(V_HIGH) })}</WhatThisShows>
+          <FigureNote>{t('scatter.caption', { h: formatScore(H_HIGH), v: formatScore(V_HIGH) })}</FigureNote>
         </ChartCard>
 
-        <div className="relative overflow-hidden rounded-2xl border border-border bg-card p-5 shadow-[var(--shadow-soft)] sm:p-6">
-          <div className="pointer-events-none absolute -top-16 -right-16 size-48 rounded-full blur-3xl" style={{ background: `${CLASS_COLORS.veryHigh}22` }} />
-          <div className="relative">
-            <div className="text-xs font-semibold tracking-wider text-muted-foreground uppercase">{t('scatter.hotTitle')}</div>
-            <div className="mt-3 flex items-baseline gap-2">
-              <span className="num font-display text-4xl font-extrabold">{hot.length}</span>
-              <span className="text-sm text-muted-foreground">{t('scatter.hotOf', { total: points.length })}</span>
+        {/* Below xl the aside spans the page: summary on the left, list on the right, so rows stay short. */}
+        <Aside title={t('scatter.hotTitle')}>
+          <div className="lg:grid lg:grid-cols-[minmax(0,1fr)_minmax(0,1.6fr)] lg:gap-x-12 xl:block">
+            <div>
+              <p className="mt-4 flex items-baseline gap-2">
+                <span className="num text-4xl font-semibold tracking-tight">{hot.length}</span>
+                <span className="text-sm text-muted-foreground">{t('scatter.hotOf', { total: points.length })}</span>
+              </p>
+              <p className="mt-2 text-sm leading-relaxed text-pretty text-muted-foreground">{t('scatter.hotBody', { pop: formatCompact(hotPop, i18n.language), h: formatScore(H_HIGH), v: formatScore(V_HIGH) })}</p>
             </div>
-            <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{t('scatter.hotBody', { pop: formatCompact(hotPop, i18n.language), h: formatScore(H_HIGH), v: formatScore(V_HIGH) })}</p>
             {hot.length > 0 && (
-              <>
-                <div className="mt-5 mb-2 text-xs font-semibold tracking-wider text-muted-foreground uppercase">{t('scatter.hotTop')}</div>
-                <ol className="grid gap-1">
+              <div>
+                <SubHeading className="mt-8 lg:mt-4 xl:mt-8">{t('scatter.hotTop')}</SubHeading>
+                <ol className="mt-2 divide-y divide-border border-y border-border">
                   {hot.slice(0, 8).map((p) => (
                     <li key={p.id}>
-                      <Link to={`/area/${p.id}`} className="group flex items-center gap-3 rounded-lg px-2 py-1.5 transition-colors hover:bg-muted">
+                      <Link to={`/area/${p.id}`} className="group flex items-center gap-3 py-2.5">
                         <span className="min-w-0 flex-1">
-                          <span className="block truncate text-sm font-semibold group-hover:text-primary">{p.name}</span>
-                          <span className="block truncate text-[11px] text-muted-foreground">
-                            {p.region} · H {formatScore(p.h)} · V {formatScore(p.v)}
+                          <span className="block truncate font-medium underline-offset-4 group-hover:text-primary group-hover:underline">{p.name}</span>
+                          {/* Dimension names spelled out (no H/V abbreviations, which read differently in Kiswahili). */}
+                          <span className="block text-xs leading-snug text-muted-foreground">
+                            {p.region} · {t('common:dimensions.hazardShort')} <span className="num">{formatScore(p.h)}</span> · {t('common:dimensions.vulnerabilityShort')}{' '}
+                            <span className="num">{formatScore(p.v)}</span>
                           </span>
                         </span>
-                        <ClassBadge value={p.risk} showScore size="sm" />
-                        <ArrowRight className="size-3.5 text-muted-foreground opacity-0 transition-opacity group-hover:opacity-100" aria-hidden />
+                        <span className="flex shrink-0 items-center gap-2 text-sm">
+                          <ClassDot value={p.risk} />
+                          <span className="text-muted-foreground">{p.classKey ? t(`common:classes.${p.classKey}`) : t('common:classes.noData')}</span>
+                          <span className="num w-8 text-right font-semibold">{formatScore(p.risk)}</span>
+                        </span>
                       </Link>
                     </li>
                   ))}
                 </ol>
-              </>
+              </div>
             )}
           </div>
-        </div>
+        </Aside>
       </div>
     </InsightSection>
   );

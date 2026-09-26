@@ -1,5 +1,5 @@
-/** Small shared building blocks for the Data Portal: states, badges, deltas, callouts, value cells. */
-import { AlertTriangle, ArrowDown, ArrowUp, CheckCircle2, Clock3, Info, RefreshCw, XCircle } from 'lucide-react';
+/** Small shared building blocks for the Data Portal: states, badges, deltas, ruled notes, value cells. */
+import { ArrowDown, ArrowUp, CheckCircle2, Clock3, RefreshCw, XCircle } from 'lucide-react';
 import * as React from 'react';
 import { useTranslation } from 'react-i18next';
 import { Badge } from '@/components/ui/badge';
@@ -10,27 +10,25 @@ import type { Unit } from '@/engine/risk/types';
 import { cn, formatScore } from '@/lib/utils';
 import { errorMessage } from '../lib/batch';
 
-export function EmptyState({ icon, title, description, action, className }: { icon: React.ReactNode; title: React.ReactNode; description?: React.ReactNode; action?: React.ReactNode; className?: string }) {
+/** Empty state: a plain title and lead on the page (no box, no icon tile). */
+export function EmptyState({ title, description, action, className }: { title: React.ReactNode; description?: React.ReactNode; action?: React.ReactNode; className?: string }) {
   return (
-    <div className={cn('flex flex-col items-center rounded-2xl border border-dashed border-border bg-card/50 px-6 py-14 text-center', className)}>
-      <div className="flex size-12 items-center justify-center rounded-2xl bg-primary/10 text-primary [&_svg]:size-5">{icon}</div>
-      <h3 className="mt-4 text-base font-semibold">{title}</h3>
-      {description && <p className="mt-1.5 max-w-md text-sm leading-relaxed text-muted-foreground">{description}</p>}
+    <div className={cn('max-w-xl py-10', className)}>
+      <h3 className="font-display text-xl leading-snug font-semibold">{title}</h3>
+      {description && <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{description}</p>}
       {action && <div className="mt-5">{action}</div>}
     </div>
   );
 }
 
+/** Load failure: a note with a red left rule and a retry button. */
 export function ErrorState({ error, onRetry, className }: { error: unknown; onRetry?: () => void; className?: string }) {
   const { t } = useTranslation('data');
   return (
-    <div role="alert" className={cn('flex flex-col items-center rounded-2xl border border-danger/30 bg-danger/5 px-6 py-10 text-center', className)}>
-      <div className="flex size-11 items-center justify-center rounded-2xl bg-danger/10 text-danger">
-        <AlertTriangle className="size-5" />
-      </div>
-      <h3 className="mt-3 font-semibold">{t('states.errorTitle')}</h3>
-      <p className="mt-1 max-w-md text-sm text-muted-foreground">{t('states.errorLead')}</p>
-      {error != null && <p className="mt-2 max-w-md font-mono text-xs break-words text-muted-foreground">{errorMessage(error)}</p>}
+    <div role="alert" className={cn('border-l-2 border-danger py-1 pl-4', className)}>
+      <h3 className="text-base font-semibold">{t('states.errorTitle')}</h3>
+      <p className="mt-1 max-w-xl text-sm text-muted-foreground">{t('states.errorLead')}</p>
+      {error != null && <p className="mt-2 max-w-xl font-mono text-xs break-words text-muted-foreground">{errorMessage(error)}</p>}
       {onRetry && (
         <Button variant="outline" size="sm" className="mt-4" onClick={onRetry}>
           <RefreshCw /> {t('states.retry')}
@@ -40,16 +38,17 @@ export function ErrorState({ error, onRetry, className }: { error: unknown; onRe
   );
 }
 
+/** Loading placeholder: ruled rows of grey lines. */
 export function ListSkeleton({ rows = 3, className }: { rows?: number; className?: string }) {
   const { t } = useTranslation('data');
   return (
-    <div className={cn('space-y-3', className)} aria-busy="true" aria-live="polite">
+    <div className={cn('border-t border-border', className)} aria-busy="true" aria-live="polite">
       <span className="sr-only">{t('states.loading')}</span>
       {Array.from({ length: rows }, (_, i) => (
-        <div key={i} className="rounded-2xl border border-border bg-card p-5">
+        <div key={i} className="border-b border-border py-5">
           <Skeleton className="h-4 w-1/3" />
           <Skeleton className="mt-3 h-3 w-2/3" />
-          <Skeleton className="mt-5 h-16 w-full" />
+          <Skeleton className="mt-4 h-10 w-full" />
         </div>
       ))}
     </div>
@@ -62,14 +61,14 @@ export function Delta({ value, className }: { value: number | null | undefined; 
   if (value == null) return <span className={cn('text-xs text-muted-foreground', className)}>—</span>;
   if (value === 0)
     return (
-      <span className={cn('num text-[11px] font-medium text-muted-foreground', className)} aria-label={t('delta.none')}>
+      <span className={cn('num text-xs font-medium text-muted-foreground', className)} aria-label={t('delta.none')}>
         ±0.0
       </span>
     );
   const up = value > 0;
   return (
     <span
-      className={cn('num inline-flex items-center gap-0.5 rounded-md px-1.5 py-0.5 text-[11px] font-semibold', up ? 'bg-danger/10 text-danger' : 'bg-success/10 text-success', className)}
+      className={cn('num inline-flex items-center gap-0.5 text-xs font-semibold whitespace-nowrap', up ? 'text-danger' : 'text-success', className)}
       aria-label={t(up ? 'delta.up' : 'delta.down', { value: Math.abs(value).toFixed(1) })}
     >
       {up ? <ArrowUp className="size-3" aria-hidden /> : <ArrowDown className="size-3" aria-hidden />}
@@ -86,21 +85,32 @@ export function ScoreValue({ value, className }: { value: number | null | undefi
   return <span className={cn('num font-semibold', className)}>{formatScore(value)}</span>;
 }
 
+/** Unit level as one neutral tag for every level (the wording, not the style, tells them apart). */
 export function LevelBadge({ unit, className }: { unit: Pick<Unit, 'level'> | null | undefined; className?: string }) {
   const { t } = useTranslation('data');
   if (!unit) return null;
   return (
-    <Badge variant={unit.level === 'source' ? 'default' : 'secondary'} className={className}>
+    <Badge variant="secondary" className={cn('font-medium', className)}>
       {t(`levels.${unit.level}`)}
     </Badge>
   );
 }
 
+/**
+ * Row highlights for flush lists: the tint bleeds 12 px into the gutter on both sides (a box-shadow in
+ * the same colour), so row text stays aligned with headings and rules while the tint keeps some air.
+ * Apply exactly one per row.
+ */
+export const ROW_TINT = {
+  changed: '[--row-tint:color-mix(in_oklab,var(--color-muted)_60%,transparent)] bg-(--row-tint) shadow-[-12px_0_0_var(--row-tint),12px_0_0_var(--row-tint)]',
+  error: '[--row-tint:color-mix(in_oklab,var(--color-danger)_6%,transparent)] bg-(--row-tint) shadow-[-12px_0_0_var(--row-tint),12px_0_0_var(--row-tint)]',
+} as const;
+
 export function RoleBadge({ role, className }: { role: Role; className?: string }) {
   const { t } = useTranslation('data');
-  const variant = role === 'pmo' || role === 'admin' ? 'default' : role === 'sector' ? 'success' : 'secondary';
+  const variant = role === 'pmo' || role === 'admin' ? 'outline' : 'secondary';
   return (
-    <Badge variant={variant} className={className}>
+    <Badge variant={variant} className={cn('font-medium', className)}>
       {t(`roles.${role}`)}
     </Badge>
   );
@@ -116,32 +126,26 @@ export function StatusBadge({ status, className }: { status: SubmissionStatus; c
   );
 }
 
+/**
+ * A note set off by a left rule (docs/DESIGN_LANGUAGE.md §8) — never a tinted box. The rule carries the
+ * state colour; `info` stays neutral.
+ */
 export function Callout({
   tone = 'info',
-  icon,
   title,
   children,
   className,
 }: {
   tone?: 'info' | 'warning' | 'danger' | 'success';
-  icon?: React.ReactNode;
   title?: React.ReactNode;
   children?: React.ReactNode;
   className?: string;
 }) {
-  const toneCls = {
-    info: 'border-primary/20 bg-primary/5 [&_.callout-icon]:text-primary',
-    warning: 'border-warning/30 bg-warning/5 [&_.callout-icon]:text-warning',
-    danger: 'border-danger/30 bg-danger/5 [&_.callout-icon]:text-danger',
-    success: 'border-success/30 bg-success/5 [&_.callout-icon]:text-success',
-  }[tone];
+  const rule = { info: 'border-border', warning: 'border-warning', danger: 'border-danger', success: 'border-success' }[tone];
   return (
-    <div className={cn('flex gap-3 rounded-xl border p-3.5 text-sm', toneCls, className)}>
-      <span className="callout-icon mt-0.5 shrink-0 [&_svg]:size-4">{icon ?? <Info />}</span>
-      <div className="min-w-0">
-        {title && <p className="font-semibold">{title}</p>}
-        {children && <div className={cn('leading-relaxed text-muted-foreground', title && 'mt-0.5')}>{children}</div>}
-      </div>
+    <div className={cn('border-l-2 pl-4 text-sm', rule, className)}>
+      {title && <p className="font-medium text-foreground">{title}</p>}
+      {children && <div className={cn('leading-relaxed text-muted-foreground', title && 'mt-0.5')}>{children}</div>}
     </div>
   );
 }

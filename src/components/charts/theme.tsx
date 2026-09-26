@@ -64,7 +64,7 @@ export function ChartTooltip({
 }) {
   if (!active || !payload?.length) return null;
   return (
-    <div className="min-w-40 rounded-xl border border-border bg-elevated px-3 py-2 text-xs shadow-[var(--shadow-lift)]">
+    <div className="min-w-40 rounded-md border border-border bg-elevated px-3 py-2 text-xs shadow-[var(--shadow-lift)]">
       {(label !== undefined || labelFormatter) && <div className="mb-1.5 font-semibold text-foreground">{labelFormatter ? labelFormatter(label, payload) : label}</div>}
       <div className="grid gap-1">
         {payload.map((p, i) => (
