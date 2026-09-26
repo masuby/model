@@ -151,7 +151,7 @@ export default function SeverityPage() {
             <ArrowRight className="ml-auto size-4 shrink-0 text-muted-foreground transition-transform group-hover:translate-x-0.5" aria-hidden />
           </Link>
           <div className="flex items-center gap-3 rounded-2xl border border-rose-500/30 bg-card/80 p-3.5 shadow-xs ring-1 ring-rose-500/10 backdrop-blur">
-            <span className="inline-flex size-10 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-rose-500/15 to-orange-500/5 text-rose-600 dark:text-rose-400">
+            <span className="inline-flex size-10 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-rose-500/15 to-orange-500/5 text-rose-700 dark:text-rose-400">
               <Gauge className="size-5" aria-hidden />
             </span>
             <span className="min-w-0">

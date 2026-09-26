@@ -341,9 +341,22 @@ export function Separator({ className, orientation = 'horizontal', ...props }: R
   return <SeparatorPrimitive.Root orientation={orientation} className={cn('shrink-0 bg-border', orientation === 'horizontal' ? 'h-px w-full' : 'h-full w-px', className)} {...props} />;
 }
 
-export function Progress({ value, className, indicatorClassName, style }: { value: number; className?: string; indicatorClassName?: string; style?: React.CSSProperties }) {
+export function Progress({
+  value,
+  label,
+  className,
+  indicatorClassName,
+  style,
+}: {
+  value: number;
+  /** Accessible name — required so screen readers announce what the bar measures. */
+  label: string;
+  className?: string;
+  indicatorClassName?: string;
+  style?: React.CSSProperties;
+}) {
   return (
-    <ProgressPrimitive.Root value={value} className={cn('relative h-2 w-full overflow-hidden rounded-full bg-muted', className)}>
+    <ProgressPrimitive.Root value={value} aria-label={label} className={cn('relative h-2 w-full overflow-hidden rounded-full bg-muted', className)}>
       <ProgressPrimitive.Indicator className={cn('h-full rounded-full bg-primary transition-[width] duration-500', indicatorClassName)} style={{ width: `${Math.max(0, Math.min(100, value))}%`, ...style }} />
     </ProgressPrimitive.Root>
   );

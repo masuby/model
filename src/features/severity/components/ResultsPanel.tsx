@@ -358,7 +358,7 @@ export function ResultsPanel({ result, formula, missing, scenarioLabel, illustra
                 {rel.completeness}% · {t('results.completenessSub', { have: cov.have, total: cov.total })}
               </span>
             </div>
-            <Progress value={rel.completeness} className="h-1.5" />
+            <Progress value={rel.completeness} label={`${rel.completeness}%`} className="h-1.5" />
           </div>
           <dl className="mt-3 grid grid-cols-2 gap-2 text-[11px]">
             <div>

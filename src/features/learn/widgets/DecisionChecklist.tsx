@@ -117,7 +117,7 @@ export default function DecisionChecklist() {
       </div>
 
       <div className="mb-4 flex items-center gap-3">
-        <Progress value={(done.length / STEPS.length) * 100} className="h-2 flex-1" indicatorClassName="bg-success" />
+        <Progress value={(done.length / STEPS.length) * 100} label={`${done.length} / ${STEPS.length}`} className="h-2 flex-1" indicatorClassName="bg-success" />
         <span className="num text-xs font-semibold text-muted-foreground">{t('widgets.decisionChecklist.progress', { done: done.length, total: STEPS.length })}</span>
       </div>
 

@@ -11,7 +11,7 @@ import { SeverityChip } from './bits';
 
 const META: Record<ScenarioChoice, { icon: LucideIcon; tint: string }> = {
   riverineFlood: { icon: Waves, tint: 'from-sky-500/20 to-blue-500/5 text-sky-600 dark:text-sky-400' },
-  drought: { icon: Sun, tint: 'from-amber-500/20 to-orange-500/5 text-amber-600 dark:text-amber-400' },
+  drought: { icon: Sun, tint: 'from-amber-500/20 to-orange-500/5 text-amber-700 dark:text-amber-400' },
   landslide: { icon: Mountain, tint: 'from-stone-500/20 to-emerald-500/5 text-stone-600 dark:text-stone-300' },
   custom: { icon: SlidersHorizontal, tint: 'from-primary/15 to-primary/5 text-primary' },
 };

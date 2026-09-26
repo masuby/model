@@ -2,8 +2,11 @@ import { useTranslation } from 'react-i18next';
 import { classify, NO_DATA_COLOR, type Scale } from '@/engine/risk/classes';
 import { cn, formatScore } from '@/lib/utils';
 
-/** Readable text colour on a class fill (the light classes need dark text). */
-export const onClassColor = (hex: string) => (['#fee08b', '#91cf60'].includes(hex) ? '#1f2937' : '#ffffff');
+/**
+ * Readable text colour on a class fill (WCAG AA ≥ 4.5:1): near-black on every class except Very High,
+ * whose deep red takes white. Unknown fills (no data) take near-black on the neutral grey.
+ */
+export const onClassColor = (hex: string) => (hex.toLowerCase() === '#d73027' ? '#ffffff' : '#0b1324');
 
 export function ClassDot({ value, scale = 'risk', className }: { value: number | null | undefined; scale?: Scale; className?: string }) {
   const c = classify(value, scale);

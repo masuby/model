@@ -3,7 +3,7 @@ import { motion } from 'motion/react';
 import * as React from 'react';
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
-import { DIMENSION_COLORS } from '@/components/charts/theme';
+import { DIMENSION_COLORS, DIMENSION_TEXT } from '@/components/charts/theme';
 import { ClassBadge } from '@/components/risk/RiskBadge';
 import { ScoreGauge } from '@/components/risk/ScoreGauge';
 import { Button } from '@/components/ui/button';
@@ -36,6 +36,7 @@ function DimensionPanel({ step, showIndicators }: { step: DimensionStep; showInd
   const { t } = useTranslation(['methodology', 'common', 'indicators']);
   const present = step.categories.filter((c) => isNum(c.scaled));
   const color = DIMENSION_COLORS[step.key];
+  const textColor = DIMENSION_TEXT[step.key];
   const tag = DIM_TAG[step.key];
   const terms = present.map((c, i) => (
     <React.Fragment key={c.key}>
@@ -55,7 +56,7 @@ function DimensionPanel({ step, showIndicators }: { step: DimensionStep; showInd
       <div className="h-1" style={{ background: color }} aria-hidden />
       <div className="flex items-start justify-between gap-3 px-5 pt-4">
         <div>
-          <span className="font-display text-xs font-extrabold tracking-wider" style={{ color }}>
+          <span className="font-display text-xs font-extrabold tracking-wider" style={{ color: textColor }}>
             {tag}
           </span>
           <h4 className="text-base font-bold">{t(`common:dimensions.${step.key}`)}</h4>

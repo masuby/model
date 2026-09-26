@@ -20,6 +20,7 @@ import {
   resolutionBreakdown,
   sortMatrix,
   strengthOf,
+  needsPlate,
   topDriverCounts,
 } from '../analytics';
 
@@ -188,10 +189,13 @@ describe('correlation', () => {
 });
 
 describe('colour helpers', () => {
-  it('picks readable ink', () => {
-    expect(inkOn('#ffffff')).toBe('#1f2937');
+  it('picks the ink with the higher WCAG contrast, and a plate when neither reaches AA', () => {
+    expect(inkOn('#ffffff')).toBe('#0b1324');
     expect(inkOn('#000000')).toBe('#ffffff');
     expect(inkOn('rgb(127, 39, 4)')).toBe('#ffffff');
+    expect(needsPlate('#ffffff')).toBe(false);
+    expect(needsPlate('#7f2704')).toBe(false);
+    expect(needsPlate('#d94801')).toBe(true); // mid-orange: 4.3:1 at best
   });
 
   it('diverging colour is neutral at 0 and a pole at ±1', () => {

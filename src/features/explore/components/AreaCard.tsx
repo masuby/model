@@ -214,7 +214,7 @@ export function AreaBody({ unit }: { unit: Unit }) {
       <section>
         <SectionTitle>{t('common:labels.coverage')}</SectionTitle>
         <div className="flex items-center gap-3">
-          <Progress value={coverage} className="h-1.5 flex-1" indicatorClassName={coverage >= 80 ? 'bg-success' : coverage >= 60 ? 'bg-warning' : 'bg-danger'} />
+          <Progress value={coverage} label={t('common:labels.coverage')} className="h-1.5 flex-1" indicatorClassName={coverage >= 80 ? 'bg-success' : coverage >= 60 ? 'bg-warning' : 'bg-danger'} />
           <span className="num text-sm font-bold">{coverage}%</span>
         </div>
         <p className="mt-1 text-[11px] text-muted-foreground">{t('card.coverageDetail', { have, total })}</p>

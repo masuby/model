@@ -3,7 +3,7 @@ import { motion } from 'motion/react';
 import { Accordion } from 'radix-ui';
 import * as React from 'react';
 import { useTranslation } from 'react-i18next';
-import { DIMENSION_COLORS } from '@/components/charts/theme';
+import { DIMENSION_COLORS, DIMENSION_TEXT } from '@/components/charts/theme';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { ALL_INDICATORS, DIMENSIONS, type DimensionDef, type IndicatorDef } from '@/engine/risk/hierarchy';
@@ -106,12 +106,13 @@ function DimensionColumn({ dim }: { dim: DimensionDef }) {
   const { t } = useTranslation(['methodology', 'common']);
   const groups = dim.categories.reduce((n, c) => n + c.indicators.length, 0);
   const color = DIMENSION_COLORS[dim.key];
+  const textColor = DIMENSION_TEXT[dim.key];
   return (
     <Card className="overflow-hidden">
       <div className="h-1" style={{ background: color }} aria-hidden />
       <div className="px-5 pt-4 pb-4">
         <div className="flex items-center justify-between gap-2">
-          <span className="font-display text-xs font-extrabold tracking-wider" style={{ color }}>
+          <span className="font-display text-xs font-extrabold tracking-wider" style={{ color: textColor }}>
             {DIM_TAG[dim.key]}
           </span>
           <span className="text-[11px] text-muted-foreground">{t('methodology:structure.dimMeta', { categories: dim.categories.length, groups })}</span>

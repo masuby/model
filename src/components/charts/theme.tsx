@@ -14,6 +14,14 @@ export const DIMENSION_COLORS = {
   risk: '#e11d48',
 } as const;
 
+/** Accessible TEXT colours per dimension (theme-aware CSS variables) — use for labels, not fills. */
+export const DIMENSION_TEXT = {
+  hazard: 'var(--dim-hazard-text)',
+  vulnerability: 'var(--dim-vulnerability-text)',
+  coping: 'var(--dim-coping-text)',
+  risk: 'var(--dim-risk-text)',
+} as const;
+
 /** Categorical palette (colour-blind-aware) for series that are not INFORM classes. */
 export const SERIES = ['#338cf6', '#f97316', '#10b981', '#8b5cf6', '#e11d48', '#eab308', '#06b6d4', '#64748b'];
 

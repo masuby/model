@@ -150,8 +150,8 @@ export const SEVERITY_COLORS: Record<SeverityCategoryKey, string> = {
   veryLow: '#fde0c5',
   low: '#facba6',
   medium: '#f59e6b',
-  high: '#e0563b',
-  veryHigh: '#9f1d1d',
+  high: '#c2410c',
+  veryHigh: '#7f1d1d',
 };
 
 /** Population groups affected (IASC Humanitarian Profile) — the diversity score is their count, max 5. */

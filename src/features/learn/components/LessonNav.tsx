@@ -31,13 +31,13 @@ export function LessonSideNav({ current, sections, active }: { current: LessonId
           <span>{t('nav.course')}</span>
           <span className="num text-muted-foreground">{t('nav.done', { done, total: LESSONS.length })}</span>
         </div>
-        <Progress value={(done / LESSONS.length) * 100} className="mt-2 h-1.5" indicatorClassName="bg-success" />
-        <ol className="mt-3 grid gap-0.5">
+        <Progress value={(done / LESSONS.length) * 100} label={t('nav.course')} className="mt-2 h-1.5" indicatorClassName="bg-success" />
+        <ol className="mt-3 grid min-w-0 grid-cols-1 gap-0.5">
           {LESSONS.map((l) => {
             const isCurrent = l.id === current;
             const complete = isCompleted(progress, l.id);
             return (
-              <li key={l.id}>
+              <li key={l.id} className="min-w-0">
                 <Link
                   to={`/learn/${l.id}`}
                   aria-current={isCurrent ? 'page' : undefined}
@@ -47,7 +47,7 @@ export function LessonSideNav({ current, sections, active }: { current: LessonId
                   )}
                 >
                   <StepDot n={l.n} complete={complete} current={isCurrent} />
-                  <span className="min-w-0 flex-1 truncate">{t(`lessons.${l.id}.title`)}</span>
+                  <span className="line-clamp-2 min-w-0 flex-1 leading-snug">{t(`lessons.${l.id}.title`)}</span>
                   {complete && <span className="sr-only">({t('status.completed')})</span>}
                 </Link>
                 {isCurrent && (

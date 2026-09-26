@@ -66,7 +66,7 @@ function SectionNav() {
                   active === id ? 'bg-primary/10 text-primary' : 'text-muted-foreground hover:bg-muted hover:text-foreground',
                 )}
               >
-                <span className="num opacity-60">{String(i + 1).padStart(2, '0')}</span>
+                <span className="num">{String(i + 1).padStart(2, '0')}</span>
                 {t(`nav.${id}`)}
               </a>
             </li>

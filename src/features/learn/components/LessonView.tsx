@@ -114,7 +114,7 @@ export function LessonView({ id }: { id: LessonId }) {
                 transition={{ duration: 0.4 }}
                 className="flex items-baseline gap-3 text-2xl font-bold text-balance sm:text-[1.75rem]"
               >
-                <span className="num font-display text-base font-bold text-primary/70">{`${meta.n}.${i + 1}`}</span>
+                <span className="num font-display text-base font-bold text-primary">{`${meta.n}.${i + 1}`}</span>
                 <span>{s.title}</span>
               </motion.h2>
               {s.blocks.map((b, j) => (

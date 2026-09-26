@@ -142,7 +142,7 @@ function ScorePanel({ view }: { view: AreaView }) {
     <div className="relative w-full overflow-hidden rounded-3xl border border-border bg-card shadow-[var(--shadow-lift)] lg:w-[380px] print:w-[320px] print:shadow-none">
       <div className="pointer-events-none absolute inset-x-8 -top-28 h-48 rounded-full opacity-25 blur-3xl print:hidden" style={{ background: cls?.color ?? NO_DATA_COLOR }} />
       <div className="relative flex flex-col items-center px-6 pt-6 pb-6 text-center">
-        <div className="text-xs font-semibold tracking-[0.16em] text-muted-foreground uppercase">{t('common:informRisk')}</div>
+        <div className="text-xs font-semibold tracking-[0.16em] text-foreground/85 uppercase">{t('common:informRisk')}</div>
         <ScoreGauge value={unit.risk} size={220} className="mt-4" label={t('hero.outOf10')} />
         <ClassBadge value={unit.risk} size="lg" className="mt-4" />
 
@@ -280,7 +280,7 @@ export function AreaHero({ view }: { view: AreaView }) {
               <Fact label={t('common:labels.density')} value={formatNumber(density, lang, { maximumFractionDigits: 0 })} sub={t('facts.perKm2')} />
               <Fact label={t('common:labels.coverage')} sub={t('facts.coverageSub', { have: coverage.have, total: coverage.total })}>
                 <div className="num font-display text-xl font-extrabold tracking-tight sm:text-2xl">{coverage.pct}%</div>
-                <Progress value={coverage.pct} className="mt-1.5 h-1.5" indicatorClassName={coverage.pct >= 85 ? 'bg-success' : coverage.pct >= 60 ? 'bg-warning' : 'bg-danger'} />
+                <Progress value={coverage.pct} label={t('common:labels.coverage')} className="mt-1.5 h-1.5" indicatorClassName={coverage.pct >= 85 ? 'bg-success' : coverage.pct >= 60 ? 'bg-warning' : 'bg-danger'} />
               </Fact>
             </dl>
 

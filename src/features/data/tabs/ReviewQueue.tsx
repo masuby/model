@@ -137,7 +137,7 @@ export function ReviewQueue() {
             <Textarea id="bulk-note" value={bulkNote} maxLength={NOTE_MAX} onChange={(e) => setBulkNote(e.target.value)} placeholder={t('review.notePlaceholder')} />
             {progress && (
               <div aria-live="polite">
-                <Progress value={(progress.done / Math.max(1, progress.total)) * 100} />
+                <Progress value={(progress.done / Math.max(1, progress.total)) * 100} label={`${progress.done} / ${progress.total}`} />
                 <p className="mt-1.5 text-xs text-muted-foreground">{t('review.progress', { done: progress.done, total: progress.total })}</p>
               </div>
             )}

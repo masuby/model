@@ -76,24 +76,29 @@
   --card-foreground: #0b1324;
   --elevated: #ffffff;
   --muted: #eef2f7;
-  --muted-foreground: #5b6679;
+  --muted-foreground: #525d70;
   --border: #e3e8ef;
   --input: #d6dde7;
-  --ring: #338cf6;
-  --primary: #1d6deb;
+  --ring: #1557d8;
+  --primary: #1557d8;
   --primary-foreground: #ffffff;
   --secondary: #eaf1fb;
   --secondary-foreground: #14325f;
   --accent: #eef7ff;
   --accent-foreground: #1847af;
-  --success: #15803d;
-  --warning: #b45309;
-  --danger: #dc2626;
+  --success: #166534;
+  --warning: #92400e;
+  --danger: #b91c1c;
   --map-bg: #dfe8f3;
   --map-water: #a9cdee;
   --map-water-stroke: #6aa6dc;
   --map-stroke: #ffffff;
   --grid: rgb(15 23 42 / 0.06);
+  /* Dimension colours for TEXT (AA on surfaces); charts use the brighter DIMENSION_COLORS fills. */
+  --dim-hazard-text: #c2410c;
+  --dim-vulnerability-text: #6d28d9;
+  --dim-coping-text: #0369a1;
+  --dim-risk-text: #be123c;
   color-scheme: light;
 }
 
@@ -104,7 +109,7 @@
   --card-foreground: #e7ecf5;
   --elevated: #121c32;
   --muted: #121b2e;
-  --muted-foreground: #93a0b8;
+  --muted-foreground: #a3afc4;
   --border: #1d2940;
   --input: #26344f;
   --ring: #59adfb;
@@ -116,12 +121,16 @@
   --accent-foreground: #a9cdff;
   --success: #4ade80;
   --warning: #fbbf24;
-  --danger: #f87171;
+  --danger: #fca5a5;
   --map-bg: #0a1426;
   --map-water: #12345a;
   --map-water-stroke: #1f4d80;
   --map-stroke: #0b1324;
   --grid: rgb(226 232 240 / 0.06);
+  --dim-hazard-text: #fdba74;
+  --dim-vulnerability-text: #c4b5fd;
+  --dim-coping-text: #7dd3fc;
+  --dim-risk-text: #fda4af;
   color-scheme: dark;
 }
 
@@ -168,6 +177,12 @@
   }
   ::selection {
     background: rgb(51 140 246 / 0.25);
+  }
+  /* Grid items default to min-width:auto, so one long unbreakable line (a truncated name, a formula)
+     can stretch a whole mobile column past the viewport. Let grid items shrink; zero specificity so
+     any explicit width utility still wins. */
+  :where(.grid) > * {
+    min-width: 0;
   }
   :focus-visible {
     @apply outline-2 outline-offset-2 outline-ring;

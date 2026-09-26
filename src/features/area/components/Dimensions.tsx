@@ -1,5 +1,5 @@
 import { useTranslation } from 'react-i18next';
-import { DIMENSION_COLORS } from '@/components/charts/theme';
+import { DIMENSION_COLORS, DIMENSION_TEXT } from '@/components/charts/theme';
 import { ClassBadge } from '@/components/risk/RiskBadge';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { classify, NO_DATA_COLOR } from '@/engine/risk/classes';
@@ -15,7 +15,7 @@ function Equation({ view }: { view: AreaView }) {
   const { unit } = view;
   const term = (d: (typeof DIMENSIONS)[number]) => (
     <span className="inline-flex items-baseline gap-1.5">
-      <span className="text-[11px] font-bold tracking-wider uppercase" style={{ color: DIMENSION_COLORS[d.key] }}>
+      <span className="text-[11px] font-bold tracking-wider uppercase" style={{ color: DIMENSION_TEXT[d.key] }}>
         {DIM_SHORT[d.key]}
       </span>
       <span className="num font-display text-lg font-extrabold text-foreground">{formatScore(unit.dims[d.key].score)}</span>
@@ -63,7 +63,7 @@ export function Dimensions({ view }: { view: AreaView }) {
                 <div className="absolute inset-x-0 top-0 h-1" style={{ background: DIMENSION_COLORS[def.key] }} />
                 <CardHeader>
                   <div className="flex items-center justify-between gap-2">
-                    <span className="text-xs font-bold tracking-wider uppercase" style={{ color: DIMENSION_COLORS[def.key] }}>
+                    <span className="text-xs font-bold tracking-wider uppercase" style={{ color: DIMENSION_TEXT[def.key] }}>
                       {DIM_SHORT[def.key]}
                     </span>
                     <ClassBadge value={dim.score} scale={def.scale} size="sm" />

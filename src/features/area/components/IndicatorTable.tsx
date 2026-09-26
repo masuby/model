@@ -1,7 +1,7 @@
 import { FileSpreadsheet, Info, PencilLine } from 'lucide-react';
 import * as React from 'react';
 import { useTranslation } from 'react-i18next';
-import { DIMENSION_COLORS } from '@/components/charts/theme';
+import { DIMENSION_COLORS, DIMENSION_TEXT } from '@/components/charts/theme';
 import { ClassBadge } from '@/components/risk/RiskBadge';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
@@ -137,7 +137,7 @@ export function IndicatorTable({ view }: { view: AreaView }) {
                   <th scope="rowgroup" colSpan={5} className="px-5 pt-6 pb-2 text-left sm:px-6">
                     <div className="flex flex-wrap items-center gap-3">
                       <span className="h-5 w-1 rounded-full" style={{ background: DIMENSION_COLORS[def.key] }} aria-hidden />
-                      <span className="text-[11px] font-bold tracking-wider uppercase" style={{ color: DIMENSION_COLORS[def.key] }}>
+                      <span className="text-[11px] font-bold tracking-wider uppercase" style={{ color: DIMENSION_TEXT[def.key] }}>
                         {DIM_SHORT[def.key]}
                       </span>
                       <span className="font-display text-base font-bold">{t(`common:dimensions.${def.key}`)}</span>

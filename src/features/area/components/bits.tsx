@@ -89,7 +89,7 @@ export function DeltaChip({ value, reference, label, className }: { value: numbe
       >
         <Icon className="size-3" aria-hidden />
         <span className="num">{formatDelta(d)}</span>
-        <span className="font-medium opacity-80">{t('delta.vs', { ref: label })}</span>
+        <span className="font-medium">{t('delta.vs', { ref: label })}</span>
       </span>
     </Tooltip>
   );

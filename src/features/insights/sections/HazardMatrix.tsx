@@ -8,7 +8,7 @@ import { isNum } from '@/engine/risk/math';
 import { rampColor } from '@/engine/risk/metrics';
 import type { RiskModel } from '@/engine/risk/types';
 import { cn, formatScore } from '@/lib/utils';
-import { columnMaxima, hazardMatrix, inkOn, MATRIX_HAZARDS, sortMatrix, type MatrixHazard, type MatrixRow, type MatrixSortKey } from '../analytics';
+import { columnMaxima, hazardMatrix, inkOn, MATRIX_HAZARDS, sortMatrix, type MatrixHazard, type MatrixRow, type MatrixSortKey, needsPlate } from '../analytics';
 import { useInsightTheme, type InsightTheme } from '../theme';
 import { InsightSection, WhatThisShows } from '../ui';
 
@@ -121,7 +121,12 @@ export function HazardMatrix({ model }: { model: RiskModel }) {
                         style={fill ? { background: fill, color: inkOn(fill) } : undefined}
                         title={`${r.name} · ${colLabel(c)}: ${formatScore(v)}`}
                       >
-                        {formatScore(v)}
+                        {fill && needsPlate(fill) ? (
+                          // Mid-orange fills: neither white nor dark text reaches AA, so sit the number on a light plate.
+                          <span className="rounded-[5px] bg-white/90 px-1 text-[#0b1324]">{formatScore(v)}</span>
+                        ) : (
+                          formatScore(v)
+                        )}
                       </td>
                     );
                   })}

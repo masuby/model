@@ -119,7 +119,7 @@ export function ResolutionBadge({ value, className }: { value: Resolution; class
 export function Formula({ label, children, className, caption }: { label: string; children: React.ReactNode; className?: string; caption?: React.ReactNode }) {
   return (
     <figure className={cn('overflow-hidden rounded-xl border border-border bg-muted/45', className)}>
-      <div role="math" aria-label={label} className="overflow-x-auto px-4 py-3.5 font-serif text-[17px] leading-relaxed text-foreground sm:px-5">
+      <div role="math" aria-label={label} tabIndex={0} className="overflow-x-auto rounded-md focus-visible:outline-2 focus-visible:outline-ring px-4 py-3.5 font-serif text-[17px] leading-relaxed text-foreground sm:px-5">
         <div aria-hidden className="flex min-w-max flex-col gap-2.5">
           {children}
         </div>

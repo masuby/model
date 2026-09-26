@@ -34,7 +34,7 @@ function TocList({ active, onNavigate, className }: TocProps & { active: string;
                 isActive ? 'border-primary font-semibold text-foreground' : 'border-border text-muted-foreground hover:border-foreground/30 hover:text-foreground',
               )}
             >
-              {!s.depth && <span className={cn('num w-5 shrink-0 text-[11px] font-semibold', isActive ? 'text-primary' : 'text-muted-foreground/70')}>{s.number}</span>}
+              {!s.depth && <span className={cn('num w-5 shrink-0 text-[11px] font-semibold', isActive ? 'text-primary' : 'text-muted-foreground')}>{s.number}</span>}
               <span>{t(sectionKey(s.id))}</span>
             </a>
           </li>

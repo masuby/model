@@ -157,10 +157,10 @@ export default function HomePage() {
                   <CardContent className="text-sm leading-relaxed text-muted-foreground">{t(`common:dimensions.${d}Desc`)}</CardContent>
                 </Card>
               </motion.div>
-              {i < 2 && <div className="hidden items-center justify-center font-display text-3xl font-bold text-muted-foreground/50 lg:flex">×</div>}
+              {i < 2 && <div className="hidden items-center justify-center font-display text-3xl font-bold text-muted-foreground/50 lg:flex" aria-hidden>×</div>}
             </React.Fragment>
           ))}
-          <div className="hidden items-center justify-center font-display text-3xl font-bold text-muted-foreground/50 lg:flex">=</div>
+          <div className="hidden items-center justify-center font-display text-3xl font-bold text-muted-foreground/50 lg:flex" aria-hidden>=</div>
           <motion.div {...fade} transition={{ duration: 0.5, delay: 0.3 }}>
             <Card className="relative h-full overflow-hidden border-primary/30 bg-gradient-to-br from-primary/10 to-transparent">
               <CardHeader>

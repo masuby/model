@@ -2,7 +2,7 @@ import * as React from 'react';
 import { useTranslation } from 'react-i18next';
 import { Bar, BarChart, CartesianGrid, LabelList, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts';
 import { ChartCard } from '@/components/charts/ChartCard';
-import { DIMENSION_COLORS } from '@/components/charts/theme';
+import { DIMENSION_COLORS, DIMENSION_TEXT } from '@/components/charts/theme';
 import { Segmented } from '@/components/ui/primitives';
 import { DIMENSION_KEYS, type DimensionKey } from '@/engine/risk/hierarchy';
 import type { RiskModel } from '@/engine/risk/types';
@@ -89,7 +89,7 @@ export function RiskDrivers({ model }: { model: RiskModel }) {
   const lead = drivers[0];
   const highestMean = React.useMemo(() => [...stats].filter((s) => s.mean !== null).sort((a, b) => (b.mean ?? 0) - (a.mean ?? 0))[0], [stats]);
 
-  const legend = DIMENSION_KEYS.map((k) => ({ key: k, color: DIMENSION_COLORS[k], label: t(`common:dimensions.${k}`) }));
+  const legend = DIMENSION_KEYS.map((k) => ({ key: k, color: DIMENSION_TEXT[k], label: t(`common:dimensions.${k}`) }));
   const yWidth = narrow ? 112 : 176;
 
   const driverCsv = React.useMemo(

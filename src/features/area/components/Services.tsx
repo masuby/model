@@ -50,7 +50,7 @@ function DrrItem({ k, info }: { k: (typeof DRR_KEYS)[number]; info: ServicesInfo
           </span>
         </div>
         <p className="mt-0.5 text-xs leading-relaxed text-muted-foreground">{t(`services.drr.${k}.desc`)}</p>
-        {aggregate && recorded > 0 && <Progress value={(n / recorded) * 100} className="mt-2 h-1.5" indicatorClassName="bg-success" />}
+        {aggregate && recorded > 0 && <Progress value={(n / recorded) * 100} label={t(`services.drr.${k}.desc`)} className="mt-2 h-1.5" indicatorClassName="bg-success" />}
       </div>
     </li>
   );

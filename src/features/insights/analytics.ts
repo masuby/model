@@ -399,7 +399,19 @@ export function luminance(color: string): number {
 }
 
 /** Readable ink on a fill: dark text on light fills, white on dark ones. */
-export const inkOn = (fill: string): string => (luminance(fill) > 0.4 ? '#1f2937' : '#ffffff');
+/** Best WCAG contrast ratio achievable on a fill with white or near-black (#0b1324) text. */
+export const bestContrast = (fill: string): { ink: string; ratio: number } => {
+  const l = luminance(fill);
+  const onWhite = 1.05 / (l + 0.05);
+  const onDark = (l + 0.05) / (0.0074 + 0.05);
+  return onWhite >= onDark ? { ink: '#ffffff', ratio: onWhite } : { ink: '#0b1324', ratio: onDark };
+};
+
+/** Text colour for a fill: whichever of white / near-black gives the higher WCAG contrast ratio. */
+export const inkOn = (fill: string): string => bestContrast(fill).ink;
+
+/** True when no plain text colour reaches WCAG AA (4.5:1) on this fill — put the text on a plate. */
+export const needsPlate = (fill: string): boolean => bestContrast(fill).ratio < 4.5;
 
 const mix = (a: string, b: string, t: number) => {
   const pa = [1, 3, 5].map((i) => parseInt(a.slice(i, i + 2), 16));

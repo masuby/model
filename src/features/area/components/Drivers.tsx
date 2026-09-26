@@ -1,7 +1,7 @@
 import { ArrowDownRight, ArrowUpRight } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
-import { DIMENSION_COLORS } from '@/components/charts/theme';
+import { DIMENSION_COLORS, DIMENSION_TEXT } from '@/components/charts/theme';
 import { ClassBadge } from '@/components/risk/RiskBadge';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { DIMENSION_BY_KEY } from '@/engine/risk/hierarchy';
@@ -41,7 +41,7 @@ function DiffList({ title, rows, up }: { title: string; rows: Array<IndicatorRow
                 <span className="truncate">{t(`indicators:${r.key}`)}</span>
               </span>
               <span className="num shrink-0 text-xs text-muted-foreground">
-                {formatScore(r.value)} <span className="opacity-60">{t('drivers.vs')}</span> {formatScore(r.national)}
+                {formatScore(r.value)} <span className="text-muted-foreground">{t('drivers.vs')}</span> {formatScore(r.national)}
                 <span className={up ? 'ml-2 font-bold text-danger' : 'ml-2 font-bold text-success'}>{formatDelta(r.d)}</span>
               </span>
             </li>
@@ -126,7 +126,7 @@ export function Drivers({ view }: { view: AreaView }) {
               </CardHeader>
               <CardContent className="relative">
                 <div className="flex items-center gap-3">
-                  <span className="text-xs font-bold tracking-wider uppercase" style={{ color: DIMENSION_COLORS[weakest.key] }}>
+                  <span className="text-xs font-bold tracking-wider uppercase" style={{ color: DIMENSION_TEXT[weakest.key] }}>
                     {DIM_SHORT[weakest.key]}
                   </span>
                   <span className="num font-display text-4xl font-extrabold">{formatScore(weakest.score)}</span>

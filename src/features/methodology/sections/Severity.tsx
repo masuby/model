@@ -189,7 +189,7 @@ export function SeveritySection() {
                       </td>
                       <td className="num px-4 py-2 font-semibold">{level}</td>
                       <td className="px-4 py-2">
-                        <span className="rounded-full px-2.5 py-0.5 text-xs font-semibold" style={{ background: SEVERITY_COLORS[k], color: level <= 3 ? '#1f2937' : '#ffffff' }}>
+                        <span className="rounded-full px-2.5 py-0.5 text-xs font-semibold" style={{ background: SEVERITY_COLORS[k], color: level <= 3 ? '#1f2937' : '#ffffff' /* levels 4–5 are dark enough for white (≥ 4.5:1) */ }}>
                           {t(`common:classes.${k}`)}
                         </span>
                       </td>

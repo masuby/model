@@ -50,7 +50,7 @@ export function LevelControl() {
           label: (
             <span className="flex flex-col items-center leading-tight">
               <span className="text-center whitespace-normal">{t(`level.${l}`)}</span>
-              <span className="num mt-0.5 text-[10px] font-semibold opacity-60">
+              <span className="num mt-0.5 text-[10px] font-semibold text-muted-foreground">
                 {counts[l]}
                 {l === 'source' && ` · ${t('level.ref')}`}
               </span>

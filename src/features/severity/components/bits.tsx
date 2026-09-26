@@ -16,8 +16,8 @@ export const FADE = {
 
 /** Accent per severity dimension (distinct from the severity ramp so they never read as a score). */
 export const DIM_ACCENT: Record<SeverityDimensionKey, { text: string; soft: string; ring: string; hex: string }> = {
-  impact: { text: 'text-rose-600 dark:text-rose-400', soft: 'bg-rose-500/10', ring: 'ring-rose-500/25', hex: '#e11d48' },
-  conditions: { text: 'text-amber-600 dark:text-amber-400', soft: 'bg-amber-500/10', ring: 'ring-amber-500/25', hex: '#f59e0b' },
+  impact: { text: 'text-rose-700 dark:text-rose-400', soft: 'bg-rose-500/10', ring: 'ring-rose-500/25', hex: '#e11d48' },
+  conditions: { text: 'text-amber-700 dark:text-amber-400', soft: 'bg-amber-500/10', ring: 'ring-amber-500/25', hex: '#f59e0b' },
   complexity: { text: 'text-violet-600 dark:text-violet-400', soft: 'bg-violet-500/10', ring: 'ring-violet-500/25', hex: '#8b5cf6' },
 };
 

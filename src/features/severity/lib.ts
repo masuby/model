@@ -279,12 +279,12 @@ export function formulaBreakdown(result: SeverityResult): FormulaBreakdown | nul
   return { impact, conditions, complexity, g, geoTerm, complexityTerm, total: geoTerm + complexityTerm };
 }
 
-/** Readable text colour on a SEVERITY_COLORS fill. */
+/** Readable text colour on a SEVERITY_COLORS fill (all combinations ≥ 4.5:1). */
 export const ON_SEVERITY: Record<SeverityCategoryKey, string> = {
   veryLow: '#431407',
   low: '#431407',
   medium: '#2a0d04',
-  high: '#1f0703',
+  high: '#ffffff',
   veryHigh: '#ffffff',
 };
 
