@@ -10,7 +10,7 @@
 import fs from 'fs';
 const R = (p) => JSON.parse(fs.readFileSync(new URL('../' + p, import.meta.url)));
 const SPEC = R('src/data/inform-indicator-spec.json');
-const fixture = R('src/services/__tests__/pipeline.fixture.json');       // [{district, raw, risk}]
+const fixture = R('src/engine/risk/__tests__/fixtures/pipeline.fixture.json');       // [{district, raw, risk}]
 const councils = R('src/data/tanzania-councils.json');
 const councilData = R('src/data/tanzania-councils-data.json');
 

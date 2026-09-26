@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { useTranslation } from 'react-i18next';
-import { createBrowserRouter, Link, RouterProvider, useRouteError } from 'react-router-dom';
+import { createBrowserRouter, Link, Navigate, RouterProvider, useRouteError } from 'react-router-dom';
 import { Toaster } from 'sonner';
 import { Button } from '@/components/ui/button';
 import { TooltipProvider } from '@/components/ui/primitives';
@@ -51,10 +51,10 @@ const router = createBrowserRouter([
       { path: 'learn/:lessonId', element: lazyPage(() => import('@/features/learn/LearnPage')) },
       { path: 'methodology', element: lazyPage(() => import('@/features/methodology/MethodologyPage')) },
       { path: 'data', element: lazyPage(() => import('@/features/data/DataPortalPage')) },
-      // Legacy routes from the previous app
-      { path: 'risk', element: lazyPage(() => import('@/features/explore/ExplorePage')) },
-      { path: 'education', element: lazyPage(() => import('@/features/learn/LearnPage')) },
-      { path: 'data-entry', element: lazyPage(() => import('@/features/data/DataPortalPage')) },
+      // Legacy routes from the previous app (keep old links and bookmarks working)
+      { path: 'risk', element: <Navigate to="/explore" replace /> },
+      { path: 'education', element: <Navigate to="/learn" replace /> },
+      { path: 'data-entry', element: <Navigate to="/data" replace /> },
       { path: '*', element: lazyPage(() => import('./NotFound')) },
     ],
   },

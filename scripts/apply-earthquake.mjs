@@ -8,8 +8,9 @@
  *      correction of an acknowledged artifact (the limitation flagged it for exactly this).
  * Then recompute natural.aggregate (mean), hazard.total (scaled geomean), risk (cbrt). National untouched.
  */
+import { fileURLToPath } from 'url';
 import fs from 'fs';
-const ROOT = new URL('..', import.meta.url).pathname;
+const ROOT = fileURLToPath(new URL('..', import.meta.url));
 const data = JSON.parse(fs.readFileSync(ROOT + 'src/data/tanzania-inform-risk.json', 'utf8'));
 const readCsv = (p) => { const l = fs.readFileSync(ROOT + p, 'utf8').trim().split('\n'); const h = l[0].split(','); return l.slice(1).map((x) => { const c = x.split(','); const o = {}; h.forEach((k, i) => (o[k] = c[i])); return o; }); };
 const isN = (x) => typeof x === 'number' && isFinite(x);

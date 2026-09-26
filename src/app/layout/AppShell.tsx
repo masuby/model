@@ -28,6 +28,18 @@ function ScrollToTop() {
   return null;
 }
 
+/** Per-route document title (area profiles set their own, with the area name). */
+function DocumentTitle() {
+  const { pathname } = useLocation();
+  const { t, i18n } = useTranslation();
+  React.useEffect(() => {
+    if (pathname.startsWith('/area/')) return;
+    const key = pathname === '/' ? null : NAV.find((n) => pathname.startsWith(n.to))?.key;
+    document.title = key ? `${t(`nav.${key}`)} · ${t('appName')}` : `${t('appName')} — ${t('tagline')}`;
+  }, [pathname, t, i18n.language]);
+  return null;
+}
+
 function Header({ onSearch }: { onSearch: () => void }) {
   const { t } = useTranslation();
   const [mobileOpen, setMobileOpen] = React.useState(false);
@@ -36,7 +48,7 @@ function Header({ onSearch }: { onSearch: () => void }) {
   const isMac = typeof navigator !== 'undefined' && /Mac|iPhone|iPad/.test(navigator.platform);
 
   return (
-    <header className="sticky top-0 z-[1000] border-b border-border/70 bg-background/80 backdrop-blur-xl supports-[backdrop-filter]:bg-background/65">
+    <header className="site-header sticky top-0 z-[1000] border-b border-border/70 bg-background/80 backdrop-blur-xl supports-[backdrop-filter]:bg-background/65">
       <div className="flag-rule h-[3px] w-full" />
       <div className="mx-auto flex h-16 max-w-[1440px] items-center gap-3 px-4 sm:px-6">
         <Link to="/" className="rounded-xl focus-visible:outline-2" aria-label={t('appName')}>
@@ -107,7 +119,7 @@ function Footer() {
   const { mode } = useData();
   const build = typeof __BUILD__ !== 'undefined' ? __BUILD__ : 'dev';
   return (
-    <footer className="mt-20 border-t border-border bg-card/50">
+    <footer className="site-footer mt-20 border-t border-border bg-card/50">
       <div className="mx-auto grid max-w-[1440px] gap-10 px-4 py-12 sm:px-6 md:grid-cols-[1.4fr_1fr_1fr]">
         <div className="max-w-md">
           <Logo />
@@ -171,6 +183,7 @@ export function AppShell() {
         {t('nav.skipToContent')}
       </a>
       <ScrollToTop />
+      <DocumentTitle />
       <Header onSearch={() => palette.setOpen(true)} />
       <main id="main" className="flex-1">
         <Outlet />

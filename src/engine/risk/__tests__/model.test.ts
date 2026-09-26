@@ -60,6 +60,14 @@ describe('council maths', () => {
     });
     expect(fails.map((c) => c.name)).toEqual([]);
   });
+  it('region facilities are summed over distinct source units (no double counting of split districts)', () => {
+    for (const r of model.regions) {
+      const members = model.councilsByRegion.get(placeKey(r.name)) ?? [];
+      const distinct = new Map(members.map((m) => [m.sourceId, m]));
+      const expected = [...distinct.values()].reduce((s, m) => s + (m.facilities?.health ?? 0), 0);
+      expect(r.facilities?.health ?? 0).toBe(expected);
+    }
+  });
   it('region scores are INFORM aggregates (not a mean of risk scores)', () => {
     for (const r of model.regions) expect(r.risk).toBe(riskScore(r.dims.hazard.score, r.dims.vulnerability.score, r.dims.coping.score));
   });
@@ -99,6 +107,16 @@ describe('edits flow through every level', () => {
     const c2 = edited.byId.get(council.id)!;
     const h = council.floodHazard!;
     expect(indicatorValue(c2, 'hazard', 'flood')).toBe(Math.floor(Math.max(h, Math.sqrt(h * 10)) * 10 + 0.5) / 10);
+  });
+
+  it('a hazard edit keyed on the source unit reaches its councils; council edits take precedence', () => {
+    const siblings = model.councils.filter((c) => c.sourceId === council.sourceId);
+    const edited = buildModel({
+      [council.sourceId!]: { 'hazard:landslide': { value: 9.9, at } },
+      [council.id]: { 'hazard:landslide': { value: 1, at } },
+    });
+    expect(indicatorValue(edited.byId.get(council.id)!, 'hazard', 'landslide')).toBe(1);
+    for (const s of siblings.filter((x) => x.id !== council.id)) expect(indicatorValue(edited.byId.get(s.id)!, 'hazard', 'landslide')).toBe(9.9);
   });
 
   it('clearing an indicator (null) excludes it from the mean rather than zeroing it', () => {

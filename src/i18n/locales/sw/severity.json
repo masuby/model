@@ -1,0 +1,466 @@
+{
+  "header": {
+    "eyebrow": "Kielelezo cha Ukali cha INFORM · Tanzania",
+    "title": "Ukali wa janga",
+    "lead": "Hatari ya INFORM inaonyesha mahali janga lingeleta madhara makubwa zaidi kabla halijatokea. Ukali wa INFORM hupima uzito wa janga linaloendelea: athari zake, hali za watu walioathirika na utata wa kukabiliana nalo.",
+    "methodCta": "Jinsi inavyokokotolewa",
+    "riskSub": "Kabla ya janga · 0–10 · fungua ramani ya hatari",
+    "severityName": "Ukali wa INFORM",
+    "severitySub": "Wakati wa janga · 0–5 · kikokotoo hiki",
+    "here": "Uko hapa"
+  },
+  "illustrative": "Mfano",
+  "illustrativeTitle": "Haya ni matukio ya mfano, si data rasmi.",
+  "illustrativeNote": "Yanatumia ukubwa unaowezekana ili kuonyesha jinsi mbinu inavyofanya kazi. Badilisha kila takwimu kwa data iliyotathminiwa kabla ya kutumia matokeo katika ripoti ya hali.",
+  "steps": {
+    "dimScore": "Alama",
+    "scenario": {
+      "title": "Anza na tukio",
+      "lead": "Pakia janga la mfano la Tanzania uone mbinu ikifanya kazi, au anza tathmini mpya kwenye fomu tupu."
+    },
+    "area": {
+      "title": "Bainisha eneo lililoathirika",
+      "lead": "Bofya halmashauri kwenye ramani, au uzichague kutoka kwenye orodha. Idadi ya watu na eneo kutoka Sensa ya 2022 vinaweza kisha kujaza taarifa za Athari."
+    },
+    "impact": {
+      "lead": "Janga ni kubwa kiasi gani? Ukubwa wa eneo lililoathirika na watu wanaoishi humo (kijiografia, ⅓), pamoja na watu walioathirika, waliohama makazi au waliopoteza maisha (kibinadamu, ⅔)."
+    },
+    "conditions": {
+      "lead": "Hali za watu walioathirika ni mbaya kiasi gani? Kadiria idadi ya watu walio katika kila kiwango cha hali za kibinadamu."
+    },
+    "complexity": {
+      "lead": "Ni vigumu kiasi gani kukabiliana na janga? Muktadha wa kimuundo (jamii na usalama) na mazingira ya utendaji katika eneo husika."
+    },
+    "reliability": {
+      "title": "Uaminifu wa data",
+      "lead": "Matokeo yanaweza kuaminika kiasi gani? Huripotiwa kando ya kielelezo, na hayachanganywi nacho."
+    }
+  },
+  "scenario": {
+    "aria": "Tukio",
+    "affected": "walioathirika",
+    "displaced": "waliohama",
+    "deaths": "vifo",
+    "severity": "Ukali",
+    "edited": "limebadilishwa",
+    "restore": "Rejesha takwimu za tukio",
+    "clearForm": "Futa fomu",
+    "riverineFlood": {
+      "name": "Mafuriko ya mto",
+      "blurb": "Mvua za masika za muda mrefu zinasababisha mto mkubwa kufurika, na kuzamisha vijiji vya mabondeni na kuwahamisha makumi ya maelfu ya watu."
+    },
+    "drought": {
+      "name": "Ukame",
+      "blurb": "Kushindwa kwa mvua za vuli katika mikoa kadhaa kame kunawaacha zaidi ya watu milioni moja bila chakula, maji na malisho ya kutosha."
+    },
+    "landslide": {
+      "name": "Maporomoko ya ardhi",
+      "blurb": "Mvua kubwa zinasababisha maporomoko kwenye miteremko mikali ya nyanda za juu: eneo ni dogo, lakini maisha na nyumba nyingi zinapotea."
+    },
+    "custom": {
+      "name": "Fomu tupu / maalum",
+      "blurb": "Anza na fomu tupu. Viashiria vya kimuundo vya kitaifa vinabaki vimejazwa.",
+      "cta": "Weka takwimu zako"
+    }
+  },
+  "area": {
+    "title": "Eneo lililoathirika",
+    "hint": "Bofya kuongeza au kuondoa",
+    "mapHint": "Bofya halmashauri kuziongeza au kuziondoa",
+    "mapLegend": "Hatari ya INFORM kabla ya janga",
+    "selected_one": "Halmashauri {{count}} imechaguliwa",
+    "selected_other": "Halmashauri {{count}} zimechaguliwa",
+    "add": "Ongeza halmashauri…",
+    "addAria": "Ongeza halmashauri kwenye eneo lililoathirika",
+    "listAria": "Halmashauri zilizo katika eneo lililoathirika",
+    "remove": "Ondoa {{name}}",
+    "empty": "Bado hakuna halmashauri iliyochaguliwa. Bofya ramani au chagua kutoka kwenye orodha.",
+    "population": "Watu katika eneo",
+    "populationSub": "Sensa ya NBS 2022",
+    "areaKm2": "Eneo",
+    "areaSub": "Idadi ya watu ÷ msongamano",
+    "useCensus": "Tumia idadi ya watu na eneo la sensa",
+    "applied": "Takwimu za sensa zimetumika",
+    "appliedToast": "Takwimu za sensa zimewekwa kwenye taarifa za Athari",
+    "appliedToastSub": "Watu {{people}} · km² {{area}}",
+    "censusNote": "Hizi ni jumla za halmashauri nzima. Rekebisha taarifa za Athari ikiwa ni sehemu tu ya halmashauri iliyoathirika.",
+    "context": "Hatari ya eneo lililoathirika kabla ya janga",
+    "contextMean": "Wastani wa Hatari ya INFORM (0–10)",
+    "contextRange": "Kuanzia {{min}} hadi {{max}}",
+    "contextNote": "Kwa muktadha tu: Hatari ya INFORM inaeleza hali ya eneo kabla ya janga na si sehemu ya fomula ya ukali.",
+    "contextEmpty": "Chagua halmashauri uone Hatari yao ya INFORM kabla ya janga."
+  },
+  "weight": "Uzito {{w}}",
+  "sub": {
+    "geographicalLead": "Ukubwa wa janga kwa eneo na kwa idadi ya watu.",
+    "humanLead": "Madhara ya moja kwa moja kwa watu. Asilimia hukokotolewa zenyewe.",
+    "conditionsLead": "Wagawe watu wote walio katika eneo lililoathirika kwenye viwango vitano vya hali za kibinadamu (INFORM Severity, Jedwali 1). Watu walio katika viwango 3–5 ndio wenye mahitaji; kiwango 1 hujazwa chenyewe kama watu waliobaki.",
+    "societySafetyLead": "Viashiria vya kimuundo vya kitaifa vya Tanzania, vimejazwa kutoka vyanzo vya umma. Vibadilishe ikiwa ushahidi wa eneo lililoathirika unaonyesha tofauti.",
+    "operatingEnvironmentLead": "Nani ameathirika, na ni vigumu kiasi gani kwa misaada na watu kufikiana."
+  },
+  "field": {
+    "areaAffectedKm2": {
+      "label": "Eneo lililoathirika",
+      "help": "Ukubwa wa ardhi ndani ya eneo lililoathirika. Dokezo: lijaze kutoka halmashauri ulizochagua katika hatua ya 2.",
+      "short": "Eneo lililoathirika"
+    },
+    "peopleInArea": {
+      "label": "Watu wanaoishi katika eneo lililoathirika",
+      "help": "Watu wote wanaoishi katika eneo lililoathirika, wawe wameathirika au la (kwa mfano, Sensa ya 2022).",
+      "short": "Watu katika eneo"
+    },
+    "peopleAffected": {
+      "label": "Watu walioathirika",
+      "help": "Watu ambao maisha, makazi au njia zao za kujipatia kipato zimeathirika moja kwa moja.",
+      "short": "Watu walioathirika"
+    },
+    "displaced": {
+      "label": "Watu waliohama makazi",
+      "help": "Watu waliolazimika kuondoka makwao: kambini, kwenye majengo ya umma au kwa familia zinazowahifadhi.",
+      "short": "Waliohama makazi"
+    },
+    "fatalities": {
+      "label": "Vifo",
+      "help": "Vifo vilivyosababishwa na tukio, pamoja na watu waliopotea wanaodhaniwa kufariki.",
+      "short": "Vifo"
+    },
+    "level5": { "short": "Watu katika kiwango 5" },
+    "level4": { "short": "Watu katika kiwango 4" },
+    "level3": { "short": "Watu katika kiwango 3" },
+    "level2": { "short": "Watu katika kiwango 2" },
+    "groups": {
+      "label": "Makundi ya watu yaliyoathirika",
+      "help": "Weka alama kwa kila kundi lililoathirika na janga. Kadiri makundi yanavyotofautiana, ndivyo ukabilianaji unavyokuwa mgumu zaidi.",
+      "short": "Makundi yaliyoathirika"
+    },
+    "accessOfActors": {
+      "label": "Ufikiaji wa watoa misaada kwa watu",
+      "help": "Vizuizi vya usafiri, urasimu, kuingiliwa kwa shughuli au vurugu dhidi ya wafanyakazi wa misaada.",
+      "short": "Ufikiaji wa watoa misaada"
+    },
+    "accessOfPeople": {
+      "label": "Ufikiaji wa watu kwa misaada",
+      "help": "Watu wasioweza kufikia huduma au misaada, au waliozuiliwa kutembea.",
+      "short": "Ufikiaji wa watu kwa misaada"
+    },
+    "physicalSecurityConstraints": {
+      "label": "Vikwazo vya kimazingira na kiusalama",
+      "help": "Barabara na madaraja yaliyosombwa, maji ya mafuriko, ardhi ngumu kupitika au ukosefu wa usalama.",
+      "short": "Vikwazo vya kimazingira"
+    },
+    "gini": {
+      "label": "Ukosefu wa usawa wa kipato (kielezo cha Gini)",
+      "help": "0 = usawa kamili, 100 = ukosefu mkubwa kabisa wa usawa. Ukosefu mkubwa wa usawa hudhoofisha mshikamano wa kijamii.",
+      "short": "Kielezo cha Gini"
+    },
+    "genderInequality": {
+      "label": "Kielezo cha Ukosefu wa Usawa wa Kijinsia (UNDP)",
+      "help": "0 = usawa kati ya wanawake na wanaume, 1 = ukosefu mkubwa kabisa wa usawa.",
+      "short": "Usawa wa kijinsia"
+    },
+    "conflictIntensity": {
+      "label": "Ukubwa wa migogoro",
+      "help": "0 = hakuna mgogoro … 5 = vita (kipimo cha HIIK Conflict Barometer), kwa eneo lililoathirika.",
+      "short": "Ukubwa wa migogoro"
+    },
+    "violenceFatalities": {
+      "label": "Vifo vitokanavyo na vurugu za kisiasa",
+      "help": "Vifo vilivyosababishwa na vurugu za makundi yaliyojipanga katika miezi 12 iliyopita (kwa mfano ACLED).",
+      "short": "Vifo vya vurugu"
+    },
+    "corruptionPerception": {
+      "label": "Kielezo cha Mtazamo wa Rushwa",
+      "help": "0 = rushwa kubwa sana, 100 = hakuna rushwa. Thamani ya juu ni bora, hivyo alama yake hugeuzwa.",
+      "short": "Mtazamo wa rushwa"
+    },
+    "ruleOfLawPercentile": {
+      "label": "Utawala wa sheria (asilimia ya WGI)",
+      "help": "Nafasi ya nchi kwa asilimia ikilinganishwa na nchi nyingine. Thamani ya juu ni bora, hivyo alama yake hugeuzwa.",
+      "short": "Utawala wa sheria"
+    },
+    "dataReliability": {
+      "label": "Uaminifu wa vyanzo vya data",
+      "short": "Uaminifu wa data"
+    },
+    "daysSinceUpdate": {
+      "label": "Siku tangu data zilipohuishwa mara ya mwisho",
+      "help": "Data zilizohuishwa ndani ya siku 30 hupata alama ya juu zaidi; data za zaidi ya mwaka mmoja hupata alama ya chini kabisa.",
+      "short": "Siku tangu kuhuishwa"
+    }
+  },
+  "derived": {
+    "areaPct": "{{v}}% ya eneo la nchi kavu la Tanzania",
+    "peoplePct": "{{v}}% ya wakazi wa Tanzania",
+    "affectedPct": "{{v}}% ya watu walio katika eneo",
+    "displacedPct": "{{v}}% ya watu walioathirika",
+    "fatalRate": "{{v}} kwa kila watu 10,000 walioathirika"
+  },
+  "level": {
+    "short": "Kiwango {{n}}",
+    "inputLabel": "Watu katika kiwango {{n}} ({{name}})",
+    "5": {
+      "name": "Mbaya kupindukia",
+      "desc": "Vifo au madhara yasiyoweza kurekebishwa yameenea. Hali ya maisha imeporomoka na njia zote za kukabiliana zimekwisha."
+    },
+    "4": {
+      "name": "Mbaya sana",
+      "desc": "Hali ya maisha imevunjika. Watu wanaishi kwa kutegemea misaada ya kibinadamu au mbinu za dharura; kuna madhara makubwa ya kimwili na kiakili."
+    },
+    "3": {
+      "name": "Mbaya kiasi",
+      "desc": "Hali ya maisha inazorota. Baadhi ya mahitaji ya msingi hayawezi kutimizwa bila mbinu za dharura, kama kuuza mali za uzalishaji."
+    },
+    "2": {
+      "name": "Chini ya shinikizo",
+      "desc": "Hali ya maisha iko chini ya shinikizo. Mahitaji ya msingi yanatimizwa tu kwa mbinu zinazodhoofisha njia za kujipatia kipato."
+    },
+    "1": {
+      "name": "Hakuna au kidogo",
+      "desc": "Hali ya maisha inakubalika; mahitaji ya msingi yanatimizwa bila mbinu zenye madhara. Hukokotolewa kama watu waliobaki katika eneo."
+    }
+  },
+  "conditions": {
+    "inNeedTag": "Wenye mahitaji",
+    "remainder": "waliobaki",
+    "distribution": "Watu katika eneo kwa kiwango cha hali",
+    "ofPeople": "kati ya watu {{n}}",
+    "needArea": "Weka idadi ya watu wanaoishi katika eneo lililoathirika (hatua ya 3) uone mgawanyo na mkusanyiko wa hali.",
+    "pinSub": "Watu katika viwango 3, 4 na 5",
+    "concentrationSub": "Kiwango cha juu zaidi ambacho jumla ya watu, ikihesabiwa kuanzia kiwango 5 kushuka chini, inazidi 5% ya watu walio katika eneo"
+  },
+  "defaults": {
+    "national": "Thamani ya kitaifa",
+    "edited": "Imebadilishwa",
+    "reset": "Rudisha {{value}}",
+    "resetAll": "Rudisha zote kwenye thamani za kitaifa"
+  },
+  "source": {
+    "gini": "Benki ya Dunia · Kielezo cha Gini (HBS 2018)",
+    "genderInequality": "UNDP · Kielezo cha Ukosefu wa Usawa wa Kijinsia (HDR 2023/24)",
+    "conflictIntensity": "Kipimo cha HIIK Conflict Barometer 0–5 · tathmini ya mchambuzi",
+    "violenceFatalities": "ACLED · miezi 12 iliyopita · mchambuzi",
+    "corruptionPerception": "Transparency International · CPI 2024",
+    "ruleOfLawPercentile": "Benki ya Dunia · WGI, asilimia ya utawala wa sheria"
+  },
+  "groups": {
+    "count_one": "Kundi {{count}} kati ya 5",
+    "count_other": "Makundi {{count}} kati ya 5",
+    "notSet": "Bado halijatathminiwa"
+  },
+  "group": {
+    "idps": "Wakimbizi wa ndani (IDPs)",
+    "refugees": "Wakimbizi",
+    "returnees": "Waliorejea makwao",
+    "hostCommunities": "Jamii zinazowapokea wageni",
+    "nonHost": "Walioathirika wengine (wasiohama)"
+  },
+  "access": {
+    "notSet": "Bado haijatathminiwa. Chagua alama kuanzia 0 (hakuna vikwazo) hadi 3 (vikwazo vikubwa).",
+    "level": {
+      "0": { "name": "Hakuna", "desc": "Hakuna vikwazo vya ufikiaji: misaada na watu wanafikiana bila tatizo." },
+      "1": { "name": "Kidogo", "desc": "Vikwazo au ucheleweshaji wa hapa na pale; watu wengi wanafikiwa." },
+      "2": { "name": "Wastani", "desc": "Vikwazo vya mara kwa mara; sehemu za eneo au za watu ni vigumu kufikiwa." },
+      "3": { "name": "Vikubwa", "desc": "Vikwazo vikubwa; sehemu kubwa ya watu walioathirika haiwezi kufikiwa." }
+    }
+  },
+  "reliabilityInput": {
+    "low": { "name": "Chini", "desc": "Taarifa zisizothibitishwa, chanzo kimoja au makadirio ya jumla." },
+    "medium": { "name": "Wastani", "desc": "Tathmini za sehemu au takwimu rasmi za awali." },
+    "high": { "name": "Juu", "desc": "Tathmini ya sekta nyingi iliyothibitishwa au takwimu rasmi." }
+  },
+  "reliabilityNote": "Kielelezo cha uaminifu huunganisha uaminifu wa vyanzo, upya wa data na ukamilifu wake. Huonyeshwa kando ya alama ya ukali na hakiibadilishi kamwe.",
+  "unit": {
+    "people": "watu",
+    "km2": "km²",
+    "percent": "%",
+    "per10k": "kwa 10,000",
+    "score": "alama",
+    "count": "makundi",
+    "index": "kielezo",
+    "days": "siku"
+  },
+  "validation": {
+    "negative": "Weka sifuri au zaidi.",
+    "max": "Kiwango cha juu ni {{max}}."
+  },
+  "issue": {
+    "negative": "Baadhi ya thamani ni hasi.",
+    "levelsExceedArea": "Watu katika viwango 2–5 ({{sum}}) wanazidi watu wanaoishi katika eneo ({{area}}).",
+    "affectedExceedsArea": "Walioathirika ({{affected}}) ni wengi kuliko wanaoishi katika eneo ({{area}}).",
+    "displacedExceedsAffected": "Waliohama makazi ({{displaced}}) ni wengi kuliko walioathirika ({{affected}}).",
+    "fatalitiesExceedAffected": "Vifo ({{fatalities}}) ni vingi kuliko idadi ya walioathirika ({{affected}}).",
+    "pinExceedsAffected": "Watu wenye mahitaji ({{pin}}) wanazidi walioathirika ({{affected}}).",
+    "areaExceedsNational": "Ni kubwa kuliko Tanzania nzima ({{max}} km²).",
+    "peopleExceedNational": "Ni zaidi ya idadi ya watu wote wa Tanzania ({{max}})."
+  },
+  "dim": {
+    "impact": "Athari",
+    "conditions": "Hali za kibinadamu",
+    "complexity": "Utata"
+  },
+  "cat": {
+    "geographical": "Kijiografia",
+    "human": "Kibinadamu",
+    "peopleInNeed": "Watu wenye mahitaji",
+    "concentration": "Mkusanyiko wa hali",
+    "societySafety": "Jamii na usalama",
+    "operatingEnvironment": "Mazingira ya utendaji"
+  },
+  "comp": {
+    "affectedArea": "Ukubwa wa eneo lililoathirika",
+    "peopleInArea": "Watu katika eneo lililoathirika",
+    "peopleAffected": "Watu walioathirika",
+    "peopleByCategory": "Kuhama makazi na vifo",
+    "peopleInNeed": "Watu wenye mahitaji",
+    "concentration": "Mkusanyiko wa hali",
+    "socialCohesion": "Mshikamano wa kijamii",
+    "safetySecurity": "Usalama",
+    "ruleOfLaw": "Utawala wa sheria na utawala bora",
+    "diversityOfGroups": "Aina za makundi yaliyoathirika",
+    "humanitarianAccess": "Ufikiaji wa kibinadamu"
+  },
+  "ind": {
+    "areaAffectedKm2": "Eneo lililoathirika (km²)",
+    "areaAffectedPct": "Eneo lililoathirika (% ya Tanzania)",
+    "peopleInArea": "Watu katika eneo lililoathirika",
+    "peopleInAreaPct": "Watu katika eneo (% ya wakazi wote)",
+    "peopleAffected": "Watu walioathirika",
+    "peopleAffectedPct": "Walioathirika (% ya watu katika eneo)",
+    "displaced": "Watu waliohama makazi",
+    "displacedPct": "Waliohama makazi (% ya walioathirika)",
+    "fatalities": "Vifo",
+    "fatalitiesPer10k": "Vifo kwa kila walioathirika 10,000",
+    "peopleInNeed": "Watu wenye mahitaji (viwango 3–5)",
+    "concentrationLevel": "Mkusanyiko wa hali (kiwango)",
+    "gini": "Ukosefu wa usawa wa kipato (Gini)",
+    "genderInequality": "Kielezo cha Ukosefu wa Usawa wa Kijinsia",
+    "conflictIntensity": "Ukubwa wa migogoro",
+    "violenceFatalities": "Vifo vitokanavyo na vurugu (miezi 12)",
+    "corruptionPerception": "Kielezo cha Mtazamo wa Rushwa",
+    "ruleOfLawPercentile": "Utawala wa sheria (asilimia)",
+    "groupsAffected": "Aina za makundi yaliyoathirika",
+    "accessOfActors": "Ufikiaji wa watoa misaada",
+    "accessOfPeople": "Ufikiaji wa watu kwa misaada",
+    "physicalSecurityConstraints": "Vikwazo vya kimazingira na kiusalama"
+  },
+  "results": {
+    "eyebrow": "Matokeo ya papo hapo",
+    "title": "Kielelezo cha Ukali cha INFORM",
+    "category": "Daraja {{level}} kati ya 5",
+    "announce": "Ukali {{score}}, {{category}}",
+    "incomplete": "Haijakamilika",
+    "incompleteLead": "Kielelezo kinahitaji vipimo vyote vitatu. Bado vinakosekana:",
+    "notComputed": "Haijakokotolewa",
+    "issues_one": "Taarifa {{count}} inahitaji kukaguliwa",
+    "issues_other": "Taarifa {{count}} zinahitaji kukaguliwa",
+    "dimensions": "Vipimo",
+    "expandAll": "Fungua zote",
+    "collapseAll": "Funga zote",
+    "weightInG": "{{w}} ndani ya G",
+    "formula": "Fomula kwa namba zako",
+    "formulaLhs": "Ukali",
+    "formulaHint": "G ni wastani wa kijiometri wenye uzito wa INFORM: hugeuza alama, huchukua wastani wa kijiometri kisha hugeuza tena, hivyo kipimo kimoja chenye ukali mkubwa hakififishwi na wastani.",
+    "reliability": "Uaminifu",
+    "reliabilityAria": "Uaminifu {{score}} kati ya 5",
+    "completeness": "Ukamilifu wa data",
+    "completenessSub": "viashiria {{have}} kati ya {{total}}",
+    "sourceReliability": "Uaminifu wa vyanzo",
+    "recency": "Mara ya mwisho kuhuishwa",
+    "daysAgo_one": "siku {{n}} iliyopita",
+    "daysAgo_other": "siku {{n}} zilizopita",
+    "notSet": "Haijawekwa",
+    "reliabilityNote": "Huripotiwa pamoja na kielelezo; haibadilishi alama ya ukali.",
+    "export": "Hamisha",
+    "copy": "Nakili muhtasari wa ripoti ya hali",
+    "copied": "Muhtasari umenakiliwa. Ubandike kwenye ripoti yako ya hali.",
+    "copyFailed": "Imeshindikana kunakili.",
+    "mobileCta": "Matokeo kamili"
+  },
+  "table": {
+    "eyebrow": "Viashiria",
+    "title": "Kutoka takwimu ghafi hadi alama 0–5",
+    "lead": "Kila kiashiria hupimwa kati ya kiwango cha chini na cha juu cha rejea. Idadi za watu hutumia kipimo cha logi, hivyo kupanda kutoka watu 1,000 hadi 10,000 kuna uzito sawa na kupanda kutoka 10,000 hadi 100,000.",
+    "caption": "Viashiria vya ukali pamoja na thamani ghafi, vigezo vya urekebishaji na alama 0–5",
+    "indicator": "Kiashiria",
+    "raw": "Thamani ghafi",
+    "calibration": "Vigezo vya urekebishaji",
+    "calibrationHint": "Masafa ya rejea yaliyorekebishwa kwa majanga ya ngazi za chini nchini Tanzania. Ni vigezo vya kielelezo, si data iliyopimwa.",
+    "min": "Chini",
+    "max": "Juu",
+    "scale": "Kipimo",
+    "score": "Alama (0–5)",
+    "log": "log₁₀",
+    "linear": "mstari",
+    "derived": "imekokotolewa",
+    "inverse": "imegeuzwa"
+  },
+  "derivation": {
+    "areaAffectedPct": "Eneo lililoathirika ÷ eneo la Tanzania ({{area}} km²) × 100",
+    "peopleInAreaPct": "Watu katika eneo ÷ idadi ya watu wa Tanzania ({{pop}}, Sensa ya 2022) × 100",
+    "peopleAffectedPct": "Walioathirika ÷ watu katika eneo × 100",
+    "displacedPct": "Waliohama makazi ÷ walioathirika × 100",
+    "fatalitiesPer10k": "Vifo ÷ walioathirika × 10,000",
+    "peopleInNeed": "Jumla ya watu katika viwango 3, 4 na 5",
+    "concentrationLevel": "Kiwango cha juu zaidi ambacho jumla ya watu (kuanzia kiwango 5 kushuka) inazidi 5% ya watu walio katika eneo",
+    "groupsAffected": "Idadi ya makundi tofauti ya watu yaliyoathirika (yasiyozidi 5)"
+  },
+  "method": {
+    "eyebrow": "Mbinu",
+    "title": "Jinsi Kielelezo cha Ukali cha INFORM kinavyojengwa",
+    "lead": "Viashiria hupimwa kwenye 0–5, huchukuliwa wastani kuwa vipengele, huunganishwa kuwa makundi na vipimo kwa wastani wa kijiometri wa INFORM, kisha hupewa uzito kuwa kielelezo kimoja.",
+    "chainAria": "Ngazi za ujumlishaji",
+    "levels": {
+      "indicators": "Viashiria",
+      "components": "Vipengele",
+      "categories": "Makundi",
+      "dimensions": "Vipimo",
+      "index": "Kielelezo"
+    },
+    "dimWeight": "uzito {{w}}",
+    "legendG": "wastani wa kijiometri wenye uzito wa INFORM (uliogeuzwa, hivyo thamani za juu hutawala)",
+    "legendMean": "wastani wa kawaida",
+    "live": "Alama zilizo kwenye visanduku hubadilika papo hapo kulingana na taarifa zako.",
+    "cards": {
+      "normalise": {
+        "title": "Pima kila kiashiria",
+        "body": "Kila kiashiria huwekwa kwenye 0–5 kati ya kiwango cha chini na cha juu cha rejea. Idadi kamili hutumia log₁₀(1 + x) ili kila ngazi ya ukubwa ihesabiwe sawa; viashiria ambavyo thamani ya juu ni bora hugeuzwa."
+      },
+      "aggregate": {
+        "title": "Jumlisha",
+        "body": "Viashiria huchukuliwa wastani kuwa vipengele. Vipengele, makundi na vipimo huunganishwa kwa G, wastani wa kijiometri wenye uzito wa INFORM, ili kipengele kimoja chenye ukali mkubwa kisififishwe na vile vyepesi."
+      },
+      "classify": {
+        "title": "Weka daraja",
+        "body": "Ukali = 0.7 × G(Athari ⅓, Hali ⅔) + 0.3 × Utata, huripotiwa kwa desimali moja. Daraja ni alama iliyopandishwa hadi namba kamili inayofuata: 3.1 ni daraja 4 (Juu), 3.0 ni daraja 3 (Wastani)."
+      },
+      "reliability": {
+        "title": "Pima uaminifu",
+        "body": "Uaminifu wa vyanzo, upya na ukamilifu wa data huunda kielelezo tofauti cha uaminifu cha 1–5. Kinaonyesha kiasi cha kuamini matokeo lakini hakiyabadilishi."
+      }
+    },
+    "cite": {
+      "title": "Marejeo",
+      "jrc": "Poljanšek, K. na wenzake (2020). INFORM Severity Index: Concept and methodology. Kamisheni ya Ulaya, Kituo cha Utafiti cha Pamoja (JRC).",
+      "acaps": "ACAPS (2024). INFORM Severity Index: data collection manual. ACAPS."
+    },
+    "adaptTitle": "Marekebisho kwa Tanzania",
+    "adapt": "Muundo, uzito, ujumlishaji wa kijiometri na madaraja ya kupandisha alama yanafuata mbinu rasmi. Masafa ya rejea ya viashiria ni vigezo vya urekebishaji kwa majanga ya ngazi za chini nchini Tanzania; thamani za awali za Jamii na usalama ni viashiria vya kimuundo vya kitaifa.",
+    "denominators": "Vigawanyo vya kitaifa: watu {{pop}} (Sensa ya NBS 2022) na km² {{area}}."
+  },
+  "summary": {
+    "title": "Ukali wa INFORM — {{name}}",
+    "illustrative": "(tukio la mfano, si data rasmi)",
+    "more_one": "na nyingine {{count}}",
+    "more_other": "na nyingine {{count}}",
+    "area": "Eneo lililoathirika: {{councils}}",
+    "noArea": "halijabainishwa",
+    "areaFigures": "Watu {{people}} wanaoishi kwenye km² {{area}}",
+    "severity": "Ukali: {{score}} / 5 — {{category}} (daraja {{level}} kati ya 5)",
+    "incomplete": "Ukali: haujakokotolewa — taarifa hazijakamilika",
+    "dims": "Athari {{impact}} · Hali {{conditions}} · Utata {{complexity}}",
+    "figures": "Walioathirika {{affected}} · Waliohama makazi {{displaced}} · Vifo {{fatalities}} · Wenye mahitaji (viwango 3–5) {{pin}}",
+    "reliability": "Uaminifu {{score}}/5 ({{label}}) · ukamilifu wa data {{completeness}}%",
+    "risk": "Hatari ya INFORM ya eneo kabla ya janga: {{risk}} / 10",
+    "method": "Mbinu: Kielelezo cha Ukali cha INFORM (JRC/ACAPS). Imetolewa na INFORM Tanzania tarehe {{date}}."
+  }
+}

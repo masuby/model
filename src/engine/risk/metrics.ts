@@ -16,7 +16,7 @@ export interface Metric {
   kind: 'risk' | 'dimension' | 'indicator';
   dimension: DimensionKey | null;
   indicator: string | null;
-  /** i18n key for the label. */
+  /** Fully-qualified i18n key (`ns:key`), usable with t() from any namespace. */
   labelKey: string;
   scale: Scale | null;
   get: (u: Unit) => number | null;
@@ -33,7 +33,7 @@ export function parseMetric(key: string | null | undefined): Metric {
         kind: 'dimension',
         dimension: dim,
         indicator: null,
-        labelKey: `dimensions.${dim}`,
+        labelKey: `common:dimensions.${dim}`,
         scale,
         get: (u) => u.dims[dim].score,
         classOf: (v) => classify(v, scale),
@@ -48,7 +48,7 @@ export function parseMetric(key: string | null | undefined): Metric {
         kind: 'indicator',
         dimension: dim,
         indicator: ind,
-        labelKey: `indicators.${ind}`,
+        labelKey: `indicators:${ind}`,
         scale: null,
         get: (u) => indicatorValue(u, dim, ind),
         classOf: () => null,
@@ -60,7 +60,7 @@ export function parseMetric(key: string | null | undefined): Metric {
     kind: 'risk',
     dimension: null,
     indicator: null,
-    labelKey: 'common.informRisk',
+    labelKey: 'common:informRisk',
     scale: 'risk',
     get: (u) => u.risk,
     classOf: (v) => classify(v, 'risk'),

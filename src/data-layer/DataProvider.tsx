@@ -21,6 +21,10 @@ interface DataContextValue {
   mode: Repository['mode'];
   profile: Profile | null;
   authLoading: boolean;
+  /** Supabase mode: a session exists (the user is signed in), even if the profile failed to load. */
+  signedIn: boolean;
+  /** Supabase mode: the profile lookup failed for a signed-in user (e.g. missing profile row). */
+  authError: string | null;
   /** Local demo mode only: switch the simulated role. */
   setDemoRole: (role: Role) => void;
   signInWithEmail: (email: string) => Promise<void>;
@@ -32,7 +36,8 @@ const DataContext = React.createContext<DataContextValue | null>(null);
 
 const DEMO_KEY = 'inform.demoRole';
 const demoProfile = (role: Role): Profile => ({
-  id: 'local-demo',
+  // One identity per demo role, so a demo reviewer never sees the demo officer's work as their own.
+  id: `local-demo-${role}`,
   fullName: role === 'pmo' ? 'Demo PMO reviewer' : role === 'sector' ? 'Demo sector officer' : role === 'admin' ? 'Demo administrator' : 'Visitor',
   institution: 'Demo',
   role,
@@ -69,7 +74,12 @@ function useSupabaseProfile(enabled: boolean) {
     },
   });
 
-  return { session, profile: profileQuery.data ?? null, loading: loading || (!!session && profileQuery.isLoading) };
+  return {
+    session,
+    profile: profileQuery.data ?? null,
+    loading: loading || (!!session && profileQuery.isLoading),
+    error: profileQuery.error ? (profileQuery.error as Error).message : null,
+  };
 }
 
 function DataProviderInner({ children }: { children: React.ReactNode }) {
@@ -102,6 +112,8 @@ function DataProviderInner({ children }: { children: React.ReactNode }) {
       mode: repo.mode,
       profile: repo.mode === 'supabase' ? sbAuth.profile : demoProfile(demoRole),
       authLoading: repo.mode === 'supabase' ? sbAuth.loading : false,
+      signedIn: repo.mode === 'supabase' ? !!sbAuth.session : true,
+      authError: repo.mode === 'supabase' ? sbAuth.error : null,
       setDemoRole,
       signInWithEmail: async (email) => {
         if (!sb) return;
@@ -115,10 +127,11 @@ function DataProviderInner({ children }: { children: React.ReactNode }) {
       },
       signOut: async () => {
         if (sb) await sb.auth.signOut();
-        queryClient.removeQueries({ queryKey: ['profile'] });
+        // Drop everything user-specific so the next person on this device sees nothing of the last.
+        for (const key of ['profile', 'submissions', 'audit']) queryClient.removeQueries({ queryKey: [key] });
       },
     };
-  }, [repo, sbAuth.profile, sbAuth.loading, demoRole, setDemoRole]);
+  }, [repo, sbAuth.profile, sbAuth.loading, sbAuth.session, sbAuth.error, demoRole, setDemoRole]);
 
   return <DataContext.Provider value={value}>{children}</DataContext.Provider>;
 }
@@ -163,7 +176,7 @@ export function useSubmissions() {
 
 export function useAudit(limit = 100) {
   const { repo, profile } = useData();
-  return useQuery({ queryKey: ['audit', repo.mode, limit], queryFn: () => repo.listAudit(limit), enabled: !!profile });
+  return useQuery({ queryKey: ['audit', repo.mode, profile?.id, limit], queryFn: () => repo.listAudit(limit), enabled: !!profile });
 }
 
 function useInvalidate() {

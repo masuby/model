@@ -203,7 +203,10 @@ export function aggregateUnits(members: Unit[], id: string, name: string, level:
   const areaOf = (m: Unit) =>
     m.exposure?.areaKm2 ?? (isNum(m.exposure?.population) && isNum(m.exposure?.density) && m.exposure.density > 0 ? m.exposure.population / m.exposure.density : 0);
   const area = members.reduce((s, m) => s + areaOf(m), 0);
-  const sumFac = (k: keyof NonNullable<Unit['facilities']>) => members.reduce((s, m) => s + (m.facilities?.[k] ?? 0), 0);
+  // Facilities are recorded per INFORM source unit and copied onto each council that shares it, so sum
+  // over DISTINCT source units — otherwise districts split into several councils are counted twice.
+  const facilityUnits = [...new Map(members.map((m) => [m.sourceId ?? m.id, m])).values()];
+  const sumFac = (k: keyof NonNullable<Unit['facilities']>) => facilityUnits.reduce((s, m) => s + (m.facilities?.[k] ?? 0), 0);
   const edits: Unit['edits'] = {};
   for (const m of members) Object.assign(edits, m.edits);
   return {
@@ -282,7 +285,10 @@ export function buildModel(overrides: Overrides = {}): RiskModel {
       // V & C edits made on the source unit are visible on every council that shares it.
       edits: Object.fromEntries(Object.entries(src.edits).filter(([k]) => !k.startsWith('hazard:'))),
     };
-    applyEdits(council, overrides[council.id]);
+    // Hazard/exposure edits keyed on the SOURCE unit (region/nation bulk entry, edits migrated from the
+    // previous app) apply to each of its councils first; the council's own edits then take precedence.
+    const srcHazard = Object.fromEntries(Object.entries(overrides[src.id] ?? {}).filter(([k]) => k.startsWith('hazard:')));
+    applyEdits(council, { ...srcHazard, ...overrides[council.id] });
     council.risk = riskScore(council.dims.hazard.score, council.dims.vulnerability.score, council.dims.coping.score);
     councils.push(council);
   }

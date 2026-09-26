@@ -103,6 +103,28 @@ drop trigger if exists on_auth_user_created on auth.users;
 create trigger on_auth_user_created after insert on auth.users
 for each row execute function public.handle_new_user();
 
+-- Never trust the client for authorship or review state: a submission is always created pending, by
+-- the caller, with the caller's profile name, and with empty review fields.
+create or replace function public.normalise_submission()
+returns trigger
+language plpgsql security definer set search_path = public
+as $$
+begin
+  new.author_id     := auth.uid();
+  new.author_name   := coalesce((select nullif(full_name, '') from public.profiles where id = auth.uid()), 'User');
+  new.status        := 'pending';
+  new.created_at    := now();
+  new.reviewed_at   := null;
+  new.reviewer_id   := null;
+  new.reviewer_name := null;
+  new.review_note   := null;
+  return new;
+end $$;
+
+drop trigger if exists before_submission_insert on public.submissions;
+create trigger before_submission_insert before insert on public.submissions
+for each row execute function public.normalise_submission();
+
 -- Log every new submission.
 create or replace function public.log_submission()
 returns trigger
@@ -170,7 +192,8 @@ begin
 end $$;
 
 -- Revert one approved value back to the shipped baseline.
-create or replace function public.revert_value(p_unit_id text, p_ref text)
+drop function if exists public.revert_value(text, text);
+create or replace function public.revert_value(p_unit_id text, p_ref text, p_unit_name text default null)
 returns void
 language plpgsql security definer set search_path = public
 as $$
@@ -181,14 +204,14 @@ begin
   end if;
   select coalesce(nullif(full_name, ''), 'Reviewer') into reviewer from public.profiles where id = auth.uid();
   delete from public.indicator_values where unit_id = p_unit_id and ref = p_ref;
-  insert into public.audit_log (actor_id, actor_name, action, unit_id, detail)
-  values (auth.uid(), reviewer, 'reverted', p_unit_id, p_ref);
+  insert into public.audit_log (actor_id, actor_name, action, unit_id, unit_name, detail)
+  values (auth.uid(), reviewer, 'reverted', p_unit_id, p_unit_name, p_ref);
 end $$;
 
 revoke all on function public.review_submission(uuid, text, text) from public, anon;
-revoke all on function public.revert_value(text, text) from public, anon;
+revoke all on function public.revert_value(text, text, text) from public, anon;
 grant execute on function public.review_submission(uuid, text, text) to authenticated;
-grant execute on function public.revert_value(text, text) to authenticated;
+grant execute on function public.revert_value(text, text, text) to authenticated;
 
 -- ---------------------------------------------------------------------------------------------------
 -- Row-level security

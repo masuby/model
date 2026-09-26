@@ -1,0 +1,387 @@
+{
+  "meta": {
+    "title": "{{name}} — Area risk profile · INFORM Tanzania"
+  },
+  "eyebrow": "Area risk profile",
+  "breadcrumb": {
+    "label": "Breadcrumb",
+    "country": "Tanzania"
+  },
+  "levelOf": {
+    "council": "Council in",
+    "source": "INFORM source unit (district) in",
+    "region": "Region of the United Republic of Tanzania",
+    "national": "United Republic of Tanzania · national profile",
+    "regionName": "{{region}} Region"
+  },
+  "peers": {
+    "council": "councils",
+    "region": "regions",
+    "source": "INFORM source units",
+    "national": "countries"
+  },
+  "actions": {
+    "print": "Print / save PDF",
+    "copy": "Copy link",
+    "copied": "Link copied to the clipboard",
+    "copyFailed": "Could not copy the link — copy it from the address bar instead",
+    "explore": "Open in explorer",
+    "compare": "Compare"
+  },
+  "hero": {
+    "outOf10": "out of 10",
+    "rankLabel": "rank among {{peers}} (1 = highest risk)",
+    "percentile": "Percentile",
+    "percentileLabel": "share of {{peers}} with lower risk than this area",
+    "lowerRisk": "Lower risk",
+    "higherRisk": "Higher risk",
+    "councilsAbove": "councils score above the national value",
+    "regionsAbove": "regions score above the national value"
+  },
+  "facts": {
+    "census": "2022 Census",
+    "perKm2": "people per km²",
+    "coverageSub": "{{have}} of {{total}} indicators"
+  },
+  "notices": {
+    "official": "This is the official INFORM Tanzania country figure — it is not re-aggregated from councils.",
+    "aggregated_one": "Aggregated from {{count}} council the INFORM way: indicator averages first, then categories and dimensions — not an average of risk scores.",
+    "aggregated_other": "Aggregated from {{count}} councils the INFORM way: indicator averages first, then categories and dimensions — not an average of risk scores.",
+    "sourceUnit_one": "A reference unit of the {{total}}-unit INFORM workbook. {{count}} council uses its vulnerability and coping data.",
+    "sourceUnit_other": "A reference unit of the {{total}}-unit INFORM workbook. {{count}} councils use its vulnerability and coping data.",
+    "inherited": "A newly created council: it inherits its data from {{parent}} until its own figures are published.",
+    "shared_one": "Hazard & Exposure is computed on this council’s own boundary. Vulnerability and coping data come from INFORM source unit",
+    "shared_other": "Hazard & Exposure is computed on this council’s own boundary. Vulnerability and coping data are shared by {{count}} councils and come from INFORM source unit",
+    "edits_one": "{{count}} value has been updated through reviewed data entry.",
+    "edits_other": "{{count}} values have been updated through reviewed data entry.",
+    "editsMembers_one": "Includes {{count}} reviewed update made in its councils.",
+    "editsMembers_other": "Includes {{count}} reviewed updates made in its councils.",
+    "latestEdit": "Latest: {{indicator}} by {{authority}}, {{date}}.",
+    "unknownAuthority": "an authorised officer"
+  },
+  "nav": {
+    "label": "Sections of this profile",
+    "overview": "Overview",
+    "dimensions": "Dimensions",
+    "charts": "Comparisons",
+    "drivers": "Drivers",
+    "indicators": "Indicators",
+    "places": "Places",
+    "services": "Facilities & DRR",
+    "method": "Methodology"
+  },
+  "sections": {
+    "overview": {
+      "eyebrow": "Overview",
+      "title": "{{name}} at a glance"
+    },
+    "dimensions": {
+      "eyebrow": "The three dimensions",
+      "title": "How the score is built",
+      "lead": "INFORM combines Hazard & Exposure, Vulnerability and Lack of Coping Capacity with a geometric mean. Each dimension is classed on its own thresholds, so compare classes — not raw numbers — across dimensions."
+    },
+    "charts": {
+      "eyebrow": "Comparisons",
+      "title": "Against its region and the nation",
+      "lead": "How this profile compares with the regional and national picture, and where it sits among its peers. Download any chart as an image, or its data as CSV."
+    },
+    "drivers": {
+      "eyebrow": "What drives risk here",
+      "title": "The indicators that weigh most",
+      "lead": "The highest-scoring indicators and the dimension that stands out, in plain language."
+    },
+    "indicators": {
+      "eyebrow": "Evidence",
+      "title": "Every indicator, with its source",
+      "lead": "All {{count}} indicators behind the score, grouped by dimension and category, with the responsible authority, the dataset and how local the data are."
+    },
+    "places": {
+      "eyebrow": "Places",
+      "title": {
+        "council": "Neighbouring councils",
+        "region": "Member councils",
+        "source": "Related places",
+        "national": "Regions of Tanzania"
+      },
+      "lead": "Ranked by INFORM Risk. Select a place to open its profile."
+    },
+    "services": {
+      "eyebrow": "Capacity on the ground",
+      "title": "Facilities & DRR status",
+      "lead": "Services that help people cope, and whether key disaster-risk-reduction arrangements are in place."
+    },
+    "method": {
+      "eyebrow": "Methodology",
+      "title": "How this profile is calculated"
+    }
+  },
+  "glance": {
+    "title": "At a glance",
+    "lead": "Key findings for {{name}}, generated from the current data.",
+    "overall": "Overall INFORM Risk is <b>{{score}} ({{cls}})</b> — {{rank}}.",
+    "rank_ordinal_one": "the {{count}}st highest of {{total}} {{peers}}",
+    "rank_ordinal_two": "the {{count}}nd highest of {{total}} {{peers}}",
+    "rank_ordinal_few": "the {{count}}rd highest of {{total}} {{peers}}",
+    "rank_ordinal_other": "the {{count}}th highest of {{total}} {{peers}}",
+    "aboveNational": "That is <b>{{d}} points above</b> the official national value of {{national}}.",
+    "belowNational": "That is <b>{{d}} points below</b> the official national value of {{national}}.",
+    "equalNational": "That is <b>level with</b> the official national value of {{national}}.",
+    "localRank": "Within {{region}} Region it is <b>{{rank}}</b>.",
+    "weakest": "Its weakest dimension is <b>{{dim}}</b>, classed {{cls}} on its own scale ({{score}}).",
+    "driver": "The highest-scoring indicator is <b>{{indicator}}</b>, at {{score}} out of 10.",
+    "coverage": "<b>{{have}} of {{total}} indicators</b> carry data; missing ones are left out of the averages, never counted as zero.",
+    "nationalOverall": "Tanzania’s official INFORM Risk is <b>{{score}} ({{cls}})</b>.",
+    "nationalAbove": "<b>{{n}} of {{total}} councils</b> score above the national value."
+  },
+  "map": {
+    "title": "Location",
+    "desc": "Coloured by INFORM Risk; {{name}} is outlined.",
+    "descNational": "Regions coloured by INFORM Risk.",
+    "viewLabel": "Map view",
+    "focus": "Zoom in",
+    "country": "Whole country"
+  },
+  "dims": {
+    "categories": "Categories",
+    "tickNote": "Tick = national value.",
+    "scaleNote": "Classes use each dimension’s own INFORM thresholds (see Methodology below). Arrows compare with the region and the nation: red means higher (more risk), green means lower.",
+    "nationalNote": "Official country value"
+  },
+  "delta": {
+    "vs": "vs {{ref}}",
+    "tooltip": "Compared with {{ref}} ({{value}}). Higher means more risk."
+  },
+  "cats": {
+    "natural": "Natural",
+    "human": "Human",
+    "socioEconomic": "Socio-economic",
+    "vulnerableGroups": "Vulnerable groups",
+    "infrastructure": "Infrastructure",
+    "institutional": "Institutional"
+  },
+  "charts": {
+    "categories": {
+      "title": "The six categories",
+      "desc": "Category scores (0–10), with the regional and national references where they apply.",
+      "descNational": "Category scores (0–10) of the official national profile.",
+      "modeLabel": "Chart type",
+      "radar": "Radar",
+      "bars": "Bars",
+      "aria": "Category scores of {{name}} compared with its references",
+      "officialNote": "The national risk of {{value}} is the official figure."
+    },
+    "indicators": {
+      "title": "Indicator scores",
+      "desc": "Every indicator of the selected dimension, sorted by score and coloured on the continuous 0–10 scale.",
+      "dimLabel": "Dimension",
+      "compareWith": "Compare with",
+      "missing_one": "{{count}} indicator without data",
+      "missing_other": "{{count}} indicators without data",
+      "ramp": "Indicator score (0–10)",
+      "refKey": "{{name}} value",
+      "aria": "Bar chart of the {{dim}} indicators for {{name}}"
+    },
+    "distribution": {
+      "title": "Position among peers",
+      "desc": {
+        "council": "INFORM Risk of all {{count}} councils — one dot each — over the risk-class bands.",
+        "region": "INFORM Risk of all {{count}} regions — one dot each — over the risk-class bands.",
+        "source": "INFORM Risk of all {{count}} INFORM source units — one dot each — over the risk-class bands."
+      },
+      "descNational": "INFORM Risk of all {{count}} councils, with the official national value.",
+      "axis": "INFORM Risk (0–10) · shaded bands are the risk classes",
+      "clickHint": "Click to open its profile",
+      "sameRegion": {
+        "council": "Other councils in {{region}}",
+        "source": "Other INFORM source units in {{region}}"
+      },
+      "others": {
+        "council": "Other councils",
+        "region": "Other regions",
+        "source": "Other INFORM source units"
+      },
+      "nationalLine": "Official national value",
+      "aria": "Dot plot: {{name}} scores {{score}} and ranks {{rank}} of {{total}} {{peers}}.",
+      "ariaNational": "Dot plot of {{count}} councils; the national value is {{score}}.",
+      "group": {
+        "self": "This area",
+        "region": "Same region",
+        "other": "Other"
+      }
+    }
+  },
+  "csv": {
+    "dimension": "Dimension",
+    "category": "Category",
+    "indicator": "Indicator",
+    "name": "Name",
+    "region": "Region",
+    "highlight": "Group",
+    "source": "Source",
+    "resolution": "Data resolution",
+    "editedBy": "Updated by",
+    "editedAt": "Updated on"
+  },
+  "drivers": {
+    "topTitle": "Top drivers",
+    "topLead": "The five indicators with the highest scores across all dimensions.",
+    "note": "Scores run from 0 to 10 and higher always means more risk — for Lack of Coping Capacity, a high score means fewer resources. Ticks mark the regional and national values.",
+    "weakestEyebrow": "Weakest dimension",
+    "weakestBody": "The {{dim}} dimension is classed {{cls}} on its own INFORM scale — the highest of the three relative to its thresholds, and the clearest signal of where this area stands out.",
+    "learn": "Learn how the dimensions work",
+    "vsTitle": "Compared with the national picture",
+    "vsLead": "Indicators furthest above and below the national value.",
+    "above": "Higher than national",
+    "below": "Lower than national",
+    "vs": "vs",
+    "none": "None."
+  },
+  "table": {
+    "resolutionKey": "Data resolution:",
+    "indicator": "Indicator",
+    "resolution": "Resolution",
+    "categoryScore": "Category",
+    "caption": "All indicators for {{name}}, with values, the national comparison, sources and data resolution",
+    "edited": "Updated · {{authority}} · {{date}}",
+    "editedMembers": "Includes council updates",
+    "councilNote": "Hazard & Exposure indicators are computed on the council’s own boundary; vulnerability and coping indicators come from its INFORM source unit.",
+    "regionNote": "Regional values average the member councils’ indicators, which are then combined the INFORM way.",
+    "nationalNote": "National values are the official INFORM Tanzania country figures; gaps are indicators without a national value."
+  },
+  "resolution": {
+    "council": {
+      "label": "Council",
+      "desc": "Measured on each council’s own boundary."
+    },
+    "district": {
+      "label": "District",
+      "desc": "Available per INFORM source unit (district) and shared by the councils within it."
+    },
+    "region": {
+      "label": "Region",
+      "desc": "From a regional survey: every council in the region carries the same value."
+    },
+    "national": {
+      "label": "National",
+      "desc": "A national or INFORM SADC baseline value applied to every unit."
+    },
+    "overlay": {
+      "label": "Overlay",
+      "desc": "A documented hazard overlay mapped from expert sources, rather than a measured statistic."
+    }
+  },
+  "noData": {
+    "title_zero": "Every indicator has data.",
+    "title_one": "{{count}} indicator has no data.",
+    "title_other": "{{count}} indicators have no data.",
+    "body": "“No data” means no value was reported. INFORM leaves it out of the category average — it is never treated as zero, and zero is a real, low score.",
+    "tooltip": "No value reported — left out of the average, not counted as zero."
+  },
+  "places": {
+    "siblings": {
+      "title": "Councils in {{region}} Region",
+      "desc": "Ranked by INFORM Risk; {{name}} is highlighted."
+    },
+    "members": {
+      "title": "Councils of {{region}}",
+      "desc": "The councils that make up the region, ranked by INFORM Risk."
+    },
+    "sourceCouncils": {
+      "title": "Councils using this unit’s data",
+      "desc": "These councils take their vulnerability and coping data from {{name}}."
+    },
+    "sourceSiblings": {
+      "title": "INFORM source units in {{region}} Region",
+      "desc": "Reference units of the INFORM workbook in the same region."
+    },
+    "regions": {
+      "title": "All regions",
+      "desc": "Aggregated from their councils and ranked by INFORM Risk."
+    },
+    "regionProfile": "Region profile",
+    "thisArea": "This area",
+    "inherits": "inherits data from {{parent}}",
+    "count": "Count",
+    "average": "Average risk",
+    "range": "Range",
+    "membersNote": "The region’s own score is not the average of these scores: INFORM averages the councils’ indicators first, then rebuilds the categories, dimensions and risk."
+  },
+  "services": {
+    "facilitiesTitle": "Facilities",
+    "basis": {
+      "self": "Recorded for this INFORM source unit (district).",
+      "source_one": "Figures belong to INFORM source unit",
+      "source_other": "Figures belong to the district shared by {{count}} councils — INFORM source unit",
+      "aggregate_one": "Summed over {{count}} district (INFORM source unit), counted once; {{with}} has facility records.",
+      "aggregate_other": "Summed over {{count}} districts (INFORM source units), each counted once; {{with}} have facility records."
+    },
+    "facilities": {
+      "health": "Health facilities",
+      "education": "Schools",
+      "water": "Water points",
+      "boreholes": "Boreholes"
+    },
+    "per10k": "per 10,000 people",
+    "national": "National:",
+    "noFacilities": "No facility records are available for this area yet.",
+    "facilitiesSource": "Source: facility counts from the 2022 Population and Housing Census (NBS). Rates use the population of the same district(s).",
+    "drrTitle": "Disaster-risk-reduction status",
+    "drrLead": "Arrangements recorded for this district.",
+    "drrLeadNone": "No disaster-risk-reduction status has been recorded for this district yet.",
+    "drrLeadAggregate": "{{recorded}} of {{total}} districts have a disaster-risk-reduction record.",
+    "drr": {
+      "eprp": {
+        "name": "Emergency preparedness and response plan",
+        "abbr": "EPRP",
+        "desc": "An approved, costed plan for preparing for and responding to emergencies."
+      },
+      "aa": {
+        "name": "Anticipatory action",
+        "abbr": "AA",
+        "desc": "Pre-agreed actions and financing, triggered by a forecast before a hazard strikes."
+      },
+      "eocc": {
+        "name": "Emergency operations and communication centre",
+        "abbr": "EOCC",
+        "desc": "A facility that coordinates the response and communication during emergencies."
+      },
+      "inPlace": "In place",
+      "notInPlace": "Not in place",
+      "notRecorded": "Not recorded",
+      "countOf": "{{n}} of {{total}} districts"
+    },
+    "drrSource": "Source: PMO – Disaster Management Department and district disaster-management committee records."
+  },
+  "method": {
+    "title": "How this profile is calculated",
+    "steps": {
+      "indicators": "Each indicator is scored from 0 to 10, where higher always means more risk.",
+      "categories": "A category is the average of its indicators; indicators without data are skipped, never counted as zero.",
+      "dimensions": "A dimension combines its categories with INFORM’s scaled geometric mean, rounded to one decimal.",
+      "risk": "INFORM Risk is the cube root of Hazard & Exposure × Vulnerability × Lack of Coping Capacity."
+    },
+    "level": {
+      "council": "Councils: Hazard & Exposure is computed on the council’s own boundary; Vulnerability and Lack of Coping Capacity come from its INFORM source unit, because survey data have no council breakdown.",
+      "region": "Regions: aggregated from their councils the INFORM way — indicator averages first, then categories, dimensions and risk — not an average of council risk scores.",
+      "source": "INFORM source units: the district-level backbone of the Tanzania INFORM workbook, used here as the reference level.",
+      "national": "National: the official INFORM Tanzania country value ({{value}}) — never a re-aggregation of councils or regions."
+    },
+    "officialNote": "The national value shown for comparison ({{value}}) is the official INFORM Tanzania figure.",
+    "link": "Read the full methodology",
+    "thresholdsTitle": "Class thresholds",
+    "thresholdsLead": "Each scale has its own INFORM thresholds, taken from the Tanzania workbook.",
+    "citeTitle": "Cite this profile",
+    "cite": "INFORM Tanzania ({{year}}). {{name}} — area risk profile. Data as of {{asOf}}. {{url}}"
+  },
+  "print": {
+    "title": "Area risk profile",
+    "printed": "Printed {{date}}"
+  },
+  "notFound": {
+    "title": "We couldn’t find that area",
+    "body": "No council, region or INFORM source unit matches “{{id}}”. The link may be mistyped or out of date.",
+    "explore": "Open the risk explorer",
+    "national": "National profile",
+    "hint": "Area links look like /area/C001 (council), /area/R-dodoma (region), /area/TZ0101 (INFORM source unit) or /area/TZ (national)."
+  }
+}

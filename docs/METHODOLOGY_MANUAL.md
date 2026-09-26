@@ -175,11 +175,13 @@ nudge the mean — INFORM averages all hazard types; it never falls below the do
 ### 5.2 Category → Dimension: INFORM scaled geometric mean (Excel Box 6)
 > **dimension = (10 − GEOMEAN( (10−c₁)/10·9 + 1 , (10−c₂)/10·9 + 1 , … )) / 9 × 10**
 
-A low category **drags the dimension down** (geometric), unlike a plain average.
+Because the scores are inverted before the geometric mean, the result is always **at or above** the
+plain average: a **high** category weighs more than a low one, so a serious problem in one category is
+not averaged away by a benign one.
 
-**Worked example — Kondoa Hazard:** Natural 3.9, Human 0.7.
-scaled: (10−3.9)/10·9+1 = 6.49 ; (10−0.7)/10·9+1 = 9.37.
-GEOMEAN = √(6.49 × 9.37) = 7.80. dimension = (10 − 7.80)/9 × 10 = **2.4**. ✔ matches stored.
+**Worked example — Kondoa Hazard:** Natural 3.9, Human 1.3 (plain average 2.6).
+scaled: (10−3.9)/10·9+1 = 6.49 ; (10−1.3)/10·9+1 = 8.83.
+GEOMEAN = √(6.49 × 8.83) = 7.570. dimension = (10 − 7.570)/9 × 10 = **2.7** (≥ 2.6). ✔ matches stored.
 
 > **Full end-to-end worked example** (real data, every indicator from raw value → standardisation →
 > 0-10 → category → dimension → risk, plus how the four levels harmonise): see
@@ -191,7 +193,8 @@ GEOMEAN = √(6.49 × 9.37) = 7.80. dimension = (10 − 7.80)/9 × 10 = **2.4**.
 ### 5.3 Dimension → Risk: cube root
 > **Risk = ∛(Hazard × Vulnerability × LackOfCoping)**
 
-**Kondoa:** ∛(2.4 × 5.5 × 4.6) = ∛60.7 = **3.9** (Medium). ✔
+**Kondoa:** ∛(2.7 × 5.4 × 4.7) = ∛68.53 = **4.1** (Medium). ✔ (The in-app Methodology page recomputes
+this example live from the engine for any council.)
 
 Then `Risk` is classed with the **Tanzania thresholds** (Very-Low < 2.5 < Low < 3.4 < Medium
 < 4.3 < High < 5.9 < Very-High).

@@ -76,7 +76,9 @@ export function ChartCard({
   const ref = React.useRef<HTMLDivElement>(null);
   const name = filename ?? (typeof title === 'string' ? slug(title) : 'chart');
   const png = () => {
-    const svg = ref.current?.querySelector('svg.recharts-surface, svg') as SVGSVGElement | null;
+    // Prefer an explicitly marked export target, then the Recharts surface, then any SVG.
+    const root = ref.current;
+    const svg = (root?.querySelector('[data-export] svg, svg[data-export]') ?? root?.querySelector('svg.recharts-surface') ?? root?.querySelector('svg')) as SVGSVGElement | null;
     if (svg) void exportSvgAsPng(svg, `inform-tz-${name}`);
   };
   return (

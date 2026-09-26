@@ -68,6 +68,8 @@
 
 /* Semantic surface tokens (light / dark). Components use these, never raw greys. */
 :root {
+  /* Sticky site header height (3px flag rule + 64px bar + 1px border) — use for sticky offsets. */
+  --header-h: 68px;
   --background: #f6f8fb;
   --foreground: #0b1324;
   --card: #ffffff;
@@ -215,13 +217,18 @@
 }
 
 @media print {
-  header,
-  footer,
+  .site-header,
+  .site-footer,
   .no-print {
     display: none !important;
   }
   body {
     background: #fff !important;
+  }
+  /* Scroll-triggered fade-ins that were never scrolled into view must still print. */
+  [style*='opacity'] {
+    opacity: 1 !important;
+    transform: none !important;
   }
 }
 

@@ -99,8 +99,14 @@ export function createSupabaseRepository(sb: SupabaseClient): Repository {
       return out;
     },
     async listSubmissions() {
-      const rows = must(await sb.from('submissions').select('*').order('created_at', { ascending: false }).limit(500)) as SubmissionRow[];
-      return rows.map(toSubmission);
+      // Every pending submission (a reviewer must never lose one off the end of a page), plus the most
+      // recent decided ones for history. RLS limits sector users to their own rows.
+      const [pending, decided] = await Promise.all([
+        sb.from('submissions').select('*').eq('status', 'pending').order('created_at', { ascending: true }),
+        sb.from('submissions').select('*').neq('status', 'pending').order('created_at', { ascending: false }).limit(500),
+      ]);
+      const rows = [...(must(pending) as SubmissionRow[]), ...(must(decided) as SubmissionRow[])];
+      return rows.map(toSubmission).sort((a, b) => b.createdAt.localeCompare(a.createdAt));
     },
     async submit(input: NewSubmission, author: Profile) {
       const row = must(
@@ -125,7 +131,7 @@ export function createSupabaseRepository(sb: SupabaseClient): Repository {
       must(await sb.rpc('review_submission', { p_id: id, p_decision: decision, p_note: note ?? null }));
     },
     async revert(unitId, ref) {
-      must(await sb.rpc('revert_value', { p_unit_id: unitId, p_ref: ref }));
+      must(await sb.rpc('revert_value', { p_unit_id: unitId, p_ref: ref, p_unit_name: null }));
     },
     async listAudit(limit = 100) {
       const rows = must(await sb.from('audit_log').select('*').order('at', { ascending: false }).limit(limit)) as AuditRow[];

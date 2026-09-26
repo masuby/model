@@ -320,7 +320,7 @@ export function Switch({ className, ...props }: React.ComponentProps<typeof Swit
   );
 }
 
-export function Slider({ className, ...props }: React.ComponentProps<typeof SliderPrimitive.Root>) {
+export function Slider({ className, thumbLabel, ...props }: React.ComponentProps<typeof SliderPrimitive.Root> & { thumbLabel?: string }) {
   return (
     <SliderPrimitive.Root className={cn('relative flex h-5 w-full touch-none items-center select-none', className)} {...props}>
       <SliderPrimitive.Track className="relative h-1.5 grow overflow-hidden rounded-full bg-muted">
@@ -329,6 +329,7 @@ export function Slider({ className, ...props }: React.ComponentProps<typeof Slid
       {(props.value ?? props.defaultValue ?? [0]).map((_, i) => (
         <SliderPrimitive.Thumb
           key={i}
+          aria-label={thumbLabel ?? props['aria-label']}
           className="block size-5 rounded-full border-2 border-primary bg-card shadow transition-transform hover:scale-110 focus-visible:outline-2 focus-visible:outline-ring"
         />
       ))}

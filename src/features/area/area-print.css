@@ -1,0 +1,84 @@
+/*
+ * Print / "Save as PDF" styles for the Area Profile (scoped to .area-report).
+ * The global stylesheet already hides the app header, footer and `.no-print`. Here we:
+ *   • force the light tokens even when the viewer is in night mode (paper is white),
+ *   • reveal scroll-animated sections that may not have entered the viewport yet,
+ *   • keep colours (class fills, bars, map) and avoid splitting cards across pages.
+ */
+@media print {
+  @page {
+    size: A4;
+    margin: 12mm 11mm;
+  }
+
+  .area-report {
+    --background: #ffffff;
+    --foreground: #0b1324;
+    --card: #ffffff;
+    --card-foreground: #0b1324;
+    --elevated: #ffffff;
+    --muted: #eef2f7;
+    --muted-foreground: #4b5565;
+    --border: #dfe4ec;
+    --input: #d6dde7;
+    --primary: #1d6deb;
+    --primary-foreground: #ffffff;
+    --secondary: #eaf1fb;
+    --accent: #eef7ff;
+    --success: #15803d;
+    --warning: #b45309;
+    --danger: #dc2626;
+    --map-bg: #eef3f9;
+    --map-water: #a9cdee;
+    --map-water-stroke: #6aa6dc;
+    --map-stroke: #ffffff;
+    --grid: rgb(15 23 42 / 0.05);
+    color-scheme: light;
+    background: #ffffff;
+    color: var(--foreground);
+    font-size: 11pt;
+  }
+
+  .area-report *,
+  .area-report *::before,
+  .area-report *::after {
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+    box-shadow: none !important;
+    backdrop-filter: none !important;
+  }
+
+  /* Motion wrappers start transparent until scrolled into view — never on paper. */
+  .area-report .area-reveal {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+
+  .area-report section {
+    break-inside: auto;
+  }
+  .area-report h2,
+  .area-report h3 {
+    break-after: avoid;
+  }
+  .area-report .rounded-2xl,
+  .area-report .rounded-3xl,
+  .area-report tr {
+    break-inside: avoid;
+  }
+  /* Long cards (the indicator table, the driver list) may flow across pages. */
+  .area-report .area-breakable {
+    break-inside: auto !important;
+  }
+
+  /* Links print as text. */
+  .area-report a {
+    color: inherit !important;
+    text-decoration: none !important;
+  }
+
+  /* Leaflet: keep the locator crisp and without controls. */
+  .area-report .leaflet-control-container {
+    display: none !important;
+  }
+}

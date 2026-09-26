@@ -78,14 +78,37 @@ describe('full index', () => {
     const expected = 0.7 * informGeometric([i, c], [1 / 3, 2 / 3])! + 0.3 * x;
     expect(r.severity).toBe(Math.round(expected * 10) / 10);
   });
-  it('scenarios produce complete, ordered, plausible results', () => {
+  it('scenarios are complete and span the scale (flood High > drought Medium > landslide Low)', () => {
     const [flood, drought, landslide] = SEVERITY_SCENARIOS.map((s) => computeSeverity(s.input));
     for (const r of [flood, drought, landslide]) {
       expect(r.complete).toBe(true);
       expect(r.severity!).toBeGreaterThan(0);
       expect(r.severity!).toBeLessThanOrEqual(5);
     }
-    expect(drought.dimensions.impact.score!).toBeGreaterThan(landslide.dimensions.impact.score!);
+    expect(flood.category).toBe('high');
+    expect(drought.category).toBe('medium');
+    expect(landslide.category).toBe('low');
+    expect(flood.severity!).toBeGreaterThan(drought.severity!);
+    expect(drought.severity!).toBeGreaterThan(landslide.severity!);
+  });
+  it('scenario areas are real councils whose census totals match the inputs', async () => {
+    const { buildModel } = await import('@/engine/risk/model');
+    const m = buildModel();
+    for (const s of SEVERITY_SCENARIOS) {
+      const units = s.councils.map((id) => m.byId.get(id)!);
+      expect(units.every(Boolean)).toBe(true);
+      const pop = units.reduce((a, u) => a + (u.exposure?.population ?? 0), 0);
+      expect(pop).toBe(s.input.peopleInArea);
+    }
+  });
+  it('a category with no data makes the index incomplete (not silently carried by the other)', () => {
+    const r = computeSeverity({ ...SEVERITY_SCENARIOS[0].input, levels: {} });
+    expect(r.complete).toBe(false);
+    expect(r.severity).toBeNull();
+  });
+  it('missing reliability information scores as least reliable', () => {
+    const r = computeSeverity({ ...SEVERITY_SCENARIOS[0].input, dataReliability: null, daysSinceUpdate: null });
+    expect(r.reliability.score).toBeLessThanOrEqual(2);
   });
   it('more people in need never lowers severity (monotonic)', () => {
     const base = SEVERITY_SCENARIOS[0].input;

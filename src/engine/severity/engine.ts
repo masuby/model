@@ -168,11 +168,14 @@ export interface Reliability {
   completeness: number; // % of indicators with data
 }
 
-/** Tanzania implementation of the INFORM reliability concept: data reliability, recency, information gaps. */
+/**
+ * Tanzania implementation of the INFORM reliability concept: data reliability, recency, information gaps.
+ * An element with no information scores as least reliable (1) — absence of evidence is not medium quality.
+ */
 export function reliability(input: SeverityInput, completeness: number): Reliability {
-  const rel = input.dataReliability === 'high' ? 5 : input.dataReliability === 'medium' ? 3 : input.dataReliability === 'low' ? 1 : 3;
+  const rel = input.dataReliability === 'high' ? 5 : input.dataReliability === 'medium' ? 3 : 1;
   const d = input.daysSinceUpdate;
-  const rec = !isNum(d) ? 3 : d <= 30 ? 5 : d <= 90 ? 4 : d <= 180 ? 3 : d <= 365 ? 2 : 1;
+  const rec = !isNum(d) ? 1 : d <= 30 ? 5 : d <= 90 ? 4 : d <= 180 ? 3 : d <= 365 ? 2 : 1;
   const gap = completeness >= 90 ? 5 : completeness >= 75 ? 4 : completeness >= 50 ? 3 : completeness >= 25 ? 2 : 1;
   const score = Math.max(1, Math.min(5, Math.round((rel + rec + gap) / 3)));
   return { score, key: SEVERITY_CATEGORY_KEYS[score - 1], completeness: Math.round(completeness) };
@@ -219,7 +222,9 @@ export function computeSeverity(input: SeverityInput): SeverityResult {
     dimensions[dim.id] = { id: dim.id, score, children: catNodes };
   }
 
-  const complete = [dimensions.impact.score, dimensions.conditions.score, dimensions.complexity.score].every(isNum);
+  // The index is only published when every category of every dimension has data (methodology §4.4.1);
+  // a dimension carried by a single category would silently misrepresent the crisis.
+  const complete = Object.values(dimensions).every((d) => isNum(d.score) && (d.children ?? []).every((c) => isNum(c.score)));
   let severity: number | null = null;
   if (complete) {
     const w = SEVERITY_WEIGHTS;
