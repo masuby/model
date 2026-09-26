@@ -21,14 +21,15 @@ import { cn } from '@/lib/utils';
 
 /* ---------------------------------------------------------------- Tabs */
 export const Tabs = TabsPrimitive.Root;
+/** Underline tabs (editorial) — a hairline baseline with the active tab marked in the text colour. */
 export function TabsList({ className, ...props }: React.ComponentProps<typeof TabsPrimitive.List>) {
-  return <TabsPrimitive.List className={cn('inline-flex items-center gap-1 rounded-xl bg-muted p-1 text-muted-foreground', className)} {...props} />;
+  return <TabsPrimitive.List className={cn('inline-flex max-w-full items-end gap-5 overflow-x-auto border-b border-border text-muted-foreground', className)} {...props} />;
 }
 export function TabsTrigger({ className, ...props }: React.ComponentProps<typeof TabsPrimitive.Trigger>) {
   return (
     <TabsPrimitive.Trigger
       className={cn(
-        'inline-flex items-center justify-center gap-1.5 rounded-lg px-3 py-1.5 text-sm font-medium whitespace-nowrap transition-all hover:text-foreground data-[state=active]:bg-card data-[state=active]:text-foreground data-[state=active]:shadow-sm [&_svg]:size-4',
+        '-mb-px inline-flex items-center justify-center gap-1.5 border-b-2 border-transparent pt-1 pb-2.5 text-sm font-medium whitespace-nowrap transition-colors hover:text-foreground data-[state=active]:border-foreground data-[state=active]:text-foreground [&_svg]:size-4',
         className,
       )}
       {...props}
@@ -61,14 +62,14 @@ export function Segmented<T extends string>({
       value={value}
       aria-label={ariaLabel}
       onValueChange={(v) => v && onValueChange(v as T)}
-      className={cn('inline-flex items-center gap-1 rounded-xl bg-muted p-1', className)}
+      className={cn('inline-flex items-center gap-0.5 rounded-md border border-border bg-muted/60 p-0.5', className)}
     >
       {options.map((o) => (
         <ToggleGroupPrimitive.Item
           key={o.value}
           value={o.value}
           className={cn(
-            'inline-flex items-center gap-1.5 rounded-lg font-medium text-muted-foreground transition-all hover:text-foreground data-[state=on]:bg-card data-[state=on]:text-foreground data-[state=on]:shadow-sm [&_svg]:size-4',
+            'inline-flex items-center gap-1.5 rounded-[5px] font-medium text-muted-foreground transition-colors hover:text-foreground data-[state=on]:bg-card data-[state=on]:text-foreground data-[state=on]:ring-1 data-[state=on]:ring-border [&_svg]:size-4',
             size === 'sm' ? 'px-2.5 py-1 text-xs' : 'px-3 py-1.5 text-sm',
           )}
         >
@@ -103,7 +104,7 @@ export function Select({
       <SelectPrimitive.Trigger
         aria-label={ariaLabel}
         className={cn(
-          'inline-flex h-10 w-full items-center justify-between gap-2 rounded-xl border border-input bg-card px-3 text-sm text-foreground shadow-xs transition-colors hover:bg-muted/60 focus-visible:outline-2 focus-visible:outline-ring data-[placeholder]:text-muted-foreground disabled:opacity-50',
+          'inline-flex h-10 w-full items-center justify-between gap-2 rounded-md border border-input bg-background px-3 text-sm text-foreground shadow-xs transition-colors hover:bg-muted/60 focus-visible:outline-2 focus-visible:outline-ring data-[placeholder]:text-muted-foreground disabled:opacity-50',
           className,
         )}
       >
@@ -367,7 +368,7 @@ export const Input = React.forwardRef<HTMLInputElement, React.InputHTMLAttribute
   <input
     ref={ref}
     className={cn(
-      'h-10 w-full rounded-xl border border-input bg-card px-3 text-sm text-foreground shadow-xs transition-colors placeholder:text-muted-foreground focus-visible:border-ring focus-visible:outline-2 focus-visible:outline-ring/40 disabled:opacity-50 aria-[invalid=true]:border-danger',
+      'h-10 w-full rounded-md border border-input bg-background px-3 text-sm text-foreground shadow-xs transition-colors placeholder:text-muted-foreground focus-visible:border-ring focus-visible:outline-2 focus-visible:outline-ring/40 disabled:opacity-50 aria-[invalid=true]:border-danger',
       className,
     )}
     {...props}
@@ -379,7 +380,7 @@ export const Textarea = React.forwardRef<HTMLTextAreaElement, React.TextareaHTML
   <textarea
     ref={ref}
     className={cn(
-      'min-h-24 w-full rounded-xl border border-input bg-card px-3 py-2 text-sm text-foreground shadow-xs placeholder:text-muted-foreground focus-visible:border-ring focus-visible:outline-2 focus-visible:outline-ring/40',
+      'min-h-24 w-full rounded-md border border-input bg-background px-3 py-2 text-sm text-foreground shadow-xs placeholder:text-muted-foreground focus-visible:border-ring focus-visible:outline-2 focus-visible:outline-ring/40',
       className,
     )}
     {...props}

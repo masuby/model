@@ -42,7 +42,7 @@ export function SectionNav({ sections, unit }: { sections: Array<{ id: string; l
   };
 
   return (
-    <div className="no-print sticky top-[68px] z-[900] border-b border-border/70 bg-background/80 backdrop-blur-xl supports-[backdrop-filter]:bg-background/65">
+    <div className="no-print sticky top-[var(--header-h)] z-[900] border-b border-border/70 bg-background/80 backdrop-blur-xl supports-[backdrop-filter]:bg-background/65">
       <PageContainer className="flex items-center gap-4">
         <div className="hidden shrink-0 items-center gap-2 border-r border-border py-2 pr-4 text-sm md:flex">
           <ClassDot value={unit.risk} />

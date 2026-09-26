@@ -9,7 +9,7 @@ import * as React from 'react';
 import { buildModel } from '@/engine/risk/model';
 import type { EditRef, Overrides, RiskModel } from '@/engine/risk/types';
 import { createLocalRepository } from './local';
-import { createSupabaseClient, createSupabaseRepository, supabaseConfigured } from './supabase';
+import { createSupabaseClient, createSupabaseRepository, supabaseConfigured, type SupabaseClient } from './supabase';
 import type { NewSubmission, Profile, Repository, Role } from './types';
 
 export const queryClient = new QueryClient({
@@ -34,9 +34,34 @@ interface DataContextValue {
 
 const DataContext = React.createContext<DataContextValue | null>(null);
 
-/** The Supabase client, created once before first render when (and only when) Supabase is configured. */
-const SB = await createSupabaseClient();
+/**
+ * The Supabase client is created in the background — the app renders immediately with the shipped
+ * dataset and picks up approved edits and the session as soon as the SDK has loaded (never blocking
+ * first paint). In demo mode nothing is downloaded at all.
+ */
+const sbPromise: Promise<SupabaseClient | null> = supabaseConfigured ? createSupabaseClient() : Promise.resolve(null);
+let SB: SupabaseClient | null = null;
+void sbPromise.then((c) => {
+  SB = c;
+});
 const getSupabase = () => SB;
+
+/** A repository that forwards to the real Supabase one once the SDK is ready. */
+function createDeferredSupabaseRepository(): Repository {
+  const ready = sbPromise.then((c) => {
+    if (!c) throw new Error('Supabase is not configured');
+    return createSupabaseRepository(c);
+  });
+  return {
+    mode: 'supabase',
+    getOverrides: () => ready.then((r) => r.getOverrides()),
+    listSubmissions: () => ready.then((r) => r.listSubmissions()),
+    submit: (input, author) => ready.then((r) => r.submit(input, author)),
+    review: (id, decision, reviewer, note) => ready.then((r) => r.review(id, decision, reviewer, note)),
+    revert: (unitId, ref, actor) => ready.then((r) => r.revert(unitId, ref, actor)),
+    listAudit: (limit) => ready.then((r) => r.listAudit(limit)),
+  };
+}
 
 const DEMO_KEY = 'inform.demoRole';
 const demoProfile = (role: Role): Profile => ({
@@ -48,7 +73,10 @@ const demoProfile = (role: Role): Profile => ({
 });
 
 function useSupabaseProfile(enabled: boolean) {
-  const sb = getSupabase();
+  const [sb, setSb] = React.useState<SupabaseClient | null>(getSupabase);
+  React.useEffect(() => {
+    if (enabled && !sb) void sbPromise.then(setSb);
+  }, [enabled, sb]);
   const [session, setSession] = React.useState<Session | null>(null);
   const [loading, setLoading] = React.useState(enabled);
 
@@ -87,10 +115,7 @@ function useSupabaseProfile(enabled: boolean) {
 }
 
 function DataProviderInner({ children }: { children: React.ReactNode }) {
-  const repo = React.useMemo<Repository>(() => {
-    const sb = getSupabase();
-    return sb ? createSupabaseRepository(sb) : createLocalRepository();
-  }, []);
+  const repo = React.useMemo<Repository>(() => (supabaseConfigured ? createDeferredSupabaseRepository() : createLocalRepository()), []);
 
   const sbAuth = useSupabaseProfile(repo.mode === 'supabase');
   const [demoRole, setDemoRoleState] = React.useState<Role>(() => {
@@ -110,7 +135,6 @@ function DataProviderInner({ children }: { children: React.ReactNode }) {
   }, []);
 
   const value = React.useMemo<DataContextValue>(() => {
-    const sb = getSupabase();
     return {
       repo,
       mode: repo.mode,
@@ -120,16 +144,19 @@ function DataProviderInner({ children }: { children: React.ReactNode }) {
       authError: repo.mode === 'supabase' ? sbAuth.error : null,
       setDemoRole,
       signInWithEmail: async (email) => {
+        const sb = await sbPromise;
         if (!sb) return;
         const { error } = await sb.auth.signInWithOtp({ email, options: { emailRedirectTo: `${window.location.origin}/data` } });
         if (error) throw error;
       },
       signInWithPassword: async (email, password) => {
+        const sb = await sbPromise;
         if (!sb) return;
         const { error } = await sb.auth.signInWithPassword({ email, password });
         if (error) throw error;
       },
       signOut: async () => {
+        const sb = await sbPromise;
         if (sb) await sb.auth.signOut();
         // Drop everything user-specific so the next person on this device sees nothing of the last.
         for (const key of ['profile', 'submissions', 'audit']) queryClient.removeQueries({ queryKey: [key] });

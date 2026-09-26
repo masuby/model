@@ -8,9 +8,10 @@ import { DataProvider } from '@/data-layer/DataProvider';
 import { resolveTheme, usePrefs } from '@/state/prefs';
 import { AppShell } from './layout/AppShell';
 import { PageLoader } from './PageLoader';
+import { loadRoute, type RouteKey } from './routes';
 
-const lazyPage = (factory: () => Promise<{ default: React.ComponentType }>) => {
-  const C = React.lazy(factory);
+const lazyPage = (key: RouteKey) => {
+  const C = React.lazy(() => loadRoute(key));
   return (
     <React.Suspense fallback={<PageLoader />}>
       <C />
@@ -42,20 +43,20 @@ const router = createBrowserRouter([
     element: <AppShell />,
     errorElement: <RouteError />,
     children: [
-      { index: true, element: lazyPage(() => import('@/features/home/HomePage')) },
-      { path: 'explore', element: lazyPage(() => import('@/features/explore/ExplorePage')) },
-      { path: 'area/:id', element: lazyPage(() => import('@/features/area/AreaPage')) },
-      { path: 'insights', element: lazyPage(() => import('@/features/insights/InsightsPage')) },
-      { path: 'severity', element: lazyPage(() => import('@/features/severity/SeverityPage')) },
-      { path: 'learn', element: lazyPage(() => import('@/features/learn/LearnPage')) },
-      { path: 'learn/:lessonId', element: lazyPage(() => import('@/features/learn/LearnPage')) },
-      { path: 'methodology', element: lazyPage(() => import('@/features/methodology/MethodologyPage')) },
-      { path: 'data', element: lazyPage(() => import('@/features/data/DataPortalPage')) },
+      { index: true, element: lazyPage('home') },
+      { path: 'explore', element: lazyPage('explore') },
+      { path: 'area/:id', element: lazyPage('area') },
+      { path: 'insights', element: lazyPage('insights') },
+      { path: 'severity', element: lazyPage('severity') },
+      { path: 'learn', element: lazyPage('learn') },
+      { path: 'learn/:lessonId', element: lazyPage('learn') },
+      { path: 'methodology', element: lazyPage('methodology') },
+      { path: 'data', element: lazyPage('data') },
       // Legacy routes from the previous app (keep old links and bookmarks working)
       { path: 'risk', element: <Navigate to="/explore" replace /> },
       { path: 'education', element: <Navigate to="/learn" replace /> },
       { path: 'data-entry', element: <Navigate to="/data" replace /> },
-      { path: '*', element: lazyPage(() => import('./NotFound')) },
+      { path: '*', element: lazyPage('notFound') },
     ],
   },
 ]);

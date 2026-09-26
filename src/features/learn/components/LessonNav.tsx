@@ -13,7 +13,7 @@ import { completedCount, isCompleted, isCourseComplete } from '../progress';
 export function ReadingProgress() {
   const { scrollYProgress } = useScroll();
   const scaleX = useSpring(scrollYProgress, { stiffness: 140, damping: 30, restDelta: 0.001 });
-  return <motion.div className="fixed inset-x-0 top-[67px] z-[999] h-[3px] origin-left bg-primary print:hidden" style={{ scaleX }} aria-hidden />;
+  return <motion.div className="fixed inset-x-0 top-[var(--header-h)] z-[999] h-[3px] origin-left bg-primary print:hidden" style={{ scaleX }} aria-hidden />;
 }
 
 /** Desktop: sticky side nav with every lesson, and the current lesson's sections (scroll-spy). */
@@ -118,7 +118,7 @@ export function LessonTopBar({ current }: { current: LessonId }) {
     c.scrollLeft += a.left - b.left - (b.width - a.width) / 2;
   }, [current]);
   return (
-    <nav aria-label={t('nav.label')} className="sticky top-[67px] z-[900] border-b border-border bg-background/85 backdrop-blur-xl lg:hidden print:hidden">
+    <nav aria-label={t('nav.label')} className="sticky top-[var(--header-h)] z-[900] border-b border-border bg-background/85 backdrop-blur-xl lg:hidden print:hidden">
       <div className="mx-auto flex max-w-[1440px] items-center gap-2 px-4 py-2 sm:px-6">
         <Link to="/learn" className="inline-flex size-9 shrink-0 items-center justify-center rounded-xl border border-border bg-card text-muted-foreground hover:text-primary" aria-label={t('nav.overview')}>
           <ArrowLeft className="size-4" aria-hidden />

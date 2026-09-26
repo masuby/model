@@ -126,7 +126,6 @@ function fromRawUnit(u: RawUnit, level: Level): Unit {
   };
 }
 
-const cloneDims = (dims: Unit['dims']): Unit['dims'] => structuredClone(dims);
 
 /* ------------------------------------------------------------------------------------------------ */
 /* Recalculation                                                                                      */
@@ -150,20 +149,30 @@ function setIndicator(unit: Unit, dimKey: DimensionKey, key: string, value: numb
 }
 
 /**
- * Apply a set of approved edits to a unit (mutates the unit's own dims — callers clone first).
+ * Apply a set of approved edits to a unit. Copy-on-write: a dimension is cloned only when one of its
+ * indicators is edited, so unedited units can safely share the shipped (read-only) dimension objects.
  * Exposure edits amplify flood as INFORM's Hazard × Exposure term: flood = max(h, √(h × exposure)),
  * unless flood itself was edited. Edited dimensions are recomputed from their indicators.
  */
 export function applyEdits(unit: Unit, edits: Partial<Record<EditRef, EditStamp>> | undefined): Unit {
   if (!edits || !Object.keys(edits).length) return unit;
   const touched = new Set<DimensionKey>();
+  const own = new Set<DimensionKey>();
+  const writable = (dim: DimensionKey) => {
+    if (!own.has(dim)) {
+      unit.dims = { ...unit.dims, [dim]: structuredClone(unit.dims[dim]) };
+      own.add(dim);
+    }
+    return unit;
+  };
 
   for (const [ref, stamp] of Object.entries(edits) as Array<[EditRef, EditStamp]>) {
     if (ref === 'hazard:exposure') continue;
     const [dim, key] = ref.split(':') as [DimensionKey, string];
     if (!DIMENSION_KEYS.includes(dim)) continue;
     const value = isNum(stamp.value) ? Math.max(0, Math.min(10, stamp.value)) : null;
-    if (setIndicator(unit, dim, key, value)) {
+    if (Object.values(unit.dims[dim].categories).some((c) => key in c.indicators)) {
+      setIndicator(writable(dim), dim, key, value);
       touched.add(dim);
       unit.edits[ref] = stamp;
     }
@@ -175,7 +184,7 @@ export function applyEdits(unit: Unit, edits: Partial<Record<EditRef, EditStamp>
     unit.edits['hazard:exposure'] = exp;
     const h = unit.floodHazard;
     if (isNum(h) && !edits['hazard:flood']) {
-      setIndicator(unit, 'hazard', 'flood', round1(Math.max(h, Math.sqrt(h * Math.max(exp.value, 0)))));
+      setIndicator(writable('hazard'), 'hazard', 'flood', round1(Math.max(h, Math.sqrt(h * Math.max(exp.value, 0)))));
       touched.add('hazard');
     }
   }
@@ -251,13 +260,26 @@ const NATIONAL: Unit = {
   edits: {},
 };
 
+/** Council-specific hazard dimensions, parsed once (read-only; applyEdits copies on write). */
+const COUNCIL_HAZARD_DIMS = new Map<string, DimensionValues>();
+function councilBaseHazard(code: string): DimensionValues | null {
+  const ch = COUNCIL_HAZARD[code];
+  if (!ch) return null;
+  let d = COUNCIL_HAZARD_DIMS.get(code);
+  if (!d) {
+    d = readDimension(ch.hazardExposure, 'hazard');
+    COUNCIL_HAZARD_DIMS.set(code, d);
+  }
+  return d;
+}
+
 export const OFFICIAL_NATIONAL_RISK = DATASET.national.risk;
 export const DATA_AS_OF = DATASET.metadata.asOf ?? DATASET.metadata.lastUpdated?.slice(0, 7) ?? '';
 
 /** Build every level, applying the given approved edits. Pure: the shipped dataset is never mutated. */
 export function buildModel(overrides: Overrides = {}): RiskModel {
   // 1. Source units (170) — Vulnerability & Coping backbone.
-  const sources = BASE_SOURCES.map((s) => applyEdits({ ...s, dims: cloneDims(s.dims), edits: {} }, overrides[s.id]));
+  const sources = BASE_SOURCES.map((s) => applyEdits({ ...s, dims: { ...s.dims }, edits: {} }, overrides[s.id]));
   const sourceByName = new Map(sources.map((s) => [placeKey(s.name), s]));
 
   // 2. Councils (195) — own Hazard & Exposure; V & C from the (edited) source unit; risk live.
@@ -267,13 +289,14 @@ export function buildModel(overrides: Overrides = {}): RiskModel {
     const src = sourceByName.get(placeKey(p.src));
     if (!src) continue;
     const ch = COUNCIL_HAZARD[String(p.code)];
-    const hazard = ch ? readDimension(ch.hazardExposure, 'hazard') : structuredClone(src.dims.hazard);
+    const hazard = councilBaseHazard(String(p.code)) ?? src.dims.hazard;
     const council: Unit = {
       id: String(p.code),
       level: 'council',
       name: p.name,
       region: regionDisplayName(p.reg),
-      dims: { hazard, vulnerability: structuredClone(src.dims.vulnerability), coping: structuredClone(src.dims.coping) },
+      // Shared, read-only dimension objects; applyEdits copies on write.
+      dims: { hazard, vulnerability: src.dims.vulnerability, coping: src.dims.coping },
       risk: null,
       exposure: ch ? readExposure(ch.hazardExposure.exposure) : src.exposure,
       floodHazard: ch?.hazardExposure.hazardFreq?.flood ?? src.floodHazard,
@@ -304,7 +327,7 @@ export function buildModel(overrides: Overrides = {}): RiskModel {
   const regions = [...councilsByRegion.entries()].map(([k, list]) => aggregateUnits(list, `R-${k}`, list[0].region));
 
   // 4. National — official figure.
-  const national: Unit = { ...NATIONAL, dims: cloneDims(NATIONAL.dims), edits: {} };
+  const national: Unit = { ...NATIONAL, dims: { ...NATIONAL.dims }, edits: {} };
 
   const byId = new Map<string, Unit>();
   for (const u of [...sources, ...councils, ...regions, national]) byId.set(u.id, u);

@@ -1,10 +1,10 @@
 /**
  * i18n — English and Kiswahili. Catalogues live in `locales/<lang>/<namespace>.json`.
  *
- * Only `common` and `indicators` (shared vocabulary) load at start-up, and only for the active
- * language; every page namespace (`home`, `explore`, `learn`, …) is fetched with that page's code the
- * first time `useTranslation('<ns>')` asks for it (react-i18next suspends until it arrives). This keeps
- * ~400 KB of text out of the first download. Switching language pre-loads the namespaces in use.
+ * `common` and `indicators` (shared vocabulary) are bundled with the app so nothing waits on a request
+ * before first paint; every page namespace (`home`, `explore`, `learn`, …) is fetched in parallel with
+ * that page's code (see preloadNamespaces / app/routes). This keeps ~400 KB of text out of the first
+ * download. Switching language pre-loads the namespaces in use.
  */
 import i18n, { type BackendModule, type ReadCallback } from 'i18next';
 import { initReactI18next } from 'react-i18next';
@@ -12,8 +12,21 @@ import { usePrefs, type Language } from '@/state/prefs';
 
 type Catalogue = Record<string, unknown>;
 const loaders = import.meta.glob<Catalogue>('./locales/*/*.json', { import: 'default' });
+/** Shared vocabulary ships inside the app bundle (≈ 9 KB gzipped, both languages): no fetch before first paint. */
+const bundled = import.meta.glob<Catalogue>(['./locales/*/common.json', './locales/*/indicators.json'], { import: 'default', eager: true });
 
 export const NAMESPACES = [...new Set(Object.keys(loaders).map((p) => p.match(/\/(\w+)\.json$/)![1]))];
+
+const resources: Record<string, Record<string, Catalogue>> = {};
+for (const [path, catalogue] of Object.entries(bundled)) {
+  const [, lang, ns] = path.match(/\.\/locales\/(\w+)\/(\w+)\.json$/)!;
+  (resources[lang] ??= {})[ns] = catalogue;
+}
+
+/** Start loading a page's namespaces (used to fetch them in parallel with the page's code). */
+export function preloadNamespaces(ns: string[]): Promise<void> {
+  return i18n.loadNamespaces(ns);
+}
 
 const lazyBackend: BackendModule = {
   type: 'backend',
@@ -37,6 +50,9 @@ export const i18nReady = i18n
   .use(lazyBackend)
   .use(initReactI18next)
   .init({
+    resources,
+    // Page namespaces not in `resources` are fetched by the lazy backend on demand.
+    partialBundledLanguages: true,
     lng: usePrefs.getState().language,
     fallbackLng: 'en',
     supportedLngs: ['en', 'sw'],

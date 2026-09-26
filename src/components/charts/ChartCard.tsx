@@ -1,5 +1,5 @@
 /**
- * ChartCard — a Card with a title, optional description, and built-in exports:
+ * ChartCard — a figure (title row over a hairline rule, no box) with built-in exports:
  *   • PNG: serialises the first <svg> inside the card (Recharts renders SVG) onto a canvas.
  *   • CSV: from the `csv` rows you pass.
  * Charts inside should use `chartTheme()` so they read correctly in day and night mode.
@@ -8,7 +8,6 @@ import { Download, FileSpreadsheet, ImageDown } from 'lucide-react';
 import * as React from 'react';
 import { useTranslation } from 'react-i18next';
 import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from '@/components/ui/primitives';
 import { cn, downloadText, slug, toCsv } from '@/lib/utils';
 
@@ -81,12 +80,13 @@ export function ChartCard({
     const svg = (root?.querySelector('[data-export] svg, svg[data-export]') ?? root?.querySelector('svg.recharts-surface') ?? root?.querySelector('svg')) as SVGSVGElement | null;
     if (svg) void exportSvgAsPng(svg, `inform-tz-${name}`);
   };
+  // A figure sits on the page under a hairline rule — no box (docs/DESIGN_LANGUAGE.md §7).
   return (
-    <Card className={cn('flex flex-col', className)}>
-      <CardHeader className="flex-row items-start justify-between gap-3">
+    <figure className={cn('flex flex-col border-t border-border pt-5', className)}>
+      <figcaption className="mb-4 flex items-start justify-between gap-3">
         <div className="min-w-0">
-          <CardTitle>{title}</CardTitle>
-          {description && <CardDescription className="mt-1">{description}</CardDescription>}
+          <h3 className="text-base font-semibold leading-snug">{title}</h3>
+          {description && <p className="mt-1 text-sm leading-relaxed text-muted-foreground">{description}</p>}
         </div>
         <div className="no-print flex shrink-0 items-center gap-1">
           {actions}
@@ -108,10 +108,10 @@ export function ChartCard({
             </DropdownMenuContent>
           </DropdownMenu>
         </div>
-      </CardHeader>
-      <CardContent ref={ref} className={cn('min-h-0 flex-1', contentClassName)}>
+      </figcaption>
+      <div ref={ref} className={cn('min-h-0 flex-1', contentClassName)}>
         {children}
-      </CardContent>
-    </Card>
+      </div>
+    </figure>
   );
 }

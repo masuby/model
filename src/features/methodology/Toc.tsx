@@ -92,7 +92,7 @@ export function MobileToc({ onNavigate }: TocProps) {
   }, [open]);
 
   return (
-    <nav aria-label={t('toc.title')} className="no-print sticky top-[67px] z-30 -mx-4 border-b border-border bg-background/90 backdrop-blur-xl sm:-mx-6 lg:hidden">
+    <nav aria-label={t('toc.title')} className="no-print sticky top-[var(--header-h)] z-30 -mx-4 border-b border-border bg-background/90 backdrop-blur-xl sm:-mx-6 lg:hidden">
       <button
         type="button"
         aria-expanded={open}

@@ -59,6 +59,10 @@ state/prefs.ts  theme, language, learning progress (persisted)
 
 ## Visual language
 
+**The binding reference is [`docs/DESIGN_LANGUAGE.md`](DESIGN_LANGUAGE.md)** (editorial, few boxes, hairline
+rules, colour for data only, serif titles, no decorative motion). The notes below are older detail.
+
+
 - Cards: `Card` (rounded-2xl, soft shadow). Sections: `SectionHeading` with an eyebrow.
 - Headline numbers: `font-display font-extrabold num` (tabular numerals).
 - Scores always with one decimal via `formatScore`; populations via `formatNumber`/`formatCompact`.

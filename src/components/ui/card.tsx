@@ -1,8 +1,12 @@
+/**
+ * Card — a flat bordered box. Use sparingly (see docs/DESIGN_LANGUAGE.md): interactive panels, overlays,
+ * or one highlighted element. Static content belongs on the page with rules, not in grids of cards.
+ */
 import * as React from 'react';
 import { cn } from '@/lib/utils';
 
 export function Card({ className, ...props }: React.ComponentProps<'div'>) {
-  return <div className={cn('rounded-2xl border border-border bg-card text-card-foreground shadow-[var(--shadow-soft)]', className)} {...props} />;
+  return <div className={cn('rounded-lg border border-border bg-card text-card-foreground', className)} {...props} />;
 }
 
 export function CardHeader({ className, ...props }: React.ComponentProps<'div'>) {
@@ -10,7 +14,7 @@ export function CardHeader({ className, ...props }: React.ComponentProps<'div'>)
 }
 
 export function CardTitle({ className, ...props }: React.ComponentProps<'h3'>) {
-  return <h3 className={cn('font-display text-base font-semibold leading-tight tracking-tight', className)} {...props} />;
+  return <h3 className={cn('text-base font-semibold leading-tight tracking-tight', className)} {...props} />;
 }
 
 export function CardDescription({ className, ...props }: React.ComponentProps<'p'>) {

@@ -22,7 +22,8 @@
     "title": "Risk is where hazard, vulnerability and weak coping capacity meet",
     "lead": "INFORM combines three dimensions with a geometric mean, so a place is only high-risk when all three are elevated. A strong health system or low poverty genuinely lowers risk, even where floods or droughts are frequent.",
     "equation": "Risk = ∛(Hazard & Exposure × Vulnerability × Lack of Coping Capacity)",
-    "national": "Tanzania today"
+    "national": "Tanzania today",
+    "result": "Tanzania: ∛({{h}} × {{v}} × {{c}}) = {{r}}"
   },
   "top": {
     "eyebrow": "Where risk concentrates",
@@ -30,11 +31,14 @@
     "lead": "Ranked by INFORM Risk. Select a council to see what drives its score.",
     "all": "Open the full ranking",
     "distribution": "How councils are distributed across risk classes",
-    "drivers": "Main driver"
+    "drivers": "Main driver",
+    "rank": "Rank",
+    "council": "Council",
+    "score": "Risk"
   },
   "modules": {
     "eyebrow": "One platform",
-    "title": "Everything you need to understand and act on risk",
+    "title": "What you can do here",
     "explore": "Interactive map of all councils and regions, coloured by risk, any dimension or any of 32 indicators.",
     "insights": "National patterns: regional rankings, hazard hot-spots and how the dimensions interact.",
     "severity": "Score an unfolding crisis with the official INFORM Severity Index method.",
@@ -44,12 +48,19 @@
   },
   "sources": {
     "title": "Built on authoritative data",
-    "lead": "Every indicator is traceable to its source and method."
+    "lead": "Every indicator is traceable to its authority, dataset and method."
   },
   "cta": {
     "title": "Evidence for preparedness, anticipatory action and investment",
     "lead": "Use INFORM Tanzania to target preparedness, prioritise investment and brief decision-makers with a transparent, reproducible index.",
     "primary": "Start exploring",
     "secondary": "Read the methodology"
+  },
+  "mapSource": "INFORM Risk by council. Sources: INFORM Tanzania model, NBS 2022 census.",
+  "figures": {
+    "national": "National INFORM Risk",
+    "councils": "Councils assessed",
+    "people": "People covered",
+    "high": "Councils at high risk"
   }
 }
