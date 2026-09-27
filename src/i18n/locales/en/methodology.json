@@ -1,0 +1,593 @@
+{
+  "sections": {
+    "overview": "Overview",
+    "structure": "Model structure",
+    "pipeline": "The calculation pipeline",
+    "workedExample": "Live worked example",
+    "geometric": "Why a geometric mean",
+    "classification": "Classification",
+    "levels": "Administrative levels",
+    "advanced": "Advanced multi-source model",
+    "severity": "Crisis severity method",
+    "sources": "Data sources register",
+    "quality": "Quality assurance",
+    "limitations": "Limitations & roadmap",
+    "changelog": "Corrections in this version",
+    "references": "References"
+  },
+  "toc": {
+    "title": "On this page",
+    "backToTop": "Back to top",
+    "show": "Show contents",
+    "hide": "Hide contents"
+  },
+  "hero": {
+    "eyebrow": "Methodology · Technical documentation",
+    "title": "How INFORM Tanzania measures risk",
+    "lead": "INFORM Tanzania applies the INFORM methodology of the European Commission’s Joint Research Centre to every council in the country. This page documents the model end to end, recomputes a real council in your browser, and states its limitations plainly.",
+    "download": "Indicator register (CSV)",
+    "print": "Print or save as PDF",
+    "asOf": "Data as of {{date}}",
+    "indicators": "{{used}} of {{total}} workbook indicators in use",
+    "verified": "{{n}} workbook values reproduced exactly"
+  },
+  "resolution": {
+    "council": "Council",
+    "district": "District",
+    "region": "Region",
+    "national": "National",
+    "overlay": "Documented overlay"
+  },
+  "keyed": {
+    "adm2": "District (Adm2)",
+    "adm1": "Region (Adm1)",
+    "national": "National"
+  },
+  "chips": {
+    "cap": "outlier cap",
+    "log": "log",
+    "inverted": "inverted",
+    "notUsed": "not used"
+  },
+  "vars": {
+    "risk": "Risk",
+    "severity": "Severity",
+    "impact": "Impact",
+    "conditions": "Conditions",
+    "complexity": "Complexity",
+    "class": "class"
+  },
+  "overview": {
+    "title": "An open, reproducible index of disaster risk for every council",
+    "lead": "What INFORM is, what this Tanzanian implementation adds, and who it is built for.",
+    "p1": "INFORM — the Index for Risk Management — is a global, open-source assessment of the risk of humanitarian crises and disasters. It is a collaboration of the Inter-Agency Standing Committee (IASC) and the European Commission, with the Joint Research Centre (JRC) as scientific lead, and it is used by governments, UN agencies and donors to decide where to invest in preparedness and prevention.",
+    "p2": "INFORM treats risk as the meeting point of three dimensions: the hazards people are exposed to, how vulnerable they are, and how little capacity exists to cope. The dimensions are combined with a geometric mean, so a place is at high risk only where all three are present — a severe hazard in a well-prepared, resilient area is not scored as a disaster.",
+    "p3": "INFORM Tanzania brings that method down to where decisions are made. It rebuilds the INFORM Tanzania country workbook (INFORM Sub-national SADC 2024 structure) in code, reproduces it exactly, and extends it from the workbook’s {{sources}} units to the {{councils}} councils and {{regions}} regions of the 2022 Population and Housing Census, using Tanzanian data from TMA, NBS, the Ministry of Health, MUCHALI/IPC, UNHCR and other authorities.",
+    "glance": {
+      "title": "At a glance",
+      "councils": "Councils",
+      "regions": "Regions",
+      "sources": "INFORM source units",
+      "national": "National INFORM Risk (official)",
+      "note": "All figures on this page are read live from the model, including any approved data updates."
+    },
+    "adds": {
+      "title": "What INFORM Tanzania adds",
+      "councils": {
+        "title": "Council resolution",
+        "body": "All {{councils}} councils of the 2022 census in {{regions}} regions — not only the {{sources}} units of the source workbook."
+      },
+      "local": {
+        "title": "Tanzanian evidence",
+        "body": "34 years of CHIRPS v3 rainfall, ERA5 temperature, the 2022 census and national surveys, each traceable to its authority."
+      },
+      "open": {
+        "title": "Open and verifiable",
+        "body": "Every formula is published here and reproduced by automated tests against the official workbook."
+      },
+      "live": {
+        "title": "A living model",
+        "body": "Sector ministries submit data; once PMO-DMD approves it, scores recompute at every level."
+      }
+    },
+    "audience": {
+      "title": "Who it is for",
+      "dmd": {
+        "title": "Disaster management",
+        "body": "PMO-DMD and regional and district disaster management committees: prioritise preparedness, contingency planning and anticipatory action."
+      },
+      "sectors": {
+        "title": "Sector ministries and agencies",
+        "body": "See exactly how their data shapes risk, and keep it current through the Data portal."
+      },
+      "partners": {
+        "title": "Development partners and funders",
+        "body": "Target investment with a transparent, comparable and auditable evidence base."
+      },
+      "research": {
+        "title": "Researchers and analysts",
+        "body": "Inspect, reproduce and challenge every step — the specification, the code and the tests are open."
+      }
+    }
+  },
+  "structure": {
+    "title": "Three dimensions, six categories, thirty-two indicator groups",
+    "lead": "The hierarchy is the INFORM Sub-national structure used for Tanzania. Open any indicator group to see what it measures, the authority responsible for its data, and the workbook indicators that feed it.",
+    "dimMeta": "{{categories}} categories · {{groups}} groups",
+    "groupCount_one": "{{count}} group",
+    "groupCount_other": "{{count}} groups",
+    "levels": {
+      "title": "Where the {{used}} indicators in use are measured",
+      "note": "{{used}} of the {{total}} indicators in the workbook specification are switched on (Use = Yes). The bar shows the level at which the workbook keys each raw value; a regional survey value applies to every council in that region, and the register below marks it as such."
+    },
+    "treeHint": "Select an indicator group to expand it. The mark before each name shows the resolution of the data behind today’s values; the fraction shows workbook indicators in use.",
+    "legend": "Data resolution:",
+    "expandAll": "Expand all",
+    "collapseAll": "Collapse all",
+    "leaf": {
+      "lead": "Lead authority",
+      "partners": "With",
+      "dataset": "Dataset",
+      "method": "Method",
+      "resolution": "Resolution",
+      "workbook": "Workbook indicators",
+      "workbookCount": "{{used}} of {{total}} in use",
+      "noWorkbook": "No workbook indicator feeds this group; its values come from the Tanzanian data layer shown above."
+    }
+  },
+  "pipeline": {
+    "title": "From a raw measurement to a risk score in eight steps",
+    "lead": "Steps 1–4 standardise each raw value onto a common 0–10 scale; steps 5–8 aggregate it up the hierarchy. The formulas are those of the Tanzania INFORM workbook, cell for cell.",
+    "intro": "Standardisation follows the workbook’s processing sheets; aggregation follows the INFORM SADC 2024 sheet (cells Z, AK, AU and AV). Each stage is locked by a golden test against the workbook’s cached values. Because the minimum and maximum of every indicator are frozen, a value standardises identically whether the model runs on 170 units, 195 councils or any other resolution.",
+    "applies": "Applies to {{n}} of the {{total}} indicators in use.",
+    "appliesMinmax": "{{custom}} indicators use a fixed reference pair and {{range}} the frozen workbook data range; {{dec}} are inverted (Decrease risk).",
+    "where": {
+      "denominator": "where d is the denominator named in the specification (e.g. population).",
+      "quartiles": "where L and U are Tukey’s fences: Q₁ and Q₃ are the lower and upper quartiles across units, and IQR = Q₃ − Q₁.",
+      "decrease": "if “Decrease risk”",
+      "minmax": "where min and max are the indicator’s frozen reference values, identical at every resolution.",
+      "weights": "where the sums run over the indicators of the group that have data; wᵢ = 1 in standard INFORM.",
+      "components": "where the sum runs over the m indicator groups of the category that have data."
+    },
+    "phase": {
+      "standardise": "Standardisation",
+      "standardiseHint": "raw value → 0–10 score",
+      "aggregate": "Aggregation",
+      "aggregateHint": "scores → INFORM Risk"
+    },
+    "steps": {
+      "1": {
+        "title": "Denominator",
+        "body": "Counts are turned into rates where the specification requires it — for example health facilities per inhabitant — so large and small units are compared fairly.",
+        "formula": "x equals the raw value divided by the denominator d"
+      },
+      "2": {
+        "title": "Outlier cap (Tukey fences)",
+        "body": "Where flagged, a value is clamped to the Tukey fences so that a single extreme unit cannot stretch the scale for everyone else.",
+        "formula": "x prime equals the minimum of the maximum of x and Q1 minus 1.5 times IQR, and Q3 plus 1.5 times IQR"
+      },
+      "3": {
+        "title": "Transform",
+        "body": "Heavily skewed indicators — event counts, exposure — are log-transformed; the 0.001 offset keeps a real zero finite.",
+        "formula": "x double prime equals the natural logarithm of 0.001 plus x prime"
+      },
+      "4": {
+        "title": "Min–max to 0–10",
+        "body": "The value is placed between the indicator’s frozen minimum and maximum, inverted where more means less risk (“Decrease risk”, e.g. physicians per capita), clamped to 0–10 and rounded to one decimal.",
+        "formula": "s star equals 10 times x minus min over max minus min; for decrease-risk indicators s star becomes 10 minus s star; s equals s star clamped to 0 to 10 and rounded to one decimal"
+      },
+      "5": {
+        "title": "Indicator group = average",
+        "body": "The standardised indicators of a group are averaged. Missing values are skipped — never treated as zero. In standard INFORM every weight is 1; weights matter only in the advanced multi-source baskets.",
+        "formula": "g equals the sum of w i times s i over the sum of w i, over indicators with data"
+      },
+      "6": {
+        "title": "Category = average",
+        "body": "Each category is the arithmetic mean of its indicator groups, again skipping groups without data.",
+        "formula": "c equals the mean of the m indicator groups"
+      },
+      "7": {
+        "title": "Dimension = scaled geometric mean",
+        "body": "Categories are mapped onto INFORM’s 1–10 “lack-of” scale, combined with a geometric mean and mapped back to 0–10. The result is never below the arithmetic mean, so a severe category is not diluted by a mild one. Rounded to one decimal.",
+        "formula": "y k equals 10 minus c k, over 10, times 9, plus 1; D equals 10 minus the geometric mean of the y k, divided by 9, times 10, rounded to one decimal; the geometric mean of n values is the n-th root of their product"
+      },
+      "8": {
+        "title": "Risk = cube root of the product",
+        "body": "INFORM Risk is the geometric mean of the three dimensions: risk is high only where hazard, vulnerability and lack of coping capacity coincide. Rounded to one decimal.",
+        "formula": "Risk equals the cube root of H times V times LCC, rounded to one decimal"
+      }
+    }
+  },
+  "example": {
+    "title": "The maths, recomputed in your browser",
+    "lead": "Choose any council. Its categories are combined into dimension scores, and those into INFORM Risk, with the very functions the rest of the application uses. Every number is substituted into the formulas and then checked against the model.",
+    "choose": "Council",
+    "live": "Recomputed from current data, including approved updates.",
+    "showIndicators": "Show indicators",
+    "hideIndicators": "Hide indicators",
+    "profile": "Open profile",
+    "sharedSource": "Vulnerability and coping come from the INFORM source unit “{{source}}”",
+    "inherited": "This council inherits its data from {{parent}} until council-specific data exist.",
+    "categories": "Categories",
+    "withData": "{{n}} of {{total}} indicators with data",
+    "mean": "mean",
+    "noData": "no data",
+    "dimFormula": "{{dim}} is the scaled geometric mean of the categories {{cats}}, which equals {{result}}",
+    "matches": "Matches the model value {{value}}",
+    "mismatch": "Differs from the model value {{value}}",
+    "riskStep": "Step 8 · dimensions → risk",
+    "riskFormula": "Risk equals the cube root of {{h}} times {{v}} times {{c}}, which rounds to {{result}}",
+    "footnote": "Indicators marked “no data” are excluded from the category mean rather than counted as zero; a 0.0 is a real, measured zero.",
+    "recorded": "Category values are recorded to one decimal in the source dataset, which is why some means differ from the category in the second decimal.",
+    "summary": "{{name}}: H {{h}}, V {{v}}, LCC {{c}}, INFORM Risk {{risk}}. {{check}}",
+    "summaryOk": "All values match the model.",
+    "summaryDiff": "Some values differ from the model."
+  },
+  "geometric": {
+    "title": "Why a geometric mean?",
+    "lead": "The choice of aggregation encodes what risk means. INFORM uses two geometric means, with opposite emphases.",
+    "p1": "An arithmetic mean lets a high score in one dimension compensate for a low score in another. Risk does not work that way: a strong earthquake in an empty desert is not a disaster, and a poor community with no hazard is not at risk of one. INFORM therefore multiplies the three dimensions (a geometric mean), so a very low value in any one of them pulls risk down.",
+    "p2": "Inside a dimension INFORM does the opposite. The geometric mean is taken on the inverted (10 − c) scale, so the dimension is never lower than the arithmetic mean of its categories: a council facing a severe natural hazard keeps a high Hazard & Exposure score even if human-made hazards are negligible.",
+    "riskPanel": "Dimensions → INFORM Risk",
+    "presets": "Examples",
+    "preset": {
+      "balanced": "All equal",
+      "oneLow": "One very low",
+      "oneHigh": "One extreme"
+    },
+    "arithmetic": "Arithmetic mean",
+    "geometric": "Geometric mean (INFORM)",
+    "scaledGeo": "Scaled geometric mean (INFORM)",
+    "riskNote": "When all three dimensions are equal, both means agree. When one dimension approaches zero, the geometric mean collapses towards zero while the arithmetic mean still reports moderate risk.",
+    "dimPanel": "Categories → dimension",
+    "dimHint": "Two categories of the Hazard & Exposure dimension.",
+    "dimNote": "The scaled geometric mean always sits at or above the arithmetic mean: one severe category keeps the whole dimension high."
+  },
+  "classification": {
+    "title": "Five classes — and each dimension has its own thresholds",
+    "lead": "Scores are classified with the cut-points in the Tanzania workbook’s Thresholds sheet. Each cut-point is an exclusive upper bound: a risk score of exactly {{t1}} is Low, not Very low.",
+    "ruleLabel": "class is Very low if x is below t1, Low if x is at least t1 and below t2, Medium if x is at least t2 and below t3, High if x is at least t3 and below t4, and Very high if x is at least t4",
+    "ruleCaption": "Workbook rule. t₁ … t₄ are the four thresholds of the scale; a score equal to a threshold belongs to the class above.",
+    "visualTitle": "The same 0–10 axis, cut differently for each scale",
+    "visualLead": "Hazard, vulnerability and lack of coping capacity are distributed differently across Tanzania, so each carries its own cut-points.",
+    "tableCaption": "Class boundaries by scale (score range, one decimal)",
+    "class": "Class",
+    "own": "Every map, badge, gauge and table in this application classifies a dimension with that dimension’s thresholds and INFORM Risk with the risk thresholds. Reusing the risk thresholds for a dimension — as the previous version of the tool did — misclassifies it, because the dimensions do not share a distribution.",
+    "exampleTitle": "Same number, different class",
+    "example": "A score of {{value}} is {{hazardClass}} on the Hazard & Exposure scale but only {{riskClass}} on the INFORM Risk scale.",
+    "if": "if"
+  },
+  "levels": {
+    "title": "Four administrative levels, one consistent model",
+    "lead": "The same engine runs at every level, and each level is built in the way INFORM prescribes — never by averaging scores that were already aggregated.",
+    "sources": {
+      "tag": "Reference",
+      "title": "INFORM source units",
+      "body": "The {{n}} units of the INFORM Tanzania country workbook: the backbone the engine is proven against, and the level at which vulnerability and coping data are recorded."
+    },
+    "councils": {
+      "tag": "Headline",
+      "title": "Councils",
+      "body": "The {{n}} councils of the 2022 census. Each has its own Hazard & Exposure, computed on its own boundary; vulnerability and coping come from its INFORM source unit. Risk is computed live as ∛(H × V × LCC), so an approved update propagates at once.",
+      "inherited": "{{n}} new or split councils ({{examples}} …) inherit their parent district’s data until council-specific data exist. They are flagged wherever they appear — never fabricated."
+    },
+    "regions": {
+      "tag": "Aggregate",
+      "title": "Regions",
+      "body": "The {{n}} regions are built from their councils the INFORM way: indicator means → category means → scaled geometric mean → cube root. A region’s risk is never a mean of council risk scores."
+    },
+    "national": {
+      "title": "National (official)",
+      "body": "The official INFORM Tanzania figure, {{value}}, reported as published. It is never re-aggregated from councils, whose data partly inherit or share source units."
+    },
+    "missing": {
+      "title": "Missing data is not zero",
+      "body": "A blank indicator is stored as “no data” (null) and excluded from every average, so it can neither raise nor lower a score. A 0 is different: it is a real, measured zero — landlocked Dodoma has no coastal hazard — and it is included.",
+      "formula": "the mean of 5, 5 and a missing value equals {{result}}, not 3.3",
+      "noData": "no data",
+      "not": "not 3.3"
+    },
+    "propagate": {
+      "title": "Updates propagate through every level",
+      "body": "Sector data enters through the Data portal and is reviewed by PMO-DMD. Once approved, the council’s dimension is recomputed from its indicators, then its risk, then its region. A vulnerability or coping update on an INFORM source unit reaches every council that shares it."
+    },
+    "shared": {
+      "title": "Shared source units",
+      "body": "Because survey data exist at the workbook’s resolution, {{n}} INFORM source units each supply vulnerability and coping values to more than one council. The Data portal says which councils an update will reach."
+    },
+    "liveNote": "Council and regional scores on this site are recomputed from their indicators when the model loads. Approved updates currently applied: {{edits}}."
+  },
+  "advanced": {
+    "title": "An advanced, multi-source model on the same engine",
+    "lead": "Some INFORM indicator groups rest on a single global proxy. The advanced model expands {{groups}} of them into baskets of {{n}} Tanzanian sub-indicators — satellite, reanalysis and sector records.",
+    "p1": "Each sub-indicator carries its own specification (unit, reference range, direction, lead sector) and is standardised exactly as in steps 1–4. It then joins the workbook indicator(s) of its group.",
+    "how": "Inside an expanded group the workbook indicators (weight 1 each) and the sub-indicators (their basket weights) are combined by a weighted mean over the members that have data. Blank members drop out and the remaining weights renormalise, so a partly filled basket introduces no bias.",
+    "formulaLabel": "g equals the sum of w i times s i over the sum of w i, taken only over members with data",
+    "formulaCaption": "Blank-skip weighting: members without data leave both sums.",
+    "weights": "where wᵢ = 1 for a workbook indicator and the basket weight for a sub-indicator.",
+    "degradeTitle": "Degrades exactly to standard INFORM",
+    "degrade": "With no advanced data present, the result is byte-identical to the genuine INFORM workbook — verified by an automated test on real district data.",
+    "basketsTitle": "{{groups}} baskets · {{n}} sub-indicators",
+    "basketsLead": "All {{groups}} baskets are in {{where}}. Open a basket to see its sub-indicators; the weight column gives each one’s basket weight. Names, units and bases are recorded as in the specification.",
+    "members_one": "{{count}} sub-indicator",
+    "members_other": "{{count}} sub-indicators",
+    "workbookLine": "Workbook indicator (w = 1):",
+    "noWorkbook": "none switched on",
+    "status": "The advanced baskets are an extension of the engine for analysis and benchmarking; scores shown elsewhere in this application follow the standard INFORM structure until sector data fill the baskets.",
+    "col": {
+      "name": "Sub-indicator",
+      "lead": "Lead · unit",
+      "basis": "Basis",
+      "weight": "Weight"
+    }
+  },
+  "severity": {
+    "title": "Crisis severity: the official INFORM Severity Index method",
+    "lead": "INFORM Risk describes the structural likelihood of harm before a crisis. The INFORM Severity Index measures how severe an ongoing crisis is. INFORM Tanzania implements the JRC/ACAPS method for sub-national Tanzanian crises.",
+    "p1": "Severity is assessed on a 0–5 scale across three dimensions: the impact of the crisis, the conditions of the people affected, and the complexity of the crisis. The structure, weights and aggregation below follow the published concept and methodology.",
+    "formulaLabel": "Severity equals 0.7 times G of Impact with weight one third and Conditions with weight two thirds, plus 0.3 times Complexity",
+    "formulaCaption": "Impact and conditions combine through INFORM’s weighted geometric aggregation G, with weights 1/3 and 2/3; that result carries weight 0.7 and complexity 0.3.",
+    "dim": {
+      "impact": "Impact of the crisis",
+      "conditions": "Conditions of affected people",
+      "complexity": "Complexity of the crisis"
+    },
+    "cat": {
+      "geographical": "Geographical",
+      "human": "Human",
+      "peopleInNeed": "People in need",
+      "concentration": "Concentration of conditions",
+      "societySafety": "Society and safety",
+      "operatingEnvironment": "Operating environment"
+    },
+    "agg": {
+      "geometric": "geometric",
+      "arithmetic": "average"
+    },
+    "comp": {
+      "affectedArea": "Area affected",
+      "peopleInArea": "People in the affected area",
+      "peopleAffected": "People affected",
+      "peopleByCategory": "Displaced people and fatalities",
+      "peopleInNeed": "People in need",
+      "concentration": "Share by level of conditions",
+      "socialCohesion": "Social cohesion",
+      "safetySecurity": "Safety and security",
+      "ruleOfLaw": "Rule of law",
+      "diversityOfGroups": "Diversity of affected groups",
+      "humanitarianAccess": "Humanitarian access"
+    },
+    "indicatorCount_one": "{{count}} indicator",
+    "indicatorCount_other": "{{count}} indicators",
+    "aggTitle": "Aggregation, step by step",
+    "steps": {
+      "normalise": "Each indicator is scaled to 0–5 between reference values — absolute counts on a log₁₀(1 + x) scale — and inverted where a higher value means lower severity.",
+      "average": "Indicators combine into components, and components into most categories, by arithmetic average (missing values skipped).",
+      "geometric": "Categories combine into dimensions with INFORM’s inverted, rescaled weighted geometric mean G, shown below.",
+      "final": "Severity = 0.7 × G(Impact 1/3, Conditions 2/3) + 0.3 × Complexity, calculated only when all three dimensions have data."
+    },
+    "gLabel": "G of x with weights w equals 5 minus the exponential of the weighted mean of the natural logarithm of y i, minus 1, over 4, times 5, where y i equals 5 minus x i, times 4 over 5, plus 1",
+    "gCaption": "Invert, rescale to [1, 5], take the weighted geometric mean, rescale to [0, 5] and invert back. Fixed points: 0 → 0 and 5 → 5.",
+    "categoriesTitle": "Five categories, including Medium",
+    "categoriesLead": "The category is the ROUNDUP of the one-decimal score (so 3.1 is category 4).",
+    "col": {
+      "score": "Score",
+      "level": "Level",
+      "category": "Category"
+    },
+    "reliabilityTitle": "Reliability rating",
+    "reliability": "A reliability rating from 1 to 5 — the average of source reliability, recency of the last update and the share of indicators with data — is shown alongside every result. It qualifies the score; it does not change it.",
+    "citeLabel": "Source:",
+    "citation": "Poljanšek, K., Vernaccini, L. & Marin Ferrer, M. (2020). INFORM Severity Index: Concept and Methodology. European Commission JRC and ACAPS.",
+    "calibration": "Indicator reference ranges are calibration parameters for sub-national Tanzanian crises; they are listed in the calculator.",
+    "open": "Open the severity calculator"
+  },
+  "sources": {
+    "title": "Data sources register",
+    "lead": "Every indicator group, the authority responsible for it, the dataset and method behind today’s values, and the resolution at which the data genuinely exist. A regional survey value used for a council is labelled as regional.",
+    "tabGroups": "Indicators ({{n}})",
+    "tabWorkbook": "Workbook specification ({{n}})",
+    "workbookLead": "The full keying-in specification extracted from the Tanzania workbook: every raw indicator with its unit, processing, frozen reference, direction and resolution. Indicators with Use = Yes feed the model.",
+    "search": "Search indicator, authority or dataset…",
+    "searchWorkbook": "Search code, indicator or group…",
+    "dimension": "Filter by dimension",
+    "resolution": "Filter by resolution",
+    "all": "All",
+    "allResolutions": "All resolutions",
+    "count": "{{shown}} of {{total}} shown",
+    "download": "Download CSV",
+    "empty": "No indicator matches these filters.",
+    "exposure": "Exposure",
+    "captionGroups": "Data sources for every indicator group",
+    "captionWorkbook": "Workbook indicator specification",
+    "usedOnly": "In use only",
+    "fixed": "fixed reference",
+    "dataRange": "frozen data range",
+    "decrease": "Decrease risk",
+    "increase": "Increase risk",
+    "note": "Dataset and method descriptions are recorded in English as supplied by the data owners. Downloads contain the rows currently shown.",
+    "col": {
+      "indicator": "Indicator",
+      "authority": "Lead authority",
+      "partners": "Partners",
+      "dataset": "Dataset",
+      "method": "Method",
+      "resolution": "Resolution",
+      "code": "Code",
+      "unit": "Unit",
+      "processing": "Processing",
+      "reference": "Reference (min – max)",
+      "direction": "Direction",
+      "level": "Keyed at",
+      "use": "In use"
+    }
+  },
+  "quality": {
+    "title": "Quality assurance",
+    "lead": "The engine is guarded by automated tests that run on every change. They compare the code with the official workbook’s own cached values and lock in the model’s invariants.",
+    "rows": "{{n}} reference rows",
+    "live": {
+      "pass": "All consistent",
+      "fail": "Inconsistency detected",
+      "title": "Live self-check, running in your browser",
+      "body": "When this page loaded, every council’s dimension scores were re-derived from its categories and every risk score from its dimensions, using the engine.",
+      "dims": "Dimension scores",
+      "risk": "Risk scores"
+    },
+    "checks": {
+      "standardise": {
+        "title": "Standardisation reproduces the workbook",
+        "body": "Every one of the {{used}} indicators in use, for every district: raw value → 0–10 matches the workbook exactly, across fixed and data-range references, log transforms and inverted indicators."
+      },
+      "pipeline": {
+        "title": "The full raw → risk pipeline",
+        "body": "Hazard, vulnerability, coping and risk rebuilt from raw values match the workbook for all {{units}} source units."
+      },
+      "parity": {
+        "title": "Workbook cell parity",
+        "body": "Category means, dimension scores and risk match the workbook’s cached cells and an independent re-implementation of the literal Excel expressions, including rounding at one decimal."
+      },
+      "invariants": {
+        "title": "Model invariants",
+        "body": "{{councils}} councils each with data; {{inherited}} inheriting councils flagged; {{regions}} regions including Dar es Salaam; national kept official; missing data excluded and zero included; updates flow council → region; more hazard never lowers risk."
+      },
+      "flexibility": {
+        "title": "Indicator flexibility",
+        "body": "Adding or removing an indicator through the workbook’s Use flag re-weights its group, and the same raw value gives the same score at any resolution."
+      },
+      "advanced": {
+        "title": "Advanced model",
+        "body": "With no advanced data, the multi-source engine with its {{n}} sub-indicators is byte-identical to standard INFORM; partial baskets aggregate only the members present."
+      },
+      "severity": {
+        "title": "Severity conformance",
+        "body": "Geometric aggregation fixed points, ROUNDUP categories including Medium, the 70/30 formula, monotonicity and reliability behave as the published method specifies."
+      }
+    },
+    "reproduce": "Reproduce it yourself",
+    "reproduceHint": "from the repository root — the whole suite runs in seconds."
+  },
+  "limitations": {
+    "title": "Limitations and planned improvements",
+    "lead": "A composite index is only as good as its inputs. These are the known weaknesses of the current version, each paired with the step that addresses it.",
+    "today": "Today",
+    "next": "Next",
+    "status": {
+      "open": "Open",
+      "inProgress": "In progress",
+      "planned": "Planned"
+    },
+    "items": {
+      "overlays": {
+        "title": "Several hazards are baseline or overlay values",
+        "now": "An audit of the {{groups}} indicator groups found 8 built from genuine local data (such as drought, flood and heatwave), 9 documented overlays graded from evidence rather than a gridded dataset (storms, landslide, coastal, wildfire, volcano, lightning, zoonoses, hazardous material, vehicle accidents), and the remainder still carrying the INFORM SADC 2024 baseline.",
+        "next": "Replace overlays with gridded evidence — GEM seismic hazard, NASA LHASA landslide susceptibility, LIS/OTD lightning density, IBTrACS cyclone tracks and the TFS district fire counts already on file."
+      },
+      "drought": {
+        "title": "Drought is not multiplied by exposure",
+        "now": "Flood is amplified by population exposure; drought is not, because multiplying drought by urban density would wrongly demote pastoral and semi-arid communities such as Longido.",
+        "next": "An agricultural exposure layer — cropland and livestock — for drought."
+      },
+      "relative": {
+        "title": "Scaling is relative to Tanzania",
+        "now": "Data-range references are frozen at the minimum and maximum across Tanzanian units, not INFORM’s global reference values. Scores compare well within Tanzania; compare them with global INFORM with care.",
+        "next": "Adopt policy or literature bounds (such as 0–100% for rates) where they are more defensible, recorded per indicator in the specification."
+      },
+      "floor": {
+        "title": "Raise-only flooring is precautionary",
+        "now": "Computed flood and drought evidence can raise a documented hazard but never lower it. This errs toward flagging risk, and keeps a few documented values that are likely too high — drought in central Dar es Salaam, for example.",
+        "next": "Sector review of flagged values through the Data portal, with each correction and its source recorded."
+      },
+      "inherit": {
+        "title": "{{inherited}} new councils inherit their parent’s data",
+        "now": "Councils created after the source workbook — Kibiti, Ubungo and Kigamboni among them — carry their parent district’s values until council-specific data exist. They are flagged, never fabricated.",
+        "next": "Council-native sources: the MoH facility registry, BEST education statistics, CAG audits and 2022 census tabulations."
+      },
+      "surveys": {
+        "title": "Vulnerability and coping are coarser than hazard",
+        "now": "Survey-based indicators exist at regional or source-unit level, and {{shared}} source units each back more than one council, so those councils share values.",
+        "next": "Small-area estimates and council-level administrative data as ministries submit them."
+      },
+      "sentinel": {
+        "title": "The Sentinel-1 flood layer is excluded",
+        "now": "A Sentinel-1 radar flood-frequency layer was computed for every council but failed validation: its simple backscatter threshold classed smooth dry surfaces — the Lake Natron soda flats, salt and clay pans — as water, so semi-arid councils outranked the Rufiji and Kilombero flood plains. It is not used.",
+        "next": "Dry-versus-wet-season change detection with terrain and water-body masking, validated against recorded floods before any use."
+      },
+      "precision": {
+        "title": "Close scores are not precise rankings",
+        "now": "Min–max scaling keeps the real spacing between units, so several semi-arid councils sit within a few tenths of each other. A difference of 0.1 is not meaningful.",
+        "next": "Publish uncertainty ranges alongside scores as the time series grows."
+      },
+      "freshness": {
+        "title": "Some inputs age quickly",
+        "now": "Refugee figures, for example, reflect 2024 camp populations; camp closures since then are not yet reflected. Outdated inputs are flagged in the source register.",
+        "next": "Dated snapshots and a refresh calendar per indicator, so every score is reported “as of” its data."
+      },
+      "bimodal": {
+        "title": "Drought season in bimodal highlands",
+        "now": "The drought index scores the season it detects as the main rainy season. In a few bimodal highland councils it picks the erratic short rains (October–January) instead of the reliable long rains, which inflates drought: Lushoto computes to 10.0 on the 0–10 scale. Treat very high drought in wet highland councils with caution.",
+        "next": "Score both rainy seasons in bimodal areas (or the season that matters for local livelihoods) and validate against MUCHALI/IPC food-security history."
+      }
+    },
+    "closingTitle": "How limitations are tracked",
+    "closing": "Each item above is tracked, and each can be improved through the Data portal or in code without changing the INFORM engine. As gaps close, scores will change as the picture becomes more complete, and every change remains traceable to a sourced indicator.",
+    "sourcesNote": "Sources: INFORM Tanzania Methodology & Data-Integrity Manual (§8), Local Data Integration Plan (§2) and the Indicator Source Register."
+  },
+  "changelog": {
+    "title": "Corrections in this version",
+    "lead": "This rebuild fixes issues found by an audit of the previous application. Each correction is locked in by an automated test.",
+    "before": "Before",
+    "after": "Now",
+    "items": {
+      "thresholds": {
+        "title": "Official per-dimension thresholds",
+        "before": "Dimension maps and badges were coloured with the INFORM Risk thresholds.",
+        "after": "Each dimension is classified with its own thresholds from the workbook’s Thresholds sheet."
+      },
+      "live": {
+        "title": "Council risk recomputed live",
+        "before": "Council risk could be read from a stored figure, so an approved update did not always reach it.",
+        "after": "Council risk is always computed as ∛(H × V × LCC) from current values; approved updates propagate to the council and its region."
+      },
+      "dar": {
+        "title": "Dar es Salaam region join fixed",
+        "before": "A spelling mismatch (“Dar-es-salaam” versus “Dar es Salaam”) broke the join between councils and their region.",
+        "after": "Place names are normalised before joining; all 31 regions, including Dar es Salaam, aggregate from their councils."
+      },
+      "severity": {
+        "title": "Severity follows the official method",
+        "before": "The severity calculator used a simplified scheme with no Medium category.",
+        "after": "The JRC/ACAPS structure: 70/30 weighting, inverted geometric aggregation, ROUNDUP categories including Medium, and a separate reliability rating."
+      },
+      "totals": {
+        "title": "Dimension-total overrides removed",
+        "before": "Dimension totals could be edited directly, disconnecting them from their indicators.",
+        "after": "Totals are always derived from indicators, so every score can be traced back to its inputs."
+      }
+    }
+  },
+  "references": {
+    "title": "References",
+    "lead": "The methodological sources this implementation follows, and the principal datasets behind its indicators.",
+    "groups": {
+      "inform": "INFORM methodology",
+      "statistics": "Composite indicators and statistics",
+      "data": "Principal datasets"
+    },
+    "use": {
+      "informMethodology": "The INFORM Risk concept, hierarchy, standardisation and aggregation rules implemented here.",
+      "informSubnational": "Guidance for sub-national INFORM models, which the Tanzania workbook follows.",
+      "informSeverity": "The crisis-severity structure, weights, geometric aggregation and categories.",
+      "informIndex": "The global INFORM initiative and its published results.",
+      "oecd": "Good practice for normalisation, weighting and aggregation of composite indicators.",
+      "tukey": "The fences (Q₁ − 1.5·IQR, Q₃ + 1.5·IQR) used to cap outliers.",
+      "chirps": "Satellite–station rainfall behind the drought and heavy-rain indicators (CHIRPS v3 used here).",
+      "era5": "Reanalysis temperature behind potential evapotranspiration, SPEI and heat exposure.",
+      "spei": "The drought index whose depth enters the drought indicator.",
+      "census": "Council populations and areas behind exposure and every per-capita denominator."
+    },
+    "newTab": "(opens in a new tab)",
+    "citeTitle": "How to cite this methodology",
+    "cite": "INFORM Tanzania. Methodology of the sub-national INFORM Risk and crisis-severity model for Tanzania (data as of {{date}})."
+  }
+}

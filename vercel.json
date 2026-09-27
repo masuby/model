@@ -1,11 +1,28 @@
 {
-  "rewrites": [
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "framework": "vite",
+  "buildCommand": "npm run build",
+  "outputDirectory": "dist",
+  "redirects": [
     {
-      "source": "/api/:path*",
-      "destination": "https://api.inform.co.tz/api/:path*"
+      "source": "/risk",
+      "destination": "/explore",
+      "permanent": true
     },
     {
-      "source": "/((?!assets|favicon|static|.*\\.).*)",
+      "source": "/education",
+      "destination": "/learn",
+      "permanent": true
+    },
+    {
+      "source": "/data-entry",
+      "destination": "/data",
+      "permanent": true
+    }
+  ],
+  "rewrites": [
+    {
+      "source": "/((?!assets/|favicon|.*\\.).*)",
       "destination": "/index.html"
     }
   ],
@@ -22,8 +39,20 @@
           "value": "DENY"
         },
         {
-          "key": "X-XSS-Protection",
-          "value": "1; mode=block"
+          "key": "Referrer-Policy",
+          "value": "strict-origin-when-cross-origin"
+        },
+        {
+          "key": "Permissions-Policy",
+          "value": "camera=(), microphone=(), geolocation=(), payment=()"
+        },
+        {
+          "key": "Strict-Transport-Security",
+          "value": "max-age=63072000; includeSubDomains; preload"
+        },
+        {
+          "key": "Content-Security-Policy",
+          "value": "default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; font-src 'self' data:; img-src 'self' data: blob: https://*.basemaps.cartocdn.com; connect-src 'self' https://*.supabase.co wss://*.supabase.co https://*.basemaps.cartocdn.com; worker-src 'self'; manifest-src 'self'; frame-ancestors 'none'; base-uri 'self'; form-action 'self'; object-src 'none'"
         }
       ]
     },
@@ -37,16 +66,7 @@
       ]
     },
     {
-      "source": "/",
-      "headers": [
-        {
-          "key": "Cache-Control",
-          "value": "public, max-age=0, must-revalidate"
-        }
-      ]
-    },
-    {
-      "source": "/index.html",
+      "source": "/(index.html)?",
       "headers": [
         {
           "key": "Cache-Control",

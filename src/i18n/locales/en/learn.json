@@ -1,0 +1,911 @@
+{
+  "overview": {
+    "kicker": "A free, self-paced course",
+    "eyebrowShort": "Learn",
+    "title": "Understand disaster risk in Tanzania",
+    "lead": "Seven short, hands-on lessons on how INFORM measures hazard, exposure, vulnerability, coping capacity, risk and crisis severity, using Tanzania’s real data. Try each idea on live council figures, then check yourself with a quick quiz.",
+    "methodology": "Read the methodology",
+    "start": "Start the course",
+    "continue": "Continue with lesson {{n}}",
+    "viewCertificate": "View your certificate",
+    "kpi": {
+      "lessons": "Lessons",
+      "minutes": "Minutes",
+      "questions": "Quiz questions"
+    },
+    "progressLabel": "{{pct}}% of the course completed",
+    "yourProgress": "Your progress",
+    "lessonsDone": "{{done}} of {{total}} lessons",
+    "avgLabel": "Average quiz score",
+    "nextLabel": "Next step",
+    "startHere": "Start here",
+    "savedLocally": "Your progress is saved in this browser. No account is needed.",
+    "reset": "Reset progress",
+    "resetTitle": "Reset your course progress?",
+    "resetBody": "This clears every completed lesson and quiz score saved in this browser. It cannot be undone.",
+    "resetConfirm": "Yes, reset",
+    "howTitle": "How the course works",
+    "how": {
+      "read": {
+        "title": "Read",
+        "body": "Short sections with Tanzanian examples, key ideas and honest caveats."
+      },
+      "try": {
+        "title": "Try it on real data",
+        "body": "Every lesson has a live widget driven by the same model as the risk map."
+      },
+      "quiz": {
+        "title": "Pass the quiz",
+        "body": "Three or four questions with instant feedback. Get two thirds right to mark the lesson complete."
+      }
+    },
+    "pathTitle": "The seven lessons",
+    "pathLead": "Take them in order or jump to what you need. Each lesson ends with a short quiz.",
+    "minutes_one": "{{count}} min",
+    "minutes_other": "{{count}} min",
+    "certReady": "You have completed every lesson. Your certificate is ready to print.",
+    "certLocked_one": "Complete {{count}} more lesson to unlock your printable certificate.",
+    "certLocked_other": "Complete {{count}} more lessons to unlock your printable certificate.",
+    "aboutTitle": "About this course",
+    "about": "Lessons follow the INFORM methodology of the European Commission’s Joint Research Centre and partners, as implemented for Tanzania in this app. Every number comes from the live model, and illustrative scenarios are labelled as such. The course supports official guidance and local knowledge; it does not replace them."
+  },
+  "status": {
+    "completed": "completed",
+    "completedScore": "Completed · {{score}}%",
+    "upNext": "Up next",
+    "ready": "Ready"
+  },
+  "nav": {
+    "label": "Course lessons",
+    "overview": "Course overview",
+    "course": "Course progress",
+    "done": "{{done}}/{{total}}",
+    "certificate": "Certificate",
+    "breadcrumb": "Breadcrumb",
+    "pager": "Lesson navigation",
+    "previous": "Previous lesson",
+    "next": "Next lesson",
+    "finish": "Finish the course"
+  },
+  "lesson": {
+    "of": "Lesson {{n}} of {{total}}",
+    "objectives": "In this lesson you will",
+    "takeaways": "Key takeaways",
+    "sections_one": "{{count}} section",
+    "sections_other": "{{count}} sections"
+  },
+  "callout": {
+    "key": "Key idea",
+    "tz": "Tanzania example",
+    "warn": "Watch out",
+    "tip": "Tip",
+    "fact": "Did you know?"
+  },
+  "quiz": {
+    "title": "Check your understanding",
+    "meta": "{{n}} questions · pass mark {{mark}}",
+    "intro": "{{n}} quick questions, one at a time. You will see right away whether you are correct, with a short explanation. Get {{mark}} right to complete the lesson — you can retry as often as you like.",
+    "start": "Start the quiz",
+    "alreadyPassed": "You have passed this quiz.",
+    "bestScore": "Best score {{score}}%",
+    "retake": "Retake quiz",
+    "progress": "Question {{i}} of {{n}}",
+    "chooseOne": "Choose one answer.",
+    "keyboardHint": "Press Enter or select “Check answer”.",
+    "check": "Check answer",
+    "next": "Next question",
+    "seeResults": "See results",
+    "correct": "Correct!",
+    "incorrect": "Not quite",
+    "srCorrect": "correct answer",
+    "srYourAnswer": "your answer",
+    "srWrong": "incorrect",
+    "score": "{{correct}} of {{total}} correct",
+    "passMark": "pass mark {{mark}} of {{total}}",
+    "passedTitle": "Lesson complete!",
+    "failedTitle": "Almost there",
+    "passedBody": "Well done — your progress is saved and the next lesson is unlocked.",
+    "failedBody": "Have another look at the lesson, then try again. The explanations after each question are a good place to start.",
+    "bestKept": "Your earlier best score of {{score}}% is kept.",
+    "summary": "Your answers",
+    "qShort": "Q{{i}}",
+    "retry": "Try again",
+    "review": "Review the lesson",
+    "nextLesson": "Next: lesson {{n}} · {{title}}",
+    "finishCourse": "Finish the course"
+  },
+  "widget": {
+    "tryIt": "Try it",
+    "live": "Live data",
+    "engine": "Live engine",
+    "illustrative": "Illustrative scenario",
+    "pickCouncil": "Council",
+    "try": "Try:",
+    "national": "Tanzania (national)",
+    "nationalMarker": "The vertical tick shows Tanzania’s national value ({{value}}).",
+    "markerHint": "Vertical ticks on the bars show national values.",
+    "topDriver": "Biggest driver here: {{indicator}} ({{value}}).",
+    "sharedSource": "Vulnerability and coping data come from the INFORM unit “{{source}}”, shared with neighbouring councils.",
+    "ownSource": "Vulnerability and coping data come from the INFORM unit “{{source}}”."
+  },
+  "widgets": {
+    "hazardHotspots": {
+      "title": "Where is each hazard highest?",
+      "lead": "Pick a hazard to see the five councils with the highest score. Select a council to open its full profile.",
+      "quick": "Quick picks",
+      "pick": "All hazard indicators",
+      "coverage": "{{n}} of {{total}} councils have data for this indicator.",
+      "ties": "{{n}} councils share the top score of {{value}}.",
+      "relative": "Scores are relative to Tanzania: 0 = least, 10 = most hazard-prone council.",
+      "droughtNote": "Honest note: some Dar es Salaam councils carry a documented baseline drought value of 10 that is flagged for review on the Methodology page. Always check where a value comes from."
+    },
+    "exposureCompare": {
+      "title": "Compare the exposure of two councils",
+      "lead": "Population density from the 2022 census, and the 0–10 exposure index built from it on a log scale.",
+      "a": "Council A",
+      "b": "Council B",
+      "pick": "Choose a council",
+      "indexSub": "0–10 index",
+      "floodBefore": "Flood hazard (h)",
+      "floodAfter": "Flood with exposure",
+      "axis": "People per km²",
+      "logNote": "log scale — each tick is ×10",
+      "insight": "{{denser}} has about {{ratio}} times as many people per km² as {{other}}, yet its exposure index is only {{gap}} points higher. The log scale keeps big differences visible without letting them dominate.",
+      "same": "Pick two different councils to compare them.",
+      "source": "NBS 2022 Population and Housing Census, council population ÷ council area; exposure = log-scaled min–max across councils."
+    },
+    "vulnerabilityProfile": {
+      "title": "Explore a council’s vulnerability",
+      "lead": "The Vulnerability score on its own class scale, its two categories and every indicator. Striped bars mean no data — left out, not counted as zero."
+    },
+    "copingWhatIf": {
+      "title": "Lack of coping capacity — and a what-if",
+      "lead": "See a council’s coping gaps, then improve one indicator and let the real engine recompute its Lack of Coping Capacity and INFORM Risk.",
+      "footer": "The what-if uses the same recalculation as the Data portal (category mean → scaled geometric mean → cube root). It is a thought experiment: nothing is saved.",
+      "drrRecords": "DRR records:",
+      "drr": {
+        "eprp": "Preparedness & response plan",
+        "aa": "Anticipatory action",
+        "eocc": "Emergency operations centre"
+      },
+      "whatIf": "What if…?",
+      "indicator": "Indicator to improve",
+      "slider": "{{indicator}} — lack-of-capacity score",
+      "direction": "Lower is better: 0 means no gap in capacity, 10 the largest gap in Tanzania.",
+      "noData": "This council has no data for this indicator, so it cannot be simulated.",
+      "matchBest": "Match the best council ({{value}}, {{council}})",
+      "lower": "Risk would fall by {{delta}}. Strengthening capacity lowers risk even where hazards cannot be changed.",
+      "higher": "Risk would rise by {{delta}} — weaker capacity means higher risk.",
+      "noChange": "This change is too small to move the rounded scores.",
+      "becomes": "becomes"
+    },
+    "riskPlayground": {
+      "title": "Risk playground",
+      "lead": "Move the three dimensions and watch INFORM Risk respond, computed live with the app’s engine. Each slider is classed on its own scale.",
+      "footer": "Risk = ROUND(H^⅓ × V^⅓ × LCC^⅓, 1), exactly as in the Tanzania INFORM workbook; classes use the workbook’s risk thresholds.",
+      "presets": "Presets",
+      "preset": {
+        "national": "Tanzania",
+        "extreme": "Extreme hazard only",
+        "balanced": "Balanced",
+        "allHigh": "All three high"
+      },
+      "load": "Load a council’s real values",
+      "choose": "Choose a council…",
+      "matches": "Matches the official score of {{name}}: {{score}}.",
+      "whyTitle": "Why the geometric mean matters",
+      "geo": "INFORM (geometric mean)",
+      "arith": "Simple average",
+      "gapBig": "A simple average would overstate risk by {{gap}}. With the geometric mean, one extreme dimension cannot make up for low ones.",
+      "gapSmall": "The two means differ by only {{gap}} here, because the three dimensions are fairly similar. Try “Extreme hazard only”.",
+      "gapNone": "When the three dimensions are equal, both means agree. Make one dimension extreme and watch them split."
+    },
+    "severityCalculator": {
+      "title": "Severity mini-calculator",
+      "lead": "The INFORM Severity engine running on an illustrative Tanzanian scenario. Change the number of people affected and see the severity respond.",
+      "footer": "Illustrative magnitudes, not official figures. Structural indicators (inequality, rule of law…) use the national defaults shown on the Crisis severity page.",
+      "scenario": "Scenario",
+      "scenarios": {
+        "riverineFlood": {
+          "name": "River flood",
+          "desc": "Heavy seasonal rains push a river over its banks across a farming floodplain. About {{people}} people live in the affected area."
+        },
+        "drought": {
+          "name": "Drought",
+          "desc": "Two failed rainy seasons across a semi-arid, farming and pastoral area. About {{people}} people live in the affected area."
+        },
+        "landslide": {
+          "name": "Landslide",
+          "desc": "Very heavy rain triggers a mudflow on a steep mountain slope above a town. About {{people}} people live in the affected area."
+        }
+      },
+      "slider": "People affected",
+      "displaced": "Displaced",
+      "deaths": "Deaths",
+      "inNeed": "People in need",
+      "severity": "Severity",
+      "outOf5": "out of 5",
+      "category": "Category {{level}} · {{label}}",
+      "reliability": "Reliability: {{label}} ({{pct}}% of indicators with data)",
+      "dims": {
+        "impact": "Impact",
+        "conditions": "Conditions of affected people",
+        "complexity": "Complexity"
+      },
+      "weights": {
+        "impact": "⅓ of 70%",
+        "conditions": "⅔ of 70%",
+        "complexity": "30%"
+      }
+    },
+    "decisionChecklist": {
+      "title": "Decision brief builder",
+      "lead": "Pick a council and work through six checks. Each one is filled in from the live model — tick it once you have reviewed it.",
+      "footer": "A brief is a starting point for discussion with the district disaster management committee, not a verdict.",
+      "progress": "{{done}} of {{total}} checked",
+      "rank": "Rank {{rank}} of {{n}} councils",
+      "driverIs": "Driven mainly by {{dim}} — “{{cls}}” on its own scale. Vertical ticks show the national values.",
+      "coverage": "{{pct}}% of indicators have data.",
+      "coverageLevel": {
+        "good": "Good",
+        "fair": "Fair",
+        "low": "Low"
+      },
+      "resolution": "Hazard and exposure are computed for this council; vulnerability and coping come from district-level surveys.",
+      "openProfile": "Open the full profile",
+      "steps": {
+        "risk": {
+          "title": "Overall risk",
+          "hint": "Where does this council stand on INFORM Risk?"
+        },
+        "driver": {
+          "title": "What drives it?",
+          "hint": "Compare each dimension on its own class scale, not by raw numbers."
+        },
+        "indicators": {
+          "title": "Top indicators",
+          "hint": "The three highest indicator scores across all dimensions."
+        },
+        "data": {
+          "title": "Check the data",
+          "hint": "Coverage, origin and resolution decide how much weight the number can bear."
+        },
+        "action": {
+          "title": "Match actions to the driver",
+          "hint": "Suggested areas of action for the highest category in the driving dimension."
+        },
+        "next": {
+          "title": "Take the next step",
+          "hint": "Open the profile, prepare for response, or improve the evidence."
+        }
+      },
+      "actions": {
+        "natural": "early warning linked to TMA forecasts, land-use planning, flood protection, safer construction and slope management.",
+        "human": "road-safety measures, safety plans for hazardous sites, and conflict-sensitive planning with local leaders.",
+        "socioEconomic": "social protection, livelihood and income support, safer housing and food-security monitoring with MUCHALI.",
+        "vulnerableGroups": "nutrition and health programmes, support for refugees and their host communities, and outreach to the most vulnerable households.",
+        "infrastructure": "health access, water points and sanitation, communication networks and schools that can serve as safe places.",
+        "institutional": "emergency preparedness and response plans, trained disaster management committees, emergency operations capacity and anticipatory action."
+      },
+      "complete": "Brief complete for {{name}}. Take it to the planning table — and add what local leaders and communities know."
+    }
+  },
+  "figures": {
+    "disaster": {
+      "hazard": "Hazard",
+      "hazardQ": "What could happen?",
+      "exposure": "Exposure",
+      "exposureQ": "Who is in the way?",
+      "vulnerability": "Vulnerability",
+      "vulnerabilityQ": "How badly would they be hurt?",
+      "coping": "Lack of coping",
+      "copingQ": "Can they manage?",
+      "risk": "Risk",
+      "riskQ": "How likely is serious harm?",
+      "times": "times",
+      "equals": "equals"
+    },
+    "ladder": {
+      "indicators": "Indicators",
+      "categories": "Categories",
+      "dimensions": "Dimensions",
+      "risk": "INFORM Risk",
+      "class": "Classes",
+      "mean": "average",
+      "geomean": "scaled geometric mean",
+      "cubeRoot": "cube root ∛",
+      "thresholds": "thresholds"
+    },
+    "thresholds": {
+      "caption": "INFORM class ranges for Tanzania by scale",
+      "scale": "Scale",
+      "class": "Class",
+      "short": {
+        "risk": "Risk",
+        "hazard": "H&E",
+        "vulnerability": "V",
+        "coping": "LCC"
+      }
+    },
+    "severity": {
+      "geoPart": "{{pct}}% geometric part",
+      "linearPart": "{{pct}}% added directly",
+      "impact": "Impact",
+      "conditions": "Conditions",
+      "complexity": "Complexity"
+    }
+  },
+  "completion": {
+    "notYetTitle": "Almost there",
+    "waitingTitle": "Your certificate is waiting",
+    "notYetBody_one": "Complete {{count}} more lesson to unlock your certificate.",
+    "notYetBody_other": "Complete {{count}} more lessons to unlock your certificate.",
+    "title": "Congratulations — course complete!",
+    "lead": "You can now read an INFORM profile from the score down to its drivers, explain why the geometric mean matters, and tell risk from crisis severity. Put it to work on the live map.",
+    "explore": "Explore the risk map",
+    "methodology": "Read the full methodology",
+    "scores": "Your quiz scores",
+    "average": "Average"
+  },
+  "certificate": {
+    "nameLabel": "Name on the certificate (optional, stays in this browser)",
+    "namePlaceholder": "INFORM Tanzania learner",
+    "print": "Print certificate",
+    "honest": "A record of self-paced learning in this app — not an official qualification.",
+    "aria": "Certificate of completion for {{name}}",
+    "title": "Certificate of Completion",
+    "certifies": "This certifies that",
+    "body": "has completed all {{lessons}} lessons of “Understanding disaster risk in Tanzania”: hazard, exposure, vulnerability, coping capacity, INFORM Risk, crisis severity and using INFORM for decisions.",
+    "score": "Average quiz score",
+    "date": "Date completed"
+  },
+  "lessons": {
+    "hazard": {
+      "title": "Hazard",
+      "subtitle": "What could strike, where, and how hard",
+      "summary": "Natural and human hazards, how INFORM puts them on a 0–10 scale, and where Tanzania’s hotspots are.",
+      "objectives": [
+        "Explain the difference between a <b>hazard</b> and a <b>disaster</b>.",
+        "Name the two hazard categories INFORM Tanzania uses and some of its {{hazardCount}} hazard indicators.",
+        "Read a 0–10 hazard indicator and find the councils where it is highest."
+      ],
+      "sections": [
+        {
+          "id": "hazard-vs-disaster",
+          "title": "A hazard is not yet a disaster",
+          "blocks": [
+            { "type": "p", "text": "A <b>hazard</b> is an event or process that <i>could</i> cause loss of life, injury, damage or disruption: a flood, a drought, an earthquake, a disease outbreak, a road crash. On its own, a hazard is only a possibility of harm." },
+            { "type": "p", "text": "A <b>disaster</b> happens when a hazard meets people and assets that are in harm’s way, vulnerable, and unable to cope. Heavy rain over an empty forest reserve is a hazard; the same rain over a crowded river valley with fragile houses and no warning can become a disaster." },
+            { "type": "figure", "id": "disasterEquation", "caption": "INFORM looks at all four ideas together. This course takes them one lesson at a time." },
+            { "type": "callout", "tone": "key", "text": "Disasters are never caused by the hazard alone. That is why INFORM measures hazard <i>together</i> with exposure, vulnerability and coping capacity." }
+          ]
+        },
+        {
+          "id": "categories",
+          "title": "How INFORM organises hazards",
+          "blocks": [
+            { "type": "p", "text": "In INFORM, hazard is part of the first dimension, <b>Hazard & Exposure</b>. For Tanzania it brings together {{hazardCount}} hazard indicators in two categories:" },
+            {
+              "type": "compare",
+              "items": [
+                { "title": "Natural hazards", "text": "Flood, drought, earthquake, landslide, coastal hazards, storms and cyclones, lightning, heatwave, volcano, wildfire, environmental degradation, and animal and plant diseases and pests." },
+                { "title": "Human hazards", "text": "Conflict intensity and conflict risk, internal violence, road-traffic accidents, and hazardous materials at industrial, mining and petroleum sites." }
+              ]
+            },
+            { "type": "p", "text": "Every indicator is put on the same <b>0–10 scale</b>, where 10 marks the most hazard-prone councils in Tanzania. Raw measurements — days of very heavy rain, estimated earthquake shaking, recorded floods — are rescaled with a <b>min–max</b> method, so that very different hazards can be compared and averaged." },
+            { "type": "callout", "tone": "tip", "text": "An indicator score is <b>relative to Tanzania</b>. A drought score of 9 means “among the most drought-prone councils in the country” — not “a 90% chance of drought”." }
+          ]
+        },
+        {
+          "id": "landscape",
+          "title": "Tanzania’s hazard landscape",
+          "blocks": [
+            {
+              "type": "list",
+              "style": "bullet",
+              "items": [
+                "<b>Floods</b> — river valleys such as the Rufiji and the Kilombero flood in heavy rainy seasons. The very wet 2023–24 El Niño season brought severe flooding to Rufiji and Kibiti.",
+                "<b>Drought</b> — the semi-arid central corridor, including much of Dodoma and Singida, and the pastoral north depend on rains that often fail.",
+                "<b>Earthquakes</b> — branches of the East African Rift cross the country. In September 2016 an earthquake of magnitude 5.9 struck Kagera region, damaging many homes in and around Bukoba.",
+                "<b>Landslides</b> — steep, rain-soaked slopes in the highlands. In December 2023 a deadly mudflow from the slopes of Mount Hanang swept into Katesh town.",
+                "<b>Lightning</b> — the Lake Victoria basin is one of the most lightning-prone regions on Earth.",
+                "<b>Cyclones</b> — rare but real: Cyclone Hidaya brought strong winds and heavy rain to the coast around Mafia in May 2024."
+              ]
+            },
+            { "type": "widget", "id": "hazardHotspots" },
+            { "type": "callout", "tone": "warn", "text": "Several councils can share the same top score. Min–max scaling keeps real differences, so ties are honest — don’t over-read a difference of 0.1." }
+          ]
+        },
+        {
+          "id": "dimension",
+          "title": "From indicators to one hazard score",
+          "blocks": [
+            { "type": "p", "text": "Indicators are averaged into the two category scores, natural and human. The two categories are then combined with INFORM’s <b>scaled geometric mean</b> into the Hazard & Exposure score — lesson 5 shows exactly how." },
+            { "type": "p", "text": "Tanzania’s national Hazard & Exposure score is <b>{{nH}}</b>, which is “{{nHClass}}” on the hazard scale." },
+            { "type": "callout", "tone": "fact", "text": "Each dimension has its <b>own</b> class thresholds. On the hazard scale {{nH}} is “{{nHClass}}”; the same number would read “{{nHRiskClass}}” on the overall risk scale." }
+          ]
+        }
+      ],
+      "takeaways": [
+        "A hazard is a potential event; it becomes a disaster only when it meets exposed, vulnerable people who cannot cope.",
+        "INFORM Tanzania uses {{hazardCount}} hazard indicators in two categories: natural and human.",
+        "Scores run from 0 to 10 and are relative to Tanzania — ties and close values are real, not errors."
+      ],
+      "quiz": [
+        {
+          "q": "Which statement best describes a hazard?",
+          "options": ["An event that has already caused a disaster", "A potentially damaging event or process that may cause harm", "The number of people living in a council", "A council’s ability to respond to emergencies"],
+          "explain": "A hazard is only the possibility of harm. It becomes a disaster when it meets exposed, vulnerable people who cannot cope."
+        },
+        {
+          "q": "In INFORM Tanzania, which of these is a <b>human</b> hazard?",
+          "options": ["Landslide", "Lightning", "Road-traffic accidents", "Drought"],
+          "explain": "Human hazards are conflict, internal violence, road-traffic accidents and hazardous materials. Landslides, lightning and drought are natural hazards."
+        },
+        {
+          "q": "A council’s flood indicator is 9.0. What does that tell you?",
+          "options": ["It is among the most flood-prone councils in Tanzania", "There is a 90% chance of a flood this year", "90% of its people live in flood zones", "It had nine floods last year"],
+          "explain": "Indicators are rescaled from 0 to 10 relative to all councils in Tanzania. A 9.0 places the council near the top of the national flood range — it is not a probability."
+        },
+        {
+          "q": "Heavy rain falls on an uninhabited forest reserve. In INFORM terms, this is…",
+          "options": ["A disaster, because the rain was extreme", "A vulnerability problem", "A failure of coping capacity", "A hazard with almost no exposure — so little risk"],
+          "explain": "Without people or assets in harm’s way there is little risk. Risk needs hazard <i>and</i> exposure, vulnerability and a lack of coping capacity."
+        }
+      ]
+    },
+    "exposure": {
+      "title": "Exposure",
+      "subtitle": "Who and what is in harm’s way",
+      "summary": "Why the same flood matters more in a crowded town, and how INFORM measures exposure with census population density.",
+      "objectives": [
+        "Define <b>exposure</b> and explain why INFORM combines it with hazard.",
+        "Explain why population density is measured on a <b>logarithmic</b> scale.",
+        "Compare the exposure of two councils with real 2022 census data."
+      ],
+      "sections": [
+        {
+          "id": "people-in-the-way",
+          "title": "Where hazards meet people",
+          "blocks": [
+            { "type": "p", "text": "<b>Exposure</b> describes the people, homes, farms, roads and services located where a hazard can strike. A severe flood in an empty valley harms no one; a moderate flood in a dense town can affect thousands of households." },
+            { "type": "p", "text": "That is why INFORM does not treat hazard and exposure separately: the first dimension is literally called <b>Hazard & Exposure</b>." },
+            { "type": "callout", "tone": "key", "text": "Exposure answers one question: <i>who or what is in harm’s way?</i> It says nothing yet about how badly they would be hurt — that is vulnerability, the next lesson." }
+          ]
+        },
+        {
+          "id": "density",
+          "title": "Concentration, not headcount",
+          "blocks": [
+            { "type": "p", "text": "INFORM Tanzania measures exposure with <b>population density</b> — people per square kilometre — from the 2022 Population and Housing Census (NBS). A large rural council can have more people than a small town, but far fewer people per km² who could be hit by the same event." },
+            { "type": "p", "text": "Density is extremely uneven: city councils have thousands of people per km², pastoral councils only a handful. So density is put on a <b>logarithmic scale</b> before it is scaled to 0–10. Each step on a log scale is a ten-fold jump, so one dense city does not squash every rural council to zero." },
+            { "type": "formula", "text": "exposure = (log₁₀ density − log₁₀ min) ÷ (log₁₀ max − log₁₀ min) × 10", "caption": "min and max are the lowest and highest council densities in Tanzania" },
+            { "type": "widget", "id": "exposureCompare" },
+            { "type": "callout", "tone": "tip", "text": "Notice how a density hundreds of times higher adds only a few points of exposure. That is the log scale at work: big differences stay visible without dominating." }
+          ]
+        },
+        {
+          "id": "flood",
+          "title": "Exposure amplifies flood — but never hides it",
+          "blocks": [
+            { "type": "p", "text": "For floods, INFORM Tanzania combines the physical flood hazard <i>h</i> with the exposure index <i>E</i>:" },
+            { "type": "formula", "text": "flood = max( h , √(h × E) )" },
+            { "type": "p", "text": "In a dense, flood-prone city the square-root term is larger than <i>h</i>, so exposure <b>raises</b> the flood score. In a sparsely populated but flood-prone valley, the documented hazard is kept in full — exposure can never lower a known flood risk." },
+            { "type": "callout", "tone": "warn", "text": "Precautionary by design: an earlier version multiplied flood <i>down</i> by exposure and hid well-known flood areas. An audit caught it, and the rule was changed so that exposure only amplifies." },
+            { "type": "callout", "tone": "tz", "text": "<b>Rufiji and Kilombero.</b> Fertile floodplains attract farming families and settlements — people live where the water and the soil are. That is exactly why the seasonal floods there can do so much damage." }
+          ]
+        }
+      ],
+      "takeaways": [
+        "Exposure means the people and assets in harm’s way.",
+        "INFORM Tanzania measures it as log-scaled population density from the 2022 census.",
+        "For floods, exposure can raise the hazard score but never lower it."
+      ],
+      "quiz": [
+        {
+          "q": "What does exposure measure?",
+          "options": ["How poor households are", "How often floods occur", "Who and what is located where a hazard can strike", "How strong local government is"],
+          "explain": "Exposure is about presence in harm’s way. Poverty belongs to vulnerability, flood frequency to hazard, and government strength to coping capacity."
+        },
+        {
+          "q": "Why is population density put on a logarithmic scale?",
+          "options": ["Density is very uneven: without the log, a few cities would push every other council close to zero", "To make cities score lower than villages", "Because the census publishes logarithms", "To leave small councils out"],
+          "explain": "The log scale turns ten-fold jumps into equal steps, so dense cities still score highest but rural councils keep meaningful, distinguishable scores."
+        },
+        {
+          "q": "A flood-prone council has few people: flood hazard h = 9.8 and exposure E = 2.9. Using flood = max(h, √(h × E)), what is its flood score?",
+          "options": ["{{sqrtVal}} — exposure pulls it down", "9.8 — the documented hazard is kept", "2.9 — the exposure value", "0 — almost nobody lives there"],
+          "explain": "√(9.8 × 2.9) ≈ {{sqrtVal}}, which is lower than 9.8, so the maximum keeps 9.8. Exposure can amplify flood but never hide a known flood risk."
+        }
+      ]
+    },
+    "vulnerability": {
+      "title": "Vulnerability",
+      "subtitle": "Why the same event hurts some people more",
+      "summary": "Poverty, health, food insecurity and displacement — the conditions that make people more likely to suffer harm.",
+      "objectives": [
+        "Explain <b>vulnerability</b> and how it differs from exposure.",
+        "Name INFORM’s two vulnerability categories and their indicators.",
+        "Read a council’s vulnerability profile and spot what drives it."
+      ],
+      "sections": [
+        {
+          "id": "same-hazard",
+          "title": "Same hazard, different outcomes",
+          "blocks": [
+            { "type": "p", "text": "Two villages sit on the same floodplain. In one, families have some savings, solid houses and healthy children. In the other, households are poor, houses are built of mud brick and many children are stunted. The flood is identical — the harm is not. The difference is <b>vulnerability</b>." },
+            { "type": "p", "text": "Vulnerability is the set of conditions that make people more likely to suffer when a hazard strikes, and slower to recover afterwards." },
+            { "type": "callout", "tone": "key", "text": "Exposure says <i>who is in the way</i>. Vulnerability says <i>how badly they would be hurt</i>." }
+          ]
+        },
+        {
+          "id": "categories",
+          "title": "Two categories",
+          "blocks": [
+            {
+              "type": "compare",
+              "items": [
+                { "title": "Socio-economic vulnerability", "text": "Development and poverty (Household Budget Survey), economic dependency, habitat — the quality of housing — and livelihoods, measured through acute food insecurity (IPC / MUCHALI)." },
+                { "title": "Vulnerable groups", "text": "Displaced people (refugees and asylum seekers, UNHCR), health conditions such as the HIV and malaria burden, children’s health and nutrition (stunting, TDHS-MIS 2022), and economically vulnerable groups." }
+              ]
+            },
+            { "type": "p", "text": "Indicators are averaged within each category, and the two categories are combined with the scaled geometric mean. Nationally, Tanzania’s Vulnerability score is <b>{{nV}}</b> — “{{nVClass}}” on the vulnerability scale." },
+            { "type": "callout", "tone": "tz", "text": "<b>Kigoma and refugee hosting.</b> Kasulu and Kibondo host the Nyarugusu and Nduta refugee camps. Hosting large displaced populations raises the “displaced people” indicator and adds pressure on water, health services and land shared with host communities." },
+            { "type": "widget", "id": "vulnerabilityProfile" }
+          ]
+        },
+        {
+          "id": "missing-data",
+          "title": "Missing data is not zero",
+          "blocks": [
+            { "type": "p", "text": "Surveys do not measure everything everywhere. When an indicator has no data, INFORM leaves it <b>blank</b> and averages only the indicators that exist. A blank never pulls a score up or down; a real, measured zero does count." },
+            { "type": "callout", "tone": "warn", "text": "Vulnerability and coping data come from national surveys that are representative at district or region level, not for every council. Councils created by splitting an older district share their parent’s values until council-level data exist." },
+            { "type": "callout", "tone": "tip", "text": "Vulnerability changes slowly, but it can be changed: social protection, nutrition programmes and health services all reduce it — and every reduction lowers INFORM Risk." }
+          ]
+        }
+      ],
+      "takeaways": [
+        "Vulnerability is how susceptible people are to harm, and how slowly they recover.",
+        "Two categories: socio-economic vulnerability and vulnerable groups.",
+        "Missing data is left out of averages — never treated as zero."
+      ],
+      "quiz": [
+        {
+          "q": "Two villages face the same flood. One suffers far more because households are poorer and many children are malnourished. Which INFORM idea explains the difference?",
+          "options": ["Hazard", "Exposure", "Vulnerability", "Crisis severity"],
+          "explain": "The hazard and the exposure are the same; what differs is how susceptible people are to harm — their vulnerability."
+        },
+        {
+          "q": "Which indicator belongs to the <b>vulnerable groups</b> category?",
+          "options": ["Development & poverty", "Habitat", "Economic dependency", "Displaced people"],
+          "explain": "Vulnerable groups cover displaced people, health conditions, children’s health and nutrition, and economically vulnerable groups. The other three are socio-economic indicators."
+        },
+        {
+          "q": "An indicator has no data for a council. How does INFORM treat it?",
+          "options": ["It is left out; the average uses only the indicators that have data", "As zero", "As the national average", "The council gets no score at all"],
+          "explain": "Missing is not zero. Blanks are excluded from every average, so they can never pull a score up or down."
+        },
+        {
+          "q": "Why does Kasulu District score high on “displaced people”?",
+          "options": ["It has the most floods in Tanzania", "It hosts a large refugee population", "It has the highest population density", "It has no health facilities"],
+          "explain": "Kasulu hosts the Nyarugusu refugee camp. The indicator reflects refugees and asylum seekers relative to the local population (UNHCR data)."
+        }
+      ]
+    },
+    "coping": {
+      "title": "Coping capacity",
+      "subtitle": "The resources that stop a hazard becoming a crisis",
+      "summary": "Health access, water, communication, education, disaster plans and governance — and why INFORM measures their lack.",
+      "objectives": [
+        "Explain coping capacity and why INFORM measures its <b>lack</b>.",
+        "Distinguish infrastructure from institutional capacity.",
+        "Test how improving one capacity indicator changes a council’s risk."
+      ],
+      "sections": [
+        {
+          "id": "capacity",
+          "title": "Capacity makes the difference",
+          "blocks": [
+            { "type": "p", "text": "When a hazard strikes, some places manage: warnings go out, clinics treat the injured, roads stay open and the disaster management committee coordinates relief. Elsewhere, the same event overwhelms local systems. <b>Coping capacity</b> is the ability of people, organisations and systems to manage an emergency with the resources they have." },
+            { "type": "p", "text": "INFORM turns this around and measures the <b>Lack of Coping Capacity (LCC)</b>, so that on every dimension a higher score means higher risk. A high LCC means few resources to respond." },
+            { "type": "callout", "tone": "key", "text": "Higher LCC = weaker capacity = higher risk. Investing in capacity lowers LCC — and therefore lowers INFORM Risk." }
+          ]
+        },
+        {
+          "id": "categories",
+          "title": "Two categories",
+          "blocks": [
+            {
+              "type": "compare",
+              "items": [
+                { "title": "Infrastructure", "text": "Access to health care, economic capacity, water, sanitation and hygiene (WASH), communication — roads, electricity, mobile phones and internet — and education." },
+                { "title": "Institutional", "text": "Disaster-risk-reduction (DRR) implementation — plans, early warning and emergency operations — and governance." }
+              ]
+            },
+            { "type": "p", "text": "Nationally, Tanzania’s Lack of Coping Capacity is <b>{{nC}}</b> — “{{nCClass}}” on the coping scale. Try the widget below to see how much a single improvement can change a council’s risk." },
+            { "type": "callout", "tone": "tz", "text": "Disaster management in Tanzania is coordinated by the Prime Minister’s Office – Disaster Management Department, with disaster management committees at regional and district level. Emergency preparedness and response plans, emergency operations centres and anticipatory-action arrangements all feed the DRR-implementation indicator." },
+            { "type": "widget", "id": "copingWhatIf" }
+          ]
+        },
+        {
+          "id": "counterbalance",
+          "title": "Capacity counterbalances vulnerability",
+          "blocks": [
+            { "type": "p", "text": "Because INFORM Risk multiplies the three dimensions, a council with high vulnerability but strong capacity can end up at lower risk than a less vulnerable council with little capacity. Capacity is also what decision-makers can change fastest — through plans, trained staff, equipment and early-warning systems." },
+            { "type": "callout", "tone": "warn", "text": "The what-if above runs the real engine, but it is a thought experiment: official scores change only when new, sourced data are entered through the Data portal." }
+          ]
+        }
+      ],
+      "takeaways": [
+        "INFORM measures the <b>lack</b> of coping capacity: higher means weaker.",
+        "Two categories: infrastructure and institutional.",
+        "Improving capacity is one of the most direct levers for reducing risk."
+      ],
+      "quiz": [
+        {
+          "q": "A council’s Lack of Coping Capacity score rises from 4.0 to 7.0. What does that mean?",
+          "options": ["Its capacity improved", "Its hazards became more frequent", "Its capacity weakened", "Its population grew"],
+          "explain": "INFORM measures the <i>lack</i> of capacity, so a higher LCC means fewer resources to respond — and higher risk."
+        },
+        {
+          "q": "Which of these is an <b>institutional</b> coping-capacity indicator?",
+          "options": ["DRR implementation", "Access to health care", "WASH", "Communication"],
+          "explain": "The institutional category holds DRR implementation and governance. Health access, WASH and communication are infrastructure."
+        },
+        {
+          "q": "Why can investing in early warning and emergency plans lower INFORM Risk?",
+          "options": ["It stops the hazard from happening", "It reduces the number of people in the council", "It changes the class thresholds", "It lowers Lack of Coping Capacity, one of the three factors of risk"],
+          "explain": "Risk = ∛(H × V × LCC). Better plans and warnings reduce LCC, so risk falls even though the hazard itself is unchanged."
+        }
+      ]
+    },
+    "risk": {
+      "title": "Putting it together: INFORM Risk",
+      "subtitle": "From 0–10 indicators to one comparable score",
+      "summary": "How indicators become categories, dimensions and one risk score — and why INFORM uses a geometric mean.",
+      "objectives": [
+        "Follow the steps from indicator to INFORM Risk.",
+        "Explain why the <b>geometric mean</b> matters, and when it differs from a simple average.",
+        "Classify a risk score with Tanzania’s thresholds."
+      ],
+      "sections": [
+        {
+          "id": "equation",
+          "title": "The risk equation",
+          "blocks": [
+            { "type": "p", "text": "INFORM Risk combines the three dimensions you have met — Hazard & Exposure (H), Vulnerability (V) and Lack of Coping Capacity (LCC) — into one score from 0 to 10:" },
+            { "type": "formula", "text": "Risk = ∛( H × V × LCC )", "caption": "the geometric mean of the three dimensions, rounded to one decimal" },
+            { "type": "p", "text": "For Tanzania as a whole: ∛({{nH}} × {{nV}} × {{nC}}) = <b>{{national}}</b>, which is “{{nationalClass}}”. This is the official INFORM Tanzania country value." },
+            { "type": "figure", "id": "aggregationLadder", "caption": "The whole journey, from {{indicatorCount}} indicators to one class. Every step reproduces the Tanzania INFORM workbook." }
+          ]
+        },
+        {
+          "id": "geometric",
+          "title": "Why a geometric mean?",
+          "blocks": [
+            { "type": "p", "text": "A simple average lets one very high dimension hide two low ones. The geometric mean does not: if any dimension is low, risk stays low. A place with extreme hazard but few vulnerable people and strong capacity is <i>not</i> a high-risk place." },
+            { "type": "p", "text": "It also means that improvement anywhere counts. Reducing vulnerability or lack of coping capacity lowers risk even where the hazard itself cannot be changed." },
+            { "type": "widget", "id": "riskPlayground" },
+            { "type": "callout", "tone": "tip", "text": "Load any council into the playground: the sliders take its real H, V and LCC, and the result matches its score in the Risk explorer." }
+          ]
+        },
+        {
+          "id": "classes",
+          "title": "Classes: Tanzania’s thresholds",
+          "blocks": [
+            { "type": "p", "text": "Scores are grouped into five classes, from Very low to Very high. The thresholds come from the Tanzania INFORM workbook, and <b>each dimension has its own set</b>:" },
+            { "type": "figure", "id": "classThresholds", "caption": "Class ranges for overall risk and for each dimension (Tanzania INFORM workbook)." },
+            { "type": "callout", "tone": "warn", "text": "Never colour a dimension map with the risk thresholds. A Hazard score of {{nH}} is “{{nHClass}}” on its own scale but would look “{{nHRiskClass}}” on the risk scale." }
+          ]
+        },
+        {
+          "id": "levels",
+          "title": "Councils, regions and the country",
+          "blocks": [
+            { "type": "p", "text": "Council scores are computed live from their three dimensions. Regions are aggregated the INFORM way — indicator averages, then categories, dimensions and the cube root — <b>not</b> by averaging council risk scores. The national value is the official INFORM Tanzania figure, {{national}}." },
+            { "type": "callout", "tone": "fact", "text": "The model covers {{councils}} councils in {{regions}} regions. Hazard and exposure are computed for each council’s own area; vulnerability and coping come from the survey districts that contain them." }
+          ]
+        }
+      ],
+      "takeaways": [
+        "Indicator → category (average) → dimension (scaled geometric mean) → risk (cube root) → class.",
+        "The geometric mean stops one extreme dimension from dominating.",
+        "Overall risk and each dimension have their own class thresholds."
+      ],
+      "quiz": [
+        {
+          "q": "What is the INFORM Risk formula?",
+          "options": ["(H + V + LCC) ÷ 3", "The highest of H, V and LCC", "∛(H × V × LCC)", "H × V ÷ LCC"],
+          "explain": "INFORM Risk is the geometric mean of the three dimensions: the cube root of their product, rounded to one decimal."
+        },
+        {
+          "q": "A place has H = 9.0, V = 1.0 and LCC = 1.0. The simple average is {{arith}}. What is its INFORM Risk?",
+          "options": ["{{arith}}", "{{geo}}", "9.0", "1.0"],
+          "explain": "∛(9 × 1 × 1) = {{geo}}. With the geometric mean, an extreme hazard alone does not make a high-risk place when vulnerability and lack of coping capacity are low."
+        },
+        {
+          "q": "Using Tanzania’s risk thresholds, a council with INFORM Risk {{classScore}} is classed…",
+          "options": ["Very low", "Low", "Medium", "High", "Very high"],
+          "explain": "Check the risk row of the thresholds table: {{classScore}} falls inside the “High” band. Remember that each dimension has its own thresholds."
+        },
+        {
+          "q": "How is a region’s INFORM Risk calculated?",
+          "options": ["INFORM aggregation: indicator averages, then categories, dimensions and the cube root", "The average of its councils’ risk scores", "The highest council score in the region", "It is copied from the national value"],
+          "explain": "Regions are aggregated from their councils’ indicators, following the same steps as any INFORM unit — never by averaging risk scores."
+        }
+      ]
+    },
+    "severity": {
+      "title": "Crisis severity",
+      "subtitle": "Measuring a crisis that is already happening",
+      "summary": "The INFORM Severity Index: impact, conditions of affected people and complexity, on a 0–5 scale.",
+      "objectives": [
+        "Distinguish INFORM Risk (before a crisis) from INFORM Severity (during one).",
+        "Describe the three severity dimensions and how they are weighted.",
+        "Use the calculator to see how the size of a crisis changes its severity."
+      ],
+      "sections": [
+        {
+          "id": "risk-vs-severity",
+          "title": "Risk versus severity",
+          "blocks": [
+            { "type": "p", "text": "INFORM Risk describes the <b>potential</b> for a crisis. It changes slowly, is updated from surveys and climate records, and guides preparedness and planning. When a flood or a drought actually strikes, decision-makers need a different answer: <i>how severe is this crisis, right now?</i>" },
+            { "type": "p", "text": "The <b>INFORM Severity Index</b>, developed by the European Commission’s Joint Research Centre with ACAPS, gives that answer. It scores an ongoing crisis from 0 to 5 and places it in one of five categories." },
+            {
+              "type": "compare",
+              "items": [
+                { "title": "INFORM Risk", "text": "Before a crisis · scale 0–10 · every council · updated periodically · guides preparedness, risk reduction and development planning." },
+                { "title": "INFORM Severity", "text": "During a crisis · scale 0–5, categories 1–5 · the affected area only · updated as the crisis evolves · guides response and prioritisation." }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "dimensions",
+          "title": "Three dimensions",
+          "blocks": [
+            {
+              "type": "terms",
+              "items": [
+                { "term": "Impact", "def": "The size of the event: the area and the people living in it, and the people affected, displaced and killed — both in numbers and relative to the population." },
+                { "term": "Conditions of affected people", "def": "How many people are in need, and how concentrated the most severe conditions are — from level 1 (none or minimal) to level 5 (extreme)." },
+                { "term": "Complexity", "def": "What makes a crisis harder to resolve: inequality, insecurity, weak rule of law, the diversity of groups affected and constraints on humanitarian access." }
+              ]
+            },
+            { "type": "formula", "text": "Severity = 70% × G(Impact ⅓, Conditions ⅔) + 30% × Complexity", "caption": "G is INFORM’s weighted geometric mean. The category is the score rounded up (1–5)." },
+            { "type": "figure", "id": "severityWeights", "caption": "Conditions of affected people carry twice the weight of impact." },
+            { "type": "callout", "tone": "key", "text": "What matters most is how people are doing, not only how big the event is." }
+          ]
+        },
+        {
+          "id": "calculator",
+          "title": "Try it",
+          "blocks": [
+            { "type": "p", "text": "The calculator below runs the app’s severity engine on an illustrative Tanzanian scenario. Move the slider to change how many people are affected; the related figures — displaced people, deaths and people at each level of need — scale with it." },
+            { "type": "widget", "id": "severityCalculator" },
+            { "type": "callout", "tone": "warn", "text": "The scenarios are illustrative, not official figures. Real assessments use data from the Prime Minister’s Office – Disaster Management Department, district committees, MUCHALI/IPC and partners." }
+          ]
+        },
+        {
+          "id": "reliability",
+          "title": "Reliability travels with the score",
+          "blocks": [
+            { "type": "p", "text": "A severity score is only as good as its data. INFORM reports a <b>reliability</b> rating next to every score — based on data quality, how recent the information is and how many indicators are missing — but never mixes it into the score itself." },
+            { "type": "callout", "tone": "tz", "text": "In a fast-moving flood, the first figures are usually incomplete and are revised as assessment teams reach affected villages. Re-score as the data improve, and always show the reliability rating next to the number." }
+          ]
+        }
+      ],
+      "takeaways": [
+        "Risk describes a potential crisis (0–10); Severity describes an ongoing one (0–5, categories 1–5).",
+        "Severity = 70% × G(Impact, Conditions) + 30% × Complexity.",
+        "Always report reliability next to the score."
+      ],
+      "quiz": [
+        {
+          "q": "When is the INFORM Severity Index used?",
+          "options": ["Before any hazard, for long-term planning", "During an ongoing crisis, to measure how severe it is", "Only for earthquakes", "Instead of INFORM Risk, everywhere"],
+          "explain": "Severity scores a crisis that is already happening. INFORM Risk is the tool for preparedness before a crisis."
+        },
+        {
+          "q": "In the severity formula, which dimension has twice the weight of Impact?",
+          "options": ["Complexity", "Reliability", "Conditions of affected people", "Hazard & Exposure"],
+          "explain": "Inside the geometric part, Impact weighs ⅓ and Conditions of affected people ⅔. Reliability is reported separately and is not part of the score."
+        },
+        {
+          "q": "What scale does the Severity Index use?",
+          "options": ["0–5, grouped into categories 1 to 5", "0–10, like INFORM Risk", "A percentage", "Only “low” and “high”"],
+          "explain": "Severity runs from 0 to 5; the category is the score rounded up, from 1 (very low) to 5 (very high)."
+        },
+        {
+          "q": "How is data reliability handled?",
+          "options": ["It is multiplied into the score", "Unreliable crises are not scored", "It is ignored", "It is reported next to the score but never mixed into it"],
+          "explain": "Reliability — data quality, recency and missing indicators — travels with the score so users can judge it, without changing the score itself."
+        }
+      ]
+    },
+    "decisions": {
+      "title": "Using INFORM for decisions in Tanzania",
+      "subtitle": "From a score to a better decision",
+      "summary": "Read the drivers, check the data and match actions to what really drives risk — with a practical checklist.",
+      "objectives": [
+        "Read a council profile from the score down to its drivers.",
+        "Check data coverage and origin before relying on a number.",
+        "Match actions to the dimension that drives risk."
+      ],
+      "sections": [
+        {
+          "id": "starting-point",
+          "title": "A score is a starting point",
+          "blocks": [
+            { "type": "p", "text": "INFORM is a <b>composite indicator</b>: it summarises dozens of data sets into one comparable number. That makes it powerful for prioritising — which councils first, which dimension first — but it does not replace local knowledge, field assessments or official early warnings." },
+            { "type": "callout", "tone": "key", "text": "Use INFORM to ask better questions: <i>where</i> is risk high, <i>why</i> is it high, and <i>what</i> would lower it?" }
+          ]
+        },
+        {
+          "id": "drivers",
+          "title": "Read the drivers, not just the rank",
+          "blocks": [
+            { "type": "p", "text": "Two councils with the same score can need very different responses. One may be driven by hazard (frequent floods), another by vulnerability (poverty, malnutrition), a third by a lack of coping capacity (few health facilities, no emergency plan). Always open the profile and look at the three dimensions and the top indicators." },
+            {
+              "type": "list",
+              "style": "bullet",
+              "items": [
+                "<b>Hazard-driven:</b> early warning based on TMA forecasts, land-use planning, flood protection, safer construction and slope management.",
+                "<b>Vulnerability-driven:</b> social protection, nutrition and health programmes, livelihood support, and support for host communities.",
+                "<b>Capacity-driven:</b> emergency preparedness and response plans, trained committees, health access, water points and communication."
+              ]
+            },
+            { "type": "callout", "tone": "tz", "text": "<b>Hanang, December 2023.</b> A deadly mudflow from the slopes of Mount Hanang struck Katesh after very heavy rain. For planners the lesson is clear: settlements below steep slopes need hazard mapping, land-use rules and warnings that reach people in time." }
+          ]
+        },
+        {
+          "id": "check-data",
+          "title": "Check the data before you decide",
+          "blocks": [
+            {
+              "type": "list",
+              "style": "check",
+              "items": [
+                "<b>Coverage:</b> what share of the {{indicatorCount}} indicators has data for this council? Low coverage means lower confidence.",
+                "<b>Origin:</b> is the council new or split from another? Then it shares its parent district’s vulnerability and coping data.",
+                "<b>Resolution:</b> hazard and exposure are computed per council; vulnerability and coping come from district- or region-level surveys.",
+                "<b>Documented values:</b> a few indicators keep a documented baseline that is flagged for review — the Methodology page lists them openly."
+              ]
+            },
+            { "type": "widget", "id": "decisionChecklist" }
+          ]
+        },
+        {
+          "id": "cycle",
+          "title": "Plan, respond, review",
+          "blocks": [
+            { "type": "p", "text": "Use INFORM Risk for preparedness and planning — budgets, contingency plans and risk-reduction investment. When a crisis begins, switch to the Severity Index to prioritise the response. Afterwards, update the evidence through the Data portal, so the next analysis starts from better data." },
+            { "type": "callout", "tone": "tip", "text": "Decisions are shared. Take the council profile to the district disaster management committee, and combine it with what local leaders and communities know." }
+          ]
+        }
+      ],
+      "takeaways": [
+        "Use the rank to prioritise, and the drivers to decide what to do.",
+        "Check coverage, origin and resolution before relying on a number.",
+        "Risk for preparedness, Severity for response, the Data portal to improve the evidence."
+      ],
+      "quiz": [
+        {
+          "q": "Two councils both have INFORM Risk 5.0. What should you do next?",
+          "options": ["Treat them exactly the same", "Choose the one with more people", "Look at which dimension and indicators drive each score", "Average their scores"],
+          "explain": "The same score can hide very different drivers — and different drivers call for different actions."
+        },
+        {
+          "q": "A council’s risk is driven mainly by Lack of Coping Capacity. Which action fits best?",
+          "options": ["Strengthen emergency plans, health access and early-warning communication", "Build a flood wall", "Redraw the council boundary", "Nothing — capacity cannot change"],
+          "explain": "When capacity is the driver, invest in capacity: plans, trained committees, health access and warnings that reach people."
+        },
+        {
+          "q": "A newly created council shows exactly the same vulnerability values as its parent district. Why?",
+          "options": ["It is a data-entry error", "The two councils are identical", "Vulnerability is always national", "Survey data exist only for the parent district, so the new council inherits them until council data exist"],
+          "explain": "Surveys were designed for the old district boundaries. New and split councils honestly inherit their parent’s values — the app flags them — until council-level data are collected."
+        }
+      ]
+    }
+  }
+}

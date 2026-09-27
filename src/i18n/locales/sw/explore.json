@@ -1,0 +1,177 @@
+{
+  "title": "Chunguza hatari",
+  "lead": "Paka ramani ya Tanzania rangi kwa hatari kwa ujumla, kwa kipimo, au kwa kiashiria chochote kati ya {{count}}. Chagua eneo uone kinachoendesha alama yake.",
+  "panel": {
+    "label": "Vidhibiti vya uchunguzi"
+  },
+  "stage": {
+    "label": "Ramani na orodha ya nafasi"
+  },
+  "sheet": {
+    "expand": "Panua paneli",
+    "collapse": "Kunja paneli"
+  },
+  "search": {
+    "label": "Tafuta halmashauri au mkoa",
+    "placeholder": "Tafuta halmashauri au mkoa…",
+    "placeholderShort": "Tafuta eneo…",
+    "results": "Maeneo yanayolingana",
+    "empty": "Hakuna eneo linalolingana na “{{q}}”."
+  },
+  "level": {
+    "label": "Ngazi",
+    "council": "Halmashauri",
+    "region": "Mikoa",
+    "source": "Vitengo vya INFORM",
+    "reference": "Rejea",
+    "note": {
+      "council": "Halmashauri {{count}} (NBS 2022) — ngazi kuu. Vitisho na Mfiduo hukokotolewa kwa kila halmashauri; udhaifu na uwezo wa kukabiliana hutoka kwenye kitengo cha chanzo cha INFORM cha halmashauri husika.",
+      "region": "Mikoa {{count}}, iliyojumlishwa kutoka halmashauri zake kwa mbinu ya INFORM (wastani wa viashiria, kisha wastani wa kijiometri uliopimwa).",
+      "source": "Vitengo {{count}} vya kitabu cha INFORM SADC 2024, vinaonyeshwa kwa rejea tu. Halmashauri ndizo ngazi kuu."
+    }
+  },
+  "lens": {
+    "label": "Paka rangi kwa",
+    "indicator": "Kiashiria kimoja",
+    "indicatorChip": "Kiashiria…",
+    "pickIndicator": "Chagua kiashiria…",
+    "selected": "kimechaguliwa",
+    "searchIndicator": "Tafuta viashiria…",
+    "noIndicator": "Hakuna kiashiria kinacholingana.",
+    "scoresFor": "Alama zinazoonyeshwa ni za {{name}}.",
+    "scoresNational": "Alama zinazoonyeshwa: takwimu rasmi za kitaifa.",
+    "valuesFor": "Thamani za {{name}} (0–10).",
+    "valuesNational": "Thamani rasmi za kitaifa (0–10).",
+    "source": "Chanzo",
+    "resolution": "Kiwango cha undani",
+    "backToRisk": "Rudi kwenye hatari kwa ujumla"
+  },
+  "resolution": {
+    "council": "Halmashauri — hukokotolewa kwa kila halmashauri",
+    "district": "Wilaya — thamani moja kwa halmashauri za wilaya moja",
+    "region": "Mkoa — makadirio ya tafiti, sawa kwa kila halmashauri ya mkoa",
+    "national": "Taifa — thamani moja kwa nchi nzima",
+    "overlay": "Tabaka lililorekodiwa — mfiduo uliobainishwa na wataalamu"
+  },
+  "legend": {
+    "label": "Ufunguo na kichujio",
+    "filterHint": "Bofya daraja kuchuja ramani na orodha ya nafasi.",
+    "filterLabel": "Chuja kwa daraja",
+    "classCount_one": "{{cls}}: eneo {{count}}",
+    "classCount_other": "{{cls}}: maeneo {{count}}",
+    "clearFilter": "Ondoa kichujio",
+    "filtered": "Inaonyesha {{cls}} pekee",
+    "lower": "Chini",
+    "higher": "Juu",
+    "continuousNote": "Kiashiria kimoja hutumia kipimo endelevu cha 0–10. INFORM huweka madaraja kwa hatari kwa ujumla na kwa vipimo vitatu pekee, hivyo thamani za viashiria hazipangwi kwa madaraja.",
+    "continuousShort": "Kipimo endelevu 0–10 · INFORM haina madaraja kwa kiashiria kimoja"
+  },
+  "honesty": {
+    "label": "Kuhusu vipimo hivi",
+    "title": "Jinsi ya kusoma rangi",
+    "indicator": "Mwonekano wa kiashiria kimoja hutumia kipimo endelevu cha 0–10: INFORM huweka madaraja kwa hatari kwa ujumla na kwa vipimo vitatu pekee.",
+    "dimension": "Hatari na kila kipimo vina viwango vyake vya madaraja vya INFORM, hivyo alama ileile inaweza kuangukia madaraja tofauti.",
+    "national": "Thamani ya kitaifa ni takwimu rasmi ya INFORM Tanzania, si wastani wa halmashauri au mikoa.",
+    "more": "Soma kuhusu mbinu →"
+  },
+  "stats": {
+    "label": "Takwimu",
+    "mean": "Wastani",
+    "min": "Chini zaidi",
+    "max": "Juu zaidi",
+    "national": "Kitaifa (rasmi)",
+    "nationalShort": "Kitaifa",
+    "areas_one": "eneo {{count}}",
+    "areas_other": "maeneo {{count}}",
+    "missing_one": "Eneo {{count}} halina data kwa kipimo hiki.",
+    "missing_other": "Maeneo {{count}} hayana data kwa kipimo hiki.",
+    "distribution": "Mgawanyo"
+  },
+  "ranking": {
+    "label": "Maeneo ya juu",
+    "openTable": "Fungua orodha kamili ya nafasi"
+  },
+  "basemap": {
+    "label": "Ramani ya mitaa",
+    "hint": "Muktadha wa OpenStreetMap chini ya rangi"
+  },
+  "view": {
+    "label": "Mwonekano",
+    "map": "Ramani",
+    "table": "Jedwali",
+    "showOnMap": "Onyesha kwenye ramani"
+  },
+  "share": {
+    "copy": "Nakili kiungo",
+    "copied": "Kiungo kimenakiliwa",
+    "copiedDesc": "Yeyote mwenye kiungo hiki ataona mwonekano huu huu.",
+    "failed": "Imeshindikana kunakili kiungo"
+  },
+  "map": {
+    "loading": "Inapakia ramani…",
+    "hint": "Bofya kuona maelezo"
+  },
+  "card": {
+    "label": "Maelezo ya {{name}}",
+    "close": "Funga maelezo",
+    "rank": "Nafasi ya hatari",
+    "national": "Kitaifa (rasmi)",
+    "regionRisk": "Mkoa wa {{name}}",
+    "dimensions": "Vipimo",
+    "markerRegion": "Mstari wa alama: mkoa wa {{name}}",
+    "markerNational": "Mstari wa alama: takwimu rasmi ya kitaifa",
+    "drivers": "Vichocheo vikuu",
+    "driversHint": "Viashiria vyenye alama za juu zaidi (0–10). Chagua kimoja kupaka ramani rangi kwa kiashiria hicho.",
+    "colourBy": "Paka ramani rangi kwa {{name}}",
+    "people": "Watu",
+    "popSource": "Chanzo: {{source}}",
+    "coverageDetail": "Viashiria {{have}} kati ya {{total}} vina data",
+    "regionNote_one": "Umejumlishwa kutoka halmashauri {{count}} kwa mbinu ya INFORM.",
+    "regionNote_other": "Umejumlishwa kutoka halmashauri {{count}} kwa mbinu ya INFORM.",
+    "sourceNote": "Kitengo cha rejea kutoka kitabu cha INFORM SADC 2024. Halmashauri ndizo ngazi kuu.",
+    "editedNote_one": "Inajumuisha sasisho {{count}} la data lililoidhinishwa.",
+    "editedNote_other": "Inajumuisha masasisho {{count}} ya data yaliyoidhinishwa.",
+    "inheritedBadge": "Data iliyorithiwa",
+    "viewProfile": "Tazama wasifu kamili",
+    "compare": "Linganisha",
+    "comparing": "Inalinganishwa"
+  },
+  "compare": {
+    "title": "Ulinganisho",
+    "clear": "Futa",
+    "expand": "Panua ulinganisho",
+    "collapse": "Kunja ulinganisho",
+    "remove": "Ondoa {{name}} kwenye ulinganisho",
+    "full": "Unaweza kulinganisha hadi maeneo {{max}}",
+    "fullHint": "Ondoa kwanza eneo moja kwenye ulinganisho."
+  },
+  "abbr": {
+    "risk": "Hatari",
+    "hazard": "VT",
+    "vulnerability": "UD",
+    "coping": "UK"
+  },
+  "table": {
+    "label": "Jedwali la nafasi",
+    "eyebrow": "Orodha ya nafasi · {{level}}",
+    "title": "Zimepangwa kwa {{metric}}",
+    "caption": "{{level}} zimepangwa kwa {{metric}}",
+    "search": "Chuja kwa jina au mkoa…",
+    "showing": "{{shown}} kati ya {{total}}",
+    "export": "Hamisha CSV",
+    "rank": "Nafasi",
+    "rankShort": "#",
+    "name": "Jina",
+    "level": "Ngazi",
+    "riskClass": "Daraja la hatari",
+    "clearClass": "Ondoa kichujio cha {{cls}}",
+    "selectRow": "Onyesha maelezo ya {{name}}",
+    "empty": "Hakuna eneo linalolingana na vichujio hivi."
+  },
+  "footer": {
+    "asOf": "Data hadi {{date}}",
+    "methodology": "Mbinu",
+    "method": "Mbinu ya INFORM · JRC na washirika",
+    "learn": "Jinsi INFORM inavyofanya kazi"
+  }
+}

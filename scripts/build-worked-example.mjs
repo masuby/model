@@ -7,8 +7,9 @@
  * out: docs/worked_example_indicators.csv  (every indicator: raw → standardisation → 0-10 → aggregation)
  *      docs/worked_example_levels.csv       (council → district → region → national harmonisation)
  */
+import { fileURLToPath } from 'url';
 import fs from 'fs';
-const ROOT = new URL('..', import.meta.url).pathname;
+const ROOT = fileURLToPath(new URL('..', import.meta.url));
 const J = (p) => JSON.parse(fs.readFileSync(ROOT + p, 'utf8'));
 const readCsv = (p) => { const l = fs.readFileSync(ROOT + p, 'utf8').trim().split('\n'); const h = l[0].split(','); return l.slice(1).map((x) => { const c = x.split(','); const o = {}; h.forEach((k, i) => (o[k] = c[i])); return o; }); };
 const risk = J('src/data/tanzania-inform-risk.json'), cou = J('src/data/tanzania-councils.json'), cd = J('src/data/tanzania-councils-data.json');

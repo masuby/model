@@ -1,0 +1,399 @@
+{
+  "meta": {
+    "title": "{{name}} — Wasifu wa hatari wa eneo · INFORM Tanzania"
+  },
+  "eyebrow": "Wasifu wa hatari wa eneo",
+  "breadcrumb": {
+    "label": "Njia ya ukurasa",
+    "country": "Tanzania"
+  },
+  "levelOf": {
+    "council": "Halmashauri katika",
+    "source": "Kitengo cha chanzo cha INFORM (wilaya) katika",
+    "region": "Mkoa wa Jamhuri ya Muungano wa Tanzania",
+    "national": "Jamhuri ya Muungano wa Tanzania · wasifu wa kitaifa",
+    "regionName": "Mkoa wa {{region}}"
+  },
+  "peers": {
+    "council": "halmashauri",
+    "region": "mikoa",
+    "source": "vitengo vya chanzo vya INFORM",
+    "national": "nchi"
+  },
+  "actions": {
+    "print": "Chapisha au hifadhi kama PDF",
+    "copy": "Nakili kiungo",
+    "copied": "Kiungo kimenakiliwa",
+    "copyFailed": "Imeshindikana kunakili kiungo — kinakili kutoka kwenye upau wa anwani",
+    "explore": "Fungua kwenye kichunguzi",
+    "compare": "Linganisha"
+  },
+  "hero": {
+    "outOf10": "kati ya 10"
+  },
+  "facts": {
+    "census": "Sensa ya 2022",
+    "coverageSub": "viashiria {{have}} kati ya {{total}}"
+  },
+  "figures": {
+    "rank": "Nafasi kati ya {{peers}} (1 = hatari kubwa zaidi)",
+    "rankSub": "Chini yake: {{pct}}% ya {{peers}}",
+    "councilsAbove": "Halmashauri zenye alama juu ya thamani ya kitaifa",
+    "regionsAbove": "Mikoa {{n}} kati ya {{total}} iko juu yake",
+    "density": "Watu {{value}} kwa km²"
+  },
+  "notices": {
+    "official": "Hii ni thamani rasmi ya INFORM kwa Tanzania — haikokotolewi upya kutoka kwa halmashauri.",
+    "aggregated_one": "Imejumlishwa kutoka halmashauri {{count}} kwa mbinu ya INFORM: wastani wa viashiria kwanza, kisha makundi na vipimo — si wastani wa alama za hatari.",
+    "aggregated_other": "Imejumlishwa kutoka halmashauri {{count}} kwa mbinu ya INFORM: wastani wa viashiria kwanza, kisha makundi na vipimo — si wastani wa alama za hatari.",
+    "sourceUnit_one": "Kitengo cha rejea kati ya vitengo {{total}} vya kitabu cha INFORM. Halmashauri {{count}} inatumia data yake ya udhaifu na uwezo wa kukabiliana.",
+    "sourceUnit_other": "Kitengo cha rejea kati ya vitengo {{total}} vya kitabu cha INFORM. Halmashauri {{count}} zinatumia data yake ya udhaifu na uwezo wa kukabiliana.",
+    "inherited": "Halmashauri mpya: inarithi data kutoka {{parent}} hadi takwimu zake zenyewe zitakapochapishwa.",
+    "shared_one": "Vitisho na Mfiduo vimekokotolewa kwa mipaka ya halmashauri hii yenyewe. Data ya udhaifu na uwezo wa kukabiliana inatoka kitengo cha chanzo cha INFORM",
+    "shared_other": "Vitisho na Mfiduo vimekokotolewa kwa mipaka ya halmashauri hii yenyewe. Data ya udhaifu na uwezo wa kukabiliana inashirikiwa na halmashauri {{count}} na inatoka kitengo cha chanzo cha INFORM",
+    "edits_one": "Thamani {{count}} imesasishwa kupitia uingizaji wa data uliohakikiwa.",
+    "edits_other": "Thamani {{count}} zimesasishwa kupitia uingizaji wa data uliohakikiwa.",
+    "editsMembers_one": "Inajumuisha sasisho {{count}} lililohakikiwa katika halmashauri zake.",
+    "editsMembers_other": "Inajumuisha masasisho {{count}} yaliyohakikiwa katika halmashauri zake.",
+    "latestEdit": "La karibuni: {{indicator}} na {{authority}}, {{date}}.",
+    "unknownAuthority": "afisa aliyeidhinishwa"
+  },
+  "nav": {
+    "label": "Sehemu za wasifu huu",
+    "overview": "Muhtasari",
+    "dimensions": "Vipimo",
+    "charts": "Ulinganisho",
+    "drivers": "Vichocheo",
+    "indicators": "Viashiria",
+    "places": "Maeneo",
+    "services": "Huduma na maandalizi",
+    "method": "Mbinu"
+  },
+  "sections": {
+    "overview": {
+      "eyebrow": "Muhtasari",
+      "title": "{{name}} kwa muhtasari"
+    },
+    "dimensions": {
+      "eyebrow": "Vipimo vitatu",
+      "title": "Jinsi alama inavyoundwa",
+      "lead": "INFORM huunganisha Vitisho na Mfiduo, Udhaifu na Ukosefu wa Uwezo wa Kukabiliana kwa wastani wa kijiometri. Kila kipimo kina vizingiti vyake vya madaraja, hivyo linganisha madaraja — si namba ghafi — kati ya vipimo."
+    },
+    "charts": {
+      "eyebrow": "Ulinganisho",
+      "title": {
+        "council": "Dhidi ya mkoa wake na taifa",
+        "source": "Dhidi ya mkoa wake na taifa",
+        "region": "Ikilinganishwa na taifa na mikoa mingine",
+        "national": "Picha ya kitaifa"
+      },
+      "lead": {
+        "council": "Jinsi wasifu huu unavyolinganishwa na picha ya mkoa na ya taifa, na mahali ulipo miongoni mwa maeneo ya ngazi yake. Pakua chati yoyote kama picha, au data yake kama CSV.",
+        "source": "Jinsi wasifu huu unavyolinganishwa na picha ya mkoa na ya taifa, na mahali ulipo miongoni mwa maeneo ya ngazi yake. Pakua chati yoyote kama picha, au data yake kama CSV.",
+        "region": "Jinsi mkoa huu unavyolinganishwa na picha ya kitaifa, na mahali ulipo miongoni mwa mikoa mingine. Pakua chati yoyote kama picha, au data yake kama CSV.",
+        "national": "Alama za makundi na viashiria za wasifu rasmi wa kitaifa, na jinsi halmashauri zinavyotawanyika kuizunguka. Pakua chati yoyote kama picha, au data yake kama CSV."
+      }
+    },
+    "drivers": {
+      "eyebrow": "Kinachoendesha hatari hapa",
+      "title": "Viashiria vyenye uzito mkubwa",
+      "lead": "Viashiria vyenye alama za juu zaidi na kipimo kinachojitokeza, kwa lugha rahisi."
+    },
+    "indicators": {
+      "eyebrow": "Ushahidi",
+      "title": "Kila kiashiria na chanzo chake",
+      "lead": "Viashiria vyote {{count}} vilivyo nyuma ya alama, vimepangwa kwa kipimo na kundi, pamoja na mamlaka inayohusika, seti ya data na jinsi data ilivyo ya karibu na eneo."
+    },
+    "places": {
+      "eyebrow": "Maeneo",
+      "title": {
+        "council": "Halmashauri jirani",
+        "region": "Halmashauri za mkoa huu",
+        "source": "Maeneo yanayohusiana",
+        "national": "Mikoa ya Tanzania"
+      },
+      "lead": "Yamepangwa kwa Hatari ya INFORM. Chagua eneo kufungua wasifu wake."
+    },
+    "services": {
+      "eyebrow": "Uwezo uliopo",
+      "title": "Huduma na hali ya kupunguza hatari za maafa",
+      "lead": "Huduma zinazosaidia watu kukabiliana, na kama mipango muhimu ya kupunguza hatari za maafa ipo."
+    },
+    "method": {
+      "eyebrow": "Mbinu",
+      "title": "Jinsi wasifu huu unavyokokotolewa"
+    }
+  },
+  "glance": {
+    "title": "Mambo makuu",
+    "overall": "Hatari ya jumla ya INFORM ni <b>{{score}} ({{cls}})</b> — {{rank}}.",
+    "rank_ordinal_other": "nafasi ya {{count}} kwa ukubwa wa hatari kati ya {{peers}} {{total}}",
+    "aboveNational": "Hii ni <b>alama {{d}} juu</b> ya thamani rasmi ya kitaifa ya {{national}}.",
+    "belowNational": "Hii ni <b>alama {{d}} chini</b> ya thamani rasmi ya kitaifa ya {{national}}.",
+    "equalNational": "Hii <b>inalingana</b> na thamani rasmi ya kitaifa ya {{national}}.",
+    "localRank": "Ndani ya Mkoa wa {{region}} inashika <b>{{rank}}</b>.",
+    "weakest": "Kipimo chake dhaifu zaidi ni <b>{{dim}}</b>, chenye daraja la {{cls}} kwa vizingiti vyake ({{score}}).",
+    "driver": "Kiashiria chenye alama ya juu zaidi ni <b>{{indicator}}</b>, alama {{score}} kati ya 10.",
+    "coverage": "<b>Viashiria {{have}} kati ya {{total}}</b> vina data; visivyo na data haviingizwi kwenye wastani, na kamwe havihesabiwi kama sifuri.",
+    "nationalOverall": "Hatari rasmi ya INFORM kwa Tanzania ni <b>{{score}} ({{cls}})</b>.",
+    "nationalAbove": "<b>Halmashauri {{n}} kati ya {{total}}</b> zina alama juu ya thamani ya kitaifa."
+  },
+  "map": {
+    "title": "Mahali",
+    "desc": "Imepakwa rangi kwa Hatari ya INFORM; {{name}} imezungushiwa mstari.",
+    "descNational": "Mikoa imepakwa rangi kwa Hatari ya INFORM.",
+    "viewLabel": "Mwonekano wa ramani",
+    "focus": "Karibia",
+    "country": "Nchi nzima",
+    "hint": "Bofya eneo kufungua wasifu wake"
+  },
+  "dims": {
+    "categories": "Makundi",
+    "tickNote": "Katika safu za makundi, kistari kinaonyesha thamani ya kitaifa.",
+    "scaleNote": "Madaraja yanatumia vizingiti vya INFORM vya kila kipimo (tazama Mbinu hapa chini).",
+    "arrowsRegion": "Mishale inalinganisha na mkoa na taifa: nyekundu ni juu zaidi (hatari zaidi), kijani ni chini zaidi.",
+    "arrowsNation": "Mishale inalinganisha na taifa: nyekundu ni juu zaidi (hatari zaidi), kijani ni chini zaidi.",
+    "nationalNote": "Thamani rasmi ya nchi"
+  },
+  "delta": {
+    "vs": "dhidi ya {{ref}}",
+    "tooltip": "Ikilinganishwa na {{ref}} ({{value}}). Juu zaidi inamaanisha hatari zaidi."
+  },
+  "cats": {
+    "natural": "Asili",
+    "human": "Binadamu",
+    "socioEconomic": "Kijamii-kiuchumi",
+    "vulnerableGroups": "Makundi hatarishi",
+    "infrastructure": "Miundombinu",
+    "institutional": "Kitaasisi"
+  },
+  "charts": {
+    "categories": {
+      "title": "Makundi sita",
+      "desc": "Alama za makundi (0–10), pamoja na rejea za mkoa na taifa pale zinapohusika.",
+      "descNational": "Alama za makundi (0–10) za wasifu rasmi wa kitaifa.",
+      "modeLabel": "Aina ya chati",
+      "radar": "Rada",
+      "bars": "Pau",
+      "aria": "Alama za makundi za {{name}} zikilinganishwa na rejea zake",
+      "officialNote": "Hatari ya kitaifa ya {{value}} ni takwimu rasmi."
+    },
+    "indicators": {
+      "title": "Alama za viashiria",
+      "desc": "Kila kiashiria cha kipimo kilichochaguliwa, kimepangwa kwa alama na kupakwa rangi kwa kipimo endelevu cha 0–10.",
+      "dimLabel": "Kipimo",
+      "compareWith": "Linganisha na",
+      "missing_one": "Kiashiria {{count}} hakina data",
+      "missing_other": "Viashiria {{count}} havina data",
+      "ramp": "Alama ya kiashiria (0–10)",
+      "refKey": "Thamani ya {{name}}",
+      "aria": "Chati ya pau ya viashiria vya {{dim}} kwa {{name}}"
+    },
+    "distribution": {
+      "title": "Nafasi miongoni mwa wenzake",
+      "desc": {
+        "council": "Hatari ya INFORM ya halmashauri zote {{count}} — nukta moja kwa kila moja — juu ya mikanda ya madaraja ya hatari.",
+        "region": "Hatari ya INFORM ya mikoa yote {{count}} — nukta moja kwa kila mmoja — juu ya mikanda ya madaraja ya hatari.",
+        "source": "Hatari ya INFORM ya vitengo vyote {{count}} vya chanzo vya INFORM — nukta moja kwa kila kimoja — juu ya mikanda ya madaraja ya hatari."
+      },
+      "descNational": "Hatari ya INFORM ya halmashauri zote {{count}}, pamoja na thamani rasmi ya kitaifa.",
+      "axis": "Hatari ya INFORM (0–10) · mikanda yenye kivuli ni madaraja ya hatari",
+      "clickHint": "Bofya kufungua wasifu wake",
+      "sameRegion": {
+        "council": "Halmashauri nyingine za Mkoa wa {{region}}",
+        "source": "Vitengo vingine vya chanzo katika Mkoa wa {{region}}"
+      },
+      "others": {
+        "council": "Halmashauri nyingine",
+        "region": "Mikoa mingine",
+        "source": "Vitengo vingine vya chanzo vya INFORM"
+      },
+      "nationalLine": "Thamani rasmi ya kitaifa",
+      "aria": "Mchoro wa nukta: {{name}} ina alama {{score}} na inashika nafasi ya {{rank}} kati ya {{peers}} {{total}}.",
+      "ariaNational": "Mchoro wa nukta wa halmashauri {{count}}; thamani ya kitaifa ni {{score}}.",
+      "group": {
+        "self": "Eneo hili",
+        "region": "Mkoa uleule",
+        "other": "Mengineyo"
+      }
+    }
+  },
+  "csv": {
+    "dimension": "Kipimo",
+    "category": "Kundi",
+    "indicator": "Kiashiria",
+    "name": "Jina",
+    "region": "Mkoa",
+    "highlight": "Kikundi",
+    "source": "Chanzo",
+    "resolution": "Kiwango cha data",
+    "editedBy": "Imesasishwa na",
+    "editedAt": "Tarehe ya sasisho"
+  },
+  "drivers": {
+    "topTitle": "Vichocheo vikuu",
+    "topLead": "Viashiria vitano vyenye alama za juu zaidi katika vipimo vyote.",
+    "note": {
+      "council": "Alama ni kuanzia 0 hadi 10 na juu zaidi daima inamaanisha hatari zaidi — kwa Ukosefu wa Uwezo wa Kukabiliana, alama ya juu inamaanisha rasilimali chache. Kwenye kila mstari, duara linaonyesha thamani ya mkoa na kistari thamani ya kitaifa.",
+      "source": "Alama ni kuanzia 0 hadi 10 na juu zaidi daima inamaanisha hatari zaidi — kwa Ukosefu wa Uwezo wa Kukabiliana, alama ya juu inamaanisha rasilimali chache. Kwenye kila mstari, duara linaonyesha thamani ya mkoa na kistari thamani ya kitaifa.",
+      "region": "Alama ni kuanzia 0 hadi 10 na juu zaidi daima inamaanisha hatari zaidi — kwa Ukosefu wa Uwezo wa Kukabiliana, alama ya juu inamaanisha rasilimali chache. Kwenye kila mstari, kistari kinaonyesha thamani ya kitaifa.",
+      "national": "Alama ni kuanzia 0 hadi 10 na juu zaidi daima inamaanisha hatari zaidi — kwa Ukosefu wa Uwezo wa Kukabiliana, alama ya juu inamaanisha rasilimali chache."
+    },
+    "weakestEyebrow": "Kipimo dhaifu zaidi",
+    "weakestBody": "Kipimo cha {{dim}} kina daraja la {{cls}} kwa vizingiti vyake vya INFORM — cha juu zaidi kati ya vipimo vitatu ukilinganisha na vizingiti vyake, na ishara iliyo wazi zaidi ya mahali eneo hili linapojitokeza.",
+    "learn": "Jifunze jinsi vipimo vinavyofanya kazi",
+    "vsTitle": "Ukilinganisha na picha ya kitaifa",
+    "vsLead": "Viashiria vilivyo juu zaidi na chini zaidi ya thamani ya kitaifa.",
+    "above": "Juu ya kitaifa",
+    "below": "Chini ya kitaifa",
+    "vs": "dhidi ya",
+    "none": "Hakuna."
+  },
+  "table": {
+    "resolutionKey": "Kiwango cha data:",
+    "indicator": "Kiashiria",
+    "resolution": "Kiwango",
+    "categoryScore": "Kundi",
+    "caption": "Viashiria vyote vya {{name}}, pamoja na thamani, ulinganisho wa kitaifa, vyanzo na kiwango cha data",
+    "edited": "Imesasishwa · {{authority}} · {{date}}",
+    "editedMembers": "Inajumuisha masasisho ya halmashauri",
+    "show_one": "Onyesha kiashiria {{count}}",
+    "show_other": "Onyesha viashiria {{count}}",
+    "hide": "Ficha viashiria"
+  },
+  "resolution": {
+    "council": {
+      "label": "Halmashauri",
+      "desc": "Kimepimwa kwa mipaka ya kila halmashauri yenyewe."
+    },
+    "district": {
+      "label": "Wilaya",
+      "desc": "Kinapatikana kwa kila kitengo cha chanzo cha INFORM (wilaya) na kinashirikiwa na halmashauri zilizomo."
+    },
+    "region": {
+      "label": "Mkoa",
+      "desc": "Kutoka utafiti wa kimkoa: kila halmashauri ya mkoa ina thamani ileile."
+    },
+    "national": {
+      "label": "Kitaifa",
+      "desc": "Thamani ya msingi ya kitaifa au ya INFORM SADC inayotumika kwa kila eneo."
+    },
+    "overlay": {
+      "label": "Tabaka",
+      "desc": "Tabaka la vitisho lililoandaliwa kutoka vyanzo vya wataalamu, badala ya takwimu iliyopimwa."
+    }
+  },
+  "noData": {
+    "title_zero": "Kila kiashiria kina data.",
+    "title_one": "Kiashiria {{count}} hakina data.",
+    "title_other": "Viashiria {{count}} havina data.",
+    "body": "“Hakuna data” inamaanisha hakuna thamani iliyoripotiwa. INFORM hukiacha kiashiria hicho nje ya wastani wa kundi — hakihesabiwi kamwe kama sifuri, na sifuri ni alama halisi ya chini.",
+    "tooltip": "Hakuna thamani iliyoripotiwa — haiingizwi kwenye wastani, haihesabiwi kama sifuri."
+  },
+  "places": {
+    "siblings": {
+      "title": "Halmashauri za Mkoa wa {{region}}",
+      "desc": "{{name}} imeangaziwa."
+    },
+    "members": {
+      "title": "Halmashauri za {{region}}",
+      "desc": "Halmashauri zinazounda mkoa huu."
+    },
+    "sourceCouncils": {
+      "title": "Halmashauri zinazotumia data ya kitengo hiki",
+      "desc": "Halmashauri hizi huchukua data ya udhaifu na uwezo wa kukabiliana kutoka {{name}}."
+    },
+    "sourceSiblings": {
+      "title": "Vitengo vya chanzo vya INFORM katika Mkoa wa {{region}}",
+      "desc": "Vitengo vya rejea vya kitabu cha INFORM katika mkoa uleule."
+    },
+    "regions": {
+      "title": "Mikoa yote",
+      "desc": "Kila mmoja umejumlishwa kutoka halmashauri zake."
+    },
+    "regionProfile": "Wasifu wa mkoa",
+    "thisArea": "Eneo hili",
+    "inherits": "inarithi data kutoka {{parent}}",
+    "count": "Idadi",
+    "average": "Wastani wa hatari",
+    "range": "Kiwango",
+    "membersNote": "Alama ya mkoa si wastani wa alama hizi: INFORM huchukua wastani wa viashiria vya halmashauri kwanza, kisha hujenga upya makundi, vipimo na hatari."
+  },
+  "services": {
+    "facilitiesTitle": "Huduma",
+    "basis": {
+      "self": "Zimerekodiwa kwa kitengo hiki cha chanzo cha INFORM (wilaya).",
+      "source_one": "Takwimu ni za kitengo cha chanzo cha INFORM",
+      "source_other": "Takwimu ni za wilaya inayoshirikiwa na halmashauri {{count}} — kitengo cha chanzo cha INFORM",
+      "aggregate_one": "Zimejumlishwa kutoka wilaya {{count}} (kitengo cha chanzo cha INFORM), ikihesabiwa mara moja; {{with}} ina rekodi za huduma.",
+      "aggregate_other": "Zimejumlishwa kutoka wilaya {{count}} (vitengo vya chanzo vya INFORM), kila moja ikihesabiwa mara moja; {{with}} zina rekodi za huduma."
+    },
+    "facilities": {
+      "health": "Vituo vya afya",
+      "education": "Shule",
+      "water": "Vituo vya maji",
+      "boreholes": "Visima virefu"
+    },
+    "per10k": "kwa kila watu 10,000",
+    "national": "Kitaifa:",
+    "noFacilities": "Bado hakuna rekodi za huduma kwa eneo hili.",
+    "facilitiesSource": "Chanzo: idadi ya huduma kutoka Sensa ya Watu na Makazi 2022 (NBS). Viwango vinatumia idadi ya watu wa wilaya hizohizo.",
+    "drrTitle": "Hali ya kupunguza hatari za maafa",
+    "drrLead": "Mipango iliyorekodiwa kwa wilaya hii.",
+    "drrLeadNone": "Bado hakuna hali ya kupunguza hatari za maafa iliyorekodiwa kwa wilaya hii.",
+    "drrLeadAggregate": "Wilaya {{recorded}} kati ya {{total}} zina rekodi ya kupunguza hatari za maafa.",
+    "drr": {
+      "eprp": {
+        "name": "Mpango wa kujiandaa na kukabiliana na dharura",
+        "abbr": "EPRP",
+        "desc": "Mpango ulioidhinishwa, wenye makadirio ya gharama, wa kujiandaa na kukabiliana na dharura."
+      },
+      "aa": {
+        "name": "Hatua za tahadhari za mapema",
+        "abbr": "AA",
+        "desc": "Hatua na fedha zilizokubaliwa mapema, zinazoanzishwa na utabiri kabla janga halijatokea."
+      },
+      "eocc": {
+        "name": "Kituo cha operesheni na mawasiliano ya dharura",
+        "abbr": "EOCC",
+        "desc": "Kituo kinachoratibu hatua za kukabiliana na mawasiliano wakati wa dharura."
+      },
+      "inPlace": "Ndiyo",
+      "notInPlace": "Hapana",
+      "countOf": "wilaya {{n}} kati ya {{total}}",
+      "progressLabel": "{{abbr}}: wilaya {{n}} kati ya {{total}}"
+    },
+    "drrSource": "Chanzo: kumbukumbu za Ofisi ya Waziri Mkuu – Idara ya Menejimenti ya Maafa na kamati za maafa za wilaya."
+  },
+  "method": {
+    "steps": {
+      "indicators": "Kila kiashiria kinapewa alama kuanzia 0 hadi 10, ambapo juu zaidi daima inamaanisha hatari zaidi.",
+      "categories": "Kundi ni wastani wa viashiria vyake; viashiria visivyo na data vinarukwa, havihesabiwi kamwe kama sifuri.",
+      "dimensions": "Kipimo huunganisha makundi yake kwa wastani wa kijiometri uliopimwa wa INFORM, na kukadiriwa hadi desimali moja.",
+      "risk": "Hatari ya INFORM ni kipeo cha tatu cha Vitisho na Mfiduo × Udhaifu × Ukosefu wa Uwezo wa Kukabiliana."
+    },
+    "level": {
+      "council": "Halmashauri hushiriki data ya udhaifu na uwezo wa kukabiliana ya kitengo chao cha chanzo cha INFORM kwa sababu data za tafiti za kaya hazigawanywi kwa halmashauri.",
+      "region": "Mikoa hujengwa upya kutoka wastani wa viashiria vya halmashauri zake badala ya kuchukua wastani wa alama za hatari za halmashauri: muunganiko wa INFORM si wa mstari, hivyo njia hizo mbili zingetoa matokeo tofauti.",
+      "source": "Vitengo vya chanzo vya INFORM: msingi wa ngazi ya wilaya wa kitabu cha INFORM cha Tanzania, vinavyotumika hapa kama ngazi ya rejea.",
+      "national": "Thamani ya kitaifa ({{value}}) inatumika kama ilivyochapishwa katika kitabu cha INFORM cha Tanzania, hivyo inaweza kutofautiana na wastani wowote wa halmashauri au mikoa."
+    },
+    "officialNote": "Thamani ya kitaifa inayoonyeshwa kwa ulinganisho ({{value}}) ni takwimu rasmi ya INFORM kwa Tanzania.",
+    "link": "Soma mbinu kamili",
+    "thresholdsTitle": "Vizingiti vya madaraja",
+    "thresholdsLead": "Kila kipimo kina vizingiti vyake vya INFORM, kutoka kitabu cha Tanzania.",
+    "citeTitle": "Nukuu wasifu huu",
+    "cite": "INFORM Tanzania ({{year}}). {{name}} — wasifu wa hatari wa eneo. Data hadi {{asOf}}. {{url}}"
+  },
+  "print": {
+    "title": "Wasifu wa hatari wa eneo",
+    "printed": "Imechapishwa {{date}}"
+  },
+  "notFound": {
+    "title": "Hatukuweza kupata eneo hilo",
+    "body": "Hakuna halmashauri, mkoa wala kitengo cha chanzo cha INFORM kinacholingana na “{{id}}”. Huenda kiungo kimekosewa au kimepitwa na wakati.",
+    "explore": "Fungua kichunguzi cha hatari",
+    "national": "Wasifu wa kitaifa",
+    "hint": "Viungo vya maeneo huonekana hivi: /area/C001 (halmashauri), /area/R-dodoma (mkoa), /area/TZ0101 (kitengo cha chanzo cha INFORM) au /area/TZ (taifa)."
+  }
+}

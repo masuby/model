@@ -1,0 +1,66 @@
+{
+  "eyebrow": "INFORM Ngazi za Chini · Jamhuri ya Muungano wa Tanzania",
+  "title": "Tambua mahali majanga yangeleta madhara makubwa zaidi, kabla hayajatokea.",
+  "lead": "Kielelezo huria cha hatari za maafa kinachotegemea ushahidi kwa kila moja ya halmashauri 195 na mikoa 31 ya Tanzania, kilichojengwa juu ya mbinu ya kimataifa ya INFORM na data za Tanzania.",
+  "ctaExplore": "Chunguza ramani ya hatari",
+  "ctaLearn": "Jinsi INFORM inavyofanya kazi",
+  "nationalRisk": "Hatari ya INFORM Kitaifa",
+  "nationalNote": "Thamani rasmi ya INFORM kwa Tanzania",
+  "mapCaption": "Hatari ya INFORM kwa halmashauri",
+  "kpi": {
+    "councils": "Halmashauri zilizochambuliwa",
+    "regions": "Mikoa",
+    "indicators": "Viashiria",
+    "indicatorsSub": "Viashiria {{used}} vya kitabu katika makundi {{groups}}",
+    "population": "Watu waliohusishwa",
+    "populationSub": "Sensa ya Watu na Makazi 2022",
+    "highRisk": "Halmashauri zenye hatari ya juu au zaidi",
+    "highRiskSub": "{{pct}}% ya halmashauri zote"
+  },
+  "formula": {
+    "eyebrow": "Mfumo wa INFORM",
+    "title": "Hatari hutokea pale vitisho, udhaifu na uwezo mdogo wa kukabiliana vinapokutana",
+    "lead": "INFORM huunganisha vipimo vitatu kwa wastani wa kijiometri, hivyo eneo huwa na hatari kubwa pale tu vipimo vyote vitatu vikiwa juu. Mfumo imara wa afya au umaskini mdogo hupunguza hatari kweli, hata pale mafuriko au ukame ni ya mara kwa mara.",
+    "equation": "Hatari = ∛(Vitisho na Mfiduo × Udhaifu × Ukosefu wa Uwezo wa Kukabiliana)",
+    "national": "Tanzania leo",
+    "result": "Tanzania: ∛({{h}} × {{v}} × {{c}}) = {{r}}"
+  },
+  "top": {
+    "eyebrow": "Mahali hatari ilipojikita",
+    "title": "Halmashauri zenye hatari kubwa zaidi",
+    "lead": "Zimepangwa kwa Hatari ya INFORM. Chagua halmashauri kuona kinachoendesha alama yake.",
+    "all": "Fungua orodha kamili",
+    "distribution": "Mgawanyo wa halmashauri kwa madaraja ya hatari",
+    "drivers": "Kichocheo kikuu",
+    "rank": "Nafasi",
+    "council": "Halmashauri",
+    "score": "Hatari"
+  },
+  "modules": {
+    "eyebrow": "Jukwaa moja",
+    "title": "Unachoweza kufanya hapa",
+    "explore": "Ramani shirikishi ya halmashauri na mikoa yote, iliyopakwa rangi kwa hatari, kipimo chochote au viashiria vyovyote kati ya 32.",
+    "insights": "Mwelekeo wa kitaifa: nafasi za mikoa, maeneo yenye vitisho vingi na jinsi vipimo vinavyohusiana.",
+    "severity": "Pima janga linaloendelea kwa mbinu rasmi ya Kielelezo cha Ukali cha INFORM.",
+    "learn": "Kozi fupi yenye maswali inayoeleza hatari, kuanzia vitisho hadi uwezo wa kukabiliana.",
+    "methodology": "Kila fomula, kizingiti na chanzo cha data, wazi kwa uchunguzi.",
+    "data": "Wizara na taasisi huwasilisha data mpya; Ofisi ya Waziri Mkuu huikagua na kuiidhinisha."
+  },
+  "sources": {
+    "title": "Imejengwa juu ya data zenye mamlaka",
+    "lead": "Kila kiashiria kinafuatilika hadi mamlaka, seti ya data na mbinu yake."
+  },
+  "cta": {
+    "title": "Ushahidi kwa ajili ya maandalizi, hatua za mapema na uwekezaji",
+    "lead": "Tumia INFORM Tanzania kulenga maandalizi, kuweka vipaumbele vya uwekezaji na kuwapa viongozi taarifa kwa kielelezo kilicho wazi na kinachoweza kurudiwa.",
+    "primary": "Anza kuchunguza",
+    "secondary": "Soma mbinu"
+  },
+  "mapSource": "Hatari ya INFORM kwa halmashauri. Vyanzo: mfumo wa INFORM Tanzania, Sensa ya 2022 ya NBS.",
+  "figures": {
+    "national": "Hatari ya INFORM Kitaifa",
+    "councils": "Halmashauri zilizopimwa",
+    "people": "Watu waliohusishwa",
+    "high": "Halmashauri zenye hatari kubwa"
+  }
+}

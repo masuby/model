@@ -1,0 +1,153 @@
+{
+  "appName": "INFORM Tanzania",
+  "tagline": "Hatari na ukali wa majanga katika ngazi za chini",
+  "informRisk": "Hatari ya INFORM",
+  "nav": {
+    "home": "Mwanzo",
+    "explore": "Chunguza hatari",
+    "insights": "Uchambuzi",
+    "severity": "Ukali wa janga",
+    "learn": "Jifunze",
+    "methodology": "Mbinu",
+    "data": "Lango la data",
+    "menu": "Menyu",
+    "skipToContent": "Ruka hadi maudhui",
+    "main": "Kuu",
+    "mobile": "Menyu kuu"
+  },
+  "theme": {
+    "label": "Mwonekano",
+    "light": "Mchana",
+    "dark": "Usiku",
+    "system": "Kifaa",
+    "toggle": "Badilisha kati ya mchana na usiku"
+  },
+  "language": {
+    "label": "Lugha"
+  },
+  "search": {
+    "placeholder": "Tafuta halmashauri au mkoa…",
+    "open": "Tafuta",
+    "empty": "Hakuna eneo linalolingana na “{{q}}”.",
+    "councils": "Halmashauri",
+    "regions": "Mikoa",
+    "pages": "Kurasa",
+    "hint": "Bonyeza {{key}} kutafuta"
+  },
+  "classes": {
+    "veryLow": "Chini sana",
+    "low": "Chini",
+    "medium": "Wastani",
+    "high": "Juu",
+    "veryHigh": "Juu sana",
+    "noData": "Hakuna data"
+  },
+  "dimensions": {
+    "hazard": "Vitisho na Mfiduo",
+    "vulnerability": "Udhaifu",
+    "coping": "Ukosefu wa Uwezo wa Kukabiliana",
+    "hazardShort": "Vitisho",
+    "vulnerabilityShort": "Udhaifu",
+    "copingShort": "Ukosefu wa uwezo",
+    "hazardDesc": "Uwezekano na ukubwa wa majanga ya asili na yanayosababishwa na binadamu, na idadi ya watu walio kwenye njia ya madhara.",
+    "vulnerabilityDesc": "Jinsi watu wanavyoweza kudhurika kwa urahisi: umaskini, afya, ukosefu wa chakula, ukimbizi na makundi mengine hatarishi.",
+    "copingDesc": "Kiwango ambacho eneo linakosa rasilimali na taasisi za kukabiliana na kupona baada ya janga. Alama ya juu inamaanisha rasilimali chache."
+  },
+  "categories": {
+    "natural": "Majanga ya asili",
+    "human": "Majanga yanayosababishwa na binadamu",
+    "socioEconomic": "Kijamii na kiuchumi",
+    "vulnerableGroups": "Makundi hatarishi",
+    "infrastructure": "Miundombinu",
+    "institutional": "Kitaasisi"
+  },
+  "levels": {
+    "council": "Halmashauri",
+    "councils": "Halmashauri",
+    "region": "Mkoa",
+    "regions": "Mikoa",
+    "national": "Taifa",
+    "source": "Kitengo cha chanzo cha INFORM",
+    "sources": "Vitengo vya chanzo vya INFORM (rejea)"
+  },
+  "units": {
+    "people": "watu",
+    "perKm2": "kwa km²",
+    "km2": "km²"
+  },
+  "actions": {
+    "open": "Fungua",
+    "close": "Funga",
+    "back": "Rudi",
+    "next": "Endelea",
+    "previous": "Iliyotangulia",
+    "cancel": "Ghairi",
+    "save": "Hifadhi",
+    "submit": "Wasilisha",
+    "reset": "Weka upya",
+    "clear": "Futa",
+    "download": "Pakua",
+    "downloadCsv": "Pakua CSV",
+    "downloadPng": "Pakua picha",
+    "print": "Chapisha",
+    "share": "Nakili kiungo",
+    "copied": "Kiungo kimenakiliwa",
+    "viewProfile": "Tazama wasifu",
+    "compare": "Linganisha",
+    "learnMore": "Jifunze zaidi",
+    "tryAgain": "Jaribu tena",
+    "signIn": "Ingia",
+    "signOut": "Toka",
+    "apply": "Tumia",
+    "remove": "Ondoa",
+    "edit": "Hariri",
+    "showAll": "Onyesha yote",
+    "showLess": "Onyesha machache",
+    "printPdf": "Chapisha au hifadhi kama PDF"
+  },
+  "labels": {
+    "score": "Alama",
+    "rank": "Nafasi",
+    "class": "Daraja",
+    "population": "Idadi ya watu",
+    "density": "Msongamano",
+    "area": "Eneo",
+    "source": "Chanzo",
+    "updated": "Imesasishwa",
+    "coverage": "Upatikanaji wa data",
+    "region": "Mkoa",
+    "of": "kati ya",
+    "outOf": "kati ya {{max}}",
+    "asOf": "Data hadi {{date}}",
+    "official": "Rasmi",
+    "edited": "Imesasishwa",
+    "inherited": "Inarithi data kutoka {{parent}}",
+    "sharedSource": "Data ya udhaifu na uwezo wa kukabiliana inatoka {{source}}",
+    "national": "Kitaifa",
+    "yes": "Ndiyo",
+    "no": "Hapana"
+  },
+  "footer": {
+    "about": "INFORM Tanzania inatumia mbinu ya INFORM ya Kituo cha Utafiti cha Pamoja cha Kamisheni ya Ulaya na washirika wake kwa kila halmashauri nchini Tanzania.",
+    "disclaimer": "Alama ni viashiria mchanganyiko vinavyosaidia, na si kuchukua nafasi ya, maarifa ya ndani na tathmini rasmi.",
+    "build": "Toleo {{build}}",
+    "methodology": "Mbinu",
+    "sources": "Vyanzo vya data",
+    "github": "Msimbo chanzo",
+    "rights": "Data huria na mbinu huria."
+  },
+  "states": {
+    "loading": "Inapakia…",
+    "error": "Kuna hitilafu.",
+    "errorDetail": "Ukurasa umekumbwa na hitilafu isiyotarajiwa. Unaweza kujaribu tena, au kurudi mwanzo.",
+    "notFound": "Ukurasa haupatikani",
+    "notFoundDetail": "Ukurasa unaoutafuta haupo au umehamishwa.",
+    "goHome": "Nenda mwanzo",
+    "empty": "Hakuna cha kuonyesha bado.",
+    "errorLabel": "Hitilafu imetokea"
+  },
+  "a11y": {
+    "mapOf": "Ramani ya Tanzania iliyopakwa rangi kwa {{metric}}",
+    "selected": "Imechaguliwa"
+  }
+}

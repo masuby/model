@@ -1,0 +1,177 @@
+{
+  "title": "Risk explorer",
+  "lead": "Colour Tanzania by overall risk, a dimension or any of {{count}} indicators. Select an area to see what drives its score.",
+  "panel": {
+    "label": "Explorer controls"
+  },
+  "stage": {
+    "label": "Map and ranking"
+  },
+  "sheet": {
+    "expand": "Expand panel",
+    "collapse": "Collapse panel"
+  },
+  "search": {
+    "label": "Find a council or region",
+    "placeholder": "Find a council or region…",
+    "placeholderShort": "Search places…",
+    "results": "Matching places",
+    "empty": "No place matches “{{q}}”."
+  },
+  "level": {
+    "label": "Level",
+    "council": "Councils",
+    "region": "Regions",
+    "source": "INFORM units",
+    "reference": "Reference",
+    "note": {
+      "council": "{{count}} councils (NBS 2022) — the headline level. Hazard & Exposure is computed for each council; vulnerability and coping come from the council’s INFORM source unit.",
+      "region": "{{count}} regions, aggregated from their councils the INFORM way (indicator means, then the scaled geometric mean).",
+      "source": "The {{count}} units of the INFORM SADC 2024 workbook, shown for reference. Councils are the headline level."
+    }
+  },
+  "lens": {
+    "label": "Colour by",
+    "indicator": "Single indicator",
+    "indicatorChip": "Indicator…",
+    "pickIndicator": "Choose an indicator…",
+    "selected": "selected",
+    "searchIndicator": "Search indicators…",
+    "noIndicator": "No indicator matches.",
+    "scoresFor": "Scores shown for {{name}}.",
+    "scoresNational": "Scores shown: official national figures.",
+    "valuesFor": "Values for {{name}} (0–10).",
+    "valuesNational": "Official national values (0–10).",
+    "source": "Source",
+    "resolution": "Resolution",
+    "backToRisk": "Back to overall risk"
+  },
+  "resolution": {
+    "council": "Council — computed for each council",
+    "district": "District — shared by the councils of a district",
+    "region": "Region — survey estimate, the same for every council in the region",
+    "national": "National — one value for the whole country",
+    "overlay": "Documented overlay — expert-mapped exposure"
+  },
+  "legend": {
+    "label": "Legend & filter",
+    "filterHint": "Click a class to filter the map and the ranking.",
+    "filterLabel": "Filter by class",
+    "classCount_one": "{{cls}}: {{count}} area",
+    "classCount_other": "{{cls}}: {{count}} areas",
+    "clearFilter": "Clear filter",
+    "filtered": "Showing {{cls}} only",
+    "lower": "Lower",
+    "higher": "Higher",
+    "continuousNote": "Single indicators use a continuous 0–10 scale. INFORM defines classes only for overall risk and the three dimensions, so indicator values are not classified.",
+    "continuousShort": "Continuous 0–10 scale · INFORM has no classes for single indicators"
+  },
+  "honesty": {
+    "label": "About these scales",
+    "title": "How to read the colours",
+    "indicator": "Single-indicator lenses use a continuous 0–10 scale: INFORM defines classes only for overall risk and the three dimensions.",
+    "dimension": "Risk and each dimension have their own INFORM class thresholds, so the same score can fall in different classes.",
+    "national": "The national value is the official INFORM Tanzania figure, not an average of councils or regions.",
+    "more": "Read the methodology →"
+  },
+  "stats": {
+    "label": "Statistics",
+    "mean": "Mean",
+    "min": "Lowest",
+    "max": "Highest",
+    "national": "National (official)",
+    "nationalShort": "National",
+    "areas_one": "{{count}} area",
+    "areas_other": "{{count}} areas",
+    "missing_one": "{{count}} area has no data for this lens.",
+    "missing_other": "{{count}} areas have no data for this lens.",
+    "distribution": "Distribution"
+  },
+  "ranking": {
+    "label": "Top areas",
+    "openTable": "Open the full ranking"
+  },
+  "basemap": {
+    "label": "Street basemap",
+    "hint": "OpenStreetMap context under the colours"
+  },
+  "view": {
+    "label": "View",
+    "map": "Map",
+    "table": "Table",
+    "showOnMap": "Show on map"
+  },
+  "share": {
+    "copy": "Copy link",
+    "copied": "Link copied",
+    "copiedDesc": "Anyone with the link opens this exact view.",
+    "failed": "Could not copy the link"
+  },
+  "map": {
+    "loading": "Loading map…",
+    "hint": "Click for details"
+  },
+  "card": {
+    "label": "Details for {{name}}",
+    "close": "Close details",
+    "rank": "Risk rank",
+    "national": "National (official)",
+    "regionRisk": "{{name}} region",
+    "dimensions": "Dimensions",
+    "markerRegion": "Marker: {{name}} region",
+    "markerNational": "Marker: official national figure",
+    "drivers": "Top drivers",
+    "driversHint": "Highest-scoring indicators (0–10). Select one to colour the map by it.",
+    "colourBy": "Colour the map by {{name}}",
+    "people": "People",
+    "popSource": "Source: {{source}}",
+    "coverageDetail": "{{have}} of {{total}} indicators have data",
+    "regionNote_one": "Aggregated from {{count}} council with the INFORM method.",
+    "regionNote_other": "Aggregated from {{count}} councils with the INFORM method.",
+    "sourceNote": "Reference unit from the INFORM SADC 2024 workbook. Councils are the headline level.",
+    "editedNote_one": "Includes {{count}} approved data update.",
+    "editedNote_other": "Includes {{count}} approved data updates.",
+    "inheritedBadge": "Inherited data",
+    "viewProfile": "View full profile",
+    "compare": "Compare",
+    "comparing": "Comparing"
+  },
+  "compare": {
+    "title": "Comparison",
+    "clear": "Clear",
+    "expand": "Expand comparison",
+    "collapse": "Collapse comparison",
+    "remove": "Remove {{name}} from the comparison",
+    "full": "You can compare up to {{max}} areas",
+    "fullHint": "Remove one from the comparison tray first."
+  },
+  "abbr": {
+    "risk": "Risk",
+    "hazard": "H",
+    "vulnerability": "V",
+    "coping": "LCC"
+  },
+  "table": {
+    "label": "Ranking table",
+    "eyebrow": "Ranking · {{level}}",
+    "title": "Ranked by {{metric}}",
+    "caption": "{{level}} ranked by {{metric}}",
+    "search": "Filter by name or region…",
+    "showing": "{{shown}} of {{total}}",
+    "export": "Export CSV",
+    "rank": "Rank",
+    "rankShort": "#",
+    "name": "Name",
+    "level": "Level",
+    "riskClass": "Risk class",
+    "clearClass": "Remove the {{cls}} filter",
+    "selectRow": "Show details for {{name}}",
+    "empty": "No area matches these filters."
+  },
+  "footer": {
+    "asOf": "Data as of {{date}}",
+    "methodology": "Methodology",
+    "method": "INFORM methodology · JRC & partners",
+    "learn": "How INFORM works"
+  }
+}

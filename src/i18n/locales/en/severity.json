@@ -1,0 +1,465 @@
+{
+  "header": {
+    "eyebrow": "INFORM Severity Index · Tanzania",
+    "title": "Crisis severity",
+    "lead": "INFORM Risk shows where a crisis would hit hardest before it happens. INFORM Severity measures how serious an unfolding crisis is: its impact, the conditions of the people affected and the complexity of the response.",
+    "methodCta": "How it is calculated",
+    "before": "Before a crisis",
+    "during": "During a crisis",
+    "riskCta": "Open the risk explorer",
+    "severityName": "INFORM Severity"
+  },
+  "illustrativeTitle": "Illustrative scenarios, not official data.",
+  "illustrativeNote": "They use plausible magnitudes to demonstrate the method. Replace every figure with assessed data before using a result in a situation report.",
+  "steps": {
+    "kicker": "Step {{n}} of {{total}}",
+    "dimScore": "Score",
+    "scenario": {
+      "title": "Start from a scenario",
+      "lead": "Load an illustrative Tanzanian crisis to see the method at work, or start a blank assessment."
+    },
+    "area": {
+      "title": "Define the affected area",
+      "lead": "Click councils on the map, or pick them from the list. Their 2022 census population and area can then fill the Impact inputs."
+    },
+    "impact": {
+      "lead": "How big is the crisis? The size of the affected area and the people living there (geographical, ⅓), and the people affected, displaced or killed (human, ⅔)."
+    },
+    "conditions": {
+      "lead": "How bad are the conditions of the people affected? Place everyone in the affected area on the five levels of humanitarian conditions (INFORM Severity, Table 1). People at levels 3–5 are the people in need; level 1 is filled in automatically as the remainder."
+    },
+    "complexity": {
+      "lead": "How hard is it to respond? The structural context (society and safety) and the operating environment on the ground."
+    },
+    "reliability": {
+      "title": "Reliability",
+      "lead": "How far can the result be trusted? Reported next to the index, never mixed into it."
+    }
+  },
+  "scenario": {
+    "aria": "Scenario",
+    "affected": "affected",
+    "displaced": "displaced",
+    "deaths": "deaths",
+    "severity": "Severity",
+    "edited": "edited",
+    "restore": "Restore scenario figures",
+    "clearForm": "Clear the form",
+    "riverineFlood": {
+      "name": "Riverine flood",
+      "blurb": "Prolonged masika rains push a major river over its banks, flooding lowland villages and displacing tens of thousands."
+    },
+    "drought": {
+      "name": "Drought",
+      "blurb": "Failed vuli rains across several semi-arid regions leave over a million people short of food, water and pasture."
+    },
+    "landslide": {
+      "name": "Landslide",
+      "blurb": "Intense rain triggers landslides on steep highland slopes: a small area, but a heavy toll in lives and homes."
+    },
+    "custom": {
+      "name": "Blank / custom",
+      "blurb": "Start from an empty form. The national structural indicators stay pre-filled."
+    }
+  },
+  "area": {
+    "title": "Affected area",
+    "hint": "Click to add or remove",
+    "mapHint": "Click councils to add or remove them",
+    "mapLegend": "Pre-crisis INFORM Risk",
+    "selected_one": "{{count}} council selected",
+    "selected_other": "{{count}} councils selected",
+    "add": "Add a council…",
+    "addAria": "Add a council to the affected area",
+    "listAria": "Councils in the affected area",
+    "remove": "Remove {{name}}",
+    "empty": "No councils selected yet. Click the map or pick from the list.",
+    "population": "People in the area",
+    "populationSub": "NBS 2022 census",
+    "areaKm2": "Area",
+    "areaSub": "Population ÷ density",
+    "useCensus": "Use census population & area",
+    "applied": "Census figures applied",
+    "appliedToast": "Census figures applied to the Impact inputs",
+    "appliedToastSub": "{{people}} people · {{area}} km²",
+    "censusNote": "Whole-council totals. Adjust the Impact inputs if only part of a council is affected.",
+    "context": "Pre-crisis risk of the affected area",
+    "contextMean": "Mean INFORM Risk (0–10)",
+    "contextRange": "Range {{min}}–{{max}}",
+    "contextNote": "Context only: INFORM Risk describes the area before the crisis and is not part of the severity formula.",
+    "contextEmpty": "Select councils to see their pre-crisis INFORM Risk."
+  },
+  "weight": "Weight {{w}}",
+  "sub": {
+    "geographicalLead": "The scale of the crisis in space and population.",
+    "humanLead": "Direct effects on people. The percentages are derived automatically.",
+    "societySafetyLead": "National structural indicators for Tanzania, pre-filled from public sources. Edit them if local evidence for the affected area differs.",
+    "operatingEnvironmentLead": "Who is affected, and how hard it is for aid and people to reach each other."
+  },
+  "field": {
+    "areaAffectedKm2": {
+      "label": "Area affected",
+      "help": "Land area inside the affected zone. Tip: fill it from the councils selected in step 2.",
+      "short": "Area affected"
+    },
+    "peopleInArea": {
+      "label": "People living in the affected area",
+      "help": "Everyone living in the affected area, affected or not (for example the 2022 census).",
+      "short": "People in the area"
+    },
+    "peopleAffected": {
+      "label": "People affected",
+      "help": "People whose lives, homes or livelihoods were directly hit.",
+      "short": "People affected"
+    },
+    "displaced": {
+      "label": "People displaced",
+      "help": "People forced from their homes: in camps, public buildings or with host families.",
+      "short": "People displaced"
+    },
+    "fatalities": {
+      "label": "Fatalities",
+      "help": "Deaths caused by the event, including missing people presumed dead.",
+      "short": "Fatalities"
+    },
+    "level5": { "short": "People at level 5" },
+    "level4": { "short": "People at level 4" },
+    "level3": { "short": "People at level 3" },
+    "level2": { "short": "People at level 2" },
+    "groups": {
+      "label": "Population groups affected",
+      "help": "Tick every group the crisis affects. The more diverse the groups, the more complex the response.",
+      "short": "Groups affected"
+    },
+    "accessOfActors": {
+      "label": "Access of relief actors to people",
+      "help": "Restricted movement, bureaucratic hurdles, interference or violence against aid workers.",
+      "short": "Access of relief actors"
+    },
+    "accessOfPeople": {
+      "label": "Access of people to assistance",
+      "help": "People unable to reach services or aid, or restricted in their movement.",
+      "short": "Access of people to aid"
+    },
+    "physicalSecurityConstraints": {
+      "label": "Physical and security constraints",
+      "help": "Washed-out roads and bridges, flood water, difficult terrain or insecurity.",
+      "short": "Physical constraints"
+    },
+    "gini": {
+      "label": "Income inequality (Gini index)",
+      "help": "0 = perfect equality, 100 = maximal inequality. Higher inequality weakens social cohesion.",
+      "short": "Gini index"
+    },
+    "genderInequality": {
+      "label": "Gender Inequality Index (UNDP)",
+      "help": "0 = equality between women and men, 1 = maximal inequality.",
+      "short": "Gender inequality"
+    },
+    "conflictIntensity": {
+      "label": "Conflict intensity",
+      "help": "0 = no conflict … 5 = war (HIIK Conflict Barometer scale), for the affected area.",
+      "short": "Conflict intensity"
+    },
+    "violenceFatalities": {
+      "label": "Fatalities from political violence",
+      "help": "Deaths from organised violence in the last 12 months (for example ACLED).",
+      "short": "Violence fatalities"
+    },
+    "corruptionPerception": {
+      "label": "Corruption Perceptions Index",
+      "help": "0 = highly corrupt, 100 = very clean. Higher is better, so the score is inverted.",
+      "short": "Corruption perceptions"
+    },
+    "ruleOfLawPercentile": {
+      "label": "Rule of law (WGI percentile)",
+      "help": "Percentile rank among countries. Higher is better, so the score is inverted.",
+      "short": "Rule of law"
+    },
+    "dataReliability": {
+      "label": "Reliability of the data sources",
+      "short": "Data reliability"
+    },
+    "daysSinceUpdate": {
+      "label": "Days since the data were last updated",
+      "help": "Updates within 30 days score highest; data older than a year score lowest.",
+      "short": "Days since update"
+    }
+  },
+  "derived": {
+    "areaPct": "{{v}}% of Tanzania’s land area",
+    "peoplePct": "{{v}}% of Tanzania’s population",
+    "affectedPct": "{{v}}% of the people in the area",
+    "displacedPct": "{{v}}% of the people affected",
+    "fatalRate": "{{v}} per 10,000 people affected"
+  },
+  "level": {
+    "1": {
+      "name": "None or minimal",
+      "desc": "Acceptable living standards; basic needs are met without harmful coping. Calculated as the rest of the people in the area."
+    },
+    "2": {
+      "name": "Stressed",
+      "desc": "Living standards are under stress. Basic needs are met only through coping that erodes livelihoods."
+    },
+    "3": {
+      "name": "Moderate",
+      "desc": "Living standards are degrading. Some basic needs cannot be met without crisis coping, such as selling productive assets."
+    },
+    "4": {
+      "name": "Severe",
+      "desc": "Living standards have broken down. Survival depends on humanitarian aid or emergency coping; serious physical and mental harm."
+    },
+    "5": {
+      "name": "Extreme",
+      "desc": "Widespread loss of life or irreversible harm. Living standards have collapsed and coping options are exhausted."
+    },
+    "short": "Level {{n}}",
+    "inputLabel": "People at level {{n}} ({{name}})"
+  },
+  "conditions": {
+    "inNeedTag": "In need",
+    "remainder": "remainder",
+    "distribution": "People in the area by level of conditions",
+    "ofPeople": "of {{n}} people",
+    "needArea": "Enter the people living in the affected area (step 3) to see the distribution and the concentration of conditions.",
+    "pinSub": "People at levels 3, 4 and 5",
+    "concentrationSub": "Highest level whose cumulative share, counted from level 5 down, exceeds 5% of the people in the area"
+  },
+  "defaults": {
+    "national": "National default",
+    "edited": "Edited",
+    "reset": "Reset to {{value}}",
+    "resetAll": "Reset all to national defaults"
+  },
+  "source": {
+    "gini": "World Bank · Gini index (HBS 2018)",
+    "genderInequality": "UNDP · Gender Inequality Index (HDR 2023/24)",
+    "conflictIntensity": "HIIK Conflict Barometer scale 0–5 · analyst judgement",
+    "violenceFatalities": "ACLED · last 12 months · analyst",
+    "corruptionPerception": "Transparency International · CPI 2024",
+    "ruleOfLawPercentile": "World Bank · WGI Rule of Law percentile"
+  },
+  "groups": {
+    "count_one": "{{count}} of 5 groups",
+    "count_other": "{{count}} of 5 groups",
+    "notSet": "Not assessed yet"
+  },
+  "group": {
+    "idps": "Internally displaced (IDPs)",
+    "refugees": "Refugees",
+    "returnees": "Returnees",
+    "hostCommunities": "Host communities",
+    "nonHost": "Other affected (non-displaced)"
+  },
+  "access": {
+    "notSet": "Not assessed yet. Pick a score from 0 (no constraints) to 3 (high constraints).",
+    "level": {
+      "0": { "name": "None", "desc": "No access constraints: aid and people move freely." },
+      "1": { "name": "Low", "desc": "Occasional restrictions or delays; most people can be reached." },
+      "2": { "name": "Moderate", "desc": "Regular restrictions; parts of the area or population are hard to reach." },
+      "3": { "name": "High", "desc": "Severe restrictions; large parts of the affected population cannot be reached." }
+    }
+  },
+  "reliabilityInput": {
+    "low": { "name": "Low", "desc": "Unverified reports, a single source or rough estimates." },
+    "medium": { "name": "Medium", "desc": "Partial assessments or preliminary official figures." },
+    "high": { "name": "High", "desc": "Verified multi-sector assessment or official statistics." }
+  },
+  "reliabilityNote": "The reliability index combines source reliability, recency and data completeness. It is shown next to the severity score and never changes it.",
+  "unit": {
+    "people": "people",
+    "km2": "km²",
+    "percent": "%",
+    "per10k": "per 10,000",
+    "score": "score",
+    "count": "groups",
+    "index": "index",
+    "days": "days"
+  },
+  "validation": {
+    "negative": "Enter zero or more.",
+    "max": "The maximum is {{max}}."
+  },
+  "issue": {
+    "negative": "Some values are negative.",
+    "levelsExceedArea": "People at levels 2–5 ({{sum}}) exceed the people living in the area ({{area}}).",
+    "affectedExceedsArea": "More people affected ({{affected}}) than live in the area ({{area}}).",
+    "displacedExceedsAffected": "More people displaced ({{displaced}}) than affected ({{affected}}).",
+    "fatalitiesExceedAffected": "More fatalities ({{fatalities}}) than people affected ({{affected}}).",
+    "pinExceedsAffected": "People in need ({{pin}}) exceed the people affected ({{affected}}).",
+    "areaExceedsNational": "Larger than Tanzania ({{max}} km²).",
+    "peopleExceedNational": "More than Tanzania’s population ({{max}})."
+  },
+  "dim": {
+    "impact": "Impact",
+    "conditions": "Humanitarian conditions",
+    "complexity": "Complexity"
+  },
+  "cat": {
+    "geographical": "Geographical",
+    "human": "Human",
+    "peopleInNeed": "People in need",
+    "concentration": "Concentration of conditions",
+    "societySafety": "Society & safety",
+    "operatingEnvironment": "Operating environment"
+  },
+  "comp": {
+    "affectedArea": "Size of the affected area",
+    "peopleInArea": "People in the affected area",
+    "peopleAffected": "People affected",
+    "peopleByCategory": "Displacement & loss of life",
+    "peopleInNeed": "People in need",
+    "concentration": "Concentration of conditions",
+    "socialCohesion": "Social cohesion",
+    "safetySecurity": "Safety & security",
+    "ruleOfLaw": "Rule of law & governance",
+    "diversityOfGroups": "Diversity of groups affected",
+    "humanitarianAccess": "Humanitarian access"
+  },
+  "ind": {
+    "areaAffectedKm2": "Area affected (km²)",
+    "areaAffectedPct": "Area affected (% of Tanzania)",
+    "peopleInArea": "People in the affected area",
+    "peopleInAreaPct": "People in the area (% of population)",
+    "peopleAffected": "People affected",
+    "peopleAffectedPct": "People affected (% of people in the area)",
+    "displaced": "People displaced",
+    "displacedPct": "Displaced (% of people affected)",
+    "fatalities": "Fatalities",
+    "fatalitiesPer10k": "Fatalities per 10,000 affected",
+    "peopleInNeed": "People in need (levels 3–5)",
+    "concentrationLevel": "Concentration of conditions (level)",
+    "gini": "Income inequality (Gini)",
+    "genderInequality": "Gender Inequality Index",
+    "conflictIntensity": "Conflict intensity",
+    "violenceFatalities": "Fatalities from violence (12 months)",
+    "corruptionPerception": "Corruption Perceptions Index",
+    "ruleOfLawPercentile": "Rule of law (percentile)",
+    "groupsAffected": "Diversity of groups affected",
+    "accessOfActors": "Access of relief actors",
+    "accessOfPeople": "Access of people to assistance",
+    "physicalSecurityConstraints": "Physical & security constraints"
+  },
+  "results": {
+    "eyebrow": "Live result",
+    "title": "INFORM Severity Index",
+    "scenarioIllustrative": "{{name}} · illustrative",
+    "category": "Category {{level}} of 5",
+    "announce": "Severity {{score}}, {{category}}",
+    "incomplete": "Incomplete",
+    "incompleteLead": "The index needs all three dimensions. Still missing:",
+    "notComputed": "Not computed",
+    "issues_one": "{{count}} input needs checking",
+    "issues_other": "{{count}} inputs need checking",
+    "dimensions": "Dimensions",
+    "expandAll": "Expand all",
+    "collapseAll": "Collapse all",
+    "weightInG": "{{w}} in G",
+    "formula": "The formula with your numbers",
+    "formulaLhs": "Severity",
+    "formulaHint": "G(Impact, Humanitarian conditions) is INFORM’s weighted geometric mean, with weights ⅓ and ⅔: it inverts, averages geometrically and inverts back, so one very severe dimension is not averaged away.",
+    "reliability": "Reliability",
+    "completeness": "Data completeness",
+    "completenessSub": "{{have}} of {{total}} indicators",
+    "sourceReliability": "Source reliability",
+    "recency": "Last update",
+    "daysAgo_one": "{{n}} day ago",
+    "daysAgo_other": "{{n}} days ago",
+    "notSet": "Not set",
+    "reliabilityNote": "Reported alongside the index; it never changes the severity score.",
+    "export": "Export",
+    "copy": "Copy summary for a situation report",
+    "copyShort": "Copy summary",
+    "copied": "Summary copied. Paste it into your situation report.",
+    "copyFailed": "Could not copy to the clipboard.",
+    "mobileCta": "Full result"
+  },
+  "table": {
+    "eyebrow": "Indicators",
+    "title": "From raw figures to 0–5 scores",
+    "lead": "Each indicator is scaled between a reference minimum and maximum. Counts of people use a log scale, so going from 1,000 to 10,000 people weighs as much as going from 10,000 to 100,000.",
+    "caption": "Severity indicators with raw values, calibration parameters and 0–5 scores",
+    "indicator": "Indicator",
+    "raw": "Raw value",
+    "calibration": "Calibration parameters",
+    "calibrationHint": "Reference ranges calibrated for sub-national crises in Tanzania. They are model parameters, not observed data.",
+    "min": "Min",
+    "max": "Max",
+    "scale": "Scale",
+    "score": "Score (0–5)",
+    "log": "log₁₀",
+    "linear": "linear",
+    "derived": "derived",
+    "inverse": "inverted"
+  },
+  "derivation": {
+    "areaAffectedPct": "Area affected ÷ Tanzania’s area ({{area}} km²) × 100",
+    "peopleInAreaPct": "People in the area ÷ Tanzania’s population ({{pop}}, 2022 census) × 100",
+    "peopleAffectedPct": "People affected ÷ people in the area × 100",
+    "displacedPct": "People displaced ÷ people affected × 100",
+    "fatalitiesPer10k": "Fatalities ÷ people affected × 10,000",
+    "peopleInNeed": "Sum of the people at levels 3, 4 and 5",
+    "concentrationLevel": "Highest level whose cumulative share (from level 5 down) exceeds 5% of the people in the area",
+    "groupsAffected": "Number of distinct population groups affected (maximum 5)"
+  },
+  "method": {
+    "eyebrow": "Methodology",
+    "title": "How the INFORM Severity Index is built",
+    "lead": "Indicators are scaled to 0–5, averaged into components, combined into categories and dimensions with INFORM’s geometric mean, and weighted into one index.",
+    "chainAria": "Aggregation levels",
+    "levels": {
+      "indicators": "Indicators",
+      "components": "Components",
+      "categories": "Categories",
+      "dimensions": "Dimensions",
+      "index": "Index"
+    },
+    "dimWeight": "weight {{w}}",
+    "legendG": "INFORM weighted geometric mean (inverted, so high values dominate)",
+    "legendMean": "arithmetic mean",
+    "live": "Scores update live with your inputs.",
+    "cards": {
+      "normalise": {
+        "title": "Scale every indicator",
+        "body": "Each indicator is mapped to 0–5 between a reference minimum and maximum. Absolute counts use log₁₀(1 + x) so that orders of magnitude count equally; indicators where higher is better are inverted."
+      },
+      "aggregate": {
+        "title": "Aggregate",
+        "body": "Indicators are averaged into components. Components, categories and dimensions are combined with G, INFORM’s weighted geometric mean, so one very severe aspect is not diluted by milder ones."
+      },
+      "classify": {
+        "title": "Classify",
+        "body": "Severity = 0.7 × G(Impact ⅓, Conditions ⅔) + 0.3 × Complexity, reported with one decimal. The category is the score rounded up: 3.1 is category 4 (High), 3.0 is category 3 (Medium)."
+      },
+      "reliability": {
+        "title": "Qualify",
+        "body": "Source reliability, recency and completeness form a separate 1–5 reliability index. It tells you how far to trust the result but never changes it."
+      }
+    },
+    "cite": {
+      "title": "References",
+      "jrc": "Poljanšek, K. et al. (2020). INFORM Severity Index: Concept and methodology. European Commission, Joint Research Centre (JRC).",
+      "acaps": "ACAPS (2024). INFORM Severity Index: data collection manual. ACAPS."
+    },
+    "adaptTitle": "Tanzania adaptation",
+    "adapt": "The structure, weights, geometric aggregation and round-up categories follow the official method. The indicator reference ranges are calibration parameters for sub-national Tanzanian crises; the Society & safety defaults are national structural indicators.",
+    "denominators": "National denominators: {{pop}} people (NBS 2022 census) and {{area}} km²."
+  },
+  "summary": {
+    "title": "INFORM Severity — {{name}}",
+    "illustrative": "(illustrative scenario, not official data)",
+    "more_one": "and {{count}} more",
+    "more_other": "and {{count}} more",
+    "area": "Affected area: {{councils}}",
+    "noArea": "not specified",
+    "areaFigures": "{{people}} people living on {{area}} km²",
+    "severity": "Severity: {{score}} / 5 — {{category}} (category {{level}} of 5)",
+    "incomplete": "Severity: not computed — inputs incomplete",
+    "dims": "Impact {{impact}} · Conditions {{conditions}} · Complexity {{complexity}}",
+    "figures": "People affected {{affected}} · Displaced {{displaced}} · Fatalities {{fatalities}} · People in need (levels 3–5) {{pin}}",
+    "reliability": "Reliability {{score}}/5 ({{label}}) · data completeness {{completeness}}%",
+    "risk": "Pre-crisis INFORM Risk of the area: {{risk}} / 10",
+    "method": "Method: INFORM Severity Index (JRC/ACAPS). Generated with INFORM Tanzania on {{date}}."
+  }
+}

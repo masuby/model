@@ -1,0 +1,96 @@
+# INFORM Tanzania — Frontend guide
+
+How the web app is put together, and the rules every page follows. Read this before adding a feature.
+
+## Stack
+
+React 19 · TypeScript (strict) · Vite 7 · Tailwind CSS v4 · Radix UI (via `radix-ui`) · React Router 7 ·
+TanStack Query · Zustand · i18next · Recharts 3 · Leaflet / react-leaflet · Motion · Supabase (optional).
+
+## Layout of `src/`
+
+```
+app/            App.tsx (router, providers), layout/ (AppShell, header, footer, theme, language, ⌘K search)
+components/
+  ui/           design-system primitives: Button, Card, Badge, primitives.tsx (Tabs, Select, Tooltip,
+                Dialog, SheetContent, DropdownMenu, Popover, Switch, Slider, Segmented, Progress, Input…)
+  layout/       Page.tsx → PageContainer, PageHeader, Section, SectionHeading, Kicker, KeyFigures, Note
+  risk/         ClassBadge, ClassDot, ClassLegend, RampLegend, DimensionBars, ScoreBar
+  map/          StaticMap (light SVG choropleth) and RiskMap (Leaflet, pan/zoom) — lazy-load both
+  charts/       ChartCard (flat figure with PNG/CSV export), theme.tsx (useChartTheme, ChartTooltip,
+                DIMENSION_COLORS for fills, DIMENSION_TEXT for text)
+data-layer/     DataProvider (useModel, useData, useSubmit, useReview…), local + Supabase repositories
+engine/risk/    INFORM Risk engine: math, classes, hierarchy, standardise, model, metrics, sources
+engine/severity INFORM Severity Index engine: definitions, engine, scenarios
+features/<x>/   one folder per page (owns its components)
+i18n/           i18next setup + locales/<en|sw>/<namespace>.json
+state/prefs.ts  theme, language, learning progress (persisted)
+```
+
+## Non-negotiable rules
+
+1. **Every user-visible string is translated.** Add keys to `src/i18n/locales/en/<ns>.json` **and**
+   `src/i18n/locales/sw/<ns>.json` (natural Kiswahili, not word-for-word). Use `useTranslation('<ns>')`.
+   Shared words live in `common` (classes, dimensions, categories, levels, actions, labels);
+   indicator names/descriptions in `indicators` (`t('indicators:flood')`, `t('indicators:desc.flood')`).
+2. **Never hard-code INFORM numbers or classes.** Read them from the model (`useModel()`), classify with
+   `classify(value, scale)` from `@/engine/risk/classes`. Each dimension has its OWN thresholds
+   (`scale = 'hazard' | 'vulnerability' | 'coping' | 'risk'`).
+3. **Day and night.** Use semantic tokens only: `bg-background`, `bg-card`, `bg-muted`, `bg-elevated`,
+   `text-foreground`, `text-muted-foreground`, `border-border`, `text-primary`, `bg-primary/10`,
+   `text-success|warning|danger`. Never raw `bg-white`/`text-gray-*`. Charts use `useChartTheme()`.
+4. **Accessible.** Radix primitives for interactive widgets; buttons have labels; icons in buttons get
+   `aria-label` when there is no text; colour is never the only signal (pair with text/score).
+5. **Responsive.** Mobile first; check 375 px, 768 px and 1440 px layouts. Use `PageContainer`.
+6. **Typed.** No `any`. `npx tsc -p tsconfig.app.json --noEmit` and `npx vitest run` must pass.
+7. **Honest.** Illustrative content is labelled as such; data provenance is shown where values appear.
+
+## Conventions added during QA
+
+- `Progress` requires a `label` (accessible name).
+- Dimension colours: `DIMENSION_COLORS` for fills/strokes, `DIMENSION_TEXT` (theme-aware CSS variables)
+  for any text — the bright fills fail contrast as text.
+- Class fills: take text colour from `onClassColor(hex)`; never hard-code white on a class colour.
+- Map overlays positioned over `RiskMap` need `z-[450]` (Leaflet panes sit at z-index 400).
+- Translations load lazily per namespace: always declare the namespace in `useTranslation('<ns>')`
+  (prefixed keys like `t('learn:x')` only resolve if that namespace is already loaded).
+- Speed (keep the shell light): code under `src/app/` imports UI from `@/components/ui/overlays`, never
+  the `primitives` barrel, so form controls stay out of the entry bundle. Heavy libraries (recharts,
+  leaflet, supabase-js, xlsx) are only ever reached through `import()`; after a build, `dist/index.html`
+  must modulepreload `vendor-react` only. Content far below the fold mounts at idle (Severity table and
+  methodology, area charts). Do not read layout (`scrollHeight`, `getBoundingClientRect`…) synchronously
+  in an effect on mount; let a `ResizeObserver` report it. `useModel()` re-renders only when the model
+  changes. Measure with `node scripts/qa-perf.mjs [--only=/route]`.
+- QA before merging UI work: `node scripts/qa-a11y.mjs` (axe, both themes) and
+  `node scripts/qa-screenshots.mjs` (full-page screenshots, both themes, both languages, 390/1440 px)
+  against `npx vite preview --port 4173`.
+
+## Visual language
+
+**The binding reference is [`docs/DESIGN_LANGUAGE.md`](DESIGN_LANGUAGE.md)** (editorial, few boxes, hairline
+rules, colour for data only, serif titles, no decorative motion). The notes below are older detail.
+
+
+- Cards: `Card` (rounded-2xl, soft shadow). Sections: `SectionHeading` with an eyebrow.
+- Headline numbers: `font-display font-extrabold num` (tabular numerals).
+- Scores always with one decimal via `formatScore`; populations via `formatNumber`/`formatCompact`.
+- Class colours via `ClassBadge`/`ClassDot`; the INFORM ramp is green → yellow → red.
+- Motion: subtle `motion` fade/slide on section entry; respect reduced motion (global CSS handles it).
+- Icons: `lucide-react`, size 4 (16 px) in buttons.
+
+## Engine API (quick reference)
+
+```ts
+const model = useModel();                 // RiskModel with approved edits applied
+model.councils / regions / sources / national; model.byId.get(id)
+unit.dims.hazard.score; unit.dims.hazard.categories.natural.indicators.flood; unit.risk
+parseMetric('risk' | 'dim:hazard' | 'ind:hazard:flood') → { get(u), classOf(v), scale, labelKey }
+metricColor(metric, value)                // map/table colour
+topDrivers(unit, n, dim?), dataCoverage(unit), indicatorValue(unit, dim, key)
+DIMENSIONS / ALL_INDICATORS (hierarchy), sourceFor(dim, key), sourceLabel(src), AUTHORITIES
+computeFromRaw(rawById) / standardise(raw, spec) / SPECS / usedSpecs()
+computeSeverity(input) → { severity, category, level, dimensions tree, indicators, reliability }
+```
+
+Unit ids: councils `C001…`, regions `R-<placekey>`, INFORM source units `TZ0101…`, national `TZ`.
+Routes: `/area/:id` renders any unit's profile.

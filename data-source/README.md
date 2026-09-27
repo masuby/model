@@ -22,6 +22,13 @@ Regenerate both: `node scripts/export-indicators.mjs`.
   append events as they occur; folded into the flood hazard by `apply-climate-hazards.mjs`.
 - **`indicator_sources.csv`** — the authority/dataset/method per headline indicator.
 
+## Corrections and derived files
+- **`scripts/fix-council-population.py`** — replaces area-apportioned population estimates in
+  `council_climate.csv` with the authentic figures in `population_2022_councils.csv` (all 195 councils,
+  total 61,741,120) and recomputes density/exposure; then run `node scripts/apply-council-hazards.mjs`.
+- **`scripts/build-council-index.mjs`** — writes the geometry-free `src/data/tanzania-councils-index.json`
+  the app's model uses; re-run whenever `tanzania-councils.json` changes.
+
 ## How it flows
 ```
 compute-*.py / *.csv ──▶ apply-climate-hazards.mjs ──▶ src/data/tanzania-inform-risk.json ──▶ app

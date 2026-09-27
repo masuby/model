@@ -1,0 +1,66 @@
+{
+  "eyebrow": "INFORM Sub-national · United Republic of Tanzania",
+  "title": "See where disasters would hurt most, before they strike.",
+  "lead": "An open, evidence-based index of disaster risk for every one of Tanzania’s 195 councils and 31 regions, built on the global INFORM methodology and Tanzanian data.",
+  "ctaExplore": "Explore the risk map",
+  "ctaLearn": "How INFORM works",
+  "nationalRisk": "National INFORM Risk",
+  "nationalNote": "Official INFORM Tanzania country value",
+  "mapCaption": "Council-level INFORM Risk",
+  "kpi": {
+    "councils": "Councils analysed",
+    "regions": "Regions",
+    "indicators": "Indicators",
+    "indicatorsSub": "{{used}} workbook indicators in {{groups}} groups",
+    "population": "People covered",
+    "populationSub": "2022 Population and Housing Census",
+    "highRisk": "Councils at high risk or above",
+    "highRiskSub": "{{pct}}% of all councils"
+  },
+  "formula": {
+    "eyebrow": "The INFORM model",
+    "title": "Risk is where hazard, vulnerability and weak coping capacity meet",
+    "lead": "INFORM combines three dimensions with a geometric mean, so a place is only high-risk when all three are elevated. A strong health system or low poverty genuinely lowers risk, even where floods or droughts are frequent.",
+    "equation": "Risk = ∛(Hazard & Exposure × Vulnerability × Lack of Coping Capacity)",
+    "national": "Tanzania today",
+    "result": "Tanzania: ∛({{h}} × {{v}} × {{c}}) = {{r}}"
+  },
+  "top": {
+    "eyebrow": "Where risk concentrates",
+    "title": "Highest-risk councils",
+    "lead": "Ranked by INFORM Risk. Select a council to see what drives its score.",
+    "all": "Open the full ranking",
+    "distribution": "How councils are distributed across risk classes",
+    "drivers": "Main driver",
+    "rank": "Rank",
+    "council": "Council",
+    "score": "Risk"
+  },
+  "modules": {
+    "eyebrow": "One platform",
+    "title": "What you can do here",
+    "explore": "Interactive map of all councils and regions, coloured by risk, any dimension or any of 32 indicators.",
+    "insights": "National patterns: regional rankings, hazard hot-spots and how the dimensions interact.",
+    "severity": "Score an unfolding crisis with the official INFORM Severity Index method.",
+    "learn": "A short course with quizzes that explains risk, from hazards to coping capacity.",
+    "methodology": "Every formula, threshold and data source, open for scrutiny.",
+    "data": "Ministries and agencies submit updated data; PMO reviews and approves it."
+  },
+  "sources": {
+    "title": "Built on authoritative data",
+    "lead": "Every indicator is traceable to its authority, dataset and method."
+  },
+  "cta": {
+    "title": "Evidence for preparedness, anticipatory action and investment",
+    "lead": "Use INFORM Tanzania to target preparedness, prioritise investment and brief decision-makers with a transparent, reproducible index.",
+    "primary": "Start exploring",
+    "secondary": "Read the methodology"
+  },
+  "mapSource": "INFORM Risk by council. Sources: INFORM Tanzania model, NBS 2022 census.",
+  "figures": {
+    "national": "National INFORM Risk",
+    "councils": "Councils assessed",
+    "people": "People covered",
+    "high": "Councils at high risk"
+  }
+}

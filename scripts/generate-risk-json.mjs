@@ -3,7 +3,7 @@
 // Run: node scripts/generate-risk-json.mjs
 import { writeFile, readFile } from 'fs/promises';
 import * as XLSX from 'xlsx';
-import { transformWorkbook } from '../src/services/informRiskDataService.js';
+import { transformWorkbook } from './lib/informRiskDataService.js';
 
 const SRC = 'data-source/tanzania-inform-risk.xlsx';
 const OUT = 'src/data/tanzania-inform-risk.json';

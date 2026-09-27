@@ -5,7 +5,7 @@ build-indicator-spec.py - extract the INFORM standardisation spec from the authe
 Reads "Tanzania - Country Model Template.xlsx" and writes, straight from the hidden sheets:
   - data-source/inform_indicator_spec.csv              (human-auditable spec, all 78 indicators)
   - src/data/inform-indicator-spec.json                (the spec the app/engine imports, keyed by id)
-  - src/services/__tests__/standardise.fixture.json    (golden fixture: [id, raw, expected-0-10] per
+  - src/engine/risk/__tests__/fixtures/standardise.fixture.json    (golden fixture: [id, raw, expected-0-10] per
                                                          district, for every used denominator-free
                                                          indicator - the JS proof of standardise())
 
@@ -100,7 +100,7 @@ for iid, s in spec.items():
         raw = idd.cell(idd_rows[d], cidd).value
         if isinstance(stored, (int, float)) and raw is not None and str(raw) != 'No data':
             fixture.append([iid, raw, stored])
-with open(os.path.join(ROOT, 'src/services/__tests__/standardise.fixture.json'), 'w') as f:
+with open(os.path.join(ROOT, 'src/engine/risk/__tests__/fixtures/standardise.fixture.json'), 'w') as f:
     json.dump(fixture, f)
 
 # Pipeline fixture: per district, the raw values by id + the workbook's stored dimension totals and risk
@@ -126,7 +126,7 @@ for d, rrow in idd_rows.items():
     H, V, C, R = (sadc.cell(sr, col).value for col in (26, 37, 47, 48))
     if all(isinstance(z, (int, float)) for z in (H, V, C, R)):
         pipe.append(dict(district=d, raw=raw, hazard=H, vulnerability=V, coping=C, risk=R))
-with open(os.path.join(ROOT, 'src/services/__tests__/pipeline.fixture.json'), 'w') as f:
+with open(os.path.join(ROOT, 'src/engine/risk/__tests__/fixtures/pipeline.fixture.json'), 'w') as f:
     json.dump(pipe, f)
 
 print('spec: %d indicators (%d used)' % (len(spec), sum(1 for s in spec.values() if s['use'] == 'Yes')))
