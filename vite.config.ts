@@ -13,8 +13,8 @@ export default defineConfig({
   plugins: [
     react(),
     tailwindcss(),
-    // Installable, offline-capable app: the shell, data and map boundaries are precached; basemap tiles
-    // and fonts are cached as they are used. Supabase calls always go to the network.
+    // Installable, offline-capable app: the shell code is precached, pages are network-first, and page
+    // code, data and fonts are cached as they are used. Supabase calls always go to the network.
     VitePWA({
       registerType: 'autoUpdate',
       includeAssets: ['favicon.svg', 'favicon.ico', 'apple-touch-icon-180x180.png'],
@@ -36,13 +36,19 @@ export default defineConfig({
         ],
       },
       workbox: {
-        // Precache only the app shell (≈ 0.3 MB): a first visit on mobile data must not silently download
-        // the whole site. Page code, map geometry and translations are cached as they are used, so every
-        // page a visitor has opened keeps working offline.
-        globPatterns: ['index.html', 'assets/index-*.{js,css}', 'assets/vendor-react-*.js', 'assets/*latin-wght-normal*.woff2', '*.{svg,ico}'],
-        navigateFallback: '/index.html',
-        navigateFallbackDenylist: [/^\/assets\//, /\.[a-z0-9]+$/i],
+        // Precache only the app shell code (≈ 0.3 MB): a first visit on mobile data must not silently
+        // download the whole site. Page code, map geometry and translations are cached as they are used,
+        // so every page a visitor has opened keeps working offline.
+        globPatterns: ['assets/index-*.{js,css}', 'assets/vendor-react-*.js', 'assets/*latin-wght-normal*.woff2', '*.{svg,ico}'],
+        // Pages (HTML) are network-first and never served from a precached copy: online visitors always get
+        // the current deploy (and a rollback takes effect at once); the cached copy is only for offline use.
+        navigateFallback: null,
         runtimeCaching: [
+          {
+            urlPattern: ({ request, url }) => request.mode === 'navigate' && !/\.[a-z0-9]+$/i.test(url.pathname),
+            handler: 'NetworkFirst',
+            options: { cacheName: 'pages', networkTimeoutSeconds: 4, expiration: { maxEntries: 30 } },
+          },
           {
             // Hashed build assets never change: cache-first, bounded.
             urlPattern: ({ url, sameOrigin }) => sameOrigin && url.pathname.startsWith('/assets/'),

@@ -69,6 +69,6 @@
   },
   "description": "INFORM Tanzania — sub-national disaster risk and crisis severity for every council in Tanzania",
   "engines": {
-    "node": ">=20"
+    "node": ">=22"
   }
 }

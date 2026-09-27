@@ -3,6 +3,23 @@
   "framework": "vite",
   "buildCommand": "npm run build",
   "outputDirectory": "dist",
+  "redirects": [
+    {
+      "source": "/risk",
+      "destination": "/explore",
+      "permanent": true
+    },
+    {
+      "source": "/education",
+      "destination": "/learn",
+      "permanent": true
+    },
+    {
+      "source": "/data-entry",
+      "destination": "/data",
+      "permanent": true
+    }
+  ],
   "rewrites": [
     {
       "source": "/((?!assets/|favicon|.*\\.).*)",

@@ -10,6 +10,7 @@ import { resolveTheme, usePrefs } from '@/state/prefs';
 import { AppShell } from './layout/AppShell';
 import { PageLoader } from './PageLoader';
 import { loadRoute, type RouteKey } from './routes';
+import { isStaleCodeError, reloadForUpdate } from './updateReload';
 
 const lazyPage = (key: RouteKey) => {
   const C = React.lazy(() => loadRoute(key));
@@ -23,6 +24,10 @@ const lazyPage = (key: RouteKey) => {
 function RouteError() {
   const error = useRouteError() as Error | undefined;
   const { t } = useTranslation();
+  // A page's code went missing because a new version was deployed while this tab was open: reload once.
+  React.useEffect(() => {
+    if (isStaleCodeError(error)) reloadForUpdate();
+  }, [error]);
   return (
     <PageContainer className="py-24 sm:py-32">
       <div className="max-w-xl">
@@ -55,10 +60,12 @@ const router = createBrowserRouter([
       { path: 'learn/:lessonId', element: lazyPage('learn') },
       { path: 'methodology', element: lazyPage('methodology') },
       { path: 'data', element: lazyPage('data') },
-      // Legacy routes from the previous app (keep old links and bookmarks working)
+      // Legacy routes from the previous app (keep old links and bookmarks working). vercel.json answers
+      // these with permanent redirects too; these cover navigations served by the service worker.
       { path: 'risk', element: <Navigate to="/explore" replace /> },
       { path: 'education', element: <Navigate to="/learn" replace /> },
       { path: 'data-entry', element: <Navigate to="/data" replace /> },
+      { path: 'index.html', element: <Navigate to="/" replace /> },
       { path: '*', element: lazyPage('notFound') },
     ],
   },

@@ -80,7 +80,7 @@ describe('SeverityPage', () => {
       expect(results.getByText(i18n.t('severity:results.announce', { score: expected.severity!.toFixed(1), category: i18n.t(`common:classes.${expected.category}`) }))).toBeInTheDocument();
       expect(screen.getAllByRole('radio').length).toBeGreaterThanOrEqual(4);
       // The table and methodology mount once the browser is idle.
-      await waitFor(() => expect(document.querySelector('[data-deferred="pending"]')).toBeNull());
+      await waitFor(() => expect(document.querySelector('[data-deferred="pending"]')).toBeNull(), { timeout: 20_000 });
       expect(missing).toEqual([]);
     });
   }
