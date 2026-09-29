@@ -149,5 +149,15 @@
   "a11y": {
     "mapOf": "Map of Tanzania coloured by {{metric}}",
     "selected": "Selected"
+  },
+  "sourceKind": {
+    "national": "Tanzanian institution",
+    "global": "Global dataset"
+  },
+  "valueLevel": {
+    "national": "National figure",
+    "region": "Regional figure",
+    "council": "Council figure",
+    "baseline": "INFORM baseline"
   }
 }

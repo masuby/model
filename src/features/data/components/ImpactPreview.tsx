@@ -156,23 +156,45 @@ export function ImpactPreview({
 }
 
 /** Compact impact list for review items: each affected council's risk before → after. */
+/** The dimension that moved most, for a council whose overall risk holds after rounding. */
+function movedDimension(i: AffectedImpact): (typeof KEYS)[number] | null {
+  let best: (typeof KEYS)[number] | null = null;
+  for (const k of KEYS) {
+    const d = Math.abs(scoreDelta(i.before[k], i.after[k]) ?? 0);
+    if (d > 0 && (!best || d > Math.abs(scoreDelta(i.before[best], i.after[best]) ?? 0))) best = k;
+  }
+  return best;
+}
+
 export function ImpactList({ impacts, max = 4 }: { impacts: AffectedImpact[]; max?: number }) {
-  const { t } = useTranslation('data');
+  const { t } = useTranslation(['data', 'common']);
   if (!impacts.length) return null;
   const shown = impacts.slice(0, max);
   return (
     <div>
       <h4 className="text-sm font-medium text-muted-foreground">{t('review.impactTitle', { count: impacts.length })}</h4>
       <ul className="mt-1.5 divide-y divide-border border-y border-border">
-        {shown.map((i) => (
-          <li key={i.unit.id} className="flex flex-wrap items-center justify-between gap-2 py-2 text-sm">
-            <span className="min-w-0 truncate">{i.unit.name}</span>
-            <span className="flex items-center gap-2.5">
-              <BeforeAfter before={i.before.risk} after={i.after.risk} />
-              <Delta value={scoreDelta(i.before.risk, i.after.risk)} />
-            </span>
-          </li>
-        ))}
+        {shown.map((i) => {
+          // Overall risk first; when it holds after rounding, the dimension that moved instead.
+          const dim = scoreDelta(i.before.risk, i.after.risk) === 0 ? movedDimension(i) : null;
+          return (
+            <li key={i.unit.id} className="flex flex-wrap items-center justify-between gap-2 py-2 text-sm">
+              <span className="min-w-0 truncate">{i.unit.name}</span>
+              {dim ? (
+                <span className="flex items-center gap-2.5">
+                  <span className="text-xs text-muted-foreground">{t(`common:dimensions.${dim}Short`)}</span>
+                  <BeforeAfter before={i.before[dim]} after={i.after[dim]} scale={dim} />
+                  <Delta value={scoreDelta(i.before[dim], i.after[dim])} />
+                </span>
+              ) : (
+                <span className="flex items-center gap-2.5">
+                  <BeforeAfter before={i.before.risk} after={i.after.risk} />
+                  <Delta value={scoreDelta(i.before.risk, i.after.risk)} />
+                </span>
+              )}
+            </li>
+          );
+        })}
       </ul>
       {impacts.length > max && <p className="mt-1.5 text-xs text-muted-foreground">{t('review.impactMore', { count: impacts.length - max })}</p>}
     </div>

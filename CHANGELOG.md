@@ -1,5 +1,38 @@
 # Changelog
 
+## Unreleased
+
+### Institutional data workflow
+
+Data entry now runs through the institutions that own the data, in the figures they already publish.
+
+- **Every indicator has a responsible institution.** Reviewers assign each of the 78 workbook
+  indicators (53 in the INFORM score, 25 advanced) to a Tanzanian institution or a global source, in
+  bulk or with suggested owners, and send update or validation requests with a due date and a message.
+- **Institutions enter measured figures, not scores.** An officer sees their institution's indicators
+  and open requests, and enters figures in natural units for the whole country, any region and any
+  council, typed or pasted from a spreadsheet (names matched, header rows skipped, "n/a" read as no
+  data). A live 0–10 preview and range checks catch unit mistakes; the dataset is required. They can
+  also confirm that the current values still hold.
+- **Data at any level.** For each council the most local figure applies (council, else its region, else
+  the country, else the INFORM baseline) and only indicator groups with a new figure are recomputed,
+  with the workbook's own standardisation and weights.
+- **Review with consequences in view.** Reviewers see today's value and where it comes from, the
+  proposal, the 0–10 scores and the councils whose scores would move, then approve or reject. Approved
+  figures can be reverted one area at a time.
+- **Sources everywhere.** Tables say whether each source is a Tanzanian institution or a global dataset,
+  and area profiles list the figures behind a recomputed score with the level they were recorded at.
+- **People.** Administrators set each person's role and institution in the portal.
+- Database: migrations `0004_data_workflow.sql` and `0005_one_live_request.sql` (row-level security;
+  every change goes through functions that re-check the caller's role and institution).
+
+### Other changes
+
+- No em dashes anywhere in the site, the documents or the code comments; missing values read "n/a".
+- Night mode: text on green and red buttons (Approve, Revert) meets contrast requirements.
+- The Data portal's tab row no longer shows a stray scrollbar on Windows.
+- `npm run dev:demo` runs the browser-only demo alongside a configured backend.
+
 ## 2.0.0: Advanced rebuild (2026-09)
 
 A ground-up rebuild of the web app on a typed, tested foundation, with a new design, English/Kiswahili,

@@ -149,5 +149,15 @@
   "a11y": {
     "mapOf": "Ramani ya Tanzania iliyopakwa rangi kwa {{metric}}",
     "selected": "Imechaguliwa"
+  },
+  "sourceKind": {
+    "national": "Taasisi ya Tanzania",
+    "global": "Seti ya data ya kimataifa"
+  },
+  "valueLevel": {
+    "national": "Takwimu ya taifa",
+    "region": "Takwimu ya mkoa",
+    "council": "Takwimu ya halmashauri",
+    "baseline": "Msingi wa INFORM"
   }
 }

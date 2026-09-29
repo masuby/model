@@ -14,8 +14,8 @@ export const buttonVariants = cva(
         ghost: 'text-foreground hover:bg-muted',
         subtle: 'bg-muted text-foreground hover:bg-muted/70',
         link: 'text-primary underline-offset-4 hover:underline px-0 h-auto',
-        danger: 'bg-danger text-white hover:bg-danger/90',
-        success: 'bg-success text-white hover:bg-success/90',
+        danger: 'bg-danger text-background hover:bg-danger/90',
+        success: 'bg-success text-background hover:bg-success/90',
       },
       size: {
         sm: 'h-8 px-3 text-[13px]',

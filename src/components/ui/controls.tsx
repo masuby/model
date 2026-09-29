@@ -18,15 +18,19 @@ import { cn } from '@/lib/utils';
 
 /* ---------------------------------------------------------------- Tabs */
 export const Tabs = TabsPrimitive.Root;
-/** Underline tabs (editorial) - a hairline baseline with the active tab marked in the text colour. */
+/**
+ * Underline tabs (editorial) - a hairline baseline with the active tab marked in the text colour. The
+ * baseline is an inset shadow the active underline paints over, so the row never overflows vertically
+ * (which would show a stray scrollbar where scrollbars are always visible).
+ */
 export function TabsList({ className, ...props }: React.ComponentProps<typeof TabsPrimitive.List>) {
-  return <TabsPrimitive.List className={cn('relative inline-flex max-w-full items-end gap-5 overflow-x-auto border-b border-border text-muted-foreground', className)} {...props} />;
+  return <TabsPrimitive.List className={cn('relative inline-flex max-w-full items-end gap-5 overflow-x-auto text-muted-foreground shadow-[inset_0_-1px_0_var(--border)]', className)} {...props} />;
 }
 export function TabsTrigger({ className, ...props }: React.ComponentProps<typeof TabsPrimitive.Trigger>) {
   return (
     <TabsPrimitive.Trigger
       className={cn(
-        '-mb-px inline-flex items-center justify-center gap-1.5 border-b-2 border-transparent pt-1 pb-2.5 text-sm font-medium whitespace-nowrap transition-colors hover:text-foreground data-[state=active]:border-foreground data-[state=active]:text-foreground [&_svg]:size-4',
+        'inline-flex items-center justify-center gap-1.5 border-b-2 border-transparent pt-1 pb-2.5 text-sm font-medium whitespace-nowrap transition-colors hover:text-foreground data-[state=active]:border-foreground data-[state=active]:text-foreground [&_svg]:size-4',
         className,
       )}
       {...props}
@@ -116,7 +120,7 @@ export function Select({
         <SelectPrimitive.Content
           position="popper"
           sideOffset={6}
-          className="z-[1200] max-h-[min(24rem,var(--radix-select-content-available-height))] min-w-[var(--radix-select-trigger-width)] overflow-hidden rounded-md border border-border bg-elevated text-foreground shadow-[var(--shadow-lift)]"
+          className="z-[1200] max-h-[min(24rem,var(--radix-select-content-available-height))] max-w-[calc(100vw-2rem)] min-w-[var(--radix-select-trigger-width)] overflow-hidden rounded-md border border-border bg-elevated text-foreground shadow-[var(--shadow-lift)]"
         >
           <SelectPrimitive.Viewport className="p-1">{children}</SelectPrimitive.Viewport>
         </SelectPrimitive.Content>
@@ -124,16 +128,22 @@ export function Select({
     </SelectPrimitive.Root>
   );
 }
-export function SelectItem({ value, children, className }: { value: string; children: React.ReactNode; className?: string }) {
+/**
+ * An option. `description` shows beside the label in the open list only: the closed select shows just
+ * the label (e.g. "TMA", described as "Tanzania Meteorological Authority").
+ */
+export function SelectItem({ value, children, description, className }: { value: string; children: React.ReactNode; description?: string; className?: string }) {
   return (
     <SelectPrimitive.Item
       value={value}
+      aria-label={description && typeof children === 'string' ? `${children}, ${description}` : undefined}
       className={cn(
         'relative flex cursor-pointer items-center gap-2 rounded-lg py-2 pr-8 pl-2.5 text-sm outline-none select-none data-[highlighted]:bg-muted data-[state=checked]:font-semibold',
         className,
       )}
     >
       <SelectPrimitive.ItemText>{children}</SelectPrimitive.ItemText>
+      {description && <span className="min-w-0 truncate font-normal text-muted-foreground">{description}</span>}
       <SelectPrimitive.ItemIndicator className="absolute right-2.5">
         <Check className="size-4 text-primary" />
       </SelectPrimitive.ItemIndicator>

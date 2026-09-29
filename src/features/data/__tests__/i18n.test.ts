@@ -10,7 +10,7 @@ import commonSw from '@/i18n/locales/sw/common.json';
 import dataSw from '@/i18n/locales/sw/data.json';
 import indicatorsSw from '@/i18n/locales/sw/indicators.json';
 import { AUTHORITY_KEYS } from '@/engine/risk/sources';
-import { usedSpecs } from '@/engine/risk/standardise';
+import { ADVANCED_SPECS, usedSpecs } from '@/engine/risk/standardise';
 import { specKey, unitKey } from '../lib/raw';
 import { EDITABLE_FIELDS } from '../lib/targets';
 
@@ -46,7 +46,7 @@ function staticKeys(): string[] {
   return [...keys];
 }
 
-const specs = usedSpecs();
+const specs = [...usedSpecs(), ...Object.values(ADVANCED_SPECS)];
 const DYNAMIC = [
   ...['council', 'source', 'region', 'national'].map((k) => `levels.${k}`),
   ...['viewer', 'sector', 'pmo', 'admin'].flatMap((k) => [`roles.${k}`, `mode.roleDesc.${k}`]),
@@ -58,14 +58,21 @@ const DYNAMIC = [
   ...AUTHORITY_KEYS.map((k) => `authorities.${k}`),
   ...specs.map((s) => `specs.${specKey(s.id)}`),
   ...specs.filter((s) => s.unit?.trim()).map((s) => `units.${unitKey(s.unit)}`),
-  ...specs.map((s) => `raw.keyedAt.${s.keyed_at}`),
   ...['council', 'region', 'nation'].flatMap((l) => [`paste.levels.${l}`, `paste.levelHelp.${l}`, `paste.placeholder.${l}`]),
   ...['empty', 'notNumber', 'range', 'unmatched', 'ambiguous', 'missingName', 'duplicate', 'extraValue', 'tooManyValues', 'noDataNotAllowed'].map((k) => `paste.issues.${k}`),
   ...['ready', 'unchanged', 'conflict'].map((k) => `paste.status.${k}`),
   ...['tooLarge', 'json', 'format', 'version', 'read'].map((k) => `tools.errors.${k}`),
   ...['unknownUnit', 'unknownIndicator', 'badValue', 'unsupportedUnit', 'badSubmission'].map((k) => `tools.issueKinds.${k}`),
-  ...['submitted', 'approved', 'rejected', 'reverted', 'imported', 'reset'].map((k) => `activity.actions.${k}`),
-  ...['scores', 'raw', 'paste', 'queue', 'mine', 'approved', 'activity'].map((k) => `tabs.${k}`),
+  ...['submitted', 'approved', 'rejected', 'reverted', 'imported', 'reset', 'assigned', 'requested', 'validated', 'closed'].map((k) => `activity.actions.${k}`),
+  ...['update', 'validate'].map((k) => `activity.detail.requested.${k}`),
+  ...['done', 'cancelled'].map((k) => `activity.detail.closed.${k}`),
+  ...['indicators', 'queue', 'scores', 'paste', 'mine', 'approved', 'activity', 'people'].map((k) => `tabs.${k}`),
+  ...['national', 'region', 'council', 'baseline'].map((k) => `common:valueLevel.${k}`),
+  ...['national', 'global'].map((k) => `common:sourceKind.${k}`),
+  ...['all', 'unassigned', 'requested', 'overdue', 'pending', 'never'].map((k) => `workflow.list.status.${k}`),
+  ...['unmatched', 'ambiguous', 'notNumber', 'noValue', 'duplicate'].map((k) => `workflow.paste.issue.${k}`),
+  ...['update', 'validate'].flatMap((k) => [`workflow.request.${k}`, `workflow.request.title.${k}`, `workflow.request.lead.${k}`]),
+  'workflow.request.submitted',
   ...EDITABLE_FIELDS.map((f) => `indicators:${f.key}`),
   ...['hazard', 'vulnerability', 'coping'].flatMap((d) => [`common:dimensions.${d}`, `common:dimensions.${d}Short`]),
   ...['natural', 'human', 'socioEconomic', 'vulnerableGroups', 'infrastructure', 'institutional'].map((c) => `common:categories.${c}`),

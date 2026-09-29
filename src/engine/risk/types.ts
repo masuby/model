@@ -37,6 +37,25 @@ export interface DrrStatus {
   eocc: boolean;
 }
 
+/** Level at which a measured value was recorded, or 'baseline' for the INFORM workbook value. */
+export type ValueLevel = 'national' | 'region' | 'council' | 'baseline';
+
+/** One workbook indicator behind a recomputed indicator group, with where its value came from. */
+export interface LeafInput {
+  specId: string;
+  /** Measured value in the indicator's natural unit (null = no data). */
+  raw: number | null;
+  /** Its 0–10 score (null when there is no value or it cannot be scored). */
+  score: number | null;
+  level: ValueLevel;
+  /** Unit the value was recorded for (a council, region, 'TZ', or the INFORM district for the baseline). */
+  unitId?: string;
+  dataset?: string | null;
+  period?: string | null;
+  institution?: string | null;
+  at?: string;
+}
+
 /** Where an edited value came from (stamped by Data Entry). */
 export interface EditStamp {
   value: number | null;
@@ -45,6 +64,8 @@ export interface EditStamp {
   note?: string;
   author?: string;
   at: string; // ISO timestamp
+  /** Set when the value was recomputed from measured values: every indicator behind it. */
+  inputs?: LeafInput[];
 }
 
 /** Edits keyed by unit id, then by indicator ref (`hazard:flood`) or `hazard:exposure`. */

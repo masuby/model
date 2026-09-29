@@ -228,7 +228,8 @@
     "source": "Chanzo",
     "resolution": "Kiwango cha data",
     "editedBy": "Imesasishwa na",
-    "editedAt": "Tarehe ya sasisho"
+    "editedAt": "Tarehe ya sasisho",
+    "sourceKind": "Aina ya chanzo"
   },
   "drivers": {
     "topTitle": "Vichocheo vikuu",
@@ -259,7 +260,10 @@
     "editedMembers": "Inajumuisha masasisho ya halmashauri",
     "show_one": "Onyesha kiashiria {{count}}",
     "show_other": "Onyesha viashiria {{count}}",
-    "hide": "Ficha viashiria"
+    "hide": "Ficha viashiria",
+    "measured": "Takwimu zilizo nyuma ya alama hii",
+    "baselineRest_one": "Kiashiria {{count}} kingine kutoka msingi wa INFORM",
+    "baselineRest_other": "Viashiria {{count}} vingine kutoka msingi wa INFORM"
   },
   "resolution": {
     "council": {

@@ -6,7 +6,7 @@ import { beforeAll, beforeEach, describe, expect, it, vi } from 'vitest';
 import '@/i18n';
 import i18n from '@/i18n';
 import { TooltipProvider } from '@/components/ui/primitives';
-import { DataProvider } from '@/data-layer/DataProvider';
+import { DataProvider, queryClient } from '@/data-layer/DataProvider';
 import { buildModel } from '@/engine/risk/model';
 import AreaPage from './AreaPage';
 import { loadCharts } from './components/ChartSlot';
@@ -76,7 +76,7 @@ describe('AreaPage', { timeout: 90_000 }, () => {
   // chart sections render synchronously when they mount (and before printing).
   beforeAll(async () => {
     await loadCharts();
-  });
+  }, 60_000); // a cold import of the chart library can be slow when the whole suite runs in parallel
   const council = model.councils.find((c) => c.inheritedFrom) ?? model.councils[0];
   const region = model.regions[0];
   const source = model.sources[0];
@@ -121,6 +121,28 @@ describe('AreaPage', { timeout: 90_000 }, () => {
     expect(document.querySelectorAll('svg.recharts-surface').length).toBeGreaterThanOrEqual(3);
     expect(screen.getByRole('table', { name: /All indicators for/ })).toBeInTheDocument();
     expect(document.querySelector('.area-deferred')).toBeNull();
+  });
+
+  it('lists the figures an institution sent behind a score, with the level they were recorded at', async () => {
+    await i18n.changeLanguage('en');
+    const kondoa = model.councils.find((c) => c.region === 'Dodoma')!;
+    localStorage.setItem(
+      'inform.v2.rawValues',
+      JSON.stringify([{ specId: 'VU.VG.CH-UW', unitId: 'R-dodoma', level: 'region', value: 21.5, dataset: 'TDHS-MIS 2022', institution: 'NBS', at: new Date().toISOString() }]),
+    );
+    queryClient.clear();
+    try {
+      renderAt(kondoa.id);
+      expect((await screen.findAllByText('Figures behind this score', {}, { timeout: 20_000 })).length).toBeGreaterThan(0);
+      expect(screen.getAllByText('Regional figure').length).toBeGreaterThan(0);
+      expect(screen.getAllByText(/NBS · TDHS-MIS 2022/).length).toBeGreaterThan(0);
+      // Every source says what kind it is.
+      expect(screen.getAllByText(/· Tanzanian institution/).length).toBeGreaterThan(0);
+      expect(screen.getAllByText(/· Global dataset/).length).toBeGreaterThan(0);
+    } finally {
+      localStorage.removeItem('inform.v2.rawValues');
+      queryClient.clear();
+    }
   });
 
   it('shows a friendly not-found state for unknown ids', async () => {
