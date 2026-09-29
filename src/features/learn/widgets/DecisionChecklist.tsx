@@ -18,7 +18,7 @@ const QUICK = ['Hanang District', 'Kibiti District', 'Kasulu District', 'Kinondo
 const STEPS = ['risk', 'driver', 'indicators', 'data', 'action', 'next'] as const;
 type Step = (typeof STEPS)[number];
 
-/** Lesson 7 — a decision brief for any council: six checks, auto-filled from the live model. */
+/** Lesson 7 - a decision brief for any council: six checks, auto-filled from the live model. */
 export default function DecisionChecklist() {
   const { t } = useTranslation(['learn', 'common', 'indicators']);
   const model = useModel();

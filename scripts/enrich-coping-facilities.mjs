@@ -1,5 +1,5 @@
 /**
- * enrich-coping-facilities.mjs — coping capacity = RESOURCES AVAILABLE. Fixes the
+ * enrich-coping-facilities.mjs - coping capacity = RESOURCES AVAILABLE. Fixes the
  * uniform national modelled values (e.g. WASH = 7 everywhere → an "all red" lens) by
  * deriving them from the real 2022-census facilities: more water points/boreholes →
  * more WASH resource → lower "lack of coping". Also tags each district's DRR

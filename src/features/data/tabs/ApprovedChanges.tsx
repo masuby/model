@@ -12,7 +12,7 @@ import { Dialog, DialogContent, Input, Tooltip } from '@/components/ui/primitive
 import { useModel, useOverrides, useRevert } from '@/data-layer/DataProvider';
 import { authorityLabel } from '@/engine/risk/sources';
 import type { EditRef, EditStamp, RiskModel, Unit } from '@/engine/risk/types';
-import { downloadText, formatScore, toCsv } from '@/lib/utils';
+import { downloadText, formatScore, NO_VALUE, toCsv } from '@/lib/utils';
 import { useRefLabel } from '../components/ChangeTable';
 import { Delta, EmptyState, ErrorState, LevelBadge, ListSkeleton, ScoreValue } from '../components/common';
 import { useAuthorityName } from '../components/SubmitPanel';
@@ -133,7 +133,7 @@ export function ApprovedChanges() {
                     <LevelBadge unit={g.unit} />
                   </div>
                   <p className="mt-0.5 text-sm text-muted-foreground">
-                    {g.unit?.region ?? '—'}
+                    {g.unit?.region ?? NO_VALUE}
                     {sharing.length > 0 && ` · ${t('approved.sharedBy', { names: sharing.map((c) => c.name).join(', ') })}`}
                   </p>
                 </div>
@@ -178,7 +178,7 @@ export function ApprovedChanges() {
                             <div className="font-medium">{l.name}</div>
                             <div className="text-xs text-muted-foreground">{l.dim}</div>
                             <div className="mt-1.5 text-xs text-muted-foreground sm:hidden">
-                              <span className="font-medium text-foreground">{authorityLabel(r.stamp.authority) || '—'}</span>
+                              <span className="font-medium text-foreground">{authorityLabel(r.stamp.authority) || NO_VALUE}</span>
                               {' · '}
                               <time dateTime={r.stamp.at} title={dateTime(r.stamp.at, i18n.language)}>
                                 {relativeTime(r.stamp.at, i18n.language)}

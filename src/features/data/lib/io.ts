@@ -1,6 +1,6 @@
 /**
  * Export / import of portal data as JSON. Export is a faithful snapshot of what the current user may
- * see; import NEVER writes approved values directly — everything in a file is re-submitted as pending
+ * see; import NEVER writes approved values directly - everything in a file is re-submitted as pending
  * submissions for a reviewer, after strict validation (known units and indicators, 0–10 values,
  * bounded text), with every value resolved onto the correct edit target.
  */

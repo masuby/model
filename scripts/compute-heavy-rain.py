@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-compute-heavy-rain.py — per-district heavy-rainfall hazard from CHIRPS DAILY rainfall
+compute-heavy-rain.py - per-district heavy-rainfall hazard from CHIRPS DAILY rainfall
 (2015–2024). For each district the district-MEAN daily rainfall is computed; days
 above 50 mm (heavy) and 100 mm (very heavy) are counted, then ÷ years -> mean annual
 event counts. heavy_rain_index (0–10) = percentile rank of (count>50 + 2×count>100).
@@ -8,7 +8,7 @@ event counts. heavy_rain_index (0–10) = percentile rank of (count>50 + 2×coun
 Source preference:
   1. national CHIRPS v3 daily union (.cache/chirps_daily/...), once the download lands
   2. else on-disk CHIRPS daily climatology (tanzania_climate_clip/CHIRPS_CLIMATOLOGY,
-     global v2.0 days_p05 monthly files) windowed to Tanzania — used NOW.
+     global v2.0 days_p05 monthly files) windowed to Tanzania - used NOW.
 out: data-source/chirps_heavy_rain_events.csv
 """
 from __future__ import annotations

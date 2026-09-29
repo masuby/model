@@ -1,5 +1,5 @@
 /**
- * i18n — English and Kiswahili. Catalogues live in `locales/<lang>/<namespace>.json`.
+ * i18n - English and Kiswahili. Catalogues live in `locales/<lang>/<namespace>.json`.
  *
  * `common` and `indicators` (shared vocabulary) are bundled with the app so nothing waits on a request
  * before first paint; every page namespace (`home`, `explore`, `learn`, …) is fetched in parallel with

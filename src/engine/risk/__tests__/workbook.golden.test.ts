@@ -1,5 +1,5 @@
 /**
- * GOLDEN — the aggregation maths vs the workbook's own cached cells (INFORM SADC 2024, data_only):
+ * GOLDEN - the aggregation maths vs the workbook's own cached cells (INFORM SADC 2024, data_only):
  * six category means (S,Y / AE,AJ / AQ,AT), the dimensions (Z, AK, AU) and RISK (AV). Also checks the
  * formulas against an independent reference written straight from the Excel strings.
  *
@@ -17,7 +17,7 @@ interface Row {
 }
 const rows = rowsJson as Row[];
 
-// Independent reference — the literal Excel expressions.
+// Independent reference - the literal Excel expressions.
 const excelScaledGeomean = (a: number, b: number) => {
   const geo = Math.sqrt(((10 - a) / 10 * 9 + 1) * ((10 - b) / 10 * 9 + 1));
   return Math.round(((10 - geo) / 9) * 10 * 10) / 10;

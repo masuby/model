@@ -167,8 +167,8 @@ export function Quiz({ lessonId, items }: { lessonId: LessonId; items: QuizItem[
                     </span>
                     <span className="leading-relaxed">
                       <RichText text={opt} />
-                      {reveal && isAnswer && <span className="sr-only"> — {t('quiz.srCorrect')}</span>}
-                      {reveal && isChosen && !isAnswer && <span className="sr-only"> — {t('quiz.srYourAnswer')}</span>}
+                      {reveal && isAnswer && <span className="sr-only">, {t('quiz.srCorrect')}</span>}
+                      {reveal && isChosen && !isAnswer && <span className="sr-only">, {t('quiz.srYourAnswer')}</span>}
                     </span>
                   </RadioGroup.Item>
                 );
@@ -240,7 +240,7 @@ function Result({
         <div>
           <h3 ref={focusOnMount} tabIndex={-1} className="text-xl font-semibold outline-none">
             {o.passed ? t('quiz.passedTitle') : t('quiz.failedTitle')}
-            <span className="sr-only"> — {t('quiz.score', { correct: o.correct, total: o.total })}</span>
+            <span className="sr-only">, {t('quiz.score', { correct: o.correct, total: o.total })}</span>
           </h3>
           <p className="text-sm text-muted-foreground">
             {t('quiz.score', { correct: o.correct, total: o.total })} · {t('quiz.passMark', { mark: passMark(o.total), total: o.total })}

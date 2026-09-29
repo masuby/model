@@ -11,7 +11,7 @@ INFORM Tanzania is a static single-page app. **Vercel** is the single production
 3. Domain: add `inform.co.tz` (and `www`) in *Project → Settings → Domains* and point DNS as instructed.
    Today `www.inform.co.tz` is the primary domain and `inform.co.tz` redirects to it, so the site (and
    every magic link) runs on `https://www.inform.co.tz`.
-4. Environment variables (only if using the shared backend — see §2), for *Production*, *Preview* and
+4. Environment variables (only if using the shared backend, see §2), for *Production*, *Preview* and
    *Development* (set on 2026-09-26):
    - `VITE_SUPABASE_URL`
    - `VITE_SUPABASE_PUBLISHABLE_KEY`
@@ -24,7 +24,7 @@ what is live.
 
 Production project: **inform-tanzania** (ref `eovhjdkwtxuidndypozp`, region `eu-west-1`,
 URL `https://eovhjdkwtxuidndypozp.supabase.co`). Migrations `0001`–`0003` are applied and the role model
-was verified end-to-end against it (sector / reviewer / admin / anonymous — 15/15 checks).
+was verified end-to-end against it (sector / reviewer / admin / anonymous, 15/15 checks).
 
 Without Supabase keys the Data portal runs in demo mode (browser-local). To set up a new environment:
 

@@ -35,7 +35,7 @@ interface DataContextValue {
 const DataContext = React.createContext<DataContextValue | null>(null);
 
 /**
- * The Supabase client is created in the background — the app renders immediately with the shipped
+ * The Supabase client is created in the background - the app renders immediately with the shipped
  * dataset and picks up approved edits and the session as soon as the SDK has loaded (never blocking
  * first paint). The SDK download waits for the page's load event and an idle moment, so it never competes
  * with the route's own code. In demo mode nothing is downloaded at all.
@@ -239,7 +239,7 @@ function useInvalidate() {
   return () => Promise.all(['overrides', 'submissions', 'audit'].map((k) => qc.invalidateQueries({ queryKey: [k] })));
 }
 
-/** Submit changes. Reviewers (PMO/admin) can apply immediately — recorded as a self-approved submission. */
+/** Submit changes. Reviewers (PMO/admin) can apply immediately - recorded as a self-approved submission. */
 export function useSubmit() {
   const { repo, profile } = useData();
   const invalidate = useInvalidate();

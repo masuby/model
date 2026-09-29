@@ -33,14 +33,14 @@ export function useMySubmissions() {
 
 /**
  * Authorship check. In local demo mode every demo role shares one profile id, so the (role-specific)
- * demo name is compared too — otherwise a demo PMO would see the demo officer's work as their own.
+ * demo name is compared too - otherwise a demo PMO would see the demo officer's work as their own.
  */
 export function isOwnSubmission(s: Pick<Submission, 'authorId' | 'authorName'>, profile: Pick<Profile, 'id' | 'fullName'>, mode: 'local' | 'supabase'): boolean {
   if (!s.authorId || s.authorId !== profile.id) return false;
   return mode === 'supabase' || s.authorName === profile.fullName;
 }
 
-/** Pending submissions, oldest first (reviewers only — others get an empty list). */
+/** Pending submissions, oldest first (reviewers only - others get an empty list). */
 export function usePendingQueue() {
   const query = useSubmissions();
   const { canReview: reviewer } = usePermissions();

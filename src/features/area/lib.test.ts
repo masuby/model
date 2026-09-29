@@ -106,7 +106,7 @@ describe('small helpers', () => {
     expect(formatDelta(0.8)).toBe('+0.8');
     expect(formatDelta(-0.3)).toBe('−0.3');
     expect(formatDelta(0)).toBe('0.0');
-    expect(formatDelta(null)).toBe('—');
+    expect(formatDelta(null)).toBe('n/a');
   });
   it('computes per-10k rates and area', () => {
     expect(per10k(25, 100_000)).toBe(2.5);

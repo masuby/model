@@ -7,7 +7,7 @@ import { Button } from '@/components/ui/button';
 import { Skeleton } from '@/components/ui/primitives';
 import type { Role, SubmissionStatus } from '@/data-layer/types';
 import type { Unit } from '@/engine/risk/types';
-import { cn, formatScore } from '@/lib/utils';
+import { cn, formatScore, NO_VALUE } from '@/lib/utils';
 import { errorMessage } from '../lib/batch';
 
 /** Empty state: a plain title and lead on the page (no box, no icon tile). */
@@ -58,7 +58,7 @@ export function ListSkeleton({ rows = 3, className }: { rows?: number; className
 /** Signed change with direction colour: up = more risk (danger), down = less risk (success). */
 export function Delta({ value, className }: { value: number | null | undefined; className?: string }) {
   const { t } = useTranslation('data');
-  if (value == null) return <span className={cn('text-xs text-muted-foreground', className)}>—</span>;
+  if (value == null) return <span className={cn('text-xs text-muted-foreground', className)}>{NO_VALUE}</span>;
   if (value === 0)
     return (
       <span className={cn('num text-xs font-medium text-muted-foreground', className)} aria-label={t('delta.none')}>
@@ -127,7 +127,7 @@ export function StatusBadge({ status, className }: { status: SubmissionStatus; c
 }
 
 /**
- * A note set off by a left rule (docs/DESIGN_LANGUAGE.md §8) — never a tinted box. The rule carries the
+ * A note set off by a left rule (docs/DESIGN_LANGUAGE.md §8) - never a tinted box. The rule carries the
  * state colour; `info` stays neutral.
  */
 export function Callout({

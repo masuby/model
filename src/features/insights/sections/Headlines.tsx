@@ -11,7 +11,7 @@ import { ClassBadge } from '@/components/risk/RiskBadge';
 import { THRESHOLDS } from '@/engine/risk/classes';
 import { isNum } from '@/engine/risk/math';
 import type { RiskModel } from '@/engine/risk/types';
-import { formatCompact, formatNumber, formatScore } from '@/lib/utils';
+import { formatCompact, formatNumber, formatScore, NO_VALUE } from '@/lib/utils';
 import { HIGH_INDEX, resolutionBreakdown, topDriverCounts, type Headline } from '../analytics';
 import { InsightSection } from '../ui';
 
@@ -54,7 +54,7 @@ export function HeadlineFigures({ h, className }: { h: Headline; className?: str
               {h.topRegion.name}
             </Link>
           ) : (
-            '—'
+            NO_VALUE
           ),
           sub: h.topRegion && (
             <span className="flex flex-wrap items-center gap-2">

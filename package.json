@@ -67,7 +67,7 @@
     "vite-plugin-pwa": "^1.3.0",
     "vitest": "^4.1.7"
   },
-  "description": "INFORM Tanzania — sub-national disaster risk and crisis severity for every council in Tanzania",
+  "description": "INFORM Tanzania: sub-national disaster risk and crisis severity for every council in Tanzania",
   "engines": {
     "node": ">=22"
   }

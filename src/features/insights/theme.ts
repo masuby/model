@@ -11,7 +11,7 @@ import { useChartTheme } from '@/components/charts/theme';
 import type { Resolution } from './analytics';
 
 /**
- * Data-locality ramp: one hue (blue) stepped by how local the data is — most local is strongest —
+ * Data-locality ramp: one hue (blue) stepped by how local the data is - most local is strongest  - 
  * plus a separate amber for documented overlays (not on the locality scale). Validated with the
  * dataviz palette checker (ordinal: monotone lightness, single hue, light end ≥ 2:1 on the surface).
  */
@@ -35,7 +35,7 @@ export function useInsightTheme() {
   return React.useMemo(
     () => ({
       ...th,
-      /** Chart surface (= --background) — used for 2px gaps between touching marks and rings around dots. */
+      /** Chart surface (= --background) - used for 2px gaps between touching marks and rings around dots. */
       surface: th.dark ? '#0a0f1a' : '#ffffff',
       /** Primary ink (= --foreground). */
       ink: th.dark ? '#e7ecf5' : '#0b1324',

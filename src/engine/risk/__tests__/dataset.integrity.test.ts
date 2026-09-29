@@ -3,7 +3,7 @@
  *   indicator → category : arithmetic MEAN (missing excluded, 0 included)
  *   category  → dimension: INFORM scaled GEOMEAN
  *   dimension → risk     : ∛(H × V × LCC)
- *   flood (H × E)        : max(hazard, √(hazard × exposure)) — exposure amplifies, never hides
+ *   flood (H × E)        : max(hazard, √(hazard × exposure)) - exposure amplifies, never hides
  * plus the documented spot values, so the documentation and the data can never silently diverge.
  */
 import { describe, expect, it } from 'vitest';

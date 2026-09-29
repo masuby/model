@@ -18,7 +18,7 @@ import { DIMENSIONS } from '@/engine/risk/hierarchy';
 import { parseMetric, rampColor } from '@/engine/risk/metrics';
 import { dataCoverage, topDrivers, unitsAt } from '@/engine/risk/model';
 import type { Unit } from '@/engine/risk/types';
-import { cn, formatNumber, formatScore } from '@/lib/utils';
+import { cn, formatNumber, formatScore, NO_VALUE } from '@/lib/utils';
 import { coverageCounts, editCount, MAX_COMPARE, rankUnits, referenceUnit } from '../lib/explore';
 import { useExplore } from '../lib/ExploreContext';
 import { ClassScale, MetricValue, Notice, SectionTitle } from './bits';
@@ -134,7 +134,7 @@ export function AreaBody({ unit }: { unit: Unit }) {
       label: t('card.rank'),
       value: (
         <>
-          {riskRank ?? '—'}
+          {riskRank ?? NO_VALUE}
           <span className="text-sm font-normal text-muted-foreground">/ {peers.length}</span>
         </>
       ),

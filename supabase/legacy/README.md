@@ -1,4 +1,4 @@
-# ⚠️ Legacy SQL — DO NOT RUN
+# ⚠️ Legacy SQL: DO NOT RUN
 
 These files are kept for historical reference only. They had drifted from the
 shipped frontend code (wrong committee column names, a NOT NULL `indicator_id`

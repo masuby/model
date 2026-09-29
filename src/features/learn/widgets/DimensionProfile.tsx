@@ -1,7 +1,7 @@
 /**
  * Shared body for the Vulnerability (lesson 3) and Lack of Coping Capacity (lesson 4) widgets:
  * a council's dimension score on its own class scale, its categories and indicators, and where the
- * data come from. Laid out with rules — no nested boxes.
+ * data come from. Laid out with rules - no nested boxes.
  */
 import { useTranslation } from 'react-i18next';
 import { ScoreBar } from '@/components/risk/DimensionBars';

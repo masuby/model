@@ -1,12 +1,12 @@
 /**
- * Area Profile — /area/:id for any unit (council C001…, region R-<key>, INFORM source unit TZ0101…,
+ * Area Profile - /area/:id for any unit (council C001…, region R-<key>, INFORM source unit TZ0101…,
  * national TZ). A report-like page meant to be read, printed, saved as PDF or screen-shared:
  * title block with score and key figures → locator + key findings → dimensions → charts → drivers →
  * full indicator table with provenance → ranked places → facilities & DRR → methodology.
  *
  * Built to the editorial design language (docs/DESIGN_LANGUAGE.md): numbered sections separated by
  * hairline rules, no card grids, colour only on data. Heavy below-the-fold sections mount as they
- * approach the viewport (and all at once before printing) — see components/Deferred.
+ * approach the viewport (and all at once before printing) - see components/Deferred.
  */
 import './area-print.css';
 import { ArrowRight } from 'lucide-react';
@@ -78,7 +78,7 @@ type Layout = 'phone' | 'tablet' | 'desktop' | 'wide';
 
 /**
  * Rendered heights of the deferred sections, measured at 390, 820 and 1440 px (C041, R-kigoma, TZ), so
- * the placeholders keep the page length — and the scrollbar and scroll position — stable while sections
+ * the placeholders keep the page length - and the scrollbar and scroll position - stable while sections
  * mount. Layouts change at 640 px (the indicator table folds, chart controls wrap), 1024 px (charts,
  * drivers and place lists go side by side) and 1280 px (long place lists split into two columns).
  */

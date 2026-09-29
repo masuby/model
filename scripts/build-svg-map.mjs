@@ -1,10 +1,10 @@
 /**
- * build-svg-map.mjs — pre-project and simplify the council, region and water-body boundaries into SVG
+ * build-svg-map.mjs - pre-project and simplify the council, region and water-body boundaries into SVG
  * path strings (src/data/tanzania-svg.json) for <StaticMap>: a lightweight choropleth for places that
  * do not need pan/zoom (home hero, area locator, click-to-select pickers). No Leaflet, no GeoJSON parsing
  * at runtime.
  *
- * Projection: equirectangular scaled by cos(φ₀) at Tanzania's mid-latitude — visually faithful at this
+ * Projection: equirectangular scaled by cos(φ₀) at Tanzania's mid-latitude - visually faithful at this
  * latitude and trivially cheap. Simplification: Douglas–Peucker (turf) at ~0.006° (≈ 650 m).
  *
  *   node scripts/build-svg-map.mjs

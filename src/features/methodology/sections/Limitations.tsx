@@ -20,7 +20,7 @@ const ITEMS: ReadonlyArray<{ key: string; status: Status }> = [
   { key: 'freshness', status: 'inProgress' },
 ];
 
-/** Status is state, so it may carry colour — as a small dot beside a plain word, never a tinted pill. */
+/** Status is state, so it may carry colour - as a small dot beside a plain word, never a tinted pill. */
 const STATUS_DOT: Record<Status, string> = { open: 'bg-warning', inProgress: 'bg-primary', planned: 'border border-muted-foreground' };
 
 export function LimitationsSection() {

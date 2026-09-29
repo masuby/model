@@ -12,7 +12,7 @@ import { cn, formatScore } from '@/lib/utils';
 import { useExplore } from '../lib/ExploreContext';
 import { LENSES, MetricValue } from './bits';
 
-/** Radio-style marker (visual only — the row itself carries the state). */
+/** Radio-style marker (visual only - the row itself carries the state). */
 function RadioMark({ on }: { on: boolean }) {
   return (
     <span

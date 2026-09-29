@@ -447,15 +447,15 @@
     "denominators": "National denominators: {{pop}} people (NBS 2022 census) and {{area}} km²."
   },
   "summary": {
-    "title": "INFORM Severity — {{name}}",
+    "title": "INFORM Severity: {{name}}",
     "illustrative": "(illustrative scenario, not official data)",
     "more_one": "and {{count}} more",
     "more_other": "and {{count}} more",
     "area": "Affected area: {{councils}}",
     "noArea": "not specified",
     "areaFigures": "{{people}} people living on {{area}} km²",
-    "severity": "Severity: {{score}} / 5 — {{category}} (category {{level}} of 5)",
-    "incomplete": "Severity: not computed — inputs incomplete",
+    "severity": "Severity: {{score}} / 5, {{category}} (category {{level}} of 5)",
+    "incomplete": "Severity: not computed (inputs incomplete)",
     "dims": "Impact {{impact}} · Conditions {{conditions}} · Complexity {{complexity}}",
     "figures": "People affected {{affected}} · Displaced {{displaced}} · Fatalities {{fatalities}} · People in need (levels 3–5) {{pin}}",
     "reliability": "Reliability {{score}}/5 ({{label}}) · data completeness {{completeness}}%",

@@ -1,5 +1,5 @@
 /**
- * qa-a11y.mjs — axe-core accessibility audit (WCAG 2.1 A/AA) of every route in day and night mode.
+ * qa-a11y.mjs - axe-core accessibility audit (WCAG 2.1 A/AA) of every route in day and night mode.
  *   node scripts/qa-a11y.mjs [baseUrl]
  */
 import AxeBuilder from '@axe-core/playwright';

@@ -1,12 +1,12 @@
-# INFORM Tanzania — design language
+# INFORM Tanzania: design language
 
 **Editorial and institutional.** The site should read like a well-made statistical report (think
 national statistics offices, The Economist data pages, Our World in Data): content first, structure made
-with typography, whitespace and hairline rules — not with boxes, gradients or decoration.
+with typography, whitespace and hairline rules, not with boxes, gradients or decoration.
 
 If a pattern is common on AI-generated landing pages, it is probably wrong here.
 
-## 1. Surfaces — few boxes
+## 1. Surfaces: few boxes
 
 - The page is the surface. Group content with **section rules** (`border-t border-border`), columns,
   headings and whitespace.
@@ -56,14 +56,14 @@ If a pattern is common on AI-generated landing pages, it is probably wrong here.
 ## 7. Charts, tables, maps
 
 - A chart sits directly on the page under a title row (title, one-line caption, export menu) with a
-  hairline above it (`ChartCard`) — not inside a card.
+  hairline above it (`ChartCard`), not inside a card.
 - Tables: hairline rows, no zebra, sticky header where long, numbers right-aligned.
 - Maps: a floating legend panel (small, bordered, solid background) is fine; nothing else floats.
 
 ## 8. Notes and callouts
 
 - A note is a paragraph with a left rule (`border-l-2 border-border pl-4`) or a single line of muted
-  text — not a coloured box. Warnings may use `border-l-2 border-warning`.
+  text, not a coloured box. Warnings may use `border-l-2 border-warning`.
 
 ## Building blocks
 

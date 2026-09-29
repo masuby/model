@@ -15,7 +15,7 @@ import { canReview, canSubmit, type NewSubmission } from '@/data-layer/types';
 import type { DimensionKey } from '@/engine/risk/hierarchy';
 import { AUTHORITIES, AUTHORITY_KEYS, INDICATOR_SOURCES, sourceFor, type AuthorityKey } from '@/engine/risk/sources';
 import type { EditRef, Unit } from '@/engine/risk/types';
-import { cn } from '@/lib/utils';
+import { cn, NO_VALUE } from '@/lib/utils';
 import { errorMessage } from '../lib/batch';
 import { buildSubmissions, sharingCouncils, type DraftChange, type Impact } from '../lib/targets';
 import { ChangeTable } from './ChangeTable';
@@ -51,7 +51,7 @@ export function useAuthorityName() {
   const { t } = useTranslation('data');
   return React.useCallback(
     (key: string | null | undefined) => {
-      if (!key) return '—';
+      if (!key) return NO_VALUE;
       const a = (AUTHORITIES as Record<string, { label: string; full: string }>)[key];
       return a ? `${a.label} · ${t(`authorities.${key}`, { defaultValue: a.full })}` : key;
     },
@@ -231,11 +231,11 @@ export function ConfirmSubmitDialog({
               </div>
               <div>
                 <dt className="text-xs text-muted-foreground">{t('meta.dataset')}</dt>
-                <dd className="mt-0.5 font-medium">{first.dataset ?? '—'}</dd>
+                <dd className="mt-0.5 font-medium">{first.dataset ?? NO_VALUE}</dd>
               </div>
               <div className="sm:col-span-2">
                 <dt className="text-xs text-muted-foreground">{t('meta.note')}</dt>
-                <dd className="mt-0.5 whitespace-pre-wrap">{first.note ?? '—'}</dd>
+                <dd className="mt-0.5 whitespace-pre-wrap">{first.note ?? NO_VALUE}</dd>
               </div>
             </dl>
           )}
@@ -256,7 +256,7 @@ export function ConfirmSubmitDialog({
 
 /**
  * Submit section for one council's drafted changes: the last section of the entry form (heading over a
- * rule, like the dimension sections — no box). Hazard and Vulnerability/Coping changes become two
+ * rule, like the dimension sections - no box). Hazard and Vulnerability/Coping changes become two
  * submissions (council vs shared source unit) via `buildSubmissions`. `children` render between the lead
  * and the fields (measured-value entry lists how its values map onto model indicators there).
  */

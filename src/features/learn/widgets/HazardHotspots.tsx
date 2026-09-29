@@ -15,7 +15,7 @@ import { Chip, Finding, WidgetFrame } from '../components/WidgetKit';
 const QUICK = ['flood', 'drought', 'earthquake', 'landslide', 'lightning'] as const;
 const TOP_N = 5;
 
-/** Lesson 1 — pick a hazard indicator and see the councils where it is highest (live model). */
+/** Lesson 1 - pick a hazard indicator and see the councils where it is highest (live model). */
 export default function HazardHotspots() {
   const { t } = useTranslation(['learn', 'indicators', 'common']);
   const model = useModel();

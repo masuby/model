@@ -1,5 +1,5 @@
 /**
- * Step 1 — illustrative scenarios plus a blank / custom form, as one ruled radio list: name and blurb on
+ * Step 1 - illustrative scenarios plus a blank / custom form, as one ruled radio list: name and blurb on
  * the left, headline figures and the resulting severity on the right. The "illustrative" disclosure is a
  * single note under the list (rendered by the page), not a tag on every row. Each radio is named by its
  * title alone; the blurb, figures and severity are its description.
@@ -13,7 +13,7 @@ import { formatCompact, formatScore } from '@/lib/utils';
 import type { ScenarioChoice } from '../lib';
 import { RadioMark, SeverityChip } from './bits';
 
-/** Scenario previews are static — compute them once per session, not on every mount. */
+/** Scenario previews are static - compute them once per session, not on every mount. */
 let previewCache: Array<{ s: (typeof SEVERITY_SCENARIOS)[number]; r: ReturnType<typeof computeSeverity> }> | null = null;
 const previews = () => (previewCache ??= SEVERITY_SCENARIOS.map((s) => ({ s, r: computeSeverity(s.input) })));
 

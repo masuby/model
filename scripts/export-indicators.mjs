@@ -1,9 +1,9 @@
 /**
- * export-indicators.mjs — flatten the INFORM model into reusable per-indicator CSVs, so the
+ * export-indicators.mjs - flatten the INFORM model into reusable per-indicator CSVs, so the
  * data layer is transparent, auditable and easy to extend/update for future advancements.
  *
  * Writes two views of every district × indicator (value on the 0–10 INFORM scale + its source):
- *   data-source/inform_indicators_long.csv   tidy: one row per (district, indicator) — best for
+ *   data-source/inform_indicators_long.csv   tidy: one row per (district, indicator) - best for
  *                                             adding/updating indicators and tracking provenance.
  *   data-source/inform_indicators_wide.csv    one row per district, every indicator as a column.
  *

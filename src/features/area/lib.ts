@@ -9,6 +9,7 @@ import { isNum, mean } from '@/engine/risk/math';
 import { placeKey, unitsAt } from '@/engine/risk/model';
 import { sourceFor, type SourceInfo } from '@/engine/risk/sources';
 import type { EditRef, EditStamp, Facilities, Level, RiskModel, Unit } from '@/engine/risk/types';
+import { NO_VALUE } from '@/lib/utils';
 
 /* ------------------------------------------------------------------------------------------------ */
 /* Resolution                                                                                         */
@@ -188,16 +189,16 @@ export function delta(a: number | null | undefined, b: number | null | undefined
   return Math.round((a - b) * 10) / 10;
 }
 
-/** "+0.8", "−0.3", "0.0" — with a true minus sign. */
+/** "+0.8", "−0.3", "0.0" - with a true minus sign. */
 export function formatDelta(d: number | null | undefined): string {
-  if (!isNum(d)) return '—';
+  if (!isNum(d)) return NO_VALUE;
   if (d === 0) return '0.0';
   return `${d > 0 ? '+' : '−'}${Math.abs(d).toFixed(1)}`;
 }
 
 /**
  * The dimension that is worst on its OWN INFORM scale: highest class, then furthest into that class.
- * (Comparing raw scores across dimensions would be wrong — each has its own thresholds.)
+ * (Comparing raw scores across dimensions would be wrong - each has its own thresholds.)
  */
 export function weakestDimension(unit: Unit): { key: DimensionKey; score: number; cls: ClassInfo } | null {
   let best: { key: DimensionKey; score: number; cls: ClassInfo; rankKey: number } | null = null;
@@ -266,7 +267,7 @@ export function editList(unit: Unit): Array<{ ref: EditRef; stamp: EditStamp }> 
 /* Exposure, facilities & DRR                                                                         */
 /* ------------------------------------------------------------------------------------------------ */
 
-/** Area in km² — stored for some units, otherwise recovered as population ÷ density. */
+/** Area in km² - stored for some units, otherwise recovered as population ÷ density. */
 export function unitArea(unit: Unit): number | null {
   const e = unit.exposure;
   if (isNum(e?.areaKm2) && e.areaKm2 > 0) return e.areaKm2;
@@ -365,7 +366,7 @@ export function compareHref(unit: Unit): string {
   return unit.level === 'national' ? `/explore?level=${lvl}` : `/explore?level=${lvl}&id=${encodeURIComponent(unit.id)}&cmp=${encodeURIComponent(unit.id)}`;
 }
 
-/** Mean of a dimension score across units — used for "council average" context lines. */
+/** Mean of a dimension score across units - used for "council average" context lines. */
 export const meanOf = (units: readonly Unit[], get: (u: Unit) => number | null): number | null => mean(units.map(get));
 
 /* ------------------------------------------------------------------------------------------------ */

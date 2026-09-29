@@ -1,5 +1,5 @@
 /**
- * Crisis severity (/severity) — the official JRC/ACAPS INFORM Severity Index for a Tanzanian crisis:
+ * Crisis severity (/severity) - the official JRC/ACAPS INFORM Severity Index for a Tanzanian crisis:
  *   Severity = 0.7 × G(Impact ⅓, Conditions ⅔) + 0.3 × Complexity   (0–5; category = ROUNDUP)
  * Scenario → affected area (councils) → inputs by the official structure → live result, exports,
  * the indicator calibration table and a methodology explainer. All maths is in @/engine/severity.
@@ -327,8 +327,12 @@ export default function SeverityPage() {
       >
         <a href="#sev-results" className="flex items-center gap-3 rounded-lg border border-border bg-elevated px-4 py-2.5 shadow-[var(--shadow-lift)]" tabIndex={resultsInView ? -1 : 0}>
           <span className="text-sm text-muted-foreground">{t('scenario.severity')}</span>
-          <span className="num text-2xl leading-none font-semibold">{result.complete ? formatScore(result.severity) : '—'}</span>
-          <span className="text-xs text-muted-foreground">/ 5</span>
+          {result.complete && (
+            <>
+              <span className="num text-2xl leading-none font-semibold">{formatScore(result.severity)}</span>
+              <span className="text-xs text-muted-foreground">/ 5</span>
+            </>
+          )}
           <SeverityChip score={result.complete ? result.severity : null} size="sm" />
           <span className="ml-auto inline-flex items-center gap-1 text-sm font-medium text-primary">
             {t('results.mobileCta')} <ArrowRight className="size-3.5" aria-hidden />

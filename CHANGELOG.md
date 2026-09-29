@@ -1,6 +1,6 @@
 # Changelog
 
-## 2.0.0 — Advanced rebuild (2026-09)
+## 2.0.0: Advanced rebuild (2026-09)
 
 A ground-up rebuild of the web app on a typed, tested foundation, with a new design, English/Kiswahili,
 day/night themes, a shared data backend and several methodological corrections.
@@ -53,7 +53,7 @@ day/night themes, a shared data backend and several methodological corrections.
 - Code-split routes and vendor chunks; translations loaded per page and language; map boundaries
   fetched per level; Supabase SDK loaded only when configured. First load: 134 KB gzip of app code
   (the old app shipped a single 2.1 MB bundle).
-- Accessibility: axe-core WCAG 2.1 AA audit of every page in both themes — no serious or critical
+- Accessibility: axe-core WCAG 2.1 AA audit of every page in both themes: no serious or critical
   violations; keyboard navigation; labelled controls; no horizontal overflow at 360 px.
 - Security headers (CSP, HSTS, frame denial), CI quality gate (typecheck, lint, tests, build);
   Vercel is the single host. Obsolete GitHub Pages / Netlify / self-host configs archived.

@@ -1,5 +1,5 @@
 /**
- * RiskMap — the one Leaflet choropleth used everywhere (hero, explorer, area profile, severity picker).
+ * RiskMap - the one Leaflet choropleth used everywhere (hero, explorer, area profile, severity picker).
  * Joins the model's units onto the council / region / INFORM-district boundaries, colours by any metric
  * (class thresholds for risk and dimensions, a continuous ramp for single indicators), and restyles in
  * place when the metric or selection changes (no re-mount).

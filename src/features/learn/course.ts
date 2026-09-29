@@ -7,6 +7,7 @@
  */
 import { classify, THRESHOLDS } from '@/engine/risk/classes';
 import { mean, riskScore, round1 } from '@/engine/risk/math';
+import { NO_VALUE } from '@/lib/utils';
 
 export const LESSON_IDS = ['hazard', 'exposure', 'vulnerability', 'coping', 'risk', 'severity', 'decisions'] as const;
 export type LessonId = (typeof LESSON_IDS)[number];
@@ -26,7 +27,7 @@ export type WidgetId = (typeof WIDGET_IDS)[number];
 export const FIGURE_IDS = ['disasterEquation', 'aggregationLadder', 'classThresholds', 'severityWeights'] as const;
 export type FigureId = (typeof FIGURE_IDS)[number];
 
-const one = (x: number | null): string => (x == null ? '—' : x.toFixed(1));
+const one = (x: number | null): string => (x == null ? NO_VALUE : x.toFixed(1));
 
 /** A score in the middle of the "High" risk band, derived from the workbook thresholds. */
 const CLASS_QUESTION_SCORE = round1((THRESHOLDS.risk[2] + THRESHOLDS.risk[3]) / 2);

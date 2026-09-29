@@ -1,5 +1,5 @@
 /**
- * Methodology — long-form, citable documentation of INFORM Tanzania: model structure, the exact
+ * Methodology - long-form, citable documentation of INFORM Tanzania: model structure, the exact
  * standardisation and aggregation formulas (with a live worked example computed by the engine),
  * classification, administrative levels, the advanced multi-source model, the crisis-severity method,
  * the data-sources register, quality assurance, limitations, corrections and references.

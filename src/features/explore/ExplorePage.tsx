@@ -1,9 +1,9 @@
 /**
- * Risk Explorer (/explore) — the flagship screen.
+ * Risk Explorer (/explore) - the flagship screen.
  *
  * Desktop (≥1024 px): a 392 px control panel on the left and a full-bleed map on the right with a few
  * solid floating panels (a compact map key, the view toolbar, the area card, the comparison). Table view
- * swaps the map for a sortable ranking; there nothing floats — the area card docks as a column on the
+ * swaps the map for a sortable ranking; there nothing floats - the area card docks as a column on the
  * right and the comparison docks under the table. Mobile: the map fills the screen, controls and the area
  * card live in a non-modal bottom sheet. All view state lives in the query string, so every view is a
  * shareable link. No animation library: state changes are instant or short CSS transitions.

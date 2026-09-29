@@ -22,7 +22,7 @@ export function useMediaQuery(query: string): boolean {
 
 /**
  * Height of the app header (flag rule + bar + hairline border), measured so the explorer fills the
- * viewport exactly — no page scroll, whatever the header ends up being.
+ * viewport exactly - no page scroll, whatever the header ends up being.
  */
 export function useHeaderHeight(fallback = 68): number {
   const [h, setH] = React.useState(fallback);

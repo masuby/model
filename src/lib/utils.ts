@@ -1,6 +1,9 @@
 import { clsx, type ClassValue } from 'clsx';
 import { twMerge } from 'tailwind-merge';
 
+/** Shown wherever a value is missing (never an em dash). */
+export const NO_VALUE = 'n/a';
+
 /** Merge Tailwind class lists, resolving conflicts (`px-2` + `px-4` → `px-4`). */
 export function cn(...inputs: ClassValue[]): string {
   return twMerge(clsx(inputs));
@@ -13,7 +16,7 @@ const intlLocale = (lang: string) => (lang === 'sw' ? 'sw-TZ' : 'en-GB');
 
 /** Locale-aware number formatting (Swahili uses the same digits; grouping differs). */
 export function formatNumber(value: number | null | undefined, lang = 'en', opts: Intl.NumberFormatOptions = {}): string {
-  if (typeof value !== 'number' || !Number.isFinite(value)) return '—';
+  if (typeof value !== 'number' || !Number.isFinite(value)) return NO_VALUE;
   const key = intlLocale(lang) + JSON.stringify(opts);
   let f = numberFormats.get(key);
   if (!f) numberFormats.set(key, (f = new Intl.NumberFormat(intlLocale(lang), opts)));
@@ -22,7 +25,7 @@ export function formatNumber(value: number | null | undefined, lang = 'en', opts
 
 /** A 0–10 (or 0–5) score with one decimal, or an em dash. */
 export function formatScore(value: number | null | undefined): string {
-  if (typeof value !== 'number' || !Number.isFinite(value)) return '—';
+  if (typeof value !== 'number' || !Number.isFinite(value)) return NO_VALUE;
   return (Math.round(value * 10) / 10).toFixed(1);
 }
 
@@ -31,9 +34,9 @@ export function formatCompact(value: number | null | undefined, lang = 'en'): st
 }
 
 export function formatDate(iso: string | number | Date | null | undefined, lang = 'en', opts: Intl.DateTimeFormatOptions = { dateStyle: 'medium' }): string {
-  if (!iso) return '—';
+  if (!iso) return NO_VALUE;
   const d = iso instanceof Date ? iso : new Date(iso);
-  if (Number.isNaN(d.getTime())) return '—';
+  if (Number.isNaN(d.getTime())) return NO_VALUE;
   const key = intlLocale(lang) + JSON.stringify(opts);
   let f = dateFormats.get(key);
   if (!f) dateFormats.set(key, (f = new Intl.DateTimeFormat(intlLocale(lang), opts)));

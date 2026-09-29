@@ -1,5 +1,5 @@
 /**
- * Helpers for the "decision brief" (lesson 7) — pure, so they are unit-tested.
+ * Helpers for the "decision brief" (lesson 7) - pure, so they are unit-tested.
  * Dimensions are compared by where they sit inside their OWN class scale (a Hazard of 3.0 and a
  * Vulnerability of 3.0 are not the same level), never by their raw 0–10 numbers.
  */
@@ -19,7 +19,7 @@ export function classPosition(value: number, scale: Scale): number {
   return c.index + Math.min(within, 0.999);
 }
 
-/** The dimension that sits highest on its own class scale — what "drives" this unit's risk. */
+/** The dimension that sits highest on its own class scale - what "drives" this unit's risk. */
 export function driverDimension(unit: Unit): DimensionKey | null {
   let best: DimensionKey | null = null;
   let bestPos = -Infinity;

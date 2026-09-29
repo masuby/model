@@ -1,6 +1,6 @@
 /**
  * Data tools: export everything this person may see as JSON; in local (demo) mode also import a JSON
- * export (validated, re-submitted as PENDING submissions — never written straight into approved values)
+ * export (validated, re-submitted as PENDING submissions - never written straight into approved values)
  * and reset all browser-local data.
  */
 import { ChevronDown, Download, FileJson, Loader2, Trash2, Upload, Wrench } from 'lucide-react';
@@ -179,7 +179,7 @@ function ImportDialog({ open, onOpenChange }: { open: boolean; onOpenChange: (o:
                   <ul className="mt-1 max-h-32 space-y-0.5 overflow-y-auto text-muted-foreground">
                     {plan.issues.slice(0, 50).map((i, n) => (
                       <li key={n}>
-                        <span className="font-mono">{i.where}</span> — {t(`tools.issueKinds.${i.kind}`)}
+                        <span className="font-mono">{i.where}</span>: {t(`tools.issueKinds.${i.kind}`)}
                       </li>
                     ))}
                   </ul>

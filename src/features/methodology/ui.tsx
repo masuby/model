@@ -1,7 +1,7 @@
 /**
  * Typesetting primitives for the Methodology page (docs/DESIGN_LANGUAGE.md): numbered document sections
  * divided by hairline rules, prose at a reading measure, left-rule notes and a tiny HTML formula kit
- * (variables, fractions, roots, big operators, aligned rows, cases) — no LaTeX dependency, no boxes, no
+ * (variables, fractions, roots, big operators, aligned rows, cases) - no LaTeX dependency, no boxes, no
  * entrance motion. Display equations are set on the page, as in a statistical publication, with the
  * equation number at the right and any "where …" explanation as wrapping text beneath.
  */
@@ -84,7 +84,7 @@ export function SubHeading({ children, className, id }: { children: React.ReactN
 }
 
 /**
- * A note set off by a left rule — not a coloured box. `caution` uses the warning rule; the title reads
+ * A note set off by a left rule - not a coloured box. `caution` uses the warning rule; the title reads
  * in the foreground colour, the body in muted text.
  */
 export function Callout({ tone = 'note', title, children, className }: { tone?: 'note' | 'caution'; title?: React.ReactNode; children: React.ReactNode; className?: string }) {
@@ -124,7 +124,7 @@ export function ResolutionBadge({ value, className }: { value: Resolution; class
 /* ------------------------------------------------------------------------------------------------ */
 
 /**
- * Whether a horizontally scrollable element overflows and is not yet scrolled to its end — drives the
+ * Whether a horizontally scrollable element overflows and is not yet scrolled to its end - drives the
  * right-edge fade that tells a reader on a narrow screen that the formula continues.
  */
 function useScrollHint(ref: React.RefObject<HTMLElement | null>) {
@@ -293,7 +293,7 @@ export function Sep({ children = ',' }: { children?: React.ReactNode }) {
   return <span className="-ml-1.5">{children}</span>;
 }
 
-/** A short qualifier inside a formula (a few words at most — explanations belong in `where`). */
+/** A short qualifier inside a formula (a few words at most - explanations belong in `where`). */
 export function Txt({ children }: { children: React.ReactNode }) {
   return <span className="font-sans text-[0.78em] text-muted-foreground not-italic">{children}</span>;
 }

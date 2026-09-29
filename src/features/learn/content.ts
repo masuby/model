@@ -5,7 +5,7 @@
  * checked for identical structure in `__tests__/catalogue.test.ts`.
  *
  * Inline markup in any text: <b>bold</b> and <i>italic</i> (see RichText).
- * Live values are interpolated with i18next (`{{national}}` …) — see CONTENT_VARS.
+ * Live values are interpolated with i18next (`{{national}}` …) - see CONTENT_VARS.
  */
 import { FIGURE_IDS, WIDGET_IDS, type FigureId, type WidgetId } from './course';
 
@@ -48,7 +48,7 @@ export interface LessonContent {
 
 /**
  * Names of the live values lesson text may interpolate. They are filled from the real model
- * (`useContentVars`) and the engine (`QUIZ_VARS`) — lesson text never types an INFORM number in.
+ * (`useContentVars`) and the engine (`QUIZ_VARS`) - lesson text never types an INFORM number in.
  */
 export const CONTENT_VARS = [
   'national',

@@ -2,7 +2,7 @@
  * Measured-value entry: a sector officer keys the ACTUAL value in its natural unit (18 for 18 %
  * underweight, 11 for an 11-year drought frequency…) and the proven workbook standardiser turns it into
  * a 0–10 score. Workbook indicators roll up into workbook components (weighted mean of the indicators
- * that were filled — `computeFromRaw`), and each component maps onto one model leaf
+ * that were filled - `computeFromRaw`), and each component maps onto one model leaf
  * (`leafForWorkbookComponent`), which becomes an ordinary Change carrying its raw provenance.
  */
 import type { Change } from '@/data-layer/types';

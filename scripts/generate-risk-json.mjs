@@ -11,6 +11,6 @@ const OUT = 'src/data/tanzania-inform-risk.json';
 const buf = await readFile(SRC);
 const workbook = XLSX.read(buf, { type: 'buffer' });
 const data = transformWorkbook(workbook);
-if (!data?.national?.risk) throw new Error('Parse produced no national.risk — aborting');
+if (!data?.national?.risk) throw new Error('Parse produced no national.risk - aborting');
 await writeFile(OUT, JSON.stringify(data));
-console.log(`✓ ${OUT} — national risk ${data.national.risk}, units ${data.metadata?.totalUnits}`);
+console.log(`✓ ${OUT} - national risk ${data.national.risk}, units ${data.metadata?.totalUnits}`);

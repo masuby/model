@@ -49,7 +49,7 @@
     "rejected": "Imekataliwa"
   },
   "mode": {
-    "demoTitle": "Hali ya majaribio — data inabaki kwenye kivinjari hiki",
+    "demoTitle": "Hali ya majaribio: data inabaki kwenye kivinjari hiki",
     "demoLead": "Hakuna hifadhidata ya pamoja iliyounganishwa, kwa hiyo kila unachoingiza kinahifadhiwa kwenye kifaa hiki pekee na hakitoki humo. Badilisha nafasi ili upitie mtiririko mzima: wasilisha kama afisa wa sekta, kisha idhinisha kama mkaguzi wa PMO.",
     "demoRole": "Jaribu kama",
     "roleSwitched": "Sasa wewe ni: {{role}}",
@@ -79,7 +79,7 @@
     "password": "Nenosiri",
     "sendLink": "Nitumie kiungo cha kuingia",
     "signIn": "Ingia",
-    "linkHint": "Tutakutumia kiungo cha kutumia mara moja — hakuna nenosiri linalohitajika. Kitakurudisha moja kwa moja hapa.",
+    "linkHint": "Tutakutumia kiungo cha kutumia mara moja, hivyo hakuna nenosiri linalohitajika. Kitakurudisha moja kwa moja hapa.",
     "passwordHint": "Tumia nenosiri uliloandaliwa na msimamizi wako.",
     "linkSent": "Angalia sanduku lako la barua",
     "linkSentLead": "Tumetuma kiungo cha kuingia kwa {{email}}. Kifungue kwenye kifaa hiki ili kuendelea.",
@@ -154,7 +154,7 @@
     "current": "Sasa",
     "about": "Kuhusu {{name}}",
     "pending": "Inasubiri uhakiki",
-    "pendingTip": "Tayari umetuma thamani ya kiashiria hiki — inasubiri mkaguzi wa PMO.",
+    "pendingTip": "Tayari umetuma thamani ya kiashiria hiki. Inasubiri mkaguzi wa PMO.",
     "sharedTitle": "Alama za udhaifu na uwezo wa kukabiliana huhifadhiwa kwenye kitengo cha chanzo cha INFORM “{{source}}”",
     "sharedSiblings_one": "Data za tafiti zinazozitegemea hazijagawanywa kwa halmashauri, kwa hiyo badiliko lolote kwenye safu hizi linatumika pia kwa {{names}}.",
     "sharedSiblings_other": "Data za tafiti zinazozitegemea hazijagawanywa kwa halmashauri, kwa hiyo badiliko lolote kwenye safu hizi linatumika pia kwa {{names}}.",
@@ -165,8 +165,8 @@
     "exposureFloodEdited": "Thamani yako ya mafuriko inatangulia ukuzaji unaotokana na mfiduo.",
     "exposureDesc": "Fahirisi ya mfiduo wa watu (0–10) kutokana na idadi ya watu na eneo la halmashauri. Huongeza hatari ya mafuriko kama sehemu ya Hatari × Mfiduo ya INFORM.",
     "markNoData": "Weka {{name}} kama hakuna data",
-    "noDataOn": "Imewekwa kama hakuna data — bofya kutendua",
-    "noDataOff": "Weka kama hakuna data (haitajumuishwa kwenye wastani — si sifuri)",
+    "noDataOn": "Imewekwa kama hakuna data. Bofya kutendua.",
+    "noDataOff": "Weka kama hakuna data (haitajumuishwa kwenye wastani, si sifuri)",
     "resetRow": "Rudisha {{name}}",
     "reviewNow": "Hakiki",
     "errors": {
@@ -208,8 +208,8 @@
     "splitLead": "Thamani za hatari ni za halmashauri; thamani za udhaifu na uwezo wa kukabiliana ni za kitengo chake cha chanzo cha INFORM kinachoshirikiwa. Kila moja hukaguliwa peke yake.",
     "sentToast_one": "Imetumwa kwa uhakiki",
     "sentToast_other": "Mawasilisho {{count}} yametumwa kwa uhakiki",
-    "appliedToast_one": "Imetumika — ramani imesasishwa",
-    "appliedToast_other": "Mawasilisho {{count}} yametumika — ramani imesasishwa",
+    "appliedToast_one": "Imetumika. Ramani imesasishwa.",
+    "appliedToast_other": "Mawasilisho {{count}} yametumika. Ramani imesasishwa.",
     "errorToast": "Uwasilishaji umeshindikana",
     "viewMine": "Tazama mawasilisho yangu",
     "partial": "{{done}} kati ya {{total}} yamehifadhiwa kabla ya hitilafu: {{message}}"
@@ -227,7 +227,7 @@
   "meta": {
     "authority": "Mamlaka inayohusika",
     "authorityPlaceholder": "Chagua mamlaka…",
-    "authoritySuggested": "Imependekezwa kutokana na chanzo cha kawaida cha kiashiria — ibadilishe ikihitajika.",
+    "authoritySuggested": "Imependekezwa kutokana na chanzo cha kawaida cha kiashiria. Ibadilishe ikihitajika.",
     "dataset": "Seti ya data",
     "datasetPlaceholder": "mf. TDHS-MIS 2022",
     "note": "Maelezo kwa mkaguzi",
@@ -248,7 +248,7 @@
     "proposed": "Pendekezo",
     "delta": "Badiliko",
     "measured": "Kipimo halisi: {{values}}",
-    "stale": "Imebadilika tangu kuwasilishwa — sasa ni {{value}}"
+    "stale": "Imebadilika tangu kuwasilishwa (sasa ni {{value}})"
   },
   "raw": {
     "pickTitle": "Halmashauri",
@@ -261,7 +261,7 @@
     "sharedTarget_one": "huhifadhiwa kwenye kitengo cha chanzo (pia halmashauri {{count}} nyingine)",
     "sharedTarget_other": "huhifadhiwa kwenye kitengo cha chanzo (pia halmashauri {{count}} nyingine)",
     "sharedTargetAlone": "huhifadhiwa kwenye kitengo cha chanzo",
-    "reference": "rejea {{min}} – {{max}}",
+    "reference": "rejea {{min}} hadi {{max}}",
     "higherMoreRisk": "juu zaidi = hatari zaidi",
     "higherLessRisk": "juu zaidi = hatari kidogo",
     "keyedAt": {
@@ -281,7 +281,7 @@
   },
   "paste": {
     "setupTitle": "Unabandika nini?",
-    "setupLead": "Kiashiria kimoja kwa wakati mmoja, kwa halmashauri au mikoa mingi kwa pamoja — moja kwa moja kutoka kwenye jedwali.",
+    "setupLead": "Kiashiria kimoja kwa wakati mmoja, kwa halmashauri au mikoa mingi kwa pamoja, moja kwa moja kutoka kwenye jedwali.",
     "indicator": "Kiashiria",
     "level": "Ngazi",
     "levels": {
@@ -291,7 +291,7 @@
     },
     "levelHelp": {
       "council": "Mstari mmoja kwa kila halmashauri. Thamani zisizo na majina zinalinganishwa kwa mpangilio wa kiolezo.",
-      "region": "Mstari mmoja kwa kila mkoa — thamani inatumika kwa kila halmashauri iliyomo.",
+      "region": "Mstari mmoja kwa kila mkoa. Thamani inatumika kwa kila halmashauri iliyomo.",
       "nation": "Thamani moja kwa nchi nzima, inatumika kwa kila halmashauri."
     },
     "targetCouncil": "Thamani za hatari huhifadhiwa kwenye kila halmashauri.",
@@ -350,13 +350,13 @@
       "unmatched": "Hakuna jina linalolingana lililopatikana.",
       "ambiguous": "Inalingana na halmashauri kadhaa: {{candidates}}. Ongeza District, Town, Municipal au City.",
       "missingName": "Jina linakosekana kwenye mstari huu.",
-      "duplicate": "{{suggestion}} imejitokeza zaidi ya mara moja — thamani ya mwisho ndiyo inatumika.",
+      "duplicate": "{{suggestion}} imejitokeza zaidi ya mara moja. Thamani ya mwisho ndiyo inatumika.",
       "extraValue": "Thamani ya kwanza pekee ndiyo inatumika katika ngazi ya taifa.",
       "tooManyValues": "Thamani ni nyingi kuliko maeneo yaliyo kwenye kiolezo.",
       "noDataNotAllowed": "Mfiduo hauwezi kuwekwa kama hakuna data."
     },
     "leadSector": "Kila eneo linakuwa uwasilishaji wake katika foleni ya uhakiki ya PMO.",
-    "leadReviewer": "Kama mkaguzi, thamani hizi zinatumika kwenye ramani mara moja — uwasilishaji mmoja kwa kila eneo.",
+    "leadReviewer": "Kama mkaguzi, thamani zako zinatumika kwenye ramani mara moja, uwasilishaji mmoja kwa kila eneo.",
     "noteHint": "Maelezo moja yanaambatishwa kwa kila uwasilishaji katika kundi hili.",
     "submissions": "Mawasilisho",
     "councilsAffected": "Halmashauri zinazoathirika",
@@ -374,10 +374,10 @@
     "sentToast_other": "Mawasilisho {{count}} yametumwa kwa uhakiki",
     "appliedToast_one": "Thamani {{count}} imetumika kwenye ramani",
     "appliedToast_other": "Thamani {{count}} zimetumika kwenye ramani",
-    "partialToast": "{{ok}} zimehifadhiwa, {{failed}} zimeshindikana — tazama orodha hapa chini.",
+    "partialToast": "{{ok}} zimehifadhiwa, {{failed}} zimeshindikana. Tazama orodha hapa chini.",
     "copied_one": "Jina {{count}} limenakiliwa kwa mpangilio wa kiolezo",
     "copied_other": "Majina {{count}} yamenakiliwa kwa mpangilio wa kiolezo",
-    "copyFailed": "Imeshindikana kunakili — tumia kiolezo cha CSV badala yake."
+    "copyFailed": "Imeshindikana kunakili. Tumia kiolezo cha CSV badala yake."
   },
   "review": {
     "emptyTitle": "Hakuna kinachosubiri",
@@ -403,8 +403,8 @@
     "reasonRequired": "Sababu ya kukataa (mwandishi ataiona)",
     "noteOptional": "Ujumbe kwa mwandishi (si lazima)",
     "notePlaceholder": "mf. Tafadhali ambatisha jedwali la utafiti la awamu hii…",
-    "approvedToast": "Imeidhinishwa — {{name}} imesasishwa kwenye ramani",
-    "rejectedToast": "Imekataliwa — {{name}}: mwandishi ataona sababu yako",
+    "approvedToast": "Imeidhinishwa. {{name}} imesasishwa kwenye ramani.",
+    "rejectedToast": "{{name}} imekataliwa. Mwandishi ataona sababu yako.",
     "error": "Uhakiki umeshindikana",
     "impactTitle_one": "Athari kwa halmashauri {{count}}",
     "impactTitle_other": "Athari kwa halmashauri {{count}}",
@@ -437,7 +437,7 @@
   },
   "approved": {
     "emptyTitle": "Msingi rasmi unatumika",
-    "emptyLead": "Bado hakuna mabadiliko yaliyoidhinishwa — kila ramani inaonyesha thamani za INFORM Sub-national SADC 2024.",
+    "emptyLead": "Bado hakuna mabadiliko yaliyoidhinishwa. Kila ramani inaonyesha thamani za INFORM Sub-national SADC 2024.",
     "search": "Chuja kwa eneo, kiashiria, mamlaka…",
     "count_one": "Thamani {{count}} iliyoidhinishwa katika {{units}}",
     "count_other": "Thamani {{count}} zilizoidhinishwa katika {{units}}",
@@ -486,7 +486,7 @@
     "import": "Ingiza JSON…",
     "reset": "Futa data ya ndani…",
     "importTitle": "Ingiza data",
-    "importLead": "Thamani zilizo kwenye faili zinawasilishwa upya kama mawasilisho yanayosubiri uhakiki — hakuna kinachotumika moja kwa moja.",
+    "importLead": "Thamani zilizo kwenye faili zinawasilishwa upya kama mawasilisho yanayosubiri uhakiki. Hakuna kinachotumika moja kwa moja.",
     "chooseFile": "Chagua faili la INFORM Tanzania (.json)",
     "fileHint": "Hadi MB {{size}}",
     "exportedAt": "Lilihamishwa {{date}}",
@@ -522,15 +522,15 @@
     "resetLead": "Inafuta thamani zilizoidhinishwa, mawasilisho na shughuli zilizohifadhiwa kwenye kivinjari hiki.",
     "resetWarnTitle": "Hili haliwezi kutenduliwa",
     "resetWarn": "Hamisha nakala ya JSON kwanza kama unaweza kuhitaji data hii tena. Hifadhidata ya pamoja haiathiriki.",
-    "resetAck": "Naelewa — futa data iliyo kwenye kivinjari hiki",
+    "resetAck": "Naelewa: futa data iliyo kwenye kivinjari hiki",
     "resetConfirm": "Futa data ya ndani",
-    "resetDone": "Data ya ndani imefutwa — msingi rasmi umerudi"
+    "resetDone": "Data ya ndani imefutwa. Msingi rasmi umerudi."
   },
   "authorities": {
     "NBS": "Ofisi ya Taifa ya Takwimu",
     "OCGS": "Ofisi ya Mtakwimu Mkuu wa Serikali (Zanzibar)",
-    "PMO": "Ofisi ya Waziri Mkuu – Idara ya Menejimenti ya Maafa",
-    "PORALG": "Ofisi ya Rais – Tawala za Mikoa na Serikali za Mitaa (TAMISEMI)",
+    "PMO": "Ofisi ya Waziri Mkuu, Idara ya Menejimenti ya Maafa",
+    "PORALG": "Ofisi ya Rais, Tawala za Mikoa na Serikali za Mitaa (TAMISEMI)",
     "DRRC": "Kamati ya Usimamizi wa Maafa ya Mkoa na Wilaya",
     "TMA": "Mamlaka ya Hali ya Hewa Tanzania",
     "NEMC": "Baraza la Taifa la Hifadhi na Usimamizi wa Mazingira",

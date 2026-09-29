@@ -1,7 +1,7 @@
 /**
  * Non-modal bottom sheet for small screens: a "peek" row that is always visible (the map stays usable)
  * and a body that slides up. Tap or drag the handle to expand/collapse. Plain CSS height transition and
- * pointer events — no animation library. The body is only rendered once the sheet has been opened.
+ * pointer events - no animation library. The body is only rendered once the sheet has been opened.
  */
 import * as React from 'react';
 import { useTranslation } from 'react-i18next';

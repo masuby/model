@@ -1,7 +1,7 @@
 /**
  * Enter measured values: the officer keys actual values in their natural units for the 53 workbook
  * indicators; each is standardised live to 0–10 exactly as the INFORM workbook, rolled up into its
- * workbook component and mapped onto the model leaf — then submitted with its raw provenance.
+ * workbook component and mapped onto the model leaf - then submitted with its raw provenance.
  * Same layout as score entry: rows, then the submit section; the live preview sticks beside both.
  */
 import { CircleSlash, RotateCcw, TrendingDown, TrendingUp } from 'lucide-react';

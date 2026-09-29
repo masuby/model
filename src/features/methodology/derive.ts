@@ -16,7 +16,7 @@ export interface CategoryStep {
   mean: number | null;
   indicators: Array<{ key: string; value: number | null }>;
   withData: number;
-  /** (10 − c)/10 · 9 + 1 — the category on INFORM's 1–10 "lack-of" scale. */
+  /** (10 − c)/10 · 9 + 1 - the category on INFORM's 1–10 "lack-of" scale. */
   scaled: number | null;
 }
 
@@ -30,7 +30,7 @@ export interface DimensionStep {
   geomean: number | null;
   /** Unrounded dimension score. */
   raw: number | null;
-  /** ROUND(raw, 1) — the engine's dimensionScore(). */
+  /** ROUND(raw, 1) - the engine's dimensionScore(). */
   result: number | null;
   model: number | null;
   matches: boolean;

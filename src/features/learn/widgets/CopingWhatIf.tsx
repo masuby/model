@@ -18,7 +18,7 @@ import { DimensionProfile } from './DimensionProfile';
 const QUICK = ['Rufiji District', 'Longido District', 'Kasulu District', 'Hanang District'] as const;
 const COPING_KEYS = DIMENSION_BY_KEY.coping.categories.flatMap((c) => c.indicators.map((i) => i.key));
 
-/** Lesson 4 — a council's lack of coping capacity, and a what-if: improve one indicator and recompute. */
+/** Lesson 4 - a council's lack of coping capacity, and a what-if: improve one indicator and recompute. */
 export default function CopingWhatIf() {
   const { t } = useTranslation(['learn', 'common', 'indicators']);
   const model = useModel();
@@ -30,7 +30,7 @@ export default function CopingWhatIf() {
   const ref = `${unit.id}:${key}`;
   const target = edit?.ref === ref ? edit.value : original;
 
-  // Best (lowest "lack of") value among all councils — a realistic target.
+  // Best (lowest "lack of") value among all councils - a realistic target.
   const best = React.useMemo(() => {
     let b: { v: number; u: Unit } | null = null;
     for (const u of model.councils) {

@@ -84,7 +84,7 @@
   "quiz": {
     "title": "Pima uelewa wako",
     "meta": "Maswali {{n}} · alama ya kufaulu {{mark}}",
-    "intro": "Maswali {{n}} mafupi, moja baada ya jingine. Utaona papo hapo kama umepata, pamoja na maelezo mafupi. Pata {{mark}} sahihi ili kukamilisha somo — unaweza kujaribu tena mara nyingi upendavyo.",
+    "intro": "Maswali {{n}} mafupi, moja baada ya jingine. Utaona papo hapo kama umepata, pamoja na maelezo mafupi. Pata {{mark}} sahihi ili kukamilisha somo. Unaweza kujaribu tena mara nyingi upendavyo.",
     "start": "Anza jaribio",
     "alreadyPassed": "Umeshafaulu jaribio hili.",
     "bestScore": "Alama bora {{score}}%",
@@ -104,7 +104,7 @@
     "passMark": "alama ya kufaulu {{mark}} kati ya {{total}}",
     "passedTitle": "Somo limekamilika!",
     "failedTitle": "Karibu kufika",
-    "passedBody": "Hongera — maendeleo yako yamehifadhiwa na somo linalofuata limefunguliwa.",
+    "passedBody": "Hongera! Maendeleo yako yamehifadhiwa na somo linalofuata limefunguliwa.",
     "failedBody": "Pitia somo tena, kisha jaribu upya. Maelezo baada ya kila swali ni mahali pazuri pa kuanzia.",
     "bestKept": "Alama yako bora ya awali ya {{score}}% imehifadhiwa.",
     "summary": "Majibu yako",
@@ -149,17 +149,17 @@
       "floodBefore": "Kitisho cha mafuriko (h)",
       "floodAfter": "Mafuriko pamoja na mfiduo",
       "axis": "Watu kwa km²",
-      "logNote": "kipimo cha logariti — kila alama ni ×10",
+      "logNote": "kipimo cha logariti (kila alama ni ×10)",
       "insight": "{{denser}} ina takriban mara {{ratio}} ya watu kwa km² ikilinganishwa na {{other}}, lakini kielelezo chake cha mfiduo kiko juu kwa alama {{gap}} tu. Kipimo cha logariti kinaonyesha tofauti kubwa bila kuziacha zitawale.",
       "same": "Chagua halmashauri mbili tofauti ili kuzilinganisha.",
       "source": "Sensa ya Watu na Makazi 2022 (NBS), idadi ya watu wa halmashauri ÷ eneo la halmashauri; mfiduo = min–max ya logariti kati ya halmashauri."
     },
     "vulnerabilityProfile": {
       "title": "Chunguza udhaifu wa halmashauri",
-      "lead": "Alama ya Udhaifu kwenye madaraja ya kipimo chake, makundi yake mawili na kila kiashiria. Mistari yenye milia inamaanisha hakuna data — haihesabiwi, wala haichukuliwi kama sifuri."
+      "lead": "Alama ya Udhaifu kwenye madaraja ya kipimo chake, makundi yake mawili na kila kiashiria. Mistari yenye milia inamaanisha hakuna data, ambayo huachwa nje badala ya kuhesabiwa kama sifuri."
     },
     "copingWhatIf": {
-      "title": "Ukosefu wa uwezo wa kukabiliana — na zoezi la “je, ikiwa?”",
+      "title": "Ukosefu wa uwezo wa kukabiliana, pamoja na zoezi la “je, ikiwa?”",
       "lead": "Ona mapengo ya uwezo ya halmashauri, kisha boresha kiashiria kimoja na uiache injini halisi ikokotoe upya Ukosefu wa Uwezo wa Kukabiliana na Hatari ya INFORM.",
       "footer": "Zoezi hili linatumia ukokotoaji uleule wa Lango la data (wastani wa kundi → wastani wa kijiometri uliopimwa → kipeuo cha tatu). Ni zoezi la kufikirika tu: hakuna kinachohifadhiwa.",
       "drrRecords": "Kumbukumbu za DRR:",
@@ -170,12 +170,12 @@
       },
       "whatIf": "Je, ikiwa…?",
       "indicator": "Kiashiria cha kuboresha",
-      "slider": "{{indicator}} — alama ya ukosefu wa uwezo",
+      "slider": "{{indicator}}: alama ya ukosefu wa uwezo",
       "direction": "Chini ni bora: 0 inamaanisha hakuna pengo la uwezo, 10 ni pengo kubwa zaidi nchini Tanzania.",
       "noData": "Halmashauri hii haina data ya kiashiria hiki, hivyo haiwezi kuigwa.",
       "matchBest": "Fikia halmashauri bora ({{value}}, {{council}})",
       "lower": "Hatari ingeshuka kwa {{delta}}. Kuimarisha uwezo hushusha hatari hata pale vitisho haviwezi kubadilishwa.",
-      "higher": "Hatari ingepanda kwa {{delta}} — uwezo dhaifu unamaanisha hatari kubwa zaidi.",
+      "higher": "Hatari ingepanda kwa {{delta}}, kwa sababu uwezo dhaifu unamaanisha hatari kubwa zaidi.",
       "noChange": "Mabadiliko haya ni madogo mno kubadilisha alama zilizokadiriwa.",
       "becomes": "inakuwa"
     },
@@ -240,11 +240,11 @@
     },
     "decisionChecklist": {
       "title": "Kiunda muhtasari wa maamuzi",
-      "lead": "Chagua halmashauri na upitie ukaguzi sita. Kila mmoja unajazwa kutoka kwenye modeli hai — weka alama ya tiki ukishaupitia.",
+      "lead": "Chagua halmashauri na upitie ukaguzi sita. Kila mmoja unajazwa kutoka kwenye modeli hai. Weka alama ya tiki ukishaupitia.",
       "footer": "Muhtasari ni mahali pa kuanzia majadiliano na kamati ya wilaya ya usimamizi wa maafa, si hukumu ya mwisho.",
       "progress": "{{done}} kati ya {{total}} vimehakikiwa",
       "rank": "Nafasi ya {{rank}} kati ya halmashauri {{n}}",
-      "driverIs": "Inaendeshwa zaidi na {{dim}} — “{{cls}}” kwenye kipimo chake. Alama za wima zinaonyesha thamani za kitaifa.",
+      "driverIs": "Inaendeshwa zaidi na {{dim}}, yenye daraja “{{cls}}” kwenye kipimo chake. Alama za wima zinaonyesha thamani za kitaifa.",
       "coverage": "Viashiria {{pct}}% vina data.",
       "coverageLevel": {
         "good": "Nzuri",
@@ -287,7 +287,7 @@
         "infrastructure": "upatikanaji wa huduma za afya, vituo vya maji na usafi wa mazingira, mitandao ya mawasiliano na shule zinazoweza kutumika kama maeneo salama.",
         "institutional": "mipango ya maandalizi na mwitikio wa dharura, kamati za usimamizi wa maafa zilizopata mafunzo, uwezo wa operesheni za dharura na hatua za tahadhari kabla ya janga."
       },
-      "complete": "Muhtasari wa {{name}} umekamilika. Upeleke kwenye meza ya mipango — na uongeze maarifa ya viongozi na jamii za eneo hilo."
+      "complete": "Muhtasari wa {{name}} umekamilika. Upeleke kwenye meza ya mipango, na uongeze maarifa ya viongozi na jamii za eneo hilo."
     }
   },
   "figures": {
@@ -340,7 +340,7 @@
     "waitingTitle": "Cheti chako kinakusubiri",
     "notYetBody_one": "Kamilisha somo {{count}} zaidi ili kufungua cheti chako.",
     "notYetBody_other": "Kamilisha masomo {{count}} zaidi ili kufungua cheti chako.",
-    "title": "Hongera — umekamilisha kozi!",
+    "title": "Hongera, umekamilisha kozi!",
     "lead": "Sasa unaweza kusoma wasifu wa INFORM kuanzia alama hadi vichocheo vyake, kueleza kwa nini wastani wa kijiometri ni muhimu, na kutofautisha hatari na ukali wa janga. Yatumie maarifa hayo kwenye ramani hai.",
     "explore": "Chunguza ramani ya hatari",
     "methodology": "Soma mbinu kamili",
@@ -351,7 +351,7 @@
     "nameLabel": "Jina kwenye cheti (si lazima, linabaki kwenye kivinjari hiki)",
     "namePlaceholder": "Mwanafunzi wa INFORM Tanzania",
     "print": "Chapisha cheti",
-    "honest": "Kumbukumbu ya kujifunza kwa kasi yako mwenyewe katika programu hii — si sifa rasmi ya kitaaluma.",
+    "honest": "Kumbukumbu ya kujifunza kwa kasi yako mwenyewe katika programu hii, si sifa rasmi ya kitaaluma.",
     "aria": "Cheti cha kukamilisha kozi cha {{name}}",
     "title": "Cheti cha Kukamilisha Kozi",
     "certifies": "Hiki ni kuthibitisha kwamba",
@@ -392,8 +392,8 @@
                 { "title": "Vitisho vinavyosababishwa na binadamu", "text": "Ukubwa na hatari ya migogoro, vurugu za ndani, ajali za barabarani, na vitu hatarishi katika maeneo ya viwanda, migodi na mafuta." }
               ]
             },
-            { "type": "p", "text": "Kila kiashiria kinawekwa kwenye <b>kipimo kimoja cha 0–10</b>, ambapo 10 ni halmashauri zilizo hatarini zaidi nchini Tanzania. Vipimo ghafi — siku za mvua kubwa sana, makadirio ya mtikisiko wa tetemeko, mafuriko yaliyorekodiwa — vinapimwa upya kwa mbinu ya <b>min–max</b>, ili vitisho tofauti kabisa viweze kulinganishwa na kuwekewa wastani." },
-            { "type": "callout", "tone": "tip", "text": "Alama ya kiashiria ni <b>ya kulinganisha ndani ya Tanzania</b>. Alama ya ukame ya 9 inamaanisha “miongoni mwa halmashauri zenye ukame zaidi nchini” — si “uwezekano wa 90% wa ukame”." }
+            { "type": "p", "text": "Kila kiashiria kinawekwa kwenye <b>kipimo kimoja cha 0–10</b>, ambapo 10 ni halmashauri zilizo hatarini zaidi nchini Tanzania. Vipimo ghafi (siku za mvua kubwa sana, makadirio ya mtikisiko wa tetemeko, mafuriko yaliyorekodiwa) vinapimwa upya kwa mbinu ya <b>min–max</b>, ili vitisho tofauti kabisa viweze kulinganishwa na kuwekewa wastani." },
+            { "type": "callout", "tone": "tip", "text": "Alama ya kiashiria ni <b>ya kulinganisha ndani ya Tanzania</b>. Alama ya ukame ya 9 inamaanisha “miongoni mwa halmashauri zenye ukame zaidi nchini”, si “uwezekano wa 90% wa ukame”." }
           ]
         },
         {
@@ -404,23 +404,23 @@
               "type": "list",
               "style": "bullet",
               "items": [
-                "<b>Mafuriko</b> — mabonde ya mito kama Rufiji na Kilombero hufurika katika misimu ya mvua kubwa. Msimu wa mvua nyingi wa El Niño wa 2023–24 ulileta mafuriko makubwa Rufiji na Kibiti.",
-                "<b>Ukame</b> — ukanda kame wa kati, ikiwemo sehemu kubwa ya Dodoma na Singida, pamoja na maeneo ya wafugaji ya kaskazini, hutegemea mvua ambazo mara nyingi hushindwa.",
-                "<b>Matetemeko ya ardhi</b> — matawi ya Bonde la Ufa la Afrika Mashariki yanapita nchini. Septemba 2016 tetemeko la ardhi la ukubwa wa 5.9 lilipiga mkoa wa Kagera na kuharibu nyumba nyingi ndani na kando ya Bukoba.",
-                "<b>Maporomoko ya ardhi</b> — miteremko mikali iliyolowa maji katika nyanda za juu. Desemba 2023 maporomoko ya tope yaliyosababisha vifo yalishuka kutoka miteremko ya Mlima Hanang hadi mji wa Katesh.",
-                "<b>Radi</b> — bonde la Ziwa Viktoria ni mojawapo ya maeneo yenye radi nyingi zaidi duniani.",
-                "<b>Vimbunga</b> — ni nadra lakini vipo: Kimbunga Hidaya kilileta upepo mkali na mvua kubwa katika pwani karibu na Mafia mwezi Mei 2024."
+                "<b>Mafuriko</b>: mabonde ya mito kama Rufiji na Kilombero hufurika katika misimu ya mvua kubwa. Msimu wa mvua nyingi wa El Niño wa 2023–24 ulileta mafuriko makubwa Rufiji na Kibiti.",
+                "<b>Ukame</b>: ukanda kame wa kati, ikiwemo sehemu kubwa ya Dodoma na Singida, pamoja na maeneo ya wafugaji ya kaskazini, hutegemea mvua ambazo mara nyingi hushindwa.",
+                "<b>Matetemeko ya ardhi</b>: matawi ya Bonde la Ufa la Afrika Mashariki yanapita nchini. Septemba 2016 tetemeko la ardhi la ukubwa wa 5.9 lilipiga mkoa wa Kagera na kuharibu nyumba nyingi ndani na kando ya Bukoba.",
+                "<b>Maporomoko ya ardhi</b>: miteremko mikali iliyolowa maji katika nyanda za juu. Desemba 2023 maporomoko ya tope yaliyosababisha vifo yalishuka kutoka miteremko ya Mlima Hanang hadi mji wa Katesh.",
+                "<b>Radi</b>: bonde la Ziwa Viktoria ni mojawapo ya maeneo yenye radi nyingi zaidi duniani.",
+                "<b>Vimbunga</b>: ni nadra lakini vipo. Kimbunga Hidaya kilileta upepo mkali na mvua kubwa katika pwani karibu na Mafia mwezi Mei 2024."
               ]
             },
             { "type": "widget", "id": "hazardHotspots" },
-            { "type": "callout", "tone": "warn", "text": "Halmashauri kadhaa zinaweza kushiriki alama ileile ya juu. Mbinu ya min–max inahifadhi tofauti halisi, hivyo alama zinazolingana ni za kweli — usitafsiri kupita kiasi tofauti ya 0.1." }
+            { "type": "callout", "tone": "warn", "text": "Halmashauri kadhaa zinaweza kushiriki alama ileile ya juu. Mbinu ya min–max inahifadhi tofauti halisi, hivyo alama zinazolingana ni za kweli. Usitafsiri kupita kiasi tofauti ya 0.1." }
           ]
         },
         {
           "id": "dimension",
           "title": "Kutoka viashiria hadi alama moja ya vitisho",
           "blocks": [
-            { "type": "p", "text": "Viashiria vinawekewa wastani ili kupata alama za makundi mawili, ya asili na ya binadamu. Kisha makundi hayo mawili yanaunganishwa kwa <b>wastani wa kijiometri uliopimwa</b> wa INFORM kupata alama ya Vitisho na Mfiduo — somo la 5 linaonyesha jinsi hasa." },
+            { "type": "p", "text": "Viashiria vinawekewa wastani ili kupata alama za makundi mawili, ya asili na ya binadamu. Kisha makundi hayo mawili yanaunganishwa kwa <b>wastani wa kijiometri uliopimwa</b> wa INFORM kupata alama ya Vitisho na Mfiduo. Somo la 5 linaonyesha jinsi hasa." },
             { "type": "p", "text": "Alama ya kitaifa ya Vitisho na Mfiduo ya Tanzania ni <b>{{nH}}</b>, ambayo ni “{{nHClass}}” kwenye kipimo cha vitisho." },
             { "type": "callout", "tone": "fact", "text": "Kila kipimo kina vizingiti vyake <b>vyenyewe</b> vya madaraja. Kwenye kipimo cha vitisho {{nH}} ni “{{nHClass}}”; namba ileile ingesomeka “{{nHRiskClass}}” kwenye kipimo cha hatari kwa ujumla." }
           ]
@@ -429,7 +429,7 @@
       "takeaways": [
         "Kitisho ni tukio linalowezekana; huwa janga pale tu kinapokutana na watu walio njiani, walio dhaifu na wasioweza kukabiliana.",
         "INFORM Tanzania inatumia viashiria {{hazardCount}} vya vitisho katika makundi mawili: ya asili na ya binadamu.",
-        "Alama ni kati ya 0 na 10 na ni za kulinganisha ndani ya Tanzania — alama zinazolingana au kukaribiana ni halisi, si makosa."
+        "Alama ni kati ya 0 na 10 na ni za kulinganisha ndani ya Tanzania, hivyo alama zinazolingana au kukaribiana ni halisi, si makosa."
       ],
       "quiz": [
         {
@@ -445,11 +445,11 @@
         {
           "q": "Kiashiria cha mafuriko cha halmashauri ni 9.0. Hii inakuambia nini?",
           "options": ["Iko miongoni mwa halmashauri zilizo hatarini zaidi kwa mafuriko nchini Tanzania", "Kuna uwezekano wa 90% wa mafuriko mwaka huu", "90% ya watu wake wanaishi katika maeneo ya mafuriko", "Ilikuwa na mafuriko tisa mwaka jana"],
-          "explain": "Viashiria vinapimwa upya kati ya 0 na 10 kwa kulinganisha halmashauri zote za Tanzania. Alama 9.0 inaiweka halmashauri karibu na juu ya kiwango cha kitaifa cha mafuriko — si uwezekano."
+          "explain": "Viashiria vinapimwa upya kati ya 0 na 10 kwa kulinganisha halmashauri zote za Tanzania. Alama 9.0 inaiweka halmashauri karibu na juu ya kiwango cha kitaifa cha mafuriko. Si uwezekano."
         },
         {
           "q": "Mvua kubwa inanyesha juu ya hifadhi ya msitu isiyo na watu. Kwa lugha ya INFORM, hii ni…",
-          "options": ["Janga, kwa sababu mvua ilikuwa kubwa mno", "Tatizo la udhaifu", "Kushindwa kwa uwezo wa kukabiliana", "Kitisho kisicho na mfiduo karibu kabisa — hivyo hatari ni ndogo"],
+          "options": ["Janga, kwa sababu mvua ilikuwa kubwa mno", "Tatizo la udhaifu", "Kushindwa kwa uwezo wa kukabiliana", "Kitisho kisicho na mfiduo karibu kabisa, hivyo hatari ni ndogo"],
           "explain": "Bila watu au mali zilizo njiani, hatari ni ndogo. Hatari inahitaji kitisho <i>na</i> mfiduo, udhaifu na ukosefu wa uwezo wa kukabiliana."
         }
       ]
@@ -470,14 +470,14 @@
           "blocks": [
             { "type": "p", "text": "<b>Mfiduo</b> unaeleza watu, nyumba, mashamba, barabara na huduma zilizo mahali ambapo kitisho kinaweza kupiga. Mafuriko makubwa katika bonde lisilo na watu hayamdhuru mtu; mafuriko ya wastani katika mji wenye watu wengi yanaweza kuathiri maelfu ya kaya." },
             { "type": "p", "text": "Ndiyo sababu INFORM haitenganishi kitisho na mfiduo: kipimo cha kwanza kinaitwa kihalisi <b>Vitisho na Mfiduo</b>." },
-            { "type": "callout", "tone": "key", "text": "Mfiduo unajibu swali moja: <i>nani au nini kiko njiani mwa madhara?</i> Bado hauelezi wangedhurika kiasi gani — hilo ni udhaifu, somo linalofuata." }
+            { "type": "callout", "tone": "key", "text": "Mfiduo unajibu swali moja: <i>nani au nini kiko njiani mwa madhara?</i> Bado hauelezi wangedhurika kiasi gani. Hilo ni udhaifu, somo linalofuata." }
           ]
         },
         {
           "id": "density",
           "title": "Msongamano, si idadi pekee",
           "blocks": [
-            { "type": "p", "text": "INFORM Tanzania inapima mfiduo kwa <b>msongamano wa watu</b> — watu kwa kilomita moja ya mraba — kutoka Sensa ya Watu na Makazi ya 2022 (NBS). Halmashauri kubwa ya vijijini inaweza kuwa na watu wengi kuliko mji mdogo, lakini watu wachache zaidi kwa km² wanaoweza kupigwa na tukio lilelile." },
+            { "type": "p", "text": "INFORM Tanzania inapima mfiduo kwa <b>msongamano wa watu</b> (watu kwa kilomita moja ya mraba) kutoka Sensa ya Watu na Makazi ya 2022 (NBS). Halmashauri kubwa ya vijijini inaweza kuwa na watu wengi kuliko mji mdogo, lakini watu wachache zaidi kwa km² wanaoweza kupigwa na tukio lilelile." },
             { "type": "p", "text": "Msongamano unatofautiana sana: halmashauri za majiji zina maelfu ya watu kwa km², za wafugaji wachache tu. Kwa hiyo msongamano unawekwa kwenye <b>kipimo cha logariti</b> kabla ya kupimwa kuwa 0–10. Kila hatua kwenye kipimo cha logariti ni ongezeko la mara kumi, hivyo jiji moja lenye watu wengi haliwezi kuzibana halmashauri zote za vijijini hadi sifuri." },
             { "type": "formula", "text": "mfiduo = (log₁₀ msongamano − log₁₀ min) ÷ (log₁₀ max − log₁₀ min) × 10", "caption": "min na max ni msongamano wa chini kabisa na wa juu kabisa kati ya halmashauri za Tanzania" },
             { "type": "widget", "id": "exposureCompare" },
@@ -486,13 +486,13 @@
         },
         {
           "id": "flood",
-          "title": "Mfiduo huongeza mafuriko — lakini hauyafichi kamwe",
+          "title": "Mfiduo huongeza mafuriko, lakini hauyafichi kamwe",
           "blocks": [
             { "type": "p", "text": "Kwa mafuriko, INFORM Tanzania inaunganisha kitisho halisi cha mafuriko <i>h</i> na kielelezo cha mfiduo <i>E</i>:" },
             { "type": "formula", "text": "mafuriko = max( h , √(h × E) )" },
-            { "type": "p", "text": "Katika jiji lenye watu wengi na lililo hatarini kwa mafuriko, sehemu ya kipeuo ni kubwa kuliko <i>h</i>, hivyo mfiduo <b>huongeza</b> alama ya mafuriko. Katika bonde lenye watu wachache lakini lililo hatarini kwa mafuriko, kitisho kilichoandikwa kinahifadhiwa kikamilifu — mfiduo hauwezi kamwe kushusha hatari ya mafuriko inayojulikana." },
+            { "type": "p", "text": "Katika jiji lenye watu wengi na lililo hatarini kwa mafuriko, sehemu ya kipeuo ni kubwa kuliko <i>h</i>, hivyo mfiduo <b>huongeza</b> alama ya mafuriko. Katika bonde lenye watu wachache lakini lililo hatarini kwa mafuriko, kitisho kilichoandikwa kinahifadhiwa kikamilifu. Mfiduo hauwezi kamwe kushusha hatari ya mafuriko inayojulikana." },
             { "type": "callout", "tone": "warn", "text": "Tahadhari kwa makusudi: toleo la awali lilizidisha alama ya mafuriko kwa mfiduo na hivyo <i>kuishusha</i>, likaficha maeneo yanayojulikana kwa mafuriko. Ukaguzi uligundua kosa hilo, na kanuni ikabadilishwa ili mfiduo uongeze tu." },
-            { "type": "callout", "tone": "tz", "text": "<b>Rufiji na Kilombero.</b> Mabonde yenye rutuba huvutia familia za wakulima na makazi — watu huishi pale yalipo maji na udongo mzuri. Ndiyo hasa sababu mafuriko ya msimu huko yanaweza kuleta uharibifu mkubwa." }
+            { "type": "callout", "tone": "tz", "text": "<b>Rufiji na Kilombero.</b> Mabonde yenye rutuba huvutia familia za wakulima na makazi: watu huishi pale yalipo maji na udongo mzuri. Ndiyo hasa sababu mafuriko ya msimu huko yanaweza kuleta uharibifu mkubwa." }
           ]
         }
       ],
@@ -514,7 +514,7 @@
         },
         {
           "q": "Halmashauri iliyo hatarini kwa mafuriko ina watu wachache: kitisho cha mafuriko h = 9.8 na mfiduo E = 2.9. Kwa kanuni mafuriko = max(h, √(h × E)), alama yake ya mafuriko ni ipi?",
-          "options": ["{{sqrtVal}} — mfiduo unaishusha", "9.8 — kitisho kilichoandikwa kinahifadhiwa", "2.9 — thamani ya mfiduo", "0 — karibu hakuna anayeishi huko"],
+          "options": ["{{sqrtVal}} (mfiduo unaishusha)", "9.8 (kitisho kilichoandikwa kinahifadhiwa)", "2.9 (thamani ya mfiduo)", "0 (karibu hakuna anayeishi huko)"],
           "explain": "√(9.8 × 2.9) ≈ {{sqrtVal}}, ambayo ni chini ya 9.8, hivyo kiwango cha juu (max) kinahifadhi 9.8. Mfiduo unaweza kuongeza mafuriko lakini hauwezi kuficha hatari ya mafuriko inayojulikana."
         }
       ]
@@ -522,7 +522,7 @@
     "vulnerability": {
       "title": "Udhaifu",
       "subtitle": "Kwa nini tukio lilelile huwaumiza baadhi ya watu zaidi",
-      "summary": "Umaskini, afya, ukosefu wa chakula na kuhama makazi — hali zinazowafanya watu kuwa rahisi zaidi kudhurika.",
+      "summary": "Umaskini, afya, ukosefu wa chakula na kuhama makazi: hali zinazowafanya watu kuwa rahisi zaidi kudhurika.",
       "objectives": [
         "Eleza <b>udhaifu</b> na jinsi unavyotofautiana na mfiduo.",
         "Taja makundi mawili ya udhaifu ya INFORM na viashiria vyake.",
@@ -533,7 +533,7 @@
           "id": "same-hazard",
           "title": "Kitisho kilekile, matokeo tofauti",
           "blocks": [
-            { "type": "p", "text": "Vijiji viwili viko kwenye bonde lilelile la mafuriko. Katika kimoja, familia zina akiba kidogo, nyumba imara na watoto wenye afya. Katika kingine, kaya ni maskini, nyumba zimejengwa kwa matofali ya udongo na watoto wengi wamedumaa. Mafuriko ni yaleyale — madhara si sawa. Tofauti hiyo ni <b>udhaifu</b>." },
+            { "type": "p", "text": "Vijiji viwili viko kwenye bonde lilelile la mafuriko. Katika kimoja, familia zina akiba kidogo, nyumba imara na watoto wenye afya. Katika kingine, kaya ni maskini, nyumba zimejengwa kwa matofali ya udongo na watoto wengi wamedumaa. Mafuriko ni yaleyale; madhara si sawa. Tofauti hiyo ni <b>udhaifu</b>." },
             { "type": "p", "text": "Udhaifu ni mkusanyiko wa hali zinazowafanya watu kuwa rahisi kuteseka kitisho kinapopiga, na kuchelewa kurejea katika hali ya kawaida baadaye." },
             { "type": "callout", "tone": "key", "text": "Mfiduo unaeleza <i>nani yuko njiani</i>. Udhaifu unaeleza <i>wangedhurika kiasi gani</i>." }
           ]
@@ -545,11 +545,11 @@
             {
               "type": "compare",
               "items": [
-                { "title": "Udhaifu wa kijamii na kiuchumi", "text": "Maendeleo na umaskini (Utafiti wa Bajeti ya Kaya), utegemezi wa kiuchumi, makazi — ubora wa nyumba — na riziki, zinazopimwa kupitia ukosefu mkubwa wa chakula (IPC / MUCHALI)." },
+                { "title": "Udhaifu wa kijamii na kiuchumi", "text": "Maendeleo na umaskini (Utafiti wa Bajeti ya Kaya), utegemezi wa kiuchumi, makazi (ubora wa nyumba) na riziki, zinazopimwa kupitia ukosefu mkubwa wa chakula (IPC / MUCHALI)." },
                 { "title": "Makundi hatarishi", "text": "Watu waliohama makazi (wakimbizi na waomba hifadhi, UNHCR), hali ya afya kama mzigo wa VVU na malaria, afya na lishe ya watoto (udumavu, TDHS-MIS 2022), na makundi yaliyo hatarini kiuchumi." }
               ]
             },
-            { "type": "p", "text": "Viashiria vinawekewa wastani ndani ya kila kundi, na makundi mawili yanaunganishwa kwa wastani wa kijiometri uliopimwa. Kitaifa, alama ya Udhaifu ya Tanzania ni <b>{{nV}}</b> — “{{nVClass}}” kwenye kipimo cha udhaifu." },
+            { "type": "p", "text": "Viashiria vinawekewa wastani ndani ya kila kundi, na makundi mawili yanaunganishwa kwa wastani wa kijiometri uliopimwa. Kitaifa, alama ya Udhaifu ya Tanzania ni <b>{{nV}}</b>, yaani “{{nVClass}}” kwenye kipimo cha udhaifu." },
             { "type": "callout", "tone": "tz", "text": "<b>Kigoma na kuhifadhi wakimbizi.</b> Kasulu na Kibondo zinahifadhi kambi za wakimbizi za Nyarugusu na Nduta. Kuhifadhi idadi kubwa ya watu waliohama makazi huongeza kiashiria cha “watu waliohama makazi” na kuongeza shinikizo kwa maji, huduma za afya na ardhi wanazoshiriki na jamii zinazowahifadhi." },
             { "type": "widget", "id": "vulnerabilityProfile" }
           ]
@@ -560,20 +560,20 @@
           "blocks": [
             { "type": "p", "text": "Tafiti hazipimi kila kitu kila mahali. Kiashiria kisipokuwa na data, INFORM hukiacha <b>wazi</b> na kuweka wastani wa viashiria vilivyopo tu. Nafasi iliyo wazi haipandishi wala haishushi alama; sifuri halisi iliyopimwa huhesabiwa." },
             { "type": "callout", "tone": "warn", "text": "Data za udhaifu na uwezo wa kukabiliana zinatoka kwenye tafiti za kitaifa zinazowakilisha ngazi ya wilaya au mkoa, si kila halmashauri. Halmashauri zilizoundwa kwa kugawanya wilaya ya zamani zinatumia thamani za wilaya mama hadi data za ngazi ya halmashauri zipatikane." },
-            { "type": "callout", "tone": "tip", "text": "Udhaifu hubadilika polepole, lakini unaweza kubadilishwa: hifadhi ya jamii, programu za lishe na huduma za afya vyote huupunguza — na kila upunguzaji hushusha Hatari ya INFORM." }
+            { "type": "callout", "tone": "tip", "text": "Udhaifu hubadilika polepole, lakini unaweza kubadilishwa: hifadhi ya jamii, programu za lishe na huduma za afya vyote huupunguza, na kila upunguzaji hushusha Hatari ya INFORM." }
           ]
         }
       ],
       "takeaways": [
         "Udhaifu ni jinsi watu walivyo rahisi kudhurika, na jinsi wanavyorejea polepole.",
         "Makundi mawili: udhaifu wa kijamii na kiuchumi, na makundi hatarishi.",
-        "Data zinazokosekana huachwa nje ya wastani — hazichukuliwi kamwe kama sifuri."
+        "Data zinazokosekana huachwa nje ya wastani, hazichukuliwi kamwe kama sifuri."
       ],
       "quiz": [
         {
           "q": "Vijiji viwili vinakumbwa na mafuriko yaleyale. Kimoja kinateseka zaidi kwa sababu kaya ni maskini zaidi na watoto wengi wana utapiamlo. Wazo lipi la INFORM linaeleza tofauti hiyo?",
           "options": ["Kitisho", "Mfiduo", "Udhaifu", "Ukali wa janga"],
-          "explain": "Kitisho na mfiduo ni sawa; kinachotofautiana ni jinsi watu walivyo rahisi kudhurika — yaani udhaifu wao."
+          "explain": "Kitisho na mfiduo ni sawa; kinachotofautiana ni jinsi watu walivyo rahisi kudhurika, yaani udhaifu wao."
         },
         {
           "q": "Kiashiria kipi ni cha kundi la <b>makundi hatarishi</b>?",
@@ -595,7 +595,7 @@
     "coping": {
       "title": "Uwezo wa kukabiliana",
       "subtitle": "Rasilimali zinazozuia kitisho kugeuka kuwa janga",
-      "summary": "Upatikanaji wa huduma za afya, maji, mawasiliano, elimu, mipango ya maafa na utawala — na kwa nini INFORM hupima ukosefu wake.",
+      "summary": "Upatikanaji wa huduma za afya, maji, mawasiliano, elimu, mipango ya maafa na utawala, na kwa nini INFORM hupima ukosefu wake.",
       "objectives": [
         "Eleza uwezo wa kukabiliana na kwa nini INFORM hupima <b>ukosefu</b> wake.",
         "Tofautisha uwezo wa miundombinu na uwezo wa kitaasisi.",
@@ -608,7 +608,7 @@
           "blocks": [
             { "type": "p", "text": "Kitisho kinapopiga, baadhi ya maeneo hufanikiwa kukabiliana: tahadhari hutolewa, zahanati huwatibu majeruhi, barabara hubaki wazi na kamati ya usimamizi wa maafa huratibu misaada. Kwingine, tukio lilelile huzidi uwezo wa mifumo ya eneo. <b>Uwezo wa kukabiliana</b> ni uwezo wa watu, taasisi na mifumo kusimamia dharura kwa rasilimali walizonazo." },
             { "type": "p", "text": "INFORM hugeuza hili na kupima <b>Ukosefu wa Uwezo wa Kukabiliana (LCC)</b>, ili katika kila kipimo alama ya juu imaanishe hatari kubwa zaidi. LCC ya juu inamaanisha rasilimali chache za kukabiliana." },
-            { "type": "callout", "tone": "key", "text": "LCC ya juu = uwezo dhaifu = hatari kubwa zaidi. Kuwekeza katika uwezo hushusha LCC — na hivyo hushusha Hatari ya INFORM." }
+            { "type": "callout", "tone": "key", "text": "LCC ya juu = uwezo dhaifu = hatari kubwa zaidi. Kuwekeza katika uwezo hushusha LCC, na hivyo hushusha Hatari ya INFORM." }
           ]
         },
         {
@@ -618,12 +618,12 @@
             {
               "type": "compare",
               "items": [
-                { "title": "Miundombinu", "text": "Upatikanaji wa huduma za afya, uwezo wa kiuchumi, maji, usafi wa mazingira na usafi binafsi (WASH), mawasiliano — barabara, umeme, simu za mkononi na intaneti — na elimu." },
-                { "title": "Kitaasisi", "text": "Utekelezaji wa kupunguza hatari za maafa (DRR) — mipango, tahadhari za mapema na operesheni za dharura — pamoja na utawala." }
+                { "title": "Miundombinu", "text": "Upatikanaji wa huduma za afya, uwezo wa kiuchumi, maji, usafi wa mazingira na usafi binafsi (WASH), mawasiliano (barabara, umeme, simu za mkononi na intaneti) na elimu." },
+                { "title": "Kitaasisi", "text": "Utekelezaji wa kupunguza hatari za maafa (DRR), yaani mipango, tahadhari za mapema na operesheni za dharura, pamoja na utawala." }
               ]
             },
-            { "type": "p", "text": "Kitaifa, Ukosefu wa Uwezo wa Kukabiliana wa Tanzania ni <b>{{nC}}</b> — “{{nCClass}}” kwenye kipimo cha uwezo wa kukabiliana. Jaribu kifaa kilicho hapa chini uone jinsi uboreshaji mmoja unavyoweza kubadilisha hatari ya halmashauri." },
-            { "type": "callout", "tone": "tz", "text": "Usimamizi wa maafa Tanzania unaratibiwa na Ofisi ya Waziri Mkuu – Idara ya Menejimenti ya Maafa, pamoja na kamati za usimamizi wa maafa katika ngazi za mkoa na wilaya. Mipango ya maandalizi na mwitikio wa dharura, vituo vya operesheni za dharura na mipango ya hatua za tahadhari kabla ya janga vyote vinachangia kiashiria cha utekelezaji wa DRR." },
+            { "type": "p", "text": "Kitaifa, Ukosefu wa Uwezo wa Kukabiliana wa Tanzania ni <b>{{nC}}</b>, yaani “{{nCClass}}” kwenye kipimo cha uwezo wa kukabiliana. Jaribu kifaa kilicho hapa chini uone jinsi uboreshaji mmoja unavyoweza kubadilisha hatari ya halmashauri." },
+            { "type": "callout", "tone": "tz", "text": "Usimamizi wa maafa Tanzania unaratibiwa na Ofisi ya Waziri Mkuu (Idara ya Menejimenti ya Maafa), pamoja na kamati za usimamizi wa maafa katika ngazi za mkoa na wilaya. Mipango ya maandalizi na mwitikio wa dharura, vituo vya operesheni za dharura na mipango ya hatua za tahadhari kabla ya janga vyote vinachangia kiashiria cha utekelezaji wa DRR." },
             { "type": "widget", "id": "copingWhatIf" }
           ]
         },
@@ -631,7 +631,7 @@
           "id": "counterbalance",
           "title": "Uwezo husawazisha udhaifu",
           "blocks": [
-            { "type": "p", "text": "Kwa kuwa Hatari ya INFORM huzidisha vipimo vitatu, halmashauri yenye udhaifu mkubwa lakini uwezo imara inaweza kuwa na hatari ndogo kuliko halmashauri isiyo dhaifu sana lakini yenye uwezo mdogo. Uwezo pia ndicho kitu ambacho watoa maamuzi wanaweza kubadilisha kwa haraka zaidi — kupitia mipango, watumishi waliopata mafunzo, vifaa na mifumo ya tahadhari za mapema." },
+            { "type": "p", "text": "Kwa kuwa Hatari ya INFORM huzidisha vipimo vitatu, halmashauri yenye udhaifu mkubwa lakini uwezo imara inaweza kuwa na hatari ndogo kuliko halmashauri isiyo dhaifu sana lakini yenye uwezo mdogo. Uwezo pia ndicho kitu ambacho watoa maamuzi wanaweza kubadilisha kwa haraka zaidi, kupitia mipango, watumishi waliopata mafunzo, vifaa na mifumo ya tahadhari za mapema." },
             { "type": "callout", "tone": "warn", "text": "Zoezi la “je, ikiwa” hapo juu linaendesha injini halisi, lakini ni zoezi la kufikirika: alama rasmi hubadilika tu pale data mpya zenye vyanzo zinapoingizwa kupitia Lango la data." }
           ]
         }
@@ -645,7 +645,7 @@
         {
           "q": "Alama ya Ukosefu wa Uwezo wa Kukabiliana ya halmashauri inapanda kutoka 4.0 hadi 7.0. Hii inamaanisha nini?",
           "options": ["Uwezo wake umeimarika", "Vitisho vyake vimeongezeka", "Uwezo wake umedhoofika", "Idadi ya watu wake imeongezeka"],
-          "explain": "INFORM hupima <i>ukosefu</i> wa uwezo, hivyo LCC ya juu inamaanisha rasilimali chache za kukabiliana — na hatari kubwa zaidi."
+          "explain": "INFORM hupima <i>ukosefu</i> wa uwezo, hivyo LCC ya juu inamaanisha rasilimali chache za kukabiliana, na hatari kubwa zaidi."
         },
         {
           "q": "Kipi kati ya hivi ni kiashiria cha uwezo wa kukabiliana cha <b>kitaasisi</b>?",
@@ -662,7 +662,7 @@
     "risk": {
       "title": "Kuunganisha yote: Hatari ya INFORM",
       "subtitle": "Kutoka viashiria vya 0–10 hadi alama moja inayolinganishika",
-      "summary": "Jinsi viashiria vinavyokuwa makundi, vipimo na alama moja ya hatari — na kwa nini INFORM hutumia wastani wa kijiometri.",
+      "summary": "Jinsi viashiria vinavyokuwa makundi, vipimo na alama moja ya hatari, na kwa nini INFORM hutumia wastani wa kijiometri.",
       "objectives": [
         "Fuata hatua kutoka kiashiria hadi Hatari ya INFORM.",
         "Eleza kwa nini <b>wastani wa kijiometri</b> ni muhimu, na lini unatofautiana na wastani wa kawaida.",
@@ -673,7 +673,7 @@
           "id": "equation",
           "title": "Mlinganyo wa hatari",
           "blocks": [
-            { "type": "p", "text": "Hatari ya INFORM inaunganisha vipimo vitatu ulivyojifunza — Vitisho na Mfiduo (H), Udhaifu (V) na Ukosefu wa Uwezo wa Kukabiliana (LCC) — kuwa alama moja kati ya 0 na 10:" },
+            { "type": "p", "text": "Hatari ya INFORM inaunganisha vipimo vitatu ulivyojifunza, yaani Vitisho na Mfiduo (H), Udhaifu (V) na Ukosefu wa Uwezo wa Kukabiliana (LCC), kuwa alama moja kati ya 0 na 10:" },
             { "type": "formula", "text": "Hatari = ∛( H × V × LCC )", "caption": "wastani wa kijiometri wa vipimo vitatu, uliokadiriwa hadi desimali moja" },
             { "type": "p", "text": "Kwa Tanzania nzima: ∛({{nH}} × {{nV}} × {{nC}}) = <b>{{national}}</b>, ambayo ni “{{nationalClass}}”. Hii ndiyo thamani rasmi ya INFORM kwa Tanzania." },
             { "type": "figure", "id": "aggregationLadder", "caption": "Safari nzima, kutoka viashiria {{indicatorCount}} hadi daraja moja. Kila hatua inafuata kitabu cha kazi cha INFORM Tanzania." }
@@ -702,7 +702,7 @@
           "id": "levels",
           "title": "Halmashauri, mikoa na nchi",
           "blocks": [
-            { "type": "p", "text": "Alama za halmashauri zinakokotolewa papo hapo kutoka vipimo vyake vitatu. Mikoa inajumlishwa kwa njia ya INFORM — wastani wa viashiria, kisha makundi, vipimo na kipeuo cha tatu — <b>si</b> kwa kuweka wastani wa alama za hatari za halmashauri. Thamani ya kitaifa ni takwimu rasmi ya INFORM kwa Tanzania, {{national}}." },
+            { "type": "p", "text": "Alama za halmashauri zinakokotolewa papo hapo kutoka vipimo vyake vitatu. Mikoa inajumlishwa kwa njia ya INFORM (wastani wa viashiria, kisha makundi, vipimo na kipeuo cha tatu), <b>si</b> kwa kuweka wastani wa alama za hatari za halmashauri. Thamani ya kitaifa ni takwimu rasmi ya INFORM kwa Tanzania, {{national}}." },
             { "type": "callout", "tone": "fact", "text": "Modeli inajumuisha halmashauri {{councils}} katika mikoa {{regions}}. Vitisho na mfiduo vinakokotolewa kwa eneo la kila halmashauri; udhaifu na uwezo wa kukabiliana vinatoka kwenye wilaya za tafiti zinazozijumuisha." }
           ]
         }
@@ -731,7 +731,7 @@
         {
           "q": "Hatari ya INFORM ya mkoa inakokotolewaje?",
           "options": ["Ujumlishaji wa INFORM: wastani wa viashiria, kisha makundi, vipimo na kipeuo cha tatu", "Wastani wa alama za hatari za halmashauri zake", "Alama ya juu zaidi ya halmashauri katika mkoa", "Inanakiliwa kutoka thamani ya kitaifa"],
-          "explain": "Mikoa inajumlishwa kutoka viashiria vya halmashauri zake, kwa hatua zilezile za kitengo chochote cha INFORM — kamwe si kwa kuweka wastani wa alama za hatari."
+          "explain": "Mikoa inajumlishwa kutoka viashiria vya halmashauri zake, kwa hatua zilezile za kitengo chochote cha INFORM, kamwe si kwa kuweka wastani wa alama za hatari."
         }
       ]
     },
@@ -767,8 +767,8 @@
             {
               "type": "terms",
               "items": [
-                { "term": "Athari", "def": "Ukubwa wa tukio: eneo na watu wanaoishi humo, na watu walioathirika, waliohama makazi na waliofariki — kwa idadi na kwa uwiano na idadi ya watu." },
-                { "term": "Hali ya watu walioathirika", "def": "Idadi ya watu wanaohitaji msaada, na jinsi hali mbaya zaidi zilivyojikita — kuanzia kiwango cha 1 (hakuna au ndogo) hadi kiwango cha 5 (mbaya kupita kiasi)." },
+                { "term": "Athari", "def": "Ukubwa wa tukio: eneo na watu wanaoishi humo, na watu walioathirika, waliohama makazi na waliofariki, kwa idadi na kwa uwiano na idadi ya watu." },
+                { "term": "Hali ya watu walioathirika", "def": "Idadi ya watu wanaohitaji msaada, na jinsi hali mbaya zaidi zilivyojikita, kuanzia kiwango cha 1 (hakuna au ndogo) hadi kiwango cha 5 (mbaya kupita kiasi)." },
                 { "term": "Utata", "def": "Kinachofanya janga kuwa gumu kutatua: ukosefu wa usawa, ukosefu wa usalama, utawala dhaifu wa sheria, wingi wa makundi yaliyoathirika na vikwazo vya kufikisha misaada ya kibinadamu." }
               ]
             },
@@ -781,16 +781,16 @@
           "id": "calculator",
           "title": "Jaribu",
           "blocks": [
-            { "type": "p", "text": "Kikokotoo kilicho hapa chini kinaendesha injini ya ukali ya programu kwa mfano wa kufikirika wa Tanzania. Sogeza kitelezi kubadilisha idadi ya watu walioathirika; takwimu zinazohusiana — waliohama makazi, vifo na watu katika kila kiwango cha uhitaji — hubadilika pamoja nayo." },
+            { "type": "p", "text": "Kikokotoo kilicho hapa chini kinaendesha injini ya ukali ya programu kwa mfano wa kufikirika wa Tanzania. Sogeza kitelezi kubadilisha idadi ya watu walioathirika; takwimu zinazohusiana (waliohama makazi, vifo na watu katika kila kiwango cha uhitaji) hubadilika pamoja nayo." },
             { "type": "widget", "id": "severityCalculator" },
-            { "type": "callout", "tone": "warn", "text": "Mifano hii ni ya kufikirika, si takwimu rasmi. Tathmini halisi hutumia data kutoka Ofisi ya Waziri Mkuu – Idara ya Menejimenti ya Maafa, kamati za wilaya, MUCHALI/IPC na washirika." }
+            { "type": "callout", "tone": "warn", "text": "Mifano hii ni ya kufikirika, si takwimu rasmi. Tathmini halisi hutumia data kutoka Ofisi ya Waziri Mkuu (Idara ya Menejimenti ya Maafa), kamati za wilaya, MUCHALI/IPC na washirika." }
           ]
         },
         {
           "id": "reliability",
           "title": "Uaminifu huambatana na alama",
           "blocks": [
-            { "type": "p", "text": "Alama ya ukali ni nzuri kadiri data zake zilivyo nzuri. INFORM huripoti kiwango cha <b>uaminifu</b> pembeni ya kila alama — kulingana na ubora wa data, jinsi taarifa zilivyo za karibuni na idadi ya viashiria vinavyokosekana — lakini haikichanganyi kamwe ndani ya alama yenyewe." },
+            { "type": "p", "text": "Alama ya ukali ni nzuri kadiri data zake zilivyo nzuri. INFORM huripoti kiwango cha <b>uaminifu</b> pembeni ya kila alama (kulingana na ubora wa data, jinsi taarifa zilivyo za karibuni na idadi ya viashiria vinavyokosekana), lakini haikichanganyi kamwe ndani ya alama yenyewe." },
             { "type": "callout", "tone": "tz", "text": "Katika mafuriko yanayobadilika haraka, takwimu za kwanza huwa pungufu na hurekebishwa kadiri timu za tathmini zinavyofika vijiji vilivyoathirika. Pima upya kadiri data zinavyoboreka, na daima onyesha kiwango cha uaminifu pembeni ya namba." }
           ]
         }
@@ -819,14 +819,14 @@
         {
           "q": "Uaminifu wa data unashughulikiwaje?",
           "options": ["Unazidishwa ndani ya alama", "Majanga yasiyo na data za kuaminika hayapimwi", "Unapuuzwa", "Unaripotiwa pembeni ya alama lakini hauchanganywi kamwe ndani yake"],
-          "explain": "Uaminifu — ubora wa data, jinsi zilivyo za karibuni na viashiria vinavyokosekana — huambatana na alama ili watumiaji waipime, bila kubadilisha alama yenyewe."
+          "explain": "Uaminifu (ubora wa data, jinsi zilivyo za karibuni na viashiria vinavyokosekana) huambatana na alama ili watumiaji waipime, bila kubadilisha alama yenyewe."
         }
       ]
     },
     "decisions": {
       "title": "Kutumia INFORM kufanya maamuzi Tanzania",
       "subtitle": "Kutoka alama hadi uamuzi bora",
-      "summary": "Soma vichocheo, hakiki data na linganisha hatua na kinachoendesha hatari kweli — kwa orodha ya ukaguzi ya vitendo.",
+      "summary": "Soma vichocheo, hakiki data na linganisha hatua na kinachoendesha hatari kweli, kwa orodha ya ukaguzi ya vitendo.",
       "objectives": [
         "Soma wasifu wa halmashauri kuanzia alama hadi vichocheo vyake.",
         "Hakiki ukamilifu na asili ya data kabla ya kutegemea namba.",
@@ -837,7 +837,7 @@
           "id": "starting-point",
           "title": "Alama ni mahali pa kuanzia",
           "blocks": [
-            { "type": "p", "text": "INFORM ni <b>kiashiria mchanganyiko</b>: kinafupisha makumi ya seti za data kuwa namba moja inayolinganishika. Hilo linakifanya kiwe na nguvu katika kupanga vipaumbele — halmashauri zipi kwanza, kipimo kipi kwanza — lakini hakichukui nafasi ya maarifa ya wenyeji, tathmini za uwandani wala tahadhari rasmi za mapema." },
+            { "type": "p", "text": "INFORM ni <b>kiashiria mchanganyiko</b>: kinafupisha makumi ya seti za data kuwa namba moja inayolinganishika. Hilo linakifanya kiwe na nguvu katika kupanga vipaumbele (halmashauri zipi kwanza, kipimo kipi kwanza), lakini hakichukui nafasi ya maarifa ya wenyeji, tathmini za uwandani wala tahadhari rasmi za mapema." },
             { "type": "callout", "tone": "key", "text": "Tumia INFORM kuuliza maswali bora: hatari iko juu <i>wapi</i>, iko juu <i>kwa nini</i>, na <i>nini</i> kingeishusha?" }
           ]
         },
@@ -869,7 +869,7 @@
                 "<b>Ukamilifu:</b> ni sehemu gani ya viashiria {{indicatorCount}} ina data kwa halmashauri hii? Ukamilifu mdogo unamaanisha imani ndogo.",
                 "<b>Asili:</b> je, halmashauri ni mpya au imegawanywa kutoka nyingine? Basi inatumia data za udhaifu na uwezo wa kukabiliana za wilaya mama.",
                 "<b>Kiwango cha undani:</b> vitisho na mfiduo vinakokotolewa kwa kila halmashauri; udhaifu na uwezo wa kukabiliana vinatoka kwenye tafiti za ngazi ya wilaya au mkoa.",
-                "<b>Thamani zilizoandikwa:</b> viashiria vichache vinabaki na thamani ya msingi iliyoandikwa ambayo imewekewa alama ya kupitiwa upya — ukurasa wa Mbinu unaziorodhesha waziwazi."
+                "<b>Thamani zilizoandikwa:</b> viashiria vichache vinabaki na thamani ya msingi iliyoandikwa ambayo imewekewa alama ya kupitiwa upya. Ukurasa wa Mbinu unaziorodhesha waziwazi."
               ]
             },
             { "type": "widget", "id": "decisionChecklist" }
@@ -879,7 +879,7 @@
           "id": "cycle",
           "title": "Panga, kabiliana, pitia",
           "blocks": [
-            { "type": "p", "text": "Tumia Hatari ya INFORM kwa maandalizi na mipango — bajeti, mipango ya dharura na uwekezaji katika kupunguza hatari. Janga linapoanza, hamia kwenye Kielelezo cha Ukali ili kupanga vipaumbele vya mwitikio. Baadaye, sasisha ushahidi kupitia Lango la data, ili uchambuzi unaofuata uanze na data bora zaidi." },
+            { "type": "p", "text": "Tumia Hatari ya INFORM kwa maandalizi na mipango: bajeti, mipango ya dharura na uwekezaji katika kupunguza hatari. Janga linapoanza, hamia kwenye Kielelezo cha Ukali ili kupanga vipaumbele vya mwitikio. Baadaye, sasisha ushahidi kupitia Lango la data, ili uchambuzi unaofuata uanze na data bora zaidi." },
             { "type": "callout", "tone": "tip", "text": "Maamuzi ni ya pamoja. Peleka wasifu wa halmashauri kwenye kamati ya wilaya ya usimamizi wa maafa, na uunganishe na kile ambacho viongozi na jamii za eneo hilo wanajua." }
           ]
         }
@@ -893,17 +893,17 @@
         {
           "q": "Halmashauri mbili zote zina Hatari ya INFORM 5.0. Ufanye nini baadaye?",
           "options": ["Uzishughulikie sawasawa kabisa", "Uchague yenye watu wengi zaidi", "Uangalie kipimo na viashiria vinavyoendesha kila alama", "Uweke wastani wa alama zao"],
-          "explain": "Alama moja inaweza kuficha vichocheo tofauti kabisa — na vichocheo tofauti vinahitaji hatua tofauti."
+          "explain": "Alama moja inaweza kuficha vichocheo tofauti kabisa, na vichocheo tofauti vinahitaji hatua tofauti."
         },
         {
           "q": "Hatari ya halmashauri inaendeshwa zaidi na Ukosefu wa Uwezo wa Kukabiliana. Hatua ipi inafaa zaidi?",
-          "options": ["Kuimarisha mipango ya dharura, upatikanaji wa huduma za afya na mawasiliano ya tahadhari za mapema", "Kujenga ukuta wa kuzuia mafuriko", "Kuchora upya mpaka wa halmashauri", "Hakuna — uwezo hauwezi kubadilika"],
+          "options": ["Kuimarisha mipango ya dharura, upatikanaji wa huduma za afya na mawasiliano ya tahadhari za mapema", "Kujenga ukuta wa kuzuia mafuriko", "Kuchora upya mpaka wa halmashauri", "Hakuna, kwa sababu uwezo hauwezi kubadilika"],
           "explain": "Uwezo unapokuwa kichocheo, wekeza katika uwezo: mipango, kamati zilizopata mafunzo, huduma za afya na tahadhari zinazowafikia watu."
         },
         {
           "q": "Halmashauri mpya inaonyesha thamani za udhaifu zilezile kabisa za wilaya mama. Kwa nini?",
           "options": ["Ni kosa la kuingiza data", "Halmashauri hizo mbili zinafanana kabisa", "Udhaifu daima ni wa kitaifa", "Data za tafiti zipo kwa wilaya mama pekee, hivyo halmashauri mpya inazirithi hadi data za halmashauri zipatikane"],
-          "explain": "Tafiti ziliundwa kwa mipaka ya wilaya za zamani. Halmashauri mpya na zilizogawanywa zinarithi kwa uwazi thamani za wilaya mama — programu inaziwekea alama — hadi data za ngazi ya halmashauri zikusanywe."
+          "explain": "Tafiti ziliundwa kwa mipaka ya wilaya za zamani. Halmashauri mpya na zilizogawanywa zinarithi kwa uwazi thamani za wilaya mama (programu inaziwekea alama) hadi data za ngazi ya halmashauri zikusanywe."
         }
       ]
     }

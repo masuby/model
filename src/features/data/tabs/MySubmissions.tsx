@@ -6,7 +6,7 @@ import { Button } from '@/components/ui/button';
 import { Segmented } from '@/components/ui/primitives';
 import { useModel } from '@/data-layer/DataProvider';
 import type { Submission, SubmissionStatus } from '@/data-layer/types';
-import { cn } from '@/lib/utils';
+import { cn, NO_VALUE } from '@/lib/utils';
 import { ChangeTable } from '../components/ChangeTable';
 import { EmptyState, ErrorState, LevelBadge, ListSkeleton, StatusBadge } from '../components/common';
 import { useAuthorityName } from '../components/SubmitPanel';
@@ -109,7 +109,7 @@ export function SubmissionItem({ submission: s }: { submission: Submission }) {
       {s.status !== 'pending' && (s.reviewerName || reviewNote) && (
         <div className={cn('mb-4 max-w-3xl border-l-2 pl-4 text-sm', s.status === 'approved' ? 'border-success' : 'border-danger')}>
           <p className="text-xs text-muted-foreground">
-            {t(s.status === 'approved' ? 'mine.approvedBy' : 'mine.rejectedBy', { name: s.reviewerName ?? '—' })}
+            {t(s.status === 'approved' ? 'mine.approvedBy' : 'mine.rejectedBy', { name: s.reviewerName ?? NO_VALUE })}
             {s.reviewedAt && ` · ${dateTime(s.reviewedAt, i18n.language)}`}
           </p>
           {reviewNote && <p className="mt-0.5 leading-relaxed whitespace-pre-wrap">{reviewNote}</p>}

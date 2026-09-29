@@ -29,7 +29,7 @@ describe('administrative structure', () => {
   it('28 new/split councils are flagged as inheriting their parent', () => {
     expect(model.councils.filter((c) => c.inheritedFrom).length).toBe(28);
   });
-  it('31 regions, every region has councils (incl. Dar es Salaam — name join fixed)', () => {
+  it('31 regions, every region has councils (incl. Dar es Salaam - name join fixed)', () => {
     expect(model.regions.length).toBe(31);
     for (const r of model.regions) expect(r.members).toBeGreaterThan(0);
     expect(model.regions.some((r) => placeKey(r.name) === 'daressalaam')).toBe(true);

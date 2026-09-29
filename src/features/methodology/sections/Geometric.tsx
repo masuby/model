@@ -25,7 +25,7 @@ function RangeField({ id, label, value, onChange, color }: { id: string; label: 
         onChange={(e) => onChange(Number(e.target.value))}
         className={cn(
           'mt-2 h-5 w-full cursor-pointer appearance-none bg-transparent',
-          // A hairline track and a solid thumb in the dimension's colour — the same in every browser and theme.
+          // A hairline track and a solid thumb in the dimension's colour - the same in every browser and theme.
           '[&::-webkit-slider-runnable-track]:h-[3px] [&::-webkit-slider-runnable-track]:rounded-full [&::-webkit-slider-runnable-track]:bg-border',
           '[&::-webkit-slider-thumb]:-mt-[6.5px] [&::-webkit-slider-thumb]:size-4 [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:border-2 [&::-webkit-slider-thumb]:border-background [&::-webkit-slider-thumb]:bg-[var(--thumb)] [&::-webkit-slider-thumb]:ring-1 [&::-webkit-slider-thumb]:ring-[var(--thumb)]',
           '[&::-moz-range-track]:h-[3px] [&::-moz-range-track]:rounded-full [&::-moz-range-track]:bg-border',

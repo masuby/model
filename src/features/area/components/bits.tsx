@@ -74,7 +74,7 @@ export function SubHeading({ title, lead, className, id }: { title: React.ReactN
   );
 }
 
-/** "↗ +0.8 vs Dodoma" — text first; red when higher (worse), green when lower. */
+/** "↗ +0.8 vs Dodoma" - text first; red when higher (worse), green when lower. */
 export function DeltaChip({ value, reference, label, className }: { value: number | null | undefined; reference: number | null | undefined; label: string; className?: string }) {
   const { t } = useTranslation('area');
   const d = delta(value, reference);
@@ -159,7 +159,7 @@ export function OutOf10({ className }: { className?: string }) {
 }
 
 /**
- * How local the data are — plain text with an explanatory tooltip (the label carries the meaning).
+ * How local the data are - plain text with an explanatory tooltip (the label carries the meaning).
  * `focusable={false}` where a key already explains the terms (the indicator table), so keyboard users
  * are not made to tab through one chip per row.
  */
@@ -174,7 +174,7 @@ export function ResolutionChip({ resolution, className, focusable = true }: { re
   );
 }
 
-/** "No data" tag with a dashed outline — missing is not zero. */
+/** "No data" tag with a dashed outline - missing is not zero. */
 export function NoDataPill({ className, focusable = true }: { className?: string; focusable?: boolean }) {
   const { t } = useTranslation('area');
   return (

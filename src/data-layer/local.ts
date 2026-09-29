@@ -1,5 +1,5 @@
 /**
- * Local (browser-only) repository — demo mode when no Supabase project is configured. Everything is
+ * Local (browser-only) repository - demo mode when no Supabase project is configured. Everything is
  * stored in this browser's localStorage and is clearly labelled as such in the UI.
  * Also migrates edits saved by the previous app (`inform_overrides_v1`) into the new format once.
  */
@@ -26,7 +26,7 @@ function write(key: string, value: unknown): void {
   try {
     localStorage.setItem(key, JSON.stringify(value));
   } catch {
-    /* quota or privacy mode — edits simply won't persist */
+    /* quota or privacy mode - edits simply won't persist */
   }
 }
 const uid = () => (crypto.randomUUID ? crypto.randomUUID() : `${Date.now()}-${Math.random().toString(36).slice(2)}`);

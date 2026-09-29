@@ -5,7 +5,7 @@ import { Button } from '@/components/ui/button';
 import { Input, Segmented, Select, SelectItem, Switch, Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/primitives';
 import { DIMENSION_KEYS, type DimensionKey } from '@/engine/risk/hierarchy';
 import { AUTHORITIES } from '@/engine/risk/sources';
-import { cn, downloadText } from '@/lib/utils';
+import { cn, downloadText, NO_VALUE } from '@/lib/utils';
 import { ALL_SPECS, hasDenominator, isDecrease, isUsed, keyedLevel, REGISTER_ROWS, registerCsv, RESOLUTIONS, specDimension, workbookCsv, type RegisterRow, type Resolution } from '../data';
 import { DocSection, ResolutionBadge } from '../ui';
 
@@ -271,10 +271,10 @@ function WorkbookRegister() {
                         <div className="font-medium">{s.name}</div>
                         <div className="text-[11px] text-muted-foreground">{s.component}</div>
                       </th>
-                      <td className="px-3 py-2.5 text-xs">{s.unit ?? '—'}</td>
-                      <td className="px-3 py-2.5">{steps.length ? <span className="text-xs">{steps.join(' · ')}</span> : <span className="text-xs text-muted-foreground">—</span>}</td>
+                      <td className="px-3 py-2.5 text-xs">{s.unit ?? NO_VALUE}</td>
+                      <td className="px-3 py-2.5">{steps.length ? <span className="text-xs">{steps.join(' · ')}</span> : <span className="text-xs text-muted-foreground">{NO_VALUE}</span>}</td>
                       <td className="num px-3 py-2.5 font-mono text-[11px] whitespace-nowrap">
-                        {typeof s.resolved_min === 'number' && typeof s.resolved_max === 'number' ? `${+s.resolved_min.toFixed(3)} – ${+s.resolved_max.toFixed(3)}` : '—'}
+                        {typeof s.resolved_min === 'number' && typeof s.resolved_max === 'number' ? t('methodology:sources.range', { min: +s.resolved_min.toFixed(3), max: +s.resolved_max.toFixed(3) }) : NO_VALUE}
                         {s.normalisation && <div className="font-sans text-[11px] text-muted-foreground">{s.normalisation === 'Custom' ? t('methodology:sources.fixed') : t('methodology:sources.dataRange')}</div>}
                       </td>
                       <td className="px-3 py-2.5 text-xs whitespace-nowrap">
@@ -284,10 +284,10 @@ function WorkbookRegister() {
                             {isDecrease(s) ? t('methodology:sources.decrease') : t('methodology:sources.increase')}
                           </span>
                         ) : (
-                          '—'
+                          NO_VALUE
                         )}
                       </td>
-                      <td className="px-3 py-2.5 text-xs whitespace-nowrap">{lvl ? t(`methodology:keyed.${lvl}`) : '—'}</td>
+                      <td className="px-3 py-2.5 text-xs whitespace-nowrap">{lvl ? t(`methodology:keyed.${lvl}`) : NO_VALUE}</td>
                       <td className="px-3 py-2.5 text-xs">{isUsed(s) ? <span className="font-medium text-success">{t('common:labels.yes')}</span> : t('common:labels.no')}</td>
                     </tr>
                   );

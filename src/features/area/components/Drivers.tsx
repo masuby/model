@@ -17,7 +17,7 @@ import { formatScore } from '@/lib/utils';
 import { formatDelta, weakestDimension, type AreaView, type IndicatorRow } from '../lib';
 import { CompareTrack, OutOf10, ResolutionChip, SubHeading, type TrackRef } from './bits';
 
-/** Dimension name with its colour dot — the dot encodes the dimension, the text names it. */
+/** Dimension name with its colour dot - the dot encodes the dimension, the text names it. */
 function DimTag({ dim }: { dim: keyof typeof DIMENSION_COLORS }) {
   const { t } = useTranslation('common');
   if (dim === 'risk') return null;

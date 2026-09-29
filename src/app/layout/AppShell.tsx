@@ -65,7 +65,7 @@ function DocumentTitle() {
   React.useEffect(() => {
     if (pathname.startsWith('/area/')) return;
     const key = pathname === '/' ? null : NAV.find((n) => pathname.startsWith(n.to))?.key;
-    document.title = key ? `${t(`nav.${key}`)} · ${t('appName')}` : `${t('appName')} — ${t('tagline')}`;
+    document.title = key ? `${t(`nav.${key}`)} · ${t('appName')}` : `${t('appName')} · ${t('tagline')}`;
   }, [pathname, t, i18n.language]);
   return null;
 }

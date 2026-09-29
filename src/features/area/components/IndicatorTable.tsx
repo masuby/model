@@ -1,5 +1,5 @@
 /**
- * Every indicator with its source — a statistical table set directly on the page: hairline rows,
+ * Every indicator with its source - a statistical table set directly on the page: hairline rows,
  * sentence-case column headers, a sticky header, numbers right-aligned, and notes set off by a rule.
  *
  * Keyboard: one tab stop per row (the indicator name, whose tooltip carries the description and the
@@ -39,10 +39,10 @@ function ValueCell({ value }: { value: number | null }) {
   );
 }
 
-/** "Full authority name — method", shown on hover over the source and in the indicator's tooltip. */
+/** "Full authority name: method", shown on hover over the source and in the indicator's tooltip. */
 function sourceTip(row: IndicatorRow): string {
   const full = (AUTHORITIES as Record<string, { full: string }>)[row.source.by]?.full;
-  return full ? `${full} — ${row.source.method}` : row.source.method;
+  return full ? `${full}: ${row.source.method}` : row.source.method;
 }
 
 function SourceCell({ row, unitLevel }: { row: IndicatorRow; unitLevel: string }) {
@@ -253,7 +253,7 @@ export function IndicatorTable({ view }: { view: AreaView }) {
         })}
       </table>
 
-      {/* How this unit's values were built is noted once, under the title — not repeated here. */}
+      {/* How this unit's values were built is noted once, under the title - not repeated here. */}
       <Note className="mt-8 max-w-3xl" title={t('noData.title', { count: missing })}>
         <p>{t('noData.body')}</p>
       </Note>

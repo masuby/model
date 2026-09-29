@@ -10,7 +10,7 @@ import { completedCount, isCompleted, isCourseComplete } from '../progress';
 
 /**
  * Thin reading-progress bar fixed under the site header. A plain bar driven by one passive scroll
- * listener (coalesced to one write per frame) — no animation library.
+ * listener (coalesced to one write per frame) - no animation library.
  */
 export function ReadingProgress() {
   const ref = React.useRef<HTMLDivElement>(null);

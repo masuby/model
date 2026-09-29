@@ -1,5 +1,5 @@
 /**
- * qa-screenshots.mjs — visual QA: full-page screenshots of every route in day/night and English/Kiswahili
+ * qa-screenshots.mjs - visual QA: full-page screenshots of every route in day/night and English/Kiswahili
  * at phone, tablet and desktop widths, plus any console errors. Requires a running dev or preview server.
  *
  *   npx playwright install chromium          (once)

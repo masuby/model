@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-compute-exposure.py — the EXPOSURE term for INFORM Hazard × Exposure, from REAL
+compute-exposure.py - the EXPOSURE term for INFORM Hazard × Exposure, from REAL
 NBS 2022 PHC council populations (via citypopulation.de). For each of the 150
 district polygons: population (sum of its 2022 councils) ÷ polygon area = density,
 then a 0–10 percentile-ranked exposure index. Region-population fallback (area
@@ -18,7 +18,7 @@ ROOT = Path(__file__).resolve().parent.parent
 GEO = ROOT / "src/data/tanzania-districts.json"
 OUT = ROOT / "data-source/exposure_nbs2022.csv"
 
-# Real 2022 PHC populations, (region, council, population) — NBS, via citypopulation.de
+# Real 2022 PHC populations, (region, council, population) - NBS, via citypopulation.de
 POP = [
  ("Arusha","Arusha City",617631),("Arusha","Arusha Rural",449518),("Arusha","Karatu",280454),
  ("Arusha","Longido",175915),("Arusha","Meru",331603),("Arusha","Monduli",227585),("Arusha","Ngorongoro",273549),

@@ -1,5 +1,5 @@
 """
-fix-council-population.py — replace area-apportioned population ESTIMATES in council_climate.csv with
+fix-council-population.py - replace area-apportioned population ESTIMATES in council_climate.csv with
 the authentic NBS 2022 census figures, then recompute density and the exposure index exactly as
 compute-council-climate.py does (log10 density, min–max to 0–10 across all 195 councils).
 

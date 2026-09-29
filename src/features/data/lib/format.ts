@@ -1,5 +1,5 @@
 /** Small, locale-aware display helpers for the Data Portal. */
-import { formatDate } from '@/lib/utils';
+import { formatDate, NO_VALUE } from '@/lib/utils';
 
 const locale = (lang: string) => (lang === 'sw' ? 'sw-TZ' : 'en-GB');
 
@@ -14,9 +14,9 @@ const UNITS: Array<[Intl.RelativeTimeFormatUnit, number]> = [
 
 /** "3 hours ago" / "saa 3 zilizopita"; "just now" under a minute. */
 export function relativeTime(iso: string | null | undefined, lang = 'en', now = Date.now()): string {
-  if (!iso) return '—';
+  if (!iso) return NO_VALUE;
   const t = new Date(iso).getTime();
-  if (Number.isNaN(t)) return '—';
+  if (Number.isNaN(t)) return NO_VALUE;
   const secs = Math.round((t - now) / 1000);
   const rtf = new Intl.RelativeTimeFormat(locale(lang), { numeric: 'auto' });
   for (const [unit, size] of UNITS) if (Math.abs(secs) >= size) return rtf.format(Math.round(secs / size), unit);

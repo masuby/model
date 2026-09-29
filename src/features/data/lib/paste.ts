@@ -1,7 +1,7 @@
 /**
  * Bulk paste: parse "name <TAB , ; |> value" lines (or values only, in template order) copied from a
  * spreadsheet, match the names against the model's councils/regions, and resolve every value onto the
- * unit that must receive it — councils for Hazard & exposure, their distinct INFORM source units for
+ * unit that must receive it - councils for Hazard & exposure, their distinct INFORM source units for
  * Vulnerability & Coping (deduplicated; disagreeing values for one source unit are a conflict).
  */
 import type { EditRef, RiskModel, Unit } from '@/engine/risk/types';
@@ -35,7 +35,7 @@ const DIGITS_RE = /^\d+$/;
 const NO_DATA = new Set(['na', 'n/a', 'n.a.', 'nodata', 'no-data', 'null', 'none', '-', '—', '–', 'hakunadata', 'nd']);
 export const isNoDataToken = (s: string) => NO_DATA.has(s.trim().toLowerCase().replace(/\s+/g, ''));
 
-/** Split cells; trailing empty cells (spreadsheet padding) are dropped — a lone name means "no value". */
+/** Split cells; trailing empty cells (spreadsheet padding) are dropped - a lone name means "no value". */
 function splitCells(line: string, sep: RegExp): { names: string[]; token: string } {
   const parts = line.split(sep).map((s) => s.trim());
   let end = parts.length;
@@ -54,7 +54,7 @@ export function splitLine(line: string): { names: string[]; token: string } {
   if (s.includes(',')) {
     const raw = s.split(',');
     const n = raw.length;
-    // "Kondoa, 6,5" — a decimal comma after a separator comma.
+    // "Kondoa, 6,5" - a decimal comma after a separator comma.
     if (n >= 3 && DIGITS_RE.test(raw[n - 2].trim()) && DIGITS_RE.test(raw[n - 1]) && !/^\s/.test(raw[n - 1])) {
       return { names: raw.slice(0, n - 2).map((x) => x.trim()).filter(Boolean), token: `${raw[n - 2].trim()},${raw[n - 1]}` };
     }

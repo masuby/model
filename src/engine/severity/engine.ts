@@ -170,7 +170,7 @@ export interface Reliability {
 
 /**
  * Tanzania implementation of the INFORM reliability concept: data reliability, recency, information gaps.
- * An element with no information scores as least reliable (1) — absence of evidence is not medium quality.
+ * An element with no information scores as least reliable (1) - absence of evidence is not medium quality.
  */
 export function reliability(input: SeverityInput, completeness: number): Reliability {
   const rel = input.dataReliability === 'high' ? 5 : input.dataReliability === 'medium' ? 3 : 1;

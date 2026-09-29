@@ -1,6 +1,6 @@
 /**
  * Overview: a lightweight SVG locator map (no Leaflet) beside the key findings, written as a short
- * report paragraph — a serif lede and a ruled list — rather than icon tiles in a card.
+ * report paragraph - a serif lede and a ruled list - rather than icon tiles in a card.
  */
 import * as React from 'react';
 import { Trans, useTranslation } from 'react-i18next';

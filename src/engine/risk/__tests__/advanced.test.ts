@@ -1,5 +1,5 @@
 /**
- * ADVANCED — the exploded multi-source model runs on the SAME engine. With no advanced data it is
+ * ADVANCED - the exploded multi-source model runs on the SAME engine. With no advanced data it is
  * byte-identical to genuine INFORM; with a basket present it refines the component by a weighted average
  * over the members present (blank-skip, no bias).
  */

@@ -15,7 +15,7 @@ import { Button } from '@/components/ui/button';
 import { CLASS_COLORS, CLASS_KEYS, classify, THRESHOLDS } from '@/engine/risk/classes';
 import { findIndicator } from '@/engine/risk/hierarchy';
 import { authorityLabel } from '@/engine/risk/sources';
-import { cn, formatCompact, formatDate, formatNumber, formatScore } from '@/lib/utils';
+import { cn, formatCompact, formatDate, formatNumber, formatScore, NO_VALUE } from '@/lib/utils';
 import { compareHref, editList, explorerHref, type AreaView } from '../lib';
 import { OutOf10 } from './bits';
 import { useDeferred } from './Deferred';
@@ -210,7 +210,7 @@ export function AreaHero({ view }: { view: AreaView }) {
       ? { label: t('figures.rank', { peers }), value: of(rank.rank, rank.total), sub: t('figures.rankSub', { pct: rank.percentile, peers }) }
       : above
         ? { label: t('figures.councilsAbove'), value: of(above.councils, model.councils.length), sub: t('figures.regionsAbove', { n: above.regions, total: model.regions.length }) }
-        : { label: t('figures.rank', { peers }), value: '—' },
+        : { label: t('figures.rank', { peers }), value: NO_VALUE },
     {
       label: t('common:labels.population'),
       // Ten-million-plus totals (the nation) are shown compactly so the row never overflows.
@@ -225,7 +225,7 @@ export function AreaHero({ view }: { view: AreaView }) {
           <span className="text-[0.55em] font-medium text-muted-foreground"> {t('common:units.km2')}</span>
         </>
       ) : (
-        '—'
+        NO_VALUE
       ),
       sub: density != null ? t('figures.density', { value: formatNumber(density, lang, { maximumFractionDigits: 0 }) }) : undefined,
     },

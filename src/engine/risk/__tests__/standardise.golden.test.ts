@@ -1,5 +1,5 @@
 /**
- * GOLDEN — standardise() reproduces the Tanzania workbook's 0–10 byte-for-byte.
+ * GOLDEN - standardise() reproduces the Tanzania workbook's 0–10 byte-for-byte.
  * Fixture rows are [indicator_id, raw_value, expected_0-10] for every USED, denominator-free indicator ×
  * every district, read from the workbook (`Indicator Data` raw → `Indicator - processed` 0–10).
  */

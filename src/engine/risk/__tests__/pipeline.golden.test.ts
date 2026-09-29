@@ -1,5 +1,5 @@
 /**
- * GOLDEN — the full pipeline raw → risk reproduces the workbook's stored Hazard / Vulnerability /
+ * GOLDEN - the full pipeline raw → risk reproduces the workbook's stored Hazard / Vulnerability /
  * Coping / Risk for every one of the 170 source units (standardise → component AVERAGEIFS → category
  * AVERAGE → dimension scaled GEOMEAN → risk cube-root).
  */

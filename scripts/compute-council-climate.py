@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-compute-council-climate.py — REAL council-level (195 NBS-2022 LGAs) climate hazard +
+compute-council-climate.py - REAL council-level (195 NBS-2022 LGAs) climate hazard +
 exposure, computed on the actual council polygons so every council (especially the 28
 split + the shared-source groups) gets its OWN values instead of inheriting a parent.
 
@@ -52,7 +52,7 @@ N = len(geoms); print(f"councils: {N}", flush=True)
 # ---- real NBS-2022 council populations (imported from compute-exposure.py) ---
 import importlib.util
 spec = importlib.util.spec_from_file_location("_exp", ROOT / "scripts/compute-exposure.py")
-# compute-exposure runs on import (reads district geo) — avoid that; instead read its POP list textually
+# compute-exposure runs on import (reads district geo) - avoid that; instead read its POP list textually
 poptxt = (ROOT / "scripts/compute-exposure.py").read_text()
 m = re.search(r"POP\s*=\s*\[(.*?)\n\]", poptxt, re.S)
 POP = eval("[" + m.group(1) + "]")  # list of (region, council, population)

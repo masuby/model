@@ -25,7 +25,7 @@
     "source": "INFORM units",
     "reference": "Reference",
     "note": {
-      "council": "{{count}} councils (NBS 2022) — the headline level. Hazard & Exposure is computed for each council; vulnerability and coping come from the council’s INFORM source unit.",
+      "council": "{{count}} councils (NBS 2022), the headline level. Hazard & Exposure is computed for each council; vulnerability and coping come from the council’s INFORM source unit.",
       "region": "{{count}} regions, aggregated from their councils the INFORM way (indicator means, then the scaled geometric mean).",
       "source": "The {{count}} units of the INFORM SADC 2024 workbook, shown for reference. Councils are the headline level."
     }
@@ -47,11 +47,11 @@
     "backToRisk": "Back to overall risk"
   },
   "resolution": {
-    "council": "Council — computed for each council",
-    "district": "District — shared by the councils of a district",
-    "region": "Region — survey estimate, the same for every council in the region",
-    "national": "National — one value for the whole country",
-    "overlay": "Documented overlay — expert-mapped exposure"
+    "council": "Council: computed for each council",
+    "district": "District: shared by the councils of a district",
+    "region": "Region: survey estimate, the same for every council in the region",
+    "national": "National: one value for the whole country",
+    "overlay": "Documented overlay: expert-mapped exposure"
   },
   "legend": {
     "label": "Legend & filter",

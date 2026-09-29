@@ -3,23 +3,23 @@ import { SERIES } from '@/components/charts/theme';
 import { isNum } from '@/engine/risk/math';
 import { indicatorValue } from '@/engine/risk/model';
 import type { Unit } from '@/engine/risk/types';
-import { cn, formatNumber, formatScore } from '@/lib/utils';
+import { cn, formatNumber, formatScore, NO_VALUE } from '@/lib/utils';
 import { CouncilPicker, Finding, useCouncil, WidgetFrame } from '../components/WidgetKit';
 
-const LOG_MAX = 5; // 10^5 people per km² — above any Tanzanian council
+const LOG_MAX = 5; // 10^5 people per km² - above any Tanzanian council
 const TICKS = [1, 10, 100, 1_000, 10_000, 100_000];
 
 const areaOf = (u: Unit): number | null =>
   u.exposure?.areaKm2 ?? (isNum(u.exposure?.population) && isNum(u.exposure?.density) && u.exposure.density > 0 ? u.exposure.population / u.exposure.density : null);
 const logPos = (d: number | null | undefined) => (isNum(d) && d > 0 ? Math.max(0, Math.min(1, Math.log10(d) / LOG_MAX)) : null);
 
-/** Series colours for the two councils (marker fills only — labels stay in the text colour). */
+/** Series colours for the two councils (marker fills only - labels stay in the text colour). */
 const SIDE = [
   { key: 'a', color: SERIES[0] },
   { key: 'b', color: SERIES[1] },
 ] as const;
 
-/** Lesson 2 — compare the population density (exposure) of two councils, on a log axis. */
+/** Lesson 2 - compare the population density (exposure) of two councils, on a log axis. */
 export default function ExposureCompare() {
   const { t, i18n } = useTranslation(['learn', 'common', 'indicators']);
   const [a, setA] = useCouncil('Kinondoni Municipal');
@@ -118,7 +118,7 @@ export default function ExposureCompare() {
                 denser: denser.name,
                 other: other.name,
                 ratio: formatNumber(ratio, lang, { maximumFractionDigits: ratio < 10 ? 1 : 0 }),
-                gap: idxGap == null ? '—' : formatScore(idxGap),
+                gap: idxGap == null ? NO_VALUE : formatScore(idxGap),
               })}
         </Finding>
       )}

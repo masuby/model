@@ -4,7 +4,7 @@
  * Below-the-fold sections (charts, the full indicator table, place lists…) are the bulk of the page's
  * main-thread work. `Deferred` renders a fixed-height placeholder until the section approaches the
  * viewport, then mounts the real content once. Everything is rendered at once when:
- *   • the page is about to print (`beforeprint`, or the print media query turning on) — paper must be
+ *   • the page is about to print (`beforeprint`, or the print media query turning on) - paper must be
  *     complete, so the update is flushed synchronously before the browser lays out the print copy;
  *   • the reader jumps to a section from the in-page navigation (so the scroll target does not move
  *     while placeholders above it are swapped for real content).
@@ -71,7 +71,7 @@ export function DeferredProvider({ children, prepare }: { children: React.ReactN
 
 /**
  * Mounts `children` only once the placeholder comes within `rootMargin` of the viewport. The caller
- * passes the content's measured height for the current layout (phone / tablet / desktop — see
+ * passes the content's measured height for the current layout (phone / tablet / desktop - see
  * placeholderHeights in AreaPage), so the scrollbar, the section nav and content above the viewport
  * stay put when the section mounts.
  */

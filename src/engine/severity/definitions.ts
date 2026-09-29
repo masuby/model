@@ -1,5 +1,5 @@
 /**
- * INFORM Severity Index — model structure (JRC / ACAPS, "INFORM Severity Index: Concept and
+ * INFORM Severity Index - model structure (JRC / ACAPS, "INFORM Severity Index: Concept and
  * methodology", Poljanšek et al., 2020; ACAPS data-collection manual 2024), adapted for Tanzania.
  *
  *   Severity = 70% × G(Impact 1/3, Conditions 2/3) + 30% × Complexity                  (Figure 12)
@@ -155,7 +155,7 @@ export const SEVERITY_COLORS: Record<SeverityCategoryKey, string> = {
   veryHigh: '#b91c1c',
 };
 
-/** Population groups affected (IASC Humanitarian Profile) — the diversity score is their count, max 5. */
+/** Population groups affected (IASC Humanitarian Profile) - the diversity score is their count, max 5. */
 export const AFFECTED_GROUPS = ['idps', 'refugees', 'returnees', 'hostCommunities', 'nonHost'] as const;
 export type AffectedGroup = (typeof AFFECTED_GROUPS)[number];
 

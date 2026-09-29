@@ -128,7 +128,7 @@ export const DIMENSION_BY_KEY: Record<DimensionKey, DimensionDef> = Object.fromE
   DIMENSIONS.map((d) => [d.key, d]),
 ) as Record<DimensionKey, DimensionDef>;
 
-/** `${dimension}:${indicator}` — the stable key for an indicator leaf (edits, sources, i18n). */
+/** `${dimension}:${indicator}` - the stable key for an indicator leaf (edits, sources, i18n). */
 export type IndicatorRef = `${DimensionKey}:${string}`;
 export const indicatorRef = (dim: DimensionKey, key: string): IndicatorRef => `${dim}:${key}`;
 

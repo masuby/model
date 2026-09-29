@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
 """
-export-councils.py — reconcile our 170 INFORM units to the REAL 195 councils (LGAs) from the
+export-councils.py - reconcile our 170 INFORM units to the REAL 195 councils (LGAs) from the
 NBS 2022 PHC geodatabase (PO-RALG/NBS authoritative). Exports the 195 council boundaries +
 a reconciliation map. 167 councils match our data by (Swahili-stripped) name; the 28 new/split
-councils are spatially assigned to the parent district that DOES have data (real, flagged — never
+councils are spatially assigned to the parent district that DOES have data (real, flagged - never
 fabricated). Council-specific data can replace the inherited values later.
 
 out: src/data/tanzania-councils.json   (195 simplified polygons; props: code,name,dist,reg,src,isNew)

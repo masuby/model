@@ -106,7 +106,7 @@ async function renderAt(search = '') {
 }
 const params = () => new URLSearchParams(screen.getByTestId('search').textContent ?? '');
 
-describe('ExplorePage — desktop', () => {
+describe('ExplorePage - desktop', () => {
   it('mounts the panel, lens tiles, legend, statistics and the map', async () => {
     await renderAt();
     expect(screen.getByRole('heading', { level: 1, name: 'Risk explorer' })).toBeInTheDocument();
@@ -117,7 +117,7 @@ describe('ExplorePage — desktop', () => {
     expect(screen.getByText('Legend & filter')).toBeInTheDocument();
     const map = screen.getByTestId('map');
     expect(map.dataset.level).toBe('council');
-    // RiskMap translates labelKey within its namespace — the explorer hands it a namespace-relative key.
+    // RiskMap translates labelKey within its namespace - the explorer hands it a namespace-relative key.
     expect(map.dataset.label).toBe('informRisk');
   });
 
@@ -219,7 +219,7 @@ describe('ExplorePage — desktop', () => {
   });
 });
 
-describe('ExplorePage — mobile', () => {
+describe('ExplorePage - mobile', () => {
   it('uses a bottom sheet with lens chips, and the area in the sheet peek', async () => {
     desktop = false;
     await renderAt(`?id=${council.id}`);
@@ -232,7 +232,7 @@ describe('ExplorePage — mobile', () => {
   });
 });
 
-describe('ExplorePage — Kiswahili', () => {
+describe('ExplorePage - Kiswahili', () => {
   it('renders in Kiswahili with no missing keys', async () => {
     await act(async () => {
       await i18n.changeLanguage('sw');

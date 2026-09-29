@@ -1,5 +1,5 @@
 /**
- * INFORM standardisation — raw value in its natural unit → 0–10 score, exactly as the Tanzania
+ * INFORM standardisation - raw value in its natural unit → 0–10 score, exactly as the Tanzania
  * workbook's hidden sheets `Indicator processing -12/-22` and `Indicator - processed`:
  *
  *   (2) denominator   x = raw / denominator                       ("None" → unchanged)
@@ -100,7 +100,7 @@ const dimKind = (label: string | null): 'H' | 'V' | 'C' | null => {
  * Full INFORM hierarchy from RAW values:
  * raw → standardise → component (weighted) AVERAGE of indicators present → category AVERAGE →
  * dimension scaled GEOMEAN → risk cube-root. The indicator set IS the spec: add a row (Use = Yes) to
- * add an indicator, set Use = No to remove it — the engine never hard-codes the list.
+ * add an indicator, set Use = No to remove it - the engine never hard-codes the list.
  */
 export function computeFromRaw(
   rawById: Record<string, Raw>,
@@ -147,7 +147,7 @@ export function computeFromRaw(
 }
 
 /**
- * ADVANCED mode — the same engine over the merged spec. Inside an exploded component the INFORM
+ * ADVANCED mode - the same engine over the merged spec. Inside an exploded component the INFORM
  * indicator and the extra sub-indicators aggregate together (weighted); blanks drop out, so with no
  * advanced data the result is byte-identical to standard INFORM.
  */

@@ -21,7 +21,7 @@ const SIBLINGS_SHOWN = 3;
 
 /**
  * Before → after for one score. The old value is quiet text (class dot + score, full contrast muted
- * text — never a faded badge); the new value is the full-colour class badge. Unchanged: just the badge.
+ * text - never a faded badge); the new value is the full-colour class badge. Unchanged: just the badge.
  */
 export function BeforeAfter({ before, after, scale = 'risk' }: { before: number | null; after: number | null; scale?: Scale }) {
   const changed = scoreDelta(before, after) !== 0 || (before == null) !== (after == null);

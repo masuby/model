@@ -1,9 +1,9 @@
 /**
  * The profile's three charts, all Recharts inside ChartCard (PNG + CSV export) and themed with
  * useChartTheme so they read in day and night mode:
- *   a) CategoryChart     — the six INFORM categories vs region and national (radar or bars)
- *   b) IndicatorChart    — every indicator of one dimension, coloured by the continuous 0–10 ramp
- *   c) DistributionChart — beeswarm of all peers' INFORM Risk with this unit highlighted
+ *   a) CategoryChart     - the six INFORM categories vs region and national (radar or bars)
+ *   b) IndicatorChart    - every indicator of one dimension, coloured by the continuous 0–10 ramp
+ *   c) DistributionChart - beeswarm of all peers' INFORM Risk with this unit highlighted
  * View controls sit in a row under each caption (not beside it), so captions keep the full width on
  * phones; the title row holds only the export menu.
  */
@@ -433,7 +433,7 @@ export function DistributionChart({ view }: { view: AreaView }) {
       return <circle cx={p.cx} cy={p.cy} r={r} fill={fill} stroke={surface} strokeWidth={1.25} style={{ cursor: 'pointer' }} />;
     };
   // The own-score label sits above the whole swarm (in the top margin), haloed, with a leader line
-  // down to the dot — never on top of neighbouring dots.
+  // down to the dot - never on top of neighbouring dots.
   const LABEL_Y = 14;
   const selfShape = (p: { cx?: number; cy?: number }) => {
     if (p.cx == null || p.cy == null) return <g />;

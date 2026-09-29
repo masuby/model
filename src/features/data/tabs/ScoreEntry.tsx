@@ -17,7 +17,7 @@ import { useModel } from '@/data-layer/DataProvider';
 import { DIMENSIONS, type DimensionDef } from '@/engine/risk/hierarchy';
 import { authorityLabel, sourceFor, sourceLabel } from '@/engine/risk/sources';
 import type { EditRef, Unit } from '@/engine/risk/types';
-import { cn, formatDate, formatScore } from '@/lib/utils';
+import { cn, formatDate, formatScore, NO_VALUE } from '@/lib/utils';
 import { Callout, Delta, EmptyState, ROW_TINT } from '../components/common';
 import { CouncilContextCard, DiscardDialog } from '../components/CouncilPicker';
 import { BeforeAfter, ImpactPreview } from '../components/ImpactPreview';
@@ -331,7 +331,7 @@ const IndicatorRow = React.memo(function IndicatorRow({ ev, council, setRow, pen
   const stamp = council.edits[ref];
   const src = sourceFor(field.dim, field.key);
   const provenance = stamp
-    ? t('scores.updatedBy', { authority: authorityLabel(stamp.authority) || stamp.author || '—', date: formatDate(stamp.at, i18n.language) })
+    ? t('scores.updatedBy', { authority: authorityLabel(stamp.authority) || stamp.author || NO_VALUE, date: formatDate(stamp.at, i18n.language) })
     : sourceLabel(src);
   const noData = !!draft?.noData;
   const dirty = isRowDirty(draft);

@@ -1,16 +1,16 @@
 /**
  * The Tanzania INFORM Risk model: builds every administrative level from the shipped dataset and
  * applies approved edits as a PURE function (`buildModel(overrides)`), so the map, tables, charts and
- * area profiles always agree — including after data entry.
+ * area profiles always agree - including after data entry.
  *
  * Resolution design (documented in docs/METHODOLOGY.md):
- *   • 170 INFORM source units — the country-workbook backbone (reference level).
- *   • 195 NBS-2022 councils — the headline level. Each council has its OWN Hazard & Exposure (computed
+ *   • 170 INFORM source units - the country-workbook backbone (reference level).
+ *   • 195 NBS-2022 councils - the headline level. Each council has its OWN Hazard & Exposure (computed
  *     on its own polygon); Vulnerability & Coping come from its source unit (survey data has no council
  *     breakdown). Council risk is computed live = ∛(H × V × LCC).
- *   • 31 regions — aggregated from their councils the INFORM way: indicator means → category means →
+ *   • 31 regions - aggregated from their councils the INFORM way: indicator means → category means →
  *     scaled geometric mean → cube root (not a mean of risk scores).
- *   • National — the OFFICIAL INFORM Tanzania country figure (4.1), never a re-aggregation.
+ *   • National - the OFFICIAL INFORM Tanzania country figure (4.1), never a re-aggregation.
  */
 import riskDataset from '@/data/tanzania-inform-risk.json';
 import councilIndex from '@/data/tanzania-councils-index.json';
@@ -60,7 +60,7 @@ const DATASET = riskDataset as unknown as {
   metadata: { asOf?: string; lastUpdated?: string };
 };
 const COUNCIL_HAZARD = councilHazardData as unknown as Record<string, { hazardExposure: RawUnit['hazardExposure']; risk: number }>;
-/** Council attributes without geometry (scripts/build-council-index.mjs) — keeps boundaries out of the app shell. */
+/** Council attributes without geometry (scripts/build-council-index.mjs) - keeps boundaries out of the app shell. */
 const COUNCIL_FEATURES = (councilIndex as unknown as CouncilFeatureProps[]).map((properties) => ({ properties }));
 
 /** Normalise a place name for joins ("Dar-es-salaam" ≡ "Dar es Salaam"). */
@@ -214,7 +214,7 @@ export function aggregateUnits(members: Unit[], id: string, name: string, level:
     m.exposure?.areaKm2 ?? (isNum(m.exposure?.population) && isNum(m.exposure?.density) && m.exposure.density > 0 ? m.exposure.population / m.exposure.density : 0);
   const area = members.reduce((s, m) => s + areaOf(m), 0);
   // Facilities are recorded per INFORM source unit and copied onto each council that shares it, so sum
-  // over DISTINCT source units — otherwise districts split into several councils are counted twice.
+  // over DISTINCT source units - otherwise districts split into several councils are counted twice.
   const facilityUnits = [...new Map(members.map((m) => [m.sourceId ?? m.id, m])).values()];
   const sumFac = (k: keyof NonNullable<Unit['facilities']>) => facilityUnits.reduce((s, m) => s + (m.facilities?.[k] ?? 0), 0);
   const edits: Unit['edits'] = {};
@@ -278,11 +278,11 @@ export const DATA_AS_OF = DATASET.metadata.asOf ?? DATASET.metadata.lastUpdated?
 
 /** Build every level, applying the given approved edits. Pure: the shipped dataset is never mutated. */
 export function buildModel(overrides: Overrides = {}): RiskModel {
-  // 1. Source units (170) — Vulnerability & Coping backbone.
+  // 1. Source units (170) - Vulnerability & Coping backbone.
   const sources = BASE_SOURCES.map((s) => applyEdits({ ...s, dims: { ...s.dims }, edits: {} }, overrides[s.id]));
   const sourceByName = new Map(sources.map((s) => [placeKey(s.name), s]));
 
-  // 2. Councils (195) — own Hazard & Exposure; V & C from the (edited) source unit; risk live.
+  // 2. Councils (195) - own Hazard & Exposure; V & C from the (edited) source unit; risk live.
   const councils: Unit[] = [];
   for (const f of COUNCIL_FEATURES) {
     const p = f.properties;
@@ -317,7 +317,7 @@ export function buildModel(overrides: Overrides = {}): RiskModel {
     councils.push(council);
   }
 
-  // 3. Regions (31) — INFORM aggregation over their councils.
+  // 3. Regions (31) - INFORM aggregation over their councils.
   const councilsByRegion = new Map<string, Unit[]>();
   for (const c of councils) {
     const k = placeKey(c.region);
@@ -326,7 +326,7 @@ export function buildModel(overrides: Overrides = {}): RiskModel {
   }
   const regions = [...councilsByRegion.entries()].map(([k, list]) => aggregateUnits(list, `R-${k}`, list[0].region));
 
-  // 4. National — official figure.
+  // 4. National - official figure.
   const national: Unit = { ...NATIONAL, dims: { ...NATIONAL.dims }, edits: {} };
 
   const byId = new Map<string, Unit>();
@@ -349,7 +349,7 @@ export function unitsAt(model: RiskModel, level: Level): Unit[] {
   }
 }
 
-/** Share (0–100) of a unit's leaf indicators that carry data — INFORM's reliability signal. */
+/** Share (0–100) of a unit's leaf indicators that carry data - INFORM's reliability signal. */
 export function dataCoverage(unit: Unit): number {
   let have = 0;
   let total = 0;

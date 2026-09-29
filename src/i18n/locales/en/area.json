@@ -1,6 +1,6 @@
 {
   "meta": {
-    "title": "{{name}} — Area risk profile · INFORM Tanzania"
+    "title": "{{name}}: area risk profile · INFORM Tanzania"
   },
   "eyebrow": "Area risk profile",
   "breadcrumb": {
@@ -24,7 +24,7 @@
     "print": "Print or save as PDF",
     "copy": "Copy link",
     "copied": "Link copied to the clipboard",
-    "copyFailed": "Could not copy the link — copy it from the address bar instead",
+    "copyFailed": "Could not copy the link. Copy it from the address bar instead.",
     "explore": "Open in explorer",
     "compare": "Compare"
   },
@@ -43,9 +43,9 @@
     "density": "{{value}} people per km²"
   },
   "notices": {
-    "official": "This is the official INFORM Tanzania country figure — it is not re-aggregated from councils.",
-    "aggregated_one": "Aggregated from {{count}} council the INFORM way: indicator averages first, then categories and dimensions — not an average of risk scores.",
-    "aggregated_other": "Aggregated from {{count}} councils the INFORM way: indicator averages first, then categories and dimensions — not an average of risk scores.",
+    "official": "This is the official INFORM Tanzania country figure. It is not re-aggregated from councils.",
+    "aggregated_one": "Aggregated from {{count}} council the INFORM way (indicator averages first, then categories and dimensions), not as an average of risk scores.",
+    "aggregated_other": "Aggregated from {{count}} councils the INFORM way (indicator averages first, then categories and dimensions), not as an average of risk scores.",
     "sourceUnit_one": "A reference unit of the {{total}}-unit INFORM workbook. {{count}} council uses its vulnerability and coping data.",
     "sourceUnit_other": "A reference unit of the {{total}}-unit INFORM workbook. {{count}} councils use its vulnerability and coping data.",
     "inherited": "A newly created council: it inherits its data from {{parent}} until its own figures are published.",
@@ -77,7 +77,7 @@
     "dimensions": {
       "eyebrow": "The three dimensions",
       "title": "How the score is built",
-      "lead": "INFORM combines Hazard & Exposure, Vulnerability and Lack of Coping Capacity with a geometric mean. Each dimension is classed on its own thresholds, so compare classes — not raw numbers — across dimensions."
+      "lead": "INFORM combines Hazard & Exposure, Vulnerability and Lack of Coping Capacity with a geometric mean. Each dimension is classed on its own thresholds, so compare classes (not raw numbers) across dimensions."
     },
     "charts": {
       "eyebrow": "Comparisons",
@@ -126,7 +126,7 @@
   },
   "glance": {
     "title": "Key findings",
-    "overall": "Overall INFORM Risk is <b>{{score}} ({{cls}})</b> — {{rank}}.",
+    "overall": "Overall INFORM Risk is <b>{{score}} ({{cls}})</b>, {{rank}}.",
     "rank_ordinal_one": "the {{count}}st highest of {{total}} {{peers}}",
     "rank_ordinal_two": "the {{count}}nd highest of {{total}} {{peers}}",
     "rank_ordinal_few": "the {{count}}rd highest of {{total}} {{peers}}",
@@ -195,9 +195,9 @@
     "distribution": {
       "title": "Position among peers",
       "desc": {
-        "council": "INFORM Risk of all {{count}} councils — one dot each — over the risk-class bands.",
-        "region": "INFORM Risk of all {{count}} regions — one dot each — over the risk-class bands.",
-        "source": "INFORM Risk of all {{count}} INFORM source units — one dot each — over the risk-class bands."
+        "council": "INFORM Risk of all {{count}} councils (one dot each) over the risk-class bands.",
+        "region": "INFORM Risk of all {{count}} regions (one dot each) over the risk-class bands.",
+        "source": "INFORM Risk of all {{count}} INFORM source units (one dot each) over the risk-class bands."
       },
       "descNational": "INFORM Risk of all {{count}} councils, with the official national value.",
       "axis": "INFORM Risk (0–10) · shaded bands are the risk classes",
@@ -237,13 +237,13 @@
     "topTitle": "Top drivers",
     "topLead": "The five indicators with the highest scores across all dimensions.",
     "note": {
-      "council": "Scores run from 0 to 10 and higher always means more risk — for Lack of Coping Capacity, a high score means fewer resources. On each track the ring marks the regional value and the tick the national value.",
-      "source": "Scores run from 0 to 10 and higher always means more risk — for Lack of Coping Capacity, a high score means fewer resources. On each track the ring marks the regional value and the tick the national value.",
-      "region": "Scores run from 0 to 10 and higher always means more risk — for Lack of Coping Capacity, a high score means fewer resources. On each track the tick marks the national value.",
-      "national": "Scores run from 0 to 10 and higher always means more risk — for Lack of Coping Capacity, a high score means fewer resources."
+      "council": "Scores run from 0 to 10 and higher always means more risk. For Lack of Coping Capacity, a high score means fewer resources. On each track the ring marks the regional value and the tick the national value.",
+      "source": "Scores run from 0 to 10 and higher always means more risk. For Lack of Coping Capacity, a high score means fewer resources. On each track the ring marks the regional value and the tick the national value.",
+      "region": "Scores run from 0 to 10 and higher always means more risk. For Lack of Coping Capacity, a high score means fewer resources. On each track the tick marks the national value.",
+      "national": "Scores run from 0 to 10 and higher always means more risk. For Lack of Coping Capacity, a high score means fewer resources."
     },
     "weakestEyebrow": "Weakest dimension",
-    "weakestBody": "The {{dim}} dimension is classed {{cls}} on its own INFORM scale — the highest of the three relative to its thresholds, and the clearest signal of where this area stands out.",
+    "weakestBody": "The {{dim}} dimension is classed {{cls}} on its own INFORM scale, the highest of the three relative to its thresholds and the clearest signal of where this area stands out.",
     "learn": "Learn how the dimensions work",
     "vsTitle": "Compared with the national picture",
     "vsLead": "Indicators furthest above and below the national value.",
@@ -290,8 +290,8 @@
     "title_zero": "Every indicator has data.",
     "title_one": "{{count}} indicator has no data.",
     "title_other": "{{count}} indicators have no data.",
-    "body": "“No data” means no value was reported. INFORM leaves it out of the category average — it is never treated as zero, and zero is a real, low score.",
-    "tooltip": "No value reported — left out of the average, not counted as zero."
+    "body": "“No data” means no value was reported. INFORM leaves it out of the category average. It is never treated as zero, and zero is a real, low score.",
+    "tooltip": "No value reported, so it is left out of the average (not counted as zero)."
   },
   "places": {
     "siblings": {
@@ -327,7 +327,7 @@
     "basis": {
       "self": "Recorded for this INFORM source unit (district).",
       "source_one": "Figures belong to INFORM source unit",
-      "source_other": "Figures belong to the district shared by {{count}} councils — INFORM source unit",
+      "source_other": "Figures belong to the district shared by {{count}} councils (INFORM source unit)",
       "aggregate_one": "Summed over {{count}} district (INFORM source unit), counted once; {{with}} has facility records.",
       "aggregate_other": "Summed over {{count}} districts (INFORM source units), each counted once; {{with}} have facility records."
     },
@@ -366,7 +366,7 @@
       "countOf": "{{n}} of {{total}} districts",
       "progressLabel": "{{abbr}}: {{n}} of {{total}} districts"
     },
-    "drrSource": "Source: PMO – Disaster Management Department and district disaster-management committee records."
+    "drrSource": "Source: records of the Prime Minister’s Office (Disaster Management Department) and district disaster-management committees."
   },
   "method": {
     "steps": {
@@ -386,7 +386,7 @@
     "thresholdsTitle": "Class thresholds",
     "thresholdsLead": "Each scale has its own INFORM thresholds, taken from the Tanzania workbook.",
     "citeTitle": "Cite this profile",
-    "cite": "INFORM Tanzania ({{year}}). {{name}} — area risk profile. Data as of {{asOf}}. {{url}}"
+    "cite": "INFORM Tanzania ({{year}}). {{name}}: area risk profile. Data as of {{asOf}}. {{url}}"
   },
   "print": {
     "title": "Area risk profile",

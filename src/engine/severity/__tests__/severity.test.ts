@@ -1,5 +1,5 @@
 /**
- * INFORM Severity Index — methodology conformance (JRC 2020 concept & methodology).
+ * INFORM Severity Index - methodology conformance (JRC 2020 concept & methodology).
  */
 import { describe, expect, it } from 'vitest';
 import { SEVERITY_WEIGHTS } from '../definitions';

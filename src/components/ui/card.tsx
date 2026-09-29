@@ -1,5 +1,5 @@
 /**
- * Card — a flat bordered box. Use sparingly (see docs/DESIGN_LANGUAGE.md): interactive panels, overlays,
+ * Card - a flat bordered box. Use sparingly (see docs/DESIGN_LANGUAGE.md): interactive panels, overlays,
  * or one highlighted element. Static content belongs on the page with rules, not in grids of cards.
  */
 import * as React from 'react';

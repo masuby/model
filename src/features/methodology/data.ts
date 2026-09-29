@@ -7,7 +7,7 @@
 import { ALL_INDICATORS, DIMENSIONS, leafForWorkbookComponent, type DimensionKey, type IndicatorLocation } from '@/engine/risk/hierarchy';
 import { ADVANCED_SPECS, SPECS, usedSpecs, type IndicatorSpec } from '@/engine/risk/standardise';
 import { AUTHORITIES, AUTHORITY_KEYS, INDICATOR_SOURCES, sourceFor, type Authority, type SourceInfo } from '@/engine/risk/sources';
-import { toCsv } from '@/lib/utils';
+import { NO_VALUE, toCsv } from '@/lib/utils';
 
 /* ------------------------------------------------------------------------------------------------ */
 /* Sections (table of contents)                                                                       */
@@ -240,15 +240,15 @@ export const BASKETS: readonly Basket[] = (() => {
 export const ADVANCED_COUNT = Object.keys(ADVANCED_SPECS).length;
 
 /* ------------------------------------------------------------------------------------------------ */
-/* Verification (sizes of the golden fixtures — asserted by the methodology test)                     */
+/* Verification (sizes of the golden fixtures - asserted by the methodology test)                     */
 /* ------------------------------------------------------------------------------------------------ */
 
 export const VERIFIED = {
-  /** standardise.fixture.json — every used indicator × every district. */
+  /** standardise.fixture.json - every used indicator × every district. */
   standardiseValues: 8664,
-  /** pipeline.fixture.json — raw → risk for every INFORM source unit. */
+  /** pipeline.fixture.json - raw → risk for every INFORM source unit. */
   pipelineUnits: 170,
-  /** workbook_rows.fixture.json — cached workbook rows (category → dimension → risk). */
+  /** workbook_rows.fixture.json - cached workbook rows (category → dimension → risk). */
   workbookRows: 8,
 } as const;
 
@@ -278,7 +278,7 @@ export const REFERENCES: readonly Reference[] = [
   {
     id: 'informSubnational',
     group: 'inform',
-    citation: 'European Commission, Joint Research Centre — Disaster Risk Management Knowledge Centre. INFORM Sub-national risk models: guidance and methodology.',
+    citation: 'European Commission, Joint Research Centre, Disaster Risk Management Knowledge Centre. INFORM Sub-national risk models: guidance and methodology.',
     url: 'https://drmkc.jrc.ec.europa.eu/inform-index/INFORM-Subnational-Risk',
     linkLabel: 'drmkc.jrc.ec.europa.eu',
   },
@@ -292,7 +292,7 @@ export const REFERENCES: readonly Reference[] = [
   {
     id: 'informIndex',
     group: 'inform',
-    citation: 'INFORM — Index for Risk Management. Inter-Agency Standing Committee and European Commission.',
+    citation: 'INFORM: Index for Risk Management. Inter-Agency Standing Committee and European Commission.',
     url: 'https://drmkc.jrc.ec.europa.eu/inform-index',
     linkLabel: 'drmkc.jrc.ec.europa.eu/inform-index',
   },
@@ -311,7 +311,7 @@ export const REFERENCES: readonly Reference[] = [
   {
     id: 'chirps',
     group: 'data',
-    citation: 'Funk, C. et al. (2015). The climate hazards infrared precipitation with stations — a new environmental record for monitoring extremes. Scientific Data 2, 150066.',
+    citation: 'Funk, C. et al. (2015). The climate hazards infrared precipitation with stations: a new environmental record for monitoring extremes. Scientific Data 2, 150066.',
     url: 'https://doi.org/10.1038/sdata.2015.66',
     linkLabel: 'doi:10.1038/sdata.2015.66',
   },
@@ -367,4 +367,4 @@ export function formatMonth(asOf: string | null | undefined, lang: string): stri
 }
 
 /** Fixed-decimal formatting for intermediate values in formulas. */
-export const fx = (x: number | null | undefined, d = 2): string => (typeof x === 'number' && Number.isFinite(x) ? x.toFixed(d) : '—');
+export const fx = (x: number | null | undefined, d = 2): string => (typeof x === 'number' && Number.isFinite(x) ? x.toFixed(d) : NO_VALUE);
