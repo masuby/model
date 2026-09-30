@@ -1,15 +1,15 @@
 #!/usr/bin/env python3
 """
-compute-drought-spi-spei.py — per-district drought hazard for INFORM, from CHIRPS v3
+compute-drought-spi-spei.py - per-district drought hazard for INFORM, from CHIRPS v3
 monthly rainfall (1991–2024) + ERA5 t2m (SPEI's PET). Same monthly CHIRPS v3 set
 validated by regCM5/papers/paper8_year_classification.
 
 Authentic, community-relevant drought hazard (SPI/SPEI *frequency* is ~stationary by
 construction, so it is NOT used to rank). The 0–10 drought_index blends:
-  • aridity            — low mean annual rainfall (dryland)            0.30
-  • annual variability — interannual rainfall CV                       0.20
-  • SPEI drought depth — mean magnitude of SPEI-12 during droughts     0.15
-  • GROWING-SEASON failure — how often & how variable the main rainy   0.35
+  • aridity            - low mean annual rainfall (dryland)            0.30
+  • annual variability - interannual rainfall CV                       0.20
+  • SPEI drought depth - mean magnitude of SPEI-12 during droughts     0.15
+  • GROWING-SEASON failure - how often & how variable the main rainy   0.35
     season fails (the crop-failure / food-security driver → IPC/MUCHALI)
 
 Heavy extractions are cached to _drought_cube.npz so the index can be re-tuned fast.

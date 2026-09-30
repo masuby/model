@@ -1,5 +1,5 @@
 /**
- * Course progress rules (pure — the persisted state lives in `usePrefs().learnProgress`).
+ * Course progress rules (pure - the persisted state lives in `usePrefs().learnProgress`).
  * A lesson is complete once its quiz is passed: at least two thirds of the questions right
  * (2 of 3, 3 of 4). The best score is kept when a learner retakes a quiz.
  */
@@ -53,7 +53,7 @@ export function averageScore(progress: Progress): number | null {
   return scores.length ? Math.round(scores.reduce((s, x) => s + x, 0) / scores.length) : null;
 }
 
-/** ISO date of the most recent completion — the certificate date. */
+/** ISO date of the most recent completion - the certificate date. */
 export function completionDate(progress: Progress): string | null {
   const dates = LESSON_IDS.map((id) => progress[id]).filter((r): r is LessonRecord => !!r?.completed && !!r.at).map((r) => r.at);
   return dates.length ? dates.reduce((a, b) => (a > b ? a : b)) : null;

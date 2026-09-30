@@ -63,7 +63,7 @@ export function dimensionScore(categories: ReadonlyArray<number | null | undefin
  */
 export function riskScore(h: number | null | undefined, v: number | null | undefined, c: number | null | undefined): number | null {
   if (!isNum(h) || !isNum(v) || !isNum(c)) return null;
-  // Math.pow(x, 1/3) — not Math.cbrt — to mirror Excel's `^(1/3)` bit-for-bit at rounding boundaries.
+  // Math.pow(x, 1/3) - not Math.cbrt - to mirror Excel's `^(1/3)` bit-for-bit at rounding boundaries.
   return round1(Math.pow(h, 1 / 3) * Math.pow(v, 1 / 3) * Math.pow(c, 1 / 3));
 }
 

@@ -7,7 +7,7 @@ import { ChartCard } from '@/components/charts/ChartCard';
 import { ALL_INDICATORS } from '@/engine/risk/hierarchy';
 import { sourceFor, sourceLabel } from '@/engine/risk/sources';
 import type { RiskModel } from '@/engine/risk/types';
-import { formatNumber } from '@/lib/utils';
+import { formatNumber, NO_VALUE } from '@/lib/utils';
 import { coverageHistogram, LOCAL_RESOLUTIONS, resolutionBreakdown, type CoverageBin, type Resolution, type ResolutionGroup } from '../analytics';
 import { useBarShape } from '../marks';
 import { useInsightTheme } from '../theme';
@@ -116,7 +116,7 @@ export function DataCoverage({ model }: { model: RiskModel }) {
           <dl className="mt-6 grid grid-cols-2 divide-x divide-border border-t border-border pt-4">
             <div className="pr-5">
               <dt className="text-sm text-muted-foreground">{t('coverage.median')}</dt>
-              <dd className="num mt-1 text-2xl font-semibold tracking-tight">{median === null ? '—' : `${median}%`}</dd>
+              <dd className="num mt-1 text-2xl font-semibold tracking-tight">{median === null ? NO_VALUE : `${median}%`}</dd>
             </div>
             <div className="pl-5">
               <dt className="text-sm text-muted-foreground">{t('coverage.atLeast90')}</dt>
@@ -186,7 +186,7 @@ export function DataCoverage({ model }: { model: RiskModel }) {
                     <ul className="mt-2 mb-1 space-y-1 border-l border-border pl-3 leading-relaxed text-muted-foreground">
                       {g.indicators.map((l) => (
                         <li key={`${l.dimension.key}:${l.indicator.key}`}>
-                          <span className="text-foreground">{t(`indicators:${l.indicator.key}`)}</span> — {sourceLabel(sourceFor(l.dimension.key, l.indicator.key))}
+                          <span className="text-foreground">{t(`indicators:${l.indicator.key}`)}</span> · {sourceLabel(sourceFor(l.dimension.key, l.indicator.key))}
                         </li>
                       ))}
                     </ul>

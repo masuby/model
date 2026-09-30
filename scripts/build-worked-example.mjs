@@ -1,7 +1,7 @@
 /**
- * build-worked-example.mjs — generate the WORKED-EXAMPLE tables from the REAL shipped data, so the
- * documentation's example can never drift from what the app computes. Uses Rufiji (Pwani) — a
- * documented flood district — for the full indicator→risk chain, Kibiti (its split council) for the
+ * build-worked-example.mjs - generate the WORKED-EXAMPLE tables from the REAL shipped data, so the
+ * documentation's example can never drift from what the app computes. Uses Rufiji (Pwani) - a
+ * documented flood district - for the full indicator→risk chain, Kibiti (its split council) for the
  * council-level refinement, and Pwani for the region harmonisation.
  *
  * out: docs/worked_example_indicators.csv  (every indicator: raw → standardisation → 0-10 → aggregation)

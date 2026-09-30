@@ -1,7 +1,7 @@
 /**
- * Step 2 — the affected area. Councils are toggled on a lightweight SVG map (StaticMap — no Leaflet) or
+ * Step 2 - the affected area. Councils are toggled on a lightweight SVG map (StaticMap - no Leaflet) or
  * from the list (keyboard accessible); their NBS-2022 census totals can fill the Impact inputs. The
- * councils' mean INFORM Risk is shown as pre-crisis context only — it never enters the severity formula.
+ * councils' mean INFORM Risk is shown as pre-crisis context only - it never enters the severity formula.
  */
 import { Check, X } from 'lucide-react';
 import * as React from 'react';
@@ -13,7 +13,7 @@ import { Select, SelectGroup, SelectItem } from '@/components/ui/primitives';
 import { CLASS_COLORS, CLASS_KEYS } from '@/engine/risk/classes';
 import { parseMetric } from '@/engine/risk/metrics';
 import type { RiskModel, Unit } from '@/engine/risk/types';
-import { formatNumber, formatScore } from '@/lib/utils';
+import { formatNumber, formatScore, NO_VALUE } from '@/lib/utils';
 import type { AreaTotals } from '../lib';
 
 const StaticMap = React.lazy(() => import('@/components/map/StaticMap'));
@@ -123,13 +123,13 @@ export const AreaPicker = React.memo(function AreaPicker({ model, selectedIds, c
             <dl className="grid grid-cols-2 divide-x divide-border">
               <div className="pr-4">
                 <dt className="text-sm text-muted-foreground">{t('area.population')}</dt>
-                <dd className="num mt-1 text-2xl font-semibold tracking-tight">{has ? formatNumber(totals.population, lang) : '—'}</dd>
+                <dd className="num mt-1 text-2xl font-semibold tracking-tight">{has ? formatNumber(totals.population, lang) : NO_VALUE}</dd>
                 <dd className="mt-0.5 text-xs text-muted-foreground">{t('area.populationSub')}</dd>
               </div>
               <div className="pl-4 sm:pl-6">
                 <dt className="text-sm text-muted-foreground">{t('area.areaKm2')}</dt>
                 <dd className="num mt-1 text-2xl font-semibold tracking-tight">
-                  {has ? formatNumber(totals.areaKm2, lang) : '—'} <span className="text-sm font-normal text-muted-foreground">km²</span>
+                  {has ? formatNumber(totals.areaKm2, lang) : NO_VALUE} <span className="text-sm font-normal text-muted-foreground">km²</span>
                 </dd>
                 <dd className="mt-0.5 text-xs text-muted-foreground">{t('area.areaSub')}</dd>
               </div>

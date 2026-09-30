@@ -3,12 +3,12 @@ import { useTranslation } from 'react-i18next';
 import { ChartCard } from '@/components/charts/ChartCard';
 import { isNum } from '@/engine/risk/math';
 import type { RiskModel } from '@/engine/risk/types';
-import { cn } from '@/lib/utils';
+import { cn, NO_VALUE } from '@/lib/utils';
 import { correlationColor, correlationMatrix, inkOn, strengthOf, type LensKey } from '../analytics';
 import { useInsightTheme } from '../theme';
 import { Aside, FigureNote, InsightSection, LENS_SHORT } from '../ui';
 
-const fmtR = (r: number | null) => (isNum(r) ? r.toFixed(2).replace('-', '−') : '—');
+const fmtR = (r: number | null) => (isNum(r) ? r.toFixed(2).replace('-', '−') : NO_VALUE);
 
 export function CorrelationView({ model }: { model: RiskModel }) {
   const { t } = useTranslation(['insights', 'common']);

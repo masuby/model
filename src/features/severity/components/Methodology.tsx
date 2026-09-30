@@ -1,7 +1,7 @@
 /**
  * Methodology explainer: the official aggregation structure (Indicators → Components → Categories →
- * Dimensions → Index, weights ⅓/⅔ and 70/30) drawn as a flat, ruled diagram — columns separated by
- * hairlines on wide screens, a nested tree on small ones — with live scores, the four principles and the
+ * Dimensions → Index, weights ⅓/⅔ and 70/30) drawn as a flat, ruled diagram - columns separated by
+ * hairlines on wide screens, a nested tree on small ones - with live scores, the four principles and the
  * citations. Colour appears only as small severity dots on scores (data).
  */
 import { ChevronRight } from 'lucide-react';
@@ -100,7 +100,7 @@ function AggregationDiagram({ result }: { result: SeverityResult }) {
   const w = SEVERITY_WEIGHTS;
   return (
     <figure>
-      {/* Level chain — small screens (wide screens carry it in the column headers) */}
+      {/* Level chain - small screens (wide screens carry it in the column headers) */}
       <ol className="mb-5 flex flex-wrap items-center gap-x-1.5 gap-y-1 text-sm text-muted-foreground xl:hidden" aria-label={t('method.chainAria')}>
         {LEVELS.map((l, i) => (
           <li key={l} className="inline-flex items-center gap-1.5">
@@ -161,10 +161,10 @@ function AggregationDiagram({ result }: { result: SeverityResult }) {
 
       <figcaption className="mt-3 flex flex-wrap gap-x-5 gap-y-1 text-xs text-muted-foreground">
         <span>
-          <b className="font-mono font-semibold text-foreground">G</b> — {t('method.legendG')}
+          <b className="font-mono font-semibold text-foreground">G</b>: {t('method.legendG')}
         </span>
         <span>
-          <b className="font-mono font-semibold text-foreground">x̄</b> — {t('method.legendMean')}
+          <b className="font-mono font-semibold text-foreground">x̄</b>: {t('method.legendMean')}
         </span>
         <span>{t('method.live')}</span>
       </figcaption>

@@ -148,7 +148,7 @@ export function NumberField({
           autoComplete="off"
           spellCheck={false}
           value={text}
-          placeholder={placeholder ?? '—'}
+          placeholder={placeholder}
           aria-invalid={error ? true : undefined}
           aria-describedby={describedBy}
           onFocus={() => setDraft(text)}

@@ -1,5 +1,5 @@
 /**
- * refill-real-hazards.mjs — overlay DOCUMENTED, REPORTED Tanzania data onto the
+ * refill-real-hazards.mjs - overlay DOCUMENTED, REPORTED Tanzania data onto the
  * INFORM SADC 2024 baseline, then recompute each edited dimension's aggregates
  * (mean) → total (mean of components) → risk (∛H·V·LCC). Hazards/vulnerability are
  * only RAISED (max); coping is only IMPROVED (min "lack"). National figures stay at
@@ -9,9 +9,9 @@
  * Kyela, Kigoma, Dar urban); landslide highlands (Rungwe/Mbeya, Hanang/Mbulu,
  * Lushoto/Usambara, Kilimanjaro/Pare); Indian Ocean coastal strip; central+pastoral
  * drought (Dodoma/Singida/Shinyanga/Simiyu, Monduli/Longido/Ngorongoro/Kiteto/Simanjiro);
- * Rift seismicity (Kagera 2016 Bukoba M5.9). Poverty — HBS 2017-18 (Geita ~40%,
- * Shinyanga/Lindi >90% poor households, Kagera/Kigoma high). Stunting — TDHS 2022
- * (Iringa 56.9%, Njombe 50.4%, Rukwa 49.8%, Southern Highlands). DRM coping — PMO-DMD
+ * Rift seismicity (Kagera 2016 Bukoba M5.9). Poverty - HBS 2017-18 (Geita ~40%,
+ * Shinyanga/Lindi >90% poor households, Kagera/Kigoma high). Stunting - TDHS 2022
+ * (Iringa 56.9%, Njombe 50.4%, Rukwa 49.8%, Southern Highlands). DRM coping - PMO-DMD
  * EW4ALL regional EOCC + ERT (Mwanza, Arusha, Dodoma, Mbeya).
  */
 import { readFile, writeFile } from 'fs/promises';
@@ -57,18 +57,18 @@ raiseH('drought', 6.5, { names: ['Monduli', 'Longido', 'Ngorongoro', 'Igunga', '
 raiseH('earthquake', 7.0, { names: ['Bukoba', 'Bukoba Urban', 'Missenyi', 'Muleba'] });
 raiseH('earthquake', 6.0, { regions: ['Mbeya', 'Rukwa', 'Songwe', 'Katavi', 'Kigoma'] });
 
-// VULNERABILITY — development & poverty (HBS 2017-18)
+// VULNERABILITY - development & poverty (HBS 2017-18)
 raiseV('socioEconomic', 'developmentPoverty', 8.5, { regions: ['Geita'] });
 raiseV('socioEconomic', 'developmentPoverty', 8.0, { regions: ['Kagera', 'Shinyanga', 'Lindi'] });
 raiseV('socioEconomic', 'developmentPoverty', 7.5, { regions: ['Kigoma', 'Mtwara', 'Rukwa', 'Katavi'] });
 raiseV('socioEconomic', 'developmentPoverty', 7.0, { regions: ['Tabora', 'Singida', 'Simiyu', 'Dodoma'] });
-// VULNERABILITY — children health & nutrition (TDHS 2022 stunting)
+// VULNERABILITY - children health & nutrition (TDHS 2022 stunting)
 raiseV('vulnerableGroups', 'childrenHealthNutrition', 9.0, { regions: ['Iringa'] });
 raiseV('vulnerableGroups', 'childrenHealthNutrition', 8.5, { regions: ['Njombe', 'Rukwa'] });
 raiseV('vulnerableGroups', 'childrenHealthNutrition', 8.0, { regions: ['Songwe'] });
 raiseV('vulnerableGroups', 'childrenHealthNutrition', 7.5, { regions: ['Mbeya', 'Kigoma', 'Ruvuma', 'Katavi', 'Geita'] });
 
-// DRM coping — improves the INSTITUTIONAL (DRR/governance) component only, MODERATELY.
+// DRM coping - improves the INSTITUTIONAL (DRR/governance) component only, MODERATELY.
 // Risk still = ∛(H×V×LCC): a district with an EPRP but high hazard + vulnerability stays
 // high-risk. Strength: full regional EOCC+ERT (strongest) > drought Anticipatory Action +
 // EPRP > EPRP alone. min() means overlaps keep the strongest improvement.
@@ -102,4 +102,4 @@ all.forEach((u) => {
 
 data.metadata = { ...(data.metadata || {}), refilled: 'documented TZ hazards + poverty/stunting vulnerability + DRM coping' };
 await writeFile(FILE, JSON.stringify(data));
-console.log(`✓ refilled — hazards:${tH.size} vulnerability:${tV.size} coping:${tC.size} (union ${all.size} of ${D.length}). National kept official.`);
+console.log(`✓ refilled - hazards:${tH.size} vulnerability:${tV.size} coping:${tC.size} (union ${all.size} of ${D.length}). National kept official.`);

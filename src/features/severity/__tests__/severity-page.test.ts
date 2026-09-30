@@ -190,10 +190,10 @@ describe('exports', () => {
     const enText = buildSummary(ctxFor('en'));
     const swText = buildSummary(ctxFor('sw'));
     const sev = computeSeverity(SEVERITY_SCENARIOS[0].input).severity!.toFixed(1);
-    expect(enText).toContain('INFORM Severity — Riverine flood');
+    expect(enText).toContain('INFORM Severity: Riverine flood');
     expect(enText).toContain(`${sev} / 5`);
     expect(enText).toContain('Council C001');
-    expect(swText).toContain('Ukali wa INFORM — Mafuriko ya mto');
+    expect(swText).toContain('Ukali wa INFORM: Mafuriko ya mto');
     expect(swText).not.toMatch(/\b(summary|results|scenario)\./);
     expect(enText).not.toMatch(/\b(summary|results|scenario)\./);
   });

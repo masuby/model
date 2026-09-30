@@ -1,6 +1,6 @@
 /**
  * Pure analytics behind the national Insights page. Everything is derived from the live RiskModel
- * (approved edits included) — no INFORM number is hard-coded here. Kept free of React so it can be
+ * (approved edits included) - no INFORM number is hard-coded here. Kept free of React so it can be
  * unit-tested against the shipped dataset (see `__tests__/analytics.test.ts`).
  */
 import { CLASS_KEYS, classify, type ClassKey, type Scale } from '@/engine/risk/classes';
@@ -256,7 +256,7 @@ export interface DriverCount {
 
 /**
  * How often each indicator is a unit's top driver (`topDrivers(unit, 1)`). When several indicators
- * share the top score, each of them is counted — otherwise the hierarchy order would silently decide.
+ * share the top score, each of them is counted - otherwise the hierarchy order would silently decide.
  */
 export function topDriverCounts(units: readonly Unit[]): DriverCount[] {
   const map = new Map<string, DriverCount>();
@@ -410,7 +410,7 @@ export const bestContrast = (fill: string): { ink: string; ratio: number } => {
 /** Text colour for a fill: whichever of white / near-black gives the higher WCAG contrast ratio. */
 export const inkOn = (fill: string): string => bestContrast(fill).ink;
 
-/** True when no plain text colour reaches WCAG AA (4.5:1) on this fill — put the text on a plate. */
+/** True when no plain text colour reaches WCAG AA (4.5:1) on this fill - put the text on a plate. */
 export const needsPlate = (fill: string): boolean => bestContrast(fill).ratio < 4.5;
 
 const mix = (a: string, b: string, t: number) => {

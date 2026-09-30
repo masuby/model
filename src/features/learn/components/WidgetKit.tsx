@@ -65,7 +65,7 @@ export function Finding({ children, tone = 'neutral', className, ...rest }: { ch
 
 /* ------------------------------------------------------------------------------------------------ */
 
-/** Find a council by (part of) its name, falling back to a given index — used for sensible defaults. */
+/** Find a council by (part of) its name, falling back to a given index - used for sensible defaults. */
 export function findCouncil(model: RiskModel, name: string, fallback = 0): Unit {
   const n = name.toLowerCase();
   return model.councils.find((c) => c.name.toLowerCase() === n) ?? model.councils.find((c) => c.name.toLowerCase().includes(n)) ?? model.councils[fallback];

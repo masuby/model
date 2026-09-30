@@ -194,7 +194,7 @@ export function ScaleInfo({ className, align = 'start' }: { className?: string; 
   );
 }
 
-/** A note set off by a left rule (inherited data, shared source, edits…) — no tinted box, no icon. */
+/** A note set off by a left rule (inherited data, shared source, edits…) - no tinted box, no icon. */
 export function Notice({ tone = 'muted', children }: { tone?: 'muted' | 'warning' | 'primary'; children: React.ReactNode }) {
   return (
     <p

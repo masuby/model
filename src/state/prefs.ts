@@ -7,7 +7,7 @@ export type Language = 'en' | 'sw';
 interface PrefsState {
   theme: ThemePref;
   language: Language;
-  /** Completed learning lessons (by id) and quiz scores — persisted per browser, no account needed. */
+  /** Completed learning lessons (by id) and quiz scores - persisted per browser, no account needed. */
   learnProgress: Record<string, { completed: boolean; score: number; at: string }>;
   setTheme: (t: ThemePref) => void;
   setLanguage: (l: Language) => void;

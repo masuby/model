@@ -44,7 +44,7 @@ const PATH_TO_ROUTE: Array<[RegExp, RouteKey]> = [
 ];
 
 const warmed = new Set<RouteKey>();
-/** Warm a route's code and translations (idempotent) — call on link hover/focus/touch. */
+/** Warm a route's code and translations (idempotent) - call on link hover/focus/touch. */
 export function prefetchRoute(path: string): void {
   const key = PATH_TO_ROUTE.find(([re]) => re.test(path.split(/[?#]/)[0]))?.[1];
   if (!key || warmed.has(key)) return;

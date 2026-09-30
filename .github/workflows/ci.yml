@@ -1,7 +1,7 @@
 name: CI
 
 # Quality gate for every push and pull request. Deployment is handled by Vercel's Git integration
-# (production = main, previews for every PR), so this workflow only verifies — it never deploys.
+# (production = main, previews for every PR), so this workflow only verifies - it never deploys.
 on:
   push:
     branches: [main]

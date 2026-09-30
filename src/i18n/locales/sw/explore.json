@@ -25,7 +25,7 @@
     "source": "Vitengo vya INFORM",
     "reference": "Rejea",
     "note": {
-      "council": "Halmashauri {{count}} (NBS 2022) — ngazi kuu. Vitisho na Mfiduo hukokotolewa kwa kila halmashauri; udhaifu na uwezo wa kukabiliana hutoka kwenye kitengo cha chanzo cha INFORM cha halmashauri husika.",
+      "council": "Halmashauri {{count}} (NBS 2022), ngazi kuu. Vitisho na Mfiduo hukokotolewa kwa kila halmashauri; udhaifu na uwezo wa kukabiliana hutoka kwenye kitengo cha chanzo cha INFORM cha halmashauri husika.",
       "region": "Mikoa {{count}}, iliyojumlishwa kutoka halmashauri zake kwa mbinu ya INFORM (wastani wa viashiria, kisha wastani wa kijiometri uliopimwa).",
       "source": "Vitengo {{count}} vya kitabu cha INFORM SADC 2024, vinaonyeshwa kwa rejea tu. Halmashauri ndizo ngazi kuu."
     }
@@ -47,11 +47,11 @@
     "backToRisk": "Rudi kwenye hatari kwa ujumla"
   },
   "resolution": {
-    "council": "Halmashauri — hukokotolewa kwa kila halmashauri",
-    "district": "Wilaya — thamani moja kwa halmashauri za wilaya moja",
-    "region": "Mkoa — makadirio ya tafiti, sawa kwa kila halmashauri ya mkoa",
-    "national": "Taifa — thamani moja kwa nchi nzima",
-    "overlay": "Tabaka lililorekodiwa — mfiduo uliobainishwa na wataalamu"
+    "council": "Halmashauri: hukokotolewa kwa kila halmashauri",
+    "district": "Wilaya: thamani moja kwa halmashauri za wilaya moja",
+    "region": "Mkoa: makadirio ya tafiti, sawa kwa kila halmashauri ya mkoa",
+    "national": "Taifa: thamani moja kwa nchi nzima",
+    "overlay": "Tabaka lililorekodiwa: mfiduo uliobainishwa na wataalamu"
   },
   "legend": {
     "label": "Ufunguo na kichujio",

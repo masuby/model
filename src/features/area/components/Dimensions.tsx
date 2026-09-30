@@ -1,7 +1,7 @@
 /**
  * The three INFORM dimensions: the unit's own equation as a display line, then the dimensions as three
  * columns separated by vertical rules on wide screens (rows separated by hairlines below lg, each split
- * into summary and categories on tablets). No cards, no coloured strips: colour appears only on data —
+ * into summary and categories on tablets). No cards, no coloured strips: colour appears only on data  - 
  * class badges, tracks, and the dimension letters that tie each column back to the equation.
  */
 import { useTranslation } from 'react-i18next';

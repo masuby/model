@@ -1,10 +1,10 @@
 /**
- * National Insights — a story-driven analytics page for Tanzania's INFORM Risk. Every figure is
+ * National Insights - a story-driven analytics page for Tanzania's INFORM Risk. Every figure is
  * computed live from `useModel()` (approved edits included); see `analytics.ts` for the maths.
  *
  * Speed: the header, key figures and key findings need no chart library and render with the first
- * paint. Each chart section is its own lazily loaded chunk, mounted when it nears the viewport or —
- * one section at a time, in reading order — whenever the browser is idle, so the page is complete by
+ * paint. Each chart section is its own lazily loaded chunk, mounted when it nears the viewport or  - 
+ * one section at a time, in reading order - whenever the browser is idle, so the page is complete by
  * the time anyone scrolls or prints, without one long task up front.
  */
 import { ArrowRight, MapPinned, Printer } from 'lucide-react';
@@ -27,7 +27,7 @@ type SectionComponent = React.ComponentType<{ model: RiskModel }>;
 type Estimate = readonly [xl: number, lg: number, narrow: number];
 
 /**
- * A chart section: its code-split loader, and the height it reserves until it renders — measured
+ * A chart section: its code-split loader, and the height it reserves until it renders - measured
  * content heights (1440, 1024 and 390 px viewports), so the page barely shifts as sections arrive.
  */
 function chartSection(id: string, load: () => Promise<SectionComponent>, estimate: Estimate) {
@@ -123,7 +123,7 @@ function SectionNav() {
 
   // Scroll-spy: the current section is the last one whose top has passed the reading line (30% down
   // the viewport); at the very bottom of the page it is the last section. Re-evaluated on every scroll
-  // and resize (throttled to one check per frame), so jumps — Home/End, scrollbar drags, in-page links —
+  // and resize (throttled to one check per frame), so jumps - Home/End, scrollbar drags, in-page links  - 
   // can never leave it stale.
   React.useEffect(() => {
     let frame = 0;
@@ -213,7 +213,7 @@ export default function InsightsPage() {
   // section then mounts because it is in view. Sections above it keep arriving and can differ a little
   // from their reserved height, and the browser's scroll anchoring loses its anchor when a placeholder
   // is swapped for content, so keep the target pinned (before paint, via ResizeObserver) until the
-  // reader scrolls, taps or types — or for at most 10 s.
+  // reader scrolls, taps or types - or for at most 10 s.
   const storyRef = React.useRef<HTMLDivElement>(null);
   React.useLayoutEffect(() => {
     const id = window.location.hash.slice(1);

@@ -7,7 +7,7 @@ import { ClassDot } from '@/components/risk/RiskBadge';
 import { Segmented } from '@/components/ui/primitives';
 import { classify } from '@/engine/risk/classes';
 import type { RiskModel, Unit } from '@/engine/risk/types';
-import { formatScore } from '@/lib/utils';
+import { formatScore, NO_VALUE } from '@/lib/utils';
 import { LENSES, lensScale, lensValue, rankUnits, type LensKey, type RankRow } from '../analytics';
 import { useBarShape } from '../marks';
 import { useInsightTheme } from '../theme';
@@ -156,7 +156,7 @@ export function RegionalRanking({ model }: { model: RiskModel }) {
             <div className="pl-5">
               <dt className="text-sm text-muted-foreground">{t('regions.above')}</dt>
               <dd className="num mt-1 text-2xl font-semibold tracking-tight">
-                {above ?? '—'}
+                {above ?? NO_VALUE}
                 <span className="text-base font-medium text-muted-foreground"> / {valued.length}</span>
               </dd>
               <dd className="mt-1 text-xs leading-snug text-muted-foreground">{t('regions.aboveSub', { value: formatScore(national) })}</dd>

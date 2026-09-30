@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""compute-heatwave.py — heat exposure proxy per district from ERA5 t2m (cached cube).
+"""compute-heatwave.py - heat exposure proxy per district from ERA5 t2m (cached cube).
 Blends mean annual temperature with the hottest-quarter mean, min-max to 0-10. (Proxy:
 true heatwave needs daily extremes; this captures the hot lowlands vs cool highlands pattern.)
 out: data-source/heatwave_era5.csv"""

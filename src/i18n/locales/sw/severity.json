@@ -447,15 +447,15 @@
     "denominators": "Vigawanyo vya kitaifa: watu {{pop}} (Sensa ya NBS 2022) na km² {{area}}."
   },
   "summary": {
-    "title": "Ukali wa INFORM — {{name}}",
+    "title": "Ukali wa INFORM: {{name}}",
     "illustrative": "(tukio la mfano, si data rasmi)",
     "more_one": "na nyingine {{count}}",
     "more_other": "na nyingine {{count}}",
     "area": "Eneo lililoathirika: {{councils}}",
     "noArea": "halijabainishwa",
     "areaFigures": "Watu {{people}} wanaoishi kwenye km² {{area}}",
-    "severity": "Ukali: {{score}} / 5 — {{category}} (daraja {{level}} kati ya 5)",
-    "incomplete": "Ukali: haujakokotolewa — taarifa hazijakamilika",
+    "severity": "Ukali: {{score}} / 5, {{category}} (daraja {{level}} kati ya 5)",
+    "incomplete": "Ukali: haujakokotolewa (taarifa hazijakamilika)",
     "dims": "Athari {{impact}} · Hali {{conditions}} · Utata {{complexity}}",
     "figures": "Walioathirika {{affected}} · Waliohama makazi {{displaced}} · Vifo {{fatalities}} · Wenye mahitaji (viwango 3–5) {{pin}}",
     "reliability": "Uaminifu {{score}}/5 ({{label}}) · ukamilifu wa data {{completeness}}%",

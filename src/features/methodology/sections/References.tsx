@@ -2,6 +2,7 @@ import { useTranslation } from 'react-i18next';
 import { useModel } from '@/data-layer/DataProvider';
 import { formatMonth, REFERENCES, type ReferenceGroup } from '../data';
 import { DocSection, SubHeading } from '../ui';
+import { NO_VALUE } from '@/lib/utils';
 
 const GROUPS: readonly ReferenceGroup[] = ['inform', 'statistics', 'data'];
 
@@ -40,7 +41,7 @@ export function ReferencesSection() {
       </div>
       <div className="mt-14 max-w-3xl border-l-2 border-border pl-5">
         <SubHeading>{t('references.citeTitle')}</SubHeading>
-        <p className="mt-2 font-display text-[1.05rem] leading-relaxed">{t('references.cite', { date: model.asOf ? formatMonth(model.asOf, i18n.language) : '—' })}</p>
+        <p className="mt-2 font-display text-[1.05rem] leading-relaxed">{t('references.cite', { date: model.asOf ? formatMonth(model.asOf, i18n.language) : NO_VALUE })}</p>
       </div>
     </DocSection>
   );

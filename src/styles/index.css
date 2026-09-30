@@ -9,7 +9,7 @@
   --font-display: 'Source Serif 4 Variable', 'Source Serif 4', Georgia, 'Times New Roman', serif;
   --font-mono: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
 
-  /* Brand — drawn from the Tanzanian flag: green, gold, blue, on a deep navy base. */
+  /* Brand - drawn from the Tanzanian flag: green, gold, blue, on a deep navy base. */
   --color-brand-50: #eef7ff;
   --color-brand-100: #d9ecff;
   --color-brand-200: #bcdfff;
@@ -59,7 +59,7 @@
 
 /* Semantic surface tokens (light / dark). Components use these, never raw greys. */
 :root {
-  /* Sticky site header height (64px bar + 1px border) — use for sticky offsets. */
+  /* Sticky site header height (64px bar + 1px border) - use for sticky offsets. */
   --header-h: 65px;
   --background: #ffffff;
   --foreground: #0b1324;

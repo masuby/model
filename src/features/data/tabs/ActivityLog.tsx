@@ -1,4 +1,4 @@
-/** Activity (reviewers): the audit trail — submissions, approvals, rejections, reverts, imports, resets. */
+/** Activity (reviewers): the audit trail - submissions, approvals, rejections, reverts, imports, resets. */
 import { CheckCircle2, RotateCcw, Send, Trash2, Upload, XCircle, type LucideIcon } from 'lucide-react';
 import * as React from 'react';
 import { useTranslation } from 'react-i18next';

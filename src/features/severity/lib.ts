@@ -1,5 +1,5 @@
 /**
- * Crisis-severity page — pure state and helpers (no React), kept apart so they are unit-tested.
+ * Crisis-severity page - pure state and helpers (no React), kept apart so they are unit-tested.
  * The INFORM Severity maths itself lives in `@/engine/severity`; nothing here changes a score.
  */
 import {
@@ -16,7 +16,7 @@ import {
 import { informGeometric, TANZANIA_AREA_KM2, TANZANIA_POPULATION_2022, type SeverityInput, type SeverityResult } from '@/engine/severity/engine';
 import { SEVERITY_SCENARIOS, STRUCTURAL_DEFAULTS, type SeverityScenario } from '@/engine/severity/scenarios';
 import type { Unit } from '@/engine/risk/types';
-import { formatNumber } from '@/lib/utils';
+import { formatNumber, NO_VALUE } from '@/lib/utils';
 
 export const isNum = (x: unknown): x is number => typeof x === 'number' && Number.isFinite(x);
 
@@ -104,7 +104,7 @@ export interface AreaTotals {
   count: number;
   population: number;
   areaKm2: number;
-  /** Arithmetic mean of the councils' INFORM Risk (context only — never enters the severity formula). */
+  /** Arithmetic mean of the councils' INFORM Risk (context only - never enters the severity formula). */
   meanRisk: number | null;
   minRisk: number | null;
   maxRisk: number | null;
@@ -225,7 +225,7 @@ export interface InputIssue {
   values: Record<string, number>;
 }
 
-/** Plausibility checks. Warnings never block the calculation — the analyst decides. */
+/** Plausibility checks. Warnings never block the calculation - the analyst decides. */
 export function validateInput(input: SeverityInput): InputIssue[] {
   const issues: InputIssue[] = [];
   const numeric: NumericField[] = ['areaAffectedKm2', 'peopleInArea', 'peopleAffected', 'displaced', 'fatalities', ...STRUCTURAL_FIELDS, 'daysSinceUpdate'];
@@ -323,7 +323,7 @@ export function indicatorCoverage(result: SeverityResult): { have: number; total
 
 /** Format a raw indicator value for display, by unit. */
 export function formatRaw(unit: SeverityIndicatorDef['unit'], v: number | null | undefined, lang: string): string {
-  if (!isNum(v)) return '—';
+  if (!isNum(v)) return NO_VALUE;
   switch (unit) {
     case 'people':
     case 'count':
@@ -374,7 +374,7 @@ export function buildExportJson(ctx: ExportContext) {
   const { state, result, councils, totals, t } = ctx;
   const f = formulaBreakdown(result);
   return {
-    generator: 'INFORM Tanzania — crisis severity calculator',
+    generator: 'INFORM Tanzania crisis severity calculator',
     method: 'INFORM Severity Index (JRC/ACAPS): Severity = 0.7 × G(Impact 1/3, Conditions 2/3) + 0.3 × Complexity; category = ROUNDUP(score)',
     references: [t('method.cite.jrc'), t('method.cite.acaps')],
     exportedAt: (ctx.now ?? new Date()).toISOString(),
@@ -442,7 +442,7 @@ export function buildCsvRows(ctx: ExportContext): CsvRow[] {
 export function buildSummary(ctx: ExportContext): string {
   const { state, result, councils, totals, lang, t } = ctx;
   const n = (x: number | null | undefined) => formatNumber(isNum(x) ? Math.round(x) : null, lang);
-  const s1 = (x: number | null | undefined) => (isNum(x) ? (Math.round(x * 10) / 10).toFixed(1) : '—');
+  const s1 = (x: number | null | undefined) => (isNum(x) ? (Math.round(x * 10) / 10).toFixed(1) : NO_VALUE);
   const input = state.input;
   const lv = input.levels ?? {};
   const pinParts = [lv[5], lv[4], lv[3]];

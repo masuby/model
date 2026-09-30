@@ -12,8 +12,8 @@ export interface Authority {
 export const AUTHORITIES = {
   NBS: { label: 'NBS', full: 'National Bureau of Statistics' },
   OCGS: { label: 'OCGS', full: 'Office of the Chief Government Statistician (Zanzibar)' },
-  PMO: { label: 'PMO-DMD', full: "Prime Minister's Office – Disaster Management Department" },
-  PORALG: { label: 'PO-RALG', full: "President's Office – Regional Administration and Local Government" },
+  PMO: { label: 'PMO-DMD', full: "Prime Minister's Office, Disaster Management Department" },
+  PORALG: { label: 'PO-RALG', full: "President's Office, Regional Administration and Local Government" },
   DRRC: { label: 'DRRC', full: 'Regional and District Disaster Management Committee' },
   TMA: { label: 'TMA', full: 'Tanzania Meteorological Authority' },
   NEMC: { label: 'NEMC', full: 'National Environment Management Council' },
@@ -52,7 +52,7 @@ export interface SourceInfo {
   also?: AuthorityKey[];
   dataset: string;
   method: string;
-  /** How local the data is — shown honestly in the UI. */
+  /** How local the data is - shown honestly in the UI. */
   resolution: 'council' | 'district' | 'region' | 'national' | 'overlay';
 }
 
@@ -74,7 +74,7 @@ export const INDICATOR_SOURCES: Partial<Record<IndicatorRef | 'hazard:exposure',
   'vulnerability:developmentPoverty': { by: 'NBS', dataset: 'Household Budget Survey 2017/18', method: 'poverty headcount', resolution: 'region' },
   'vulnerability:childrenHealthNutrition': { by: 'MOH', also: ['NBS', 'TFNC'], dataset: 'TDHS-MIS 2022', method: 'under-5 stunting', resolution: 'region' },
   'vulnerability:healthConditions': { by: 'MOH', also: ['TACAIDS', 'NMCP'], dataset: 'THIS 2022-23 (HIV) + TDHS-MIS 2022 (malaria)', method: 'disease-burden min–max blend', resolution: 'region' },
-  'vulnerability:displacedPeople': { by: 'UNHCR', also: ['PMO'], dataset: 'UNHCR 2024 – Nyarugusu / Nduta camps', method: 'refugee burden, scaled', resolution: 'district' },
+  'vulnerability:displacedPeople': { by: 'UNHCR', also: ['PMO'], dataset: 'UNHCR 2024, Nyarugusu and Nduta camps', method: 'refugee burden, scaled', resolution: 'district' },
   'vulnerability:livelihoods': { by: 'MUCHALI', also: ['MOA'], dataset: 'IPC / MUCHALI acute food-insecurity rounds', method: 'food-insecurity phase', resolution: 'district' },
   'vulnerability:habitat': { by: 'NBS', dataset: '2022 PHC housing', method: 'housing and services', resolution: 'district' },
   'coping:wash': { by: 'MOW', dataset: '2022 PHC water points and boreholes', method: 'resource availability (rank-normalised)', resolution: 'district' },

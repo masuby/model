@@ -1,5 +1,5 @@
 /**
- * ChartCard — a figure (title row over a hairline rule, no box) with built-in exports:
+ * ChartCard - a figure (title row over a hairline rule, no box) with built-in exports:
  *   • PNG: serialises the first <svg> inside the card (Recharts renders SVG) onto a canvas.
  *   • CSV: from the `csv` rows you pass.
  * Charts inside should use `chartTheme()` so they read correctly in day and night mode.
@@ -81,7 +81,7 @@ export function ChartCard({
     const svg = (root?.querySelector('[data-export] svg, svg[data-export]') ?? root?.querySelector('svg.recharts-surface') ?? root?.querySelector('svg')) as SVGSVGElement | null;
     if (svg) void exportSvgAsPng(svg, `inform-tz-${name}`);
   };
-  // A figure sits on the page under a hairline rule — no box (docs/DESIGN_LANGUAGE.md §7).
+  // A figure sits on the page under a hairline rule - no box (docs/DESIGN_LANGUAGE.md §7).
   return (
     <figure className={cn('flex flex-col border-t border-border pt-5', className)}>
       <figcaption className="mb-4 flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">

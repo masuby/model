@@ -1,11 +1,11 @@
 /**
- * Data Portal (/data) — where sector officers keep Tanzania's INFORM data current and PMO reviewers
+ * Data Portal (/data) - where sector officers keep Tanzania's INFORM data current and PMO reviewers
  * approve it. Role-aware tabs: enter scores, measured values or bulk paste; review queue; my
  * submissions; approved changes (with revert); activity. Works in local demo mode (browser only) and
  * against the shared Supabase backend (RLS + server-side approval).
  *
  * Layout follows docs/DESIGN_LANGUAGE.md: a plain header whose key figures (separated by rules) close it,
- * the access note, then straight into the work — underline tabs (a labelled native select on phones, so
+ * the access note, then straight into the work - underline tabs (a labelled native select on phones, so
  * the active section is always visible), or just the approved changes when that is all a visitor can see.
  * Score entry (the contributors' landing tab) ships with the page; measured values, bulk paste and the
  * review queue load on demand and are prefetched on tab hover/focus.
@@ -82,7 +82,7 @@ export default function DataPortalPage() {
   const [visited, setVisited] = React.useState<ReadonlySet<TabKey>>(() => new Set([active]));
   const listRef = React.useRef<HTMLDivElement>(null);
 
-  // Where the tab row scrolls sideways (tablet widths), keep the active tab in view — horizontally only,
+  // Where the tab row scrolls sideways (tablet widths), keep the active tab in view - horizontally only,
   // so a deep link never makes the page jump.
   React.useEffect(() => {
     const list = listRef.current;
@@ -124,7 +124,7 @@ export default function DataPortalPage() {
   }, [overrides.data]);
   const awaiting = perms.canReview ? pending.length : mine.filter((s) => s.status === 'pending').length;
   const worker = perms.canSubmit || perms.canReview;
-  // Only figures that say something for this person: no "awaiting" for visitors, no empty "0 / —" pair
+  // Only figures that say something for this person: no "awaiting" for visitors, no empty "0 /  - " pair
   // while the official baseline is still untouched.
   const figures = [
     stats.values > 0

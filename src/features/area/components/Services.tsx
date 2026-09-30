@@ -1,6 +1,6 @@
 /**
  * Capacity on the ground: facility counts as a full-width row of key figures (with per-capita rates),
- * then the three disaster-risk-reduction arrangements — as columns separated by vertical rules when
+ * then the three disaster-risk-reduction arrangements - as columns separated by vertical rules when
  * any district has a record, or as one short ruled definition list when nothing is recorded yet (the
  * lead already says so; three "Not recorded" columns would only repeat it).
  */

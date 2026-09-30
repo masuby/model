@@ -26,7 +26,7 @@ export const LENS_SHORT: Record<LensKey, string> = {
 export const sectionClass = (ruled = true) => cn('scroll-mt-32 py-14 sm:py-16', ruled && 'border-t border-border');
 
 /**
- * The heading and body of a story section: serif title and lead (no kicker — the sticky section nav
+ * The heading and body of a story section: serif title and lead (no kicker - the sticky section nav
  * already names every section). The `<section>` element itself (id, rule) is rendered by the page so
  * every anchor exists before the section's code has loaded.
  */

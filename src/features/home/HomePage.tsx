@@ -1,5 +1,5 @@
 /**
- * Home — editorial landing page (docs/DESIGN_LANGUAGE.md): serif headline, key figures separated by
+ * Home - editorial landing page (docs/DESIGN_LANGUAGE.md): serif headline, key figures separated by
  * rules, a lightweight SVG map, and ruled sections instead of card grids. No decorative motion.
  */
 import { ArrowRight, ArrowUpRight } from 'lucide-react';

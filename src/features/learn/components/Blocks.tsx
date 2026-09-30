@@ -26,7 +26,7 @@ const RULE: Record<CalloutTone, string> = {
  */
 const RULED = 'my-8 border-y border-border [[data-ruled]+&]:-mt-8 [[data-ruled]+&]:border-t-0';
 
-/** Space reserved while a widget's code loads — about the widget's own height, so the text below does not jump. */
+/** Space reserved while a widget's code loads - about the widget's own height, so the text below does not jump. */
 function WidgetFallback({ id }: { id: WidgetId }) {
   const h = WIDGET_HEIGHT[id];
   return (
@@ -40,7 +40,7 @@ function WidgetFallback({ id }: { id: WidgetId }) {
 
 /**
  * Split a formula into pieces that may only break between them, most preferably at "=", then at a
- * top-level "+"/"−", then at a top-level "×"/"÷" — never inside a bracket or an operand.
+ * top-level "+"/"−", then at a top-level "×"/"÷" - never inside a bracket or an operand.
  * Returns the right-hand pieces with their operator in front ("= …", "+ …", "× …").
  */
 function splitTopLevel(text: string, ops: string[]): string[] {
@@ -116,7 +116,7 @@ export function BlockView({ block }: { block: Block }) {
           {block.items.map((item, i) => (
             <li key={i} className="grid grid-cols-[1.5rem_1fr] leading-relaxed text-foreground/90">
               <span className="num pt-px text-sm text-muted-foreground" aria-hidden>
-                {block.style === 'number' ? `${i + 1}.` : '—'}
+                {block.style === 'number' ? `${i + 1}.` : '•'}
               </span>
               <span>
                 <RichText text={item} />

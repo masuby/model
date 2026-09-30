@@ -1,5 +1,5 @@
 /**
- * StaticMap — a lightweight SVG choropleth (no Leaflet, no GeoJSON at runtime). Paths are pre-projected
+ * StaticMap - a lightweight SVG choropleth (no Leaflet, no GeoJSON at runtime). Paths are pre-projected
  * and simplified by scripts/build-svg-map.mjs. Use it wherever pan/zoom is not needed: the home hero,
  * area locators, click-to-select pickers. For full exploration use RiskMap.
  */

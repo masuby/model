@@ -5,7 +5,7 @@ import tailwindcss from '@tailwindcss/vite';
 import path from 'node:path';
 import { VitePWA } from 'vite-plugin-pwa';
 
-// Build stamp (commit + UTC time) — shown in the footer so anyone can confirm what is live.
+// Build stamp (commit + UTC time) - shown in the footer so anyone can confirm what is live.
 const sha = (process.env.VERCEL_GIT_COMMIT_SHA || process.env.GITHUB_SHA || 'local').slice(0, 7);
 const BUILD_STAMP = `${sha} · ${new Date().toISOString().slice(0, 16).replace('T', ' ')} UTC`;
 
@@ -106,7 +106,7 @@ export default defineConfig({
     include: ['src/**/*.test.{ts,tsx}'],
     // Full-page render tests (jsdom + the whole model) need more than the 5 s default on CI runners.
     testTimeout: 30_000,
-    // Tests always run in local demo mode — never against a real Supabase project from .env.local.
+    // Tests always run in local demo mode - never against a real Supabase project from .env.local.
     env: { VITE_SUPABASE_URL: '', VITE_SUPABASE_PUBLISHABLE_KEY: '', VITE_SUPABASE_ANON_KEY: '' },
     // Component tests opt into the DOM with a `// @vitest-environment jsdom` file header.
     setupFiles: ['src/test/setup.ts'],

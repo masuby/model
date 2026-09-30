@@ -3,7 +3,7 @@
  * The global stylesheet already hides the app header, footer and `.no-print`. Here we:
  *   • force the light tokens even when the viewer is in night mode (paper is white),
  *   • keep data colours (class fills, bars, map) and avoid splitting figures and rows across pages,
- *   • collapse any deferred placeholder (content is rendered before printing — see Deferred.tsx).
+ *   • collapse any deferred placeholder (content is rendered before printing - see Deferred.tsx).
  */
 @media print {
   @page {

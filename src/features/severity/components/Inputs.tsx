@@ -1,5 +1,5 @@
 /**
- * Steps 3–6 — the assessment inputs, grouped by the official INFORM Severity structure:
+ * Steps 3–6 - the assessment inputs, grouped by the official INFORM Severity structure:
  *   Impact (Geographical ⅓, Human ⅔) · Conditions (people by level of humanitarian conditions)
  *   Complexity (Society & safety, Operating environment) · Reliability (reported separately).
  * Layout: ruled sub-sections on the page (docs/DESIGN_LANGUAGE.md), not stacked boxes.
@@ -323,7 +323,7 @@ export function ConditionsInputs({
                 <span className="text-xl font-semibold">{t(`level.${conc.raw}.name`)}</span>
               </>
             ) : (
-              <span className="num text-3xl font-semibold">—</span>
+              <span className="text-sm text-muted-foreground">{t('results.notComputed')}</span>
             )}
           </dd>
           <dd className="mt-1 text-sm leading-relaxed text-muted-foreground">{t('conditions.concentrationSub')}</dd>

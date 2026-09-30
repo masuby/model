@@ -19,7 +19,7 @@ const PRESETS: Array<{ key: string; dims: Dims }> = [
   { key: 'allHigh', dims: { hazard: 8, vulnerability: 8, coping: 8 } },
 ];
 
-/** Lesson 5 — INFORM Risk playground: three sliders → riskScore() live, and geometric vs arithmetic mean. */
+/** Lesson 5 - INFORM Risk playground: three sliders → riskScore() live, and geometric vs arithmetic mean. */
 export default function RiskPlayground() {
   const { t } = useTranslation(['learn', 'common']);
   const model = useModel();
@@ -29,7 +29,7 @@ export default function RiskPlayground() {
   );
   const [dims, setDims] = React.useState<Dims>(nationalDims);
   const [loaded, setLoaded] = React.useState<Loaded | null>({ kind: 'national' });
-  // Empty until a council is loaded, and cleared when the sliders move — so any council can be (re)loaded.
+  // Empty until a council is loaded, and cleared when the sliders move - so any council can be (re)loaded.
   const [councilId, setCouncilId] = React.useState('');
 
   const risk = riskScore(dims.hazard, dims.vulnerability, dims.coping);
@@ -170,7 +170,7 @@ function ClassScale({ value, className }: { value: number | null; className?: st
 
 /**
  * Returns `value` once it has stopped changing for `delay` ms. Starts empty, so nothing is announced
- * on page load — only after the learner has moved something.
+ * on page load - only after the learner has moved something.
  */
 function useSettled(value: string, delay: number): string {
   const [settled, setSettled] = React.useState('');

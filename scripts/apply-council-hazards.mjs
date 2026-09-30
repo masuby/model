@@ -1,14 +1,14 @@
 /**
- * apply-council-hazards.mjs — build REAL council-level (195) data from the council climate
+ * apply-council-hazards.mjs - build REAL council-level (195) data from the council climate
  * computation, so every council carries its OWN Hazard & Exposure instead of inheriting the
  * parent district's. Vulnerability & Coping stay district-level (those come from district-
- * representative surveys: HBS/TDHS/IPC — no council resolution exists, so inheriting is honest).
+ * representative surveys: HBS/TDHS/IPC - no council resolution exists, so inheriting is honest).
  *
- * Per council (raise-only — never below the district's documented level):
+ * Per council (raise-only - never below the district's documented level):
  *   drought  = max(council CHIRPS/SPEI drought, district drought floor)
  *   heatwave = max(council ERA5 heat,            district heat floor)
  *   flood    = max( max(district flood hazard [documented events], council heavy-rain)  ×  council exposure )
- *   exposure = council NBS-2022 population ÷ council area (the H×E amplifier — council-specific)
+ *   exposure = council NBS-2022 population ÷ council area (the H×E amplifier - council-specific)
  *   other natural/human hazards = inherited from the district (no council source yet)
  * Then: natural.aggregate = mean, hazard.total = scaled geomean(natural,human),
  *       risk = cbrt(councilHazard × districtVuln × districtCoping).
@@ -49,14 +49,14 @@ for (const f of councils.features) {
   const E = num(cl.exposure_index);
   const cDrought = num(cl.drought_index), cHeat = num(cl.heatwave_index), cHeavy = num(cl.heavy_rain_index);
 
-  // drought / heatwave — council's own, but ONLY refine an indicator the district already had,
+  // drought / heatwave - council's own, but ONLY refine an indicator the district already had,
   // floored at the district level (raise-only). Adding a NEW indicator the district lacked (e.g.
   // heatwave where it was null) would change the indicator set and could LOWER the mean below the
-  // district — so we keep the set identical: the aggregate can then only rise.
+  // district - so we keep the set identical: the aggregate can then only rise.
   if (isN(cDrought) && isN(nat.drought)) nat.drought = r1(Math.max(cDrought, nat.drought));
   if (isN(cHeat) && isN(nat.heatwave)) nat.heatwave = r1(Math.max(cHeat, nat.heatwave));
 
-  // flood — the district's FINAL flood (documented events + district H×E) is the floor so a
+  // flood - the district's FINAL flood (documented events + district H×E) is the floor so a
   // flood-prone council is never shown safer; council heavy-rain + council exposure can only raise it.
   const distFlood = isN(nat.flood) ? nat.flood : 0;
   const hazardFlood = Math.max(distFlood, isN(cHeavy) ? cHeavy : 0);
@@ -72,7 +72,7 @@ for (const f of councils.features) {
   const humanAgg = he.human?.aggregate;
   he.total = r1(sgm([nat.aggregate, humanAgg]));
 
-  // Vulnerability & Coping are the district's (survey resolution) — riskModel references the live
+  // Vulnerability & Coping are the district's (survey resolution) - riskModel references the live
   // district object so Data-Entry edits flow through; we store only the council-specific hazard + risk.
   const h = he.total, v = src.vulnerability?.total, c = src.lackCopingCapacity?.total;
   const cRisk = [h, v, c].every(isN) ? r1(Math.pow(h, 1 / 3) * Math.pow(v, 1 / 3) * Math.pow(c, 1 / 3)) : src.risk;

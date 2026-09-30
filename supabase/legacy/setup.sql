@@ -1,5 +1,5 @@
 -- ============================================================================
--- INFORM TANZANIA — CONSOLIDATED SUPABASE SETUP  (single source of truth)
+-- INFORM TANZANIA - CONSOLIDATED SUPABASE SETUP  (single source of truth)
 -- ============================================================================
 -- Run this ONCE in the Supabase SQL Editor on a fresh project.
 -- It is idempotent: safe to re-run.
@@ -13,7 +13,7 @@
 --
 -- SECURITY NOTE (read me):
 --   The frontend talks to Supabase with the PUBLIC anon key and does NOT use
---   Supabase Auth — user identity comes from the app's own authService. So RLS
+--   Supabase Auth - user identity comes from the app's own authService. So RLS
 --   cannot key on auth.uid(). The policies below are intentionally PERMISSIVE
 --   (anon may read/write) to make the shared multi-user database work today.
 --   This means anyone with the anon key (which ships in the frontend bundle)
@@ -54,7 +54,7 @@ CREATE INDEX IF NOT EXISTS idx_admin_units_level  ON admin_units(level);
 CREATE INDEX IF NOT EXISTS idx_admin_units_parent ON admin_units(parent_code);
 
 -- ============================================================================
--- 2. committees  (matches committeeSupabaseService — adm1_/adm2_ naming)
+-- 2. committees  (matches committeeSupabaseService - adm1_/adm2_ naming)
 -- ============================================================================
 CREATE TABLE IF NOT EXISTS committees (
   id             BIGSERIAL PRIMARY KEY,
@@ -74,7 +74,7 @@ CREATE TABLE IF NOT EXISTS committees (
 CREATE INDEX IF NOT EXISTS idx_committees_type   ON committees(type);
 CREATE INDEX IF NOT EXISTS idx_committees_adm1   ON committees(adm1_code);
 CREATE INDEX IF NOT EXISTS idx_committees_active ON committees(is_active);
--- one regional committee per region — also makes the seed below idempotent
+-- one regional committee per region - also makes the seed below idempotent
 CREATE UNIQUE INDEX IF NOT EXISTS uq_committees_regional_adm1
   ON committees(adm1_code) WHERE type = 'regional';
 
@@ -84,7 +84,7 @@ CREATE TRIGGER committees_updated_at BEFORE UPDATE ON committees
 
 -- ============================================================================
 -- 3. submissions  (matches supabaseDataService.createSubmission/update)
---    NOTE: no FK to auth.users — submitter identity is stored as name/email
+--    NOTE: no FK to auth.users - submitter identity is stored as name/email
 --    text fields supplied by the app's own auth layer.
 -- ============================================================================
 CREATE TABLE IF NOT EXISTS submissions (
@@ -186,7 +186,7 @@ CREATE TRIGGER data_entries_updated_at BEFORE UPDATE ON data_entries
   FOR EACH ROW EXECUTE FUNCTION set_updated_at();
 
 -- ============================================================================
--- 6. ROW LEVEL SECURITY — permissive (anon key, app-level auth). See note above.
+-- 6. ROW LEVEL SECURITY - permissive (anon key, app-level auth). See note above.
 -- ============================================================================
 ALTER TABLE admin_units        ENABLE ROW LEVEL SECURITY;
 ALTER TABLE committees         ENABLE ROW LEVEL SECURITY;
@@ -207,7 +207,7 @@ BEGIN
 END $$;
 
 -- ============================================================================
--- 7. REALTIME — live updates for dashboards/PMO panels
+-- 7. REALTIME - live updates for dashboards/PMO panels
 -- ============================================================================
 DO $$
 DECLARE t TEXT;
@@ -222,7 +222,7 @@ BEGIN
 END $$;
 
 -- ============================================================================
--- 8. STORAGE — bucket "excel-files" for excelStorageService (public bucket)
+-- 8. STORAGE - bucket "excel-files" for excelStorageService (public bucket)
 -- ============================================================================
 INSERT INTO storage.buckets (id, name, public)
 VALUES ('excel-files', 'excel-files', true)
@@ -238,7 +238,7 @@ CREATE POLICY "excel modify" ON storage.objects FOR UPDATE USING (bucket_id = 'e
 CREATE POLICY "excel delete" ON storage.objects FOR DELETE USING (bucket_id = 'excel-files');
 
 -- ============================================================================
--- 9. SEED — 31 regional disaster committees + 26 mainland regions
+-- 9. SEED - 31 regional disaster committees + 26 mainland regions
 -- ============================================================================
 INSERT INTO committees (name, type, adm1_code, adm1_name, is_active) VALUES
   ('Dodoma Regional Disaster Committee','regional','TZ01','Dodoma',true),

@@ -1,10 +1,10 @@
 /**
- * fix-dimension-aggregation.mjs — restore AUTHENTIC INFORM dimension aggregation in the shipped
+ * fix-dimension-aggregation.mjs - restore AUTHENTIC INFORM dimension aggregation in the shipped
  * dataset. Two earlier scripts (refill-real-hazards, enrich-coping-facilities) set dimension totals
  * with arithmetic MEAN; later scripts re-fixed Hazard & Vulnerability to the scaled GEOMEAN but never
  * re-fixed Lack of Coping Capacity, so ~69 coping totals drifted to the mean. This recomputes every
  * dimension total as the scaled geomean OF THE STORED CATEGORY AGGREGATES (so the total is exactly the
- * sgm of the category values shown in the UI) and risk as the cube root — the authentic INFORM/Excel
+ * sgm of the category values shown in the UI) and risk as the cube root - the authentic INFORM/Excel
  * pipeline. Missing data (null) is excluded; National stays official (untouched); idempotent.
  */
 import fs from 'fs';

@@ -14,7 +14,7 @@ import {
 } from '../lib/targets';
 
 const model = buildModel();
-const kondoa = model.byId.get('C001')!; // Kondoa District — shares TZ0101 with Kondoa Town (C002)
+const kondoa = model.byId.get('C001')!; // Kondoa District - shares TZ0101 with Kondoa Town (C002)
 const meta = { authority: 'TMA', dataset: ' CHIRPS v3 ', note: '  checked  ' };
 
 describe('edit targets', () => {

@@ -1,7 +1,7 @@
 /**
  * Static teaching figures referenced from lesson content (`{ "type": "figure", "id": … }`).
  * Numbers (indicator counts, class ranges, severity weights) come from the engine, never typed in.
- * Figures sit on the page between hairline rules — typography and data colour only.
+ * Figures sit on the page between hairline rules - typography and data colour only.
  */
 import { ArrowDown, ArrowRight } from 'lucide-react';
 import * as React from 'react';
@@ -214,7 +214,7 @@ const FIGURES: Record<FigureId, () => React.ReactElement> = {
 };
 
 /**
- * A figure opens with a hairline — unless it directly follows another ruled block (a formula, terms
+ * A figure opens with a hairline - unless it directly follows another ruled block (a formula, terms
  * or comparison, marked `data-ruled`), whose bottom rule already separates the two.
  */
 export function Figure({ id, caption }: { id: FigureId; caption?: string }) {

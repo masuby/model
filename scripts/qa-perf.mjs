@@ -1,5 +1,5 @@
 /**
- * qa-perf.mjs — page-load performance on a production build, emulating a mid-range phone on 4G
+ * qa-perf.mjs - page-load performance on a production build, emulating a mid-range phone on 4G
  * (4× CPU slowdown, ~9 Mbps / 60 ms RTT). Reports FCP, LCP, total blocking time proxy, JS bytes.
  *   npx vite build && npx vite preview --port 4173
  *   node scripts/qa-perf.mjs [baseUrl] [--runs=3] [--only=/severity,/]

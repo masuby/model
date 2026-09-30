@@ -42,7 +42,7 @@ def bullets(s, items, left=Inches(0.7), top=Inches(1.6), width=Inches(12), size=
     tf = box(s, left, top, width, SH - top - Inches(0.4)); first = True
     for txt, lvl, color, bold in items:
         p = tf.paragraphs[0] if first else tf.add_paragraph(); first = False
-        prefix = {0: '■  ', 1: '      –  ', 2: '            ·  '}[lvl]
+        prefix = {0: '■  ', 1: '      •  ', 2: '            ·  '}[lvl]
         setp(p, prefix + txt, size - lvl*2, color, bold=bold); p.space_after = Pt(gap)
 
 # ---- 1 TITLE ----
@@ -53,19 +53,19 @@ setp(tf.paragraphs[0], 'INFORM TANZANIA', 14, GOLD, bold=True)
 p = tf.add_paragraph(); setp(p, 'Subnational Disaster Risk', 44, WHITE, bold=True)
 p = tf.add_paragraph(); setp(p, 'From a hidden-sheet Excel template to a scalable, local-data risk engine', 22, WHITE)
 tf = box(s, Inches(0.8), Inches(4.85), Inches(11.7), Inches(2))
-setp(tf.paragraphs[0], "Prime Minister's Office – Disaster Management Department (PMO-DMD)", 16, WHITE, bold=True)
-p = tf.add_paragraph(); setp(p, 'Reproducing the regional INFORM model exactly — and scaling it to all 195 councils', 14, RGBColor(0xD8,0xE6,0xDC))
+setp(tf.paragraphs[0], "Prime Minister's Office, Disaster Management Department (PMO-DMD)", 16, WHITE, bold=True)
+p = tf.add_paragraph(); setp(p, 'Reproducing the regional INFORM model exactly, and scaling it to all 195 councils', 14, RGBColor(0xD8,0xE6,0xDC))
 p = tf.add_paragraph(); setp(p, 'June 2026', 13, RGBColor(0xD8,0xE6,0xDC))
 
 # ---- 2 WHAT IS INFORM ----
 s = slide(); header(s, 'BACKGROUND', 'What is INFORM?')
 bullets(s, [
- ('INFORM is a global, open composite index of disaster risk — a single 0–10 score per area (0 = lowest risk, 10 = highest).', 0, NAVY, False),
+ ('INFORM is a global, open composite index of disaster risk: a single 0–10 score per area (0 = lowest risk, 10 = highest).', 0, NAVY, False),
  ('Tanzania runs the regional INFORM Model Template (the SADC / IGAD subnational adaptation). The official national INFORM risk is 4.1.', 0, NAVY, False),
- ('Risk is built from three dimensions — the INFORM logic:', 0, NAVY, True),
- ('Hazard & Exposure — the threats (drought, flood, earthquake, conflict…) and who/what is exposed', 1, GREY, False),
- ('Vulnerability — susceptibility of people (poverty, health, food insecurity, displacement)', 1, GREY, False),
- ('Lack of Coping Capacity — weakness of institutions & infrastructure to respond (WASH, health, DRR, governance)', 1, GREY, False),
+ ('Risk is built from three dimensions (the INFORM logic):', 0, NAVY, True),
+ ('Hazard & Exposure: the threats (drought, flood, earthquake, conflict…) and who/what is exposed', 1, GREY, False),
+ ('Vulnerability: susceptibility of people (poverty, health, food insecurity, displacement)', 1, GREY, False),
+ ('Lack of Coping Capacity: weakness of institutions & infrastructure to respond (WASH, health, DRR, governance)', 1, GREY, False),
  ('Each dimension is built from indicators → categories → dimension → the final risk index.', 0, GREEN, True),
 ], top=Inches(1.7), size=17)
 
@@ -87,12 +87,12 @@ tf = box(s, Inches(0.6), Inches(6.2), Inches(12), Inches(1))
 setp(tf.paragraphs[0], '78 raw indicators (53 currently used for Tanzania) → aggregated to 6 categories → 3 dimensions → one INFORM risk score, for every administrative unit.', 15, GREEN, bold=True)
 
 # ---- 4 INDICATOR FORMULA CHAIN ----
-s = slide(); header(s, 'HOW THE TEMPLATE WORKS', 'From an actual value to a 0–10 score — the standardisation chain')
+s = slide(); header(s, 'HOW THE TEMPLATE WORKS', 'From an actual value to a 0–10 score: the standardisation chain')
 steps = ['Actual value (natural unit)', 'Denominator (÷ population / area / GDP, or none)',
-         'Outlier cap — Tukey IQR fence  MAX(MIN(x, Q3+1.5·IQR), Q1−1.5·IQR)',
-         'Transform — None | Logarithm LN(0.001+x) | Exponential',
-         'Min–max scaling — 10 × (x − Min) / (Max − Min)  vs a fixed reference',
-         'Direction — if protective: 10 − score (higher = better)',
+         'Outlier cap: Tukey IQR fence  MAX(MIN(x, Q3+1.5·IQR), Q1−1.5·IQR)',
+         'Transform: None | Logarithm LN(0.001+x) | Exponential',
+         'Min–max scaling: 10 × (x − Min) / (Max − Min)  vs a fixed reference',
+         'Direction: if protective: 10 − score (higher = better)',
          'Clamp [0,10] → ROUND to 1 dp →  the 0–10 indicator']
 y = Inches(1.7)
 for i, st in enumerate(steps):
@@ -106,9 +106,9 @@ tf = box(s, Inches(0.7), y+Inches(0.02), Inches(12), Inches(0.5))
 setp(tf.paragraphs[0], 'Excel:  =IF(val="","",IFERROR(MAX(0,MIN(10,ROUND(IF(sign="Decrease",10-base,base),1))),"No data"))', 12, GREY, bold=True, font='Consolas')
 
 # ---- 5 FEW INDICATORS, MANY UNITS ----
-s = slide(); header(s, 'CAPTURING DIVERSITY', 'A few indicators — many different units (why standardisation is needed)')
+s = slide(); header(s, 'CAPTURING DIVERSITY', 'A few indicators: many different units (why standardisation is needed)')
 rows = [('Indicator', 'Unit', 'Dimension', True),
-        ('Food security – insufficient food', '% of population (Phase 2+)', 'Vulnerability', False),
+        ('Food security: insufficient food', '% of population (Phase 2+)', 'Vulnerability', False),
         ('Historic drought frequency', 'years', 'Hazard & Exposure', False),
         ('Internally displaced people', 'count (number of people)', 'Vulnerability', False),
         ('Gross National Income per capita', 'US$ (thousands, log)', 'Coping Capacity', False),
@@ -126,7 +126,7 @@ for ri, (a, b, c, hd) in enumerate(rows):
         para.runs[0].font.bold = hd; para.runs[0].font.color.rgb = WHITE if hd else NAVY
         cell.fill.solid(); cell.fill.fore_color.rgb = NAVY if hd else (LIGHT if ri % 2 else WHITE)
 tf = box(s, Inches(0.7), Inches(6.75), Inches(12), Inches(0.5))
-setp(tf.paragraphs[0], '%, years, counts, US$, per-1,000, per-10,000, ratios, Mg/ha/yr, m/yr — all reconciled onto one 0–10 scale.', 14, GREEN, bold=True)
+setp(tf.paragraphs[0], '%, years, counts, US$, per-1,000, per-10,000, ratios, Mg/ha/yr, m/yr: all reconciled onto one 0–10 scale.', 14, GREEN, bold=True)
 
 # ---- 6 CATEGORISATION -> RISK ----
 s = slide(); header(s, 'CATEGORISATION & AGGREGATION', 'From standardised indicators to the INFORM risk')
@@ -135,9 +135,9 @@ bullets(s, [
  ('Category   =  AVERAGE of its components   (arithmetic mean)', 0, NAVY, True),
  ('Dimension  =  scaled GEOMEAN of its categories', 0, NAVY, True),
  ('ROUND( (10 − GEOMEAN((10−c)/10×9+1)) /9 ×10 , 1 )', 1, GREY, False),
- ('INFORM Risk  =  ∛ ( H × V × LCC )   — cube-root of the three dimensions', 0, GREEN, True),
+ ('INFORM Risk  =  ∛ ( H × V × LCC )  : cube-root of the three dimensions', 0, GREEN, True),
  ('ROUND( H^(1/3) × V^(1/3) × LCC^(1/3) , 1 )', 1, GREY, False),
- ('The geometric mean means a country cannot "average away" one very weak dimension — high hazard with low coping still yields high risk.', 0, NAVY, False),
+ ('The geometric mean means a country cannot "average away" one very weak dimension: high hazard with low coping still yields high risk.', 0, NAVY, False),
 ], top=Inches(1.8), size=18, gap=10)
 
 # ---- 7 THE BOTTLENECK ----
@@ -146,51 +146,51 @@ fill(s, Inches(0.7), Inches(1.65), Inches(12), Inches(0.7), RED)
 tf = box(s, Inches(0.9), Inches(1.74), Inches(11.6), Inches(0.6))
 setp(tf.paragraphs[0], 'Every reference range, outlier fence, transform and aggregation is buried in hidden worksheets.', 16, WHITE, bold=True)
 bullets(s, [
- ('Opaque — the math is invisible to the people who use and must trust the numbers.', 0, NAVY, False),
- ('Fixed unit set — built for ~170 districts; it cannot scale to 195 councils, wards or villages.', 0, NAVY, False),
- ('Manual & single-file — one workbook, no version control, easy to break, hard to audit.', 0, NAVY, False),
- ('Closed to local data — no clean way to add a local indicator or feed council-level values.', 0, NAVY, False),
- ('No automation — no live update, no link to early-warning or anticipatory action.', 0, NAVY, False),
- ('Result: the model stops at the national / regional level. Local risk — where decisions are made — is out of reach.', 0, RED, True),
+ ('Opaque: the math is invisible to the people who use and must trust the numbers.', 0, NAVY, False),
+ ('Fixed unit set: built for ~170 districts; it cannot scale to 195 councils, wards or villages.', 0, NAVY, False),
+ ('Manual & single-file: one workbook, no version control, easy to break, hard to audit.', 0, NAVY, False),
+ ('Closed to local data: no clean way to add a local indicator or feed council-level values.', 0, NAVY, False),
+ ('No automation: no live update, no link to early-warning or anticipatory action.', 0, NAVY, False),
+ ('Result: the model stops at the national / regional level. Local risk, where decisions are made, is out of reach.', 0, RED, True),
 ], top=Inches(2.6), size=16, gap=11)
 
 # ---- 8 ENGINES MIMIC EXCEL ----
-s = slide(); header(s, 'THE ENABLER', 'We rebuilt the hidden sheets as a transparent engine — proven identical')
+s = slide(); header(s, 'THE ENABLER', 'We rebuilt the hidden sheets as a transparent engine: proven identical')
 bullets(s, [
  ('The hidden-sheet formulas were reverse-engineered and reproduced exactly in code (a standardisation + aggregation engine).', 0, NAVY, False),
  ('Proven byte-for-byte against the official workbook:', 0, GREEN, True),
  ('8,664 / 8,664 standardised indicator cells reproduce the template exactly', 1, GREEN, False),
  ('170 / 170 district risk scores reproduce the template exactly', 1, GREEN, False),
- ('Now it scales — the same engine runs unchanged on 195 councils and 31 regions (194/195 match district INFORM; the rest are new post-2024 councils).', 0, NAVY, False),
- ('Spec-driven & open — add, delete or amend an indicator without touching the math; fully testable and version-controlled.', 0, NAVY, False),
- ('The regional INFORM core is never altered — it is reproduced exactly; everything new is additive (v2).', 0, GOLD, True),
+ ('Now it scales: the same engine runs unchanged on 195 councils and 31 regions (194/195 match district INFORM; the rest are new post-2024 councils).', 0, NAVY, False),
+ ('Spec-driven & open: add, delete or amend an indicator without touching the math; fully testable and version-controlled.', 0, NAVY, False),
+ ('The regional INFORM core is never altered: it is reproduced exactly; everything new is additive (v2).', 0, GOLD, True),
 ], top=Inches(1.7), size=16, gap=10)
 
 # ---- 9 LOCAL DATA METHODS ----
-s = slide(); header(s, 'CAPTURING REAL LOCAL DATA', 'Methods — a federated, bottom-up data system')
+s = slide(); header(s, 'CAPTURING REAL LOCAL DATA', 'Methods: a federated, bottom-up data system')
 bullets(s, [
- ('Federated collection tools — one shared Excel sent to every sector; they enter ACTUAL values in natural units and a locked formula shows the 0–10 live.', 0, NAVY, False),
+ ('Federated collection tools: one shared Excel sent to every sector; they enter ACTUAL values in natural units and a locked formula shows the 0–10 live.', 0, NAVY, False),
  ('One accountable Tanzanian stakeholder per indicator:', 0, NAVY, True),
  ('TMA (climate), GST (geology), NEMC (environment), MoH (health), NBS (statistics), MoA/MUCHALI (food), MoW (water), PMO-DMD (DRR)…', 1, GREY, False),
- ('Bottom-up aggregation — village → district → region → country; finer, well-filled data refines the higher level.', 0, NAVY, False),
+ ('Bottom-up aggregation: village → district → region → country; finer, well-filled data refines the higher level.', 0, NAVY, False),
  ('Authentic sources used: NBS 2022 Census, TMA CHIRPS v3 / ERA5, GST seismic catalogue, MoH TDHS-MIS 2022, IPC/MUCHALI, TASAF, and satellite Earth Observation.', 0, NAVY, False),
- ('Earth Observation computed live (Earth Engine): MODIS NDVI, SMAP soil moisture, CHIRPS aridity — each validated against known geography before use.', 0, GREEN, True),
+ ('Earth Observation computed live (Earth Engine): MODIS NDVI, SMAP soil moisture, CHIRPS aridity, each validated against known geography before use.', 0, GREEN, True),
 ], top=Inches(1.7), size=16, gap=10)
 
 # ---- 9b HONEST STATUS (for model developers) ----
-s = slide(); header(s, 'HONEST STATUS', 'Where this actually stands — no overselling')
+s = slide(); header(s, 'HONEST STATUS', 'Where this actually stands: no overselling')
 quad = [('SOLID / EXACT', GREEN, [
           'Engine reproduces the template byte-for-byte: 8,664/8,664 cells, 170/170 risks',
           'Same engine runs at 195 councils / 31 regions (194/195 = district INFORM)',
           '2022 census population per council (sum = 61,741,120, the exact national total)']),
         ('PROTOTYPE / PROPOSED', GOLD, [
           'Advanced "exploded" multi-source indicators + weights = literature-proposed, NOT enforced',
-          'EO drought layers (aridity P/PET, NDVI, soil moisture) computed & validated — research-grade',
-          'Seasonality from CHIRPS 8-zone analysis — context layer, not yet in the index']),
-        ('TRIED — DID NOT WORK', RED, [
-          'Sentinel-1 flood (VV<-17dB): FAILED validation — flagged soda-lakes/salt-flats as water → PULLED',
-          'Lightning (LIS/OTD): not available on Earth Engine — not done',
-          'SMAP soil moisture product is deprecated (ends 2022) — not current']),
+          'EO drought layers (aridity P/PET, NDVI, soil moisture) computed & validated: research-grade',
+          'Seasonality from CHIRPS 8-zone analysis: context layer, not yet in the index']),
+        ('TRIED, DID NOT WORK', RED, [
+          'Sentinel-1 flood (VV<-17dB): FAILED validation, flagged soda-lakes/salt-flats as water → PULLED',
+          'Lightning (LIS/OTD): not available on Earth Engine, not done',
+          'SMAP soil moisture product is deprecated (ends 2022): not current']),
         ('STILL OPEN', NAVY, [
           'Many vulnerability indicators exist only at region/national level → council = labelled proxy',
           'No sustainable update pipeline; no live link to EOCC / early warning',
@@ -207,18 +207,18 @@ for (title, col, items), (x, y) in zip(quad, xy):
         setp(p, '·  ' + it, 11, NAVY); p.space_after = Pt(5)
 
 # ---- 10 THE GAP ----
-s = slide(); header(s, 'THE GAP', 'What is still missing — the challenge ahead')
+s = slide(); header(s, 'THE GAP', 'What is still missing: the challenge ahead')
 bullets(s, [
- ('Subnational risk is not yet operational — decisions happen at council/ward level, but official INFORM stops at national/regional.', 0, RED, True),
- ('Local data is scattered and uneven — many key indicators exist only at region or national level (poverty, health surveys, GDP).', 0, NAVY, False),
- ('No sustainable pipeline — capturing, validating and updating local data is still manual and ad-hoc.', 0, NAVY, False),
+ ('Subnational risk is not yet operational: decisions happen at council/ward level, but official INFORM stops at national/regional.', 0, RED, True),
+ ('Local data is scattered and uneven: many key indicators exist only at region or national level (poverty, health surveys, GDP).', 0, NAVY, False),
+ ('No sustainable pipeline: capturing, validating and updating local data is still manual and ad-hoc.', 0, NAVY, False),
  ('Earth-Observation indicators (vegetation, soil moisture, flood, landslide) need proper computation, downscaling and validation.', 0, NAVY, False),
- ('No live link to action — risk is not yet wired to the EOCC, early-warning, or LGA planning & budgeting.', 0, NAVY, False),
- ('Capacity & financing gaps at the local-government level — tools, training and incentives to keep the data flowing.', 0, NAVY, False),
+ ('No live link to action: risk is not yet wired to the EOCC, early-warning, or LGA planning & budgeting.', 0, NAVY, False),
+ ('Capacity & financing gaps at the local-government level: tools, training and incentives to keep the data flowing.', 0, NAVY, False),
 ], top=Inches(1.7), size=16, gap=12)
 
 # ---- 11 OPPORTUNITIES ----
-s = slide(); header(s, 'OPPORTUNITIES', 'Research & financial support — for member-state adoption')
+s = slide(); header(s, 'OPPORTUNITIES', 'Research & financial support: for member-state adoption')
 two = [('RESEARCH', GREEN, [
         'EO computation & statistical downscaling to council/ward',
         'Validation against ground events & independent products',
@@ -227,7 +227,7 @@ two = [('RESEARCH', GREEN, [
         'Methods publishable as regional public goods']),
        ('FINANCING & ADOPTION', GOLD, [
         'Fund local-data integration & the federated tools',
-        'LGA capacity building — train sectors to capture & submit',
+        'LGA capacity building: train sectors to capture & submit',
         'Scale to SADC / IGAD member states (transparent, open engine)',
         'Wire risk to PMO-DMD EOCC, anticipatory action & PO-RALG planning',
         'Tanzania as the subnational-INFORM pilot for the region'])]
@@ -250,7 +250,7 @@ tf = box(s, Inches(0.9), Inches(3.3), Inches(11.6), Inches(3))
 for i, t in enumerate([
    'The template math is fully understood and reproduced exactly (8,664/8,664; 170/170).',
    'It runs at council level (195) because it is code, not a hidden-sheet workbook.',
-   'Local-data capture and EO are working but research-grade — and some attempts failed (stated plainly).',
+   'Local-data capture and EO are working but research-grade, and some attempts failed (stated plainly).',
    'Ask: research partnership + financing to integrate local data and support member-state adoption.']):
     p = tf.paragraphs[0] if i == 0 else tf.add_paragraph()
     setp(p, '▸  ' + t, 18, RGBColor(0xD8,0xE6,0xDC)); p.space_after = Pt(12)

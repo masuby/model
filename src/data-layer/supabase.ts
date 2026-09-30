@@ -1,5 +1,5 @@
 /**
- * Supabase repository — shared, multi-user persistence with row-level security.
+ * Supabase repository - shared, multi-user persistence with row-level security.
  * Schema: supabase/migrations/0001_init.sql. Approvals run server-side in the `review_submission`
  * security-definer function, which checks the reviewer's role and writes the approved values
  * atomically with an audit entry.
@@ -8,6 +8,7 @@ import type { SupabaseClient as BaseClient } from '@supabase/supabase-js';
 import type { Database, Json } from './database.types';
 import type { EditRef, Overrides } from '@/engine/risk/types';
 import type { AuditEntry, Change, NewSubmission, Profile, Repository, Submission, SubmissionStatus } from './types';
+import { NO_VALUE } from '@/lib/utils';
 
 export type SupabaseClient = BaseClient<Database>;
 
@@ -139,7 +140,7 @@ export function createSupabaseRepository(sb: SupabaseClient): Repository {
       return rows.map((r) => ({
         id: String(r.id),
         at: r.at,
-        actor: r.actor_name ?? '—',
+        actor: r.actor_name ?? NO_VALUE,
         action: ACTIONS.includes(r.action as AuditEntry['action']) ? (r.action as AuditEntry['action']) : 'submitted',
         unitId: r.unit_id ?? undefined,
         unitName: r.unit_name ?? undefined,

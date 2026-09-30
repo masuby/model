@@ -1,5 +1,5 @@
 /**
- * Risk Explorer — pure helpers (no React, no i18n) so they are unit-testable:
+ * Risk Explorer - pure helpers (no React, no i18n) so they are unit-testable:
  *   • URL state  ⇄ ExploreState (every view is shareable)
  *   • statistics, ranks, sorting, search and class filtering over a level's units
  *   • carrying a selection across levels (council → its region / INFORM source unit)
@@ -28,7 +28,7 @@ export interface ExploreState {
   metric: MetricKey;
   /** Selected unit id (any explorable level). */
   id: string | null;
-  /** Class filter — only meaningful for class metrics (risk and dimensions). */
+  /** Class filter - only meaningful for class metrics (risk and dimensions). */
   cls: ClassKey | null;
   view: ExploreView;
   /** Pinned units for the comparison tray (max 3, any level). */
@@ -263,7 +263,7 @@ export function searchUnits(pool: readonly Unit[], query: string, limit = 8): Un
 /* Area facts                                                                                         */
 /* ------------------------------------------------------------------------------------------------ */
 
-/** Leaf indicators with data vs. the total — the counts behind `dataCoverage`. */
+/** Leaf indicators with data vs. the total - the counts behind `dataCoverage`. */
 export function coverageCounts(u: Unit): { have: number; total: number } {
   let have = 0;
   for (const l of ALL_INDICATORS) if (isNum(u.dims[l.dimension.key].categories[l.category.key]?.indicators[l.indicator.key])) have++;

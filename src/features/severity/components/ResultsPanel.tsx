@@ -1,5 +1,5 @@
 /**
- * Live results — one flat panel (the only box on the page besides inputs): the index with its category
+ * Live results - one flat panel (the only box on the page besides inputs): the index with its category
  * bar, an incomplete state that lists what is missing, the dimension → category → component → indicator
  * tree, the formula with the numbers substituted and the separately-reported reliability (both native
  * <details>, closed by default so the panel fits a laptop screen), and an export bar that stays pinned

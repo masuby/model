@@ -1,4 +1,4 @@
-# INFORM Tanzania — Frontend guide
+# INFORM Tanzania: Frontend guide
 
 How the web app is put together, and the rules every page follows. Read this before adding a feature.
 
@@ -16,7 +16,7 @@ components/
                 Dialog, SheetContent, DropdownMenu, Popover, Switch, Slider, Segmented, Progress, Input…)
   layout/       Page.tsx → PageContainer, PageHeader, Section, SectionHeading, Kicker, KeyFigures, Note
   risk/         ClassBadge, ClassDot, ClassLegend, RampLegend, DimensionBars, ScoreBar
-  map/          StaticMap (light SVG choropleth) and RiskMap (Leaflet, pan/zoom) — lazy-load both
+  map/          StaticMap (light SVG choropleth) and RiskMap (Leaflet, pan/zoom); lazy-load both
   charts/       ChartCard (flat figure with PNG/CSV export), theme.tsx (useChartTheme, ChartTooltip,
                 DIMENSION_COLORS for fills, DIMENSION_TEXT for text)
 data-layer/     DataProvider (useModel, useData, useSubmit, useReview…), local + Supabase repositories
@@ -49,7 +49,7 @@ state/prefs.ts  theme, language, learning progress (persisted)
 
 - `Progress` requires a `label` (accessible name).
 - Dimension colours: `DIMENSION_COLORS` for fills/strokes, `DIMENSION_TEXT` (theme-aware CSS variables)
-  for any text — the bright fills fail contrast as text.
+  for any text: the bright fills fail contrast as text.
 - Class fills: take text colour from `onClassColor(hex)`; never hard-code white on a class colour.
 - Map overlays positioned over `RiskMap` need `z-[450]` (Leaflet panes sit at z-index 400).
 - Translations load lazily per namespace: always declare the namespace in `useTranslation('<ns>')`

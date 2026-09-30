@@ -2,7 +2,7 @@
  * Metric resolver: what the map/table/charts are coloured by.
  *   'risk'                → overall INFORM Risk (risk thresholds)
  *   'dim:<dimension>'     → a dimension score (that dimension's own thresholds)
- *   'ind:<dim>:<key>'     → a single indicator (continuous 0–10 scale — INFORM defines no classes for leaves)
+ *   'ind:<dim>:<key>'     → a single indicator (continuous 0–10 scale - INFORM defines no classes for leaves)
  */
 import { classify, type ClassInfo, type Scale } from './classes';
 import { DIMENSION_BY_KEY, findIndicator, type DimensionKey } from './hierarchy';

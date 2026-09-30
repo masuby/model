@@ -1,6 +1,6 @@
 /**
  * Page-level layout primitives (see docs/DESIGN_LANGUAGE.md): structure comes from type, whitespace and
- * hairline rules — not boxes.
+ * hairline rules - not boxes.
  */
 import * as React from 'react';
 import { cn } from '@/lib/utils';

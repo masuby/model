@@ -1,12 +1,12 @@
-# Validating Hazards with Earth Observation (Sentinel-1 floods & beyond) — Plan
+# Validating Hazards with Earth Observation (Sentinel-1 floods & beyond): Plan
 
 **Idea.** Our hazards are *computed* (CHIRPS rainfall, recorded events). The next level is to
-**validate them against what satellites actually observed** — starting with **Sentinel-1 SAR
+**validate them against what satellites actually observed**: starting with **Sentinel-1 SAR
 for floods**, because radar sees standing water *through cloud, day or night* (exactly when
 floods happen and optical sensors are blind). Free, Copernicus. This turns "reported flood"
 into "observed inundation extent + population flooded".
 
-Build when it clearly helps and doesn't disrupt the live tool — this plan keeps it ready.
+Build when it clearly helps and doesn't disrupt the live tool: this plan keeps it ready.
 
 ---
 
@@ -23,9 +23,9 @@ Build when it clearly helps and doesn't disrupt the live tool — this plan keep
    `event index` and the flood H×E from real inundation; flag mismatches in the manual.
 
 **Data/compute options (no heavy infra needed to start):**
-- **Copernicus Global Flood Monitoring (GFM)** / **Copernicus EMS Rapid Mapping** / **UNOSAT** —
+- **Copernicus Global Flood Monitoring (GFM)** / **Copernicus EMS Rapid Mapping** / **UNOSAT**:
   *ready-made* S1 flood footprints for major events → fastest validation, just overlay.
-- **Google Earth Engine** or **Copernicus Data Space** — compute S1 change detection ourselves
+- **Google Earth Engine** or **Copernicus Data Space**: compute S1 change detection ourselves
   for events without a ready product (`rasterio`/GDAL already in this repo handle the rasters).
 
 Output: `data-source/flood_events.csv` gains `observed_km2`, `people_flooded`, `eo_source`
@@ -62,23 +62,23 @@ EO observation     ──┘
 
 ## 4. Phases
 
-- **Phase A — flood validation (start):** overlay Copernicus GFM/EMS footprints for the events
+- **Phase A: flood validation (start):** overlay Copernicus GFM/EMS footprints for the events
   already listed → `observed_km2` + `people_flooded` → calibrate the event index. Low effort,
   high credibility.
-- **Phase B — drought cross-check:** MODIS VHI / FAO ASI seasonal vs our drought index; report
+- **Phase B: drought cross-check:** MODIS VHI / FAO ASI seasonal vs our drought index; report
   agreement; surface agricultural-drought (ties to IPC/MUCHALI food security).
-- **Phase C — wildfire & landslide:** VIIRS burned area → wildfire indicator; Sentinel-1 InSAR →
+- **Phase C: wildfire & landslide:** VIIRS burned area → wildfire indicator; Sentinel-1 InSAR →
   landslide hotspots. Replaces two INFORM-baseline placeholders.
-- **Phase D — monitoring:** Sentinel-1 auto flood alerts (new acquisition → inundation → district)
+- **Phase D: monitoring:** Sentinel-1 auto flood alerts (new acquisition → inundation → district)
   feed the **snapshot** pipeline (see RISK_OVER_TIME_PLAN.md) → near-real-time emerging-flood risk.
 
 ---
 
 ## 5. Honest constraints
 
-- Sentinel-1 revisit is ~6–12 days — it catches flood *peaks* if an overpass lands in the window;
+- Sentinel-1 revisit is ~6–12 days: it catches flood *peaks* if an overpass lands in the window;
   brief flash floods can be missed (combine with rainfall + reports).
-- SAR confuses water with smooth dry surfaces (sand, tarmac) and is noisy in cities/vegetation —
+- SAR confuses water with smooth dry surfaces (sand, tarmac) and is noisy in cities/vegetation:
   needs masking + care; ready-made GFM/EMS products already handle much of this.
 - Processing S1 ourselves needs GEE/Copernicus access; **start with ready-made flood footprints**
   to get value immediately, add custom processing later.

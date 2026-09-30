@@ -1,6 +1,6 @@
 /**
  * Comparison of up to three pinned areas: risk and the three dimensions as class-coloured bars. A small
- * table — the row labels once on the left, one column per area separated by vertical rules. It floats
+ * table - the row labels once on the left, one column per area separated by vertical rules. It floats
  * over the map, docks under the ranking table, and sits above the bottom sheet on mobile.
  */
 import { ChevronDown, ChevronUp, X } from 'lucide-react';

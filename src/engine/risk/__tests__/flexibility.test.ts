@@ -1,5 +1,5 @@
 /**
- * FLEXIBILITY — the indicator set lives in the spec, not in code: add (new row, Use = Yes), delete
+ * FLEXIBILITY - the indicator set lives in the spec, not in code: add (new row, Use = Yes), delete
  * (Use = No) and re-weight without touching the engine; results are resolution-independent.
  */
 import { describe, expect, it } from 'vitest';
@@ -25,7 +25,7 @@ const baseSpec: Omit<IndicatorSpec, 'id' | 'resolved_min' | 'resolved_max'> = {
 };
 
 describe('indicator flexibility (add / delete / spec-driven)', () => {
-  it('holds all 78 indicators — 53 used, 25 available to activate', () => {
+  it('holds all 78 indicators - 53 used, 25 available to activate', () => {
     const all = Object.values(SPECS);
     expect(all.length).toBe(78);
     expect(all.filter((s) => s.use === 'Yes').length).toBe(53);

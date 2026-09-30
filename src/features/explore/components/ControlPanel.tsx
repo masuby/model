@@ -1,6 +1,6 @@
 /**
  * The explorer's control panel: level, lens, legend & class filter, statistics and a ranking preview.
- * One column of sections separated by hairline rules — no boxes. On desktop the level switch sits in the
+ * One column of sections separated by hairline rules - no boxes. On desktop the level switch sits in the
  * fixed header under the search, so every level is visible on the first screen.
  */
 import { ArrowRight, FilterX } from 'lucide-react';
@@ -84,7 +84,7 @@ function Share({ value, total, color, dim }: { value: number; total: number; col
 
 /**
  * Legend that is also the distribution and the class filter: swatch, class, range, count, share.
- * With a filter on, the other rows fade only their colour marks — the text keeps full contrast.
+ * With a filter on, the other rows fade only their colour marks - the text keeps full contrast.
  */
 function ClassFilterLegend() {
   const { t } = useTranslation(['explore', 'common']);

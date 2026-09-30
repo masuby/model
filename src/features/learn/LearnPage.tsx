@@ -1,5 +1,5 @@
 /**
- * Learn — a seven-lesson course on the INFORM methodology applied to Tanzania.
+ * Learn - a seven-lesson course on the INFORM methodology applied to Tanzania.
  *   /learn             course overview (progress, lessons, continue)
  *   /learn/:lessonId   a lesson (reading column, live-data widget, quiz)
  *   /learn/complete    completion screen + printable certificate

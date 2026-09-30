@@ -1,5 +1,5 @@
 /**
- * Course overview — an editorial title block with a "start here" line (or the learner's progress once
+ * Course overview - an editorial title block with a "start here" line (or the learner's progress once
  * a lesson is passed) beside it, the lessons as a ruled table of contents, and a short "how it works"
  * column. No cards, no decoration.
  */
@@ -10,7 +10,7 @@ import { Link } from 'react-router-dom';
 import { Kicker, Note, PageContainer, Section, SectionHeading } from '@/components/layout/Page';
 import { Button } from '@/components/ui/button';
 import { Dialog, DialogClose, DialogContent, DialogTrigger, Progress } from '@/components/ui/primitives';
-import { cn } from '@/lib/utils';
+import { cn, NO_VALUE } from '@/lib/utils';
 import { usePrefs } from '@/state/prefs';
 import { COMPLETE_SLUG, LESSON_BY_ID, LESSONS, TOTAL_MINUTES, TOTAL_QUESTIONS, type LessonId } from '../course';
 import { useProgress } from '../hooks';
@@ -68,7 +68,7 @@ export function CourseOverview() {
           />
         </div>
 
-        {/* Start here, then progress — set off by a rule, not a box. Its top lines up with the title. */}
+        {/* Start here, then progress - set off by a rule, not a box. Its top lines up with the title. */}
         <aside aria-labelledby="learn-progress" className="self-start border-t border-border pt-6 lg:mt-[2.6rem] lg:border-t-0 lg:border-l lg:pt-0 lg:pl-10">
           {done === 0 ? (
             <>
@@ -102,7 +102,7 @@ export function CourseOverview() {
                 )}
                 <div className="flex items-baseline justify-between gap-4 py-2.5">
                   <dt className="text-muted-foreground">{t('overview.nextLabel')}</dt>
-                  <dd className="text-right font-medium">{complete ? t('nav.certificate') : upNext ? t(`lessons.${upNext}.title`) : '—'}</dd>
+                  <dd className="text-right font-medium">{complete ? t('nav.certificate') : upNext ? t(`lessons.${upNext}.title`) : NO_VALUE}</dd>
                 </div>
               </dl>
             </>

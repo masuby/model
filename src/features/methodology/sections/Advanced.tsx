@@ -2,7 +2,7 @@ import { ChevronDown, ChevronsUpDown } from 'lucide-react';
 import * as React from 'react';
 import { useTranslation } from 'react-i18next';
 import { Button } from '@/components/ui/button';
-import { cn } from '@/lib/utils';
+import { cn, NO_VALUE } from '@/lib/utils';
 import { ADVANCED_COUNT, BASKETS, findAuthority, isDecrease, weightOf, type Basket } from '../data';
 import { BigOp, Callout, DocSection, Formula, Frac, Line, Op, P, SubHeading, V } from '../ui';
 
@@ -64,7 +64,7 @@ function BasketRows({ basket, open, onToggle }: { basket: Basket; open: boolean;
             <td className="hidden px-4 py-2.5 text-xs leading-relaxed text-muted-foreground md:table-cell">{lead}</td>
             <td className="hidden px-4 py-2.5 md:table-cell">
               <span className="line-clamp-2 text-xs leading-relaxed text-muted-foreground" title={m.basis ?? undefined}>
-                {m.basis ?? '—'}
+                {m.basis ?? NO_VALUE}
               </span>
             </td>
             <td className="num py-2.5 pl-4 text-right text-[13px] font-semibold">{weightOf(m).toFixed(2)}</td>

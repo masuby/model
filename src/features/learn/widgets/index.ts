@@ -34,7 +34,7 @@ export function preloadWidget(id: WidgetId): void {
 
 /**
  * Measured height of each widget (English, default council), used for the loading placeholder so
- * the text below — and a jump to a section or to #quiz — does not move when the chunk arrives.
+ * the text below - and a jump to a section or to #quiz - does not move when the chunk arrives.
  * `base` is a 390px phone, `sm` a 640px screen, `md` the full 44rem reading column.
  */
 export const WIDGET_HEIGHT: Record<WidgetId, { base: string; sm: string; md: string }> = {

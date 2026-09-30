@@ -1,5 +1,5 @@
 /**
- * build-council-index.mjs — write src/data/tanzania-councils-index.json: the 195 councils' properties
+ * build-council-index.mjs - write src/data/tanzania-councils-index.json: the 195 councils' properties
  * WITHOUT geometry. The risk model only needs names/codes/regions/source units, so the app shell no
  * longer bundles the 470 KB boundary file (the map loads geometry lazily with its own chunk).
  *

@@ -16,7 +16,7 @@ const DIMS: SeverityDimensionKey[] = ['impact', 'conditions', 'complexity'];
 /** Readable text on a severity category fill (the two darkest take white). */
 const textOn = (level: number | null) => ((level ?? 0) >= 4 ? '#ffffff' : '#1f2937');
 
-/** Lesson 6 — run the real INFORM Severity engine on an illustrative scenario with one slider. */
+/** Lesson 6 - run the real INFORM Severity engine on an illustrative scenario with one slider. */
 export default function SeverityCalculator() {
   const { t, i18n } = useTranslation(['learn', 'common']);
   const lang = i18n.language;

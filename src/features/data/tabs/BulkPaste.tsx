@@ -17,7 +17,7 @@ import { classify } from '@/engine/risk/classes';
 import { DIMENSIONS } from '@/engine/risk/hierarchy';
 import { sourceFor, sourceLabel } from '@/engine/risk/sources';
 import type { EditRef } from '@/engine/risk/types';
-import { cn, downloadText, formatNumber, toCsv } from '@/lib/utils';
+import { cn, downloadText, formatNumber, NO_VALUE, toCsv } from '@/lib/utils';
 import { Callout, Delta, EmptyState, ScoreValue } from '../components/common';
 import { hasErrors, MetaFields, suggestAuthority, useAuthorityName, validateMeta, EMPTY_META, type MetaState } from '../components/SubmitPanel';
 import { usePermissions, useBatchOps } from '../hooks';
@@ -362,7 +362,7 @@ export function BulkPaste() {
               </div>
               <div>
                 <dt className="text-xs text-muted-foreground">{t('meta.dataset')}</dt>
-                <dd className="mt-0.5 font-medium">{meta.dataset.trim() || '—'}</dd>
+                <dd className="mt-0.5 font-medium">{meta.dataset.trim() || NO_VALUE}</dd>
               </div>
             </dl>
             {progress && (
@@ -425,7 +425,7 @@ function TargetRow({ target: tg }: { target: PlanTarget }) {
       </td>
       <td className="px-2 py-2.5 text-right sm:px-3">
         {tg.status === 'conflict' ? (
-          <span className="num text-xs text-danger">{tg.conflictValues?.map((v) => (v == null ? '—' : v.toFixed(1))).join(' / ')}</span>
+          <span className="num text-xs text-danger">{tg.conflictValues?.map((v) => (v == null ? NO_VALUE : v.toFixed(1))).join(' / ')}</span>
         ) : (
           <ScoreValue value={tg.value} />
         )}

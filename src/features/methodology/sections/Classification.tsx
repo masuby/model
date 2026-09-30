@@ -2,6 +2,7 @@ import { useTranslation } from 'react-i18next';
 import { onClassColor } from '@/components/risk/RiskBadge';
 import { CLASS_COLORS, CLASS_KEYS, classify, classRanges, THRESHOLDS, type Scale } from '@/engine/risk/classes';
 import { Callout, Cases, DocSection, Formula, Line, N, Op, P, SubHeading, Txt, V } from '../ui';
+import { NO_VALUE } from '@/lib/utils';
 
 const SCALES: readonly Scale[] = ['risk', 'hazard', 'vulnerability', 'coping'];
 
@@ -143,7 +144,7 @@ export function ClassificationSection() {
       <div className="mt-12 grid gap-8 lg:grid-cols-2 lg:gap-12">
         <P className="text-[15px]">{t('classification.own')}</P>
         <Callout title={t('classification.exampleTitle')}>
-          {t('classification.example', { value: sample.toFixed(1), hazardClass: onHazard ? t(`common:classes.${onHazard.key}`) : '—', riskClass: onRisk ? t(`common:classes.${onRisk.key}`) : '—' })}
+          {t('classification.example', { value: sample.toFixed(1), hazardClass: onHazard ? t(`common:classes.${onHazard.key}`) : NO_VALUE, riskClass: onRisk ? t(`common:classes.${onRisk.key}`) : NO_VALUE })}
           <span className="mt-3 flex flex-wrap items-center gap-2">
             <span className="text-xs text-muted-foreground">{t('common:dimensions.hazard')}</span>
             <N>

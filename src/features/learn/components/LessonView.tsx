@@ -136,7 +136,7 @@ export function LessonView({ id }: { id: LessonId }) {
                 {content.takeaways.map((k, i) => (
                   <li key={i} className="grid grid-cols-[1.5rem_1fr] leading-relaxed">
                     <span className="text-muted-foreground" aria-hidden>
-                      —
+                      •
                     </span>
                     <span>
                       <RichText text={k} />

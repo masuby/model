@@ -14,7 +14,7 @@ export const DIMENSION_COLORS = {
   risk: '#e11d48',
 } as const;
 
-/** Accessible TEXT colours per dimension (theme-aware CSS variables) — use for labels, not fills. */
+/** Accessible TEXT colours per dimension (theme-aware CSS variables) - use for labels, not fills. */
 export const DIMENSION_TEXT = {
   hazard: 'var(--dim-hazard-text)',
   vulnerability: 'var(--dim-vulnerability-text)',

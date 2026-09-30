@@ -100,7 +100,7 @@ export function CouncilPicker({ value, onChange, id, className }: { value: strin
 
 /**
  * Council selector with context: risk class, coverage, the source unit and the councils that share it.
- * Sits on the page between hairline rules — the picker on the left, a definition list on the right.
+ * Sits on the page between hairline rules - the picker on the left, a definition list on the right.
  */
 export function CouncilContextCard({
   idPrefix,

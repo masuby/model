@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-fetch-chirps-daily.py — download national CHIRPS v3.0 daily precipitation for
+fetch-chirps-daily.py - download national CHIRPS v3.0 daily precipitation for
 Tanzania (2015–2024), bbox-subset, into one consolidated NetCDF used to count
 heavy-rain events (>50 mm, >100 mm) per district.
 
@@ -23,7 +23,7 @@ import rasterio
 from rasterio.windows import from_bounds
 from rasterio.errors import RasterioIOError
 
-# National Tanzania bbox (west, south, east, north) — matches TZ_BOUNDS lat[-12,0] lon[29,41]
+# National Tanzania bbox (west, south, east, north) - matches TZ_BOUNDS lat[-12,0] lon[29,41]
 TZ_BBOX = (29.0, -12.0, 41.0, 0.0)
 START, END = "2015-01-01", "2024-12-31"
 N_WORKERS, DELAY = 4, 0.4
@@ -97,7 +97,7 @@ def fetch_or_load(date: pd.Timestamp):
 def main():
     dates = pd.date_range(START, END, freq="D")
     pre = sum(1 for d in dates if cache_path(d).exists())
-    print(f"CHIRPS v3 daily — {len(dates)} days {START}..{END}, bbox {TZ_BBOX}", flush=True)
+    print(f"CHIRPS v3 daily - {len(dates)} days {START}..{END}, bbox {TZ_BBOX}", flush=True)
     print(f"  pre-cached: {pre}/{len(dates)}  workers={N_WORKERS} delay={DELAY}s", flush=True)
 
     # Establish grid from the first available day (probe, then preallocate).
@@ -107,7 +107,7 @@ def main():
         if probe is not None:
             break
     if probe is None:
-        raise RuntimeError("Could not fetch any CHIRPS day — check network/URL.")
+        raise RuntimeError("Could not fetch any CHIRPS day - check network/URL.")
     nlat, nlon = probe["data"].shape
     lats, lons = probe["lats"], probe["lons"]
     stack = np.full((len(dates), nlat, nlon), np.nan, dtype=np.float32)

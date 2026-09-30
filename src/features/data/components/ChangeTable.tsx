@@ -4,7 +4,7 @@ import * as React from 'react';
 import { useTranslation } from 'react-i18next';
 import type { Change } from '@/data-layer/types';
 import type { EditRef } from '@/engine/risk/types';
-import { cn, formatScore } from '@/lib/utils';
+import { cn, formatScore, NO_VALUE } from '@/lib/utils';
 import { decodeRaw, unitKey } from '../lib/raw';
 import { sameScore, scoreDelta } from '../lib/scores';
 import { fieldFor, isEditRef } from '../lib/targets';
@@ -42,7 +42,7 @@ export function ChangeTable({
   className,
 }: {
   changes: readonly Change[];
-  /** Current value of a ref on the target unit — when given, changes made stale by later edits are flagged. */
+  /** Current value of a ref on the target unit - when given, changes made stale by later edits are flagged. */
   currentOf?: (ref: EditRef) => number | null;
   caption?: string;
   className?: string;
@@ -93,7 +93,7 @@ export function ChangeTable({
                     </div>
                   )}
                 </td>
-                <td className="px-2 py-2.5 text-right text-muted-foreground sm:px-3">{c.previous === undefined ? '—' : <ScoreValue value={c.previous} />}</td>
+                <td className="px-2 py-2.5 text-right text-muted-foreground sm:px-3">{c.previous === undefined ? NO_VALUE : <ScoreValue value={c.previous} />}</td>
                 <td className="px-2 py-2.5 text-right sm:px-3">
                   <ScoreValue value={c.value} className="text-foreground" />
                 </td>

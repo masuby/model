@@ -2,7 +2,7 @@
  * Ranking table: sortable, searchable, class-filtered, row click selects, CSV export of the current view.
  * Nothing floats over the rows: on desktop the area card docks as a column on the right (`aside`) and the
  * comparison docks under the table (`footer`). Columns respond to the table column's own width (container
- * queries), so they give way in order — class, region, the non-active dimensions — when the card is open.
+ * queries), so they give way in order - class, region, the non-active dimensions - when the card is open.
  */
 import { ArrowDown, ArrowUp, ArrowUpDown, FileSpreadsheet, GitCompareArrows, Search, X } from 'lucide-react';
 import * as React from 'react';
@@ -14,7 +14,7 @@ import { CLASS_COLORS, classify, type Scale } from '@/engine/risk/classes';
 import type { DimensionKey } from '@/engine/risk/hierarchy';
 import { parseMetric } from '@/engine/risk/metrics';
 import type { Unit } from '@/engine/risk/types';
-import { cn, downloadText, formatScore, slug, toCsv } from '@/lib/utils';
+import { cn, downloadText, formatScore, NO_VALUE, slug, toCsv } from '@/lib/utils';
 import { matchesClass, normalizeText, sortUnits, type SortKey } from '../lib/explore';
 import { useExplore } from '../lib/ExploreContext';
 import { useMediaQuery } from '../lib/hooks';
@@ -26,7 +26,7 @@ const RISK = parseMetric('risk');
 const DIMS: readonly DimensionKey[] = ['hazard', 'vulnerability', 'coping'];
 const csvScore = (v: number | null | undefined) => (typeof v === 'number' && Number.isFinite(v) ? Math.round(v * 10) / 10 : '');
 
-/** The class as plain text with its dot — no filled pill on every row. */
+/** The class as plain text with its dot - no filled pill on every row. */
 function ClassText({ value, scale }: { value: number | null | undefined; scale: Scale }) {
   const { t } = useTranslation('common');
   const c = classify(value, scale);
@@ -149,7 +149,7 @@ export function RankingTable({ bottomPad = 0, aside, footer }: { bottomPad?: num
 
   return (
     <div className="flex h-full min-h-0 flex-col bg-background" role="region" aria-label={t('table.label')}>
-      {/* Header — spans the full stage, above the table and the docked card */}
+      {/* Header - spans the full stage, above the table and the docked card */}
       <div className="relative shrink-0 border-b border-border px-4 pt-4 pb-4 sm:px-6 sm:pt-6 lg:px-8">
         <div className="flex items-start gap-3">
           <div className="min-w-0 flex-1">
@@ -230,7 +230,7 @@ export function RankingTable({ bottomPad = 0, aside, footer }: { bottomPad?: num
                       data-selected={isSel || undefined}
                       className={cn('group cursor-pointer transition-colors duration-150 [&>td]:border-b [&>td]:border-border hover:bg-muted/50', isSel && 'bg-accent hover:bg-accent')}
                     >
-                      <td className="num py-3 pr-3 text-muted-foreground">{ranks.get(u.id) ?? '—'}</td>
+                      <td className="num py-3 pr-3 text-muted-foreground">{ranks.get(u.id) ?? NO_VALUE}</td>
                       <td className="px-3 py-3">
                         <div className="flex items-center gap-1.5">
                           <button

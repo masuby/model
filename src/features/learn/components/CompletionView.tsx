@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 import { PageContainer, PageHeader, Section } from '@/components/layout/Page';
 import { Button } from '@/components/ui/button';
 import { Input, Progress as ProgressBar } from '@/components/ui/primitives';
-import { cn, formatDate } from '@/lib/utils';
+import { cn, formatDate, NO_VALUE } from '@/lib/utils';
 import { LESSONS, TOTAL_MINUTES } from '../course';
 import { useProgress } from '../hooks';
 import { averageScore, completedCount, completionDate, courseProgressPct, isCompleted, isCourseComplete, nextIncomplete, type Progress } from '../progress';
@@ -24,7 +24,7 @@ const saveName = (v: string) => {
   try {
     localStorage.setItem(NAME_KEY, v);
   } catch {
-    /* storage unavailable — the name simply is not remembered */
+    /* storage unavailable - the name simply is not remembered */
   }
 };
 
@@ -215,7 +215,7 @@ function Certificate({ name, avg, date }: { name: string; avg: number; date: str
             <div className="mt-1 border-t border-foreground/30 pt-1 text-muted-foreground print:border-slate-400 print:text-slate-600">{t('certificate.score')}</div>
           </div>
           <div>
-            <div className="font-display text-[clamp(0.9rem,2vw,1.4rem)] font-semibold">{date || '—'}</div>
+            <div className="font-display text-[clamp(0.9rem,2vw,1.4rem)] font-semibold">{date || NO_VALUE}</div>
             <div className="mt-1 border-t border-foreground/30 pt-1 text-muted-foreground print:border-slate-400 print:text-slate-600">{t('certificate.date')}</div>
           </div>
         </div>

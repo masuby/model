@@ -49,7 +49,7 @@
     "rejected": "Rejected"
   },
   "mode": {
-    "demoTitle": "Demo mode — data stays in this browser",
+    "demoTitle": "Demo mode: data stays in this browser",
     "demoLead": "No shared database is connected, so everything you enter is saved only on this device and never leaves it. Switch role to walk through the whole workflow: submit as a sector officer, then approve as a PMO reviewer.",
     "demoRole": "Try it as",
     "roleSwitched": "You are now: {{role}}",
@@ -79,7 +79,7 @@
     "password": "Password",
     "sendLink": "Email me a sign-in link",
     "signIn": "Sign in",
-    "linkHint": "We will email you a one-time link — no password needed. It brings you straight back here.",
+    "linkHint": "We will email you a one-time link, so no password is needed. It brings you straight back here.",
     "passwordHint": "Use the password set up by your administrator.",
     "linkSent": "Check your inbox",
     "linkSentLead": "We sent a sign-in link to {{email}}. Open it on this device to continue.",
@@ -154,7 +154,7 @@
     "current": "Current",
     "about": "About {{name}}",
     "pending": "Pending review",
-    "pendingTip": "You already sent a value for this indicator — it is waiting for a PMO reviewer.",
+    "pendingTip": "You already sent a value for this indicator. It is waiting for a PMO reviewer.",
     "sharedTitle": "Vulnerability and coping scores are stored on the INFORM source unit “{{source}}”",
     "sharedSiblings_one": "The survey data behind them has no council breakdown, so a change to any of these rows also applies to {{names}}.",
     "sharedSiblings_other": "The survey data behind them has no council breakdown, so a change to any of these rows also applies to {{names}}.",
@@ -165,8 +165,8 @@
     "exposureFloodEdited": "Your flood value takes precedence over exposure amplification.",
     "exposureDesc": "Population exposure index (0–10) from council population and area. It amplifies the flood hazard as INFORM’s Hazard × Exposure term.",
     "markNoData": "Mark {{name}} as no data",
-    "noDataOn": "Marked as no data — click to undo",
-    "noDataOff": "Mark as no data (left out of averages — not zero)",
+    "noDataOn": "Marked as no data. Click to undo.",
+    "noDataOff": "Mark as no data (left out of averages, not zero)",
     "resetRow": "Reset {{name}}",
     "reviewNow": "Review",
     "errors": {
@@ -208,8 +208,8 @@
     "splitLead": "Hazard values belong to the council; vulnerability and coping values belong to its shared INFORM source unit. Each is reviewed on its own.",
     "sentToast_one": "Sent for review",
     "sentToast_other": "{{count}} submissions sent for review",
-    "appliedToast_one": "Applied — the map is updated",
-    "appliedToast_other": "{{count}} submissions applied — the map is updated",
+    "appliedToast_one": "Applied. The map is updated.",
+    "appliedToast_other": "{{count}} submissions applied. The map is updated.",
     "errorToast": "Submission failed",
     "viewMine": "View my submissions",
     "partial": "{{done}} of {{total}} saved before an error: {{message}}"
@@ -227,7 +227,7 @@
   "meta": {
     "authority": "Responsible authority",
     "authorityPlaceholder": "Choose the authority…",
-    "authoritySuggested": "Suggested from the indicator’s usual source — change it if needed.",
+    "authoritySuggested": "Suggested from the indicator’s usual source. Change it if needed.",
     "dataset": "Dataset",
     "datasetPlaceholder": "e.g. TDHS-MIS 2022",
     "note": "Note for the reviewer",
@@ -248,7 +248,7 @@
     "proposed": "Proposed",
     "delta": "Change",
     "measured": "Measured: {{values}}",
-    "stale": "Changed since submission — now {{value}}"
+    "stale": "Changed since submission (now {{value}})"
   },
   "raw": {
     "pickTitle": "Council",
@@ -261,7 +261,7 @@
     "sharedTarget_one": "stored on the source unit (also {{count}} other council)",
     "sharedTarget_other": "stored on the source unit (also {{count}} other councils)",
     "sharedTargetAlone": "stored on the source unit",
-    "reference": "reference {{min}} – {{max}}",
+    "reference": "reference {{min}} to {{max}}",
     "higherMoreRisk": "higher = more risk",
     "higherLessRisk": "higher = less risk",
     "keyedAt": {
@@ -281,7 +281,7 @@
   },
   "paste": {
     "setupTitle": "What are you pasting?",
-    "setupLead": "One indicator at a time, for many councils or regions at once — straight from a spreadsheet.",
+    "setupLead": "One indicator at a time, for many councils or regions at once, straight from a spreadsheet.",
     "indicator": "Indicator",
     "level": "Level",
     "levels": {
@@ -291,7 +291,7 @@
     },
     "levelHelp": {
       "council": "One line per council. Values without names are matched in template order.",
-      "region": "One line per region — the value applies to every council in it.",
+      "region": "One line per region. The value applies to every council in it.",
       "nation": "One value for the whole country, applied to every council."
     },
     "targetCouncil": "Hazard values are stored on each council.",
@@ -350,13 +350,13 @@
       "unmatched": "No matching name found.",
       "ambiguous": "Matches several councils: {{candidates}}. Add District, Town, Municipal or City.",
       "missingName": "A name is missing on this line.",
-      "duplicate": "{{suggestion}} appears more than once — the last value is used.",
+      "duplicate": "{{suggestion}} appears more than once. The last value is used.",
       "extraValue": "Only the first value is used at national level.",
       "tooManyValues": "More values than units in the template.",
       "noDataNotAllowed": "Exposure cannot be marked as no data."
     },
     "leadSector": "Each unit becomes its own submission in the PMO review queue.",
-    "leadReviewer": "As a reviewer, these values are applied to the map immediately — one submission per unit.",
+    "leadReviewer": "As a reviewer, your values are applied to the map immediately, one submission per unit.",
     "noteHint": "One note is attached to every submission in this batch.",
     "submissions": "Submissions",
     "councilsAffected": "Councils affected",
@@ -374,10 +374,10 @@
     "sentToast_other": "{{count}} submissions sent for review",
     "appliedToast_one": "{{count}} value applied to the map",
     "appliedToast_other": "{{count}} values applied to the map",
-    "partialToast": "{{ok}} saved, {{failed}} failed — see the list below.",
+    "partialToast": "{{ok}} saved, {{failed}} failed. See the list below.",
     "copied_one": "{{count}} name copied in template order",
     "copied_other": "{{count}} names copied in template order",
-    "copyFailed": "Couldn’t copy — use the CSV template instead."
+    "copyFailed": "Couldn’t copy. Use the CSV template instead."
   },
   "review": {
     "emptyTitle": "All caught up",
@@ -403,8 +403,8 @@
     "reasonRequired": "Reason for rejecting (the author will see it)",
     "noteOptional": "Note to the author (optional)",
     "notePlaceholder": "e.g. Please attach the survey table for this round…",
-    "approvedToast": "Approved — {{name}} is updated on the map",
-    "rejectedToast": "Rejected — {{name}}: the author will see your reason",
+    "approvedToast": "Approved. {{name}} is updated on the map.",
+    "rejectedToast": "Rejected {{name}}. The author will see your reason.",
     "error": "Review failed",
     "impactTitle_one": "Effect on {{count}} council",
     "impactTitle_other": "Effect on {{count}} councils",
@@ -437,7 +437,7 @@
   },
   "approved": {
     "emptyTitle": "The official baseline is in use",
-    "emptyLead": "No approved changes yet — every map shows the INFORM Sub-national SADC 2024 values.",
+    "emptyLead": "No approved changes yet. Every map shows the INFORM Sub-national SADC 2024 values.",
     "search": "Filter by unit, indicator, authority…",
     "count_one": "{{count}} approved value across {{units}}",
     "count_other": "{{count}} approved values across {{units}}",
@@ -486,7 +486,7 @@
     "import": "Import JSON…",
     "reset": "Reset local data…",
     "importTitle": "Import data",
-    "importLead": "Values in the file are re-submitted as pending submissions for review — nothing is applied directly.",
+    "importLead": "Values in the file are re-submitted as pending submissions for review. Nothing is applied directly.",
     "chooseFile": "Choose an INFORM Tanzania export (.json)",
     "fileHint": "Up to {{size}} MB",
     "exportedAt": "Exported {{date}}",
@@ -522,15 +522,15 @@
     "resetLead": "Clears the approved values, submissions and activity stored in this browser.",
     "resetWarnTitle": "This cannot be undone",
     "resetWarn": "Export a JSON copy first if you might need this data again. The shared database is not affected.",
-    "resetAck": "I understand — delete the data in this browser",
+    "resetAck": "I understand: delete the data in this browser",
     "resetConfirm": "Delete local data",
-    "resetDone": "Local data cleared — the official baseline is back"
+    "resetDone": "Local data cleared. The official baseline is back."
   },
   "authorities": {
     "NBS": "National Bureau of Statistics",
     "OCGS": "Office of the Chief Government Statistician (Zanzibar)",
-    "PMO": "Prime Minister's Office – Disaster Management Department",
-    "PORALG": "President's Office – Regional Administration and Local Government",
+    "PMO": "Prime Minister's Office, Disaster Management Department",
+    "PORALG": "President's Office, Regional Administration and Local Government",
     "DRRC": "Regional and District Disaster Management Committee",
     "TMA": "Tanzania Meteorological Authority",
     "NEMC": "National Environment Management Council",

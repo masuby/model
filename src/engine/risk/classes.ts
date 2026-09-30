@@ -2,7 +2,7 @@
  * INFORM 5-class classification, read from the Tanzania workbook's `Thresholds` sheet
  * (data-source/tanzania-inform-risk.xlsx). The workbook rule is
  *   IF(x < t1, Very Low, IF(x < t2, Low, IF(x < t3, Medium, IF(x < t4, High, Very High))))
- * i.e. each threshold is an EXCLUSIVE upper bound. Each dimension has its OWN thresholds —
+ * i.e. each threshold is an EXCLUSIVE upper bound. Each dimension has its OWN thresholds  - 
  * colouring a dimension map with the risk thresholds (as the old app did) misclassifies it.
  */
 

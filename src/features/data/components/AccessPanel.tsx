@@ -12,7 +12,7 @@ import { Card } from '@/components/ui/card';
 import { Input, Label, Segmented, Skeleton } from '@/components/ui/primitives';
 import { useData } from '@/data-layer/DataProvider';
 import type { Profile, Role } from '@/data-layer/types';
-import { cn } from '@/lib/utils';
+import { cn, NO_VALUE } from '@/lib/utils';
 import { errorMessage } from '../lib/batch';
 import { RoleBadge } from './common';
 
@@ -27,7 +27,7 @@ export function AccessPanel() {
   return <ProfileBar profile={profile} />;
 }
 
-/** Signed in, but the account's profile could not be loaded — say so, never pretend to be signed out. */
+/** Signed in, but the account's profile could not be loaded - say so, never pretend to be signed out. */
 function ProfileErrorCard({ message }: { message: string | null }) {
   const { t } = useTranslation('data');
   const { signOut } = useData();
@@ -82,7 +82,7 @@ function DemoBanner({ role }: { role: Role }) {
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
 
-/** Signed out: ONE flat bordered panel — the why on the left, the form on the right, a rule between. */
+/** Signed out: ONE flat bordered panel - the why on the left, the form on the right, a rule between. */
 function SignInCard() {
   const { t } = useTranslation('data');
   const { signInWithEmail, signInWithPassword } = useData();
@@ -219,7 +219,7 @@ function ProfileBar({ profile }: { profile: Profile }) {
           <span className="truncate text-base font-semibold">{profile.fullName}</span>
           <RoleBadge role={profile.role} />
         </div>
-        <div className="mt-0.5 truncate text-sm text-muted-foreground">{[profile.institution, profile.email].filter(Boolean).join(' · ') || '—'}</div>
+        <div className="mt-0.5 truncate text-sm text-muted-foreground">{[profile.institution, profile.email].filter(Boolean).join(' · ') || NO_VALUE}</div>
       </div>
       <div className="flex flex-wrap items-center gap-x-5 gap-y-3">
         <span className="text-sm text-muted-foreground">{t('mode.live')}</span>

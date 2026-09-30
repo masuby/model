@@ -1,10 +1,10 @@
 /**
- * Edit targets and live impact — the rules that decide WHICH unit receives an edit, and what the map
+ * Edit targets and live impact - the rules that decide WHICH unit receives an edit, and what the map
  * would show after approval.
  *
  *   • Hazard & Exposure indicators (and the exposure index) are council-own: edits target the council.
  *   • Vulnerability & Lack of Coping Capacity come from the council's INFORM source unit
- *     (`unit.sourceId`), shared by sibling councils — edits MUST target the source unit, so every
+ *     (`unit.sourceId`), shared by sibling councils - edits MUST target the source unit, so every
  *     council that shares it moves together (this is exactly how `buildModel` applies overrides).
  *
  * The preview runs the engine's own `applyEdits` on a `structuredClone` of the unit, so it is the same
@@ -86,7 +86,7 @@ export type ValueMap = Partial<Record<EditRef, number | null>>;
 /**
  * The unit as it would be after the given values are approved. Uses the engine's `applyEdits` on a
  * deep clone. One subtlety is reproduced exactly: when flood was already edited (approved), a new
- * exposure value must NOT re-amplify flood — the real model skips amplification whenever flood is edited.
+ * exposure value must NOT re-amplify flood - the real model skips amplification whenever flood is edited.
  */
 export function simulate(unit: Unit, values: ValueMap): Unit {
   const clone = structuredClone(unit);
@@ -118,8 +118,8 @@ export interface AffectedImpact extends Impact {
 }
 
 /**
- * Impact of a (pending) submission on the councils it affects: the council itself, or — for a source
- * unit — every council that shares it. Regions/national are not edit targets (they are aggregated).
+ * Impact of a (pending) submission on the councils it affects: the council itself, or - for a source
+ * unit - every council that shares it. Regions/national are not edit targets (they are aggregated).
  */
 export function submissionImpact(model: RiskModel, unitId: string, changes: ReadonlyArray<Pick<Change, 'ref' | 'value'>>): AffectedImpact[] {
   const unit = model.byId.get(unitId);

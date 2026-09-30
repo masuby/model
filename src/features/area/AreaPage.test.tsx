@@ -34,7 +34,7 @@ class Noop {
   }
 }
 
-/** Reports every observed element as on screen — as if the reader had scrolled the whole page. */
+/** Reports every observed element as on screen - as if the reader had scrolled the whole page. */
 class InViewObserver extends Noop {
   private readonly cb: IntersectionObserverCallback;
   constructor(cb: IntersectionObserverCallback) {

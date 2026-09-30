@@ -18,7 +18,7 @@ import { cn } from '@/lib/utils';
 
 /* ---------------------------------------------------------------- Tabs */
 export const Tabs = TabsPrimitive.Root;
-/** Underline tabs (editorial) — a hairline baseline with the active tab marked in the text colour. */
+/** Underline tabs (editorial) - a hairline baseline with the active tab marked in the text colour. */
 export function TabsList({ className, ...props }: React.ComponentProps<typeof TabsPrimitive.List>) {
   return <TabsPrimitive.List className={cn('relative inline-flex max-w-full items-end gap-5 overflow-x-auto border-b border-border text-muted-foreground', className)} {...props} />;
 }
@@ -206,7 +206,7 @@ export function Progress({
   style,
 }: {
   value: number;
-  /** Accessible name — required so screen readers announce what the bar measures. */
+  /** Accessible name - required so screen readers announce what the bar measures. */
   label: string;
   className?: string;
   indicatorClassName?: string;

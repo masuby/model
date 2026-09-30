@@ -1,7 +1,7 @@
 # Verified against Tanzania - Country Model Template.xlsx (the real formulas)
 
 Every formula below was **read directly from the workbook's own cells** (openpyxl, formula mode) on
-2026-06-03 — not assumed. Most of the engine lives in **hidden sheets** (`Thresholds`,
+2026-06-03, not assumed. Most of the engine lives in **hidden sheets** (`Thresholds`,
 `Indicator processing - 22`, `Indicator processing - 12`, `Indicator Data`, `SADC - Admin2 Data`,
 `admin_analysis` are all `hidden`). Sheet of record for the maths: **`INFORM SADC 2024`**; for
 standardisation: **`Indicator - processed`** + the two hidden `Indicator processing` sheets.
@@ -69,4 +69,4 @@ indicators is Tanzania-relative rather than the fixed INFORM reference.
 
 Reproduce: `python3` + openpyxl on `Tanzania - Country Model Template.xlsx`, `data_only=False`
 (formulas), sheets `INFORM SADC 2024` / `Indicator - processed` / `Indicator processing - 22` /
-`Thresholds`. Engine sheets are hidden — set `ws.sheet_state='visible'` or read by name.
+`Thresholds`. Engine sheets are hidden: set `ws.sheet_state='visible'` or read by name.

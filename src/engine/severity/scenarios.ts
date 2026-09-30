@@ -1,5 +1,5 @@
 /**
- * Illustrative Tanzanian crisis scenarios for the Severity calculator. They are NOT official figures —
+ * Illustrative Tanzanian crisis scenarios for the Severity calculator. They are NOT official figures  - 
  * plausible magnitudes chosen to demonstrate the method across the severity scale. The affected area is
  * defined by real councils: `peopleInArea` and `areaAffectedKm2` equal those councils' NBS 2022 census
  * population and polygon area (as the calculator's "use census population & area" would compute), so the

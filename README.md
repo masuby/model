@@ -10,12 +10,12 @@ preparedness, anticipatory action and investment.
 
 | | |
 |---|---|
-| **Risk explorer** | Interactive map and ranking of every council and region — by overall risk, any dimension, or any of 32 indicators |
-| **Area profiles** | Report-grade profile of any council/region: drivers, indicators, sources, peers — printable |
+| **Risk explorer** | Interactive map and ranking of every council and region, by overall risk, any dimension or any of 32 indicators |
+| **Area profiles** | Report-grade, printable profile of any council/region: drivers, indicators, sources, peers |
 | **Insights** | National analytics: regional ranking, hazard hot-spots, how the dimensions interact, data coverage |
 | **Crisis severity** | The official INFORM Severity Index method for an unfolding crisis, with a council picker |
 | **Learn** | A seven-lesson course with quizzes and live widgets built on the real engine |
-| **Methodology** | Every formula, threshold, data source and limitation — with a live worked example |
+| **Methodology** | Every formula, threshold, data source and limitation, with a live worked example |
 | **Data portal** | Ministries submit updated values; PMO reviews and approves; full audit trail |
 
 English and Kiswahili · day and night themes · responsive · accessible.
@@ -77,7 +77,7 @@ src/
   data-layer/     local + Supabase repositories, React Query hooks
   features/       one folder per page
   i18n/           English + Kiswahili catalogues
-  data/           bundled dataset (generated — do not edit by hand)
+  data/           bundled dataset (generated; do not edit by hand)
 data-source/      transparent CSV inputs + GeoJSON boundaries
 scripts/          offline data pipeline (Python/Node): climate, exposure, earthquake, tools
 supabase/         database schema (migrations/) and the retired v1 schema (legacy/)
