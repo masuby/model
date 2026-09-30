@@ -16,7 +16,7 @@ preparedness, anticipatory action and investment.
 | **Crisis severity** | The official INFORM Severity Index method for an unfolding crisis, with a council picker |
 | **Learn** | A seven-lesson course with quizzes and live widgets built on the real engine |
 | **Methodology** | Every formula, threshold, data source and limitation, with a live worked example |
-| **Data portal** | Ministries submit updated values; PMO reviews and approves; full audit trail |
+| **Data portal** | Institutions keep their assigned indicators current with national, regional or council figures; PMO assigns, requests, reviews and approves; full audit trail |
 
 English and Kiswahili · day and night themes · responsive · accessible.
 
@@ -53,16 +53,18 @@ npm run check        # typecheck + lint + tests
 npm run build        # production build → dist/
 ```
 
-Requires Node 20+.
+Requires Node 22+.
 
 ### Shared data backend (optional)
 
 Without configuration the Data portal runs in **demo mode** (edits stay in the visitor's browser).
 To enable real accounts, roles and a shared approval queue:
 
-1. Create a Supabase project and run [`supabase/migrations/0001_init.sql`](supabase/migrations/0001_init.sql).
+1. Create a Supabase project and apply every file in [`supabase/migrations/`](supabase/migrations) in order.
 2. Set `VITE_SUPABASE_URL` and `VITE_SUPABASE_PUBLISHABLE_KEY` (see [`.env.example`](.env.example)).
-3. Promote reviewers: `update profiles set role = 'pmo' where id = '<user id>';`
+3. Make yourself an administrator (`update profiles set role = 'admin' where id = '<your user id>';`),
+   then manage everyone's role and institution in *Data portal → People*. Details in
+   [`docs/DEPLOYMENT.md`](docs/DEPLOYMENT.md).
 
 See [`docs/DEPLOYMENT.md`](docs/DEPLOYMENT.md).
 

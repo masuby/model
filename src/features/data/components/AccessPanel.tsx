@@ -16,7 +16,7 @@ import { cn, NO_VALUE } from '@/lib/utils';
 import { errorMessage } from '../lib/batch';
 import { RoleBadge } from './common';
 
-const DEMO_ROLES: Role[] = ['viewer', 'sector', 'pmo'];
+const DEMO_ROLES: Role[] = ['viewer', 'sector', 'pmo', 'admin'];
 
 export function AccessPanel() {
   const { mode, profile, authLoading, signedIn, authError } = useData();

@@ -1,13 +1,14 @@
-/** Activity (reviewers): the audit trail - submissions, approvals, rejections, reverts, imports, resets. */
-import { CheckCircle2, RotateCcw, Send, Trash2, Upload, XCircle, type LucideIcon } from 'lucide-react';
+/** Activity (reviewers): the audit trail, from submissions and approvals to assignments, requests and validations. */
+import { Archive, BadgeCheck, CheckCircle2, Mail, RotateCcw, Send, Trash2, Upload, UserCheck, XCircle, type LucideIcon } from 'lucide-react';
 import * as React from 'react';
 import { useTranslation } from 'react-i18next';
 import { useAudit } from '@/data-layer/DataProvider';
 import type { AuditEntry } from '@/data-layer/types';
 import { cn, formatDate } from '@/lib/utils';
 import { EmptyState, ErrorState, ListSkeleton } from '../components/common';
-import { APPLIED_DIRECTLY_NOTE } from '../hooks';
 import { dateTime, dayKey, relativeTime } from '../lib/format';
+import { localiseDetail } from '../lib/activity';
+import { isSpecId, specLabel } from '../lib/workflow';
 
 /** A small status glyph per action, coloured only where the colour means something (approve / reject). */
 const ICONS: Record<AuditEntry['action'], { icon: LucideIcon; cls: string }> = {
@@ -17,6 +18,10 @@ const ICONS: Record<AuditEntry['action'], { icon: LucideIcon; cls: string }> = {
   reverted: { icon: RotateCcw, cls: 'text-warning' },
   imported: { icon: Upload, cls: 'text-muted-foreground' },
   reset: { icon: Trash2, cls: 'text-danger' },
+  assigned: { icon: UserCheck, cls: 'text-muted-foreground' },
+  requested: { icon: Mail, cls: 'text-muted-foreground' },
+  validated: { icon: BadgeCheck, cls: 'text-success' },
+  closed: { icon: Archive, cls: 'text-muted-foreground' },
 };
 
 export function ActivityLog() {
@@ -46,14 +51,15 @@ export function ActivityLog() {
           <ol className="divide-y divide-border border-y border-border">
             {entries.map((e) => {
               const { icon: Icon, cls } = ICONS[e.action] ?? ICONS.submitted;
-              const detail = e.detail === APPLIED_DIRECTLY_NOTE ? t('mine.appliedDirectly') : e.detail;
+              const detail = localiseDetail(e, t);
+              const subject = e.unitId && isSpecId(e.unitId) ? specLabel(t, e.unitId) : (e.unitName ?? e.unitId);
               return (
                 <li key={e.id} className="flex gap-3 py-3">
                   <Icon className={cn('mt-0.5 size-4 shrink-0', cls)} aria-hidden />
                   <div className="min-w-0 flex-1">
                     <p className="text-sm">
                       <span className="font-semibold">{e.actor}</span> {t(`activity.actions.${e.action}`)}{' '}
-                      {(e.unitName || e.unitId) && <span className="font-medium">{e.unitName ?? e.unitId}</span>}
+                      {subject && <span className="font-medium">{subject}</span>}
                     </p>
                     {detail && <p className="mt-0.5 text-xs break-words text-muted-foreground">{detail}</p>}
                   </div>

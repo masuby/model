@@ -90,6 +90,10 @@ export function sourceFor(dim: DimensionKey, key: string): SourceInfo {
   return INDICATOR_SOURCES[`${dim}:${key}` as IndicatorRef] ?? DEFAULT_SOURCE;
 }
 
+/** International agencies and global datasets, as opposed to Tanzanian institutions. */
+export const GLOBAL_AUTHORITIES: ReadonlySet<string> = new Set<AuthorityKey>(['UNHCR', 'WFP', 'FEWSNET', 'CHC', 'USGS', 'INFORM']);
+export const authorityKind = (key: string | null | undefined): 'national' | 'global' => (key && GLOBAL_AUTHORITIES.has(key) ? 'global' : 'national');
+
 export function authorityLabel(key: string | undefined | null): string {
   if (!key) return '';
   return (AUTHORITIES as Record<string, Authority>)[key]?.label ?? key;

@@ -1,14 +1,14 @@
 /**
- * Data Portal (/data) - where sector officers keep Tanzania's INFORM data current and PMO reviewers
- * approve it. Role-aware tabs: enter scores, measured values or bulk paste; review queue; my
- * submissions; approved changes (with revert); activity. Works in local demo mode (browser only) and
- * against the shared Supabase backend (RLS + server-side approval).
+ * Data Portal (/data): where institutions keep Tanzania's INFORM data current and PMO reviewers approve
+ * it. Role-aware tabs: indicators (assignments, requests and the entry sheet), review, my submissions,
+ * approved data (with revert), direct scores and bulk paste (reviewers), activity and people (admins).
+ * Works in local demo mode (browser only) and against the shared Supabase backend (RLS + server-side
+ * approval).
  *
  * Layout follows docs/DESIGN_LANGUAGE.md: a plain header whose key figures (separated by rules) close it,
  * the access note, then straight into the work - underline tabs (a labelled native select on phones, so
  * the active section is always visible), or just the approved changes when that is all a visitor can see.
- * Score entry (the contributors' landing tab) ships with the page; measured values, bulk paste and the
- * review queue load on demand and are prefetched on tab hover/focus.
+ * Each tool loads on demand and is prefetched on tab hover/focus.
  */
 import { ChevronDown } from 'lucide-react';
 import * as React from 'react';
@@ -16,7 +16,7 @@ import { useTranslation } from 'react-i18next';
 import { useSearchParams } from 'react-router-dom';
 import { KeyFigures, PageContainer, PageHeader } from '@/components/layout/Page';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/primitives';
-import { useData, useModel, useOverrides } from '@/data-layer/DataProvider';
+import { useData, useModel, useOverrides, useRawSubmissions, useRawValues } from '@/data-layer/DataProvider';
 import { formatDate, formatNumber } from '@/lib/utils';
 import { AccessPanel, ContributorAccess } from './components/AccessPanel';
 import { ErrorState, ListSkeleton } from './components/common';
@@ -24,37 +24,42 @@ import { DataToolsMenu } from './components/DataTools';
 import { useMySubmissions, usePendingQueue, usePermissions } from './hooks';
 import { relativeTime } from './lib/format';
 import { ActivityLog } from './tabs/ActivityLog';
-import { ApprovedChanges } from './tabs/ApprovedChanges';
+import { Approved } from './tabs/Approved';
 import { MySubmissions } from './tabs/MySubmissions';
 import { ScoreEntry } from './tabs/ScoreEntry';
 
-type TabKey = 'scores' | 'raw' | 'paste' | 'queue' | 'mine' | 'approved' | 'activity';
+type TabKey = 'indicators' | 'queue' | 'scores' | 'paste' | 'mine' | 'approved' | 'activity' | 'people';
 interface TabDef {
   key: TabKey;
-  show: (p: { canSubmit: boolean; canReview: boolean }) => boolean;
+  show: (p: { canSubmit: boolean; canReview: boolean; isAdmin: boolean }) => boolean;
 }
 
+// Institutions work through the indicators they are assigned (measured values). Direct 0–10 scores and
+// bulk paste stay with reviewers, for the few indicator groups that have no workbook indicator.
 const TABS: readonly TabDef[] = [
-  { key: 'scores', show: (p) => p.canSubmit },
-  { key: 'raw', show: (p) => p.canSubmit },
-  { key: 'paste', show: (p) => p.canSubmit },
+  { key: 'indicators', show: (p) => p.canSubmit },
   { key: 'queue', show: (p) => p.canReview },
+  { key: 'scores', show: (p) => p.canReview },
+  { key: 'paste', show: (p) => p.canReview },
   { key: 'mine', show: (p) => p.canSubmit },
   { key: 'approved', show: () => true },
   { key: 'activity', show: (p) => p.canReview },
+  { key: 'people', show: (p) => p.isAdmin },
 ];
 /** Reviewers land on their queue, so it leads their tab row. */
-const REVIEWER_ORDER: readonly TabKey[] = ['queue', 'scores', 'raw', 'paste', 'mine', 'approved', 'activity'];
+const REVIEWER_ORDER: readonly TabKey[] = ['queue', 'indicators', 'scores', 'paste', 'mine', 'approved', 'activity', 'people'];
 
 /** Tools split out of the page chunk. Import promises are cached, so prefetching is free. */
 const LOADERS = {
-  raw: () => import('./tabs/RawEntry'),
+  indicators: () => import('./tabs/Indicators'),
   paste: () => import('./tabs/BulkPaste'),
-  queue: () => import('./tabs/ReviewQueue'),
+  queue: () => import('./tabs/Review'),
+  people: () => import('./tabs/People'),
 };
-const RawEntry = React.lazy(() => LOADERS.raw().then((m) => ({ default: m.RawEntry })));
+const Indicators = React.lazy(() => LOADERS.indicators().then((m) => ({ default: m.Indicators })));
 const BulkPaste = React.lazy(() => LOADERS.paste().then((m) => ({ default: m.BulkPaste })));
-const ReviewQueue = React.lazy(() => LOADERS.queue().then((m) => ({ default: m.ReviewQueue })));
+const Review = React.lazy(() => LOADERS.queue().then((m) => ({ default: m.Review })));
+const People = React.lazy(() => LOADERS.people().then((m) => ({ default: m.People })));
 const prefetch = (key: TabKey) => {
   if (key in LOADERS) void LOADERS[key as keyof typeof LOADERS]().catch(() => undefined);
 };
@@ -65,16 +70,22 @@ export default function DataPortalPage() {
   const perms = usePermissions();
   const overrides = useOverrides();
   const model = useModel();
-  const { pending } = usePendingQueue();
+  const { pending: pendingScores } = usePendingQueue();
   const { mine } = useMySubmissions();
+  const rawSubmissions = useRawSubmissions();
+  const rawValues = useRawValues();
+  const isAdmin = profile?.role === 'admin';
+  const rawPending = React.useMemo(() => (rawSubmissions.data ?? []).filter((s) => s.status === 'pending'), [rawSubmissions.data]);
+  const pending = { length: pendingScores.length + (perms.canReview ? rawPending.length : 0) };
   const [params, setParams] = useSearchParams();
 
   const tabs = React.useMemo(() => {
-    const shown = TABS.filter((tab) => tab.show({ canSubmit: perms.canSubmit, canReview: perms.canReview }));
+    const shown = TABS.filter((tab) => tab.show({ canSubmit: perms.canSubmit, canReview: perms.canReview, isAdmin }));
     return perms.canReview ? [...shown].sort((a, b) => REVIEWER_ORDER.indexOf(a.key) - REVIEWER_ORDER.indexOf(b.key)) : shown;
-  }, [perms.canSubmit, perms.canReview]);
-  // Deterministic landing tab per role (no jump once data loads): reviewers start on their queue.
-  const defaultTab: TabKey = perms.canReview ? 'queue' : perms.canSubmit ? 'scores' : 'approved';
+  }, [perms.canSubmit, perms.canReview, isAdmin]);
+  // Deterministic landing tab per role (no jump once data loads): reviewers start on their queue,
+  // institutions on their indicators.
+  const defaultTab: TabKey = perms.canReview ? 'queue' : perms.canSubmit ? 'indicators' : 'approved';
   const requested = params.get('tab') as TabKey | null;
   const active: TabKey = requested && tabs.some((x) => x.key === requested) ? requested : defaultTab;
   const councilParam = params.get('council');
@@ -120,9 +131,16 @@ export default function DataPortalPage() {
         values++;
         if (stamp.at > latest) latest = stamp.at;
       }
-    return { values, units: Object.keys(overrides.data ?? {}).length, latest };
-  }, [overrides.data]);
-  const awaiting = perms.canReview ? pending.length : mine.filter((s) => s.status === 'pending').length;
+    const units = new Set(Object.keys(overrides.data ?? {}));
+    for (const v of rawValues.data ?? []) {
+      values++;
+      units.add(v.unitId);
+      if (v.at > latest) latest = v.at;
+    }
+    return { values, units: units.size, latest };
+  }, [overrides.data, rawValues.data]);
+  const myRawPending = rawPending.filter((s) => s.authorId === profile?.id && s.authorName === profile?.fullName).length;
+  const awaiting = perms.canReview ? pending.length : mine.filter((s) => s.status === 'pending').length + myRawPending;
   const worker = perms.canSubmit || perms.canReview;
   // Only figures that say something for this person: no "awaiting" for visitors, no empty "0 /  - " pair
   // while the official baseline is still untouched.
@@ -149,13 +167,14 @@ export default function DataPortalPage() {
     overrides.isLoading ? <ListSkeleton rows={2} /> : overrides.isError ? <ErrorState error={overrides.error} onRetry={() => void overrides.refetch()} /> : node;
 
   const body: Record<TabKey, () => React.ReactNode> = {
+    indicators: () => <Indicators />,
+    queue: () => <Review />,
     scores: () => gate(<ScoreEntry councilId={councilId} onCouncilChange={(id) => setParam('council', id)} />),
-    raw: () => gate(<RawEntry councilId={councilId} onCouncilChange={(id) => setParam('council', id)} />),
     paste: () => gate(<BulkPaste />),
-    queue: () => <ReviewQueue />,
-    mine: () => <MySubmissions onStart={() => onTab('scores')} />,
-    approved: () => <ApprovedChanges />,
+    mine: () => <MySubmissions onStart={() => onTab('indicators')} />,
+    approved: () => <Approved />,
     activity: () => <ActivityLog />,
+    people: () => <People />,
   };
 
   const tabLabel = (key: TabKey) => t(`tabs.${key}`);

@@ -231,7 +231,8 @@
     "source": "Source",
     "resolution": "Data resolution",
     "editedBy": "Updated by",
-    "editedAt": "Updated on"
+    "editedAt": "Updated on",
+    "sourceKind": "Source type"
   },
   "drivers": {
     "topTitle": "Top drivers",
@@ -262,7 +263,10 @@
     "editedMembers": "Includes council updates",
     "show_one": "Show {{count}} indicator",
     "show_other": "Show {{count}} indicators",
-    "hide": "Hide indicators"
+    "hide": "Hide indicators",
+    "measured": "Figures behind this score",
+    "baselineRest_one": "{{count}} other indicator from the INFORM baseline",
+    "baselineRest_other": "{{count}} other indicators from the INFORM baseline"
   },
   "resolution": {
     "council": {

@@ -1,6 +1,9 @@
 /**
  * Every indicator with its source - a statistical table set directly on the page: hairline rows,
  * sentence-case column headers, a sticky header, numbers right-aligned, and notes set off by a rule.
+ * Each source says whether it is a Tanzanian institution or a global dataset; a score recomputed from
+ * figures that institutions sent lists those figures, each with the level it was recorded at (council,
+ * region or the whole country), and the resolution column follows the latest one.
  *
  * Keyboard: one tab stop per row (the indicator name, whose tooltip carries the description and the
  * source method); source and resolution tooltips are hover-only because the key above explains them.
@@ -16,7 +19,8 @@ import { Button } from '@/components/ui/button';
 import { Tooltip } from '@/components/ui/primitives';
 import { DIMENSIONS, type DimensionKey } from '@/engine/risk/hierarchy';
 import { rampColor } from '@/engine/risk/metrics';
-import { AUTHORITIES, authorityLabel, sourceLabel, type SourceInfo } from '@/engine/risk/sources';
+import { AUTHORITIES, authorityKind, authorityLabel, sourceLabel, type SourceInfo } from '@/engine/risk/sources';
+import type { EditStamp, LeafInput } from '@/engine/risk/types';
 import { cn, downloadText, formatDate, formatScore, slug, toCsv } from '@/lib/utils';
 import { delta, formatDelta, type AreaView, type IndicatorRow } from '../lib';
 import { DIM_SHORT, NoDataPill, ResolutionChip, useMediaQuery } from './bits';
@@ -45,14 +49,29 @@ function sourceTip(row: IndicatorRow): string {
   return full ? `${full}: ${row.source.method}` : row.source.method;
 }
 
+/** Figures from institutions behind a council's recomputed score (none on regions or the country). */
+const measuredInputs = (edit: EditStamp | null, unitLevel: string): LeafInput[] =>
+  unitLevel === 'region' || unitLevel === 'national' ? [] : (edit?.inputs ?? []).filter((i) => i.level !== 'baseline');
+
+/** The level of the latest figure an institution sent, as a data resolution. */
+function measuredResolution(inputs: readonly LeafInput[]): SourceInfo['resolution'] | null {
+  const latest = inputs.reduce<LeafInput | null>((a, b) => (!a || (b.at ?? '') > (a.at ?? '') ? b : a), null);
+  return latest && latest.level !== 'baseline' ? latest.level : null;
+}
+
+// Loaded only for councils with figures from institutions: it brings the workbook's indicator specifications.
+const MeasuredInputs = React.lazy(() => import('./MeasuredInputs'));
+
 function SourceCell({ row, unitLevel }: { row: IndicatorRow; unitLevel: string }) {
   const { t, i18n } = useTranslation(['area', 'common']);
+  const measured = measuredInputs(row.edit, unitLevel).length > 0;
   return (
     <div className="min-w-0">
       <Tooltip content={sourceTip(row)}>
         <span className="block cursor-help text-xs leading-snug">
           <span className="font-medium text-foreground">{authorityLabel(row.source.by)}</span>
           {row.source.also?.length ? <span className="text-muted-foreground"> (+{row.source.also.map(authorityLabel).join(', ')})</span> : null}
+          <span className="text-muted-foreground"> · {t(`common:sourceKind.${authorityKind(row.source.by)}`)}</span>
           <span className="block text-muted-foreground">{row.source.dataset}</span>
         </span>
       </Tooltip>
@@ -69,7 +88,12 @@ function SourceCell({ row, unitLevel }: { row: IndicatorRow; unitLevel: string }
           </span>
         </span>
       )}
-      {row.edit?.dataset && unitLevel !== 'region' && <span className="mt-0.5 block text-[11px] text-muted-foreground">{row.edit.dataset}</span>}
+      {row.edit?.dataset && unitLevel !== 'region' && !measured && <span className="mt-0.5 block text-[11px] text-muted-foreground">{row.edit.dataset}</span>}
+      {measured && row.edit && (
+        <React.Suspense fallback={null}>
+          <MeasuredInputs edit={row.edit} />
+        </React.Suspense>
+      )}
     </div>
   );
 }
@@ -94,6 +118,7 @@ export function IndicatorTable({ view }: { view: AreaView }) {
       ...(region ? [region.name] : []),
       ...(isNational ? [] : [t('breadcrumb.country')]),
       t('csv.source'),
+      t('csv.sourceKind'),
       t('csv.resolution'),
       t('csv.editedBy'),
       t('csv.editedAt'),
@@ -106,7 +131,8 @@ export function IndicatorTable({ view }: { view: AreaView }) {
       ...(region ? [r.region == null ? '' : formatScore(r.region)] : []),
       ...(isNational ? [] : [r.national == null ? '' : formatScore(r.national)]),
       sourceLabel(r.source),
-      t(`resolution.${r.source.resolution}.label`),
+      t(`common:sourceKind.${authorityKind(r.source.by)}`),
+      t(`resolution.${measuredResolution(measuredInputs(r.edit, unit.level)) ?? r.source.resolution}.label`),
       r.edit ? authorityLabel(String(r.edit.authority ?? '')) : '',
       r.edit ? formatDate(r.edit.at, i18n.language) : '',
     ]);
@@ -199,6 +225,7 @@ export function IndicatorTable({ view }: { view: AreaView }) {
                   {cat.indicators.map((ind) => {
                     const row = byKey.get(`${def.key}:${ind.key}`)!;
                     const d = delta(row.value, row.national);
+                    const resolution = measuredResolution(measuredInputs(row.edit, unit.level)) ?? row.source.resolution;
                     return (
                       <tr key={ind.key} className="border-b border-border align-top transition-colors duration-150 hover:bg-muted/40">
                         <th scope="row" className="py-3 pr-3 text-left font-normal">
@@ -225,7 +252,7 @@ export function IndicatorTable({ view }: { view: AreaView }) {
                             <SourceCell row={row} unitLevel={unit.level} />
                           </div>
                           <div className="mt-1 sm:hidden">
-                            <ResolutionChip resolution={row.source.resolution} focusable={false} />
+                            <ResolutionChip resolution={resolution} focusable={false} />
                           </div>
                         </th>
                         <td className="px-3 py-3 text-right">
@@ -241,7 +268,7 @@ export function IndicatorTable({ view }: { view: AreaView }) {
                           <SourceCell row={row} unitLevel={unit.level} />
                         </td>
                         <td className="hidden py-3 pl-3 sm:table-cell">
-                          <ResolutionChip resolution={row.source.resolution} focusable={false} />
+                          <ResolutionChip resolution={resolution} focusable={false} />
                         </td>
                       </tr>
                     );

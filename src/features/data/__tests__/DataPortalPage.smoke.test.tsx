@@ -1,7 +1,8 @@
 // @vitest-environment jsdom
 /**
- * Smoke test of the whole portal in local demo mode: renders per role, enters a score, sees the live
- * preview, submits through the confirm dialog and finds the submission in the review queue.
+ * Smoke test of the whole portal in local demo mode: renders per role; an institution sends figures for
+ * an assigned indicator; a reviewer approves them, enters direct scores and bulk-pastes; an
+ * administrator manages people.
  */
 import { cleanup, fireEvent, render, screen, waitFor, within } from '@testing-library/react';
 
@@ -27,13 +28,18 @@ beforeAll(() => {
   window.matchMedia ??= ((q: string) => ({ matches: false, media: q, onchange: null, addListener() {}, removeListener() {}, addEventListener() {}, removeEventListener() {}, dispatchEvent: () => false })) as typeof window.matchMedia;
 });
 
+const SPEC = 'VU.VG.CH-UW'; // Underweight children (%)
+const assignToNbs = () => localStorage.setItem('inform.v2.assignments', JSON.stringify([{ specId: SPEC, institutionKey: 'NBS', assignedAt: new Date().toISOString() }]));
+const stored = <T,>(key: string, fallback: T): T => JSON.parse(localStorage.getItem(key) ?? JSON.stringify(fallback)) as T;
+const slow = { timeout: 20_000 };
+
 afterEach(() => {
   cleanup();
   queryClient.clear();
   localStorage.clear();
 });
 
-function renderAt(url: string, role: 'viewer' | 'sector' | 'pmo') {
+function renderAt(url: string, role: 'viewer' | 'sector' | 'pmo' | 'admin') {
   localStorage.setItem('inform.demoRole', role);
   return render(
     <DataProvider>
@@ -58,8 +64,69 @@ describe('DataPortalPage (local demo mode)', { timeout: 60_000 }, () => {
     expect(await screen.findByText('The official baseline is in use')).toBeInTheDocument();
   });
 
-  it('lets a sector officer enter a score, preview it and send it for review', async () => {
-    renderAt('/data?tab=scores&council=C001', 'sector');
+  it('shows an institution its assigned indicators, and nothing to do without any', async () => {
+    renderAt('/data', 'sector');
+    expect(screen.queryByRole('tab', { name: /Enter scores/ })).not.toBeInTheDocument();
+    expect(await screen.findByText('Indicators for NBS', {}, slow)).toBeInTheDocument();
+    expect(screen.getByText('No indicators assigned yet')).toBeInTheDocument();
+  });
+
+  it('lets an institution answer a request with figures for a region', async () => {
+    assignToNbs();
+    localStorage.setItem(
+      'inform.v2.requests',
+      JSON.stringify([{ id: 'r1', specId: SPEC, institutionKey: 'NBS', kind: 'update', status: 'open', dueDate: '2099-01-31', createdByName: 'Demo PMO reviewer', createdAt: new Date().toISOString() }]),
+    );
+    renderAt('/data', 'sector');
+    expect(await screen.findByText('Underweight children', {}, slow)).toBeInTheDocument();
+    expect(screen.getByText(/Update requested/)).toBeInTheDocument();
+    fireEvent.click(button(document, /^Enter values$/)!);
+
+    const dodoma = await screen.findByLabelText('New value for Dodoma', {}, slow);
+    fireEvent.change(dodoma, { target: { value: '21,5' } });
+    fireEvent.change(screen.getByLabelText('Dataset or source'), { target: { value: 'TDHS-MIS 2022' } });
+    fireEvent.click(button(document, /^Send for review$/)!);
+
+    await waitFor(() => expect(stored('inform.v2.rawSubmissions', [])).toHaveLength(1));
+    expect(stored<unknown[]>('inform.v2.rawSubmissions', [])[0]).toMatchObject({
+      specId: SPEC,
+      status: 'pending',
+      requestId: 'r1',
+      dataset: 'TDHS-MIS 2022',
+      entries: [{ unitId: 'R-dodoma', level: 'region', value: 21.5 }],
+    });
+    expect(stored<Array<{ status: string }>>('inform.v2.requests', [])[0].status).toBe('submitted');
+  });
+
+  it('lets a PMO reviewer approve measured values, which then feed the scores', async () => {
+    assignToNbs();
+    localStorage.setItem(
+      'inform.v2.rawSubmissions',
+      JSON.stringify([
+        {
+          id: 'x1',
+          specId: SPEC,
+          institutionKey: 'NBS',
+          entries: [{ unitId: 'R-dodoma', level: 'region', value: 21.5 }],
+          dataset: 'TDHS-MIS 2022',
+          authorId: 'someone-else',
+          authorName: 'Officer B',
+          status: 'pending',
+          createdAt: new Date().toISOString(),
+        },
+      ]),
+    );
+    renderAt('/data', 'pmo');
+    expect(await screen.findByText(/by Officer B/, {}, slow)).toBeInTheDocument();
+    const approve = [...document.querySelectorAll<HTMLButtonElement>('button')].filter((b) => b.textContent?.trim() === 'Approve').at(-1)!;
+    fireEvent.click(approve);
+    await waitFor(() => expect(stored('inform.v2.rawValues', [])).toHaveLength(1));
+    expect(stored<unknown[]>('inform.v2.rawValues', [])[0]).toMatchObject({ specId: SPEC, unitId: 'R-dodoma', level: 'region', value: 21.5, institution: 'NBS' });
+    expect(await screen.findByText('All caught up', {}, slow)).toBeInTheDocument();
+  });
+
+  it('lets a PMO reviewer enter a direct score, preview it and apply it', async () => {
+    renderAt('/data?tab=scores&council=C001', 'pmo');
     const input = await screen.findByLabelText('Flood');
     fireEvent.change(input, { target: { value: '9.9' } });
     expect(screen.getAllByText('1 change ready').length).toBeGreaterThan(0);
@@ -74,28 +141,28 @@ describe('DataPortalPage (local demo mode)', { timeout: 60_000 }, () => {
     expect(document.getElementById('score-hazard-drought-error')).toHaveTextContent('Scores run from 0 to 10.');
     fireEvent.change(drought, { target: { value: '' } });
 
-    fireEvent.click(button(document, /Review & send 1 change/)!);
+    fireEvent.click(button(document, /Review & apply 1 change/)!);
     await waitFor(() => expect(dialog()).not.toBeNull());
     expect(within(dialog()!).getAllByText('Kondoa District').length).toBeGreaterThan(0);
-    fireEvent.click(button(dialog()!, /Send for review/)!);
+    fireEvent.click(button(dialog()!, /Apply now/)!);
     await waitFor(() => expect(dialog()).toBeNull());
 
-    const stored = JSON.parse(localStorage.getItem('inform.v2.submissions') ?? '[]');
-    expect(stored).toHaveLength(1);
-    expect(stored[0]).toMatchObject({ unitId: 'C001', status: 'pending', changes: [{ ref: 'hazard:flood', value: 9.9 }] });
+    const subs = stored<unknown[]>('inform.v2.submissions', []);
+    expect(subs).toHaveLength(1);
+    expect(subs[0]).toMatchObject({ unitId: 'C001', status: 'approved', changes: [{ ref: 'hazard:flood', value: 9.9 }] });
+    await waitFor(() => expect(stored<Record<string, Record<string, { value: number }>>>('inform.v2.values', {}).C001?.['hazard:flood']?.value).toBe(9.9));
   });
 
   it('splits hazard and V/C changes onto the council and its source unit', async () => {
-    renderAt('/data?tab=scores&council=C001', 'sector');
+    renderAt('/data?tab=scores&council=C001', 'pmo');
     await waitFor(() => expect(document.getElementById('score-hazard-flood')).not.toBeNull());
     fireEvent.change(byId('score-hazard-flood'), { target: { value: '9.9' } });
     fireEvent.change(byId('score-vulnerability-habitat'), { target: { value: '9.8' } });
-    fireEvent.click(button(document, /Review & send 2 changes/)!);
+    fireEvent.click(button(document, /Review & apply 2 changes/)!);
     await waitFor(() => expect(dialog()).not.toBeNull());
-    fireEvent.click(button(dialog()!, /Send 2 for review/)!);
-    await waitFor(() => expect(JSON.parse(localStorage.getItem('inform.v2.submissions') ?? '[]')).toHaveLength(2));
-    const stored = JSON.parse(localStorage.getItem('inform.v2.submissions')!) as Array<{ unitId: string }>;
-    expect(stored.map((s) => s.unitId).sort()).toEqual(['C001', 'TZ0101']);
+    fireEvent.click(button(dialog()!, /Apply 2 now/)!);
+    await waitFor(() => expect(stored('inform.v2.submissions', [])).toHaveLength(2));
+    expect(stored<Array<{ unitId: string }>>('inform.v2.submissions', []).map((s) => s.unitId).sort()).toEqual(['C001', 'TZ0101']);
   });
 
   it('shows pending submissions to a PMO reviewer who can approve them', async () => {
@@ -127,9 +194,16 @@ describe('DataPortalPage (local demo mode)', { timeout: 60_000 }, () => {
   });
 
   it('parses a bulk paste into a preview', async () => {
-    renderAt('/data?tab=paste', 'sector');
+    renderAt('/data?tab=paste', 'pmo');
     fireEvent.change(await screen.findByLabelText('Pasted data'), { target: { value: 'Kondoa DC\t9.9\nNowhere\t5' } });
     expect(await screen.findByText('No matching name found.')).toBeInTheDocument();
     expect(screen.getByText('Kondoa District')).toBeInTheDocument();
+  });
+
+  it('gives administrators the people section, with each officer’s institution', async () => {
+    renderAt('/data?tab=people', 'admin');
+    expect(await screen.findByText(/these are the demo accounts in this browser/, {}, slow)).toBeInTheDocument();
+    expect(screen.getByText('Demo sector officer')).toBeInTheDocument();
+    expect(screen.getByLabelText('Institution of Demo sector officer')).toBeInTheDocument();
   });
 });

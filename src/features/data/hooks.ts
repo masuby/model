@@ -1,18 +1,15 @@
 /** Data Portal hooks: permissions, the current user's submissions, and batched repository work. */
 import { useQueryClient } from '@tanstack/react-query';
 import * as React from 'react';
-import { useData, useSubmissions } from '@/data-layer/DataProvider';
-import { canReview, canSubmit, type NewSubmission, type Profile, type Submission } from '@/data-layer/types';
-import { buildModel } from '@/engine/risk/model';
-import type { RiskModel } from '@/engine/risk/types';
+import { refreshData, useData, useSubmissions } from '@/data-layer/DataProvider';
+import { APPLIED_DIRECTLY_NOTE, canReview, canSubmit, type NewSubmission, type Profile, type Submission } from '@/data-layer/types';
 import { runInBatches } from './lib/batch';
 
-let BASE: RiskModel | null = null;
-/** The shipped baseline (no approved edits), for "baseline → current". Built once, on first use. */
-export const baseModel = (): RiskModel => (BASE ??= buildModel());
+/** The shipped baseline (no approved edits), for "baseline → current". */
+export { baseModel } from '@/data-layer/DataProvider';
 
-/** Review note stored when a reviewer applies their own change directly (same text as `useSubmit`). */
-export const APPLIED_DIRECTLY_NOTE = 'Applied directly by reviewer';
+/** Review note stored when a reviewer applies their own change directly. */
+export { APPLIED_DIRECTLY_NOTE };
 
 export function usePermissions() {
   const { profile, mode, authLoading } = useData();
@@ -69,7 +66,7 @@ export function useBatchOps() {
 
   const finish = React.useCallback(async () => {
     setProgress(null);
-    await Promise.all(['overrides', 'submissions', 'audit'].map((k) => qc.invalidateQueries({ queryKey: [k] })));
+    await refreshData(qc);
   }, [qc]);
 
   const submitMany = React.useCallback(

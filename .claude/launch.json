@@ -11,6 +11,15 @@
       "port": 5174
     },
     {
+      "name": "inform-demo",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": [
+        "run",
+        "dev:demo"
+      ],
+      "port": 5175
+    },
+    {
       "name": "inform-preview",
       "runtimeExecutable": "npx",
       "runtimeArgs": [

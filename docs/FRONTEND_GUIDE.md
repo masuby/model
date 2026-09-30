@@ -15,11 +15,14 @@ components/
   ui/           design-system primitives: Button, Card, Badge, primitives.tsx (Tabs, Select, Tooltip,
                 Dialog, SheetContent, DropdownMenu, Popover, Switch, Slider, Segmented, Progress, Input…)
   layout/       Page.tsx → PageContainer, PageHeader, Section, SectionHeading, Kicker, KeyFigures, Note
-  risk/         ClassBadge, ClassDot, ClassLegend, RampLegend, DimensionBars, ScoreBar
+  risk/         ClassBadge, ClassDot, ClassLegend, RampLegend, DimensionBars, ScoreBar,
+                Provenance (LevelTag, SourceKindTag, formatRaw: where a value comes from)
   map/          StaticMap (light SVG choropleth) and RiskMap (Leaflet, pan/zoom); lazy-load both
   charts/       ChartCard (flat figure with PNG/CSV export), theme.tsx (useChartTheme, ChartTooltip,
                 DIMENSION_COLORS for fills, DIMENSION_TEXT for text)
-data-layer/     DataProvider (useModel, useData, useSubmit, useReview…), local + Supabase repositories
+data-layer/     DataProvider (useModel, useData, useSubmit, useReview…, and the workflow hooks:
+                useAssignments, useRequests, useRawValues, useSubmitRaw, useReviewRaw…), local + Supabase
+                repositories (the local one enforces the same rules as the database functions)
 engine/risk/    INFORM Risk engine: math, classes, hierarchy, standardise, model, metrics, sources
 engine/severity INFORM Severity Index engine: definitions, engine, scenarios
 features/<x>/   one folder per page (owns its components)
@@ -61,6 +64,17 @@ state/prefs.ts  theme, language, learning progress (persisted)
   methodology, area charts). Do not read layout (`scrollHeight`, `getBoundingClientRect`…) synchronously
   in an effect on mount; let a `ResizeObserver` report it. `useModel()` re-renders only when the model
   changes. Measure with `node scripts/qa-perf.mjs [--only=/route]`.
+- Where a value comes from is always shown: the kind of source (`SourceKindTag`: Tanzanian institution
+  or global dataset) and, for measured figures, the level (`LevelTag`: council, regional, national or
+  INFORM baseline). Their labels live in `common` (`sourceKind.*`, `valueLevel.*`).
+- Selecting rows must never move them: bulk-action bars float at the bottom of the screen
+  (Data portal → Indicators) instead of being inserted above the list.
+- Long option labels: `<SelectItem description="Tanzania Meteorological Authority">TMA</SelectItem>`
+  shows the description in the open list only, so the closed select stays short.
+- Text on solid `bg-success` / `bg-danger` uses `text-background` (light green and red in night mode
+  need dark text).
+- `npm run dev:demo` runs the dev server in demo mode (browser-local data) even when `.env.local` has
+  Supabase keys: switch roles in the Data portal to walk through the whole workflow.
 - QA before merging UI work: `node scripts/qa-a11y.mjs` (axe, both themes) and
   `node scripts/qa-screenshots.mjs` (full-page screenshots, both themes, both languages, 390/1440 px)
   against `npx vite preview --port 4173`.
@@ -88,7 +102,10 @@ parseMetric('risk' | 'dim:hazard' | 'ind:hazard:flood') → { get(u), classOf(v)
 metricColor(metric, value)                // map/table colour
 topDrivers(unit, n, dim?), dataCoverage(unit), indicatorValue(unit, dim, key)
 DIMENSIONS / ALL_INDICATORS (hierarchy), sourceFor(dim, key), sourceLabel(src), AUTHORITIES
-computeFromRaw(rawById) / standardise(raw, spec) / SPECS / usedSpecs()
+computeFromRaw(rawById) / standardise(raw, spec) / SPECS / usedSpecs() / ADVANCED_SPECS
+deriveRawOverrides(rawValues, model, baseline) → council leaves recomputed from measured values
+mergeOverrides(explicit, derived, model)  // the most recent approved value wins per council and leaf
+resolveForCouncil(index, specId, council) // council value, else its region's, else the national one
 computeSeverity(input) → { severity, category, level, dimensions tree, indicators, reliability }
 ```
 
