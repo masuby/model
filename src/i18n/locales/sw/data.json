@@ -15,7 +15,7 @@
     "awaitingReviewer": "Mawasilisho katika foleni yako",
     "awaitingMine": "Mawasilisho yako ambayo bado yanasubiri",
     "councils": "Halmashauri zinazohusika",
-    "councilsSub": "zikitegemea vitengo {{sources}} vya chanzo vya INFORM",
+    "councilsSub": "Halmashauri zote za sensa ya 2022",
     "latest": "Badiliko la mwisho lililoidhinishwa",
     "latestSub": "Ilitumika kwenye ramani {{when}}"
   },
@@ -143,7 +143,7 @@
     "pickTitle": "Halmashauri",
     "pickLead": "Chagua halmashauri ambayo unasasisha alama za viashiria vyake.",
     "emptyTitle": "Anza kwa kuchagua halmashauri",
-    "emptyLead": "Utaona viashiria vyote 32 pamoja na thamani na vyanzo vyake vya sasa, na onyesho la moja kwa moja la jinsi mabadiliko yako yanavyosogeza hatari ya halmashauri.",
+    "emptyLead": "Utaona makundi yote 32 ya viashiria pamoja na thamani na vyanzo vyake vya sasa, na onyesho la moja kwa moja la jinsi mabadiliko yako yanavyosogeza hatari ya halmashauri.",
     "hint": "Andika alama mpya ya 0–10 kando ya kiashiria chochote. Iache tupu ili kubaki na thamani ya sasa.",
     "changeCount_one": "Badiliko {{count}} liko tayari",
     "changeCount_other": "Mabadiliko {{count}} yako tayari",

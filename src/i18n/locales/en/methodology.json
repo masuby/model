@@ -67,7 +67,6 @@
       "title": "At a glance",
       "councils": "Councils",
       "regions": "Regions",
-      "sources": "INFORM source units",
       "national": "National INFORM Risk (official)",
       "note": "All figures on this page are read live from the model, including any approved data updates."
     },
@@ -209,7 +208,7 @@
     "sharedSource": "Vulnerability and coping come from the INFORM source unit “{{source}}”",
     "inherited": "This council inherits its data from {{parent}} until council-specific data exist.",
     "categories": "Categories",
-    "withData": "{{n}} of {{total}} indicators with data",
+    "withData": "{{n}} of {{total}} indicator groups with data",
     "mean": "mean",
     "noData": "no data",
     "dimFormula": "{{dim}} is the scaled geometric mean of the categories {{cats}}, which equals {{result}}",
@@ -258,13 +257,8 @@
     "if": "if"
   },
   "levels": {
-    "title": "Four administrative levels, one consistent model",
+    "title": "Three administrative levels, one consistent model",
     "lead": "The same engine runs at every level, and each level is built in the way INFORM prescribes, never by averaging scores that were already aggregated.",
-    "sources": {
-      "tag": "Reference",
-      "title": "INFORM source units",
-      "body": "The {{n}} units of the INFORM Tanzania country workbook: the backbone the engine is proven against, and the level at which vulnerability and coping data are recorded."
-    },
     "councils": {
       "tag": "Headline",
       "title": "Councils",

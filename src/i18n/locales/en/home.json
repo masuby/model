@@ -39,7 +39,7 @@
   "modules": {
     "eyebrow": "One platform",
     "title": "What you can do here",
-    "explore": "Interactive map of all councils and regions, coloured by risk, any dimension or any of 32 indicators.",
+    "explore": "Interactive map of all councils and regions, coloured by risk, any dimension or any of 32 indicator groups.",
     "insights": "National patterns: regional rankings, hazard hot-spots and how the dimensions interact.",
     "severity": "Score an unfolding crisis with the official INFORM Severity Index method.",
     "learn": "A short course with quizzes that explains risk, from hazards to coping capacity.",

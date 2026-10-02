@@ -33,7 +33,7 @@
   },
   "facts": {
     "census": "Sensa ya 2022",
-    "coverageSub": "viashiria {{have}} kati ya {{total}}"
+    "coverageSub": "makundi ya viashiria {{have}} kati ya {{total}}"
   },
   "figures": {
     "rank": "Nafasi kati ya {{peers}} (1 = hatari kubwa zaidi)",
@@ -44,8 +44,8 @@
   },
   "notices": {
     "official": "Hii ni thamani rasmi ya INFORM kwa Tanzania. Haikokotolewi upya kutoka kwa halmashauri.",
-    "aggregated_one": "Imejumlishwa kutoka halmashauri {{count}} kwa mbinu ya INFORM (wastani wa viashiria kwanza, kisha makundi na vipimo), si wastani wa alama za hatari.",
-    "aggregated_other": "Imejumlishwa kutoka halmashauri {{count}} kwa mbinu ya INFORM (wastani wa viashiria kwanza, kisha makundi na vipimo), si wastani wa alama za hatari.",
+    "aggregated_one": "Imejumlishwa kutoka halmashauri {{count}} kwa mbinu ya INFORM (wastani wa makundi ya viashiria kwanza, kisha kategoria na vipimo), si wastani wa alama za hatari.",
+    "aggregated_other": "Imejumlishwa kutoka halmashauri {{count}} kwa mbinu ya INFORM (wastani wa makundi ya viashiria kwanza, kisha kategoria na vipimo), si wastani wa alama za hatari.",
     "sourceUnit_one": "Kitengo cha rejea kati ya vitengo {{total}} vya kitabu cha INFORM. Halmashauri {{count}} inatumia data yake ya udhaifu na uwezo wa kukabiliana.",
     "sourceUnit_other": "Kitengo cha rejea kati ya vitengo {{total}} vya kitabu cha INFORM. Halmashauri {{count}} zinatumia data yake ya udhaifu na uwezo wa kukabiliana.",
     "inherited": "Halmashauri mpya: inarithi data kutoka {{parent}} hadi takwimu zake zenyewe zitakapochapishwa.",
@@ -91,18 +91,18 @@
         "council": "Jinsi wasifu huu unavyolinganishwa na picha ya mkoa na ya taifa, na mahali ulipo miongoni mwa maeneo ya ngazi yake. Pakua chati yoyote kama picha, au data yake kama CSV.",
         "source": "Jinsi wasifu huu unavyolinganishwa na picha ya mkoa na ya taifa, na mahali ulipo miongoni mwa maeneo ya ngazi yake. Pakua chati yoyote kama picha, au data yake kama CSV.",
         "region": "Jinsi mkoa huu unavyolinganishwa na picha ya kitaifa, na mahali ulipo miongoni mwa mikoa mingine. Pakua chati yoyote kama picha, au data yake kama CSV.",
-        "national": "Alama za makundi na viashiria za wasifu rasmi wa kitaifa, na jinsi halmashauri zinavyotawanyika kuizunguka. Pakua chati yoyote kama picha, au data yake kama CSV."
+        "national": "Alama za kategoria na makundi ya viashiria za wasifu rasmi wa kitaifa, na jinsi halmashauri zinavyotawanyika kuizunguka. Pakua chati yoyote kama picha, au data yake kama CSV."
       }
     },
     "drivers": {
       "eyebrow": "Kinachoendesha hatari hapa",
-      "title": "Viashiria vyenye uzito mkubwa",
+      "title": "Makundi ya viashiria yenye uzito mkubwa",
       "lead": "Viashiria vyenye alama za juu zaidi na kipimo kinachojitokeza, kwa lugha rahisi."
     },
     "indicators": {
       "eyebrow": "Ushahidi",
-      "title": "Kila kiashiria na chanzo chake",
-      "lead": "Viashiria vyote {{count}} vilivyo nyuma ya alama, vimepangwa kwa kipimo na kundi, pamoja na mamlaka inayohusika, seti ya data na jinsi data ilivyo ya karibu na eneo."
+      "title": "Kila kundi la viashiria na chanzo chake",
+      "lead": "Makundi yote {{count}} ya viashiria yaliyo nyuma ya alama, yamepangwa kwa kipimo na kategoria, pamoja na mamlaka inayohusika, seti ya data na jinsi data ilivyo ya karibu na eneo."
     },
     "places": {
       "eyebrow": "Maeneo",
@@ -134,7 +134,7 @@
     "localRank": "Ndani ya Mkoa wa {{region}} inashika <b>{{rank}}</b>.",
     "weakest": "Kipimo chake dhaifu zaidi ni <b>{{dim}}</b>, chenye daraja la {{cls}} kwa vizingiti vyake ({{score}}).",
     "driver": "Kiashiria chenye alama ya juu zaidi ni <b>{{indicator}}</b>, alama {{score}} kati ya 10.",
-    "coverage": "<b>Viashiria {{have}} kati ya {{total}}</b> vina data; visivyo na data haviingizwi kwenye wastani, na kamwe havihesabiwi kama sifuri.",
+    "coverage": "<b>Makundi ya viashiria {{have}} kati ya {{total}}</b> yana data; yasiyo na data hayaingizwi kwenye wastani, na kamwe hayahesabiwi kama sifuri.",
     "nationalOverall": "Hatari rasmi ya INFORM kwa Tanzania ni <b>{{score}} ({{cls}})</b>.",
     "nationalAbove": "<b>Halmashauri {{n}} kati ya {{total}}</b> zina alama juu ya thamani ya kitaifa."
   },
@@ -149,7 +149,7 @@
   },
   "dims": {
     "categories": "Makundi",
-    "tickNote": "Katika safu za makundi, kistari kinaonyesha thamani ya kitaifa.",
+    "tickNote": "Katika safu za kategoria, kistari kinaonyesha thamani ya kitaifa.",
     "scaleNote": "Madaraja yanatumia vizingiti vya INFORM vya kila kipimo (tazama Mbinu hapa chini).",
     "arrowsRegion": "Mishale inalinganisha na mkoa na taifa: nyekundu ni juu zaidi (hatari zaidi), kijani ni chini zaidi.",
     "arrowsNation": "Mishale inalinganisha na taifa: nyekundu ni juu zaidi (hatari zaidi), kijani ni chini zaidi.",
@@ -170,24 +170,24 @@
   "charts": {
     "categories": {
       "title": "Makundi sita",
-      "desc": "Alama za makundi (0–10), pamoja na rejea za mkoa na taifa pale zinapohusika.",
-      "descNational": "Alama za makundi (0–10) za wasifu rasmi wa kitaifa.",
+      "desc": "Alama za kategoria (0–10), pamoja na rejea za mkoa na taifa pale zinapohusika.",
+      "descNational": "Alama za kategoria (0–10) za wasifu rasmi wa kitaifa.",
       "modeLabel": "Aina ya chati",
       "radar": "Rada",
       "bars": "Pau",
-      "aria": "Alama za makundi za {{name}} zikilinganishwa na rejea zake",
+      "aria": "Alama za kategoria za {{name}} zikilinganishwa na rejea zake",
       "officialNote": "Hatari ya kitaifa ya {{value}} ni takwimu rasmi."
     },
     "indicators": {
       "title": "Alama za viashiria",
-      "desc": "Kila kiashiria cha kipimo kilichochaguliwa, kimepangwa kwa alama na kupakwa rangi kwa kipimo endelevu cha 0–10.",
+      "desc": "Kila kundi la viashiria la kipimo kilichochaguliwa, limepangwa kwa alama na kupakwa rangi kwa kipimo endelevu cha 0–10.",
       "dimLabel": "Kipimo",
       "compareWith": "Linganisha na",
-      "missing_one": "Kiashiria {{count}} hakina data",
-      "missing_other": "Viashiria {{count}} havina data",
+      "missing_one": "Kundi {{count}} la viashiria halina data",
+      "missing_other": "Makundi {{count}} ya viashiria hayana data",
       "ramp": "Alama ya kiashiria (0–10)",
       "refKey": "Thamani ya {{name}}",
-      "aria": "Chati ya pau ya viashiria vya {{dim}} kwa {{name}}"
+      "aria": "Chati ya pau ya makundi ya viashiria ya {{dim}} kwa {{name}}"
     },
     "distribution": {
       "title": "Nafasi miongoni mwa wenzake",
@@ -221,7 +221,7 @@
   "csv": {
     "dimension": "Kipimo",
     "category": "Kundi",
-    "indicator": "Kiashiria",
+    "indicator": "Kundi la viashiria",
     "name": "Jina",
     "region": "Mkoa",
     "highlight": "Kikundi",
@@ -233,7 +233,7 @@
   },
   "drivers": {
     "topTitle": "Vichocheo vikuu",
-    "topLead": "Viashiria vitano vyenye alama za juu zaidi katika vipimo vyote.",
+    "topLead": "Makundi matano ya viashiria yenye alama za juu zaidi katika vipimo vyote.",
     "note": {
       "council": "Alama ni kuanzia 0 hadi 10 na juu zaidi daima inamaanisha hatari zaidi. Kwa Ukosefu wa Uwezo wa Kukabiliana, alama ya juu inamaanisha rasilimali chache. Kwenye kila mstari, duara linaonyesha thamani ya mkoa na kistari thamani ya kitaifa.",
       "source": "Alama ni kuanzia 0 hadi 10 na juu zaidi daima inamaanisha hatari zaidi. Kwa Ukosefu wa Uwezo wa Kukabiliana, alama ya juu inamaanisha rasilimali chache. Kwenye kila mstari, duara linaonyesha thamani ya mkoa na kistari thamani ya kitaifa.",
@@ -252,15 +252,15 @@
   },
   "table": {
     "resolutionKey": "Kiwango cha data:",
-    "indicator": "Kiashiria",
+    "indicator": "Kundi la viashiria",
     "resolution": "Kiwango",
     "categoryScore": "Kundi",
-    "caption": "Viashiria vyote vya {{name}}, pamoja na thamani, ulinganisho wa kitaifa, vyanzo na kiwango cha data",
+    "caption": "Makundi yote ya viashiria ya {{name}}, pamoja na thamani, ulinganisho wa kitaifa, vyanzo na kiwango cha data",
     "edited": "Imesasishwa · {{authority}} · {{date}}",
     "editedMembers": "Inajumuisha masasisho ya halmashauri",
-    "show_one": "Onyesha kiashiria {{count}}",
-    "show_other": "Onyesha viashiria {{count}}",
-    "hide": "Ficha viashiria",
+    "show_one": "Onyesha kundi {{count}} la viashiria",
+    "show_other": "Onyesha makundi {{count}} ya viashiria",
+    "hide": "Ficha makundi ya viashiria",
     "measured": "Takwimu zilizo nyuma ya alama hii",
     "baselineRest_one": "Kiashiria {{count}} kingine kutoka msingi wa INFORM",
     "baselineRest_other": "Viashiria {{count}} vingine kutoka msingi wa INFORM"
@@ -288,10 +288,10 @@
     }
   },
   "noData": {
-    "title_zero": "Kila kiashiria kina data.",
-    "title_one": "Kiashiria {{count}} hakina data.",
-    "title_other": "Viashiria {{count}} havina data.",
-    "body": "“Hakuna data” inamaanisha hakuna thamani iliyoripotiwa. INFORM hukiacha kiashiria hicho nje ya wastani wa kundi. Hakihesabiwi kamwe kama sifuri, na sifuri ni alama halisi ya chini.",
+    "title_zero": "Kila kundi la viashiria lina data.",
+    "title_one": "Kundi {{count}} la viashiria halina data.",
+    "title_other": "Makundi {{count}} ya viashiria hayana data.",
+    "body": "“Hakuna data” inamaanisha hakuna thamani iliyoripotiwa. INFORM huiacha nje ya wastani wa kategoria. Haihesabiwi kamwe kama sifuri, na sifuri ni alama halisi ya chini.",
     "tooltip": "Hakuna thamani iliyoripotiwa, hivyo haiingizwi kwenye wastani (haihesabiwi kama sifuri)."
   },
   "places": {
@@ -321,7 +321,7 @@
     "count": "Idadi",
     "average": "Wastani wa hatari",
     "range": "Kiwango",
-    "membersNote": "Alama ya mkoa si wastani wa alama hizi: INFORM huchukua wastani wa viashiria vya halmashauri kwanza, kisha hujenga upya makundi, vipimo na hatari."
+    "membersNote": "Alama ya mkoa si wastani wa alama hizi: INFORM huchukua wastani wa makundi ya viashiria ya halmashauri kwanza, kisha hujenga upya kategoria, vipimo na hatari."
   },
   "services": {
     "facilitiesTitle": "Huduma",
@@ -371,9 +371,9 @@
   },
   "method": {
     "steps": {
-      "indicators": "Kila kiashiria kinapewa alama kuanzia 0 hadi 10, ambapo juu zaidi daima inamaanisha hatari zaidi.",
-      "categories": "Kundi ni wastani wa viashiria vyake; viashiria visivyo na data vinarukwa, havihesabiwi kamwe kama sifuri.",
-      "dimensions": "Kipimo huunganisha makundi yake kwa wastani wa kijiometri uliopimwa wa INFORM, na kukadiriwa hadi desimali moja.",
+      "indicators": "Kila kundi la viashiria linapewa alama kuanzia 0 hadi 10, ambapo juu zaidi daima inamaanisha hatari zaidi.",
+      "categories": "Kategoria ni wastani wa makundi yake ya viashiria; makundi yasiyo na data yanarukwa, hayahesabiwi kamwe kama sifuri.",
+      "dimensions": "Kipimo huunganisha kategoria zake kwa wastani wa kijiometri uliopimwa wa INFORM, na kukadiriwa hadi desimali moja.",
       "risk": "Hatari ya INFORM ni kipeo cha tatu cha Vitisho na Mfiduo × Udhaifu × Ukosefu wa Uwezo wa Kukabiliana."
     },
     "level": {

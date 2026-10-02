@@ -33,7 +33,7 @@
   },
   "facts": {
     "census": "2022 Census",
-    "coverageSub": "{{have}} of {{total}} indicators"
+    "coverageSub": "{{have}} of {{total}} indicator groups"
   },
   "figures": {
     "rank": "Rank among {{peers}} (1 = highest risk)",
@@ -44,8 +44,8 @@
   },
   "notices": {
     "official": "This is the official INFORM Tanzania country figure. It is not re-aggregated from councils.",
-    "aggregated_one": "Aggregated from {{count}} council the INFORM way (indicator averages first, then categories and dimensions), not as an average of risk scores.",
-    "aggregated_other": "Aggregated from {{count}} councils the INFORM way (indicator averages first, then categories and dimensions), not as an average of risk scores.",
+    "aggregated_one": "Aggregated from {{count}} council the INFORM way (indicator groups averaged first, then categories and dimensions), not as an average of risk scores.",
+    "aggregated_other": "Aggregated from {{count}} councils the INFORM way (indicator groups averaged first, then categories and dimensions), not as an average of risk scores.",
     "sourceUnit_one": "A reference unit of the {{total}}-unit INFORM workbook. {{count}} council uses its vulnerability and coping data.",
     "sourceUnit_other": "A reference unit of the {{total}}-unit INFORM workbook. {{count}} councils use its vulnerability and coping data.",
     "inherited": "A newly created council: it inherits its data from {{parent}} until its own figures are published.",
@@ -91,18 +91,18 @@
         "council": "How this profile compares with the regional and national picture, and where it sits among its peers. Download any chart as an image, or its data as CSV.",
         "source": "How this profile compares with the regional and national picture, and where it sits among its peers. Download any chart as an image, or its data as CSV.",
         "region": "How this region compares with the national picture, and where it sits among the other regions. Download any chart as an image, or its data as CSV.",
-        "national": "The category and indicator scores of the official national profile, and how the councils spread around it. Download any chart as an image, or its data as CSV."
+        "national": "The category and indicator group scores of the official national profile, and how the councils spread around it. Download any chart as an image, or its data as CSV."
       }
     },
     "drivers": {
       "eyebrow": "What drives risk here",
-      "title": "The indicators that weigh most",
+      "title": "The indicator groups that weigh most",
       "lead": "The highest-scoring indicators and the dimension that stands out, in plain language."
     },
     "indicators": {
       "eyebrow": "Evidence",
-      "title": "Every indicator, with its source",
-      "lead": "All {{count}} indicators behind the score, grouped by dimension and category, with the responsible authority, the dataset and how local the data are."
+      "title": "Every indicator group, with its source",
+      "lead": "All {{count}} indicator groups behind the score, arranged by dimension and category, with the responsible authority, the dataset and how local the data are."
     },
     "places": {
       "eyebrow": "Places",
@@ -137,7 +137,7 @@
     "localRank": "Within {{region}} Region it is <b>{{rank}}</b>.",
     "weakest": "Its weakest dimension is <b>{{dim}}</b>, classed {{cls}} on its own scale ({{score}}).",
     "driver": "The highest-scoring indicator is <b>{{indicator}}</b>, at {{score}} out of 10.",
-    "coverage": "<b>{{have}} of {{total}} indicators</b> carry data; missing ones are left out of the averages, never counted as zero.",
+    "coverage": "<b>{{have}} of {{total}} indicator groups</b> carry data; missing ones are left out of the averages, never counted as zero.",
     "nationalOverall": "Tanzania’s official INFORM Risk is <b>{{score}} ({{cls}})</b>.",
     "nationalAbove": "<b>{{n}} of {{total}} councils</b> score above the national value."
   },
@@ -183,14 +183,14 @@
     },
     "indicators": {
       "title": "Indicator scores",
-      "desc": "Every indicator of the selected dimension, sorted by score and coloured on the continuous 0–10 scale.",
+      "desc": "Every indicator group of the selected dimension, sorted by score and coloured on the continuous 0–10 scale.",
       "dimLabel": "Dimension",
       "compareWith": "Compare with",
-      "missing_one": "{{count}} indicator without data",
-      "missing_other": "{{count}} indicators without data",
+      "missing_one": "{{count}} indicator group without data",
+      "missing_other": "{{count}} indicator groups without data",
       "ramp": "Indicator score (0–10)",
       "refKey": "{{name}} value",
-      "aria": "Bar chart of the {{dim}} indicators for {{name}}"
+      "aria": "Bar chart of the {{dim}} indicator groups for {{name}}"
     },
     "distribution": {
       "title": "Position among peers",
@@ -224,7 +224,7 @@
   "csv": {
     "dimension": "Dimension",
     "category": "Category",
-    "indicator": "Indicator",
+    "indicator": "Indicator group",
     "name": "Name",
     "region": "Region",
     "highlight": "Group",
@@ -236,7 +236,7 @@
   },
   "drivers": {
     "topTitle": "Top drivers",
-    "topLead": "The five indicators with the highest scores across all dimensions.",
+    "topLead": "The five indicator groups with the highest scores across all dimensions.",
     "note": {
       "council": "Scores run from 0 to 10 and higher always means more risk. For Lack of Coping Capacity, a high score means fewer resources. On each track the ring marks the regional value and the tick the national value.",
       "source": "Scores run from 0 to 10 and higher always means more risk. For Lack of Coping Capacity, a high score means fewer resources. On each track the ring marks the regional value and the tick the national value.",
@@ -255,15 +255,15 @@
   },
   "table": {
     "resolutionKey": "Data resolution:",
-    "indicator": "Indicator",
+    "indicator": "Indicator group",
     "resolution": "Resolution",
     "categoryScore": "Category",
-    "caption": "All indicators for {{name}}, with values, the national comparison, sources and data resolution",
+    "caption": "All indicator groups for {{name}}, with values, the national comparison, sources and data resolution",
     "edited": "Updated · {{authority}} · {{date}}",
     "editedMembers": "Includes council updates",
-    "show_one": "Show {{count}} indicator",
-    "show_other": "Show {{count}} indicators",
-    "hide": "Hide indicators",
+    "show_one": "Show {{count}} indicator group",
+    "show_other": "Show {{count}} indicator groups",
+    "hide": "Hide indicator groups",
     "measured": "Figures behind this score",
     "baselineRest_one": "{{count}} other indicator from the INFORM baseline",
     "baselineRest_other": "{{count}} other indicators from the INFORM baseline"
@@ -291,9 +291,9 @@
     }
   },
   "noData": {
-    "title_zero": "Every indicator has data.",
-    "title_one": "{{count}} indicator has no data.",
-    "title_other": "{{count}} indicators have no data.",
+    "title_zero": "Every indicator group has data.",
+    "title_one": "{{count}} indicator group has no data.",
+    "title_other": "{{count}} indicator groups have no data.",
     "body": "“No data” means no value was reported. INFORM leaves it out of the category average. It is never treated as zero, and zero is a real, low score.",
     "tooltip": "No value reported, so it is left out of the average (not counted as zero)."
   },
@@ -324,7 +324,7 @@
     "count": "Count",
     "average": "Average risk",
     "range": "Range",
-    "membersNote": "The region’s own score is not the average of these scores: INFORM averages the councils’ indicators first, then rebuilds the categories, dimensions and risk."
+    "membersNote": "The region’s own score is not the average of these scores: INFORM averages the councils’ indicator groups first, then rebuilds the categories, dimensions and risk."
   },
   "services": {
     "facilitiesTitle": "Facilities",
@@ -374,8 +374,8 @@
   },
   "method": {
     "steps": {
-      "indicators": "Each indicator is scored from 0 to 10, where higher always means more risk.",
-      "categories": "A category is the average of its indicators; indicators without data are skipped, never counted as zero.",
+      "indicators": "Each indicator group is scored from 0 to 10, where higher always means more risk.",
+      "categories": "A category is the average of its indicator groups; groups without data are skipped, never counted as zero.",
       "dimensions": "A dimension combines its categories with INFORM’s scaled geometric mean, rounded to one decimal.",
       "risk": "INFORM Risk is the cube root of Hazard & Exposure × Vulnerability × Lack of Coping Capacity."
     },

@@ -15,7 +15,7 @@
     "awaitingReviewer": "Submissions in your queue",
     "awaitingMine": "Your submissions still pending",
     "councils": "Councils covered",
-    "councilsSub": "backed by {{sources}} INFORM source units",
+    "councilsSub": "All councils of the 2022 census",
     "latest": "Last approved change",
     "latestSub": "Applied to the map {{when}}"
   },
@@ -143,7 +143,7 @@
     "pickTitle": "Council",
     "pickLead": "Choose the council whose indicator scores you are updating.",
     "emptyTitle": "Start by choosing a council",
-    "emptyLead": "You will see all 32 indicators with their current values and sources, and a live preview of how your changes move the council’s risk.",
+    "emptyLead": "You will see all 32 indicator groups with their current values and sources, and a live preview of how your changes move the council’s risk.",
     "hint": "Type a new 0–10 score next to any indicator. Leave it blank to keep the current value.",
     "changeCount_one": "{{count}} change ready",
     "changeCount_other": "{{count}} changes ready",

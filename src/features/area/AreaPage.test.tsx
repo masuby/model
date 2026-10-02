@@ -92,7 +92,7 @@ describe('AreaPage', { timeout: 90_000 }, () => {
     renderAt(id);
     expect(screen.getByRole('heading', { level: 1, name })).toBeInTheDocument();
     expect(screen.getByRole('navigation', { name: 'Breadcrumb' })).toBeInTheDocument();
-    expect(screen.getByText('Every indicator, with its source')).toBeInTheDocument();
+    expect(screen.getByText('Every indicator group, with its source')).toBeInTheDocument();
     expect(screen.getByText('How this profile is calculated', { selector: 'h2' })).toBeInTheDocument();
     expect(document.title).toContain(name);
     // Charts rendered as SVG (categories radar, distribution beeswarm, indicator bars).
@@ -102,7 +102,7 @@ describe('AreaPage', { timeout: 90_000 }, () => {
   it('renders in Kiswahili', async () => {
     await i18n.changeLanguage('sw');
     renderAt(council.id);
-    expect(screen.getByText('Kila kiashiria na chanzo chake')).toBeInTheDocument();
+    expect(screen.getByText('Kila kundi la viashiria na chanzo chake')).toBeInTheDocument();
     await i18n.changeLanguage('en');
   });
 
@@ -111,15 +111,15 @@ describe('AreaPage', { timeout: 90_000 }, () => {
     vi.stubGlobal('IntersectionObserver', Noop); // nothing ever scrolls into view
     renderAt(council.id);
     // Section headings are always there (the nav and print need them); the heavy content is not yet.
-    expect(screen.getByText('Every indicator, with its source', { selector: 'h2' })).toBeInTheDocument();
+    expect(screen.getByText('Every indicator group, with its source', { selector: 'h2' })).toBeInTheDocument();
     expect(document.querySelectorAll('svg.recharts-surface')).toHaveLength(0);
-    expect(screen.queryByRole('table', { name: /All indicators for/ })).not.toBeInTheDocument();
+    expect(screen.queryByRole('table', { name: /All indicator groups for/ })).not.toBeInTheDocument();
 
     act(() => {
       window.dispatchEvent(new Event('beforeprint'));
     });
     expect(document.querySelectorAll('svg.recharts-surface').length).toBeGreaterThanOrEqual(3);
-    expect(screen.getByRole('table', { name: /All indicators for/ })).toBeInTheDocument();
+    expect(screen.getByRole('table', { name: /All indicator groups for/ })).toBeInTheDocument();
     expect(document.querySelector('.area-deferred')).toBeNull();
   });
 

@@ -16,7 +16,6 @@ export function OverviewSection() {
   const glance: Array<{ label: string; value: ReactNode }> = [
     { label: t('overview.glance.councils'), value: counts.councils },
     { label: t('overview.glance.regions'), value: counts.regions },
-    { label: t('overview.glance.sources'), value: counts.sources },
     {
       label: t('overview.glance.national'),
       value: (
