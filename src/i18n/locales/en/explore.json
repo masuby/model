@@ -1,6 +1,6 @@
 {
   "title": "Risk explorer",
-  "lead": "Colour Tanzania by overall risk, a dimension or any of {{count}} indicators. Select an area to see what drives its score.",
+  "lead": "Colour Tanzania by overall risk, a dimension or any of its {{count}} indicator groups. Select an area to see what drives its score.",
   "panel": {
     "label": "Explorer controls"
   },
@@ -125,7 +125,7 @@
     "colourBy": "Colour the map by {{name}}",
     "people": "People",
     "popSource": "Source: {{source}}",
-    "coverageDetail": "{{have}} of {{total}} indicators have data",
+    "coverageDetail": "{{have}} of {{total}} indicator groups have data",
     "regionNote_one": "Aggregated from {{count}} council with the INFORM method.",
     "regionNote_other": "Aggregated from {{count}} councils with the INFORM method.",
     "sourceNote": "Reference unit from the INFORM SADC 2024 workbook. Councils are the headline level.",

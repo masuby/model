@@ -50,7 +50,7 @@
     "hot_other": "{{count}} of {{total}} councils, home to {{pop}} people, combine high hazard with high vulnerability: the priority corner for preparedness.",
     "driver_one": "{{indicator}} is the most common top-scoring indicator, leading in {{count}} of {{total}} councils.",
     "driver_other": "{{indicator}} is the most common top-scoring indicator, leading in {{count}} of {{total}} councils.",
-    "data": "{{national}} of {{total}} indicators still use one national value for every council and {{region}} exist only per region, so they cannot tell neighbouring councils apart."
+    "data": "{{national}} of {{total}} indicator groups still use one national value for every council and {{region}} exist only per region, so they cannot tell neighbouring councils apart."
   },
   "regions": {
     "title": "How the regions compare",
@@ -123,7 +123,7 @@
     "noneHigh_other": "regions have no council at High risk"
   },
   "drivers": {
-    "title": "The indicators behind the scores",
+    "title": "The indicator groups behind the scores",
     "lead": "Which single indicator scores highest in each council, and how every indicator averages out nationally.",
     "countTitle": "Most frequent top driver",
     "countSub": "Number of councils (out of {{total}}) where each indicator scores highest",
@@ -144,7 +144,7 @@
     "uniform": "Same value in every council (for example, a national baseline).",
     "meanCaption": "Long bars are structural weaknesses shared across the country: {{indicator}} ({{dimension}}) has the highest national average, at {{value}}. Short bars can still matter a great deal in the few councils where they are high.",
     "legend": "Dimensions",
-    "indicator": "Indicator",
+    "indicator": "Indicator group",
     "dimension": "Dimension",
     "category": "Category"
   },
@@ -152,19 +152,19 @@
     "title": "How complete, and how local, is the evidence?",
     "lead": "How many indicators each council has values for, and at what geographic level each indicator is measured.",
     "histTitle": "Data coverage across councils",
-    "histSub": "Share of the {{total}} indicators with a value, per council",
+    "histSub": "Share of the {{total}} indicator groups with a value, per council",
     "xAxis": "Indicators with data",
     "councils": "Councils",
     "share": "Coverage",
-    "indicatorsWithData": "Indicators with data",
-    "tooltipTitle": "{{have}} of {{total}} indicators",
+    "indicatorsWithData": "Indicator groups with data",
+    "tooltipTitle": "{{have}} of {{total}} indicator groups",
     "median": "Median coverage",
     "atLeast90": "Councils with ≥ 90% coverage",
     "histCaption": "Missing values are left out of the averages, never counted as zero. Gaps come from indicators that have no sub-national source yet.",
     "resTitle": "Where each indicator’s data comes from",
     "resSub": "Geographic resolution of the source behind every indicator",
     "centre": "local indicators",
-    "indicators": "Indicators",
+    "indicators": "Indicator groups",
     "resolution": "Resolution",
     "method": "Method",
     "res": {
@@ -181,10 +181,10 @@
       "national": "The same national value for every council (INFORM SADC 2024)",
       "overlay": "Mapped from documented hazard zones and events"
     },
-    "resCaption": "{{local}} of {{total}} indicators ({{pct}}) are measured locally, at council or district level.",
+    "resCaption": "{{local}} of {{total}} indicator groups ({{pct}}) are measured locally, at council or district level.",
     "showSources": "Show sources",
     "honestTitle": "An honest note on data gaps",
-    "honestBody": "{{national}} of the {{total}} indicators still use a national baseline and {{overlay}} are documented overlays, while {{region}} rely on region-level surveys. These layers cannot tell councils apart as sharply as local data can, so differences between neighbouring councils mostly reflect hazard and exposure. They will be replaced as ministries and agencies submit council-level data through the Data portal.",
+    "honestBody": "{{national}} of the {{total}} indicator groups still use a national baseline and {{overlay}} are documented overlays, while {{region}} rely on region-level surveys. These layers cannot tell councils apart as sharply as local data can, so differences between neighbouring councils mostly reflect hazard and exposure. They will be replaced as ministries and agencies submit council-level data through the Data portal.",
     "readMethod": "Read the methodology",
     "contribute": "Contribute data"
   },
@@ -215,7 +215,7 @@
   "notes": {
     "title": "About these figures",
     "national": "The national value is the official INFORM figure for Tanzania, not an average of councils or regions.",
-    "regions": "Regional values are aggregated from their councils the INFORM way: indicator averages → category averages → dimension scores → risk as the cube root of hazard × vulnerability × lack of coping capacity.",
+    "regions": "Regional values are aggregated from their councils the INFORM way: indicator group averages → category averages → dimension scores → risk as the cube root of hazard × vulnerability × lack of coping capacity.",
     "thresholds": "Each dimension has its own class thresholds. For overall risk the classes are {{ranges}} (Very low → Very high).",
     "councils": "Each council has its own hazard and exposure; vulnerability and coping come from its INFORM source unit, because survey data has no council breakdown.",
     "more": "Full methodology and sources"

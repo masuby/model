@@ -1,6 +1,6 @@
 {
   "title": "Chunguza hatari",
-  "lead": "Paka ramani ya Tanzania rangi kwa hatari kwa ujumla, kwa kipimo, au kwa kiashiria chochote kati ya {{count}}. Chagua eneo uone kinachoendesha alama yake.",
+  "lead": "Paka ramani ya Tanzania rangi kwa hatari kwa ujumla, kwa kipimo, au kwa kundi lolote kati ya makundi {{count}} ya viashiria. Chagua eneo uone kinachoendesha alama yake.",
   "panel": {
     "label": "Vidhibiti vya uchunguzi"
   },
@@ -125,7 +125,7 @@
     "colourBy": "Paka ramani rangi kwa {{name}}",
     "people": "Watu",
     "popSource": "Chanzo: {{source}}",
-    "coverageDetail": "Viashiria {{have}} kati ya {{total}} vina data",
+    "coverageDetail": "Makundi ya viashiria {{have}} kati ya {{total}} yana data",
     "regionNote_one": "Umejumlishwa kutoka halmashauri {{count}} kwa mbinu ya INFORM.",
     "regionNote_other": "Umejumlishwa kutoka halmashauri {{count}} kwa mbinu ya INFORM.",
     "sourceNote": "Kitengo cha rejea kutoka kitabu cha INFORM SADC 2024. Halmashauri ndizo ngazi kuu.",

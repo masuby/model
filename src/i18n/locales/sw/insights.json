@@ -47,7 +47,7 @@
     "regions": "Hatari haijagawanyika sawa nchini: mikoa {{count}} kati ya {{total}} ina alama zaidi ya thamani ya kitaifa ({{national}}), na mkoa wa chini kabisa, {{bottom}} ({{bottomScore}}), uko pointi {{spread}} chini ya ule wa juu kabisa.",
     "hot": "Halmashauri {{count}} kati ya {{total}}, zenye wakazi {{pop}}, zina vitisho vya juu pamoja na udhaifu wa juu: kona ya kipaumbele kwa maandalizi.",
     "driver": "Kiashiria cha {{indicator}} ndicho kinachoongoza mara nyingi zaidi, kikiwa na alama ya juu kabisa katika halmashauri {{count}} kati ya {{total}}.",
-    "data": "Viashiria {{national}} kati ya {{total}} bado vinatumia thamani moja ya kitaifa kwa kila halmashauri na {{region}} vinapatikana kwa ngazi ya mkoa tu, hivyo haviwezi kutofautisha halmashauri jirani."
+    "data": "Makundi ya viashiria {{national}} kati ya {{total}} bado yanatumia thamani moja ya kitaifa kwa kila halmashauri na {{region}} yanapatikana kwa ngazi ya mkoa tu, hivyo hayawezi kutofautisha halmashauri jirani."
   },
   "regions": {
     "title": "Jinsi mikoa inavyolinganishwa",
@@ -115,7 +115,7 @@
     "noneHigh": "mikoa isiyo na halmashauri yoyote yenye hatari ya Juu"
   },
   "drivers": {
-    "title": "Viashiria vilivyo nyuma ya alama",
+    "title": "Makundi ya viashiria yaliyo nyuma ya alama",
     "lead": "Kiashiria kipi kina alama ya juu kabisa katika kila halmashauri, na wastani wa kila kiashiria kitaifa.",
     "countTitle": "Kichocheo kikuu kinachojitokeza mara nyingi",
     "countSub": "Idadi ya halmashauri (kati ya {{total}}) ambamo kila kiashiria kina alama ya juu kabisa",
@@ -124,7 +124,7 @@
     "countCaption": "Kiashiria cha {{indicator}} kina alama ya juu kabisa katika halmashauri {{count}} ({{pct}}). Viashiria kadhaa vinapolingana kwa alama ya juu, kila kimoja huhesabiwa, hivyo jumla ya pau inaweza kuzidi idadi ya halmashauri.",
     "countCaptionEmpty": "Hakuna data za viashiria.",
     "meanTitle": "Wastani wa alama wa kila kiashiria",
-    "meanSub": "Wastani katika halmashauri, kwa makundi ya vipimo (0–10)",
+    "meanSub": "Wastani katika halmashauri, umepangwa kwa kipimo (0–10)",
     "filter": "Kipimo",
     "all": "Vyote",
     "mean": "Wastani",
@@ -135,7 +135,7 @@
     "uniform": "Thamani ileile katika kila halmashauri (kwa mfano, thamani ya msingi ya kitaifa).",
     "meanCaption": "Pau ndefu ni udhaifu wa kimuundo unaoenea nchi nzima: kiashiria cha {{indicator}} ({{dimension}}) kina wastani wa juu zaidi kitaifa, {{value}}. Pau fupi bado zinaweza kuwa muhimu sana katika halmashauri chache ambamo ziko juu.",
     "legend": "Vipimo",
-    "indicator": "Kiashiria",
+    "indicator": "Kundi la viashiria",
     "dimension": "Kipimo",
     "category": "Kundi"
   },
@@ -143,19 +143,19 @@
     "title": "Ushahidi umekamilika kiasi gani, na ni wa ngazi gani?",
     "lead": "Idadi ya viashiria vyenye thamani kwa kila halmashauri, na ngazi ya kijiografia ambayo kila kiashiria kinapimwa.",
     "histTitle": "Upatikanaji wa data katika halmashauri",
-    "histSub": "Sehemu ya viashiria {{total}} vyenye thamani, kwa kila halmashauri",
+    "histSub": "Sehemu ya makundi {{total}} ya viashiria yenye thamani, kwa kila halmashauri",
     "xAxis": "Viashiria vyenye data",
     "councils": "Halmashauri",
     "share": "Upatikanaji",
-    "indicatorsWithData": "Viashiria vyenye data",
-    "tooltipTitle": "Viashiria {{have}} kati ya {{total}}",
+    "indicatorsWithData": "Makundi ya viashiria yenye data",
+    "tooltipTitle": "Makundi ya viashiria {{have}} kati ya {{total}}",
     "median": "Upatikanaji wa kati",
     "atLeast90": "Halmashauri zenye upatikanaji wa ≥ 90%",
     "histCaption": "Thamani zinazokosekana huachwa nje ya wastani, kamwe hazihesabiwi kama sifuri. Mapengo yanatokana na viashiria ambavyo bado havina chanzo cha ngazi ya chini.",
     "resTitle": "Chanzo cha data cha kila kiashiria",
     "resSub": "Ngazi ya kijiografia ya chanzo kilicho nyuma ya kila kiashiria",
     "centre": "viashiria vya ndani",
-    "indicators": "Viashiria",
+    "indicators": "Makundi ya viashiria",
     "resolution": "Ngazi",
     "method": "Mbinu",
     "res": {
@@ -172,10 +172,10 @@
       "national": "Thamani ileile ya kitaifa kwa kila halmashauri (INFORM SADC 2024)",
       "overlay": "Imeonyeshwa kutokana na maeneo na matukio ya vitisho yaliyoandikwa"
     },
-    "resCaption": "Viashiria {{local}} kati ya {{total}} ({{pct}}) vinapimwa katika ngazi ya ndani, yaani halmashauri au wilaya.",
+    "resCaption": "Makundi ya viashiria {{local}} kati ya {{total}} ({{pct}}) yanapimwa katika ngazi ya ndani, yaani halmashauri au wilaya.",
     "showSources": "Onyesha vyanzo",
     "honestTitle": "Maelezo ya wazi kuhusu mapengo ya data",
-    "honestBody": "Viashiria {{national}} kati ya {{total}} bado vinatumia thamani ya msingi ya kitaifa na {{overlay}} ni tabaka zilizoandikwa, huku {{region}} vikitegemea tafiti za ngazi ya mkoa. Tabaka hizi haziwezi kutofautisha halmashauri kwa uwazi kama data za ndani, hivyo tofauti kati ya halmashauri jirani kwa kiasi kikubwa zinaakisi vitisho na mfiduo. Zitabadilishwa kadri wizara na taasisi zinavyowasilisha data za ngazi ya halmashauri kupitia Lango la data.",
+    "honestBody": "Makundi ya viashiria {{national}} kati ya {{total}} bado yanatumia thamani ya msingi ya kitaifa na {{overlay}} ni tabaka zilizoandikwa, huku {{region}} yakitegemea tafiti za ngazi ya mkoa. Tabaka hizi haziwezi kutofautisha halmashauri kwa uwazi kama data za ndani, hivyo tofauti kati ya halmashauri jirani kwa kiasi kikubwa zinaakisi vitisho na mfiduo. Zitabadilishwa kadri wizara na taasisi zinavyowasilisha data za ngazi ya halmashauri kupitia Lango la data.",
     "readMethod": "Soma mbinu",
     "contribute": "Changia data"
   },
@@ -206,7 +206,7 @@
   "notes": {
     "title": "Kuhusu takwimu hizi",
     "national": "Thamani ya kitaifa ni takwimu rasmi ya INFORM kwa Tanzania, si wastani wa halmashauri au mikoa.",
-    "regions": "Thamani za mikoa hujumlishwa kutoka halmashauri zake kwa mbinu ya INFORM: wastani wa viashiria → wastani wa makundi → alama za vipimo → hatari kama kipeo cha tatu cha vitisho × udhaifu × ukosefu wa uwezo wa kukabiliana.",
+    "regions": "Thamani za mikoa hujumlishwa kutoka halmashauri zake kwa mbinu ya INFORM: wastani wa makundi ya viashiria → wastani wa kategoria → alama za vipimo → hatari kama kipeo cha tatu cha vitisho × udhaifu × ukosefu wa uwezo wa kukabiliana.",
     "thresholds": "Kila kipimo kina vizingiti vyake vya madaraja. Kwa hatari ya jumla madaraja ni {{ranges}} (Chini sana → Juu sana).",
     "councils": "Kila halmashauri ina vitisho na mfiduo wake; udhaifu na uwezo wa kukabiliana vinatoka kwenye kitengo chake cha chanzo cha INFORM, kwa sababu data za tafiti hazina mgawanyo wa halmashauri.",
     "more": "Mbinu kamili na vyanzo"

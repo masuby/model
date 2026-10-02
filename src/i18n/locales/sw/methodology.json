@@ -209,7 +209,7 @@
     "sharedSource": "Udhaifu na uwezo wa kukabiliana vinatoka kitengo cha chanzo cha INFORM “{{source}}”",
     "inherited": "Halmashauri hii inarithi data kutoka {{parent}} hadi data mahususi ya halmashauri itakapopatikana.",
     "categories": "Kategoria",
-    "withData": "Viashiria {{n}} kati ya {{total}} vina data",
+    "withData": "Makundi ya viashiria {{n}} kati ya {{total}} yana data",
     "mean": "wastani",
     "noData": "hakuna data",
     "dimFormula": "{{dim}} ni wastani wa kijiometri uliopimwa upya wa kategoria {{cats}}, ambao ni {{result}}",
@@ -258,13 +258,8 @@
     "if": "kama"
   },
   "levels": {
-    "title": "Ngazi nne za kiutawala, kielelezo kimoja thabiti",
+    "title": "Ngazi tatu za kiutawala, kielelezo kimoja thabiti",
     "lead": "Injini ileile huendeshwa katika kila ngazi, na kila ngazi hujengwa kwa namna INFORM inavyoelekeza, kamwe si kwa kupata wastani wa alama ambazo tayari zimejumlishwa.",
-    "sources": {
-      "tag": "Rejea",
-      "title": "Vitengo vya chanzo vya INFORM",
-      "body": "Vitengo {{n}} vya kitabu cha INFORM cha Tanzania: uti wa mgongo ambao injini imethibitishwa dhidi yake, na ngazi ambayo data za udhaifu na uwezo wa kukabiliana zimeandikwa."
-    },
     "councils": {
       "tag": "Kuu",
       "title": "Halmashauri",

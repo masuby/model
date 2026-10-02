@@ -6,7 +6,7 @@ import { mean } from '@/engine/risk/math';
 import { formatScore } from '@/lib/utils';
 import { Callout, DocSection, Fn, Formula, Line, N, Op, P, Paren, Sep, SubHeading, Txt } from '../ui';
 
-const LEVELS = ['sources', 'councils', 'regions', 'national'] as const;
+const LEVELS = ['councils', 'regions', 'national'] as const;
 
 export function LevelsSection() {
   const { t } = useTranslation(['methodology', 'common']);
@@ -23,9 +23,8 @@ export function LevelsSection() {
     .map((c) => `${c.name} ← ${c.inheritedFrom}`)
     .join(', ');
 
-  const figure: Record<(typeof LEVELS)[number], React.ReactNode> = { sources: model.sources.length, councils: model.councils.length, regions: model.regions.length, national: formatScore(model.national.risk) };
+  const figure: Record<(typeof LEVELS)[number], React.ReactNode> = { councils: model.councils.length, regions: model.regions.length, national: formatScore(model.national.risk) };
   const body: Record<(typeof LEVELS)[number], string> = {
-    sources: t('levels.sources.body', { n: model.sources.length }),
     councils: t('levels.councils.body', { n: model.councils.length }),
     regions: t('levels.regions.body', { n: model.regions.length }),
     national: t('levels.national.body', { value: formatScore(model.national.risk) }),
