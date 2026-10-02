@@ -151,7 +151,7 @@ export default function DataPortalPage() {
     ...(worker
       ? [{ label: t('stats.awaiting'), value: formatNumber(awaiting, i18n.language), sub: perms.canReview ? t('stats.awaitingReviewer') : t('stats.awaitingMine') }]
       : []),
-    { label: t('stats.councils'), value: formatNumber(model.councils.length, i18n.language), sub: t('stats.councilsSub', { sources: model.sources.length }) },
+    { label: t('stats.councils'), value: formatNumber(model.councils.length, i18n.language), sub: t('stats.councilsSub') },
     ...(stats.latest
       ? [
           {
