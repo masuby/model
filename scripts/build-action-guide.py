@@ -411,7 +411,8 @@ if problems:
 
 def write(path: Path, data) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
-    path.write_text(json.dumps(data, ensure_ascii=False, indent=1) + '\n', encoding='utf-8')
+    # LF on every platform, as the files are committed.
+    path.write_bytes((json.dumps(data, ensure_ascii=False, indent=1) + '\n').encode('utf-8'))
 
 
 for key, hazard in guide['hazards'].items():
