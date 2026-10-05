@@ -71,8 +71,12 @@ beforeEach(async () => {
 
 afterEach(() => {
   cleanup();
-  expect(errors).not.toHaveBeenCalled();
-  errors.mockRestore();
+  try {
+    expect(errors).not.toHaveBeenCalled();
+  } finally {
+    // Restored even when the check fails, so one test's error is not counted against the next.
+    errors.mockRestore();
+  }
   expect(missing).toEqual([]);
 });
 
@@ -164,6 +168,62 @@ describe('ExplorePage - desktop', () => {
     expect(screen.getByTestId('map').dataset.label).toBe('flood');
     expect(screen.getByText('Source')).toBeInTheDocument();
     expect(screen.getAllByText(/continuous 0–10 scale/i).length).toBeGreaterThan(0);
+    // Its dimension is open on the group, with the group marked.
+    const groups = screen.getByRole('group', { name: 'Indicator groups of Hazard & Exposure' });
+    expect(within(groups).getByRole('button', { name: /^Flood/ })).toHaveAttribute('aria-pressed', 'true');
+  });
+
+  it('opens a dimension onto its indicator groups, right under it', async () => {
+    await renderAt();
+    // Overall risk: no groups yet, and a hint says where they are.
+    expect(screen.queryByRole('group', { name: /^Indicator groups of/ })).not.toBeInTheDocument();
+    expect(screen.getByText(/Choose a dimension to see its indicator groups/)).toBeInTheDocument();
+
+    fireEvent.click(screen.getByRole('radio', { name: /^Hazard & Exposure/ }));
+    const groups = screen.getByRole('group', { name: 'Indicator groups of Hazard & Exposure' });
+    expect(screen.getByRole('radio', { name: /^Hazard & Exposure/ }).closest('li')).toContainElement(groups);
+    expect(within(groups).getByText('Natural hazards')).toBeInTheDocument();
+    expect(within(groups).getByText('Human hazards')).toBeInTheDocument();
+
+    // Choosing a group colours the map by it and keeps the list open, for the next one.
+    fireEvent.click(within(groups).getByRole('button', { name: /^Flood/ }));
+    expect(params().get('metric')).toBe('ind:hazard:flood');
+    expect(screen.getByTestId('map').dataset.label).toBe('flood');
+    const open = screen.getByRole('group', { name: 'Indicator groups of Hazard & Exposure' });
+    const buttons = within(open).getAllByRole('button');
+    const flood = within(open).getByRole('button', { name: /^Flood/ });
+    expect(flood).toHaveAttribute('aria-pressed', 'true');
+    expect(screen.getByRole('radio', { name: /^Hazard & Exposure/ })).toHaveAttribute('aria-checked', 'false');
+    fireEvent.click(within(open).getByRole('button', { name: /^Drought/ }));
+    expect(params().get('metric')).toBe('ind:hazard:drought');
+
+    // One tab stop for the list; arrow keys, Home and End move between the groups.
+    expect(buttons.filter((b) => b.tabIndex === 0)).toHaveLength(1);
+    const drought = within(open).getByRole('button', { name: /^Drought/ });
+    act(() => drought.focus());
+    fireEvent.keyDown(drought, { key: 'ArrowDown' });
+    expect(document.activeElement).toBe(buttons[buttons.indexOf(drought) + 1]);
+    fireEvent.keyDown(document.activeElement!, { key: 'End' });
+    expect(document.activeElement).toBe(buttons.at(-1));
+    fireEvent.keyDown(document.activeElement!, { key: 'Home' });
+    expect(document.activeElement).toBe(buttons[0]);
+
+    // Another dimension opens its own groups instead.
+    fireEvent.click(screen.getByRole('radio', { name: /^Vulnerability/ }));
+    expect(screen.queryByRole('group', { name: 'Indicator groups of Hazard & Exposure' })).not.toBeInTheDocument();
+    expect(screen.getByRole('group', { name: 'Indicator groups of Vulnerability' })).toBeInTheDocument();
+    // Back to overall risk closes them.
+    fireEvent.click(screen.getByRole('radio', { name: /^INFORM Risk/ }));
+    expect(screen.queryByRole('group', { name: /^Indicator groups of/ })).not.toBeInTheDocument();
+  });
+
+  it('says what to do in the area card, with a link to the full guidance', async () => {
+    await renderAt(`?level=council&id=${council.id}`);
+    const card = await screen.findByRole('complementary', { name: `Details for ${council.name}` });
+    expect(within(card).getByText('What to do')).toBeInTheDocument();
+    const link = await within(card).findByRole('link', { name: /What to do before and during a warning/ }, { timeout: 20_000 });
+    expect(link).toHaveAttribute('href', `/area/${council.id}#actions`);
+    expect(within(card).getByText('Main hazards here')).toBeInTheDocument();
   });
 
   it('pins areas to the comparison tray and removes them', async () => {
@@ -229,6 +289,18 @@ describe('ExplorePage - mobile', () => {
     fireEvent.click(screen.getByRole('button', { name: 'Close details' }));
     expect(params().get('id')).toBeNull();
     expect(await screen.findByRole('group', { name: 'Colour by' })).toBeInTheDocument();
+  });
+
+  it("puts a dimension's indicator groups in a second row under the lens tabs", async () => {
+    desktop = false;
+    await renderAt();
+    expect(screen.queryByRole('group', { name: /^Indicator groups of/ })).not.toBeInTheDocument();
+    fireEvent.click(within(screen.getByRole('group', { name: 'Colour by' })).getByRole('button', { name: /^Hazard/ }));
+    expect(params().get('metric')).toBe('dim:hazard');
+    const chips = screen.getByRole('group', { name: 'Indicator groups of Hazard & Exposure' });
+    fireEvent.click(within(chips).getByRole('button', { name: 'Flood' }));
+    expect(params().get('metric')).toBe('ind:hazard:flood');
+    expect(within(screen.getByRole('group', { name: 'Indicator groups of Hazard & Exposure' })).getByRole('button', { name: 'Flood' })).toHaveAttribute('aria-pressed', 'true');
   });
 });
 

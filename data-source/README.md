@@ -29,6 +29,14 @@ Regenerate both: `node scripts/export-indicators.mjs`.
 - **`scripts/build-council-index.mjs`**: writes the geometry-free `src/data/tanzania-councils-index.json`
   the app's model uses; re-run whenever `tanzania-councils.json` changes.
 
+## Guidance for people
+- **`RISK_ACTION_GUIDE_BOOK_0222.docx`**: the Risk Action Guide Book (English and Kiswahili) behind the
+  "What to do" section of every area profile and the explorer's area panel. `python scripts/build-action-guide.py`
+  (needs `python-docx`) writes `src/data/action-guide/`: what to expect and do at each of the three
+  alert levels for nine hazards, the incident guide, and per council the hazards the guide documents and
+  its "Know your risk" statements (plus Tabora's council plans). Councils the guide names by an older
+  name are matched through `ALIASES` in the script; it stops if any site council is left without guidance.
+
 ## How it flows
 ```
 compute-*.py / *.csv ──▶ apply-climate-hazards.mjs ──▶ src/data/tanzania-inform-risk.json ──▶ app

@@ -1,0 +1,154 @@
+{
+ "region": {
+  "en": "Dar Es Salaam Region",
+  "sw": "Mkoa wa Dar Es Salaam"
+ },
+ "councils": {
+  "C053": {
+   "name": "Dar es Salaam City Council",
+   "hazards": [
+    "floods",
+    "heavyRainfall",
+    "strongWinds",
+    "largeWaves",
+    "publicHealth",
+    "wildfire"
+   ],
+   "documented": "repeated urban floods in the Msimbazi basin (seven of the last ten years), heavy Masika and Vuli rain, strong winds, coastal waves, cholera after floods, and settlement fires",
+   "know": [
+    {
+     "area": {
+      "en": "Dar es Salaam City: Kariakoo and the city centre",
+      "sw": "Jiji la Dar es Salaam: Kariakoo na katikati ya jiji"
+     },
+     "risk": {
+      "en": "This is the dense commercial core: Kariakoo and the city centre pack traders, goods and vehicles into narrow streets, where blocked drains flood quickly in Masika downpours and fire spreads fast between buildings.",
+      "sw": "Hiki ni kitovu cha biashara chenye msongamano: Kariakoo na katikati ya jiji hujaza wafanyabiashara, bidhaa na magari kwenye mitaa myembamba, ambapo mitaro iliyoziba hufurika haraka wakati wa mvua za Masika na moto husambaa haraka kati ya majengo."
+     },
+     "advice": {
+      "en": "For those trading and working here, it helps to keep drains, fire exits and hydrants clear, store flammable goods safely and keep electrical connections certified.",
+      "sw": "Kwa wanaofanya biashara na kazi hapa, ni vyema kuweka mitaro, njia za dharura na mabomba ya zimamoto wazi, kuhifadhi bidhaa zinazoshika moto kwa usalama na kuhakikisha miunganisho ya umeme imethibitishwa."
+     }
+    },
+    {
+     "area": {
+      "en": "Ilala: Msimbazi River valley and Jangwani",
+      "sw": "Ilala: bonde la Mto Msimbazi na Jangwani"
+     },
+     "risk": {
+      "en": "This area is the Msimbazi flood plain: the river rises rapidly in heavy rain, Jangwani and nearby settlements flood repeatedly, and the Morogoro Road crossing is cut.",
+      "sw": "Eneo hili ni uwanda wa mafuriko wa Msimbazi: mto hujaa kwa kasi wakati wa mvua kubwa, Jangwani na makazi ya jirani hufurika mara kwa mara, na kivuko cha Barabara ya Morogoro hukatika."
+     },
+     "advice": {
+      "en": "For those living and trading here, it helps to keep homes and goods above the flood level, keep the river channel free of waste and use safe routes when the valley floods.",
+      "sw": "Kwa wanaoishi na kufanya biashara hapa, ni vyema kuweka makazi na bidhaa juu ya kiwango cha mafuriko, kuweka mkondo wa mto bila taka na kutumia njia salama bonde linapofurika."
+     }
+    }
+   ]
+  },
+  "C052": {
+   "name": "Kinondoni Municipal Council",
+   "hazards": [
+    "floods",
+    "heavyRainfall",
+    "largeWaves",
+    "strongWinds",
+    "publicHealth"
+   ],
+   "documented": "Msimbazi lower-basin and Msasani floods, heavy rain, coastal waves and strong winds, cholera, and dense-settlement fires",
+   "know": [
+    {
+     "area": {
+      "en": "Kinondoni: coastal strip and the Mbezi and Tegeta valleys",
+      "sw": "Kinondoni: ukanda wa pwani na mabonde ya Mbezi na Tegeta"
+     },
+     "risk": {
+      "en": "This area combines a low coastline exposed to erosion and storm tides with river valleys that flood fast where buildings and waste have narrowed the channels.",
+      "sw": "Eneo hili lina ufukwe wa chini unaokumbwa na mmomonyoko na mawimbi makubwa, pamoja na mabonde ya mito yanayofurika haraka pale majengo na taka zilipobana mikondo."
+     },
+     "advice": {
+      "en": "For those living and building here, it helps to respect coastal and river setbacks, keep channels open and raise floor levels on low plots.",
+      "sw": "Kwa wanaoishi na kujenga hapa, ni vyema kuheshimu umbali wa ujenzi kutoka ufukweni na mitoni, kuweka mikondo wazi na kuinua sakafu kwenye viwanja vya chini."
+     }
+    }
+   ]
+  },
+  "C054": {
+   "name": "Temeke Municipal Council",
+   "hazards": [
+    "floods",
+    "heavyRainfall",
+    "largeWaves",
+    "publicHealth"
+   ],
+   "documented": "floods on the Kizinga and Mzinga rivers and low shore, heavy rain, large waves, cholera, and market fires at Mbagala and Tandika",
+   "know": [
+    {
+     "area": {
+      "en": "Temeke: low-lying settlements on the Kizinga and Mzinga rivers",
+      "sw": "Temeke: makazi ya chini kando ya mito Kizinga na Mzinga"
+     },
+     "risk": {
+      "en": "This area has extensive low-lying, unplanned settlements along the Kizinga and Mzinga rivers, where water stands for days after heavy rain and pit latrines overflow, spreading cholera.",
+      "sw": "Eneo hili lina makazi mengi ya chini na yasiyopangwa kando ya mito Kizinga na Mzinga, ambapo maji hutuama kwa siku kadhaa baada ya mvua kubwa na vyoo hufurika, na kusambaza kipindupindu."
+     },
+     "advice": {
+      "en": "For those living here, it helps to raise floors and latrines above flood level, keep shared drains open and treat or boil drinking water.",
+      "sw": "Kwa wanaoishi hapa, ni vyema kuinua sakafu na vyoo juu ya kiwango cha mafuriko, kuweka mitaro ya pamoja wazi na kutibu au kuchemsha maji ya kunywa."
+     }
+    }
+   ]
+  },
+  "C056": {
+   "name": "Ubungo Municipal Council",
+   "hazards": [
+    "floods",
+    "heavyRainfall",
+    "landslide"
+   ],
+   "documented": "Msimbazi middle-catchment floods, hillside erosion, heavy rain, and blocked storm drains",
+   "know": [
+    {
+     "area": {
+      "en": "Ubungo: Morogoro Road corridor and upper valleys",
+      "sw": "Ubungo: ukanda wa Barabara ya Morogoro na mabonde ya juu"
+     },
+     "risk": {
+      "en": "This area lies along the Morogoro Road corridor, where fast-growing settlements occupy valley slopes and stream banks; storms cause flash floods, gully erosion and disruption at the bus terminal.",
+      "sw": "Eneo hili liko kando ya Barabara ya Morogoro, ambapo makazi yanayokua kwa kasi yamejengwa kwenye miteremko ya mabonde na kingo za vijito; dhoruba husababisha mafuriko ya ghafla, mmomonyoko wa makorongo na usumbufu kwenye kituo cha mabasi."
+     },
+     "advice": {
+      "en": "For those living and trading here, it helps to build away from stream banks, protect slopes with vegetation and keep drains around markets and terminals clear.",
+      "sw": "Kwa wanaoishi na kufanya biashara hapa, ni vyema kujenga mbali na kingo za vijito, kulinda miteremko kwa mimea na kuweka mitaro kuzunguka masoko na vituo vya mabasi wazi."
+     }
+    }
+   ]
+  },
+  "C055": {
+   "name": "Kigamboni Municipal Council",
+   "hazards": [
+    "largeWaves",
+    "floods",
+    "strongWinds",
+    "heavyRainfall"
+   ],
+   "documented": "coastal floods, large waves and strong winds on the Kigamboni shore, heavy rain, and boat accidents on the harbour channel",
+   "know": [
+    {
+     "area": {
+      "en": "Kigamboni: low coastal peninsula and ferry crossing",
+      "sw": "Kigamboni: rasi ya chini ya pwani na kivuko"
+     },
+     "risk": {
+      "en": "This area is a low coastal peninsula: shoreline erosion, storm tides and strong winds affect beach settlements and the ferry crossing, and some lowland areas flood in heavy rain.",
+      "sw": "Eneo hili ni rasi ya chini ya pwani: mmomonyoko wa fukwe, mawimbi makubwa na upepo mkali huathiri makazi ya fukweni na kivuko, na baadhi ya maeneo ya chini hufurika wakati wa mvua kubwa."
+     },
+     "advice": {
+      "en": "For those living and working here, it helps to build back from the shoreline, keep mangroves and dune vegetation intact and follow ferry operating notices in rough weather.",
+      "sw": "Kwa wanaoishi na kufanya kazi hapa, ni vyema kujenga mbali na ufukwe, kulinda mikoko na mimea ya matuta ya mchanga na kufuata taarifa za uendeshaji wa kivuko hali ya hewa ikiwa mbaya."
+     }
+    }
+   ]
+  }
+ }
+}

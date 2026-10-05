@@ -1,0 +1,60 @@
+{
+ "region": {
+  "en": "Kaskazini Pemba Region",
+  "sw": "Mkoa wa Kaskazini Pemba"
+ },
+ "councils": {
+  "C193": {
+   "name": "Micheweni District",
+   "hazards": [
+    "largeWaves",
+    "strongWinds",
+    "heavyRainfall",
+    "publicHealth",
+    "drought"
+   ],
+   "documented": "large waves, strong winds, heavy rain, boat accidents, and cholera",
+   "know": [
+    {
+     "area": {
+      "en": "Micheweni: dry north and fishing villages",
+      "sw": "Micheweni: kaskazini kame na vijiji vya wavuvi"
+     },
+     "risk": {
+      "en": "This area is the driest part of Pemba, where water shortages and dry spells hit households and crops, and fishers face rough seas.",
+      "sw": "Eneo hili ni sehemu kame zaidi ya Pemba, ambapo uhaba wa maji na vipindi vya ukavu huathiri kaya na mazao, na wavuvi hukabiliwa na bahari chafu."
+     },
+     "advice": {
+      "en": "For those living and fishing here, it helps to harvest and store rainwater, plant drought-tolerant crops and stay ashore in strong winds.",
+      "sw": "Kwa wanaoishi na kuvua hapa, ni vyema kuvuna na kuhifadhi maji ya mvua, kupanda mazao yanayostahimili ukame na kubaki ufukweni upepo mkali unapovuma."
+     }
+    }
+   ]
+  },
+  "C192": {
+   "name": "Wete District",
+   "hazards": [
+    "largeWaves",
+    "floods",
+    "heavyRainfall"
+   ],
+   "documented": "coastal floods, large waves, heavy rain, and boat accidents",
+   "know": [
+    {
+     "area": {
+      "en": "Wete: hilly clove farms and harbour",
+      "sw": "Wete: mashamba ya karafuu ya milimani na bandari"
+     },
+     "risk": {
+      "en": "This area has hilly clove farms where heavy rain erodes slopes and floods valleys, and a harbour exposed to storm tides.",
+      "sw": "Eneo hili lina mashamba ya karafuu ya milimani ambapo mvua kubwa humomonyoa miteremko na kufurika mabonde, na bandari inayoathiriwa na mawimbi makubwa."
+     },
+     "advice": {
+      "en": "For those living and farming here, it helps to keep trees on slopes, build away from valley floors and keep boats secured before storms.",
+      "sw": "Kwa wanaoishi na kulima hapa, ni vyema kuacha miti kwenye miteremko, kujenga mbali na sakafu za mabonde na kufunga vyombo imara kabla ya dhoruba."
+     }
+    }
+   ]
+  }
+ }
+}

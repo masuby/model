@@ -1,0 +1,116 @@
+{
+ "region": {
+  "en": "Rukwa Region",
+  "sw": "Mkoa wa Rukwa"
+ },
+ "councils": {
+  "C109": {
+   "name": "Sumbawanga Municipal Council",
+   "hazards": [
+    "earthquake",
+    "heavyRainfall",
+    "strongWinds",
+    "floods"
+   ],
+   "documented": "earthquake on the Rukwa Rift, heavy rain, strong winds, and storm damage to houses",
+   "know": [
+    {
+     "area": {
+      "en": "Sumbawanga Municipal: Ufipa plateau town",
+      "sw": "Manispaa ya Sumbawanga: mji wa uwanda wa Ufipa"
+     },
+     "risk": {
+      "en": "This area is a cool, windy plateau town where storm run-off floods valley streets, strong winds damage roofs and the region lies in an active earthquake zone.",
+      "sw": "Eneo hili ni mji wa uwandani wenye baridi na upepo ambapo maji ya dhoruba hufurika mitaa ya mabondeni, upepo mkali huharibu paa na mkoa uko katika ukanda hai wa matetemeko."
+     },
+     "advice": {
+      "en": "For those living and building here, it helps to keep drains clear, fix roofs firmly and build to earthquake-resistant standards.",
+      "sw": "Kwa wanaoishi na kujenga hapa, ni vyema kuweka mitaro wazi, kufunga paa imara na kujenga kwa viwango vinavyostahimili matetemeko."
+     }
+    }
+   ]
+  },
+  "C107": {
+   "name": "Kalambo District Council",
+   "hazards": [
+    "earthquake",
+    "largeWaves",
+    "heavyRainfall",
+    "landslide",
+    "floods"
+   ],
+   "documented": "earthquake, Lake Tanganyika waves and boat accidents, and heavy rain",
+   "know": [
+    {
+     "area": {
+      "en": "Kalambo: Lake Tanganyika escarpment and Kalambo Falls",
+      "sw": "Kalambo: mteremko wa Ziwa Tanganyika na maporomoko ya Kalambo"
+     },
+     "risk": {
+      "en": "This area runs from the plateau down a steep escarpment to Lake Tanganyika, where landslides cut roads, rivers flash-flood and lake storms endanger fishers.",
+      "sw": "Eneo hili linaanzia uwandani kushuka mteremko mkali hadi Ziwa Tanganyika, ambapo maporomoko hukata barabara, mito hufurika ghafla na dhoruba za ziwani huhatarisha wavuvi."
+     },
+     "advice": {
+      "en": "For those living and fishing here, it helps to build away from steep slopes and stream banks, wear life jackets and keep food reserves in remote villages.",
+      "sw": "Kwa wanaoishi na kuvua hapa, ni vyema kujenga mbali na miteremko mikali na kingo za vijito, kuvaa maboya ya kujiokoa na kuweka akiba ya chakula vijijini vya mbali."
+     }
+    }
+   ]
+  },
+  "C110": {
+   "name": "Nkasi District Council",
+   "hazards": [
+    "earthquake",
+    "largeWaves",
+    "floods",
+    "publicHealth",
+    "drought",
+    "strongWinds"
+   ],
+   "documented": "earthquake, Lake Tanganyika waves and boat accidents, and shore floods",
+   "know": [
+    {
+     "area": {
+      "en": "Nkasi: Lake Tanganyika shore (Kirando) and plateau",
+      "sw": "Nkasi: ufukwe wa Ziwa Tanganyika (Kirando) na uwanda"
+     },
+     "risk": {
+      "en": "This area has lakeshore fishing villages such as Kirando exposed to storms and cholera, and plateau farmland where dry spells and strong winds damage crops.",
+      "sw": "Eneo hili lina vijiji vya wavuvi vya ufukweni kama Kirando vinavyoathiriwa na dhoruba na kipindupindu, na mashamba ya uwandani ambapo vipindi vya ukavu na upepo mkali huharibu mazao."
+     },
+     "advice": {
+      "en": "For those living and fishing here, it helps to wear life jackets, return to shore before storms build and use latrines and safe water.",
+      "sw": "Kwa wanaoishi na kuvua hapa, ni vyema kuvaa maboya ya kujiokoa, kurudi ufukweni kabla dhoruba haijaanza na kutumia vyoo na maji salama."
+     }
+    }
+   ]
+  },
+  "C108": {
+   "name": "Sumbawanga District Council",
+   "hazards": [
+    "earthquake",
+    "heavyRainfall",
+    "strongWinds",
+    "floods",
+    "drought"
+   ],
+   "documented": "earthquake, heavy rain, strong winds, and floods toward Lake Rukwa",
+   "know": [
+    {
+     "area": {
+      "en": "Sumbawanga DC: Lake Rukwa basin and plateau farms",
+      "sw": "Sumbawanga DC: bonde la Ziwa Rukwa na mashamba ya uwandani"
+     },
+     "risk": {
+      "en": "This area has the hot Lake Rukwa basin, where the lake spreads over farms and villages in wet years, and plateau farms where hail and dry spells damage maize.",
+      "sw": "Eneo hili lina bonde la joto la Ziwa Rukwa, ambapo ziwa hutanuka na kufunika mashamba na vijiji katika miaka ya mvua nyingi, na mashamba ya uwandani ambapo mvua ya mawe na ukavu huharibu mahindi."
+     },
+     "advice": {
+      "en": "For those farming and fishing here, it helps to keep homes above the lake flood line, use the flood plain seasonally and keep household food reserves.",
+      "sw": "Kwa wanaolima na kuvua hapa, ni vyema kujenga juu ya mstari wa mafuriko ya ziwa, kutumia tambarare kwa msimu na kuweka akiba ya chakula ya kaya."
+     }
+    }
+   ]
+  }
+ }
+}

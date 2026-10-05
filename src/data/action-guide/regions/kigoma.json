@@ -1,0 +1,218 @@
+{
+ "region": {
+  "en": "Kigoma Region",
+  "sw": "Mkoa wa Kigoma"
+ },
+ "councils": {
+  "C115": {
+   "name": "Kigoma-Ujiji Municipal Council",
+   "hazards": [
+    "earthquake",
+    "largeWaves",
+    "heavyRainfall",
+    "publicHealth",
+    "landslide",
+    "floods"
+   ],
+   "documented": "earthquake on the Tanganyika Rift, large waves and boat accidents on the lake, heavy rain, and cholera",
+   "know": [
+    {
+     "area": {
+      "en": "Kigoma-Ujiji Municipal: Lake Tanganyika shore and hillside streets",
+      "sw": "Manispaa ya Kigoma-Ujiji: ufukwe wa Ziwa Tanganyika na mitaa ya milimani"
+     },
+     "risk": {
+      "en": "This area lies between steep hills and Lake Tanganyika: storm run-off cuts gullies through hillside streets, low lakeside areas flood, and the dense port and market areas are prone to cholera outbreaks.",
+      "sw": "Eneo hili liko kati ya milima mikali na Ziwa Tanganyika: maji ya dhoruba huchimba makorongo kwenye mitaa ya milimani, maeneo ya chini ya ufukweni hufurika, na bandari na masoko yenye msongamano hukumbwa na milipuko ya kipindupindu."
+     },
+     "advice": {
+      "en": "For those living and trading here, it helps to keep drains and gullies clear, build back from the shoreline, and store and treat drinking water safely.",
+      "sw": "Kwa wanaoishi na kufanya biashara hapa, ni vyema kuweka mitaro na makorongo wazi, kujenga mbali na ufukwe, na kuhifadhi na kutibu maji ya kunywa kwa usalama."
+     }
+    }
+   ]
+  },
+  "C113": {
+   "name": "Kasulu Town Council",
+   "hazards": [
+    "heavyRainfall",
+    "floods",
+    "strongWinds",
+    "landslide"
+   ],
+   "documented": "heavy Msimu rain, valley floods, strong winds, and hillside erosion",
+   "know": [
+    {
+     "area": {
+      "en": "Kasulu Town: hillside town and river valleys",
+      "sw": "Mji wa Kasulu: mji wa milimani na mabonde ya mito"
+     },
+     "risk": {
+      "en": "This area is a hillside town where heavy rain sends flash floods through valley streets and gullies, and lightning is frequent during the rains.",
+      "sw": "Eneo hili ni mji wa milimani ambapo mvua kubwa hupeleka mafuriko ya ghafla kwenye mitaa ya mabondeni na makorongo, na radi hupiga mara kwa mara wakati wa mvua."
+     },
+     "advice": {
+      "en": "For those living and building here, it helps to keep slopes planted, build away from gully edges and fit lightning arresters on schools and public buildings.",
+      "sw": "Kwa wanaoishi na kujenga hapa, ni vyema kuacha mimea kwenye miteremko, kujenga mbali na kingo za makorongo na kuweka vizuia radi shuleni na kwenye majengo ya umma."
+     }
+    }
+   ]
+  },
+  "C117": {
+   "name": "Buhigwe District Council",
+   "hazards": [
+    "heavyRainfall",
+    "landslide",
+    "floods"
+   ],
+   "documented": "heavy rain, landslides on the highland edge, and valley floods",
+   "know": [
+    {
+     "area": {
+      "en": "Buhigwe: steep border highlands",
+      "sw": "Buhigwe: nyanda za juu za mpakani zenye miteremko mikali"
+     },
+     "risk": {
+      "en": "This area is steep, densely farmed highland on the Burundi border: saturated slopes slide in heavy rain, and hailstorms damage crops and roofs.",
+      "sw": "Eneo hili ni nyanda za juu zenye miteremko mikali na kilimo kingi mpakani mwa Burundi: miteremko iliyolowa huporomoka wakati wa mvua kubwa, na mvua ya mawe huharibu mazao na paa."
+     },
+     "advice": {
+      "en": "For those farming and living here, it helps to keep terraces, trees and grass strips on slopes and to build away from steep cuts and stream banks.",
+      "sw": "Kwa wanaolima na kuishi hapa, ni vyema kutunza matuta, miti na mistari ya nyasi kwenye miteremko na kujenga mbali na miinuko mikali na kingo za vijito."
+     }
+    }
+   ]
+  },
+  "C118": {
+   "name": "Kakonko District Council",
+   "hazards": [
+    "heavyRainfall",
+    "floods",
+    "wildfire",
+    "drought",
+    "publicHealth"
+   ],
+   "documented": "heavy rain in the Vuli fringe, valley floods, and lightning",
+   "know": [
+    {
+     "area": {
+      "en": "Kakonko: miombo farmland and border villages",
+      "sw": "Kakonko: mashamba ya miombo na vijiji vya mpakani"
+     },
+     "risk": {
+      "en": "This area has miombo farmland and border villages where dry-season fires spread fast, dry spells damage crops, and cross-border movement can carry disease.",
+      "sw": "Eneo hili lina mashamba ya miombo na vijiji vya mpakani ambapo moto wa kiangazi husambaa haraka, vipindi vya ukavu huharibu mazao, na mwingiliano wa mpakani unaweza kusambaza magonjwa."
+     },
+     "advice": {
+      "en": "For those living and farming here, it helps to burn early and under control, plant drought-tolerant crops and report unusual illness early to the health facility.",
+      "sw": "Kwa wanaoishi na kulima hapa, ni vyema kuchoma mapema kwa udhibiti, kupanda mazao yanayostahimili ukame na kutoa taarifa mapema za magonjwa yasiyo ya kawaida kituo cha afya."
+     }
+    }
+   ]
+  },
+  "C112": {
+   "name": "Kasulu District Council",
+   "hazards": [
+    "heavyRainfall",
+    "landslide",
+    "floods",
+    "publicHealth"
+   ],
+   "documented": "heavy rain, landslides, and floods on valleys draining west",
+   "know": [
+    {
+     "area": {
+      "en": "Kasulu DC: hills, valleys and refugee-hosting areas",
+      "sw": "Kasulu DC: milima, mabonde na maeneo yanayohifadhi wakimbizi"
+     },
+     "risk": {
+      "en": "This area has hills and valleys with dense settlements, including refugee-hosting areas, where floods, landslides and water-borne disease spread quickly in the rains.",
+      "sw": "Eneo hili lina milima na mabonde yenye makazi mengi, yakiwemo maeneo yanayohifadhi wakimbizi, ambapo mafuriko, maporomoko ya ardhi na magonjwa yatokanayo na maji husambaa haraka wakati wa mvua."
+     },
+     "advice": {
+      "en": "For those living here, it helps to build off valley floors and steep slopes, keep latrines away from water sources and boil or treat drinking water.",
+      "sw": "Kwa wanaoishi hapa, ni vyema kujenga nje ya sakafu za mabonde na miteremko mikali, kujenga vyoo mbali na vyanzo vya maji na kuchemsha au kutibu maji ya kunywa."
+     }
+    }
+   ]
+  },
+  "C111": {
+   "name": "Kibondo District Council",
+   "hazards": [
+    "heavyRainfall",
+    "floods",
+    "wildfire"
+   ],
+   "documented": "heavy rain, valley floods, and a sharp dry season",
+   "know": [
+    {
+     "area": {
+      "en": "Kibondo: farmland and Malagarasi tributaries",
+      "sw": "Kibondo: mashamba na vijito vya Malagarasi"
+     },
+     "risk": {
+      "en": "This area has farmland drained by Malagarasi tributaries that flood crossings and fields in heavy rain, and dry-season fires in the surrounding woodland.",
+      "sw": "Eneo hili lina mashamba yanayopitiwa na vijito vya Malagarasi vinavyofurika vivuko na mashamba wakati wa mvua kubwa, na moto wa kiangazi kwenye misitu inayozunguka."
+     },
+     "advice": {
+      "en": "For those living and farming here, it helps to know the low crossings on your route, keep stores above flood level and keep fire breaks around homes.",
+      "sw": "Kwa wanaoishi na kulima hapa, ni vyema kujua vivuko vya chini kwenye njia zenu, kuhifadhi mali juu ya kiwango cha mafuriko na kuweka njia za kuzuia moto kuzunguka nyumba."
+     }
+    }
+   ]
+  },
+  "C114": {
+   "name": "Kigoma District Council",
+   "hazards": [
+    "earthquake",
+    "largeWaves",
+    "heavyRainfall",
+    "floods",
+    "publicHealth"
+   ],
+   "documented": "earthquake, Lake Tanganyika waves and boat accidents, heavy rain, and shore floods",
+   "know": [
+    {
+     "area": {
+      "en": "Kigoma DC: lakeshore villages and the Luiche delta",
+      "sw": "Kigoma DC: vijiji vya ufukweni na delta ya Luiche"
+     },
+     "risk": {
+      "en": "This area includes lakeshore fishing villages and the Luiche river delta, which floods in heavy rain; lake storms capsize boats and cholera spreads where water is unsafe.",
+      "sw": "Eneo hili linajumuisha vijiji vya wavuvi vya ufukweni na delta ya mto Luiche inayofurika wakati wa mvua kubwa; dhoruba za ziwani hupindua vyombo na kipindupindu husambaa pasipo maji salama."
+     },
+     "advice": {
+      "en": "For those fishing and living here, it helps to wear life jackets, keep homes off the delta flood plain, and use latrines and safe drinking water.",
+      "sw": "Kwa wanaovua na kuishi hapa, ni vyema kuvaa maboya ya kujiokoa, kujenga nje ya tambarare ya mafuriko ya delta, na kutumia vyoo na maji salama ya kunywa."
+     }
+    }
+   ]
+  },
+  "C116": {
+   "name": "Uvinza District Council",
+   "hazards": [
+    "earthquake",
+    "floods",
+    "largeWaves",
+    "heavyRainfall"
+   ],
+   "documented": "earthquake, Malagarasi floods, lake waves at the river mouth, and heavy rain",
+   "know": [
+    {
+     "area": {
+      "en": "Uvinza: Malagarasi wetlands and remote lakeshore",
+      "sw": "Uvinza: ardhioevu ya Malagarasi na ufukwe wa mbali"
+     },
+     "risk": {
+      "en": "This area includes the Malagarasi wetlands and a long, remote Lake Tanganyika shore where floods isolate villages, lake storms are sudden and help can take many hours to arrive.",
+      "sw": "Eneo hili linajumuisha ardhioevu ya Malagarasi na ufukwe mrefu wa mbali wa Ziwa Tanganyika ambapo mafuriko hutenga vijiji, dhoruba za ziwani huja ghafla na msaada unaweza kuchukua saa nyingi kufika."
+     },
+     "advice": {
+      "en": "For those living, fishing and farming here, it helps to keep homes above the wetland margin, travel by water only in calm weather and keep food, water and medicine reserves.",
+      "sw": "Kwa wanaoishi, kuvua na kulima hapa, ni vyema kujenga juu ya kingo za ardhioevu, kusafiri majini wakati wa hali tulivu tu na kuweka akiba ya chakula, maji na dawa."
+     }
+    }
+   ]
+  }
+ }
+}

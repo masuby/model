@@ -1,0 +1,74 @@
+{
+  "hazards": {
+    "heavyRainfall": "Mvua kubwa",
+    "floods": "Mafuriko",
+    "landslide": "Maporomoko ya ardhi",
+    "strongWinds": "Upepo mkali",
+    "largeWaves": "Mawimbi makubwa",
+    "wildfire": "Moto wa misitu na vichaka",
+    "drought": "Ukame",
+    "earthquake": "Tetemeko la ardhi na tsunami",
+    "publicHealth": "Afya ya jamii"
+  },
+  "levels": {
+    "1": {
+      "name": "Ushauri",
+      "call": "Jiandae",
+      "colour": "Njano",
+      "short": "Ngazi ya 1"
+    },
+    "2": {
+      "name": "Tahadhari",
+      "call": "Chukua hatua",
+      "colour": "Machungwa",
+      "short": "Ngazi ya 2"
+    },
+    "3": {
+      "name": "Tahadhari kubwa",
+      "call": "Chukua hatua mara moja",
+      "colour": "Nyekundu",
+      "short": "Ngazi ya 3"
+    }
+  },
+  "emergency": {
+    "label": "Wakati wa dharura",
+    "main": "Dharura",
+    "fire": "Zimamoto na Uokoaji",
+    "call": "Piga {{number}} ({{name}})"
+  },
+  "know": {
+    "title": "Fahamu hatari ya eneo lako",
+    "lead": "Hatari iko wapi katika {{name}}, na nini huwasaidia wanaoishi na kufanya kazi huko.",
+    "leadMany": "Hatari iko wapi katika kila halmashauri ya {{name}}, na nini huwasaidia wanaoishi na kufanya kazi huko.",
+    "helps": "Kinachosaidia",
+    "openCouncil": "Wasifu wa {{name}}",
+    "empty": "Mwongozo bado hauna maelezo ya eneo hili. Mwongozo wa majanga ulio hapa chini bado unatumika."
+  },
+  "warnings": {
+    "title": "Tahadhari inapotolewa",
+    "lead": "Mamlaka ya Hali ya Hewa Tanzania (TMA) na Kamati za Usimamizi wa Maafa hutoa tahadhari katika ngazi tatu. Chagua janga na ngazi uone cha kutarajia na cha kufanya.",
+    "hazards": "Majanga katika {{name}}",
+    "hazardsNational": "Majanga",
+    "other": "Majanga mengine",
+    "plan": "Mpango wa halmashauri ya {{name}}",
+    "level": "Ngazi ya tahadhari",
+    "expect": "Unachoweza kuona",
+    "do": "Cha kufanya",
+    "more_one": "Onyesha {{count}} zaidi",
+    "more_other": "Onyesha {{count}} zaidi",
+    "less": "Onyesha machache",
+    "status": "Hadi tahadhari itakapoondolewa",
+    "error": "Mwongozo huu haukuweza kupakiwa. Hakiki muunganisho wako na ujaribu tena."
+  },
+  "incidents": {
+    "title": "Matukio na ajali",
+    "lead": "Hatua za haraka kwa dharura za kawaida, popote ulipo."
+  },
+  "source": "Kutoka Kitabu cha Mwongozo wa Hatua za Kukabili Hatari, kilichotokana na Mkakati wa Taifa wa Usimamizi wa Maafa 2022 hadi 2027 na Mpango wa Taifa wa Kujiandaa na Kukabiliana na Maafa 2022. Ni mwongozo wa jumla: daima fuata tahadhari rasmi za TMA na maelekezo ya Kamati yako ya Usimamizi wa Maafa.",
+  "summary": {
+    "title": "Nini cha kufanya",
+    "hazards": "Majanga makuu hapa",
+    "hazardsMany": "Majanga makuu katika eneo hili",
+    "more": "Cha kufanya kabla na wakati wa tahadhari"
+  }
+}

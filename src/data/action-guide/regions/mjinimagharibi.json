@@ -1,0 +1,101 @@
+{
+ "region": {
+  "en": "Mjini Magharibi Region",
+  "sw": "Mkoa wa Mjini Magharibi"
+ },
+ "councils": {
+  "C189": {
+   "name": "Zanzibar Municipal Council",
+   "hazards": [
+    "floods",
+    "largeWaves",
+    "strongWinds",
+    "earthquake",
+    "publicHealth",
+    "heavyRainfall",
+    "wildfire"
+   ],
+   "documented": "urban and shore floods, large waves, strong winds, rare tsunami, boat accidents, and cholera",
+   "know": [
+    {
+     "area": {
+      "en": "Zanzibar City: Stone Town and seafront",
+      "sw": "Jiji la Zanzibar: Mji Mkongwe na ufukwe"
+     },
+     "risk": {
+      "en": "This area has old, densely packed coral-stone buildings and narrow lanes where heavy rain weakens walls, buildings can collapse, fires spread and storm tides hit the seafront.",
+      "sw": "Eneo hili lina majengo ya zamani ya mawe ya matumbawe yaliyobanana na vichochoro vyembamba ambapo mvua kubwa hudhoofisha kuta, majengo yanaweza kuanguka, moto husambaa na mawimbi makubwa hupiga ufukwe."
+     },
+     "advice": {
+      "en": "For those living and trading here, it helps to report cracked or leaning buildings, keep lanes clear for fire and rescue and keep goods off the floor near the shore.",
+      "sw": "Kwa wanaoishi na kufanya biashara hapa, ni vyema kutoa taarifa za majengo yenye nyufa au yaliyoinama, kuacha vichochoro wazi kwa zimamoto na uokoaji na kuhifadhi bidhaa juu ya sakafu karibu na ufukwe."
+     }
+    },
+    {
+     "area": {
+      "en": "Mjini: low-lying and crowded mitaa",
+      "sw": "Mjini: mitaa ya chini na yenye msongamano"
+     },
+     "risk": {
+      "en": "This area has low-lying, crowded neighbourhoods such as Mwanakwerekwe and Kwahani where storm water floods homes, drains block and cholera spreads.",
+      "sw": "Eneo hili lina mitaa ya chini yenye msongamano kama Mwanakwerekwe na Kwahani ambapo maji ya dhoruba hufurika nyumba, mitaro huziba na kipindupindu husambaa."
+     },
+     "advice": {
+      "en": "For those living here, it helps to keep drains free of waste, build on raised floors and use safe water and latrines.",
+      "sw": "Kwa wanaoishi hapa, ni vyema kuweka mitaro bila taka, kujenga sakafu zilizoinuliwa na kutumia maji salama na vyoo."
+     }
+    }
+   ]
+  },
+  "C190": {
+   "name": "Magharibi A District",
+   "hazards": [
+    "largeWaves",
+    "floods",
+    "heavyRainfall"
+   ],
+   "documented": "coastal floods, large waves, heavy Vuli and Masika rain, and boat accidents",
+   "know": [
+    {
+     "area": {
+      "en": "Magharibi A: coast and fast-growing settlements",
+      "sw": "Magharibi A: pwani na makazi yanayokua kwa kasi"
+     },
+     "risk": {
+      "en": "This area has a coastline exposed to erosion and storm tides and fast-growing settlements built in natural water paths that flood in heavy rain.",
+      "sw": "Eneo hili lina pwani inayoathiriwa na mmomonyoko na mawimbi makubwa na makazi yanayokua kwa kasi yaliyojengwa kwenye njia za asili za maji zinazofurika wakati wa mvua kubwa."
+     },
+     "advice": {
+      "en": "For those living and building here, it helps to build outside water paths and back from the shore, and obtain building approval before building.",
+      "sw": "Kwa wanaoishi na kujenga hapa, ni vyema kujenga nje ya njia za maji na mbali na ufukwe, na kupata kibali cha ujenzi kabla ya kujenga."
+     }
+    }
+   ]
+  },
+  "C191": {
+   "name": "Magharibi B District",
+   "hazards": [
+    "largeWaves",
+    "floods",
+    "heavyRainfall"
+   ],
+   "documented": "coastal floods, large waves, heavy rain, and boat accidents",
+   "know": [
+    {
+     "area": {
+      "en": "Magharibi B: airport zone and coastal villages",
+      "sw": "Magharibi B: eneo la uwanja wa ndege na vijiji vya pwani"
+     },
+     "risk": {
+      "en": "This area includes low ground near the airport and coastal villages where storm water ponds, the shore erodes and fishers face rough seas.",
+      "sw": "Eneo hili linajumuisha ardhi ya chini karibu na uwanja wa ndege na vijiji vya pwani ambapo maji ya dhoruba hutuama, ufukwe humomonyoka na wavuvi hukabiliwa na bahari chafu."
+     },
+     "advice": {
+      "en": "For those living and fishing here, it helps to keep drains open, protect mangroves and stay ashore when strong winds are forecast.",
+      "sw": "Kwa wanaoishi na kuvua hapa, ni vyema kuweka mitaro wazi, kulinda mikoko na kubaki ufukweni upepo mkali unapotabiriwa."
+     }
+    }
+   ]
+  }
+ }
+}

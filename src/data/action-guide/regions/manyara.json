@@ -1,0 +1,192 @@
+{
+ "region": {
+  "en": "Manyara Region",
+  "sw": "Mkoa wa Manyara"
+ },
+ "councils": {
+  "C151": {
+   "name": "Babati Town Council",
+   "hazards": [
+    "floods",
+    "drought",
+    "strongWinds"
+   ],
+   "documented": "Lake Babati floods, drought on the surrounding plain, strong winds, and flash floods",
+   "know": [
+    {
+     "area": {
+      "en": "Babati Town: Lake Babati shore and town streams",
+      "sw": "Mji wa Babati: ufukwe wa Ziwa Babati na vijito vya mjini"
+     },
+     "risk": {
+      "en": "This area surrounds Lake Babati, which rises and floods nearby streets and farms in wet years, and town streams flash-flood after storms on the surrounding hills.",
+      "sw": "Eneo hili linazunguka Ziwa Babati linalojaa na kufurika mitaa na mashamba jirani katika miaka ya mvua nyingi, na vijito vya mjini hufurika ghafla baada ya dhoruba milimani."
+     },
+     "advice": {
+      "en": "For those living and trading here, it helps to build above the lake's highest known level, keep stream channels clear and keep goods off the floor.",
+      "sw": "Kwa wanaoishi na kufanya biashara hapa, ni vyema kujenga juu ya kina cha juu kabisa cha ziwa kinachojulikana, kuweka mikondo ya vijito wazi na kuhifadhi bidhaa juu ya sakafu."
+     }
+    }
+   ]
+  },
+  "C154": {
+   "name": "Mbulu Town Council",
+   "hazards": [
+    "heavyRainfall",
+    "landslide",
+    "strongWinds"
+   ],
+   "documented": "heavy rain and landslides on the Mbulu highlands, and a dry season on the lower slopes",
+   "know": [
+    {
+     "area": {
+      "en": "Mbulu Town: highland town and steep valleys",
+      "sw": "Mji wa Mbulu: mji wa nyanda za juu na mabonde makali"
+     },
+     "risk": {
+      "en": "This area is a cool highland town where steep slopes erode and slide in heavy rain, and hailstorms and strong winds damage roofs and crops.",
+      "sw": "Eneo hili ni mji wa nyanda za juu wenye baridi ambapo miteremko mikali humomonyoka na kuporomoka wakati wa mvua kubwa, na mvua ya mawe na upepo mkali huharibu paa na mazao."
+     },
+     "advice": {
+      "en": "For those living and building here, it helps to keep slopes planted, build away from steep cuts and gullies and fix roofs firmly.",
+      "sw": "Kwa wanaoishi na kujenga hapa, ni vyema kuacha mimea kwenye miteremko, kujenga mbali na miinuko mikali na makorongo na kufunga paa imara."
+     }
+    }
+   ]
+  },
+  "C150": {
+   "name": "Babati District Council",
+   "hazards": [
+    "drought",
+    "floods",
+    "strongWinds",
+    "wildfire",
+    "landslide"
+   ],
+   "documented": "drought, Lake Babati floods, strong winds, wildfire, and human–wildlife conflict toward Tarangire",
+   "know": [
+    {
+     "area": {
+      "en": "Babati DC: Rift escarpment and Lake Manyara edge",
+      "sw": "Babati DC: ukingo wa Bonde la Ufa na pembezoni mwa Ziwa Manyara"
+     },
+     "risk": {
+      "en": "This area runs from the Rift escarpment, where flash floods and debris flows rush down gullies, to the Lake Manyara edge where floods and wildlife affect farms.",
+      "sw": "Eneo hili linaanzia ukingo wa Bonde la Ufa, ambapo mafuriko ya ghafla na matope hushuka kwa kasi kwenye makorongo, hadi pembezoni mwa Ziwa Manyara ambapo mafuriko na wanyamapori huathiri mashamba."
+     },
+     "advice": {
+      "en": "For those living and farming here, it helps to keep homes off gully mouths and flood channels, keep trees on slopes and use community deterrents against wildlife.",
+      "sw": "Kwa wanaoishi na kulima hapa, ni vyema kujenga mbali na midomo ya makorongo na njia za mafuriko, kuacha miti kwenye miteremko na kutumia mbinu za jamii kufukuza wanyama."
+     }
+    }
+   ]
+  },
+  "C152": {
+   "name": "Hanang District Council",
+   "hazards": [
+    "drought",
+    "strongWinds",
+    "floods",
+    "wildfire",
+    "heavyRainfall",
+    "landslide"
+   ],
+   "documented": "drought, strong winds, flash floods on the Hanang slopes, and wildfire",
+   "know": [
+    {
+     "area": {
+      "en": "Hanang: Mount Hanang slopes and Katesh",
+      "sw": "Hanang: miteremko ya Mlima Hanang na Katesh"
+     },
+     "risk": {
+      "en": "This area lies below Mount Hanang, where intense rain can send mudflows and debris down the slopes into Katesh and nearby villages, as happened in December 2023.",
+      "sw": "Eneo hili liko chini ya Mlima Hanang, ambapo mvua kubwa inaweza kushusha matope na mawe kutoka miteremkoni hadi Katesh na vijiji jirani, kama ilivyotokea Desemba 2023."
+     },
+     "advice": {
+      "en": "For those living and building here, it helps to keep homes and markets away from gully mouths and drainage paths below the mountain and to keep trees on the slopes.",
+      "sw": "Kwa wanaoishi na kujenga hapa, ni vyema kujenga nyumba na masoko mbali na midomo ya makorongo na njia za maji chini ya mlima na kuacha miti kwenye miteremko."
+     }
+    }
+   ]
+  },
+  "C156": {
+   "name": "Kiteto District Council",
+   "hazards": [
+    "drought",
+    "strongWinds",
+    "wildfire",
+    "floods"
+   ],
+   "documented": "drought on the Maasai steppe, strong winds, wildfire, flash floods, and human–wildlife conflict",
+   "know": [
+    {
+     "area": {
+      "en": "Kiteto: dry rangeland and farmland frontier",
+      "sw": "Kiteto: nyika kame na mipaka ya mashamba"
+     },
+     "risk": {
+      "en": "This area is semi-arid rangeland where drought kills pasture and livestock and expanding farms on grazing land cause conflict between farmers and herders.",
+      "sw": "Eneo hili ni nyika kame ambapo ukame huua malisho na mifugo na upanuzi wa mashamba kwenye maeneo ya malisho husababisha migogoro kati ya wakulima na wafugaji."
+     },
+     "advice": {
+      "en": "For those living, farming and herding here, it helps to follow village land-use plans and agreed livestock routes, protect water points and sell livestock early in drought.",
+      "sw": "Kwa wanaoishi, kulima na kufuga hapa, ni vyema kufuata mipango ya matumizi ya ardhi ya vijiji na njia za mifugo zilizokubaliwa, kulinda vyanzo vya maji na kuuza mifugo mapema wakati wa ukame."
+     }
+    }
+   ]
+  },
+  "C153": {
+   "name": "Mbulu District Council",
+   "hazards": [
+    "heavyRainfall",
+    "landslide",
+    "drought",
+    "strongWinds",
+    "floods"
+   ],
+   "documented": "heavy rain and landslides on the highlands, drought on the lower plains, and strong winds",
+   "know": [
+    {
+     "area": {
+      "en": "Mbulu DC: highland farms and Yaeda valley",
+      "sw": "Mbulu DC: mashamba ya nyanda za juu na bonde la Yaeda"
+     },
+     "risk": {
+      "en": "This area has steep, intensively farmed highlands prone to erosion and landslides, and the dry Yaeda valley below where drought and flash floods affect herders.",
+      "sw": "Eneo hili lina nyanda za juu zenye miteremko mikali na kilimo kingi zinazokumbwa na mmomonyoko na maporomoko, na bonde kame la Yaeda ambapo ukame na mafuriko ya ghafla huathiri wafugaji."
+     },
+     "advice": {
+      "en": "For those living and farming here, it helps to keep terraces and trees on slopes, build away from gullies and plan water and grazing for dry years.",
+      "sw": "Kwa wanaoishi na kulima hapa, ni vyema kutunza matuta na miti kwenye miteremko, kujenga mbali na makorongo na kupanga maji na malisho kwa miaka ya ukame."
+     }
+    }
+   ]
+  },
+  "C155": {
+   "name": "Simanjiro District Council",
+   "hazards": [
+    "drought",
+    "wildfire",
+    "floods",
+    "heavyRainfall"
+   ],
+   "documented": "drought, wildfire, flash floods, human–wildlife conflict, and tanzanite pit collapse at Mererani",
+   "know": [
+    {
+     "area": {
+      "en": "Simanjiro: Maasai steppe and mining areas",
+      "sw": "Simanjiro: nyika ya Kimasai na maeneo ya uchimbaji"
+     },
+     "risk": {
+      "en": "This area is dry Maasai steppe where drought hits pasture and water, and the Mirerani tanzanite mines where shafts flood and collapse in heavy rain.",
+      "sw": "Eneo hili ni nyika kame ya Kimasai ambapo ukame huathiri malisho na maji, na migodi ya tanzanite ya Mirerani ambapo mashimo hujaa maji na kubomoka wakati wa mvua kubwa."
+     },
+     "advice": {
+      "en": "For those herding and mining here, it helps to protect dry-season grazing and water points, and keep mine shafts drained, supported and fenced.",
+      "sw": "Kwa wanaofuga na kuchimba hapa, ni vyema kulinda malisho ya kiangazi na vyanzo vya maji, na kuweka mashimo ya migodi bila maji, yaliyoimarishwa na kuzungushiwa uzio."
+     }
+    }
+   ]
+  }
+ }
+}

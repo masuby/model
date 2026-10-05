@@ -1,0 +1,294 @@
+{
+ "region": {
+  "en": "Tanga Region",
+  "sw": "Mkoa wa Tanga"
+ },
+ "councils": {
+  "C028": {
+   "name": "Tanga City Council",
+   "hazards": [
+    "largeWaves",
+    "floods",
+    "strongWinds",
+    "heavyRainfall",
+    "publicHealth"
+   ],
+   "documented": "coastal floods, large waves and strong winds, heavy Masika and Vuli rain, cholera, and boat accidents",
+   "know": [
+    {
+     "area": {
+      "en": "Tanga City: coast, port and low-lying mitaa",
+      "sw": "Jiji la Tanga: pwani, bandari na mitaa ya chini"
+     },
+     "risk": {
+      "en": "This area is a coastal port city where storm tides and erosion attack the shore, heavy rain floods low streets and the port and industries carry fire and spill risk.",
+      "sw": "Eneo hili ni jiji la bandari la pwani ambapo mawimbi makubwa na mmomonyoko hushambulia ufukwe, mvua kubwa hufurika mitaa ya chini na bandari na viwanda vina hatari ya moto na kumwagika kwa kemikali."
+     },
+     "advice": {
+      "en": "For those living and trading here, it helps to build back from the shoreline, keep drains open and keep fire extinguishers and exits ready at workplaces.",
+      "sw": "Kwa wanaoishi na kufanya biashara hapa, ni vyema kujenga mbali na ufukwe, kuweka mitaro wazi na kuweka vizimamoto na njia za kutokea tayari kazini."
+     }
+    }
+   ]
+  },
+  "C031": {
+   "name": "Handeni Town Council",
+   "hazards": [
+    "floods",
+    "heavyRainfall",
+    "drought",
+    "landslide"
+   ],
+   "documented": "flash floods (about 29 deaths in the 2019 Handeni floods), heavy rain, and drought between seasons",
+   "know": [
+    {
+     "area": {
+      "en": "Handeni Town: dry hills and town streams",
+      "sw": "Mji wa Handeni: milima kame na vijito vya mji"
+     },
+     "risk": {
+      "en": "This area is a dry hill town where water is scarce in the dry season and storm run-off floods valley streets and cuts gullies.",
+      "sw": "Eneo hili ni mji wa milima kame ambapo maji ni haba wakati wa kiangazi na maji ya dhoruba hufurika mitaa ya mabondeni na kuchimba makorongo."
+     },
+     "advice": {
+      "en": "For those living here, it helps to harvest and store water safely, keep drains open and build away from gully edges.",
+      "sw": "Kwa wanaoishi hapa, ni vyema kuvuna na kuhifadhi maji kwa usalama, kuweka mitaro wazi na kujenga mbali na kingo za makorongo."
+     }
+    }
+   ]
+  },
+  "C026": {
+   "name": "Korogwe Town Council",
+   "hazards": [
+    "floods",
+    "heavyRainfall",
+    "landslide"
+   ],
+   "documented": "Pangani floods, heavy rain, and landslides on the Usambara edge",
+   "know": [
+    {
+     "area": {
+      "en": "Korogwe Town: Pangani river and highway",
+      "sw": "Mji wa Korogwe: mto Pangani na barabara kuu"
+     },
+     "risk": {
+      "en": "This area lies on the Pangani river and the Dar–Arusha highway, where the river floods low areas and heavy traffic brings accident risk.",
+      "sw": "Eneo hili liko kando ya mto Pangani na barabara kuu ya Dar–Arusha, ambapo mto hufurika maeneo ya chini na magari mengi huleta hatari ya ajali."
+     },
+     "advice": {
+      "en": "For those living and trading here, it helps to keep homes off the river banks and trade outside the road reserve.",
+      "sw": "Kwa wanaoishi na kufanya biashara hapa, ni vyema kujenga mbali na kingo za mto na kufanya biashara nje ya hifadhi ya barabara."
+     }
+    }
+   ]
+  },
+  "C024": {
+   "name": "Bumbuli District Council",
+   "hazards": [
+    "heavyRainfall",
+    "landslide",
+    "floods"
+   ],
+   "documented": "heavy rain and landslides on the Usambara Mountains, and valley floods",
+   "know": [
+    {
+     "area": {
+      "en": "Bumbuli: steep Usambara slopes",
+      "sw": "Bumbuli: miteremko mikali ya Usambara"
+     },
+     "risk": {
+      "en": "This area has steep, densely farmed Usambara slopes where heavy rain causes landslides, rockfalls and washed-out roads.",
+      "sw": "Eneo hili lina miteremko mikali ya Usambara inayolimwa kwa wingi ambapo mvua kubwa husababisha maporomoko ya udongo na mawe na kusomba barabara."
+     },
+     "advice": {
+      "en": "For those living and farming here, it helps to keep terraces and trees on slopes and build away from steep cuts, gullies and stream banks.",
+      "sw": "Kwa wanaoishi na kulima hapa, ni vyema kutunza matuta na miti kwenye miteremko na kujenga mbali na miinuko mikali, makorongo na kingo za vijito."
+     }
+    }
+   ]
+  },
+  "C030": {
+   "name": "Handeni District Council",
+   "hazards": [
+    "floods",
+    "heavyRainfall",
+    "drought",
+    "strongWinds"
+   ],
+   "documented": "flash floods, heavy rain, drought in the dry months, and strong winds",
+   "know": [
+    {
+     "area": {
+      "en": "Handeni DC: dry plains and grazing land",
+      "sw": "Handeni DC: tambarare kame na malisho"
+     },
+     "risk": {
+      "en": "This area has dry plains where droughts fail crops and pasture, flash floods cross roads and conflicts arise between farmers and herders.",
+      "sw": "Eneo hili lina tambarare kame ambapo ukame huharibu mazao na malisho, mafuriko ya ghafla hupita barabarani na migogoro hutokea kati ya wakulima na wafugaji."
+     },
+     "advice": {
+      "en": "For those farming and herding here, it helps to plant drought-tolerant crops, follow village land-use plans and never cross flowing water.",
+      "sw": "Kwa wanaolima na kufuga hapa, ni vyema kupanda mazao yanayostahimili ukame, kufuata mipango ya matumizi ya ardhi ya vijiji na kutovuka kamwe maji yanayotiririka."
+     }
+    }
+   ]
+  },
+  "C032": {
+   "name": "Kilindi District Council",
+   "hazards": [
+    "drought",
+    "strongWinds",
+    "floods",
+    "wildfire",
+    "heavyRainfall"
+   ],
+   "documented": "drought, strong winds, flash floods, and wildfire",
+   "know": [
+    {
+     "area": {
+      "en": "Kilindi: remote dry farmland and grazing",
+      "sw": "Kilindi: mashamba kame ya mbali na malisho"
+     },
+     "risk": {
+      "en": "This area is remote dry farmland where droughts and dry-season fires are common and rains cut roads to scattered villages.",
+      "sw": "Eneo hili ni mashamba kame ya mbali ambapo ukame na moto wa kiangazi ni wa kawaida na mvua hukata barabara za kwenda vijiji vilivyotawanyika."
+     },
+     "advice": {
+      "en": "For those living and farming here, it helps to keep food and medicine reserves, burn only under control and keep fire breaks.",
+      "sw": "Kwa wanaoishi na kulima hapa, ni vyema kuweka akiba ya chakula na dawa, kuchoma kwa udhibiti tu na kuweka njia za kuzuia moto."
+     }
+    }
+   ]
+  },
+  "C025": {
+   "name": "Korogwe District Council",
+   "hazards": [
+    "floods",
+    "heavyRainfall",
+    "landslide"
+   ],
+   "documented": "Pangani floods, heavy rain, and landslides on the Usambara slopes",
+   "know": [
+    {
+     "area": {
+      "en": "Korogwe DC: Pangani valley and Usambara foothills",
+      "sw": "Korogwe DC: bonde la Pangani na vilima vya Usambara"
+     },
+     "risk": {
+      "en": "This area has the Pangani valley and sisal estates, where the river floods farms, and Usambara foothills where heavy rain causes landslides.",
+      "sw": "Eneo hili lina bonde la Pangani na mashamba ya mkonge, ambapo mto hufurika mashamba, na vilima vya Usambara ambapo mvua kubwa husababisha maporomoko."
+     },
+     "advice": {
+      "en": "For those living and farming here, it helps to keep homes above flood lines and away from steep slopes, and keep slopes planted.",
+      "sw": "Kwa wanaoishi na kulima hapa, ni vyema kujenga juu ya mistari ya mafuriko na mbali na miteremko mikali, na kuacha mimea kwenye miteremko."
+     }
+    }
+   ]
+  },
+  "C023": {
+   "name": "Lushoto District Council",
+   "hazards": [
+    "heavyRainfall",
+    "landslide",
+    "floods",
+    "strongWinds"
+   ],
+   "documented": "heavy rain and landslides on the West Usambara, valley floods, and strong winds",
+   "know": [
+    {
+     "area": {
+      "en": "Lushoto: Usambara mountains",
+      "sw": "Lushoto: milima ya Usambara"
+     },
+     "risk": {
+      "en": "This area has very steep, crowded mountain slopes where heavy rain triggers deadly landslides and rockfalls and cuts the only roads.",
+      "sw": "Eneo hili lina miteremko mikali sana yenye watu wengi ambapo mvua kubwa husababisha maporomoko hatari ya udongo na mawe na kukata barabara pekee."
+     },
+     "advice": {
+      "en": "For those living and farming here, it helps to build away from steep cuts and old slide scars, keep terraces and trees on slopes and report new cracks early.",
+      "sw": "Kwa wanaoishi na kulima hapa, ni vyema kujenga mbali na miinuko mikali na makovu ya maporomoko ya zamani, kutunza matuta na miti kwenye miteremko na kutoa taarifa mapema za nyufa mpya."
+     }
+    }
+   ]
+  },
+  "C033": {
+   "name": "Mkinga District Council",
+   "hazards": [
+    "largeWaves",
+    "floods",
+    "heavyRainfall",
+    "publicHealth"
+   ],
+   "documented": "coastal floods, large waves, heavy rain, boat accidents, and cholera",
+   "know": [
+    {
+     "area": {
+      "en": "Mkinga: coast and Kenya border",
+      "sw": "Mkinga: pwani na mpaka wa Kenya"
+     },
+     "risk": {
+      "en": "This area has coastal villages exposed to erosion and storm tides, mangrove creeks and dry inland farmland near the Kenya border.",
+      "sw": "Eneo hili lina vijiji vya pwani vinavyoathiriwa na mmomonyoko na mawimbi makubwa, hori za mikoko na mashamba kame ya ndani karibu na mpaka wa Kenya."
+     },
+     "advice": {
+      "en": "For those living and fishing here, it helps to build back from the shoreline, protect mangroves and stay ashore in strong winds.",
+      "sw": "Kwa wanaoishi na kuvua hapa, ni vyema kujenga mbali na ufukwe, kulinda mikoko na kubaki ufukweni upepo mkali unapovuma."
+     }
+    }
+   ]
+  },
+  "C027": {
+   "name": "Muheza District Council",
+   "hazards": [
+    "heavyRainfall",
+    "landslide",
+    "largeWaves",
+    "floods",
+    "strongWinds"
+   ],
+   "documented": "heavy rain, landslides on the East Usambara, coastal floods, and strong winds",
+   "know": [
+    {
+     "area": {
+      "en": "Muheza: East Usambara and farmland",
+      "sw": "Muheza: Usambara Mashariki na mashamba"
+     },
+     "risk": {
+      "en": "This area has the East Usambara forests and slopes where heavy rain causes landslides, and farmland where streams flood crossings.",
+      "sw": "Eneo hili lina misitu na miteremko ya Usambara Mashariki ambapo mvua kubwa husababisha maporomoko, na mashamba ambapo vijito hufurika vivuko."
+     },
+     "advice": {
+      "en": "For those living and farming here, it helps to protect forest cover, keep slopes planted and know flood-prone crossings.",
+      "sw": "Kwa wanaoishi na kulima hapa, ni vyema kulinda misitu, kuacha mimea kwenye miteremko na kujua vivuko vinavyofurika."
+     }
+    }
+   ]
+  },
+  "C029": {
+   "name": "Pangani District Council",
+   "hazards": [
+    "floods",
+    "largeWaves",
+    "strongWinds",
+    "publicHealth"
+   ],
+   "documented": "Pangani mouth floods, large waves, strong winds, boat accidents, and cholera",
+   "know": [
+    {
+     "area": {
+      "en": "Pangani: Pangani river mouth and coast",
+      "sw": "Pangani: mdomo wa mto Pangani na pwani"
+     },
+     "risk": {
+      "en": "This area has a low town at the Pangani river mouth where river floods meet storm tides, the shore erodes and ferry crossings are exposed to rough water.",
+      "sw": "Eneo hili lina mji wa chini kwenye mdomo wa mto Pangani ambapo mafuriko ya mto hukutana na mawimbi makubwa, ufukwe humomonyoka na vivuko vya feri huathiriwa na maji machafu."
+     },
+     "advice": {
+      "en": "For those living and fishing here, it helps to build back from the shore and river banks, protect mangroves and use ferries only in safe conditions.",
+      "sw": "Kwa wanaoishi na kuvua hapa, ni vyema kujenga mbali na ufukwe na kingo za mto, kulinda mikoko na kutumia feri katika hali salama tu."
+     }
+    }
+   ]
+  }
+ }
+}

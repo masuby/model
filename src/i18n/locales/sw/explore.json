@@ -32,19 +32,13 @@
   },
   "lens": {
     "label": "Paka rangi kwa",
-    "indicator": "Kiashiria kimoja",
-    "indicatorChip": "Kiashiria…",
-    "pickIndicator": "Chagua kiashiria…",
-    "selected": "kimechaguliwa",
-    "searchIndicator": "Tafuta viashiria…",
-    "noIndicator": "Hakuna kiashiria kinacholingana.",
     "scoresFor": "Alama zinazoonyeshwa ni za {{name}}.",
     "scoresNational": "Alama zinazoonyeshwa: takwimu rasmi za kitaifa.",
-    "valuesFor": "Thamani za {{name}} (0–10).",
-    "valuesNational": "Thamani rasmi za kitaifa (0–10).",
     "source": "Chanzo",
     "resolution": "Kiwango cha undani",
-    "backToRisk": "Rudi kwenye hatari kwa ujumla"
+    "backToRisk": "Rudi kwenye hatari kwa ujumla",
+    "groupsOf": "Makundi ya viashiria ya {{dimension}}",
+    "groupsHint": "Chagua kipimo uone makundi yake ya viashiria, kama Mafuriko au Ukame chini ya Vitisho na Mfiduo."
   },
   "resolution": {
     "council": "Halmashauri: hukokotolewa kwa kila halmashauri",

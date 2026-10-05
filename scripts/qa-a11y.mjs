@@ -6,7 +6,20 @@ import AxeBuilder from '@axe-core/playwright';
 import { chromium } from 'playwright';
 
 const BASE = process.argv[2] ?? 'http://localhost:4173';
-const ROUTES = ['/', '/explore', '/area/C041', '/insights', '/severity', '/learn', '/learn/risk', '/methodology', '/data'];
+const ROUTES = [
+  '/',
+  '/explore',
+  '/explore?metric=ind:hazard:flood&id=C041', // a dimension open on its indicator groups, with an area's guidance
+  '/area/C041',
+  '/area/C105', // a Tabora council: its own plan leads "What to do"
+  '/area/R-njombe', // a region: "Know your risk" for each of its councils
+  '/insights',
+  '/severity',
+  '/learn',
+  '/learn/risk',
+  '/methodology',
+  '/data',
+];
 const browser = await chromium.launch();
 let total = 0;
 for (const theme of ['light', 'dark']) {

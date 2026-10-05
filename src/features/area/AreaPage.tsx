@@ -12,7 +12,7 @@ import './area-print.css';
 import { ArrowRight } from 'lucide-react';
 import * as React from 'react';
 import { useTranslation } from 'react-i18next';
-import { Link, useNavigate, useParams } from 'react-router-dom';
+import { Link, useLocation, useNavigate, useParams } from 'react-router-dom';
 import { Kicker, PageContainer } from '@/components/layout/Page';
 import { Button } from '@/components/ui/button';
 import { useModel } from '@/data-layer/DataProvider';
@@ -29,6 +29,7 @@ import { Overview } from './components/Overview';
 import { Places } from './components/Places';
 import { SectionNav } from './components/SectionNav';
 import { Services } from './components/Services';
+import { WhatToDo } from './components/WhatToDo';
 import { buildAreaView, placeListsFor, resolveUnit, servicesFor, type AreaView } from './lib';
 
 function AreaNotFound({ id }: { id?: string }) {
@@ -142,6 +143,7 @@ function AreaReport({ view }: { view: AreaView }) {
     () =>
       [
         { id: 'overview', label: t('nav.overview') },
+        { id: 'actions', label: t('nav.actions') },
         { id: 'dimensions', label: t('nav.dimensions') },
         { id: 'charts', label: t('nav.charts') },
         { id: 'drivers', label: t('nav.drivers') },
@@ -153,6 +155,30 @@ function AreaReport({ view }: { view: AreaView }) {
     [t, hasPlaces],
   );
   const n = (id: string) => sections.findIndex((s) => s.id === id) + 1;
+
+  // Arriving on a section link (the explorer's "What to do" opens /area/<id>#actions): scroll to it, and
+  // keep it in place while the map and charts above it load, until the reader scrolls themselves.
+  const { hash } = useLocation();
+  React.useEffect(() => {
+    const id = decodeURIComponent(hash.slice(1));
+    if (!id) return;
+    let reading = false;
+    const stop = () => {
+      reading = true;
+    };
+    const go = () => {
+      if (!reading) document.getElementById(id)?.scrollIntoView({ block: 'start', behavior: 'instant' as ScrollBehavior });
+    };
+    const events = ['wheel', 'touchstart', 'keydown', 'pointerdown'] as const;
+    for (const e of events) window.addEventListener(e, stop, { passive: true });
+    const frame = requestAnimationFrame(go);
+    const timers = [300, 900, 1800].map((ms) => window.setTimeout(go, ms));
+    return () => {
+      cancelAnimationFrame(frame);
+      timers.forEach((tm) => window.clearTimeout(tm));
+      for (const e of events) window.removeEventListener(e, stop);
+    };
+  }, [hash, unit.id]);
 
   return (
     <DeferredProvider prepare={loadCharts}>
@@ -166,6 +192,16 @@ function AreaReport({ view }: { view: AreaView }) {
         <PageContainer>
           <AreaSection id="overview" index={n('overview')} eyebrow={t('sections.overview.eyebrow')} title={t('sections.overview.title', { name: unit.name })} className="border-t-0">
             <Overview view={view} />
+          </AreaSection>
+
+          <AreaSection
+            id="actions"
+            index={n('actions')}
+            eyebrow={t('sections.actions.eyebrow')}
+            title={t('sections.actions.title', { name: unit.name })}
+            description={t('sections.actions.lead')}
+          >
+            <WhatToDo key={unit.id} unit={unit} />
           </AreaSection>
 
           <AreaSection id="dimensions" index={n('dimensions')} eyebrow={t('sections.dimensions.eyebrow')} title={t('sections.dimensions.title')} description={t('sections.dimensions.lead')}>

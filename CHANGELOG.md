@@ -2,6 +2,39 @@
 
 ## Unreleased
 
+### What to do: the Risk Action Guide Book
+
+Every area now says what people can do about its hazards, from the Risk Action Guide Book (based on the
+National Disaster Management Strategy 2022 to 2027 and the National Disaster Preparedness and Response
+Plan 2022), in English and Kiswahili as the guide publishes it.
+
+- **A "What to do" section on every area profile**, second after the overview:
+  - the emergency numbers (190 Emergency, 114 Fire and Rescue) as tap-to-call links;
+  - **Know your risk**: where the danger lies in the council and what helps, as the guide states it (a
+    region or source unit lists each of its councils, with links to their profiles);
+  - **When a warning is issued**: the hazards the guide documents for the area first and any other
+    hazard one step away; for each of the three alert levels (Advisory: be prepared, Warning: take
+    action, Major warning: take action immediately), what people may see and what to do. Tabora's
+    councils lead with their own council plan;
+  - **Incidents and accidents**: the guide's rapid-response actions, folded until opened (all open when
+    printing).
+- **In the risk explorer**, the area panel shows the local advice and the main hazards, with a link
+  straight to the full guidance on the profile (`/area/<id>#actions`).
+- All 195 councils are covered (councils the guide names by an older name, such as Ilala or Kilombero,
+  are matched to their current names). The guide's per-council alert tables are not shown: their
+  generated sentences repeat one flood template and differ between English and Kiswahili, so the
+  national hazard tables are used, except for Tabora's hand-written council plans.
+- The guidance loads on demand (one small file per region and per hazard); the first page load is
+  unchanged. Data: `python scripts/build-action-guide.py` from `data-source/RISK_ACTION_GUIDE_BOOK_0222.docx`.
+
+### Explorer: indicator groups under their dimension
+
+- Choosing Hazard & Exposure, Vulnerability or Lack of Coping Capacity lists that dimension's
+  indicator groups right under it, by category, each with its score for the selected area. Choosing a
+  group colours the map by it and keeps the list open, so moving to the next group is one click. On
+  phones the groups are a second row of chips under the lens tabs. This replaces the separate
+  indicator search.
+
 ### Institutional data workflow
 
 Data entry now runs through the institutions that own the data, in the figures they already publish.

@@ -61,6 +61,7 @@
   "nav": {
     "label": "Sehemu za wasifu huu",
     "overview": "Muhtasari",
+    "actions": "Nini cha kufanya",
     "dimensions": "Vipimo",
     "charts": "Ulinganisho",
     "drivers": "Vichocheo",
@@ -73,6 +74,11 @@
     "overview": {
       "eyebrow": "Muhtasari",
       "title": "{{name}} kwa muhtasari"
+    },
+    "actions": {
+      "eyebrow": "Mwongozo kwa wananchi",
+      "title": "Cha kufanya katika {{name}}",
+      "lead": "Hatua za vitendo kabla na wakati wa janga, kutoka Kitabu cha Mwongozo wa Hatua za Kukabili Hatari: hatari za eneo unaloishi, cha kufanya katika kila ngazi ya tahadhari, na cha kufanya wakati wa ajali."
     },
     "dimensions": {
       "eyebrow": "Vipimo vitatu",

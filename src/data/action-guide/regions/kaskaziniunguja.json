@@ -1,0 +1,60 @@
+{
+ "region": {
+  "en": "Kaskazini Unguja Region",
+  "sw": "Mkoa wa Kaskazini Unguja"
+ },
+ "councils": {
+  "C185": {
+   "name": "Kaskazini A District",
+   "hazards": [
+    "largeWaves",
+    "strongWinds",
+    "heavyRainfall",
+    "publicHealth"
+   ],
+   "documented": "large waves on the north shore, strong winds, heavy rain, boat accidents, and cholera",
+   "know": [
+    {
+     "area": {
+      "en": "Kaskazini A: Nungwi and northern coast",
+      "sw": "Kaskazini A: Nungwi na pwani ya kaskazini"
+     },
+     "risk": {
+      "en": "This area has tourist beaches and fishing villages where coastal erosion and storm tides damage buildings and rough seas endanger boats.",
+      "sw": "Eneo hili lina fukwe za utalii na vijiji vya wavuvi ambapo mmomonyoko wa pwani na mawimbi makubwa huharibu majengo na bahari chafu huhatarisha vyombo."
+     },
+     "advice": {
+      "en": "For those living, fishing and running tourism here, it helps to build back from the shoreline, protect coral and mangroves and stay ashore in strong winds.",
+      "sw": "Kwa wanaoishi, kuvua na kufanya utalii hapa, ni vyema kujenga mbali na ufukwe, kulinda matumbawe na mikoko na kubaki ufukweni upepo mkali unapovuma."
+     }
+    }
+   ]
+  },
+  "C186": {
+   "name": "Kaskazini B District",
+   "hazards": [
+    "largeWaves",
+    "floods",
+    "heavyRainfall",
+    "drought"
+   ],
+   "documented": "coastal floods, large waves, heavy rain, and boat accidents",
+   "know": [
+    {
+     "area": {
+      "en": "Kaskazini B: inland farmland and coral ground",
+      "sw": "Kaskazini B: mashamba ya ndani na ardhi ya matumbawe"
+     },
+     "risk": {
+      "en": "This area has inland farmland on thin coral soils where dry spells damage crops, water is scarce and storm water floods low hollows.",
+      "sw": "Eneo hili lina mashamba ya ndani kwenye udongo mwembamba wa matumbawe ambapo vipindi vya ukavu huharibu mazao, maji ni haba na maji ya dhoruba hufurika mashimo ya chini."
+     },
+     "advice": {
+      "en": "For those farming here, it helps to harvest rainwater, plant drought-tolerant crops and keep homes out of low hollows.",
+      "sw": "Kwa wanaolima hapa, ni vyema kuvuna maji ya mvua, kupanda mazao yanayostahimili ukame na kujenga nje ya mashimo ya chini."
+     }
+    }
+   ]
+  }
+ }
+}

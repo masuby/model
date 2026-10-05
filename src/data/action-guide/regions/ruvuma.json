@@ -1,0 +1,214 @@
+{
+ "region": {
+  "en": "Ruvuma Region",
+  "sw": "Mkoa wa Ruvuma"
+ },
+ "councils": {
+  "C074": {
+   "name": "Songea Municipal Council",
+   "hazards": [
+    "heavyRainfall",
+    "floods",
+    "strongWinds",
+    "landslide"
+   ],
+   "documented": "heavy Msimu rain, floods on the Ruvuma tributaries, and strong winds",
+   "know": [
+    {
+     "area": {
+      "en": "Songea Municipal: hillside town and river valleys",
+      "sw": "Manispaa ya Songea: mji wa milimani na mabonde ya mito"
+     },
+     "risk": {
+      "en": "This area is a hilly town where heavy rain floods valley streets and cuts gullies through hillside settlements, and lightning is frequent.",
+      "sw": "Eneo hili ni mji wa milimani ambapo mvua kubwa hufurika mitaa ya mabondeni na kuchimba makorongo kwenye makazi ya milimani, na radi hupiga mara kwa mara."
+     },
+     "advice": {
+      "en": "For those living and trading here, it helps to keep drains clear, build away from gully edges and stream banks and fit lightning arresters on public buildings.",
+      "sw": "Kwa wanaoishi na kufanya biashara hapa, ni vyema kuweka mitaro wazi, kujenga mbali na kingo za makorongo na vijito na kuweka vizuia radi kwenye majengo ya umma."
+     }
+    }
+   ]
+  },
+  "C077": {
+   "name": "Mbinga Town Council",
+   "hazards": [
+    "heavyRainfall",
+    "landslide",
+    "floods"
+   ],
+   "documented": "heavy rain and landslides on the Matengo highlands, and valley floods",
+   "know": [
+    {
+     "area": {
+      "en": "Mbinga Town: coffee highlands",
+      "sw": "Mji wa Mbinga: nyanda za juu za kahawa"
+     },
+     "risk": {
+      "en": "This area is a highland coffee town on steep slopes where heavy rain causes landslides and erosion and hailstorms damage crops.",
+      "sw": "Eneo hili ni mji wa kahawa wa nyanda za juu kwenye miteremko mikali ambapo mvua kubwa husababisha maporomoko na mmomonyoko na mvua ya mawe huharibu mazao."
+     },
+     "advice": {
+      "en": "For those living and farming here, it helps to keep terraces and trees on slopes and build away from steep cuts and gullies.",
+      "sw": "Kwa wanaoishi na kulima hapa, ni vyema kutunza matuta na miti kwenye miteremko na kujenga mbali na miinuko mikali na makorongo."
+     }
+    }
+   ]
+  },
+  "C075": {
+   "name": "Madaba District Council",
+   "hazards": [
+    "heavyRainfall",
+    "floods",
+    "strongWinds",
+    "wildfire"
+   ],
+   "documented": "heavy rain, valley floods, and strong winds",
+   "know": [
+    {
+     "area": {
+      "en": "Madaba: miombo farmland and forest",
+      "sw": "Madaba: mashamba ya miombo na misitu"
+     },
+     "risk": {
+      "en": "This area has miombo farmland and forest where dry-season fires spread fast and wildlife from nearby reserves raids crops.",
+      "sw": "Eneo hili lina mashamba ya miombo na misitu ambapo moto wa kiangazi husambaa haraka na wanyamapori kutoka hifadhi jirani huvamia mazao."
+     },
+     "advice": {
+      "en": "For those living and farming here, it helps to burn early and under control, keep fire breaks and use community deterrents against wildlife.",
+      "sw": "Kwa wanaoishi na kulima hapa, ni vyema kuchoma mapema kwa udhibiti, kuweka njia za kuzuia moto na kutumia mbinu za jamii kufukuza wanyama."
+     }
+    }
+   ]
+  },
+  "C076": {
+   "name": "Mbinga District Council",
+   "hazards": [
+    "heavyRainfall",
+    "landslide",
+    "floods"
+   ],
+   "documented": "heavy rain, landslides, and floods on the highland valleys",
+   "know": [
+    {
+     "area": {
+      "en": "Mbinga DC: steep coffee slopes and Ruhuhu valley",
+      "sw": "Mbinga DC: miteremko mikali ya kahawa na bonde la Ruhuhu"
+     },
+     "risk": {
+      "en": "This area has steep coffee slopes prone to landslides and the Ruhuhu valley and coal areas where rivers flood farms and roads.",
+      "sw": "Eneo hili lina miteremko mikali ya kahawa inayokumbwa na maporomoko na bonde la Ruhuhu na maeneo ya makaa ya mawe ambapo mito hufurika mashamba na barabara."
+     },
+     "advice": {
+      "en": "For those living and farming here, it helps to keep slopes planted, build away from river banks and know flood-prone crossings.",
+      "sw": "Kwa wanaoishi na kulima hapa, ni vyema kuacha mimea kwenye miteremko, kujenga mbali na kingo za mito na kujua vivuko vinavyofurika."
+     }
+    }
+   ]
+  },
+  "C079": {
+   "name": "Namtumbo District Council",
+   "hazards": [
+    "heavyRainfall",
+    "floods",
+    "wildfire"
+   ],
+   "documented": "heavy rain, Ruvuma floods, and a sharp dry season",
+   "know": [
+    {
+     "area": {
+      "en": "Namtumbo: Selous edge and uranium areas",
+      "sw": "Namtumbo: pembezoni mwa Selous na maeneo ya urani"
+     },
+     "risk": {
+      "en": "This area borders the Nyerere (Selous) reserve, where elephants raid crops and dry-season fires spread, and rains cut remote roads.",
+      "sw": "Eneo hili linapakana na hifadhi ya Nyerere (Selous), ambapo tembo huvamia mazao na moto wa kiangazi husambaa, na mvua hukata barabara za mbali."
+     },
+     "advice": {
+      "en": "For those living and farming here, it helps to use community deterrents, keep fire breaks and keep food and medicine reserves before the rains.",
+      "sw": "Kwa wanaoishi na kulima hapa, ni vyema kutumia mbinu za jamii kufukuza wanyama, kuweka njia za kuzuia moto na kuweka akiba ya chakula na dawa kabla ya mvua."
+     }
+    }
+   ]
+  },
+  "C078": {
+   "name": "Nyasa District Council",
+   "hazards": [
+    "floods",
+    "largeWaves",
+    "heavyRainfall",
+    "earthquake",
+    "strongWinds",
+    "landslide"
+   ],
+   "documented": "Lake Nyasa floods and large waves, boat accidents, heavy rain, and earthquake",
+   "know": [
+    {
+     "area": {
+      "en": "Nyasa: Lake Nyasa shore and Livingstone slopes",
+      "sw": "Nyasa: ufukwe wa Ziwa Nyasa na miteremko ya Livingstone"
+     },
+     "risk": {
+      "en": "This area has Lake Nyasa shore villages exposed to sudden storms and strong winds, and steep slopes behind them where landslides and flash floods occur.",
+      "sw": "Eneo hili lina vijiji vya ufukwe wa Ziwa Nyasa vinavyoathiriwa na dhoruba za ghafla na upepo mkali, na miteremko mikali nyuma yake ambapo maporomoko na mafuriko ya ghafla hutokea."
+     },
+     "advice": {
+      "en": "For those living and fishing here, it helps to wear life jackets, return to shore when winds rise and build away from steep cuts and stream mouths.",
+      "sw": "Kwa wanaoishi na kuvua hapa, ni vyema kuvaa maboya ya kujiokoa, kurudi ufukweni upepo unapovuma na kujenga mbali na miinuko mikali na midomo ya vijito."
+     }
+    }
+   ]
+  },
+  "C073": {
+   "name": "Songea District Council",
+   "hazards": [
+    "heavyRainfall",
+    "floods",
+    "strongWinds",
+    "drought"
+   ],
+   "documented": "heavy rain, floods on streams to the Ruvuma, and strong winds",
+   "know": [
+    {
+     "area": {
+      "en": "Songea DC: farmland and the Ruvuma headwaters",
+      "sw": "Songea DC: mashamba na vyanzo vya mto Ruvuma"
+     },
+     "risk": {
+      "en": "This area has maize and tobacco farmland where dry spells and hail damage crops, and river headwaters that flood crossings in heavy rain.",
+      "sw": "Eneo hili lina mashamba ya mahindi na tumbaku ambapo vipindi vya ukavu na mvua ya mawe huharibu mazao, na vyanzo vya mito vinavyofurika vivuko wakati wa mvua kubwa."
+     },
+     "advice": {
+      "en": "For those farming here, it helps to plant early-maturing varieties, keep household food reserves and know flood-prone crossings.",
+      "sw": "Kwa wanaolima hapa, ni vyema kupanda mbegu zinazokomaa mapema, kuweka akiba ya chakula ya kaya na kujua vivuko vinavyofurika."
+     }
+    }
+   ]
+  },
+  "C072": {
+   "name": "Tunduru District Council",
+   "hazards": [
+    "heavyRainfall",
+    "floods",
+    "wildfire"
+   ],
+   "documented": "heavy rain, wet-season floods, dry-season wildfire, and human–wildlife conflict",
+   "know": [
+    {
+     "area": {
+      "en": "Tunduru: Ruvuma border, miombo and gem mining",
+      "sw": "Tunduru: mpaka wa Ruvuma, miombo na uchimbaji wa vito"
+     },
+     "risk": {
+      "en": "This area borders Mozambique on the Ruvuma river, with miombo where elephants raid crops, gemstone pits that collapse in the rains and remote villages cut off by floods.",
+      "sw": "Eneo hili linapakana na Msumbiji kando ya mto Ruvuma, lina miombo ambapo tembo huvamia mazao, mashimo ya vito yanayobomoka wakati wa mvua na vijiji vya mbali vinavyotengwa na mafuriko."
+     },
+     "advice": {
+      "en": "For those living, farming and mining here, it helps to use community deterrents, fence or backfill pits and keep homes above the river flood line.",
+      "sw": "Kwa wanaoishi, kulima na kuchimba hapa, ni vyema kutumia mbinu za jamii kufukuza wanyama, kuzungushia uzio au kufukia mashimo na kujenga juu ya mstari wa mafuriko ya mto."
+     }
+    }
+   ]
+  }
+ }
+}

@@ -1,0 +1,616 @@
+{
+ "levels": {
+  "1": [
+   {
+    "impact": {
+     "en": "Higher waves on the sea and lakes, risky for small boats and canoes",
+     "sw": "Mawimbi makubwa baharini na maziwani, hatari kwa vyombo vidogo na mitumbwi"
+    },
+    "actions": {
+     "en": [
+      "Check TMA marine forecasts before going out.",
+      "Small boats and canoes: stay close to shore.",
+      "Wear a life jacket."
+     ],
+     "sw": [
+      "Fuatilia utabiri wa TMA wa hali ya bahari na maziwa kabla ya kutoka.",
+      "Vyombo vidogo na mitumbwi: bakini karibu na ufukwe.",
+      "Vaa jaketi ya kujiokoa."
+     ]
+    }
+   },
+   {
+    "impact": {
+     "en": "Difficult conditions for night fishing",
+     "sw": "Mazingira magumu kwa uvuvi wa usiku"
+    },
+    "actions": {
+     "en": [
+      "Avoid night fishing far from shore.",
+      "Carry a charged phone, a torch and a whistle.",
+      "Tell someone at the landing site where you are going and when you will return."
+     ],
+     "sw": [
+      "Epuka uvuvi wa usiku mbali na ufukwe.",
+      "Beba simu yenye chaji, tochi na filimbi.",
+      "Mjulishe mtu mwaloni unakokwenda na muda utakaorudi."
+     ]
+    }
+   },
+   {
+    "impact": {
+     "en": "Unsafe conditions for swimming and beach activities",
+     "sw": "Mazingira yasiyo salama kwa kuogelea na shughuli za fukweni"
+    },
+    "actions": {
+     "en": [
+      "Do not swim in rough water.",
+      "Keep children under adult supervision near water."
+     ],
+     "sw": [
+      "Usiogelee kwenye maji yenye mawimbi makali.",
+      "Waweke watoto chini ya uangalizi wa watu wazima karibu na maji."
+     ]
+    }
+   },
+   {
+    "impact": {
+     "en": "Possible disruption to ferry and lake transport",
+     "sw": "Uwezekano wa usumbufu wa usafiri wa vivuko na maziwani"
+    },
+    "actions": {
+     "en": [
+      "Check with ferry operators before travelling.",
+      "Allow extra travel time."
+     ],
+     "sw": [
+      "Wasiliana na waendeshaji wa vivuko kabla ya kusafiri.",
+      "Weka muda wa ziada wa safari."
+     ]
+    }
+   },
+   {
+    "impact": {
+     "en": "Risk of boats capsizing, especially when overloaded",
+     "sw": "Hatari ya vyombo kupinduka, hasa vikiwa vimezidishiwa mzigo"
+    },
+    "actions": {
+     "en": [
+      "Do not board an overloaded boat or ferry.",
+      "Make sure there is a life jacket for everyone on board.",
+      "Boat owners: check boats and engines before departure."
+     ],
+     "sw": [
+      "Usipande chombo au kivuko kilichozidishiwa abiria au mzigo.",
+      "Hakikisha kuna jaketi ya kujiokoa kwa kila mtu chomboni.",
+      "Wamiliki wa vyombo: kagueni vyombo na injini kabla ya kuondoka."
+     ]
+    }
+   },
+   {
+    "impact": {
+     "en": "Waves reaching low-lying beaches and shore paths",
+     "sw": "Mawimbi kufika kwenye fukwe za chini na njia za ufukweni"
+    },
+    "actions": {
+     "en": [
+      "Keep off rocks, piers and seawalls during high waves.",
+      "Keep away from the water's edge at high tide."
+     ],
+     "sw": [
+      "Usikae juu ya miamba, gati wala kuta za bahari wakati wa mawimbi makubwa.",
+      "Kaa mbali na ukingo wa maji wakati wa maji kujaa."
+     ]
+    }
+   },
+   {
+    "impact": {
+     "en": "Some erosion of beaches and shoreline",
+     "sw": "Mmomonyoko wa baadhi ya fukwe na kingo za maji"
+    },
+    "actions": {
+     "en": [
+      "Do not cut mangroves or remove beach vegetation.",
+      "Do not dig sand from beaches.",
+      "Report erosion to Village/Mtaa leaders."
+     ],
+     "sw": [
+      "Usikate mikoko wala kuondoa uoto wa fukweni.",
+      "Usichimbe mchanga fukweni.",
+      "Toa taarifa ya mmomonyoko kwa viongozi wa Kijiji/Mtaa."
+     ]
+    }
+   },
+   {
+    "impact": {
+     "en": "Reduced visibility on the water from spray and swell",
+     "sw": "Kupungua kwa uwezo wa kuona majini kutokana na manyunyu na mawimbi"
+    },
+    "actions": {
+     "en": [
+      "Reduce speed.",
+      "Use lights at night.",
+      "Travel together with other boats."
+     ],
+     "sw": [
+      "Punguza mwendo.",
+      "Tumia taa usiku.",
+      "Safiri pamoja na vyombo vingine."
+     ]
+    }
+   },
+   {
+    "impact": {
+     "en": "Higher risk for fishers, boat passengers and people with special needs",
+     "sw": "Hatari kubwa zaidi kwa wavuvi, abiria wa vyombo vya majini na watu wenye mahitaji maalum"
+    },
+    "actions": {
+     "en": [
+      "Village/Mtaa and Ward Disaster Management Committees and Beach Management Units: review contingency plans, update the lists of boats and fishers and check rescue equipment.",
+      "Share this advisory with fishers, boat operators and coastal and lakeshore households."
+     ],
+     "sw": [
+      "Kamati za Usimamizi wa Maafa za Vijiji/Mitaa na Kata na Vikundi vya Usimamizi wa Mialo (BMU): pitieni mipango ya dharura, boresheni orodha za vyombo na wavuvi na kagueni vifaa vya uokoaji.",
+      "Wapatie taarifa hii wavuvi, waendesha vyombo na kaya za pwani na kando ya maziwa."
+     ]
+    }
+   },
+   {
+    "impact": {
+     "en": "Possible damage to nets and fishing gear",
+     "sw": "Uwezekano wa uharibifu wa nyavu na zana za uvuvi"
+    },
+    "actions": {
+     "en": [
+      "Move nets and gear above the high-water mark.",
+      "Secure boats at their moorings."
+     ],
+     "sw": [
+      "Hamisha nyavu na zana juu ya usawa wa maji kujaa.",
+      "Funga vizuri vyombo mahali pa kuegesha."
+     ]
+    }
+   },
+   {
+    "impact": {
+     "en": "Warning status",
+     "sw": "Hali ya tahadhari"
+    },
+    "actions": {
+     "en": [
+      "Please continue to follow updates from TMA, Disaster Management Committees and local leaders.",
+      "This advisory remains in place until the authorities update or withdraw it."
+     ],
+     "sw": [
+      "Tafadhali endeleeni kufuatilia taarifa za TMA, Kamati za Usimamizi wa Maafa na viongozi wa eneo.",
+      "Tahadhari hii itaendelea hadi mamlaka zitakapoihuisha au kuiondoa rasmi."
+     ]
+    }
+   }
+  ],
+  "2": [
+   {
+    "impact": {
+     "en": "Fishers and small boats at serious risk of capsizing",
+     "sw": "Wavuvi na vyombo vidogo katika hatari kubwa ya kupinduka"
+    },
+    "actions": {
+     "en": [
+      "Stop all small-boat and night fishing.",
+      "Beach Management Units: stop boats from leaving landing sites.",
+      "District and Ward Disaster Management Committees: meet, activate contingency plans, prepare rescue boats and alert communities by radio, loudspeaker and door-to-door."
+     ],
+     "sw": [
+      "Sitisha uvuvi wote wa vyombo vidogo na wa usiku.",
+      "Vikundi vya Usimamizi wa Mialo (BMU): zuieni vyombo kutoka mialoni.",
+      "Kamati za Usimamizi wa Maafa za Wilaya na Kata: kutaneni, amilisheni mipango ya dharura, andaeni vyombo vya uokoaji na toeni tahadhari kwa jamii kupitia redio, vipaza sauti na nyumba kwa nyumba."
+     ]
+    }
+   },
+   {
+    "impact": {
+     "en": "Threat to life from drowning",
+     "sw": "Hatari ya maisha kutokana na kuzama majini"
+    },
+    "actions": {
+     "en": [
+      "Do not go out on the water.",
+      "Boats already out: please return to the nearest safe shore.",
+      "Report missing fishers immediately to the Police or BMU, or call 190."
+     ],
+     "sw": [
+      "Usitoke majini.",
+      "Vyombo vilivyo majini: tafadhali rudini ufukwe salama ulio karibu.",
+      "Toa taarifa ya wavuvi waliopotea mara moja kwa Polisi au BMU, au piga 190."
+     ]
+    }
+   },
+   {
+    "impact": {
+     "en": "Disruption to ferry and marine transport",
+     "sw": "Usumbufu wa usafiri wa vivuko na majini"
+    },
+    "actions": {
+     "en": [
+      "Travel by ferry only if essential.",
+      "Follow instructions from ferry operators and TASAC.",
+      "Do not board overloaded vessels."
+     ],
+     "sw": [
+      "Safiri kwa kivuko ikiwa ni lazima tu.",
+      "Fuata maelekezo ya waendeshaji wa vivuko na TASAC.",
+      "Usipande vyombo vilivyozidishiwa abiria au mzigo."
+     ]
+    }
+   },
+   {
+    "impact": {
+     "en": "Damage to jetties, piers and landing sites",
+     "sw": "Uharibifu wa gati, madaraja ya kushukia na mialo"
+    },
+    "actions": {
+     "en": [
+      "Pull boats to higher ground or sheltered moorings.",
+      "Keep off jetties and piers.",
+      "Report damage to port authorities."
+     ],
+     "sw": [
+      "Vuta vyombo kwenda sehemu za mwinuko au maegesho yaliyokingwa.",
+      "Usikae juu ya gati na madaraja ya kushukia.",
+      "Toa taarifa ya uharibifu kwa mamlaka za bandari."
+     ]
+    }
+   },
+   {
+    "impact": {
+     "en": "Significant beach and shoreline erosion",
+     "sw": "Mmomonyoko mkubwa wa fukwe na kingo za maji"
+    },
+    "actions": {
+     "en": [
+      "Keep away from cliff edges and eroding banks.",
+      "Leave buildings at the edge of eroding shoreline.",
+      "Report erosion to Village/Mtaa leaders."
+     ],
+     "sw": [
+      "Kaa mbali na kingo za majabali na kingo zinazomomonyoka.",
+      "Ondoka kwenye majengo yaliyo ukingoni mwa fukwe zinazomomonyoka.",
+      "Toa taarifa ya mmomonyoko kwa viongozi wa Kijiji/Mtaa."
+     ]
+    }
+   },
+   {
+    "impact": {
+     "en": "Waves overtopping seawalls and flooding low coastal roads",
+     "sw": "Mawimbi kuvuka kuta za bahari na kufurika barabara za pwani za chini"
+    },
+    "actions": {
+     "en": [
+      "Avoid coastal roads at high tide.",
+      "Do not drive through water on roads.",
+      "Follow instructions from the Traffic Police."
+     ],
+     "sw": [
+      "Epuka barabara za pwani wakati wa maji kujaa.",
+      "Usiendeshe gari kwenye maji yaliyofunika barabara.",
+      "Fuata maelekezo ya Polisi wa Usalama Barabarani."
+     ]
+    }
+   },
+   {
+    "impact": {
+     "en": "Damage to hotels and beach businesses",
+     "sw": "Uharibifu wa hoteli na biashara za fukweni"
+    },
+    "actions": {
+     "en": [
+      "Hotel operators: move guests and activities away from the shoreline.",
+      "Suspend boat trips and water sports.",
+      "Secure beach furniture and equipment."
+     ],
+     "sw": [
+      "Waendeshaji wa hoteli: hamisheni wageni na shughuli mbali na ufukwe.",
+      "Sitisha safari za boti na michezo ya majini.",
+      "Funga vizuri samani na vifaa vya fukweni."
+     ]
+    }
+   },
+   {
+    "impact": {
+     "en": "Loss of nets and fishing gear",
+     "sw": "Upotevu wa nyavu na zana za uvuvi"
+    },
+    "actions": {
+     "en": [
+      "Move nets and gear well above wave reach.",
+      "Do not try to recover nets in dangerous conditions."
+     ],
+     "sw": [
+      "Hamisha nyavu na zana mbali juu ya kufikiwa na mawimbi.",
+      "Usijaribu kuokoa nyavu wakati wa hali ya hatari."
+     ]
+    }
+   },
+   {
+    "impact": {
+     "en": "Flooding of low-lying coastal and lakeshore communities",
+     "sw": "Mafuriko katika jamii za pwani na kando ya maziwa zilizo maeneo ya chini"
+    },
+    "actions": {
+     "en": [
+      "Households in low-lying coastal and lakeshore areas: please move to higher ground early.",
+      "Move before nightfall.",
+      "Follow instructions from Village/Mtaa leaders."
+     ],
+     "sw": [
+      "Kaya zilizo maeneo ya chini ya pwani na kando ya maziwa: tafadhali hamieni maeneo ya mwinuko mapema.",
+      "Hameni kabla ya usiku.",
+      "Fuateni maelekezo ya viongozi wa Kijiji/Mtaa."
+     ]
+    }
+   },
+   {
+    "impact": {
+     "en": "Rising water damaging lakeside homes",
+     "sw": "Kupanda kwa maji kuharibu makazi ya kando ya maziwa"
+    },
+    "actions": {
+     "en": [
+      "Raise food, documents and valuables.",
+      "Move livestock to higher ground.",
+      "Charge phones and keep a battery-powered radio."
+     ],
+     "sw": [
+      "Inua chakula, nyaraka na vitu vya thamani.",
+      "Hamisha mifugo kwenda maeneo ya mwinuko.",
+      "Chaji simu na uwe na redio inayotumia betri."
+     ]
+    }
+   },
+   {
+    "impact": {
+     "en": "Disruption to schools in coastal and lakeshore areas",
+     "sw": "Kuathirika kwa shule za pwani na kando ya maziwa"
+    },
+    "actions": {
+     "en": [
+      "Parents: keep children away from the shore and water.",
+      "School heads: follow directives from the District Education Office."
+     ],
+     "sw": [
+      "Wazazi: waweke watoto mbali na ufukwe na maji.",
+      "Wakuu wa shule: fuateni maelekezo ya Ofisi ya Elimu ya Wilaya."
+     ]
+    }
+   },
+   {
+    "impact": {
+     "en": "Warning status",
+     "sw": "Hali ya tahadhari"
+    },
+    "actions": {
+     "en": [
+      "Please continue to follow updates from TMA, Disaster Management Committees and local leaders.",
+      "This warning remains in force until the authorities lower or withdraw it."
+     ],
+     "sw": [
+      "Tafadhali endeleeni kufuatilia taarifa za TMA, Kamati za Usimamizi wa Maafa na viongozi wa eneo.",
+      "Tahadhari hii itaendelea kutumika hadi mamlaka zitakapoishusha au kuiondoa rasmi."
+     ]
+    }
+   }
+  ],
+  "3": [
+   {
+    "impact": {
+     "en": "Severe risk of drowning and vessels capsizing",
+     "sw": "Hatari kubwa ya kuzama na vyombo kupinduka"
+    },
+    "actions": {
+     "en": [
+      "No boat or ship movement on the sea or lakes.",
+      "Do not enter the water for any reason.",
+      "Follow directives from TASAC, the Police and District Committees."
+     ],
+     "sw": [
+      "Hakuna chombo wala meli kusafiri baharini au maziwani.",
+      "Usiingie majini kwa sababu yoyote.",
+      "Fuata maelekezo ya TASAC, Polisi na Kamati za Wilaya."
+     ]
+    }
+   },
+   {
+    "impact": {
+     "en": "Loss of life in fishing communities",
+     "sw": "Vifo katika jamii za wavuvi"
+    },
+    "actions": {
+     "en": [
+      "Boats still on the water: please go to the nearest safe shore immediately.",
+      "District Committees and Beach Management Units: account for all fishers and report the missing to the Police.",
+      "Fire and Rescue Force: lead search and rescue with the Police Marine Unit, TASAC and JWTZ."
+     ],
+     "sw": [
+      "Vyombo vilivyo bado majini: tafadhali nendeni ufukwe salama ulio karibu mara moja.",
+      "Kamati za Wilaya na Vikundi vya Usimamizi wa Mialo (BMU): hakikisheni wavuvi wote wanajulikana walipo na toeni taarifa ya waliopotea kwa Polisi.",
+      "Jeshi la Zimamoto na Uokoaji: ongozeni utafutaji na uokoaji kwa kushirikiana na Polisi Wanamaji, TASAC na JWTZ."
+     ]
+    }
+   },
+   {
+    "impact": {
+     "en": "Storm surge flooding coastal communities",
+     "sw": "Mawimbi makubwa ya dhoruba kufurika jamii za pwani"
+    },
+    "actions": {
+     "en": [
+      "Residents of low-lying coastal areas: please evacuate to higher ground as directed.",
+      "Do not go to the beach to watch the waves.",
+      "Please return only when the authorities declare the area safe."
+     ],
+     "sw": [
+      "Wakazi wa maeneo ya chini ya pwani: tafadhali hamieni maeneo ya mwinuko kama mnavyoelekezwa.",
+      "Usiende ufukweni kutazama mawimbi.",
+      "Tafadhali rudini pale tu mamlaka zitakapotangaza kuwa eneo ni salama."
+     ]
+    }
+   },
+   {
+    "impact": {
+     "en": "Major damage to ports, harbours and ferry terminals",
+     "sw": "Uharibifu mkubwa wa bandari na vituo vya vivuko"
+    },
+    "actions": {
+     "en": [
+      "Port authorities: suspend operations and secure vessels.",
+      "Keep away from ports, jetties and landing sites."
+     ],
+     "sw": [
+      "Mamlaka za bandari: sitisheni shughuli na linda vyombo.",
+      "Kaa mbali na bandari, gati na mialo."
+     ]
+    }
+   },
+   {
+    "impact": {
+     "en": "Severe shoreline erosion and collapse of buildings",
+     "sw": "Mmomonyoko mkubwa wa kingo za maji na majengo kuanguka"
+    },
+    "actions": {
+     "en": [
+      "Please move out of buildings on eroding shoreline.",
+      "Please do not return to undermined buildings.",
+      "Keep children away from cliff edges."
+     ],
+     "sw": [
+      "Tafadhali hameni kutoka majengo yaliyo kwenye kingo zinazomomonyoka.",
+      "Tafadhali msirudi kwenye majengo ambayo misingi yake imeliwa na maji.",
+      "Waweke watoto mbali na kingo za majabali."
+     ]
+    }
+   },
+   {
+    "impact": {
+     "en": "Saltwater contamination of wells and springs",
+     "sw": "Maji ya chumvi kuchafua visima na chemchemi"
+    },
+    "actions": {
+     "en": [
+      "Drink only boiled or treated water.",
+      "Do not use flooded wells until they have been cleaned and tested.",
+      "District Committees: supply safe drinking water."
+     ],
+     "sw": [
+      "Kunywa maji yaliyochemshwa au kutibiwa tu.",
+      "Usitumie visima vilivyofurika hadi visafishwe na kupimwa.",
+      "Kamati za Wilaya: sambazeni maji safi ya kunywa."
+     ]
+    }
+   },
+   {
+    "impact": {
+     "en": "Flooding of lakeshore settlements",
+     "sw": "Mafuriko katika makazi ya kando ya maziwa"
+    },
+    "actions": {
+     "en": [
+      "Lakeshore residents: please evacuate as directed.",
+      "Go to official shelters on higher ground.",
+      "Help older persons, children, pregnant women and people with disabilities first."
+     ],
+     "sw": [
+      "Wakazi wa kando ya maziwa: tafadhali hameni kama mnavyoelekezwa.",
+      "Nenda kwenye makazi rasmi ya muda yaliyo maeneo ya mwinuko.",
+      "Wasaidie wazee, watoto, wajawazito na watu wenye ulemavu kwanza."
+     ]
+    }
+   },
+   {
+    "impact": {
+     "en": "Deaths and injuries",
+     "sw": "Vifo na majeruhi"
+    },
+    "actions": {
+     "en": [
+      "Take the injured to the nearest health facility.",
+      "District Committees: set up first-aid points and provide psychosocial support.",
+      "Health authorities: manage identification and burial of the dead."
+     ],
+     "sw": [
+      "Wapeleke majeruhi kituo cha afya kilicho karibu.",
+      "Kamati za Wilaya: anzisheni vituo vya huduma ya kwanza na toeni msaada wa kisaikolojia.",
+      "Mamlaka za afya: simamieni utambuzi na maziko ya waliofariki."
+     ]
+    }
+   },
+   {
+    "impact": {
+     "en": "Loss of boats, fishing gear and food stocks",
+     "sw": "Upotevu wa vyombo, zana za uvuvi na akiba ya chakula"
+    },
+    "actions": {
+     "en": [
+      "Report losses to Village/Mtaa leaders and BMU.",
+      "District Committees: provide emergency food assistance."
+     ],
+     "sw": [
+      "Toa taarifa ya hasara kwa viongozi wa Kijiji/Mtaa na BMU.",
+      "Kamati za Wilaya: toeni msaada wa dharura wa chakula."
+     ]
+    }
+   },
+   {
+    "impact": {
+     "en": "Large-scale evacuation of coastal and lakeshore populations",
+     "sw": "Uhamishaji mkubwa wa wakazi wa pwani na kando ya maziwa"
+    },
+    "actions": {
+     "en": [
+      "Take your emergency bag.",
+      "Register at the shelter.",
+      "District Committees: provide food, water, sanitation and protection in shelters."
+     ],
+     "sw": [
+      "Chukua begi lako la dharura.",
+      "Jisajili kwenye makazi ya muda.",
+      "Kamati za Wilaya: toeni chakula, maji, huduma za usafi na ulinzi katika makazi ya muda."
+     ]
+    }
+   },
+   {
+    "impact": {
+     "en": "Roads, power and communication cut in coastal areas",
+     "sw": "Kukatika kwa barabara, umeme na mawasiliano katika maeneo ya pwani"
+    },
+    "actions": {
+     "en": [
+      "Listen to official radio broadcasts.",
+      "Keep away from fallen power lines.",
+      "District Committees: use radio and messengers to reach cut-off villages."
+     ],
+     "sw": [
+      "Sikiliza matangazo rasmi ya redio.",
+      "Kaa mbali na nyaya za umeme zilizoanguka.",
+      "Kamati za Wilaya: tumieni redio na wajumbe kufikia vijiji visivyofikika."
+     ]
+    }
+   },
+   {
+    "impact": {
+     "en": "Warning status",
+     "sw": "Hali ya tahadhari"
+    },
+    "actions": {
+     "en": [
+      "Please stay with official sources: radio, TMA, Disaster Management Committees and local leaders.",
+      "Disaster Management Committees will announce when the danger has passed and when it is safe to return."
+     ],
+     "sw": [
+      "Tafadhali tegemeeni taarifa rasmi: redio, TMA, Kamati za Usimamizi wa Maafa na viongozi wa eneo.",
+      "Kamati za Usimamizi wa Maafa zitatangaza hatari itakapokwisha na itakapokuwa salama kurudi."
+     ]
+    }
+   }
+  ]
+ }
+}

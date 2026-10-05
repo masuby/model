@@ -27,7 +27,7 @@ export const NAV = [
 ] as const;
 
 function ScrollToTop() {
-  const { pathname } = useLocation();
+  const { pathname, hash } = useLocation();
   const initial = React.useRef(true);
   React.useEffect(() => {
     // Not on first load: the page is already at the top, and scrolling would force a layout mid-render.
@@ -35,7 +35,11 @@ function ScrollToTop() {
       initial.current = false;
       return;
     }
+    // A link to a section (/area/C001#actions): the page scrolls to it itself.
+    if (hash) return;
     window.scrollTo({ top: 0, behavior: 'instant' as ScrollBehavior });
+    // Only a new page resets the scroll; the hash is read, not tracked.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [pathname]);
   return null;
 }

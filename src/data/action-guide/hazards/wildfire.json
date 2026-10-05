@@ -1,0 +1,604 @@
+{
+ "levels": {
+  "1": [
+   {
+    "impact": {
+     "en": "Dry conditions and high fire risk in grasslands, bush and forests",
+     "sw": "Hali ya ukavu na hatari kubwa ya moto kwenye nyasi, vichaka na misitu"
+    },
+    "actions": {
+     "en": [
+      "Do not burn farms, grass or rubbish without permission from Village/Mtaa leaders.",
+      "Report any fire to Village/Mtaa leaders or call 114.",
+      "Follow forecasts from the Tanzania Meteorological Authority (TMA)."
+     ],
+     "sw": [
+      "Usichome mashamba, nyasi wala taka bila kibali cha viongozi wa Kijiji/Mtaa.",
+      "Toa taarifa ya moto wowote kwa viongozi wa Kijiji/Mtaa au piga 114.",
+      "Fuatilia utabiri wa Mamlaka ya Hali ya Hewa Tanzania (TMA)."
+     ]
+    }
+   },
+   {
+    "impact": {
+     "en": "Small fires starting from cooking, cigarettes or charcoal kilns",
+     "sw": "Moto mdogo kuanzishwa na mioto ya kupikia, sigara au matanuru ya mkaa"
+    },
+    "actions": {
+     "en": [
+      "Put out cooking fires completely before leaving.",
+      "Do not throw cigarettes on dry grass.",
+      "Charcoal makers: never leave kilns unattended; clear the ground around them."
+     ],
+     "sw": [
+      "Zima kabisa moto wa kupikia kabla ya kuondoka.",
+      "Usitupe sigara kwenye nyasi kavu.",
+      "Watengenezaji wa mkaa: msiache matanuru bila uangalizi; safisheni eneo linalozunguka."
+     ]
+    }
+   },
+   {
+    "impact": {
+     "en": "Smoke from nearby fires affecting air quality",
+     "sw": "Moshi kutoka mioto ya karibu kuathiri ubora wa hewa"
+    },
+    "actions": {
+     "en": [
+      "Close doors and windows during heavy smoke.",
+      "People with asthma or chest conditions: stay indoors."
+     ],
+     "sw": [
+      "Funga milango na madirisha wakati wa moshi mzito.",
+      "Watu wenye pumu au matatizo ya kifua: bakini ndani."
+     ]
+    }
+   },
+   {
+    "impact": {
+     "en": "Risk of fire spreading to pastures, farms and homes",
+     "sw": "Hatari ya moto kusambaa kwenye malisho, mashamba na makazi"
+    },
+    "actions": {
+     "en": [
+      "Clear dry grass around homes, farms and grain stores.",
+      "Make firebreaks around farms."
+     ],
+     "sw": [
+      "Fyeka nyasi kavu kuzunguka nyumba, mashamba na maghala ya nafaka.",
+      "Tengeneza njia za kuzuia moto kuzunguka mashamba."
+     ]
+    }
+   },
+   {
+    "impact": {
+     "en": "Smoke reducing visibility on some roads",
+     "sw": "Moshi kupunguza uwezo wa kuona katika baadhi ya barabara"
+    },
+    "actions": {
+     "en": [
+      "Drive slowly with headlights on.",
+      "Do not stop in smoke."
+     ],
+     "sw": [
+      "Endesha taratibu ukiwasha taa za mbele.",
+      "Usisimame ndani ya moshi."
+     ]
+    }
+   },
+   {
+    "impact": {
+     "en": "Risk to grazing livestock",
+     "sw": "Hatari kwa mifugo inayochungwa"
+    },
+    "actions": {
+     "en": [
+      "Keep livestock away from burning areas.",
+      "Herders: do not set fires to renew pasture."
+     ],
+     "sw": [
+      "Weka mifugo mbali na maeneo yanayoungua.",
+      "Wafugaji: msiwashe moto kwa ajili ya kuotesha malisho."
+     ]
+    }
+   },
+   {
+    "impact": {
+     "en": "Higher risk for people with special needs and communities at forest edges",
+     "sw": "Hatari kubwa zaidi kwa watu wenye mahitaji maalum na jamii zilizo pembezoni mwa misitu"
+    },
+    "actions": {
+     "en": [
+      "Village/Mtaa and Ward Disaster Management Committees: review contingency plans, update the list of people with special needs and organise community fire volunteers with tools.",
+      "Share this advisory with neighbours, especially older persons, people with disabilities and pregnant women."
+     ],
+     "sw": [
+      "Kamati za Usimamizi wa Maafa za Vijiji/Mitaa na Kata: pitieni mipango ya dharura, boresheni orodha ya watu wenye mahitaji maalum na andaeni vikundi vya kujitolea vya kuzima moto vyenye vifaa.",
+      "Wapatie taarifa hii majirani, hasa wazee, watu wenye ulemavu na wajawazito."
+     ]
+    }
+   },
+   {
+    "impact": {
+     "en": "Fires started by honey gathering near forests",
+     "sw": "Moto kuanzishwa na urinaji wa asali karibu na misitu"
+    },
+    "actions": {
+     "en": [
+      "Honey gatherers: put out smoking devices completely before leaving.",
+      "Do not light fires in forest reserves."
+     ],
+     "sw": [
+      "Warinaji wa asali: zimeni kabisa vifaa vya kufukiza moshi kabla ya kuondoka.",
+      "Usiwashe moto ndani ya hifadhi za misitu."
+     ]
+    }
+   },
+   {
+    "impact": {
+     "en": "Risk to rangers, porters and workers in protected areas",
+     "sw": "Hatari kwa askari wanyamapori, wapagazi na wafanyakazi katika maeneo ya hifadhi"
+    },
+    "actions": {
+     "en": [
+      "Carry water and tools for putting out fires.",
+      "Report fires immediately to TANAPA, TAWA or TFS."
+     ],
+     "sw": [
+      "Beba maji na vifaa vya kuzima moto.",
+      "Toa taarifa ya moto mara moja kwa TANAPA, TAWA au TFS."
+     ]
+    }
+   },
+   {
+    "impact": {
+     "en": "Need for fire response readiness",
+     "sw": "Uhitaji wa utayari wa kukabili moto"
+    },
+    "actions": {
+     "en": [
+      "Fire and Rescue Force, TFS and TANAPA: check equipment, firebreaks and water points.",
+      "Village/Mtaa leaders: prepare water, sand and firefighting tools."
+     ],
+     "sw": [
+      "Jeshi la Zimamoto na Uokoaji, TFS na TANAPA: kagueni vifaa, njia za kuzuia moto na vituo vya maji.",
+      "Viongozi wa Kijiji/Mtaa: andaeni maji, mchanga na vifaa vya kuzima moto."
+     ]
+    }
+   },
+   {
+    "impact": {
+     "en": "Warning status",
+     "sw": "Hali ya tahadhari"
+    },
+    "actions": {
+     "en": [
+      "Please continue to follow updates from TMA, Disaster Management Committees and local leaders.",
+      "This advisory remains in place until the authorities update or withdraw it."
+     ],
+     "sw": [
+      "Tafadhali endeleeni kufuatilia taarifa za TMA, Kamati za Usimamizi wa Maafa na viongozi wa eneo.",
+      "Tahadhari hii itaendelea hadi mamlaka zitakapoihuisha au kuiondoa rasmi."
+     ]
+    }
+   }
+  ],
+  "2": [
+   {
+    "impact": {
+     "en": "Widespread fires in bush and forest areas",
+     "sw": "Mioto iliyoenea kwenye vichaka na misitu"
+    },
+    "actions": {
+     "en": [
+      "Households near the fire: please move to a safe place now.",
+      "Move away from the fire to the side, not uphill and not in the direction the wind is blowing.",
+      "District and Ward Disaster Management Committees: meet, activate contingency plans with the Fire and Rescue Force and alert communities by radio, loudspeaker and door-to-door."
+     ],
+     "sw": [
+      "Kaya zilizo karibu na moto: tafadhali hamieni mahali salama sasa.",
+      "Ondoka mbali na moto kwa kwenda pembeni, si kupanda mlima wala kufuata upande upepo unakoelekea.",
+      "Kamati za Usimamizi wa Maafa za Wilaya na Kata: kutaneni, amilisheni mipango ya dharura pamoja na Jeshi la Zimamoto na Uokoaji na toeni tahadhari kwa jamii kupitia redio, vipaza sauti na nyumba kwa nyumba."
+     ]
+    }
+   },
+   {
+    "impact": {
+     "en": "Threat to homes, farms and buildings near the fire",
+     "sw": "Hatari kwa nyumba, mashamba na majengo yaliyo karibu na moto"
+    },
+    "actions": {
+     "en": [
+      "Clear dry grass and leaves around buildings.",
+      "Keep water, sand and tools ready.",
+      "Move documents and valuables to a safe place."
+     ],
+     "sw": [
+      "Fyeka nyasi kavu na ondoa majani kuzunguka majengo.",
+      "Weka tayari maji, mchanga na vifaa.",
+      "Hamishia nyaraka na vitu vya thamani mahali salama."
+     ]
+    }
+   },
+   {
+    "impact": {
+     "en": "Heavy smoke affecting many communities",
+     "sw": "Moshi mzito kuathiri jamii nyingi"
+    },
+    "actions": {
+     "en": [
+      "Stay indoors with doors and windows closed.",
+      "Keep children indoors.",
+      "Go to a health facility if breathing becomes difficult."
+     ],
+     "sw": [
+      "Kaa ndani na funga milango na madirisha.",
+      "Waweke watoto ndani.",
+      "Nenda kituo cha afya ukipata shida ya kupumua."
+     ]
+    }
+   },
+   {
+    "impact": {
+     "en": "Damage to crops and stored harvests",
+     "sw": "Uharibifu wa mazao na mavuno yaliyohifadhiwa"
+    },
+    "actions": {
+     "en": [
+      "Harvest mature crops where it is safe.",
+      "Move stored grain away from the fire.",
+      "Report damage to extension officers."
+     ],
+     "sw": [
+      "Vuna mazao yaliyokomaa pale ambapo ni salama.",
+      "Hamisha nafaka zilizohifadhiwa mbali na moto.",
+      "Toa taarifa ya uharibifu kwa maafisa ugani."
+     ]
+    }
+   },
+   {
+    "impact": {
+     "en": "Power cuts from fire damage to lines and poles",
+     "sw": "Kukatika kwa umeme kutokana na moto kuharibu nyaya na nguzo"
+    },
+    "actions": {
+     "en": [
+      "Keep away from burning or fallen power lines.",
+      "Report damaged lines to TANESCO.",
+      "Charge phones and keep a battery-powered radio."
+     ],
+     "sw": [
+      "Kaa mbali na nyaya za umeme zinazoungua au zilizoanguka.",
+      "Toa taarifa ya nyaya zilizoharibika kwa TANESCO.",
+      "Chaji simu na uwe na redio inayotumia betri."
+     ]
+    }
+   },
+   {
+    "impact": {
+     "en": "Roads closed by smoke and active fires",
+     "sw": "Barabara kufungwa kutokana na moshi na moto unaowaka"
+    },
+    "actions": {
+     "en": [
+      "Do not drive through smoke or burning areas.",
+      "Follow instructions from the Traffic Police."
+     ],
+     "sw": [
+      "Usiendeshe gari kupita kwenye moshi au maeneo yanayoungua.",
+      "Fuata maelekezo ya Polisi wa Usalama Barabarani."
+     ]
+    }
+   },
+   {
+    "impact": {
+     "en": "Livestock at risk and wild animals fleeing protected areas",
+     "sw": "Mifugo kuwa hatarini na wanyamapori kukimbia kutoka maeneo ya hifadhi"
+    },
+    "actions": {
+     "en": [
+      "Move livestock away from the fire.",
+      "Do not approach wild animals.",
+      "Report wild animals near homes to TAWA or TANAPA."
+     ],
+     "sw": [
+      "Hamisha mifugo mbali na moto.",
+      "Usiwakaribie wanyamapori.",
+      "Toa taarifa ya wanyamapori walio karibu na makazi kwa TAWA au TANAPA."
+     ]
+    }
+   },
+   {
+    "impact": {
+     "en": "Risk to firefighters and volunteers",
+     "sw": "Hatari kwa wazima moto na wanaojitolea"
+    },
+    "actions": {
+     "en": [
+      "Only trained teams should fight large fires.",
+      "Volunteers: work only under the direction of fire teams.",
+      "Fire and Rescue Force: lead firefighting with TFS, TANAPA, TAWA and the Police Force."
+     ],
+     "sw": [
+      "Timu zilizofunzwa pekee ndizo zizime mioto mikubwa.",
+      "Wanaojitolea: fanyeni kazi chini ya maelekezo ya timu za zimamoto pekee.",
+      "Jeshi la Zimamoto na Uokoaji: ongozeni uzimaji moto kwa kushirikiana na TFS, TANAPA, TAWA na Jeshi la Polisi."
+     ]
+    }
+   },
+   {
+    "impact": {
+     "en": "Disruption to mountain climbing and safaris in national parks",
+     "sw": "Kuathirika kwa upandaji milima na utalii katika hifadhi za taifa"
+    },
+    "actions": {
+     "en": [
+      "Park authorities: suspend climbing and safaris in affected areas.",
+      "Tour operators: move guests away from threatened camps and routes."
+     ],
+     "sw": [
+      "Mamlaka za hifadhi: sitisheni upandaji milima na safari za utalii katika maeneo yaliyoathirika.",
+      "Waendeshaji wa utalii: hamisheni wageni kutoka kambi na njia zilizo hatarini."
+     ]
+    }
+   },
+   {
+    "impact": {
+     "en": "Damage to mobile towers near forests",
+     "sw": "Uharibifu wa minara ya simu iliyo karibu na misitu"
+    },
+    "actions": {
+     "en": [
+      "Charge phones and keep a battery-powered radio.",
+      "Agree a family meeting point."
+     ],
+     "sw": [
+      "Chaji simu na uwe na redio inayotumia betri.",
+      "Kubalianeni mahali pa kukutana kama familia."
+     ]
+    }
+   },
+   {
+    "impact": {
+     "en": "Heavy smoke disrupting schools",
+     "sw": "Moshi mzito kuathiri shule"
+    },
+    "actions": {
+     "en": [
+      "School heads: keep pupils indoors during heavy smoke.",
+      "Follow directives from the District Education Office.",
+      "Parents: keep children away from burning areas."
+     ],
+     "sw": [
+      "Wakuu wa shule: bakisheni wanafunzi ndani wakati wa moshi mzito.",
+      "Fuateni maelekezo ya Ofisi ya Elimu ya Wilaya.",
+      "Wazazi: waweke watoto mbali na maeneo yanayoungua."
+     ]
+    }
+   },
+   {
+    "impact": {
+     "en": "Warning status",
+     "sw": "Hali ya tahadhari"
+    },
+    "actions": {
+     "en": [
+      "Please continue to follow updates from TMA, Disaster Management Committees and local leaders.",
+      "This warning remains in force until the authorities lower or withdraw it."
+     ],
+     "sw": [
+      "Tafadhali endeleeni kufuatilia taarifa za TMA, Kamati za Usimamizi wa Maafa na viongozi wa eneo.",
+      "Tahadhari hii itaendelea kutumika hadi mamlaka zitakapoishusha au kuiondoa rasmi."
+     ]
+    }
+   }
+  ],
+  "3": [
+   {
+    "impact": {
+     "en": "Severe fires threatening villages, towns, forests and protected areas",
+     "sw": "Mioto mikubwa inayotishia vijiji, miji, misitu na maeneo ya hifadhi"
+    },
+    "actions": {
+     "en": [
+      "Please evacuate immediately when directed.",
+      "Leave early; do not wait until the fire is close.",
+      "Please do not go back for belongings."
+     ],
+     "sw": [
+      "Tafadhali hama mara moja unapoelekezwa.",
+      "Ondoka mapema; usisubiri moto ukaribie.",
+      "Tafadhali usirudi kufuata mali."
+     ]
+    }
+   },
+   {
+    "impact": {
+     "en": "Deaths and injuries from burns and smoke",
+     "sw": "Vifo na majeruhi kutokana na kuungua na moshi"
+    },
+    "actions": {
+     "en": [
+      "Call 114 or 190.",
+      "Cool burns with clean water and take the injured to a health facility.",
+      "Health facilities: prepare for burns and breathing emergencies and refer serious cases to regional hospitals."
+     ],
+     "sw": [
+      "Piga 114 au 190.",
+      "Poza majeraha ya moto kwa maji safi na wapeleke majeruhi kituo cha afya.",
+      "Vituo vya afya: jiandaeni kwa majeraha ya moto na matatizo ya kupumua na wapelekeni wagonjwa mahututi hospitali za mkoa."
+     ]
+    }
+   },
+   {
+    "impact": {
+     "en": "Large-scale evacuation of communities",
+     "sw": "Uhamishaji mkubwa wa jamii"
+    },
+    "actions": {
+     "en": [
+      "Register at the shelter.",
+      "Help older persons, children, pregnant women and people with disabilities first.",
+      "District Committees: provide food, water, sanitation and protection in shelters."
+     ],
+     "sw": [
+      "Jisajili kwenye makazi ya muda.",
+      "Wasaidie wazee, watoto, wajawazito na watu wenye ulemavu kwanza.",
+      "Kamati za Wilaya: toeni chakula, maji, huduma za usafi na ulinzi katika makazi ya muda."
+     ]
+    }
+   },
+   {
+    "impact": {
+     "en": "Major loss of crops, livestock and food stores",
+     "sw": "Upotevu mkubwa wa mazao, mifugo na akiba ya chakula"
+    },
+    "actions": {
+     "en": [
+      "Report losses to Village/Mtaa leaders.",
+      "District Committees: provide emergency food assistance.",
+      "Extension officers: assess crop and livestock losses."
+     ],
+     "sw": [
+      "Toa taarifa ya hasara kwa viongozi wa Kijiji/Mtaa.",
+      "Kamati za Wilaya: toeni msaada wa dharura wa chakula.",
+      "Maafisa ugani: fanyeni tathmini ya hasara ya mazao na mifugo."
+     ]
+    }
+   },
+   {
+    "impact": {
+     "en": "Severe smoke over large areas, including distant towns",
+     "sw": "Moshi mzito katika maeneo makubwa, ikiwemo miji ya mbali"
+    },
+    "actions": {
+     "en": [
+      "Stay indoors and limit outdoor activity.",
+      "Suspend outdoor sports and gatherings.",
+      "Go to a health facility if breathing becomes difficult."
+     ],
+     "sw": [
+      "Kaa ndani na punguza shughuli za nje.",
+      "Sitisha michezo na mikusanyiko ya nje.",
+      "Nenda kituo cha afya ukipata shida ya kupumua."
+     ]
+    }
+   },
+   {
+    "impact": {
+     "en": "Major destruction of forest reserves and water catchments",
+     "sw": "Uharibifu mkubwa wa hifadhi za misitu na vyanzo vya maji"
+    },
+    "actions": {
+     "en": [
+      "Keep out of burning forests.",
+      "Fire and Rescue Force, TFS, TANAPA and TAWA: protect villages at forest edges and water catchments."
+     ],
+     "sw": [
+      "Usiingie kwenye misitu inayoungua.",
+      "Jeshi la Zimamoto na Uokoaji, TFS, TANAPA na TAWA: lindeni vijiji vilivyo pembezoni mwa misitu na vyanzo vya maji."
+     ]
+    }
+   },
+   {
+    "impact": {
+     "en": "Tourism operations threatened in national parks and on Mount Kilimanjaro",
+     "sw": "Shughuli za utalii kuwa hatarini katika hifadhi za taifa na Mlima Kilimanjaro"
+    },
+    "actions": {
+     "en": [
+      "Park authorities: suspend all tourism in affected areas until declared safe.",
+      "Tour operators: account for all guests, porters and guides."
+     ],
+     "sw": [
+      "Mamlaka za hifadhi: sitisheni utalii wote katika maeneo yaliyoathirika hadi yatangazwe kuwa salama.",
+      "Waendeshaji wa utalii: hakikisheni wageni, wapagazi na waongoza watalii wote wanajulikana walipo."
+     ]
+    }
+   },
+   {
+    "impact": {
+     "en": "Power and communication networks damaged",
+     "sw": "Uharibifu wa mitandao ya umeme na mawasiliano"
+    },
+    "actions": {
+     "en": [
+      "Listen to official radio broadcasts.",
+      "Keep away from fallen power lines.",
+      "District Committees: use radio and messengers to reach cut-off villages."
+     ],
+     "sw": [
+      "Sikiliza matangazo rasmi ya redio.",
+      "Kaa mbali na nyaya za umeme zilizoanguka.",
+      "Kamati za Wilaya: tumieni redio na wajumbe kufikia vijiji visivyofikika."
+     ]
+    }
+   },
+   {
+    "impact": {
+     "en": "Health emergencies: burns, breathing problems and trauma",
+     "sw": "Dharura za kiafya: majeraha ya moto, matatizo ya kupumua na mshtuko"
+    },
+    "actions": {
+     "en": [
+      "Health authorities: send mobile health teams to shelters.",
+      "District Committees: provide psychosocial support to survivors and families."
+     ],
+     "sw": [
+      "Mamlaka za afya: pelekeni timu za huduma za afya za mkoba kwenye makazi ya muda.",
+      "Kamati za Wilaya: toeni msaada wa kisaikolojia kwa manusura na familia."
+     ]
+    }
+   },
+   {
+    "impact": {
+     "en": "Fires restarting from smouldering ground",
+     "sw": "Moto kuwaka upya kutoka ardhi inayofuka"
+    },
+    "actions": {
+     "en": [
+      "Please return only when the authorities declare the area safe.",
+      "Report smoke rising from burnt ground.",
+      "Keep livestock out of burnt areas."
+     ],
+     "sw": [
+      "Tafadhali rudini pale tu mamlaka zitakapotangaza kuwa eneo ni salama.",
+      "Toa taarifa ya moshi unaofuka kutoka ardhi iliyoungua.",
+      "Usiingize mifugo kwenye maeneo yaliyoungua."
+     ]
+    }
+   },
+   {
+    "impact": {
+     "en": "National support required, including JWTZ and aerial firefighting",
+     "sw": "Msaada wa kitaifa unahitajika, ikiwemo JWTZ na uzimaji moto kwa ndege"
+    },
+    "actions": {
+     "en": [
+      "Regional Committees: request JWTZ and aerial firefighting support through the Prime Minister's Office.",
+      "Follow directives from Disaster Management Committees and the Fire and Rescue Force."
+     ],
+     "sw": [
+      "Kamati za Mikoa: ombeni msaada wa JWTZ na uzimaji moto kwa ndege kupitia Ofisi ya Waziri Mkuu.",
+      "Fuata maelekezo ya Kamati za Usimamizi wa Maafa na Jeshi la Zimamoto na Uokoaji."
+     ]
+    }
+   },
+   {
+    "impact": {
+     "en": "Warning status",
+     "sw": "Hali ya tahadhari"
+    },
+    "actions": {
+     "en": [
+      "Please stay with official sources: radio, TMA, Disaster Management Committees and local leaders.",
+      "Disaster Management Committees will announce when the danger has passed and when it is safe to return."
+     ],
+     "sw": [
+      "Tafadhali tegemeeni taarifa rasmi: redio, TMA, Kamati za Usimamizi wa Maafa na viongozi wa eneo.",
+      "Kamati za Usimamizi wa Maafa zitatangaza hatari itakapokwisha na itakapokuwa salama kurudi."
+     ]
+    }
+   }
+  ]
+ }
+}

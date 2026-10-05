@@ -1,0 +1,74 @@
+{
+  "hazards": {
+    "heavyRainfall": "Heavy rainfall",
+    "floods": "Floods",
+    "landslide": "Landslides",
+    "strongWinds": "Strong winds",
+    "largeWaves": "Large waves",
+    "wildfire": "Wildfire",
+    "drought": "Drought",
+    "earthquake": "Earthquake and tsunami",
+    "publicHealth": "Public health"
+  },
+  "levels": {
+    "1": {
+      "name": "Advisory",
+      "call": "Be prepared",
+      "colour": "Yellow",
+      "short": "Level 1"
+    },
+    "2": {
+      "name": "Warning",
+      "call": "Take action",
+      "colour": "Orange",
+      "short": "Level 2"
+    },
+    "3": {
+      "name": "Major warning",
+      "call": "Take action immediately",
+      "colour": "Red",
+      "short": "Level 3"
+    }
+  },
+  "emergency": {
+    "label": "In an emergency",
+    "main": "Emergency",
+    "fire": "Fire and Rescue",
+    "call": "Call {{number}} ({{name}})"
+  },
+  "know": {
+    "title": "Know your risk",
+    "lead": "Where the danger lies in {{name}}, and what helps the people who live and work there.",
+    "leadMany": "Where the danger lies in each council of {{name}}, and what helps the people who live and work there.",
+    "helps": "What helps",
+    "openCouncil": "{{name}} profile",
+    "empty": "The guide has no local statement for this area yet. The hazard guidance below still applies."
+  },
+  "warnings": {
+    "title": "When a warning is issued",
+    "lead": "The Tanzania Meteorological Authority (TMA) and Disaster Management Committees issue warnings at three levels. Choose a hazard and a level to see what to expect and what to do.",
+    "hazards": "Hazards in {{name}}",
+    "hazardsNational": "Hazards",
+    "other": "Other hazards",
+    "plan": "{{name}} council plan",
+    "level": "Alert level",
+    "expect": "What you may see",
+    "do": "What to do",
+    "more_one": "Show {{count}} more",
+    "more_other": "Show {{count}} more",
+    "less": "Show fewer",
+    "status": "Until the warning is lifted",
+    "error": "This guidance could not be loaded. Check your connection and try again."
+  },
+  "incidents": {
+    "title": "Incidents and accidents",
+    "lead": "Immediate actions for common emergencies, wherever you are."
+  },
+  "source": "From the Risk Action Guide Book, based on the National Disaster Management Strategy 2022 to 2027 and the National Disaster Preparedness and Response Plan 2022. It is general guidance: always follow official warnings from TMA and the instructions of your Disaster Management Committee.",
+  "summary": {
+    "title": "What to do",
+    "hazards": "Main hazards here",
+    "hazardsMany": "Main hazards in this area",
+    "more": "What to do before and during a warning"
+  }
+}

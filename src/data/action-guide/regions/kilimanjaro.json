@@ -1,0 +1,193 @@
+{
+ "region": {
+  "en": "Kilimanjaro Region",
+  "sw": "Mkoa wa Kilimanjaro"
+ },
+ "councils": {
+  "C019": {
+   "name": "Moshi Municipal Council",
+   "hazards": [
+    "floods",
+    "heavyRainfall",
+    "earthquake",
+    "strongWinds"
+   ],
+   "documented": "Karanga and Rau river floods (highway closures recorded in 2025), heavy rain and lahars risk on Kilimanjaro slopes, earthquake, and strong winds",
+   "know": [
+    {
+     "area": {
+      "en": "Moshi Municipal: Rau and Karanga river valleys",
+      "sw": "Manispaa ya Moshi: mabonde ya mito Rau na Karanga"
+     },
+     "risk": {
+      "en": "This area lies below Mount Kilimanjaro: rivers such as the Rau, Karanga and Njoro rise within hours of heavy rain on the slopes and flood low streets and riverside settlements.",
+      "sw": "Eneo hili liko chini ya Mlima Kilimanjaro: mito kama Rau, Karanga na Njoro hujaa ndani ya saa chache baada ya mvua kubwa milimani na kufurika mitaa ya chini na makazi ya kando ya mito."
+     },
+     "advice": {
+      "en": "For those living and trading here, it helps to build back from river banks, keep drains and culverts clear and keep goods above the highest known flood mark.",
+      "sw": "Kwa wanaoishi na kufanya biashara hapa, ni vyema kujenga mbali na kingo za mito, kuweka mitaro na makalavati wazi na kuhifadhi bidhaa juu ya alama ya juu ya mafuriko inayojulikana."
+     }
+    }
+   ]
+  },
+  "C021": {
+   "name": "Hai District Council",
+   "hazards": [
+    "heavyRainfall",
+    "landslide",
+    "floods",
+    "earthquake",
+    "drought"
+   ],
+   "documented": "heavy rain and landslides on the Kilimanjaro and Mount Meru slopes, flash floods, and earthquake",
+   "know": [
+    {
+     "area": {
+      "en": "Hai: Kilimanjaro slopes and the Sanya plains",
+      "sw": "Hai: miteremko ya Kilimanjaro na tambarare za Sanya"
+     },
+     "risk": {
+      "en": "This area runs from steep, wet coffee and banana slopes, where landslides and gullies form, down to dry Sanya plains where drought and flash floods affect farms and livestock.",
+      "sw": "Eneo hili linaanzia miteremko mikali yenye unyevu ya kahawa na migomba, ambapo maporomoko na makorongo hutokea, hadi tambarare kame za Sanya ambapo ukame na mafuriko ya ghafla huathiri mashamba na mifugo."
+     },
+     "advice": {
+      "en": "For those living and farming here, it helps to keep trees and terraces on slopes, avoid building on steep cuts, and plan water and fodder for dry years on the plains.",
+      "sw": "Kwa wanaoishi na kulima hapa, ni vyema kuacha miti na matuta kwenye miteremko, kuepuka kujenga kwenye miinuko mikali, na kupanga maji na malisho kwa miaka ya ukame tambarareni."
+     }
+    }
+   ]
+  },
+  "C020": {
+   "name": "Moshi District Council",
+   "hazards": [
+    "floods",
+    "landslide",
+    "heavyRainfall",
+    "earthquake"
+   ],
+   "documented": "floods on the Weruweru and Kikafu, landslides on the mountain, heavy Vuli and Masika rain, and earthquake",
+   "know": [
+    {
+     "area": {
+      "en": "Moshi DC: mountain slopes and lowland irrigation",
+      "sw": "Moshi DC: miteremko ya mlima na umwagiliaji wa tambarare"
+     },
+     "risk": {
+      "en": "This area has densely settled mountain slopes prone to landslides and lowland irrigation schemes (such as Lower Moshi) where rivers overflow and water disputes arise in dry years.",
+      "sw": "Eneo hili lina miteremko ya mlima yenye watu wengi inayokumbwa na maporomoko, na skimu za umwagiliaji za tambarare (kama Lower Moshi) ambapo mito hufurika na migogoro ya maji hutokea miaka ya ukame."
+     },
+     "advice": {
+      "en": "For those living and farming here, it helps to protect slopes and springs, keep canals maintained and share water by agreed schedules.",
+      "sw": "Kwa wanaoishi na kulima hapa, ni vyema kulinda miteremko na chemchemi, kutunza mifereji na kugawana maji kwa ratiba zilizokubaliwa."
+     }
+    }
+   ]
+  },
+  "C017": {
+   "name": "Mwanga District Council",
+   "hazards": [
+    "drought",
+    "floods",
+    "strongWinds",
+    "landslide"
+   ],
+   "documented": "drought in the Pangani valley, flash floods on the Pangani, strong winds, and water shortage",
+   "know": [
+    {
+     "area": {
+      "en": "Mwanga: North Pare slopes and Nyumba ya Mungu",
+      "sw": "Mwanga: miteremko ya Pare Kaskazini na Nyumba ya Mungu"
+     },
+     "risk": {
+      "en": "This area combines steep North Pare slopes prone to landslides with dry lowlands around Nyumba ya Mungu dam and Lake Jipe, where drought and flash floods are common.",
+      "sw": "Eneo hili linachanganya miteremko mikali ya Pare Kaskazini inayokumbwa na maporomoko na tambarare kame kuzunguka bwawa la Nyumba ya Mungu na Ziwa Jipe, ambapo ukame na mafuriko ya ghafla ni ya kawaida."
+     },
+     "advice": {
+      "en": "For those living and farming here, it helps to keep slopes planted, build away from gullies and seasonal river beds, and keep household food and water reserves.",
+      "sw": "Kwa wanaoishi na kulima hapa, ni vyema kuacha mimea kwenye miteremko, kujenga mbali na makorongo na mikondo ya mito ya msimu, na kuweka akiba ya chakula na maji ya kaya."
+     }
+    }
+   ]
+  },
+  "C016": {
+   "name": "Rombo District Council",
+   "hazards": [
+    "heavyRainfall",
+    "landslide",
+    "floods",
+    "earthquake"
+   ],
+   "documented": "heavy rain and landslides on the eastern Kilimanjaro slopes, flash floods, and earthquake",
+   "know": [
+    {
+     "area": {
+      "en": "Rombo: eastern Kilimanjaro slopes",
+      "sw": "Rombo: miteremko ya mashariki ya Kilimanjaro"
+     },
+     "risk": {
+      "en": "This area is on the drier eastern slopes of Kilimanjaro, where water is scarce in dry seasons, storms erode farmland, and the Kenya border brings cross-border movement.",
+      "sw": "Eneo hili liko kwenye miteremko kame zaidi ya mashariki ya Kilimanjaro, ambapo maji ni haba wakati wa kiangazi, dhoruba humomonyoa mashamba, na mpaka wa Kenya huleta mwingiliano."
+     },
+     "advice": {
+      "en": "For those living and farming here, it helps to harvest roof rainwater, protect springs and use contour bunds and trees to hold soil.",
+      "sw": "Kwa wanaoishi na kulima hapa, ni vyema kuvuna maji ya mvua kutoka paa, kulinda chemchemi na kutumia matuta ya kontua na miti kushikilia udongo."
+     }
+    }
+   ]
+  },
+  "C018": {
+   "name": "Same District Council",
+   "hazards": [
+    "drought",
+    "floods",
+    "landslide",
+    "strongWinds",
+    "heavyRainfall"
+   ],
+   "documented": "drought on the Pare lowlands, flash floods and landslides on the Pare Mountains, and strong winds",
+   "know": [
+    {
+     "area": {
+      "en": "Same: South Pare mountains and dry lowlands",
+      "sw": "Same: milima ya Pare Kusini na tambarare kame"
+     },
+     "risk": {
+      "en": "This area has steep South Pare mountains where heavy rain triggers landslides, and dry lowlands along the highway and Mkomazi where drought, flash floods and wildlife conflict occur.",
+      "sw": "Eneo hili lina milima mikali ya Pare Kusini ambapo mvua kubwa husababisha maporomoko ya ardhi, na tambarare kame kando ya barabara kuu na Mkomazi ambapo ukame, mafuriko ya ghafla na migogoro na wanyamapori hutokea."
+     },
+     "advice": {
+      "en": "For those living, farming and herding here, it helps to build away from steep slopes and river beds, protect water points and plan livestock numbers for dry years.",
+      "sw": "Kwa wanaoishi, kulima na kufuga hapa, ni vyema kujenga mbali na miteremko mikali na mikondo ya mito, kulinda vyanzo vya maji na kupanga idadi ya mifugo kwa miaka ya ukame."
+     }
+    }
+   ]
+  },
+  "C022": {
+   "name": "Siha District Council",
+   "hazards": [
+    "heavyRainfall",
+    "landslide",
+    "floods",
+    "strongWinds",
+    "wildfire"
+   ],
+   "documented": "heavy rain and landslides on the western Kilimanjaro slopes, and flash floods",
+   "know": [
+    {
+     "area": {
+      "en": "Siha: West Kilimanjaro farms and forest edge",
+      "sw": "Siha: mashamba ya Kilimanjaro Magharibi na pembezoni mwa msitu"
+     },
+     "risk": {
+      "en": "This area has large farms and settlements on the western slopes, where strong winds, frost and hail damage crops and dry-season fires spread from grassland into forest.",
+      "sw": "Eneo hili lina mashamba makubwa na makazi kwenye miteremko ya magharibi, ambapo upepo mkali, baridi kali na mvua ya mawe huharibu mazao na moto wa kiangazi husambaa kutoka nyasi hadi msituni."
+     },
+     "advice": {
+      "en": "For those living and farming here, it helps to plant windbreaks, keep fire breaks along the forest edge and burn fields only with permission on calm days.",
+      "sw": "Kwa wanaoishi na kulima hapa, ni vyema kupanda miti ya kuzuia upepo, kuweka njia za kuzuia moto pembezoni mwa msitu na kuchoma mashamba kwa ruhusa siku zisizo na upepo tu."
+     }
+    }
+   ]
+  }
+ }
+}

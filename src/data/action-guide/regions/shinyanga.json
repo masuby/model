@@ -1,0 +1,164 @@
+{
+ "region": {
+  "en": "Shinyanga Region",
+  "sw": "Mkoa wa Shinyanga"
+ },
+ "councils": {
+  "C124": {
+   "name": "Shinyanga Municipal Council",
+   "hazards": [
+    "drought",
+    "strongWinds",
+    "floods",
+    "heavyRainfall"
+   ],
+   "documented": "drought, strong winds, flash floods in heavy Vuli or Masika rain, and water shortage",
+   "know": [
+    {
+     "area": {
+      "en": "Shinyanga Municipal: low-lying town and seasonal streams",
+      "sw": "Manispaa ya Shinyanga: mji wa chini na vijito vya msimu"
+     },
+     "risk": {
+      "en": "This area is a flat town on black-clay soils where storm water ponds in low streets and seasonal streams flood quickly, and water runs short in the dry season.",
+      "sw": "Eneo hili ni mji tambarare kwenye udongo mweusi wa mfinyanzi ambapo maji ya dhoruba hutuama kwenye mitaa ya chini na vijito vya msimu hufurika haraka, na maji hupungua wakati wa kiangazi."
+     },
+     "advice": {
+      "en": "For those living and trading here, it helps to keep drains and stream reserves clear, build on raised foundations and store water safely.",
+      "sw": "Kwa wanaoishi na kufanya biashara hapa, ni vyema kuweka mitaro na hifadhi za vijito wazi, kujenga kwa misingi iliyoinuliwa na kuhifadhi maji kwa usalama."
+     }
+    }
+   ]
+  },
+  "C120": {
+   "name": "Kahama Town Council",
+   "hazards": [
+    "drought",
+    "floods",
+    "strongWinds"
+   ],
+   "documented": "drought, gold-pit collapse, flash floods, and strong winds",
+   "know": [
+    {
+     "area": {
+      "en": "Kahama Town: mining town and highway",
+      "sw": "Mji wa Kahama: mji wa madini na barabara kuu"
+     },
+     "risk": {
+      "en": "This area is a fast-growing mining and trading town on the Isaka–Rwanda corridor where unplanned settlements flood and heavy traffic brings accident and fire risk.",
+      "sw": "Eneo hili ni mji wa madini na biashara unaokua kwa kasi kwenye ukanda wa Isaka–Rwanda ambapo makazi holela hufurika na magari mengi huleta hatari ya ajali na moto."
+     },
+     "advice": {
+      "en": "For those living and trading here, it helps to build outside stream and road reserves, keep drains open and keep fire extinguishers at fuel stations and markets.",
+      "sw": "Kwa wanaoishi na kufanya biashara hapa, ni vyema kujenga nje ya hifadhi za vijito na barabara, kuweka mitaro wazi na kuweka vizimamoto kwenye vituo vya mafuta na masoko."
+     }
+    }
+   ]
+  },
+  "C122": {
+   "name": "Kishapu District Council",
+   "hazards": [
+    "drought",
+    "strongWinds",
+    "floods",
+    "heavyRainfall"
+   ],
+   "documented": "drought, mining accidents, strong winds, and flash floods",
+   "know": [
+    {
+     "area": {
+      "en": "Kishapu: dry plains, Mwadui and grazing land",
+      "sw": "Kishapu: tambarare kame, Mwadui na maeneo ya malisho"
+     },
+     "risk": {
+      "en": "This area has dry, flat plains where droughts kill crops and livestock, clay soils waterlog in heavy rains and the Mwadui diamond mine and tailings lie nearby.",
+      "sw": "Eneo hili lina tambarare kame ambapo ukame huua mazao na mifugo, udongo wa mfinyanzi hujaa maji wakati wa mvua kubwa na mgodi wa almasi wa Mwadui na mabwawa ya tope la mgodi yako karibu."
+     },
+     "advice": {
+      "en": "For those farming and herding here, it helps to plant drought-tolerant crops, follow agreed grazing routes and keep homes away from tailings and mine pits.",
+      "sw": "Kwa wanaolima na kufuga hapa, ni vyema kupanda mazao yanayostahimili ukame, kufuata njia za malisho zilizokubaliwa na kujenga mbali na mabwawa ya tope na mashimo ya migodi."
+     }
+    }
+   ]
+  },
+  "C121": {
+   "name": "Msalala District Council",
+   "hazards": [
+    "drought",
+    "floods",
+    "strongWinds"
+   ],
+   "documented": "drought, gold-pit collapse, flash floods, and strong winds",
+   "know": [
+    {
+     "area": {
+      "en": "Msalala: gold mining areas (Bulyanhulu)",
+      "sw": "Msalala: maeneo ya uchimbaji dhahabu (Bulyanhulu)"
+     },
+     "risk": {
+      "en": "This area has large and artisanal gold mines where pits collapse when saturated and mercury and tailings pollute water.",
+      "sw": "Eneo hili lina migodi mikubwa na midogo ya dhahabu ambapo mashimo hubomoka yanapojaa maji na zebaki na tope la mgodi huchafua maji."
+     },
+     "advice": {
+      "en": "For those mining and living here, it helps to support pit walls, fence or backfill old pits and use safe drinking water sources away from mining run-off.",
+      "sw": "Kwa wanaochimba na kuishi hapa, ni vyema kuimarisha kuta za mashimo, kuzungushia uzio au kufukia mashimo ya zamani na kutumia vyanzo salama vya maji mbali na maji ya migodi."
+     }
+    }
+   ]
+  },
+  "C123": {
+   "name": "Shinyanga District Council",
+   "hazards": [
+    "drought",
+    "strongWinds",
+    "wildfire",
+    "floods",
+    "heavyRainfall"
+   ],
+   "documented": "drought, strong winds, wildfire, and flash floods",
+   "know": [
+    {
+     "area": {
+      "en": "Shinyanga DC: mbuga plains and farmland",
+      "sw": "Shinyanga DC: mbuga na mashamba"
+     },
+     "risk": {
+      "en": "This area has mbuga plains where heavy rain waterlogs fields and cuts rural roads, and dry spells and drought reduce harvests and pasture.",
+      "sw": "Eneo hili lina mbuga ambapo mvua kubwa hujaza maji mashamba na kukata barabara za vijijini, na vipindi vya ukavu na ukame hupunguza mavuno na malisho."
+     },
+     "advice": {
+      "en": "For those farming here, it helps to build on higher ground, open field drains and keep household food and seed reserves.",
+      "sw": "Kwa wanaolima hapa, ni vyema kujenga sehemu za miinuko, kufungua mifereji ya mashamba na kuweka akiba ya chakula na mbegu ya kaya."
+     }
+    }
+   ]
+  },
+  "C119": {
+   "name": "Ushetu District Council",
+   "hazards": [
+    "drought",
+    "strongWinds",
+    "floods",
+    "wildfire",
+    "heavyRainfall"
+   ],
+   "documented": "drought, mining accidents, strong winds, and flash floods",
+   "know": [
+    {
+     "area": {
+      "en": "Ushetu: miombo farmland and tobacco",
+      "sw": "Ushetu: mashamba ya miombo na tumbaku"
+     },
+     "risk": {
+      "en": "This area has miombo farmland and tobacco growing where forest clearing and dry-season fires degrade land, and rains cut remote roads.",
+      "sw": "Eneo hili lina mashamba ya miombo na kilimo cha tumbaku ambapo ukataji wa misitu na moto wa kiangazi huharibu ardhi, na mvua hukata barabara za mbali."
+     },
+     "advice": {
+      "en": "For those farming here, it helps to plant woodlots, burn only under control and keep food and medicine reserves before the rains.",
+      "sw": "Kwa wanaolima hapa, ni vyema kupanda mashamba ya miti, kuchoma kwa udhibiti tu na kuweka akiba ya chakula na dawa kabla ya mvua."
+     }
+    }
+   ]
+  }
+ }
+}

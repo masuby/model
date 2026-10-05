@@ -1,0 +1,163 @@
+{
+ "region": {
+  "en": "Njombe Region",
+  "sw": "Mkoa wa Njombe"
+ },
+ "councils": {
+  "C158": {
+   "name": "Njombe Town Council",
+   "hazards": [
+    "heavyRainfall",
+    "strongWinds",
+    "floods",
+    "wildfire"
+   ],
+   "documented": "heavy rain and cold on the southern highlands, strong winds, and valley floods",
+   "know": [
+    {
+     "area": {
+      "en": "Njombe Town: highland town and plantation edges",
+      "sw": "Mji wa Njombe: mji wa nyanda za juu na pembezoni mwa mashamba ya miti"
+     },
+     "risk": {
+      "en": "This area is a cold, wet highland town surrounded by pine and wattle plantations, where dry-season fires spread from plantations and heavy rain floods valley streets.",
+      "sw": "Eneo hili ni mji wa nyanda za juu wenye baridi na unyevu uliozungukwa na mashamba ya misindano na miwattle, ambapo moto wa kiangazi husambaa kutoka mashambani na mvua kubwa hufurika mitaa ya mabondeni."
+     },
+     "advice": {
+      "en": "For those living and working here, it helps to keep fire breaks around homes and sawmills, keep drains open and keep warm in cold spells, especially children and older people.",
+      "sw": "Kwa wanaoishi na kufanya kazi hapa, ni vyema kuweka njia za kuzuia moto kuzunguka nyumba na viwanda vya mbao, kuweka mitaro wazi na kujikinga na baridi kali, hasa watoto na wazee."
+     }
+    }
+   ]
+  },
+  "C159": {
+   "name": "Makambako Town Council",
+   "hazards": [
+    "heavyRainfall",
+    "strongWinds",
+    "floods"
+   ],
+   "documented": "heavy rain, strong winds, and floods on the highland valleys",
+   "know": [
+    {
+     "area": {
+      "en": "Makambako Town: TAZARA and highway junction",
+      "sw": "Mji wa Makambako: makutano ya TAZARA na barabara kuu"
+     },
+     "risk": {
+      "en": "This area is a windy transport junction on the TANZAM highway and TAZARA railway, where heavy traffic brings accident and fuel-fire risk and storms damage roofs.",
+      "sw": "Eneo hili ni makutano yenye upepo ya barabara kuu ya TANZAM na reli ya TAZARA, ambapo magari mengi huleta hatari ya ajali na moto wa mafuta na dhoruba huharibu paa."
+     },
+     "advice": {
+      "en": "For those trading and travelling here, it helps to trade outside the road reserve, keep fire extinguishers at fuel stations and markets and fix roofs firmly.",
+      "sw": "Kwa wanaofanya biashara na kusafiri hapa, ni vyema kufanya biashara nje ya hifadhi ya barabara, kuweka vizimamoto kwenye vituo vya mafuta na masoko na kufunga paa imara."
+     }
+    }
+   ]
+  },
+  "C160": {
+   "name": "Ludewa District Council",
+   "hazards": [
+    "floods",
+    "largeWaves",
+    "heavyRainfall",
+    "landslide"
+   ],
+   "documented": "Lake Nyasa floods and large waves, heavy rain, landslides, and boat accidents",
+   "know": [
+    {
+     "area": {
+      "en": "Ludewa: Livingstone mountains and Lake Nyasa shore",
+      "sw": "Ludewa: milima ya Livingstone na ufukwe wa Ziwa Nyasa"
+     },
+     "risk": {
+      "en": "This area has the steep Livingstone escarpment, where landslides and washouts cut remote roads, and Lake Nyasa shore villages exposed to sudden lake storms.",
+      "sw": "Eneo hili lina mteremko mkali wa milima ya Livingstone, ambapo maporomoko na kusombwa kwa barabara hukata barabara za mbali, na vijiji vya ufukwe wa Ziwa Nyasa vinavyoathiriwa na dhoruba za ghafla ziwani."
+     },
+     "advice": {
+      "en": "For those living and fishing here, it helps to build away from steep cuts and stream banks, wear life jackets and keep food and medicine reserves in remote villages.",
+      "sw": "Kwa wanaoishi na kuvua hapa, ni vyema kujenga mbali na miinuko mikali na kingo za vijito, kuvaa maboya ya kujiokoa na kuweka akiba ya chakula na dawa vijijini vya mbali."
+     }
+    }
+   ]
+  },
+  "C161": {
+   "name": "Makete District Council",
+   "hazards": [
+    "heavyRainfall",
+    "landslide",
+    "strongWinds"
+   ],
+   "documented": "heavy rain, landslides on the Kipengere slopes, strong winds, and cold",
+   "know": [
+    {
+     "area": {
+      "en": "Makete: high, cold mountain villages",
+      "sw": "Makete: vijiji vya milimani vyenye baridi kali"
+     },
+     "risk": {
+      "en": "This area is very high, cold mountain country where frost and hail damage crops, steep slopes slide in heavy rain and roads close in the rains.",
+      "sw": "Eneo hili ni nchi ya milima mirefu sana yenye baridi kali ambapo barafu na mvua ya mawe huharibu mazao, miteremko mikali huporomoka wakati wa mvua kubwa na barabara hufungwa wakati wa mvua."
+     },
+     "advice": {
+      "en": "For those living and farming here, it helps to keep terraces and trees on slopes, plant frost-tolerant crops and keep warm clothing and food reserves.",
+      "sw": "Kwa wanaoishi na kulima hapa, ni vyema kutunza matuta na miti kwenye miteremko, kupanda mazao yanayostahimili baridi na kuweka nguo za joto na akiba ya chakula."
+     }
+    }
+   ]
+  },
+  "C157": {
+   "name": "Njombe District Council",
+   "hazards": [
+    "heavyRainfall",
+    "landslide",
+    "floods",
+    "strongWinds",
+    "wildfire"
+   ],
+   "documented": "heavy rain, landslides, valley floods, and strong winds",
+   "know": [
+    {
+     "area": {
+      "en": "Njombe DC: highland farms and plantations",
+      "sw": "Njombe DC: mashamba ya nyanda za juu na misitu ya kupandwa"
+     },
+     "risk": {
+      "en": "This area has highland farms and tree plantations where dry-season fires spread fast, frost damages crops and heavy rain erodes slopes.",
+      "sw": "Eneo hili lina mashamba ya nyanda za juu na misitu ya kupandwa ambapo moto wa kiangazi husambaa haraka, barafu huharibu mazao na mvua kubwa humomonyoa miteremko."
+     },
+     "advice": {
+      "en": "For those farming here, it helps to burn fields only under control on calm days, keep fire breaks around plantations and keep slopes planted.",
+      "sw": "Kwa wanaolima hapa, ni vyema kuchoma mashamba kwa udhibiti siku zisizo na upepo tu, kuweka njia za kuzuia moto kuzunguka misitu na kuacha mimea kwenye miteremko."
+     }
+    }
+   ]
+  },
+  "C162": {
+   "name": "Wanging'ombe District Council",
+   "hazards": [
+    "heavyRainfall",
+    "floods",
+    "strongWinds",
+    "drought"
+   ],
+   "documented": "heavy rain, valley floods, and strong winds on the plateau",
+   "know": [
+    {
+     "area": {
+      "en": "Wanging'ombe: highland plains and wetlands",
+      "sw": "Wanging'ombe: tambarare za nyanda za juu na ardhioevu"
+     },
+     "risk": {
+      "en": "This area has open highland plains where strong winds and hail damage crops and roofs, wetlands that flood in heavy rains and dry spells that reduce harvests.",
+      "sw": "Eneo hili lina tambarare za wazi za nyanda za juu ambapo upepo mkali na mvua ya mawe huharibu mazao na paa, ardhioevu inayofurika wakati wa mvua kubwa na vipindi vya ukavu vinavyopunguza mavuno."
+     },
+     "advice": {
+      "en": "For those farming here, it helps to plant windbreaks, fix roofs firmly, keep homes off wetland margins and keep household food reserves.",
+      "sw": "Kwa wanaolima hapa, ni vyema kupanda mistari ya miti ya kuzuia upepo, kufunga paa imara, kujenga nje ya kingo za ardhioevu na kuweka akiba ya chakula ya kaya."
+     }
+    }
+   ]
+  }
+ }
+}

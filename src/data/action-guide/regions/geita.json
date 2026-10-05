@@ -1,0 +1,158 @@
+{
+ "region": {
+  "en": "Geita Region",
+  "sw": "Mkoa wa Geita"
+ },
+ "councils": {
+  "C175": {
+   "name": "Geita Town Council",
+   "hazards": [
+    "floods",
+    "largeWaves",
+    "heavyRainfall",
+    "publicHealth"
+   ],
+   "documented": "Lake Victoria floods and large waves, heavy rain, mining accidents in nearby pits, boat accidents, and cholera",
+   "know": [
+    {
+     "area": {
+      "en": "Geita Town: mining town and surrounding pits",
+      "sw": "Mji wa Geita: mji wa madini na mashimo yanayouzunguka"
+     },
+     "risk": {
+      "en": "This area is a gold-mining town on the Lake Victoria basin, one of the most lightning-prone zones in Africa; open pits, waste dumps and crowded settlements around the mines flood, collapse and catch fire.",
+      "sw": "Eneo hili ni mji wa madini ya dhahabu katika bonde la Ziwa Victoria, mojawapo ya maeneo yenye radi nyingi zaidi Afrika; mashimo ya wazi, marundo ya mabaki na makazi yenye msongamano kuzunguka migodi hufurika, kubomoka na kuungua moto."
+     },
+     "advice": {
+      "en": "For those living and working here, it helps to fit lightning arresters on schools and markets, fence or backfill old pits and keep drains around settlements open.",
+      "sw": "Kwa wanaoishi na kufanya kazi hapa, ni vyema kuweka vizuia radi shuleni na masokoni, kuzungushia uzio au kufukia mashimo ya zamani na kuweka mitaro ya makazi wazi."
+     }
+    }
+   ]
+  },
+  "C178": {
+   "name": "Bukombe District Council",
+   "hazards": [
+    "heavyRainfall",
+    "floods"
+   ],
+   "documented": "heavy rain and floods in the Lake Victoria basin fringe, lightning, and a marked dry season",
+   "know": [
+    {
+     "area": {
+      "en": "Bukombe: artisanal mining and farmland",
+      "sw": "Bukombe: uchimbaji mdogo na mashamba"
+     },
+     "risk": {
+      "en": "This area mixes artisanal gold mining with farming; pits collapse and flood during the rains, mercury and run-off pollute water, and frequent thunderstorms bring lightning.",
+      "sw": "Eneo hili linachanganya uchimbaji mdogo wa dhahabu na kilimo; mashimo hubomoka na kujaa maji wakati wa mvua, zebaki na maji yanayotiririka huchafua vyanzo vya maji, na ngurumo za mara kwa mara huleta radi."
+     },
+     "advice": {
+      "en": "For those mining and farming here, it helps to shore pit walls, keep processing away from drinking-water sources and shelter in protected buildings during storms.",
+      "sw": "Kwa wanaochimba na kulima hapa, ni vyema kuimarisha kuta za mashimo, kuchenjua mbali na vyanzo vya maji ya kunywa na kujikinga ndani ya majengo yaliyolindwa wakati wa dhoruba."
+     }
+    }
+   ]
+  },
+  "C179": {
+   "name": "Chato District Council",
+   "hazards": [
+    "floods",
+    "largeWaves",
+    "heavyRainfall",
+    "publicHealth"
+   ],
+   "documented": "Lake Victoria floods, large waves, boat accidents, heavy rain, and cholera along the shore",
+   "know": [
+    {
+     "area": {
+      "en": "Chato: Lake Victoria shore and islands",
+      "sw": "Chato: ufukwe wa Ziwa Victoria na visiwa"
+     },
+     "risk": {
+      "en": "This area includes Lake Victoria shoreline, landing sites and islands, where sudden lake storms capsize boats, lightning strikes fishers and landing sites suffer cholera outbreaks.",
+      "sw": "Eneo hili linajumuisha ufukwe wa Ziwa Victoria, mialo na visiwa, ambapo dhoruba za ghafla ziwani hupindua mitumbwi, radi hupiga wavuvi na mialo hukumbwa na milipuko ya kipindupindu."
+     },
+     "advice": {
+      "en": "For those fishing and trading here, it helps to wear life jackets, keep boats seaworthy, return to shore when storms build and keep landing sites supplied with safe water and latrines.",
+      "sw": "Kwa wanaovua na kufanya biashara hapa, ni vyema kuvaa maboya ya kujiokoa, kutunza vyombo viwe imara, kurudi ufukweni dhoruba inapojitokeza na kuhakikisha mialo ina maji safi na vyoo."
+     }
+    }
+   ]
+  },
+  "C174": {
+   "name": "Geita District Council",
+   "hazards": [
+    "heavyRainfall",
+    "floods",
+    "publicHealth",
+    "largeWaves"
+   ],
+   "documented": "heavy rain, pit collapse and flooded mine shafts, lake-edge floods, and cholera",
+   "know": [
+    {
+     "area": {
+      "en": "Geita DC: lakeshore villages and mining camps",
+      "sw": "Geita DC: vijiji vya ufukweni na kambi za uchimbaji"
+     },
+     "risk": {
+      "en": "This area combines lakeshore fishing villages with scattered mining camps; lake storms, lightning, pit collapse and water-borne disease are the recurring risks.",
+      "sw": "Eneo hili linachanganya vijiji vya wavuvi vya ufukweni na kambi za uchimbaji zilizotawanyika; dhoruba za ziwani, radi, kubomoka kwa mashimo na magonjwa yatokanayo na maji ni hatari za mara kwa mara."
+     },
+     "advice": {
+      "en": "For those living and working here, it helps to follow safe boating and pit-safety practice, keep latrines away from water sources and know your nearest safe shelter.",
+      "sw": "Kwa wanaoishi na kufanya kazi hapa, ni vyema kufuata usalama wa vyombo vya majini na wa mashimo, kujenga vyoo mbali na vyanzo vya maji na kufahamu mahali salama pa kujikinga karibu nanyi."
+     }
+    }
+   ]
+  },
+  "C177": {
+   "name": "Mbogwe District Council",
+   "hazards": [
+    "heavyRainfall",
+    "floods"
+   ],
+   "documented": "heavy rain, mining accidents, floods on small valleys, and lightning",
+   "know": [
+    {
+     "area": {
+      "en": "Mbogwe: mining sites and seasonal streams",
+      "sw": "Mbogwe: maeneo ya uchimbaji na vijito vya msimu"
+     },
+     "risk": {
+      "en": "This area has artisanal mining along seasonal streams; heavy rain floods pits and diggings, washes out access roads and spreads silt over farmland.",
+      "sw": "Eneo hili lina uchimbaji mdogo kando ya vijito vya msimu; mvua kubwa hujaza maji mashimo, husomba barabara za kufikia na husambaza tope mashambani."
+     },
+     "advice": {
+      "en": "For those mining and farming here, it helps to divert run-off away from pits, backfill worked-out diggings and keep stream channels clear.",
+      "sw": "Kwa wanaochimba na kulima hapa, ni vyema kuelekeza maji mbali na mashimo, kufukia mashimo yaliyokwisha chimbwa na kuweka mikondo ya vijito wazi."
+     }
+    }
+   ]
+  },
+  "C176": {
+   "name": "Nyang'hwale District Council",
+   "hazards": [
+    "heavyRainfall",
+    "floods"
+   ],
+   "documented": "heavy rain, artisanal mining accidents, floods, and water contamination",
+   "know": [
+    {
+     "area": {
+      "en": "Nyang'hwale: mining villages",
+      "sw": "Nyang'hwale: vijiji vya uchimbaji"
+     },
+     "risk": {
+      "en": "This area has many small mining villages with temporary housing; pit collapse, lightning, fire and contaminated water are common, especially in the rainy season.",
+      "sw": "Eneo hili lina vijiji vingi vidogo vya uchimbaji vyenye makazi ya muda; kubomoka kwa mashimo, radi, moto na maji machafu ni kawaida, hasa wakati wa mvua."
+     },
+     "advice": {
+      "en": "For those living and mining here, it helps to strengthen pit walls, build shelters with safe wiring and lightning protection and treat or boil drinking water.",
+      "sw": "Kwa wanaoishi na kuchimba hapa, ni vyema kuimarisha kuta za mashimo, kujenga makazi yenye nyaya salama za umeme na kinga ya radi na kutibu au kuchemsha maji ya kunywa."
+     }
+    }
+   ]
+  }
+ }
+}

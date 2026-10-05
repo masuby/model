@@ -1,0 +1,245 @@
+{
+ "region": {
+  "en": "Pwani Region",
+  "sw": "Mkoa wa Pwani"
+ },
+ "councils": {
+  "C046": {
+   "name": "Kibaha Town Council",
+   "hazards": [
+    "largeWaves",
+    "floods",
+    "heavyRainfall",
+    "strongWinds",
+    "publicHealth"
+   ],
+   "documented": "Ruvu and coastal-plain floods, heavy Masika and Vuli rain, strong winds, and cholera",
+   "know": [
+    {
+     "area": {
+      "en": "Kibaha Town: highway corridor and industrial areas",
+      "sw": "Mji wa Kibaha: ukanda wa barabara kuu na maeneo ya viwanda"
+     },
+     "risk": {
+      "en": "This area is a fast-growing town on the Dar–Morogoro highway with factories, where storm run-off floods roadside settlements and industrial fires and spills can occur.",
+      "sw": "Eneo hili ni mji unaokua kwa kasi kando ya barabara kuu ya Dar–Morogoro wenye viwanda, ambapo maji ya dhoruba hufurika makazi ya kando ya barabara na moto au kumwagika kwa kemikali kunaweza kutokea viwandani."
+     },
+     "advice": {
+      "en": "For those living and working here, it helps to keep drains and culverts clear, build outside the road reserve and keep fire extinguishers and exits ready at workplaces.",
+      "sw": "Kwa wanaoishi na kufanya kazi hapa, ni vyema kuweka mitaro na makalavati wazi, kujenga nje ya hifadhi ya barabara na kuweka vizimamoto na njia za kutokea tayari kazini."
+     }
+    }
+   ]
+  },
+  "C051": {
+   "name": "Kibiti Town Council",
+   "hazards": [
+    "floods",
+    "largeWaves",
+    "heavyRainfall",
+    "publicHealth"
+   ],
+   "documented": "Rufiji delta floods, large waves, heavy rain, boat accidents, and cholera",
+   "know": [
+    {
+     "area": {
+      "en": "Kibiti Town: Rufiji delta edge and highway",
+      "sw": "Mji wa Kibiti: pembezoni mwa delta ya Rufiji na barabara kuu"
+     },
+     "risk": {
+      "en": "This area lies at the edge of the Rufiji delta on the coastal highway, where floods cut the road and low areas, and mosquitoes spread malaria after rains.",
+      "sw": "Eneo hili liko pembezoni mwa delta ya Rufiji kando ya barabara kuu ya pwani, ambapo mafuriko hukata barabara na maeneo ya chini, na mbu husambaza malaria baada ya mvua."
+     },
+     "advice": {
+      "en": "For those living and trading here, it helps to keep homes above the flood line, plan travel around flood periods and sleep under treated nets.",
+      "sw": "Kwa wanaoishi na kufanya biashara hapa, ni vyema kujenga juu ya mstari wa mafuriko, kupanga safari kuzingatia vipindi vya mafuriko na kulala ndani ya vyandarua vyenye dawa."
+     }
+    }
+   ]
+  },
+  "C043": {
+   "name": "Bagamoyo District Council",
+   "hazards": [
+    "largeWaves",
+    "floods",
+    "heavyRainfall",
+    "publicHealth"
+   ],
+   "documented": "coastal floods, large waves, Ruvu floods, heavy rain, boat accidents, and cholera",
+   "know": [
+    {
+     "area": {
+      "en": "Bagamoyo: coast, Ruvu delta and old town",
+      "sw": "Bagamoyo: pwani, delta ya Ruvu na mji wa kale"
+     },
+     "risk": {
+      "en": "This area has a low coastline with erosion and storm tides threatening the old town and beaches, and the Ruvu and Wami deltas that flood farms and villages.",
+      "sw": "Eneo hili lina pwani ya chini yenye mmomonyoko na mawimbi makubwa yanayohatarisha mji wa kale na fukwe, na delta za Ruvu na Wami zinazofurika mashamba na vijiji."
+     },
+     "advice": {
+      "en": "For those living and fishing here, it helps to build back from the shoreline, protect mangroves and keep homes off the river flood plains.",
+      "sw": "Kwa wanaoishi na kuvua hapa, ni vyema kujenga mbali na ufukwe, kulinda mikoko na kujenga nje ya tambarare za mafuriko za mito."
+     }
+    }
+   ]
+  },
+  "C044": {
+   "name": "Chalinze District Council",
+   "hazards": [
+    "floods",
+    "heavyRainfall",
+    "strongWinds",
+    "largeWaves"
+   ],
+   "documented": "Ruvu floods, heavy rain, and strong winds on the coastal plain",
+   "know": [
+    {
+     "area": {
+      "en": "Chalinze: Wami river plains and highway junction",
+      "sw": "Chalinze: tambarare za mto Wami na makutano ya barabara"
+     },
+     "risk": {
+      "en": "This area has the Wami river plains that flood in heavy rains, dry grazing land where herders and farmers compete, and a busy highway junction.",
+      "sw": "Eneo hili lina tambarare za mto Wami zinazofurika wakati wa mvua kubwa, ardhi kame ya malisho ambapo wafugaji na wakulima hushindania ardhi, na makutano ya barabara yenye shughuli nyingi."
+     },
+     "advice": {
+      "en": "For those living and farming here, it helps to keep homes and stores off the flood plain, follow village land-use plans and trade outside the road reserve.",
+      "sw": "Kwa wanaoishi na kulima hapa, ni vyema kujenga makazi na maghala nje ya tambarare ya mafuriko, kufuata mipango ya matumizi ya ardhi ya vijiji na kufanya biashara nje ya hifadhi ya barabara."
+     }
+    }
+   ]
+  },
+  "C045": {
+   "name": "Kibaha District Council",
+   "hazards": [
+    "floods",
+    "heavyRainfall",
+    "publicHealth",
+    "drought"
+   ],
+   "documented": "Ruvu floods, heavy rain, and cholera after floodwater",
+   "know": [
+    {
+     "area": {
+      "en": "Kibaha DC: Ruvu river and farmland",
+      "sw": "Kibaha DC: mto Ruvu na mashamba"
+     },
+     "risk": {
+      "en": "This area has the Ruvu river valley, which floods farms and crossings and supplies Dar es Salaam's water, and farmland where dry spells damage crops.",
+      "sw": "Eneo hili lina bonde la mto Ruvu, linalofurika mashamba na vivuko na kusambaza maji ya Dar es Salaam, na mashamba ambapo vipindi vya ukavu huharibu mazao."
+     },
+     "advice": {
+      "en": "For those living and farming here, it helps to keep homes off the river banks, protect the river from pollution and plant drought-tolerant crops.",
+      "sw": "Kwa wanaoishi na kulima hapa, ni vyema kujenga mbali na kingo za mto, kulinda mto dhidi ya uchafuzi na kupanda mazao yanayostahimili ukame."
+     }
+    }
+   ]
+  },
+  "C047": {
+   "name": "Kisarawe District Council",
+   "hazards": [
+    "heavyRainfall",
+    "floods",
+    "largeWaves",
+    "landslide",
+    "wildfire"
+   ],
+   "documented": "heavy rain, floods on coastal valleys, and landslides on the Pugu hills",
+   "know": [
+    {
+     "area": {
+      "en": "Kisarawe: Pugu hills and forest reserves",
+      "sw": "Kisarawe: milima ya Pugu na hifadhi za misitu"
+     },
+     "risk": {
+      "en": "This area has the Pugu hills and forest reserves where charcoal burning and dry-season fires degrade forest, and storms erode slopes and flood valley crossings.",
+      "sw": "Eneo hili lina milima ya Pugu na hifadhi za misitu ambapo uchomaji mkaa na moto wa kiangazi huharibu misitu, na dhoruba humomonyoa miteremko na kufurika vivuko vya mabondeni."
+     },
+     "advice": {
+      "en": "For those living and farming here, it helps to burn fields only under control, protect forest cover and build away from gullies and valley floors.",
+      "sw": "Kwa wanaoishi na kulima hapa, ni vyema kuchoma mashamba kwa udhibiti tu, kulinda misitu na kujenga mbali na makorongo na sakafu za mabonde."
+     }
+    }
+   ]
+  },
+  "C050": {
+   "name": "Mafia District Council",
+   "hazards": [
+    "largeWaves",
+    "strongWinds",
+    "earthquake",
+    "heavyRainfall",
+    "publicHealth"
+   ],
+   "documented": "large waves, strong winds, rare tsunami, boat accidents, heavy rain, and cholera",
+   "know": [
+    {
+     "area": {
+      "en": "Mafia: island villages and marine park",
+      "sw": "Mafia: vijiji vya kisiwani na hifadhi ya bahari"
+     },
+     "risk": {
+      "en": "This area is an island where strong winds and rough seas cut boat and air links, coastal erosion affects villages and help can arrive slowly.",
+      "sw": "Eneo hili ni kisiwa ambapo upepo mkali na bahari chafu hukata usafiri wa vyombo na ndege, mmomonyoko wa pwani huathiri vijiji na msaada unaweza kuchelewa kufika."
+     },
+     "advice": {
+      "en": "For those living and fishing here, it helps to stay ashore when strong winds are forecast, protect mangroves and keep food, water and medicine reserves.",
+      "sw": "Kwa wanaoishi na kuvua hapa, ni vyema kubaki ufukweni upepo mkali unapotabiriwa, kulinda mikoko na kuweka akiba ya chakula, maji na dawa."
+     }
+    }
+   ]
+  },
+  "C048": {
+   "name": "Mkuranga District Council",
+   "hazards": [
+    "largeWaves",
+    "floods",
+    "heavyRainfall",
+    "publicHealth"
+   ],
+   "documented": "coastal floods, large waves, heavy rain, and cholera",
+   "know": [
+    {
+     "area": {
+      "en": "Mkuranga: coastal villages and farmland",
+      "sw": "Mkuranga: vijiji vya pwani na mashamba"
+     },
+     "risk": {
+      "en": "This area has coastal villages exposed to erosion and storm tides, and fast-growing farmland and industry near Dar es Salaam where storms flood low areas.",
+      "sw": "Eneo hili lina vijiji vya pwani vinavyoathiriwa na mmomonyoko na mawimbi makubwa, na mashamba na viwanda vinavyokua kwa kasi karibu na Dar es Salaam ambapo dhoruba hufurika maeneo ya chini."
+     },
+     "advice": {
+      "en": "For those living and farming here, it helps to build back from the shoreline and stream banks, protect mangroves and keep drains open.",
+      "sw": "Kwa wanaoishi na kulima hapa, ni vyema kujenga mbali na ufukwe na kingo za vijito, kulinda mikoko na kuweka mitaro wazi."
+     }
+    }
+   ]
+  },
+  "C049": {
+   "name": "Rufiji District Council",
+   "hazards": [
+    "floods",
+    "heavyRainfall",
+    "largeWaves",
+    "publicHealth"
+   ],
+   "documented": "Rufiji river and delta floods, heavy rain, boat accidents, and cholera",
+   "know": [
+    {
+     "area": {
+      "en": "Rufiji: Rufiji river flood plain",
+      "sw": "Rufiji: tambarare ya mafuriko ya mto Rufiji"
+     },
+     "risk": {
+      "en": "This area is the Rufiji flood plain, where the river floods villages and farms in wet years (as in 2024), cutting roads and spreading water-borne disease.",
+      "sw": "Eneo hili ni tambarare ya mafuriko ya mto Rufiji, ambapo mto hufurika vijiji na mashamba katika miaka ya mvua nyingi (kama mwaka 2024), hukata barabara na kusambaza magonjwa yatokanayo na maji."
+     },
+     "advice": {
+      "en": "For those living and farming here, it helps to build on higher ground or raised plinths, keep food and seed above flood level and use safe water.",
+      "sw": "Kwa wanaoishi na kulima hapa, ni vyema kujenga sehemu za miinuko au kwenye misingi iliyoinuliwa, kuhifadhi chakula na mbegu juu ya kiwango cha mafuriko na kutumia maji salama."
+     }
+    }
+   ]
+  }
+ }
+}

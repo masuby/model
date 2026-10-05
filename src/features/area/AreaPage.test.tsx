@@ -1,5 +1,5 @@
 // @vitest-environment jsdom
-import { act, render, screen } from '@testing-library/react';
+import { act, fireEvent, render, screen, within } from '@testing-library/react';
 import { MemoryRouter, Route, Routes } from 'react-router-dom';
 import type * as Recharts from 'recharts';
 import { beforeAll, beforeEach, describe, expect, it, vi } from 'vitest';
@@ -7,7 +7,8 @@ import '@/i18n';
 import i18n from '@/i18n';
 import { TooltipProvider } from '@/components/ui/primitives';
 import { DataProvider, queryClient } from '@/data-layer/DataProvider';
-import { buildModel } from '@/engine/risk/model';
+import { buildModel, placeKey } from '@/engine/risk/model';
+import { isStatusRow, loadHazardGuide, loadRegionGuide } from '@/features/guide/data';
 import AreaPage from './AreaPage';
 import { loadCharts } from './components/ChartSlot';
 
@@ -142,6 +143,50 @@ describe('AreaPage', { timeout: 90_000 }, () => {
     } finally {
       localStorage.removeItem('inform.v2.rawValues');
       queryClient.clear();
+    }
+  });
+
+  it('tells people what to do: the local advice, every hazard at each alert level, and the incident guide', async () => {
+    await i18n.changeLanguage('en');
+    const c = model.councils.find((x) => placeKey(x.region) !== 'tabora')!;
+    const guide = (await loadRegionGuide(placeKey(c.region)))!.councils[c.id];
+    const levels = await loadHazardGuide(guide.hazards[0]);
+    renderAt(c.id);
+    const section = document.getElementById('actions')!;
+    expect(within(section).getByRole('heading', { level: 2, name: `What to do in ${c.name}` })).toBeInTheDocument();
+    expect(within(section).getByRole('link', { name: 'Call 190 (Emergency)' })).toHaveAttribute('href', 'tel:190');
+    // Know your risk: the guide's own statement for this council, and what helps.
+    expect((await within(section).findAllByText(guide.know[0].risk.en, {}, { timeout: 20_000 })).length).toBeGreaterThan(0);
+    expect(within(section).getAllByText('What helps').length).toBeGreaterThan(0);
+    // The hazards the guide documents here come first, the first one open at the advisory level.
+    const hazards = within(section).getByRole('radiogroup', { name: `Hazards in ${c.name}` });
+    expect(within(hazards).getAllByRole('radio')).toHaveLength(guide.hazards.length);
+    expect(within(hazards).getAllByRole('radio')[0]).toHaveAttribute('aria-checked', 'true');
+    expect(within(section).getByRole('combobox', { name: 'Other hazards' })).toBeInTheDocument();
+    // A major warning: what people may see, and what to do.
+    fireEvent.click(within(section).getByRole('radio', { name: /^Major warning/ }));
+    const top = levels['3']!.find((r) => !isStatusRow(r))!;
+    expect((await within(section).findAllByText(top.impact.en, {}, { timeout: 20_000 })).length).toBeGreaterThan(0);
+    expect(within(section).getAllByText(top.actions.en[0]).length).toBeGreaterThan(0);
+    // The incident guide, folded.
+    expect(await within(section).findByRole('heading', { level: 3, name: 'Incidents and accidents' }, { timeout: 20_000 })).toBeInTheDocument();
+  });
+
+  it("leads with the council's own plan where the guide has one, in Kiswahili", async () => {
+    await i18n.changeLanguage('sw');
+    try {
+      const c = model.councils.find((x) => placeKey(x.region) === 'tabora')!;
+      const plan = (await loadRegionGuide('tabora'))!.councils[c.id].levels!;
+      renderAt(c.id);
+      const section = document.getElementById('actions')!;
+      const hazards = await within(section).findByRole('radiogroup', { name: `Majanga katika ${c.name}` }, { timeout: 20_000 });
+      const first = within(hazards).getAllByRole('radio')[0];
+      expect(first).toHaveTextContent(`Mpango wa halmashauri ya ${c.name}`);
+      expect(first).toHaveAttribute('aria-checked', 'true');
+      const row = plan['1']!.find((r) => !isStatusRow(r))!;
+      expect(within(section).getAllByText(row.impact.sw).length).toBeGreaterThan(0);
+    } finally {
+      await i18n.changeLanguage('en');
     }
   });
 

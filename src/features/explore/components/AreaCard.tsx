@@ -21,6 +21,7 @@ import type { Unit } from '@/engine/risk/types';
 import { cn, formatNumber, formatScore, NO_VALUE } from '@/lib/utils';
 import { coverageCounts, editCount, MAX_COMPARE, rankUnits, referenceUnit } from '../lib/explore';
 import { useExplore } from '../lib/ExploreContext';
+import { AreaGuide } from './AreaGuide';
 import { ClassScale, MetricValue, Notice, SectionTitle } from './bits';
 
 const RISK = parseMetric('risk');
@@ -260,6 +261,9 @@ export function AreaBody({ unit }: { unit: Unit }) {
           <p className="mt-2 text-xs leading-relaxed text-muted-foreground">{t('card.driversHint')}</p>
         </section>
       )}
+
+      {/* What to do, from the Risk Action Guide Book */}
+      <AreaGuide unit={unit} />
 
       {/* People */}
       <section className="py-6">

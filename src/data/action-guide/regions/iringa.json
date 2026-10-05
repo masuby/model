@@ -1,0 +1,139 @@
+{
+ "region": {
+  "en": "Iringa Region",
+  "sw": "Mkoa wa Iringa"
+ },
+ "councils": {
+  "C081": {
+   "name": "Iringa Municipal Council",
+   "hazards": [
+    "heavyRainfall",
+    "floods",
+    "strongWinds",
+    "landslide"
+   ],
+   "documented": "heavy Msimu rain, floods on the Little Ruaha, strong winds, and hillside erosion",
+   "know": [
+    {
+     "area": {
+      "en": "Iringa Municipal: escarpment edge and Little Ruaha valley",
+      "sw": "Manispaa ya Iringa: ukingo wa mwinuko na bonde la Ruaha Ndogo"
+     },
+     "risk": {
+      "en": "This area sits on a rocky escarpment above the Little Ruaha valley; storm run-off cuts gullies through hillside settlements, boulders can dislodge on steep slopes and valley-bottom plots flood.",
+      "sw": "Eneo hili liko kwenye mwinuko wa mawe juu ya bonde la Ruaha Ndogo; maji ya dhoruba huchimba makorongo kwenye makazi ya milimani, mawe yanaweza kuporomoka kwenye miteremko mikali na viwanja vya mabondeni hufurika."
+     },
+     "advice": {
+      "en": "For those living and building here, it helps to keep slopes planted, lead run-off into lined drains, avoid building directly below loose boulders and keep valley plots raised.",
+      "sw": "Kwa wanaoishi na kujenga hapa, ni vyema kuacha mimea kwenye miteremko, kuelekeza maji kwenye mifereji iliyojengewa, kuepuka kujenga chini ya mawe yaliyolegea na kuinua viwanja vya mabondeni."
+     }
+    }
+   ]
+  },
+  "C082": {
+   "name": "Mafinga Town Council",
+   "hazards": [
+    "heavyRainfall",
+    "strongWinds",
+    "floods",
+    "wildfire"
+   ],
+   "documented": "heavy rain and cold on the Mufindi highlands, strong winds, and valley floods",
+   "know": [
+    {
+     "area": {
+      "en": "Mafinga Town: timber processing and plantations",
+      "sw": "Mji wa Mafinga: uchakataji wa mbao na mashamba ya miti"
+     },
+     "risk": {
+      "en": "This area is a timber town surrounded by pine and eucalyptus plantations; sawmills, sawdust heaps and dry-season plantation fires create high fire risk to homes and livelihoods.",
+      "sw": "Eneo hili ni mji wa mbao uliozungukwa na mashamba ya misindano na mikaratusi; viwanda vya mbao, marundo ya randa na moto wa kiangazi mashambani huleta hatari kubwa ya moto kwa makazi na shughuli za kiuchumi."
+     },
+     "advice": {
+      "en": "For those working and living here, it helps to keep sawdust and offcuts away from homes and wiring, maintain fire breaks around plantations and keep fire-fighting equipment ready at sawmills.",
+      "sw": "Kwa wanaofanya kazi na kuishi hapa, ni vyema kuweka randa na mabaki ya mbao mbali na nyumba na nyaya za umeme, kutunza njia za kuzuia moto kuzunguka mashamba na kuweka vifaa vya kuzima moto tayari viwandani."
+     }
+    }
+   ]
+  },
+  "C080": {
+   "name": "Iringa District Council",
+   "hazards": [
+    "heavyRainfall",
+    "floods",
+    "landslide",
+    "drought"
+   ],
+   "documented": "heavy rain, floods on the Little Ruaha and its tributaries, landslides on the escarpment, and a sharp dry season",
+   "know": [
+    {
+     "area": {
+      "en": "Iringa DC: Pawaga and the Great Ruaha lowlands",
+      "sw": "Iringa DC: Pawaga na tambarare za Ruaha Mkuu"
+     },
+     "risk": {
+      "en": "This area includes hot, dry lowlands along the Great Ruaha where rains are unreliable; irrigated rice schemes flood in wet years, while dry years bring water conflict and crop failure.",
+      "sw": "Eneo hili linajumuisha tambarare za joto na kame kando ya Ruaha Mkuu ambako mvua si za uhakika; skimu za mpunga hufurika katika miaka ya mvua nyingi, huku miaka ya ukame ikileta migogoro ya maji na mazao kukauka."
+     },
+     "advice": {
+      "en": "For those farming and herding here, it helps to maintain irrigation canals, share water by agreed schedules and keep food and seed reserves for dry years.",
+      "sw": "Kwa wanaolima na kufuga hapa, ni vyema kutunza mifereji ya umwagiliaji, kugawana maji kwa ratiba zilizokubaliwa na kuweka akiba ya chakula na mbegu kwa miaka ya ukame."
+     }
+    }
+   ]
+  },
+  "C084": {
+   "name": "Kilolo District Council",
+   "hazards": [
+    "heavyRainfall",
+    "landslide",
+    "floods",
+    "strongWinds"
+   ],
+   "documented": "heavy rain and landslides on the Udzungwa slopes, valley floods, and strong winds",
+   "know": [
+    {
+     "area": {
+      "en": "Kilolo: Udzungwa highland slopes",
+      "sw": "Kilolo: miteremko ya nyanda za juu za Udzungwa"
+     },
+     "risk": {
+      "en": "This area lies on the steep, high-rainfall Udzungwa slopes; saturated soils cause landslides and washouts on roads, and cold nights stress crops and households.",
+      "sw": "Eneo hili liko kwenye miteremko mikali ya Udzungwa yenye mvua nyingi; udongo uliojaa maji husababisha maporomoko ya ardhi na barabara kusombwa, na baridi kali za usiku huathiri mazao na kaya."
+     },
+     "advice": {
+      "en": "For those living and farming here, it helps to keep trees and terraces on slopes, keep roadside drains clear and avoid building at the foot of steep, cut slopes.",
+      "sw": "Kwa wanaoishi na kulima hapa, ni vyema kuacha miti na matuta kwenye miteremko, kuweka mifereji ya kando ya barabara wazi na kuepuka kujenga chini ya miteremko mikali iliyochongwa."
+     }
+    }
+   ]
+  },
+  "C083": {
+   "name": "Mufindi District Council",
+   "hazards": [
+    "heavyRainfall",
+    "strongWinds",
+    "floods",
+    "wildfire",
+    "landslide"
+   ],
+   "documented": "heavy rain, strong winds and hail on the high plateau, valley floods, and cold snaps",
+   "know": [
+    {
+     "area": {
+      "en": "Mufindi: tea estates and forest plantations",
+      "sw": "Mufindi: mashamba ya chai na misitu ya kupandwa"
+     },
+     "risk": {
+      "en": "This area is cool, wet highland with large tea estates and forest plantations; dry-season fires spread through plantations, and heavy rain causes slope failures and impassable earth roads.",
+      "sw": "Eneo hili ni nyanda za juu zenye baridi na unyevu, zenye mashamba makubwa ya chai na misitu ya kupandwa; moto wa kiangazi husambaa mashambani mwa miti, na mvua kubwa husababisha miteremko kuporomoka na barabara za udongo kutopitika."
+     },
+     "advice": {
+      "en": "For those living and working here, it helps to keep fire breaks maintained, control field burning strictly and keep estate and village roads drained.",
+      "sw": "Kwa wanaoishi na kufanya kazi hapa, ni vyema kutunza njia za kuzuia moto, kudhibiti kikamilifu uchomaji wa mashamba na kuweka mifereji kwenye barabara za mashamba na vijiji."
+     }
+    }
+   ]
+  }
+ }
+}

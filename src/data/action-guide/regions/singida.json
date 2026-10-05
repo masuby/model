@@ -1,0 +1,192 @@
+{
+ "region": {
+  "en": "Singida Region",
+  "sw": "Mkoa wa Singida"
+ },
+ "councils": {
+  "C094": {
+   "name": "Singida Municipal Council",
+   "hazards": [
+    "drought",
+    "strongWinds",
+    "wildfire",
+    "floods"
+   ],
+   "documented": "drought on the central plateau, strong winds, wildfire, flash floods, and water shortage",
+   "know": [
+    {
+     "area": {
+      "en": "Singida Municipal: lakeside town and rocky hills",
+      "sw": "Manispaa ya Singida: mji wa kando ya maziwa na milima ya mawe"
+     },
+     "risk": {
+      "en": "This area is a dry town between the Singidani and Kindai lakes and rocky hills, where storm run-off floods low streets, lakes rise in wet years and water is scarce in the dry season.",
+      "sw": "Eneo hili ni mji kame kati ya maziwa ya Singidani na Kindai na milima ya mawe, ambapo maji ya dhoruba hufurika mitaa ya chini, maziwa hujaa katika miaka ya mvua nyingi na maji ni haba wakati wa kiangazi."
+     },
+     "advice": {
+      "en": "For those living and trading here, it helps to build away from lake margins and gullies, keep drains open and harvest and store water safely.",
+      "sw": "Kwa wanaoishi na kufanya biashara hapa, ni vyema kujenga mbali na kingo za maziwa na makorongo, kuweka mitaro wazi na kuvuna na kuhifadhi maji kwa usalama."
+     }
+    }
+   ]
+  },
+  "C097": {
+   "name": "Ikungi District Council",
+   "hazards": [
+    "drought",
+    "strongWinds",
+    "wildfire",
+    "floods"
+   ],
+   "documented": "drought, strong winds, wildfire, and flash floods",
+   "know": [
+    {
+     "area": {
+      "en": "Ikungi: semi-arid farmland and highway",
+      "sw": "Ikungi: mashamba kame na barabara kuu"
+     },
+     "risk": {
+      "en": "This area is semi-arid farmland where droughts and dry spells fail crops, and flash floods cross the Dodoma–Singida highway.",
+      "sw": "Eneo hili ni mashamba kame kiasi ambapo ukame na vipindi vya ukavu huharibu mazao, na mafuriko ya ghafla hupita barabara kuu ya Dodoma–Singida."
+     },
+     "advice": {
+      "en": "For those farming and travelling here, it helps to plant sorghum, millet and sunflower, keep food reserves and never cross flowing water on the road.",
+      "sw": "Kwa wanaolima na kusafiri hapa, ni vyema kupanda mtama, uwele na alizeti, kuweka akiba ya chakula na kutovuka kamwe maji yanayotiririka barabarani."
+     }
+    }
+   ]
+  },
+  "C092": {
+   "name": "Iramba District Council",
+   "hazards": [
+    "drought",
+    "strongWinds",
+    "wildfire",
+    "floods",
+    "heavyRainfall",
+    "landslide"
+   ],
+   "documented": "drought, strong winds, wildfire, and flash floods",
+   "know": [
+    {
+     "area": {
+      "en": "Iramba: escarpment, Lake Kitangiri and gold pits",
+      "sw": "Iramba: mteremko, Ziwa Kitangiri na mashimo ya dhahabu"
+     },
+     "risk": {
+      "en": "This area has the Rift escarpment where heavy rain cuts gullies, Lake Kitangiri margins that flood, and artisanal gold pits that collapse in the rains.",
+      "sw": "Eneo hili lina mteremko wa Bonde la Ufa ambapo mvua kubwa huchimba makorongo, kingo za Ziwa Kitangiri zinazofurika, na mashimo madogo ya dhahabu yanayobomoka wakati wa mvua."
+     },
+     "advice": {
+      "en": "For those living and mining here, it helps to build away from gully edges, keep homes above lake flood lines and fence or backfill pits.",
+      "sw": "Kwa wanaoishi na kuchimba hapa, ni vyema kujenga mbali na kingo za makorongo, kujenga juu ya mistari ya mafuriko ya ziwa na kuzungushia uzio au kufukia mashimo."
+     }
+    }
+   ]
+  },
+  "C096": {
+   "name": "Itigi District Council",
+   "hazards": [
+    "drought",
+    "wildfire",
+    "strongWinds",
+    "floods"
+   ],
+   "documented": "drought, Itigi thicket wildfire, strong winds, and flash floods",
+   "know": [
+    {
+     "area": {
+      "en": "Itigi: thicket, railway and dry farmland",
+      "sw": "Itigi: vichaka, reli na mashamba kame"
+     },
+     "risk": {
+      "en": "This area has dense Itigi thicket and dry farmland on the Central Line, where droughts fail crops and dry-season fires spread.",
+      "sw": "Eneo hili lina vichaka vizito vya Itigi na mashamba kame kando ya Reli ya Kati, ambapo ukame huharibu mazao na moto wa kiangazi husambaa."
+     },
+     "advice": {
+      "en": "For those living and farming here, it helps to grow drought-tolerant crops, keep fire breaks and stay off the railway line during floods.",
+      "sw": "Kwa wanaoishi na kulima hapa, ni vyema kupanda mazao yanayostahimili ukame, kuweka njia za kuzuia moto na kukaa mbali na reli wakati wa mafuriko."
+     }
+    }
+   ]
+  },
+  "C095": {
+   "name": "Manyoni District Council",
+   "hazards": [
+    "drought",
+    "wildfire",
+    "strongWinds",
+    "floods"
+   ],
+   "documented": "drought, wildfire, strong winds, flash floods, and human–wildlife conflict",
+   "know": [
+    {
+     "area": {
+      "en": "Manyoni: dry plains, Bahi swamp edge and railway",
+      "sw": "Manyoni: tambarare kame, pembezoni mwa bwawa la Bahi na reli"
+     },
+     "risk": {
+      "en": "This area has dry plains where drought hits crops and livestock, low areas that flood around the Bahi swamp edge, and the Central Line and highway.",
+      "sw": "Eneo hili lina tambarare kame ambapo ukame huathiri mazao na mifugo, maeneo ya chini yanayofurika pembezoni mwa bwawa la Bahi, na Reli ya Kati na barabara kuu."
+     },
+     "advice": {
+      "en": "For those farming and herding here, it helps to store water and fodder, keep homes off swamp margins and plan travel around floods.",
+      "sw": "Kwa wanaolima na kufuga hapa, ni vyema kuhifadhi maji na malisho, kujenga nje ya kingo za bwawa na kupanga safari kuzingatia mafuriko."
+     }
+    }
+   ]
+  },
+  "C098": {
+   "name": "Mkalama District Council",
+   "hazards": [
+    "drought",
+    "strongWinds",
+    "wildfire",
+    "floods"
+   ],
+   "documented": "drought, strong winds, wildfire, and flash floods",
+   "know": [
+    {
+     "area": {
+      "en": "Mkalama: Lake Eyasi basin and Wembere plains",
+      "sw": "Mkalama: bonde la Ziwa Eyasi na tambarare za Wembere"
+     },
+     "risk": {
+      "en": "This area has dry basin land where droughts are frequent, clay plains that flood in wet years and conflicts between farmers and herders over water.",
+      "sw": "Eneo hili lina ardhi kame ya bonde ambapo ukame ni wa mara kwa mara, tambarare za mfinyanzi zinazofurika katika miaka ya mvua nyingi na migogoro kati ya wakulima na wafugaji kuhusu maji."
+     },
+     "advice": {
+      "en": "For those farming and herding here, it helps to follow village land-use plans, protect water points and keep household food reserves.",
+      "sw": "Kwa wanaolima na kufuga hapa, ni vyema kufuata mipango ya matumizi ya ardhi ya vijiji, kulinda vyanzo vya maji na kuweka akiba ya chakula ya kaya."
+     }
+    }
+   ]
+  },
+  "C093": {
+   "name": "Singida District Council",
+   "hazards": [
+    "drought",
+    "strongWinds",
+    "wildfire",
+    "floods"
+   ],
+   "documented": "drought, strong winds, wildfire, and flash floods",
+   "know": [
+    {
+     "area": {
+      "en": "Singida DC: dry farmland and seasonal lakes",
+      "sw": "Singida DC: mashamba kame na maziwa ya msimu"
+     },
+     "risk": {
+      "en": "This area has dry farmland and seasonal lakes where droughts fail crops, strong winds raise dust and lakes flood fields in wet years.",
+      "sw": "Eneo hili lina mashamba kame na maziwa ya msimu ambapo ukame huharibu mazao, upepo mkali huinua vumbi na maziwa hufurika mashamba katika miaka ya mvua nyingi."
+     },
+     "advice": {
+      "en": "For those farming here, it helps to grow drought-tolerant crops, plant windbreaks and keep homes above lake flood lines.",
+      "sw": "Kwa wanaolima hapa, ni vyema kupanda mazao yanayostahimili ukame, kupanda mistari ya miti ya kuzuia upepo na kujenga juu ya mistari ya mafuriko ya maziwa."
+     }
+    }
+   ]
+  }
+ }
+}

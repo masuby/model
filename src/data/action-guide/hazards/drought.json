@@ -1,0 +1,614 @@
+{
+ "levels": {
+  "1": [
+   {
+    "impact": {
+     "en": "Below-normal rainfall expected; early signs of dry conditions",
+     "sw": "Mvua chini ya wastani zinatarajiwa; dalili za awali za ukavu"
+    },
+    "actions": {
+     "en": [
+      "Please follow TMA seasonal forecasts and advice from extension officers.",
+      "Households: use water carefully and keep a food reserve.",
+      "Village/Mtaa and Ward Disaster Management Committees: review drought contingency plans and update the list of people with special needs."
+     ],
+     "sw": [
+      "Tafadhali fuatilieni utabiri wa msimu wa TMA na ushauri wa maafisa ugani.",
+      "Kaya: tumieni maji kwa uangalifu na wekeni akiba ya chakula.",
+      "Kamati za Usimamizi wa Maafa za Vijiji/Mitaa na Kata: pitieni mipango ya dharura ya ukame na boresheni orodha ya watu wenye mahitaji maalum."
+     ]
+    }
+   },
+   {
+    "impact": {
+     "en": "Low soil moisture affecting germination of crops",
+     "sw": "Unyevu mdogo wa udongo kuathiri uotaji wa mazao"
+    },
+    "actions": {
+     "en": [
+      "Farmers are advised to plant drought-tolerant crops such as sorghum, millet and cassava.",
+      "Use mulch to keep moisture in the soil.",
+      "Plant with the first reliable rains, as advised by extension officers."
+     ],
+     "sw": [
+      "Wakulima mnashauriwa kupanda mazao yanayostahimili ukame kama mtama, uwele na mihogo.",
+      "Tumieni matandazo kuhifadhi unyevu udongoni.",
+      "Pandeni kwa mvua za kwanza za uhakika, kwa ushauri wa maafisa ugani."
+     ]
+    }
+   },
+   {
+    "impact": {
+     "en": "Some pasture loss in grazing areas",
+     "sw": "Upungufu wa malisho katika baadhi ya maeneo ya kuchungia"
+    },
+    "actions": {
+     "en": [
+      "Livestock keepers: store crop residues and hay.",
+      "Agree reserve grazing areas with Village leaders.",
+      "Consider selling some animals early while they are in good condition."
+     ],
+     "sw": [
+      "Wafugaji: hifadhini mabaki ya mazao na nyasi kavu.",
+      "Kubalianeni maeneo ya akiba ya malisho na viongozi wa Kijiji.",
+      "Fikirieni kuuza baadhi ya mifugo mapema ikiwa bado ina afya nzuri."
+     ]
+    }
+   },
+   {
+    "impact": {
+     "en": "Reduced flow in rivers and streams",
+     "sw": "Kupungua kwa mtiririko wa maji mitoni na vijitoni"
+    },
+    "actions": {
+     "en": [
+      "Please use water sparingly at home and on farms.",
+      "Protect water sources from animals and waste.",
+      "Report drying water sources to Village/Mtaa leaders."
+     ],
+     "sw": [
+      "Tafadhali tumieni maji kwa uangalifu nyumbani na mashambani.",
+      "Lindeni vyanzo vya maji dhidi ya mifugo na taka.",
+      "Toeni taarifa ya vyanzo vya maji vinavyokauka kwa viongozi wa Kijiji/Mtaa."
+     ]
+    }
+   },
+   {
+    "impact": {
+     "en": "Falling water levels in small dams and ponds",
+     "sw": "Kupungua kwa kina cha maji katika mabwawa madogo na malambo"
+    },
+    "actions": {
+     "en": [
+      "Harvest rainwater from roofs wherever possible.",
+      "Water user groups and RUWASA: repair broken boreholes and wells."
+     ],
+     "sw": [
+      "Vuneni maji ya mvua kutoka kwenye paa pale inapowezekana.",
+      "Vikundi vya watumiaji maji na RUWASA: karabatini visima vilivyoharibika."
+     ]
+    }
+   },
+   {
+    "impact": {
+     "en": "Rising demand for water for irrigation and livestock",
+     "sw": "Kuongezeka kwa mahitaji ya maji kwa umwagiliaji na mifugo"
+    },
+    "actions": {
+     "en": [
+      "Use water-saving irrigation methods.",
+      "Farmers and livestock keepers: agree water-sharing times with Village leaders.",
+      "Report water disputes to Village/Mtaa leaders."
+     ],
+     "sw": [
+      "Tumieni njia za umwagiliaji zinazookoa maji.",
+      "Wakulima na wafugaji: kubalianeni ratiba za kugawana maji na viongozi wa Kijiji.",
+      "Toeni taarifa ya migogoro ya maji kwa viongozi wa Kijiji/Mtaa."
+     ]
+    }
+   },
+   {
+    "impact": {
+     "en": "Poorer quality of available water",
+     "sw": "Kushuka kwa ubora wa maji yanayopatikana"
+    },
+    "actions": {
+     "en": [
+      "Boil drinking water or treat it with chlorine tablets.",
+      "Cover stored water.",
+      "Report cases of diarrhoea to the nearest health facility."
+     ],
+     "sw": [
+      "Chemsheni maji ya kunywa au yatibuni kwa vidonge vya klorini.",
+      "Funikeni maji yaliyohifadhiwa.",
+      "Toeni taarifa ya wagonjwa wa kuhara kwenye kituo cha afya kilicho karibu."
+     ]
+    }
+   },
+   {
+    "impact": {
+     "en": "Higher risk for children, older persons, pregnant women and people with disabilities",
+     "sw": "Hatari kubwa zaidi kwa watoto, wazee, wajawazito na watu wenye ulemavu"
+    },
+    "actions": {
+     "en": [
+      "Please share this advisory with neighbours, especially households with young children and older persons.",
+      "Health workers: begin nutrition screening of children under five."
+     ],
+     "sw": [
+      "Tafadhali wapatieni taarifa hii majirani, hasa kaya zenye watoto wadogo na wazee.",
+      "Watoa huduma za afya: anzeni uchunguzi wa lishe kwa watoto walio chini ya miaka mitano."
+     ]
+    }
+   },
+   {
+    "impact": {
+     "en": "Early weight loss in livestock",
+     "sw": "Mifugo kuanza kupungua uzito"
+    },
+    "actions": {
+     "en": [
+      "Give supplementary feed and clean water.",
+      "Vaccinate livestock as advised by livestock officers.",
+      "Consider early sale of weaker animals."
+     ],
+     "sw": [
+      "Toeni chakula cha ziada na maji safi kwa mifugo.",
+      "Chanjeni mifugo kwa ushauri wa maafisa mifugo.",
+      "Fikirieni kuuza mapema mifugo dhaifu."
+     ]
+    }
+   },
+   {
+    "impact": {
+     "en": "Pressure on shared boreholes and wells",
+     "sw": "Msongamano katika visima vya pamoja"
+    },
+    "actions": {
+     "en": [
+      "Agree water-collection schedules with neighbours.",
+      "Report broken pumps to the water authority or RUWASA."
+     ],
+     "sw": [
+      "Kubalianeni ratiba za kuchota maji na majirani.",
+      "Toeni taarifa ya pampu zilizoharibika kwa mamlaka ya maji au RUWASA."
+     ]
+    }
+   },
+   {
+    "impact": {
+     "en": "Warning status",
+     "sw": "Hali ya tahadhari"
+    },
+    "actions": {
+     "en": [
+      "Please continue to follow updates from TMA, Disaster Management Committees and extension officers.",
+      "This advisory remains in place until the authorities update or withdraw it."
+     ],
+     "sw": [
+      "Tafadhali endeleeni kufuatilia taarifa za TMA, Kamati za Usimamizi wa Maafa na maafisa ugani.",
+      "Tahadhari hii itaendelea hadi mamlaka zitakapoihuisha au kuiondoa rasmi."
+     ]
+    }
+   }
+  ],
+  "2": [
+   {
+    "impact": {
+     "en": "Significant rainfall deficit in many areas",
+     "sw": "Upungufu mkubwa wa mvua katika maeneo mengi"
+    },
+    "actions": {
+     "en": [
+      "District and Ward Disaster Management Committees: meet, activate drought contingency plans and report needs to the Regional Committee.",
+      "Please share water- and food-saving advice through radio, community meetings and places of worship."
+     ],
+     "sw": [
+      "Kamati za Usimamizi wa Maafa za Wilaya na Kata: kutaneni, amilisheni mipango ya dharura ya ukame na wasilisheni mahitaji kwa Kamati ya Mkoa.",
+      "Tafadhali sambazeni ushauri wa kutunza maji na chakula kupitia redio, mikutano ya jamii na nyumba za ibada."
+     ]
+    }
+   },
+   {
+    "impact": {
+     "en": "Crop stress and reduced harvests",
+     "sw": "Mazao kudhoofika na kupungua kwa mavuno"
+    },
+    "actions": {
+     "en": [
+      "Farmers are advised to harvest what is mature and store it safely.",
+      "Extension officers: advise on managing remaining crops and on drought-tolerant seed.",
+      "Village Committees: assess household food stocks."
+     ],
+     "sw": [
+      "Wakulima mnashauriwa kuvuna mazao yaliyokomaa na kuyahifadhi vizuri.",
+      "Maafisa ugani: toeni ushauri wa kutunza mazao yaliyobaki na mbegu zinazostahimili ukame.",
+      "Kamati za Vijiji: fanyeni tathmini ya akiba ya chakula ya kaya."
+     ]
+    }
+   },
+   {
+    "impact": {
+     "en": "Water shortage for households and livestock",
+     "sw": "Uhaba wa maji kwa kaya na mifugo"
+    },
+    "actions": {
+     "en": [
+      "Please use water first for drinking, cooking and hygiene.",
+      "Water user groups: agree fair sharing times at boreholes and shared sources.",
+      "District Committees: plan water delivery to the most affected villages."
+     ],
+     "sw": [
+      "Tafadhali tumieni maji kwanza kwa kunywa, kupikia na usafi.",
+      "Vikundi vya watumiaji maji: kubalianeni ratiba za haki za kuchota maji visimani na vyanzo vya pamoja.",
+      "Kamati za Wilaya: pangeni usambazaji wa maji kwa vijiji vilivyoathirika zaidi."
+     ]
+    }
+   },
+   {
+    "impact": {
+     "en": "Pasture loss forcing livestock movement",
+     "sw": "Upungufu wa malisho unaolazimu mifugo kuhamishwa"
+    },
+    "actions": {
+     "en": [
+      "Livestock keepers: move herds only along routes agreed with Village and District leaders.",
+      "District Committees: designate grazing areas and water points along livestock routes.",
+      "Give supplementary feed and minerals where possible."
+     ],
+     "sw": [
+      "Wafugaji: hamisheni mifugo kupitia njia zilizokubaliwa na viongozi wa Kijiji na Wilaya tu.",
+      "Kamati za Wilaya: tengeni maeneo ya malisho na vituo vya maji kwenye njia za mifugo.",
+      "Toeni chakula cha ziada na madini pale inapowezekana."
+     ]
+    }
+   },
+   {
+    "impact": {
+     "en": "Falling water levels in dams, reservoirs and rivers",
+     "sw": "Kupungua kwa kina cha maji katika mabwawa na mito"
+    },
+    "actions": {
+     "en": [
+      "Please avoid non-essential water use such as washing vehicles.",
+      "Water authorities: announce water-use schedules in good time."
+     ],
+     "sw": [
+      "Tafadhali epukeni matumizi ya maji yasiyo ya lazima kama kuosha magari.",
+      "Mamlaka za maji: tangazeni ratiba za matumizi ya maji mapema."
+     ]
+    }
+   },
+   {
+    "impact": {
+     "en": "Possible reduction in hydropower and power supply",
+     "sw": "Uwezekano wa kupungua kwa uzalishaji wa umeme wa maji"
+    },
+    "actions": {
+     "en": [
+      "Please switch off appliances and lights that are not needed.",
+      "Follow announcements from TANESCO."
+     ],
+     "sw": [
+      "Tafadhali zimeni vifaa na taa zisizohitajika.",
+      "Fuatilieni matangazo ya TANESCO."
+     ]
+    }
+   },
+   {
+    "impact": {
+     "en": "Rising food prices in local markets",
+     "sw": "Kupanda kwa bei za vyakula masokoni"
+    },
+    "actions": {
+     "en": [
+      "Households: avoid selling food reserves needed for your own family.",
+      "Report unusual price rises to Village/Mtaa leaders.",
+      "District Committees: monitor market prices and report to the Regional Committee."
+     ],
+     "sw": [
+      "Kaya: epukeni kuuza akiba ya chakula inayohitajika na familia.",
+      "Toeni taarifa ya kupanda kwa bei kusiko kwa kawaida kwa viongozi wa Kijiji/Mtaa.",
+      "Kamati za Wilaya: fuatilieni bei za masoko na toeni taarifa kwa Kamati ya Mkoa."
+     ]
+    }
+   },
+   {
+    "impact": {
+     "en": "Movement of pastoralists in search of water and pasture",
+     "sw": "Kuhama kwa wafugaji kutafuta maji na malisho"
+    },
+    "actions": {
+     "en": [
+      "Pastoralists: inform Village leaders before entering a new area.",
+      "Farmers and pastoralists: please resolve disputes through Village leaders.",
+      "District Committees: coordinate movement with neighbouring districts."
+     ],
+     "sw": [
+      "Wafugaji: wajulisheni viongozi wa Kijiji kabla ya kuingia eneo jipya.",
+      "Wakulima na wafugaji: tafadhali tatueni migogoro kupitia viongozi wa Kijiji.",
+      "Kamati za Wilaya: ratibuni uhamaji na wilaya jirani."
+     ]
+    }
+   },
+   {
+    "impact": {
+     "en": "Weakness and disease in livestock",
+     "sw": "Mifugo kudhoofika na kupata magonjwa"
+    },
+    "actions": {
+     "en": [
+      "Report sick or dying animals to livestock officers.",
+      "Consider selling weak animals before they lose more value.",
+      "District livestock officers: deploy mobile veterinary teams."
+     ],
+     "sw": [
+      "Toeni taarifa ya mifugo inayougua au kufa kwa maafisa mifugo.",
+      "Fikirieni kuuza mifugo dhaifu kabla thamani yake haijashuka zaidi.",
+      "Maafisa mifugo wa Wilaya: pelekeni timu za huduma za mifugo za mkoba."
+     ]
+    }
+   },
+   {
+    "impact": {
+     "en": "Increased diarrhoea from unsafe water",
+     "sw": "Kuongezeka kwa kuhara kutokana na maji yasiyo salama"
+    },
+    "actions": {
+     "en": [
+      "Boil drinking water or treat it with chlorine tablets.",
+      "Give ORS at the first sign of diarrhoea and go to a health facility.",
+      "District Committees: distribute water-treatment tablets to affected villages."
+     ],
+     "sw": [
+      "Chemsheni maji ya kunywa au yatibuni kwa vidonge vya klorini.",
+      "Tumieni ORS dalili za kuhara zinapoanza na nendeni kituo cha afya.",
+      "Kamati za Wilaya: sambazeni vidonge vya kutibu maji kwa vijiji vilivyoathirika."
+     ]
+    }
+   },
+   {
+    "impact": {
+     "en": "Children missing school to fetch water",
+     "sw": "Watoto kukosa masomo ili kutafuta maji"
+    },
+    "actions": {
+     "en": [
+      "Parents: please keep children in school.",
+      "School heads: report water shortages at schools to the District Education Office."
+     ],
+     "sw": [
+      "Wazazi: tafadhali hakikisheni watoto wanaendelea na masomo.",
+      "Wakuu wa shule: toeni taarifa ya uhaba wa maji shuleni kwa Ofisi ya Elimu ya Wilaya."
+     ]
+    }
+   },
+   {
+    "impact": {
+     "en": "Warning status",
+     "sw": "Hali ya tahadhari"
+    },
+    "actions": {
+     "en": [
+      "Please continue to follow updates from TMA, Disaster Management Committees and extension officers.",
+      "This warning remains in force until the authorities lower or withdraw it."
+     ],
+     "sw": [
+      "Tafadhali endeleeni kufuatilia taarifa za TMA, Kamati za Usimamizi wa Maafa na maafisa ugani.",
+      "Tahadhari hii itaendelea kutumika hadi mamlaka zitakapoishusha au kuiondoa rasmi."
+     ]
+    }
+   }
+  ],
+  "3": [
+   {
+    "impact": {
+     "en": "Severe drought affecting whole districts or regions",
+     "sw": "Ukame mkali unaoathiri wilaya au mikoa mizima"
+    },
+    "actions": {
+     "en": [
+      "Regional Committees: report the situation and needs to the Prime Minister's Office – Disaster Management Department.",
+      "District Committees: coordinate food, water, health and livestock support in every affected ward.",
+      "Please follow guidance from Disaster Management Committees and Village/Mtaa leaders."
+     ],
+     "sw": [
+      "Kamati za Mikoa: wasilisheni hali na mahitaji kwa Ofisi ya Waziri Mkuu – Idara ya Menejimenti ya Maafa.",
+      "Kamati za Wilaya: ratibuni msaada wa chakula, maji, afya na mifugo katika kila kata iliyoathirika.",
+      "Tafadhali fuateni maelekezo ya Kamati za Usimamizi wa Maafa na viongozi wa Kijiji/Mtaa."
+     ]
+    }
+   },
+   {
+    "impact": {
+     "en": "Crop failure and serious food shortage",
+     "sw": "Mazao kushindwa na upungufu mkubwa wa chakula"
+    },
+    "actions": {
+     "en": [
+      "District Committees: distribute food assistance to households most in need, with NFRA and partners.",
+      "Village Committees: help identify households most in need of food assistance.",
+      "Please share available food with vulnerable neighbours."
+     ],
+     "sw": [
+      "Kamati za Wilaya: sambazeni msaada wa chakula kwa kaya zenye uhitaji zaidi, kwa kushirikiana na NFRA na wadau.",
+      "Kamati za Vijiji: saidieni kutambua kaya zenye uhitaji mkubwa wa msaada wa chakula.",
+      "Tafadhali shirikianeni chakula kilichopo na majirani walio hatarini."
+     ]
+    }
+   },
+   {
+    "impact": {
+     "en": "Large numbers of livestock dying",
+     "sw": "Vifo vya idadi kubwa ya mifugo"
+    },
+    "actions": {
+     "en": [
+      "Livestock officers: support sale or slaughter of weak animals before they die.",
+      "Deliver emergency feed and water to remaining animals.",
+      "Please bury or burn carcasses away from water sources."
+     ],
+     "sw": [
+      "Maafisa mifugo: saidieni uuzaji au uchinjaji wa mifugo dhaifu kabla haijafa.",
+      "Pelekeni chakula na maji ya dharura kwa mifugo iliyobaki.",
+      "Tafadhali zikeni au chomeni mizoga mbali na vyanzo vya maji."
+     ]
+    }
+   },
+   {
+    "impact": {
+     "en": "Severe shortage of drinking water",
+     "sw": "Uhaba mkubwa wa maji ya kunywa"
+    },
+    "actions": {
+     "en": [
+      "District Committees and water authorities: deliver water to affected villages, health facilities and schools.",
+      "Please use water only for drinking, cooking and hygiene.",
+      "Report broken water points to RUWASA or the water authority."
+     ],
+     "sw": [
+      "Kamati za Wilaya na mamlaka za maji: sambazeni maji kwa vijiji, vituo vya afya na shule zilizoathirika.",
+      "Tafadhali tumieni maji kwa kunywa, kupikia na usafi pekee.",
+      "Toeni taarifa ya vituo vya maji vilivyoharibika kwa RUWASA au mamlaka ya maji."
+     ]
+    }
+   },
+   {
+    "impact": {
+     "en": "Power rationing from reduced hydropower",
+     "sw": "Mgao wa umeme kutokana na kupungua kwa umeme wa maji"
+    },
+    "actions": {
+     "en": [
+      "Follow TANESCO rationing schedules.",
+      "Health facilities and water pumps: keep back-up power ready."
+     ],
+     "sw": [
+      "Fuateni ratiba za mgao wa umeme za TANESCO.",
+      "Vituo vya afya na pampu za maji: wekeni tayari vyanzo mbadala vya umeme."
+     ]
+    }
+   },
+   {
+    "impact": {
+     "en": "Sharp rise in food prices",
+     "sw": "Kupanda sana kwa bei za vyakula"
+    },
+    "actions": {
+     "en": [
+      "Traders: please do not hoard food.",
+      "District Committees: monitor prices and report hoarding to the authorities.",
+      "Report unusual price rises to Village/Mtaa leaders."
+     ],
+     "sw": [
+      "Wafanyabiashara: tafadhali msilimbikize vyakula.",
+      "Kamati za Wilaya: fuatilieni bei na toeni taarifa ya ulimbikizaji kwa mamlaka.",
+      "Toeni taarifa ya kupanda kwa bei kusiko kwa kawaida kwa viongozi wa Kijiji/Mtaa."
+     ]
+    }
+   },
+   {
+    "impact": {
+     "en": "Malnutrition, especially in children under five",
+     "sw": "Utapiamlo, hasa kwa watoto walio chini ya miaka mitano"
+    },
+    "actions": {
+     "en": [
+      "Parents: take thin or weak children to the nearest health facility.",
+      "Health workers: screen children for malnutrition and treat severe cases.",
+      "Continue breastfeeding infants."
+     ],
+     "sw": [
+      "Wazazi: wapelekeni watoto waliokonda au dhaifu kituo cha afya kilicho karibu.",
+      "Watoa huduma za afya: fanyeni uchunguzi wa utapiamlo kwa watoto na tibuni walioathirika sana.",
+      "Endeleeni kunyonyesha watoto wachanga."
+     ]
+    }
+   },
+   {
+    "impact": {
+     "en": "Families moving in search of water and food",
+     "sw": "Familia kuhama kutafuta maji na chakula"
+    },
+    "actions": {
+     "en": [
+      "Please register with Village leaders on arrival in a new area.",
+      "District Committees: set up reception points with water, food and health services.",
+      "Protect women, children and older persons on the move."
+     ],
+     "sw": [
+      "Tafadhali jiandikisheni kwa viongozi wa Kijiji mnapofika eneo jipya.",
+      "Kamati za Wilaya: anzisheni vituo vya mapokezi vyenye maji, chakula na huduma za afya.",
+      "Walindeni wanawake, watoto na wazee wanaohama."
+     ]
+    }
+   },
+   {
+    "impact": {
+     "en": "Heavy losses to farming and livestock livelihoods",
+     "sw": "Hasara kubwa kwa maisha yanayotegemea kilimo na mifugo"
+    },
+    "actions": {
+     "en": [
+      "Report losses to Village/Mtaa leaders and extension officers.",
+      "Extension officers: assess crop and livestock losses."
+     ],
+     "sw": [
+      "Toeni taarifa ya hasara kwa viongozi wa Kijiji/Mtaa na maafisa ugani.",
+      "Maafisa ugani: fanyeni tathmini ya hasara ya mazao na mifugo."
+     ]
+    }
+   },
+   {
+    "impact": {
+     "en": "Conflict with wildlife as herds enter protected areas",
+     "sw": "Migogoro na wanyamapori mifugo inapoingia maeneo ya hifadhi"
+    },
+    "actions": {
+     "en": [
+      "Livestock keepers: please do not graze inside protected areas.",
+      "Report dangerous wild animals to TAWA or TANAPA.",
+      "District Committees, TAWA and TANAPA: agree temporary grazing areas outside protected areas."
+     ],
+     "sw": [
+      "Wafugaji: tafadhali msichunge ndani ya maeneo ya hifadhi.",
+      "Toeni taarifa ya wanyamapori hatari kwa TAWA au TANAPA.",
+      "Kamati za Wilaya, TAWA na TANAPA: kubalianeni maeneo ya muda ya malisho nje ya hifadhi."
+     ]
+    }
+   },
+   {
+    "impact": {
+     "en": "National support required for food, water, nutrition and livestock",
+     "sw": "Msaada wa kitaifa unahitajika kwa chakula, maji, lishe na mifugo"
+    },
+    "actions": {
+     "en": [
+      "Prime Minister's Office – Disaster Management Department: coordinate national support with ministries and partners.",
+      "District Committees: send regular situation reports through the Regional Committee."
+     ],
+     "sw": [
+      "Ofisi ya Waziri Mkuu – Idara ya Menejimenti ya Maafa: ratibuni msaada wa kitaifa pamoja na wizara na wadau.",
+      "Kamati za Wilaya: wasilisheni taarifa za hali mara kwa mara kupitia Kamati ya Mkoa."
+     ]
+    }
+   },
+   {
+    "impact": {
+     "en": "Warning status",
+     "sw": "Hali ya tahadhari"
+    },
+    "actions": {
+     "en": [
+      "Please rely on official sources: radio, TMA, Disaster Management Committees and local leaders.",
+      "Disaster Management Committees will announce when the drought emergency has ended."
+     ],
+     "sw": [
+      "Tafadhali tegemeeni taarifa rasmi: redio, TMA, Kamati za Usimamizi wa Maafa na viongozi wa eneo.",
+      "Kamati za Usimamizi wa Maafa zitatangaza hali ya dharura ya ukame itakapomalizika."
+     ]
+    }
+   }
+  ]
+ }
+}

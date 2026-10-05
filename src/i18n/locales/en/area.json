@@ -61,6 +61,7 @@
   "nav": {
     "label": "Sections of this profile",
     "overview": "Overview",
+    "actions": "What to do",
     "dimensions": "Dimensions",
     "charts": "Comparisons",
     "drivers": "Drivers",
@@ -73,6 +74,11 @@
     "overview": {
       "eyebrow": "Overview",
       "title": "{{name}} at a glance"
+    },
+    "actions": {
+      "eyebrow": "Guidance for people",
+      "title": "What to do in {{name}}",
+      "lead": "Practical steps before and during a hazard, from the Risk Action Guide Book: the risks where you live, what to do at each warning level, and what to do in an accident."
     },
     "dimensions": {
       "eyebrow": "The three dimensions",

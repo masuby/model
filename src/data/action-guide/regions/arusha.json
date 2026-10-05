@@ -1,0 +1,194 @@
+{
+ "region": {
+  "en": "Arusha Region",
+  "sw": "Mkoa wa Arusha"
+ },
+ "councils": {
+  "C015": {
+   "name": "Arusha City Council",
+   "hazards": [
+    "floods",
+    "heavyRainfall",
+    "strongWinds",
+    "earthquake"
+   ],
+   "documented": "flash floods on the Themi and Naura rivers in the city, heavy Vuli and Masika rain on the Meru slopes, strong winds, earthquake on the northern Rift, and market fires",
+   "know": [
+    {
+     "area": {
+      "en": "Arusha City: Themi and Naura river valleys",
+      "sw": "Jiji la Arusha: mabonde ya mito Themi na Naura"
+     },
+     "risk": {
+      "en": "This area lies along the Themi and Naura rivers in Arusha city: run-off from the Meru slopes raises these rivers within an hour, flooding riverside plots and low streets in the Vuli and Masika rains.",
+      "sw": "Eneo hili liko kando ya mito Themi na Naura jijini Arusha: maji kutoka miteremko ya Meru hujaza mito hii ndani ya saa moja, na kufurika viwanja vya kando ya mito na mitaa ya chini wakati wa mvua za Vuli na Masika."
+     },
+     "advice": {
+      "en": "For those living and trading here, it helps to build above the highest known flood mark, keep the river reserve and drains clear, and store goods off the floor.",
+      "sw": "Kwa wanaoishi na kufanya biashara hapa, ni vyema kujenga juu ya alama ya juu ya mafuriko inayojulikana, kuweka hifadhi ya mto na mitaro wazi, na kuhifadhi bidhaa juu ya sakafu."
+     }
+    }
+   ]
+  },
+  "C011": {
+   "name": "Arusha District Council",
+   "hazards": [
+    "heavyRainfall",
+    "landslide",
+    "floods",
+    "earthquake",
+    "drought"
+   ],
+   "documented": "heavy rain and landslides on the Meru and Monduli slopes, flash floods in the valleys, earthquake on the Rift, and dry-season water shortage on the plains",
+   "know": [
+    {
+     "area": {
+      "en": "Arusha DC: steep slopes of Mount Meru",
+      "sw": "Arusha DC: miteremko mikali ya Mlima Meru"
+     },
+     "risk": {
+      "en": "This area is on the steep volcanic-soil slopes of Mount Meru: heavy rain saturates the soil and triggers landslides, gully erosion and mudflows onto homes and roads below.",
+      "sw": "Eneo hili liko kwenye miteremko mikali ya Mlima Meru yenye udongo wa volkano: mvua kubwa hulowesha udongo na kusababisha maporomoko ya ardhi, mmomonyoko wa makorongo na matope kushuka kwenye nyumba na barabara za chini."
+     },
+     "advice": {
+      "en": "For those living and farming here, it helps to keep trees and terraces on steep slopes, lead run-off into lined channels and avoid cutting deep into slopes behind houses.",
+      "sw": "Kwa wanaoishi na kulima hapa, ni vyema kuacha miti na matuta kwenye miteremko mikali, kuelekeza maji kwenye mifereji iliyojengewa na kuepuka kuchimba kwa kina nyuma ya nyumba."
+     }
+    }
+   ]
+  },
+  "C013": {
+   "name": "Karatu District Council",
+   "hazards": [
+    "heavyRainfall",
+    "landslide",
+    "floods",
+    "strongWinds"
+   ],
+   "documented": "heavy rain and landslides on the Ngorongoro highlands, valley floods, strong winds, and a short dry season",
+   "know": [
+    {
+     "area": {
+      "en": "Karatu: escarpment gullies and Karatu town",
+      "sw": "Karatu: makorongo ya ukingo wa bonde na mji wa Karatu"
+     },
+     "risk": {
+      "en": "This area sits below the Ngorongoro highlands and the Rift escarpment: storm water rushes down gullies through Karatu town and farmland, cutting roads and carrying soil and debris.",
+      "sw": "Eneo hili liko chini ya nyanda za juu za Ngorongoro na ukingo wa Bonde la Ufa: maji ya dhoruba hushuka kwa kasi kupitia makorongo mjini Karatu na mashambani, yakikata barabara na kubeba udongo na takataka."
+     },
+     "advice": {
+      "en": "For those living and farming here, it helps to keep gullies clear and planted, use contour bunds on fields and keep buildings back from gully edges.",
+      "sw": "Kwa wanaoishi na kulima hapa, ni vyema kuweka makorongo wazi na yenye mimea, kutumia matuta ya kontua mashambani na kujenga mbali na kingo za makorongo."
+     }
+    }
+   ]
+  },
+  "C012": {
+   "name": "Longido District Council",
+   "hazards": [
+    "drought",
+    "heavyRainfall",
+    "strongWinds",
+    "wildfire",
+    "floods"
+   ],
+   "documented": "drought and failed Vuli rains on the dry Maasai steppe, strong winds, wildfire, flash floods in rare storms, and human–wildlife conflict toward the Kenyan border",
+   "know": [
+    {
+     "area": {
+      "en": "Longido: semi-arid rangelands",
+      "sw": "Longido: nyika kame"
+     },
+     "risk": {
+      "en": "This area is semi-arid rangeland where rains are short and unreliable; in drought years pasture and water points fail and livestock losses rise quickly.",
+      "sw": "Eneo hili ni nyika kame ambako mvua ni fupi na si za uhakika; katika miaka ya ukame malisho na vyanzo vya maji hukauka na vifo vya mifugo huongezeka haraka."
+     },
+     "advice": {
+      "en": "For those keeping livestock here, it helps to protect dry-season grazing reserves, maintain water points and charcos, and sell animals early when rains fail.",
+      "sw": "Kwa wanaofuga hapa, ni vyema kulinda maeneo ya malisho ya kiangazi, kutunza vyanzo vya maji na malambo, na kuuza mifugo mapema mvua zikikosekana."
+     }
+    }
+   ]
+  },
+  "C010": {
+   "name": "Meru District Council",
+   "hazards": [
+    "heavyRainfall",
+    "landslide",
+    "floods",
+    "earthquake",
+    "strongWinds"
+   ],
+   "documented": "heavy rain and landslides on Mount Meru, flash floods in the Usa and Nduruma valleys, earthquake, and strong winds",
+   "know": [
+    {
+     "area": {
+      "en": "Meru DC: Usa River and lowland streams",
+      "sw": "Meru DC: Usa River na vijito vya mabondeni"
+     },
+     "risk": {
+      "en": "This area receives rivers draining Mount Meru; around Usa River and the Kikuletwa lowlands, streams overflow quickly in heavy rain and flood farms and settlements.",
+      "sw": "Eneo hili hupokea mito inayotoka Mlima Meru; kuzunguka Usa River na mabonde ya Kikuletwa, vijito hufurika haraka wakati wa mvua kubwa na kujaa maji mashambani na kwenye makazi."
+     },
+     "advice": {
+      "en": "For those living and farming here, it helps to build on raised ground, keep river channels clear of debris and leave vegetation along stream banks.",
+      "sw": "Kwa wanaoishi na kulima hapa, ni vyema kujenga sehemu zilizoinuka, kuweka mikondo ya mito safi bila takataka na kuacha mimea kando ya kingo za vijito."
+     }
+    }
+   ]
+  },
+  "C009": {
+   "name": "Monduli District Council",
+   "hazards": [
+    "drought",
+    "strongWinds",
+    "wildfire",
+    "floods"
+   ],
+   "documented": "drought on the Monduli and Kitumbeine plains, strong winds, wildfire, flash floods on the escarpment, and human–wildlife conflict",
+   "know": [
+    {
+     "area": {
+      "en": "Monduli: Mto wa Mbu and the Rift Valley floor",
+      "sw": "Monduli: Mto wa Mbu na sakafu ya Bonde la Ufa"
+     },
+     "risk": {
+      "en": "This area lies on the Rift Valley floor below the escarpment; storms on the highlands send flash floods into Mto wa Mbu and nearby settlements, while the plains face recurrent drought.",
+      "sw": "Eneo hili liko kwenye sakafu ya Bonde la Ufa chini ya ukingo wake; dhoruba kwenye nyanda za juu hupeleka mafuriko ya ghafla Mto wa Mbu na makazi ya jirani, huku tambarare zikikumbwa na ukame wa mara kwa mara."
+     },
+     "advice": {
+      "en": "For those living and farming here, it helps to keep homes and stores off flood channels, maintain drainage through town and plan water and pasture reserves for dry years.",
+      "sw": "Kwa wanaoishi na kulima hapa, ni vyema kujenga nyumba na maghala nje ya njia za mafuriko, kutunza mifereji mjini na kupanga akiba ya maji na malisho kwa miaka ya ukame."
+     }
+    }
+   ]
+  },
+  "C014": {
+   "name": "Ngorongoro District Council",
+   "hazards": [
+    "drought",
+    "floods",
+    "landslide",
+    "earthquake",
+    "wildfire"
+   ],
+   "documented": "drought on the Salei and Serengeti plains, flash floods and landslides on the crater highlands, earthquake, wildfire, and human–wildlife conflict",
+   "know": [
+    {
+     "area": {
+      "en": "Ngorongoro: Loliondo and the Lake Natron basin",
+      "sw": "Ngorongoro: Loliondo na bonde la Ziwa Natron"
+     },
+     "risk": {
+      "en": "This area includes the Lake Natron basin and Ol Doinyo Lengai, an active volcano, within dry pastoral rangeland; drought, ash and tremors, and human–wildlife conflict are the main risks.",
+      "sw": "Eneo hili linajumuisha bonde la Ziwa Natron na Ol Doinyo Lengai, volkano hai, ndani ya nyika kame ya wafugaji; ukame, majivu na mitetemeko, na migogoro kati ya binadamu na wanyamapori ni hatari kuu."
+     },
+     "advice": {
+      "en": "For those living and herding here, it helps to keep grazing and water plans for dry years, follow official guidance on volcanic activity and strengthen bomas against wildlife.",
+      "sw": "Kwa wanaoishi na kuchunga hapa, ni vyema kuwa na mipango ya malisho na maji kwa miaka ya ukame, kufuata maelekezo rasmi kuhusu shughuli za volkano na kuimarisha maboma dhidi ya wanyamapori."
+     }
+    }
+   ]
+  }
+ }
+}

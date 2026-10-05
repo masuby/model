@@ -1,0 +1,224 @@
+{
+ "region": {
+  "en": "Dodoma Region",
+  "sw": "Mkoa wa Dodoma"
+ },
+ "councils": {
+  "C006": {
+   "name": "Dodoma City Council",
+   "hazards": [
+    "drought",
+    "heavyRainfall",
+    "strongWinds",
+    "wildfire",
+    "floods"
+   ],
+   "documented": "drought and failed rains on the semi-arid plateau (under 800 mm a year), strong winds, wildfire, flash floods in the short wet season, and water shortage",
+   "know": [
+    {
+     "area": {
+      "en": "Dodoma City: seasonal streams and fast-growing suburbs",
+      "sw": "Jiji la Dodoma: vijito vya msimu na mitaa mipya inayokua"
+     },
+     "risk": {
+      "en": "This area is semi-arid ground on the central plateau: seasonal streams through the city are dry for months but flash-flood within an hour of a storm, while long dry seasons strain water supply; the area also lies near active Rift faults.",
+      "sw": "Eneo hili ni ardhi kame ya uwanda wa kati: vijito vya msimu jijini huwa vikavu kwa miezi kadhaa lakini hufurika ghafla ndani ya saa moja baada ya dhoruba, huku kiangazi kirefu kikiathiri upatikanaji wa maji; eneo pia liko karibu na mipasuko hai ya Bonde la Ufa."
+     },
+     "advice": {
+      "en": "For those living and building here, it helps to keep stream channels and setbacks clear, build to approved standards on firm ground and store water safely for the dry months.",
+      "sw": "Kwa wanaoishi na kujenga hapa, ni vyema kuweka mikondo ya vijito na umbali wa ujenzi wazi, kujenga kwa viwango vilivyoidhinishwa kwenye ardhi imara na kuhifadhi maji salama kwa miezi ya kiangazi."
+     }
+    }
+   ]
+  },
+  "C002": {
+   "name": "Kondoa Town Council",
+   "hazards": [
+    "drought",
+    "strongWinds",
+    "floods",
+    "landslide"
+   ],
+   "documented": "drought, strong winds, flash floods on the Bubu, gully erosion, and water shortage",
+   "know": [
+    {
+     "area": {
+      "en": "Kondoa Town: eroded gullies and river crossings",
+      "sw": "Mji wa Kondoa: makorongo yaliyomomonyoka na vivuko vya mito"
+     },
+     "risk": {
+      "en": "This area has some of Tanzania's most eroded land: bare slopes shed run-off into deep gullies that flash-flood through town, undercut roads and bury fields in sand.",
+      "sw": "Eneo hili lina ardhi iliyomomonyoka zaidi nchini: miteremko mitupu hupeleka maji kwenye makorongo marefu yanayofurika ghafla mjini, yakimomonyoa barabara na kufunika mashamba kwa mchanga."
+     },
+     "advice": {
+      "en": "For those living and farming here, it helps to keep vegetation and terraces on slopes, check-dam gullies and build away from gully edges and sandy river beds.",
+      "sw": "Kwa wanaoishi na kulima hapa, ni vyema kuacha mimea na matuta kwenye miteremko, kujenga vizuizi vya makorongo na kujenga mbali na kingo za makorongo na mito ya mchanga."
+     }
+    }
+   ]
+  },
+  "C007": {
+   "name": "Bahi District Council",
+   "hazards": [
+    "drought",
+    "strongWinds",
+    "wildfire",
+    "floods"
+   ],
+   "documented": "drought, the Bahi wetland drying in poor years, strong winds, wildfire, and flash floods when the Bubu rises",
+   "know": [
+    {
+     "area": {
+      "en": "Bahi: Bahi swamp and rice plains",
+      "sw": "Bahi: bwawa la Bahi na tambarare za mpunga"
+     },
+     "risk": {
+      "en": "This area surrounds the Bahi swamp: in wet years the swamp spreads over rice fields and villages, while in dry years the same plains face crop failure and water shortage.",
+      "sw": "Eneo hili linazunguka bwawa la Bahi: katika miaka ya mvua nyingi bwawa hupanuka na kufunika mashamba ya mpunga na vijiji, huku katika miaka ya ukame tambarare hizo hukumbwa na mazao kukauka na uhaba wa maji."
+     },
+     "advice": {
+      "en": "For those living and farming here, it helps to keep homes and stores on higher ground, use the swamp edge seasonally for rice and keep a food and seed reserve for dry years.",
+      "sw": "Kwa wanaoishi na kulima hapa, ni vyema kujenga makazi na maghala sehemu za miinuko, kutumia kingo za bwawa kwa msimu kwa mpunga na kuweka akiba ya chakula na mbegu kwa miaka ya ukame."
+     }
+    }
+   ]
+  },
+  "C005": {
+   "name": "Chamwino District Council",
+   "hazards": [
+    "drought",
+    "strongWinds",
+    "wildfire",
+    "floods",
+    "heavyRainfall"
+   ],
+   "documented": "drought, strong winds, wildfire, flash floods, and water shortage for livestock and crops",
+   "know": [
+    {
+     "area": {
+      "en": "Chamwino: semi-arid farmland",
+      "sw": "Chamwino: mashamba ya nchi kame"
+     },
+     "risk": {
+      "en": "This area receives low, erratic rainfall in a single season; dry spells and early cessation of rain often cause crop failure and food shortage.",
+      "sw": "Eneo hili hupata mvua kidogo zisizo za uhakika katika msimu mmoja; vipindi vya ukavu na mvua kukatika mapema mara nyingi husababisha mazao kukauka na upungufu wa chakula."
+     },
+     "advice": {
+      "en": "For those farming here, it helps to plant drought-tolerant crops such as sorghum, millet and sunflower, harvest rainwater and keep household food reserves.",
+      "sw": "Kwa wanaolima hapa, ni vyema kupanda mazao yanayostahimili ukame kama mtama, uwele na alizeti, kuvuna maji ya mvua na kuweka akiba ya chakula ya kaya."
+     }
+    }
+   ]
+  },
+  "C008": {
+   "name": "Chemba District Council",
+   "hazards": [
+    "drought",
+    "strongWinds",
+    "wildfire",
+    "floods",
+    "landslide"
+   ],
+   "documented": "drought on the northern Dodoma plain, strong winds, wildfire, and flash floods in gullies",
+   "know": [
+    {
+     "area": {
+      "en": "Chemba: dry plains and seasonal rivers",
+      "sw": "Chemba: tambarare kame na mito ya msimu"
+     },
+     "risk": {
+      "en": "This area is dry pastoral and farming land where drought reduces pasture and water, and sudden storms send flash floods along seasonal rivers that cut roads.",
+      "sw": "Eneo hili ni ardhi kame ya ufugaji na kilimo ambako ukame hupunguza malisho na maji, na dhoruba za ghafla hupeleka mafuriko kwenye mito ya msimu yanayokata barabara."
+     },
+     "advice": {
+      "en": "For those living and herding here, it helps to protect dry-season grazing and water points, keep homes off seasonal river beds and plan journeys around storm periods.",
+      "sw": "Kwa wanaoishi na kuchunga hapa, ni vyema kulinda malisho na vyanzo vya maji vya kiangazi, kujenga mbali na mito ya msimu na kupanga safari kuzingatia vipindi vya dhoruba."
+     }
+    }
+   ]
+  },
+  "C001": {
+   "name": "Kondoa District Council",
+   "hazards": [
+    "drought",
+    "landslide",
+    "floods",
+    "strongWinds",
+    "wildfire",
+    "heavyRainfall"
+   ],
+   "documented": "drought, severe gully erosion on the Kondoa highlands, flash floods on the Bubu, strong winds, and wildfire",
+   "know": [
+    {
+     "area": {
+      "en": "Kondoa DC: Irangi hills",
+      "sw": "Kondoa DC: milima ya Irangi"
+     },
+     "risk": {
+      "en": "This area lies in the Irangi hills, where steep, over-grazed slopes erode quickly; heavy storms trigger gully growth, soil loss and occasional slope failures.",
+      "sw": "Eneo hili liko kwenye milima ya Irangi, ambako miteremko mikali iliyolishwa kupita kiasi humomonyoka haraka; dhoruba kubwa husababisha makorongo kupanuka, upotevu wa udongo na mara chache kuporomoka kwa miteremko."
+     },
+     "advice": {
+      "en": "For those living and farming here, it helps to keep grass cover and terraces on slopes, control grazing on steep land and plant trees along gullies.",
+      "sw": "Kwa wanaoishi na kulima hapa, ni vyema kuacha nyasi na matuta kwenye miteremko, kudhibiti malisho kwenye ardhi yenye mteremko mkali na kupanda miti kando ya makorongo."
+     }
+    }
+   ]
+  },
+  "C004": {
+   "name": "Kongwa District Council",
+   "hazards": [
+    "drought",
+    "strongWinds",
+    "wildfire",
+    "floods",
+    "heavyRainfall"
+   ],
+   "documented": "drought, strong winds, wildfire, and flash floods on the Mkondoa headwaters toward Kilosa",
+   "know": [
+    {
+     "area": {
+      "en": "Kongwa: dry plains and grazing land",
+      "sw": "Kongwa: tambarare kame na maeneo ya malisho"
+     },
+     "risk": {
+      "en": "This area is dry plain with sandy soils where failed or late rains quickly reduce harvests, pasture and water for people and livestock.",
+      "sw": "Eneo hili ni tambarare kame yenye udongo wa mchanga ambako mvua zikikosekana au kuchelewa mavuno, malisho na maji kwa watu na mifugo hupungua haraka."
+     },
+     "advice": {
+      "en": "For those living and farming here, it helps to grow drought-tolerant crops, protect water points and plan livestock numbers to match available pasture.",
+      "sw": "Kwa wanaoishi na kulima hapa, ni vyema kupanda mazao yanayostahimili ukame, kulinda vyanzo vya maji na kupanga idadi ya mifugo kulingana na malisho yaliyopo."
+     }
+    }
+   ]
+  },
+  "C003": {
+   "name": "Mpwapwa District Council",
+   "hazards": [
+    "drought",
+    "strongWinds",
+    "wildfire",
+    "floods",
+    "landslide",
+    "heavyRainfall"
+   ],
+   "documented": "drought, strong winds, wildfire, flash floods, and landslides on the Rubeho escarpment",
+   "know": [
+    {
+     "area": {
+      "en": "Mpwapwa: hill slopes and the Mpwapwa river",
+      "sw": "Mpwapwa: miteremko ya milima na mto Mpwapwa"
+     },
+     "risk": {
+      "en": "This area lies below steep hills where heavy rain sends flash floods down the Mpwapwa river and its gullies through town and farmland, with erosion and occasional landslides on slopes.",
+      "sw": "Eneo hili liko chini ya milima mikali ambako mvua kubwa hupeleka mafuriko ya ghafla kwenye mto Mpwapwa na makorongo yake mjini na mashambani, pamoja na mmomonyoko na mara chache maporomoko kwenye miteremko."
+     },
+     "advice": {
+      "en": "For those living and farming here, it helps to build back from river banks and gullies, keep trees and terraces on slopes and keep drainage channels open.",
+      "sw": "Kwa wanaoishi na kulima hapa, ni vyema kujenga mbali na kingo za mto na makorongo, kuacha miti na matuta kwenye miteremko na kuweka mifereji wazi."
+     }
+    }
+   ]
+  }
+ }
+}
