@@ -32,19 +32,13 @@
   },
   "lens": {
     "label": "Colour by",
-    "indicator": "Single indicator",
-    "indicatorChip": "Indicator…",
-    "pickIndicator": "Choose an indicator…",
-    "selected": "selected",
-    "searchIndicator": "Search indicators…",
-    "noIndicator": "No indicator matches.",
     "scoresFor": "Scores shown for {{name}}.",
     "scoresNational": "Scores shown: official national figures.",
-    "valuesFor": "Values for {{name}} (0–10).",
-    "valuesNational": "Official national values (0–10).",
     "source": "Source",
     "resolution": "Resolution",
-    "backToRisk": "Back to overall risk"
+    "backToRisk": "Back to overall risk",
+    "groupsOf": "Indicator groups of {{dimension}}",
+    "groupsHint": "Choose a dimension to see its indicator groups, such as Flood or Drought under Hazard & Exposure."
   },
   "resolution": {
     "council": "Council: computed for each council",

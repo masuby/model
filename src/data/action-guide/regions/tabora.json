@@ -1,0 +1,1634 @@
+{
+ "region": {
+  "en": "Tabora Region",
+  "sw": "Mkoa wa Tabora"
+ },
+ "councils": {
+  "C105": {
+   "name": "Tabora Municipal Council",
+   "hazards": [
+    "strongWinds",
+    "heavyRainfall",
+    "publicHealth",
+    "floods"
+   ],
+   "know": [
+    {
+     "area": {
+      "en": "Valley-bottom streets and low-lying mitaa",
+      "sw": "Mitaa ya mabondeni na maeneo ya chini"
+     },
+     "risk": {
+      "en": "This area is a valley bottom: run-off from the surrounding higher ground collects here, and in intense Msimu storms (November–April) water can pond knee-deep within an hour where drains are blocked.",
+      "sw": "Eneo hili ni bondeni: maji kutoka maeneo ya miinuko jirani hukusanyika hapa, na wakati wa dhoruba kali za Msimu (Novemba–Aprili) maji yanaweza kutuama hadi usawa wa goti ndani ya saa moja pale mitaro ilipoziba."
+     },
+     "advice": {
+      "en": "For those living and trading here, it helps to build floors and shop entrances above the highest known water mark and keep the drain in front of your plot clean and open all year.",
+      "sw": "Kwa wanaoishi na kufanya biashara hapa, ni vyema kujenga sakafu na milango ya maduka juu ya alama ya juu ya maji inayojulikana na kuweka mtaro wa mbele ya kiwanja chako safi na wazi mwaka mzima."
+     }
+    },
+    {
+     "area": {
+      "en": "Plots along seasonal streams",
+      "sw": "Viwanja kando ya vijito vya msimu"
+     },
+     "risk": {
+      "en": "This plot lies beside a seasonal stream: it carries no water for most of the year but rises within minutes of a heavy storm upstream, and waste or structures in the channel push water onto neighbouring plots.",
+      "sw": "Kiwanja hiki kiko kando ya kijito cha msimu: hakina maji muda mwingi wa mwaka lakini hujaa ndani ya dakika chache baada ya dhoruba kubwa upande wa juu, na taka au majengo ndani ya mkondo husukuma maji kwenye viwanja vya jirani."
+     },
+     "advice": {
+      "en": "For those living here, it helps to keep the channel and stream reserve clear and to place buildings and stores on the higher part of your plot, outside the flood path.",
+      "sw": "Kwa wanaoishi hapa, ni vyema kuweka mkondo na hifadhi ya kijito wazi na kujenga majengo na maghala sehemu ya juu ya kiwanja, nje ya njia ya mafuriko."
+     }
+    },
+    {
+     "area": {
+      "en": "Markets, bus stand and railway station",
+      "sw": "Masoko, stendi ya mabasi na stesheni ya reli"
+     },
+     "risk": {
+      "en": "This is a crowded public place: markets, the bus stand and the railway station hold large crowds in small spaces with timber stalls, loose roofing and improvised wiring, and gusts, fire and panic cause most injuries here.",
+      "sw": "Hapa ni eneo la umma lenye msongamano: masoko, stendi ya mabasi na stesheni ya reli hukusanya watu wengi katika maeneo madogo yenye vibanda vya mbao, mabati yaliyolegea na miunganisho holela ya umeme, na upepo mkali, moto na msukumano husababisha majeraha mengi hapa."
+     },
+     "advice": {
+      "en": "For those trading and travelling here, it helps to keep exits clear, fire extinguishers working, stalls and signboards firmly anchored and electrical connections safe.",
+      "sw": "Kwa wanaofanya biashara na kusafiri hapa, ni vyema kuweka njia za kutokea wazi, vizimamoto vikifanya kazi, vibanda na mabango vimefungwa imara na miunganisho ya umeme ikiwa salama."
+     }
+    },
+    {
+     "area": {
+      "en": "Open grounds, schools and tall trees",
+      "sw": "Viwanja vya wazi, shule na miti mirefu"
+     },
+     "risk": {
+      "en": "This area is exposed to lightning: thunderstorms are frequent over Tabora during the Msimu season, and most casualties occur in open grounds, under isolated tall trees and in buildings without lightning protection.",
+      "sw": "Eneo hili lina hatari ya radi: ngurumo na radi hutokea mara kwa mara Tabora wakati wa Msimu, na vifo na majeraha mengi hutokea viwanjani, chini ya miti mirefu iliyosimama peke yake na kwenye majengo yasiyo na kinga ya radi."
+     },
+     "advice": {
+      "en": "For those living, studying and working here, it helps when schools, markets and public buildings have earthed lightning arresters, and treat the 30 minutes after the last thunder as still dangerous.",
+      "sw": "Kwa wanaoishi, kusoma na kufanya kazi hapa, ni vyema shule, masoko na majengo ya umma yawe na vizuia radi vilivyounganishwa ardhini, na zingatieni kuwa dakika 30 baada ya ngurumo ya mwisho bado ni hatari."
+     }
+    },
+    {
+     "area": {
+      "en": "Water supply and sanitation",
+      "sw": "Huduma ya maji na usafi wa mazingira"
+     },
+     "risk": {
+      "en": "This area is prone to water-borne disease: dry-season shortages push households to unsafe sources, and flood water entering pit latrines and shallow wells spreads cholera and diarrhoea quickly in dense mitaa.",
+      "sw": "Eneo hili lina hatari ya magonjwa yatokanayo na maji: uhaba wa maji wakati wa kiangazi husukuma kaya kutumia vyanzo visivyo salama, na maji ya mafuriko yanayoingia vyooni na kwenye visima vifupi husambaza kipindupindu na kuhara haraka kwenye mitaa yenye msongamano."
+     },
+     "advice": {
+      "en": "For those living here, it helps to store water in clean covered containers, treat or boil drinking water, and build lined latrines raised above flood level.",
+      "sw": "Kwa wanaoishi hapa, ni vyema kuhifadhi maji kwenye vyombo safi vilivyofunikwa, kutibu au kuchemsha maji ya kunywa, na kujenga vyoo vilivyojengewa na kuinuliwa juu ya kiwango cha mafuriko."
+     }
+    }
+   ],
+   "levels": {
+    "1": [
+     {
+      "impact": {
+       "en": "Heavy Msimu storms over Tabora town. Blocked drains overflow and water ponds in low-lying streets and unplanned settlements along seasonal streams. Strong gusts and lightning possible; markets, bus and rail stations crowded.",
+       "sw": "Mvua kubwa za Msimu mjini Tabora. Mitaro iliyoziba inafurika na maji yanatuama kwenye mitaa ya mabondeni na makazi holela kando ya vijito vya msimu. Upepo mkali na radi vinawezekana; masoko, stendi za mabasi na stesheni za reli zimejaa watu."
+      },
+      "actions": {
+       "en": [
+        "Municipal and Mtaa teams clear drains, culverts and stream outlets in low-lying streets before the storm.",
+        "Households in valley-bottom streets raise food, documents and electrical items, and tie down loose roofing sheets.",
+        "Market, bus stand and railway station managers secure stalls and signboards and keep exits clear.",
+        "Do not walk or drive through flooded streets or culverts. Go indoors when you hear thunder."
+       ],
+       "sw": [
+        "Timu za Manispaa na Mitaa zisafishe mitaro, makalavati na midomo ya vijito kwenye mitaa ya mabondeni kabla ya dhoruba.",
+        "Kaya za mitaa ya mabondeni zipandishe chakula, nyaraka na vifaa vya umeme, na zifunge vizuri mabati yaliyolegea.",
+        "Wasimamizi wa masoko, stendi za mabasi na stesheni ya reli waimarishe vibanda na mabango na waache njia za kutokea wazi.",
+        "Usitembee wala kuendesha kwenye mitaa au makalavati yaliyofurika. Ingia ndani unaposikia ngurumo."
+       ]
+      }
+     },
+     {
+      "impact": {
+       "en": "Warning status",
+       "sw": "Hali ya tahadhari"
+      },
+      "actions": {
+       "en": [
+        "Please continue to follow updates from TMA, Disaster Management Committees and local leaders.",
+        "This advisory remains in place until the authorities update or withdraw it."
+       ],
+       "sw": [
+        "Tafadhali endeleeni kufuatilia taarifa za TMA, Kamati za Usimamizi wa Maafa na viongozi wa eneo.",
+        "Tahadhari hii itaendelea hadi mamlaka zitakapoihuisha au kuiondoa rasmi."
+       ]
+      }
+     }
+    ],
+    "2": [
+     {
+      "impact": {
+       "en": "Flash floods in valley-bottom streets and along seasonal streams. Houses flooded, some roads and culvert crossings closed, power and piped water interrupted, and shallow wells contaminated.",
+       "sw": "Mafuriko ya ghafla kwenye mitaa ya mabondeni na kando ya vijito vya msimu. Nyumba zimeingiwa maji, baadhi ya barabara na vivuko vya makalavati vimefungwa, umeme na maji ya bomba vimekatika, na visima vifupi vimechafuka."
+      },
+      "actions": {
+       "en": [
+        "Move households from flooded valley-bottom streets to the designated school or ward evacuation centre.",
+        "TARURA and the Traffic Police close and mark flooded roads and culvert crossings and divert traffic.",
+        "Schools release pupils only to parents or guardians, and not across flooded streams.",
+        "Boil or treat drinking water. TUWASA increases chlorination; health facilities watch for cholera and diarrhoea."
+       ],
+       "sw": [
+        "Hamisha kaya kutoka mitaa ya mabondeni iliyofurika kwenda shule au kituo cha uokoaji cha kata kilichoteuliwa.",
+        "TARURA na Polisi wa Usalama Barabarani wafunge na kuweka alama barabara na vivuko vilivyofurika, na waelekeze magari njia mbadala.",
+        "Shule ziwaruhusu wanafunzi kwa wazazi au walezi tu, na wasivuke vijito vilivyofurika.",
+        "Chemsha au tibu maji ya kunywa. TUWASA iongeze klorini; vituo vya afya vifuatilie kipindupindu na kuhara."
+       ]
+      }
+     },
+     {
+      "impact": {
+       "en": "Warning status",
+       "sw": "Hali ya tahadhari"
+      },
+      "actions": {
+       "en": [
+        "Please continue to follow updates from TMA, Disaster Management Committees and local leaders.",
+        "This warning remains in force until the authorities lower or withdraw it."
+       ],
+       "sw": [
+        "Tafadhali endeleeni kufuatilia taarifa za TMA, Kamati za Usimamizi wa Maafa na viongozi wa eneo.",
+        "Tahadhari hii itaendelea kutumika hadi mamlaka zitakapoishusha au kuiondoa rasmi."
+       ]
+      }
+     }
+    ],
+    "3": [
+     {
+      "impact": {
+       "en": "Widespread flooding and storm damage across Tabora town. Houses collapse, families trapped, roads and power cut, and pit latrines overflow. High risk of drowning, injury and cholera.",
+       "sw": "Mafuriko makubwa na uharibifu wa dhoruba mjini Tabora. Nyumba zinaanguka, familia zimekwama, barabara na umeme vimekatika, na vyoo vya shimo vinafurika. Hatari kubwa ya kuzama, majeraha na kipindupindu."
+      },
+      "actions": {
+       "en": [
+        "Evacuate all households in flooded or collapse-prone houses now. Do not return until the committee declares the area safe.",
+        "Fire and Rescue (114), Police and Red Cross lead search and rescue. Keep the route to Kitete Regional Referral Hospital clear.",
+        "Open evacuation centres and register every household, with safe space for women, children, older persons and people with disabilities.",
+        "Health team: treat injuries first, set up cholera treatment points and chlorinate water at every centre."
+       ],
+       "sw": [
+        "Hamisha kaya zote zilizo kwenye nyumba zilizofurika au zilizo hatarini kuanguka sasa. Msirudi mpaka kamati itangaze eneo ni salama.",
+        "Zimamoto na Uokoaji (114), Polisi na Msalaba Mwekundu waongoze utafutaji na uokoaji. Njia ya kwenda Hospitali ya Rufaa ya Mkoa Kitete iwe wazi.",
+        "Fungua vituo vya uokoaji na sajili kila kaya, kukiwa na nafasi salama kwa wanawake, watoto, wazee na watu wenye ulemavu.",
+        "Timu ya afya: tibu majeruhi kwanza, anzisha vituo vya kutibu kipindupindu na weka klorini kwenye maji ya kila kituo."
+       ]
+      }
+     },
+     {
+      "impact": {
+       "en": "Warning status",
+       "sw": "Hali ya tahadhari"
+      },
+      "actions": {
+       "en": [
+        "Please stay with official sources: radio, TMA, Disaster Management Committees and local leaders.",
+        "Disaster Management Committees will announce when the danger has passed and when it is safe to return."
+       ],
+       "sw": [
+        "Tafadhali tegemeeni taarifa rasmi: redio, TMA, Kamati za Usimamizi wa Maafa na viongozi wa eneo.",
+        "Kamati za Usimamizi wa Maafa zitatangaza hatari itakapokwisha na itakapokuwa salama kurudi."
+       ]
+      }
+     }
+    ]
+   },
+   "profile": {
+    "setting": "Regional HQ; 308,741 people on 1,461 km². Railway/SGR junction, airport, regional referral hospital (Kitete). Unplanned settlements in valley bottoms and along seasonal streams.",
+    "hazards": "Urban flash floods; strong winds; lightning; water shortage; cholera; market and dry-season fires.",
+    "atRisk": "Households in low-lying informal settlements; markets, bus and rail stations; schools; travellers in transit."
+   }
+  },
+  "C099": {
+   "name": "Nzega Town Council",
+   "hazards": [
+    "drought",
+    "heavyRainfall",
+    "strongWinds",
+    "floods"
+   ],
+   "know": [
+    {
+     "area": {
+      "en": "Low-lying houses and the market area",
+      "sw": "Nyumba za maeneo ya chini na eneo la soko"
+     },
+     "risk": {
+      "en": "This part of town is low-lying: Nzega sits on a gently sloping plain, and storm water from the surrounding farmland converges on the lower streets and the market area, where drains are narrow and often blocked.",
+      "sw": "Sehemu hii ya mji iko chini: Nzega iko kwenye uwanda wenye mteremko mdogo, na maji ya dhoruba kutoka mashamba yanayozunguka hukutana kwenye mitaa ya chini na eneo la soko, ambapo mitaro ni myembamba na mara nyingi huziba."
+     },
+     "advice": {
+      "en": "For those living and trading here, it helps to build on raised foundations, keep drains open and store goods on shelves above floor level.",
+      "sw": "Kwa wanaoishi na kufanya biashara hapa, ni vyema kujenga kwa misingi iliyoinuliwa, kuweka mitaro wazi na kuhifadhi bidhaa kwenye rafu juu ya sakafu."
+     }
+    },
+    {
+     "area": {
+      "en": "T3/T8 junction and truck parks",
+      "sw": "Makutano ya T3/T8 na maegesho ya malori"
+     },
+     "risk": {
+      "en": "This is a busy trunk-road junction: the T3 and T8 meet in Nzega, carrying heavy trucks and fuel tankers through town, and roadside trading and parking narrow the carriageway and raise the risk of crashes, spills and fire.",
+      "sw": "Haya ni makutano ya barabara kuu yenye shughuli nyingi: T3 na T8 hukutana Nzega zikipitisha malori makubwa na magari ya mafuta katikati ya mji, na biashara na maegesho kando ya barabara hupunguza upana wa barabara na kuongeza hatari ya ajali, kumwagika kwa mafuta na moto."
+     },
+     "advice": {
+      "en": "For those trading and working here, it helps to use market spaces set back from the carriageway and marked parking bays, and keep fire extinguishers ready at fuel stations and garages.",
+      "sw": "Kwa wanaofanya biashara na kazi hapa, ni vyema kutumia maeneo ya biashara yaliyo mbali kidogo na barabara na maegesho yaliyowekwa alama, na kuweka vizimamoto tayari kwenye vituo vya mafuta na gereji."
+     }
+    },
+    {
+     "area": {
+      "en": "Water points and households",
+      "sw": "Vituo vya maji na kaya"
+     },
+     "risk": {
+      "en": "This town faces recurrent water shortage: supply in Nzega drops in the dry season (June–October) and whenever pipes or pumps fail, pushing households to unprotected sources.",
+      "sw": "Mji huu hukumbwa na uhaba wa maji wa mara kwa mara: upatikanaji wa maji Nzega hupungua wakati wa kiangazi (Juni–Oktoba) na pale mabomba au pampu zinapoharibika, hivyo kaya hulazimika kutumia vyanzo visivyolindwa."
+     },
+     "advice": {
+      "en": "For those living here, it helps to harvest roof rainwater, store water safely at home and report leaks early so supply lasts between interruptions.",
+      "sw": "Kwa wanaoishi hapa, ni vyema kuvuna maji ya mvua kutoka paa, kuhifadhi maji salama nyumbani na kutoa taarifa mapema za uvujaji ili maji yadumu kipindi cha kukatika kwa huduma."
+     }
+    },
+    {
+     "area": {
+      "en": "Mining pits near town",
+      "sw": "Mashimo ya madini karibu na mji"
+     },
+     "risk": {
+      "en": "This area has mining pits: gold pits around Nzega have unsupported walls in loose, weathered soil, collapse when saturated during the rains, and fill with water deep enough to drown.",
+      "sw": "Eneo hili lina mashimo ya madini: mashimo ya dhahabu kuzunguka Nzega yana kuta zisizoimarishwa kwenye udongo laini, hubomoka yanapojaa maji wakati wa mvua, na hujaa maji yenye kina cha kuweza kuzamisha."
+     },
+     "advice": {
+      "en": "For those mining and living here, it helps to shore pit walls, divert run-off away from pit mouths, and fence or backfill abandoned pits.",
+      "sw": "Kwa wanaochimba na kuishi hapa, ni vyema kuimarisha kuta za mashimo, kuelekeza maji ya mvua mbali na midomo ya mashimo, na kuzungushia uzio au kufukia mashimo yaliyoachwa."
+     }
+    },
+    {
+     "area": {
+      "en": "Unplanned and crowded settlements",
+      "sw": "Makazi holela na yenye msongamano"
+     },
+     "risk": {
+      "en": "This is a densely built settlement: in unplanned mitaa, closely packed houses share drains and access paths, so one blocked drain floods several homes and one fire can spread from roof to roof.",
+      "sw": "Haya ni makazi yaliyobanana: katika mitaa isiyopangwa nyumba hutegemea mitaro na njia zile zile, hivyo mtaro mmoja ukiziba nyumba kadhaa hufurika na moto mmoja unaweza kusambaa kutoka paa moja hadi jingine."
+     },
+     "advice": {
+      "en": "For those living here, it helps to leave space between buildings, keep lanes wide enough for fire and rescue vehicles, and keep shared drains open.",
+      "sw": "Kwa wanaoishi hapa, ni vyema kuacha nafasi kati ya majengo, kuweka njia pana za kupitisha magari ya zimamoto na uokoaji, na kuweka mitaro ya pamoja wazi."
+     }
+    }
+   ],
+   "levels": {
+    "1": [
+     {
+      "impact": {
+       "en": "Dry spells strain Nzega town's water supply; short heavy storms cause flash runoff in town drains and at the T3/T8 junction. Strong winds and dust, and lightning where storms build.",
+       "sw": "Vipindi vya ukavu vinapunguza maji mjini Nzega; mvua fupi kubwa zinasababisha maji kutiririka kwa kasi kwenye mitaro ya mji na makutano ya barabara T3/T8. Upepo mkali, vumbi na radi dhoruba inapojengeka."
+      },
+      "actions": {
+       "en": [
+        "The water authority publishes a rationing timetable; households store water in clean, covered containers.",
+        "Town council clears drains and culverts around the market, bus stand and the T3/T8 junction.",
+        "Traders and households tie down roofs and remove loose objects that strong winds can lift.",
+        "Drivers on T3 and T8: slow down, use headlights and never cross water flowing over the road."
+       ],
+       "sw": [
+        "Mamlaka ya maji itangaze ratiba ya mgawo wa maji; kaya zihifadhi maji kwenye vyombo safi vilivyofunikwa.",
+        "Halmashauri ya Mji isafishe mitaro na makalavati kuzunguka soko, stendi na makutano ya T3/T8.",
+        "Wafanyabiashara na kaya wafunge vizuri paa na waondoe vitu vinavyoweza kupeperushwa na upepo.",
+        "Madereva wa T3 na T8: punguzeni mwendo, washeni taa na msivuke maji yanayopita juu ya barabara."
+       ]
+      }
+     },
+     {
+      "impact": {
+       "en": "Warning status",
+       "sw": "Hali ya tahadhari"
+      },
+      "actions": {
+       "en": [
+        "Please continue to follow updates from TMA, Disaster Management Committees and local leaders.",
+        "This advisory remains in place until the authorities update or withdraw it."
+       ],
+       "sw": [
+        "Tafadhali endeleeni kufuatilia taarifa za TMA, Kamati za Usimamizi wa Maafa na viongozi wa eneo.",
+        "Tahadhari hii itaendelea hadi mamlaka zitakapoihuisha au kuiondoa rasmi."
+       ]
+      }
+     }
+    ],
+    "2": [
+     {
+      "impact": {
+       "en": "Water points dry or crowded, or flash floods entering low homes and the market; traffic on T3/T8 disrupted. Rising risk of unsafe water and diarrhoea.",
+       "sw": "Vituo vya maji vimekauka au vina msongamano, au mafuriko ya ghafla yanaingia kwenye nyumba za chini na sokoni; usafiri wa T3/T8 umeathirika. Hatari ya maji yasiyo salama na kuhara inaongezeka."
+      },
+      "actions": {
+       "en": [
+        "Deliver water by bowser to the worst-affected mitaa, putting health facilities and schools first.",
+        "Move households from flooded low areas to the ward assembly point.",
+        "Police and TANROADS manage traffic at the junction and hold heavy trucks at safe parking.",
+        "Treat or boil all drinking water. Clinics report diarrhoea cases to the council every day."
+       ],
+       "sw": [
+        "Sambaza maji kwa magari ya maji kwenye mitaa iliyoathirika zaidi, kuanzia vituo vya afya na shule.",
+        "Hamisha kaya kutoka maeneo ya chini yaliyofurika kwenda kituo cha kukusanyika cha kata.",
+        "Polisi na TANROADS wasimamie magari kwenye makutano na wazuie malori makubwa kwenye maegesho salama.",
+        "Tibu au chemsha maji yote ya kunywa. Kliniki ziripoti wagonjwa wa kuhara kwa halmashauri kila siku."
+       ]
+      }
+     },
+     {
+      "impact": {
+       "en": "Warning status",
+       "sw": "Hali ya tahadhari"
+      },
+      "actions": {
+       "en": [
+        "Please continue to follow updates from TMA, Disaster Management Committees and local leaders.",
+        "This warning remains in force until the authorities lower or withdraw it."
+       ],
+       "sw": [
+        "Tafadhali endeleeni kufuatilia taarifa za TMA, Kamati za Usimamizi wa Maafa na viongozi wa eneo.",
+        "Tahadhari hii itaendelea kutumika hadi mamlaka zitakapoishusha au kuiondoa rasmi."
+       ]
+      }
+     }
+    ],
+    "3": [
+     {
+      "impact": {
+       "en": "Severe water crisis or flooding: health facilities and schools without water, houses damaged and the T3/T8 corridor cut. High risk of cholera, injury and stranded travellers.",
+       "sw": "Uhaba mkubwa wa maji au mafuriko: vituo vya afya na shule bila maji, nyumba zimeharibika na barabara za T3/T8 zimekatika. Hatari kubwa ya kipindupindu, majeraha na wasafiri kukwama."
+      },
+      "actions": {
+       "en": [
+        "Activate the Town Disaster Management Committee and evacuate damaged houses now.",
+        "Run emergency water trucking with chlorination at every distribution point; protect the hospital supply.",
+        "Hold long-distance buses and trucks at safe areas and open shelter for stranded travellers.",
+        "Health team: treat injuries first and keep a cholera treatment point ready."
+       ],
+       "sw": [
+        "Kamati ya Usimamizi wa Maafa ya Mji ianze kazi na hamisha watu kutoka nyumba zilizoharibika sasa.",
+        "Sambaza maji ya dharura kwa magari na weka klorini kila kituo cha kugawa; linda maji ya hospitali.",
+        "Zuia mabasi na malori ya safari ndefu kwenye maeneo salama na fungua makazi kwa wasafiri waliokwama.",
+        "Timu ya afya: tibu majeruhi kwanza na weka tayari kituo cha kutibu kipindupindu."
+       ]
+      }
+     },
+     {
+      "impact": {
+       "en": "Warning status",
+       "sw": "Hali ya tahadhari"
+      },
+      "actions": {
+       "en": [
+        "Please stay with official sources: radio, TMA, Disaster Management Committees and local leaders.",
+        "Disaster Management Committees will announce when the danger has passed and when it is safe to return."
+       ],
+       "sw": [
+        "Tafadhali tegemeeni taarifa rasmi: redio, TMA, Kamati za Usimamizi wa Maafa na viongozi wa eneo.",
+        "Kamati za Usimamizi wa Maafa zitatangaza hatari itakapokwisha na itakapokuwa salama kurudi."
+       ]
+      }
+     }
+    ]
+   },
+   "profile": {
+    "setting": "Commercial town where the T3 (Morogoro–Rwanda) and T8 (Tabora–Mwanza) roads meet. Chronic water stress; artisanal gold sites nearby.",
+    "hazards": "Water shortage and drought; flash runoff in town drains; strong winds; cholera; road crashes in heavy rain.",
+    "atRisk": "Households relying on shallow wells and vendors; market traders; truck and bus passengers on T3/T8."
+   }
+  },
+  "C101": {
+   "name": "Igunga District Council",
+   "hazards": [
+    "heavyRainfall",
+    "floods",
+    "drought"
+   ],
+   "know": [
+    {
+     "area": {
+      "en": "Manonga and Wembere black-clay plains",
+      "sw": "Mbuga za udongo mweusi za Manonga na Wembere"
+     },
+     "risk": {
+      "en": "This area is a flood plain: the Manonga and Wembere plains are flat black-clay (mbuga) soils that drain very slowly, and after heavy rain water can stand on fields and homesteads for several weeks.",
+      "sw": "Eneo hili ni uwanda wa mafuriko: mbuga za Manonga na Wembere ni tambarare zenye udongo mweusi wa mfinyanzi unaopitisha maji polepole sana, na baada ya mvua kubwa maji yanaweza kutuama mashambani na kwenye makazi kwa wiki kadhaa."
+     },
+     "advice": {
+      "en": "For those living and farming here, it helps to build houses and stores on raised plinths or natural high points and keep food and seed above the flood line.",
+      "sw": "Kwa wanaoishi na kulima hapa, ni vyema kujenga nyumba na maghala kwenye misingi iliyoinuliwa au miinuko ya asili na kuhifadhi chakula na mbegu juu ya kiwango cha mafuriko."
+     }
+    },
+    {
+     "area": {
+      "en": "Rice fields and the Mwamapuli irrigation scheme",
+      "sw": "Mashamba ya mpunga na skimu ya umwagiliaji Mwamapuli"
+     },
+     "risk": {
+      "en": "This area is an irrigation scheme: rice schemes such as Mwamapuli depend on controlled water, and when intakes and canals overtop in heavy rain, fields flood and fast-flowing canals become drowning points for children.",
+      "sw": "Eneo hili ni skimu ya umwagiliaji: skimu za mpunga kama Mwamapuli hutegemea maji yanayodhibitiwa, na vyanzo na mifereji vinapofurika wakati wa mvua kubwa mashamba hujaa maji na mifereji yenye mkondo mkali huwa hatari ya kuzama kwa watoto."
+     },
+     "advice": {
+      "en": "For those farming and living here, it helps to maintain canals and drainage gates and to supervise children at canal crossings.",
+      "sw": "Kwa wanaolima na kuishi hapa, ni vyema kutunza mifereji na milango ya maji na kuwasimamia watoto kwenye vivuko vya mifereji."
+     }
+    },
+    {
+     "area": {
+      "en": "T3 road crossings and drifts",
+      "sw": "Vivuko na makalavati ya barabara T3"
+     },
+     "risk": {
+      "en": "This road section floods: water flows across low sections and drifts on the T3 and feeder roads, and 15 cm of moving water can knock a person over while 30 cm can float a motorcycle or small car.",
+      "sw": "Sehemu hii ya barabara hufurika: maji hupita juu ya sehemu za chini na makalavati ya barabara T3 na barabara za vijijini, na maji yanayotiririka ya sentimita 15 yanaweza kumwangusha mtu huku sentimita 30 zikiweza kuelea pikipiki au gari dogo."
+     },
+     "advice": {
+      "en": "For those travelling and transporting goods here, it helps to know the low crossings on your route, plan journeys around heavy-rain periods and use marked alternative routes.",
+      "sw": "Kwa wanaosafiri na kusafirisha bidhaa hapa, ni vyema kufahamu vivuko vya chini kwenye njia yenu, kupanga safari kuzingatia vipindi vya mvua kubwa na kutumia njia mbadala zilizowekwa alama."
+     }
+    },
+    {
+     "area": {
+      "en": "Grazing areas and livestock routes",
+      "sw": "Maeneo ya malisho na njia za mifugo"
+     },
+     "risk": {
+      "en": "This is a grazing area under pressure: Igunga carries large cattle herds, and in a poor rainy season pasture and water points shrink, herds concentrate on the remaining sources and disputes with crop farmers increase.",
+      "sw": "Hili ni eneo la malisho lenye shinikizo: Igunga ina makundi makubwa ya ng'ombe, na msimu wa mvua ukiwa hafifu malisho na vyanzo vya maji hupungua, mifugo hukusanyika kwenye vyanzo vilivyobaki na migogoro na wakulima huongezeka."
+     },
+     "advice": {
+      "en": "For those keeping livestock and farming here, it helps to follow agreed livestock routes and village land-use plans, protect watering points and plan early sale of animals when rains fail.",
+      "sw": "Kwa wanaofuga na kulima hapa, ni vyema kufuata njia za mifugo zilizokubaliwa na mipango ya matumizi ya ardhi ya vijiji, kulinda vyanzo vya maji na kupanga mapema kuuza mifugo mvua zikikosekana."
+     }
+    },
+    {
+     "area": {
+      "en": "Dryland farms",
+      "sw": "Mashamba ya nchi kavu"
+     },
+     "risk": {
+      "en": "This is dryland farming country: rainfall over Igunga's uplands is erratic, and dry spells of two to three weeks between December and February often hit maize at flowering.",
+      "sw": "Haya ni maeneo ya kilimo cha nchi kavu: mvua kwenye miinuko ya Igunga si za uhakika, na vipindi vya ukavu vya wiki mbili hadi tatu kati ya Desemba na Februari mara nyingi huathiri mahindi wakati wa kuchanua."
+     },
+     "advice": {
+      "en": "For those farming here, it helps to grow sorghum, millet, cassava and early-maturing varieties and to keep a household food reserve.",
+      "sw": "Kwa wanaolima hapa, ni vyema kupanda mtama, uwele, mihogo na mbegu zinazokomaa mapema na kuweka akiba ya chakula ya kaya."
+     }
+    }
+   ],
+   "levels": {
+    "1": [
+     {
+      "impact": {
+       "en": "Heavy rain over the flat Manonga and Wembere plains. Clay soils hold water, so mbuga and rice fields begin to pond, low homes get wet and earth roads become slippery. Lightning over open plains.",
+       "sw": "Mvua kubwa kwenye tambarare za Manonga na Wembere. Udongo wa mfinyanzi unatuamisha maji, hivyo mbuga na mashamba ya mpunga yanaanza kujaa maji, nyumba za chini zinalowa na barabara za udongo zinateleza. Radi kwenye maeneo ya wazi."
+      },
+      "actions": {
+       "en": [
+        "Irrigation committees at Mwamapuli and other rice schemes clear canals and open field outlets.",
+        "Households in plain villages raise food, seed and documents and store clean drinking water.",
+        "Herders move cattle to higher ground before the plains fill with water.",
+        "Do not cross flooded drifts or sections of the T3 where water is flowing over the road."
+       ],
+       "sw": [
+        "Kamati za umwagiliaji Mwamapuli na skimu nyingine za mpunga zisafishe mifereji na zifungue njia za kutolea maji shambani.",
+        "Kaya za vijiji vya tambarare zipandishe chakula, mbegu na nyaraka na zihifadhi maji safi ya kunywa.",
+        "Wafugaji wahamishe ng'ombe kwenda maeneo ya miinuko kabla tambarare hazijajaa maji.",
+        "Usivuke vivuko vilivyofurika wala sehemu za barabara T3 ambako maji yanapita juu ya barabara."
+       ]
+      }
+     },
+     {
+      "impact": {
+       "en": "Warning status",
+       "sw": "Hali ya tahadhari"
+      },
+      "actions": {
+       "en": [
+        "Please continue to follow updates from TMA, Disaster Management Committees and local leaders.",
+        "This advisory remains in place until the authorities update or withdraw it."
+       ],
+       "sw": [
+        "Tafadhali endeleeni kufuatilia taarifa za TMA, Kamati za Usimamizi wa Maafa na viongozi wa eneo.",
+        "Tahadhari hii itaendelea hadi mamlaka zitakapoihuisha au kuiondoa rasmi."
+       ]
+      }
+     }
+    ],
+    "2": [
+     {
+      "impact": {
+       "en": "Ponding and river floods spread across the Wembere and Manonga plains. Houses and rice fields inundated, village roads cut, T3 sections flooded, and farmers and herders competing for dry land.",
+       "sw": "Maji yaliyotuama na mafuriko ya mito yanaenea kwenye tambarare za Wembere na Manonga. Nyumba na mashamba ya mpunga yamezama, barabara za vijiji zimekatika, sehemu za T3 zimefurika, na wakulima na wafugaji wanagombania maeneo makavu."
+      },
+      "actions": {
+       "en": [
+        "Move households from inundated villages to ward assembly points on higher ground.",
+        "TANROADS and Police control traffic on flooded T3 sections; TARURA closes village drifts.",
+        "Ward officers agree safe livestock routes and grazing areas to prevent farmer–herder conflict.",
+        "Boil or treat drinking water. Health facilities watch for cholera, diarrhoea and malaria."
+       ],
+       "sw": [
+        "Hamisha kaya kutoka vijiji vilivyozama kwenda vituo vya kukusanyika vya kata vilivyo kwenye miinuko.",
+        "TANROADS na Polisi wasimamie magari kwenye sehemu za T3 zilizofurika; TARURA ifunge vivuko vya vijijini.",
+        "Maafisa wa kata wakubaliane njia salama za mifugo na maeneo ya malisho ili kuzuia migogoro ya wakulima na wafugaji.",
+        "Chemsha au tibu maji ya kunywa. Vituo vya afya vifuatilie kipindupindu, kuhara na malaria."
+       ]
+      }
+     },
+     {
+      "impact": {
+       "en": "Warning status",
+       "sw": "Hali ya tahadhari"
+      },
+      "actions": {
+       "en": [
+        "Please continue to follow updates from TMA, Disaster Management Committees and local leaders.",
+        "This warning remains in force until the authorities lower or withdraw it."
+       ],
+       "sw": [
+        "Tafadhali endeleeni kufuatilia taarifa za TMA, Kamati za Usimamizi wa Maafa na viongozi wa eneo.",
+        "Tahadhari hii itaendelea kutumika hadi mamlaka zitakapoishusha au kuiondoa rasmi."
+       ]
+      }
+     }
+    ],
+    "3": [
+     {
+      "impact": {
+       "en": "Large parts of the plains under standing water for weeks. Villages isolated, houses collapse, the T3 is cut, and crops and livestock are lost. High risk of drowning, cholera and food shortage.",
+       "sw": "Sehemu kubwa ya tambarare imefunikwa na maji kwa wiki kadhaa. Vijiji vimetengwa, nyumba zinaanguka, T3 imekatika, na mazao na mifugo vimepotea. Hatari kubwa ya kuzama, kipindupindu na upungufu wa chakula."
+      },
+      "actions": {
+       "en": [
+        "Evacuate isolated villages now. Use boats or canoes only with life jackets and trained crews.",
+        "Call 114 and 190. Keep the T3 corridor and the route to Igunga District Hospital open.",
+        "Open camps on higher ground, register every household and plan food, seed and livestock support.",
+        "Health team: treat injuries first, set up cholera treatment points in camps and chlorinate water."
+       ],
+       "sw": [
+        "Hamisha vijiji vilivyotengwa sasa. Tumia boti au mitumbwi tu ukiwa na jaketi ya kujiokoa na waendeshaji waliofunzwa.",
+        "Piga 114 na 190. Barabara T3 na njia ya kwenda Hospitali ya Wilaya Igunga ziwe wazi.",
+        "Fungua kambi kwenye miinuko, sajili kila kaya na panga msaada wa chakula, mbegu na mifugo.",
+        "Timu ya afya: tibu majeruhi kwanza, anzisha vituo vya kutibu kipindupindu kambini na weka klorini kwenye maji."
+       ]
+      }
+     },
+     {
+      "impact": {
+       "en": "Warning status",
+       "sw": "Hali ya tahadhari"
+      },
+      "actions": {
+       "en": [
+        "Please stay with official sources: radio, TMA, Disaster Management Committees and local leaders.",
+        "Disaster Management Committees will announce when the danger has passed and when it is safe to return."
+       ],
+       "sw": [
+        "Tafadhali tegemeeni taarifa rasmi: redio, TMA, Kamati za Usimamizi wa Maafa na viongozi wa eneo.",
+        "Kamati za Usimamizi wa Maafa zitatangaza hatari itakapokwisha na itakapokuwa salama kurudi."
+       ]
+      }
+     }
+    ]
+   },
+   "profile": {
+    "setting": "546,204 people on 7,064 km². Flat, low Manonga and Wembere plains with water-retaining clay soils; Mwamapuli rice irrigation scheme; T3 crosses the district.",
+    "hazards": "Riverine and ponding floods; road cuts on T3 and drifts; dry spells; lightning; cholera; farmer–herder conflict over water and pasture.",
+    "atRisk": "Plain and riverside villages; rice farmers; herders and cattle; travellers on T3."
+   }
+  },
+  "C106": {
+   "name": "Kaliua District Council",
+   "hazards": [
+    "heavyRainfall",
+    "floods",
+    "strongWinds",
+    "drought"
+   ],
+   "know": [
+    {
+     "area": {
+      "en": "Wetland margins and the Malagarasi and Ugalla valleys",
+      "sw": "Kingo za ardhioevu na mabonde ya Malagarasi na Ugalla"
+     },
+     "risk": {
+      "en": "This area is a wetland margin: the Malagarasi and Ugalla margins expand every heavy rainy season, and water levels can stay high for weeks after the rains end.",
+      "sw": "Eneo hili ni kingo za ardhioevu: kingo za Malagarasi na Ugalla hupanuka kila msimu wa mvua kubwa, na kina cha maji kinaweza kubaki juu kwa wiki kadhaa baada ya mvua kwisha."
+     },
+     "advice": {
+      "en": "For those farming and fishing here, it helps to use the margins seasonally and to keep permanent houses and stores above the highest known flood mark.",
+      "sw": "Kwa wanaolima na kuvua hapa, ni vyema kutumia kingo kwa msimu na kujenga nyumba za kudumu na maghala juu ya alama ya juu kabisa ya mafuriko inayojulikana."
+     }
+    },
+    {
+     "area": {
+      "en": "Fishing camps",
+      "sw": "Kambi za uvuvi"
+     },
+     "risk": {
+      "en": "This is a fishing camp area: camps sit in remote, low-lying spots, rising water, afternoon thunderstorms and capsizing are the main threats, and help is often hours away.",
+      "sw": "Hili ni eneo la kambi za uvuvi: kambi ziko maeneo ya mbali na ya chini, kupanda kwa maji, dhoruba za mchana na kupinduka kwa mitumbwi ni hatari kuu, na msaada mara nyingi uko saa kadhaa mbali."
+     },
+     "advice": {
+      "en": "For those fishing here, it helps to wear life jackets, bring boats to shore before storms build and keep the camp register up to date with the village.",
+      "sw": "Kwa wanaovua hapa, ni vyema kuvaa maboya ya kujiokoa, kurudisha mitumbwi ufukweni kabla dhoruba haijaanza na kuhuisha daftari la kambi lililoko kijijini."
+     }
+    },
+    {
+     "area": {
+      "en": "Miombo woodland edges",
+      "sw": "Pembezoni mwa misitu ya miombo"
+     },
+     "risk": {
+      "en": "This area borders miombo woodland: from June to October dry grass and leaf litter burn fast, and fires driven by afternoon winds can travel several kilometres in a day.",
+      "sw": "Eneo hili linapakana na misitu ya miombo: kati ya Juni na Oktoba nyasi kavu na majani yaliyoanguka huungua haraka, na moto unaosukumwa na upepo wa mchana unaweza kusafiri kilomita kadhaa kwa siku."
+     },
+     "advice": {
+      "en": "For those living and farming here, it helps to keep fire breaks cleared around homes, tobacco barns and apiaries, and to burn fields early in the dry season on calm days with village approval.",
+      "sw": "Kwa wanaoishi na kulima hapa, ni vyema kusafisha njia za kuzuia moto kuzunguka nyumba, mabani ya tumbaku na mizinga, na kuchoma mashamba mapema wakati wa kiangazi siku zisizo na upepo kwa idhini ya kijiji."
+     }
+    },
+    {
+     "area": {
+      "en": "Villages next to forest and game reserves",
+      "sw": "Vijiji jirani na hifadhi za misitu na wanyamapori"
+     },
+     "risk": {
+      "en": "This village borders a reserve: villages next to forest and game reserves experience crop raids and occasional attacks, most often at night and around harvest time.",
+      "sw": "Kijiji hiki kinapakana na hifadhi: vijiji jirani na hifadhi za misitu na wanyamapori hukumbwa na uvamizi wa mazao na mashambulizi ya mara kwa mara, mara nyingi usiku na kipindi cha mavuno."
+     },
+     "advice": {
+      "en": "For those living and farming here, it helps to use community deterrents such as chilli fences and night guarding, keep in touch with wildlife officers and plan movement after dark.",
+      "sw": "Kwa wanaoishi na kulima hapa, ni vyema kutumia mbinu za jamii kama uzio wa pilipili na ulinzi wa usiku, kuwasiliana na maafisa wanyamapori na kupanga safari za usiku."
+     }
+    },
+    {
+     "area": {
+      "en": "Tobacco barns and the Kigoma railway line",
+      "sw": "Mabani ya tumbaku na reli ya Kigoma"
+     },
+     "risk": {
+      "en": "This area has tobacco barns and a flood-prone railway: barns are tall, lightly built structures exposed to strong storm gusts, and floods regularly cut the Kigoma railway line and rural roads at low sections.",
+      "sw": "Eneo hili lina mabani ya tumbaku na reli inayofurika: mabani ni majengo marefu yaliyojengwa kwa wepesi yanayoathiriwa na upepo mkali wa dhoruba, na mafuriko mara kwa mara hukata reli ya Kigoma na barabara za vijijini kwenye sehemu za chini."
+     },
+     "advice": {
+      "en": "For those farming and living here, it helps to fix barn roofing to every purlin, tie walls to the frame, and use designated crossings rather than the railway line for people and livestock.",
+      "sw": "Kwa wanaolima na kuishi hapa, ni vyema kufunga mabati ya mabani kila mbao ya kenchi, kuunganisha kuta na fremu, na kutumia vivuko vilivyotengwa badala ya reli kwa watu na mifugo."
+     }
+    }
+   ],
+   "levels": {
+    "1": [
+     {
+      "impact": {
+       "en": "Heavy storms over western Kaliua. Streams feeding the Malagarasi and Ugalla rise and wetland margins begin to flood. Strong winds and lightning; dry spells stress maize and tobacco; wildlife moving near forest-edge villages.",
+       "sw": "Dhoruba kubwa magharibi mwa Kaliua. Vijito vinavyoingia Malagarasi na Ugalla vinajaa na kingo za ardhioevu zinaanza kufurika. Upepo mkali na radi; vipindi vya ukavu vinaathiri mahindi na tumbaku; wanyamapori wanakaribia vijiji vya pembezoni mwa misitu."
+      },
+      "actions": {
+       "en": [
+        "Ward and village teams watch river crossings and wetland margins and warn fishers and farmers.",
+        "Households in Ulyankulu and other dense settlements clear drains and secure roofs.",
+        "Keep children and livestock away from forest edges at dawn and dusk; report wildlife to the wildlife officer.",
+        "Do not cross flowing rivers. Shelter in a solid building when you hear thunder."
+       ],
+       "sw": [
+        "Timu za kata na vijiji zifuatilie vivuko vya mito na kingo za ardhioevu na ziwaonye wavuvi na wakulima.",
+        "Kaya za Ulyankulu na makazi mengine yenye msongamano zisafishe mitaro na ziimarishe paa.",
+        "Waweke watoto na mifugo mbali na pembezoni mwa misitu alfajiri na jioni; ripoti wanyamapori kwa afisa wanyamapori.",
+        "Usivuke mito inayotiririka. Jikinge ndani ya jengo imara unaposikia ngurumo."
+       ]
+      }
+     },
+     {
+      "impact": {
+       "en": "Mvua kubwa",
+       "sw": ""
+      },
+      "actions": {
+       "en": [],
+       "sw": []
+      }
+     },
+     {
+      "impact": {
+       "en": "Warning status",
+       "sw": "Hali ya tahadhari"
+      },
+      "actions": {
+       "en": [
+        "Please continue to follow updates from TMA, Disaster Management Committees and local leaders.",
+        "This advisory remains in place until the authorities update or withdraw it."
+       ],
+       "sw": [
+        "Tafadhali endeleeni kufuatilia taarifa za TMA, Kamati za Usimamizi wa Maafa na viongozi wa eneo.",
+        "Tahadhari hii itaendelea hadi mamlaka zitakapoihuisha au kuiondoa rasmi."
+       ]
+      }
+     }
+    ],
+    "2": [
+     {
+      "impact": {
+       "en": "River and wetland floods cut roads and access to railway stations; houses and fields flooded and fishing camps exposed. Wildlife raids or wildfire in the miombo possible.",
+       "sw": "Mafuriko ya mito na ardhioevu yamekata barabara na njia za kufika stesheni za reli; nyumba na mashamba yamefurika na kambi za uvuvi ziko hatarini. Uvamizi wa wanyamapori au moto kwenye miombo unawezekana."
+      },
+      "actions": {
+       "en": [
+        "Move households from flooded wetland margins and fishing camps to ward assembly points.",
+        "Stop fishing and canoe crossings on flooded rivers until the committee advises.",
+        "TFS and village fire teams contain wildfires; wildlife officers respond to crop and livestock raids.",
+        "Boil or treat drinking water. Clinics watch for cholera, diarrhoea and malaria."
+       ],
+       "sw": [
+        "Hamisha kaya kutoka kingo za ardhioevu zilizofurika na kambi za uvuvi kwenda vituo vya kukusanyika vya kata.",
+        "Simamisha uvuvi na uvukaji kwa mitumbwi kwenye mito iliyofurika hadi kamati itakaposhauri.",
+        "TFS na vikundi vya zimamoto vya vijiji wadhibiti moto; maafisa wanyamapori washughulikie uvamizi wa mazao na mifugo.",
+        "Chemsha au tibu maji ya kunywa. Kliniki zifuatilie kipindupindu, kuhara na malaria."
+       ]
+      }
+     },
+     {
+      "impact": {
+       "en": "Warning status",
+       "sw": "Hali ya tahadhari"
+      },
+      "actions": {
+       "en": [
+        "Please continue to follow updates from TMA, Disaster Management Committees and local leaders.",
+        "This warning remains in force until the authorities lower or withdraw it."
+       ],
+       "sw": [
+        "Tafadhali endeleeni kufuatilia taarifa za TMA, Kamati za Usimamizi wa Maafa na viongozi wa eneo.",
+        "Tahadhari hii itaendelea kutumika hadi mamlaka zitakapoishusha au kuiondoa rasmi."
+       ]
+      }
+     }
+    ],
+    "3": [
+     {
+      "impact": {
+       "en": "Life-threatening floods, wildfire or storm damage in Kaliua. Villages and camps isolated, houses destroyed, and high risk of drowning, burns, injury and cholera in dense settlements.",
+       "sw": "Mafuriko, moto au uharibifu wa dhoruba unaohatarisha maisha Kaliua. Vijiji na kambi vimetengwa, nyumba zimeharibika, na hatari kubwa ya kuzama, kuungua, majeraha na kipindupindu kwenye makazi yenye msongamano."
+      },
+      "actions": {
+       "en": [
+        "Evacuate threatened villages and camps now, to higher ground or upwind of fire.",
+        "Call 114 and 190. Coordinate with TRC to stop trains on flooded sections of the Kigoma line.",
+        "Open shelters and register every household; account for fishers and herders still out.",
+        "Health team: treat injuries and burns first, then set up cholera treatment points in dense settlements."
+       ],
+       "sw": [
+        "Hamisha vijiji na kambi vilivyo hatarini sasa, kwenda miinuko au upande ambao moto hauelekei.",
+        "Piga 114 na 190. Shirikiana na TRC kusimamisha treni kwenye sehemu zilizofurika za reli ya Kigoma.",
+        "Fungua makazi na sajili kila kaya; hakiki wavuvi na wafugaji ambao bado hawajarudi.",
+        "Timu ya afya: tibu majeruhi na walioungua kwanza, kisha anzisha vituo vya kutibu kipindupindu kwenye makazi yenye msongamano."
+       ]
+      }
+     },
+     {
+      "impact": {
+       "en": "Warning status",
+       "sw": "Hali ya tahadhari"
+      },
+      "actions": {
+       "en": [
+        "Please stay with official sources: radio, TMA, Disaster Management Committees and local leaders.",
+        "Disaster Management Committees will announce when the danger has passed and when it is safe to return."
+       ],
+       "sw": [
+        "Tafadhali tegemeeni taarifa rasmi: redio, TMA, Kamati za Usimamizi wa Maafa na viongozi wa eneo.",
+        "Kamati za Usimamizi wa Maafa zitatangaza hatari itakapokwisha na itakapokuwa salama kurudi."
+       ]
+      }
+     }
+    ]
+   },
+   "profile": {
+    "setting": "Most populous council (678,447 people on 14,050 km²). Western miombo; Malagarasi and Ugalla wetlands; railway to Kigoma; dense settlements such as Ulyankulu.",
+    "hazards": "River and wetland floods; wildfire; drought; lightning; strong winds; human–wildlife conflict; cholera in dense settlements.",
+    "atRisk": "Wetland and riverside villages; fishing camps; dense settlements; forest-edge farmers and herders."
+   }
+  },
+  "C100": {
+   "name": "Nzega District Council",
+   "hazards": [
+    "drought",
+    "heavyRainfall",
+    "floods",
+    "strongWinds"
+   ],
+   "know": [
+    {
+     "area": {
+      "en": "Artisanal gold mining sites",
+      "sw": "Maeneo ya uchimbaji mdogo wa dhahabu"
+     },
+     "risk": {
+      "en": "This is an artisanal mining area: pits in weathered rock and loose soil collapse when saturated, and pits left open fill with water, posing a drowning risk to children and livestock.",
+      "sw": "Hili ni eneo la uchimbaji mdogo: mashimo kwenye miamba iliyooza na udongo laini hubomoka yanapojaa maji, na mashimo yaliyoachwa wazi hujaa maji na kuwa hatari ya kuzamisha watoto na mifugo."
+     },
+     "advice": {
+      "en": "For those mining and living here, it helps to timber or bench pit walls, cut diversion channels around pit mouths, and fence or backfill abandoned pits.",
+      "sw": "Kwa wanaochimba na kuishi hapa, ni vyema kuimarisha kuta za mashimo kwa mbao au ngazi, kuchimba mifereji ya kuelekeza maji kuzunguka midomo ya mashimo, na kuzungushia uzio au kufukia mashimo yaliyoachwa."
+     }
+    },
+    {
+     "area": {
+      "en": "Clay plains and valley bottoms",
+      "sw": "Mbuga za mfinyanzi na mabonde"
+     },
+     "risk": {
+      "en": "This area is a clay plain and valley bottom: the soils hold surface water for days to weeks after heavy rain, waterlogging crops, homesteads and earth roads.",
+      "sw": "Eneo hili ni mbuga ya mfinyanzi na bonde: udongo hushikilia maji kwa siku hadi wiki kadhaa baada ya mvua kubwa, na kufanya mazao, makazi na barabara za udongo kujaa maji."
+     },
+     "advice": {
+      "en": "For those living and farming here, it helps to build on higher ground, keep field drains open and store harvests on raised platforms.",
+      "sw": "Kwa wanaoishi na kulima hapa, ni vyema kujenga sehemu za miinuko, kuweka mifereji ya mashamba wazi na kuhifadhi mavuno juu ya vichanja."
+     }
+    },
+    {
+     "area": {
+      "en": "Villages with few water sources",
+      "sw": "Vijiji vyenye vyanzo vichache vya maji"
+     },
+     "risk": {
+      "en": "This village has few water sources: shallow wells and charco dams dry up by the middle of the dry season, increasing walking distances and dependence on unsafe water.",
+      "sw": "Kijiji hiki kina vyanzo vichache vya maji: visima vifupi na malambo hukauka katikati ya kiangazi, na kuongeza umbali wa kutafuta maji na utegemezi wa maji yasiyo salama."
+     },
+     "advice": {
+      "en": "For those living here, it helps to harvest rainwater, protect and deepen wells, and keep livestock watering points separate from drinking-water sources.",
+      "sw": "Kwa wanaoishi hapa, ni vyema kuvuna maji ya mvua, kulinda na kuongeza kina cha visima, na kutenganisha vyanzo vya kunyweshea mifugo na vya maji ya kunywa."
+     }
+    },
+    {
+     "area": {
+      "en": "Densely settled farming villages",
+      "sw": "Vijiji vya wakulima vyenye watu wengi"
+     },
+     "risk": {
+      "en": "This area is densely settled: northern Nzega is the most densely settled part of Tabora Region, where small farms and many livestock depend on the same land and water, so a failed season hits food and income quickly.",
+      "sw": "Eneo hili lina watu wengi: kaskazini mwa Nzega ndiyo sehemu yenye watu wengi zaidi Mkoa wa Tabora, ambapo mashamba madogo na mifugo mingi hutegemea ardhi na maji yale yale, hivyo msimu ukishindwa chakula na kipato huathirika haraka."
+     },
+     "advice": {
+      "en": "For those farming here, it helps to grow drought-tolerant crops, keep household food reserves and save through village savings groups.",
+      "sw": "Kwa wanaolima hapa, ni vyema kupanda mazao yanayostahimili ukame, kuweka akiba ya chakula ya kaya na kuweka akiba kupitia vikundi vya kijiji."
+     }
+    },
+    {
+     "area": {
+      "en": "Central railway line and Bukene station",
+      "sw": "Reli ya kati na stesheni ya Bukene"
+     },
+     "risk": {
+      "en": "This area lies along the Central Line: the railway runs through the district via Bukene, heavy flows wash out culverts and embankment sections, and activity in the railway reserve worsens erosion.",
+      "sw": "Eneo hili liko kando ya Reli ya Kati: reli inapita wilayani kupitia Bukene, maji mengi husomba makalavati na sehemu za tuta, na shughuli ndani ya hifadhi ya reli huongeza mmomonyoko."
+     },
+     "advice": {
+      "en": "For those living and farming here, it helps to keep the railway reserve clear and to report damaged culverts to TRC early.",
+      "sw": "Kwa wanaoishi na kulima hapa, ni vyema kuweka hifadhi ya reli wazi na kutoa taarifa mapema za makalavati yaliyoharibika kwa TRC."
+     }
+    }
+   ],
+   "levels": {
+    "1": [
+     {
+      "impact": {
+       "en": "Late onset or dry spells in the Msimu threaten maize, rice and cotton; heavy storms flood mbuga fields and fill artisanal mine pits. Lightning and strong winds over open farmland.",
+       "sw": "Kuchelewa kwa mvua au vipindi vya ukavu katika Msimu vinatishia mahindi, mpunga na pamba; dhoruba kubwa zinafurisha mbuga na kujaza mashimo ya uchimbaji mdogo wa madini. Radi na upepo mkali mashambani."
+      },
+      "actions": {
+       "en": [
+        "Extension officers advise drought-tolerant seed and staggered planting; mbuga farmers open field drains.",
+        "Artisanal miners divert runoff away from pits, fence open shafts and stay out of pits during and after rain.",
+        "Herders plan water and pasture and keep livestock away from flooding mbuga.",
+        "When you hear thunder, leave open fields and mine sites. Do not shelter under trees."
+       ],
+       "sw": [
+        "Maafisa ugani washauri mbegu zinazostahimili ukame na upandaji kwa awamu; wakulima wa mbuga wafungue mifereji ya kutolea maji.",
+        "Wachimbaji wadogo waelekeze maji ya mvua mbali na mashimo, wazungushie uzio mashimo wazi na wasiingie mashimoni wakati na baada ya mvua.",
+        "Wafugaji wapange maji na malisho na waweke mifugo mbali na mbuga zinazofurika.",
+        "Ukisikia ngurumo, ondoka mashambani na maeneo ya migodi. Usijikinge chini ya miti."
+       ]
+      }
+     },
+     {
+      "impact": {
+       "en": "Warning status",
+       "sw": "Hali ya tahadhari"
+      },
+      "actions": {
+       "en": [
+        "Please continue to follow updates from TMA, Disaster Management Committees and local leaders.",
+        "This advisory remains in place until the authorities update or withdraw it."
+       ],
+       "sw": [
+        "Tafadhali endeleeni kufuatilia taarifa za TMA, Kamati za Usimamizi wa Maafa na viongozi wa eneo.",
+        "Tahadhari hii itaendelea hadi mamlaka zitakapoihuisha au kuiondoa rasmi."
+       ]
+      }
+     }
+    ],
+    "2": [
+     {
+      "impact": {
+       "en": "Mbuga fields and shallow wells flooded, mine pits waterlogged and unstable, and village roads and drifts cut; or crops wilting and water points failing in a prolonged dry spell.",
+       "sw": "Mbuga na visima vifupi vimefurika, mashimo ya migodi yamejaa maji na si imara, na barabara na vivuko vya vijiji vimekatika; au mazao yananyauka na vituo vya maji vinakauka katika ukavu wa muda mrefu."
+      },
+      "actions": {
+       "en": [
+        "Village and ward committees stop all work in mine pits; the mining officer and police enforce it.",
+        "Move households from flooded mbuga to ward assembly points and close flooded drifts.",
+        "Repair or protect water points, giving priority to schools and dispensaries.",
+        "Boil or treat well water. Health workers watch for diarrhoea and malaria."
+       ],
+       "sw": [
+        "Kamati za vijiji na kata zisimamishe kazi zote mashimoni; afisa madini na polisi wasimamie utekelezaji.",
+        "Hamisha kaya kutoka mbuga zilizofurika kwenda vituo vya kukusanyika vya kata na funga vivuko vilivyofurika.",
+        "Karabati au linda vituo vya maji, kuanzia shule na zahanati.",
+        "Chemsha au tibu maji ya visima. Watoa huduma za afya wafuatilie kuhara na malaria."
+       ]
+      }
+     },
+     {
+      "impact": {
+       "en": "Warning status",
+       "sw": "Hali ya tahadhari"
+      },
+      "actions": {
+       "en": [
+        "Please continue to follow updates from TMA, Disaster Management Committees and local leaders.",
+        "This warning remains in force until the authorities lower or withdraw it."
+       ],
+       "sw": [
+        "Tafadhali endeleeni kufuatilia taarifa za TMA, Kamati za Usimamizi wa Maafa na viongozi wa eneo.",
+        "Tahadhari hii itaendelea kutumika hadi mamlaka zitakapoishusha au kuiondoa rasmi."
+       ]
+      }
+     }
+    ],
+    "3": [
+     {
+      "impact": {
+       "en": "Life-threatening floods or mine-pit collapses. Villages cut off, houses destroyed, crops failed and livestock dying. High risk of drowning, people trapped underground and cholera.",
+       "sw": "Mafuriko au kuporomoka kwa mashimo ya migodi kunakohatarisha maisha. Vijiji vimetengwa, nyumba zimeharibika, mazao yameharibika na mifugo inakufa. Hatari kubwa ya kuzama, watu kufukiwa mashimoni na kipindupindu."
+      },
+      "actions": {
+       "en": [
+        "Evacuate flooded villages and mining camps now.",
+        "Call 114 and 190. Rescue at a collapsed pit only by trained teams with shoring; no crowd digging.",
+        "Open shelters, register households and miners, and start a food and livestock-feed assessment.",
+        "Health team: treat injuries first, then screen for cholera and malnutrition."
+       ],
+       "sw": [
+        "Hamisha vijiji vilivyofurika na kambi za wachimbaji sasa.",
+        "Piga 114 na 190. Uokoaji kwenye shimo lililoporomoka ufanywe na timu zilizofunzwa zenye vifaa vya kuzuia kuporomoka; umati usichimbe.",
+        "Fungua makazi, sajili kaya na wachimbaji, na anza tathmini ya chakula na malisho ya mifugo.",
+        "Timu ya afya: tibu majeruhi kwanza, kisha pima kipindupindu na utapiamlo."
+       ]
+      }
+     },
+     {
+      "impact": {
+       "en": "Warning status",
+       "sw": "Hali ya tahadhari"
+      },
+      "actions": {
+       "en": [
+        "Please stay with official sources: radio, TMA, Disaster Management Committees and local leaders.",
+        "Disaster Management Committees will announce when the danger has passed and when it is safe to return."
+       ],
+       "sw": [
+        "Tafadhali tegemeeni taarifa rasmi: redio, TMA, Kamati za Usimamizi wa Maafa na viongozi wa eneo.",
+        "Kamati za Usimamizi wa Maafa zitatangaza hatari itakapokwisha na itakapokuwa salama kurudi."
+       ]
+      }
+     }
+    ]
+   },
+   "profile": {
+    "setting": "Most densely settled rural council (Nzega district 574,498 people on 7,173 km²). Northern plains drain toward the Lake Victoria basin; Central Line passes via Bukene.",
+    "hazards": "Dry spells and drought; mbuga flooding; lightning; strong winds; artisanal mine-pit flooding and collapse; livestock disease.",
+    "atRisk": "Artisanal miners and mining camps; rice farmers in mbuga; herders; shallow-well users."
+   }
+  },
+  "C104": {
+   "name": "Sikonge District Council",
+   "hazards": [
+    "wildfire",
+    "strongWinds",
+    "floods"
+   ],
+   "know": [
+    {
+     "area": {
+      "en": "Forest and game reserves",
+      "sw": "Hifadhi za misitu na wanyamapori"
+     },
+     "risk": {
+      "en": "This area is forest and game reserve: reserves cover most of Sikonge, and late dry-season fires (August–October) burn hottest and spread fastest, often started by land clearing, honey harvesting or hunting.",
+      "sw": "Eneo hili ni hifadhi ya misitu na wanyamapori: hifadhi zinachukua sehemu kubwa ya Sikonge, na moto wa mwishoni mwa kiangazi (Agosti–Oktoba) huwaka kwa nguvu zaidi na kusambaa haraka, mara nyingi ukianzishwa na usafishaji wa mashamba, urinaji wa asali au uwindaji."
+     },
+     "advice": {
+      "en": "For those living and working here, it helps to burn early and under control, maintain fire breaks and put fires out fully before leaving the bush.",
+      "sw": "Kwa wanaoishi na kufanya kazi hapa, ni vyema kuchoma mapema kwa udhibiti, kutunza njia za kuzuia moto na kuzima moto kabisa kabla ya kuondoka porini."
+     }
+    },
+    {
+     "area": {
+      "en": "Apiaries and honey camps",
+      "sw": "Maeneo ya mizinga na kambi za asali"
+     },
+     "risk": {
+      "en": "This is a beekeeping area: beekeepers work deep in the miombo, far from roads and health facilities, exposed to wildfire, snakes, wild animals and bee stings.",
+      "sw": "Hili ni eneo la ufugaji nyuki: warina asali hufanya kazi ndani kabisa ya miombo, mbali na barabara na vituo vya afya, wakikabiliwa na moto, nyoka, wanyamapori na kuumwa na nyuki."
+     },
+     "advice": {
+      "en": "For those keeping bees here, it helps to work in groups, share your trip plan with the village, handle smokers safely and carry a phone, water and first-aid kit.",
+      "sw": "Kwa wanaofuga nyuki hapa, ni vyema kufanya kazi kwa vikundi, kukijulisha kijiji mpango wa safari, kutumia vifaa vya kufukiza moshi kwa usalama na kubeba simu, maji na vifaa vya huduma ya kwanza."
+     }
+    },
+    {
+     "area": {
+      "en": "Villages near wildlife areas",
+      "sw": "Vijiji karibu na maeneo ya wanyamapori"
+     },
+     "risk": {
+      "en": "This village is near wildlife areas: elephants and other large animals move between the reserves and farmland, raiding crops mostly at night and close to harvest.",
+      "sw": "Kijiji hiki kiko karibu na maeneo ya wanyamapori: tembo na wanyama wengine wakubwa hupita kati ya hifadhi na mashamba, wakivamia mazao hasa usiku na karibu na mavuno."
+     },
+     "advice": {
+      "en": "For those living and farming here, it helps to use community deterrents, keep in touch with wildlife officers and plan movement at night and early morning.",
+      "sw": "Kwa wanaoishi na kulima hapa, ni vyema kutumia mbinu za jamii za kufukuza wanyama, kuwasiliana na maafisa wanyamapori na kupanga safari za usiku na alfajiri."
+     }
+    },
+    {
+     "area": {
+      "en": "T8 and Ipole–Mpanda road crossings",
+      "sw": "Vivuko vya barabara T8 na Ipole–Mpanda"
+     },
+     "risk": {
+      "en": "This route has flood-prone river crossings: rivers crossing the T8 and the Ipole–Mpanda road rise quickly after storms upstream and can close the route for hours to days.",
+      "sw": "Njia hii ina vivuko vya mito vinavyofurika: mito inayokatiza barabara ya T8 na ya Ipole–Mpanda hujaa haraka baada ya dhoruba upande wa juu na inaweza kufunga njia kwa saa hadi siku kadhaa."
+     },
+     "advice": {
+      "en": "For those travelling and transporting goods here, it helps to plan journeys around the rains and carry food, water and a phone on every trip.",
+      "sw": "Kwa wanaosafiri na kusafirisha bidhaa hapa, ni vyema kupanga safari kuzingatia mvua na kubeba chakula, maji na simu kila safari."
+     }
+    },
+    {
+     "area": {
+      "en": "Scattered and remote villages",
+      "sw": "Vijiji vilivyotawanyika na vya mbali"
+     },
+     "risk": {
+      "en": "This is a remote village: villages are widely scattered across a very large district, emergency response can take many hours, and the first help usually comes from neighbours.",
+      "sw": "Hiki ni kijiji cha mbali: vijiji vimetawanyika katika wilaya kubwa sana, huduma ya dharura inaweza kuchukua saa nyingi, na msaada wa kwanza mara nyingi hutoka kwa majirani."
+     },
+     "advice": {
+      "en": "For those living here, it helps to keep a village first-aid kit, a food reserve and leaders' phone numbers, and agree a family meeting point.",
+      "sw": "Kwa wanaoishi hapa, ni vyema kuwa na vifaa vya huduma ya kwanza vya kijiji, akiba ya chakula na namba za simu za viongozi, na kukubaliana mahali pa kukutana kama familia."
+     }
+    }
+   ],
+   "levels": {
+    "1": [
+     {
+      "impact": {
+       "en": "Most of Sikonge is forest and game reserve. Dry-season fires start in the miombo, wildlife approaches forest-edge villages, and Msimu storms raise seasonal rivers on the T8 and Ipole–Mpanda roads.",
+       "sw": "Sehemu kubwa ya Sikonge ni misitu na hifadhi za wanyamapori. Moto wa kiangazi unaanza kwenye miombo, wanyamapori wanakaribia vijiji vya pembezoni mwa misitu, na dhoruba za Msimu zinajaza mito ya msimu kwenye barabara T8 na Ipole–Mpanda."
+      },
+      "actions": {
+       "en": [
+        "Beekeepers and forest users: no fire for honey harvesting on windy days; keep fire breaks around hives and villages.",
+        "Warn forest-edge villages about wildlife; escort children at dawn and dusk and keep livestock in the boma.",
+        "Drivers on T8 and the Ipole–Mpanda road check road conditions before travelling in the Msimu.",
+        "Save 190. Report fires and wildlife immediately to the TFS or wildlife officer."
+       ],
+       "sw": [
+        "Wafugaji nyuki na watumiaji wa misitu: msitumie moto kuvuna asali siku za upepo; wekeni njia za kuzuia moto kuzunguka mizinga na vijiji.",
+        "Onya vijiji vya pembezoni mwa misitu kuhusu wanyamapori; wasindikize watoto alfajiri na jioni na weka mifugo zizini.",
+        "Madereva wa T8 na barabara ya Ipole–Mpanda waulize hali ya barabara kabla ya kusafiri wakati wa Msimu.",
+        "Hifadhi 190. Ripoti moto na wanyamapori mara moja kwa TFS au afisa wanyamapori."
+       ]
+      }
+     },
+     {
+      "impact": {
+       "en": "Warning status",
+       "sw": "Hali ya tahadhari"
+      },
+      "actions": {
+       "en": [
+        "Please continue to follow updates from TMA, Disaster Management Committees and local leaders.",
+        "This advisory remains in place until the authorities update or withdraw it."
+       ],
+       "sw": [
+        "Tafadhali endeleeni kufuatilia taarifa za TMA, Kamati za Usimamizi wa Maafa na viongozi wa eneo.",
+        "Tahadhari hii itaendelea hadi mamlaka zitakapoihuisha au kuiondoa rasmi."
+       ]
+      }
+     }
+    ],
+    "2": [
+     {
+      "impact": {
+       "en": "Wildfire spreading toward villages, hives and fields, or wildlife raiding crops, livestock and people. Flooded rivers cut the T8, the Ipole–Mpanda road and rural roads.",
+       "sw": "Moto unaenea kuelekea vijiji, mizinga na mashamba, au wanyamapori wanavamia mazao, mifugo na watu. Mito iliyofurika imekata T8, barabara ya Ipole–Mpanda na barabara za vijijini."
+      },
+      "actions": {
+       "en": [
+        "Move people away from the fire front or wildlife area; rangers and the ward officer lead.",
+        "TFS and village fire teams contain the fire. Do not chase animals with a crowd.",
+        "TANROADS and Police close flooded crossings on T8 and the Ipole–Mpanda road and hold vehicles.",
+        "Clinics ready for burns, animal bites and crush injuries."
+       ],
+       "sw": [
+        "Waondoe watu mbali na mstari wa moto au eneo la wanyamapori; askari wanyamapori na afisa wa kata waongoze.",
+        "TFS na vikundi vya zimamoto vya vijiji wadhibiti moto. Usimfukuze mnyama kwa umati.",
+        "TANROADS na Polisi wafunge vivuko vilivyofurika kwenye T8 na barabara ya Ipole–Mpanda na wazuie magari.",
+        "Kliniki ziwe tayari kwa walioungua, walioumwa na wanyama na majeraha ya kukanyagwa."
+       ]
+      }
+     },
+     {
+      "impact": {
+       "en": "Warning status",
+       "sw": "Hali ya tahadhari"
+      },
+      "actions": {
+       "en": [
+        "Please continue to follow updates from TMA, Disaster Management Committees and local leaders.",
+        "This warning remains in force until the authorities lower or withdraw it."
+       ],
+       "sw": [
+        "Tafadhali endeleeni kufuatilia taarifa za TMA, Kamati za Usimamizi wa Maafa na viongozi wa eneo.",
+        "Tahadhari hii itaendelea kutumika hadi mamlaka zitakapoishusha au kuiondoa rasmi."
+       ]
+      }
+     }
+    ],
+    "3": [
+     {
+      "impact": {
+       "en": "Life-threatening wildfire, wildlife attacks or floods. Villages or forest camps cut off or burned, with risk of death from burns, attacks, drowning or injury.",
+       "sw": "Moto, mashambulizi ya wanyamapori au mafuriko yanayohatarisha maisha. Vijiji au kambi za misituni vimetengwa au kuungua, na hatari ya vifo kwa kuungua, kushambuliwa, kuzama au majeraha."
+      },
+      "actions": {
+       "en": [
+        "Evacuate threatened villages and forest camps now.",
+        "Call 114 and 190. TAWA rangers and Police secure the area.",
+        "Open shelters, register households and account for beekeepers and herders still in the forest.",
+        "Health team: treat burns and injuries first; refer severe cases to Sikonge District Hospital or Kitete."
+       ],
+       "sw": [
+        "Hamisha vijiji na kambi za misituni vilivyo hatarini sasa.",
+        "Piga 114 na 190. Askari wa TAWA na Polisi walinde eneo.",
+        "Fungua makazi, sajili kaya na hakiki wafugaji nyuki na wafugaji ambao bado wako misituni.",
+        "Timu ya afya: tibu walioungua na majeruhi kwanza; peleka wagonjwa mahututi Hospitali ya Wilaya Sikonge au Kitete."
+       ]
+      }
+     },
+     {
+      "impact": {
+       "en": "Warning status",
+       "sw": "Hali ya tahadhari"
+      },
+      "actions": {
+       "en": [
+        "Please stay with official sources: radio, TMA, Disaster Management Committees and local leaders.",
+        "Disaster Management Committees will announce when the danger has passed and when it is safe to return."
+       ],
+       "sw": [
+        "Tafadhali tegemeeni taarifa rasmi: redio, TMA, Kamati za Usimamizi wa Maafa na viongozi wa eneo.",
+        "Kamati za Usimamizi wa Maafa zitatangaza hatari itakapokwisha na itakapokuwa salama kurudi."
+       ]
+      }
+     }
+    ]
+   },
+   "profile": {
+    "setting": "335,686 people on 27,873 km², of which about 26,800 km² is forest and game reserve. Beekeeping and tobacco; T8 Tabora–Mbeya road and T23 branch to Mpanda at Ipole.",
+    "hazards": "Wildfire; human–wildlife conflict; flash floods cutting T8/T23 and rural roads; drought; lightning.",
+    "atRisk": "Beekeepers and forest users; forest-edge villages; herders; travellers on T8/T23."
+   }
+  },
+  "C103": {
+   "name": "Urambo District Council",
+   "hazards": [
+    "heavyRainfall",
+    "drought",
+    "strongWinds",
+    "wildfire",
+    "floods"
+   ],
+   "know": [
+    {
+     "area": {
+      "en": "Swamps and areas near water bodies",
+      "sw": "Mabwawa na maeneo jirani na vyanzo vya maji"
+     },
+     "risk": {
+      "en": "This area borders swamps and open water: Urambo holds a large share of the region's swamps, and in wet years floodwater spreads outward into nearby fields and settlements.",
+      "sw": "Eneo hili linapakana na mabwawa na maji ya wazi: Urambo ina sehemu kubwa ya mabwawa ya mkoa, na katika miaka ya mvua nyingi maji ya mafuriko husambaa hadi mashamba na makazi ya jirani."
+     },
+     "advice": {
+      "en": "For those living and farming here, it helps to keep houses and stores above the highest remembered flood mark and grow flood-tolerant crops on the swamp edge.",
+      "sw": "Kwa wanaoishi na kulima hapa, ni vyema kujenga nyumba na maghala juu ya alama ya juu kabisa ya mafuriko inayokumbukwa na kupanda mazao yanayostahimili maji pembezoni mwa mabwawa."
+     }
+    },
+    {
+     "area": {
+      "en": "Tobacco barns and stores",
+      "sw": "Mabani na maghala ya tumbaku"
+     },
+     "risk": {
+      "en": "This is a tobacco-curing area: storm gusts lift poorly fixed barn roofs, and wood-fired curing barns are a frequent source of fire during the curing season.",
+      "sw": "Hili ni eneo la kukausha tumbaku: upepo mkali wa dhoruba hung'oa paa za mabani zisizofungwa vizuri, na mabani ya kukaushia kwa kuni ni chanzo cha mara kwa mara cha moto wakati wa msimu wa kukausha."
+     },
+     "advice": {
+      "en": "For those curing tobacco here, it helps to fix roofing to every purlin, keep a cleared fire break and have water or sand beside each barn.",
+      "sw": "Kwa wanaokausha tumbaku hapa, ni vyema kufunga mabati kila mbao ya kenchi, kuweka njia ya kuzuia moto iliyosafishwa na kuwa na maji au mchanga karibu na kila banda."
+     }
+    },
+    {
+     "area": {
+      "en": "Miombo woodland and fallow land",
+      "sw": "Misitu ya miombo na mashamba ya pori"
+     },
+     "risk": {
+      "en": "This is miombo and fallow land: clearing miombo for new tobacco land and curing fuel removes the tree cover that holds soil and moisture, lengthening local droughts and increasing run-off and floods.",
+      "sw": "Haya ni maeneo ya miombo na mashamba ya pori: kukata miombo kwa ajili ya mashamba mapya ya tumbaku na kuni za kukaushia huondoa miti inayoshikilia udongo na unyevu, na kurefusha ukame na kuongeza mtiririko wa maji na mafuriko."
+     },
+     "advice": {
+      "en": "For those farming here, it helps to plant woodlots, use fuel-efficient curing barns and keep trees along stream banks.",
+      "sw": "Kwa wanaolima hapa, ni vyema kupanda mashamba ya miti, kutumia mabani ya kukaushia yanayotumia kuni kidogo na kuacha miti kando ya vijito."
+     }
+    },
+    {
+     "area": {
+      "en": "Tsetse and wildlife areas",
+      "sw": "Maeneo ya mbung'o na wanyamapori"
+     },
+     "risk": {
+      "en": "This is a tsetse area: large parts of the district carry tsetse flies, which spread sleeping sickness to people and trypanosomiasis to cattle, mainly near woodland and water.",
+      "sw": "Hili ni eneo la mbung'o: sehemu kubwa ya wilaya ina mbung'o wanaoeneza malale kwa binadamu na nagana kwa ng'ombe, hasa karibu na misitu na maji."
+     },
+     "advice": {
+      "en": "For those living and keeping livestock here, it helps to graze away from tsetse hotspots, treat cattle with insecticide and get fever tested early after fly bites.",
+      "sw": "Kwa wanaoishi na kufuga hapa, ni vyema kulisha mifugo mbali na maeneo yenye mbung'o wengi, kuogesha mifugo kwa dawa na kupima homa mapema baada ya kuumwa na mbung'o."
+     }
+    },
+    {
+     "area": {
+      "en": "Rural roads and river crossings",
+      "sw": "Barabara za vijijini na vivuko vya mito"
+     },
+     "risk": {
+      "en": "This area has flood-prone river crossings: crossings on rural roads flood quickly after storms, and many children walk through them on the way to school.",
+      "sw": "Eneo hili lina vivuko vya mito vinavyofurika: vivuko kwenye barabara za vijijini hufurika haraka baada ya dhoruba, na watoto wengi hupita humo wakienda shule."
+     },
+     "advice": {
+      "en": "For those living here, it helps to mark danger points and agree safe school routes before the rains begin.",
+      "sw": "Kwa wanaoishi hapa, ni vyema kuweka alama sehemu za hatari na kukubaliana njia salama za kwenda shule kabla mvua hazijaanza."
+     }
+    }
+   ],
+   "levels": {
+    "1": [
+     {
+      "impact": {
+       "en": "Erratic Msimu rains linked to miombo loss; dry spells threaten maize and tobacco. Storm winds can damage roofs and tobacco barns, lightning strikes open fields, and grass fires start late in the dry season.",
+       "sw": "Mvua za Msimu zisizotabirika kutokana na upotevu wa miombo; vipindi vya ukavu vinatishia mahindi na tumbaku. Upepo wa dhoruba unaweza kuharibu paa na mabani ya tumbaku, radi inapiga mashambani, na moto wa nyasi unaanza mwishoni mwa kiangazi."
+      },
+      "actions": {
+       "en": [
+        "Farmers reinforce tobacco barns and roofs and avoid lighting curing fires during strong winds.",
+        "Keep fire breaks around villages, barns and forests; no uncontrolled burning.",
+        "Communities near the Ugalla and Malagarasi wetlands watch river levels and report rises.",
+        "Leave the fields and shelter in a solid building when you hear thunder."
+       ],
+       "sw": [
+        "Wakulima waimarishe mabani ya tumbaku na paa na wasiwashe moto wa kukausha tumbaku wakati wa upepo mkali.",
+        "Wekeni njia za kuzuia moto kuzunguka vijiji, mabani na misitu; hakuna uchomaji holela.",
+        "Jamii za karibu na ardhioevu za Ugalla na Malagarasi zifuatilie kina cha maji ya mito na ziripoti yanapopanda.",
+        "Ondoka mashambani na jikinge ndani ya jengo imara unaposikia ngurumo."
+       ]
+      }
+     },
+     {
+      "impact": {
+       "en": "Warning status",
+       "sw": "Hali ya tahadhari"
+      },
+      "actions": {
+       "en": [
+        "Please continue to follow updates from TMA, Disaster Management Committees and local leaders.",
+        "This advisory remains in place until the authorities update or withdraw it."
+       ],
+       "sw": [
+        "Tafadhali endeleeni kufuatilia taarifa za TMA, Kamati za Usimamizi wa Maafa na viongozi wa eneo.",
+        "Tahadhari hii itaendelea hadi mamlaka zitakapoihuisha au kuiondoa rasmi."
+       ]
+      }
+     }
+    ],
+    "2": [
+     {
+      "impact": {
+       "en": "Wetland margins and river crossings flooded and rural roads cut; barns and houses damaged by wind; or wildfire spreading through miombo and fields. Crops and tobacco at risk.",
+       "sw": "Kingo za ardhioevu na vivuko vya mito vimefurika na barabara za vijijini zimekatika; mabani na nyumba vimeharibiwa na upepo; au moto unaenea kwenye miombo na mashamba. Mazao na tumbaku viko hatarini."
+      },
+      "actions": {
+       "en": [
+        "Move households from flooded wetland margins to ward assembly points.",
+        "Village fire teams and TFS fight fires only where it is safe, working from the burnt side.",
+        "Close flooded river crossings and keep children from walking to school through them.",
+        "Boil drinking water. Clinics watch for diarrhoea, malaria and burns."
+       ],
+       "sw": [
+        "Hamisha kaya kutoka kingo za ardhioevu zilizofurika kwenda vituo vya kukusanyika vya kata.",
+        "Vikundi vya zimamoto vya vijiji na TFS wazime moto pale tu ilipo salama, wakianzia upande uliokwisha ungua.",
+        "Funga vivuko vya mito vilivyofurika na zuia watoto kuvipita wakienda shule.",
+        "Chemsha maji ya kunywa. Kliniki zifuatilie kuhara, malaria na walioungua."
+       ]
+      }
+     },
+     {
+      "impact": {
+       "en": "Warning status",
+       "sw": "Hali ya tahadhari"
+      },
+      "actions": {
+       "en": [
+        "Please continue to follow updates from TMA, Disaster Management Committees and local leaders.",
+        "This warning remains in force until the authorities lower or withdraw it."
+       ],
+       "sw": [
+        "Tafadhali endeleeni kufuatilia taarifa za TMA, Kamati za Usimamizi wa Maafa na viongozi wa eneo.",
+        "Tahadhari hii itaendelea kutumika hadi mamlaka zitakapoishusha au kuiondoa rasmi."
+       ]
+      }
+     }
+    ],
+    "3": [
+     {
+      "impact": {
+       "en": "Life-threatening flood, storm or wildfire. Villages cut off or burned and houses and barns destroyed, with risk of drowning, burns, injury and disease.",
+       "sw": "Mafuriko, dhoruba au moto unaohatarisha maisha. Vijiji vimetengwa au kuungua na nyumba na mabani vimeharibika, na hatari ya kuzama, kuungua, majeraha na magonjwa."
+      },
+      "actions": {
+       "en": [
+        "Evacuate threatened villages now, to higher ground or upwind of fire.",
+        "Call 114 and 190. Keep the road to Urambo District Hospital open.",
+        "Open shelters and register every household; note who is missing.",
+        "Health team: treat burns and injuries first, then guard against cholera."
+       ],
+       "sw": [
+        "Hamisha vijiji vilivyo hatarini sasa, kwenda miinuko au upande ambao moto hauelekei.",
+        "Piga 114 na 190. Barabara ya kwenda Hospitali ya Wilaya Urambo iwe wazi.",
+        "Fungua makazi na sajili kila kaya; andika waliopotea.",
+        "Timu ya afya: tibu walioungua na majeruhi kwanza, kisha zuia kipindupindu."
+       ]
+      }
+     },
+     {
+      "impact": {
+       "en": "Warning status",
+       "sw": "Hali ya tahadhari"
+      },
+      "actions": {
+       "en": [
+        "Please stay with official sources: radio, TMA, Disaster Management Committees and local leaders.",
+        "Disaster Management Committees will announce when the danger has passed and when it is safe to return."
+       ],
+       "sw": [
+        "Tafadhali tegemeeni taarifa rasmi: redio, TMA, Kamati za Usimamizi wa Maafa na viongozi wa eneo.",
+        "Kamati za Usimamizi wa Maafa zitatangaza hatari itakapokwisha na itakapokuwa salama kurudi."
+       ]
+      }
+     }
+    ]
+   },
+   "profile": {
+    "setting": "260,322 people on 5,415 km². Tobacco heartland; miombo, swamps and wetland margins linked to the Ugalla and Malagarasi systems; tsetse areas; limited piped water.",
+    "hazards": "Erratic rainfall and drought; wildfire; wetland and river floods; windstorms damaging roofs and tobacco barns; lightning; human–wildlife conflict.",
+    "atRisk": "Tobacco farmers and barns; wetland-margin villages; forest-edge households; children and herders at dawn and dusk."
+   }
+  },
+  "C102": {
+   "name": "Uyui District Council",
+   "hazards": [
+    "heavyRainfall",
+    "drought",
+    "strongWinds",
+    "floods",
+    "wildfire"
+   ],
+   "know": [
+    {
+     "area": {
+      "en": "Seasonal streams and drifts on rural roads",
+      "sw": "Vijito vya msimu na vivuko vya barabara za vijijini"
+     },
+     "risk": {
+      "en": "This area has seasonal streams: streams across Uyui are dry for months but carry fast flash floods within an hour of a storm, cutting drifts on rural roads and isolating villages.",
+      "sw": "Eneo hili lina vijito vya msimu: vijito vya Uyui huwa vikavu kwa miezi kadhaa lakini hubeba mafuriko ya ghafla ndani ya saa moja baada ya dhoruba, na kukata vivuko vya barabara za vijijini na kutenga vijiji."
+     },
+     "advice": {
+      "en": "For those living and travelling here, it helps to keep grass and trees on stream banks and to plan journeys around storm periods.",
+      "sw": "Kwa wanaoishi na kusafiri hapa, ni vyema kuacha nyasi na miti kwenye kingo za vijito na kupanga safari kuzingatia vipindi vya dhoruba."
+     }
+    },
+    {
+     "area": {
+      "en": "Mbuga lowlands",
+      "sw": "Mbuga za mabonde"
+     },
+     "risk": {
+      "en": "This area is mbuga lowland: it collects run-off from the surrounding miombo and stays waterlogged for weeks in a normal rainy season.",
+      "sw": "Eneo hili ni mbuga ya bonde: hupokea maji kutoka miombo inayozunguka na hubaki na maji kwa wiki kadhaa katika msimu wa kawaida wa mvua."
+     },
+     "advice": {
+      "en": "For those living and farming here, it helps to grow rice and other flood-tolerant crops on the mbuga and build homes on the higher ground.",
+      "sw": "Kwa wanaoishi na kulima hapa, ni vyema kupanda mpunga na mazao mengine yanayostahimili maji kwenye mbuga na kujenga makazi sehemu za miinuko."
+     }
+    },
+    {
+     "area": {
+      "en": "Miombo villages",
+      "sw": "Vijiji vya miombo"
+     },
+     "risk": {
+      "en": "This is a miombo village: dry-season fires in grass and woodland spread quickly with afternoon winds and threaten homes, barns and apiaries.",
+      "sw": "Hiki ni kijiji cha miombo: moto wa kiangazi kwenye nyasi na misitu husambaa haraka kwa upepo wa mchana na kuhatarisha nyumba, mabani na mizinga."
+     },
+     "advice": {
+      "en": "For those living and farming here, it helps to keep fire breaks around homes and barns and to burn fields early on calm days with village approval.",
+      "sw": "Kwa wanaoishi na kulima hapa, ni vyema kuweka njia za kuzuia moto kuzunguka nyumba na mabani na kuchoma mashamba mapema siku zisizo na upepo kwa idhini ya kijiji."
+     }
+    },
+    {
+     "area": {
+      "en": "Growing villages around Tabora town",
+      "sw": "Vijiji vinavyokua kuzunguka mji wa Tabora"
+     },
+     "risk": {
+      "en": "This is a fast-growing area around Tabora town: new houses are going up on stream banks and low-lying plots that flood in heavy rain.",
+      "sw": "Hili ni eneo linalokua kwa kasi kuzunguka mji wa Tabora: nyumba mpya zinajengwa kwenye kingo za vijito na viwanja vya chini vinavyofurika wakati wa mvua kubwa."
+     },
+     "advice": {
+      "en": "For those building here, it helps to obtain a building permit and have the plot checked by the village or council before investing in construction.",
+      "sw": "Kwa wanaojenga hapa, ni vyema kupata kibali cha ujenzi na kiwanja kukaguliwa na kijiji au halmashauri kabla ya kuwekeza kwenye ujenzi."
+     }
+    },
+    {
+     "area": {
+      "en": "Drought-prone farms",
+      "sw": "Mashamba yanayokumbwa na ukame"
+     },
+     "risk": {
+      "en": "This is a drought-prone farming area: dry spells in the middle of the Msimu season (January–February) are common across Uyui and often damage maize at flowering.",
+      "sw": "Hili ni eneo la kilimo linalokumbwa na ukame: vipindi vya ukavu katikati ya msimu wa mvua (Januari–Februari) ni vya kawaida Uyui na mara nyingi huharibu mahindi wakati wa kuchanua."
+     },
+     "advice": {
+      "en": "For those farming here, it helps to plant early, choose early-maturing and drought-tolerant varieties and keep a household food reserve.",
+      "sw": "Kwa wanaolima hapa, ni vyema kupanda mapema, kuchagua mbegu zinazokomaa mapema na zinazostahimili ukame na kuweka akiba ya chakula ya kaya."
+     }
+    }
+   ],
+   "levels": {
+    "1": [
+     {
+      "impact": {
+       "en": "Uneven Msimu rains over Uyui's miombo and mbuga. Storms fill seasonal streams and drifts on rural roads; dry spells stress maize and tobacco. Lightning and strong winds over open fields.",
+       "sw": "Mvua za Msimu zisizo na mtawanyiko mzuri kwenye miombo na mbuga za Uyui. Dhoruba zinajaza vijito vya msimu na vivuko vya barabara za vijijini; vipindi vya ukavu vinaathiri mahindi na tumbaku. Radi na upepo mkali mashambani."
+      },
+      "actions": {
+       "en": [
+        "Village leaders check drifts and footbridges used by school children and mark danger points.",
+        "Farmers secure tobacco barns and stores and open field drains.",
+        "Keep fire breaks around villages and barns; no field burning on windy days.",
+        "Do not cross flowing streams on foot, by bicycle or by motorcycle."
+       ],
+       "sw": [
+        "Viongozi wa vijiji wakague vivuko na madaraja ya miguu yanayotumiwa na wanafunzi na waweke alama sehemu za hatari.",
+        "Wakulima waimarishe mabani ya tumbaku na maghala na wafungue mifereji ya mashamba.",
+        "Wekeni njia za kuzuia moto kuzunguka vijiji na mabani; msichome mashamba siku za upepo.",
+        "Usivuke vijito vinavyotiririka kwa miguu, baiskeli wala pikipiki."
+       ]
+      }
+     },
+     {
+      "impact": {
+       "en": "Warning status",
+       "sw": "Hali ya tahadhari"
+      },
+      "actions": {
+       "en": [
+        "Please continue to follow updates from TMA, Disaster Management Committees and local leaders.",
+        "This advisory remains in place until the authorities update or withdraw it."
+       ],
+       "sw": [
+        "Tafadhali endeleeni kufuatilia taarifa za TMA, Kamati za Usimamizi wa Maafa na viongozi wa eneo.",
+        "Tahadhari hii itaendelea hadi mamlaka zitakapoihuisha au kuiondoa rasmi."
+       ]
+      }
+     }
+    ],
+    "2": [
+     {
+      "impact": {
+       "en": "Rural roads and drifts cut and villages temporarily isolated; houses with weak walls damaged; or crops failing in a prolonged dry spell. Children unable to reach school safely.",
+       "sw": "Barabara na vivuko vya vijijini vimekatika na vijiji vimetengwa kwa muda; nyumba zenye kuta dhaifu zimeharibika; au mazao yanaharibika kwa ukavu wa muda mrefu. Watoto hawawezi kufika shule kwa usalama."
+      },
+      "actions": {
+       "en": [
+        "Close flooded drifts; schools keep pupils until streams fall or adults escort them home.",
+        "Move households from damaged houses to safe public buildings.",
+        "Ward extension officers assess crop and tobacco damage and report to the council.",
+        "Boil drinking water. Dispensaries ready for diarrhoea and malaria."
+       ],
+       "sw": [
+        "Funga vivuko vilivyofurika; shule zibaki na wanafunzi hadi maji yapungue au watu wazima wawasindikize nyumbani.",
+        "Hamisha kaya kutoka nyumba zilizoharibika kwenda majengo salama ya umma.",
+        "Maafisa ugani wa kata wafanye tathmini ya uharibifu wa mazao na tumbaku na waripoti halmashauri.",
+        "Chemsha maji ya kunywa. Zahanati ziwe tayari kwa kuhara na malaria."
+       ]
+      }
+     },
+     {
+      "impact": {
+       "en": "Warning status",
+       "sw": "Hali ya tahadhari"
+      },
+      "actions": {
+       "en": [
+        "Please continue to follow updates from TMA, Disaster Management Committees and local leaders.",
+        "This warning remains in force until the authorities lower or withdraw it."
+       ],
+       "sw": [
+        "Tafadhali endeleeni kufuatilia taarifa za TMA, Kamati za Usimamizi wa Maafa na viongozi wa eneo.",
+        "Tahadhari hii itaendelea kutumika hadi mamlaka zitakapoishusha au kuiondoa rasmi."
+       ]
+      }
+     }
+    ],
+    "3": [
+     {
+      "impact": {
+       "en": "Life-threatening floods and storm damage. Villages cut off from Tabora town, houses collapse and people are trapped, with risk of drowning, injury and disease.",
+       "sw": "Mafuriko na uharibifu wa dhoruba unaohatarisha maisha. Vijiji vimetengwa na mji wa Tabora, nyumba zinaanguka na watu wamekwama, na hatari ya kuzama, majeraha na magonjwa."
+      },
+      "actions": {
+       "en": [
+        "Evacuate affected villages now. Do not return until the committee declares it safe.",
+        "Call 114 and 190. Coordinate with Tabora Municipal Council on access routes and referral to Kitete Hospital.",
+        "Open shelters and register every household; note who is missing.",
+        "Health team: treat injuries first, then guard against cholera if water is contaminated."
+       ],
+       "sw": [
+        "Hamisha vijiji vilivyoathirika sasa. Msirudi mpaka kamati itangaze ni salama.",
+        "Piga 114 na 190. Shirikiana na Manispaa ya Tabora kuhusu njia za kufika na rufaa kwenda Hospitali ya Kitete.",
+        "Fungua makazi na sajili kila kaya; andika waliopotea.",
+        "Timu ya afya: tibu majeruhi kwanza, kisha zuia kipindupindu maji yakichafuka."
+       ]
+      }
+     },
+     {
+      "impact": {
+       "en": "Warning status",
+       "sw": "Hali ya tahadhari"
+      },
+      "actions": {
+       "en": [
+        "Please stay with official sources: radio, TMA, Disaster Management Committees and local leaders.",
+        "Disaster Management Committees will announce when the danger has passed and when it is safe to return."
+       ],
+       "sw": [
+        "Tafadhali tegemeeni taarifa rasmi: redio, TMA, Kamati za Usimamizi wa Maafa na viongozi wa eneo.",
+        "Kamati za Usimamizi wa Maafa zitatangaza hatari itakapokwisha na itakapokuwa salama kurudi."
+       ]
+      }
+     }
+    ]
+   },
+   "profile": {
+    "setting": "562,588 people on 11,966 km², surrounding Tabora Municipality. Mixed miombo and mbuga; tobacco and maize farming; long rural roads with drifts.",
+    "hazards": "Dry spells and drought; flash floods at drifts and streams; strong winds; wildfire; lightning.",
+    "atRisk": "Remote villages cut off in the Msimu; children crossing streams to school; tobacco farmers and barns."
+   }
+  }
+ }
+}

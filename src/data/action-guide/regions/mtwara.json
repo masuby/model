@@ -1,0 +1,245 @@
+{
+ "region": {
+  "en": "Mtwara Region",
+  "sw": "Mkoa wa Mtwara"
+ },
+ "councils": {
+  "C065": {
+   "name": "Mtwara Municipal Council",
+   "hazards": [
+    "largeWaves",
+    "floods",
+    "strongWinds",
+    "heavyRainfall",
+    "publicHealth"
+   ],
+   "documented": "coastal floods, large waves and strong winds, heavy Msimu rain, cholera, and boat accidents",
+   "know": [
+    {
+     "area": {
+      "en": "Mtwara Municipal: Mikindani Bay shore and low streets",
+      "sw": "Manispaa ya Mtwara: ufukwe wa ghuba ya Mikindani na mitaa ya chini"
+     },
+     "risk": {
+      "en": "This area is a low coastal town where storm tides and erosion attack the shoreline, heavy rain floods low streets and the port and gas facilities bring industrial risk.",
+      "sw": "Eneo hili ni mji wa pwani wa chini ambapo mawimbi makubwa na mmomonyoko hushambulia ufukwe, mvua kubwa hufurika mitaa ya chini na bandari na mitambo ya gesi huleta hatari za viwandani."
+     },
+     "advice": {
+      "en": "For those living and trading here, it helps to build back from the shoreline, protect mangroves, keep drains to the sea open and follow safety rules near port and gas installations.",
+      "sw": "Kwa wanaoishi na kufanya biashara hapa, ni vyema kujenga mbali na ufukwe, kulinda mikoko, kuweka mitaro inayoelekea baharini wazi na kufuata kanuni za usalama karibu na bandari na mitambo ya gesi."
+     }
+    }
+   ]
+  },
+  "C069": {
+   "name": "Masasi Town Council",
+   "hazards": [
+    "floods",
+    "drought",
+    "strongWinds",
+    "wildfire"
+   ],
+   "documented": "wet-season floods, dry-season drought, strong winds, and wildfire",
+   "know": [
+    {
+     "area": {
+      "en": "Masasi Town: inselberg hills and town streams",
+      "sw": "Mji wa Masasi: milima ya mawe na vijito vya mjini"
+     },
+     "risk": {
+      "en": "This area is a town among rocky inselberg hills where storm run-off rushes off bare rock into streets and seasonal streams, and dry spells cause water shortages.",
+      "sw": "Eneo hili ni mji uliozungukwa na milima ya mawe ambapo maji ya dhoruba hukimbia kutoka kwenye mawe matupu hadi mitaani na vijito vya msimu, na vipindi vya ukavu husababisha uhaba wa maji."
+     },
+     "advice": {
+      "en": "For those living and trading here, it helps to keep drains and stream reserves clear, avoid building at the foot of rock slopes and harvest and store rainwater.",
+      "sw": "Kwa wanaoishi na kufanya biashara hapa, ni vyema kuweka mitaro na hifadhi za vijito wazi, kuepuka kujenga chini ya miteremko ya mawe na kuvuna na kuhifadhi maji ya mvua."
+     }
+    }
+   ]
+  },
+  "C064": {
+   "name": "Nanyamba Town Council",
+   "hazards": [
+    "largeWaves",
+    "floods",
+    "heavyRainfall",
+    "publicHealth"
+   ],
+   "documented": "coastal floods, large waves, heavy rain, and cholera",
+   "know": [
+    {
+     "area": {
+      "en": "Nanyamba Town: Makonde plateau farmland",
+      "sw": "Mji wa Nanyamba: mashamba ya uwanda wa Makonde"
+     },
+     "risk": {
+      "en": "This area is on the Makonde plateau where deep groundwater makes water scarce in the dry season and cashew and food crops depend on unreliable rains.",
+      "sw": "Eneo hili liko kwenye uwanda wa Makonde ambapo maji ya ardhini yaliyo chini sana hufanya maji kuwa haba wakati wa kiangazi na korosho na mazao ya chakula hutegemea mvua zisizo za uhakika."
+     },
+     "advice": {
+      "en": "For those living and farming here, it helps to harvest rainwater, protect water sources and plant drought-tolerant crops with household food reserves.",
+      "sw": "Kwa wanaoishi na kulima hapa, ni vyema kuvuna maji ya mvua, kulinda vyanzo vya maji na kupanda mazao yanayostahimili ukame na kuweka akiba ya chakula."
+     }
+    }
+   ]
+  },
+  "C067": {
+   "name": "Newala Town Council",
+   "hazards": [
+    "drought",
+    "heavyRainfall",
+    "strongWinds",
+    "landslide"
+   ],
+   "documented": "water shortage on the Makonde plateau, heavy rain, and strong winds",
+   "know": [
+    {
+     "area": {
+      "en": "Newala Town: Makonde plateau escarpment",
+      "sw": "Mji wa Newala: ukingo wa uwanda wa Makonde"
+     },
+     "risk": {
+      "en": "This area sits on the Makonde plateau edge, where water is scarce in the dry season and run-off erodes gullies down the escarpment towards the Ruvuma valley.",
+      "sw": "Eneo hili liko ukingoni mwa uwanda wa Makonde, ambapo maji ni haba wakati wa kiangazi na maji ya mvua huchimba makorongo kwenye mteremko kuelekea bonde la Ruvuma."
+     },
+     "advice": {
+      "en": "For those living here, it helps to harvest and store rainwater, keep trees and grass on the escarpment and build back from gully edges.",
+      "sw": "Kwa wanaoishi hapa, ni vyema kuvuna na kuhifadhi maji ya mvua, kuacha miti na nyasi kwenye mteremko na kujenga mbali na kingo za makorongo."
+     }
+    }
+   ]
+  },
+  "C068": {
+   "name": "Masasi District Council",
+   "hazards": [
+    "drought",
+    "floods",
+    "wildfire",
+    "strongWinds",
+    "heavyRainfall"
+   ],
+   "documented": "drought in the dry months, wet-season floods, wildfire, and strong winds",
+   "know": [
+    {
+     "area": {
+      "en": "Masasi DC: farmland and the Lukuledi valley",
+      "sw": "Masasi DC: mashamba na bonde la Lukuledi"
+     },
+     "risk": {
+      "en": "This area has cashew and food farmland where dry spells damage crops, and the Lukuledi valley where heavy rain floods fields and rural crossings.",
+      "sw": "Eneo hili lina mashamba ya korosho na chakula ambapo vipindi vya ukavu huharibu mazao, na bonde la Lukuledi ambapo mvua kubwa hufurika mashamba na vivuko vya vijijini."
+     },
+     "advice": {
+      "en": "For those farming here, it helps to plant early-maturing and drought-tolerant varieties, keep food reserves and keep homes and stores off the valley floor.",
+      "sw": "Kwa wanaolima hapa, ni vyema kupanda mbegu zinazokomaa mapema na kustahimili ukame, kuweka akiba ya chakula na kujenga makazi na maghala nje ya sakafu ya bonde."
+     }
+    }
+   ]
+  },
+  "C063": {
+   "name": "Mtwara District Council",
+   "hazards": [
+    "largeWaves",
+    "floods",
+    "heavyRainfall",
+    "publicHealth"
+   ],
+   "documented": "coastal floods, large waves, heavy rain, boat accidents, and cholera",
+   "know": [
+    {
+     "area": {
+      "en": "Mtwara DC: coast, Ruvuma delta and gas fields",
+      "sw": "Mtwara DC: pwani, delta ya Ruvuma na maeneo ya gesi"
+     },
+     "risk": {
+      "en": "This area includes coastal villages exposed to storm surge and erosion, the Ruvuma delta that floods in wet years, and gas fields such as Msimbati.",
+      "sw": "Eneo hili linajumuisha vijiji vya pwani vinavyoathiriwa na mawimbi makubwa na mmomonyoko, delta ya Ruvuma inayofurika katika miaka ya mvua nyingi, na maeneo ya gesi kama Msimbati."
+     },
+     "advice": {
+      "en": "For those living and fishing here, it helps to keep boats ashore in strong winds, keep homes off the delta flood plain and follow safety rules around gas installations.",
+      "sw": "Kwa wanaoishi na kuvua hapa, ni vyema kuweka vyombo ufukweni wakati wa upepo mkali, kujenga nje ya tambarare ya mafuriko ya delta na kufuata kanuni za usalama karibu na mitambo ya gesi."
+     }
+    }
+   ]
+  },
+  "C071": {
+   "name": "Nanyumbu District Council",
+   "hazards": [
+    "drought",
+    "wildfire",
+    "floods",
+    "publicHealth"
+   ],
+   "documented": "drought, wildfire, wet-season floods, and human–wildlife conflict on the Mozambican border",
+   "know": [
+    {
+     "area": {
+      "en": "Nanyumbu: Ruvuma river border villages",
+      "sw": "Nanyumbu: vijiji vya mpakani kando ya mto Ruvuma"
+     },
+     "risk": {
+      "en": "This area borders the Ruvuma river and Mozambique, where the river floods riverside farms, wildlife raids crops and cross-border movement brings security and disease concerns.",
+      "sw": "Eneo hili linapakana na mto Ruvuma na Msumbiji, ambapo mto hufurika mashamba ya kando ya mto, wanyamapori huvamia mazao na mwingiliano wa mpakani huleta changamoto za usalama na magonjwa."
+     },
+     "advice": {
+      "en": "For those living and farming here, it helps to keep homes above the river flood line, use community deterrents against wildlife and report unusual illness or insecurity early.",
+      "sw": "Kwa wanaoishi na kulima hapa, ni vyema kujenga juu ya mstari wa mafuriko ya mto, kutumia mbinu za jamii kufukuza wanyama na kutoa taarifa mapema za magonjwa au hali ya usalama."
+     }
+    }
+   ]
+  },
+  "C066": {
+   "name": "Newala District Council",
+   "hazards": [
+    "drought",
+    "heavyRainfall",
+    "strongWinds",
+    "floods"
+   ],
+   "documented": "water shortage on the plateau, heavy rain, and strong winds",
+   "know": [
+    {
+     "area": {
+      "en": "Newala DC: plateau villages and Ruvuma valley",
+      "sw": "Newala DC: vijiji vya uwandani na bonde la Ruvuma"
+     },
+     "risk": {
+      "en": "This area has plateau villages with long walks to scarce water in the dry season and lowland villages in the Ruvuma valley that flood in wet years.",
+      "sw": "Eneo hili lina vijiji vya uwandani vyenye safari ndefu kufuata maji machache wakati wa kiangazi na vijiji vya tambarare katika bonde la Ruvuma vinavyofurika katika miaka ya mvua nyingi."
+     },
+     "advice": {
+      "en": "For those living here, it helps to harvest rainwater and protect wells on the plateau, and keep homes and stores above the flood line in the valley.",
+      "sw": "Kwa wanaoishi hapa, ni vyema kuvuna maji ya mvua na kulinda visima uwandani, na kujenga makazi na maghala juu ya mstari wa mafuriko bondeni."
+     }
+    }
+   ]
+  },
+  "C070": {
+   "name": "Tandahimba District Council",
+   "hazards": [
+    "heavyRainfall",
+    "floods",
+    "drought",
+    "strongWinds",
+    "wildfire"
+   ],
+   "documented": "heavy Msimu rain, floods, dry-season water shortage, and strong winds",
+   "know": [
+    {
+     "area": {
+      "en": "Tandahimba: cashew farmland on the plateau",
+      "sw": "Tandahimba: mashamba ya korosho uwandani"
+     },
+     "risk": {
+      "en": "This area is intensive cashew farmland on the plateau where water is scarce in the dry season, crops depend on unreliable rains and dry-season field fires spread.",
+      "sw": "Eneo hili ni mashamba mengi ya korosho uwandani ambapo maji ni haba wakati wa kiangazi, mazao hutegemea mvua zisizo za uhakika na moto wa mashamba husambaa kiangazi."
+     },
+     "advice": {
+      "en": "For those farming here, it helps to harvest rainwater, burn fields only under control on calm days and keep household food and cash reserves.",
+      "sw": "Kwa wanaolima hapa, ni vyema kuvuna maji ya mvua, kuchoma mashamba kwa udhibiti siku zisizo na upepo tu na kuweka akiba ya chakula na fedha ya kaya."
+     }
+    }
+   ]
+  }
+ }
+}

@@ -1,0 +1,188 @@
+{
+ "region": {
+  "en": "Mbeya Region",
+  "sw": "Mkoa wa Mbeya"
+ },
+ "councils": {
+  "C087": {
+   "name": "Mbeya City Council",
+   "hazards": [
+    "heavyRainfall",
+    "floods",
+    "landslide",
+    "earthquake",
+    "strongWinds"
+   ],
+   "documented": "heavy rain and floods on the Meta and Sisimba, landslides on the Poroto edge, earthquake on the Rukwa Rift, and strong winds",
+   "know": [
+    {
+     "area": {
+      "en": "Mbeya City: valley-floor streets and hillside settlements",
+      "sw": "Jiji la Mbeya: mitaa ya mabondeni na makazi ya milimani"
+     },
+     "risk": {
+      "en": "This area is a city in a highland valley where run-off from the Mbeya range floods low streets and cuts gullies through hillside settlements, and the region lies in an active earthquake zone.",
+      "sw": "Eneo hili ni jiji lililo kwenye bonde la nyanda za juu ambapo maji kutoka safu ya milima ya Mbeya hufurika mitaa ya chini na kuchimba makorongo kwenye makazi ya milimani, na mkoa uko katika ukanda hai wa matetemeko."
+     },
+     "advice": {
+      "en": "For those living and building here, it helps to keep streams and drains clear, avoid building on steep slopes and stream banks, and build to earthquake-resistant standards.",
+      "sw": "Kwa wanaoishi na kujenga hapa, ni vyema kuweka vijito na mitaro wazi, kuepuka kujenga kwenye miteremko mikali na kingo za vijito, na kujenga kwa viwango vinavyostahimili matetemeko."
+     }
+    }
+   ]
+  },
+  "C090": {
+   "name": "Busokelo District Council",
+   "hazards": [
+    "heavyRainfall",
+    "landslide",
+    "floods"
+   ],
+   "documented": "heavy rain and landslides on the Rungwe slopes, and valley floods",
+   "know": [
+    {
+     "area": {
+      "en": "Busokelo: steep Rungwe slopes and Lake Nyasa catchment",
+      "sw": "Busokelo: miteremko mikali ya Rungwe na bonde la Ziwa Nyasa"
+     },
+     "risk": {
+      "en": "This area has steep, very high-rainfall slopes where saturated soils slide, rivers rise fast and roads wash out.",
+      "sw": "Eneo hili lina miteremko mikali yenye mvua nyingi sana ambapo udongo uliojaa maji huporomoka, mito hujaa haraka na barabara husombwa."
+     },
+     "advice": {
+      "en": "For those living and farming here, it helps to keep trees and terraces on slopes, build away from steep cuts and stream banks and watch for cracks in the ground after heavy rain.",
+      "sw": "Kwa wanaoishi na kulima hapa, ni vyema kuacha miti na matuta kwenye miteremko, kujenga mbali na miinuko mikali na kingo za vijito na kuangalia nyufa ardhini baada ya mvua kubwa."
+     }
+    }
+   ]
+  },
+  "C085": {
+   "name": "Chunya District Council",
+   "hazards": [
+    "floods",
+    "heavyRainfall",
+    "wildfire"
+   ],
+   "documented": "gold-pit collapse and flooded shafts, heavy rain, floods toward Lake Rukwa, and wildfire",
+   "know": [
+    {
+     "area": {
+      "en": "Chunya: dry miombo and gold-mining areas",
+      "sw": "Chunya: miombo kame na maeneo ya uchimbaji wa dhahabu"
+     },
+     "risk": {
+      "en": "This area is hot, dry miombo country with many artisanal gold mines, where pits collapse and flood in the rains, fires spread in the dry season and water is scarce.",
+      "sw": "Eneo hili ni nchi ya miombo yenye joto na ukame yenye migodi mingi midogo ya dhahabu, ambapo mashimo hubomoka na kujaa maji wakati wa mvua, moto husambaa kiangazi na maji ni haba."
+     },
+     "advice": {
+      "en": "For those living and mining here, it helps to support and fence pits, divert run-off from pit mouths, keep fire breaks and protect drinking-water sources from mercury.",
+      "sw": "Kwa wanaoishi na kuchimba hapa, ni vyema kuimarisha na kuzungushia uzio mashimo, kuelekeza maji mbali na midomo ya mashimo, kuweka njia za kuzuia moto na kulinda vyanzo vya maji ya kunywa dhidi ya zebaki."
+     }
+    }
+   ]
+  },
+  "C088": {
+   "name": "Kyela District Council",
+   "hazards": [
+    "floods",
+    "largeWaves",
+    "heavyRainfall",
+    "earthquake",
+    "publicHealth"
+   ],
+   "documented": "Lake Nyasa floods and large waves, Kiwira river floods, heavy rain, earthquake, and boat accidents",
+   "know": [
+    {
+     "area": {
+      "en": "Kyela: Lake Nyasa flood plain and river deltas",
+      "sw": "Kyela: tambarare ya mafuriko ya Ziwa Nyasa na delta za mito"
+     },
+     "risk": {
+      "en": "This area is a low, very wet flood plain where the Kiwira, Songwe and Lufilyo rivers overflow into rice fields and villages, and malaria and cholera rise after floods.",
+      "sw": "Eneo hili ni tambarare ya chini yenye mvua nyingi sana ambapo mito Kiwira, Songwe na Lufilyo hufurika mashamba ya mpunga na vijiji, na malaria na kipindupindu huongezeka baada ya mafuriko."
+     },
+     "advice": {
+      "en": "For those living and farming here, it helps to build on raised plinths, keep homes and stores off river banks, sleep under treated nets and use safe water.",
+      "sw": "Kwa wanaoishi na kulima hapa, ni vyema kujenga kwenye misingi iliyoinuliwa, kujenga mbali na kingo za mito, kulala ndani ya vyandarua vyenye dawa na kutumia maji salama."
+     }
+    }
+   ]
+  },
+  "C091": {
+   "name": "Mbarali District Council",
+   "hazards": [
+    "floods",
+    "heavyRainfall"
+   ],
+   "documented": "Great Ruaha floods on the Usangu plain, heavy rain, and a hard dry season when irrigation fails",
+   "know": [
+    {
+     "area": {
+      "en": "Mbarali: Usangu plains and irrigation schemes",
+      "sw": "Mbarali: tambarare za Usangu na skimu za umwagiliaji"
+     },
+     "risk": {
+      "en": "This area covers the Usangu plains, where rivers flood irrigated rice in wet years, water is fought over in dry years and herders and farmers compete for land.",
+      "sw": "Eneo hili linajumuisha tambarare za Usangu, ambapo mito hufurika mpunga wa umwagiliaji katika miaka ya mvua nyingi, maji hugombaniwa katika miaka ya ukame na wafugaji na wakulima hushindania ardhi."
+     },
+     "advice": {
+      "en": "For those farming and herding here, it helps to maintain canals, share water by agreed schedules and follow village land-use plans and livestock routes.",
+      "sw": "Kwa wanaolima na kufuga hapa, ni vyema kutunza mifereji, kugawana maji kwa ratiba zilizokubaliwa na kufuata mipango ya matumizi ya ardhi ya vijiji na njia za mifugo."
+     }
+    }
+   ]
+  },
+  "C086": {
+   "name": "Mbeya District Council",
+   "hazards": [
+    "heavyRainfall",
+    "landslide",
+    "floods",
+    "earthquake"
+   ],
+   "documented": "heavy rain, landslides, valley floods, and earthquake",
+   "know": [
+    {
+     "area": {
+      "en": "Mbeya DC: highland farms and the Mbeya range",
+      "sw": "Mbeya DC: mashamba ya nyanda za juu na safu ya milima ya Mbeya"
+     },
+     "risk": {
+      "en": "This area has steep highland farms where heavy rain causes landslides and gullies, and hailstorms and frost damage crops.",
+      "sw": "Eneo hili lina mashamba ya nyanda za juu yenye miteremko mikali ambapo mvua kubwa husababisha maporomoko na makorongo, na mvua ya mawe na baridi kali huharibu mazao."
+     },
+     "advice": {
+      "en": "For those living and farming here, it helps to keep terraces and trees on slopes, build away from gullies and steep cuts and fix roofs firmly.",
+      "sw": "Kwa wanaoishi na kulima hapa, ni vyema kutunza matuta na miti kwenye miteremko, kujenga mbali na makorongo na miinuko mikali na kufunga paa imara."
+     }
+    }
+   ]
+  },
+  "C089": {
+   "name": "Rungwe District Council",
+   "hazards": [
+    "heavyRainfall",
+    "landslide",
+    "floods",
+    "earthquake"
+   ],
+   "documented": "heavy rain and landslides on Mount Rungwe, Kiwira floods, and earthquake",
+   "know": [
+    {
+     "area": {
+      "en": "Rungwe: Tukuyu and the Rungwe volcanic slopes",
+      "sw": "Rungwe: Tukuyu na miteremko ya volkano ya Rungwe"
+     },
+     "risk": {
+      "en": "This area lies on the high-rainfall slopes of the Rungwe volcano, where landslides, flash floods and earth tremors occur and the volcano is monitored.",
+      "sw": "Eneo hili liko kwenye miteremko yenye mvua nyingi ya volkano ya Rungwe, ambapo maporomoko, mafuriko ya ghafla na mitikisiko ya ardhi hutokea na volkano hufuatiliwa."
+     },
+     "advice": {
+      "en": "For those living and farming here, it helps to keep slopes planted, build away from steep cuts and river banks, build to earthquake-resistant standards and follow official guidance.",
+      "sw": "Kwa wanaoishi na kulima hapa, ni vyema kuacha mimea kwenye miteremko, kujenga mbali na miinuko mikali na kingo za mito, kujenga kwa viwango vinavyostahimili matetemeko na kufuata maelekezo rasmi."
+     }
+    }
+   ]
+  }
+ }
+}

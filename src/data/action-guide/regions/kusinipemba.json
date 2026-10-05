@@ -1,0 +1,60 @@
+{
+ "region": {
+  "en": "Kusini Pemba Region",
+  "sw": "Mkoa wa Kusini Pemba"
+ },
+ "councils": {
+  "C194": {
+   "name": "Chake Chake District",
+   "hazards": [
+    "largeWaves",
+    "floods",
+    "strongWinds",
+    "heavyRainfall"
+   ],
+   "documented": "coastal floods, large waves, strong winds, heavy rain, and boat accidents",
+   "know": [
+    {
+     "area": {
+      "en": "Chake Chake: town valleys and creek",
+      "sw": "Chake Chake: mabonde ya mji na hori"
+     },
+     "risk": {
+      "en": "This area is a hilly town where storm run-off floods valley streets and the creek, and steep cuts can slide in heavy rain.",
+      "sw": "Eneo hili ni mji wa milimani ambapo maji ya dhoruba hufurika mitaa ya mabondeni na hori, na miinuko mikali inaweza kuporomoka wakati wa mvua kubwa."
+     },
+     "advice": {
+      "en": "For those living and trading here, it helps to keep drains open and build away from valley floors and steep cuts.",
+      "sw": "Kwa wanaoishi na kufanya biashara hapa, ni vyema kuweka mitaro wazi na kujenga mbali na sakafu za mabonde na miinuko mikali."
+     }
+    }
+   ]
+  },
+  "C195": {
+   "name": "Mkoani District",
+   "hazards": [
+    "largeWaves",
+    "strongWinds",
+    "heavyRainfall",
+    "publicHealth"
+   ],
+   "documented": "large waves, strong winds, heavy rain, boat accidents, and cholera",
+   "know": [
+    {
+     "area": {
+      "en": "Mkoani: port and southern coast",
+      "sw": "Mkoani: bandari na pwani ya kusini"
+     },
+     "risk": {
+      "en": "This area has the main ferry port and coastal villages where rough seas disrupt ferries and boats, and erosion and storm tides hit the shore.",
+      "sw": "Eneo hili lina bandari kuu ya meli na vijiji vya pwani ambapo bahari chafu huvuruga meli na vyombo, na mmomonyoko na mawimbi makubwa hupiga ufukwe."
+     },
+     "advice": {
+      "en": "For those living, fishing and travelling here, it helps to travel only on licensed vessels in safe weather, wear life jackets and build back from the shore.",
+      "sw": "Kwa wanaoishi, kuvua na kusafiri hapa, ni vyema kusafiri kwa vyombo vyenye leseni katika hali salama ya hewa tu, kuvaa maboya ya kujiokoa na kujenga mbali na ufukwe."
+     }
+    }
+   ]
+  }
+ }
+}

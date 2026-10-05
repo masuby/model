@@ -1,0 +1,658 @@
+[
+ {
+  "name": {
+   "en": "Transport incidents",
+   "sw": "Ajali za usafiri"
+  },
+  "rows": [
+   {
+    "incident": {
+     "en": "Road traffic accident: single vehicle, motorcycle (bodaboda) or pedestrian",
+     "sw": "Ajali ya barabarani: gari moja, pikipiki (bodaboda) au mtembea kwa miguu"
+    },
+    "actions": {
+     "en": [
+      "Switch on hazard lights and place warning triangles well before the scene.",
+      "Call 190 and inform the Traffic Police.",
+      "Stop bleeding by pressing firmly on the wound with a clean cloth.",
+      "Do not move seriously injured people unless there is a risk of fire."
+     ],
+     "sw": [
+      "Washa taa za tahadhari na weka pembetatu za onyo umbali wa kutosha kabla ya eneo la ajali.",
+      "Piga 190 na wajulishe Polisi wa Usalama Barabarani.",
+      "Zuia damu kwa kubana jeraha kwa nguvu kwa kitambaa safi.",
+      "Usimsogeze majeruhi mahututi isipokuwa kuna hatari ya moto."
+     ]
+    }
+   },
+   {
+    "incident": {
+     "en": "Bus or lorry accident with many casualties",
+     "sw": "Ajali ya basi au lori yenye majeruhi wengi"
+    },
+    "actions": {
+     "en": [
+      "Call 190 immediately.",
+      "Keep the road clear for ambulances and rescue vehicles.",
+      "Health teams: sort the injured by priority at the scene and activate hospital mass-casualty plans.",
+      "Fire and Rescue Force, Traffic Police and the Red Cross: coordinate rescue and account for all passengers."
+     ],
+     "sw": [
+      "Piga 190 mara moja.",
+      "Acha wazi barabara kwa magari ya wagonjwa na ya uokoaji.",
+      "Timu za afya: pangeni majeruhi kwa kipaumbele eneo la tukio na amilisheni mipango ya hospitali ya kupokea majeruhi wengi.",
+      "Jeshi la Zimamoto na Uokoaji, Polisi wa Usalama Barabarani na Chama cha Msalaba Mwekundu: ratibuni uokoaji na hakikisheni abiria wote wanajulikana walipo."
+     ]
+    }
+   },
+   {
+    "incident": {
+     "en": "Fuel tanker accident: overturn, leak, fire or explosion risk",
+     "sw": "Ajali ya gari la mafuta: kupinduka, kuvuja, hatari ya moto au mlipuko"
+    },
+    "actions": {
+     "en": [
+      "Please do not collect or scoop leaking fuel; it can explode (Morogoro 2019: 105 deaths).",
+      "Move everyone at least 200 m away.",
+      "Call 114 and 190.",
+      "Police and Fire and Rescue Force: close the road and cordon off the area."
+     ],
+     "sw": [
+      "Tafadhali usichote wala kukusanya mafuta yanayovuja; yanaweza kulipuka (Morogoro 2019: vifo 105).",
+      "Waondoe watu wote umbali wa angalau mita 200.",
+      "Piga 114 na 190.",
+      "Polisi na Jeshi la Zimamoto na Uokoaji: fungeni barabara na wekeni eneo la zuio."
+     ]
+    }
+   },
+   {
+    "incident": {
+     "en": "Boat or ferry accident on a lake, river or the sea",
+     "sw": "Ajali ya chombo au kivuko ziwani, mtoni au baharini"
+    },
+    "actions": {
+     "en": [
+      "Throw something that floats (life jacket, jerrycan, log) to people in the water.",
+      "Do not swim out to rescue unless you are trained.",
+      "Call 190 and inform the Marine Police or Beach Management Unit.",
+      "Fire and Rescue Force and TASAC: coordinate search and account for all passengers."
+     ],
+     "sw": [
+      "Mrushie aliye majini kitu kinachoelea (jaketi ya kujiokoa, dumu, gogo).",
+      "Usiogelee kwenda kuokoa isipokuwa umefunzwa.",
+      "Piga 190 na wajulishe Polisi Wanamaji au Kikundi cha Usimamizi wa Mwalo (BMU).",
+      "Jeshi la Zimamoto na Uokoaji na TASAC: ratibuni utafutaji na hakikisheni abiria wote wanajulikana walipo."
+     ]
+    }
+   },
+   {
+    "incident": {
+     "en": "Aircraft accident: small aircraft, helicopter or passenger aircraft",
+     "sw": "Ajali ya ndege: ndege ndogo, helikopta au ndege ya abiria"
+    },
+    "actions": {
+     "en": [
+      "Keep everyone at least 500 m away.",
+      "Do not approach until the fire risk has passed.",
+      "Call 190; the Tanzania Civil Aviation Authority (TCAA) must be informed.",
+      "Police: protect the site for accident investigators."
+     ],
+     "sw": [
+      "Waweke watu wote umbali wa angalau mita 500.",
+      "Usikaribie hadi hatari ya moto iishe.",
+      "Piga 190; Mamlaka ya Usafiri wa Anga Tanzania (TCAA) ijulishwe.",
+      "Polisi: lindeni eneo kwa ajili ya wachunguzi wa ajali."
+     ]
+    }
+   },
+   {
+    "incident": {
+     "en": "Rail accident: derailment, collision or person hit by a train",
+     "sw": "Ajali ya treni: kuacha reli, kugongana au mtu kugongwa na treni"
+    },
+    "actions": {
+     "en": [
+      "Keep away from the tracks; other trains may be coming.",
+      "Call 190 and inform the Tanzania Railways Corporation (TRC) so that other trains can be stopped.",
+      "Give first aid only where it is safe.",
+      "Do not remove wreckage until investigators arrive."
+     ],
+     "sw": [
+      "Kaa mbali na reli; treni nyingine zinaweza kuwa zinakuja.",
+      "Piga 190 na ujulishe Shirika la Reli Tanzania (TRC) ili treni nyingine zisimamishwe.",
+      "Toa huduma ya kwanza pale tu ambapo ni salama.",
+      "Usiondoe mabaki hadi wachunguzi wafike."
+     ]
+    }
+   }
+  ]
+ },
+ {
+  "name": {
+   "en": "Fire and infrastructure",
+   "sw": "Moto na miundombinu"
+  },
+  "rows": [
+   {
+    "incident": {
+     "en": "Building collapse: under construction or occupied",
+     "sw": "Kuanguka kwa jengo: linalojengwa au lenye watu"
+    },
+    "actions": {
+     "en": [
+      "Do not enter the rubble; more of the building may collapse.",
+      "Call 114 and 190.",
+      "Keep everyone at least 50 m away.",
+      "Tell rescuers where trapped people were last seen; Fire and Rescue Force leads the rescue."
+     ],
+     "sw": [
+      "Usiingie kwenye kifusi; sehemu nyingine ya jengo inaweza kuanguka.",
+      "Piga 114 na 190.",
+      "Waweke watu wote umbali wa angalau mita 50.",
+      "Waeleze waokoaji mahali walipoonekana mara ya mwisho waliokwama; Jeshi la Zimamoto na Uokoaji linaongoza uokoaji."
+     ]
+    }
+   },
+   {
+    "incident": {
+     "en": "House or market fire",
+     "sw": "Moto wa nyumba au soko"
+    },
+    "actions": {
+     "en": [
+      "Leave the building immediately and help others out.",
+      "Stay low under smoke.",
+      "Close doors behind you, but do not lock them.",
+      "Call 114, and meet your family at the agreed assembly point."
+     ],
+     "sw": [
+      "Toka kwenye jengo mara moja na wasaidie wengine kutoka.",
+      "Inama chini ya moshi.",
+      "Funga milango nyuma yako, lakini usiifunge kwa ufunguo.",
+      "Piga 114, na kutana na familia yako mahali pa kukutana palipokubaliwa."
+     ]
+    }
+   },
+   {
+    "incident": {
+     "en": "Factory or warehouse fire",
+     "sw": "Moto wa kiwanda au ghala"
+    },
+    "actions": {
+     "en": [
+      "Sound the alarm and leave by emergency exits.",
+      "Call 114.",
+      "Tell firefighters about any chemicals stored on site.",
+      "Please do not return until the Fire and Rescue Force declares it safe."
+     ],
+     "sw": [
+      "Piga kengele ya hatari na toka kupitia milango ya dharura.",
+      "Piga 114.",
+      "Wajulishe wazima moto kuhusu kemikali zilizohifadhiwa eneo hilo.",
+      "Tafadhali usirudi hadi Jeshi la Zimamoto na Uokoaji litangaze kuwa ni salama."
+     ]
+    }
+   },
+   {
+    "incident": {
+     "en": "School or hospital fire",
+     "sw": "Moto wa shule au hospitali"
+    },
+    "actions": {
+     "en": [
+      "Sound the alarm.",
+      "Teachers and nurses: move pupils and patients out by marked routes; carry those who cannot walk.",
+      "Call 114.",
+      "Count everyone at the assembly point."
+     ],
+     "sw": [
+      "Piga kengele ya hatari.",
+      "Walimu na wauguzi: watoeni wanafunzi na wagonjwa kupitia njia zilizowekewa alama; wabebeni wasioweza kutembea.",
+      "Piga 114.",
+      "Hesabuni kila mtu mahali pa kukusanyika."
+     ]
+    }
+   },
+   {
+    "incident": {
+     "en": "Petrol station fire or explosion",
+     "sw": "Moto au mlipuko wa kituo cha mafuta"
+    },
+    "actions": {
+     "en": [
+      "Move at least 200 m away.",
+      "Do not use phones, cigarettes or open flames near the pumps.",
+      "Station staff: switch off power at the main switch only if safe.",
+      "Call 114; Police close the road."
+     ],
+     "sw": [
+      "Ondoka umbali wa angalau mita 200.",
+      "Usitumie simu, sigara wala moto karibu na pampu.",
+      "Wafanyakazi wa kituo: zimeni umeme kwenye swichi kuu ikiwa tu ni salama.",
+      "Piga 114; Polisi wafunge barabara."
+     ]
+    }
+   },
+   {
+    "incident": {
+     "en": "Bridge or dam failure",
+     "sw": "Kuvunjika kwa daraja au bwawa"
+    },
+    "actions": {
+     "en": [
+      "Communities downstream of a failed dam: move to higher ground immediately.",
+      "Do not cross damaged bridges.",
+      "Call 190 and inform Village/Mtaa leaders.",
+      "District Committees: warn downstream communities by radio and door-to-door, with the dam operator and TANROADS."
+     ],
+     "sw": [
+      "Jamii zilizo chini ya bwawa lililovunjika: hamieni maeneo ya mwinuko mara moja.",
+      "Usivuke madaraja yaliyoharibika.",
+      "Piga 190 na wajulishe viongozi wa Kijiji/Mtaa.",
+      "Kamati za Wilaya: watahadharisheni wakazi wa chini kupitia redio na nyumba kwa nyumba, kwa kushirikiana na mwendeshaji wa bwawa na TANROADS."
+     ]
+    }
+   }
+  ]
+ },
+ {
+  "name": {
+   "en": "Industrial and technological",
+   "sw": "Viwanda na teknolojia"
+  },
+  "rows": [
+   {
+    "incident": {
+     "en": "Chemical spill: factory, transport accident or pesticide leak",
+     "sw": "Kumwagika kwa kemikali: kiwandani, ajali ya usafiri au kuvuja kwa viuatilifu"
+    },
+    "actions": {
+     "en": [
+      "Move upwind and uphill, away from the spill.",
+      "Do not touch or smell the substance.",
+      "Call 190 and 114; report any label or number on the container.",
+      "Fire and Rescue Force, NEMC and GCLA: cordon off at least 100 m and manage the spill."
+     ],
+     "sw": [
+      "Hamia upande upepo unakotoka na eneo la juu, mbali na kemikali.",
+      "Usiguse wala kunusa kemikali.",
+      "Piga 190 na 114; toa taarifa ya maandishi au namba iliyo kwenye chombo.",
+      "Jeshi la Zimamoto na Uokoaji, NEMC na GCLA: wekeni eneo la zuio la angalau mita 100 na dhibitini kemikali."
+     ]
+    }
+   },
+   {
+    "incident": {
+     "en": "Mining accident: pit collapse, rockfall, gas or flooding",
+     "sw": "Ajali ya mgodi: shimo kuporomoka, mawe kuanguka, gesi au mafuriko"
+    },
+    "actions": {
+     "en": [
+      "Please do not send untrained people into the pit.",
+      "Call 190 and inform the Mining Commission.",
+      "Mine owners: count all miners at the surface.",
+      "Fire and Rescue Force: lead the rescue."
+     ],
+     "sw": [
+      "Tafadhali msiwatume watu wasiofunzwa kuingia shimoni.",
+      "Piga 190 na ujulishe Tume ya Madini.",
+      "Wamiliki wa migodi: hesabuni wachimbaji wote walio juu ardhini.",
+      "Jeshi la Zimamoto na Uokoaji: ongozeni uokoaji."
+     ]
+    }
+   },
+   {
+    "incident": {
+     "en": "Electric shock or fallen power line",
+     "sw": "Kupigwa na shoti ya umeme au nyaya za umeme zilizoanguka"
+    },
+    "actions": {
+     "en": [
+      "Do not touch the person or the wire.",
+      "Switch off power at the main switch if you can.",
+      "Call 190 and TANESCO.",
+      "If you must, separate the person from the wire with a dry wooden stick; give CPR if they are not breathing."
+     ],
+     "sw": [
+      "Usimguse mtu wala waya.",
+      "Zima umeme kwenye swichi kuu ikiwezekana.",
+      "Piga 190 na TANESCO.",
+      "Ikilazimu, mtenganishe mtu na waya kwa fimbo kavu ya mbao; mpe huduma ya kuokoa pumzi (CPR) kama hapumui."
+     ]
+    }
+   },
+   {
+    "incident": {
+     "en": "Gas leak or cylinder explosion",
+     "sw": "Kuvuja kwa gesi au mlipuko wa mtungi"
+    },
+    "actions": {
+     "en": [
+      "Open windows and doors.",
+      "Do not switch lights or appliances on or off.",
+      "Close the cylinder valve if it is safe, and leave the room.",
+      "Call 114."
+     ],
+     "sw": [
+      "Fungua madirisha na milango.",
+      "Usiwashe wala kuzima taa au vifaa vya umeme.",
+      "Funga valvu ya mtungi ikiwa ni salama, na toka chumbani.",
+      "Piga 114."
+     ]
+    }
+   },
+   {
+    "incident": {
+     "en": "Radiological incident: lost or damaged radioactive source",
+     "sw": "Tukio la mionzi: chanzo cha mionzi kilichopotea au kuharibika"
+    },
+    "actions": {
+     "en": [
+      "Do not touch or approach a suspected source; keep at least 100 m away.",
+      "Move upwind of the area.",
+      "Call 190 and inform the Tanzania Atomic Energy Commission (TAEC).",
+      "Do not eat, drink or smoke in the area; note who was near the source."
+     ],
+     "sw": [
+      "Usiguse wala kukaribia chanzo kinachoshukiwa; kaa umbali wa angalau mita 100.",
+      "Hamia upande upepo unakotoka.",
+      "Piga 190 na ujulishe Tume ya Nguvu za Atomiki Tanzania (TAEC).",
+      "Usile, usinywe wala kuvuta sigara eneo hilo; andika majina ya waliokuwa karibu na chanzo."
+     ]
+    }
+   }
+  ]
+ },
+ {
+  "name": {
+   "en": "Crowd and social events",
+   "sw": "Matukio ya kijamii na watu wengi"
+  },
+  "rows": [
+   {
+    "incident": {
+     "en": "Crowd crush or stampede: religious gathering, sports event, market or school",
+     "sw": "Msongamano hatari wa watu: mkusanyiko wa kidini, michezo, sokoni au shuleni"
+    },
+    "actions": {
+     "en": [
+      "Move with the crowd, not against it, and edge sideways towards open space.",
+      "Keep your arms in front of your chest to protect your breathing.",
+      "If you fall, curl up and protect your head.",
+      "Do not stop to pick up dropped items; call 190 once you are safe."
+     ],
+     "sw": [
+      "Enda pamoja na umati, si kinyume nao, na sogea pembeni kuelekea eneo la wazi.",
+      "Weka mikono mbele ya kifua kulinda upumuaji.",
+      "Ukianguka, jikunje na linda kichwa chako.",
+      "Usisimame kuokota vitu vilivyodondoka; piga 190 ukishakuwa salama."
+     ]
+    }
+   },
+   {
+    "incident": {
+     "en": "Civil unrest or public disturbance",
+     "sw": "Vurugu za kiraia au fujo za umma"
+    },
+    "actions": {
+     "en": [
+      "Please move away from the disturbance and keep children indoors.",
+      "Do not film at close range or take sides.",
+      "Call 190 and inform the Police Force.",
+      "Ward and religious leaders: help calm the situation and protect women, children and older persons."
+     ],
+     "sw": [
+      "Tafadhali ondoka mbali na eneo la fujo na waweke watoto ndani.",
+      "Usichukue picha za video karibu wala kuegemea upande wowote.",
+      "Piga 190 na ujulishe Jeshi la Polisi.",
+      "Viongozi wa kata na wa dini: saidieni kutuliza hali na walindeni wanawake, watoto na wazee."
+     ]
+    }
+   }
+  ]
+ },
+ {
+  "name": {
+   "en": "Environmental and health",
+   "sw": "Mazingira na afya"
+  },
+  "rows": [
+   {
+    "incident": {
+     "en": "Food poisoning affecting many people: wedding, school, market or restaurant",
+     "sw": "Sumu ya chakula inayoathiri watu wengi: harusi, shule, sokoni au mgahawani"
+    },
+    "actions": {
+     "en": [
+      "Stop serving and eating the suspected food.",
+      "Keep a sample of the food in a clean covered container.",
+      "Take sick people and the food sample to the nearest health facility.",
+      "TBS, TMDA and GCLA: test the food and trace the source."
+     ],
+     "sw": [
+      "Acha kuandaa na kula chakula kinachoshukiwa.",
+      "Hifadhi sampuli ya chakula kwenye chombo safi kilichofunikwa.",
+      "Wapeleke wagonjwa na sampuli ya chakula kituo cha afya kilicho karibu.",
+      "TBS, TMDA na GCLA: pimeni chakula na fuatilieni chanzo."
+     ]
+    }
+   },
+   {
+    "incident": {
+     "en": "Contaminated or poisoned water source",
+     "sw": "Chanzo cha maji kilichochafuka au kutiwa sumu"
+    },
+    "actions": {
+     "en": [
+      "Stop using the water source.",
+      "Village/Mtaa leaders: inform the community through religious leaders, meetings and radio.",
+      "Report to the water authority or RUWASA.",
+      "District Committees: arrange a safe alternative water supply; GCLA and NEMC test the source."
+     ],
+     "sw": [
+      "Acha kutumia chanzo hicho cha maji.",
+      "Viongozi wa Kijiji/Mtaa: ijulisheni jamii kupitia viongozi wa dini, mikutano na redio.",
+      "Toa taarifa kwa mamlaka ya maji au RUWASA.",
+      "Kamati za Wilaya: pangeni maji salama mbadala; GCLA na NEMC wapime chanzo."
+     ]
+    }
+   },
+   {
+    "incident": {
+     "en": "Charcoal smoke (carbon monoxide) poisoning indoors",
+     "sw": "Sumu ya moshi wa mkaa (monoksidi ya kaboni) ndani ya nyumba"
+    },
+    "actions": {
+     "en": [
+      "Open all doors and windows.",
+      "Carry the person out into fresh air and check other rooms.",
+      "Take the person to a health facility or call 190.",
+      "Never use charcoal stoves or generators in closed rooms."
+     ],
+     "sw": [
+      "Fungua milango na madirisha yote.",
+      "Mtoe mtu nje kwenye hewa safi na kagua vyumba vingine.",
+      "Mpeleke kituo cha afya au piga 190.",
+      "Kamwe usitumie jiko la mkaa wala jenereta ndani ya chumba kilichofungwa."
+     ]
+    }
+   }
+  ]
+ },
+ {
+  "name": {
+   "en": "Wildlife and animal incidents",
+   "sw": "Wanyamapori na wanyama"
+  },
+  "rows": [
+   {
+    "incident": {
+     "en": "Snakebite",
+     "sw": "Kuumwa na nyoka"
+    },
+    "actions": {
+     "en": [
+      "Keep the person calm and still.",
+      "Keep the bitten limb still with a splint; do not tie it tightly.",
+      "Remove rings, bracelets and tight clothing.",
+      "Take the person to a health facility as quickly as possible; do not cut, suck or burn the bite, and do not chase the snake."
+     ],
+     "sw": [
+      "Mtulize mtu na asijisogeze.",
+      "Tuliza kiungo kilichoumwa kwa banzi; usikifunge kwa kubana.",
+      "Ondoa pete, bangili na mavazi yanayobana.",
+      "Mpeleke kituo cha afya haraka iwezekanavyo; usikate, usinyonye wala kuchoma jeraha, na usimfukuze nyoka."
+     ]
+    }
+   },
+   {
+    "incident": {
+     "en": "Crocodile or hippo attack",
+     "sw": "Shambulio la mamba au kiboko"
+    },
+    "actions": {
+     "en": [
+      "Pull the person out using a rope or long stick; do not enter the water.",
+      "Stop bleeding with firm pressure on the wound.",
+      "Call 190 and inform TAWA.",
+      "Warn others to stay away from that part of the water."
+     ],
+     "sw": [
+      "Mvute mtu nje kwa kamba au fimbo ndefu; usiingie majini.",
+      "Zuia damu kwa kubana jeraha kwa nguvu.",
+      "Piga 190 na ujulishe TAWA.",
+      "Watahadharishe wengine kukaa mbali na eneo hilo la maji."
+     ]
+    }
+   },
+   {
+    "incident": {
+     "en": "Elephant, lion or buffalo entering villages or attacking people or livestock",
+     "sw": "Tembo, simba au nyati kuingia vijijini au kushambulia watu au mifugo"
+    },
+    "actions": {
+     "en": [
+      "Please do not chase or provoke the animal.",
+      "Report to TAWA, TANAPA or village game scouts.",
+      "Take the injured to a health facility.",
+      "Keep livestock in secure enclosures; report losses to Village leaders for consolation payment procedures."
+     ],
+     "sw": [
+      "Tafadhali usimfukuze wala kumchokoza mnyama.",
+      "Toa taarifa kwa TAWA, TANAPA au askari wanyamapori wa kijiji.",
+      "Wapeleke majeruhi kituo cha afya.",
+      "Weka mifugo katika mazizi imara; toa taarifa ya hasara kwa viongozi wa Kijiji kwa taratibu za kifuta jasho au kifuta machozi."
+     ]
+    }
+   },
+   {
+    "incident": {
+     "en": "Bee or wasp swarm attack",
+     "sw": "Shambulio la kundi la nyuki au manyigu"
+    },
+    "actions": {
+     "en": [
+      "Run straight away from the swarm and cover your face.",
+      "Go into a building or vehicle as soon as possible.",
+      "Do not jump into water.",
+      "Scrape out stings; take the person to a health facility if they have many stings or difficulty breathing."
+     ],
+     "sw": [
+      "Kimbia moja kwa moja mbali na kundi na funika uso wako.",
+      "Ingia ndani ya jengo au gari haraka iwezekanavyo.",
+      "Usiruke majini.",
+      "Kwangua miiba; mpeleke mtu kituo cha afya kama ana miiba mingi au shida ya kupumua."
+     ]
+    }
+   }
+  ]
+ },
+ {
+  "name": {
+   "en": "Other common incidents",
+   "sw": "Matukio mengine ya kawaida"
+  },
+  "rows": [
+   {
+    "incident": {
+     "en": "Drowning",
+     "sw": "Kuzama majini"
+    },
+    "actions": {
+     "en": [
+      "Reach with a stick or rope, or throw something that floats; do not enter the water unless trained.",
+      "Once out, check breathing and give CPR if the person is not breathing.",
+      "Call 190.",
+      "Take the person to a health facility even if they seem well."
+     ],
+     "sw": [
+      "Mfikie kwa fimbo au kamba, au mrushie kitu kinachoelea; usiingie majini isipokuwa umefunzwa.",
+      "Akitoka, kagua upumuaji na mpe huduma ya kuokoa pumzi (CPR) kama hapumui.",
+      "Piga 190.",
+      "Mpeleke kituo cha afya hata kama anaonekana yuko salama."
+     ]
+    }
+   },
+   {
+    "incident": {
+     "en": "Lightning strike",
+     "sw": "Kupigwa na radi"
+    },
+    "actions": {
+     "en": [
+      "People struck by lightning carry no electric charge and are safe to touch.",
+      "Check breathing and give CPR if the person is not breathing.",
+      "Call 190.",
+      "Take the person to a health facility and treat burns."
+     ],
+     "sw": [
+      "Watu waliopigwa na radi hawana umeme mwilini na ni salama kuwagusa.",
+      "Kagua upumuaji na mpe huduma ya kuokoa pumzi (CPR) kama hapumui.",
+      "Piga 190.",
+      "Mpeleke kituo cha afya na tibu majeraha ya moto."
+     ]
+    }
+   },
+   {
+    "incident": {
+     "en": "Heatstroke or heat illness affecting many people",
+     "sw": "Kiharusi cha joto au ugonjwa wa joto unaoathiri watu wengi"
+    },
+    "actions": {
+     "en": [
+      "Move the person into the shade and loosen clothing.",
+      "Cool the body with wet cloths and fanning.",
+      "Give sips of water only if the person is fully awake.",
+      "Call 190 or go to a health facility immediately; event organisers and school heads should provide shade and water."
+     ],
+     "sw": [
+      "Mhamishie mtu kivulini na legeza mavazi.",
+      "Poza mwili kwa vitambaa vilivyolowa maji na kupepea.",
+      "Mpe maji kidogo kidogo ikiwa tu ana fahamu kamili.",
+      "Piga 190 au nenda kituo cha afya mara moja; waandaaji wa matukio na wakuu wa shule watoe kivuli na maji."
+     ]
+    }
+   },
+   {
+    "incident": {
+     "en": "Missing person, or person lost in mountains, forests or parks",
+     "sw": "Mtu aliyepotea, au aliyepotea milimani, misituni au hifadhini"
+    },
+    "actions": {
+     "en": [
+      "Note when and where the person was last seen.",
+      "Call 190 and inform the Police Force.",
+      "Inform Village/Mtaa leaders; TANAPA or TAWA in protected areas.",
+      "Please share only verified information; do not spread rumours."
+     ],
+     "sw": [
+      "Andika muda na mahali alipoonekana mara ya mwisho.",
+      "Piga 190 na ujulishe Jeshi la Polisi.",
+      "Wajulishe viongozi wa Kijiji/Mtaa; TANAPA au TAWA kwenye maeneo ya hifadhi.",
+      "Tafadhali shirikisheni taarifa zilizothibitishwa tu; msieneze uvumi."
+     ]
+    }
+   }
+  ]
+ }
+]

@@ -17,7 +17,7 @@ import { AreaActions, AreaBody, AreaCardPanel, AreaHeader } from './components/A
 import { MiniLegend, ScaleInfo } from './components/bits';
 import { CompareTray } from './components/CompareTray';
 import { ControlPanel } from './components/ControlPanel';
-import { IndicatorPicker, LensChips } from './components/LensPicker';
+import { IndicatorChips, LensChips } from './components/LensPicker';
 import { LensHeader, MapStage } from './components/MapStage';
 import { MobileSheet } from './components/MobileSheet';
 import { PlaceSearch } from './components/PlaceSearch';
@@ -92,9 +92,10 @@ function ControlsPeek() {
         aria-label={t('lens.label')}
       >
         <LensChips />
-        <IndicatorPicker variant="chip" />
         <span aria-hidden className="w-2 shrink-0" />
       </div>
+      {/* The open dimension's indicator groups, under the lens tabs. */}
+      <IndicatorChips />
       <div className="mt-3 flex items-end gap-2">
         <div className="min-w-0 flex-1">
           <div className="mb-1 flex items-baseline justify-between gap-2 text-xs">

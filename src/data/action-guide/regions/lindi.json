@@ -1,0 +1,186 @@
+{
+ "region": {
+  "en": "Lindi Region",
+  "sw": "Mkoa wa Lindi"
+ },
+ "councils": {
+  "C059": {
+   "name": "Lindi Municipal Council",
+   "hazards": [
+    "largeWaves",
+    "floods",
+    "strongWinds",
+    "heavyRainfall",
+    "publicHealth"
+   ],
+   "documented": "coastal floods, large waves and strong winds, heavy Msimu rain, cholera, and boat accidents",
+   "know": [
+    {
+     "area": {
+      "en": "Lindi Municipal: Lindi Bay shore and Lukuledi estuary",
+      "sw": "Manispaa ya Lindi: ufukwe wa ghuba ya Lindi na mlango wa Lukuledi"
+     },
+     "risk": {
+      "en": "This area is a low coastal town on Lindi Bay where storm tides and coastal erosion threaten the shoreline, and heavy rain floods low streets near the estuary.",
+      "sw": "Eneo hili ni mji wa pwani wa chini kwenye ghuba ya Lindi ambapo mawimbi makubwa na mmomonyoko wa fukwe huhatarisha ufukwe, na mvua kubwa hufurika mitaa ya chini karibu na mlango wa mto."
+     },
+     "advice": {
+      "en": "For those living and trading here, it helps to build back from the shoreline, protect mangroves and keep drains to the sea clear.",
+      "sw": "Kwa wanaoishi na kufanya biashara hapa, ni vyema kujenga mbali na ufukwe, kulinda mikoko na kuweka mitaro inayoelekea baharini wazi."
+     }
+    }
+   ]
+  },
+  "C057": {
+   "name": "Kilwa District Council",
+   "hazards": [
+    "largeWaves",
+    "strongWinds",
+    "earthquake",
+    "heavyRainfall",
+    "publicHealth",
+    "floods"
+   ],
+   "documented": "large waves, strong winds, rare tsunami on the open coast, boat accidents, heavy rain, and cholera",
+   "know": [
+    {
+     "area": {
+      "en": "Kilwa: coast, islands and the Matandu river",
+      "sw": "Kilwa: pwani, visiwa na mto Matandu"
+     },
+     "risk": {
+      "en": "This area includes a long coastline and islands exposed to storm surge, strong winds and erosion, and the Matandu valley where rivers flood fields and roads.",
+      "sw": "Eneo hili linajumuisha pwani ndefu na visiwa vinavyoathiriwa na mawimbi makubwa, upepo mkali na mmomonyoko, na bonde la Matandu ambapo mito hufurika mashamba na barabara."
+     },
+     "advice": {
+      "en": "For those living and fishing here, it helps to keep boats ashore when strong winds are forecast, protect mangroves and keep homes off river flood plains.",
+      "sw": "Kwa wanaoishi na kuvua hapa, ni vyema kuweka vyombo ufukweni upepo mkali unapotabiriwa, kulinda mikoko na kujenga nje ya tambarare za mafuriko za mito."
+     }
+    }
+   ]
+  },
+  "C058": {
+   "name": "Lindi District Council",
+   "hazards": [
+    "largeWaves",
+    "floods",
+    "heavyRainfall",
+    "publicHealth",
+    "drought",
+    "strongWinds",
+    "landslide"
+   ],
+   "documented": "coastal floods, large waves, heavy rain, boat accidents, and cholera",
+   "know": [
+    {
+     "area": {
+      "en": "Lindi DC: Lukuledi valley and coastal villages",
+      "sw": "Lindi DC: bonde la Lukuledi na vijiji vya pwani"
+     },
+     "risk": {
+      "en": "This area has coastal fishing villages and the Lukuledi river valley, where heavy rain floods farms and cuts rural roads, and dry spells damage crops.",
+      "sw": "Eneo hili lina vijiji vya wavuvi vya pwani na bonde la mto Lukuledi, ambapo mvua kubwa hufurika mashamba na kukata barabara za vijijini, na vipindi vya ukavu huharibu mazao."
+     },
+     "advice": {
+      "en": "For those living and farming here, it helps to build on higher ground, keep stores above flood level and plant drought-tolerant crops such as cassava and sorghum.",
+      "sw": "Kwa wanaoishi na kulima hapa, ni vyema kujenga sehemu za miinuko, kuhifadhi mali juu ya kiwango cha mafuriko na kupanda mazao yanayostahimili ukame kama mihogo na mtama."
+     }
+    },
+    {
+     "area": {
+      "en": "Mtama: Rondo plateau and Lukuledi slopes",
+      "sw": "Mtama: uwanda wa Rondo na miteremko ya Lukuledi"
+     },
+     "risk": {
+      "en": "This area has the Rondo plateau and its slopes, where run-off erodes farmland and gullies, and water is scarce on the plateau in the dry season.",
+      "sw": "Eneo hili lina uwanda wa Rondo na miteremko yake, ambapo maji ya mvua humomonyoa mashamba na makorongo, na maji ni haba uwandani wakati wa kiangazi."
+     },
+     "advice": {
+      "en": "For those living and farming here, it helps to keep trees and contour bunds on slopes, harvest rainwater and protect water sources.",
+      "sw": "Kwa wanaoishi na kulima hapa, ni vyema kuacha miti na matuta ya kontua kwenye miteremko, kuvuna maji ya mvua na kulinda vyanzo vya maji."
+     }
+    }
+   ]
+  },
+  "C061": {
+   "name": "Liwale District Council",
+   "hazards": [
+    "drought",
+    "wildfire",
+    "floods",
+    "heavyRainfall"
+   ],
+   "documented": "dry-season drought and wildfire in the Selous woodland, wet-season floods, and human–wildlife conflict",
+   "know": [
+    {
+     "area": {
+      "en": "Liwale: remote miombo and Selous edge",
+      "sw": "Liwale: miombo ya mbali na pembezoni mwa Selous"
+     },
+     "risk": {
+      "en": "This area is remote miombo country bordering the Nyerere (Selous) reserve, where wildlife raids crops, dry-season fires spread and rains cut roads for weeks.",
+      "sw": "Eneo hili ni nchi ya miombo ya mbali inayopakana na hifadhi ya Nyerere (Selous), ambapo wanyamapori huvamia mazao, moto wa kiangazi husambaa na mvua hukata barabara kwa wiki kadhaa."
+     },
+     "advice": {
+      "en": "For those living and farming here, it helps to use community deterrents against wildlife, keep fire breaks and keep food, water and medicine reserves before the rains.",
+      "sw": "Kwa wanaoishi na kulima hapa, ni vyema kutumia mbinu za jamii kufukuza wanyama, kuweka njia za kuzuia moto na kuweka akiba ya chakula, maji na dawa kabla ya mvua."
+     }
+    }
+   ]
+  },
+  "C060": {
+   "name": "Nachingwea District Council",
+   "hazards": [
+    "drought",
+    "floods",
+    "wildfire",
+    "strongWinds",
+    "heavyRainfall"
+   ],
+   "documented": "drought in the dry months, wet-season floods, wildfire, and strong winds",
+   "know": [
+    {
+     "area": {
+      "en": "Nachingwea: farmland plains",
+      "sw": "Nachingwea: tambarare za mashamba"
+     },
+     "risk": {
+      "en": "This area is farmland plains producing cashew, sesame and food crops, where erratic rains and dry spells cause crop losses and heavy storms flood low fields.",
+      "sw": "Eneo hili ni tambarare za mashamba yanayozalisha korosho, ufuta na mazao ya chakula, ambapo mvua zisizo za uhakika na vipindi vya ukavu husababisha hasara ya mazao na dhoruba kubwa hufurika mashamba ya chini."
+     },
+     "advice": {
+      "en": "For those farming here, it helps to plant early-maturing and drought-tolerant varieties, keep household food reserves and keep field drains open.",
+      "sw": "Kwa wanaolima hapa, ni vyema kupanda mbegu zinazokomaa mapema na kustahimili ukame, kuweka akiba ya chakula ya kaya na kuweka mifereji ya mashamba wazi."
+     }
+    }
+   ]
+  },
+  "C062": {
+   "name": "Ruangwa District Council",
+   "hazards": [
+    "drought",
+    "floods",
+    "wildfire",
+    "strongWinds",
+    "heavyRainfall"
+   ],
+   "documented": "drought, wet-season floods, wildfire, and strong winds",
+   "know": [
+    {
+     "area": {
+      "en": "Ruangwa: farmland and small-scale mining",
+      "sw": "Ruangwa: mashamba na uchimbaji mdogo"
+     },
+     "risk": {
+      "en": "This area combines farmland with small-scale gemstone and graphite mining, where pits collapse and flood in the rains and dry spells damage crops.",
+      "sw": "Eneo hili linachanganya mashamba na uchimbaji mdogo wa vito na kinywe, ambapo mashimo hubomoka na kujaa maji wakati wa mvua na vipindi vya ukavu huharibu mazao."
+     },
+     "advice": {
+      "en": "For those living, farming and mining here, it helps to fence or backfill pits, divert run-off away from pit mouths and plant drought-tolerant crops.",
+      "sw": "Kwa wanaoishi, kulima na kuchimba hapa, ni vyema kuzungushia uzio au kufukia mashimo, kuelekeza maji mbali na midomo ya mashimo na kupanda mazao yanayostahimili ukame."
+     }
+    }
+   ]
+  }
+ }
+}

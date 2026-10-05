@@ -1,0 +1,138 @@
+{
+ "region": {
+  "en": "Katavi Region",
+  "sw": "Mkoa wa Katavi"
+ },
+ "councils": {
+  "C163": {
+   "name": "Mpanda Municipal Council",
+   "hazards": [
+    "floods",
+    "drought",
+    "wildfire",
+    "heavyRainfall"
+   ],
+   "documented": "seasonal floods on the Katavi wetlands, drought in the dry months, wildfire, and human–wildlife conflict",
+   "know": [
+    {
+     "area": {
+      "en": "Mpanda Municipal: town streams and valley settlements",
+      "sw": "Manispaa ya Mpanda: vijito vya mjini na makazi ya mabondeni"
+     },
+     "risk": {
+      "en": "This area is a fast-growing town where seasonal streams flood low streets and unplanned plots during heavy Msimu storms, and lightning is frequent.",
+      "sw": "Eneo hili ni mji unaokua kwa kasi ambapo vijito vya msimu hufurika mitaa ya chini na viwanja holela wakati wa dhoruba kali za Msimu, na radi hupiga mara kwa mara."
+     },
+     "advice": {
+      "en": "For those living and trading here, it helps to keep drains and stream reserves clear, build above known flood marks and fit lightning arresters on schools and markets.",
+      "sw": "Kwa wanaoishi na kufanya biashara hapa, ni vyema kuweka mitaro na hifadhi za vijito wazi, kujenga juu ya alama za mafuriko zinazojulikana na kuweka vizuia radi shuleni na masokoni."
+     }
+    }
+   ]
+  },
+  "C166": {
+   "name": "Mlele District Council",
+   "hazards": [
+    "drought",
+    "wildfire",
+    "floods",
+    "heavyRainfall"
+   ],
+   "documented": "drought, wildfire, wet-season floods on the Rukwa plains, and human–wildlife conflict",
+   "know": [
+    {
+     "area": {
+      "en": "Mlele: Katavi plains and reserve edges",
+      "sw": "Mlele: tambarare za Katavi na pembezoni mwa hifadhi"
+     },
+     "risk": {
+      "en": "This area borders Katavi National Park and forest reserves: wildlife raids crops, dry-season fires spread through miombo, and rivers flood the plains in heavy rains.",
+      "sw": "Eneo hili linapakana na Hifadhi ya Taifa Katavi na hifadhi za misitu: wanyamapori huvamia mazao, moto wa kiangazi husambaa kwenye miombo, na mito hufurika tambarare wakati wa mvua kubwa."
+     },
+     "advice": {
+      "en": "For those living and farming here, it helps to keep fire breaks around homes and fields, use community deterrents against wildlife and keep homes off the flood plain.",
+      "sw": "Kwa wanaoishi na kulima hapa, ni vyema kuweka njia za kuzuia moto kuzunguka nyumba na mashamba, kutumia mbinu za jamii kufukuza wanyama na kujenga nje ya tambarare za mafuriko."
+     }
+    }
+   ]
+  },
+  "C165": {
+   "name": "Mpanda District Council",
+   "hazards": [
+    "drought",
+    "wildfire",
+    "floods",
+    "largeWaves",
+    "heavyRainfall"
+   ],
+   "documented": "drought, wildfire, floods beside Lake Rukwa, and human–wildlife conflict",
+   "know": [
+    {
+     "area": {
+      "en": "Mpanda DC: Lake Tanganyika shore (Karema) and hills",
+      "sw": "Mpanda DC: ufukwe wa Ziwa Tanganyika (Karema) na milima"
+     },
+     "risk": {
+      "en": "This area includes the Lake Tanganyika shore around Karema, where sudden lake storms capsize boats, and steep hills where rain washes out remote roads.",
+      "sw": "Eneo hili linajumuisha ufukwe wa Ziwa Tanganyika kuzunguka Karema, ambapo dhoruba za ghafla ziwani hupindua vyombo, na milima mikali ambapo mvua husomba barabara za mbali."
+     },
+     "advice": {
+      "en": "For those fishing and living here, it helps to wear life jackets, return to shore when storms build and keep homes back from the shoreline and gullies.",
+      "sw": "Kwa wanaovua na kuishi hapa, ni vyema kuvaa maboya ya kujiokoa, kurudi ufukweni dhoruba inapojitokeza na kujenga mbali na ufukwe na makorongo."
+     }
+    }
+   ]
+  },
+  "C167": {
+   "name": "Mpimbwe District Council",
+   "hazards": [
+    "drought",
+    "wildfire",
+    "floods"
+   ],
+   "documented": "drought, wildfire, Lake Rukwa floods, and human–wildlife conflict",
+   "know": [
+    {
+     "area": {
+      "en": "Mpimbwe: Lake Rukwa flood plain and Usevya",
+      "sw": "Mpimbwe: tambarare ya mafuriko ya Ziwa Rukwa na Usevya"
+     },
+     "risk": {
+      "en": "This area lies on the Lake Rukwa flood plain: in wet years the lake and rivers spread over rice fields and villages, while drought brings herder–farmer conflict.",
+      "sw": "Eneo hili liko kwenye tambarare ya mafuriko ya Ziwa Rukwa: katika miaka ya mvua nyingi ziwa na mito hutanuka na kufunika mashamba ya mpunga na vijiji, na ukame huleta migogoro ya wakulima na wafugaji."
+     },
+     "advice": {
+      "en": "For those farming and herding here, it helps to keep homes and stores on higher ground, use the flood plain seasonally and follow agreed grazing routes.",
+      "sw": "Kwa wanaolima na kufuga hapa, ni vyema kujenga makazi na maghala sehemu za miinuko, kutumia tambarare kwa msimu na kufuata njia za malisho zilizokubaliwa."
+     }
+    }
+   ]
+  },
+  "C164": {
+   "name": "Nsimbo District Council",
+   "hazards": [
+    "drought",
+    "wildfire",
+    "floods",
+    "heavyRainfall"
+   ],
+   "documented": "drought, wildfire, seasonal wetland floods, and human–wildlife conflict",
+   "know": [
+    {
+     "area": {
+      "en": "Nsimbo: miombo farms and mining areas",
+      "sw": "Nsimbo: mashamba ya miombo na maeneo ya uchimbaji"
+     },
+     "risk": {
+      "en": "This area combines miombo farmland, tobacco and small-scale mining: fires spread in the dry season, and pits collapse and flood during the rains.",
+      "sw": "Eneo hili linachanganya mashamba ya miombo, tumbaku na uchimbaji mdogo: moto husambaa wakati wa kiangazi, na mashimo hubomoka na kujaa maji wakati wa mvua."
+     },
+     "advice": {
+      "en": "For those living and working here, it helps to burn early and under control, fence or backfill pits and divert run-off away from pit mouths.",
+      "sw": "Kwa wanaoishi na kufanya kazi hapa, ni vyema kuchoma mapema kwa udhibiti, kuzungushia uzio au kufukia mashimo na kuelekeza maji mbali na midomo ya mashimo."
+     }
+    }
+   ]
+  }
+ }
+}

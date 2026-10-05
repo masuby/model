@@ -25,7 +25,10 @@ data-layer/     DataProvider (useModel, useData, useSubmit, useReview…, and th
                 repositories (the local one enforces the same rules as the database functions)
 engine/risk/    INFORM Risk engine: math, classes, hierarchy, standardise, model, metrics, sources
 engine/severity INFORM Severity Index engine: definitions, engine, scenarios
-features/<x>/   one folder per page (owns its components)
+features/<x>/   one folder per page (owns its components); features/guide/ is shared: the Risk Action
+                Guide Book data used by the area profile and the explorer
+data/           generated datasets (do not edit by hand); action-guide/ comes from
+                scripts/build-action-guide.py
 i18n/           i18next setup + locales/<en|sw>/<namespace>.json
 state/prefs.ts  theme, language, learning progress (persisted)
 ```
@@ -75,6 +78,15 @@ state/prefs.ts  theme, language, learning progress (persisted)
   need dark text).
 - `npm run dev:demo` runs the dev server in demo mode (browser-local data) even when `.env.local` has
   Supabase keys: switch roles in the Data portal to walk through the whole workflow.
+- "What to do" (the Risk Action Guide Book): read it through `@/features/guide/data`:
+  `useAreaGuide(unit)` (the councils behind any unit, their hazards most relevant first and their
+  "Know your risk" statements), `useHazardGuide(key)` (the three alert levels) and `useIncidentGuide()`.
+  Each loads one small JSON file on demand; render guide text with `pick(text, i18n.language)` and keep
+  labels in the `guide` namespace. To rebuild the data from the docx: `python scripts/build-action-guide.py`.
+- Profile sections can be linked: `/area/<id>#actions` lands on "What to do" (the explorer's area panel
+  links there). `ScrollToTop` leaves hash links alone.
+- Explorer lenses: a dimension opens onto its own indicator groups, nested under it (`LensTiles`;
+  `IndicatorChips` on phones), so there is no separate indicator picker.
 - QA before merging UI work: `node scripts/qa-a11y.mjs` (axe, both themes) and
   `node scripts/qa-screenshots.mjs` (full-page screenshots, both themes, both languages, 390/1440 px)
   against `npx vite preview --port 4173`.

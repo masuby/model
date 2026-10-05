@@ -10,8 +10,8 @@ preparedness, anticipatory action and investment.
 
 | | |
 |---|---|
-| **Risk explorer** | Interactive map and ranking of every council and region, by overall risk, any dimension or any of 32 indicators |
-| **Area profiles** | Report-grade, printable profile of any council/region: drivers, indicators, sources, peers |
+| **Risk explorer** | Interactive map and ranking of every council and region, by overall risk, any dimension or any of the 32 indicator groups listed under it; the area panel says what to do there |
+| **Area profiles** | Report-grade, printable profile of any council/region: what to do (from the Risk Action Guide Book), drivers, indicators, sources, peers |
 | **Insights** | National analytics: regional ranking, hazard hot-spots, how the dimensions interact, data coverage |
 | **Crisis severity** | The official INFORM Severity Index method for an unfolding crisis, with a council picker |
 | **Learn** | A seven-lesson course with quizzes and live widgets built on the real engine |
@@ -93,6 +93,10 @@ The site ships a bundled dataset generated offline. See [`data-source/README.md`
 edit/extend the CSVs, re-run the relevant `scripts/compute-*.py` / `scripts/apply-*.mjs`, then
 `npm test` to confirm the engine still reproduces the workbook. Approved Data-portal edits are applied
 on top of the bundled dataset at runtime.
+
+The "What to do" guidance comes from the Risk Action Guide Book
+(`data-source/RISK_ACTION_GUIDE_BOOK_0222.docx`): `python scripts/build-action-guide.py` (needs
+`python-docx`) regenerates `src/data/action-guide/`.
 
 ## Contributing
 

@@ -1,0 +1,219 @@
+{
+ "region": {
+  "en": "Kagera Region",
+  "sw": "Mkoa wa Kagera"
+ },
+ "councils": {
+  "C127": {
+   "name": "Bukoba Municipal Council",
+   "hazards": [
+    "floods",
+    "largeWaves",
+    "heavyRainfall",
+    "publicHealth",
+    "earthquake"
+   ],
+   "documented": "Lake Victoria floods and large waves, heavy bimodal rain, boat accidents, and cholera on the shore",
+   "know": [
+    {
+     "area": {
+      "en": "Bukoba Municipal: lakeshore and Kanoni river lowlands",
+      "sw": "Manispaa ya Bukoba: ufukwe wa ziwa na tambarare za mto Kanoni"
+     },
+     "risk": {
+      "en": "This area lies between steep ridges and Lake Victoria; heavy rain floods the Kanoni river lowlands and low streets, lake storms hit the port and landing sites, and the town sits in a seismically active zone.",
+      "sw": "Eneo hili liko kati ya milima mikali na Ziwa Victoria; mvua kubwa hufurika tambarare za mto Kanoni na mitaa ya chini, dhoruba za ziwani hupiga bandari na mialo, na mji uko katika ukanda wenye matetemeko ya ardhi."
+     },
+     "advice": {
+      "en": "For those living and trading here, it helps to build to earthquake-resistant standards, keep homes and goods above flood level and keep drains to the lake open.",
+      "sw": "Kwa wanaoishi na kufanya biashara hapa, ni vyema kujenga kwa viwango vinavyostahimili matetemeko, kuweka makazi na bidhaa juu ya kiwango cha mafuriko na kuweka mifereji inayoelekea ziwani wazi."
+     }
+    }
+   ]
+  },
+  "C129": {
+   "name": "Biharamulo District Council",
+   "hazards": [
+    "heavyRainfall",
+    "floods",
+    "wildfire"
+   ],
+   "documented": "heavy rain, floods on valleys draining to the lake, lightning, and a short dry season",
+   "know": [
+    {
+     "area": {
+      "en": "Biharamulo: woodland and farming villages",
+      "sw": "Biharamulo: misitu na vijiji vya wakulima"
+     },
+     "risk": {
+      "en": "This area has open woodland, farmland and game reserves on the Lake Victoria basin; frequent thunderstorms bring lightning, dry-season fires spread through grass, and wildlife raids crops near reserves.",
+      "sw": "Eneo hili lina misitu ya wazi, mashamba na hifadhi za wanyamapori katika bonde la Ziwa Victoria; ngurumo za mara kwa mara huleta radi, moto wa kiangazi husambaa kwenye nyasi, na wanyamapori huvamia mazao karibu na hifadhi."
+     },
+     "advice": {
+      "en": "For those living and farming here, it helps to fit lightning protection on schools and public buildings, keep fire breaks around homes and use community deterrents near reserves.",
+      "sw": "Kwa wanaoishi na kulima hapa, ni vyema kuweka vizuia radi shuleni na majengo ya umma, kutunza njia za kuzuia moto kuzunguka nyumba na kutumia mbinu za jamii karibu na hifadhi."
+     }
+    }
+   ]
+  },
+  "C126": {
+   "name": "Bukoba District Council",
+   "hazards": [
+    "floods",
+    "largeWaves",
+    "heavyRainfall",
+    "publicHealth",
+    "earthquake",
+    "landslide"
+   ],
+   "documented": "lake floods, large waves, boat accidents, heavy rain, and cholera",
+   "know": [
+    {
+     "area": {
+      "en": "Bukoba DC: ridges and valleys near the lake",
+      "sw": "Bukoba DC: milima na mabonde karibu na ziwa"
+     },
+     "risk": {
+      "en": "This area is a landscape of steep ridges and swampy valleys in an earthquake-prone zone; heavy rain causes landslides and valley flooding, and weak masonry houses are vulnerable to tremors.",
+      "sw": "Eneo hili lina milima mikali na mabonde yenye matope katika ukanda wa matetemeko; mvua kubwa husababisha maporomoko ya ardhi na mafuriko mabondeni, na nyumba dhaifu za matofali huathirika na mitetemeko."
+     },
+     "advice": {
+      "en": "For those living and building here, it helps to use reinforced, well-tied walls and roofs, keep trees on steep slopes and keep homes out of valley-bottom swamps.",
+      "sw": "Kwa wanaoishi na kujenga hapa, ni vyema kutumia kuta na paa zilizoimarishwa na kufungwa vizuri, kuacha miti kwenye miteremko mikali na kujenga mbali na mabwawa ya mabondeni."
+     }
+    }
+   ]
+  },
+  "C125": {
+   "name": "Karagwe District Council",
+   "hazards": [
+    "heavyRainfall",
+    "landslide",
+    "floods",
+    "strongWinds"
+   ],
+   "documented": "heavy rain and landslides on the Kagera highlands, valley floods, and strong winds",
+   "know": [
+    {
+     "area": {
+      "en": "Karagwe: highland ridges and banana farms",
+      "sw": "Karagwe: milima ya nyanda za juu na mashamba ya migomba"
+     },
+     "risk": {
+      "en": "This area is cool highland of steep ridges where intense storms bring hail, damaging winds and landslides, flattening banana and coffee crops and blocking roads.",
+      "sw": "Eneo hili ni nyanda za juu zenye baridi na milima mikali ambako dhoruba kali huleta mvua ya mawe, upepo haribifu na maporomoko ya ardhi, yakiangusha migomba na kahawa na kuziba barabara."
+     },
+     "advice": {
+      "en": "For those farming and living here, it helps to keep trees and grass strips on slopes, use windbreaks around plantations and fix roofs firmly.",
+      "sw": "Kwa wanaolima na kuishi hapa, ni vyema kuacha miti na vipande vya nyasi kwenye miteremko, kutumia vizuia upepo kuzunguka mashamba na kufunga paa imara."
+     }
+    }
+   ]
+  },
+  "C131": {
+   "name": "Kyerwa District Council",
+   "hazards": [
+    "heavyRainfall",
+    "floods",
+    "landslide"
+   ],
+   "documented": "heavy rain, floods on the Kagera River, and lightning",
+   "know": [
+    {
+     "area": {
+      "en": "Kyerwa: Kagera river border and hill farms",
+      "sw": "Kyerwa: mpaka wa mto Kagera na mashamba ya milimani"
+     },
+     "risk": {
+      "en": "This area borders the Kagera river and has steep farmland; hailstorms and landslides damage crops and roads, and the river floods its swampy margins in heavy rains.",
+      "sw": "Eneo hili linapakana na mto Kagera na lina mashamba yenye miteremko mikali; mvua ya mawe na maporomoko huharibu mazao na barabara, na mto hufurika kingo zake zenye matope wakati wa mvua kubwa."
+     },
+     "advice": {
+      "en": "For those farming and living here, it helps to protect slopes with terraces and trees, keep homes above river flood margins and fix roofs firmly against strong winds.",
+      "sw": "Kwa wanaolima na kuishi hapa, ni vyema kulinda miteremko kwa matuta na miti, kujenga juu ya kingo za mafuriko za mto na kufunga paa imara dhidi ya upepo mkali."
+     }
+    }
+   ]
+  },
+  "C132": {
+   "name": "Missenyi District Council",
+   "hazards": [
+    "floods",
+    "largeWaves",
+    "heavyRainfall",
+    "earthquake"
+   ],
+   "documented": "lake-edge floods, large waves, boat accidents, and heavy rain",
+   "know": [
+    {
+     "area": {
+      "en": "Missenyi: Kagera river plains and border zone",
+      "sw": "Missenyi: tambarare za mto Kagera na ukanda wa mpakani"
+     },
+     "risk": {
+      "en": "This area includes the Kagera river flood plains and lies in the zone affected by the 2016 Kagera earthquake; floods cover farms and roads in wet years, and poorly built houses are at risk from tremors.",
+      "sw": "Eneo hili linajumuisha tambarare za mafuriko za mto Kagera na liko katika ukanda ulioathiriwa na tetemeko la ardhi la Kagera la mwaka 2016; mafuriko hufunika mashamba na barabara katika miaka ya mvua nyingi, na nyumba zisizojengwa vizuri ziko hatarini kwa mitetemeko."
+     },
+     "advice": {
+      "en": "For those living and building here, it helps to use earthquake-resistant construction, build above the river flood margin and keep drainage through settlements open.",
+      "sw": "Kwa wanaoishi na kujenga hapa, ni vyema kujenga kwa mbinu zinazostahimili matetemeko, kujenga juu ya kingo za mafuriko za mto na kuweka mifereji ya makazi wazi."
+     }
+    }
+   ]
+  },
+  "C128": {
+   "name": "Muleba District Council",
+   "hazards": [
+    "heavyRainfall",
+    "floods",
+    "largeWaves",
+    "landslide",
+    "publicHealth"
+   ],
+   "documented": "heavy rain, lake floods, boat accidents, and landslides on the inland hills",
+   "know": [
+    {
+     "area": {
+      "en": "Muleba: lake islands and landing sites",
+      "sw": "Muleba: visiwa vya ziwa na mialo"
+     },
+     "risk": {
+      "en": "This area includes many Lake Victoria islands and landing sites where sudden storms capsize boats, lightning strikes on open water, and crowded fishing camps face cholera outbreaks.",
+      "sw": "Eneo hili linajumuisha visiwa vingi vya Ziwa Victoria na mialo ambapo dhoruba za ghafla hupindua mitumbwi, radi hupiga majini, na kambi za wavuvi zenye msongamano hukumbwa na milipuko ya kipindupindu."
+     },
+     "advice": {
+      "en": "For those fishing and living here, it helps to wear life jackets, keep boats in good repair, return to shore before storms build and keep safe water and latrines at landing sites.",
+      "sw": "Kwa wanaovua na kuishi hapa, ni vyema kuvaa maboya ya kujiokoa, kutunza vyombo viwe imara, kurudi ufukweni kabla dhoruba haijaanza na kuhakikisha mialo ina maji safi na vyoo."
+     }
+    }
+   ]
+  },
+  "C130": {
+   "name": "Ngara District Council",
+   "hazards": [
+    "heavyRainfall",
+    "floods",
+    "strongWinds",
+    "landslide",
+    "publicHealth"
+   ],
+   "documented": "heavy rain, floods on the Ruvubu and Kagera, and strong winds on the highlands",
+   "know": [
+    {
+     "area": {
+      "en": "Ngara: steep hills and the Rusumo border",
+      "sw": "Ngara: milima mikali na mpaka wa Rusumo"
+     },
+     "risk": {
+      "en": "This area is hilly border country where heavy rain causes landslides and road washouts, and cross-border movement at Rusumo raises the risk of disease outbreaks.",
+      "sw": "Eneo hili ni nchi ya milima mpakani ambako mvua kubwa husababisha maporomoko ya ardhi na barabara kusombwa, na mwingiliano wa watu mpakani Rusumo huongeza hatari ya milipuko ya magonjwa."
+     },
+     "advice": {
+      "en": "For those living and trading here, it helps to keep slopes planted, keep roadside drains clear and maintain good hygiene and vaccination at border markets.",
+      "sw": "Kwa wanaoishi na kufanya biashara hapa, ni vyema kuacha mimea kwenye miteremko, kuweka mifereji ya kando ya barabara wazi na kudumisha usafi na chanjo kwenye masoko ya mpakani."
+     }
+    }
+   ]
+  }
+ }
+}

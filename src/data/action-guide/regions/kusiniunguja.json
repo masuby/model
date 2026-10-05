@@ -1,0 +1,60 @@
+{
+ "region": {
+  "en": "Kusini Unguja Region",
+  "sw": "Mkoa wa Kusini Unguja"
+ },
+ "councils": {
+  "C187": {
+   "name": "Kati District",
+   "hazards": [
+    "largeWaves",
+    "floods",
+    "heavyRainfall",
+    "publicHealth",
+    "drought"
+   ],
+   "documented": "coastal floods, large waves, heavy rain, and cholera",
+   "know": [
+    {
+     "area": {
+      "en": "Kati: central farmland and Jozani forest",
+      "sw": "Kati: mashamba ya kati na msitu wa Jozani"
+     },
+     "risk": {
+      "en": "This area has central farmland and the Jozani forest, where low ground floods in heavy rain and dry spells and fires affect crops and forest.",
+      "sw": "Eneo hili lina mashamba ya kati na msitu wa Jozani, ambapo ardhi ya chini hufurika wakati wa mvua kubwa na vipindi vya ukavu na moto huathiri mazao na misitu."
+     },
+     "advice": {
+      "en": "For those living and farming here, it helps to keep homes off low ground, burn only under control and protect forest cover.",
+      "sw": "Kwa wanaoishi na kulima hapa, ni vyema kujenga nje ya ardhi ya chini, kuchoma kwa udhibiti tu na kulinda misitu."
+     }
+    }
+   ]
+  },
+  "C188": {
+   "name": "Kusini District",
+   "hazards": [
+    "largeWaves",
+    "strongWinds",
+    "heavyRainfall"
+   ],
+   "documented": "large waves on the south and east shores, strong winds, heavy rain, and boat accidents",
+   "know": [
+    {
+     "area": {
+      "en": "Kusini: Paje, Makunduchi and south-east coast",
+      "sw": "Kusini: Paje, Makunduchi na pwani ya kusini-mashariki"
+     },
+     "risk": {
+      "en": "This area has east-coast tourist and seaweed-farming villages where erosion and storm tides threaten the shore and seaweed farmers face rough seas and heat.",
+      "sw": "Eneo hili lina vijiji vya utalii na kilimo cha mwani vya pwani ya mashariki ambapo mmomonyoko na mawimbi makubwa huhatarisha ufukwe na wakulima wa mwani hukabiliwa na bahari chafu na joto."
+     },
+     "advice": {
+      "en": "For those living, farming seaweed and running tourism here, it helps to build back from the shore, avoid the sea in strong winds and protect yourself from the sun.",
+      "sw": "Kwa wanaoishi, kulima mwani na kufanya utalii hapa, ni vyema kujenga mbali na ufukwe, kuepuka bahari upepo mkali unapovuma na kujikinga na jua."
+     }
+    }
+   ]
+  }
+ }
+}

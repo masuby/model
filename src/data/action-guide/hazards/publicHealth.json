@@ -1,0 +1,674 @@
+{
+ "levels": {
+  "1": [
+   {
+    "impact": {
+     "en": "Reports of unusual illness or unexplained deaths in the community",
+     "sw": "Taarifa za magonjwa yasiyo ya kawaida au vifo visivyoelezeka katika jamii"
+    },
+    "actions": {
+     "en": [
+      "Please report unusual illness or sudden deaths to the nearest health facility or community health worker.",
+      "Community health workers: report signals through the event-based surveillance system.",
+      "District Rapid Response Teams: verify reports within 24 hours."
+     ],
+     "sw": [
+      "Tafadhali toeni taarifa ya magonjwa yasiyo ya kawaida au vifo vya ghafla kwenye kituo cha afya kilicho karibu au kwa mhudumu wa afya ngazi ya jamii.",
+      "Wahudumu wa afya ngazi ya jamii: toeni taarifa za viashiria kupitia mfumo wa ufuatiliaji wa matukio.",
+      "Timu za Wilaya za Kukabiliana na Dharura: thibitisheni taarifa ndani ya saa 24."
+     ]
+    }
+   },
+   {
+    "impact": {
+     "en": "Outbreak of a priority disease in a neighbouring country",
+     "sw": "Mlipuko wa ugonjwa wa kipaumbele katika nchi jirani"
+    },
+    "actions": {
+     "en": [
+      "Travellers: please cooperate with health screening at border points.",
+      "If you develop fever after travel, please visit a health facility and mention your journey.",
+      "Ministry of Health and Port Health: strengthen screening at points of entry."
+     ],
+     "sw": [
+      "Wasafiri: tafadhali shirikianeni na uchunguzi wa afya mipakani.",
+      "Ukipata homa baada ya safari, tafadhali nenda kituo cha afya na eleza safari yako.",
+      "Wizara ya Afya na Afya Mipakani: imarisheni uchunguzi katika vituo vya kuingilia nchini."
+     ]
+    }
+   },
+   {
+    "impact": {
+     "en": "Unusual deaths or illness in livestock or wildlife",
+     "sw": "Vifo au magonjwa yasiyo ya kawaida kwa mifugo au wanyamapori"
+    },
+    "actions": {
+     "en": [
+      "Please do not eat, sell or handle meat from animals that died of unknown causes.",
+      "Report sick or dead animals to livestock officers.",
+      "District Veterinary Officers: investigate and share results with health officers."
+     ],
+     "sw": [
+      "Tafadhali msile, msiuze wala kushika nyama ya mifugo iliyokufa kwa sababu zisizojulikana.",
+      "Toeni taarifa ya mifugo inayougua au kufa kwa maafisa mifugo.",
+      "Maafisa Mifugo wa Wilaya: fanyeni uchunguzi na shirikisheni matokeo na maafisa afya."
+     ]
+    }
+   },
+   {
+    "impact": {
+     "en": "Rainy-season conditions favouring cholera, malaria and Rift Valley fever",
+     "sw": "Hali ya msimu wa mvua inayochochea kipindupindu, malaria na homa ya Bonde la Ufa"
+    },
+    "actions": {
+     "en": [
+      "Boil drinking water or treat it with chlorine tablets.",
+      "Use latrines, wash hands with soap and sleep under an insecticide-treated net.",
+      "Health authorities: pre-position medicines and supplies through MSD."
+     ],
+     "sw": [
+      "Chemsheni maji ya kunywa au yatibuni kwa vidonge vya klorini.",
+      "Tumieni vyoo, nawini mikono kwa sabuni na laleni ndani ya chandarua chenye dawa.",
+      "Mamlaka za afya: wekeni tayari dawa na vifaa kupitia MSD."
+     ]
+    }
+   },
+   {
+    "impact": {
+     "en": "Rising resistance to antibiotics and other medicines",
+     "sw": "Kuongezeka kwa usugu wa vimelea dhidi ya dawa"
+    },
+    "actions": {
+     "en": [
+      "Please use antibiotics only when prescribed and complete the full course.",
+      "Do not buy antibiotics without a prescription.",
+      "Hospitals: strengthen antimicrobial stewardship programmes."
+     ],
+     "sw": [
+      "Tafadhali tumieni dawa za antibiotiki kwa maelekezo ya daktari tu na malizeni dozi yote.",
+      "Msinunue antibiotiki bila cheti cha daktari.",
+      "Hospitali: imarisheni programu za matumizi sahihi ya dawa za antibiotiki."
+     ]
+    }
+   },
+   {
+    "impact": {
+     "en": "Food safety risks, including aflatoxin in maize and groundnuts",
+     "sw": "Hatari za usalama wa chakula, ikiwemo sumukuvu kwenye mahindi na karanga"
+    },
+    "actions": {
+     "en": [
+      "Dry maize and groundnuts well and store them off the ground.",
+      "Do not eat mouldy grain.",
+      "TBS, TMDA and GCLA: test suspected food and investigate food poisoning."
+     ],
+     "sw": [
+      "Kausheni vizuri mahindi na karanga na hifadhini juu ya ardhi.",
+      "Msile nafaka zenye ukungu.",
+      "TBS, TMDA na GCLA: pimeni vyakula vinavyoshukiwa na chunguzeni matukio ya sumu ya chakula."
+     ]
+    }
+   },
+   {
+    "impact": {
+     "en": "Environmental and chemical health risks",
+     "sw": "Hatari za kiafya zitokanazo na mazingira na kemikali"
+    },
+    "actions": {
+     "en": [
+      "Please report polluted water sources or chemical smells to Village/Mtaa leaders.",
+      "Workers handling chemicals: use protective equipment.",
+      "NEMC, OSHA and GCLA: test and investigate reported contamination."
+     ],
+     "sw": [
+      "Tafadhali toeni taarifa ya vyanzo vya maji vilivyochafuka au harufu za kemikali kwa viongozi wa Kijiji/Mtaa.",
+      "Wafanyakazi wanaoshughulika na kemikali: tumieni vifaa vya kujikinga.",
+      "NEMC, OSHA na GCLA: pimeni na chunguzeni uchafuzi ulioripotiwa."
+     ]
+    }
+   },
+   {
+    "impact": {
+     "en": "Heat and climate-related health risks",
+     "sw": "Hatari za kiafya zitokanazo na joto na mabadiliko ya tabianchi"
+    },
+    "actions": {
+     "en": [
+      "Drink plenty of safe water and rest in the shade during the hottest hours.",
+      "Check on older persons and young children during hot weather.",
+      "Health authorities: extend malaria control to newly affected highland areas."
+     ],
+     "sw": [
+      "Kunyweni maji safi ya kutosha na pumzikeni kivulini wakati wa joto kali.",
+      "Wafuatilieni wazee na watoto wadogo wakati wa joto.",
+      "Mamlaka za afya: panueni udhibiti wa malaria kwenye maeneo mapya ya miinuko yaliyoathirika."
+     ]
+    }
+   },
+   {
+    "impact": {
+     "en": "Higher risk for children under five, older persons, pregnant women and people with chronic illness or disabilities",
+     "sw": "Hatari kubwa zaidi kwa watoto chini ya miaka mitano, wazee, wajawazito na wenye magonjwa sugu au ulemavu"
+    },
+    "actions": {
+     "en": [
+      "Village/Mtaa and Ward Disaster Management Committees: review health contingency plans and update the list of people with special needs.",
+      "Please share this advisory with neighbours and relatives."
+     ],
+     "sw": [
+      "Kamati za Usimamizi wa Maafa za Vijiji/Mitaa na Kata: pitieni mipango ya dharura ya afya na boresheni orodha ya watu wenye mahitaji maalum.",
+      "Tafadhali wapatieni taarifa hii majirani na ndugu."
+     ]
+    }
+   },
+   {
+    "impact": {
+     "en": "Need for community awareness on prevention and early reporting",
+     "sw": "Uhitaji wa uelewa wa jamii kuhusu kujikinga na kutoa taarifa mapema"
+    },
+    "actions": {
+     "en": [
+      "Religious and community leaders: please share prevention messages at gatherings.",
+      "Health authorities: run awareness through radio, markets, mosques and churches."
+     ],
+     "sw": [
+      "Viongozi wa dini na jamii: tafadhali sambazeni ujumbe wa kujikinga katika mikusanyiko.",
+      "Mamlaka za afya: toeni elimu kupitia redio, masoko, misikiti na makanisa."
+     ]
+    }
+   },
+   {
+    "impact": {
+     "en": "Need to pre-position medicines, protective equipment and vaccines",
+     "sw": "Uhitaji wa kuweka tayari dawa, vifaa vya kujikinga na chanjo"
+    },
+    "actions": {
+     "en": [
+      "Health facilities: check stocks of essential medicines, vaccines and protective equipment.",
+      "MSD: support supply and maintain the vaccine cold chain."
+     ],
+     "sw": [
+      "Vituo vya afya: kagueni akiba ya dawa muhimu, chanjo na vifaa vya kujikinga.",
+      "MSD: saidieni usambazaji na tunzeni mnyororo baridi wa chanjo."
+     ]
+    }
+   },
+   {
+    "impact": {
+     "en": "Need for One Health coordination across sectors",
+     "sw": "Uhitaji wa uratibu wa Afya Moja kati ya sekta"
+    },
+    "actions": {
+     "en": [
+      "Prime Minister's Office – One Health Section: convene coordination meetings of the health, livestock, wildlife, environment and agriculture sectors.",
+      "District Committees: include health and livestock officers in all preparedness meetings."
+     ],
+     "sw": [
+      "Ofisi ya Waziri Mkuu – Dawati la Afya Moja: itisheni vikao vya uratibu vya sekta za afya, mifugo, wanyamapori, mazingira na kilimo.",
+      "Kamati za Wilaya: shirikisheni maafisa afya na mifugo katika vikao vyote vya maandalizi."
+     ]
+    }
+   },
+   {
+    "impact": {
+     "en": "Warning status",
+     "sw": "Hali ya tahadhari"
+    },
+    "actions": {
+     "en": [
+      "Please continue to follow updates from the Ministry of Health, health workers and Disaster Management Committees.",
+      "This advisory remains in place until the authorities update or withdraw it."
+     ],
+     "sw": [
+      "Tafadhali endeleeni kufuatilia taarifa za Wizara ya Afya, watoa huduma za afya na Kamati za Usimamizi wa Maafa.",
+      "Tahadhari hii itaendelea hadi mamlaka zitakapoihuisha au kuiondoa rasmi."
+     ]
+    }
+   }
+  ],
+  "2": [
+   {
+    "impact": {
+     "en": "Confirmed cases of an epidemic-prone disease (e.g. cholera, anthrax, Rift Valley fever) in one or more districts",
+     "sw": "Wagonjwa waliothibitishwa wa ugonjwa wa mlipuko (mfano kipindupindu, kimeta, homa ya Bonde la Ufa) katika wilaya moja au zaidi"
+    },
+    "actions": {
+     "en": [
+      "Please follow prevention advice from health workers and Village/Mtaa leaders.",
+      "Ministry of Health and District Health Management Teams: activate outbreak response and deploy Rapid Response Teams.",
+      "District Disaster Management Committees: meet and support the health response."
+     ],
+     "sw": [
+      "Tafadhali fuateni ushauri wa kujikinga kutoka kwa watoa huduma za afya na viongozi wa Kijiji/Mtaa.",
+      "Wizara ya Afya na Timu za Uendeshaji wa Huduma za Afya za Wilaya: amilisheni mwitikio wa mlipuko na pelekeni Timu za Kukabiliana na Dharura.",
+      "Kamati za Usimamizi wa Maafa za Wilaya: kutaneni na saidieni mwitikio wa afya."
+     ]
+    }
+   },
+   {
+    "impact": {
+     "en": "Health workers at risk of infection",
+     "sw": "Watoa huduma za afya kuwa hatarini kuambukizwa"
+    },
+    "actions": {
+     "en": [
+      "Health facilities: provide protective equipment and train staff in infection prevention and control.",
+      "Set up screening and isolation areas at health facilities."
+     ],
+     "sw": [
+      "Vituo vya afya: toeni vifaa vya kujikinga na fundisheni watumishi kuhusu kuzuia na kudhibiti maambukizi.",
+      "Anzisheni maeneo ya uchunguzi na utengaji katika vituo vya afya."
+     ]
+    }
+   },
+   {
+    "impact": {
+     "en": "Contacts of cases need to be followed up",
+     "sw": "Watu waliokutana na wagonjwa kuhitaji kufuatiliwa"
+    },
+    "actions": {
+     "en": [
+      "If a health worker contacts you, please cooperate and report any symptoms.",
+      "Contact-tracing teams: follow up contacts daily for the incubation period.",
+      "Village/Mtaa leaders: support contact tracing in the community."
+     ],
+     "sw": [
+      "Mtoa huduma za afya akiwasiliana nawe, tafadhali shirikiana naye na toa taarifa ya dalili zozote.",
+      "Timu za ufuatiliaji: fuatilieni waliokutana na wagonjwa kila siku kwa kipindi cha kuatamia ugonjwa.",
+      "Viongozi wa Kijiji/Mtaa: saidieni ufuatiliaji katika jamii."
+     ]
+    }
+   },
+   {
+    "impact": {
+     "en": "Hospital outbreak of drug-resistant infections",
+     "sw": "Mlipuko wa maambukizi sugu ya dawa hospitalini"
+    },
+    "actions": {
+     "en": [
+      "Hospital infection prevention committees: isolate affected patients and investigate.",
+      "Report to the national antimicrobial resistance coordinating committee."
+     ],
+     "sw": [
+      "Kamati za hospitali za kuzuia maambukizi: tengeni wagonjwa walioathirika na fanyeni uchunguzi.",
+      "Toeni taarifa kwa kamati ya kitaifa ya uratibu wa usugu wa vimelea dhidi ya dawa."
+     ]
+    }
+   },
+   {
+    "impact": {
+     "en": "Confirmed food poisoning or aflatoxin outbreak",
+     "sw": "Mlipuko uliothibitishwa wa sumu ya chakula au sumukuvu"
+    },
+    "actions": {
+     "en": [
+      "Please stop eating the suspected food and take sick people to a health facility.",
+      "TBS, TMDA and GCLA: trace the source and remove affected products from markets."
+     ],
+     "sw": [
+      "Tafadhali acheni kula chakula kinachoshukiwa na wapelekeni wagonjwa kituo cha afya.",
+      "TBS, TMDA na GCLA: fuatilieni chanzo na ondoeni bidhaa zilizoathirika sokoni."
+     ]
+    }
+   },
+   {
+    "impact": {
+     "en": "Environmental or chemical exposure event",
+     "sw": "Tukio la kuathiriwa na mazingira au kemikali"
+    },
+    "actions": {
+     "en": [
+      "Residents near the affected site: please follow instructions to move away.",
+      "Exposed people: go to a health facility.",
+      "NEMC, OSHA and GCLA: contain the source and investigate."
+     ],
+     "sw": [
+      "Wakazi walio karibu na eneo lililoathirika: tafadhali fuateni maelekezo ya kuondoka.",
+      "Walioathirika: nendeni kituo cha afya.",
+      "NEMC, OSHA na GCLA: dhibitini chanzo na fanyeni uchunguzi."
+     ]
+    }
+   },
+   {
+    "impact": {
+     "en": "Risk of spread across borders and between districts",
+     "sw": "Hatari ya ugonjwa kusambaa mipakani na kati ya wilaya"
+    },
+    "actions": {
+     "en": [
+      "Travellers: please cooperate with screening and avoid non-essential travel to affected areas.",
+      "Ministry of Health: coordinate with neighbouring countries and notify WHO as required by the International Health Regulations."
+     ],
+     "sw": [
+      "Wasafiri: tafadhali shirikianeni na uchunguzi na epukeni safari zisizo za lazima kwenda maeneo yaliyoathirika.",
+      "Wizara ya Afya: ratibuni na nchi jirani na toeni taarifa WHO kama inavyotakiwa na Kanuni za Afya za Kimataifa."
+     ]
+    }
+   },
+   {
+    "impact": {
+     "en": "Disease linked to animals",
+     "sw": "Ugonjwa unaohusiana na wanyama"
+    },
+    "actions": {
+     "en": [
+      "Livestock keepers: please vaccinate animals and follow livestock movement restrictions.",
+      "Do not slaughter or eat sick or dead animals.",
+      "Ministry responsible for livestock, TVLA, TANAPA and TAWA: control the disease in animals."
+     ],
+     "sw": [
+      "Wafugaji: tafadhali chanjeni mifugo na fuateni vizuizi vya kusafirisha mifugo.",
+      "Msichinje wala kula mifugo inayougua au iliyokufa.",
+      "Wizara yenye dhamana ya mifugo, TVLA, TANAPA na TAWA: dhibitini ugonjwa kwa wanyama."
+     ]
+    }
+   },
+   {
+    "impact": {
+     "en": "Need for treatment and isolation capacity",
+     "sw": "Uhitaji wa uwezo wa matibabu na utengaji"
+    },
+    "actions": {
+     "en": [
+      "Designated hospitals: prepare isolation and treatment units.",
+      "Refer severe cases to referral hospitals."
+     ],
+     "sw": [
+      "Hospitali teule: andaeni vituo vya utengaji na matibabu.",
+      "Wapelekeni wagonjwa mahututi hospitali za rufaa."
+     ]
+    }
+   },
+   {
+    "impact": {
+     "en": "Rumours, misinformation and stigma",
+     "sw": "Uvumi, taarifa potofu na unyanyapaa"
+    },
+    "actions": {
+     "en": [
+      "Please rely only on information from the Ministry of Health and health workers.",
+      "Please support affected families and do not stigmatise them.",
+      "Religious and community leaders: share correct health messages."
+     ],
+     "sw": [
+      "Tafadhali tegemeeni taarifa za Wizara ya Afya na watoa huduma za afya pekee.",
+      "Tafadhali wasaidieni familia zilizoathirika na msiwanyanyapae.",
+      "Viongozi wa dini na jamii: sambazeni ujumbe sahihi wa afya."
+     ]
+    }
+   },
+   {
+    "impact": {
+     "en": "Need for safe burial of people who died of high-risk diseases",
+     "sw": "Uhitaji wa maziko salama kwa waliofariki kwa magonjwa hatarishi"
+    },
+    "actions": {
+     "en": [
+      "Families: please do not wash or touch the body; inform health workers.",
+      "Trained burial teams: conduct safe and dignified burials together with religious leaders."
+     ],
+     "sw": [
+      "Familia: tafadhali msiuoshe wala kuugusa mwili; wajulisheni watoa huduma za afya.",
+      "Timu za maziko zilizofunzwa: fanyeni maziko salama na ya heshima kwa kushirikiana na viongozi wa dini."
+     ]
+    }
+   },
+   {
+    "impact": {
+     "en": "Need for rapid laboratory confirmation",
+     "sw": "Uhitaji wa uthibitisho wa haraka wa maabara"
+    },
+    "actions": {
+     "en": [
+      "Health facilities: send samples to designated reference laboratories using safe transport.",
+      "Laboratories: share results within 24–48 hours."
+     ],
+     "sw": [
+      "Vituo vya afya: pelekeni sampuli maabara teule za rufaa kwa usafirishaji salama.",
+      "Maabara: toeni majibu ndani ya saa 24–48."
+     ]
+    }
+   },
+   {
+    "impact": {
+     "en": "Warning status",
+     "sw": "Hali ya tahadhari"
+    },
+    "actions": {
+     "en": [
+      "Please continue to follow updates from the Ministry of Health, health workers and Disaster Management Committees.",
+      "This warning remains in force until the Ministry of Health lowers or withdraws it."
+     ],
+     "sw": [
+      "Tafadhali endeleeni kufuatilia taarifa za Wizara ya Afya, watoa huduma za afya na Kamati za Usimamizi wa Maafa.",
+      "Tahadhari hii itaendelea kutumika hadi Wizara ya Afya itakapoishusha au kuiondoa rasmi."
+     ]
+    }
+   }
+  ],
+  "3": [
+   {
+    "impact": {
+     "en": "Widespread transmission of a high-consequence disease across several districts or regions",
+     "sw": "Maambukizi yaliyoenea ya ugonjwa hatari katika wilaya au mikoa kadhaa"
+    },
+    "actions": {
+     "en": [
+      "Please follow all public health directives from the Ministry of Health and Disaster Management Committees.",
+      "Ministry of Health and the Prime Minister's Office – Disaster Management Department: coordinate the national response and advise the Government on emergency measures.",
+      "Regional and District Committees: activate health emergency contingency plans."
+     ],
+     "sw": [
+      "Tafadhali fuateni maelekezo yote ya afya ya jamii kutoka Wizara ya Afya na Kamati za Usimamizi wa Maafa.",
+      "Wizara ya Afya na Ofisi ya Waziri Mkuu – Idara ya Menejimenti ya Maafa: ratibuni mwitikio wa kitaifa na toeni ushauri kwa Serikali kuhusu hatua za dharura.",
+      "Kamati za Mikoa na Wilaya: amilisheni mipango ya dharura ya afya."
+     ]
+    }
+   },
+   {
+    "impact": {
+     "en": "Any confirmed case of Ebola or Marburg, or a disease spreading rapidly with high deaths",
+     "sw": "Mgonjwa yeyote aliyethibitishwa wa Ebola au Marburg, au ugonjwa unaosambaa kwa kasi na vifo vingi"
+    },
+    "actions": {
+     "en": [
+      "If you or someone near you has fever with bleeding, vomiting or diarrhoea, please call 190 or inform health workers immediately; do not travel.",
+      "Ministry of Health: isolate cases, trace all contacts and deploy specialist medical teams.",
+      "Request technical support from WHO as needed."
+     ],
+     "sw": [
+      "Ukiwa wewe au mtu wa karibu ana homa pamoja na kutokwa damu, kutapika au kuhara, tafadhali piga 190 au wajulishe watoa huduma za afya mara moja; usisafiri.",
+      "Wizara ya Afya: tengeni wagonjwa, fuatilieni wote waliokutana nao na pelekeni timu za wataalamu wa tiba.",
+      "Ombeni msaada wa kitaalamu kutoka WHO inapohitajika."
+     ]
+    }
+   },
+   {
+    "impact": {
+     "en": "Health facilities overwhelmed by large numbers of patients",
+     "sw": "Vituo vya afya kuzidiwa na idadi kubwa ya wagonjwa"
+    },
+    "actions": {
+     "en": [
+      "Please go to the facility you are directed to and follow instructions from health workers.",
+      "Hospitals: activate surge plans and set up dedicated treatment units.",
+      "Request JWTZ medical support through the Prime Minister's Office where needed."
+     ],
+     "sw": [
+      "Tafadhali nendeni kituo mnachoelekezwa na fuateni maelekezo ya watoa huduma za afya.",
+      "Hospitali: amilisheni mipango ya kuongeza uwezo na anzisheni vituo maalum vya matibabu.",
+      "Ombeni msaada wa kitabibu wa JWTZ kupitia Ofisi ya Waziri Mkuu inapohitajika."
+     ]
+    }
+   },
+   {
+    "impact": {
+     "en": "Mass-casualty event requiring emergency trauma care",
+     "sw": "Tukio la majeruhi wengi linalohitaji huduma za dharura za majeraha"
+    },
+    "actions": {
+     "en": [
+      "Please keep roads to hospitals clear and avoid crowding at the scene.",
+      "Hospitals: activate mass-casualty plans and triage.",
+      "Fire and Rescue Force, the Police Force and the Red Cross: support rescue and emergency transport."
+     ],
+     "sw": [
+      "Tafadhali achieni wazi barabara za kwenda hospitali na epukeni kujazana eneo la tukio.",
+      "Hospitali: amilisheni mipango ya kupokea majeruhi wengi na upangaji wa wagonjwa kwa kipaumbele.",
+      "Jeshi la Zimamoto na Uokoaji, Jeshi la Polisi na Chama cha Msalaba Mwekundu: saidieni uokoaji na usafiri wa dharura."
+     ]
+    }
+   },
+   {
+    "impact": {
+     "en": "Many deaths requiring safe and dignified burial",
+     "sw": "Vifo vingi vinavyohitaji maziko salama na ya heshima"
+    },
+    "actions": {
+     "en": [
+      "Families: please follow burial guidance from health workers.",
+      "Trained burial teams: conduct safe and dignified burials with religious leaders.",
+      "District Committees: provide psychosocial support to bereaved families."
+     ],
+     "sw": [
+      "Familia: tafadhali fuateni maelekezo ya maziko kutoka kwa watoa huduma za afya.",
+      "Timu za maziko zilizofunzwa: fanyeni maziko salama na ya heshima kwa kushirikiana na viongozi wa dini.",
+      "Kamati za Wilaya: toeni msaada wa kisaikolojia kwa familia zilizofiwa."
+     ]
+    }
+   },
+   {
+    "impact": {
+     "en": "Event of international concern",
+     "sw": "Tukio lenye umuhimu wa kimataifa"
+    },
+    "actions": {
+     "en": [
+      "Ministry of Health (IHR National Focal Point): notify WHO within 24 hours and share regular situation reports.",
+      "Coordinate with the East African Community, SADC and Africa CDC."
+     ],
+     "sw": [
+      "Wizara ya Afya (Kituo cha Kitaifa cha IHR): toeni taarifa WHO ndani ya saa 24 na shirikisheni taarifa za hali mara kwa mara.",
+      "Ratibuni na Jumuiya ya Afrika Mashariki, SADC na Africa CDC."
+     ]
+    }
+   },
+   {
+    "impact": {
+     "en": "Severe malnutrition among children",
+     "sw": "Utapiamlo mkali kwa watoto"
+    },
+    "actions": {
+     "en": [
+      "Parents: please take thin or weak children to the nearest health facility.",
+      "Continue breastfeeding infants.",
+      "Health workers: screen and treat children with severe malnutrition."
+     ],
+     "sw": [
+      "Wazazi: tafadhali wapelekeni watoto waliokonda au dhaifu kituo cha afya kilicho karibu.",
+      "Endeleeni kunyonyesha watoto wachanga.",
+      "Watoa huduma za afya: fanyeni uchunguzi na tibuni watoto wenye utapiamlo mkali."
+     ]
+    }
+   },
+   {
+    "impact": {
+     "en": "Risks to mothers and newborns during the emergency",
+     "sw": "Hatari kwa akina mama na watoto wachanga wakati wa dharura"
+    },
+    "actions": {
+     "en": [
+      "Pregnant women: please continue antenatal visits and deliver at a health facility.",
+      "Health facilities: keep emergency obstetric and newborn care running."
+     ],
+     "sw": [
+      "Wajawazito: tafadhali endeleeni na kliniki na mjifungulie kituo cha afya.",
+      "Vituo vya afya: endelezeni huduma za dharura za uzazi na watoto wachanga."
+     ]
+    }
+   },
+   {
+    "impact": {
+     "en": "Distress among survivors, bereaved families and health workers",
+     "sw": "Msongo wa mawazo kwa manusura, familia zilizofiwa na watoa huduma za afya"
+    },
+    "actions": {
+     "en": [
+      "Please support neighbours who have lost family members.",
+      "Ministry responsible for social welfare and the Red Cross: provide psychosocial support."
+     ],
+     "sw": [
+      "Tafadhali wasaidieni majirani waliopoteza wanafamilia.",
+      "Wizara yenye dhamana ya ustawi wa jamii na Chama cha Msalaba Mwekundu: toeni msaada wa kisaikolojia."
+     ]
+    }
+   },
+   {
+    "impact": {
+     "en": "Disruption to schools, markets, transport and routine health services",
+     "sw": "Usumbufu wa shule, masoko, usafiri na huduma za kawaida za afya"
+    },
+    "actions": {
+     "en": [
+      "Please follow directives on schools, markets and gatherings.",
+      "Health facilities: maintain immunisation, HIV, TB and chronic-disease services.",
+      "MSD: protect supplies of medicines and vaccines."
+     ],
+     "sw": [
+      "Tafadhali fuateni maelekezo kuhusu shule, masoko na mikusanyiko.",
+      "Vituo vya afya: endelezeni huduma za chanjo, VVU, kifua kikuu na magonjwa sugu.",
+      "MSD: lindeni upatikanaji wa dawa na chanjo."
+     ]
+    }
+   },
+   {
+    "impact": {
+     "en": "Need to protect communities with water, sanitation and hygiene",
+     "sw": "Uhitaji wa kulinda jamii kwa maji safi, usafi wa mazingira na usafi binafsi"
+    },
+    "actions": {
+     "en": [
+      "Drink only boiled or treated water and wash hands with soap.",
+      "District Committees: supply safe water and hygiene materials to affected communities."
+     ],
+     "sw": [
+      "Kunyweni maji yaliyochemshwa au kutibiwa tu na nawini mikono kwa sabuni.",
+      "Kamati za Wilaya: sambazeni maji safi na vifaa vya usafi kwa jamii zilizoathirika."
+     ]
+    }
+   },
+   {
+    "impact": {
+     "en": "National and international support required",
+     "sw": "Msaada wa kitaifa na kimataifa unahitajika"
+    },
+    "actions": {
+     "en": [
+      "Prime Minister's Office – Disaster Management Department and One Health Section: coordinate national resources.",
+      "Engage partners such as WHO, FAO, WOAH, Africa CDC, UNICEF and the Red Cross as needed."
+     ],
+     "sw": [
+      "Ofisi ya Waziri Mkuu – Idara ya Menejimenti ya Maafa na Dawati la Afya Moja: ratibuni rasilimali za kitaifa.",
+      "Shirikisheni wadau kama WHO, FAO, WOAH, Africa CDC, UNICEF na Chama cha Msalaba Mwekundu inapohitajika."
+     ]
+    }
+   },
+   {
+    "impact": {
+     "en": "Warning status",
+     "sw": "Hali ya tahadhari"
+    },
+    "actions": {
+     "en": [
+      "Please rely on official sources: the Ministry of Health, radio, Disaster Management Committees and local leaders.",
+      "The Ministry of Health will announce when the outbreak has ended."
+     ],
+     "sw": [
+      "Tafadhali tegemeeni taarifa rasmi: Wizara ya Afya, redio, Kamati za Usimamizi wa Maafa na viongozi wa eneo.",
+      "Wizara ya Afya itatangaza mlipuko utakapomalizika."
+     ]
+    }
+   }
+  ]
+ }
+}

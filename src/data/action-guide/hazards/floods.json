@@ -1,0 +1,610 @@
+{
+ "levels": {
+  "1": [
+   {
+    "impact": {
+     "en": "Water beginning to surround a few homes in low-lying areas and river valleys",
+     "sw": "Maji kuanza kuzingira makazi machache katika maeneo ya mabondeni na kando ya mito"
+    },
+    "actions": {
+     "en": [
+      "Know how high past floods have reached in your area.",
+      "Raise food, valuables and documents above floor level.",
+      "Do not keep livestock overnight in river valleys or low-lying grazing areas."
+     ],
+     "sw": [
+      "Fahamu kiwango cha juu cha mafuriko kilichowahi kufikiwa katika eneo lako.",
+      "Inua chakula, vitu vya thamani na nyaraka juu ya sakafu.",
+      "Usilaze mifugo mabondeni wala kando ya mito."
+     ]
+    }
+   },
+   {
+    "impact": {
+     "en": "Minor damage to roads and bridges; some river crossings under water",
+     "sw": "Uharibifu mdogo wa barabara na madaraja; baadhi ya vivuko vya mito kufunikwa na maji"
+    },
+    "actions": {
+     "en": [
+      "Do not cross roads, bridges or river crossings covered by water.",
+      "Report damaged roads and bridges to Village/Mtaa leaders."
+     ],
+     "sw": [
+      "Usivuke barabara, madaraja au vivuko vilivyofunikwa na maji.",
+      "Toa taarifa ya barabara na madaraja yaliyoharibika kwa viongozi wa Kijiji/Mtaa."
+     ]
+    }
+   },
+   {
+    "impact": {
+     "en": "Travel delays where some roads become impassable",
+     "sw": "Ucheleweshaji wa safari pale baadhi ya barabara zinapokuwa hazipitiki"
+    },
+    "actions": {
+     "en": [
+      "Plan journeys and allow extra travel time.",
+      "Follow diversions from the Traffic Police, TANROADS and TARURA."
+     ],
+     "sw": [
+      "Panga safari na weka muda wa ziada wa safari.",
+      "Fuata njia mbadala zinazoelekezwa na Polisi wa Usalama Barabarani, TANROADS na TARURA."
+     ]
+    }
+   },
+   {
+    "impact": {
+     "en": "Rising river levels; floods may arrive from rain upstream even where it is not raining",
+     "sw": "Kupanda kwa kina cha maji ya mito; mafuriko yanaweza kufika kutokana na mvua za upande wa juu hata pasipo na mvua"
+    },
+    "actions": {
+     "en": [
+      "Communities along rivers and below dams: follow warnings from TMA, the Basin Water Boards, dam operators and District Committees.",
+      "Keep a reserve of food, drinking water, cash, medicines and a first-aid kit, and save the emergency number 190.",
+      "Village/Mtaa and Ward Disaster Management Committees: review flood contingency plans, update the list of people with special needs, confirm evacuation routes and shelters, and clear drains, culverts and bridges of debris.",
+      "Share this advisory with neighbours and relatives, especially older persons, people with disabilities and pregnant women."
+     ],
+     "sw": [
+      "Jamii zinazoishi kando ya mito na chini ya mabwawa: fuatilieni tahadhari za TMA, Bodi za Maji za Mabonde, waendeshaji wa mabwawa na Kamati za Wilaya.",
+      "Weka akiba ya chakula, maji ya kunywa, fedha, dawa na vifaa vya huduma ya kwanza, na hifadhi namba ya dharura 190.",
+      "Kamati za Usimamizi wa Maafa za Vijiji/Mitaa na Kata: pitieni mipango ya dharura ya mafuriko, boresheni orodha ya watu wenye mahitaji maalum, thibitisheni njia za uhamishaji na makazi ya muda, na ondoeni taka kwenye mitaro, makalavati na madaraja.",
+      "Wapatie taarifa hii majirani na ndugu, hasa wazee, watu wenye ulemavu na wajawazito."
+     ]
+    }
+   },
+   {
+    "impact": {
+     "en": "Minor damage to wooden bridges and footbridges",
+     "sw": "Uharibifu mdogo wa madaraja ya mbao na ya waenda kwa miguu"
+    },
+    "actions": {
+     "en": [
+      "Do not use wooden bridges or footbridges when water is high.",
+      "Use designated alternative routes.",
+      "Village/Mtaa leaders: guard or close unsafe footbridges and report them to TARURA."
+     ],
+     "sw": [
+      "Usitumie madaraja ya mbao au ya waenda kwa miguu maji yanapokuwa juu.",
+      "Tumia njia mbadala zilizoainishwa.",
+      "Viongozi wa Kijiji/Mtaa: lindeni au fungeni madaraja ya waenda kwa miguu yasiyo salama na toeni taarifa TARURA."
+     ]
+    }
+   },
+   {
+    "impact": {
+     "en": "Possible spread of waterborne diseases in a few areas",
+     "sw": "Uwezekano wa kuenea kwa magonjwa yatokanayo na maji machafu katika maeneo machache"
+    },
+    "actions": {
+     "en": [
+      "Boil drinking water or treat it with chlorine tablets.",
+      "Keep children from playing in floodwater.",
+      "Use latrines and wash hands with soap."
+     ],
+     "sw": [
+      "Chemsha maji ya kunywa au yatibu kwa vidonge vya klorini.",
+      "Usiwaruhusu watoto kucheza kwenye maji ya mafuriko.",
+      "Tumia vyoo na nawa mikono kwa sabuni."
+     ]
+    }
+   },
+   {
+    "impact": {
+     "en": "Minor disruption to water, power and communication services",
+     "sw": "Usumbufu mdogo wa huduma za maji, umeme na mawasiliano"
+    },
+    "actions": {
+     "en": [
+      "Store safe drinking water, food and essential medicines for at least three days.",
+      "Charge phones and keep a battery-powered radio for updates."
+     ],
+     "sw": [
+      "Hifadhi maji safi ya kunywa, chakula na dawa muhimu za angalau siku tatu.",
+      "Chaji simu na uwe na redio inayotumia betri kupata taarifa."
+     ]
+    }
+   },
+   {
+    "impact": {
+     "en": "Localised evacuation may become necessary",
+     "sw": "Uhamishaji mdogo unaweza kuhitajika"
+    },
+    "actions": {
+     "en": [
+      "Know the safe route to the nearest higher ground or shelter.",
+      "Prepare an emergency bag: documents, medicines, water, torch and phone charger.",
+      "Households in areas that flood every season: move before the rainy season starts."
+     ],
+     "sw": [
+      "Fahamu njia salama ya kwenda eneo la mwinuko au makazi ya muda yaliyo karibu.",
+      "Andaa begi la dharura: nyaraka, dawa, maji, tochi na chaja ya simu.",
+      "Kaya zilizo katika maeneo yanayofurika kila msimu: hameni kabla msimu wa mvua haujaanza."
+     ]
+    }
+   },
+   {
+    "impact": {
+     "en": "Unsafe routes to a few schools",
+     "sw": "Njia zisizo salama kwenda baadhi ya shule"
+    },
+    "actions": {
+     "en": [
+      "Parents: do not let children cross rivers, streams or flooded paths to reach school.",
+      "School heads: follow directives from the District Education Office."
+     ],
+     "sw": [
+      "Wazazi: msiwaruhusu watoto kuvuka mito, vijito au njia zilizojaa maji kwenda shule.",
+      "Wakuu wa shule: fuateni maelekezo ya Ofisi ya Elimu ya Wilaya."
+     ]
+    }
+   },
+   {
+    "impact": {
+     "en": "Risk of isolated landslides and riverbank collapse",
+     "sw": "Hatari ya maporomoko ya ardhi na kuporomoka kwa kingo za mito katika maeneo machache"
+    },
+    "actions": {
+     "en": [
+      "Stay away from steep slopes and eroding riverbanks.",
+      "Watch for warning signs: new cracks in the ground or walls, tilting trees or poles, muddy springs.",
+      "If you see these signs, leave immediately and inform local leaders."
+     ],
+     "sw": [
+      "Kaa mbali na miteremko mikali na kingo za mito zinazomomonyoka.",
+      "Angalia dalili za hatari: nyufa mpya ardhini au kwenye kuta, miti au nguzo kuinama, chemchemi za maji ya tope.",
+      "Ukiona dalili hizi, ondoka mara moja na toa taarifa kwa viongozi wa eneo."
+     ]
+    }
+   },
+   {
+    "impact": {
+     "en": "Warning status",
+     "sw": "Hali ya tahadhari"
+    },
+    "actions": {
+     "en": [
+      "Please continue to follow updates from TMA, Disaster Management Committees and local leaders.",
+      "This advisory remains in place until the authorities update or withdraw it."
+     ],
+     "sw": [
+      "Tafadhali endeleeni kufuatilia taarifa za TMA, Kamati za Usimamizi wa Maafa na viongozi wa eneo.",
+      "Tahadhari hii itaendelea hadi mamlaka zitakapoihuisha au kuiondoa rasmi."
+     ]
+    }
+   }
+  ],
+  "2": [
+   {
+    "impact": {
+     "en": "Flooding in many areas; homes, farms and roads under water",
+     "sw": "Mafuriko katika maeneo mengi; makazi, mashamba na barabara kufunikwa na maji"
+    },
+    "actions": {
+     "en": [
+      "Households in low-lying areas and on riverbanks: please move people, livestock, food and valuables to higher ground early.",
+      "Households in known flood-prone areas: leave early; do not wait for water to reach your house.",
+      "Communities downstream of dams: follow instructions from the dam operator and the District Committee."
+     ],
+     "sw": [
+      "Kaya zilizo mabondeni na kingo za mito: tafadhali hamisheni watu, mifugo, chakula na vitu vya thamani kwenda maeneo ya mwinuko mapema.",
+      "Kaya zilizo katika maeneo yenye historia ya mafuriko: hameni mapema; msisubiri maji yafike nyumbani.",
+      "Jamii zilizo chini ya mabwawa: fuateni maelekezo ya waendeshaji wa mabwawa na Kamati ya Wilaya."
+     ]
+    }
+   },
+   {
+    "impact": {
+     "en": "Travel delays and some roads closed",
+     "sw": "Ucheleweshaji wa safari na baadhi ya barabara kufungwa"
+    },
+    "actions": {
+     "en": [
+      "Avoid non-essential travel.",
+      "Follow diversions and instructions from the Traffic Police, TANROADS and TARURA.",
+      "If you must travel, allow extra time and turn back at any flooded section."
+     ],
+     "sw": [
+      "Epuka safari zisizo za lazima.",
+      "Fuata njia mbadala na maelekezo ya Polisi wa Usalama Barabarani, TANROADS na TARURA.",
+      "Ukilazimika kusafiri, weka muda wa ziada na rudi nyuma unapokuta sehemu iliyofurika."
+     ]
+    }
+   },
+   {
+    "impact": {
+     "en": "Threat to life from fast-flowing and deep water",
+     "sw": "Hatari kwa maisha kutokana na maji yanayotiririka kwa kasi na yenye kina kirefu"
+    },
+    "actions": {
+     "en": [
+      "Do not walk, ride or drive through floodwater that reaches knee height or covers half a tyre.",
+      "Do not swim, fish or play in flooded rivers.",
+      "Keep children away from rivers, streams and drains."
+     ],
+     "sw": [
+      "Usitembee, usiendeshe pikipiki wala gari kwenye maji ya mafuriko yanayofikia urefu wa goti au kufunika nusu ya tairi.",
+      "Usiogelee, usivue samaki wala kucheza kwenye mito iliyofurika.",
+      "Waweke watoto mbali na mito, vijito na mitaro."
+     ]
+    }
+   },
+   {
+    "impact": {
+     "en": "Damage to wooden bridges and footbridges",
+     "sw": "Uharibifu wa madaraja ya mbao na ya waenda kwa miguu"
+    },
+    "actions": {
+     "en": [
+      "Do not use damaged bridges or footbridges.",
+      "Village/Mtaa leaders: close unsafe crossings and guard them.",
+      "Report damaged bridges to TARURA and the District Committee."
+     ],
+     "sw": [
+      "Usitumie madaraja ya kawaida au ya waenda kwa miguu yaliyoharibika.",
+      "Viongozi wa Kijiji/Mtaa: fungeni vivuko visivyo salama na viwekeeni ulinzi.",
+      "Toeni taarifa ya madaraja yaliyoharibika kwa TARURA na Kamati ya Wilaya."
+     ]
+    }
+   },
+   {
+    "impact": {
+     "en": "Increased risk of diarrhoea, cholera and skin infections from floodwater, and of malaria from mosquito breeding",
+     "sw": "Kuongezeka kwa hatari ya kuhara, kipindupindu na magonjwa ya ngozi kutokana na maji ya mafuriko, na malaria kutokana na kuzaliana kwa mbu"
+    },
+    "actions": {
+     "en": [
+      "Avoid contact with floodwater; wash with clean water and soap after any contact.",
+      "Use latrines and wash hands with soap.",
+      "Sleep under an insecticide-treated net."
+     ],
+     "sw": [
+      "Epuka kugusa maji ya mafuriko; oga kwa maji safi na sabuni baada ya kuyagusa.",
+      "Tumia vyoo na nawa mikono kwa sabuni.",
+      "Lala ndani ya chandarua chenye dawa."
+     ]
+    }
+   },
+   {
+    "impact": {
+     "en": "Contamination of wells, boreholes and other water sources",
+     "sw": "Kuchafuliwa kwa visima, visima virefu na vyanzo vingine vya maji"
+    },
+    "actions": {
+     "en": [
+      "Boil drinking water or treat it with chlorine tablets.",
+      "Do not use wells covered by floodwater until they have been cleaned and disinfected.",
+      "Report flooded water points to the water authority or RUWASA."
+     ],
+     "sw": [
+      "Chemsha maji ya kunywa au yatibu kwa vidonge vya klorini.",
+      "Usitumie visima vilivyofunikwa na maji ya mafuriko hadi visafishwe na kutiwa dawa.",
+      "Toa taarifa ya vituo vya maji vilivyofurika kwa mamlaka ya maji au RUWASA."
+     ]
+    }
+   },
+   {
+    "impact": {
+     "en": "Risk of losing crops, harvests and food reserves",
+     "sw": "Hatari ya kupoteza mazao, mavuno na akiba ya chakula"
+    },
+    "actions": {
+     "en": [
+      "Harvest mature crops early.",
+      "Move food stores and seed to higher, dry places.",
+      "Report crop and livestock losses to extension officers."
+     ],
+     "sw": [
+      "Vuna mazao yaliyokomaa mapema.",
+      "Hamisha akiba ya chakula na mbegu kwenda maeneo ya mwinuko na makavu.",
+      "Toa taarifa ya upotevu wa mazao na mifugo kwa maafisa ugani."
+     ]
+    }
+   },
+   {
+    "impact": {
+     "en": "Significant damage to infrastructure; power and communication cuts",
+     "sw": "Uharibifu mkubwa wa miundombinu; kukatika kwa umeme na mawasiliano"
+    },
+    "actions": {
+     "en": [
+      "Store safe drinking water, food and essential medicines for at least three days.",
+      "Switch off electricity at the main switch if water is entering your house.",
+      "District and Ward Disaster Management Committees: meet, activate flood contingency plans, inspect critical roads, bridges, power and water services, and pre-position rescue teams, boats, medicines and supplies."
+     ],
+     "sw": [
+      "Hifadhi maji safi ya kunywa, chakula na dawa muhimu za angalau siku tatu.",
+      "Zima umeme kwenye swichi kuu kama maji yanaingia nyumbani.",
+      "Kamati za Usimamizi wa Maafa za Wilaya na Kata: kutaneni, amilisheni mipango ya dharura ya mafuriko, kagueni barabara, madaraja, huduma za umeme na maji, na wekeni tayari timu za uokoaji, boti, dawa na vifaa."
+     ]
+    }
+   },
+   {
+    "impact": {
+     "en": "Evacuation of people from high-risk areas is necessary",
+     "sw": "Uhamishaji wa watu kutoka maeneo hatarishi ni wa lazima"
+    },
+    "actions": {
+     "en": [
+      "Leave early: before roads are cut and before dark.",
+      "Take your emergency bag and go to the designated shelter or higher ground.",
+      "District and Ward Committees: open temporary shelters and alert communities by radio, loudspeaker and door-to-door, with support from the Police Force, the Fire and Rescue Force and the Red Cross."
+     ],
+     "sw": [
+      "Hameni mapema: kabla barabara hazijakatika na kabla ya giza.",
+      "Chukua begi lako la dharura na nenda kwenye makazi ya muda yaliyoainishwa au eneo la mwinuko.",
+      "Kamati za Wilaya na Kata: fungueni makazi ya muda na toeni tahadhari kwa jamii kupitia redio, vipaza sauti na nyumba kwa nyumba, kwa kushirikiana na Jeshi la Polisi, Jeshi la Zimamoto na Uokoaji na Chama cha Msalaba Mwekundu."
+     ]
+    }
+   },
+   {
+    "impact": {
+     "en": "Closure of schools in some affected areas",
+     "sw": "Kufungwa kwa shule katika baadhi ya maeneo yaliyoathirika"
+    },
+    "actions": {
+     "en": [
+      "Parents: do not let children cross rivers, streams or flooded paths.",
+      "School heads: follow closure directives from the District Education Office."
+     ],
+     "sw": [
+      "Wazazi: msiwaruhusu watoto kuvuka mito, vijito au njia zilizojaa maji.",
+      "Wakuu wa shule: fuateni maelekezo ya kufunga shule kutoka Ofisi ya Elimu ya Wilaya."
+     ]
+    }
+   },
+   {
+    "impact": {
+     "en": "High risk of landslides and riverbank collapse in hazardous areas",
+     "sw": "Hatari kubwa ya maporomoko ya ardhi na kuporomoka kwa kingo za mito katika maeneo hatarishi"
+    },
+    "actions": {
+     "en": [
+      "Households on landslide-prone slopes or eroding riverbanks: move to a safe place before nightfall.",
+      "Stop all farming, sand harvesting and mining on steep slopes and riverbanks.",
+      "Report cracks, tilting trees or muddy springs to local leaders immediately."
+     ],
+     "sw": [
+      "Kaya zilizo kwenye miteremko hatarishi au kingo za mito zinazomomonyoka: hameni kwenda mahali salama kabla ya usiku.",
+      "Sitisheni kilimo, uchimbaji wa mchanga na madini kwenye miteremko mikali na kingo za mito.",
+      "Toeni taarifa ya nyufa, miti kuinama au chemchemi za tope kwa viongozi wa eneo mara moja."
+     ]
+    }
+   },
+   {
+    "impact": {
+     "en": "Weak buildings at risk of collapse",
+     "sw": "Majengo dhaifu yako hatarini kuanguka"
+    },
+    "actions": {
+     "en": [
+      "Move out of mud-walled, cracked or damaged buildings, or those with water around the foundations.",
+      "Do not shelter inside weak buildings.",
+      "Report damaged buildings to Village/Mtaa leaders."
+     ],
+     "sw": [
+      "Hama kutoka nyumba za udongo, zenye nyufa au zilizoharibika, au zenye maji kuzunguka msingi.",
+      "Usijikinge ndani ya majengo dhaifu.",
+      "Toa taarifa ya majengo yaliyoharibika kwa viongozi wa Kijiji/Mtaa."
+     ]
+    }
+   },
+   {
+    "impact": {
+     "en": "Warning status",
+     "sw": "Hali ya tahadhari"
+    },
+    "actions": {
+     "en": [
+      "Please continue to follow updates from TMA, Disaster Management Committees and local leaders.",
+      "This warning remains in force until the authorities lower or withdraw it."
+     ],
+     "sw": [
+      "Tafadhali endeleeni kufuatilia taarifa za TMA, Kamati za Usimamizi wa Maafa na viongozi wa eneo.",
+      "Tahadhari hii itaendelea kutumika hadi mamlaka zitakapoishusha au kuiondoa rasmi."
+     ]
+    }
+   }
+  ],
+  "3": [
+   {
+    "impact": {
+     "en": "Widespread severe flooding affecting whole communities",
+     "sw": "Mafuriko makubwa yaliyoenea yanayoathiri jamii nzima"
+    },
+    "actions": {
+     "en": [
+      "Residents of flood areas: please evacuate to higher ground or an official shelter as directed; do not go back for belongings.",
+      "If you are trapped, move to the highest safe point, signal for help and do not enter the water.",
+      "Follow instructions from Disaster Management Committees, the Police Force and the Fire and Rescue Force."
+     ],
+     "sw": [
+      "Wakazi wa maeneo ya mafuriko: tafadhali hamieni maeneo ya mwinuko au makazi rasmi ya muda kama mnavyoelekezwa; msirudi kufuata mali.",
+      "Ukikwama, panda sehemu ya juu iliyo salama, omba msaada kwa ishara na usiingie majini.",
+      "Fuata maelekezo ya Kamati za Usimamizi wa Maafa, Jeshi la Polisi na Jeshi la Zimamoto na Uokoaji."
+     ]
+    }
+   },
+   {
+    "impact": {
+     "en": "Main roads and bridges impassable; communities cut off",
+     "sw": "Barabara kuu na madaraja kutopitika; jamii kukosa mawasiliano ya barabara"
+    },
+    "actions": {
+     "en": [
+      "Do not travel unless it is a life-saving emergency.",
+      "Keep emergency routes clear for rescue vehicles and ambulances.",
+      "Obey road closures by the Police Force, TANROADS and TARURA."
+     ],
+     "sw": [
+      "Usisafiri isipokuwa kwa dharura ya kuokoa maisha.",
+      "Acha wazi njia za dharura kwa magari ya uokoaji na ya wagonjwa.",
+      "Tii ufungaji wa barabara unaofanywa na Jeshi la Polisi, TANROADS na TARURA."
+     ]
+    }
+   },
+   {
+    "impact": {
+     "en": "Loss of life from fast-flowing and deep water",
+     "sw": "Vifo kutokana na maji yanayotiririka kwa kasi na yenye kina kirefu"
+    },
+    "actions": {
+     "en": [
+      "Please do not enter floodwater on foot, by motorcycle or by vehicle.",
+      "Do not jump in to rescue someone: throw a rope or a floating object and call for help.",
+      "In an emergency, call 190 or 114 (Fire and Rescue), or inform your local leaders."
+     ],
+     "sw": [
+      "Tafadhali usiingie kwenye maji ya mafuriko kwa miguu, pikipiki wala gari.",
+      "Usiruke majini kumwokoa mtu: mrushie kamba au kitu kinachoelea na omba msaada.",
+      "Wakati wa dharura, piga simu 190 au 114 (Zimamoto na Uokoaji), au toa taarifa kwa viongozi wa eneo lako."
+     ]
+    }
+   },
+   {
+    "impact": {
+     "en": "Collapse of buildings, bridges and major infrastructure",
+     "sw": "Kuanguka kwa majengo, madaraja na miundombinu mikubwa"
+    },
+    "actions": {
+     "en": [
+      "Please move out of weak or damaged buildings and do not re-enter them.",
+      "Report trapped people to the Fire and Rescue Force.",
+      "District Committees: cordon off unsafe buildings and bridges."
+     ],
+     "sw": [
+      "Tafadhali hameni kutoka majengo dhaifu au yaliyoharibika na msiingie tena.",
+      "Toa taarifa ya watu waliokwama kwa Jeshi la Zimamoto na Uokoaji.",
+      "Kamati za Wilaya: wekeni uzio kuzunguka majengo na madaraja yasiyo salama."
+     ]
+    }
+   },
+   {
+    "impact": {
+     "en": "Severe outbreaks of cholera and other waterborne diseases, and rising malaria cases",
+     "sw": "Mlipuko mkubwa wa kipindupindu na magonjwa mengine yatokanayo na maji machafu, na kuongezeka kwa wagonjwa wa malaria"
+    },
+    "actions": {
+     "en": [
+      "Drink only boiled or treated water.",
+      "Give oral rehydration solution (ORS) at the first sign of diarrhoea and go to a health facility immediately.",
+      "Sleep under an insecticide-treated net.",
+      "Report suspected cholera cases to the nearest health facility."
+     ],
+     "sw": [
+      "Kunywa maji yaliyochemshwa au kutibiwa tu.",
+      "Tumia ORS mara dalili za kuhara zinapoanza na nenda kituo cha afya mara moja.",
+      "Lala ndani ya chandarua chenye dawa.",
+      "Toa taarifa ya wagonjwa wanaoshukiwa kuwa na kipindupindu kwenye kituo cha afya kilicho karibu."
+     ]
+    }
+   },
+   {
+    "impact": {
+     "en": "Loss of water, power, communication and health services for several days",
+     "sw": "Kukosekana kwa huduma za maji, umeme, mawasiliano na afya kwa siku kadhaa"
+    },
+    "actions": {
+     "en": [
+      "Use stored water and food sparingly.",
+      "Rely only on official information: radio, TMA, the Prime Minister's Office and local leaders.",
+      "District Committees: set up emergency water points and mobile health services, and request support through the Prime Minister's Office."
+     ],
+     "sw": [
+      "Tumia akiba ya maji na chakula kwa uangalifu.",
+      "Tegemea taarifa rasmi tu: redio, TMA, Ofisi ya Waziri Mkuu na viongozi wa eneo.",
+      "Kamati za Wilaya: anzisheni vituo vya dharura vya maji na huduma za afya za mkoba, na ombeni msaada kupitia Ofisi ya Waziri Mkuu."
+     ]
+    }
+   },
+   {
+    "impact": {
+     "en": "Large-scale evacuation of people required",
+     "sw": "Uhamishaji mkubwa wa watu unahitajika"
+    },
+    "actions": {
+     "en": [
+      "Follow evacuation orders from the Police Force, the Fire and Rescue Force and Disaster Management Committees.",
+      "Help neighbours, older persons, children, pregnant women and people with disabilities to evacuate first.",
+      "Register at the shelter."
+     ],
+     "sw": [
+      "Fuata amri za uhamishaji kutoka Jeshi la Polisi, Jeshi la Zimamoto na Uokoaji na Kamati za Usimamizi wa Maafa.",
+      "Wasaidie majirani, wazee, watoto, wajawazito na watu wenye ulemavu kuhama kwanza.",
+      "Jisajili kwenye makazi ya muda."
+     ]
+    }
+   },
+   {
+    "impact": {
+     "en": "Closure of schools in many areas; schools used as shelters",
+     "sw": "Kufungwa kwa shule katika maeneo mengi; shule kutumika kama makazi ya muda"
+    },
+    "actions": {
+     "en": [
+      "Keep children at home or in safe shelters under adult supervision.",
+      "School heads: open school buildings as shelters only when directed by the District Committee.",
+      "Reopen schools only after the District Education Office confirms that buildings and routes are safe."
+     ],
+     "sw": [
+      "Waweke watoto nyumbani au katika makazi salama chini ya uangalizi wa watu wazima.",
+      "Wakuu wa shule: fungueni majengo ya shule kama makazi ya muda pale tu Kamati ya Wilaya itakapoelekeza.",
+      "Shule zifunguliwe tena baada tu ya Ofisi ya Elimu ya Wilaya kuthibitisha usalama wa majengo na njia."
+     ]
+    }
+   },
+   {
+    "impact": {
+     "en": "Landslides and riverbank collapse in areas with steep slopes",
+     "sw": "Maporomoko ya ardhi na kuporomoka kwa kingo za mito katika maeneo yenye miteremko mikali"
+    },
+    "actions": {
+     "en": [
+      "Residents of steep slopes, riverbanks and the valleys below them: please move to safe areas early, following guidance from Village/Mtaa leaders.",
+      "Please return only when the authorities declare the area safe.",
+      "Report missing or buried people to the Fire and Rescue Force or Village/Mtaa leaders."
+     ],
+     "sw": [
+      "Wakazi wa miteremko mikali, kingo za mito na mabonde yaliyo chini yake: tafadhali hamieni maeneo salama mapema, kwa kufuata maelekezo ya viongozi wa Kijiji/Mtaa.",
+      "Tafadhali rudini pale tu mamlaka zitakapotangaza kuwa eneo ni salama.",
+      "Toeni taarifa ya watu waliopotea au kufukiwa kwa Jeshi la Zimamoto na Uokoaji au viongozi wa Kijiji/Mtaa."
+     ]
+    }
+   },
+   {
+    "impact": {
+     "en": "Warning status",
+     "sw": "Hali ya tahadhari"
+    },
+    "actions": {
+     "en": [
+      "Please stay with official sources: radio, TMA, Disaster Management Committees and local leaders.",
+      "Disaster Management Committees will announce when the danger has passed and when it is safe to return."
+     ],
+     "sw": [
+      "Tafadhali tegemeeni taarifa rasmi: redio, TMA, Kamati za Usimamizi wa Maafa na viongozi wa eneo.",
+      "Kamati za Usimamizi wa Maafa zitatangaza hatari itakapokwisha na itakapokuwa salama kurudi."
+     ]
+    }
+   }
+  ]
+ }
+}

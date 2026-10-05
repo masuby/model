@@ -1,0 +1,239 @@
+{
+ "region": {
+  "en": "Mara Region",
+  "sw": "Mkoa wa Mara"
+ },
+ "councils": {
+  "C145": {
+   "name": "Musoma Municipal Council",
+   "hazards": [
+    "floods",
+    "largeWaves",
+    "heavyRainfall",
+    "publicHealth"
+   ],
+   "documented": "Lake Victoria floods and large waves, heavy rain, boat accidents, and cholera",
+   "know": [
+    {
+     "area": {
+      "en": "Musoma Municipal: Lake Victoria shore and low streets",
+      "sw": "Manispaa ya Musoma: ufukwe wa Ziwa Victoria na mitaa ya chini"
+     },
+     "risk": {
+      "en": "This area is a lakeshore town where heavy storms flood low streets and landing sites, lake storms capsize boats and lightning strikes are frequent.",
+      "sw": "Eneo hili ni mji wa ufukweni ambapo dhoruba kubwa hufurika mitaa ya chini na mialo, dhoruba za ziwani hupindua vyombo na radi hupiga mara kwa mara."
+     },
+     "advice": {
+      "en": "For those living, fishing and trading here, it helps to keep drains open, build above known flood marks, wear life jackets on the lake and fit lightning arresters on public buildings.",
+      "sw": "Kwa wanaoishi, kuvua na kufanya biashara hapa, ni vyema kuweka mitaro wazi, kujenga juu ya alama za mafuriko zinazojulikana, kuvaa maboya ziwani na kuweka vizuia radi kwenye majengo ya umma."
+     }
+    }
+   ]
+  },
+  "C147": {
+   "name": "Bunda Town Council",
+   "hazards": [
+    "floods",
+    "largeWaves",
+    "heavyRainfall"
+   ],
+   "documented": "lake floods, large waves, boat accidents, and heavy rain",
+   "know": [
+    {
+     "area": {
+      "en": "Bunda Town: town streams and the highway corridor",
+      "sw": "Mji wa Bunda: vijito vya mjini na ukanda wa barabara kuu"
+     },
+     "risk": {
+      "en": "This area is a growing town on the Mwanza–Musoma highway where storm run-off floods streets and roadside settlements, and traffic brings accident risk.",
+      "sw": "Eneo hili ni mji unaokua kando ya barabara kuu ya Mwanza–Musoma ambapo maji ya dhoruba hufurika mitaa na makazi ya kando ya barabara, na magari huleta hatari ya ajali."
+     },
+     "advice": {
+      "en": "For those living and trading here, it helps to keep drains and road culverts clear, trade outside the road reserve and keep goods above flood level.",
+      "sw": "Kwa wanaoishi na kufanya biashara hapa, ni vyema kuweka mitaro na makalavati ya barabara wazi, kufanya biashara nje ya hifadhi ya barabara na kuhifadhi bidhaa juu ya kiwango cha mafuriko."
+     }
+    }
+   ]
+  },
+  "C142": {
+   "name": "Tarime Town Council",
+   "hazards": [
+    "heavyRainfall",
+    "floods",
+    "publicHealth"
+   ],
+   "documented": "heavy rain, mine accidents, and floods on valleys above the lake",
+   "know": [
+    {
+     "area": {
+      "en": "Tarime Town: hillside town and border trade",
+      "sw": "Mji wa Tarime: mji wa milimani na biashara ya mpakani"
+     },
+     "risk": {
+      "en": "This area is a hilly, high-rainfall town near the Kenya border where heavy storms cause flash floods and erosion, and busy cross-border trade can spread disease.",
+      "sw": "Eneo hili ni mji wa milimani wenye mvua nyingi karibu na mpaka wa Kenya ambapo dhoruba kubwa husababisha mafuriko ya ghafla na mmomonyoko, na biashara ya mpakani inaweza kusambaza magonjwa."
+     },
+     "advice": {
+      "en": "For those living and trading here, it helps to keep slopes planted, build away from gullies and use safe water, latrines and hand-washing.",
+      "sw": "Kwa wanaoishi na kufanya biashara hapa, ni vyema kuacha mimea kwenye miteremko, kujenga mbali na makorongo na kutumia maji salama, vyoo na kunawa mikono."
+     }
+    }
+   ]
+  },
+  "C146": {
+   "name": "Bunda District Council",
+   "hazards": [
+    "floods",
+    "largeWaves",
+    "heavyRainfall",
+    "publicHealth",
+    "drought"
+   ],
+   "documented": "Lake Victoria floods, large waves, boat accidents, heavy rain, and cholera",
+   "know": [
+    {
+     "area": {
+      "en": "Bunda DC: Serengeti edge and lakeshore",
+      "sw": "Bunda DC: pembezoni mwa Serengeti na ufukwe"
+     },
+     "risk": {
+      "en": "This area borders the Serengeti and Lake Victoria, where elephants raid crops, lake storms affect fishers and dry spells damage cotton and food crops.",
+      "sw": "Eneo hili linapakana na Serengeti na Ziwa Victoria, ambapo tembo huvamia mazao, dhoruba za ziwani huathiri wavuvi na vipindi vya ukavu huharibu pamba na mazao ya chakula."
+     },
+     "advice": {
+      "en": "For those living, farming and fishing here, it helps to use community deterrents against wildlife, wear life jackets and plant drought-tolerant crops.",
+      "sw": "Kwa wanaoishi, kulima na kuvua hapa, ni vyema kutumia mbinu za jamii kufukuza wanyama, kuvaa maboya ya kujiokoa na kupanda mazao yanayostahimili ukame."
+     }
+    }
+   ]
+  },
+  "C148": {
+   "name": "Butiama District Council",
+   "hazards": [
+    "floods",
+    "heavyRainfall",
+    "largeWaves",
+    "publicHealth"
+   ],
+   "documented": "lake-edge floods, heavy rain, boat accidents, and cholera",
+   "know": [
+    {
+     "area": {
+      "en": "Butiama: farmland and seasonal rivers",
+      "sw": "Butiama: mashamba na mito ya msimu"
+     },
+     "risk": {
+      "en": "This area has farmland crossed by seasonal rivers that flood crossings after storms, and erratic rains that cause crop losses.",
+      "sw": "Eneo hili lina mashamba yanayokatizwa na mito ya msimu inayofurika vivuko baada ya dhoruba, na mvua zisizo za uhakika zinazosababisha hasara ya mazao."
+     },
+     "advice": {
+      "en": "For those living and farming here, it helps to know the low crossings on your route, keep stores above flood level and keep household food reserves.",
+      "sw": "Kwa wanaoishi na kulima hapa, ni vyema kujua vivuko vya chini kwenye njia zenu, kuhifadhi mali juu ya kiwango cha mafuriko na kuweka akiba ya chakula ya kaya."
+     }
+    }
+   ]
+  },
+  "C144": {
+   "name": "Musoma District Council",
+   "hazards": [
+    "floods",
+    "largeWaves",
+    "heavyRainfall",
+    "publicHealth"
+   ],
+   "documented": "lake floods, large waves, boat accidents, and heavy rain",
+   "know": [
+    {
+     "area": {
+      "en": "Musoma DC: lakeshore villages and the Mara wetlands",
+      "sw": "Musoma DC: vijiji vya ufukweni na ardhioevu ya Mara"
+     },
+     "risk": {
+      "en": "This area has lakeshore fishing villages and the Mara river wetlands, which flood farms and villages in wet years, and cholera spreads where water is unsafe.",
+      "sw": "Eneo hili lina vijiji vya wavuvi vya ufukweni na ardhioevu ya mto Mara inayofurika mashamba na vijiji katika miaka ya mvua nyingi, na kipindupindu husambaa pasipo maji salama."
+     },
+     "advice": {
+      "en": "For those living and fishing here, it helps to keep homes above the wetland margin, use latrines and boil or treat drinking water.",
+      "sw": "Kwa wanaoishi na kuvua hapa, ni vyema kujenga juu ya kingo za ardhioevu, kutumia vyoo na kuchemsha au kutibu maji ya kunywa."
+     }
+    }
+   ]
+  },
+  "C149": {
+   "name": "Rorya District Council",
+   "hazards": [
+    "floods",
+    "largeWaves",
+    "heavyRainfall",
+    "publicHealth"
+   ],
+   "documented": "lake floods, large waves, boat accidents, and human–wildlife conflict on the Mara River",
+   "know": [
+    {
+     "area": {
+      "en": "Rorya: lakeshore, islands and Kenya border",
+      "sw": "Rorya: ufukwe, visiwa na mpaka wa Kenya"
+     },
+     "risk": {
+      "en": "This area has a long lakeshore and islands where storms capsize boats and lightning strikes fishers, and border villages where disease can spread with movement.",
+      "sw": "Eneo hili lina ufukwe mrefu na visiwa ambapo dhoruba hupindua vyombo na radi huwapiga wavuvi, na vijiji vya mpakani ambapo magonjwa yanaweza kusambaa kwa mwingiliano."
+     },
+     "advice": {
+      "en": "For those fishing and living here, it helps to wear life jackets, return to shore before storms build and report unusual illness early.",
+      "sw": "Kwa wanaovua na kuishi hapa, ni vyema kuvaa maboya ya kujiokoa, kurudi ufukweni kabla dhoruba haijaanza na kutoa taarifa mapema za magonjwa yasiyo ya kawaida."
+     }
+    }
+   ]
+  },
+  "C143": {
+   "name": "Serengeti District Council",
+   "hazards": [
+    "drought",
+    "wildfire",
+    "floods"
+   ],
+   "documented": "drought, wildfire, flash floods on the Mara, and human–wildlife conflict",
+   "know": [
+    {
+     "area": {
+      "en": "Serengeti: villages next to the national park",
+      "sw": "Serengeti: vijiji jirani na hifadhi ya taifa"
+     },
+     "risk": {
+      "en": "This area borders Serengeti National Park, where wildlife raids crops and attacks people, dry-season fires spread from grassland and drought affects herds.",
+      "sw": "Eneo hili linapakana na Hifadhi ya Taifa Serengeti, ambapo wanyamapori huvamia mazao na kushambulia watu, moto wa kiangazi husambaa kutoka nyasi na ukame huathiri mifugo."
+     },
+     "advice": {
+      "en": "For those living, farming and herding here, it helps to use community deterrents, keep fire breaks and plan grazing and water for dry years.",
+      "sw": "Kwa wanaoishi, kulima na kufuga hapa, ni vyema kutumia mbinu za jamii, kuweka njia za kuzuia moto na kupanga malisho na maji kwa miaka ya ukame."
+     }
+    }
+   ]
+  },
+  "C141": {
+   "name": "Tarime District Council",
+   "hazards": [
+    "heavyRainfall",
+    "floods",
+    "landslide"
+   ],
+   "documented": "heavy rain, artisanal and large-scale mining accidents, and valley floods",
+   "know": [
+    {
+     "area": {
+      "en": "Tarime DC: high-rainfall hills and mining areas",
+      "sw": "Tarime DC: milima yenye mvua nyingi na maeneo ya uchimbaji"
+     },
+     "risk": {
+      "en": "This area has high-rainfall hills where storms cause landslides, flash floods and lightning, and gold-mining areas (such as Nyamongo) where pits collapse and water is polluted.",
+      "sw": "Eneo hili lina milima yenye mvua nyingi ambapo dhoruba husababisha maporomoko, mafuriko ya ghafla na radi, na maeneo ya uchimbaji wa dhahabu (kama Nyamongo) ambapo mashimo hubomoka na maji huchafuliwa."
+     },
+     "advice": {
+      "en": "For those living, farming and mining here, it helps to keep slopes planted, fence or backfill pits and keep processing away from drinking-water sources.",
+      "sw": "Kwa wanaoishi, kulima na kuchimba hapa, ni vyema kuacha mimea kwenye miteremko, kuzungushia uzio au kufukia mashimo na kuchenjua mbali na vyanzo vya maji ya kunywa."
+     }
+    }
+   ]
+  }
+ }
+}

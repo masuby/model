@@ -1,0 +1,215 @@
+{
+ "region": {
+  "en": "Mwanza Region",
+  "sw": "Mkoa wa Mwanza"
+ },
+ "councils": {
+  "C135": {
+   "name": "Mwanza City Council",
+   "hazards": [
+    "floods",
+    "largeWaves",
+    "heavyRainfall",
+    "publicHealth"
+   ],
+   "documented": "Lake Victoria floods (Mkuyuni and shore roads recorded in 2025), large waves, boat accidents, heavy rain, and cholera",
+   "know": [
+    {
+     "area": {
+      "en": "Mwanza City: rocky hillsides and lakeshore",
+      "sw": "Jiji la Mwanza: milima ya mawe na ufukwe"
+     },
+     "risk": {
+      "en": "This area is a lake city built on rocky hills where boulders can fall in heavy rain, run-off floods low streets and the lakeshore, and dense settlements spread cholera.",
+      "sw": "Eneo hili ni jiji la ziwani lililojengwa kwenye milima ya mawe ambapo miamba inaweza kuanguka wakati wa mvua kubwa, maji hufurika mitaa ya chini na ufukwe, na makazi yenye msongamano husambaza kipindupindu."
+     },
+     "advice": {
+      "en": "For those living and trading here, it is safer not to build below loose boulders, keep drains open, and use safe water and latrines.",
+      "sw": "Kwa wanaoishi na kufanya biashara hapa, ni vyema kutojenga chini ya miamba iliyolegea, kuweka mitaro wazi, na kutumia maji salama na vyoo."
+     }
+    }
+   ]
+  },
+  "C139": {
+   "name": "Ilemela Municipal Council",
+   "hazards": [
+    "floods",
+    "largeWaves",
+    "heavyRainfall",
+    "publicHealth",
+    "landslide"
+   ],
+   "documented": "lake floods, large waves, boat accidents, heavy rain, and cholera",
+   "know": [
+    {
+     "area": {
+      "en": "Ilemela Municipal: hillside settlements and lakeshore",
+      "sw": "Manispaa ya Ilemela: makazi ya milimani na ufukwe"
+     },
+     "risk": {
+      "en": "This area has fast-growing hillside settlements among rocks and a lakeshore with landing sites, where storms cause rockfalls and floods and lightning is frequent.",
+      "sw": "Eneo hili lina makazi yanayokua kwa kasi kwenye milima ya mawe na ufukwe wenye mialo, ambapo dhoruba husababisha miamba kuanguka na mafuriko na radi hupiga mara kwa mara."
+     },
+     "advice": {
+      "en": "For those living and fishing here, it helps to build on stable ground away from boulders, keep drains clear and wear life jackets on the lake.",
+      "sw": "Kwa wanaoishi na kuvua hapa, ni vyema kujenga kwenye ardhi imara mbali na miamba, kuweka mitaro wazi na kuvaa maboya ya kujiokoa ziwani."
+     }
+    }
+   ]
+  },
+  "C138": {
+   "name": "Buchosa District Council",
+   "hazards": [
+    "floods",
+    "largeWaves",
+    "heavyRainfall",
+    "publicHealth"
+   ],
+   "documented": "lake floods, large waves, boat accidents, and heavy rain",
+   "know": [
+    {
+     "area": {
+      "en": "Buchosa: lake islands and fishing villages",
+      "sw": "Buchosa: visiwa vya ziwa na vijiji vya wavuvi"
+     },
+     "risk": {
+      "en": "This area has islands and fishing villages where sudden lake storms capsize boats, lightning strikes fishers and unsafe water spreads cholera.",
+      "sw": "Eneo hili lina visiwa na vijiji vya wavuvi ambapo dhoruba za ghafla ziwani hupindua vyombo, radi huwapiga wavuvi na maji yasiyo salama husambaza kipindupindu."
+     },
+     "advice": {
+      "en": "For those fishing and living here, it helps to wear life jackets, return to shore before storms build and use latrines and safe water.",
+      "sw": "Kwa wanaovua na kuishi hapa, ni vyema kuvaa maboya ya kujiokoa, kurudi ufukweni kabla dhoruba haijaanza na kutumia vyoo na maji salama."
+     }
+    }
+   ]
+  },
+  "C136": {
+   "name": "Kwimba District Council",
+   "hazards": [
+    "drought",
+    "floods",
+    "heavyRainfall",
+    "strongWinds"
+   ],
+   "documented": "drought inland of the lake, flash floods in heavy rain, and strong winds",
+   "know": [
+    {
+     "area": {
+      "en": "Kwimba: dry plains and seasonal rivers",
+      "sw": "Kwimba: tambarare kame na mito ya msimu"
+     },
+     "risk": {
+      "en": "This area is dry farming and grazing land where dry spells cause crop losses and water shortages, and storms flood seasonal river crossings.",
+      "sw": "Eneo hili ni ardhi kame ya kilimo na malisho ambapo vipindi vya ukavu husababisha hasara ya mazao na uhaba wa maji, na dhoruba hufurika vivuko vya mito ya msimu."
+     },
+     "advice": {
+      "en": "For those living and farming here, it helps to plant drought-tolerant crops, protect water points and know the low crossings on your route.",
+      "sw": "Kwa wanaoishi na kulima hapa, ni vyema kupanda mazao yanayostahimili ukame, kulinda vyanzo vya maji na kujua vivuko vya chini kwenye njia zenu."
+     }
+    }
+   ]
+  },
+  "C134": {
+   "name": "Magu District Council",
+   "hazards": [
+    "floods",
+    "largeWaves",
+    "publicHealth"
+   ],
+   "documented": "Lake Victoria floods, large waves, boat accidents, and cholera",
+   "know": [
+    {
+     "area": {
+      "en": "Magu: Simiyu river mouth and lakeshore",
+      "sw": "Magu: mlango wa mto Simiyu na ufukwe"
+     },
+     "risk": {
+      "en": "This area has the lower Simiyu river and lakeshore plains that flood farms and villages in wet years, and fishing villages exposed to lake storms.",
+      "sw": "Eneo hili lina sehemu ya chini ya mto Simiyu na tambarare za ufukweni zinazofurika mashamba na vijiji katika miaka ya mvua nyingi, na vijiji vya wavuvi vinavyoathiriwa na dhoruba za ziwani."
+     },
+     "advice": {
+      "en": "For those living, farming and fishing here, it helps to keep homes and stores above the flood line and to wear life jackets on the lake.",
+      "sw": "Kwa wanaoishi, kulima na kuvua hapa, ni vyema kujenga makazi na maghala juu ya mstari wa mafuriko na kuvaa maboya ya kujiokoa ziwani."
+     }
+    }
+   ]
+  },
+  "C140": {
+   "name": "Misungwi District Council",
+   "hazards": [
+    "floods",
+    "heavyRainfall",
+    "drought"
+   ],
+   "documented": "lake-plain floods, heavy rain, and a marked dry season inland",
+   "know": [
+    {
+     "area": {
+      "en": "Misungwi: lakeshore plains and rice fields",
+      "sw": "Misungwi: tambarare za ufukweni na mashamba ya mpunga"
+     },
+     "risk": {
+      "en": "This area has low lakeshore plains and rice fields that waterlog after heavy rain, and dry inland areas where crops fail in dry spells.",
+      "sw": "Eneo hili lina tambarare za chini za ufukweni na mashamba ya mpunga yanayojaa maji baada ya mvua kubwa, na maeneo kame ya ndani ambapo mazao hukauka wakati wa ukavu."
+     },
+     "advice": {
+      "en": "For those living and farming here, it helps to build on higher ground, keep field drains open and keep household food reserves.",
+      "sw": "Kwa wanaoishi na kulima hapa, ni vyema kujenga sehemu za miinuko, kuweka mifereji ya mashamba wazi na kuweka akiba ya chakula ya kaya."
+     }
+    }
+   ]
+  },
+  "C137": {
+   "name": "Sengerema District Council",
+   "hazards": [
+    "floods",
+    "largeWaves",
+    "heavyRainfall",
+    "publicHealth"
+   ],
+   "documented": "lake floods, large waves, boat accidents, heavy rain, and cholera",
+   "know": [
+    {
+     "area": {
+      "en": "Sengerema: lakeshore and ferry crossings",
+      "sw": "Sengerema: ufukwe na vivuko vya feri"
+     },
+     "risk": {
+      "en": "This area has a long lakeshore with ferry crossings and landing sites where storms, overloading and capsizing endanger travellers and fishers.",
+      "sw": "Eneo hili lina ufukwe mrefu wenye vivuko na mialo ambapo dhoruba, ujazaji kupita kiasi na kupinduka huhatarisha wasafiri na wavuvi."
+     },
+     "advice": {
+      "en": "For those travelling and fishing here, it is safer never to board overloaded vessels, wear life jackets and wait ashore when storms are forecast.",
+      "sw": "Kwa wanaosafiri na kuvua hapa, ni vyema kutopanda vyombo vilivyojaa kupita kiasi, kuvaa maboya ya kujiokoa na kusubiri ufukweni dhoruba inapotabiriwa."
+     }
+    }
+   ]
+  },
+  "C133": {
+   "name": "Ukerewe District Council",
+   "hazards": [
+    "largeWaves",
+    "floods",
+    "heavyRainfall",
+    "publicHealth"
+   ],
+   "documented": "large waves, boat and ferry accidents, lake floods, heavy rain, and cholera",
+   "know": [
+    {
+     "area": {
+      "en": "Ukerewe: islands and ferry routes",
+      "sw": "Ukerewe: visiwa na njia za vivuko"
+     },
+     "risk": {
+      "en": "This area is a group of islands reached by ferry, where lake storms make crossings dangerous, help arrives slowly and water-borne disease spreads in dense villages.",
+      "sw": "Eneo hili ni kundi la visiwa vinavyofikiwa kwa vivuko, ambapo dhoruba za ziwani hufanya safari kuwa hatari, msaada huchelewa kufika na magonjwa yatokanayo na maji husambaa kwenye vijiji vyenye msongamano."
+     },
+     "advice": {
+      "en": "For those living and travelling here, it helps to board only safe, licensed vessels, wear life jackets and keep food, water and medicine reserves.",
+      "sw": "Kwa wanaoishi na kusafiri hapa, ni vyema kupanda vyombo salama vyenye leseni tu, kuvaa maboya ya kujiokoa na kuweka akiba ya chakula, maji na dawa."
+     }
+    }
+   ]
+  }
+ }
+}

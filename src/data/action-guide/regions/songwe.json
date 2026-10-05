@@ -1,0 +1,137 @@
+{
+ "region": {
+  "en": "Songwe Region",
+  "sw": "Mkoa wa Songwe"
+ },
+ "councils": {
+  "C181": {
+   "name": "Tunduma Town Council",
+   "hazards": [
+    "heavyRainfall",
+    "floods",
+    "strongWinds",
+    "earthquake",
+    "publicHealth"
+   ],
+   "documented": "heavy rain, floods on the border valleys, strong winds, and earthquake on the rift edge",
+   "know": [
+    {
+     "area": {
+      "en": "Tunduma Town: Zambia border crossing",
+      "sw": "Mji wa Tunduma: kivuko cha mpaka wa Zambia"
+     },
+     "risk": {
+      "en": "This area is a crowded border town where truck queues, fuel storage and dense markets bring fire, accident and disease risk, and storm water floods unplanned streets.",
+      "sw": "Eneo hili ni mji wa mpakani wenye msongamano ambapo foleni za malori, hifadhi ya mafuta na masoko yenye watu wengi huleta hatari ya moto, ajali na magonjwa, na maji ya dhoruba hufurika mitaa isiyopangwa."
+     },
+     "advice": {
+      "en": "For those trading and travelling here, it helps to keep exits and drains clear, keep fire extinguishers ready and use latrines and safe water.",
+      "sw": "Kwa wanaofanya biashara na kusafiri hapa, ni vyema kuacha njia za kutokea na mitaro wazi, kuweka vizimamoto tayari na kutumia vyoo na maji salama."
+     }
+    }
+   ]
+  },
+  "C184": {
+   "name": "Ileje District Council",
+   "hazards": [
+    "heavyRainfall",
+    "landslide",
+    "floods"
+   ],
+   "documented": "heavy rain, landslides on the highland edge, and valley floods",
+   "know": [
+    {
+     "area": {
+      "en": "Ileje: steep highland slopes",
+      "sw": "Ileje: miteremko mikali ya nyanda za juu"
+     },
+     "risk": {
+      "en": "This area has steep, wet highland slopes where heavy rain causes landslides and washouts that cut roads and isolate villages.",
+      "sw": "Eneo hili lina miteremko mikali yenye mvua nyingi ambapo mvua kubwa husababisha maporomoko na kusombwa kwa barabara, hukata barabara na kutenga vijiji."
+     },
+     "advice": {
+      "en": "For those living and farming here, it helps to keep terraces and trees on slopes, build away from steep cuts and stream banks and keep food reserves.",
+      "sw": "Kwa wanaoishi na kulima hapa, ni vyema kutunza matuta na miti kwenye miteremko, kujenga mbali na miinuko mikali na kingo za vijito na kuweka akiba ya chakula."
+     }
+    }
+   ]
+  },
+  "C183": {
+   "name": "Mbozi District Council",
+   "hazards": [
+    "heavyRainfall",
+    "floods",
+    "strongWinds"
+   ],
+   "documented": "heavy rain, valley floods, and strong winds",
+   "know": [
+    {
+     "area": {
+      "en": "Mbozi: coffee highlands and Vwawa",
+      "sw": "Mbozi: nyanda za juu za kahawa na Vwawa"
+     },
+     "risk": {
+      "en": "This area has coffee highlands and the regional centre Vwawa, where hailstorms damage crops and roofs, run-off erodes slopes and the TANZAM highway brings accident risk.",
+      "sw": "Eneo hili lina nyanda za juu za kahawa na makao makuu ya mkoa Vwawa, ambapo mvua ya mawe huharibu mazao na paa, maji humomonyoa miteremko na barabara kuu ya TANZAM huleta hatari ya ajali."
+     },
+     "advice": {
+      "en": "For those living and farming here, it helps to fix roofs firmly, keep slopes planted and trade outside the road reserve.",
+      "sw": "Kwa wanaoishi na kulima hapa, ni vyema kufunga paa imara, kuacha mimea kwenye miteremko na kufanya biashara nje ya hifadhi ya barabara."
+     }
+    }
+   ]
+  },
+  "C180": {
+   "name": "Momba District Council",
+   "hazards": [
+    "earthquake",
+    "heavyRainfall",
+    "floods",
+    "drought"
+   ],
+   "documented": "earthquake on the Rukwa Rift, heavy rain, and floods toward Lake Rukwa",
+   "know": [
+    {
+     "area": {
+      "en": "Momba: Lake Rukwa lowlands",
+      "sw": "Momba: tambarare za Ziwa Rukwa"
+     },
+     "risk": {
+      "en": "This area has hot Rukwa valley lowlands where rivers and the lake flood villages and farms, and droughts and wildlife damage crops.",
+      "sw": "Eneo hili lina tambarare za joto za bonde la Rukwa ambapo mito na ziwa hufurika vijiji na mashamba, na ukame na wanyamapori huharibu mazao."
+     },
+     "advice": {
+      "en": "For those farming and fishing here, it helps to keep homes above flood lines, use flood plains seasonally and keep household food reserves.",
+      "sw": "Kwa wanaolima na kuvua hapa, ni vyema kujenga juu ya mistari ya mafuriko, kutumia tambarare kwa msimu na kuweka akiba ya chakula ya kaya."
+     }
+    }
+   ]
+  },
+  "C182": {
+   "name": "Songwe District Council",
+   "hazards": [
+    "floods",
+    "heavyRainfall",
+    "strongWinds",
+    "earthquake"
+   ],
+   "documented": "Songwe river floods, heavy rain, and strong winds",
+   "know": [
+    {
+     "area": {
+      "en": "Songwe DC: Songwe valley, gold mining and Mkwajuni",
+      "sw": "Songwe DC: bonde la Songwe, uchimbaji dhahabu na Mkwajuni"
+     },
+     "risk": {
+      "en": "This area has the hot Songwe valley where rivers flash-flood, artisanal gold pits that collapse in the rains, and an active earthquake zone.",
+      "sw": "Eneo hili lina bonde la joto la Songwe ambapo mito hufurika ghafla, mashimo madogo ya dhahabu yanayobomoka wakati wa mvua, na ukanda hai wa matetemeko."
+     },
+     "advice": {
+      "en": "For those living and mining here, it helps to fence or backfill pits, build away from river banks and build to earthquake-resistant standards.",
+      "sw": "Kwa wanaoishi na kuchimba hapa, ni vyema kuzungushia uzio au kufukia mashimo, kujenga mbali na kingo za mito na kujenga kwa viwango vinavyostahimili matetemeko."
+     }
+    }
+   ]
+  }
+ }
+}

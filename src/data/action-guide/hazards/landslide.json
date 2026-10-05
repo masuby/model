@@ -1,0 +1,632 @@
+{
+ "levels": {
+  "1": [
+   {
+    "impact": {
+     "en": "Increased landslide risk on steep slopes and in previously affected areas",
+     "sw": "Ongezeko la hatari ya maporomoko ya ardhi kwenye miteremko mikali na maeneo yaliyowahi kuathirika"
+    },
+    "actions": {
+     "en": [
+      "Know the safe area and the route to it.",
+      "Prepare an emergency bag.",
+      "Keep a reserve of food, drinking water, cash and medicines.",
+      "Save the emergency number 190."
+     ],
+     "sw": [
+      "Fahamu eneo salama na njia ya kufika huko.",
+      "Andaa begi la dharura.",
+      "Weka akiba ya chakula, maji ya kunywa, fedha na dawa.",
+      "Hifadhi namba ya dharura 190."
+     ]
+    }
+   },
+   {
+    "impact": {
+     "en": "Saturated soil weakening the foundations of hillside homes",
+     "sw": "Udongo uliojaa maji kudhoofisha misingi ya nyumba za miteremkoni"
+    },
+    "actions": {
+     "en": [
+      "Inspect walls and foundations for cracks.",
+      "Clear gutters and drains around the house.",
+      "Direct rainwater away from the house and the slope."
+     ],
+     "sw": [
+      "Kagua kuta na misingi kuangalia nyufa.",
+      "Safisha mifereji ya paa na mitaro kuzunguka nyumba.",
+      "Elekeza maji ya mvua mbali na nyumba na mteremko."
+     ]
+    }
+   },
+   {
+    "impact": {
+     "en": "New cracks in the ground, roads or walls",
+     "sw": "Nyufa mpya ardhini, barabarani au kwenye kuta"
+    },
+    "actions": {
+     "en": [
+      "Mark the cracks and check them every day.",
+      "Report widening cracks to Village/Mtaa leaders.",
+      "Do not build, dig or farm on cracked ground."
+     ],
+     "sw": [
+      "Weka alama kwenye nyufa na zikague kila siku.",
+      "Toa taarifa ya nyufa zinazoongezeka kwa viongozi wa Kijiji/Mtaa.",
+      "Usijenge, usichimbe wala usilime kwenye ardhi yenye nyufa."
+     ]
+    }
+   },
+   {
+    "impact": {
+     "en": "Doors and windows suddenly sticking in hillside homes",
+     "sw": "Milango na madirisha kuanza kukwama ghafla katika nyumba za miteremkoni"
+    },
+    "actions": {
+     "en": [
+      "Check walls and foundations for new cracks.",
+      "Report to Village/Mtaa leaders.",
+      "Sleep elsewhere until the house has been inspected."
+     ],
+     "sw": [
+      "Kagua kuta na misingi kuangalia nyufa mpya.",
+      "Toa taarifa kwa viongozi wa Kijiji/Mtaa.",
+      "Lala mahali pengine hadi nyumba ikaguliwe."
+     ]
+    }
+   },
+   {
+    "impact": {
+     "en": "Tilting trees, fences and poles on slopes",
+     "sw": "Miti, uzio na nguzo kuinama kwenye miteremko"
+    },
+    "actions": {
+     "en": [
+      "Keep away from the area below them.",
+      "Report them to Village/Mtaa leaders.",
+      "Report tilting power poles to TANESCO."
+     ],
+     "sw": [
+      "Kaa mbali na eneo lililo chini yake.",
+      "Toa taarifa kwa viongozi wa Kijiji/Mtaa.",
+      "Toa taarifa ya nguzo za umeme zinazoinama kwa TANESCO."
+     ]
+    }
+   },
+   {
+    "impact": {
+     "en": "New springs or wet patches appearing on slopes",
+     "sw": "Chemchemi mpya au unyevu usio wa kawaida kujitokeza kwenye miteremko"
+    },
+    "actions": {
+     "en": [
+      "Report them to Village/Mtaa leaders immediately.",
+      "Do not build or dig near them."
+     ],
+     "sw": [
+      "Toa taarifa kwa viongozi wa Kijiji/Mtaa mara moja.",
+      "Usijenge wala kuchimba karibu nayo."
+     ]
+    }
+   },
+   {
+    "impact": {
+     "en": "Blocked drainage channels and culverts on hillsides",
+     "sw": "Mifereji na makalavati kuziba katika maeneo ya milimani"
+    },
+    "actions": {
+     "en": [
+      "Clear drains and culverts before heavy rain.",
+      "Do not dump waste in waterways.",
+      "Report blocked culverts to TARURA or TANROADS."
+     ],
+     "sw": [
+      "Safisha mitaro na makalavati kabla ya mvua kubwa.",
+      "Usitupe taka kwenye mifereji ya maji.",
+      "Toa taarifa ya makalavati yaliyoziba kwa TARURA au TANROADS."
+     ]
+    }
+   },
+   {
+    "impact": {
+     "en": "Weakening of terraces and hillside farms",
+     "sw": "Kudhoofika kwa matuta na mashamba ya miteremkoni"
+    },
+    "actions": {
+     "en": [
+      "Repair terraces and open field drainage.",
+      "Stop cultivation on saturated slopes.",
+      "Plant trees and grass on bare slopes."
+     ],
+     "sw": [
+      "Karabati matuta na fungua mifereji shambani.",
+      "Sitisha kilimo kwenye miteremko iliyojaa maji.",
+      "Panda miti na nyasi kwenye miteremko iliyo wazi."
+     ]
+    }
+   },
+   {
+    "impact": {
+     "en": "Isolated rockfalls on mountain roads",
+     "sw": "Mawe kuanguka katika baadhi ya barabara za milimani"
+    },
+    "actions": {
+     "en": [
+      "Drive slowly on mountain roads.",
+      "Do not stop below cliffs or steep road cuttings.",
+      "Report fallen rocks to TANROADS or TARURA."
+     ],
+     "sw": [
+      "Endesha taratibu kwenye barabara za milimani.",
+      "Usisimame chini ya majabali au kingo za barabara zilizochongwa.",
+      "Toa taarifa ya mawe yaliyoanguka kwa TANROADS au TARURA."
+     ]
+    }
+   },
+   {
+    "impact": {
+     "en": "Higher risk for people with special needs and for communities at the foot of mountains",
+     "sw": "Hatari kubwa zaidi kwa watu wenye mahitaji maalum na jamii zilizo chini ya milima"
+    },
+    "actions": {
+     "en": [
+      "Village/Mtaa and Ward Disaster Management Committees: review landslide contingency plans, update the list of people with special needs and identify safe areas and routes.",
+      "Communities at the foot of mountains and along stream channels: know your safe area.",
+      "Share this advisory with neighbours, especially older persons, people with disabilities and pregnant women."
+     ],
+     "sw": [
+      "Kamati za Usimamizi wa Maafa za Vijiji/Mitaa na Kata: pitieni mipango ya dharura ya maporomoko, boresheni orodha ya watu wenye mahitaji maalum na bainisheni maeneo na njia salama.",
+      "Jamii zilizo chini ya milima na kando ya mikondo ya vijito: fahamuni eneo lenu salama.",
+      "Wapatie taarifa hii majirani, hasa wazee, watu wenye ulemavu na wajawazito."
+     ]
+    }
+   },
+   {
+    "impact": {
+     "en": "Warning status",
+     "sw": "Hali ya tahadhari"
+    },
+    "actions": {
+     "en": [
+      "Please continue to follow updates from TMA, Disaster Management Committees and local leaders.",
+      "This advisory remains in place until the authorities update or withdraw it."
+     ],
+     "sw": [
+      "Tafadhali endeleeni kufuatilia taarifa za TMA, Kamati za Usimamizi wa Maafa na viongozi wa eneo.",
+      "Tahadhari hii itaendelea hadi mamlaka zitakapoihuisha au kuiondoa rasmi."
+     ]
+    }
+   }
+  ],
+  "2": [
+   {
+    "impact": {
+     "en": "Small landslides and slope failures in vulnerable areas",
+     "sw": "Maporomoko madogo ya ardhi katika maeneo hatarishi"
+    },
+    "actions": {
+     "en": [
+      "Households on landslide-prone slopes: please move to a safe place early.",
+      "Move before nightfall or heavy downpours.",
+      "Follow instructions from Village/Mtaa leaders.",
+      "District and Ward Committees: open temporary shelters and alert communities by radio, loudspeaker and door-to-door."
+     ],
+     "sw": [
+      "Kaya zilizo kwenye miteremko hatarishi: tafadhali hamieni mahali salama mapema.",
+      "Hameni kabla ya usiku au mvua kubwa.",
+      "Fuateni maelekezo ya viongozi wa Kijiji/Mtaa.",
+      "Kamati za Wilaya na Kata: fungueni makazi ya muda na toeni tahadhari kwa jamii kupitia redio, vipaza sauti na nyumba kwa nyumba."
+     ]
+    }
+   },
+   {
+    "impact": {
+     "en": "Damage to homes and walls from ground movement",
+     "sw": "Uharibifu wa nyumba na kuta kutokana na kusogea kwa ardhi"
+    },
+    "actions": {
+     "en": [
+      "Leave cracked or damaged buildings.",
+      "Do not sleep in houses with new cracks.",
+      "Report damage to Village/Mtaa leaders."
+     ],
+     "sw": [
+      "Ondoka kwenye majengo yenye nyufa au yaliyoharibika.",
+      "Usilale kwenye nyumba zenye nyufa mpya.",
+      "Toa taarifa ya uharibifu kwa viongozi wa Kijiji/Mtaa."
+     ]
+    }
+   },
+   {
+    "impact": {
+     "en": "Mountain roads and small bridges blocked by mud, stones and trees",
+     "sw": "Barabara za milimani na madaraja madogo kuzibwa na tope, mawe na miti"
+    },
+    "actions": {
+     "en": [
+      "Avoid travel on mountain roads.",
+      "Do not cross or clear debris yourself.",
+      "Report blockages to TANROADS, TARURA or the Police."
+     ],
+     "sw": [
+      "Epuka kusafiri kwenye barabara za milimani.",
+      "Usivuke wala kuondoa kifusi mwenyewe.",
+      "Toa taarifa ya vizuizi kwa TANROADS, TARURA au Polisi."
+     ]
+    }
+   },
+   {
+    "impact": {
+     "en": "Risk of injury from falling debris and collapsing slopes",
+     "sw": "Hatari ya majeraha kutokana na kifusi kinachoanguka na miteremko kuporomoka"
+    },
+    "actions": {
+     "en": [
+      "Stay away from steep slopes, cliffs and quarries.",
+      "Stop farming, quarrying and small-scale mining on slopes.",
+      "Keep children away from slopes and gullies."
+     ],
+     "sw": [
+      "Kaa mbali na miteremko mikali, majabali na machimbo.",
+      "Sitisha kilimo, uchimbaji wa kokoto na madini kwenye miteremko.",
+      "Waweke watoto mbali na miteremko na makorongo."
+     ]
+    }
+   },
+   {
+    "impact": {
+     "en": "Streams suddenly turning muddy or stopping flow",
+     "sw": "Vijito kubadilika ghafla kuwa na tope au kukatika kwa mtiririko"
+    },
+    "actions": {
+     "en": [
+      "If a stream stops flowing during heavy rain, leave the valley immediately.",
+      "If a stream turns muddy or carries trees and stones, warn people downstream.",
+      "Report to Village/Mtaa leaders immediately."
+     ],
+     "sw": [
+      "Kijito kikikatika ghafla wakati wa mvua kubwa, ondoka bondeni mara moja.",
+      "Kijito kikibadilika kuwa na tope au kubeba miti na mawe, watahadharishe walio chini.",
+      "Toa taarifa kwa viongozi wa Kijiji/Mtaa mara moja."
+     ]
+    }
+   },
+   {
+    "impact": {
+     "en": "Communities at risk of being cut off",
+     "sw": "Jamii ziko hatarini kukosa mawasiliano ya barabara"
+    },
+    "actions": {
+     "en": [
+      "Store food, drinking water and medicines for at least three days.",
+      "Charge phones and keep a battery-powered radio.",
+      "District and Ward Disaster Management Committees: meet, activate landslide contingency plans and pre-position rescue teams, tools and supplies."
+     ],
+     "sw": [
+      "Hifadhi chakula, maji ya kunywa na dawa za angalau siku tatu.",
+      "Chaji simu na uwe na redio inayotumia betri.",
+      "Kamati za Usimamizi wa Maafa za Wilaya na Kata: kutaneni, amilisheni mipango ya dharura ya maporomoko na wekeni tayari timu za uokoaji, vifaa na mahitaji."
+     ]
+    }
+   },
+   {
+    "impact": {
+     "en": "Damage to power and communication lines",
+     "sw": "Uharibifu wa nyaya za umeme na mawasiliano"
+    },
+    "actions": {
+     "en": [
+      "Stay away from fallen power lines.",
+      "Report fallen lines to TANESCO."
+     ],
+     "sw": [
+      "Kaa mbali na nyaya za umeme zilizoanguka.",
+      "Toa taarifa ya nyaya zilizoanguka kwa TANESCO."
+     ]
+    }
+   },
+   {
+    "impact": {
+     "en": "Loss of hillside farms, livestock and crops",
+     "sw": "Upotevu wa mashamba ya miteremkoni, mifugo na mazao"
+    },
+    "actions": {
+     "en": [
+      "Move livestock and food stores away from slopes.",
+      "Harvest mature crops only where it is safe.",
+      "Report losses to extension officers."
+     ],
+     "sw": [
+      "Hamisha mifugo na akiba ya chakula mbali na miteremko.",
+      "Vuna mazao yaliyokomaa pale tu ambapo ni salama.",
+      "Toa taarifa ya hasara kwa maafisa ugani."
+     ]
+    }
+   },
+   {
+    "impact": {
+     "en": "Damage to water sources, springs and pipes",
+     "sw": "Uharibifu wa vyanzo vya maji, chemchemi na mabomba"
+    },
+    "actions": {
+     "en": [
+      "Boil or treat drinking water.",
+      "Report damaged water pipes to the water authority or RUWASA."
+     ],
+     "sw": [
+      "Chemsha au tibu maji ya kunywa.",
+      "Toa taarifa ya mabomba ya maji yaliyoharibika kwa mamlaka ya maji au RUWASA."
+     ]
+    }
+   },
+   {
+    "impact": {
+     "en": "Unusual sounds: rumbling, cracking trees or knocking rocks",
+     "sw": "Sauti zisizo za kawaida: mvumo, miti kupasuka au mawe kugongana"
+    },
+    "actions": {
+     "en": [
+      "Leave immediately; run to the side, away from the path of the slide.",
+      "Warn your neighbours.",
+      "Call 190 or inform Village/Mtaa leaders."
+     ],
+     "sw": [
+      "Ondoka mara moja; kimbia pembeni, mbali na njia ya maporomoko.",
+      "Watahadharishe majirani.",
+      "Piga 190 au toa taarifa kwa viongozi wa Kijiji/Mtaa."
+     ]
+    }
+   },
+   {
+    "impact": {
+     "en": "Unsafe routes to school and possible school closures",
+     "sw": "Njia zisizo salama kwenda shule na uwezekano wa shule kufungwa"
+    },
+    "actions": {
+     "en": [
+      "Parents: keep children off routes along slopes and gullies.",
+      "School heads: follow directives from the District Education Office."
+     ],
+     "sw": [
+      "Wazazi: msiwaruhusu watoto kupita njia za miteremkoni na makorongoni.",
+      "Wakuu wa shule: fuateni maelekezo ya Ofisi ya Elimu ya Wilaya."
+     ]
+    }
+   },
+   {
+    "impact": {
+     "en": "Warning status",
+     "sw": "Hali ya tahadhari"
+    },
+    "actions": {
+     "en": [
+      "Please continue to follow updates from TMA, Disaster Management Committees and local leaders.",
+      "This warning remains in force until the authorities lower or withdraw it."
+     ],
+     "sw": [
+      "Tafadhali endeleeni kufuatilia taarifa za TMA, Kamati za Usimamizi wa Maafa na viongozi wa eneo.",
+      "Tahadhari hii itaendelea kutumika hadi mamlaka zitakapoishusha au kuiondoa rasmi."
+     ]
+    }
+   }
+  ],
+  "3": [
+   {
+    "impact": {
+     "en": "Large landslides and mudflows carrying stones and trees",
+     "sw": "Maporomoko makubwa ya ardhi na tope linalobeba mawe na miti"
+    },
+    "actions": {
+     "en": [
+      "Residents of slopes, the foot of mountains and stream channels: please evacuate as directed by Village/Mtaa leaders.",
+      "Go to stable high ground or an official shelter.",
+      "Please do not go back for belongings.",
+      "Please return only when the authorities declare the area safe."
+     ],
+     "sw": [
+      "Wakazi wa miteremkoni, chini ya milima na kando ya mikondo ya vijito: tafadhali hameni kwa kufuata maelekezo ya viongozi wa Kijiji/Mtaa.",
+      "Nenda eneo la mwinuko lililo imara au makazi rasmi ya muda.",
+      "Tafadhali usirudi kufuata mali.",
+      "Tafadhali rudini pale tu mamlaka zitakapotangaza kuwa eneo ni salama."
+     ]
+    }
+   },
+   {
+    "impact": {
+     "en": "Homes, vehicles and people buried under mud and debris",
+     "sw": "Nyumba, magari na watu kufukiwa na tope na kifusi"
+    },
+    "actions": {
+     "en": [
+      "Report missing or buried people immediately: call 190 or inform local leaders.",
+      "Do not enter buried areas; wait for rescue teams.",
+      "Fire and Rescue Force: lead search and rescue with the Police Force, JWTZ and the Red Cross."
+     ],
+     "sw": [
+      "Toa taarifa ya watu waliopotea au kufukiwa mara moja: piga 190 au wajulishe viongozi wa eneo.",
+      "Usiingie maeneo yaliyofukiwa; subiri timu za uokoaji.",
+      "Jeshi la Zimamoto na Uokoaji: ongozeni utafutaji na uokoaji kwa kushirikiana na Jeshi la Polisi, JWTZ na Chama cha Msalaba Mwekundu."
+     ]
+    }
+   },
+   {
+    "impact": {
+     "en": "Deaths and injuries",
+     "sw": "Vifo na majeruhi"
+    },
+    "actions": {
+     "en": [
+      "Take the injured to the nearest health facility.",
+      "District Committees: set up first-aid points and provide psychosocial support.",
+      "Health authorities: manage identification and burial of the dead."
+     ],
+     "sw": [
+      "Wapeleke majeruhi kituo cha afya kilicho karibu.",
+      "Kamati za Wilaya: anzisheni vituo vya huduma ya kwanza na toeni msaada wa kisaikolojia.",
+      "Mamlaka za afya: simamieni utambuzi na maziko ya waliofariki."
+     ]
+    }
+   },
+   {
+    "impact": {
+     "en": "Roads and bridges destroyed; communities cut off",
+     "sw": "Barabara na madaraja kuharibika; jamii kukosa mawasiliano ya barabara"
+    },
+    "actions": {
+     "en": [
+      "Do not travel on mountain roads.",
+      "Keep emergency routes clear.",
+      "District Committees: open access routes and request air support through the Prime Minister's Office."
+     ],
+     "sw": [
+      "Usisafiri kwenye barabara za milimani.",
+      "Acha wazi njia za dharura.",
+      "Kamati za Wilaya: fungueni njia za kufikia maeneo yaliyoathirika na ombeni usaidizi wa anga kupitia Ofisi ya Waziri Mkuu."
+     ]
+    }
+   },
+   {
+    "impact": {
+     "en": "Damage to schools, health facilities and public buildings",
+     "sw": "Uharibifu wa shule, vituo vya afya na majengo ya umma"
+    },
+    "actions": {
+     "en": [
+      "Do not use damaged buildings.",
+      "District Committees: set up temporary health and learning points in safe places.",
+      "Refer seriously injured people to district or regional hospitals."
+     ],
+     "sw": [
+      "Usitumie majengo yaliyoharibika.",
+      "Kamati za Wilaya: anzisheni vituo vya muda vya afya na masomo katika maeneo salama.",
+      "Wapelekeni majeruhi mahututi hospitali za wilaya au mkoa."
+     ]
+    }
+   },
+   {
+    "impact": {
+     "en": "Rivers blocked, forming natural dams that may burst",
+     "sw": "Mito kuzibwa na kutengeneza mabwawa ya asili yanayoweza kupasuka"
+    },
+    "actions": {
+     "en": [
+      "Communities downstream of a blocked river: please evacuate immediately.",
+      "Do not cross or stand on the blockage.",
+      "District Committees: watch the blockage day and night and warn people downstream."
+     ],
+     "sw": [
+      "Jamii zilizo chini ya mto ulioziba: tafadhali hameni mara moja.",
+      "Usivuke wala kusimama juu ya kizuizi.",
+      "Kamati za Wilaya: fuatilieni kizuizi usiku na mchana na watahadharisheni walio chini."
+     ]
+    }
+   },
+   {
+    "impact": {
+     "en": "Large numbers of households displaced",
+     "sw": "Idadi kubwa ya kaya kukosa makazi"
+    },
+    "actions": {
+     "en": [
+      "Register at the shelter.",
+      "Help older persons, children, pregnant women and people with disabilities first.",
+      "District Committees: provide food, water, sanitation and protection in shelters."
+     ],
+     "sw": [
+      "Jisajili kwenye makazi ya muda.",
+      "Wasaidie wazee, watoto, wajawazito na watu wenye ulemavu kwanza.",
+      "Kamati za Wilaya: toeni chakula, maji, huduma za usafi na ulinzi katika makazi ya muda."
+     ]
+    }
+   },
+   {
+    "impact": {
+     "en": "Water sources contaminated by mud and debris",
+     "sw": "Vyanzo vya maji kuchafuliwa na tope na kifusi"
+    },
+    "actions": {
+     "en": [
+      "Drink only boiled or treated water.",
+      "Give ORS at the first sign of diarrhoea.",
+      "District Committees: supply safe water and water-treatment tablets."
+     ],
+     "sw": [
+      "Kunywa maji yaliyochemshwa au kutibiwa tu.",
+      "Tumia ORS mara dalili za kuhara zinapoanza.",
+      "Kamati za Wilaya: sambazeni maji safi na vidonge vya kutibu maji."
+     ]
+    }
+   },
+   {
+    "impact": {
+     "en": "Widespread loss of farmland, livestock and food",
+     "sw": "Upotevu mkubwa wa mashamba, mifugo na chakula"
+    },
+    "actions": {
+     "en": [
+      "Report losses to Village/Mtaa leaders.",
+      "District Committees: provide emergency food assistance.",
+      "Extension officers: assess crop and livestock losses."
+     ],
+     "sw": [
+      "Toa taarifa ya hasara kwa viongozi wa Kijiji/Mtaa.",
+      "Kamati za Wilaya: toeni msaada wa dharura wa chakula.",
+      "Maafisa ugani: fanyeni tathmini ya hasara ya mazao na mifugo."
+     ]
+    }
+   },
+   {
+    "impact": {
+     "en": "Power and communication networks down",
+     "sw": "Kukatika kwa umeme na mitandao ya mawasiliano"
+    },
+    "actions": {
+     "en": [
+      "Listen to official radio broadcasts.",
+      "Keep away from fallen power lines.",
+      "District Committees: use radio and messengers to reach cut-off villages."
+     ],
+     "sw": [
+      "Sikiliza matangazo rasmi ya redio.",
+      "Kaa mbali na nyaya za umeme zilizoanguka.",
+      "Kamati za Wilaya: tumieni redio na wajumbe kufikia vijiji visivyofikika."
+     ]
+    }
+   },
+   {
+    "impact": {
+     "en": "Essential services disrupted for a long period",
+     "sw": "Kukatika kwa huduma muhimu kwa muda mrefu"
+    },
+    "actions": {
+     "en": [
+      "Use stored water and food sparingly.",
+      "Rely only on official information.",
+      "District Committees: report needs to the Prime Minister's Office through the Regional Committee."
+     ],
+     "sw": [
+      "Tumia akiba ya maji na chakula kwa uangalifu.",
+      "Tegemea taarifa rasmi tu.",
+      "Kamati za Wilaya: wasilisheni mahitaji Ofisi ya Waziri Mkuu kupitia Kamati ya Mkoa."
+     ]
+    }
+   },
+   {
+    "impact": {
+     "en": "Warning status",
+     "sw": "Hali ya tahadhari"
+    },
+    "actions": {
+     "en": [
+      "Please stay with official sources: radio, TMA, Disaster Management Committees and local leaders.",
+      "Disaster Management Committees will announce when the danger has passed and when it is safe to return."
+     ],
+     "sw": [
+      "Tafadhali tegemeeni taarifa rasmi: redio, TMA, Kamati za Usimamizi wa Maafa na viongozi wa eneo.",
+      "Kamati za Usimamizi wa Maafa zitatangaza hatari itakapokwisha na itakapokuwa salama kurudi."
+     ]
+    }
+   }
+  ]
+ }
+}

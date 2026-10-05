@@ -1,0 +1,167 @@
+{
+ "region": {
+  "en": "Simiyu Region",
+  "sw": "Mkoa wa Simiyu"
+ },
+ "councils": {
+  "C169": {
+   "name": "Bariadi Town Council",
+   "hazards": [
+    "drought",
+    "strongWinds",
+    "floods",
+    "heavyRainfall"
+   ],
+   "documented": "drought on the Serengeti plain, strong winds, flash floods, and water shortage",
+   "know": [
+    {
+     "area": {
+      "en": "Bariadi Town: flat town and seasonal rivers",
+      "sw": "Mji wa Bariadi: mji tambarare na mito ya msimu"
+     },
+     "risk": {
+      "en": "This area is a flat town on clay soils where storm water ponds in streets and seasonal rivers overflow, cutting roads.",
+      "sw": "Eneo hili ni mji tambarare kwenye udongo wa mfinyanzi ambapo maji ya dhoruba hutuama mitaani na mito ya msimu hufurika na kukata barabara."
+     },
+     "advice": {
+      "en": "For those living and trading here, it helps to keep drains and river reserves clear and build on raised foundations.",
+      "sw": "Kwa wanaoishi na kufanya biashara hapa, ni vyema kuweka mitaro na hifadhi za mito wazi na kujenga kwa misingi iliyoinuliwa."
+     }
+    }
+   ]
+  },
+  "C168": {
+   "name": "Bariadi District Council",
+   "hazards": [
+    "drought",
+    "strongWinds",
+    "wildfire",
+    "floods",
+    "heavyRainfall"
+   ],
+   "documented": "drought, strong winds, wildfire, and flash floods",
+   "know": [
+    {
+     "area": {
+      "en": "Bariadi DC: cotton farmland and river plains",
+      "sw": "Bariadi DC: mashamba ya pamba na tambarare za mito"
+     },
+     "risk": {
+      "en": "This area has cotton and food farmland on plains where rivers flood fields in heavy rain and dry spells damage crops.",
+      "sw": "Eneo hili lina mashamba ya pamba na chakula kwenye tambarare ambapo mito hufurika mashamba wakati wa mvua kubwa na vipindi vya ukavu huharibu mazao."
+     },
+     "advice": {
+      "en": "For those farming here, it helps to build above flood lines, open field drains and keep household food reserves.",
+      "sw": "Kwa wanaolima hapa, ni vyema kujenga juu ya mistari ya mafuriko, kufungua mifereji ya mashamba na kuweka akiba ya chakula ya kaya."
+     }
+    }
+   ]
+  },
+  "C173": {
+   "name": "Busega District Council",
+   "hazards": [
+    "drought",
+    "strongWinds",
+    "floods",
+    "largeWaves",
+    "heavyRainfall"
+   ],
+   "documented": "drought, strong winds, flash floods, and water shortage for livestock",
+   "know": [
+    {
+     "area": {
+      "en": "Busega: Lake Victoria shore and Serengeti edge",
+      "sw": "Busega: ufukwe wa Ziwa Victoria na pembezoni mwa Serengeti"
+     },
+     "risk": {
+      "en": "This area has Lake Victoria shore villages exposed to lake storms and lightning, and villages next to the Serengeti where wildlife raids crops.",
+      "sw": "Eneo hili lina vijiji vya ufukwe wa Ziwa Victoria vinavyoathiriwa na dhoruba za ziwani na radi, na vijiji jirani na Serengeti ambapo wanyamapori huvamia mazao."
+     },
+     "advice": {
+      "en": "For those living and fishing here, it helps to wear life jackets, return to shore before storms build and use community deterrents against wildlife.",
+      "sw": "Kwa wanaoishi na kuvua hapa, ni vyema kuvaa maboya ya kujiokoa, kurudi ufukweni kabla dhoruba haijaanza na kutumia mbinu za jamii kufukuza wanyama."
+     }
+    }
+   ]
+  },
+  "C170": {
+   "name": "Itilima District Council",
+   "hazards": [
+    "drought",
+    "strongWinds",
+    "wildfire",
+    "floods",
+    "heavyRainfall"
+   ],
+   "documented": "drought, strong winds, wildfire, and flash floods",
+   "know": [
+    {
+     "area": {
+      "en": "Itilima: plains farmland and grazing",
+      "sw": "Itilima: mashamba ya tambarare na malisho"
+     },
+     "risk": {
+      "en": "This area has plains farmland and grazing where heavy rains waterlog fields and drought reduces pasture and water.",
+      "sw": "Eneo hili lina mashamba ya tambarare na malisho ambapo mvua kubwa hujaza maji mashamba na ukame hupunguza malisho na maji."
+     },
+     "advice": {
+      "en": "For those farming and herding here, it helps to follow village land-use plans, protect water points and keep food reserves.",
+      "sw": "Kwa wanaolima na kufuga hapa, ni vyema kufuata mipango ya matumizi ya ardhi ya vijiji, kulinda vyanzo vya maji na kuweka akiba ya chakula."
+     }
+    }
+   ]
+  },
+  "C172": {
+   "name": "Maswa District Council",
+   "hazards": [
+    "drought",
+    "strongWinds",
+    "floods",
+    "heavyRainfall"
+   ],
+   "documented": "drought, strong winds, flash floods, and water shortage",
+   "know": [
+    {
+     "area": {
+      "en": "Maswa: Simiyu river plains and Maswa reserve",
+      "sw": "Maswa: tambarare za mto Simiyu na hifadhi ya Maswa"
+     },
+     "risk": {
+      "en": "This area has the Simiyu river plains that flood in heavy rains and villages near the Maswa game reserve where wildlife raids crops.",
+      "sw": "Eneo hili lina tambarare za mto Simiyu zinazofurika wakati wa mvua kubwa na vijiji karibu na hifadhi ya Maswa ambapo wanyamapori huvamia mazao."
+     },
+     "advice": {
+      "en": "For those living and farming here, it helps to keep homes off the flood plain, know flood-prone crossings and report wildlife to officers.",
+      "sw": "Kwa wanaoishi na kulima hapa, ni vyema kujenga nje ya tambarare ya mafuriko, kujua vivuko vinavyofurika na kutoa taarifa za wanyamapori kwa maafisa."
+     }
+    }
+   ]
+  },
+  "C171": {
+   "name": "Meatu District Council",
+   "hazards": [
+    "drought",
+    "strongWinds",
+    "wildfire",
+    "floods"
+   ],
+   "documented": "drought, strong winds, wildfire, flash floods, and human–wildlife conflict on the park edge",
+   "know": [
+    {
+     "area": {
+      "en": "Meatu: semi-arid plains and Lake Eyasi edge",
+      "sw": "Meatu: tambarare kame na pembezoni mwa Ziwa Eyasi"
+     },
+     "risk": {
+      "en": "This area is semi-arid, with frequent droughts that kill crops and livestock, flash floods in sand rivers and wildlife moving from nearby reserves.",
+      "sw": "Eneo hili ni kame kiasi, lenye ukame wa mara kwa mara unaoua mazao na mifugo, mafuriko ya ghafla kwenye mito ya mchanga na wanyamapori kutoka hifadhi jirani."
+     },
+     "advice": {
+      "en": "For those farming and herding here, it helps to grow drought-tolerant crops, store water and fodder and never cross flowing sand rivers.",
+      "sw": "Kwa wanaolima na kufuga hapa, ni vyema kupanda mazao yanayostahimili ukame, kuhifadhi maji na malisho na kutovuka kamwe mito ya mchanga inayotiririka."
+     }
+    }
+   ]
+  }
+ }
+}

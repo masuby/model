@@ -1,0 +1,235 @@
+{
+ "region": {
+  "en": "Morogoro Region",
+  "sw": "Mkoa wa Morogoro"
+ },
+ "councils": {
+  "C036": {
+   "name": "Morogoro Municipal Council",
+   "hazards": [
+    "floods",
+    "landslide",
+    "heavyRainfall"
+   ],
+   "documented": "repeated floods on the Ngerengere and Morogoro rivers, landslides on the Uluguru slopes, and heavy rain",
+   "know": [
+    {
+     "area": {
+      "en": "Morogoro Municipal: Uluguru foothills and the Morogoro river",
+      "sw": "Manispaa ya Morogoro: vilima vya Uluguru na mto Morogoro"
+     },
+     "risk": {
+      "en": "This area lies at the foot of the Uluguru mountains, where storms send flash floods and debris down the Morogoro and Kikundi rivers into low streets and riverside settlements.",
+      "sw": "Eneo hili liko chini ya milima ya Uluguru, ambapo dhoruba hupeleka mafuriko ya ghafla na mawe kwenye mito Morogoro na Kikundi hadi mitaa ya chini na makazi ya kando ya mito."
+     },
+     "advice": {
+      "en": "For those living and trading here, it helps to build back from river banks, keep drains and culverts clear and keep goods above the highest known flood mark.",
+      "sw": "Kwa wanaoishi na kufanya biashara hapa, ni vyema kujenga mbali na kingo za mito, kuweka mitaro na makalavati wazi na kuhifadhi bidhaa juu ya alama ya juu ya mafuriko inayojulikana."
+     }
+    }
+   ]
+  },
+  "C038": {
+   "name": "Ifakara Town Council",
+   "hazards": [
+    "floods",
+    "heavyRainfall",
+    "publicHealth"
+   ],
+   "documented": "Kilombero and Lumemo floods (embankment failures at Ipangalala), heavy rain, and cholera",
+   "know": [
+    {
+     "area": {
+      "en": "Ifakara Town: Kilombero flood plain",
+      "sw": "Mji wa Ifakara: tambarare ya mafuriko ya Kilombero"
+     },
+     "risk": {
+      "en": "This area is a town on the Kilombero flood plain, where the river spreads over low streets and fields in wet years and malaria and cholera rise after floods.",
+      "sw": "Eneo hili ni mji ulio kwenye tambarare ya mafuriko ya Kilombero, ambapo mto hutanuka kwenye mitaa ya chini na mashamba katika miaka ya mvua nyingi na malaria na kipindupindu huongezeka baada ya mafuriko."
+     },
+     "advice": {
+      "en": "For those living and trading here, it helps to build on raised plinths, keep drains open, sleep under treated nets and treat drinking water.",
+      "sw": "Kwa wanaoishi na kufanya biashara hapa, ni vyema kujenga kwenye misingi iliyoinuliwa, kuweka mitaro wazi, kulala ndani ya vyandarua vyenye dawa na kutibu maji ya kunywa."
+     }
+    }
+   ]
+  },
+  "C042": {
+   "name": "Gairo District Council",
+   "hazards": [
+    "floods",
+    "drought",
+    "strongWinds",
+    "landslide"
+   ],
+   "documented": "Mkondoa and Kidete floods, drought between seasons, and strong winds",
+   "know": [
+    {
+     "area": {
+      "en": "Gairo: dry hills and the highway corridor",
+      "sw": "Gairo: milima kame na ukanda wa barabara kuu"
+     },
+     "risk": {
+      "en": "This area is dry, eroded hill country on the Dar–Dodoma highway, where drought damages crops and storms send flash floods down gullies onto the road and town.",
+      "sw": "Eneo hili ni nchi ya milima kame iliyomomonyoka kando ya barabara kuu ya Dar–Dodoma, ambapo ukame huharibu mazao na dhoruba hupeleka mafuriko ya ghafla kwenye makorongo hadi barabarani na mjini."
+     },
+     "advice": {
+      "en": "For those living and farming here, it helps to keep trees and contour bunds on slopes, build away from gullies and plant drought-tolerant crops.",
+      "sw": "Kwa wanaoishi na kulima hapa, ni vyema kuacha miti na matuta ya kontua kwenye miteremko, kujenga mbali na makorongo na kupanda mazao yanayostahimili ukame."
+     }
+    }
+   ]
+  },
+  "C037": {
+   "name": "Kilombero District Council",
+   "hazards": [
+    "floods",
+    "heavyRainfall",
+    "publicHealth"
+   ],
+   "documented": "Kilombero valley floods, heavy rain, and cholera after the river rises",
+   "know": [
+    {
+     "area": {
+      "en": "Kilombero: valley rice farms and Udzungwa edge",
+      "sw": "Kilombero: mashamba ya mpunga ya bonde na pembezoni mwa Udzungwa"
+     },
+     "risk": {
+      "en": "This area covers the Kilombero valley, where rivers from the Udzungwa flood rice and sugar farms and cut roads, and wildlife from the park raids crops.",
+      "sw": "Eneo hili linajumuisha bonde la Kilombero, ambapo mito kutoka Udzungwa hufurika mashamba ya mpunga na miwa na kukata barabara, na wanyamapori kutoka hifadhi huvamia mazao."
+     },
+     "advice": {
+      "en": "For those living and farming here, it helps to keep homes and stores on higher ground, use the flood plain seasonally and use community deterrents against wildlife.",
+      "sw": "Kwa wanaoishi na kulima hapa, ni vyema kujenga makazi na maghala sehemu za miinuko, kutumia tambarare kwa msimu na kutumia mbinu za jamii kufukuza wanyama."
+     }
+    }
+   ]
+  },
+  "C034": {
+   "name": "Kilosa District Council",
+   "hazards": [
+    "floods",
+    "heavyRainfall",
+    "drought"
+   ],
+   "documented": "Mkondoa floods at Dumila and the valley, heavy rain, and drought on the uplands",
+   "know": [
+    {
+     "area": {
+      "en": "Kilosa: Mkondoa river and the railway corridor",
+      "sw": "Kilosa: mto Mkondoa na ukanda wa reli"
+     },
+     "risk": {
+      "en": "This area has the Mkondoa river, which floods Kilosa town, farms and the Central Line railway in heavy rains, and dry plains where farmer–herder conflict occurs.",
+      "sw": "Eneo hili lina mto Mkondoa unaofurika mji wa Kilosa, mashamba na reli ya kati wakati wa mvua kubwa, na tambarare kame ambapo migogoro ya wakulima na wafugaji hutokea."
+     },
+     "advice": {
+      "en": "For those living and farming here, it helps to build above known flood marks, keep off the railway during floods and follow agreed land-use plans and livestock routes.",
+      "sw": "Kwa wanaoishi na kulima hapa, ni vyema kujenga juu ya alama za mafuriko zinazojulikana, kukaa mbali na reli wakati wa mafuriko na kufuata mipango ya matumizi ya ardhi na njia za mifugo."
+     }
+    }
+   ]
+  },
+  "C040": {
+   "name": "Malinyi District Council",
+   "hazards": [
+    "floods",
+    "heavyRainfall",
+    "strongWinds"
+   ],
+   "documented": "Kilombero floods, heavy rain, and strong winds with hail",
+   "know": [
+    {
+     "area": {
+      "en": "Malinyi: remote Kilombero wetlands",
+      "sw": "Malinyi: ardhioevu ya mbali ya Kilombero"
+     },
+     "risk": {
+      "en": "This area is remote wetland and flood plain where villages are cut off for weeks in the rains and help can take a long time to arrive.",
+      "sw": "Eneo hili ni ardhioevu ya mbali na tambarare ya mafuriko ambapo vijiji hutengwa kwa wiki kadhaa wakati wa mvua na msaada unaweza kuchukua muda mrefu kufika."
+     },
+     "advice": {
+      "en": "For those living and farming here, it helps to build on raised ground, keep food, water and medicine reserves before the rains and travel by water only in safe conditions.",
+      "sw": "Kwa wanaoishi na kulima hapa, ni vyema kujenga sehemu zilizoinuka, kuweka akiba ya chakula, maji na dawa kabla ya mvua na kusafiri majini katika hali salama tu."
+     }
+    }
+   ]
+  },
+  "C035": {
+   "name": "Morogoro District Council",
+   "hazards": [
+    "floods",
+    "landslide",
+    "heavyRainfall"
+   ],
+   "documented": "Ngerengere floods, Uluguru landslides, and heavy rain",
+   "know": [
+    {
+     "area": {
+      "en": "Morogoro DC: Uluguru mountain villages",
+      "sw": "Morogoro DC: vijiji vya milima ya Uluguru"
+     },
+     "risk": {
+      "en": "This area has steep, densely farmed Uluguru slopes where heavy rain triggers landslides and erosion, and rivers flood the lowlands below.",
+      "sw": "Eneo hili lina miteremko mikali ya Uluguru yenye kilimo kingi ambapo mvua kubwa husababisha maporomoko na mmomonyoko, na mito hufurika tambarare za chini."
+     },
+     "advice": {
+      "en": "For those living and farming here, it helps to keep terraces and trees on slopes, protect springs and build away from steep cuts and stream banks.",
+      "sw": "Kwa wanaoishi na kulima hapa, ni vyema kutunza matuta na miti kwenye miteremko, kulinda chemchemi na kujenga mbali na miinuko mikali na kingo za vijito."
+     }
+    }
+   ]
+  },
+  "C041": {
+   "name": "Mvomero District Council",
+   "hazards": [
+    "floods",
+    "landslide",
+    "heavyRainfall"
+   ],
+   "documented": "floods on the Diwale and Wami, landslides on the Nguru slopes, and heavy rain",
+   "know": [
+    {
+     "area": {
+      "en": "Mvomero: Wami lowlands and mountain slopes",
+      "sw": "Mvomero: tambarare za Wami na miteremko ya milima"
+     },
+     "risk": {
+      "en": "This area combines mountain slopes prone to landslides with Wami river lowlands where floods hit farms and sugar estates and farmer–herder conflicts occur.",
+      "sw": "Eneo hili linachanganya miteremko ya milima inayokumbwa na maporomoko na tambarare za mto Wami ambapo mafuriko hupiga mashamba na mashamba ya miwa na migogoro ya wakulima na wafugaji hutokea."
+     },
+     "advice": {
+      "en": "For those living, farming and herding here, it helps to keep slopes planted, keep homes off flood plains and follow village land-use plans and livestock routes.",
+      "sw": "Kwa wanaoishi, kulima na kufuga hapa, ni vyema kuacha mimea kwenye miteremko, kujenga nje ya tambarare za mafuriko na kufuata mipango ya matumizi ya ardhi na njia za mifugo."
+     }
+    }
+   ]
+  },
+  "C039": {
+   "name": "Ulanga District Council",
+   "hazards": [
+    "floods",
+    "heavyRainfall",
+    "strongWinds",
+    "publicHealth"
+   ],
+   "documented": "Kilombero floods, heavy rain with strong winds and hail (recorded in 2025), and cholera",
+   "know": [
+    {
+     "area": {
+      "en": "Ulanga: Kilombero plain, hills and mining",
+      "sw": "Ulanga: tambarare ya Kilombero, milima na uchimbaji"
+     },
+     "risk": {
+      "en": "This area has flood plain along the Kilombero, hills where rain washes out roads, and small-scale mining where pits flood and collapse.",
+      "sw": "Eneo hili lina tambarare ya mafuriko kando ya Kilombero, milima ambapo mvua husomba barabara, na uchimbaji mdogo ambapo mashimo hujaa maji na kubomoka."
+     },
+     "advice": {
+      "en": "For those living, farming and mining here, it helps to build on higher ground, keep stores above flood level and fence or backfill pits.",
+      "sw": "Kwa wanaoishi, kulima na kuchimba hapa, ni vyema kujenga sehemu za miinuko, kuhifadhi mali juu ya kiwango cha mafuriko na kuzungushia uzio au kufukia mashimo."
+     }
+    }
+   ]
+  }
+ }
+}

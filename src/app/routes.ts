@@ -14,8 +14,8 @@ interface RouteDef {
 
 export const ROUTES = {
   home: { load: () => import('@/features/home/HomePage'), ns: ['home'] },
-  explore: { load: () => import('@/features/explore/ExplorePage'), ns: ['explore'] },
-  area: { load: () => import('@/features/area/AreaPage'), ns: ['area'] },
+  explore: { load: () => import('@/features/explore/ExplorePage'), ns: ['explore', 'guide'] },
+  area: { load: () => import('@/features/area/AreaPage'), ns: ['area', 'guide'] },
   insights: { load: () => import('@/features/insights/InsightsPage'), ns: ['insights'] },
   severity: { load: () => import('@/features/severity/SeverityPage'), ns: ['severity'] },
   learn: { load: () => import('@/features/learn/LearnPage'), ns: ['learn'] },
