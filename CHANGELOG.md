@@ -2,6 +2,19 @@
 
 ## Unreleased
 
+### Alert categories from the risk level
+
+- Every area shows its alert category, set automatically by its assessed INFORM risk level: very low
+  and low risk are an **Advisory** (yellow), medium a **Warning** (orange), high and very high a
+  **Major warning** (red).
+- On a profile: a badge under the risk score (a link to "What to do"), and a block at the top of "What
+  to do" with the rule behind it; the warning levels there open at the area's own category. In the
+  explorer: a badge beside the risk class in the area panel, and a line in its "What to do".
+- The alert colours are the standard warning yellow, orange and red, with legible text on each. The
+  earlier level dots borrowed the INFORM class colours, whose pale yellow barely showed on a light page.
+- The page says the category follows the risk level, not a forecast, and that official TMA warnings
+  come first.
+
 ### What to do: the Risk Action Guide Book
 
 Every area now says what people can do about its hazards, from the Risk Action Guide Book (based on the

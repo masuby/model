@@ -15,6 +15,8 @@ import { Button } from '@/components/ui/button';
 import { CLASS_COLORS, CLASS_KEYS, classify, THRESHOLDS } from '@/engine/risk/classes';
 import { findIndicator } from '@/engine/risk/hierarchy';
 import { authorityLabel } from '@/engine/risk/sources';
+import { alertFor } from '@/features/guide/alert';
+import { AlertBadge } from '@/features/guide/AlertBadge';
 import { cn, formatCompact, formatDate, formatNumber, formatScore, NO_VALUE } from '@/lib/utils';
 import { compareHref, editList, explorerHref, type AreaView } from '../lib';
 import { OutOf10 } from './bits';
@@ -131,11 +133,15 @@ function ScoreScale({ value, className }: { value: number | null | undefined; cl
   );
 }
 
-/** The headline score, set as type: label, serif numeral, one line of class and date, the scale. */
+/**
+ * The headline score, set as type: label, serif numeral, one line of class and date, the alert category
+ * that class sets (a link to "What to do"), the scale.
+ */
 function Score({ view, className }: { view: AreaView; className?: string }) {
-  const { t } = useTranslation(['area', 'common']);
+  const { t } = useTranslation(['area', 'common', 'guide']);
   const { unit, model } = view;
   const cls = classify(unit.risk);
+  const alert = alertFor(unit.risk);
   return (
     <div className={className}>
       <div className="text-sm font-medium text-muted-foreground">{t('common:informRisk')}</div>
@@ -152,6 +158,20 @@ function Score({ view, className }: { view: AreaView; className?: string }) {
           {unit.level === 'national' && <> · {t('common:labels.official')}</>}
         </span>
       </p>
+      {alert && (
+        <a
+          href="#actions"
+          onClick={(e) => {
+            e.preventDefault();
+            document.getElementById('actions')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          }}
+          title={t('guide:alert.title', { cls: t(`common:classes.${alert.cls}`) })}
+          className="group mt-2.5 inline-flex items-center gap-2 text-sm"
+        >
+          <AlertBadge level={alert.level} size="sm" />{' '}
+          <span className="text-muted-foreground underline-offset-4 transition-colors group-hover:text-foreground group-hover:underline">{t('guide:alert.link')}</span>
+        </a>
+      )}
       <ScoreScale value={unit.risk} className="mt-4" />
     </div>
   );

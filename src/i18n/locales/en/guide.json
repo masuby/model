@@ -30,6 +30,17 @@
       "short": "Level 3"
     }
   },
+  "alert": {
+    "label": "Alert category",
+    "for": "Alert category for {{name}}",
+    "basis": "Set by the assessed risk level: {{cls}} ({{score}}).",
+    "rule": "Very low and low risk: Advisory (yellow). Medium risk: Warning (orange). High and very high risk: Major warning (red).",
+    "official": "This category follows from the INFORM risk level, not from a forecast. When TMA issues a warning, follow that warning.",
+    "current": "{{name}}'s alert category",
+    "from": "From the {{cls}} risk level",
+    "link": "What to do",
+    "title": "Alert category from the {{cls}} risk level"
+  },
   "emergency": {
     "label": "In an emergency",
     "main": "Emergency",

@@ -83,6 +83,11 @@ state/prefs.ts  theme, language, learning progress (persisted)
   "Know your risk" statements), `useHazardGuide(key)` (the three alert levels) and `useIncidentGuide()`.
   Each loads one small JSON file on demand; render guide text with `pick(text, i18n.language)` and keep
   labels in the `guide` namespace. To rebuild the data from the docx: `python scripts/build-action-guide.py`.
+- Alert categories: `alertFor(unit.risk)` (`@/features/guide/alert`) gives an area's category from its
+  risk class (very low and low: Advisory; medium: Warning; high and very high: Major warning). Show it
+  with `AlertBadge` or `AlertDot` (`@/features/guide/AlertBadge`), which always name the category. The
+  alert colours (`ALERT_COLOR`, standard yellow, orange and red) are deliberately separate from the
+  class colours: never colour an alert with `CLASS_COLORS`.
 - Profile sections can be linked: `/area/<id>#actions` lands on "What to do" (the explorer's area panel
   links there). `ScrollToTop` leaves hash links alone.
 - Explorer lenses: a dimension opens onto its own indicator groups, nested under it (`LensTiles`;

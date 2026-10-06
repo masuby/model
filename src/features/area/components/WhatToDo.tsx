@@ -1,10 +1,12 @@
 /**
  * "What to do": the Risk Action Guide Book applied to this area.
+ *  • The area's alert category, from its assessed risk level (see features/guide/alert).
  *  • Emergency numbers, as tap-to-call links.
  *  • Know your risk: where the danger lies and what helps, for the council (or each council of a region
  *    or source unit), as the guide states it.
  *  • When a warning is issued: the area's hazards (most relevant first) and the three alert levels, each
- *    with what people may see and what to do. Tabora's councils lead with their own council plan.
+ *    with what people may see and what to do, open at the area's alert category. Tabora's councils lead
+ *    with their own council plan.
  *  • Incidents and accidents: the rapid-response guide, folded by default (open when printing).
  * Everything is shown in the reader's language; the guide is published in English and Kiswahili.
  */
@@ -14,8 +16,9 @@ import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Segmented, Select, SelectItem } from '@/components/ui/primitives';
-import { CLASS_COLORS } from '@/engine/risk/classes';
 import type { Unit } from '@/engine/risk/types';
+import { ALERT_COLOR, alertFor, type AreaAlert } from '@/features/guide/alert';
+import { AlertBadge, AlertDot } from '@/features/guide/AlertBadge';
 import {
   ALERT_LEVELS,
   HAZARD_KEYS,
@@ -30,11 +33,9 @@ import {
   type GuideRow,
   type HazardKey,
 } from '@/features/guide/data';
-import { cn } from '@/lib/utils';
+import { cn, formatScore } from '@/lib/utils';
 import { useDeferred } from './Deferred';
 
-/** Alert colours follow the guide (yellow, orange, red), drawn from the INFORM class palette. */
-const LEVEL_COLOR: Record<AlertLevel, string> = { 1: CLASS_COLORS.medium, 2: CLASS_COLORS.high, 3: CLASS_COLORS.veryHigh };
 /** Rows shown before "Show more": the guide lists the most serious impacts first. */
 const FIRST_ROWS = 4;
 const PLAN = 'plan';
@@ -50,26 +51,54 @@ export function WhatToDo({ unit }: { unit: Unit }) {
   const national = unit.level === 'national';
   const plan = unit.level === 'council' ? guide.entries[0]?.guide.levels : undefined;
   const hazards: readonly HazardKey[] = national || !guide.hazards.length ? HAZARD_KEYS : guide.hazards;
+  const alert = alertFor(unit.risk);
 
   return (
     <div className="space-y-16">
-      <p className="flex flex-wrap items-center gap-x-6 gap-y-2 border-y border-border py-4 text-sm">
-        <span className="font-semibold">{t('emergency.label')}</span>
-        {EMERGENCY.map((e) => (
-          <a key={e.number} href={`tel:${e.number}`} className="inline-flex items-center gap-2 hover:underline" aria-label={t('emergency.call', { number: e.number, name: t(`emergency.${e.key}`) })}>
-            <Phone className="size-4 text-muted-foreground" aria-hidden />
-            <span className="num text-base font-semibold">{e.number}</span>
-            <span className="text-muted-foreground">{t(`emergency.${e.key}`)}</span>
-          </a>
-        ))}
-      </p>
+      <div className="space-y-8">
+        {alert && <AlertStatus unit={unit} alert={alert} />}
+        <p className="flex flex-wrap items-center gap-x-6 gap-y-2 border-y border-border py-4 text-sm">
+          <span className="font-semibold">{t('emergency.label')}</span>
+          {EMERGENCY.map((e) => (
+            <a key={e.number} href={`tel:${e.number}`} className="inline-flex items-center gap-2 hover:underline" aria-label={t('emergency.call', { number: e.number, name: t(`emergency.${e.key}`) })}>
+              <Phone className="size-4 text-muted-foreground" aria-hidden />
+              <span className="num text-base font-semibold">{e.number}</span>
+              <span className="text-muted-foreground">{t(`emergency.${e.key}`)}</span>
+            </a>
+          ))}
+        </p>
+      </div>
 
       {!national && <KnowYourRisk unit={unit} guide={guide} />}
-      {!guide.loading && <Warnings unit={unit} hazards={hazards} plan={plan} documented={!national && guide.hazards.length > 0} />}
+      {!guide.loading && <Warnings unit={unit} hazards={hazards} plan={plan} documented={!national && guide.hazards.length > 0} alert={alert} />}
       <Incidents />
 
       <p className="max-w-3xl border-t border-border pt-5 text-sm leading-relaxed text-muted-foreground">{t('source')}</p>
     </div>
+  );
+}
+
+/** The area's alert category, from its assessed risk level, with the rule behind it and what it is not. */
+function AlertStatus({ unit, alert }: { unit: Unit; alert: AreaAlert }) {
+  const { t } = useTranslation(['guide', 'common']);
+  const { level } = alert;
+  return (
+    <section aria-labelledby="alert-title" className="max-w-3xl border-l-4 py-1 pl-5" style={{ borderColor: ALERT_COLOR[level] }}>
+      <h3 id="alert-title" className="text-sm font-medium text-muted-foreground">
+        {t('alert.for', { name: unit.name })}
+      </h3>
+      <p className="mt-2.5 flex flex-wrap items-center gap-x-3 gap-y-1.5">
+        <AlertBadge level={level} />
+        <span className="font-semibold">{t(`levels.${level}.call`)}</span>
+        <span className="text-sm text-muted-foreground">
+          {t(`levels.${level}.colour`)}, {t(`levels.${level}.short`)}
+        </span>
+      </p>
+      <p className="mt-3 leading-relaxed">
+        {t('alert.basis', { cls: t(`common:classes.${alert.cls}`), score: formatScore(alert.score) })} {t('alert.rule')}
+      </p>
+      <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{t('alert.official')}</p>
+    </section>
   );
 }
 
@@ -126,14 +155,23 @@ function KnowYourRisk({ unit, guide }: { unit: Unit; guide: ReturnType<typeof us
   );
 }
 
-function LevelDot({ level, className }: { level: AlertLevel; className?: string }) {
-  return <span aria-hidden className={cn('inline-block size-2.5 shrink-0 rounded-full', className)} style={{ background: LEVEL_COLOR[level] }} />;
-}
-
-function Warnings({ unit, hazards, plan, documented }: { unit: Unit; hazards: readonly HazardKey[]; plan?: GuideLevels; documented: boolean }) {
+function Warnings({
+  unit,
+  hazards,
+  plan,
+  documented,
+  alert,
+}: {
+  unit: Unit;
+  hazards: readonly HazardKey[];
+  plan?: GuideLevels;
+  documented: boolean;
+  alert: AreaAlert | null;
+}) {
   const { t } = useTranslation('guide');
   const [choice, setChoice] = React.useState<string>(plan ? PLAN : hazards[0]);
-  const [level, setLevel] = React.useState<AlertLevel>(1);
+  // Opens at the area's alert category; the other levels are one click away.
+  const [level, setLevel] = React.useState<AlertLevel>(alert?.level ?? 1);
   const others = HAZARD_KEYS.filter((h) => !hazards.includes(h));
   const hazard = choice === PLAN ? null : (choice as HazardKey);
   const q = useHazardGuide(hazard);
@@ -176,11 +214,10 @@ function Warnings({ unit, hazards, plan, documented }: { unit: Unit; hazards: re
             onValueChange={(v) => setLevel(Number(v) as AlertLevel)}
             options={ALERT_LEVELS.map((l) => ({
               value: String(l) as '1' | '2' | '3',
-              icon: <LevelDot level={l} />,
+              icon: <AlertDot level={l} />,
               label: (
                 <span>
-                  {t(`levels.${l}.name`)}
-                  <span className="hidden font-normal text-muted-foreground sm:inline"> · {t(`levels.${l}.call`)}</span>
+                  {t(`levels.${l}.name`)} <span className="hidden font-normal text-muted-foreground sm:inline">· {t(`levels.${l}.call`)}</span>
                 </span>
               ),
             }))}
@@ -189,14 +226,15 @@ function Warnings({ unit, hazards, plan, documented }: { unit: Unit; hazards: re
       </div>
 
       <div className="mt-8" aria-live="polite">
-        <p className="mb-3 flex items-center gap-2 text-sm">
-          <LevelDot level={level} />
+        <p className="mb-3 flex flex-wrap items-center gap-x-2 gap-y-1 text-sm">
+          <AlertDot level={level} />
           <span className="font-semibold">
             {t(`levels.${level}.name`)}: {t(`levels.${level}.call`)}
           </span>
           <span className="text-muted-foreground">
             ({t(`levels.${level}.colour`)}, {t(`levels.${level}.short`)})
           </span>
+          {alert?.level === level && <span className="text-muted-foreground">· {t('alert.current', { name: unit.name })}</span>}
         </p>
         {hazard && q.isLoading ? (
           <div className="space-y-3 border-y border-border py-6" aria-hidden>

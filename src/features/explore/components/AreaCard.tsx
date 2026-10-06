@@ -18,6 +18,8 @@ import { DIMENSIONS } from '@/engine/risk/hierarchy';
 import { parseMetric, rampColor } from '@/engine/risk/metrics';
 import { dataCoverage, topDrivers, unitsAt } from '@/engine/risk/model';
 import type { Unit } from '@/engine/risk/types';
+import { alertFor } from '@/features/guide/alert';
+import { AlertBadge } from '@/features/guide/AlertBadge';
 import { cn, formatNumber, formatScore, NO_VALUE } from '@/lib/utils';
 import { coverageCounts, editCount, MAX_COMPARE, rankUnits, referenceUnit } from '../lib/explore';
 import { useExplore } from '../lib/ExploreContext';
@@ -27,8 +29,9 @@ import { ClassScale, MetricValue, Notice, SectionTitle } from './bits';
 const RISK = parseMetric('risk');
 
 export function AreaHeader({ unit, onClose }: { unit: Unit; onClose: () => void }) {
-  const { t } = useTranslation(['explore', 'common']);
+  const { t } = useTranslation(['explore', 'common', 'guide']);
   const edits = editCount(unit);
+  const alert = alertFor(unit.risk);
   return (
     <div className="flex items-start gap-3">
       <div className="min-w-0 flex-1">
@@ -39,6 +42,7 @@ export function AreaHeader({ unit, onClose }: { unit: Unit; onClose: () => void 
         <h2 className="mt-0.5 text-[1.4rem] leading-tight text-balance">{unit.name}</h2>
         <div className="mt-2.5 flex flex-wrap items-center gap-1.5">
           <ClassBadge value={unit.risk} showScore size="sm" />
+          {alert && <AlertBadge level={alert.level} size="sm" title={t('guide:alert.title', { cls: t(`common:classes.${alert.cls}`) })} />}
           {edits > 0 && (
             <Badge variant="outline" title={t('card.editedNote', { count: edits })}>
               <Pencil /> {t('common:labels.edited')}
