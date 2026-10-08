@@ -30,6 +30,17 @@
       "short": "Ngazi ya 3"
     }
   },
+  "alert": {
+    "label": "Aina ya tahadhari",
+    "for": "Aina ya tahadhari kwa {{name}}",
+    "basis": "Imewekwa kulingana na kiwango cha hatari kilichopimwa: {{cls}} ({{score}}).",
+    "rule": "Hatari chini sana na chini: Ushauri (njano). Hatari ya wastani: Tahadhari (machungwa). Hatari ya juu na juu sana: Tahadhari kubwa (nyekundu).",
+    "official": "Aina hii inatokana na kiwango cha hatari cha INFORM, si utabiri. TMA ikitoa tahadhari, fuata tahadhari hiyo.",
+    "current": "Aina ya tahadhari ya {{name}}",
+    "from": "Kutokana na kiwango cha hatari: {{cls}}",
+    "link": "Cha kufanya",
+    "title": "Aina ya tahadhari kutokana na kiwango cha hatari: {{cls}}"
+  },
   "emergency": {
     "label": "Wakati wa dharura",
     "main": "Dharura",

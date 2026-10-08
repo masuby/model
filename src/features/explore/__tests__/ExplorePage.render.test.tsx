@@ -13,6 +13,7 @@ import { DataProvider } from '@/data-layer/DataProvider';
 import type { Metric } from '@/engine/risk/metrics';
 import { buildModel, placeKey } from '@/engine/risk/model';
 import type { Unit } from '@/engine/risk/types';
+import { alertFor } from '@/features/guide/alert';
 import ExplorePage from '../ExplorePage';
 
 const model = buildModel();
@@ -217,10 +218,16 @@ describe('ExplorePage - desktop', () => {
     expect(screen.queryByRole('group', { name: /^Indicator groups of/ })).not.toBeInTheDocument();
   });
 
-  it('says what to do in the area card, with a link to the full guidance', async () => {
+  it('says what to do in the area card, with the alert category and a link to the full guidance', async () => {
     await renderAt(`?level=council&id=${council.id}`);
     const card = await screen.findByRole('complementary', { name: `Details for ${council.name}` });
     expect(within(card).getByText('What to do')).toBeInTheDocument();
+    // The alert category follows the risk level: a badge beside the risk class, and a line in "What to do".
+    const alert = alertFor(council.risk)!;
+    const category = ['Advisory', 'Warning', 'Major warning'][alert.level - 1];
+    const cls = i18n.t(`common:classes.${alert.cls}`);
+    expect(within(card).getByTitle(`Alert category from the ${cls} risk level`)).toHaveTextContent(`Alert category: ${category}`);
+    expect(within(card).getByText(`From the ${cls} risk level`)).toBeInTheDocument();
     const link = await within(card).findByRole('link', { name: /What to do before and during a warning/ }, { timeout: 20_000 });
     expect(link).toHaveAttribute('href', `/area/${council.id}#actions`);
     expect(within(card).getByText('Main hazards here')).toBeInTheDocument();

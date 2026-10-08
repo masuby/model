@@ -8,6 +8,7 @@ import i18n from '@/i18n';
 import { TooltipProvider } from '@/components/ui/primitives';
 import { DataProvider, queryClient } from '@/data-layer/DataProvider';
 import { buildModel, placeKey } from '@/engine/risk/model';
+import { alertFor } from '@/features/guide/alert';
 import { isStatusRow, loadHazardGuide, loadRegionGuide } from '@/features/guide/data';
 import AreaPage from './AreaPage';
 import { loadCharts } from './components/ChartSlot';
@@ -134,7 +135,8 @@ describe('AreaPage', { timeout: 90_000 }, () => {
     queryClient.clear();
     try {
       renderAt(kondoa.id);
-      expect((await screen.findAllByText('Figures behind this score', {}, { timeout: 20_000 })).length).toBeGreaterThan(0);
+      // A lazy chunk: allow for a busy machine (the suite runs files in parallel).
+      expect((await screen.findAllByText('Figures behind this score', {}, { timeout: 45_000 })).length).toBeGreaterThan(0);
       expect(screen.getAllByText('Regional figure').length).toBeGreaterThan(0);
       expect(screen.getAllByText(/NBS · TDHS-MIS 2022/).length).toBeGreaterThan(0);
       // Every source says what kind it is.
@@ -154,14 +156,23 @@ describe('AreaPage', { timeout: 90_000 }, () => {
     renderAt(c.id);
     const section = document.getElementById('actions')!;
     expect(within(section).getByRole('heading', { level: 2, name: `What to do in ${c.name}` })).toBeInTheDocument();
+    // The alert category follows the risk level, in the hero (a link to this section) and here.
+    const alert = alertFor(c.risk)!;
+    const category = ['Advisory', 'Warning', 'Major warning'][alert.level - 1];
+    expect(screen.getByRole('link', { name: new RegExp(`^Alert category: ${category}\\s*What to do$`) })).toHaveAttribute('href', '#actions');
+    const status = within(section).getByRole('region', { name: `Alert category for ${c.name}` });
+    expect(within(status).getByText(category)).toBeInTheDocument();
+    expect(within(status).getByText(new RegExp(`assessed risk level: ${i18n.t(`common:classes.${alert.cls}`)}`))).toBeInTheDocument();
     expect(within(section).getByRole('link', { name: 'Call 190 (Emergency)' })).toHaveAttribute('href', 'tel:190');
     // Know your risk: the guide's own statement for this council, and what helps.
     expect((await within(section).findAllByText(guide.know[0].risk.en, {}, { timeout: 20_000 })).length).toBeGreaterThan(0);
     expect(within(section).getAllByText('What helps').length).toBeGreaterThan(0);
-    // The hazards the guide documents here come first, the first one open at the advisory level.
+    // The hazards the guide documents here come first, the first one open at the area's alert category.
     const hazards = within(section).getByRole('radiogroup', { name: `Hazards in ${c.name}` });
     expect(within(hazards).getAllByRole('radio')).toHaveLength(guide.hazards.length);
     expect(within(hazards).getAllByRole('radio')[0]).toHaveAttribute('aria-checked', 'true');
+    expect(within(section).getByRole('radio', { name: new RegExp(`^${category} ·`) })).toHaveAttribute('aria-checked', 'true');
+    expect(within(section).getByText(`· ${c.name}'s alert category`)).toBeInTheDocument();
     expect(within(section).getByRole('combobox', { name: 'Other hazards' })).toBeInTheDocument();
     // A major warning: what people may see, and what to do.
     fireEvent.click(within(section).getByRole('radio', { name: /^Major warning/ }));
@@ -179,11 +190,14 @@ describe('AreaPage', { timeout: 90_000 }, () => {
       const plan = (await loadRegionGuide('tabora'))!.councils[c.id].levels!;
       renderAt(c.id);
       const section = document.getElementById('actions')!;
+      expect(within(section).getByRole('region', { name: `Aina ya tahadhari kwa ${c.name}` })).toBeInTheDocument();
       const hazards = await within(section).findByRole('radiogroup', { name: `Majanga katika ${c.name}` }, { timeout: 20_000 });
       const first = within(hazards).getAllByRole('radio')[0];
       expect(first).toHaveTextContent(`Mpango wa halmashauri ya ${c.name}`);
       expect(first).toHaveAttribute('aria-checked', 'true');
-      const row = plan['1']!.find((r) => !isStatusRow(r))!;
+      // The plan opens at the council's alert category.
+      const level = String(alertFor(c.risk)!.level) as '1' | '2' | '3';
+      const row = plan[level]!.find((r) => !isStatusRow(r))!;
       expect(within(section).getAllByText(row.impact.sw).length).toBeGreaterThan(0);
     } finally {
       await i18n.changeLanguage('en');

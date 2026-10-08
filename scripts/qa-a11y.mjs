@@ -11,6 +11,8 @@ const ROUTES = [
   '/explore',
   '/explore?metric=ind:hazard:flood&id=C041', // a dimension open on its indicator groups, with an area's guidance
   '/area/C041',
+  '/area/C019', // low risk: a yellow Advisory
+  '/area/C063', // high risk: a red Major warning
   '/area/C105', // a Tabora council: its own plan leads "What to do"
   '/area/R-njombe', // a region: "Know your risk" for each of its councils
   '/insights',
