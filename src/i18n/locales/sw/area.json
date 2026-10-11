@@ -69,7 +69,6 @@
   },
   "nav": {
     "label": "Sehemu za wasifu huu",
-    "overview": "Muhtasari",
     "actions": "Fahamu hatari",
     "dimensions": "Vipimo",
     "charts": "Ulinganisho",
@@ -82,10 +81,6 @@
     "why": "Kwa nini alama hii"
   },
   "sections": {
-    "overview": {
-      "eyebrow": "Muhtasari",
-      "title": "{{name}} kwa muhtasari"
-    },
     "actions": {
       "eyebrow": "Mawasiliano ya hatari",
       "title": "Hatari katika {{name}}",
@@ -176,8 +171,7 @@
     "viewLabel": "Mwonekano wa ramani",
     "focus": "Karibia",
     "country": "Nchi nzima",
-    "hint": "Bofya eneo kufungua wasifu wake",
-    "show": "Onyesha ramani: {{name}} ilipo"
+    "hint": "Bofya eneo kufungua wasifu wake"
   },
   "dims": {
     "categories": "Makundi",

@@ -2,6 +2,13 @@
 
 ## Unreleased
 
+### The profile opens with the map, the hazards and the risk level in one row (11 October 2026)
+
+- The Risk view of an area profile now starts with one row across the width: the locator map (zoomed
+  on the area or the whole country, every other area one click from its profile), the hazards of the
+  area, and the risk level with its two messages and the emergency number. The separate "Overview"
+  section, which held the map below, is gone; the key findings stay at the head of the Analysis view.
+
 ### The home page shows the national risk picture as charts (11 October 2026)
 
 - The four bare figures under the headline (national risk, councils assessed, people covered, councils at

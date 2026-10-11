@@ -26,7 +26,7 @@ import { Deferred, DeferredProvider } from './components/Deferred';
 import { Dimensions } from './components/Dimensions';
 import { Drivers } from './components/Drivers';
 import { IndicatorTable } from './components/IndicatorTable';
-import { KeyFindings, Overview } from './components/Overview';
+import { KeyFindings } from './components/Overview';
 import { SectionNav } from './components/SectionNav';
 import { Services } from './components/Services';
 import { WhatToDo } from './components/WhatToDo';
@@ -187,7 +187,6 @@ function AreaReport({ view }: { view: AreaView }) {
       (mode === 'risk'
         ? [
             { id: 'actions', label: t('nav.actions') },
-            { id: 'overview', label: t('nav.overview') },
           ]
         : [
             { id: 'why', label: t('nav.why') },
@@ -254,10 +253,7 @@ function AreaReport({ view }: { view: AreaView }) {
           {mode === 'risk' ? (
             <>
               <AreaSection id="actions" index={1} eyebrow={t('sections.actions.eyebrow')} title={t('sections.actions.title', { name: unit.name })} description={t('sections.actions.lead')} className="border-t-0">
-                <WhatToDo key={unit.id} unit={unit} />
-              </AreaSection>
-              <AreaSection id="overview" index={2} eyebrow={t('sections.overview.eyebrow')} title={t('sections.overview.title', { name: unit.name })}>
-                <Overview view={view} />
+                <WhatToDo key={unit.id} view={view} />
               </AreaSection>
               <ViewLinks mode={mode} unit={unit} onSwitch={setMode} />
             </>

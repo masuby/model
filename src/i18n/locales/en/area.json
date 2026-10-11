@@ -69,7 +69,6 @@
   },
   "nav": {
     "label": "Sections of this profile",
-    "overview": "Overview",
     "actions": "Know the risk",
     "dimensions": "Dimensions",
     "charts": "Comparisons",
@@ -82,10 +81,6 @@
     "why": "Why this score"
   },
   "sections": {
-    "overview": {
-      "eyebrow": "Overview",
-      "title": "{{name}} at a glance"
-    },
     "actions": {
       "eyebrow": "Risk communication",
       "title": "The risk in {{name}}",
@@ -179,8 +174,7 @@
     "viewLabel": "Map view",
     "focus": "Zoom in",
     "country": "Whole country",
-    "hint": "Click an area to open its profile",
-    "show": "Show the map: where {{name}} is"
+    "hint": "Click an area to open its profile"
   },
   "dims": {
     "categories": "Categories",

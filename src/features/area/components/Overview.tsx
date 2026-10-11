@@ -1,91 +1,16 @@
 /**
- * Overview: a lightweight SVG locator map (no Leaflet) beside the key findings, written as a short
- * report paragraph - a serif lede and a ruled list - rather than icon tiles in a card.
+ * The key findings of an area, written as a short report paragraph - a serif lede and a ruled list -
+ * rather than icon tiles in a card (the opening of the Analysis view).
  */
-import { ChevronDown } from 'lucide-react';
 import * as React from 'react';
 import { Trans, useTranslation } from 'react-i18next';
-import { useNavigate } from 'react-router-dom';
-import { Segmented } from '@/components/ui/primitives';
-import { CLASS_COLORS, CLASS_KEYS, classify } from '@/engine/risk/classes';
-import { parseMetric } from '@/engine/risk/metrics';
+import { classify } from '@/engine/risk/classes';
 import { DATA_AS_OF, placeKey, topDrivers } from '@/engine/risk/model';
 import { dataNotesFor, worstStatus } from '@/engine/risk/notes';
 import { lackOfReliability } from '@/engine/risk/variants';
 import { formatScore } from '@/lib/utils';
 import { delta, placeListsFor, rankAmong, weakestDimension, type AreaView } from '../lib';
-import { AreaFigures } from './AreaHero';
-import { SubHeading, useMediaQuery } from './bits';
-import { useDeferred } from './Deferred';
-
-const StaticMap = React.lazy(() => import('@/components/map/StaticMap'));
-
-function LocatorMap({ view }: { view: AreaView }) {
-  const { t } = useTranslation(['area', 'common']);
-  const navigate = useNavigate();
-  const { unit, model } = view;
-  const [mode, setMode] = React.useState<'focus' | 'country'>('focus');
-  const metric = React.useMemo(() => parseMetric('risk'), []);
-  const isNational = unit.level === 'national';
-
-  // Councils and regions have their own outline; an INFORM source unit is shown through the councils
-  // that use its data. The nation is drawn by region.
-  const { level, selected } = React.useMemo(() => {
-    if (unit.level === 'region') return { level: 'region' as const, selected: [unit.id] };
-    if (unit.level === 'national') return { level: 'region' as const, selected: [] as string[] };
-    if (unit.level === 'source') return { level: 'council' as const, selected: model.councils.filter((c) => c.sourceId === unit.id).map((c) => c.id) };
-    return { level: 'council' as const, selected: [unit.id] };
-  }, [unit, model]);
-  const focusId = !isNational && mode === 'focus' ? (selected[0] ?? null) : null;
-
-  return (
-    <figure className="flex flex-col border-t border-border pt-5">
-      <figcaption className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between sm:gap-4">
-        <SubHeading title={t('map.title')} lead={isNational ? t('map.descNational') : t('map.desc', { name: unit.name })} />
-        {!isNational && selected.length > 0 && (
-          <Segmented
-            size="sm"
-            className="no-print shrink-0 self-start"
-            aria-label={t('map.viewLabel')}
-            value={mode}
-            onValueChange={setMode}
-            options={[
-              { value: 'focus', label: t('map.focus') },
-              { value: 'country', label: t('map.country') },
-            ]}
-          />
-        )}
-      </figcaption>
-      <div className="mt-5 aspect-[4/3] w-full">
-        <React.Suspense fallback={<div className="size-full bg-muted/50" />}>
-          <StaticMap
-            model={model}
-            level={level}
-            metric={metric}
-            selectedIds={selected}
-            focusId={focusId}
-            hint={t('map.hint')}
-            onSelect={(u) => {
-              if (u.id !== unit.id) navigate(`/area/${u.id}`);
-            }}
-            className="size-full"
-            aria-label={isNational ? t('map.descNational') : t('map.desc', { name: unit.name })}
-          />
-        </React.Suspense>
-      </div>
-      <div className="mt-4 flex flex-wrap items-center justify-between gap-x-6 gap-y-2 border-t border-border pt-3 text-xs text-muted-foreground">
-        <span>{t('common:informRisk')}</span>
-        <span className="flex items-center gap-1.5 whitespace-nowrap">
-          <span>{t('common:classes.veryLow')}</span>
-          {CLASS_KEYS.map((k) => (
-            <span key={k} className="h-2 w-5" style={{ background: CLASS_COLORS[k] }} title={t(`common:classes.${k}`)} aria-hidden />
-          ))}
-          <span>{t('common:classes.veryHigh')}</span>
-        </span>
-      </div>
-    </figure>
-  );
-}
+import { SubHeading } from './bits';
 
 /** The key findings (rank, distance from the national value, weakest dimension, top driver, coverage): the opening of the Analysis view. */
 export function KeyFindings({ view }: { view: AreaView }) {
@@ -198,29 +123,3 @@ export function KeyFindings({ view }: { view: AreaView }) {
 }
 
 /** The risk view's overview: where the area is. The findings sit in the Analysis view (UX-01); on a phone the map waits behind one line. */
-export function Overview({ view }: { view: AreaView }) {
-  const { t } = useTranslation('area');
-  const phone = useMediaQuery('(max-width: 639px)');
-  const { printing } = useDeferred();
-  if (!phone)
-    return (
-      <div className="max-w-3xl">
-        <LocatorMap view={view} />
-      </div>
-    );
-  return (
-    <div className="max-w-3xl">
-      {/* The key figures sit here on a phone (the hero keeps them from tablets up). */}
-      <AreaFigures view={view} className="mb-6 border-b border-border pb-6" />
-      <details open={printing || undefined} className="group">
-        <summary className="flex cursor-pointer list-none items-center gap-2 text-sm font-medium [&::-webkit-details-marker]:hidden">
-          <ChevronDown className="size-4 text-muted-foreground transition-transform group-open:rotate-180" aria-hidden />
-          {t('map.show', { name: view.unit.name })}
-        </summary>
-        <div className="mt-4">
-          <LocatorMap view={view} />
-        </div>
-      </details>
-    </div>
-  );
-}

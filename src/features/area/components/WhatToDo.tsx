@@ -31,7 +31,10 @@ import { DataNoteMark } from '@/components/risk/DataNoteMark';
 import { applyGuidance, pick, useAreaGuide, useAreaRecords, vcActions } from '@/features/guide/data';
 import type { CommitteeRecord, EventPayload } from '@/data-layer/types';
 import { cn, formatDate, formatScore } from '@/lib/utils';
+import type { AreaView } from '../lib';
+import { AreaFigures } from './AreaHero';
 import { useMediaQuery } from './bits';
+import { LocatorMap } from './LocatorMap';
 import { useDeferred } from './Deferred';
 
 /** Statements about the area shown before "Show more" (one on a phone). */
@@ -46,32 +49,40 @@ const PHONE = '(max-width: 639px)';
 /** One number for every emergency, stated on its own (PMO-DMD: 190 is not the Fire and Rescue Force's line). */
 export const EMERGENCY_NUMBER = '190';
 
-export function WhatToDo({ unit }: { unit: Unit }) {
+export function WhatToDo({ view }: { view: AreaView }) {
   const { t } = useTranslation('guide');
+  const { unit } = view;
   const guide = useAreaGuide(unit);
   const national = unit.level === 'national';
   const many = unit.level !== 'council';
+  const phone = useMediaQuery(PHONE);
   // One hazard picture: the guide's documented hazards and the model's scored groups, reconciled (RC-03).
   const items = React.useMemo(() => reconciledHazards(unit, guide.hazards), [unit, guide.hazards]);
   const risk = riskBandFor(unit.risk);
 
   return (
     <div className={many ? 'space-y-8 sm:space-y-10' : 'space-y-10 sm:space-y-12'}>
-      <div className="space-y-6 sm:space-y-8">
-        {risk && <RiskStatus unit={unit} risk={risk} />}
-        <p className="flex flex-wrap items-center gap-x-6 gap-y-2 border-y border-border py-4 text-sm">
-          <span className="font-semibold">{t('emergency.label')}</span>
-          <a href={`tel:${EMERGENCY_NUMBER}`} className="inline-flex items-center gap-2 hover:underline" aria-label={t('emergency.call', { number: EMERGENCY_NUMBER })}>
-            <Phone className="size-4 text-muted-foreground" aria-hidden />
-            <span className="num text-base font-semibold">{EMERGENCY_NUMBER}</span>
-          </a>
-        </p>
+      {/* The key figures sit here on a phone (the hero keeps them from tablets up). */}
+      {phone && <AreaFigures view={view} className="border-b border-border pb-6" />}
+
+      {/* One row across the width: where the area lies, its hazards, and the risk level with the emergency number. */}
+      <div className="grid gap-x-10 gap-y-10 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.1fr)_minmax(0,1fr)]">
+        <LocatorMap view={view} />
+        {!guide.loading && <HazardList unit={unit} items={items} />}
+        <div className="space-y-6">
+          {risk && <RiskStatus unit={unit} risk={risk} />}
+          <p className="flex flex-wrap items-center gap-x-6 gap-y-2 border-y border-border py-4 text-sm">
+            <span className="font-semibold">{t('emergency.label')}</span>
+            <a href={`tel:${EMERGENCY_NUMBER}`} className="inline-flex items-center gap-2 hover:underline" aria-label={t('emergency.call', { number: EMERGENCY_NUMBER })}>
+              <Phone className="size-4 text-muted-foreground" aria-hidden />
+              <span className="num text-base font-semibold">{EMERGENCY_NUMBER}</span>
+            </a>
+          </p>
+        </div>
       </div>
 
-      {!guide.loading && <HazardList unit={unit} items={items} />}
       {!national && <AreaNature unit={unit} guide={guide} />}
       <ReducingRisk unit={unit} />
-
     </div>
   );
 }
@@ -87,7 +98,7 @@ function RiskStatus({ unit, risk }: { unit: Unit; risk: AreaRisk }) {
   const plan = planMessage(unit, risk);
   const planVars = plan.hazard ? { ...vars, hazard: t(`indicators:${plan.hazard.key}`).toLowerCase(), score: formatScore(plan.hazard.score) } : vars;
   return (
-    <section aria-labelledby="risk-title" className="max-w-3xl border-l-4 py-1 pl-5" style={{ borderColor: risk.color }}>
+    <section aria-labelledby="risk-title" className="border-l-4 py-1 pl-5" style={{ borderColor: risk.color }}>
       <h3 id="risk-title" className="text-sm font-medium text-muted-foreground">
         {t('risk.for', { name: unit.name })}
       </h3>
@@ -95,7 +106,7 @@ function RiskStatus({ unit, risk }: { unit: Unit; risk: AreaRisk }) {
         <RiskBandBadge risk={risk.score} />
         <span className="num text-sm text-muted-foreground">{t('risk.basis', { cls, score: formatScore(risk.score) })}</span>
       </p>
-      <dl className="mt-5 grid gap-x-10 gap-y-4 sm:grid-cols-2">
+      <dl className="mt-5 grid gap-x-10 gap-y-4 sm:grid-cols-2 lg:grid-cols-1">
         <div>
           <dt className="text-xs font-semibold tracking-wide text-muted-foreground uppercase">{t('risk.live')}</dt>
           <dd className="mt-1.5 leading-relaxed">{t(`risk.band.${risk.band}.live`, vars)}</dd>
