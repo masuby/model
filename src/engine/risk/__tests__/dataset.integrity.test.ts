@@ -1,111 +1,117 @@
 /**
- * The shipped dataset is authentic to the INFORM methodology and to docs/METHODOLOGY.md:
- *   indicator → category : arithmetic MEAN (missing excluded, 0 included)
- *   category  → dimension: INFORM scaled GEOMEAN
- *   dimension → risk     : ∛(H × V × LCC)
- *   flood (H × E)        : max(hazard, √(hazard × exposure)) - exposure amplifies, never hides
- * plus the documented spot values, so the documentation and the data can never silently diverge.
+ * The Core dataset is the INFORM SADC 2024 workbook and nothing else: every scoring value of the 170
+ * units equals the workbook's cached cell, and every category, dimension and risk the engine derives
+ * from those values equals the workbook's own result. Tanzanian improvements live in the Advancement
+ * layer, never here. (The fixture is exported straight from the workbook by
+ * scripts/audit/export_workbook_leaves.py.)
  */
 import { describe, expect, it } from 'vitest';
 import data from '@/data/tanzania-inform-risk.json';
-import { dimensionScore, isNum, mean, riskScore, round1 } from '../math';
+import fixture from './fixtures/workbook.leaves.fixture.json';
+import { DIMENSIONS } from '../hierarchy';
+import { buildModel, indicatorValue, placeKey } from '../model';
+import { QUARANTINE_NOTES, noteApplies } from '../notes';
 
-type Cat = Record<string, number | null> & { aggregate?: number | null };
-interface RawUnit {
-  admin: { adm2Name: string };
-  hazardExposure: { natural: Cat; human: Cat; total: number | null; exposure?: { population: number; _src: string; index: number }; hazardFreq?: { flood?: number } };
-  vulnerability: { socioEconomic: Cat; vulnerableGroups: Cat; total: number | null };
-  lackCopingCapacity: { infrastructure: Cat; institutional: Cat; total: number | null };
-  risk: number | null;
+interface FixtureUnit { id: string; name: string; leaves: Record<string, number | null>; hazard: number | null; vulnerability: number | null; coping: number | null; risk: number | null }
+const WB = (fixture as { units: FixtureUnit[] }).units;
+const D = (data as { subnational: { adm2: Array<Record<string, unknown> & { admin: { adm2Code: string; adm2Name: string } }> }; metadata: Record<string, unknown> }).subnational.adm2;
+const META = (data as { metadata: Record<string, unknown> }).metadata;
+// The workbook exactly (the reference the tests prove) and the live model (the quarantined values withheld).
+const workbook = buildModel({}, { workbookOnly: true });
+const model = buildModel();
+
+function leafOf(unit: Record<string, unknown>, dimField: string, category: string, key: string): number | null {
+  const v = ((unit[dimField] as Record<string, Record<string, unknown>>)[category] ?? {})[key];
+  return typeof v === 'number' ? v : null;
 }
-const D = (data as unknown as { subnational: { adm2: RawUnit[] } }).subnational.adm2;
-const key = (s: string) => s.toLowerCase().replace(/[^a-z]/g, '');
-const byName = (n: string) => D.find((u) => key(u.admin.adm2Name) === key(n))!;
-const values = (c: Cat) => Object.entries(c).filter(([k]) => k !== 'aggregate').map(([, v]) => v);
 
-describe('INFORM authentic aggregation (every source unit)', () => {
-  it('category aggregate = mean of its indicators', () => {
-    const bad = D.filter((u) => isNum(u.hazardExposure.natural.aggregate) && Math.abs(round1(mean(values(u.hazardExposure.natural))!) - round1(u.hazardExposure.natural.aggregate!)) >= 0.06);
-    expect(bad.map((u) => u.admin.adm2Name)).toEqual([]);
+describe('the Core is the workbook', () => {
+  it('is built from the workbook and says so', () => {
+    expect(META.layer).toBe('core');
+    expect(String(META.source)).toContain('INFORM Sub-national SADC 2024');
+    expect(String(META.sourceSha256)).toMatch(/^[0-9a-f]{64}$/);
+    expect(D).toHaveLength(170);
   });
 
-  it('every dimension total = scaled geomean of its categories', () => {
-    const fails: string[] = [];
-    for (const u of D) {
-      const pairs: Array<[string, number | null, Array<number | null | undefined>]> = [
-        ['H', u.hazardExposure.total, [u.hazardExposure.natural.aggregate, u.hazardExposure.human.aggregate]],
-        ['V', u.vulnerability.total, [u.vulnerability.socioEconomic.aggregate, u.vulnerability.vulnerableGroups.aggregate]],
-        ['C', u.lackCopingCapacity.total, [u.lackCopingCapacity.infrastructure.aggregate, u.lackCopingCapacity.institutional.aggregate]],
+  it('every scoring value of every unit equals the workbook cell (170 × 32)', () => {
+    const byId = new Map(D.map((u) => [u.admin.adm2Code, u]));
+    const wrong: string[] = [];
+    for (const w of WB) {
+      const u = byId.get(w.id);
+      expect(u, w.id).toBeTruthy();
+      for (const dim of DIMENSIONS)
+        for (const cat of dim.categories)
+          for (const ind of cat.indicators) {
+            const ours = leafOf(u!, dim.field, cat.key, ind.key);
+            const theirs = w.leaves[ind.key] ?? null;
+            if (ours === null ? theirs !== null : theirs === null || Math.abs(ours - theirs) > 1e-9) wrong.push(`${w.name} ${ind.key}: ${ours} ≠ ${theirs}`);
+          }
+    }
+    expect(wrong).toEqual([]);
+  });
+
+  it('the engine reproduces every workbook dimension and risk from those values', () => {
+    const byId = new Map(workbook.sources.map((s) => [s.id, s]));
+    const wrong: string[] = [];
+    for (const w of WB) {
+      const s = byId.get(w.id)!;
+      const pairs: Array<[string, number | null, number | null]> = [
+        ['H', s.dims.hazard.score, w.hazard],
+        ['V', s.dims.vulnerability.score, w.vulnerability],
+        ['LCC', s.dims.coping.score, w.coping],
+        ['risk', s.risk, w.risk],
       ];
-      for (const [d, total, cats] of pairs) {
-        const g = dimensionScore(cats);
-        if (isNum(total) && isNum(g) && Math.abs(g - total) > 0.11) fails.push(`${u.admin.adm2Name} ${d}: ${g} ≠ ${total}`);
-      }
+      for (const [k, ours, theirs] of pairs) if (ours !== theirs) wrong.push(`${w.name} ${k}: ${ours} ≠ ${theirs}`);
     }
-    expect(fails).toEqual([]);
+    expect(wrong).toEqual([]);
   });
 
-  it('risk = ∛(H × V × LCC)', () => {
-    const bad = D.filter((u) => riskScore(u.hazardExposure.total, u.vulnerability.total, u.lackCopingCapacity.total) !== u.risk);
-    expect(bad.map((u) => u.admin.adm2Name)).toEqual([]);
+  it('the live model withholds exactly the quarantined values of the data notes, and nothing else', () => {
+    const wb = new Map(workbook.sources.map((s) => [s.id, s]));
+    let withheld = 0;
+    for (const u of model.sources) {
+      const w = wb.get(u.id)!;
+      for (const dim of DIMENSIONS)
+        for (const cat of dim.categories)
+          for (const ind of cat.indicators) {
+            const ref = `${dim.key}:${ind.key}` as const;
+            const live = indicatorValue(u, dim.key, ind.key);
+            const exact = indicatorValue(w, dim.key, ind.key);
+            const notes = QUARANTINE_NOTES.filter((n) => n.ref === ref && noteApplies(n, w, exact));
+            if (notes.length) {
+              withheld++;
+              expect(u.quarantined?.[ref], `${u.name} ${ref}`).toBe(notes[0].id);
+              // A group with one workbook indicator is missing; communication keeps its cellphone indicator.
+              if (ref === 'coping:communication') expect(live).not.toBeNull();
+              else expect(live, `${u.name} ${ref}`).toBeNull();
+            } else {
+              expect(u.quarantined?.[ref]).toBeUndefined();
+              expect(live, `${u.name} ${ref}`).toBe(exact);
+            }
+          }
+    }
+    // Every unit loses coastal erosion and food security, and internal violence by programme decision
+    // (DN-12); Dar es Salaam's drought, Ukerewe's landslide, Dodoma's electricity and the two
+    // displaced-people rows are withheld as well. The Lake zone's drought and Kagera's earthquake were
+    // explained on 10 October 2026 (DN-02, DN-03) and are retained.
+    const unitsIn = (...regions: string[]) => workbook.sources.filter((u) => regions.includes(placeKey(u.region))).length;
+    expect(withheld).toBe(170 * 3 + unitsIn('daressalaam') + 1 + unitsIn('dodoma') + unitsIn('kaskaziniunguja', 'manyara'));
+    // Internal violence has no value left anywhere in the live model: both of its indicators are withheld.
+    expect(model.sources.every((u) => indicatorValue(u, 'hazard', 'internalViolence') === null)).toBe(true);
+    expect(model.councils.every((c) => indicatorValue(c, 'hazard', 'internalViolence') === null)).toBe(true);
+    const dar = model.sources.find((s) => s.name === 'Kinondoni')!;
+    expect(indicatorValue(dar, 'hazard', 'drought')).toBeNull();
+    expect(indicatorValue(workbook.sources.find((s) => s.name === 'Kinondoni')!, 'hazard', 'drought')).toBe(10);
+    const kondoa = model.sources.find((s) => s.name === 'Kondoa')!;
+    expect(indicatorValue(kondoa, 'coping', 'communication')).not.toBe(indicatorValue(workbook.sources.find((s) => s.name === 'Kondoa')!, 'coping', 'communication'));
   });
-});
 
-describe('Hazard × Exposure flood and documented spot values', () => {
-  it('flood = max(hazard, √(hazard × exposure)); never below the hazard floor', () => {
-    const fails: string[] = [];
+  it('carries no value the workbook does not have (no refill, overlay, grade or floor)', () => {
+    const filled = (key: string) => D.filter((u) => typeof (u.hazardExposure as Record<string, Record<string, unknown>>).natural[key] === 'number').length;
+    for (const empty of ['heatwave', 'lightning', 'zoonoses']) expect(filled(empty), empty).toBe(0);
     for (const u of D) {
-      const hf = u.hazardExposure.hazardFreq?.flood;
-      const E = u.hazardExposure.exposure?.index;
-      const f = u.hazardExposure.natural.flood;
-      if (!isNum(hf) || !isNum(E) || !isNum(f)) continue;
-      if (Math.abs(round1(Math.max(hf, Math.sqrt(hf * E))) - f) > 0.11) fails.push(`${u.admin.adm2Name}: ${f}`);
-      if (f + 0.06 < hf) fails.push(`${u.admin.adm2Name}: below floor`);
+      expect((u.hazardExposure as Record<string, unknown>).hazardFreq).toBeUndefined();
+      expect((u.hazardExposure as Record<string, unknown>).events).toBeUndefined();
     }
-    expect(fails).toEqual([]);
-  });
-
-  it('matches the manual’s worked examples', () => {
-    expect(byName('Ilala').hazardExposure.natural.flood).toBeCloseTo(8.3, 1);
-    expect(byName('Longido').hazardExposure.natural.drought).toBeCloseTo(9.7, 1);
-    expect(byName('Kondoa').hazardExposure.natural.drought).toBeCloseTo(8.6, 1);
-    expect(byName('Pangani').hazardExposure.natural.flood).toBeCloseTo(9.8, 1);
-    expect(byName('Rufiji').hazardExposure.natural.flood!).toBeGreaterThanOrEqual(8.5);
-  });
-
-  it('newly-populated hazard layers reach their real geographies', () => {
-    const filled = (k: string) => D.filter((u) => (u.hazardExposure.natural[k] ?? 0) > 0).length;
-    expect(filled('heatwave')).toBeGreaterThan(120);
-    expect(filled('lightning')).toBeGreaterThan(100);
-    expect(byName('Mafia').hazardExposure.natural.stormsCyclone!).toBeGreaterThanOrEqual(8);
-    expect(byName('Ngorongoro').hazardExposure.natural.volcano!).toBeGreaterThanOrEqual(7);
-    expect(byName('Kasulu').vulnerability.vulnerableGroups.displacedPeople!).toBeGreaterThanOrEqual(8);
-  });
-
-  it('computed units carry NBS 2022 exposure', () => {
-    const withExp = D.filter((u) => u.hazardExposure.exposure);
-    expect(withExp.length).toBeGreaterThan(120);
-    for (const u of withExp.slice(0, 25)) {
-      expect(u.hazardExposure.exposure!._src).toContain('NBS 2022');
-      expect(u.hazardExposure.exposure!.population).toBeGreaterThan(0);
-    }
-  });
-});
-
-describe('missing-data treatment (null = excluded, 0 = real zero)', () => {
-  it('null is excluded; 0 is included', () => {
-    expect(mean([5, 5, null])).toBe(5);
-    expect(mean([5, 5, 0])).toBeCloseTo(3.33, 1);
-    expect(mean([null, undefined, NaN])).toBeNull();
-  });
-  it('the all-null "economic" leaf does not distort Vulnerability', () => {
-    let checked = 0;
-    for (const u of D) {
-      const vg = u.vulnerability.vulnerableGroups;
-      if (!isNum(vg.aggregate)) continue;
-      expect(vg.aggregate).toBeCloseTo(round1(mean(values(vg))!), 1);
-      checked++;
-    }
-    expect(checked).toBeGreaterThan(150);
   });
 });

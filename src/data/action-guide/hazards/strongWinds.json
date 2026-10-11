@@ -451,12 +451,12 @@
     "actions": {
      "en": [
       "Keep away from windows and outer walls.",
-      "Call 190 or 114 to report trapped or injured people.",
+      "Call 190 to report trapped or injured people.",
       "Fire and Rescue Force: lead search and rescue with the Police Force and the Red Cross."
      ],
      "sw": [
       "Kaa mbali na madirisha na kuta za nje.",
-      "Piga 190 au 114 kutoa taarifa ya watu waliokwama au kujeruhiwa.",
+      "Piga 190 kutoa taarifa ya watu waliokwama au kujeruhiwa.",
       "Jeshi la Zimamoto na Uokoaji: ongozeni utafutaji na uokoaji kwa kushirikiana na Jeshi la Polisi na Chama cha Msalaba Mwekundu."
      ]
     }
@@ -614,12 +614,12 @@
      "en": [
       "Do not light fires outdoors.",
       "Put out cooking fires and charcoal stoves when not in use.",
-      "Report fires immediately: call 114."
+      "Report fires immediately: call 190."
      ],
      "sw": [
       "Usiwashe moto nje.",
       "Zima moto wa kupikia na majiko ya mkaa yasipotumika.",
-      "Toa taarifa ya moto mara moja: piga 114."
+      "Toa taarifa ya moto mara moja: piga 190."
      ]
     }
    },

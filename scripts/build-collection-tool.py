@@ -21,6 +21,15 @@ from openpyxl.worksheet.protection import SheetProtection
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SPEC = json.load(open(os.path.join(ROOT, 'src/data/inform-indicator-spec.json')))
+# Benchmark 2026: the template indicators activated with a Tanzanian definition (and re-resolved ranges)
+# join the tool as ordinary rows, so institutions can enter them (src/engine/risk/standardise.ts ACTIVE_SPECS).
+_BM = json.load(open(os.path.join(ROOT, 'src/data/tanzania-benchmark-2026.json')))
+for _id, _a in _BM['activations'].items():
+    if _id in SPEC:
+        SPEC[_id] = {**SPEC[_id], **_a, 'id': _id, 'dimension': SPEC[_id]['dimension'], 'category': SPEC[_id]['category'], 'component': SPEC[_id]['component']}
+for _id, _r in _BM['respec'].items():
+    if _id in SPEC:
+        SPEC[_id] = {**SPEC[_id], 'resolved_min': _r['resolved_min'], 'resolved_max': _r['resolved_max']}
 
 # responsible Tanzanian sector per component (who fills it locally). Global-foundation indicators are
 # pre-filled by the centre; here we tag the sector that would provide LOCAL data.

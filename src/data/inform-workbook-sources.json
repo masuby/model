@@ -1,0 +1,1040 @@
+{
+"source": "INFORM SADC 2024 workbook, sheet 'Metadata' (indicators in use)",
+"indicators": {
+"HA.NAT.CH-ERO": {
+"id": "HA.NAT.CH-ERO",
+"name": "Coastal Erosion",
+"component": "Coastal hazards",
+"dimension": "Hazards & Exposure",
+"source": "Digital Earth Africa",
+"url": "https://docs.digitalearthafrica.org/en/latest/data_specs/Coastlines_specs.html",
+"resolution": "district",
+"year": "2000 - 2022",
+"unit": "meters / year",
+"description": "A continental dataset that includes annual shorelines and rates of coastal change along the entire African coastline. Generated for 2000 to 2023. Combines satellite data from the Digital Earth Africa program with tidal modelling to map the typical location of the coastline at mean sea level each yea"
+},
+"HA.NAT.DR-FRE": {
+"id": "HA.NAT.DR-FRE",
+"name": "Historic Drought Frequency",
+"component": "Drought",
+"dimension": "Hazards & Exposure",
+"source": "FAO",
+"url": "https://data.apps.fao.org/catalog/iso/f8568e67-46e7-425d-b779-a8504971389b",
+"resolution": "region",
+"year": "1984-2023",
+"unit": "years",
+"description": "Historic Agricultural Drought Frequency Maps depict the frequency of severe drought in areas where 30 percent/50 percent of the cropland/grassland has been affected. The historical frequency of severe droughts (as defined by ASI) is based on the entire ASI times series (1984-2023)."
+},
+"HA.NAT.EQ-EXP": {
+"id": "HA.NAT.EQ-EXP",
+"name": "Earthquake exposure",
+"component": "Earthquake",
+"dimension": "Hazards & Exposure",
+"source": "Global Earthquake Model (GEM)",
+"url": "https://www.globalquakemodel.org/product/global-seismic-hazard-map",
+"resolution": "district",
+"year": "2023",
+"unit": "index",
+"description": "The Global Earthquake Model (GEM) Global Seismic Hazard Map (version 2023.1) depicts the geographic distribution of the Peak Ground Acceleration (PGA) with a 10% probability of being exceeded in 50 years, computed for reference rock conditions (shear wave velocity, Vs30, of 760-800 m/s)"
+},
+"HA.NAT.ED-DEF": {
+"id": "HA.NAT.ED-DEF",
+"name": "Deforestation - Treecover Loss",
+"component": "Environmental Degradation",
+"dimension": "Hazards & Exposure",
+"source": "Global Forest Watch",
+"url": "https://data.globalforestwatch.org/documents/941f17325a494ed78c4817f9bb20f33a/explore",
+"resolution": "district",
+"year": "2000-2022",
+"unit": "%",
+"description": "Deforestation derived from global forest watch data. Input data is derived from Landsat (approx 30m resolution). Tree cover is defined as cannopy closure for all vegetation taller than 5m. For detail of input datasets see https://data.globalforestwatch.org/documents/941f17325a494ed78c4817f9bb20f33a/"
+},
+"HA.NAT.DE-ERO": {
+"id": "HA.NAT.DE-ERO",
+"name": "Soil Erosion",
+"component": "Environmental Degradation",
+"dimension": "Hazards & Exposure",
+"source": "JRC",
+"url": "https://esdac.jrc.ec.europa.eu/content/land-degradation-debt#tabs-0-description=1",
+"resolution": "region",
+"year": "year unknown",
+"unit": "Mg/ha/yr",
+"description": "Soil erosion defined as the difference between natural soil erosion and actual soil erosion globally."
+},
+"HA.NAT.FL-EXP": {
+"id": "HA.NAT.FL-EXP",
+"name": "Flood exposure",
+"component": "Flood",
+"dimension": "Hazards & Exposure",
+"source": "JRC",
+"url": "https://data.jrc.ec.europa.eu/dataset/jrc-floods-floodmapgl_rp50y-tif#dataaccess",
+"resolution": "district",
+"year": "modelled",
+"unit": "%",
+"description": "Data set representing inundation along the river network, for seven different flood return periods (from 1-in-10-years to 1-in-500-years). 1 in 100 year was chosen for analysis. Input data values provide flood depth in metres. This was simplified to include any depth of flooding, from which we calac"
+},
+"HA.NAT.LS-EXP": {
+"id": "HA.NAT.LS-EXP",
+"name": "Landslide exposure",
+"component": "Landslide",
+"dimension": "Hazards & Exposure",
+"source": "World Bank",
+"url": "https://datacatalog.worldbank.org/search/dataset/0037584",
+"resolution": "district",
+"year": "1980-2018",
+"unit": "%",
+"description": "Qualitative representation of global landslide hazard at a global scale. Dataset used combines the median annual rainfall triggered landslide hazard with earthquake hazard triggerd, simplifying it into 4 ranks from very low to high"
+},
+"HA.NAT.ST-TC2": {
+"id": "HA.NAT.ST-TC2",
+"name": "Cyclone exposure - max speed",
+"component": "Storms & Cyclone",
+"dimension": "Hazards & Exposure",
+"source": "4TU.Research Data",
+"url": "https://data.4tu.nl/datasets/0ea98bdd-5772-4da8-ae97-99735e891aff/4",
+"resolution": "district",
+"year": "2023",
+"unit": "%",
+"description": "Datasets containing tropical cyclone maximum wind speed (in m/s) return periods. For full description see https://data.4tu.nl/datasets/0ea98bdd-5772-4da8-ae97-99735e891aff/4"
+},
+"HA.NAT.VC-EXP": {
+"id": "HA.NAT.VC-EXP",
+"name": "Volcano exposure",
+"component": "Volcano",
+"dimension": "Hazards & Exposure",
+"source": "NOAA",
+"url": "https://www.arcgis.com/home/item.html?id=3318aafcd304414bb8da481d173c551d",
+"resolution": "region",
+"year": "year unknown",
+"unit": "index",
+"description": "Data from the National Oceanic and Atmospheric Administration (NOAA), displays global locations of significant volcanic eruptions. Conatins value for Volcanic Explosivity Index (VEI)"
+},
+"HA.NAT.WF-BURN": {
+"id": "HA.NAT.WF-BURN",
+"name": "Burned Area",
+"component": "Wildfire",
+"dimension": "Hazards & Exposure",
+"source": "JRC (GWIS)",
+"url": "https://gwis.jrc.ec.europa.eu/apps/country.profile/downloads",
+"resolution": "region",
+"year": "2019-2023",
+"unit": "%",
+"description": "Global dataset of individual fire perimeters for 2002-2023, provided as polygon features."
+},
+"HA.NAT.WF-FWI": {
+"id": "HA.NAT.WF-FWI",
+"name": "Fire Weather Index",
+"component": "Wildfire",
+"dimension": "Hazards & Exposure",
+"source": "GFDRR",
+"url": "Broken link: https://www.geonode-gfdrrlab.org/layers/hazard:csiro_wf_max_fwi_rp30",
+"resolution": "region",
+"year": "2022",
+"unit": "index",
+"description": "Computed from five components. The first three components are numeric ratings of the moisture content of litter and other fine fuels, the average moisture content of loosely compacted organic layers of moderate depth, and the average moisture content of deep, compact organic layers. The last two com"
+},
+"HA.HUM.CI-CBAR": {
+"id": "HA.HUM.CI-CBAR",
+"name": "Conflict Barometer",
+"component": "Conflict Intensity",
+"dimension": "Hazards & Exposure",
+"source": "Heidelberg Institute for International Conflict Research",
+"url": "https://hiik.de/data-and-maps/static-maps/?lang=en",
+"resolution": "region",
+"year": "2022",
+"unit": "Index",
+"description": "The HIIK's annual publication Conflict Barometer describes the recent trends in global conflict developments, escalations, de-escalations, and settlements."
+},
+"HA.HUM.CR-GCRI": {
+"id": "HA.HUM.CR-GCRI",
+"name": "GCRI derived Conflict probability",
+"component": "Conflict Risk",
+"dimension": "Hazards & Exposure",
+"source": "JRC",
+"url": "https://drmkc.jrc.ec.europa.eu/inform-index/INFORM-Risk/Results-and-data/moduleId/1782/id/469/controller/Admin/action/Results",
+"resolution": "national",
+"year": "2024",
+"unit": "%",
+"description": "The Global Conflict Risk Index (GCRI) estimates the risk of internal conflict at the country level within the next 4 years. INFORM Risk uses the GCRI probability estimates for the “any conflict” category, which includes the sub-categories “state-based conflict”, “non-state conflict”, and “one-sided "
+},
+"HA.HUM.VIO-EVE": {
+"id": "HA.HUM.VIO-EVE",
+"name": "Number of Events",
+"component": "Internal Violence",
+"dimension": "Hazards & Exposure",
+"source": "ACLED",
+"url": "http://www.acleddata.com/",
+"resolution": "region",
+"year": "2020-2024",
+"unit": "Number",
+"description": "ACLED (Armed Conflict Location & Event Data Project) is the most comprehensive public collection of political violence data for developing states. This dataset contains information on the specific dates and locations of political violence, the types of event, the groups involved, fatalities and chan"
+},
+"HA.HUM.VIO-FAT": {
+"id": "HA.HUM.VIO-FAT",
+"name": "Number of Fatalities",
+"component": "Internal Violence",
+"dimension": "Hazards & Exposure",
+"source": "ACLED",
+"url": "http://www.acleddata.com/",
+"resolution": "region",
+"year": "2020-2024",
+"unit": "Number",
+"description": "ACLED (Armed Conflict Location & Event Data Project) is the most comprehensive public collection of political violence data for developing states. This dataset contains information on the specific dates and locations of political violence, the types of event, the groups involved, fatalities and chan"
+},
+"VU.SE.POV-HDI": {
+"id": "VU.SE.POV-HDI",
+"name": "Human Development Index",
+"component": "Development & Poverty",
+"dimension": "Vulnerability",
+"source": "Global Data Lab",
+"url": "https://globaldatalab.org/",
+"resolution": "region",
+"year": "2022",
+"unit": "index",
+"description": "The Human Development Index measure development by combining indicators of life expectancy, educational attainment and income into a composite index."
+},
+"VU.SE.POV-GDI": {
+"id": "VU.SE.POV-GDI",
+"name": "Gender Development Index",
+"component": "Development & Poverty",
+"dimension": "Vulnerability",
+"source": "Global Data Lab",
+"url": "https://globaldatalab.org/",
+"resolution": "region",
+"year": "2022",
+"unit": "index",
+"description": "The GDI measures gender gaps in achievements in three basic dimensions of human development: health (measured by female and male life expectancy at birth), knowledge (measured by female and male expected years of schooling for children and mean years of schooling for adults aged 25 years and older) "
+},
+"VU.SE.POV-MPI": {
+"id": "VU.SE.POV-MPI",
+"name": "Multidimensional Poverty Index",
+"component": "Development & Poverty",
+"dimension": "Vulnerability",
+"source": "OPHI",
+"url": "https://ophi.org.uk/global-mpi/2023",
+"resolution": "region",
+"year": "2012-2021",
+"unit": "index",
+"description": "The Multidimensional Poverty MPI Index identifies overlapping deprivations at the household level across the same three dimensions as the Human Development Index (living standards, health, and education) and shows the average number of poor people and deprivations with which poor households contend."
+},
+"VU.SE.POV-GINI": {
+"id": "VU.SE.POV-GINI",
+"name": "Wealth Inequality",
+"component": "Development & Poverty",
+"dimension": "Vulnerability",
+"source": "Global Data Lab",
+"url": "https://globaldatalab.org/",
+"resolution": "region",
+"year": "2011 - 2022",
+"unit": "index",
+"description": "Gini coefficient wealth inequality"
+},
+"VU.SE.DEP-ODA": {
+"id": "VU.SE.DEP-ODA",
+"name": "Net ODA received (% of GNI)",
+"component": "Economic Dependency",
+"dimension": "Vulnerability",
+"source": "World Bank",
+"url": "https://data.worldbank.org/indicator/DT.ODA.ODAT.GN.ZS",
+"resolution": "national",
+"year": "2018-2022",
+"unit": "%",
+"description": "Net official development assistance (ODA) consists of disbursements of loans made on concessional terms (net of repayments of principal) and grants by official agencies of the members of the Development Assistance Committee (DAC), by multilateral institutions, and by non-DAC countries to promote eco"
+},
+"VU.SE.DEP-REM": {
+"id": "VU.SE.DEP-REM",
+"name": "Personal remittances",
+"component": "Economic Dependency",
+"dimension": "Vulnerability",
+"source": "World Bank",
+"url": "https://data.worldbank.org/indicator/BX.TRF.PWKR.DT.GD.ZS",
+"resolution": "national",
+"year": "2019-2023",
+"unit": "%",
+"description": "Personal transfers consist of all current transfers in cash or in kind made or received by resident households to or from nonresident households. Personal transfers thus include all current transfers between resident and nonresident individuals. Compensation of employees refers to the income of bord"
+},
+"VU.SE.DEP-DR": {
+"id": "VU.SE.DEP-DR",
+"name": "Dependency Ratio",
+"component": "Economic Dependency",
+"dimension": "Vulnerability",
+"source": "Global Data Lab",
+"url": "https://globaldatalab.org/",
+"resolution": "region",
+"year": "2011 - 2022",
+"unit": "ratio",
+"description": "Dependency ratio, dependend population compared to the working age population (15-64)"
+},
+"VU.SE.HAB-INF": {
+"id": "VU.SE.HAB-INF",
+"name": "Population in informal settlements",
+"component": "Habitat",
+"dimension": "Vulnerability",
+"source": "UN Habitat",
+"url": "https://data.unhabitat.org/pages/housing-slums-and-informal-settlements",
+"resolution": "national",
+"year": "2022",
+"unit": "%",
+"description": "The share of urban population living in slum households, based on 4 out of 5 household shelter deprivations defined by UN-Habitat as indicators of informality: lack of access to improved water, lack of access to improved sanitation, lack of sufficient living area and quality/durability of structure."
+},
+"VU.SE.HAB-URB": {
+"id": "VU.SE.HAB-URB",
+"name": "Urban Population",
+"component": "Habitat",
+"dimension": "Vulnerability",
+"source": "Global Data Lab",
+"url": "https://globaldatalab.org/",
+"resolution": "region",
+"year": "2013 - 2022",
+"unit": "%",
+"description": "% of population living in urban areas in region"
+},
+"VU.SE.LV-FS": {
+"id": "VU.SE.LV-FS",
+"name": "Food Security - Insufficient food",
+"component": "Livelihoods",
+"dimension": "Vulnerability",
+"source": "IPC",
+"url": "https://www.ipcinfo.org/",
+"resolution": "region",
+"year": "2022-2024",
+"unit": "% pop phase 2 or higher",
+"description": "Population at IPC level 2 or above"
+},
+"VU.VG.DP-IDP": {
+"id": "VU.VG.DP-IDP",
+"name": "Internal Displaced People",
+"component": "Displaced People",
+"dimension": "Vulnerability",
+"source": "IDMC",
+"url": "https://www.internal-displacement.org/database/displacement-data/",
+"resolution": "region",
+"year": "2023",
+"unit": "number of people",
+"description": "Internally displaced persons - IDPs refers to the number of people living in displacement as of the end of each year. It covers both confllict and disaster IDP's"
+},
+"VU.VG.HC-LEXP": {
+"id": "VU.VG.HC-LEXP",
+"name": "Life Expectancy",
+"component": "Health Conditions",
+"dimension": "Vulnerability",
+"source": "Global Data Lab",
+"url": "https://globaldatalab.org/",
+"resolution": "region",
+"year": "2022",
+"unit": "years",
+"description": "Life expectancy at Birth (LEXP) ."
+},
+"VU.VG.HC-MALAPREV": {
+"id": "VU.VG.HC-MALAPREV",
+"name": "Malaria prevalence",
+"component": "Health Conditions",
+"dimension": "Vulnerability",
+"source": "Malaria Atlas Project",
+"url": "https://malariaatlas.org/",
+"resolution": "region",
+"year": "2022",
+"unit": "max malaria prevalence per person",
+"description": "Proportion of children 2 to 10 years with malaria infection for a given year"
+},
+"VU.VG.HC-MEASLES": {
+"id": "VU.VG.HC-MEASLES",
+"name": "Measles Incidence",
+"component": "Health Conditions",
+"dimension": "Vulnerability",
+"source": "WHO",
+"url": "https://immunizationdata.who.int/global/wiise-detail-page/measles-reported-cases-and-incidence?YEAR=",
+"resolution": "national",
+"year": "2019-2023",
+"unit": "per 1,000,000 population",
+"description": "Measles incidence per 1,000,000 total population"
+},
+"VU.VG.CH-MORTNEO": {
+"id": "VU.VG.CH-MORTNEO",
+"name": "Neonatal mortality",
+"component": "Children Health and Nutrition",
+"dimension": "Vulnerability",
+"source": "Global Data Lab",
+"url": "https://globaldatalab.org/",
+"resolution": "region",
+"year": "2006 - 2021",
+"unit": "per 1,000 live births",
+"description": "Number of neonates dying before 28 days of age, per 1,000 live births in a given year"
+},
+"VU.VG.CH-MORTINF": {
+"id": "VU.VG.CH-MORTINF",
+"name": "Infant mortality",
+"component": "Children Health and Nutrition",
+"dimension": "Vulnerability",
+"source": "Global Data Lab",
+"url": "https://globaldatalab.org/",
+"resolution": "region",
+"year": "2011 - 2022",
+"unit": "per 1,000 live births",
+"description": "Number of deaths of children less than one year of age, per 1000 live births in a given year"
+},
+"VU.VG.CH-MORTCH": {
+"id": "VU.VG.CH-MORTCH",
+"name": "Child mortality",
+"component": "Children Health and Nutrition",
+"dimension": "Vulnerability",
+"source": "Global Data Lab",
+"url": "https://globaldatalab.org/",
+"resolution": "region",
+"year": "2006 - 2021",
+"unit": "per 1,000 live births",
+"description": "Number of children dying between 1 year of age and five year of age, per 1,000 live births in a given year"
+},
+"VU.VG.CH-UW": {
+"id": "VU.VG.CH-UW",
+"name": "Children Underweight",
+"component": "Children Health and Nutrition",
+"dimension": "Vulnerability",
+"source": "Global Data Lab",
+"url": "https://globaldatalab.org/",
+"resolution": "region",
+"year": "2000 - 2022",
+"unit": "%",
+"description": "Percentage of children aged 0-59 months who are below minus two standard deviations from median weight-for-age of the World Health Organization (WHO) Child Growth Standards"
+},
+"CC.INF.HC-EXP": {
+"id": "CC.INF.HC-EXP",
+"name": "Health expenditure per capita",
+"component": "Access to health care",
+"dimension": "Coping Capacity",
+"source": "WHO",
+"url": "https://apps.who.int/nha/database/Select/Indicators/en",
+"resolution": "national",
+"year": "2017-2021",
+"unit": "US$ per capita",
+"description": "Per capita total expenditure on health (THE) expressed in Purchasing Power Parities (PPP) international dollar."
+},
+"CC.INF.HC-BCG": {
+"id": "CC.INF.HC-BCG",
+"name": "BCG Immunization Coverage",
+"component": "Access to health care",
+"dimension": "Coping Capacity",
+"source": "Global Data Lab",
+"url": "https://globaldatalab.org/",
+"resolution": "region",
+"year": "2006 - 2021",
+"unit": "%",
+"description": "Percentage of children aged 1 who received a BCG vaccination"
+},
+"CC.INF.HC-DTP": {
+"id": "CC.INF.HC-DTP",
+"name": "DTP3 Immunization Coverage",
+"component": "Access to health care",
+"dimension": "Coping Capacity",
+"source": "Global Data Lab",
+"url": "https://globaldatalab.org/",
+"resolution": "region",
+"year": "2006 - 2021",
+"unit": "%",
+"description": "Percentage of children aged 1 who received a DTP3 vaccination"
+},
+"CC.INF.HC-MEASLES": {
+"id": "CC.INF.HC-MEASLES",
+"name": "Measles Immunization Coverage",
+"component": "Access to health care",
+"dimension": "Coping Capacity",
+"source": "Global Data Lab",
+"url": "https://globaldatalab.org/",
+"resolution": "region",
+"year": "2006 - 2021",
+"unit": "%",
+"description": "Percentage of children aged 1 who received a measles vaccination"
+},
+"CC.INF.HC-PHY": {
+"id": "CC.INF.HC-PHY",
+"name": "Physicians density",
+"component": "Access to health care",
+"dimension": "Coping Capacity",
+"source": "WHO",
+"url": "https://apps.who.int/gho/data/view.main.HWFMEDv",
+"resolution": "national",
+"year": "2018",
+"unit": "per 10,000 population",
+"description": "Number of medical doctors (physicians), including generalist and specialist medical practitioners, per 10,000 population."
+},
+"CC.INF.HC-FAC": {
+"id": "CC.INF.HC-FAC",
+"name": "Density of health facilities",
+"component": "Access to health care",
+"dimension": "Coping Capacity",
+"source": "HDX",
+"url": "https://data.humdata.org/dataset/health-facilities-in-sub-saharan-africa",
+"resolution": "region",
+"year": "2019",
+"unit": "per capita",
+"description": "Density of health facilities per capita. The HDX database of health facilities was developed from a variety of government and non-government sources from 50 countries in sub-Saharan Africa. It uses multiple geocoding methods to provide a comprehensive spatial inventory of 98 745 public health facili"
+},
+"CC.INF.ECO-INC": {
+"id": "CC.INF.ECO-INC",
+"name": "Household income",
+"component": "Economic capacity",
+"dimension": "Coping Capacity",
+"source": "World Bank",
+"url": "https://data.worldbank.org/indicator/NY.ADJ.NNTY.PC.CD",
+"resolution": "national",
+"year": "2017-2021",
+"unit": "US$ per capita",
+"description": "Household income is a measure of the combined incomes of all people sharing a particular household or place of residence"
+},
+"CC.INF.ECO-IWI": {
+"id": "CC.INF.ECO-IWI",
+"name": "International Wealth Index",
+"component": "Economic capacity",
+"dimension": "Coping Capacity",
+"source": "Global Data Lab",
+"url": "https://globaldatalab.org/",
+"resolution": "region",
+"year": "2013 - 2022",
+"unit": "index",
+"description": "The international Wealth Index is an asset-based wealth index that runs from 0 (no assets) to 100 (all assets) and is comparable across place and time"
+},
+"CC.INF.ECO-GDP": {
+"id": "CC.INF.ECO-GDP",
+"name": "Gross National Income per capita",
+"component": "Economic capacity",
+"dimension": "Coping Capacity",
+"source": "Global Data Lab",
+"url": "https://globaldatalab.org/",
+"resolution": "region",
+"year": "2022",
+"unit": "Log - Thousands of US$",
+"description": "Log Gross National Income per capita in thousands of US Dollars (2011 PPP)."
+},
+"CC.INF.WASH-SAN": {
+"id": "CC.INF.WASH-SAN",
+"name": "People using at least basic sanitation services (% of population)",
+"component": "WASH",
+"dimension": "Coping Capacity",
+"source": "WHO/UNICEF Joint Monitoring Programme (JMP) for Water Supply and Sanitation",
+"url": "https://washdata.org/",
+"resolution": "national",
+"year": "2022",
+"unit": "%",
+"description": "The percentage of people using at least basic sanitation services, that is, improved sanitation facilities that are not shared with other households. This indicator encompasses both people using basic sanitation services as well as those using safely managed sanitation services. Improved sanitation "
+},
+"CC.INF.WASH-WF": {
+"id": "CC.INF.WASH-WF",
+"name": "People using at least basic drinking water services (% of population)",
+"component": "WASH",
+"dimension": "Coping Capacity",
+"source": "WHO/UNICEF Joint Monitoring Programme (JMP) for Water Supply and Sanitation",
+"url": "https://washdata.org/",
+"resolution": "national",
+"year": "2022",
+"unit": "%",
+"description": "The percentage of people using at least basic water services. This indicator encompasses both people using basic water services as well as those using safely managed water services. Basic drinking water services is defined as drinking water from an improved source, provided collection time is not mo"
+},
+"CC.INF.COM-ELEC": {
+"id": "CC.INF.COM-ELEC",
+"name": "Access to electricity",
+"component": "Communication",
+"dimension": "Coping Capacity",
+"source": "Global Data Lab",
+"url": "https://globaldatalab.org/",
+"resolution": "region",
+"year": "2013 - 2022",
+"unit": "%",
+"description": "Percentage of households with electricity in region"
+},
+"CC.INF.COM-INT": {
+"id": "CC.INF.COM-INT",
+"name": "Internet access",
+"component": "Communication",
+"dimension": "Coping Capacity",
+"source": "Global Data Lab",
+"url": "https://globaldatalab.org/",
+"resolution": "region",
+"year": "2011 - 2022",
+"unit": "%",
+"description": "Percentage of households with internet access in region"
+},
+"CC.INF.COM-PHONE": {
+"id": "CC.INF.COM-PHONE",
+"name": "Cellphone ownership",
+"component": "Communication",
+"dimension": "Coping Capacity",
+"source": "Global Data Lab",
+"url": "https://globaldatalab.org/",
+"resolution": "region",
+"year": "2011 - 2022",
+"unit": "%",
+"description": "Percentage of households with a cellphone in region"
+},
+"CC.INF.EDU-ALIT": {
+"id": "CC.INF.EDU-ALIT",
+"name": "Adult literacy rate",
+"component": "Education",
+"dimension": "Coping Capacity",
+"source": "World Bank",
+"url": "https://data.worldbank.org/indicator/SE.ADT.LITR.ZS?most_recent_value_desc=true",
+"resolution": "national",
+"year": "2020-2022",
+"unit": "%",
+"description": "Total is the percentage of the population age 15 and above who can, with understanding, read and write a short, simple statement on their everyday life."
+},
+"CC.INF.EDU-YRS": {
+"id": "CC.INF.EDU-YRS",
+"name": "Mean years at school",
+"component": "Education",
+"dimension": "Coping Capacity",
+"source": "Global Data Lab",
+"url": "https://globaldatalab.org/",
+"resolution": "region",
+"year": "2022",
+"unit": "years",
+"description": "Mean years schooling of population 25+. The mean years of schooling of adults aged 25+ (MYS), reflects the current situation with regard to education in a society. Mean years of schooling was computed by using the Global Data Lab Area Database, taking for each region the average number of years of e"
+},
+"CC.INS.DRR-SEN": {
+"id": "CC.INS.DRR-SEN",
+"name": "Sendai Framework for Action",
+"component": "DRR implementation",
+"dimension": "Coping Capacity",
+"source": "UNDRR",
+"url": "https://ourworldindata.org/grapher/legislative-provisions-for-managing-disaster-risk",
+"resolution": "national",
+"year": "2017-2022",
+"unit": "index",
+"description": "Score of adoption and implementation of national strategies for managing disaster risk, 2023. Score from 0 (worst) to 1 (best) measuring alignment of country disaster risk reduction strategies with the Sendai Framework."
+},
+"CC.INS.DRR-EWS": {
+"id": "CC.INS.DRR-EWS",
+"name": "Early Warning System",
+"component": "DRR implementation",
+"dimension": "Coping Capacity",
+"source": "Anticipation Hub",
+"url": "https://www.anticipation-hub.org/advocate/anticipatory-action-overview-report/overview-report-2023",
+"resolution": "national",
+"year": "2023",
+"unit": "number of people",
+"description": "Number of people targeted by Anticipatory Action frameworks in 2023"
+},
+"CC.INS.GOV-EFF": {
+"id": "CC.INS.GOV-EFF",
+"name": "Government effectiveness",
+"component": "Governance",
+"dimension": "Coping Capacity",
+"source": "World Bank",
+"url": "https://data.worldbank.org/indicator/GE.EST?view=chart",
+"resolution": "national",
+"year": "2018-2022",
+"unit": "index",
+"description": "The Government effectiveness captures perceptions of the quality of public services, the quality of the civil service and the degree of its independence from political pressures, the quality of policy formulation and implementation, and the credibility of the government's commitment to such policies"
+},
+"CC.INS.GOV-SCI": {
+"id": "CC.INS.GOV-SCI",
+"name": "Subnational Corruption Index",
+"component": "Governance",
+"dimension": "Coping Capacity",
+"source": "Global Data Lab",
+"url": "https://globaldatalab.org/",
+"resolution": "region",
+"year": "2022",
+"unit": "index",
+"description": "The Subnational Corruption Database (SCD) provides data on corruption in 1,473 subnational areas of 178 countries. The SCD includes an overall corruption index, the Subnational Corruption Index (SCI), and its two components: the Subnational Grand Corruption Index (SGCI) and Subnational Petty Corrupt"
+}
+},
+"components": {
+"Coastal hazards": {
+"component": "Coastal hazards",
+"indicators": [
+"HA.NAT.CH-ERO"
+],
+"sources": [
+"Digital Earth Africa"
+],
+"years": [
+"2000 - 2022"
+],
+"resolution": "district"
+},
+"Drought": {
+"component": "Drought",
+"indicators": [
+"HA.NAT.DR-FRE"
+],
+"sources": [
+"FAO"
+],
+"years": [
+"1984-2023"
+],
+"resolution": "region"
+},
+"Earthquake": {
+"component": "Earthquake",
+"indicators": [
+"HA.NAT.EQ-EXP"
+],
+"sources": [
+"Global Earthquake Model (GEM)"
+],
+"years": [
+"2023"
+],
+"resolution": "district"
+},
+"Environmental Degradation": {
+"component": "Environmental Degradation",
+"indicators": [
+"HA.NAT.ED-DEF",
+"HA.NAT.DE-ERO"
+],
+"sources": [
+"Global Forest Watch",
+"JRC"
+],
+"years": [
+"2000-2022",
+"year unknown"
+],
+"resolution": "district"
+},
+"Flood": {
+"component": "Flood",
+"indicators": [
+"HA.NAT.FL-EXP"
+],
+"sources": [
+"JRC"
+],
+"years": [
+"modelled"
+],
+"resolution": "district"
+},
+"Landslide": {
+"component": "Landslide",
+"indicators": [
+"HA.NAT.LS-EXP"
+],
+"sources": [
+"World Bank"
+],
+"years": [
+"1980-2018"
+],
+"resolution": "district"
+},
+"Storms & Cyclone": {
+"component": "Storms & Cyclone",
+"indicators": [
+"HA.NAT.ST-TC2"
+],
+"sources": [
+"4TU.Research Data"
+],
+"years": [
+"2023"
+],
+"resolution": "district"
+},
+"Volcano": {
+"component": "Volcano",
+"indicators": [
+"HA.NAT.VC-EXP"
+],
+"sources": [
+"NOAA"
+],
+"years": [
+"year unknown"
+],
+"resolution": "region"
+},
+"Wildfire": {
+"component": "Wildfire",
+"indicators": [
+"HA.NAT.WF-BURN",
+"HA.NAT.WF-FWI"
+],
+"sources": [
+"JRC (GWIS)",
+"GFDRR"
+],
+"years": [
+"2019-2023",
+"2022"
+],
+"resolution": "region"
+},
+"Conflict Intensity": {
+"component": "Conflict Intensity",
+"indicators": [
+"HA.HUM.CI-CBAR"
+],
+"sources": [
+"Heidelberg Institute for International Conflict Research"
+],
+"years": [
+"2022"
+],
+"resolution": "region"
+},
+"Conflict Risk": {
+"component": "Conflict Risk",
+"indicators": [
+"HA.HUM.CR-GCRI"
+],
+"sources": [
+"JRC"
+],
+"years": [
+"2024"
+],
+"resolution": "national"
+},
+"Internal Violence": {
+"component": "Internal Violence",
+"indicators": [
+"HA.HUM.VIO-EVE",
+"HA.HUM.VIO-FAT"
+],
+"sources": [
+"ACLED"
+],
+"years": [
+"2020-2024"
+],
+"resolution": "region"
+},
+"Development & Poverty": {
+"component": "Development & Poverty",
+"indicators": [
+"VU.SE.POV-HDI",
+"VU.SE.POV-GDI",
+"VU.SE.POV-MPI",
+"VU.SE.POV-GINI"
+],
+"sources": [
+"Global Data Lab",
+"OPHI"
+],
+"years": [
+"2022",
+"2012-2021",
+"2011 - 2022"
+],
+"resolution": "region"
+},
+"Economic Dependency": {
+"component": "Economic Dependency",
+"indicators": [
+"VU.SE.DEP-ODA",
+"VU.SE.DEP-REM",
+"VU.SE.DEP-DR"
+],
+"sources": [
+"World Bank",
+"Global Data Lab"
+],
+"years": [
+"2018-2022",
+"2019-2023",
+"2011 - 2022"
+],
+"resolution": "region"
+},
+"Habitat": {
+"component": "Habitat",
+"indicators": [
+"VU.SE.HAB-INF",
+"VU.SE.HAB-URB"
+],
+"sources": [
+"UN Habitat",
+"Global Data Lab"
+],
+"years": [
+"2022",
+"2013 - 2022"
+],
+"resolution": "region"
+},
+"Livelihoods": {
+"component": "Livelihoods",
+"indicators": [
+"VU.SE.LV-FS"
+],
+"sources": [
+"IPC"
+],
+"years": [
+"2022-2024"
+],
+"resolution": "region"
+},
+"Displaced People": {
+"component": "Displaced People",
+"indicators": [
+"VU.VG.DP-IDP"
+],
+"sources": [
+"IDMC"
+],
+"years": [
+"2023"
+],
+"resolution": "region"
+},
+"Health Conditions": {
+"component": "Health Conditions",
+"indicators": [
+"VU.VG.HC-LEXP",
+"VU.VG.HC-MALAPREV",
+"VU.VG.HC-MEASLES"
+],
+"sources": [
+"Global Data Lab",
+"Malaria Atlas Project",
+"WHO"
+],
+"years": [
+"2022",
+"2019-2023"
+],
+"resolution": "region"
+},
+"Children Health and Nutrition": {
+"component": "Children Health and Nutrition",
+"indicators": [
+"VU.VG.CH-MORTNEO",
+"VU.VG.CH-MORTINF",
+"VU.VG.CH-MORTCH",
+"VU.VG.CH-UW"
+],
+"sources": [
+"Global Data Lab"
+],
+"years": [
+"2006 - 2021",
+"2011 - 2022",
+"2000 - 2022"
+],
+"resolution": "region"
+},
+"Access to health care": {
+"component": "Access to health care",
+"indicators": [
+"CC.INF.HC-EXP",
+"CC.INF.HC-BCG",
+"CC.INF.HC-DTP",
+"CC.INF.HC-MEASLES",
+"CC.INF.HC-PHY",
+"CC.INF.HC-FAC"
+],
+"sources": [
+"WHO",
+"Global Data Lab",
+"HDX"
+],
+"years": [
+"2017-2021",
+"2006 - 2021",
+"2018",
+"2019"
+],
+"resolution": "region"
+},
+"Economic capacity": {
+"component": "Economic capacity",
+"indicators": [
+"CC.INF.ECO-INC",
+"CC.INF.ECO-IWI",
+"CC.INF.ECO-GDP"
+],
+"sources": [
+"World Bank",
+"Global Data Lab"
+],
+"years": [
+"2017-2021",
+"2013 - 2022",
+"2022"
+],
+"resolution": "region"
+},
+"WASH": {
+"component": "WASH",
+"indicators": [
+"CC.INF.WASH-SAN",
+"CC.INF.WASH-WF"
+],
+"sources": [
+"WHO/UNICEF Joint Monitoring Programme (JMP) for Water Supply and Sanitation"
+],
+"years": [
+"2022"
+],
+"resolution": "national"
+},
+"Communication": {
+"component": "Communication",
+"indicators": [
+"CC.INF.COM-ELEC",
+"CC.INF.COM-INT",
+"CC.INF.COM-PHONE"
+],
+"sources": [
+"Global Data Lab"
+],
+"years": [
+"2013 - 2022",
+"2011 - 2022"
+],
+"resolution": "region"
+},
+"Education": {
+"component": "Education",
+"indicators": [
+"CC.INF.EDU-ALIT",
+"CC.INF.EDU-YRS"
+],
+"sources": [
+"World Bank",
+"Global Data Lab"
+],
+"years": [
+"2020-2022",
+"2022"
+],
+"resolution": "region"
+},
+"DRR implementation": {
+"component": "DRR implementation",
+"indicators": [
+"CC.INS.DRR-SEN",
+"CC.INS.DRR-EWS"
+],
+"sources": [
+"UNDRR",
+"Anticipation Hub"
+],
+"years": [
+"2017-2022",
+"2023"
+],
+"resolution": "national"
+},
+"Governance": {
+"component": "Governance",
+"indicators": [
+"CC.INS.GOV-EFF",
+"CC.INS.GOV-SCI"
+],
+"sources": [
+"World Bank",
+"Global Data Lab"
+],
+"years": [
+"2018-2022",
+"2022"
+],
+"resolution": "region"
+}
+}
+}

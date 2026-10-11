@@ -8,23 +8,29 @@ import type { SupabaseClient as BaseClient } from '@supabase/supabase-js';
 import type { Database, Json } from './database.types';
 import type { RawLevel, RawValue } from '@/engine/risk/rawValues';
 import type { EditRef, Overrides } from '@/engine/risk/types';
-import type {
-  Assignment,
-  AuditAction,
-  Change,
-  DataRequest,
-  Institution,
-  NewSubmission,
-  Profile,
-  RawEntry,
-  RawSubmission,
-  Repository,
-  RequestKind,
-  RequestStatus,
-  Role,
-  Submission,
-  SubmissionStatus,
-  Validation,
+import {
+  ROLES,
+  type Assignment,
+  type AuditAction,
+  type Change,
+  type DataRequest,
+  type CommitteeKind,
+  type CommitteeLevel,
+  type CommitteePayload,
+  type CommitteeRecord,
+  type Institution,
+  type NewSubmission,
+  type Profile,
+  type RawEntry,
+  type RawSubmission,
+  type Repository,
+  type RequestKind,
+  type RequestStatus,
+  type Role,
+  type Submission,
+  type SubmissionStatus,
+  type Validation,
+  type Notification,
 } from './types';
 import { NO_VALUE } from '@/lib/utils';
 
@@ -50,6 +56,7 @@ type SubmissionRow = Tables['submissions']['Row'];
 type AuditRow = Tables['audit_log']['Row'];
 type RequestRow = Tables['data_requests']['Row'];
 type RawSubmissionRow = Tables['raw_submissions']['Row'];
+type CommitteeRow = Tables['committee_records']['Row'];
 
 const REF_RE = /^(hazard|vulnerability|coping):[A-Za-z]+$/;
 const UNIT_RE = /^(TZ|R-[a-z0-9]{2,40}|C[0-9]{3})$/;
@@ -57,7 +64,6 @@ const STATUSES: readonly SubmissionStatus[] = ['pending', 'approved', 'rejected'
 const ACTIONS: readonly AuditAction[] = ['submitted', 'approved', 'rejected', 'reverted', 'imported', 'reset', 'assigned', 'requested', 'validated', 'closed'];
 const LEVELS: readonly RawLevel[] = ['national', 'region', 'council'];
 const REQUEST_STATUSES: readonly RequestStatus[] = ['open', 'submitted', 'done', 'cancelled'];
-const ROLES: readonly Role[] = ['viewer', 'sector', 'pmo', 'admin'];
 
 /** Validate the JSON `changes` column instead of trusting its shape (it is written by clients). */
 export function parseChanges(json: Json): Change[] {
@@ -125,11 +131,45 @@ const toRawSubmission = (r: RawSubmissionRow): RawSubmission => ({
   institutionKey: r.institution_key,
   requestId: r.request_id,
   entries: parseEntries(r.entries),
+  valueType: r.value_type === 'score' ? 'score' : 'raw',
+  method: r.method,
+  source: r.source,
   dataset: r.dataset,
   period: r.period,
   note: r.note,
   authorId: r.author_id,
   authorName: r.author_name,
+  status: STATUSES.includes(r.status as SubmissionStatus) ? (r.status as SubmissionStatus) : 'pending',
+  createdAt: r.created_at,
+  reviewedAt: r.reviewed_at,
+  reviewerName: r.reviewer_name,
+  reviewNote: r.review_note,
+});
+
+const COMMITTEE_KINDS: readonly CommitteeKind[] = ['drr', 'guidance', 'event', 'warning'];
+const COMMITTEE_LEVELS: readonly CommitteeLevel[] = ['council', 'region', 'national'];
+/** The JSON `payload` column is written by the submit function; it is still never trusted blindly. */
+function parsePayload(json: Json): CommitteePayload {
+  if (!json || typeof json !== 'object' || Array.isArray(json)) return {};
+  return json as unknown as CommitteePayload;
+}
+const toCommitteeRecord = (r: CommitteeRow): CommitteeRecord => ({
+  id: r.id,
+  kind: COMMITTEE_KINDS.includes(r.kind as CommitteeKind) ? (r.kind as CommitteeKind) : 'drr',
+  unitId: r.unit_id,
+  level: COMMITTEE_LEVELS.includes(r.level as CommitteeLevel) ? (r.level as CommitteeLevel) : 'council',
+  unitName: r.unit_name,
+  region: r.region,
+  regionId: r.region_id,
+  hazard: r.hazard,
+  payload: parsePayload(r.payload),
+  source: r.source,
+  note: r.note,
+  validFrom: r.valid_from,
+  validTo: r.valid_to,
+  authorId: r.author_id,
+  authorName: r.author_name,
+  authorRole: ROLES.includes(r.author_role as Role) ? (r.author_role as Role) : null,
   status: STATUSES.includes(r.status as SubmissionStatus) ? (r.status as SubmissionStatus) : 'pending',
   createdAt: r.created_at,
   reviewedAt: r.reviewed_at,
@@ -168,12 +208,14 @@ async function selectAll<T>(page: (from: number, to: number) => PromiseLike<{ da
 }
 
 export function createSupabaseRepository(sb: SupabaseClient): Repository {
+  /** Signed-in users read the tables (reviewers see who submitted); anonymous clients the views without names (SEC-02). */
+  const signedIn = async () => !!(await sb.auth.getSession()).data.session;
   return {
     mode: 'supabase',
     async getOverrides() {
-      const rows = await selectAll((a, b) =>
-        sb.from('indicator_values').select('unit_id, ref, value, authority, dataset, note, author_name, updated_at').order('unit_id').order('ref').range(a, b),
-      );
+      const rows = (await signedIn())
+        ? await selectAll((a, b) => sb.from('indicator_values').select('unit_id, ref, value, authority, dataset, note, author_name, updated_at').order('unit_id').order('ref').range(a, b))
+        : (await selectAll((a, b) => sb.from('indicator_values_public').select('unit_id, ref, value, authority, dataset, note, updated_at').order('unit_id').order('ref').range(a, b))).map((r) => ({ ...r, author_name: null }));
       const out: Overrides = {};
       for (const r of rows) {
         (out[r.unit_id] ??= {})[r.ref as EditRef] = {
@@ -257,18 +299,39 @@ export function createSupabaseRepository(sb: SupabaseClient): Repository {
     async createRequests(specIds, kind, dueDate, message) {
       return must(await sb.rpc('create_requests', { p_spec_ids: specIds, p_kind: kind, p_due: dueDate ?? undefined, p_message: message }));
     },
+    async listNotifications() {
+      const rows = must(await sb.from('notifications').select('*').order('created_at', { ascending: false }).limit(300));
+      return rows.map((r) => ({
+        id: r.id,
+        institutionKey: r.institution_key,
+        kind: r.kind as Notification['kind'],
+        specId: r.spec_id,
+        requestId: r.request_id,
+        submissionId: r.submission_id,
+        title: r.title,
+        body: r.body,
+        dueDate: r.due_date,
+        createdAt: r.created_at,
+        readAt: r.read_at,
+        emailStatus: r.email_status as Notification['emailStatus'],
+      }));
+    },
+    async markNotificationRead(id) {
+      must(await sb.from('notifications').update({ read_at: new Date().toISOString() }).eq('id', id));
+    },
     async closeRequest(id, status, _actor, note) {
       must(await sb.rpc('close_request', { p_id: id, p_status: status, p_note: note }));
     },
     async getRawValues(): Promise<RawValue[]> {
-      const rows = await selectAll((a, b) =>
-        sb
-          .from('raw_values')
-          .select('spec_id, unit_id, level, value, dataset, period, institution_key, author_name, updated_at')
-          .order('spec_id')
-          .order('unit_id')
-          .range(a, b),
-      );
+      const rows = (await signedIn())
+        ? await selectAll((a, b) =>
+            sb.from('raw_values').select('spec_id, unit_id, level, value, value_type, method, source, dataset, period, institution_key, author_name, updated_at').order('spec_id').order('unit_id').range(a, b),
+          )
+        : (
+            await selectAll((a, b) =>
+              sb.from('raw_values_public').select('spec_id, unit_id, level, value, value_type, method, source, dataset, period, institution_key, updated_at').order('spec_id').order('unit_id').range(a, b),
+            )
+          ).map((r) => ({ ...r, author_name: null }));
       return rows
         .filter((r) => LEVELS.includes(r.level as RawLevel))
         .map((r) => ({
@@ -276,6 +339,9 @@ export function createSupabaseRepository(sb: SupabaseClient): Repository {
           unitId: r.unit_id,
           level: r.level as RawLevel,
           value: r.value == null ? null : Number(r.value),
+          valueType: r.value_type === 'score' ? ('score' as const) : ('raw' as const),
+          method: r.method,
+          source: r.source,
           dataset: r.dataset,
           period: r.period,
           institution: r.institution_key,
@@ -299,6 +365,9 @@ export function createSupabaseRepository(sb: SupabaseClient): Repository {
           p_period: input.period,
           p_note: input.note,
           p_request_id: input.requestId ?? undefined,
+          p_value_type: input.valueType ?? 'raw',
+          p_method: input.valueType === 'score' ? (input.method ?? 'inform') : undefined,
+          p_source: input.source,
         }),
       );
       return toRawSubmission(must(await sb.from('raw_submissions').select('*').eq('id', id).single()));
@@ -310,7 +379,9 @@ export function createSupabaseRepository(sb: SupabaseClient): Repository {
       must(await sb.rpc('revert_raw_value', { p_spec_id: specId, p_unit_id: unitId }));
     },
     async listValidations(): Promise<Validation[]> {
-      const rows = must(await sb.from('indicator_validations').select('*').order('validated_at', { ascending: false }).limit(1000));
+      const rows = (await signedIn())
+        ? must(await sb.from('indicator_validations').select('*').order('validated_at', { ascending: false }).limit(1000))
+        : must(await sb.from('indicator_validations_public').select('*').order('validated_at', { ascending: false }).limit(1000)).map((r) => ({ ...r, validated_by_name: '', validated_by: null }));
       return rows.map((r) => ({
         id: String(r.id),
         specId: r.spec_id,
@@ -325,20 +396,48 @@ export function createSupabaseRepository(sb: SupabaseClient): Repository {
       must(await sb.rpc('confirm_values', { p_spec_id: specId, p_request_id: requestId ?? undefined, p_note: note }));
     },
     async listProfiles(): Promise<Profile[]> {
-      const rows = must(await sb.from('profiles').select('id, full_name, institution, institution_key, role').order('full_name'));
+      const rows = must(await sb.from('profiles').select('id, full_name, institution, institution_key, role, scope_unit_id').order('full_name'));
       return rows.map((r) => ({
         id: r.id,
         fullName: r.full_name || 'User',
         institution: r.institution,
         institutionKey: r.institution_key,
         role: ROLES.includes(r.role as Role) ? (r.role as Role) : 'viewer',
+        scopeUnitId: r.scope_unit_id,
       }));
     },
     async updateProfile(id, patch) {
       const update: Tables['profiles']['Update'] = {};
       if (patch.role) update.role = patch.role;
       if ('institutionKey' in patch) update.institution_key = patch.institutionKey ?? null;
+      if ('scopeUnitId' in patch) update.scope_unit_id = patch.scopeUnitId ?? null;
       must(await sb.from('profiles').update(update).eq('id', id));
+    },
+    async listCommitteeRecords(): Promise<CommitteeRecord[]> {
+      const rows = must(await sb.from('committee_records').select('*').order('created_at', { ascending: false }).limit(3000));
+      return rows.map(toCommitteeRecord);
+    },
+    async submitCommittee(input) {
+      const id = must(
+        await sb.rpc('submit_committee_record', {
+          p_kind: input.kind,
+          p_unit_id: input.unitId,
+          p_level: input.level,
+          p_unit_name: input.unitName,
+          p_region: input.region,
+          p_region_id: input.regionId ?? undefined,
+          p_hazard: input.hazard ?? undefined,
+          p_payload: input.payload as unknown as Json,
+          p_source: input.source,
+          p_note: input.note,
+          p_valid_from: input.validFrom ?? undefined,
+          p_valid_to: input.validTo ?? undefined,
+        }),
+      );
+      return toCommitteeRecord(must(await sb.from('committee_records').select('*').eq('id', id).single()));
+    },
+    async reviewCommittee(id, decision, _reviewer, note) {
+      must(await sb.rpc('review_committee_record', { p_id: id, p_decision: decision, p_note: note }));
     },
   };
 }

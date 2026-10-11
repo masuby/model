@@ -236,40 +236,72 @@ function parseAdministrativeUnit(row, headers) {
 }
 
 /**
- * Calculate national-level aggregates
- * Using geometric mean as per INFORM methodology
+ * National-level aggregate, for reference only: the INFORM aggregation of every Tanzanian unit
+ * (indicator means → category means → scaled geometric mean → cube root), exactly as the engine
+ * aggregates councils into regions. The workbook publishes NO national score, and the app computes
+ * its own national value live from the 195 councils (src/engine/risk/model.ts); this block simply
+ * records what the 170 workbook units aggregate to.
  */
-function calculateNationalAggregates(units) {
-  // Filter only Tanzania units
-  const tanzaniaUnits = units.filter(u => u.admin.iso3 === 'TZA');
+const round1 = (x) => Math.floor(x * 10 + 0.5) / 10;
+const meanOf = (xs) => {
+  const v = xs.filter((x) => typeof x === 'number' && Number.isFinite(x));
+  return v.length ? v.reduce((a, b) => a + b, 0) / v.length : null;
+};
+const scaledGeomean = (xs) => {
+  const v = xs.filter((x) => typeof x === 'number' && Number.isFinite(x));
+  if (!v.length) return null;
+  const s = v.map((x) => ((10 - x) / 10) * 9 + 1);
+  return ((10 - Math.pow(s.reduce((p, x) => p * x, 1), 1 / s.length)) / 9) * 10;
+};
 
+function calculateNationalAggregates(units) {
+  const tanzaniaUnits = units.filter((u) => u.admin.iso3 === 'TZA');
   if (tanzaniaUnits.length === 0) {
     throw new Error('No Tanzania data found');
   }
+  const aggregateDimension = (field) => {
+    const template = tanzaniaUnits[0][field];
+    const out = {};
+    const catScores = [];
+    for (const cat of Object.keys(template)) {
+      if (cat === 'total') continue;
+      const leaves = Object.keys(template[cat]).filter((k) => k !== 'aggregate');
+      const means = {};
+      for (const leaf of leaves) means[leaf] = meanOf(tanzaniaUnits.map((u) => u[field][cat][leaf]));
+      const score = meanOf(Object.values(means));
+      out[cat] = { ...means, aggregate: score };
+      catScores.push(score);
+    }
+    const g = scaledGeomean(catScores);
+    out.total = g === null ? null : round1(g);
+    return out;
+  };
+  const hazardExposure = aggregateDimension('hazardExposure');
+  const vulnerability = aggregateDimension('vulnerability');
+  const lackCopingCapacity = aggregateDimension('lackCopingCapacity');
+  const risk = [hazardExposure.total, vulnerability.total, lackCopingCapacity.total].every((x) => typeof x === 'number')
+    ? round1(Math.pow(hazardExposure.total, 1 / 3) * Math.pow(vulnerability.total, 1 / 3) * Math.pow(lackCopingCapacity.total, 1 / 3))
+    : null;
 
-  // Get first unit as template (national-level indicators are same across all districts)
-  const template = tanzaniaUnits[0];
-
-  // National scores are already calculated in the Excel
-  // We use the first district's values as they represent national-level data
   return {
     country: 'United Republic of Tanzania',
     iso3: 'TZA',
+    method: 'INFORM aggregate of all workbook units (reference only; the app aggregates the councils live)',
 
-    hazardExposure: template.hazardExposure.total,
-    vulnerability: template.vulnerability.total,
-    lackCopingCapacity: template.lackCopingCapacity.total,
+    hazardExposure: hazardExposure.total,
+    vulnerability: vulnerability.total,
+    lackCopingCapacity: lackCopingCapacity.total,
 
-    risk: template.risk,
+    risk,
 
     // Detailed breakdown
     dimensions: {
-      hazardExposure: template.hazardExposure,
-      vulnerability: template.vulnerability,
-      lackCopingCapacity: template.lackCopingCapacity
+      hazardExposure,
+      vulnerability,
+      lackCopingCapacity
     },
 
-    classification: getRiskClassification(template.risk),
+    classification: getRiskClassification(risk),
     totalDistricts: tanzaniaUnits.length
   };
 }
@@ -297,7 +329,7 @@ function groupByAdm1(units) {
 function getRiskClassification(riskScore) {
   if (riskScore === null || riskScore === undefined) return { level: 'Unknown', color: '#999' };
 
-  // Tanzania INFORM thresholds [2.5, 3.4, 4.3, 5.9, 10] (TZ_INFORM_model.xlsx)
+  // INFORM SADC 2024 workbook risk thresholds [2.5, 3.4, 4.3, 5.9, 10] (data-source/tanzania-inform-risk.xlsx)
   if (riskScore < 2.5) {
     return { level: 'Very Low', color: '#2E7D32', range: '0.0 - 2.4' };
   } else if (riskScore < 3.4) {

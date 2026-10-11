@@ -15,6 +15,7 @@
  */
 import SPEC_JSON from '@/data/inform-indicator-spec.json';
 import ADV_JSON from '@/data/inform-advanced-spec.json';
+import { BENCHMARK_ACTIVATIONS, BENCHMARK_RESPEC } from './benchmark';
 import { clamp10, dimensionScore, isNum, mean, riskScore, round1, weightedMean } from './math';
 
 export interface IndicatorSpec {
@@ -42,8 +43,37 @@ export interface IndicatorSpec {
 }
 export type SpecTable = Record<string, IndicatorSpec>;
 
+/** The workbook's indicator specification, exactly (the parity tests prove it): never modified. */
 export const SPECS = SPEC_JSON as unknown as SpecTable;
 export const ADVANCED_SPECS = ADV_JSON as unknown as SpecTable;
+/**
+ * The template indicators the workbook lists without data, activated with a Tanzanian definition by the
+ * Benchmark 2026 (unit, keyed level, direction, normalisation and reference range), plus the existing
+ * indicators whose degenerate reference range the benchmark re-resolves, plus the Tanzanian indicators
+ * added inside a workbook component (the activation names its dimension, category and component; the
+ * institutional indicators of institutional.ts). See benchmark.ts.
+ */
+export const ACTIVATED_SPECS: SpecTable = Object.fromEntries(
+  Object.entries(BENCHMARK_ACTIVATIONS)
+    .filter(([id, a]) => id in SPECS || (a.dimension && a.category && a.component))
+    .map(([id, a]) => {
+      const base = SPECS[id];
+      const spec: IndicatorSpec = base
+        ? { ...base, ...a, id, dimension: base.dimension, category: base.category, component: base.component }
+        : { denominator: 'None', fence_lo: null, fence_hi: null, resolution: a.keyed_at === 'Adm2' ? 'Subnational - Adm2' : a.keyed_at === 'Adm1' ? 'Subnational - Adm1' : 'National', ...a, id, dimension: a.dimension ?? null, category: a.category ?? null, component: a.component ?? null };
+      return [id, spec];
+    }),
+);
+/** The specification the live model uses: the workbook's, with the activated indicators and re-resolved ranges. */
+export const ACTIVE_SPECS: SpecTable = {
+  ...SPECS,
+  ...ACTIVATED_SPECS,
+  ...Object.fromEntries(
+    Object.entries(BENCHMARK_RESPEC)
+      .filter(([id]) => id in SPECS)
+      .map(([id, r]) => [id, { ...SPECS[id], resolved_min: r.resolved_min, resolved_max: r.resolved_max }]),
+  ),
+};
 /** Genuine INFORM spec merged with the exploded multi-source sub-indicators (no id collisions). */
 export const ADVANCED_MERGED: SpecTable = { ...SPECS, ...ADVANCED_SPECS };
 

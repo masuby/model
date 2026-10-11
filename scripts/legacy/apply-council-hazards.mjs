@@ -18,7 +18,7 @@
  */
 import fs from 'fs';
 import { fileURLToPath } from 'url';
-const ROOT = fileURLToPath(new URL('..', import.meta.url));
+const ROOT = fileURLToPath(new URL('../..', import.meta.url));
 const risk = JSON.parse(fs.readFileSync(ROOT + 'src/data/tanzania-inform-risk.json', 'utf8'));
 const councils = JSON.parse(fs.readFileSync(ROOT + 'src/data/tanzania-councils.json', 'utf8'));
 const csv = fs.readFileSync(ROOT + 'data-source/council_climate.csv', 'utf8').trim().split('\n');

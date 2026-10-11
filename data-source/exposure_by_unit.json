@@ -1,0 +1,833 @@
+{
+"source": "2022 Population and Housing Census council populations (NBS, transcribed via citypopulation.de; see SRC-08) summed to the INFORM workbook units; area from the census boundaries",
+"units": {
+"TZ0101": {
+"name": "Kondoa",
+"population": 325297,
+"density": 54,
+"areaKm2": 6051.9
+},
+"TZ0102": {
+"name": "Mpwapwa",
+"population": 403247,
+"density": 54,
+"areaKm2": 7405.9
+},
+"TZ0103": {
+"name": "Kongwa",
+"population": 443867,
+"density": 113,
+"areaKm2": 3925.2
+},
+"TZ0104": {
+"name": "Chamwino",
+"population": 486176,
+"density": 53,
+"areaKm2": 9128.6
+},
+"TZ0106": {
+"name": "Bahi",
+"population": 322526,
+"density": 60,
+"areaKm2": 5413.6
+},
+"TZ0107": {
+"name": "Chemba",
+"population": 339333,
+"density": 46,
+"areaKm2": 7459.2
+},
+"TZ0201": {
+"name": "Monduli",
+"population": 227585,
+"density": 33,
+"areaKm2": 6937.6
+},
+"TZ0204": {
+"name": "Karatu",
+"population": 280454,
+"density": 90,
+"areaKm2": 3113.2
+},
+"TZ0205": {
+"name": "Ngorongoro",
+"population": 273549,
+"density": 18,
+"areaKm2": 15055
+},
+"TZ0206": {
+"name": "Arusha",
+"population": 1067149,
+"density": 3827,
+"areaKm2": 278.8
+},
+"TZ0207": {
+"name": "Longido",
+"population": 175915,
+"density": 22,
+"areaKm2": 7977
+},
+"TZ0301": {
+"name": "Rombo",
+"population": 275314,
+"density": 187,
+"areaKm2": 1475.5
+},
+"TZ0302": {
+"name": "Mwanga",
+"population": 148763,
+"density": 76,
+"areaKm2": 1969.1
+},
+"TZ0303": {
+"name": "Same",
+"population": 300303,
+"density": 49,
+"areaKm2": 6147.3
+},
+"TZ0304": {
+"name": "Moshi",
+"population": 757536,
+"density": 528,
+"areaKm2": 1434.9
+},
+"TZ0305": {
+"name": "Hai",
+"population": 240999,
+"density": 268,
+"areaKm2": 898.9
+},
+"TZ0307": {
+"name": "Siha",
+"population": 139019,
+"density": 117,
+"areaKm2": 1190.2
+},
+"TZ0401": {
+"name": "Lushoto",
+"population": 350958,
+"density": 81,
+"areaKm2": 4313.1
+},
+"TZ0402": {
+"name": "Korogwe",
+"population": 359421,
+"density": 105,
+"areaKm2": 3440.4
+},
+"TZ0403": {
+"name": "Muheza",
+"population": 238260,
+"density": 155,
+"areaKm2": 1532.7
+},
+"TZ0405": {
+"name": "Pangani",
+"population": 75642,
+"density": 42,
+"areaKm2": 1798
+},
+"TZ0406": {
+"name": "Handeni",
+"population": 493321,
+"density": 66,
+"areaKm2": 7426.6
+},
+"TZ0407": {
+"name": "Kilindi",
+"population": 398391,
+"density": 57,
+"areaKm2": 7029.6
+},
+"TZ0408": {
+"name": "Mkinga",
+"population": 146802,
+"density": 54,
+"areaKm2": 2707.2
+},
+"TZ0501": {
+"name": "Kilosa",
+"population": 617032,
+"density": 53,
+"areaKm2": 11746.4
+},
+"TZ0502": {
+"name": "Morogoro",
+"population": 859145,
+"density": 72,
+"areaKm2": 11918.5
+},
+"TZ0503": {
+"name": "Kilombero",
+"population": 582960,
+"density": 44,
+"areaKm2": 13162.8
+},
+"TZ0504": {
+"name": "Ulanga",
+"population": 232895,
+"density": 17,
+"areaKm2": 13985.6
+},
+"TZ0506": {
+"name": "Mvomero",
+"population": 421741,
+"density": 55,
+"areaKm2": 7660.6
+},
+"TZ0507": {
+"name": "Gairo",
+"population": 258205,
+"density": 126,
+"areaKm2": 2046.9
+},
+"TZ0601": {
+"name": "Bagamoyo",
+"population": 205478,
+"density": 24,
+"areaKm2": 8480.6
+},
+"TZ0602": {
+"name": "Kibaha",
+"population": 388727,
+"density": 167,
+"areaKm2": 2328.1
+},
+"TZ0603": {
+"name": "Kisarawe",
+"population": 159226,
+"density": 34,
+"areaKm2": 4705.8
+},
+"TZ0604": {
+"name": "Mkuranga",
+"population": 533033,
+"density": 168,
+"areaKm2": 3170.4
+},
+"TZ0605": {
+"name": "Rufiji",
+"population": 159906,
+"density": 17,
+"areaKm2": 9197.1
+},
+"TZ0606": {
+"name": "Mafia",
+"population": 66180,
+"density": 134,
+"areaKm2": 495.6
+},
+"TZ0701": {
+"name": "Kinondoni",
+"population": 982328,
+"density": 3663,
+"areaKm2": 268.2
+},
+"TZ0702": {
+"name": "Ilala",
+"population": 1649912,
+"density": 4643,
+"areaKm2": 355.3
+},
+"TZ0703": {
+"name": "Temeke",
+"population": 1346674,
+"density": 8823,
+"areaKm2": 152.6
+},
+"TZ0801": {
+"name": "Kilwa",
+"population": 297676,
+"density": 19,
+"areaKm2": 15371.6
+},
+"TZ0802": {
+"name": "Lindi",
+"population": 174126,
+"density": 25,
+"areaKm2": 6971.1
+},
+"TZ0803": {
+"name": "Nachingwea",
+"population": 233655,
+"density": 42,
+"areaKm2": 5576.9
+},
+"TZ0804": {
+"name": "Liwale",
+"population": 136505,
+"density": 4,
+"areaKm2": 34380.2
+},
+"TZ0805": {
+"name": "Ruangwa",
+"population": 185573,
+"density": 72,
+"areaKm2": 2566.5
+},
+"TZ0901": {
+"name": "Mtwara",
+"population": 305276,
+"density": 78,
+"areaKm2": 3924.7
+},
+"TZ0902": {
+"name": "Newala",
+"population": 241288,
+"density": 124,
+"areaKm2": 1948.2
+},
+"TZ0903": {
+"name": "Masasi",
+"population": 452363,
+"density": 94,
+"areaKm2": 4800.1
+},
+"TZ0904": {
+"name": "Tandahimba",
+"population": 299073,
+"density": 143,
+"areaKm2": 2095.5
+},
+"TZ0906": {
+"name": "Nanyumbu",
+"population": 204323,
+"density": 39,
+"areaKm2": 5262.5
+},
+"TZ1001": {
+"name": "Tunduru",
+"population": 412054,
+"density": 22,
+"areaKm2": 18643
+},
+"TZ1002": {
+"name": "Songea",
+"population": 464486,
+"density": 32,
+"areaKm2": 14624.2
+},
+"TZ1003": {
+"name": "Mbinga",
+"population": 444478,
+"density": 94,
+"areaKm2": 4730.5
+},
+"TZ1005": {
+"name": "Namtumbo",
+"population": 271368,
+"density": 12,
+"areaKm2": 21933.1
+},
+"TZ1006": {
+"name": "Nyasa",
+"population": 191193,
+"density": 59,
+"areaKm2": 3230
+},
+"TZ1101": {
+"name": "Iringa",
+"population": 517844,
+"density": 26,
+"areaKm2": 20188.1
+},
+"TZ1102": {
+"name": "Mufindi",
+"population": 411325,
+"density": 50,
+"areaKm2": 8255.3
+},
+"TZ1104": {
+"name": "Kilolo",
+"population": 263559,
+"density": 29,
+"areaKm2": 9255.2
+},
+"TZ1201": {
+"name": "Chunya",
+"population": 344471,
+"density": 18,
+"areaKm2": 19085.3
+},
+"TZ1202": {
+"name": "Mbeya",
+"population": 912862,
+"density": 305,
+"areaKm2": 2996.1
+},
+"TZ1203": {
+"name": "Kyela",
+"population": 266426,
+"density": 338,
+"areaKm2": 787.8
+},
+"TZ1204": {
+"name": "Rungwe",
+"population": 273536,
+"density": 129,
+"areaKm2": 2124.8
+},
+"TZ1207": {
+"name": "Mbarali",
+"population": 446336,
+"density": 34,
+"areaKm2": 13208.1
+},
+"TZ1301": {
+"name": "Iramba",
+"population": 328912,
+"density": 73,
+"areaKm2": 4481.6
+},
+"TZ1302": {
+"name": "Singida",
+"population": 517354,
+"density": 161,
+"areaKm2": 3212.3
+},
+"TZ1303": {
+"name": "Manyoni",
+"population": 279069,
+"density": 10,
+"areaKm2": 28679.6
+},
+"TZ1305": {
+"name": "Ikungi",
+"population": 411262,
+"density": 48,
+"areaKm2": 8530.9
+},
+"TZ1306": {
+"name": "Mkalama",
+"population": 255514,
+"density": 83,
+"areaKm2": 3092
+},
+"TZ1401": {
+"name": "Nzega",
+"population": 699691,
+"density": 89,
+"areaKm2": 7866.2
+},
+"TZ1402": {
+"name": "Igunga",
+"population": 546204,
+"density": 77,
+"areaKm2": 7071.6
+},
+"TZ1403": {
+"name": "Uyui",
+"population": 562588,
+"density": 49,
+"areaKm2": 11453.6
+},
+"TZ1404": {
+"name": "Urambo",
+"population": 260322,
+"density": 48,
+"areaKm2": 5436.8
+},
+"TZ1405": {
+"name": "Sikonge",
+"population": 335686,
+"density": 13,
+"areaKm2": 26500.1
+},
+"TZ1407": {
+"name": "Kaliua",
+"population": 678447,
+"density": 43,
+"areaKm2": 15761.9
+},
+"TZ1501": {
+"name": "Kalambo",
+"population": 316783,
+"density": 56,
+"areaKm2": 5641.3
+},
+"TZ1502": {
+"name": "Sumbawanga",
+"population": 798316,
+"density": 131,
+"areaKm2": 6109.2
+},
+"TZ1503": {
+"name": "Nkasi",
+"population": 425420,
+"density": 44,
+"areaKm2": 9585.3
+},
+"TZ1601": {
+"name": "Kibondo",
+"population": 362922,
+"density": 27,
+"areaKm2": 13379.4
+},
+"TZ1602": {
+"name": "Kasulu",
+"population": 776088,
+"density": 97,
+"areaKm2": 8018.2
+},
+"TZ1603": {
+"name": "Kigoma",
+"population": 455180,
+"density": 361,
+"areaKm2": 1259.5
+},
+"TZ1605": {
+"name": "Uvinza",
+"population": 458353,
+"density": 44,
+"areaKm2": 10349.1
+},
+"TZ1606": {
+"name": "Buhigwe",
+"population": 240005,
+"density": 157,
+"areaKm2": 1525.3
+},
+"TZ1607": {
+"name": "Kakonko",
+"population": 178419,
+"density": 81,
+"areaKm2": 2217.7
+},
+"TZ1702": {
+"name": "Kishapu",
+"population": 335483,
+"density": 79,
+"areaKm2": 4249.6
+},
+"TZ1703": {
+"name": "Shinyanga",
+"population": 683355,
+"density": 167,
+"areaKm2": 4090.1
+},
+"TZ1704": {
+"name": "Kahama",
+"population": 453654,
+"density": 56,
+"areaKm2": 8143.4
+},
+"TZ1801": {
+"name": "Karagwe",
+"population": 385744,
+"density": 75,
+"areaKm2": 5176.4
+},
+"TZ1802": {
+"name": "Bukoba",
+"population": 467386,
+"density": 273,
+"areaKm2": 1711.7
+},
+"TZ1803": {
+"name": "Muleba",
+"population": 637659,
+"density": 185,
+"areaKm2": 3450.8
+},
+"TZ1804": {
+"name": "Biharamulo",
+"population": 457114,
+"density": 62,
+"areaKm2": 7360.4
+},
+"TZ1805": {
+"name": "Ngara",
+"population": 383092,
+"density": 117,
+"areaKm2": 3279.3
+},
+"TZ1807": {
+"name": "Missenyi",
+"population": 245394,
+"density": 87,
+"areaKm2": 2828.7
+},
+"TZ1808": {
+"name": "Kyerwa",
+"population": 412910,
+"density": 161,
+"areaKm2": 2559.6
+},
+"TZ1901": {
+"name": "Ukerewe",
+"population": 387815,
+"density": 642,
+"areaKm2": 604.3
+},
+"TZ1902": {
+"name": "Magu",
+"population": 421119,
+"density": 275,
+"areaKm2": 1533.2
+},
+"TZ1903": {
+"name": "Nyamagana",
+"population": 594834,
+"density": 3250,
+"areaKm2": 183
+},
+"TZ1904": {
+"name": "Kwimba",
+"population": 480025,
+"density": 148,
+"areaKm2": 3237.7
+},
+"TZ1905": {
+"name": "Sengerema",
+"population": 425415,
+"density": 135,
+"areaKm2": 3144.6
+},
+"TZ1906": {
+"name": "Ilemela",
+"population": 509687,
+"density": 2048,
+"areaKm2": 248.9
+},
+"TZ1907": {
+"name": "Misungwi",
+"population": 467867,
+"density": 180,
+"areaKm2": 2600.8
+},
+"TZ2001": {
+"name": "Tarime",
+"population": 537891,
+"density": 352,
+"areaKm2": 1529.7
+},
+"TZ2002": {
+"name": "Serengeti",
+"population": 340349,
+"density": 30,
+"areaKm2": 11243.4
+},
+"TZ2003": {
+"name": "Musoma",
+"population": 430837,
+"density": 322,
+"areaKm2": 1336.3
+},
+"TZ2004": {
+"name": "Bunda",
+"population": 426792,
+"density": 140,
+"areaKm2": 3049.2
+},
+"TZ2006": {
+"name": "Rorya",
+"population": 354490,
+"density": 177,
+"areaKm2": 2006
+},
+"TZ2101": {
+"name": "Babati",
+"population": 504772,
+"density": 90,
+"areaKm2": 5608
+},
+"TZ2102": {
+"name": "Hanang",
+"population": 367391,
+"density": 102,
+"areaKm2": 3592.2
+},
+"TZ2103": {
+"name": "Mbulu",
+"population": 376865,
+"density": 97,
+"areaKm2": 3883.4
+},
+"TZ2104": {
+"name": "Simanjiro",
+"population": 291169,
+"density": 15,
+"areaKm2": 19355.5
+},
+"TZ2105": {
+"name": "Kiteto",
+"population": 352305,
+"density": 27,
+"areaKm2": 12900
+},
+"TZ2202": {
+"name": "Wanging'ombe",
+"population": 191506,
+"density": 56,
+"areaKm2": 3446.1
+},
+"TZ2203": {
+"name": "Makete",
+"population": 109160,
+"density": 27,
+"areaKm2": 4082.7
+},
+"TZ2204": {
+"name": "Njombe",
+"population": 437919,
+"density": 56,
+"areaKm2": 7863.6
+},
+"TZ2205": {
+"name": "Ludewa",
+"population": 151361,
+"density": 26,
+"areaKm2": 5872.2
+},
+"TZ2302": {
+"name": "Mpanda",
+"population": 662304,
+"density": 102,
+"areaKm2": 6485.6
+},
+"TZ2303": {
+"name": "Mlele",
+"population": 118818,
+"density": 5,
+"areaKm2": 23473
+},
+"TZ2401": {
+"name": "Bariadi",
+"population": 644312,
+"density": 118,
+"areaKm2": 5466.2
+},
+"TZ2402": {
+"name": "Itilima",
+"population": 419213,
+"density": 89,
+"areaKm2": 4690.5
+},
+"TZ2403": {
+"name": "Meatu",
+"population": 366941,
+"density": 41,
+"areaKm2": 8880.6
+},
+"TZ2404": {
+"name": "Maswa",
+"population": 427864,
+"density": 116,
+"areaKm2": 3674.3
+},
+"TZ2405": {
+"name": "Busega",
+"population": 282167,
+"density": 197,
+"areaKm2": 1431.4
+},
+"TZ2501": {
+"name": "Geita",
+"population": 1396885,
+"density": 287,
+"areaKm2": 4871.5
+},
+"TZ2502": {
+"name": "Nyang'hwale",
+"population": 225803,
+"density": 141,
+"areaKm2": 1600.7
+},
+"TZ2503": {
+"name": "Mbogwe",
+"population": 362855,
+"density": 170,
+"areaKm2": 2131.9
+},
+"TZ2504": {
+"name": "Bukombe",
+"population": 407102,
+"density": 51,
+"areaKm2": 8015.3
+},
+"TZ2505": {
+"name": "Chato",
+"population": 584963,
+"density": 195,
+"areaKm2": 2999.6
+},
+"TZ2601": {
+"name": "Songwe",
+"population": 229129,
+"density": 21,
+"areaKm2": 11030.9
+},
+"TZ2605": {
+"name": "Ileje",
+"population": 125869,
+"density": 68,
+"areaKm2": 1866
+},
+"TZ2606": {
+"name": "Mbozi",
+"population": 510599,
+"density": 134,
+"areaKm2": 3817
+},
+"TZ2609": {
+"name": "Momba",
+"population": 259781,
+"density": 54,
+"areaKm2": 4809.5
+},
+"TZ5101": {
+"name": "Kaskazini A",
+"population": 157369,
+"density": 649,
+"areaKm2": 242.6
+},
+"TZ5102": {
+"name": "Kaskazini B",
+"population": 99921,
+"density": 451,
+"areaKm2": 221.4
+},
+"TZ5201": {
+"name": "Kati",
+"population": 132717,
+"density": 259,
+"areaKm2": 513.2
+},
+"TZ5202": {
+"name": "Kusini",
+"population": 63156,
+"density": 172,
+"areaKm2": 367
+},
+"TZ5302": {
+"name": "Mjini",
+"population": 219007,
+"density": 13898,
+"areaKm2": 15.8
+},
+"TZ5401": {
+"name": "Wete",
+"population": 148712,
+"density": 495,
+"areaKm2": 300.3
+},
+"TZ5402": {
+"name": "Micheweni",
+"population": 123379,
+"density": 607,
+"areaKm2": 203.4
+},
+"TZ5501": {
+"name": "Chake Chake",
+"population": 136298,
+"density": 600,
+"areaKm2": 227.2
+},
+"TZ5502": {
+"name": "Mkoani",
+"population": 135052,
+"density": 511,
+"areaKm2": 264.2
+}
+}
+}

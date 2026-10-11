@@ -55,13 +55,13 @@ p = tf.add_paragraph(); setp(p, 'From a hidden-sheet Excel template to a scalabl
 tf = box(s, Inches(0.8), Inches(4.85), Inches(11.7), Inches(2))
 setp(tf.paragraphs[0], "Prime Minister's Office, Disaster Management Department (PMO-DMD)", 16, WHITE, bold=True)
 p = tf.add_paragraph(); setp(p, 'Reproducing the regional INFORM model exactly, and scaling it to all 195 councils', 14, RGBColor(0xD8,0xE6,0xDC))
-p = tf.add_paragraph(); setp(p, 'June 2026', 13, RGBColor(0xD8,0xE6,0xDC))
+p = tf.add_paragraph(); setp(p, 'June 2026, corrected October 2026', 13, RGBColor(0xD8,0xE6,0xDC))
 
 # ---- 2 WHAT IS INFORM ----
 s = slide(); header(s, 'BACKGROUND', 'What is INFORM?')
 bullets(s, [
  ('INFORM is a global, open composite index of disaster risk: a single 0–10 score per area (0 = lowest risk, 10 = highest).', 0, NAVY, False),
- ('Tanzania runs the regional INFORM Model Template (the SADC / IGAD subnational adaptation). The official national INFORM risk is 4.1.', 0, NAVY, False),
+ ('Tanzania runs the regional INFORM Model Template (the SADC / IGAD subnational adaptation, 2024 release) at 170 district-level units. INFORM publishes no national figure for a subnational model; the INFORM aggregate of all 195 councils on the workbook data is 3.8 (Hazard & Exposure 2.4, Vulnerability 3.8, Lack of Coping 6.2).', 0, NAVY, False),
  ('Risk is built from three dimensions (the INFORM logic):', 0, NAVY, True),
  ('Hazard & Exposure: the threats (drought, flood, earthquake, conflict…) and who/what is exposed', 1, GREY, False),
  ('Vulnerability: susceptibility of people (poverty, health, food insecurity, displacement)', 1, GREY, False),
@@ -151,7 +151,7 @@ bullets(s, [
  ('Manual & single-file: one workbook, no version control, easy to break, hard to audit.', 0, NAVY, False),
  ('Closed to local data: no clean way to add a local indicator or feed council-level values.', 0, NAVY, False),
  ('No automation: no live update, no link to early-warning or anticipatory action.', 0, NAVY, False),
- ('Result: the model stops at the national / regional level. Local risk, where decisions are made, is out of reach.', 0, RED, True),
+ ('Result: the model stops at its 170 district-level units of 2024. Council, ward and village risk, where decisions are made, is out of reach.', 0, RED, True),
 ], top=Inches(2.6), size=16, gap=11)
 
 # ---- 8 ENGINES MIMIC EXCEL ----
@@ -161,9 +161,9 @@ bullets(s, [
  ('Proven byte-for-byte against the official workbook:', 0, GREEN, True),
  ('8,664 / 8,664 standardised indicator cells reproduce the template exactly', 1, GREEN, False),
  ('170 / 170 district risk scores reproduce the template exactly', 1, GREEN, False),
- ('Now it scales: the same engine runs unchanged on 195 councils and 31 regions (194/195 match district INFORM; the rest are new post-2024 councils).', 0, NAVY, False),
+ ('Now it scales: the same engine runs unchanged on 195 councils and 31 regions. Each council carries the values of its workbook unit (25 units back two councils; 20 councils created after the workbook inherit, flagged) until institutions enter council values.', 0, NAVY, False),
  ('Spec-driven & open: add, delete or amend an indicator without touching the math; fully testable and version-controlled.', 0, NAVY, False),
- ('The regional INFORM core is never altered: it is reproduced exactly; everything new is additive (v2).', 0, GOLD, True),
+ ('The regional INFORM core is never altered: it is reproduced exactly; every Tanzanian addition is a separate, labelled Advancement layer shown beside it.', 0, GOLD, True),
 ], top=Inches(1.7), size=16, gap=10)
 
 # ---- 9 LOCAL DATA METHODS ----
@@ -181,20 +181,20 @@ bullets(s, [
 s = slide(); header(s, 'HONEST STATUS', 'Where this actually stands: no overselling')
 quad = [('SOLID / EXACT', GREEN, [
           'Engine reproduces the template byte-for-byte: 8,664/8,664 cells, 170/170 risks',
-          'Same engine runs at 195 councils / 31 regions (194/195 = district INFORM)',
-          '2022 census population per council (sum = 61,741,120, the exact national total)']),
+          'Core = the SADC 2024 workbook values only, rebuilt after the October 2026 integrity audit found 165/170 units altered',
+          '2022 census population per council (sum = 61,741,120, the exact national total); data portal with institutional review chains']),
         ('PROTOTYPE / PROPOSED', GOLD, [
-          'Advanced "exploded" multi-source indicators + weights = literature-proposed, NOT enforced',
-          'EO drought layers (aridity P/PET, NDVI, soil moisture) computed & validated: research-grade',
+          'Advancement layer: 12 of 25 earth-observation sub-indicators filled (aridity, SPEI depth, rainfall CV, NDVI, soil moisture, heavy rain, heat days, wind, landslide, earthquake record), shown beside the Core',
+          'Basket weights are literature-proposed, not calibrated; indices measure intensity, not exposed population',
           'Seasonality from CHIRPS 8-zone analysis: context layer, not yet in the index']),
         ('TRIED, DID NOT WORK', RED, [
+          'Composite drought index (4 members blended, raise-only floor): scored wet highland councils 10 → WITHDRAWN; season-failure member withheld',
           'Sentinel-1 flood (VV<-17dB): FAILED validation, flagged soda-lakes/salt-flats as water → PULLED',
-          'Lightning (LIS/OTD): not available on Earth Engine, not done',
-          'SMAP soil moisture product is deprecated (ends 2022): not current']),
+          'Lightning (LIS/OTD) not done; SMAP soil moisture product deprecated (ends 2022)']),
         ('STILL OPEN', NAVY, [
-          'Many vulnerability indicators exist only at region/national level → council = labelled proxy',
-          'No sustainable update pipeline; no live link to EOCC / early warning',
-          'TASAF council poverty & IPC food: data exists but locked in PDFs/registry'])]
+          'Six indicator groups empty in the workbook (heatwave, lightning, zoonoses, hazmat, vehicle accidents, vulnerable-groups economic)',
+          'Most vulnerability & coping indicators vary only between regions → councils share values, labelled',
+          'No sustainable update pipeline from TMA / basin boards / NEMC; no live link to EOCC / early warning'])]
 xy = [(Inches(0.55), Inches(1.65)), (Inches(6.85), Inches(1.65)), (Inches(0.55), Inches(4.55)), (Inches(6.85), Inches(4.55))]
 for (title, col, items), (x, y) in zip(quad, xy):
     w = Inches(5.9); h = Inches(2.75)
@@ -209,7 +209,7 @@ for (title, col, items), (x, y) in zip(quad, xy):
 # ---- 10 THE GAP ----
 s = slide(); header(s, 'THE GAP', 'What is still missing: the challenge ahead')
 bullets(s, [
- ('Subnational risk is not yet operational: decisions happen at council/ward level, but official INFORM stops at national/regional.', 0, RED, True),
+ ('Subnational risk is not yet operational: decisions happen at council/ward level, but the regional INFORM model stops at 170 district-level units.', 0, RED, True),
  ('Local data is scattered and uneven: many key indicators exist only at region or national level (poverty, health surveys, GDP).', 0, NAVY, False),
  ('No sustainable pipeline: capturing, validating and updating local data is still manual and ad-hoc.', 0, NAVY, False),
  ('Earth-Observation indicators (vegetation, soil moisture, flood, landslide) need proper computation, downscaling and validation.', 0, NAVY, False),
@@ -250,12 +250,12 @@ tf = box(s, Inches(0.9), Inches(3.3), Inches(11.6), Inches(3))
 for i, t in enumerate([
    'The template math is fully understood and reproduced exactly (8,664/8,664; 170/170).',
    'It runs at council level (195) because it is code, not a hidden-sheet workbook.',
-   'Local-data capture and EO are working but research-grade, and some attempts failed (stated plainly).',
+   'Earth-observation layers are shown apart from the Core as an Advancement layer; they are research-grade, and some attempts failed (stated plainly).',
    'Ask: research partnership + financing to integrate local data and support member-state adoption.']):
     p = tf.paragraphs[0] if i == 0 else tf.add_paragraph()
     setp(p, '▸  ' + t, 18, RGBColor(0xD8,0xE6,0xDC)); p.space_after = Pt(12)
 tf = box(s, Inches(0.9), Inches(6.6), Inches(11.6), Inches(0.6))
-setp(tf.paragraphs[0], "PMO-DMD Tanzania   ·   INFORM Subnational Risk   ·   June 2026", 13, GOLD, bold=True)
+setp(tf.paragraphs[0], "PMO-DMD Tanzania   ·   INFORM Subnational Risk   ·   October 2026", 13, GOLD, bold=True)
 
 out = os.path.join(ROOT, 'docs/INFORM_Tanzania_Subnational_Risk.pptx')
 prs.save(out)

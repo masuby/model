@@ -57,7 +57,7 @@ describe('formula parity with the literal Excel expressions', () => {
 });
 
 describe('edge cases (locked in)', () => {
-  it('national 2.2 / 5.5 / 5.9 → 4.1', () => expect(riskScore(2.2, 5.5, 5.9)).toBe(4.1));
+  it('2.2 / 5.5 / 5.9 → 4.1 (Kondoa’s workbook row)', () => expect(riskScore(2.2, 5.5, 5.9)).toBe(4.1));
   it('a zero dimension yields 0, not null (Excel: 0^(1/3) = 0)', () => expect(riskScore(0, 5.5, 5.9)).toBe(0));
   it('a missing dimension yields null', () => expect(riskScore(null, 5.5, 5.9)).toBeNull());
   it('a single category passes through unchanged', () => expect(dimensionScore([4])).toBe(4));

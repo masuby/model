@@ -54,13 +54,13 @@
      "en": [
       "Please do not collect or scoop leaking fuel; it can explode (Morogoro 2019: 105 deaths).",
       "Move everyone at least 200 m away.",
-      "Call 114 and 190.",
+      "Call 190.",
       "Police and Fire and Rescue Force: close the road and cordon off the area."
      ],
      "sw": [
       "Tafadhali usichote wala kukusanya mafuta yanayovuja; yanaweza kulipuka (Morogoro 2019: vifo 105).",
       "Waondoe watu wote umbali wa angalau mita 200.",
-      "Piga 114 na 190.",
+      "Piga 190.",
       "Polisi na Jeshi la Zimamoto na Uokoaji: fungeni barabara na wekeni eneo la zuio."
      ]
     }
@@ -141,13 +141,13 @@
     "actions": {
      "en": [
       "Do not enter the rubble; more of the building may collapse.",
-      "Call 114 and 190.",
+      "Call 190.",
       "Keep everyone at least 50 m away.",
       "Tell rescuers where trapped people were last seen; Fire and Rescue Force leads the rescue."
      ],
      "sw": [
       "Usiingie kwenye kifusi; sehemu nyingine ya jengo inaweza kuanguka.",
-      "Piga 114 na 190.",
+      "Piga 190.",
       "Waweke watu wote umbali wa angalau mita 50.",
       "Waeleze waokoaji mahali walipoonekana mara ya mwisho waliokwama; Jeshi la Zimamoto na Uokoaji linaongoza uokoaji."
      ]
@@ -163,13 +163,13 @@
       "Leave the building immediately and help others out.",
       "Stay low under smoke.",
       "Close doors behind you, but do not lock them.",
-      "Call 114, and meet your family at the agreed assembly point."
+      "Call 190, and meet your family at the agreed assembly point."
      ],
      "sw": [
       "Toka kwenye jengo mara moja na wasaidie wengine kutoka.",
       "Inama chini ya moshi.",
       "Funga milango nyuma yako, lakini usiifunge kwa ufunguo.",
-      "Piga 114, na kutana na familia yako mahali pa kukutana palipokubaliwa."
+      "Piga 190, na kutana na familia yako mahali pa kukutana palipokubaliwa."
      ]
     }
    },
@@ -181,13 +181,13 @@
     "actions": {
      "en": [
       "Sound the alarm and leave by emergency exits.",
-      "Call 114.",
+      "Call 190.",
       "Tell firefighters about any chemicals stored on site.",
       "Please do not return until the Fire and Rescue Force declares it safe."
      ],
      "sw": [
       "Piga kengele ya hatari na toka kupitia milango ya dharura.",
-      "Piga 114.",
+      "Piga 190.",
       "Wajulishe wazima moto kuhusu kemikali zilizohifadhiwa eneo hilo.",
       "Tafadhali usirudi hadi Jeshi la Zimamoto na Uokoaji litangaze kuwa ni salama."
      ]
@@ -202,13 +202,13 @@
      "en": [
       "Sound the alarm.",
       "Teachers and nurses: move pupils and patients out by marked routes; carry those who cannot walk.",
-      "Call 114.",
+      "Call 190.",
       "Count everyone at the assembly point."
      ],
      "sw": [
       "Piga kengele ya hatari.",
       "Walimu na wauguzi: watoeni wanafunzi na wagonjwa kupitia njia zilizowekewa alama; wabebeni wasioweza kutembea.",
-      "Piga 114.",
+      "Piga 190.",
       "Hesabuni kila mtu mahali pa kukusanyika."
      ]
     }
@@ -223,13 +223,13 @@
       "Move at least 200 m away.",
       "Do not use phones, cigarettes or open flames near the pumps.",
       "Station staff: switch off power at the main switch only if safe.",
-      "Call 114; Police close the road."
+      "Call 190; Police close the road."
      ],
      "sw": [
       "Ondoka umbali wa angalau mita 200.",
       "Usitumie simu, sigara wala moto karibu na pampu.",
       "Wafanyakazi wa kituo: zimeni umeme kwenye swichi kuu ikiwa tu ni salama.",
-      "Piga 114; Polisi wafunge barabara."
+      "Piga 190; Polisi wafunge barabara."
      ]
     }
    },
@@ -270,13 +270,13 @@
      "en": [
       "Move upwind and uphill, away from the spill.",
       "Do not touch or smell the substance.",
-      "Call 190 and 114; report any label or number on the container.",
+      "Call 190; report any label or number on the container.",
       "Fire and Rescue Force, NEMC and GCLA: cordon off at least 100 m and manage the spill."
      ],
      "sw": [
       "Hamia upande upepo unakotoka na eneo la juu, mbali na kemikali.",
       "Usiguse wala kunusa kemikali.",
-      "Piga 190 na 114; toa taarifa ya maandishi au namba iliyo kwenye chombo.",
+      "Piga 190; toa taarifa ya maandishi au namba iliyo kwenye chombo.",
       "Jeshi la Zimamoto na Uokoaji, NEMC na GCLA: wekeni eneo la zuio la angalau mita 100 na dhibitini kemikali."
      ]
     }
@@ -331,13 +331,13 @@
       "Open windows and doors.",
       "Do not switch lights or appliances on or off.",
       "Close the cylinder valve if it is safe, and leave the room.",
-      "Call 114."
+      "Call 190."
      ],
      "sw": [
       "Fungua madirisha na milango.",
       "Usiwashe wala kuzima taa au vifaa vya umeme.",
       "Funga valvu ya mtungi ikiwa ni salama, na toka chumbani.",
-      "Piga 114."
+      "Piga 190."
      ]
     }
    },

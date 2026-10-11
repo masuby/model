@@ -326,12 +326,12 @@
      "en": [
       "If it is safe, switch off electricity and close gas cylinders.",
       "Do not light matches or candles if you smell gas.",
-      "Report fires: call 114."
+      "Report fires: call 190."
      ],
      "sw": [
       "Kama ni salama, zimeni umeme na fungeni mitungi ya gesi.",
       "Msiwashe kiberiti wala mishumaa mkihisi harufu ya gesi.",
-      "Toeni taarifa ya moto: pigeni 114."
+      "Toeni taarifa ya moto: pigeni 190."
      ]
     }
    },
@@ -444,12 +444,12 @@
     },
     "actions": {
      "en": [
-      "Report trapped people: call 190 or 114, or inform local leaders.",
+      "Report trapped people: call 190, or inform local leaders.",
       "Please do not enter collapsed buildings; wait for rescue teams.",
       "Fire and Rescue Force: lead search and rescue with the Police Force, JWTZ and the Red Cross."
      ],
      "sw": [
-      "Toeni taarifa ya watu walionaswa: pigeni 190 au 114, au wajulisheni viongozi wa eneo.",
+      "Toeni taarifa ya watu walionaswa: pigeni 190, au wajulisheni viongozi wa eneo.",
       "Tafadhali msiingie kwenye majengo yaliyoanguka; subirini timu za uokoaji.",
       "Jeshi la Zimamoto na Uokoaji: ongozeni utafutaji na uokoaji kwa kushirikiana na Jeshi la Polisi, JWTZ na Chama cha Msalaba Mwekundu."
      ]

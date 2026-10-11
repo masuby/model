@@ -121,3 +121,18 @@ describe('full index', () => {
     expect(good.score).toBeGreaterThan(poor.score);
   });
 });
+
+describe('the zero rule (SEV-01)', () => {
+  it('publishes no severity when nobody is in need: index 0, no category', () => {
+    const base = SEVERITY_SCENARIOS[0].input;
+    const nobody = computeSeverity({ ...base, levels: { 5: 0, 4: 0, 3: 0, 2: 0 } as never });
+    expect(nobody.zeroRule).toBe('noPeopleInNeed');
+    expect(nobody.severity).toBe(0);
+    expect(nobody.category).toBeNull();
+    expect(nobody.level).toBeNull();
+    // A scenario with people in need keeps its severity and category.
+    const withPeople = computeSeverity(base);
+    expect(withPeople.zeroRule).toBeNull();
+    expect(withPeople.severity).not.toBe(0);
+  });
+});

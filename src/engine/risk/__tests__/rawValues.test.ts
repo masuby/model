@@ -8,6 +8,7 @@ import baselineJson from '@/data/inform-baseline-raw.json';
 import { buildModel, indicatorValue } from '../model';
 import {
   councilInput,
+  depositedScore,
   deriveRawOverrides,
   indexRawValues,
   leafOfSpec,
@@ -18,7 +19,7 @@ import {
   type BaselineRaw,
   type RawValue,
 } from '../rawValues';
-import { computeFromRaw, SPECS, usedSpecs } from '../standardise';
+import { ACTIVATED_SPECS, ACTIVE_SPECS, SPECS, computeFromRaw, usedSpecs } from '../standardise';
 import pipeline from './fixtures/pipeline.fixture.json';
 
 const baseline = baselineJson as BaselineRaw;
@@ -35,10 +36,19 @@ const HDI = 'VU.SE.POV-HDI';
 
 describe('indicator → leaf mapping', () => {
   it('maps every used workbook indicator onto exactly one model leaf', () => {
-    const mapped = leafSpecs().flatMap((l) => l.specs.map((s) => s.id));
+    const mapped = leafSpecs(SPECS).flatMap((l) => l.specs.map((s) => s.id));
     expect(new Set(mapped).size).toBe(mapped.length);
-    expect(mapped.sort()).toEqual(usedSpecs().map((s) => s.id).sort());
+    expect(mapped.sort()).toEqual(usedSpecs(SPECS).map((s) => s.id).sort());
     expect(leafOfSpec(MPI)).toBe('vulnerability:developmentPoverty');
+  });
+  it('the active table adds the Benchmark 2026 activations, each on a leaf the workbook left empty or thin', () => {
+    const active = leafSpecs(ACTIVE_SPECS).flatMap((l) => l.specs.map((s) => s.id));
+    const added = active.filter((id) => !usedSpecs(SPECS).some((s) => s.id === id)).sort();
+    expect(added).toEqual(Object.keys(ACTIVATED_SPECS).sort());
+    expect(added.length).toBeGreaterThanOrEqual(6);
+    expect(leafOfSpec('HA.NAT.HW-EXP')).toBe('hazard:heatwave');
+    expect(leafOfSpec('HA.HUM.ACC')).toBe('hazard:vehicleAccidents');
+    expect(leafOfSpec('VU.VG.ECO-FEMHH')).toBe('vulnerability:economic');
   });
 });
 
@@ -57,7 +67,7 @@ describe('baseline', () => {
       const council = model.councils.find((c) => c.sourceId === sourceId);
       if (!council) continue;
       const expected = computeFromRaw(entry.raw).component;
-      for (const leaf of leafSpecs()) {
+      for (const leaf of leafSpecs(SPECS)) {
         const inputs = leaf.specs.map((s) => councilInput(idx, s, council, baseline));
         const scored = inputs.filter((x) => x.score != null);
         const got = scored.length ? scored.reduce((a, x) => a + x.score!, 0) / scored.length : null;
@@ -135,5 +145,33 @@ describe('merging with direct 0–10 edits', () => {
   it('replaces an older direct edit with the newer measured value', () => {
     const explicit = { [kondoa.id]: { [ref]: { value: 1.1, at: at('04-01') } } };
     expect(mergeOverrides(explicit, derived, model)[kondoa.id]?.[ref]?.inputs).toBeDefined();
+  });
+});
+
+describe('deposited 0–10 scores (entry path B)', () => {
+  const values: RawValue[] = [
+    { specId: MPI, unitId: regionIdOf(kondoa), level: 'region', value: 0.5, at: at('02-01') },
+    { specId: MPI, unitId: kondoa.id, level: 'council', value: 7.55, valueType: 'score', method: 'inform', source: 'NBS (2024) HBS 2022/23, table 4.2', dataset: 'HBS 2022/23', at: at('03-01') },
+  ];
+  const idx = indexRawValues(values);
+
+  it('takes the deposited score as the indicator score, one decimal, with its source in the lineage', () => {
+    expect(depositedScore(7.55)).toBe(7.6);
+    expect(depositedScore(12)).toBe(10);
+    expect(depositedScore(null)).toBeNull();
+    const input = councilInput(idx, SPECS[MPI], kondoa, baseline);
+    expect(input).toMatchObject({ raw: null, score: 7.6, level: 'council', valueType: 'score', source: 'NBS (2024) HBS 2022/23, table 4.2' });
+    // The sibling council keeps the region's measured value, standardised.
+    expect(councilInput(idx, SPECS[MPI], kondoaTown, baseline)).toMatchObject({ raw: 0.5, score: scoreRaw(SPECS[MPI], 0.5), level: 'region', valueType: 'raw' });
+  });
+
+  it('recomputes the group with the deposited score and changes only that council', () => {
+    const derived = deriveRawOverrides(values, model, baseline);
+    const stamp = derived[kondoa.id]!['vulnerability:developmentPoverty']!;
+    expect(stamp.inputs!.find((i) => i.specId === MPI)).toMatchObject({ score: 7.6, valueType: 'score' });
+    const m = buildModel(mergeOverrides({}, derived, model));
+    expect(indicatorValue(m.byId.get(kondoa.id)!, 'vulnerability', 'developmentPoverty')).toBe(stamp.value);
+    expect(indicatorValue(m.byId.get(kondoaTown.id)!, 'vulnerability', 'developmentPoverty')).toBe(derived[kondoaTown.id]!['vulnerability:developmentPoverty']!.value);
+    expect(derived[kondoaTown.id]!['vulnerability:developmentPoverty']!.value).not.toBe(stamp.value);
   });
 });

@@ -14,7 +14,12 @@ export const isNum = (x: unknown): x is number => typeof x === 'number' && Numbe
  * Excel ROUND(x, 1). Values in the model are non-negative (0–10), so round-half-up
  * (`floor(x·10 + 0.5) / 10`) is identical to Excel's round-half-away-from-zero here.
  */
-export const round1 = (x: number): number => Math.floor(x * 10 + 0.5) / 10;
+/**
+ * ROUND(x, 1) as the workbook rounds: half up, on the decimal value. The nudge of 1e-9 keeps an exact
+ * decimal tie (7.75) that floating-point arithmetic lands a hair below (7.7499999999) on the Excel side
+ * of the tie; it cannot move any value that is not a tie to nine decimals.
+ */
+export const round1 = (x: number): number => Math.floor(x * 10 + 0.5 + 1e-9) / 10;
 
 /** Nullable variant for display code: returns null for anything that is not a finite number. */
 export const round1OrNull = (x: unknown): number | null => (isNum(x) ? round1(x) : null);

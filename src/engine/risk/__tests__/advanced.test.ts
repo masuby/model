@@ -12,10 +12,10 @@ const pipe = pipeJson as unknown as PipelineRow[];
 const unit = pipe.find((r) => r.district === 'Kondoa') ?? pipe[0];
 
 describe('advanced exploded engine', () => {
-  it('holds 25 exploded sub-indicators across 8 components', () => {
+  it('holds 30 exploded sub-indicators across 12 components', () => {
     const all = Object.values(ADVANCED_SPECS);
-    expect(all.length).toBe(25);
-    expect(new Set(all.map((s) => s.component)).size).toBe(8);
+    expect(all.length).toBe(30);
+    expect(new Set(all.map((s) => s.component)).size).toBe(12);
     expect(all.every((s) => s.use === 'Yes')).toBe(true);
   });
 
@@ -39,7 +39,7 @@ describe('advanced exploded engine', () => {
     expect(only.component['Drought']).toBeLessThanOrEqual(10);
   });
 
-  it('the merged spec keeps every normal indicator plus the 25 exploded ones (no id collisions)', () => {
-    expect(Object.keys(ADVANCED_MERGED).length).toBe(Object.keys(SPECS).length + 25);
+  it('the merged spec keeps every normal indicator plus the 30 exploded ones (no id collisions)', () => {
+    expect(Object.keys(ADVANCED_MERGED).length).toBe(Object.keys(SPECS).length + 30);
   });
 });

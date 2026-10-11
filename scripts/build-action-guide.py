@@ -113,7 +113,8 @@ def assign_councils(region: str, names):
     for name in names:
         alias = ALIASES.get(place_key(name))
         if alias:
-            hit = next((c for c in pool if c['name'] == alias), None)
+            # Matched like every other name: the site council's spelling may differ in case ("Dar es Salaam City").
+            hit = next((c for c in pool if place_key(c['name']) == place_key(alias)), None)
             if hit:
                 result[name] = hit
             continue
@@ -264,6 +265,29 @@ COUNCIL_NAME = re.compile(r'(Council|District|Town|Municipal|City)$')
 problems = []
 regions = {}
 
+# The programme uses one emergency number, 190, stated on its own: it is not the Fire and Rescue Force's
+# line (PMO-DMD, 11 October 2026), and the guide book prints 114 in places (RC-11). Applied to every text
+# the script writes; council codes such as C114 are never touched.
+EMERGENCY_NUMBER_FIXES = [
+    (r'\b114 (and|na|or|au) 190\b', '190'),
+    (r'\b190 (and|na|or|au) 114\b', '190'),
+    (r'(?<![A-Za-z0-9])114(?![0-9])', '190'),
+    (r'\b190 \((?:Fire and Rescue|Zimamoto na Uokoaji)\)', '190'),
+    (r'\b(Fire and Rescue|Zimamoto na Uokoaji) \(190\)', r'\1'),
+]
+
+
+def fix_numbers(obj):
+    if isinstance(obj, str):
+        for a, b in EMERGENCY_NUMBER_FIXES:
+            obj = re.sub(a, b, obj)
+        return obj
+    if isinstance(obj, list):
+        return [fix_numbers(x) for x in obj]
+    if isinstance(obj, dict):
+        return {k: fix_numbers(v) for k, v in obj.items()}
+    return obj
+
 
 def know_rows(table):
     out = []
@@ -318,11 +342,16 @@ for n, start in enumerate(region_starts):
             for r, row_name in zip(profile['rows'][1:], row_names):
                 council = by_name.get(row_name)
                 if council and council['id'] in entry['councils']:
-                    entry['councils'][council['id']]['profile'] = {
+                    c = entry['councils'][council['id']]
+                    c['profile'] = {
                         'setting': clean(' '.join(r[1])),
                         'hazards': clean(' '.join(r[2])),
                         'atRisk': clean(' '.join(r[3])),
                     }
+                    # The priority-hazards cell is this council's documented-hazard statement (RC-09): the
+                    # other regions carry one in their alert tables, Tabora in its regional profile table.
+                    c['documented'] = c['profile']['hazards']
+                    c['hazards'] = list(dict.fromkeys(c['hazards'] + hazards_in(c['documented'])))
         continue
 
     tables = [b for b in blocks[start:stop] if b['t'] == 'table']
@@ -412,7 +441,7 @@ if problems:
 def write(path: Path, data) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
     # LF on every platform, as the files are committed.
-    path.write_bytes((json.dumps(data, ensure_ascii=False, indent=1) + '\n').encode('utf-8'))
+    path.write_bytes((json.dumps(fix_numbers(data), ensure_ascii=False, indent=1) + '\n').encode('utf-8'))
 
 
 for key, hazard in guide['hazards'].items():

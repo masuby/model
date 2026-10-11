@@ -74,6 +74,9 @@ export default defineConfig({
     include: ['recharts', 'leaflet', 'react-leaflet', 'radix-ui', 'cmdk', 'sonner', '@supabase/supabase-js', '@tanstack/react-query', 'i18next', 'react-i18next', 'lucide-react', 'zustand', 'zustand/middleware'],
   },
   build: {
+    // No inline scripts in the built page (the content security policy refuses them, SEC-01): the theme
+    // script lives in public/theme-init.js and Vite's module-preload polyfill, an inline script, is off.
+    modulePreload: { polyfill: false },
     target: 'es2022',
     sourcemap: false,
     chunkSizeWarningLimit: 900,

@@ -7,17 +7,23 @@
 import type { RawValue } from '@/engine/risk/rawValues';
 import { AUTHORITIES, AUTHORITY_KEYS, authorityKind } from '@/engine/risk/sources';
 import type { EditRef, EditStamp, Overrides } from '@/engine/risk/types';
+import { ACTIVE_SPECS } from '@/engine/risk/standardise';
 import {
   canEnterIndicator,
   canReview,
+  canReviewCommittee,
+  canSubmitCommittee,
   type Assignment,
   type AuditEntry,
   type DataRequest,
+  type CommitteeRecord,
   type Institution,
+  type NewCommitteeRecord,
   type NewRawSubmission,
   type NewSubmission,
   type Profile,
   type RawSubmission,
+  type Notification,
   type Repository,
   type Role,
   type Submission,
@@ -33,6 +39,8 @@ const K = {
   rawSubmissions: 'inform.v2.rawSubmissions',
   rawValues: 'inform.v2.rawValues',
   validations: 'inform.v2.validations',
+  committeeRecords: 'inform.v2.committeeRecords',
+  notifications: 'inform.v2.notifications',
   demoProfiles: 'inform.v2.demoProfiles',
   legacyOverrides: 'inform_overrides_v1',
   legacyPending: 'inform_pending_v1',
@@ -55,6 +63,13 @@ function write(key: string, value: unknown): void {
 }
 const uid = () => (crypto.randomUUID ? crypto.randomUUID() : `${Date.now()}-${Math.random().toString(36).slice(2)}`);
 const now = () => new Date().toISOString();
+
+/** Tell an institution about a request, a reminder or a decision (the local counterpart of migration 0011's triggers). */
+function notify(n: Omit<Notification, 'id' | 'createdAt' | 'emailStatus'>): void {
+  const list = read<Notification[]>(K.notifications, []);
+  list.unshift({ ...n, id: uid(), createdAt: now(), emailStatus: 'none' });
+  write(K.notifications, list.slice(0, 500));
+}
 
 /** One-time migration of the old app's edits (indicator leaves + exposure; dimension-total overrides are dropped by design). */
 function migrateLegacy(): void {
@@ -85,13 +100,26 @@ function migrateLegacy(): void {
   localStorage.removeItem(K.legacyPending);
 }
 
-/** Demo identities (one per role). The officer works for NBS unless an administrator changed it. */
-const DEMO_ROLES: readonly Role[] = ['viewer', 'sector', 'pmo', 'admin'];
-const DEMO_NAMES: Record<Role, string> = { viewer: 'Visitor', sector: 'Demo sector officer', pmo: 'Demo PMO reviewer', admin: 'Demo administrator' };
+/**
+ * Demo identities (one per role). The officer works for NBS, the district committee for Kondoa District
+ * and the regional committee for Dodoma Region unless an administrator changed it.
+ */
+const DEMO_ROLES: readonly Role[] = ['viewer', 'sector', 'ddrrc', 'rdrrc', 'ndrrc', 'pmo', 'admin'];
+const DEMO_NAMES: Record<Role, string> = {
+  viewer: 'Visitor',
+  sector: 'Demo sector officer',
+  ddrrc: 'Demo district committee (DDRRC)',
+  rdrrc: 'Demo regional committee (RDRRC)',
+  ndrrc: 'Demo national committee (NDRRC)',
+  pmo: 'Demo PMO reviewer',
+  admin: 'Demo administrator',
+};
+const DEMO_SCOPE: Partial<Record<Role, string>> = { ddrrc: 'C001', rdrrc: 'R-dodoma' };
 
 export function demoProfile(role: Role): Profile {
-  const custom = read<Record<string, { institutionKey?: string | null }>>(K.demoProfiles, {})[`local-demo-${role}`];
+  const custom = read<Record<string, { institutionKey?: string | null; scopeUnitId?: string | null }>>(K.demoProfiles, {})[`local-demo-${role}`];
   const institutionKey = custom && 'institutionKey' in custom ? (custom.institutionKey ?? null) : role === 'sector' ? 'NBS' : null;
+  const scopeUnitId = custom && 'scopeUnitId' in custom ? (custom.scopeUnitId ?? null) : (DEMO_SCOPE[role] ?? null);
   return {
     // One identity per demo role, so a demo reviewer never sees the demo officer's work as their own.
     id: `local-demo-${role}`,
@@ -99,6 +127,7 @@ export function demoProfile(role: Role): Profile {
     institution: institutionKey ? ((AUTHORITIES as Record<string, { label: string }>)[institutionKey]?.label ?? institutionKey) : 'Demo',
     institutionKey,
     role,
+    scopeUnitId,
   };
 }
 
@@ -177,7 +206,7 @@ export function createLocalRepository(): Repository {
       return read<AuditEntry[]>(K.audit, []).slice(0, limit);
     },
     async resetAll(actor) {
-      for (const key of [K.submissions, K.audit, K.assignments, K.requests, K.rawSubmissions, K.rawValues, K.validations]) write(key, []);
+      for (const key of [K.submissions, K.audit, K.assignments, K.requests, K.rawSubmissions, K.rawValues, K.validations, K.committeeRecords]) write(key, []);
       write(K.values, {});
       write(K.demoProfiles, {});
       log({ actor: actor.fullName, action: 'reset', detail: 'All local data cleared' });
@@ -218,12 +247,26 @@ export function createLocalRepository(): Repository {
         for (const r of list)
           if (r.specId === specId && r.kind === kind && (r.status === 'open' || r.status === 'submitted'))
             Object.assign(r, { status: 'cancelled', closedAt: now(), responseNote: r.responseNote || 'Replaced by a newer request' });
-        list.unshift({ id: uid(), specId, institutionKey, kind, message: message?.trim() || null, dueDate, status: 'open', createdByName: actor.fullName, createdAt: now() });
+        const id = uid();
+        list.unshift({ id, specId, institutionKey, kind, message: message?.trim() || null, dueDate, status: 'open', createdByName: actor.fullName, createdAt: now() });
+        notify({ institutionKey, kind: 'request', specId, requestId: id, title: `${kind === 'validate' ? 'Please confirm' : 'Please update'}: ${ACTIVE_SPECS[specId]?.name ?? specId}`, body: message?.trim() || null, dueDate });
         n++;
       }
       write(K.requests, list);
       if (n) log({ actor: actor.fullName, action: 'requested', detail: `${n} ${kind} request(s)` });
       return n;
+    },
+    async listNotifications(viewer) {
+      const all = read<Notification[]>(K.notifications, []);
+      return canReview(viewer.role) ? all : all.filter((n) => viewer.institutionKey && n.institutionKey === viewer.institutionKey);
+    },
+    async markNotificationRead(id, viewer) {
+      const all = read<Notification[]>(K.notifications, []);
+      const n = all.find((x) => x.id === id);
+      if (!n) throw new Error('Notification not found');
+      if (!canReview(viewer.role) && n.institutionKey !== viewer.institutionKey) throw denied('read this notification');
+      n.readAt = now();
+      write(K.notifications, all);
     },
     async closeRequest(id, status, actor, note) {
       requireReviewer(actor, 'close requests');
@@ -242,6 +285,11 @@ export function createLocalRepository(): Repository {
       if (!canEnterIndicator(author, input.specId, assignments())) throw denied('enter this indicator');
       if (!input.entries.length) throw new Error('No values to submit');
       if (input.dataset.trim().length < 2) throw new Error('Name the dataset the values come from');
+      const valueType = input.valueType ?? 'raw';
+      if (valueType === 'score') {
+        if ((input.source?.trim().length ?? 0) < 3) throw new Error('Cite the source the scores come from');
+        if (input.entries.some((e) => e.value != null && (e.value < 0 || e.value > 10))) throw new Error('Scores must lie between 0 and 10');
+      }
       const seen = new Set<string>();
       for (const e of input.entries) {
         if (seen.has(e.unitId)) throw new Error(`Unit ${e.unitId} appears twice`);
@@ -259,6 +307,9 @@ export function createLocalRepository(): Repository {
         institutionKey: ownerOf(input.specId, author.institutionKey),
         requestId: input.requestId ?? null,
         entries: input.entries,
+        valueType,
+        method: valueType === 'score' ? (input.method ?? 'inform') : null,
+        source: input.source?.trim() || null,
         dataset: input.dataset.trim(),
         period: input.period?.trim() || null,
         note: input.note?.trim() || null,
@@ -283,7 +334,20 @@ export function createLocalRepository(): Repository {
         const at = now();
         const author = `${s.authorName}${reviewer.id !== s.authorId ? ` · approved by ${reviewer.fullName}` : ''}`;
         for (const e of s.entries) {
-          byKey.set(`${s.specId}|${e.unitId}`, { specId: s.specId, unitId: e.unitId, level: e.level, value: e.value, dataset: s.dataset, period: s.period, institution: s.institutionKey, author, at });
+          byKey.set(`${s.specId}|${e.unitId}`, {
+            specId: s.specId,
+            unitId: e.unitId,
+            level: e.level,
+            value: e.value,
+            valueType: s.valueType ?? 'raw',
+            method: s.method ?? null,
+            source: s.source ?? null,
+            dataset: s.dataset,
+            period: s.period,
+            institution: s.institutionKey,
+            author,
+            at,
+          });
         }
         write(K.rawValues, [...byKey.values()]);
         if (s.requestId) updateRequest(s.requestId, { status: 'done', closedAt: at });
@@ -293,6 +357,7 @@ export function createLocalRepository(): Repository {
       s.status = decision;
       s.reviewedAt = now();
       s.reviewerName = reviewer.fullName;
+      if (s.institutionKey) notify({ institutionKey: s.institutionKey, kind: 'decision', specId: s.specId, submissionId: s.id, title: `${ACTIVE_SPECS[s.specId]?.name ?? s.specId}: ${decision}`, body: note?.trim() || null });
       s.reviewNote = note?.trim() || null;
       write(K.rawSubmissions, list);
       log({ actor: reviewer.fullName, action: decision, unitId: s.specId, detail: note });
@@ -325,11 +390,64 @@ export function createLocalRepository(): Repository {
       return DEMO_ROLES.filter((r) => r !== 'viewer').map(demoProfile);
     },
     async updateProfile(id, patch) {
-      if ('institutionKey' in patch) {
-        const all = read<Record<string, { institutionKey?: string | null }>>(K.demoProfiles, {});
-        all[id] = { ...all[id], institutionKey: patch.institutionKey ?? null };
-        write(K.demoProfiles, all);
+      const all = read<Record<string, { institutionKey?: string | null; scopeUnitId?: string | null }>>(K.demoProfiles, {});
+      if ('institutionKey' in patch) all[id] = { ...all[id], institutionKey: patch.institutionKey ?? null };
+      if ('scopeUnitId' in patch) all[id] = { ...all[id], scopeUnitId: patch.scopeUnitId ?? null };
+      write(K.demoProfiles, all);
+    },
+    async listCommitteeRecords() {
+      return read<CommitteeRecord[]>(K.committeeRecords, []);
+    },
+    async submitCommittee(input: NewCommitteeRecord, author: Profile) {
+      if (!canSubmitCommittee(author, input)) throw denied('record this for this area');
+      if (input.source.trim().length < 3) throw new Error('Say what the record rests on');
+      if (input.kind === 'warning') {
+        const w = input.payload as { alertLevel?: number; areas?: string[] };
+        if (!input.hazard || !Array.isArray(w.areas) || !w.areas.length || ![1, 2, 3].includes(Number(w.alertLevel))) throw new Error('A warning needs a hazard, a level and its areas');
       }
+      const published = input.kind === 'warning';
+      const at = now();
+      const r: CommitteeRecord = {
+        id: uid(),
+        kind: input.kind,
+        unitId: input.unitId,
+        level: input.level,
+        unitName: input.unitName,
+        region: input.region,
+        regionId: input.regionId,
+        hazard: input.hazard ?? null,
+        payload: { ...input.payload },
+        source: input.source.trim(),
+        note: input.note?.trim() || null,
+        validFrom: input.validFrom ?? null,
+        validTo: input.validTo ?? null,
+        authorId: author.id,
+        authorName: author.fullName,
+        authorRole: author.role,
+        status: published ? 'approved' : 'pending',
+        createdAt: at,
+        ...(published ? { reviewedAt: at, reviewerName: author.fullName } : {}),
+      };
+      const list = read<CommitteeRecord[]>(K.committeeRecords, []);
+      list.unshift(r);
+      write(K.committeeRecords, list);
+      log({ actor: author.fullName, action: 'submitted', unitId: r.unitId, unitName: r.unitName, detail: `Committee record (${r.kind}) · ${r.source}` });
+      return r;
+    },
+    async reviewCommittee(id, decision, reviewer, note) {
+      const list = read<CommitteeRecord[]>(K.committeeRecords, []);
+      const r = list.find((x) => x.id === id);
+      if (!r) throw new Error('Record not found');
+      if (r.kind === 'warning') {
+        if (!(r.status === 'approved' && decision === 'rejected')) throw new Error('A warning can only be withdrawn');
+      } else if (r.status !== 'pending') throw new Error('Record already reviewed');
+      if (!canReviewCommittee(reviewer, r)) throw denied('decide on this record: it is decided by the next level of the committee chain');
+      r.status = decision;
+      r.reviewedAt = now();
+      r.reviewerName = reviewer.fullName;
+      r.reviewNote = note?.trim() || null;
+      write(K.committeeRecords, list);
+      log({ actor: reviewer.fullName, action: decision, unitId: r.unitId, unitName: r.unitName, detail: `Committee record (${r.kind})${note ? ` · ${note}` : ''}` });
     },
   };
 }

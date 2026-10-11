@@ -1,0 +1,31 @@
+code,name,reg,hotspots_1km,retreating_segments,erosion_rate_m_yr,shoreline_retreating_gt0_5_pct,rate_min,coast_km,within5km_pct,lecz10_pct
+C051,Kibiti District,Pwani,458,92,-1.228,11.8,-10.21,10.70,40.79,35.62
+C063,Mtwara District,Mtwara,399,91,-0.945,9.2,-6.14,50.20,26.73,15.29
+C050,Mafia District,Pwani,511,27,-0.849,2.9,-1.48,24.53,98.17,35.29
+C048,Mkuranga District,Pwani,218,28,-0.774,5.3,-2.58,18.66,8.14,4.92
+C059,Lindi Municipal,Lindi,364,20,-0.671,1.1,-3.19,28.76,17.54,3.83
+C057,Kilwa District,Lindi,977,43,-0.551,1.3,-1.21,82.10,8.69,3.65
+C052,Kinondoni Municipal,Dar es Salaam,124,13,-0.497,2.9,-1.4,7.27,64.06,16.31
+C058,Mtama District,Lindi,80,9,-0.473,3.6,-1.18,3.39,6.87,1.78
+C043,Bagamoyo District,Pwani,260,53,-0.41,4.8,-3.13,21.86,23.54,78.02
+C028,Tanga City,Tanga,226,5,-0.379,0.3,-0.55,17.59,45.58,12.39
+C187,Kati Town,Kusini Unguja,275,1,-0.375,0.0,-0.38,33.91,53.74,20.32
+C044,Chalinze District,Pwani,46,11,-0.333,1.8,-0.5,6.08,1.66,11.13
+C029,Pangani District,Tanga,210,38,-0.312,2.6,-0.79,21.85,23.64,12.84
+C033,Mkinga District,Tanga,270,9,-0.311,0.0,-0.44,21.27,13.85,24.25
+C065,Mtwara Mikindani Municipal,Mtwara,24,7,-0.296,0.0,-0.4,4.68,35.92,11.29
+C055,Kigamboni Municipal,Dar es Salaam,211,5,-0.278,0.0,-0.34,31.24,57.06,17.33
+C188,Kusini District,Kusini Unguja,184,15,-0.244,0.0,-0.48,21.60,78.32,20.30
+C186,Kaskazini B Town,Kaskazini Unguja,79,7,-0.223,0.0,-0.38,10.59,54.00,9.62
+C189,Mjini Municipal,Mjini Magharibi,27,1,-0.221,0.0,-0.22,5.16,100.00,28.32
+C193,Micheweni District,Kaskazini Pemba,229,5,-0.214,0.0,-0.33,25.31,95.78,39.45
+C185,Kaskazini A Town,Kaskazini Unguja,211,3,-0.185,0.0,-0.24,18.05,89.18,11.64
+C195,Mkoani Town,Kusini Pemba,377,2,-0.151,0.0,-0.17,53.04,90.68,30.17
+C192,Wete Town,Kaskazini Pemba,381,0,0.0,0.0,-0.02,38.83,88.57,29.46
+C194,Chake Chake Town,Kusini Pemba,167,0,0.0,0.0,0.04,18.06,92.32,25.15
+C191,Magharibi B Municipal,Mjini Magharibi,97,0,0.0,0.0,0.05,10.48,86.15,12.14
+C027,Muheza District,Tanga,26,0,0.0,0.0,-0.04,5.67,3.01,0.21
+C054,Temeke Municipal,Dar es Salaam,0,0,0.0,0.0,,5.65,41.73,4.92
+C190,Magharibi A Municipal,Mjini Magharibi,36,0,0.0,0.0,0.11,3.55,70.67,5.49
+C049,Rufiji District,Pwani,0,0,0.0,0.0,,2.20,1.06,4.82
+C053,Dar es Salaam City,Dar es Salaam,10,0,0.0,0.0,0.14,0.78,4.49,1.17

@@ -1,0 +1,4936 @@
+{
+ "source": "2022 Population and Housing Census geodatabase (NBS/OCGS): health facilities (dispensaries, health centres and hospitals; drug outlets, pharmacies, traditional medicine shops and laboratories excluded), schools (pre-primary to secondary, government and private), water points and boreholes, spatially joined to the 195 council polygons (scripts/spatial-join-facilities-councils.py)",
+ "built": "2026-10-10",
+ "healthTypes": [
+  "Gov Dispensary",
+  "Gov Health Centre/Cottage(PHCC)",
+  "Gov Hospital",
+  "Priv Health Centre",
+  "Priv Hospital",
+  "Private Dispensary"
+ ],
+ "educationTypes": [
+  "Gov Pre-Primary School",
+  "Gov Primary School",
+  "Gov Seconadry School",
+  "Gov Secondary School",
+  "Gov Special Schools for People with Disability",
+  "Government Primary and Middle Schools",
+  "Priv Pre-Primary School",
+  "Priv Primary School",
+  "Priv Secondary School",
+  "Priv Special Schools for People with Disability",
+  "Private Nursery School",
+  "Satellite Schools/Centre"
+ ],
+ "councils": {
+  "C001": {
+   "name": "Kondoa District",
+   "region": "Dodoma",
+   "health": 52,
+   "education": 193,
+   "water": 1846,
+   "boreholes": 89,
+   "healthByType": {
+    "Gov Dispensary": 36,
+    "Gov Health Centre/Cottage(PHCC)": 7,
+    "Gov Hospital": 2,
+    "Priv Health Centre": 1,
+    "Private Dispensary": 6
+   },
+   "educationByType": {
+    "Gov Pre-Primary School": 39,
+    "Gov Primary School": 99,
+    "Gov Seconadry School": 24,
+    "Priv Pre-Primary School": 4,
+    "Priv Primary School": 2,
+    "Priv Secondary School": 2,
+    "Private Nursery School": 18,
+    "Satellite Schools/Centre": 5
+   }
+  },
+  "C002": {
+   "name": "Kondoa Town",
+   "region": "Dodoma",
+   "health": 16,
+   "education": 92,
+   "water": 244,
+   "boreholes": 19,
+   "healthByType": {
+    "Gov Dispensary": 8,
+    "Gov Health Centre/Cottage(PHCC)": 1,
+    "Gov Hospital": 1,
+    "Private Dispensary": 6
+   },
+   "educationByType": {
+    "Gov Pre-Primary School": 28,
+    "Gov Primary School": 27,
+    "Gov Seconadry School": 10,
+    "Priv Pre-Primary School": 7,
+    "Priv Primary School": 7,
+    "Priv Secondary School": 3,
+    "Private Nursery School": 4,
+    "Satellite Schools/Centre": 6
+   }
+  },
+  "C003": {
+   "name": "Mpwapwa District",
+   "region": "Dodoma",
+   "health": 74,
+   "education": 299,
+   "water": 2857,
+   "boreholes": 70,
+   "healthByType": {
+    "Gov Dispensary": 52,
+    "Gov Health Centre/Cottage(PHCC)": 10,
+    "Gov Hospital": 2,
+    "Priv Health Centre": 3,
+    "Private Dispensary": 7
+   },
+   "educationByType": {
+    "Gov Pre-Primary School": 108,
+    "Gov Primary School": 117,
+    "Gov Seconadry School": 24,
+    "Priv Pre-Primary School": 7,
+    "Priv Primary School": 4,
+    "Priv Secondary School": 1,
+    "Private Nursery School": 19,
+    "Satellite Schools/Centre": 19
+   }
+  },
+  "C004": {
+   "name": "Kongwa District",
+   "region": "Dodoma",
+   "health": 71,
+   "education": 274,
+   "water": 2116,
+   "boreholes": 99,
+   "healthByType": {
+    "Gov Dispensary": 54,
+    "Gov Health Centre/Cottage(PHCC)": 8,
+    "Gov Hospital": 1,
+    "Private Dispensary": 8
+   },
+   "educationByType": {
+    "Gov Pre-Primary School": 75,
+    "Gov Primary School": 118,
+    "Gov Seconadry School": 35,
+    "Gov Special Schools for People with Disability": 1,
+    "Priv Pre-Primary School": 8,
+    "Priv Primary School": 5,
+    "Priv Secondary School": 5,
+    "Private Nursery School": 23,
+    "Satellite Schools/Centre": 4
+   }
+  },
+  "C005": {
+   "name": "Chamwino District",
+   "region": "Dodoma",
+   "health": 74,
+   "education": 264,
+   "water": 3333,
+   "boreholes": 198,
+   "healthByType": {
+    "Gov Dispensary": 59,
+    "Gov Health Centre/Cottage(PHCC)": 7,
+    "Gov Hospital": 4,
+    "Priv Hospital": 2,
+    "Private Dispensary": 2
+   },
+   "educationByType": {
+    "Gov Pre-Primary School": 67,
+    "Gov Primary School": 118,
+    "Gov Seconadry School": 28,
+    "Government Primary and Middle Schools": 1,
+    "Priv Pre-Primary School": 5,
+    "Priv Primary School": 5,
+    "Private Nursery School": 30,
+    "Satellite Schools/Centre": 10
+   }
+  },
+  "C006": {
+   "name": "Dodoma City",
+   "region": "Dodoma",
+   "health": 102,
+   "education": 491,
+   "water": 1420,
+   "boreholes": 82,
+   "healthByType": {
+    "Gov Dispensary": 33,
+    "Gov Health Centre/Cottage(PHCC)": 7,
+    "Gov Hospital": 2,
+    "Priv Health Centre": 13,
+    "Priv Hospital": 7,
+    "Private Dispensary": 40
+   },
+   "educationByType": {
+    "Gov Pre-Primary School": 81,
+    "Gov Primary School": 90,
+    "Gov Seconadry School": 37,
+    "Gov Special Schools for People with Disability": 2,
+    "Government Primary and Middle Schools": 4,
+    "Priv Pre-Primary School": 74,
+    "Priv Primary School": 48,
+    "Priv Secondary School": 19,
+    "Private Nursery School": 130,
+    "Satellite Schools/Centre": 6
+   }
+  },
+  "C007": {
+   "name": "Bahi District",
+   "region": "Dodoma",
+   "health": 53,
+   "education": 115,
+   "water": 1977,
+   "boreholes": 83,
+   "healthByType": {
+    "Gov Dispensary": 39,
+    "Gov Health Centre/Cottage(PHCC)": 6,
+    "Gov Hospital": 3,
+    "Priv Health Centre": 1,
+    "Private Dispensary": 4
+   },
+   "educationByType": {
+    "Gov Pre-Primary School": 27,
+    "Gov Primary School": 45,
+    "Gov Seconadry School": 14,
+    "Gov Special Schools for People with Disability": 1,
+    "Private Nursery School": 19,
+    "Satellite Schools/Centre": 9
+   }
+  },
+  "C008": {
+   "name": "Chemba District",
+   "region": "Dodoma",
+   "health": 54,
+   "education": 210,
+   "water": 2256,
+   "boreholes": 163,
+   "healthByType": {
+    "Gov Dispensary": 41,
+    "Gov Health Centre/Cottage(PHCC)": 5,
+    "Gov Hospital": 2,
+    "Private Dispensary": 6
+   },
+   "educationByType": {
+    "Gov Pre-Primary School": 53,
+    "Gov Primary School": 101,
+    "Gov Seconadry School": 23,
+    "Priv Pre-Primary School": 2,
+    "Priv Primary School": 3,
+    "Priv Secondary School": 1,
+    "Private Nursery School": 16,
+    "Satellite Schools/Centre": 11
+   }
+  },
+  "C009": {
+   "name": "Monduli District",
+   "region": "Arusha",
+   "health": 47,
+   "education": 256,
+   "water": 1100,
+   "boreholes": 13,
+   "healthByType": {
+    "Gov Dispensary": 34,
+    "Gov Health Centre/Cottage(PHCC)": 2,
+    "Gov Hospital": 1,
+    "Priv Health Centre": 2,
+    "Private Dispensary": 8
+   },
+   "educationByType": {
+    "Gov Pre-Primary School": 69,
+    "Gov Primary School": 66,
+    "Gov Seconadry School": 11,
+    "Priv Pre-Primary School": 10,
+    "Priv Primary School": 22,
+    "Priv Secondary School": 11,
+    "Private Nursery School": 58,
+    "Satellite Schools/Centre": 9
+   }
+  },
+  "C010": {
+   "name": "Meru District",
+   "region": "Arusha",
+   "health": 65,
+   "education": 380,
+   "water": 2010,
+   "boreholes": 51,
+   "healthByType": {
+    "Gov Dispensary": 31,
+    "Gov Health Centre/Cottage(PHCC)": 6,
+    "Gov Hospital": 3,
+    "Priv Health Centre": 5,
+    "Priv Hospital": 2,
+    "Private Dispensary": 18
+   },
+   "educationByType": {
+    "Gov Pre-Primary School": 51,
+    "Gov Primary School": 109,
+    "Gov Seconadry School": 39,
+    "Priv Pre-Primary School": 25,
+    "Priv Primary School": 58,
+    "Priv Secondary School": 28,
+    "Private Nursery School": 69,
+    "Satellite Schools/Centre": 1
+   }
+  },
+  "C011": {
+   "name": "Arusha District",
+   "region": "Arusha",
+   "health": 70,
+   "education": 306,
+   "water": 1387,
+   "boreholes": 15,
+   "healthByType": {
+    "Gov Dispensary": 31,
+    "Gov Health Centre/Cottage(PHCC)": 5,
+    "Gov Hospital": 2,
+    "Priv Health Centre": 2,
+    "Priv Hospital": 4,
+    "Private Dispensary": 26
+   },
+   "educationByType": {
+    "Gov Pre-Primary School": 35,
+    "Gov Primary School": 88,
+    "Gov Seconadry School": 30,
+    "Gov Special Schools for People with Disability": 2,
+    "Government Primary and Middle Schools": 1,
+    "Priv Pre-Primary School": 25,
+    "Priv Primary School": 49,
+    "Priv Secondary School": 19,
+    "Private Nursery School": 54,
+    "Satellite Schools/Centre": 3
+   }
+  },
+  "C012": {
+   "name": "Longido District",
+   "region": "Arusha",
+   "health": 38,
+   "education": 259,
+   "water": 828,
+   "boreholes": 27,
+   "healthByType": {
+    "Gov Dispensary": 25,
+    "Gov Health Centre/Cottage(PHCC)": 4,
+    "Gov Hospital": 5,
+    "Priv Health Centre": 2,
+    "Private Dispensary": 2
+   },
+   "educationByType": {
+    "Gov Pre-Primary School": 120,
+    "Gov Primary School": 53,
+    "Gov Seconadry School": 8,
+    "Priv Pre-Primary School": 19,
+    "Priv Primary School": 13,
+    "Priv Secondary School": 1,
+    "Private Nursery School": 30,
+    "Satellite Schools/Centre": 15
+   }
+  },
+  "C013": {
+   "name": "Karatu District",
+   "region": "Arusha",
+   "health": 69,
+   "education": 250,
+   "water": 1446,
+   "boreholes": 79,
+   "healthByType": {
+    "Gov Dispensary": 35,
+    "Gov Health Centre/Cottage(PHCC)": 6,
+    "Gov Hospital": 2,
+    "Priv Health Centre": 6,
+    "Priv Hospital": 4,
+    "Private Dispensary": 16
+   },
+   "educationByType": {
+    "Gov Pre-Primary School": 25,
+    "Gov Primary School": 113,
+    "Gov Seconadry School": 32,
+    "Gov Special Schools for People with Disability": 1,
+    "Government Primary and Middle Schools": 2,
+    "Priv Pre-Primary School": 10,
+    "Priv Primary School": 10,
+    "Priv Secondary School": 4,
+    "Private Nursery School": 45,
+    "Satellite Schools/Centre": 8
+   }
+  },
+  "C014": {
+   "name": "Ngorongoro District",
+   "region": "Arusha",
+   "health": 42,
+   "education": 261,
+   "water": 990,
+   "boreholes": 22,
+   "healthByType": {
+    "Gov Dispensary": 26,
+    "Gov Health Centre/Cottage(PHCC)": 6,
+    "Gov Hospital": 4,
+    "Priv Health Centre": 1,
+    "Priv Hospital": 2,
+    "Private Dispensary": 3
+   },
+   "educationByType": {
+    "Gov Pre-Primary School": 108,
+    "Gov Primary School": 69,
+    "Gov Seconadry School": 11,
+    "Priv Pre-Primary School": 15,
+    "Priv Primary School": 9,
+    "Priv Secondary School": 2,
+    "Private Nursery School": 36,
+    "Satellite Schools/Centre": 11
+   }
+  },
+  "C015": {
+   "name": "Arusha City",
+   "region": "Arusha",
+   "health": 85,
+   "education": 431,
+   "water": 1068,
+   "boreholes": 19,
+   "healthByType": {
+    "Gov Dispensary": 12,
+    "Gov Health Centre/Cottage(PHCC)": 6,
+    "Gov Hospital": 3,
+    "Priv Health Centre": 22,
+    "Priv Hospital": 9,
+    "Private Dispensary": 33
+   },
+   "educationByType": {
+    "Gov Pre-Primary School": 34,
+    "Gov Primary School": 45,
+    "Gov Seconadry School": 27,
+    "Gov Special Schools for People with Disability": 1,
+    "Government Primary and Middle Schools": 1,
+    "Priv Pre-Primary School": 54,
+    "Priv Primary School": 94,
+    "Priv Secondary School": 24,
+    "Priv Special Schools for People with Disability": 1,
+    "Private Nursery School": 150
+   }
+  },
+  "C016": {
+   "name": "Rombo District",
+   "region": "Kilimanjaro",
+   "health": 49,
+   "education": 262,
+   "water": 1490,
+   "boreholes": 19,
+   "healthByType": {
+    "Gov Dispensary": 24,
+    "Gov Health Centre/Cottage(PHCC)": 6,
+    "Gov Hospital": 2,
+    "Priv Hospital": 2,
+    "Private Dispensary": 15
+   },
+   "educationByType": {
+    "Gov Pre-Primary School": 39,
+    "Gov Primary School": 141,
+    "Gov Seconadry School": 40,
+    "Gov Special Schools for People with Disability": 1,
+    "Priv Pre-Primary School": 6,
+    "Priv Primary School": 10,
+    "Priv Secondary School": 11,
+    "Private Nursery School": 14
+   }
+  },
+  "C017": {
+   "name": "Mwanga District",
+   "region": "Kilimanjaro",
+   "health": 64,
+   "education": 207,
+   "water": 1325,
+   "boreholes": 37,
+   "healthByType": {
+    "Gov Dispensary": 42,
+    "Gov Health Centre/Cottage(PHCC)": 7,
+    "Gov Hospital": 4,
+    "Priv Health Centre": 2,
+    "Priv Hospital": 1,
+    "Private Dispensary": 8
+   },
+   "educationByType": {
+    "Gov Pre-Primary School": 15,
+    "Gov Primary School": 101,
+    "Gov Seconadry School": 26,
+    "Gov Special Schools for People with Disability": 1,
+    "Priv Pre-Primary School": 5,
+    "Priv Primary School": 7,
+    "Priv Secondary School": 16,
+    "Private Nursery School": 34,
+    "Satellite Schools/Centre": 2
+   }
+  },
+  "C018": {
+   "name": "Same District",
+   "region": "Kilimanjaro",
+   "health": 82,
+   "education": 362,
+   "water": 2327,
+   "boreholes": 75,
+   "healthByType": {
+    "Gov Dispensary": 51,
+    "Gov Health Centre/Cottage(PHCC)": 6,
+    "Gov Hospital": 3,
+    "Priv Health Centre": 4,
+    "Priv Hospital": 1,
+    "Private Dispensary": 17
+   },
+   "educationByType": {
+    "Gov Pre-Primary School": 48,
+    "Gov Primary School": 181,
+    "Gov Seconadry School": 43,
+    "Priv Pre-Primary School": 13,
+    "Priv Primary School": 15,
+    "Priv Secondary School": 19,
+    "Private Nursery School": 42,
+    "Satellite Schools/Centre": 1
+   }
+  },
+  "C019": {
+   "name": "Moshi Municipal",
+   "region": "Kilimanjaro",
+   "health": 44,
+   "education": 200,
+   "water": 389,
+   "boreholes": 2,
+   "healthByType": {
+    "Gov Dispensary": 8,
+    "Gov Health Centre/Cottage(PHCC)": 4,
+    "Gov Hospital": 2,
+    "Priv Health Centre": 14,
+    "Priv Hospital": 5,
+    "Private Dispensary": 11
+   },
+   "educationByType": {
+    "Gov Pre-Primary School": 14,
+    "Gov Primary School": 32,
+    "Gov Seconadry School": 13,
+    "Gov Special Schools for People with Disability": 1,
+    "Priv Pre-Primary School": 21,
+    "Priv Primary School": 19,
+    "Priv Secondary School": 10,
+    "Priv Special Schools for People with Disability": 2,
+    "Private Nursery School": 88
+   }
+  },
+  "C020": {
+   "name": "Moshi District",
+   "region": "Kilimanjaro",
+   "health": 115,
+   "education": 563,
+   "water": 2975,
+   "boreholes": 43,
+   "healthByType": {
+    "Gov Dispensary": 57,
+    "Gov Health Centre/Cottage(PHCC)": 4,
+    "Priv Health Centre": 4,
+    "Priv Hospital": 7,
+    "Private Dispensary": 43
+   },
+   "educationByType": {
+    "Gov Pre-Primary School": 49,
+    "Gov Primary School": 213,
+    "Gov Seconadry School": 57,
+    "Gov Special Schools for People with Disability": 3,
+    "Priv Pre-Primary School": 22,
+    "Priv Primary School": 37,
+    "Priv Secondary School": 35,
+    "Priv Special Schools for People with Disability": 2,
+    "Private Nursery School": 143,
+    "Satellite Schools/Centre": 2
+   }
+  },
+  "C021": {
+   "name": "Hai District",
+   "region": "Kilimanjaro",
+   "health": 69,
+   "education": 274,
+   "water": 1503,
+   "boreholes": 25,
+   "healthByType": {
+    "Gov Dispensary": 31,
+    "Gov Health Centre/Cottage(PHCC)": 6,
+    "Gov Hospital": 2,
+    "Priv Health Centre": 2,
+    "Priv Hospital": 1,
+    "Private Dispensary": 27
+   },
+   "educationByType": {
+    "Gov Pre-Primary School": 25,
+    "Gov Primary School": 100,
+    "Gov Seconadry School": 28,
+    "Priv Pre-Primary School": 21,
+    "Priv Primary School": 28,
+    "Priv Secondary School": 17,
+    "Priv Special Schools for People with Disability": 1,
+    "Private Nursery School": 54
+   }
+  },
+  "C022": {
+   "name": "Siha District",
+   "region": "Kilimanjaro",
+   "health": 28,
+   "education": 180,
+   "water": 889,
+   "boreholes": 3,
+   "healthByType": {
+    "Gov Dispensary": 14,
+    "Gov Health Centre/Cottage(PHCC)": 1,
+    "Gov Hospital": 2,
+    "Priv Health Centre": 5,
+    "Private Dispensary": 6
+   },
+   "educationByType": {
+    "Gov Pre-Primary School": 51,
+    "Gov Primary School": 55,
+    "Gov Seconadry School": 14,
+    "Priv Pre-Primary School": 10,
+    "Priv Primary School": 12,
+    "Priv Secondary School": 4,
+    "Priv Special Schools for People with Disability": 1,
+    "Private Nursery School": 32,
+    "Satellite Schools/Centre": 1
+   }
+  },
+  "C023": {
+   "name": "Lushoto District",
+   "region": "Tanga",
+   "health": 73,
+   "education": 339,
+   "water": 3120,
+   "boreholes": 29,
+   "healthByType": {
+    "Gov Dispensary": 49,
+    "Gov Health Centre/Cottage(PHCC)": 9,
+    "Gov Hospital": 1,
+    "Priv Health Centre": 3,
+    "Private Dispensary": 11
+   },
+   "educationByType": {
+    "Gov Pre-Primary School": 70,
+    "Gov Primary School": 162,
+    "Gov Seconadry School": 53,
+    "Gov Special Schools for People with Disability": 1,
+    "Priv Pre-Primary School": 7,
+    "Priv Primary School": 7,
+    "Priv Secondary School": 7,
+    "Private Nursery School": 26,
+    "Satellite Schools/Centre": 6
+   }
+  },
+  "C024": {
+   "name": "Bumbuli District",
+   "region": "Tanga",
+   "health": 32,
+   "education": 172,
+   "water": 1642,
+   "boreholes": 9,
+   "healthByType": {
+    "Gov Dispensary": 23,
+    "Gov Health Centre/Cottage(PHCC)": 3,
+    "Gov Hospital": 1,
+    "Priv Hospital": 1,
+    "Private Dispensary": 4
+   },
+   "educationByType": {
+    "Gov Pre-Primary School": 35,
+    "Gov Primary School": 92,
+    "Gov Seconadry School": 26,
+    "Priv Pre-Primary School": 1,
+    "Priv Primary School": 2,
+    "Priv Secondary School": 3,
+    "Private Nursery School": 9,
+    "Satellite Schools/Centre": 4
+   }
+  },
+  "C025": {
+   "name": "Korogwe District",
+   "region": "Tanga",
+   "health": 70,
+   "education": 301,
+   "water": 2078,
+   "boreholes": 44,
+   "healthByType": {
+    "Gov Dispensary": 42,
+    "Gov Health Centre/Cottage(PHCC)": 7,
+    "Priv Health Centre": 1,
+    "Private Dispensary": 20
+   },
+   "educationByType": {
+    "Gov Pre-Primary School": 101,
+    "Gov Primary School": 135,
+    "Gov Seconadry School": 26,
+    "Gov Special Schools for People with Disability": 1,
+    "Priv Pre-Primary School": 14,
+    "Priv Primary School": 2,
+    "Priv Secondary School": 1,
+    "Private Nursery School": 20,
+    "Satellite Schools/Centre": 1
+   }
+  },
+  "C026": {
+   "name": "Korogwe Town",
+   "region": "Tanga",
+   "health": 18,
+   "education": 87,
+   "water": 281,
+   "boreholes": 10,
+   "healthByType": {
+    "Gov Dispensary": 8,
+    "Gov Health Centre/Cottage(PHCC)": 2,
+    "Gov Hospital": 1,
+    "Priv Health Centre": 4,
+    "Private Dispensary": 3
+   },
+   "educationByType": {
+    "Gov Pre-Primary School": 9,
+    "Gov Primary School": 27,
+    "Gov Seconadry School": 9,
+    "Priv Pre-Primary School": 8,
+    "Priv Primary School": 9,
+    "Priv Secondary School": 4,
+    "Private Nursery School": 19,
+    "Satellite Schools/Centre": 2
+   }
+  },
+  "C027": {
+   "name": "Muheza District",
+   "region": "Tanga",
+   "health": 56,
+   "education": 224,
+   "water": 2210,
+   "boreholes": 62,
+   "healthByType": {
+    "Gov Dispensary": 33,
+    "Gov Health Centre/Cottage(PHCC)": 2,
+    "Gov Hospital": 2,
+    "Priv Health Centre": 3,
+    "Priv Hospital": 1,
+    "Private Dispensary": 15
+   },
+   "educationByType": {
+    "Gov Pre-Primary School": 19,
+    "Gov Primary School": 107,
+    "Gov Seconadry School": 27,
+    "Priv Pre-Primary School": 12,
+    "Priv Primary School": 10,
+    "Priv Secondary School": 5,
+    "Private Nursery School": 39,
+    "Satellite Schools/Centre": 5
+   }
+  },
+  "C028": {
+   "name": "Tanga City",
+   "region": "Tanga",
+   "health": 55,
+   "education": 351,
+   "water": 1119,
+   "boreholes": 32,
+   "healthByType": {
+    "Gov Dispensary": 23,
+    "Gov Health Centre/Cottage(PHCC)": 6,
+    "Gov Hospital": 2,
+    "Priv Health Centre": 7,
+    "Priv Hospital": 3,
+    "Private Dispensary": 14
+   },
+   "educationByType": {
+    "Gov Pre-Primary School": 26,
+    "Gov Primary School": 75,
+    "Gov Seconadry School": 26,
+    "Priv Pre-Primary School": 19,
+    "Priv Primary School": 25,
+    "Priv Secondary School": 18,
+    "Private Nursery School": 161,
+    "Satellite Schools/Centre": 1
+   }
+  },
+  "C029": {
+   "name": "Pangani District",
+   "region": "Tanga",
+   "health": 27,
+   "education": 76,
+   "water": 516,
+   "boreholes": 34,
+   "healthByType": {
+    "Gov Dispensary": 19,
+    "Gov Health Centre/Cottage(PHCC)": 2,
+    "Gov Hospital": 1,
+    "Private Dispensary": 5
+   },
+   "educationByType": {
+    "Gov Pre-Primary School": 6,
+    "Gov Primary School": 32,
+    "Gov Seconadry School": 7,
+    "Priv Pre-Primary School": 6,
+    "Priv Primary School": 4,
+    "Priv Secondary School": 5,
+    "Private Nursery School": 8,
+    "Satellite Schools/Centre": 8
+   }
+  },
+  "C030": {
+   "name": "Handeni District",
+   "region": "Tanga",
+   "health": 66,
+   "education": 212,
+   "water": 2826,
+   "boreholes": 37,
+   "healthByType": {
+    "Gov Dispensary": 52,
+    "Gov Health Centre/Cottage(PHCC)": 3,
+    "Gov Hospital": 1,
+    "Priv Hospital": 1,
+    "Private Dispensary": 9
+   },
+   "educationByType": {
+    "Gov Pre-Primary School": 23,
+    "Gov Primary School": 113,
+    "Gov Seconadry School": 26,
+    "Priv Pre-Primary School": 2,
+    "Priv Primary School": 1,
+    "Private Nursery School": 29,
+    "Satellite Schools/Centre": 18
+   }
+  },
+  "C031": {
+   "name": "Handeni Town",
+   "region": "Tanga",
+   "health": 13,
+   "education": 82,
+   "water": 390,
+   "boreholes": 16,
+   "healthByType": {
+    "Gov Dispensary": 7,
+    "Gov Health Centre/Cottage(PHCC)": 1,
+    "Gov Hospital": 1,
+    "Private Dispensary": 4
+   },
+   "educationByType": {
+    "Gov Pre-Primary School": 12,
+    "Gov Primary School": 39,
+    "Gov Seconadry School": 9,
+    "Priv Pre-Primary School": 4,
+    "Priv Primary School": 3,
+    "Priv Secondary School": 2,
+    "Private Nursery School": 13
+   }
+  },
+  "C032": {
+   "name": "Kilindi District",
+   "region": "Tanga",
+   "health": 55,
+   "education": 218,
+   "water": 2508,
+   "boreholes": 36,
+   "healthByType": {
+    "Gov Dispensary": 37,
+    "Gov Health Centre/Cottage(PHCC)": 5,
+    "Gov Hospital": 2,
+    "Priv Health Centre": 3,
+    "Priv Hospital": 2,
+    "Private Dispensary": 6
+   },
+   "educationByType": {
+    "Gov Pre-Primary School": 28,
+    "Gov Primary School": 107,
+    "Gov Seconadry School": 22,
+    "Priv Pre-Primary School": 4,
+    "Priv Primary School": 8,
+    "Priv Secondary School": 1,
+    "Private Nursery School": 10,
+    "Satellite Schools/Centre": 38
+   }
+  },
+  "C033": {
+   "name": "Mkinga District",
+   "region": "Tanga",
+   "health": 29,
+   "education": 178,
+   "water": 1463,
+   "boreholes": 61,
+   "healthByType": {
+    "Gov Dispensary": 24,
+    "Gov Health Centre/Cottage(PHCC)": 3,
+    "Gov Hospital": 2
+   },
+   "educationByType": {
+    "Gov Pre-Primary School": 44,
+    "Gov Primary School": 76,
+    "Gov Seconadry School": 11,
+    "Priv Pre-Primary School": 9,
+    "Private Nursery School": 35,
+    "Satellite Schools/Centre": 3
+   }
+  },
+  "C034": {
+   "name": "Kilosa District",
+   "region": "Morogoro",
+   "health": 89,
+   "education": 426,
+   "water": 3692,
+   "boreholes": 158,
+   "healthByType": {
+    "Gov Dispensary": 50,
+    "Gov Health Centre/Cottage(PHCC)": 10,
+    "Gov Hospital": 1,
+    "Priv Health Centre": 2,
+    "Priv Hospital": 5,
+    "Private Dispensary": 21
+   },
+   "educationByType": {
+    "Gov Pre-Primary School": 92,
+    "Gov Primary School": 164,
+    "Gov Seconadry School": 37,
+    "Government Primary and Middle Schools": 1,
+    "Priv Pre-Primary School": 30,
+    "Priv Primary School": 11,
+    "Priv Secondary School": 4,
+    "Private Nursery School": 78,
+    "Satellite Schools/Centre": 9
+   }
+  },
+  "C035": {
+   "name": "Morogoro District",
+   "region": "Morogoro",
+   "health": 82,
+   "education": 253,
+   "water": 2616,
+   "boreholes": 44,
+   "healthByType": {
+    "Gov Dispensary": 50,
+    "Gov Health Centre/Cottage(PHCC)": 9,
+    "Gov Hospital": 3,
+    "Priv Health Centre": 1,
+    "Priv Hospital": 2,
+    "Private Dispensary": 17
+   },
+   "educationByType": {
+    "Gov Pre-Primary School": 32,
+    "Gov Primary School": 150,
+    "Gov Seconadry School": 29,
+    "Priv Pre-Primary School": 9,
+    "Priv Primary School": 3,
+    "Private Nursery School": 23,
+    "Satellite Schools/Centre": 7
+   }
+  },
+  "C036": {
+   "name": "Morogoro Municipal",
+   "region": "Morogoro",
+   "health": 94,
+   "education": 414,
+   "water": 1626,
+   "boreholes": 23,
+   "healthByType": {
+    "Gov Dispensary": 25,
+    "Gov Health Centre/Cottage(PHCC)": 4,
+    "Gov Hospital": 6,
+    "Priv Health Centre": 20,
+    "Priv Hospital": 9,
+    "Private Dispensary": 30
+   },
+   "educationByType": {
+    "Gov Pre-Primary School": 34,
+    "Gov Primary School": 64,
+    "Gov Seconadry School": 26,
+    "Gov Special Schools for People with Disability": 3,
+    "Priv Pre-Primary School": 29,
+    "Priv Primary School": 37,
+    "Priv Secondary School": 30,
+    "Priv Special Schools for People with Disability": 1,
+    "Private Nursery School": 189,
+    "Satellite Schools/Centre": 1
+   }
+  },
+  "C037": {
+   "name": "Mlimba District",
+   "region": "Morogoro",
+   "health": 49,
+   "education": 241,
+   "water": 1351,
+   "boreholes": 22,
+   "healthByType": {
+    "Gov Dispensary": 27,
+    "Gov Health Centre/Cottage(PHCC)": 4,
+    "Gov Hospital": 1,
+    "Priv Health Centre": 1,
+    "Private Dispensary": 16
+   },
+   "educationByType": {
+    "Gov Pre-Primary School": 75,
+    "Gov Primary School": 89,
+    "Gov Seconadry School": 22,
+    "Priv Pre-Primary School": 12,
+    "Priv Primary School": 8,
+    "Priv Secondary School": 8,
+    "Private Nursery School": 22,
+    "Satellite Schools/Centre": 5
+   }
+  },
+  "C038": {
+   "name": "Ifakara Town",
+   "region": "Morogoro",
+   "health": 38,
+   "education": 262,
+   "water": 1687,
+   "boreholes": 23,
+   "healthByType": {
+    "Gov Dispensary": 12,
+    "Gov Health Centre/Cottage(PHCC)": 3,
+    "Gov Hospital": 1,
+    "Priv Health Centre": 4,
+    "Priv Hospital": 5,
+    "Private Dispensary": 13
+   },
+   "educationByType": {
+    "Gov Pre-Primary School": 46,
+    "Gov Primary School": 79,
+    "Gov Seconadry School": 23,
+    "Gov Special Schools for People with Disability": 1,
+    "Priv Pre-Primary School": 17,
+    "Priv Primary School": 17,
+    "Priv Secondary School": 19,
+    "Priv Special Schools for People with Disability": 1,
+    "Private Nursery School": 58,
+    "Satellite Schools/Centre": 1
+   }
+  },
+  "C039": {
+   "name": "Ulanga District",
+   "region": "Morogoro",
+   "health": 30,
+   "education": 152,
+   "water": 1130,
+   "boreholes": 18,
+   "healthByType": {
+    "Gov Dispensary": 17,
+    "Gov Health Centre/Cottage(PHCC)": 2,
+    "Gov Hospital": 1,
+    "Private Dispensary": 10
+   },
+   "educationByType": {
+    "Gov Pre-Primary School": 33,
+    "Gov Primary School": 58,
+    "Gov Seconadry School": 16,
+    "Government Primary and Middle Schools": 1,
+    "Priv Pre-Primary School": 6,
+    "Priv Primary School": 5,
+    "Priv Secondary School": 6,
+    "Private Nursery School": 13,
+    "Satellite Schools/Centre": 14
+   }
+  },
+  "C040": {
+   "name": "Malinyi District",
+   "region": "Morogoro",
+   "health": 25,
+   "education": 108,
+   "water": 1038,
+   "boreholes": 16,
+   "healthByType": {
+    "Gov Dispensary": 13,
+    "Gov Health Centre/Cottage(PHCC)": 2,
+    "Gov Hospital": 1,
+    "Priv Hospital": 1,
+    "Private Dispensary": 8
+   },
+   "educationByType": {
+    "Gov Pre-Primary School": 19,
+    "Gov Primary School": 39,
+    "Gov Seconadry School": 11,
+    "Priv Pre-Primary School": 4,
+    "Priv Primary School": 3,
+    "Priv Secondary School": 6,
+    "Private Nursery School": 12,
+    "Satellite Schools/Centre": 14
+   }
+  },
+  "C041": {
+   "name": "Mvomero District",
+   "region": "Morogoro",
+   "health": 77,
+   "education": 310,
+   "water": 2710,
+   "boreholes": 63,
+   "healthByType": {
+    "Gov Dispensary": 47,
+    "Gov Health Centre/Cottage(PHCC)": 8,
+    "Gov Hospital": 3,
+    "Priv Health Centre": 1,
+    "Priv Hospital": 2,
+    "Private Dispensary": 16
+   },
+   "educationByType": {
+    "Gov Pre-Primary School": 52,
+    "Gov Primary School": 138,
+    "Gov Seconadry School": 25,
+    "Gov Special Schools for People with Disability": 1,
+    "Priv Pre-Primary School": 7,
+    "Priv Primary School": 9,
+    "Priv Secondary School": 2,
+    "Private Nursery School": 57,
+    "Satellite Schools/Centre": 19
+   }
+  },
+  "C042": {
+   "name": "Gairo District",
+   "region": "Morogoro",
+   "health": 44,
+   "education": 151,
+   "water": 1454,
+   "boreholes": 22,
+   "healthByType": {
+    "Gov Dispensary": 31,
+    "Gov Health Centre/Cottage(PHCC)": 1,
+    "Gov Hospital": 2,
+    "Priv Hospital": 1,
+    "Private Dispensary": 9
+   },
+   "educationByType": {
+    "Gov Pre-Primary School": 46,
+    "Gov Primary School": 73,
+    "Gov Seconadry School": 15,
+    "Priv Pre-Primary School": 3,
+    "Priv Primary School": 2,
+    "Priv Secondary School": 2,
+    "Private Nursery School": 10
+   }
+  },
+  "C043": {
+   "name": "Bagamoyo District",
+   "region": "Pwani",
+   "health": 42,
+   "education": 198,
+   "water": 910,
+   "boreholes": 152,
+   "healthByType": {
+    "Gov Dispensary": 20,
+    "Gov Health Centre/Cottage(PHCC)": 3,
+    "Gov Hospital": 1,
+    "Priv Health Centre": 4,
+    "Priv Hospital": 2,
+    "Private Dispensary": 12
+   },
+   "educationByType": {
+    "Gov Pre-Primary School": 8,
+    "Gov Primary School": 40,
+    "Gov Seconadry School": 11,
+    "Priv Pre-Primary School": 8,
+    "Priv Primary School": 20,
+    "Priv Secondary School": 17,
+    "Private Nursery School": 92,
+    "Satellite Schools/Centre": 2
+   }
+  },
+  "C044": {
+   "name": "Chalinze District",
+   "region": "Pwani",
+   "health": 69,
+   "education": 227,
+   "water": 2210,
+   "boreholes": 25,
+   "healthByType": {
+    "Gov Dispensary": 39,
+    "Gov Health Centre/Cottage(PHCC)": 10,
+    "Gov Hospital": 3,
+    "Priv Health Centre": 2,
+    "Private Dispensary": 15
+   },
+   "educationByType": {
+    "Gov Pre-Primary School": 17,
+    "Gov Primary School": 104,
+    "Gov Seconadry School": 22,
+    "Priv Pre-Primary School": 9,
+    "Priv Primary School": 9,
+    "Priv Secondary School": 5,
+    "Private Nursery School": 56,
+    "Satellite Schools/Centre": 5
+   }
+  },
+  "C045": {
+   "name": "Kibaha District",
+   "region": "Pwani",
+   "health": 36,
+   "education": 143,
+   "water": 484,
+   "boreholes": 28,
+   "healthByType": {
+    "Gov Dispensary": 22,
+    "Gov Health Centre/Cottage(PHCC)": 2,
+    "Priv Health Centre": 1,
+    "Priv Hospital": 1,
+    "Private Dispensary": 10
+   },
+   "educationByType": {
+    "Gov Pre-Primary School": 21,
+    "Gov Primary School": 33,
+    "Gov Seconadry School": 6,
+    "Gov Special Schools for People with Disability": 1,
+    "Priv Pre-Primary School": 13,
+    "Priv Primary School": 10,
+    "Priv Secondary School": 6,
+    "Private Nursery School": 50,
+    "Satellite Schools/Centre": 3
+   }
+  },
+  "C046": {
+   "name": "Kibaha Town",
+   "region": "Pwani",
+   "health": 52,
+   "education": 230,
+   "water": 523,
+   "boreholes": 24,
+   "healthByType": {
+    "Gov Dispensary": 12,
+    "Gov Health Centre/Cottage(PHCC)": 3,
+    "Gov Hospital": 2,
+    "Priv Health Centre": 4,
+    "Priv Hospital": 4,
+    "Private Dispensary": 27
+   },
+   "educationByType": {
+    "Gov Pre-Primary School": 14,
+    "Gov Primary School": 39,
+    "Gov Seconadry School": 16,
+    "Priv Pre-Primary School": 23,
+    "Priv Primary School": 27,
+    "Priv Secondary School": 22,
+    "Private Nursery School": 89
+   }
+  },
+  "C047": {
+   "name": "Kisarawe District",
+   "region": "Pwani",
+   "health": 46,
+   "education": 190,
+   "water": 1159,
+   "boreholes": 48,
+   "healthByType": {
+    "Gov Dispensary": 34,
+    "Gov Health Centre/Cottage(PHCC)": 5,
+    "Gov Hospital": 2,
+    "Private Dispensary": 5
+   },
+   "educationByType": {
+    "Gov Pre-Primary School": 42,
+    "Gov Primary School": 77,
+    "Gov Seconadry School": 15,
+    "Priv Pre-Primary School": 5,
+    "Priv Primary School": 2,
+    "Priv Secondary School": 7,
+    "Private Nursery School": 41,
+    "Satellite Schools/Centre": 1
+   }
+  },
+  "C048": {
+   "name": "Mkuranga District",
+   "region": "Pwani",
+   "health": 71,
+   "education": 388,
+   "water": 2216,
+   "boreholes": 159,
+   "healthByType": {
+    "Gov Dispensary": 35,
+    "Gov Health Centre/Cottage(PHCC)": 3,
+    "Gov Hospital": 3,
+    "Priv Health Centre": 6,
+    "Private Dispensary": 24
+   },
+   "educationByType": {
+    "Gov Pre-Primary School": 27,
+    "Gov Primary School": 103,
+    "Gov Seconadry School": 31,
+    "Priv Pre-Primary School": 27,
+    "Priv Primary School": 29,
+    "Priv Secondary School": 14,
+    "Private Nursery School": 146,
+    "Satellite Schools/Centre": 11
+   }
+  },
+  "C049": {
+   "name": "Rufiji District",
+   "region": "Pwani",
+   "health": 36,
+   "education": 106,
+   "water": 1045,
+   "boreholes": 147,
+   "healthByType": {
+    "Gov Dispensary": 22,
+    "Gov Health Centre/Cottage(PHCC)": 6,
+    "Gov Hospital": 1,
+    "Private Dispensary": 7
+   },
+   "educationByType": {
+    "Gov Pre-Primary School": 10,
+    "Gov Primary School": 57,
+    "Gov Seconadry School": 12,
+    "Priv Pre-Primary School": 6,
+    "Priv Primary School": 2,
+    "Priv Secondary School": 3,
+    "Private Nursery School": 11,
+    "Satellite Schools/Centre": 5
+   }
+  },
+  "C050": {
+   "name": "Mafia District",
+   "region": "Pwani",
+   "health": 19,
+   "education": 69,
+   "water": 625,
+   "boreholes": 54,
+   "healthByType": {
+    "Gov Dispensary": 15,
+    "Gov Health Centre/Cottage(PHCC)": 1,
+    "Gov Hospital": 1,
+    "Private Dispensary": 2
+   },
+   "educationByType": {
+    "Gov Pre-Primary School": 15,
+    "Gov Primary School": 26,
+    "Gov Seconadry School": 7,
+    "Priv Pre-Primary School": 2,
+    "Priv Primary School": 2,
+    "Private Nursery School": 17
+   }
+  },
+  "C051": {
+   "name": "Kibiti District",
+   "region": "Pwani",
+   "health": 69,
+   "education": 163,
+   "water": 1155,
+   "boreholes": 41,
+   "healthByType": {
+    "Gov Dispensary": 55,
+    "Gov Health Centre/Cottage(PHCC)": 6,
+    "Gov Hospital": 1,
+    "Priv Hospital": 1,
+    "Private Dispensary": 6
+   },
+   "educationByType": {
+    "Gov Pre-Primary School": 40,
+    "Gov Primary School": 80,
+    "Gov Seconadry School": 13,
+    "Priv Pre-Primary School": 1,
+    "Priv Primary School": 1,
+    "Priv Secondary School": 2,
+    "Private Nursery School": 22,
+    "Satellite Schools/Centre": 4
+   }
+  },
+  "C052": {
+   "name": "Kinondoni Municipal",
+   "region": "Dar es Salaam",
+   "health": 173,
+   "education": 568,
+   "water": 827,
+   "boreholes": 22,
+   "healthByType": {
+    "Gov Dispensary": 26,
+    "Gov Health Centre/Cottage(PHCC)": 5,
+    "Gov Hospital": 1,
+    "Priv Health Centre": 40,
+    "Priv Hospital": 24,
+    "Private Dispensary": 77
+   },
+   "educationByType": {
+    "Gov Pre-Primary School": 41,
+    "Gov Primary School": 68,
+    "Gov Seconadry School": 30,
+    "Gov Special Schools for People with Disability": 3,
+    "Priv Pre-Primary School": 78,
+    "Priv Primary School": 77,
+    "Priv Secondary School": 36,
+    "Priv Special Schools for People with Disability": 1,
+    "Private Nursery School": 234
+   }
+  },
+  "C053": {
+   "name": "Dar es Salaam City",
+   "region": "Dar es Salaam",
+   "health": 205,
+   "education": 858,
+   "water": 1212,
+   "boreholes": 91,
+   "healthByType": {
+    "Gov Dispensary": 26,
+    "Gov Health Centre/Cottage(PHCC)": 4,
+    "Gov Hospital": 8,
+    "Priv Health Centre": 48,
+    "Priv Hospital": 7,
+    "Private Dispensary": 112
+   },
+   "educationByType": {
+    "Gov Pre-Primary School": 55,
+    "Gov Primary School": 110,
+    "Gov Seconadry School": 51,
+    "Government Primary and Middle Schools": 2,
+    "Priv Pre-Primary School": 75,
+    "Priv Primary School": 116,
+    "Priv Secondary School": 44,
+    "Private Nursery School": 404,
+    "Satellite Schools/Centre": 1
+   }
+  },
+  "C054": {
+   "name": "Temeke Municipal",
+   "region": "Dar es Salaam",
+   "health": 251,
+   "education": 1181,
+   "water": 985,
+   "boreholes": 139,
+   "healthByType": {
+    "Gov Dispensary": 34,
+    "Gov Health Centre/Cottage(PHCC)": 10,
+    "Gov Hospital": 4,
+    "Priv Health Centre": 34,
+    "Priv Hospital": 26,
+    "Private Dispensary": 143
+   },
+   "educationByType": {
+    "Gov Pre-Primary School": 70,
+    "Gov Primary School": 124,
+    "Gov Seconadry School": 48,
+    "Gov Special Schools for People with Disability": 6,
+    "Government Primary and Middle Schools": 2,
+    "Priv Pre-Primary School": 108,
+    "Priv Primary School": 86,
+    "Priv Secondary School": 36,
+    "Priv Special Schools for People with Disability": 6,
+    "Private Nursery School": 695
+   }
+  },
+  "C055": {
+   "name": "Kigamboni Municipal",
+   "region": "Dar es Salaam",
+   "health": 46,
+   "education": 199,
+   "water": 460,
+   "boreholes": 52,
+   "healthByType": {
+    "Gov Dispensary": 15,
+    "Gov Health Centre/Cottage(PHCC)": 2,
+    "Gov Hospital": 2,
+    "Priv Health Centre": 3,
+    "Private Dispensary": 24
+   },
+   "educationByType": {
+    "Gov Pre-Primary School": 15,
+    "Gov Primary School": 33,
+    "Gov Seconadry School": 16,
+    "Priv Pre-Primary School": 10,
+    "Priv Primary School": 30,
+    "Priv Secondary School": 4,
+    "Private Nursery School": 88,
+    "Satellite Schools/Centre": 3
+   }
+  },
+  "C056": {
+   "name": "Ubungo Municipal",
+   "region": "Dar es Salaam",
+   "health": 131,
+   "education": 499,
+   "water": 690,
+   "boreholes": 29,
+   "healthByType": {
+    "Gov Dispensary": 12,
+    "Gov Health Centre/Cottage(PHCC)": 4,
+    "Gov Hospital": 3,
+    "Priv Health Centre": 26,
+    "Priv Hospital": 14,
+    "Private Dispensary": 72
+   },
+   "educationByType": {
+    "Gov Pre-Primary School": 17,
+    "Gov Primary School": 62,
+    "Gov Seconadry School": 31,
+    "Government Primary and Middle Schools": 1,
+    "Priv Pre-Primary School": 40,
+    "Priv Primary School": 85,
+    "Priv Secondary School": 27,
+    "Priv Special Schools for People with Disability": 1,
+    "Private Nursery School": 235
+   }
+  },
+  "C057": {
+   "name": "Kilwa District",
+   "region": "Lindi",
+   "health": 63,
+   "education": 241,
+   "water": 1261,
+   "boreholes": 63,
+   "healthByType": {
+    "Gov Dispensary": 51,
+    "Gov Health Centre/Cottage(PHCC)": 6,
+    "Gov Hospital": 1,
+    "Priv Health Centre": 1,
+    "Priv Hospital": 1,
+    "Private Dispensary": 3
+   },
+   "educationByType": {
+    "Gov Pre-Primary School": 51,
+    "Gov Primary School": 101,
+    "Gov Seconadry School": 23,
+    "Priv Pre-Primary School": 5,
+    "Priv Primary School": 3,
+    "Priv Secondary School": 1,
+    "Private Nursery School": 20,
+    "Satellite Schools/Centre": 37
+   }
+  },
+  "C058": {
+   "name": "Mtama District",
+   "region": "Lindi",
+   "health": 56,
+   "education": 141,
+   "water": 1398,
+   "boreholes": 34,
+   "healthByType": {
+    "Gov Dispensary": 43,
+    "Gov Health Centre/Cottage(PHCC)": 5,
+    "Gov Hospital": 2,
+    "Priv Health Centre": 2,
+    "Priv Hospital": 1,
+    "Private Dispensary": 3
+   },
+   "educationByType": {
+    "Gov Pre-Primary School": 15,
+    "Gov Primary School": 78,
+    "Gov Seconadry School": 15,
+    "Government Primary and Middle Schools": 1,
+    "Priv Pre-Primary School": 1,
+    "Priv Secondary School": 4,
+    "Private Nursery School": 20,
+    "Satellite Schools/Centre": 7
+   }
+  },
+  "C059": {
+   "name": "Lindi Municipal",
+   "region": "Lindi",
+   "health": 78,
+   "education": 154,
+   "water": 1135,
+   "boreholes": 37,
+   "healthByType": {
+    "Gov Dispensary": 66,
+    "Gov Health Centre/Cottage(PHCC)": 6,
+    "Gov Hospital": 1,
+    "Private Dispensary": 5
+   },
+   "educationByType": {
+    "Gov Pre-Primary School": 16,
+    "Gov Primary School": 73,
+    "Gov Seconadry School": 13,
+    "Priv Pre-Primary School": 6,
+    "Priv Primary School": 4,
+    "Priv Secondary School": 2,
+    "Private Nursery School": 29,
+    "Satellite Schools/Centre": 11
+   }
+  },
+  "C060": {
+   "name": "Nachingwea District",
+   "region": "Lindi",
+   "health": 54,
+   "education": 171,
+   "water": 2018,
+   "boreholes": 28,
+   "healthByType": {
+    "Gov Dispensary": 39,
+    "Gov Health Centre/Cottage(PHCC)": 5,
+    "Gov Hospital": 2,
+    "Priv Health Centre": 1,
+    "Priv Hospital": 2,
+    "Private Dispensary": 5
+   },
+   "educationByType": {
+    "Gov Pre-Primary School": 11,
+    "Gov Primary School": 111,
+    "Gov Seconadry School": 28,
+    "Government Primary and Middle Schools": 1,
+    "Priv Pre-Primary School": 7,
+    "Priv Primary School": 3,
+    "Private Nursery School": 10
+   }
+  },
+  "C061": {
+   "name": "Liwale District",
+   "region": "Lindi",
+   "health": 42,
+   "education": 107,
+   "water": 1216,
+   "boreholes": 52,
+   "healthByType": {
+    "Gov Dispensary": 33,
+    "Gov Health Centre/Cottage(PHCC)": 3,
+    "Gov Hospital": 3,
+    "Priv Hospital": 1,
+    "Private Dispensary": 2
+   },
+   "educationByType": {
+    "Gov Pre-Primary School": 11,
+    "Gov Primary School": 63,
+    "Gov Seconadry School": 17,
+    "Priv Pre-Primary School": 1,
+    "Priv Primary School": 1,
+    "Private Nursery School": 7,
+    "Satellite Schools/Centre": 7
+   }
+  },
+  "C062": {
+   "name": "Ruangwa District",
+   "region": "Lindi",
+   "health": 50,
+   "education": 132,
+   "water": 1890,
+   "boreholes": 38,
+   "healthByType": {
+    "Gov Dispensary": 38,
+    "Gov Health Centre/Cottage(PHCC)": 8,
+    "Gov Hospital": 3,
+    "Private Dispensary": 1
+   },
+   "educationByType": {
+    "Gov Pre-Primary School": 9,
+    "Gov Primary School": 84,
+    "Gov Seconadry School": 22,
+    "Priv Pre-Primary School": 3,
+    "Priv Primary School": 2,
+    "Private Nursery School": 6,
+    "Satellite Schools/Centre": 6
+   }
+  },
+  "C063": {
+   "name": "Mtwara District",
+   "region": "Mtwara",
+   "health": 37,
+   "education": 122,
+   "water": 1321,
+   "boreholes": 42,
+   "healthByType": {
+    "Gov Dispensary": 31,
+    "Gov Health Centre/Cottage(PHCC)": 3,
+    "Gov Hospital": 2,
+    "Private Dispensary": 1
+   },
+   "educationByType": {
+    "Gov Pre-Primary School": 25,
+    "Gov Primary School": 71,
+    "Gov Seconadry School": 18,
+    "Priv Pre-Primary School": 1,
+    "Priv Secondary School": 1,
+    "Private Nursery School": 2,
+    "Satellite Schools/Centre": 4
+   }
+  },
+  "C064": {
+   "name": "Nanyamba Town",
+   "region": "Mtwara",
+   "health": 32,
+   "education": 97,
+   "water": 986,
+   "boreholes": 3,
+   "healthByType": {
+    "Gov Dispensary": 25,
+    "Gov Health Centre/Cottage(PHCC)": 4,
+    "Gov Hospital": 1,
+    "Priv Health Centre": 1,
+    "Private Dispensary": 1
+   },
+   "educationByType": {
+    "Gov Pre-Primary School": 11,
+    "Gov Primary School": 67,
+    "Gov Seconadry School": 13,
+    "Private Nursery School": 2,
+    "Satellite Schools/Centre": 4
+   }
+  },
+  "C065": {
+   "name": "Mtwara Mikindani Municipal",
+   "region": "Mtwara",
+   "health": 26,
+   "education": 144,
+   "water": 654,
+   "boreholes": 11,
+   "healthByType": {
+    "Gov Dispensary": 10,
+    "Gov Health Centre/Cottage(PHCC)": 2,
+    "Gov Hospital": 2,
+    "Priv Health Centre": 3,
+    "Priv Hospital": 1,
+    "Private Dispensary": 8
+   },
+   "educationByType": {
+    "Gov Pre-Primary School": 15,
+    "Gov Primary School": 33,
+    "Gov Seconadry School": 14,
+    "Priv Pre-Primary School": 12,
+    "Priv Primary School": 6,
+    "Priv Secondary School": 8,
+    "Priv Special Schools for People with Disability": 1,
+    "Private Nursery School": 55
+   }
+  },
+  "C066": {
+   "name": "Newala District",
+   "region": "Mtwara",
+   "health": 34,
+   "education": 137,
+   "water": 1231,
+   "boreholes": 1,
+   "healthByType": {
+    "Gov Dispensary": 30,
+    "Gov Health Centre/Cottage(PHCC)": 2,
+    "Gov Hospital": 1,
+    "Private Dispensary": 1
+   },
+   "educationByType": {
+    "Gov Pre-Primary School": 30,
+    "Gov Primary School": 79,
+    "Gov Seconadry School": 15,
+    "Gov Special Schools for People with Disability": 1,
+    "Private Nursery School": 3,
+    "Satellite Schools/Centre": 9
+   }
+  },
+  "C067": {
+   "name": "Newala Town",
+   "region": "Mtwara",
+   "health": 27,
+   "education": 78,
+   "water": 905,
+   "boreholes": 3,
+   "healthByType": {
+    "Gov Dispensary": 20,
+    "Gov Health Centre/Cottage(PHCC)": 3,
+    "Gov Hospital": 1,
+    "Priv Health Centre": 1,
+    "Private Dispensary": 2
+   },
+   "educationByType": {
+    "Gov Pre-Primary School": 9,
+    "Gov Primary School": 45,
+    "Gov Seconadry School": 11,
+    "Priv Pre-Primary School": 1,
+    "Private Nursery School": 11,
+    "Satellite Schools/Centre": 1
+   }
+  },
+  "C068": {
+   "name": "Masasi District",
+   "region": "Mtwara",
+   "health": 57,
+   "education": 222,
+   "water": 3651,
+   "boreholes": 25,
+   "healthByType": {
+    "Gov Dispensary": 35,
+    "Gov Health Centre/Cottage(PHCC)": 4,
+    "Gov Hospital": 2,
+    "Priv Health Centre": 4,
+    "Priv Hospital": 1,
+    "Private Dispensary": 11
+   },
+   "educationByType": {
+    "Gov Pre-Primary School": 13,
+    "Gov Primary School": 129,
+    "Gov Seconadry School": 28,
+    "Gov Special Schools for People with Disability": 1,
+    "Government Primary and Middle Schools": 1,
+    "Priv Pre-Primary School": 2,
+    "Priv Primary School": 3,
+    "Priv Secondary School": 2,
+    "Private Nursery School": 37,
+    "Satellite Schools/Centre": 6
+   }
+  },
+  "C069": {
+   "name": "Masasi Town",
+   "region": "Mtwara",
+   "health": 19,
+   "education": 124,
+   "water": 957,
+   "boreholes": 15,
+   "healthByType": {
+    "Gov Dispensary": 8,
+    "Gov Hospital": 1,
+    "Priv Health Centre": 1,
+    "Priv Hospital": 2,
+    "Private Dispensary": 7
+   },
+   "educationByType": {
+    "Gov Pre-Primary School": 16,
+    "Gov Primary School": 36,
+    "Gov Seconadry School": 9,
+    "Gov Special Schools for People with Disability": 1,
+    "Priv Pre-Primary School": 3,
+    "Priv Primary School": 4,
+    "Priv Secondary School": 3,
+    "Private Nursery School": 51,
+    "Satellite Schools/Centre": 1
+   }
+  },
+  "C070": {
+   "name": "Tandahimba District",
+   "region": "Mtwara",
+   "health": 51,
+   "education": 212,
+   "water": 2349,
+   "boreholes": 9,
+   "healthByType": {
+    "Gov Dispensary": 33,
+    "Gov Health Centre/Cottage(PHCC)": 5,
+    "Gov Hospital": 1,
+    "Priv Health Centre": 2,
+    "Private Dispensary": 10
+   },
+   "educationByType": {
+    "Gov Pre-Primary School": 29,
+    "Gov Primary School": 122,
+    "Gov Seconadry School": 27,
+    "Gov Special Schools for People with Disability": 2,
+    "Priv Pre-Primary School": 4,
+    "Priv Primary School": 1,
+    "Private Nursery School": 22,
+    "Satellite Schools/Centre": 5
+   }
+  },
+  "C071": {
+   "name": "Nanyumbu District",
+   "region": "Mtwara",
+   "health": 28,
+   "education": 142,
+   "water": 2323,
+   "boreholes": 39,
+   "healthByType": {
+    "Gov Dispensary": 20,
+    "Gov Health Centre/Cottage(PHCC)": 3,
+    "Gov Hospital": 2,
+    "Private Dispensary": 3
+   },
+   "educationByType": {
+    "Gov Pre-Primary School": 21,
+    "Gov Primary School": 93,
+    "Gov Seconadry School": 16,
+    "Priv Pre-Primary School": 1,
+    "Priv Special Schools for People with Disability": 1,
+    "Private Nursery School": 8,
+    "Satellite Schools/Centre": 2
+   }
+  },
+  "C072": {
+   "name": "Tunduru District",
+   "region": "Ruvuma",
+   "health": 77,
+   "education": 276,
+   "water": 3279,
+   "boreholes": 97,
+   "healthByType": {
+    "Gov Dispensary": 57,
+    "Gov Health Centre/Cottage(PHCC)": 5,
+    "Gov Hospital": 3,
+    "Priv Health Centre": 1,
+    "Priv Hospital": 2,
+    "Private Dispensary": 9
+   },
+   "educationByType": {
+    "Gov Pre-Primary School": 56,
+    "Gov Primary School": 146,
+    "Gov Seconadry School": 22,
+    "Gov Special Schools for People with Disability": 1,
+    "Priv Pre-Primary School": 6,
+    "Priv Primary School": 2,
+    "Priv Secondary School": 3,
+    "Private Nursery School": 31,
+    "Satellite Schools/Centre": 9
+   }
+  },
+  "C073": {
+   "name": "Songea District",
+   "region": "Ruvuma",
+   "health": 45,
+   "education": 145,
+   "water": 1455,
+   "boreholes": 23,
+   "healthByType": {
+    "Gov Dispensary": 29,
+    "Gov Health Centre/Cottage(PHCC)": 4,
+    "Gov Hospital": 2,
+    "Priv Hospital": 1,
+    "Private Dispensary": 9
+   },
+   "educationByType": {
+    "Gov Pre-Primary School": 30,
+    "Gov Primary School": 73,
+    "Gov Seconadry School": 15,
+    "Priv Pre-Primary School": 2,
+    "Priv Primary School": 2,
+    "Priv Secondary School": 5,
+    "Private Nursery School": 17,
+    "Satellite Schools/Centre": 1
+   }
+  },
+  "C074": {
+   "name": "Songea Municipal",
+   "region": "Ruvuma",
+   "health": 50,
+   "education": 227,
+   "water": 574,
+   "boreholes": 9,
+   "healthByType": {
+    "Gov Dispensary": 20,
+    "Gov Health Centre/Cottage(PHCC)": 8,
+    "Priv Health Centre": 5,
+    "Private Dispensary": 17
+   },
+   "educationByType": {
+    "Gov Pre-Primary School": 26,
+    "Gov Primary School": 69,
+    "Gov Seconadry School": 24,
+    "Priv Pre-Primary School": 9,
+    "Priv Primary School": 15,
+    "Priv Secondary School": 14,
+    "Private Nursery School": 69,
+    "Satellite Schools/Centre": 1
+   }
+  },
+  "C075": {
+   "name": "Madaba District",
+   "region": "Ruvuma",
+   "health": 22,
+   "education": 69,
+   "water": 509,
+   "boreholes": 1,
+   "healthByType": {
+    "Gov Dispensary": 11,
+    "Gov Health Centre/Cottage(PHCC)": 3,
+    "Gov Hospital": 2,
+    "Priv Health Centre": 1,
+    "Priv Hospital": 1,
+    "Private Dispensary": 4
+   },
+   "educationByType": {
+    "Gov Pre-Primary School": 13,
+    "Gov Primary School": 26,
+    "Gov Seconadry School": 7,
+    "Government Primary and Middle Schools": 1,
+    "Priv Pre-Primary School": 3,
+    "Priv Primary School": 1,
+    "Priv Secondary School": 5,
+    "Private Nursery School": 13
+   }
+  },
+  "C076": {
+   "name": "Mbinga District",
+   "region": "Ruvuma",
+   "health": 61,
+   "education": 323,
+   "water": 2694,
+   "boreholes": 5,
+   "healthByType": {
+    "Gov Dispensary": 47,
+    "Gov Health Centre/Cottage(PHCC)": 3,
+    "Priv Health Centre": 4,
+    "Priv Hospital": 3,
+    "Private Dispensary": 4
+   },
+   "educationByType": {
+    "Gov Pre-Primary School": 97,
+    "Gov Primary School": 160,
+    "Gov Seconadry School": 31,
+    "Priv Pre-Primary School": 1,
+    "Priv Primary School": 3,
+    "Priv Secondary School": 15,
+    "Private Nursery School": 13,
+    "Satellite Schools/Centre": 3
+   }
+  },
+  "C077": {
+   "name": "Mbinga Town",
+   "region": "Ruvuma",
+   "health": 24,
+   "education": 149,
+   "water": 1374,
+   "boreholes": 2,
+   "healthByType": {
+    "Gov Dispensary": 16,
+    "Gov Health Centre/Cottage(PHCC)": 1,
+    "Gov Hospital": 2,
+    "Priv Health Centre": 1,
+    "Private Dispensary": 4
+   },
+   "educationByType": {
+    "Gov Pre-Primary School": 33,
+    "Gov Primary School": 66,
+    "Gov Seconadry School": 14,
+    "Priv Pre-Primary School": 9,
+    "Priv Primary School": 9,
+    "Priv Secondary School": 5,
+    "Private Nursery School": 12,
+    "Satellite Schools/Centre": 1
+   }
+  },
+  "C078": {
+   "name": "Nyasa District",
+   "region": "Ruvuma",
+   "health": 44,
+   "education": 143,
+   "water": 1312,
+   "boreholes": 1,
+   "healthByType": {
+    "Gov Dispensary": 26,
+    "Gov Health Centre/Cottage(PHCC)": 3,
+    "Gov Hospital": 4,
+    "Priv Health Centre": 2,
+    "Priv Hospital": 2,
+    "Private Dispensary": 7
+   },
+   "educationByType": {
+    "Gov Pre-Primary School": 6,
+    "Gov Primary School": 111,
+    "Gov Seconadry School": 15,
+    "Priv Secondary School": 1,
+    "Private Nursery School": 4,
+    "Satellite Schools/Centre": 6
+   }
+  },
+  "C079": {
+   "name": "Namtumbo District",
+   "region": "Ruvuma",
+   "health": 59,
+   "education": 269,
+   "water": 1270,
+   "boreholes": 18,
+   "healthByType": {
+    "Gov Dispensary": 40,
+    "Gov Health Centre/Cottage(PHCC)": 8,
+    "Gov Hospital": 2,
+    "Priv Health Centre": 1,
+    "Priv Hospital": 1,
+    "Private Dispensary": 7
+   },
+   "educationByType": {
+    "Gov Pre-Primary School": 92,
+    "Gov Primary School": 104,
+    "Gov Seconadry School": 24,
+    "Priv Pre-Primary School": 9,
+    "Priv Primary School": 5,
+    "Priv Secondary School": 9,
+    "Private Nursery School": 22,
+    "Satellite Schools/Centre": 4
+   }
+  },
+  "C080": {
+   "name": "Iringa District",
+   "region": "Iringa",
+   "health": 100,
+   "education": 334,
+   "water": 3692,
+   "boreholes": 77,
+   "healthByType": {
+    "Gov Dispensary": 65,
+    "Gov Health Centre/Cottage(PHCC)": 8,
+    "Gov Hospital": 4,
+    "Priv Health Centre": 2,
+    "Priv Hospital": 3,
+    "Private Dispensary": 18
+   },
+   "educationByType": {
+    "Gov Pre-Primary School": 47,
+    "Gov Primary School": 146,
+    "Gov Seconadry School": 32,
+    "Priv Pre-Primary School": 9,
+    "Priv Primary School": 9,
+    "Priv Secondary School": 15,
+    "Private Nursery School": 58,
+    "Satellite Schools/Centre": 18
+   }
+  },
+  "C081": {
+   "name": "Iringa Municipal",
+   "region": "Iringa",
+   "health": 47,
+   "education": 224,
+   "water": 1190,
+   "boreholes": 10,
+   "healthByType": {
+    "Gov Dispensary": 9,
+    "Gov Health Centre/Cottage(PHCC)": 4,
+    "Gov Hospital": 2,
+    "Priv Health Centre": 6,
+    "Priv Hospital": 2,
+    "Private Dispensary": 24
+   },
+   "educationByType": {
+    "Gov Pre-Primary School": 38,
+    "Gov Primary School": 42,
+    "Gov Seconadry School": 16,
+    "Gov Special Schools for People with Disability": 1,
+    "Government Primary and Middle Schools": 1,
+    "Priv Pre-Primary School": 24,
+    "Priv Primary School": 18,
+    "Priv Secondary School": 15,
+    "Priv Special Schools for People with Disability": 1,
+    "Private Nursery School": 68
+   }
+  },
+  "C082": {
+   "name": "Mafinga Town",
+   "region": "Iringa",
+   "health": 28,
+   "education": 131,
+   "water": 540,
+   "boreholes": 4,
+   "healthByType": {
+    "Gov Dispensary": 15,
+    "Gov Health Centre/Cottage(PHCC)": 1,
+    "Gov Hospital": 1,
+    "Priv Health Centre": 6,
+    "Private Dispensary": 5
+   },
+   "educationByType": {
+    "Gov Pre-Primary School": 2,
+    "Gov Primary School": 28,
+    "Gov Seconadry School": 12,
+    "Priv Pre-Primary School": 3,
+    "Priv Primary School": 12,
+    "Priv Secondary School": 9,
+    "Private Nursery School": 64,
+    "Satellite Schools/Centre": 1
+   }
+  },
+  "C083": {
+   "name": "Mufindi District",
+   "region": "Iringa",
+   "health": 104,
+   "education": 351,
+   "water": 3324,
+   "boreholes": 82,
+   "healthByType": {
+    "Gov Dispensary": 66,
+    "Gov Health Centre/Cottage(PHCC)": 9,
+    "Gov Hospital": 2,
+    "Priv Health Centre": 4,
+    "Priv Hospital": 1,
+    "Private Dispensary": 22
+   },
+   "educationByType": {
+    "Gov Pre-Primary School": 55,
+    "Gov Primary School": 145,
+    "Gov Seconadry School": 34,
+    "Government Primary and Middle Schools": 2,
+    "Priv Pre-Primary School": 11,
+    "Priv Primary School": 6,
+    "Priv Secondary School": 10,
+    "Private Nursery School": 67,
+    "Satellite Schools/Centre": 21
+   }
+  },
+  "C084": {
+   "name": "Kilolo District",
+   "region": "Iringa",
+   "health": 70,
+   "education": 258,
+   "water": 2456,
+   "boreholes": 17,
+   "healthByType": {
+    "Gov Dispensary": 42,
+    "Gov Health Centre/Cottage(PHCC)": 4,
+    "Gov Hospital": 3,
+    "Priv Health Centre": 3,
+    "Priv Hospital": 1,
+    "Private Dispensary": 17
+   },
+   "educationByType": {
+    "Gov Pre-Primary School": 33,
+    "Gov Primary School": 123,
+    "Gov Seconadry School": 26,
+    "Government Primary and Middle Schools": 1,
+    "Priv Pre-Primary School": 4,
+    "Priv Primary School": 6,
+    "Priv Secondary School": 16,
+    "Private Nursery School": 48,
+    "Satellite Schools/Centre": 1
+   }
+  },
+  "C085": {
+   "name": "Chunya District",
+   "region": "Mbeya",
+   "health": 47,
+   "education": 118,
+   "water": 1390,
+   "boreholes": 39,
+   "healthByType": {
+    "Gov Dispensary": 29,
+    "Gov Health Centre/Cottage(PHCC)": 5,
+    "Gov Hospital": 2,
+    "Priv Health Centre": 3,
+    "Private Dispensary": 8
+   },
+   "educationByType": {
+    "Gov Pre-Primary School": 14,
+    "Gov Primary School": 69,
+    "Gov Seconadry School": 14,
+    "Priv Pre-Primary School": 1,
+    "Priv Primary School": 2,
+    "Priv Secondary School": 1,
+    "Private Nursery School": 11,
+    "Satellite Schools/Centre": 6
+   }
+  },
+  "C086": {
+   "name": "Mbeya District",
+   "region": "Mbeya",
+   "health": 87,
+   "education": 310,
+   "water": 3757,
+   "boreholes": 14,
+   "healthByType": {
+    "Gov Dispensary": 65,
+    "Gov Health Centre/Cottage(PHCC)": 5,
+    "Gov Hospital": 3,
+    "Priv Health Centre": 1,
+    "Priv Hospital": 1,
+    "Private Dispensary": 12
+   },
+   "educationByType": {
+    "Gov Pre-Primary School": 25,
+    "Gov Primary School": 153,
+    "Gov Seconadry School": 37,
+    "Priv Pre-Primary School": 6,
+    "Priv Primary School": 10,
+    "Priv Secondary School": 28,
+    "Private Nursery School": 28,
+    "Satellite Schools/Centre": 23
+   }
+  },
+  "C087": {
+   "name": "Mbeya City",
+   "region": "Mbeya",
+   "health": 84,
+   "education": 373,
+   "water": 1282,
+   "boreholes": 7,
+   "healthByType": {
+    "Gov Dispensary": 14,
+    "Gov Health Centre/Cottage(PHCC)": 8,
+    "Gov Hospital": 4,
+    "Priv Health Centre": 14,
+    "Priv Hospital": 8,
+    "Private Dispensary": 36
+   },
+   "educationByType": {
+    "Gov Pre-Primary School": 33,
+    "Gov Primary School": 77,
+    "Gov Seconadry School": 36,
+    "Priv Pre-Primary School": 32,
+    "Priv Primary School": 16,
+    "Priv Secondary School": 22,
+    "Private Nursery School": 157
+   }
+  },
+  "C088": {
+   "name": "Kyela District",
+   "region": "Mbeya",
+   "health": 52,
+   "education": 205,
+   "water": 1761,
+   "boreholes": 28,
+   "healthByType": {
+    "Gov Dispensary": 31,
+    "Gov Health Centre/Cottage(PHCC)": 4,
+    "Gov Hospital": 1,
+    "Priv Health Centre": 4,
+    "Priv Hospital": 2,
+    "Private Dispensary": 10
+   },
+   "educationByType": {
+    "Gov Pre-Primary School": 34,
+    "Gov Primary School": 102,
+    "Gov Seconadry School": 23,
+    "Government Primary and Middle Schools": 1,
+    "Priv Pre-Primary School": 6,
+    "Priv Primary School": 4,
+    "Priv Secondary School": 5,
+    "Private Nursery School": 30
+   }
+  },
+  "C089": {
+   "name": "Rungwe District",
+   "region": "Mbeya",
+   "health": 68,
+   "education": 256,
+   "water": 2032,
+   "boreholes": 3,
+   "healthByType": {
+    "Gov Dispensary": 41,
+    "Gov Health Centre/Cottage(PHCC)": 8,
+    "Gov Hospital": 1,
+    "Priv Health Centre": 5,
+    "Priv Hospital": 3,
+    "Private Dispensary": 10
+   },
+   "educationByType": {
+    "Gov Pre-Primary School": 29,
+    "Gov Primary School": 134,
+    "Gov Seconadry School": 35,
+    "Priv Pre-Primary School": 5,
+    "Priv Primary School": 7,
+    "Priv Secondary School": 12,
+    "Private Nursery School": 33,
+    "Satellite Schools/Centre": 1
+   }
+  },
+  "C090": {
+   "name": "Busokelo District",
+   "region": "Mbeya",
+   "health": 30,
+   "education": 93,
+   "water": 996,
+   "boreholes": 0,
+   "healthByType": {
+    "Gov Dispensary": 14,
+    "Gov Health Centre/Cottage(PHCC)": 6,
+    "Gov Hospital": 1,
+    "Priv Hospital": 2,
+    "Private Dispensary": 7
+   },
+   "educationByType": {
+    "Gov Pre-Primary School": 5,
+    "Gov Primary School": 61,
+    "Gov Seconadry School": 18,
+    "Priv Primary School": 1,
+    "Priv Secondary School": 2,
+    "Private Nursery School": 6
+   }
+  },
+  "C091": {
+   "name": "Mbarali District",
+   "region": "Mbeya",
+   "health": 73,
+   "education": 298,
+   "water": 3211,
+   "boreholes": 53,
+   "healthByType": {
+    "Gov Dispensary": 49,
+    "Gov Health Centre/Cottage(PHCC)": 7,
+    "Gov Hospital": 3,
+    "Priv Health Centre": 3,
+    "Priv Hospital": 3,
+    "Private Dispensary": 8
+   },
+   "educationByType": {
+    "Gov Pre-Primary School": 35,
+    "Gov Primary School": 120,
+    "Gov Seconadry School": 26,
+    "Priv Pre-Primary School": 5,
+    "Priv Primary School": 7,
+    "Priv Secondary School": 6,
+    "Priv Special Schools for People with Disability": 1,
+    "Private Nursery School": 81,
+    "Satellite Schools/Centre": 17
+   }
+  },
+  "C092": {
+   "name": "Iramba District",
+   "region": "Singida",
+   "health": 11,
+   "education": 181,
+   "water": 1835,
+   "boreholes": 41,
+   "healthByType": {
+    "Gov Dispensary": 7,
+    "Gov Health Centre/Cottage(PHCC)": 1,
+    "Gov Hospital": 2,
+    "Private Dispensary": 1
+   },
+   "educationByType": {
+    "Gov Pre-Primary School": 37,
+    "Gov Primary School": 97,
+    "Gov Seconadry School": 19,
+    "Priv Pre-Primary School": 1,
+    "Priv Primary School": 3,
+    "Priv Secondary School": 2,
+    "Private Nursery School": 11,
+    "Satellite Schools/Centre": 11
+   }
+  },
+  "C093": {
+   "name": "Singida District",
+   "region": "Singida",
+   "health": 28,
+   "education": 155,
+   "water": 2221,
+   "boreholes": 117,
+   "healthByType": {
+    "Gov Dispensary": 19,
+    "Gov Health Centre/Cottage(PHCC)": 3,
+    "Gov Hospital": 3,
+    "Private Dispensary": 3
+   },
+   "educationByType": {
+    "Gov Pre-Primary School": 14,
+    "Gov Primary School": 93,
+    "Gov Seconadry School": 24,
+    "Priv Pre-Primary School": 4,
+    "Priv Primary School": 2,
+    "Priv Secondary School": 5,
+    "Private Nursery School": 8,
+    "Satellite Schools/Centre": 5
+   }
+  },
+  "C094": {
+   "name": "Singida Municipal",
+   "region": "Singida",
+   "health": 20,
+   "education": 177,
+   "water": 823,
+   "boreholes": 72,
+   "healthByType": {
+    "Gov Dispensary": 9,
+    "Gov Health Centre/Cottage(PHCC)": 2,
+    "Gov Hospital": 3,
+    "Priv Health Centre": 1,
+    "Private Dispensary": 5
+   },
+   "educationByType": {
+    "Gov Pre-Primary School": 48,
+    "Gov Primary School": 52,
+    "Gov Seconadry School": 15,
+    "Gov Special Schools for People with Disability": 1,
+    "Priv Pre-Primary School": 7,
+    "Priv Primary School": 7,
+    "Priv Secondary School": 7,
+    "Private Nursery School": 37,
+    "Satellite Schools/Centre": 3
+   }
+  },
+  "C095": {
+   "name": "Manyoni District",
+   "region": "Singida",
+   "health": 32,
+   "education": 138,
+   "water": 1302,
+   "boreholes": 60,
+   "healthByType": {
+    "Gov Dispensary": 23,
+    "Gov Health Centre/Cottage(PHCC)": 3,
+    "Priv Health Centre": 1,
+    "Priv Hospital": 1,
+    "Private Dispensary": 4
+   },
+   "educationByType": {
+    "Gov Pre-Primary School": 9,
+    "Gov Primary School": 66,
+    "Gov Seconadry School": 16,
+    "Priv Pre-Primary School": 4,
+    "Priv Primary School": 4,
+    "Priv Secondary School": 3,
+    "Private Nursery School": 13,
+    "Satellite Schools/Centre": 23
+   }
+  },
+  "C096": {
+   "name": "Itigi District",
+   "region": "Singida",
+   "health": 15,
+   "education": 101,
+   "water": 944,
+   "boreholes": 36,
+   "healthByType": {
+    "Gov Dispensary": 11,
+    "Gov Hospital": 1,
+    "Private Dispensary": 3
+   },
+   "educationByType": {
+    "Gov Pre-Primary School": 4,
+    "Gov Primary School": 62,
+    "Gov Seconadry School": 10,
+    "Priv Pre-Primary School": 3,
+    "Priv Primary School": 4,
+    "Priv Secondary School": 1,
+    "Private Nursery School": 4,
+    "Satellite Schools/Centre": 13
+   }
+  },
+  "C097": {
+   "name": "Ikungi District",
+   "region": "Singida",
+   "health": 48,
+   "education": 249,
+   "water": 2381,
+   "boreholes": 80,
+   "healthByType": {
+    "Gov Dispensary": 31,
+    "Gov Health Centre/Cottage(PHCC)": 5,
+    "Gov Hospital": 5,
+    "Priv Hospital": 2,
+    "Private Dispensary": 5
+   },
+   "educationByType": {
+    "Gov Pre-Primary School": 54,
+    "Gov Primary School": 124,
+    "Gov Seconadry School": 30,
+    "Gov Special Schools for People with Disability": 1,
+    "Priv Pre-Primary School": 5,
+    "Priv Primary School": 3,
+    "Priv Secondary School": 5,
+    "Private Nursery School": 15,
+    "Satellite Schools/Centre": 12
+   }
+  },
+  "C098": {
+   "name": "Mkalama District",
+   "region": "Singida",
+   "health": 43,
+   "education": 133,
+   "water": 1744,
+   "boreholes": 56,
+   "healthByType": {
+    "Gov Dispensary": 29,
+    "Gov Health Centre/Cottage(PHCC)": 4,
+    "Gov Hospital": 1,
+    "Priv Hospital": 1,
+    "Private Dispensary": 8
+   },
+   "educationByType": {
+    "Gov Pre-Primary School": 6,
+    "Gov Primary School": 91,
+    "Gov Seconadry School": 18,
+    "Priv Pre-Primary School": 2,
+    "Priv Primary School": 3,
+    "Priv Secondary School": 2,
+    "Private Nursery School": 7,
+    "Satellite Schools/Centre": 4
+   }
+  },
+  "C099": {
+   "name": "Nzega Town",
+   "region": "Tabora",
+   "health": 17,
+   "education": 90,
+   "water": 841,
+   "boreholes": 41,
+   "healthByType": {
+    "Gov Dispensary": 6,
+    "Gov Health Centre/Cottage(PHCC)": 2,
+    "Gov Hospital": 1,
+    "Priv Health Centre": 4,
+    "Private Dispensary": 4
+   },
+   "educationByType": {
+    "Gov Pre-Primary School": 17,
+    "Gov Primary School": 33,
+    "Gov Seconadry School": 10,
+    "Priv Pre-Primary School": 7,
+    "Priv Primary School": 6,
+    "Priv Secondary School": 4,
+    "Private Nursery School": 12,
+    "Satellite Schools/Centre": 1
+   }
+  },
+  "C100": {
+   "name": "Nzega District",
+   "region": "Tabora",
+   "health": 55,
+   "education": 219,
+   "water": 2671,
+   "boreholes": 59,
+   "healthByType": {
+    "Gov Dispensary": 44,
+    "Gov Health Centre/Cottage(PHCC)": 4,
+    "Gov Hospital": 1,
+    "Priv Health Centre": 1,
+    "Private Dispensary": 5
+   },
+   "educationByType": {
+    "Gov Pre-Primary School": 16,
+    "Gov Primary School": 148,
+    "Gov Seconadry School": 31,
+    "Government Primary and Middle Schools": 1,
+    "Priv Primary School": 3,
+    "Private Nursery School": 5,
+    "Satellite Schools/Centre": 15
+   }
+  },
+  "C101": {
+   "name": "Igunga District",
+   "region": "Tabora",
+   "health": 78,
+   "education": 256,
+   "water": 2668,
+   "boreholes": 54,
+   "healthByType": {
+    "Gov Dispensary": 60,
+    "Gov Health Centre/Cottage(PHCC)": 6,
+    "Gov Hospital": 2,
+    "Priv Health Centre": 1,
+    "Priv Hospital": 1,
+    "Private Dispensary": 8
+   },
+   "educationByType": {
+    "Gov Pre-Primary School": 64,
+    "Gov Primary School": 136,
+    "Gov Seconadry School": 31,
+    "Gov Special Schools for People with Disability": 1,
+    "Priv Pre-Primary School": 3,
+    "Priv Primary School": 6,
+    "Priv Secondary School": 6,
+    "Private Nursery School": 9
+   }
+  },
+  "C102": {
+   "name": "Uyui District",
+   "region": "Tabora",
+   "health": 66,
+   "education": 227,
+   "water": 2548,
+   "boreholes": 22,
+   "healthByType": {
+    "Gov Dispensary": 50,
+    "Gov Health Centre/Cottage(PHCC)": 1,
+    "Gov Hospital": 3,
+    "Priv Health Centre": 1,
+    "Private Dispensary": 11
+   },
+   "educationByType": {
+    "Gov Pre-Primary School": 16,
+    "Gov Primary School": 151,
+    "Gov Seconadry School": 27,
+    "Priv Primary School": 2,
+    "Priv Secondary School": 3,
+    "Private Nursery School": 11,
+    "Satellite Schools/Centre": 17
+   }
+  },
+  "C103": {
+   "name": "Urambo District",
+   "region": "Tabora",
+   "health": 34,
+   "education": 166,
+   "water": 1259,
+   "boreholes": 28,
+   "healthByType": {
+    "Gov Dispensary": 23,
+    "Gov Health Centre/Cottage(PHCC)": 3,
+    "Gov Hospital": 3,
+    "Priv Health Centre": 1,
+    "Priv Hospital": 1,
+    "Private Dispensary": 3
+   },
+   "educationByType": {
+    "Gov Pre-Primary School": 51,
+    "Gov Primary School": 81,
+    "Gov Seconadry School": 15,
+    "Priv Pre-Primary School": 4,
+    "Priv Primary School": 2,
+    "Priv Secondary School": 3,
+    "Private Nursery School": 8,
+    "Satellite Schools/Centre": 2
+   }
+  },
+  "C104": {
+   "name": "Sikonge District",
+   "region": "Tabora",
+   "health": 43,
+   "education": 159,
+   "water": 1668,
+   "boreholes": 28,
+   "healthByType": {
+    "Gov Dispensary": 27,
+    "Gov Health Centre/Cottage(PHCC)": 5,
+    "Gov Hospital": 2,
+    "Priv Hospital": 2,
+    "Private Dispensary": 7
+   },
+   "educationByType": {
+    "Gov Pre-Primary School": 14,
+    "Gov Primary School": 96,
+    "Gov Seconadry School": 19,
+    "Priv Pre-Primary School": 1,
+    "Priv Primary School": 1,
+    "Priv Secondary School": 2,
+    "Private Nursery School": 4,
+    "Satellite Schools/Centre": 22
+   }
+  },
+  "C105": {
+   "name": "Tabora Municipal",
+   "region": "Tabora",
+   "health": 54,
+   "education": 214,
+   "water": 1439,
+   "boreholes": 24,
+   "healthByType": {
+    "Gov Dispensary": 24,
+    "Gov Health Centre/Cottage(PHCC)": 2,
+    "Gov Hospital": 2,
+    "Priv Health Centre": 5,
+    "Priv Hospital": 4,
+    "Private Dispensary": 17
+   },
+   "educationByType": {
+    "Gov Pre-Primary School": 15,
+    "Gov Primary School": 69,
+    "Gov Seconadry School": 22,
+    "Gov Special Schools for People with Disability": 2,
+    "Priv Pre-Primary School": 13,
+    "Priv Primary School": 12,
+    "Priv Secondary School": 11,
+    "Priv Special Schools for People with Disability": 2,
+    "Private Nursery School": 66,
+    "Satellite Schools/Centre": 2
+   }
+  },
+  "C106": {
+   "name": "Kaliua District",
+   "region": "Tabora",
+   "health": 54,
+   "education": 257,
+   "water": 2116,
+   "boreholes": 12,
+   "healthByType": {
+    "Gov Dispensary": 39,
+    "Gov Health Centre/Cottage(PHCC)": 4,
+    "Gov Hospital": 1,
+    "Priv Hospital": 1,
+    "Private Dispensary": 9
+   },
+   "educationByType": {
+    "Gov Pre-Primary School": 56,
+    "Gov Primary School": 118,
+    "Gov Seconadry School": 20,
+    "Priv Pre-Primary School": 10,
+    "Priv Primary School": 1,
+    "Priv Secondary School": 1,
+    "Private Nursery School": 14,
+    "Satellite Schools/Centre": 37
+   }
+  },
+  "C107": {
+   "name": "Kalambo District",
+   "region": "Rukwa",
+   "health": 68,
+   "education": 312,
+   "water": 2248,
+   "boreholes": 16,
+   "healthByType": {
+    "Gov Dispensary": 56,
+    "Gov Health Centre/Cottage(PHCC)": 7,
+    "Gov Hospital": 1,
+    "Private Dispensary": 4
+   },
+   "educationByType": {
+    "Gov Pre-Primary School": 48,
+    "Gov Primary School": 192,
+    "Gov Seconadry School": 26,
+    "Priv Pre-Primary School": 4,
+    "Priv Primary School": 2,
+    "Priv Secondary School": 8,
+    "Private Nursery School": 14,
+    "Satellite Schools/Centre": 18
+   }
+  },
+  "C108": {
+   "name": "Sumbawanga District",
+   "region": "Rukwa",
+   "health": 79,
+   "education": 577,
+   "water": 2637,
+   "boreholes": 15,
+   "healthByType": {
+    "Gov Dispensary": 58,
+    "Gov Health Centre/Cottage(PHCC)": 8,
+    "Gov Hospital": 2,
+    "Priv Health Centre": 2,
+    "Private Dispensary": 9
+   },
+   "educationByType": {
+    "Gov Pre-Primary School": 117,
+    "Gov Primary School": 342,
+    "Gov Seconadry School": 54,
+    "Priv Pre-Primary School": 6,
+    "Priv Primary School": 6,
+    "Priv Secondary School": 16,
+    "Private Nursery School": 24,
+    "Satellite Schools/Centre": 12
+   }
+  },
+  "C109": {
+   "name": "Sumbawanga Municipal",
+   "region": "Rukwa",
+   "health": 53,
+   "education": 184,
+   "water": 1804,
+   "boreholes": 27,
+   "healthByType": {
+    "Gov Dispensary": 26,
+    "Gov Health Centre/Cottage(PHCC)": 5,
+    "Gov Hospital": 3,
+    "Priv Health Centre": 4,
+    "Priv Hospital": 2,
+    "Private Dispensary": 13
+   },
+   "educationByType": {
+    "Gov Pre-Primary School": 20,
+    "Gov Primary School": 52,
+    "Gov Seconadry School": 18,
+    "Gov Special Schools for People with Disability": 1,
+    "Priv Pre-Primary School": 10,
+    "Priv Primary School": 17,
+    "Priv Secondary School": 14,
+    "Private Nursery School": 51,
+    "Satellite Schools/Centre": 1
+   }
+  },
+  "C110": {
+   "name": "Nkasi District",
+   "region": "Rukwa",
+   "health": 74,
+   "education": 515,
+   "water": 2525,
+   "boreholes": 84,
+   "healthByType": {
+    "Gov Dispensary": 56,
+    "Gov Health Centre/Cottage(PHCC)": 4,
+    "Gov Hospital": 2,
+    "Priv Health Centre": 6,
+    "Priv Hospital": 1,
+    "Private Dispensary": 5
+   },
+   "educationByType": {
+    "Gov Pre-Primary School": 81,
+    "Gov Primary School": 308,
+    "Gov Seconadry School": 63,
+    "Priv Pre-Primary School": 12,
+    "Priv Primary School": 6,
+    "Priv Secondary School": 3,
+    "Private Nursery School": 36,
+    "Satellite Schools/Centre": 6
+   }
+  },
+  "C111": {
+   "name": "Kibondo District",
+   "region": "Kigoma",
+   "health": 48,
+   "education": 131,
+   "water": 1944,
+   "boreholes": 35,
+   "healthByType": {
+    "Gov Dispensary": 39,
+    "Gov Health Centre/Cottage(PHCC)": 5,
+    "Gov Hospital": 1,
+    "Priv Health Centre": 1,
+    "Private Dispensary": 2
+   },
+   "educationByType": {
+    "Gov Pre-Primary School": 20,
+    "Gov Primary School": 79,
+    "Gov Seconadry School": 15,
+    "Priv Pre-Primary School": 2,
+    "Priv Primary School": 3,
+    "Priv Secondary School": 8,
+    "Private Nursery School": 4
+   }
+  },
+  "C112": {
+   "name": "Kasulu District",
+   "region": "Kigoma",
+   "health": 48,
+   "education": 73,
+   "water": 1340,
+   "boreholes": 13,
+   "healthByType": {
+    "Gov Dispensary": 32,
+    "Gov Health Centre/Cottage(PHCC)": 7,
+    "Gov Hospital": 4,
+    "Priv Health Centre": 4,
+    "Priv Hospital": 1
+   },
+   "educationByType": {
+    "Gov Pre-Primary School": 6,
+    "Gov Primary School": 50,
+    "Gov Seconadry School": 10,
+    "Priv Secondary School": 2,
+    "Private Nursery School": 5
+   }
+  },
+  "C113": {
+   "name": "Kasulu Town",
+   "region": "Kigoma",
+   "health": 24,
+   "education": 105,
+   "water": 624,
+   "boreholes": 2,
+   "healthByType": {
+    "Gov Dispensary": 11,
+    "Gov Health Centre/Cottage(PHCC)": 1,
+    "Gov Hospital": 1,
+    "Priv Health Centre": 1,
+    "Priv Hospital": 2,
+    "Private Dispensary": 8
+   },
+   "educationByType": {
+    "Gov Pre-Primary School": 3,
+    "Gov Primary School": 48,
+    "Gov Seconadry School": 18,
+    "Priv Primary School": 8,
+    "Priv Secondary School": 14,
+    "Private Nursery School": 14
+   }
+  },
+  "C114": {
+   "name": "Kigoma District",
+   "region": "Kigoma",
+   "health": 42,
+   "education": 157,
+   "water": 1568,
+   "boreholes": 22,
+   "healthByType": {
+    "Gov Dispensary": 28,
+    "Gov Health Centre/Cottage(PHCC)": 1,
+    "Gov Hospital": 1,
+    "Priv Health Centre": 2,
+    "Private Dispensary": 10
+   },
+   "educationByType": {
+    "Gov Pre-Primary School": 3,
+    "Gov Primary School": 100,
+    "Gov Seconadry School": 24,
+    "Gov Special Schools for People with Disability": 1,
+    "Priv Pre-Primary School": 4,
+    "Priv Primary School": 3,
+    "Priv Secondary School": 16,
+    "Private Nursery School": 5,
+    "Satellite Schools/Centre": 1
+   }
+  },
+  "C115": {
+   "name": "Kigoma Ujiji Municipal",
+   "region": "Kigoma",
+   "health": 31,
+   "education": 120,
+   "water": 453,
+   "boreholes": 13,
+   "healthByType": {
+    "Gov Dispensary": 11,
+    "Gov Health Centre/Cottage(PHCC)": 4,
+    "Gov Hospital": 1,
+    "Priv Health Centre": 4,
+    "Private Dispensary": 11
+   },
+   "educationByType": {
+    "Gov Pre-Primary School": 8,
+    "Gov Primary School": 44,
+    "Gov Seconadry School": 20,
+    "Government Primary and Middle Schools": 1,
+    "Priv Pre-Primary School": 8,
+    "Priv Primary School": 10,
+    "Priv Secondary School": 11,
+    "Private Nursery School": 18
+   }
+  },
+  "C116": {
+   "name": "Uvinza District",
+   "region": "Kigoma",
+   "health": 48,
+   "education": 202,
+   "water": 1657,
+   "boreholes": 11,
+   "healthByType": {
+    "Gov Dispensary": 35,
+    "Gov Health Centre/Cottage(PHCC)": 5,
+    "Gov Hospital": 4,
+    "Private Dispensary": 4
+   },
+   "educationByType": {
+    "Gov Pre-Primary School": 16,
+    "Gov Primary School": 130,
+    "Gov Seconadry School": 22,
+    "Gov Special Schools for People with Disability": 1,
+    "Priv Primary School": 6,
+    "Priv Secondary School": 3,
+    "Private Nursery School": 10,
+    "Satellite Schools/Centre": 14
+   }
+  },
+  "C117": {
+   "name": "Buhigwe District",
+   "region": "Kigoma",
+   "health": 38,
+   "education": 72,
+   "water": 944,
+   "boreholes": 2,
+   "healthByType": {
+    "Gov Dispensary": 20,
+    "Gov Health Centre/Cottage(PHCC)": 3,
+    "Gov Hospital": 1,
+    "Priv Health Centre": 3,
+    "Priv Hospital": 3,
+    "Private Dispensary": 8
+   },
+   "educationByType": {
+    "Gov Pre-Primary School": 4,
+    "Gov Primary School": 52,
+    "Gov Seconadry School": 13,
+    "Priv Secondary School": 2,
+    "Satellite Schools/Centre": 1
+   }
+  },
+  "C118": {
+   "name": "Kakonko District",
+   "region": "Kigoma",
+   "health": 28,
+   "education": 35,
+   "water": 949,
+   "boreholes": 17,
+   "healthByType": {
+    "Gov Dispensary": 19,
+    "Gov Health Centre/Cottage(PHCC)": 2,
+    "Gov Hospital": 1,
+    "Priv Health Centre": 2,
+    "Private Dispensary": 4
+   },
+   "educationByType": {
+    "Gov Pre-Primary School": 3,
+    "Gov Primary School": 25,
+    "Gov Seconadry School": 6,
+    "Priv Secondary School": 1
+   }
+  },
+  "C119": {
+   "name": "Ushetu District",
+   "region": "Shinyanga",
+   "health": 43,
+   "education": 158,
+   "water": 2351,
+   "boreholes": 34,
+   "healthByType": {
+    "Gov Dispensary": 30,
+    "Gov Health Centre/Cottage(PHCC)": 6,
+    "Gov Hospital": 1,
+    "Private Dispensary": 6
+   },
+   "educationByType": {
+    "Gov Pre-Primary School": 6,
+    "Gov Primary School": 107,
+    "Gov Seconadry School": 22,
+    "Priv Pre-Primary School": 1,
+    "Priv Primary School": 3,
+    "Private Nursery School": 9,
+    "Satellite Schools/Centre": 10
+   }
+  },
+  "C120": {
+   "name": "Kahama Municipal",
+   "region": "Shinyanga",
+   "health": 52,
+   "education": 204,
+   "water": 1222,
+   "boreholes": 19,
+   "healthByType": {
+    "Gov Dispensary": 20,
+    "Gov Health Centre/Cottage(PHCC)": 4,
+    "Gov Hospital": 1,
+    "Priv Health Centre": 8,
+    "Priv Hospital": 1,
+    "Private Dispensary": 18
+   },
+   "educationByType": {
+    "Gov Pre-Primary School": 18,
+    "Gov Primary School": 84,
+    "Gov Seconadry School": 23,
+    "Priv Pre-Primary School": 14,
+    "Priv Primary School": 33,
+    "Priv Secondary School": 15,
+    "Private Nursery School": 13,
+    "Satellite Schools/Centre": 4
+   }
+  },
+  "C121": {
+   "name": "Msalala District",
+   "region": "Shinyanga",
+   "health": 45,
+   "education": 153,
+   "water": 1557,
+   "boreholes": 27,
+   "healthByType": {
+    "Gov Dispensary": 31,
+    "Gov Health Centre/Cottage(PHCC)": 4,
+    "Gov Hospital": 2,
+    "Private Dispensary": 8
+   },
+   "educationByType": {
+    "Gov Pre-Primary School": 17,
+    "Gov Primary School": 96,
+    "Gov Seconadry School": 18,
+    "Priv Pre-Primary School": 2,
+    "Priv Primary School": 5,
+    "Priv Secondary School": 1,
+    "Private Nursery School": 13,
+    "Satellite Schools/Centre": 1
+   }
+  },
+  "C122": {
+   "name": "Kishapu District",
+   "region": "Shinyanga",
+   "health": 65,
+   "education": 187,
+   "water": 2057,
+   "boreholes": 20,
+   "healthByType": {
+    "Gov Dispensary": 43,
+    "Gov Health Centre/Cottage(PHCC)": 8,
+    "Gov Hospital": 3,
+    "Priv Health Centre": 1,
+    "Priv Hospital": 1,
+    "Private Dispensary": 9
+   },
+   "educationByType": {
+    "Gov Pre-Primary School": 24,
+    "Gov Primary School": 117,
+    "Gov Seconadry School": 28,
+    "Gov Secondary School": 3,
+    "Priv Pre-Primary School": 1,
+    "Priv Primary School": 3,
+    "Priv Secondary School": 2,
+    "Private Nursery School": 9
+   }
+  },
+  "C123": {
+   "name": "Shinyanga District",
+   "region": "Shinyanga",
+   "health": 67,
+   "education": 190,
+   "water": 2953,
+   "boreholes": 30,
+   "healthByType": {
+    "Gov Dispensary": 46,
+    "Gov Health Centre/Cottage(PHCC)": 5,
+    "Gov Hospital": 1,
+    "Priv Health Centre": 2,
+    "Priv Hospital": 2,
+    "Private Dispensary": 11
+   },
+   "educationByType": {
+    "Gov Pre-Primary School": 10,
+    "Gov Primary School": 135,
+    "Gov Seconadry School": 28,
+    "Priv Pre-Primary School": 3,
+    "Priv Primary School": 2,
+    "Priv Secondary School": 2,
+    "Private Nursery School": 10
+   }
+  },
+  "C124": {
+   "name": "Shinyanga Municipal",
+   "region": "Shinyanga",
+   "health": 40,
+   "education": 174,
+   "water": 715,
+   "boreholes": 4,
+   "healthByType": {
+    "Gov Dispensary": 15,
+    "Gov Health Centre/Cottage(PHCC)": 2,
+    "Gov Hospital": 2,
+    "Priv Health Centre": 6,
+    "Priv Hospital": 1,
+    "Private Dispensary": 14
+   },
+   "educationByType": {
+    "Gov Pre-Primary School": 35,
+    "Gov Primary School": 40,
+    "Gov Seconadry School": 14,
+    "Priv Pre-Primary School": 4,
+    "Priv Primary School": 15,
+    "Priv Secondary School": 12,
+    "Private Nursery School": 51,
+    "Satellite Schools/Centre": 3
+   }
+  },
+  "C125": {
+   "name": "Karagwe District",
+   "region": "Kagera",
+   "health": 57,
+   "education": 237,
+   "water": 2405,
+   "boreholes": 47,
+   "healthByType": {
+    "Gov Dispensary": 41,
+    "Gov Health Centre/Cottage(PHCC)": 3,
+    "Gov Hospital": 1,
+    "Priv Health Centre": 3,
+    "Priv Hospital": 1,
+    "Private Dispensary": 8
+   },
+   "educationByType": {
+    "Gov Pre-Primary School": 44,
+    "Gov Primary School": 108,
+    "Gov Seconadry School": 27,
+    "Government Primary and Middle Schools": 2,
+    "Priv Pre-Primary School": 5,
+    "Priv Primary School": 13,
+    "Priv Secondary School": 8,
+    "Private Nursery School": 16,
+    "Satellite Schools/Centre": 14
+   }
+  },
+  "C126": {
+   "name": "Bukoba District",
+   "region": "Kagera",
+   "health": 46,
+   "education": 336,
+   "water": 2416,
+   "boreholes": 39,
+   "healthByType": {
+    "Gov Dispensary": 32,
+    "Gov Health Centre/Cottage(PHCC)": 5,
+    "Gov Hospital": 1,
+    "Priv Health Centre": 2,
+    "Priv Hospital": 2,
+    "Private Dispensary": 4
+   },
+   "educationByType": {
+    "Gov Pre-Primary School": 106,
+    "Gov Primary School": 131,
+    "Gov Seconadry School": 31,
+    "Gov Special Schools for People with Disability": 1,
+    "Government Primary and Middle Schools": 1,
+    "Priv Pre-Primary School": 13,
+    "Priv Primary School": 9,
+    "Priv Secondary School": 6,
+    "Priv Special Schools for People with Disability": 1,
+    "Private Nursery School": 35,
+    "Satellite Schools/Centre": 2
+   }
+  },
+  "C127": {
+   "name": "Bukoba Municipal",
+   "region": "Kagera",
+   "health": 28,
+   "education": 144,
+   "water": 440,
+   "boreholes": 4,
+   "healthByType": {
+    "Gov Dispensary": 10,
+    "Gov Health Centre/Cottage(PHCC)": 3,
+    "Gov Hospital": 2,
+    "Priv Health Centre": 5,
+    "Priv Hospital": 1,
+    "Private Dispensary": 7
+   },
+   "educationByType": {
+    "Gov Pre-Primary School": 9,
+    "Gov Primary School": 25,
+    "Gov Seconadry School": 19,
+    "Priv Pre-Primary School": 6,
+    "Priv Primary School": 19,
+    "Priv Secondary School": 15,
+    "Private Nursery School": 50,
+    "Satellite Schools/Centre": 1
+   }
+  },
+  "C128": {
+   "name": "Muleba District",
+   "region": "Kagera",
+   "health": 66,
+   "education": 472,
+   "water": 3095,
+   "boreholes": 40,
+   "healthByType": {
+    "Gov Dispensary": 41,
+    "Gov Health Centre/Cottage(PHCC)": 7,
+    "Priv Health Centre": 6,
+    "Priv Hospital": 3,
+    "Private Dispensary": 9
+   },
+   "educationByType": {
+    "Gov Pre-Primary School": 87,
+    "Gov Primary School": 224,
+    "Gov Seconadry School": 48,
+    "Priv Pre-Primary School": 10,
+    "Priv Primary School": 21,
+    "Priv Secondary School": 13,
+    "Private Nursery School": 62,
+    "Satellite Schools/Centre": 7
+   }
+  },
+  "C129": {
+   "name": "Biharamulo District",
+   "region": "Kagera",
+   "health": 32,
+   "education": 194,
+   "water": 1592,
+   "boreholes": 76,
+   "healthByType": {
+    "Gov Dispensary": 18,
+    "Gov Health Centre/Cottage(PHCC)": 5,
+    "Gov Hospital": 1,
+    "Priv Health Centre": 1,
+    "Priv Hospital": 2,
+    "Private Dispensary": 5
+   },
+   "educationByType": {
+    "Gov Pre-Primary School": 24,
+    "Gov Primary School": 97,
+    "Gov Seconadry School": 19,
+    "Gov Special Schools for People with Disability": 1,
+    "Priv Pre-Primary School": 13,
+    "Priv Primary School": 5,
+    "Priv Secondary School": 2,
+    "Private Nursery School": 17,
+    "Satellite Schools/Centre": 16
+   }
+  },
+  "C130": {
+   "name": "Ngara District",
+   "region": "Kagera",
+   "health": 64,
+   "education": 181,
+   "water": 1762,
+   "boreholes": 14,
+   "healthByType": {
+    "Gov Dispensary": 46,
+    "Gov Health Centre/Cottage(PHCC)": 8,
+    "Gov Hospital": 1,
+    "Priv Health Centre": 1,
+    "Priv Hospital": 2,
+    "Private Dispensary": 6
+   },
+   "educationByType": {
+    "Gov Pre-Primary School": 4,
+    "Gov Primary School": 115,
+    "Gov Seconadry School": 24,
+    "Priv Pre-Primary School": 3,
+    "Priv Primary School": 8,
+    "Priv Secondary School": 5,
+    "Private Nursery School": 16,
+    "Satellite Schools/Centre": 6
+   }
+  },
+  "C131": {
+   "name": "Kyerwa District",
+   "region": "Kagera",
+   "health": 42,
+   "education": 286,
+   "water": 2896,
+   "boreholes": 15,
+   "healthByType": {
+    "Gov Dispensary": 29,
+    "Gov Health Centre/Cottage(PHCC)": 4,
+    "Gov Hospital": 1,
+    "Priv Hospital": 1,
+    "Private Dispensary": 7
+   },
+   "educationByType": {
+    "Gov Pre-Primary School": 78,
+    "Gov Primary School": 102,
+    "Gov Seconadry School": 26,
+    "Priv Pre-Primary School": 12,
+    "Priv Primary School": 12,
+    "Priv Secondary School": 9,
+    "Private Nursery School": 28,
+    "Satellite Schools/Centre": 19
+   }
+  },
+  "C132": {
+   "name": "Missenyi District",
+   "region": "Kagera",
+   "health": 45,
+   "education": 212,
+   "water": 1606,
+   "boreholes": 58,
+   "healthByType": {
+    "Gov Dispensary": 28,
+    "Gov Health Centre/Cottage(PHCC)": 3,
+    "Priv Health Centre": 3,
+    "Priv Hospital": 2,
+    "Private Dispensary": 9
+   },
+   "educationByType": {
+    "Gov Pre-Primary School": 34,
+    "Gov Primary School": 98,
+    "Gov Seconadry School": 24,
+    "Government Primary and Middle Schools": 1,
+    "Priv Pre-Primary School": 8,
+    "Priv Primary School": 14,
+    "Priv Secondary School": 4,
+    "Private Nursery School": 27,
+    "Satellite Schools/Centre": 2
+   }
+  },
+  "C133": {
+   "name": "Ukerewe District",
+   "region": "Mwanza",
+   "health": 47,
+   "education": 147,
+   "water": 2200,
+   "boreholes": 47,
+   "healthByType": {
+    "Gov Dispensary": 33,
+    "Gov Health Centre/Cottage(PHCC)": 3,
+    "Gov Hospital": 3,
+    "Priv Health Centre": 1,
+    "Priv Hospital": 1,
+    "Private Dispensary": 6
+   },
+   "educationByType": {
+    "Gov Pre-Primary School": 24,
+    "Gov Primary School": 91,
+    "Gov Seconadry School": 20,
+    "Priv Pre-Primary School": 1,
+    "Priv Primary School": 2,
+    "Priv Secondary School": 4,
+    "Private Nursery School": 3,
+    "Satellite Schools/Centre": 2
+   }
+  },
+  "C134": {
+   "name": "Magu District",
+   "region": "Mwanza",
+   "health": 62,
+   "education": 264,
+   "water": 2142,
+   "boreholes": 48,
+   "healthByType": {
+    "Gov Dispensary": 40,
+    "Gov Health Centre/Cottage(PHCC)": 10,
+    "Gov Hospital": 1,
+    "Priv Health Centre": 4,
+    "Private Dispensary": 7
+   },
+   "educationByType": {
+    "Gov Pre-Primary School": 56,
+    "Gov Primary School": 105,
+    "Gov Seconadry School": 29,
+    "Priv Pre-Primary School": 7,
+    "Priv Primary School": 20,
+    "Priv Secondary School": 10,
+    "Private Nursery School": 35,
+    "Satellite Schools/Centre": 2
+   }
+  },
+  "C135": {
+   "name": "Mwanza City",
+   "region": "Mwanza",
+   "health": 84,
+   "education": 420,
+   "water": 1204,
+   "boreholes": 4,
+   "healthByType": {
+    "Gov Dispensary": 17,
+    "Gov Health Centre/Cottage(PHCC)": 4,
+    "Gov Hospital": 3,
+    "Priv Health Centre": 28,
+    "Priv Hospital": 14,
+    "Private Dispensary": 18
+   },
+   "educationByType": {
+    "Gov Pre-Primary School": 46,
+    "Gov Primary School": 73,
+    "Gov Seconadry School": 30,
+    "Priv Pre-Primary School": 20,
+    "Priv Primary School": 61,
+    "Priv Secondary School": 28,
+    "Private Nursery School": 160,
+    "Satellite Schools/Centre": 2
+   }
+  },
+  "C136": {
+   "name": "Kwimba District",
+   "region": "Mwanza",
+   "health": 76,
+   "education": 219,
+   "water": 2901,
+   "boreholes": 35,
+   "healthByType": {
+    "Gov Dispensary": 59,
+    "Gov Health Centre/Cottage(PHCC)": 9,
+    "Gov Hospital": 2,
+    "Priv Health Centre": 1,
+    "Priv Hospital": 1,
+    "Private Dispensary": 4
+   },
+   "educationByType": {
+    "Gov Pre-Primary School": 24,
+    "Gov Primary School": 147,
+    "Gov Seconadry School": 35,
+    "Priv Primary School": 3,
+    "Priv Secondary School": 2,
+    "Private Nursery School": 6,
+    "Satellite Schools/Centre": 2
+   }
+  },
+  "C137": {
+   "name": "Sengerema District",
+   "region": "Mwanza",
+   "health": 59,
+   "education": 301,
+   "water": 1683,
+   "boreholes": 23,
+   "healthByType": {
+    "Gov Dispensary": 45,
+    "Gov Health Centre/Cottage(PHCC)": 6,
+    "Gov Hospital": 1,
+    "Priv Health Centre": 1,
+    "Priv Hospital": 2,
+    "Private Dispensary": 4
+   },
+   "educationByType": {
+    "Gov Pre-Primary School": 35,
+    "Gov Primary School": 142,
+    "Gov Seconadry School": 48,
+    "Priv Pre-Primary School": 11,
+    "Priv Primary School": 21,
+    "Priv Secondary School": 17,
+    "Private Nursery School": 22,
+    "Satellite Schools/Centre": 5
+   }
+  },
+  "C138": {
+   "name": "Buchosa District",
+   "region": "Mwanza",
+   "health": 52,
+   "education": 135,
+   "water": 1533,
+   "boreholes": 10,
+   "healthByType": {
+    "Gov Dispensary": 34,
+    "Gov Health Centre/Cottage(PHCC)": 6,
+    "Gov Hospital": 3,
+    "Priv Health Centre": 1,
+    "Private Dispensary": 8
+   },
+   "educationByType": {
+    "Gov Pre-Primary School": 9,
+    "Gov Primary School": 87,
+    "Gov Seconadry School": 21,
+    "Priv Pre-Primary School": 2,
+    "Priv Primary School": 4,
+    "Priv Secondary School": 1,
+    "Private Nursery School": 10,
+    "Satellite Schools/Centre": 1
+   }
+  },
+  "C139": {
+   "name": "Ilemela Municipal",
+   "region": "Mwanza",
+   "health": 67,
+   "education": 388,
+   "water": 1045,
+   "boreholes": 16,
+   "healthByType": {
+    "Gov Dispensary": 15,
+    "Gov Health Centre/Cottage(PHCC)": 7,
+    "Gov Hospital": 1,
+    "Priv Health Centre": 12,
+    "Priv Hospital": 4,
+    "Private Dispensary": 28
+   },
+   "educationByType": {
+    "Gov Pre-Primary School": 37,
+    "Gov Primary School": 72,
+    "Gov Seconadry School": 30,
+    "Gov Special Schools for People with Disability": 1,
+    "Priv Pre-Primary School": 25,
+    "Priv Primary School": 56,
+    "Priv Secondary School": 23,
+    "Private Nursery School": 141,
+    "Satellite Schools/Centre": 3
+   }
+  },
+  "C140": {
+   "name": "Misungwi District",
+   "region": "Mwanza",
+   "health": 67,
+   "education": 242,
+   "water": 3176,
+   "boreholes": 44,
+   "healthByType": {
+    "Gov Dispensary": 45,
+    "Gov Health Centre/Cottage(PHCC)": 6,
+    "Gov Hospital": 4,
+    "Priv Health Centre": 1,
+    "Priv Hospital": 1,
+    "Private Dispensary": 10
+   },
+   "educationByType": {
+    "Gov Pre-Primary School": 16,
+    "Gov Primary School": 137,
+    "Gov Seconadry School": 37,
+    "Priv Pre-Primary School": 6,
+    "Priv Primary School": 12,
+    "Priv Secondary School": 7,
+    "Private Nursery School": 26,
+    "Satellite Schools/Centre": 1
+   }
+  },
+  "C141": {
+   "name": "Tarime District",
+   "region": "Mara",
+   "health": 60,
+   "education": 269,
+   "water": 1838,
+   "boreholes": 38,
+   "healthByType": {
+    "Gov Dispensary": 33,
+    "Gov Health Centre/Cottage(PHCC)": 6,
+    "Gov Hospital": 2,
+    "Priv Health Centre": 5,
+    "Priv Hospital": 1,
+    "Private Dispensary": 13
+   },
+   "educationByType": {
+    "Gov Pre-Primary School": 36,
+    "Gov Primary School": 109,
+    "Gov Seconadry School": 39,
+    "Priv Pre-Primary School": 13,
+    "Priv Primary School": 21,
+    "Priv Secondary School": 2,
+    "Private Nursery School": 45,
+    "Satellite Schools/Centre": 4
+   }
+  },
+  "C142": {
+   "name": "Tarime Town",
+   "region": "Mara",
+   "health": 22,
+   "education": 107,
+   "water": 389,
+   "boreholes": 6,
+   "healthByType": {
+    "Gov Dispensary": 6,
+    "Gov Health Centre/Cottage(PHCC)": 1,
+    "Gov Hospital": 2,
+    "Priv Health Centre": 2,
+    "Priv Hospital": 1,
+    "Private Dispensary": 10
+   },
+   "educationByType": {
+    "Gov Pre-Primary School": 26,
+    "Gov Primary School": 28,
+    "Gov Seconadry School": 12,
+    "Gov Special Schools for People with Disability": 3,
+    "Priv Pre-Primary School": 7,
+    "Priv Primary School": 7,
+    "Priv Secondary School": 3,
+    "Private Nursery School": 18,
+    "Satellite Schools/Centre": 3
+   }
+  },
+  "C143": {
+   "name": "Serengeti District",
+   "region": "Mara",
+   "health": 61,
+   "education": 230,
+   "water": 1357,
+   "boreholes": 26,
+   "healthByType": {
+    "Gov Dispensary": 43,
+    "Gov Health Centre/Cottage(PHCC)": 7,
+    "Gov Hospital": 5,
+    "Priv Health Centre": 1,
+    "Private Dispensary": 5
+   },
+   "educationByType": {
+    "Gov Pre-Primary School": 46,
+    "Gov Primary School": 121,
+    "Gov Seconadry School": 34,
+    "Priv Pre-Primary School": 2,
+    "Priv Primary School": 5,
+    "Priv Secondary School": 4,
+    "Private Nursery School": 12,
+    "Satellite Schools/Centre": 6
+   }
+  },
+  "C144": {
+   "name": "Musoma District",
+   "region": "Mara",
+   "health": 31,
+   "education": 178,
+   "water": 1371,
+   "boreholes": 17,
+   "healthByType": {
+    "Gov Dispensary": 21,
+    "Gov Health Centre/Cottage(PHCC)": 3,
+    "Gov Hospital": 4,
+    "Private Dispensary": 3
+   },
+   "educationByType": {
+    "Gov Pre-Primary School": 19,
+    "Gov Primary School": 110,
+    "Gov Seconadry School": 22,
+    "Priv Pre-Primary School": 6,
+    "Priv Primary School": 3,
+    "Priv Secondary School": 2,
+    "Private Nursery School": 13,
+    "Satellite Schools/Centre": 3
+   }
+  },
+  "C145": {
+   "name": "Musoma Municipal",
+   "region": "Mara",
+   "health": 27,
+   "education": 226,
+   "water": 485,
+   "boreholes": 0,
+   "healthByType": {
+    "Gov Dispensary": 8,
+    "Gov Health Centre/Cottage(PHCC)": 3,
+    "Gov Hospital": 2,
+    "Priv Health Centre": 5,
+    "Priv Hospital": 1,
+    "Private Dispensary": 8
+   },
+   "educationByType": {
+    "Gov Pre-Primary School": 13,
+    "Gov Primary School": 80,
+    "Gov Seconadry School": 37,
+    "Government Primary and Middle Schools": 1,
+    "Priv Pre-Primary School": 17,
+    "Priv Primary School": 26,
+    "Priv Secondary School": 13,
+    "Private Nursery School": 37,
+    "Satellite Schools/Centre": 2
+   }
+  },
+  "C146": {
+   "name": "Bunda District",
+   "region": "Mara",
+   "health": 40,
+   "education": 141,
+   "water": 1363,
+   "boreholes": 35,
+   "healthByType": {
+    "Gov Dispensary": 27,
+    "Gov Health Centre/Cottage(PHCC)": 4,
+    "Gov Hospital": 2,
+    "Priv Health Centre": 1,
+    "Priv Hospital": 1,
+    "Private Dispensary": 5
+   },
+   "educationByType": {
+    "Gov Pre-Primary School": 7,
+    "Gov Primary School": 97,
+    "Gov Seconadry School": 16,
+    "Priv Pre-Primary School": 3,
+    "Priv Primary School": 5,
+    "Priv Secondary School": 4,
+    "Private Nursery School": 7,
+    "Satellite Schools/Centre": 2
+   }
+  },
+  "C147": {
+   "name": "Bunda Town",
+   "region": "Mara",
+   "health": 21,
+   "education": 108,
+   "water": 461,
+   "boreholes": 10,
+   "healthByType": {
+    "Gov Dispensary": 11,
+    "Gov Health Centre/Cottage(PHCC)": 1,
+    "Gov Hospital": 1,
+    "Priv Hospital": 2,
+    "Private Dispensary": 6
+   },
+   "educationByType": {
+    "Gov Pre-Primary School": 4,
+    "Gov Primary School": 59,
+    "Gov Seconadry School": 16,
+    "Priv Primary School": 10,
+    "Priv Secondary School": 6,
+    "Private Nursery School": 11,
+    "Satellite Schools/Centre": 2
+   }
+  },
+  "C148": {
+   "name": "Butiama District",
+   "region": "Mara",
+   "health": 49,
+   "education": 171,
+   "water": 1363,
+   "boreholes": 39,
+   "healthByType": {
+    "Gov Dispensary": 33,
+    "Gov Health Centre/Cottage(PHCC)": 3,
+    "Gov Hospital": 3,
+    "Priv Health Centre": 2,
+    "Private Dispensary": 8
+   },
+   "educationByType": {
+    "Gov Pre-Primary School": 2,
+    "Gov Primary School": 100,
+    "Gov Seconadry School": 30,
+    "Government Primary and Middle Schools": 2,
+    "Priv Pre-Primary School": 4,
+    "Priv Primary School": 11,
+    "Priv Secondary School": 4,
+    "Private Nursery School": 16,
+    "Satellite Schools/Centre": 2
+   }
+  },
+  "C149": {
+   "name": "Rorya District",
+   "region": "Mara",
+   "health": 53,
+   "education": 227,
+   "water": 2192,
+   "boreholes": 47,
+   "healthByType": {
+    "Gov Dispensary": 31,
+    "Gov Health Centre/Cottage(PHCC)": 4,
+    "Gov Hospital": 1,
+    "Priv Health Centre": 6,
+    "Priv Hospital": 4,
+    "Private Dispensary": 7
+   },
+   "educationByType": {
+    "Gov Pre-Primary School": 20,
+    "Gov Primary School": 117,
+    "Gov Seconadry School": 38,
+    "Priv Pre-Primary School": 8,
+    "Priv Primary School": 13,
+    "Priv Secondary School": 7,
+    "Private Nursery School": 20,
+    "Satellite Schools/Centre": 4
+   }
+  },
+  "C150": {
+   "name": "Babati District",
+   "region": "Manyara",
+   "health": 66,
+   "education": 271,
+   "water": 2334,
+   "boreholes": 43,
+   "healthByType": {
+    "Gov Dispensary": 43,
+    "Gov Health Centre/Cottage(PHCC)": 9,
+    "Gov Hospital": 1,
+    "Priv Hospital": 3,
+    "Private Dispensary": 10
+   },
+   "educationByType": {
+    "Gov Pre-Primary School": 34,
+    "Gov Primary School": 143,
+    "Gov Seconadry School": 37,
+    "Government Primary and Middle Schools": 1,
+    "Priv Pre-Primary School": 4,
+    "Priv Primary School": 10,
+    "Priv Secondary School": 5,
+    "Private Nursery School": 28,
+    "Satellite Schools/Centre": 9
+   }
+  },
+  "C151": {
+   "name": "Babati Town",
+   "region": "Manyara",
+   "health": 24,
+   "education": 109,
+   "water": 606,
+   "boreholes": 17,
+   "healthByType": {
+    "Gov Dispensary": 8,
+    "Gov Health Centre/Cottage(PHCC)": 3,
+    "Gov Hospital": 1,
+    "Priv Health Centre": 2,
+    "Priv Hospital": 2,
+    "Private Dispensary": 8
+   },
+   "educationByType": {
+    "Gov Pre-Primary School": 15,
+    "Gov Primary School": 30,
+    "Gov Seconadry School": 10,
+    "Priv Pre-Primary School": 5,
+    "Priv Primary School": 13,
+    "Priv Secondary School": 7,
+    "Private Nursery School": 28,
+    "Satellite Schools/Centre": 1
+   }
+  },
+  "C152": {
+   "name": "Hanang District",
+   "region": "Manyara",
+   "health": 46,
+   "education": 230,
+   "water": 2470,
+   "boreholes": 53,
+   "healthByType": {
+    "Gov Dispensary": 24,
+    "Gov Health Centre/Cottage(PHCC)": 8,
+    "Gov Hospital": 1,
+    "Priv Health Centre": 2,
+    "Private Dispensary": 11
+   },
+   "educationByType": {
+    "Gov Pre-Primary School": 20,
+    "Gov Primary School": 132,
+    "Gov Seconadry School": 33,
+    "Priv Pre-Primary School": 5,
+    "Priv Primary School": 7,
+    "Priv Secondary School": 2,
+    "Private Nursery School": 24,
+    "Satellite Schools/Centre": 7
+   }
+  },
+  "C153": {
+   "name": "Mbulu District",
+   "region": "Manyara",
+   "health": 31,
+   "education": 153,
+   "water": 1875,
+   "boreholes": 34,
+   "healthByType": {
+    "Gov Dispensary": 20,
+    "Gov Health Centre/Cottage(PHCC)": 1,
+    "Gov Hospital": 1,
+    "Priv Health Centre": 1,
+    "Priv Hospital": 1,
+    "Private Dispensary": 7
+   },
+   "educationByType": {
+    "Gov Pre-Primary School": 13,
+    "Gov Primary School": 88,
+    "Gov Seconadry School": 20,
+    "Priv Pre-Primary School": 3,
+    "Priv Primary School": 5,
+    "Priv Secondary School": 5,
+    "Private Nursery School": 18,
+    "Satellite Schools/Centre": 1
+   }
+  },
+  "C154": {
+   "name": "Mbulu Town",
+   "region": "Manyara",
+   "health": 21,
+   "education": 102,
+   "water": 1077,
+   "boreholes": 24,
+   "healthByType": {
+    "Gov Dispensary": 14,
+    "Gov Health Centre/Cottage(PHCC)": 2,
+    "Gov Hospital": 2,
+    "Priv Health Centre": 1,
+    "Private Dispensary": 2
+   },
+   "educationByType": {
+    "Gov Pre-Primary School": 7,
+    "Gov Primary School": 56,
+    "Gov Seconadry School": 15,
+    "Priv Pre-Primary School": 4,
+    "Priv Primary School": 3,
+    "Priv Secondary School": 11,
+    "Private Nursery School": 5,
+    "Satellite Schools/Centre": 1
+   }
+  },
+  "C155": {
+   "name": "Simanjiro District",
+   "region": "Manyara",
+   "health": 58,
+   "education": 283,
+   "water": 1471,
+   "boreholes": 102,
+   "healthByType": {
+    "Gov Dispensary": 40,
+    "Gov Health Centre/Cottage(PHCC)": 5,
+    "Gov Hospital": 1,
+    "Priv Health Centre": 1,
+    "Priv Hospital": 1,
+    "Private Dispensary": 10
+   },
+   "educationByType": {
+    "Gov Pre-Primary School": 74,
+    "Gov Primary School": 85,
+    "Gov Seconadry School": 16,
+    "Priv Pre-Primary School": 10,
+    "Priv Primary School": 17,
+    "Priv Secondary School": 3,
+    "Private Nursery School": 71,
+    "Satellite Schools/Centre": 7
+   }
+  },
+  "C156": {
+   "name": "Kiteto District",
+   "region": "Manyara",
+   "health": 45,
+   "education": 172,
+   "water": 1548,
+   "boreholes": 90,
+   "healthByType": {
+    "Gov Dispensary": 31,
+    "Gov Health Centre/Cottage(PHCC)": 3,
+    "Gov Hospital": 1,
+    "Priv Hospital": 1,
+    "Private Dispensary": 9
+   },
+   "educationByType": {
+    "Gov Pre-Primary School": 19,
+    "Gov Primary School": 91,
+    "Gov Seconadry School": 19,
+    "Priv Pre-Primary School": 4,
+    "Priv Primary School": 5,
+    "Private Nursery School": 20,
+    "Satellite Schools/Centre": 14
+   }
+  },
+  "C157": {
+   "name": "Njombe District",
+   "region": "Njombe",
+   "health": 37,
+   "education": 156,
+   "water": 1254,
+   "boreholes": 4,
+   "healthByType": {
+    "Gov Dispensary": 26,
+    "Gov Health Centre/Cottage(PHCC)": 5,
+    "Gov Hospital": 1,
+    "Priv Health Centre": 1,
+    "Private Dispensary": 4
+   },
+   "educationByType": {
+    "Gov Pre-Primary School": 34,
+    "Gov Primary School": 50,
+    "Gov Seconadry School": 10,
+    "Priv Pre-Primary School": 2,
+    "Priv Primary School": 3,
+    "Priv Secondary School": 2,
+    "Private Nursery School": 52,
+    "Satellite Schools/Centre": 3
+   }
+  },
+  "C158": {
+   "name": "Njombe Town",
+   "region": "Njombe",
+   "health": 72,
+   "education": 269,
+   "water": 1646,
+   "boreholes": 9,
+   "healthByType": {
+    "Gov Dispensary": 51,
+    "Gov Health Centre/Cottage(PHCC)": 4,
+    "Gov Hospital": 2,
+    "Priv Health Centre": 6,
+    "Priv Hospital": 1,
+    "Private Dispensary": 8
+   },
+   "educationByType": {
+    "Gov Pre-Primary School": 66,
+    "Gov Primary School": 81,
+    "Gov Seconadry School": 13,
+    "Priv Pre-Primary School": 15,
+    "Priv Primary School": 15,
+    "Priv Secondary School": 15,
+    "Private Nursery School": 64
+   }
+  },
+  "C159": {
+   "name": "Makambako Town",
+   "region": "Njombe",
+   "health": 28,
+   "education": 191,
+   "water": 778,
+   "boreholes": 4,
+   "healthByType": {
+    "Gov Dispensary": 11,
+    "Gov Health Centre/Cottage(PHCC)": 2,
+    "Gov Hospital": 1,
+    "Priv Health Centre": 5,
+    "Priv Hospital": 2,
+    "Private Dispensary": 7
+   },
+   "educationByType": {
+    "Gov Pre-Primary School": 33,
+    "Gov Primary School": 39,
+    "Gov Seconadry School": 11,
+    "Priv Pre-Primary School": 9,
+    "Priv Primary School": 5,
+    "Priv Secondary School": 1,
+    "Private Nursery School": 91,
+    "Satellite Schools/Centre": 2
+   }
+  },
+  "C160": {
+   "name": "Ludewa District",
+   "region": "Njombe",
+   "health": 76,
+   "education": 208,
+   "water": 1899,
+   "boreholes": 11,
+   "healthByType": {
+    "Gov Dispensary": 60,
+    "Gov Health Centre/Cottage(PHCC)": 6,
+    "Gov Hospital": 2,
+    "Priv Health Centre": 3,
+    "Priv Hospital": 2,
+    "Private Dispensary": 3
+   },
+   "educationByType": {
+    "Gov Pre-Primary School": 55,
+    "Gov Primary School": 107,
+    "Gov Seconadry School": 17,
+    "Priv Pre-Primary School": 3,
+    "Priv Primary School": 5,
+    "Priv Secondary School": 7,
+    "Private Nursery School": 14
+   }
+  },
+  "C161": {
+   "name": "Makete District",
+   "region": "Njombe",
+   "health": 59,
+   "education": 188,
+   "water": 2075,
+   "boreholes": 0,
+   "healthByType": {
+    "Gov Dispensary": 42,
+    "Gov Health Centre/Cottage(PHCC)": 5,
+    "Gov Hospital": 1,
+    "Priv Health Centre": 1,
+    "Priv Hospital": 5,
+    "Private Dispensary": 5
+   },
+   "educationByType": {
+    "Gov Pre-Primary School": 36,
+    "Gov Primary School": 106,
+    "Gov Seconadry School": 17,
+    "Priv Pre-Primary School": 1,
+    "Priv Primary School": 3,
+    "Priv Secondary School": 3,
+    "Private Nursery School": 18,
+    "Satellite Schools/Centre": 4
+   }
+  },
+  "C162": {
+   "name": "Wanging'ombe District",
+   "region": "Njombe",
+   "health": 62,
+   "education": 314,
+   "water": 2697,
+   "boreholes": 33,
+   "healthByType": {
+    "Gov Dispensary": 50,
+    "Gov Health Centre/Cottage(PHCC)": 4,
+    "Gov Hospital": 2,
+    "Priv Health Centre": 2,
+    "Priv Hospital": 3,
+    "Private Dispensary": 1
+   },
+   "educationByType": {
+    "Gov Pre-Primary School": 77,
+    "Gov Primary School": 109,
+    "Gov Seconadry School": 20,
+    "Priv Pre-Primary School": 9,
+    "Priv Primary School": 6,
+    "Priv Secondary School": 14,
+    "Private Nursery School": 75,
+    "Satellite Schools/Centre": 4
+   }
+  },
+  "C163": {
+   "name": "Mpanda Municipal",
+   "region": "Katavi",
+   "health": 35,
+   "education": 123,
+   "water": 572,
+   "boreholes": 20,
+   "healthByType": {
+    "Gov Dispensary": 10,
+    "Gov Health Centre/Cottage(PHCC)": 4,
+    "Gov Hospital": 3,
+    "Priv Health Centre": 2,
+    "Private Dispensary": 16
+   },
+   "educationByType": {
+    "Gov Pre-Primary School": 23,
+    "Gov Primary School": 41,
+    "Gov Seconadry School": 12,
+    "Priv Pre-Primary School": 11,
+    "Priv Primary School": 10,
+    "Priv Secondary School": 3,
+    "Private Nursery School": 20,
+    "Satellite Schools/Centre": 3
+   }
+  },
+  "C164": {
+   "name": "Nsimbo District",
+   "region": "Katavi",
+   "health": 33,
+   "education": 107,
+   "water": 1090,
+   "boreholes": 34,
+   "healthByType": {
+    "Gov Dispensary": 21,
+    "Gov Health Centre/Cottage(PHCC)": 6,
+    "Gov Hospital": 3,
+    "Priv Health Centre": 1,
+    "Private Dispensary": 2
+   },
+   "educationByType": {
+    "Gov Pre-Primary School": 30,
+    "Gov Primary School": 58,
+    "Gov Seconadry School": 10,
+    "Priv Pre-Primary School": 2,
+    "Priv Secondary School": 1,
+    "Private Nursery School": 4,
+    "Satellite Schools/Centre": 2
+   }
+  },
+  "C165": {
+   "name": "Tanganyika District",
+   "region": "Katavi",
+   "health": 33,
+   "education": 119,
+   "water": 1044,
+   "boreholes": 19,
+   "healthByType": {
+    "Gov Dispensary": 21,
+    "Gov Health Centre/Cottage(PHCC)": 6,
+    "Gov Hospital": 2,
+    "Private Dispensary": 4
+   },
+   "educationByType": {
+    "Gov Pre-Primary School": 8,
+    "Gov Primary School": 82,
+    "Gov Seconadry School": 15,
+    "Priv Pre-Primary School": 1,
+    "Priv Secondary School": 1,
+    "Private Nursery School": 3,
+    "Satellite Schools/Centre": 9
+   }
+  },
+  "C166": {
+   "name": "Mlele District",
+   "region": "Katavi",
+   "health": 12,
+   "education": 37,
+   "water": 457,
+   "boreholes": 11,
+   "healthByType": {
+    "Gov Dispensary": 8,
+    "Gov Health Centre/Cottage(PHCC)": 3,
+    "Private Dispensary": 1
+   },
+   "educationByType": {
+    "Gov Pre-Primary School": 1,
+    "Gov Primary School": 24,
+    "Gov Seconadry School": 7,
+    "Priv Pre-Primary School": 1,
+    "Priv Primary School": 3,
+    "Satellite Schools/Centre": 1
+   }
+  },
+  "C167": {
+   "name": "Mpimbwe District",
+   "region": "Katavi",
+   "health": 21,
+   "education": 63,
+   "water": 560,
+   "boreholes": 11,
+   "healthByType": {
+    "Gov Dispensary": 11,
+    "Gov Health Centre/Cottage(PHCC)": 3,
+    "Gov Hospital": 1,
+    "Private Dispensary": 6
+   },
+   "educationByType": {
+    "Gov Pre-Primary School": 1,
+    "Gov Primary School": 46,
+    "Gov Seconadry School": 7,
+    "Private Nursery School": 7,
+    "Satellite Schools/Centre": 2
+   }
+  },
+  "C168": {
+   "name": "Bariadi District",
+   "region": "Simiyu",
+   "health": 41,
+   "education": 170,
+   "water": 1392,
+   "boreholes": 52,
+   "healthByType": {
+    "Gov Dispensary": 28,
+    "Gov Health Centre/Cottage(PHCC)": 2,
+    "Gov Hospital": 2,
+    "Priv Hospital": 1,
+    "Private Dispensary": 8
+   },
+   "educationByType": {
+    "Gov Pre-Primary School": 44,
+    "Gov Primary School": 88,
+    "Gov Seconadry School": 23,
+    "Priv Pre-Primary School": 4,
+    "Priv Primary School": 3,
+    "Priv Secondary School": 1,
+    "Private Nursery School": 5,
+    "Satellite Schools/Centre": 2
+   }
+  },
+  "C169": {
+   "name": "Bariadi Town",
+   "region": "Simiyu",
+   "health": 26,
+   "education": 114,
+   "water": 622,
+   "boreholes": 47,
+   "healthByType": {
+    "Gov Dispensary": 8,
+    "Gov Health Centre/Cottage(PHCC)": 2,
+    "Gov Hospital": 3,
+    "Priv Health Centre": 2,
+    "Priv Hospital": 1,
+    "Private Dispensary": 10
+   },
+   "educationByType": {
+    "Gov Pre-Primary School": 38,
+    "Gov Primary School": 37,
+    "Gov Seconadry School": 13,
+    "Priv Pre-Primary School": 4,
+    "Priv Primary School": 6,
+    "Priv Secondary School": 2,
+    "Private Nursery School": 12,
+    "Satellite Schools/Centre": 2
+   }
+  },
+  "C170": {
+   "name": "Itilima District",
+   "region": "Simiyu",
+   "health": 47,
+   "education": 152,
+   "water": 2035,
+   "boreholes": 48,
+   "healthByType": {
+    "Gov Dispensary": 33,
+    "Gov Health Centre/Cottage(PHCC)": 4,
+    "Gov Hospital": 3,
+    "Priv Health Centre": 2,
+    "Private Dispensary": 5
+   },
+   "educationByType": {
+    "Gov Pre-Primary School": 14,
+    "Gov Primary School": 94,
+    "Gov Seconadry School": 27,
+    "Priv Pre-Primary School": 3,
+    "Priv Secondary School": 1,
+    "Private Nursery School": 9,
+    "Satellite Schools/Centre": 4
+   }
+  },
+  "C171": {
+   "name": "Meatu District",
+   "region": "Simiyu",
+   "health": 74,
+   "education": 200,
+   "water": 1853,
+   "boreholes": 39,
+   "healthByType": {
+    "Gov Dispensary": 59,
+    "Gov Health Centre/Cottage(PHCC)": 4,
+    "Gov Hospital": 2,
+    "Priv Health Centre": 1,
+    "Private Dispensary": 8
+   },
+   "educationByType": {
+    "Gov Pre-Primary School": 48,
+    "Gov Primary School": 111,
+    "Gov Seconadry School": 21,
+    "Priv Primary School": 3,
+    "Priv Secondary School": 1,
+    "Private Nursery School": 10,
+    "Satellite Schools/Centre": 6
+   }
+  },
+  "C172": {
+   "name": "Maswa District",
+   "region": "Simiyu",
+   "health": 188,
+   "education": 226,
+   "water": 2090,
+   "boreholes": 62,
+   "healthByType": {
+    "Gov Dispensary": 153,
+    "Gov Health Centre/Cottage(PHCC)": 13,
+    "Gov Hospital": 6,
+    "Priv Health Centre": 9,
+    "Private Dispensary": 7
+   },
+   "educationByType": {
+    "Gov Pre-Primary School": 32,
+    "Gov Primary School": 129,
+    "Gov Seconadry School": 40,
+    "Priv Pre-Primary School": 3,
+    "Priv Primary School": 2,
+    "Priv Secondary School": 3,
+    "Private Nursery School": 16,
+    "Satellite Schools/Centre": 1
+   }
+  },
+  "C173": {
+   "name": "Busega District",
+   "region": "Simiyu",
+   "health": 39,
+   "education": 164,
+   "water": 1397,
+   "boreholes": 89,
+   "healthByType": {
+    "Gov Dispensary": 24,
+    "Gov Health Centre/Cottage(PHCC)": 4,
+    "Gov Hospital": 3,
+    "Priv Hospital": 1,
+    "Private Dispensary": 7
+   },
+   "educationByType": {
+    "Gov Pre-Primary School": 30,
+    "Gov Primary School": 86,
+    "Gov Seconadry School": 22,
+    "Priv Pre-Primary School": 1,
+    "Priv Primary School": 7,
+    "Priv Secondary School": 4,
+    "Private Nursery School": 12,
+    "Satellite Schools/Centre": 2
+   }
+  },
+  "C174": {
+   "name": "Geita District",
+   "region": "Geita",
+   "health": 135,
+   "education": 684,
+   "water": 3006,
+   "boreholes": 60,
+   "healthByType": {
+    "Gov Dispensary": 87,
+    "Gov Health Centre/Cottage(PHCC)": 13,
+    "Gov Hospital": 8,
+    "Priv Health Centre": 2,
+    "Priv Hospital": 2,
+    "Private Dispensary": 23
+   },
+   "educationByType": {
+    "Gov Pre-Primary School": 238,
+    "Gov Primary School": 318,
+    "Gov Seconadry School": 64,
+    "Gov Special Schools for People with Disability": 4,
+    "Government Primary and Middle Schools": 1,
+    "Priv Pre-Primary School": 12,
+    "Priv Primary School": 14,
+    "Priv Secondary School": 5,
+    "Private Nursery School": 24,
+    "Satellite Schools/Centre": 4
+   }
+  },
+  "C175": {
+   "name": "Geita Town",
+   "region": "Geita",
+   "health": 35,
+   "education": 157,
+   "water": 618,
+   "boreholes": 26,
+   "healthByType": {
+    "Gov Dispensary": 16,
+    "Gov Health Centre/Cottage(PHCC)": 2,
+    "Gov Hospital": 2,
+    "Priv Health Centre": 4,
+    "Priv Hospital": 3,
+    "Private Dispensary": 8
+   },
+   "educationByType": {
+    "Gov Pre-Primary School": 31,
+    "Gov Primary School": 57,
+    "Gov Seconadry School": 20,
+    "Gov Special Schools for People with Disability": 1,
+    "Priv Pre-Primary School": 8,
+    "Priv Primary School": 22,
+    "Priv Secondary School": 8,
+    "Private Nursery School": 10
+   }
+  },
+  "C176": {
+   "name": "Nyang'hwale District",
+   "region": "Geita",
+   "health": 50,
+   "education": 150,
+   "water": 1358,
+   "boreholes": 27,
+   "healthByType": {
+    "Gov Dispensary": 39,
+    "Gov Health Centre/Cottage(PHCC)": 3,
+    "Gov Hospital": 1,
+    "Priv Health Centre": 1,
+    "Priv Hospital": 2,
+    "Private Dispensary": 4
+   },
+   "educationByType": {
+    "Gov Pre-Primary School": 37,
+    "Gov Primary School": 86,
+    "Gov Seconadry School": 15,
+    "Priv Pre-Primary School": 2,
+    "Private Nursery School": 8,
+    "Satellite Schools/Centre": 2
+   }
+  },
+  "C177": {
+   "name": "Mbogwe District",
+   "region": "Geita",
+   "health": 33,
+   "education": 282,
+   "water": 1683,
+   "boreholes": 45,
+   "healthByType": {
+    "Gov Dispensary": 19,
+    "Gov Health Centre/Cottage(PHCC)": 5,
+    "Gov Hospital": 3,
+    "Private Dispensary": 6
+   },
+   "educationByType": {
+    "Gov Pre-Primary School": 101,
+    "Gov Primary School": 129,
+    "Gov Seconadry School": 23,
+    "Priv Pre-Primary School": 8,
+    "Priv Primary School": 5,
+    "Priv Secondary School": 3,
+    "Private Nursery School": 10,
+    "Satellite Schools/Centre": 3
+   }
+  },
+  "C178": {
+   "name": "Bukombe District",
+   "region": "Geita",
+   "health": 29,
+   "education": 173,
+   "water": 1540,
+   "boreholes": 34,
+   "healthByType": {
+    "Gov Dispensary": 11,
+    "Gov Health Centre/Cottage(PHCC)": 7,
+    "Priv Health Centre": 1,
+    "Priv Hospital": 2,
+    "Private Dispensary": 8
+   },
+   "educationByType": {
+    "Gov Pre-Primary School": 37,
+    "Gov Primary School": 93,
+    "Gov Seconadry School": 20,
+    "Priv Pre-Primary School": 4,
+    "Priv Primary School": 5,
+    "Priv Secondary School": 4,
+    "Private Nursery School": 4,
+    "Satellite Schools/Centre": 6
+   }
+  },
+  "C179": {
+   "name": "Chato District",
+   "region": "Geita",
+   "health": 67,
+   "education": 309,
+   "water": 2741,
+   "boreholes": 73,
+   "healthByType": {
+    "Gov Dispensary": 40,
+    "Gov Health Centre/Cottage(PHCC)": 14,
+    "Private Dispensary": 13
+   },
+   "educationByType": {
+    "Gov Pre-Primary School": 60,
+    "Gov Primary School": 145,
+    "Gov Seconadry School": 52,
+    "Gov Special Schools for People with Disability": 1,
+    "Priv Pre-Primary School": 5,
+    "Priv Primary School": 15,
+    "Priv Secondary School": 7,
+    "Private Nursery School": 19,
+    "Satellite Schools/Centre": 5
+   }
+  },
+  "C180": {
+   "name": "Momba District",
+   "region": "Songwe",
+   "health": 92,
+   "education": 129,
+   "water": 1308,
+   "boreholes": 22,
+   "healthByType": {
+    "Gov Dispensary": 76,
+    "Gov Health Centre/Cottage(PHCC)": 6,
+    "Gov Hospital": 4,
+    "Priv Health Centre": 4,
+    "Private Dispensary": 2
+   },
+   "educationByType": {
+    "Gov Pre-Primary School": 11,
+    "Gov Primary School": 91,
+    "Gov Seconadry School": 13,
+    "Priv Primary School": 1,
+    "Private Nursery School": 4,
+    "Satellite Schools/Centre": 9
+   }
+  },
+  "C181": {
+   "name": "Tunduma Town",
+   "region": "Songwe",
+   "health": 46,
+   "education": 129,
+   "water": 512,
+   "boreholes": 86,
+   "healthByType": {
+    "Gov Dispensary": 14,
+    "Gov Health Centre/Cottage(PHCC)": 6,
+    "Gov Hospital": 2,
+    "Priv Health Centre": 6,
+    "Priv Hospital": 2,
+    "Private Dispensary": 16
+   },
+   "educationByType": {
+    "Gov Pre-Primary School": 1,
+    "Gov Primary School": 49,
+    "Gov Seconadry School": 13,
+    "Priv Pre-Primary School": 2,
+    "Priv Primary School": 17,
+    "Priv Secondary School": 8,
+    "Private Nursery School": 39
+   }
+  },
+  "C182": {
+   "name": "Songwe District",
+   "region": "Songwe",
+   "health": 76,
+   "education": 97,
+   "water": 926,
+   "boreholes": 36,
+   "healthByType": {
+    "Gov Dispensary": 58,
+    "Gov Health Centre/Cottage(PHCC)": 8,
+    "Gov Hospital": 2,
+    "Priv Health Centre": 2,
+    "Private Dispensary": 6
+   },
+   "educationByType": {
+    "Gov Pre-Primary School": 14,
+    "Gov Primary School": 61,
+    "Gov Seconadry School": 12,
+    "Priv Secondary School": 1,
+    "Private Nursery School": 3,
+    "Satellite Schools/Centre": 6
+   }
+  },
+  "C183": {
+   "name": "Mbozi District",
+   "region": "Songwe",
+   "health": 202,
+   "education": 318,
+   "water": 3388,
+   "boreholes": 43,
+   "healthByType": {
+    "Gov Dispensary": 146,
+    "Gov Health Centre/Cottage(PHCC)": 16,
+    "Gov Hospital": 4,
+    "Priv Health Centre": 12,
+    "Priv Hospital": 6,
+    "Private Dispensary": 18
+   },
+   "educationByType": {
+    "Gov Pre-Primary School": 32,
+    "Gov Primary School": 176,
+    "Gov Seconadry School": 42,
+    "Gov Special Schools for People with Disability": 1,
+    "Priv Pre-Primary School": 7,
+    "Priv Primary School": 15,
+    "Priv Secondary School": 16,
+    "Private Nursery School": 26,
+    "Satellite Schools/Centre": 3
+   }
+  },
+  "C184": {
+   "name": "Ileje District",
+   "region": "Songwe",
+   "health": 76,
+   "education": 142,
+   "water": 1718,
+   "boreholes": 2,
+   "healthByType": {
+    "Gov Dispensary": 56,
+    "Gov Health Centre/Cottage(PHCC)": 10,
+    "Gov Hospital": 4,
+    "Private Dispensary": 6
+   },
+   "educationByType": {
+    "Gov Pre-Primary School": 23,
+    "Gov Primary School": 83,
+    "Gov Seconadry School": 20,
+    "Priv Pre-Primary School": 1,
+    "Priv Primary School": 1,
+    "Priv Secondary School": 3,
+    "Private Nursery School": 3,
+    "Satellite Schools/Centre": 8
+   }
+  },
+  "C185": {
+   "name": "Kaskazini A Town",
+   "region": "Kaskazini Unguja",
+   "health": 54,
+   "education": 172,
+   "water": 264,
+   "boreholes": 276,
+   "healthByType": {
+    "Gov Dispensary": 20,
+    "Gov Health Centre/Cottage(PHCC)": 10,
+    "Gov Hospital": 4,
+    "Priv Health Centre": 2,
+    "Priv Hospital": 2,
+    "Private Dispensary": 16
+   },
+   "educationByType": {
+    "Gov Pre-Primary School": 28,
+    "Gov Primary School": 60,
+    "Gov Seconadry School": 44,
+    "Government Primary and Middle Schools": 2,
+    "Priv Pre-Primary School": 8,
+    "Priv Primary School": 14,
+    "Priv Secondary School": 2,
+    "Private Nursery School": 14
+   }
+  },
+  "C186": {
+   "name": "Kaskazini B Town",
+   "region": "Kaskazini Unguja",
+   "health": 32,
+   "education": 158,
+   "water": 194,
+   "boreholes": 142,
+   "healthByType": {
+    "Gov Dispensary": 20,
+    "Gov Health Centre/Cottage(PHCC)": 4,
+    "Private Dispensary": 8
+   },
+   "educationByType": {
+    "Gov Pre-Primary School": 38,
+    "Gov Primary School": 40,
+    "Gov Seconadry School": 20,
+    "Priv Pre-Primary School": 26,
+    "Priv Primary School": 16,
+    "Priv Secondary School": 4,
+    "Private Nursery School": 14
+   }
+  },
+  "C187": {
+   "name": "Kati Town",
+   "region": "Kusini Unguja",
+   "health": 60,
+   "education": 250,
+   "water": 271,
+   "boreholes": 176,
+   "healthByType": {
+    "Gov Dispensary": 26,
+    "Gov Health Centre/Cottage(PHCC)": 14,
+    "Gov Hospital": 6,
+    "Private Dispensary": 14
+   },
+   "educationByType": {
+    "Gov Pre-Primary School": 36,
+    "Gov Primary School": 74,
+    "Gov Seconadry School": 58,
+    "Government Primary and Middle Schools": 2,
+    "Priv Pre-Primary School": 28,
+    "Priv Primary School": 30,
+    "Priv Secondary School": 4,
+    "Private Nursery School": 18
+   }
+  },
+  "C188": {
+   "name": "Kusini District",
+   "region": "Kusini Unguja",
+   "health": 11,
+   "education": 54,
+   "water": 133,
+   "boreholes": 63,
+   "healthByType": {
+    "Gov Dispensary": 5,
+    "Gov Health Centre/Cottage(PHCC)": 1,
+    "Gov Hospital": 1,
+    "Private Dispensary": 4
+   },
+   "educationByType": {
+    "Gov Pre-Primary School": 5,
+    "Gov Primary School": 15,
+    "Gov Seconadry School": 12,
+    "Priv Pre-Primary School": 14,
+    "Priv Primary School": 4,
+    "Priv Secondary School": 2,
+    "Private Nursery School": 2
+   }
+  },
+  "C189": {
+   "name": "Mjini Municipal",
+   "region": "Mjini Magharibi",
+   "health": 34,
+   "education": 157,
+   "water": 371,
+   "boreholes": 202,
+   "healthByType": {
+    "Gov Dispensary": 5,
+    "Gov Health Centre/Cottage(PHCC)": 3,
+    "Gov Hospital": 5,
+    "Priv Health Centre": 1,
+    "Priv Hospital": 5,
+    "Private Dispensary": 15
+   },
+   "educationByType": {
+    "Gov Pre-Primary School": 17,
+    "Gov Primary School": 20,
+    "Gov Seconadry School": 18,
+    "Government Primary and Middle Schools": 2,
+    "Priv Pre-Primary School": 44,
+    "Priv Primary School": 28,
+    "Priv Secondary School": 8,
+    "Private Nursery School": 19,
+    "Satellite Schools/Centre": 1
+   }
+  },
+  "C190": {
+   "name": "Magharibi A Municipal",
+   "region": "Mjini Magharibi",
+   "health": 34,
+   "education": 257,
+   "water": 263,
+   "boreholes": 328,
+   "healthByType": {
+    "Gov Dispensary": 3,
+    "Gov Health Centre/Cottage(PHCC)": 2,
+    "Gov Hospital": 1,
+    "Priv Health Centre": 1,
+    "Private Dispensary": 27
+   },
+   "educationByType": {
+    "Gov Pre-Primary School": 12,
+    "Gov Primary School": 21,
+    "Gov Seconadry School": 14,
+    "Government Primary and Middle Schools": 12,
+    "Priv Pre-Primary School": 96,
+    "Priv Primary School": 76,
+    "Priv Secondary School": 5,
+    "Private Nursery School": 21
+   }
+  },
+  "C191": {
+   "name": "Magharibi B Municipal",
+   "region": "Mjini Magharibi",
+   "health": 40,
+   "education": 195,
+   "water": 200,
+   "boreholes": 293,
+   "healthByType": {
+    "Gov Dispensary": 6,
+    "Gov Health Centre/Cottage(PHCC)": 3,
+    "Priv Health Centre": 7,
+    "Priv Hospital": 3,
+    "Private Dispensary": 21
+   },
+   "educationByType": {
+    "Gov Pre-Primary School": 4,
+    "Gov Primary School": 26,
+    "Gov Seconadry School": 14,
+    "Government Primary and Middle Schools": 14,
+    "Priv Pre-Primary School": 46,
+    "Priv Primary School": 49,
+    "Priv Secondary School": 21,
+    "Priv Special Schools for People with Disability": 1,
+    "Private Nursery School": 20
+   }
+  },
+  "C192": {
+   "name": "Wete Town",
+   "region": "Kaskazini Pemba",
+   "health": 26,
+   "education": 144,
+   "water": 245,
+   "boreholes": 189,
+   "healthByType": {
+    "Gov Dispensary": 15,
+    "Gov Health Centre/Cottage(PHCC)": 5,
+    "Gov Hospital": 2,
+    "Priv Health Centre": 1,
+    "Private Dispensary": 3
+   },
+   "educationByType": {
+    "Gov Pre-Primary School": 44,
+    "Gov Primary School": 31,
+    "Gov Seconadry School": 28,
+    "Government Primary and Middle Schools": 2,
+    "Priv Pre-Primary School": 23,
+    "Priv Primary School": 5,
+    "Priv Secondary School": 4,
+    "Private Nursery School": 7
+   }
+  },
+  "C193": {
+   "name": "Micheweni District",
+   "region": "Kaskazini Pemba",
+   "health": 17,
+   "education": 78,
+   "water": 133,
+   "boreholes": 18,
+   "healthByType": {
+    "Gov Dispensary": 11,
+    "Gov Health Centre/Cottage(PHCC)": 1,
+    "Private Dispensary": 5
+   },
+   "educationByType": {
+    "Gov Pre-Primary School": 23,
+    "Gov Primary School": 24,
+    "Gov Seconadry School": 12,
+    "Priv Pre-Primary School": 12,
+    "Priv Primary School": 4,
+    "Priv Secondary School": 1,
+    "Private Nursery School": 2
+   }
+  },
+  "C194": {
+   "name": "Chake Chake Town",
+   "region": "Kusini Pemba",
+   "health": 28,
+   "education": 115,
+   "water": 190,
+   "boreholes": 200,
+   "healthByType": {
+    "Gov Dispensary": 12,
+    "Gov Health Centre/Cottage(PHCC)": 6,
+    "Priv Health Centre": 1,
+    "Private Dispensary": 9
+   },
+   "educationByType": {
+    "Gov Pre-Primary School": 27,
+    "Gov Primary School": 26,
+    "Gov Seconadry School": 21,
+    "Priv Pre-Primary School": 19,
+    "Priv Primary School": 8,
+    "Priv Secondary School": 6,
+    "Private Nursery School": 7,
+    "Satellite Schools/Centre": 1
+   }
+  },
+  "C195": {
+   "name": "Mkoani Town",
+   "region": "Kusini Pemba",
+   "health": 18,
+   "education": 105,
+   "water": 209,
+   "boreholes": 197,
+   "healthByType": {
+    "Gov Dispensary": 9,
+    "Gov Health Centre/Cottage(PHCC)": 8,
+    "Gov Hospital": 1
+   },
+   "educationByType": {
+    "Gov Pre-Primary School": 30,
+    "Gov Primary School": 32,
+    "Gov Seconadry School": 21,
+    "Priv Pre-Primary School": 4,
+    "Priv Primary School": 4,
+    "Priv Secondary School": 2,
+    "Private Nursery School": 11,
+    "Satellite Schools/Centre": 1
+   }
+  }
+ }
+}

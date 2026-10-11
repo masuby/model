@@ -1,8 +1,19 @@
 /**
- * Provenance layer: the responsible authority, dataset and method behind every indicator.
- * A Data-Entry edit stamps its own source, which supersedes the baseline on view.
+ * Provenance layer: where a value comes from, and who is responsible for keeping it current. The two
+ * are kept apart on purpose:
+ *
+ *   • `sourceFor` says where the CURRENT Core value of an indicator group comes from. In the Core that
+ *     is always the INFORM Sub-national SADC 2024 workbook, so the answer is the workbook's own
+ *     metadata: the datasets, publishers, years and resolution of the indicators behind the group
+ *     (src/data/inform-workbook-sources.json, exported from the workbook's Metadata sheet).
+ *   • `editSource` says where an APPROVED value from the Data portal comes from: the institution that
+ *     submitted it, its dataset, and the level it was recorded at.
+ *   • `custodianFor` names the Tanzanian institution responsible for an indicator group: who is asked
+ *     for updates. It is never shown as the source of a value the institution did not supply.
  */
-import type { DimensionKey, IndicatorRef } from './hierarchy';
+import workbookSources from '@/data/inform-workbook-sources.json';
+import { DIMENSIONS, type DimensionKey, type IndicatorRef } from './hierarchy';
+import type { EditStamp, Level } from './types';
 
 export interface Authority {
   label: string;
@@ -46,49 +57,144 @@ export const AUTHORITIES = {
 
 export type AuthorityKey = keyof typeof AUTHORITIES;
 export const AUTHORITY_KEYS = Object.keys(AUTHORITIES) as AuthorityKey[];
+export const isAuthorityKey = (k: unknown): k is AuthorityKey => typeof k === 'string' && k in AUTHORITIES;
+
+/** How local a value is; `none` = no indicator with data in the workbook (the group is left out of the averages). */
+export type Resolution = 'council' | 'district' | 'region' | 'national' | 'none';
 
 export interface SourceInfo {
   by: AuthorityKey;
   also?: AuthorityKey[];
   dataset: string;
   method: string;
-  /** How local the data is - shown honestly in the UI. */
-  resolution: 'council' | 'district' | 'region' | 'national' | 'overlay';
+  resolution: Resolution;
 }
 
-export const INDICATOR_SOURCES: Partial<Record<IndicatorRef | 'hazard:exposure', SourceInfo>> = {
-  'hazard:drought': { by: 'TMA', also: ['MOA', 'CHC'], dataset: 'CHIRPS v3 (1991–2024) + ERA5 t2m', method: 'SPI-12/SPEI-12 frequency, aridity and season failure', resolution: 'council' },
-  'hazard:flood': { by: 'PMO', also: ['TMA', 'MOW'], dataset: 'CHIRPS v3 daily + recorded flood events', method: '>50 / >100 mm event counts and recorded events × exposure', resolution: 'council' },
-  'hazard:landslide': { by: 'TMA', also: ['PMO', 'GST'], dataset: 'World Bank global landslide hazard + documented events', method: 'hazard rank, documented overlay', resolution: 'district' },
-  'hazard:coastalHazards': { by: 'TMA', also: ['PMO'], dataset: 'Coastal strip exposure', method: 'documented overlay', resolution: 'overlay' },
-  'hazard:stormsCyclone': { by: 'TMA', also: ['PMO'], dataset: 'Cyclone Hidaya 2024, Lindi 1952, Zanzibar 1872', method: 'documented cyclone/storm exposure (coastal)', resolution: 'overlay' },
-  'hazard:heatwave': { by: 'TMA', also: ['CHC'], dataset: 'ERA5 t2m climatology', method: 'temperature-based heat exposure', resolution: 'council' },
-  'hazard:lightning': { by: 'TMA', dataset: 'NASA LIS/OTD flash density (Lake Victoria basin)', method: 'documented lightning-hotspot overlay', resolution: 'overlay' },
-  'hazard:volcano': { by: 'GST', also: ['PMO'], dataset: 'Ol Doinyo Lengai, Rungwe, Kilimanjaro/Meru', method: 'documented volcanism overlay', resolution: 'overlay' },
-  'hazard:zoonoses': { by: 'MOA', also: ['MOH'], dataset: '2020 desert locust, armyworm, livestock disease', method: 'documented overlay', resolution: 'overlay' },
-  'hazard:earthquake': { by: 'GST', also: ['USGS'], dataset: 'USGS catalogue M≥4.5, 1960–2024 (554 events)', method: 'maximum estimated shaking per district', resolution: 'district' },
-  'hazard:wildfire': { by: 'TFS', also: ['TMA'], dataset: 'Miombo dry-season fire regime', method: 'documented overlay (MODIS/VIIRS pending)', resolution: 'overlay' },
-  'hazard:vehicleAccidents': { by: 'TPF', also: ['PMO'], dataset: 'Highway corridors and urban traffic', method: 'documented overlay', resolution: 'overlay' },
-  'hazard:hazardousMaterial': { by: 'NEMC', also: ['PMO'], dataset: 'Industrial, mining and petroleum sites', method: 'documented overlay', resolution: 'overlay' },
-  'hazard:exposure': { by: 'NBS', dataset: '2022 Population and Housing Census', method: 'council population ÷ council area (log-scaled)', resolution: 'council' },
-  'vulnerability:developmentPoverty': { by: 'NBS', dataset: 'Household Budget Survey 2017/18', method: 'poverty headcount', resolution: 'region' },
-  'vulnerability:childrenHealthNutrition': { by: 'MOH', also: ['NBS', 'TFNC'], dataset: 'TDHS-MIS 2022', method: 'under-5 stunting', resolution: 'region' },
-  'vulnerability:healthConditions': { by: 'MOH', also: ['TACAIDS', 'NMCP'], dataset: 'THIS 2022-23 (HIV) + TDHS-MIS 2022 (malaria)', method: 'disease-burden min–max blend', resolution: 'region' },
-  'vulnerability:displacedPeople': { by: 'UNHCR', also: ['PMO'], dataset: 'UNHCR 2024, Nyarugusu and Nduta camps', method: 'refugee burden, scaled', resolution: 'district' },
-  'vulnerability:livelihoods': { by: 'MUCHALI', also: ['MOA'], dataset: 'IPC / MUCHALI acute food-insecurity rounds', method: 'food-insecurity phase', resolution: 'district' },
-  'vulnerability:habitat': { by: 'NBS', dataset: '2022 PHC housing', method: 'housing and services', resolution: 'district' },
-  'coping:wash': { by: 'MOW', dataset: '2022 PHC water points and boreholes', method: 'resource availability (rank-normalised)', resolution: 'district' },
-  'coping:accessHealth': { by: 'MOH', dataset: '2022 PHC health facilities', method: 'resource availability', resolution: 'district' },
-  'coping:education': { by: 'MOEST', also: ['NBS'], dataset: '2022 PHC schools', method: 'resource availability', resolution: 'district' },
-  'coping:drrImplementation': { by: 'PMO', also: ['DRRC'], dataset: 'EPRP / EOCC / anticipatory-action records', method: 'DRM investment overlay', resolution: 'district' },
-  'coping:governance': { by: 'PMO', dataset: 'INFORM SADC governance', method: 'baseline', resolution: 'national' },
+/* ------------------------------------------------------------------------------------------------ */
+/* Where the Core value comes from: the workbook's metadata                                          */
+/* ------------------------------------------------------------------------------------------------ */
+
+export interface WorkbookIndicatorSource {
+  id: string;
+  name: string;
+  component: string;
+  source: string;
+  url: string;
+  resolution: 'district' | 'region' | 'national';
+  year: string;
+  unit: string;
+}
+interface WorkbookComponentSource {
+  component: string;
+  indicators: string[];
+  sources: string[];
+  years: string[];
+  resolution: 'district' | 'region' | 'national';
+}
+const WORKBOOK = workbookSources as unknown as { indicators: Record<string, WorkbookIndicatorSource>; components: Record<string, WorkbookComponentSource> };
+
+/** Component names are matched like `leafForWorkbookComponent`: case and punctuation do not count. */
+const norm = (s: string) => s.toLowerCase().replace(/[^a-z0-9]/g, '');
+const COMPONENT_BY_NAME = new Map(Object.values(WORKBOOK.components).map((c) => [norm(c.component), c]));
+const COMPONENT_BY_REF = new Map<string, WorkbookComponentSource>();
+for (const dim of DIMENSIONS)
+  for (const cat of dim.categories)
+    for (const ind of cat.indicators) {
+      const comp = [...ind.workbook, ind.en].map((n) => COMPONENT_BY_NAME.get(norm(n))).find(Boolean);
+      if (comp) COMPONENT_BY_REF.set(`${dim.key}:${ind.key}`, comp);
+    }
+
+export const WORKBOOK_METHOD = 'INFORM Sub-national SADC 2024 workbook';
+
+/** Groups that have no indicator with data in the workbook (empty for every Tanzanian unit). */
+export const EMPTY_IN_WORKBOOK: SourceInfo = { by: 'INFORM', dataset: 'No indicator with data in the workbook', method: WORKBOOK_METHOD, resolution: 'none' };
+export const DEFAULT_SOURCE = EMPTY_IN_WORKBOOK;
+
+/** Where the Core value of an indicator group comes from: the workbook's datasets, years and resolution. */
+export function sourceFor(dim: DimensionKey, key: string): SourceInfo {
+  const c = COMPONENT_BY_REF.get(`${dim}:${key}`);
+  if (!c) return EMPTY_IN_WORKBOOK;
+  return { by: 'INFORM', dataset: `${c.sources.join(', ')} (${c.years.join('; ')})`, method: WORKBOOK_METHOD, resolution: c.resolution };
+}
+
+/** The workbook indicators (with their own metadata) behind an indicator group. */
+export function workbookIndicatorsFor(dim: DimensionKey, key: string): WorkbookIndicatorSource[] {
+  const c = COMPONENT_BY_REF.get(`${dim}:${key}`);
+  return c ? c.indicators.map((id) => WORKBOOK.indicators[id]).filter(Boolean) : [];
+}
+
+/* ------------------------------------------------------------------------------------------------ */
+/* Where an approved value comes from: the edit stamp                                                */
+/* ------------------------------------------------------------------------------------------------ */
+
+/** Provenance of a value approved through the Data portal, from its stamp. */
+export function editSource(edit: EditStamp, level: Level): SourceInfo {
+  const by = isAuthorityKey(edit.authority) ? edit.authority : 'PMO';
+  const measured = edit.inputs?.find((i) => i.level !== 'baseline');
+  const measuredLevel = measured && measured.level !== 'baseline' ? measured.level : null;
+  const resolution: Resolution = measuredLevel ?? (level === 'council' ? 'council' : level === 'region' ? 'region' : level === 'national' ? 'national' : 'district');
+  return {
+    by,
+    dataset: edit.dataset || (measured ? 'Measured values submitted through the Data portal' : 'Score submitted through the Data portal'),
+    method: measured ? 'Measured values standardised with the workbook method' : 'Direct 0–10 entry, approved by PMO-DMD',
+    resolution,
+  };
+}
+
+/* ------------------------------------------------------------------------------------------------ */
+/* Who is responsible for keeping a group current                                                    */
+/* ------------------------------------------------------------------------------------------------ */
+
+export interface Custodian {
+  by: AuthorityKey;
+  also: AuthorityKey[];
+}
+
+const custodian = (by: AuthorityKey, also: AuthorityKey[] = []): Custodian => ({ by, also });
+
+/** The Tanzanian institution responsible for each indicator group (the one asked for updates). */
+export const CUSTODIANS: Partial<Record<IndicatorRef, Custodian>> = {
+  'hazard:coastalHazards': custodian('TMA', ['NEMC']),
+  'hazard:drought': custodian('TMA', ['MOA']),
+  'hazard:earthquake': custodian('GST'),
+  'hazard:environmentalDegradation': custodian('NEMC', ['TFS']),
+  'hazard:flood': custodian('MOW', ['TMA', 'PMO']),
+  'hazard:heatwave': custodian('TMA'),
+  'hazard:landslide': custodian('GST', ['TMA']),
+  'hazard:lightning': custodian('TMA'),
+  'hazard:stormsCyclone': custodian('TMA'),
+  'hazard:volcano': custodian('GST'),
+  'hazard:wildfire': custodian('TFS', ['TMA']),
+  'hazard:zoonoses': custodian('MOA', ['MOH']),
+  'hazard:conflictIntensity': custodian('MOHA'),
+  'hazard:conflictRisk': custodian('MOHA'),
+  'hazard:hazardousMaterial': custodian('NEMC'),
+  'hazard:internalViolence': custodian('TPF', ['MOHA']),
+  'hazard:vehicleAccidents': custodian('TPF'),
+  'vulnerability:developmentPoverty': custodian('NBS'),
+  'vulnerability:economicDependency': custodian('MOFP', ['NBS']),
+  'vulnerability:habitat': custodian('NBS', ['MOLHHSD']),
+  'vulnerability:livelihoods': custodian('MUCHALI', ['MOA']),
+  'vulnerability:displacedPeople': custodian('MOHA', ['UNHCR', 'PMO']),
+  'vulnerability:healthConditions': custodian('MOH', ['TACAIDS', 'NMCP']),
+  'vulnerability:childrenHealthNutrition': custodian('MOH', ['NBS', 'TFNC']),
+  'vulnerability:economic': custodian('NBS'),
+  'coping:accessHealth': custodian('MOH'),
+  'coping:economicCapacity': custodian('NBS', ['MOFP']),
+  'coping:wash': custodian('MOW', ['NBS']),
+  'coping:communication': custodian('TCRA', ['NBS']),
+  'coping:education': custodian('MOEST', ['NBS']),
+  'coping:drrImplementation': custodian('PMO', ['DRRC']),
+  'coping:governance': custodian('PMO', ['PORALG']),
 };
 
-export const DEFAULT_SOURCE: SourceInfo = { by: 'INFORM', dataset: 'INFORM Sub-national SADC 2024', method: 'baseline', resolution: 'national' };
-
-export function sourceFor(dim: DimensionKey, key: string): SourceInfo {
-  return INDICATOR_SOURCES[`${dim}:${key}` as IndicatorRef] ?? DEFAULT_SOURCE;
+export function custodianFor(dim: DimensionKey, key: string): Custodian {
+  return CUSTODIANS[`${dim}:${key}` as IndicatorRef] ?? custodian('PMO');
 }
+
+/* ------------------------------------------------------------------------------------------------ */
+/* Labels                                                                                             */
+/* ------------------------------------------------------------------------------------------------ */
 
 /** International agencies and global datasets, as opposed to Tanzanian institutions. */
 export const GLOBAL_AUTHORITIES: ReadonlySet<string> = new Set<AuthorityKey>(['UNHCR', 'WFP', 'FEWSNET', 'CHC', 'USGS', 'INFORM']);
@@ -99,11 +205,17 @@ export function authorityLabel(key: string | undefined | null): string {
   return (AUTHORITIES as Record<string, Authority>)[key]?.label ?? key;
 }
 
-/** e.g. "TMA (+MoA, CHIRPS/ERA5) · CHIRPS v3 (1991–2024) + ERA5 t2m" */
+/** e.g. "INFORM SADC · Global Data Lab, OPHI (2022; 2012-2021)" or "NBS · TDHS-MIS 2022" */
 export function sourceLabel(src: Pick<SourceInfo, 'by' | 'also' | 'dataset'> | null | undefined): string {
   if (!src) return '';
   const lead = authorityLabel(src.by);
   const extra = (src.also ?? []).map(authorityLabel).join(', ');
   const who = extra ? `${lead} (+${extra})` : lead;
   return src.dataset ? `${who} · ${src.dataset}` : who;
+}
+
+/** e.g. "TMA (+MoA)" */
+export function custodianLabel(c: Custodian): string {
+  const extra = c.also.map(authorityLabel).join(', ');
+  return extra ? `${authorityLabel(c.by)} (+${extra})` : authorityLabel(c.by);
 }

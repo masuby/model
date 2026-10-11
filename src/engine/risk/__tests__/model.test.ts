@@ -1,13 +1,14 @@
 /**
- * The model speaks the real NBS-2022 structure (195 councils → 31 regions → official national), and
+ * The model speaks the real NBS-2022 structure (195 councils → 31 regions → national aggregate), and
  * approved edits flow through EVERY level consistently (the old app froze council risk).
  */
+import { BENCHMARK_AT } from '../benchmark';
 import { describe, expect, it } from 'vitest';
 import councilsGeo from '@/data/tanzania-councils.json';
 import { classify, THRESHOLDS } from '../classes';
 import { ALL_INDICATORS, leafForWorkbookComponent } from '../hierarchy';
-import { riskScore } from '../math';
-import { buildModel, dataCoverage, indicatorValue, placeKey, topDrivers, unitsAt } from '../model';
+import { dimensionScore, mean, riskScore } from '../math';
+import { aggregateUnits, buildModel, dataCoverage, indicatorValue, placeKey, topDrivers, unitsAt, BENCHMARK_OVERRIDES } from '../model';
 import { parseMetric } from '../metrics';
 import { usedSpecs } from '../standardise';
 
@@ -26,19 +27,40 @@ describe('administrative structure', () => {
   it('council ids are unique', () => {
     expect(new Set(model.councils.map((c) => c.id)).size).toBe(195);
   });
-  it('28 new/split councils are flagged as inheriting their parent', () => {
-    expect(model.councils.filter((c) => c.inheritedFrom).length).toBe(28);
+  it('the 20 councils created or split after the workbook boundaries are flagged as inheriting', () => {
+    expect(model.councils.filter((c) => c.inheritedFrom).length).toBe(20);
+    expect(model.councils.filter((c) => c.formerly).map((c) => c.name).sort()).toEqual(['Dar es Salaam City', 'Mtama District', 'Mwanza City']);
   });
   it('31 regions, every region has councils (incl. Dar es Salaam - name join fixed)', () => {
     expect(model.regions.length).toBe(31);
     for (const r of model.regions) expect(r.members).toBeGreaterThan(0);
     expect(model.regions.some((r) => placeKey(r.name) === 'daressalaam')).toBe(true);
   });
-  it('national is the OFFICIAL INFORM figure', () => {
-    expect(model.national.risk).toBe(4.1);
-    expect(model.national.dims.hazard.score).toBe(2.2);
-    expect(model.national.dims.vulnerability.score).toBe(5.5);
-    expect(model.national.dims.coping.score).toBe(5.9);
+  it('national is the INFORM aggregate of every council, never a published row or a mean of risks', () => {
+    const agg = aggregateUnits(model.councils, 'TZ', 'Tanzania', 'national');
+    expect(model.national.level).toBe('national');
+    expect(model.national.members).toBe(model.councils.length);
+    expect(model.national.risk).toBe(agg.risk);
+    expect(model.national.dims.hazard.score).toBe(agg.dims.hazard.score);
+    expect(model.national.dims.vulnerability.score).toBe(agg.dims.vulnerability.score);
+    expect(model.national.dims.coping.score).toBe(agg.dims.coping.score);
+    expect(model.national.risk).toBe(riskScore(model.national.dims.hazard.score, model.national.dims.vulnerability.score, model.national.dims.coping.score));
+    // Not Kondoa's workbook row (the old "official 4.1"), and not the mean of council risk scores.
+    const kondoa = model.sources.find((s) => s.id === 'TZ0101')!;
+    expect([model.national.dims.hazard.score, model.national.dims.vulnerability.score, model.national.dims.coping.score]).not.toEqual([
+      kondoa.dims.hazard.score,
+      kondoa.dims.vulnerability.score,
+      kondoa.dims.coping.score,
+    ]);
+  });
+  it('every score is derived from the indicator values, not read from the stored aggregates', () => {
+    for (const u of [...model.sources, ...model.councils]) {
+      for (const dim of Object.values(u.dims)) {
+        for (const cat of Object.values(dim.categories)) expect(cat.score).toBe(mean(Object.values(cat.indicators)));
+        expect(dim.score).toBe(dimensionScore(Object.values(dim.categories).map((c) => c.score)));
+      }
+      expect(u.risk).toBe(riskScore(u.dims.hazard.score, u.dims.vulnerability.score, u.dims.coping.score));
+    }
   });
   it('unitsAt wires every level', () => {
     expect(unitsAt(model, 'council')).toHaveLength(195);
@@ -52,13 +74,28 @@ describe('council maths', () => {
   it('council risk is computed live and equals ∛(H × V × LCC)', () => {
     for (const c of model.councils) expect(c.risk).toBe(riskScore(c.dims.hazard.score, c.dims.vulnerability.score, c.dims.coping.score));
   });
-  it('council hazard and risk are raise-only vs their source district', () => {
-    const src = new Map(model.sources.map((s) => [s.id, s]));
-    const fails = model.councils.filter((c) => {
+  it('in the Core (before the benchmark values) a council carries exactly the scores of its workbook unit', () => {
+    const core = buildModel({}, { benchmark: false });
+    const src = new Map(core.sources.map((s) => [s.id, s]));
+    const fails = core.councils.filter((c) => {
       const s = src.get(c.sourceId!)!;
-      return c.dims.hazard.score! < s.dims.hazard.score! - 0.06 || c.risk! < s.risk! - 0.06;
+      return c.dims.hazard.score !== s.dims.hazard.score || c.dims.vulnerability.score !== s.dims.vulnerability.score || c.dims.coping.score !== s.dims.coping.score || c.risk !== s.risk;
     });
     expect(fails.map((c) => c.name)).toEqual([]);
+  });
+  it('the Benchmark 2026 values reach every council as approved edits on their own leaves only', () => {
+    const refs = new Set(Object.values(BENCHMARK_OVERRIDES).flatMap((o) => Object.keys(o ?? {})));
+    expect(refs.has('hazard:coastalHazards')).toBe(true);
+    expect(refs.has('hazard:heatwave')).toBe(true);
+    expect(refs.has('vulnerability:habitat')).toBe(false);
+    for (const c of model.councils) {
+      for (const [ref, stamp] of Object.entries(c.edits)) {
+        expect(refs.has(ref)).toBe(true);
+        expect(stamp?.at).toBe(BENCHMARK_AT);
+        expect(stamp?.inputs?.length).toBeGreaterThan(0);
+      }
+    }
+    expect(model.councils.filter((c) => Object.keys(c.edits).length >= 8)).toHaveLength(195);
   });
   it('region facilities are summed over distinct source units (no double counting of split districts)', () => {
     for (const r of model.regions) {
@@ -102,11 +139,13 @@ describe('edits flow through every level', () => {
     }
   });
 
-  it('an exposure edit amplifies flood as √(hazard × exposure), never below the hazard', () => {
+  it('an exposure edit changes the exposure index shown and never a score (the workbook flood indicator already measures exposed people)', () => {
     const edited = buildModel({ [council.id]: { 'hazard:exposure': { value: 10, at } } });
     const c2 = edited.byId.get(council.id)!;
-    const h = council.floodHazard!;
-    expect(indicatorValue(c2, 'hazard', 'flood')).toBe(Math.floor(Math.max(h, Math.sqrt(h * 10)) * 10 + 0.5) / 10);
+    expect(c2.exposure?.index).toBe(10);
+    expect(indicatorValue(c2, 'hazard', 'flood')).toBe(indicatorValue(council, 'hazard', 'flood'));
+    expect(c2.dims.hazard.score).toBe(council.dims.hazard.score);
+    expect(c2.risk).toBe(council.risk);
   });
 
   it('a hazard edit keyed on the source unit reaches its councils; council edits take precedence', () => {

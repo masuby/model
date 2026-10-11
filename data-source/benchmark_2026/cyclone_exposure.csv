@@ -1,0 +1,22 @@
+code,name,reg,area_in_34kt_swath_pct,storms,max_wind_kt,storms_list
+C048,Mkuranga District,Pwani,100.0,1,80.0,HIDAYA 2024
+C050,Mafia District,Pwani,100.0,2,80.0,JOBO 2021; HIDAYA 2024
+C051,Kibiti District,Pwani,100.0,2,80.0,JOBO 2021; HIDAYA 2024
+C063,Mtwara District,Mtwara,100.0,1,123.0,KENNETH 2019
+C064,Nanyamba Town,Mtwara,100.0,1,123.0,KENNETH 2019
+C065,Mtwara Mikindani Municipal,Mtwara,100.0,1,123.0,KENNETH 2019
+C067,Newala Town,Mtwara,100.0,1,123.0,KENNETH 2019
+C070,Tandahimba District,Mtwara,100.0,1,123.0,KENNETH 2019
+C069,Masasi Town,Mtwara,99.9,1,123.0,KENNETH 2019
+C066,Newala District,Mtwara,98.4,1,123.0,KENNETH 2019
+C055,Kigamboni Municipal,Dar es Salaam,81.1,1,80.0,HIDAYA 2024
+C071,Nanyumbu District,Mtwara,75.2,1,123.0,KENNETH 2019
+C068,Masasi District,Mtwara,70.1,1,123.0,KENNETH 2019
+C054,Temeke Municipal,Dar es Salaam,59.8,1,80.0,HIDAYA 2024
+C058,Mtama District,Lindi,55.2,1,123.0,KENNETH 2019
+C053,Dar es Salaam City,Dar es Salaam,51.4,1,80.0,HIDAYA 2024
+C049,Rufiji District,Pwani,47.5,1,80.0,HIDAYA 2024
+C047,Kisarawe District,Pwani,32.5,1,80.0,HIDAYA 2024
+C057,Kilwa District,Lindi,11.8,2,80.0,JOBO 2021; HIDAYA 2024
+C059,Lindi Municipal,Lindi,1.9,1,123.0,KENNETH 2019
+C072,Tunduru District,Ruvuma,1.5,1,123.0,KENNETH 2019

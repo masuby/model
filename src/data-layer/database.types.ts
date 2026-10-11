@@ -73,6 +73,40 @@ export type Database = {
         Update: { assigned_at?: string; assigned_by?: string | null; institution_key?: string; note?: string | null; spec_id?: string };
         Relationships: Rel[];
       };
+      notifications: {
+        Row: {
+          id: string;
+          institution_key: string;
+          kind: string;
+          spec_id: string | null;
+          request_id: string | null;
+          submission_id: string | null;
+          title: string;
+          body: string | null;
+          due_date: string | null;
+          created_at: string;
+          read_at: string | null;
+          email_status: string;
+          email_error: string | null;
+        };
+        Insert: {
+          id?: string;
+          institution_key: string;
+          kind: string;
+          spec_id?: string | null;
+          request_id?: string | null;
+          submission_id?: string | null;
+          title: string;
+          body?: string | null;
+          due_date?: string | null;
+          created_at?: string;
+          read_at?: string | null;
+          email_status?: string;
+          email_error?: string | null;
+        };
+        Update: { read_at?: string | null; email_status?: string; email_error?: string | null };
+        Relationships: [];
+      };
       indicator_validations: {
         Row: { id: number; institution_key: string | null; note: string | null; request_id: string | null; spec_id: string; validated_at: string; validated_by: string | null; validated_by_name: string };
         Insert: { id?: number; institution_key?: string | null; note?: string | null; request_id?: string | null; spec_id: string; validated_at?: string; validated_by?: string | null; validated_by_name: string };
@@ -131,13 +165,91 @@ export type Database = {
         Relationships: [];
       };
       profiles: {
-        Row: { created_at: string; full_name: string; id: string; institution: string | null; institution_key: string | null; role: Database['public']['Enums']['app_role'] };
-        Insert: { created_at?: string; full_name?: string; id: string; institution?: string | null; institution_key?: string | null; role?: Database['public']['Enums']['app_role'] };
-        Update: { created_at?: string; full_name?: string; id?: string; institution?: string | null; institution_key?: string | null; role?: Database['public']['Enums']['app_role'] };
+        Row: { created_at: string; full_name: string; id: string; institution: string | null; institution_key: string | null; role: Database['public']['Enums']['app_role']; scope_unit_id: string | null };
+        Insert: { created_at?: string; full_name?: string; id: string; institution?: string | null; institution_key?: string | null; role?: Database['public']['Enums']['app_role']; scope_unit_id?: string | null };
+        Update: { created_at?: string; full_name?: string; id?: string; institution?: string | null; institution_key?: string | null; role?: Database['public']['Enums']['app_role']; scope_unit_id?: string | null };
+        Relationships: Rel[];
+      };
+      committee_records: {
+        Row: {
+          author_id: string;
+          author_name: string;
+          author_role: string | null;
+          created_at: string;
+          hazard: string | null;
+          id: string;
+          kind: string;
+          level: string;
+          note: string | null;
+          payload: Json;
+          region: string;
+          region_id: string | null;
+          review_note: string | null;
+          reviewed_at: string | null;
+          reviewer_id: string | null;
+          reviewer_name: string | null;
+          source: string;
+          status: string;
+          unit_id: string;
+          unit_name: string;
+          valid_from: string | null;
+          valid_to: string | null;
+        };
+        Insert: {
+          author_id?: string;
+          author_name: string;
+          author_role?: string | null;
+          created_at?: string;
+          hazard?: string | null;
+          id?: string;
+          kind: string;
+          level: string;
+          note?: string | null;
+          payload: Json;
+          region?: string;
+          region_id?: string | null;
+          review_note?: string | null;
+          reviewed_at?: string | null;
+          reviewer_id?: string | null;
+          reviewer_name?: string | null;
+          source: string;
+          status?: string;
+          unit_id: string;
+          unit_name: string;
+          valid_from?: string | null;
+          valid_to?: string | null;
+        };
+        Update: {
+          author_id?: string;
+          author_name?: string;
+          author_role?: string | null;
+          created_at?: string;
+          hazard?: string | null;
+          id?: string;
+          kind?: string;
+          level?: string;
+          note?: string | null;
+          payload?: Json;
+          region?: string;
+          region_id?: string | null;
+          review_note?: string | null;
+          reviewed_at?: string | null;
+          reviewer_id?: string | null;
+          reviewer_name?: string | null;
+          source?: string;
+          status?: string;
+          unit_id?: string;
+          unit_name?: string;
+          valid_from?: string | null;
+          valid_to?: string | null;
+        };
         Relationships: Rel[];
       };
       raw_submissions: {
         Row: {
+          method: string | null;
+          source: string | null;
+          value_type: string;
           author_id: string;
           author_name: string;
           created_at: string;
@@ -156,6 +268,9 @@ export type Database = {
           status: string;
         };
         Insert: {
+          method?: string | null;
+          source?: string | null;
+          value_type?: string;
           author_id?: string;
           author_name: string;
           created_at?: string;
@@ -174,6 +289,9 @@ export type Database = {
           status?: string;
         };
         Update: {
+          method?: string | null;
+          source?: string | null;
+          value_type?: string;
           author_id?: string;
           author_name?: string;
           created_at?: string;
@@ -195,6 +313,9 @@ export type Database = {
       };
       raw_values: {
         Row: {
+          method: string | null;
+          source: string | null;
+          value_type: string;
           author_name: string | null;
           dataset: string | null;
           institution_key: string | null;
@@ -208,6 +329,9 @@ export type Database = {
           value: number | null;
         };
         Insert: {
+          method?: string | null;
+          source?: string | null;
+          value_type?: string;
           author_name?: string | null;
           dataset?: string | null;
           institution_key?: string | null;
@@ -221,6 +345,9 @@ export type Database = {
           value?: number | null;
         };
         Update: {
+          method?: string | null;
+          source?: string | null;
+          value_type?: string;
           author_name?: string | null;
           dataset?: string | null;
           institution_key?: string | null;
@@ -293,7 +420,33 @@ export type Database = {
         Relationships: [];
       };
     };
-    Views: { [_ in never]: never };
+    Views: {
+      indicator_values_public: {
+        Row: { unit_id: string; ref: string; value: number | null; authority: string | null; dataset: string | null; note: string | null; updated_at: string };
+        Relationships: [];
+      };
+      raw_values_public: {
+        Row: {
+          spec_id: string;
+          unit_id: string;
+          level: string;
+          value: number | null;
+          value_type: string | null;
+          method: string | null;
+          source: string | null;
+          dataset: string | null;
+          period: string | null;
+          institution_key: string | null;
+          submission_id: string | null;
+          updated_at: string;
+        };
+        Relationships: [];
+      };
+      indicator_validations_public: {
+        Row: { id: number; spec_id: string; institution_key: string; request_id: string | null; note: string | null; validated_at: string };
+        Relationships: [];
+      };
+    };
     Functions: {
       assign_indicators: { Args: { p_institution_key: string; p_note?: string; p_spec_ids: string[] }; Returns: number };
       close_request: { Args: { p_id: string; p_note?: string; p_status: string }; Returns: undefined };
@@ -301,14 +454,32 @@ export type Database = {
       create_requests: { Args: { p_due?: string; p_kind: string; p_message?: string; p_spec_ids: string[] }; Returns: number };
       revert_raw_value: { Args: { p_spec_id: string; p_unit_id: string }; Returns: undefined };
       revert_value: { Args: { p_ref: string; p_unit_id: string; p_unit_name?: string }; Returns: undefined };
+      review_committee_record: { Args: { p_decision: string; p_id: string; p_note?: string }; Returns: undefined };
       review_raw_submission: { Args: { p_decision: string; p_id: string; p_note?: string }; Returns: undefined };
+      submit_committee_record: {
+        Args: {
+          p_hazard?: string;
+          p_kind: string;
+          p_level: string;
+          p_note?: string;
+          p_payload: Json;
+          p_region: string;
+          p_region_id?: string;
+          p_source: string;
+          p_unit_id: string;
+          p_unit_name: string;
+          p_valid_from?: string;
+          p_valid_to?: string;
+        };
+        Returns: string;
+      };
       review_submission: { Args: { p_decision: string; p_id: string; p_note?: string }; Returns: undefined };
       submit_raw_values: {
-        Args: { p_dataset: string; p_entries: Json; p_note?: string; p_period?: string; p_request_id?: string; p_spec_id: string };
+        Args: { p_dataset: string; p_entries: Json; p_method?: string; p_note?: string; p_period?: string; p_request_id?: string; p_source?: string; p_spec_id: string; p_value_type?: string };
         Returns: string;
       };
     };
-    Enums: { app_role: 'viewer' | 'sector' | 'pmo' | 'admin' };
+    Enums: { app_role: 'viewer' | 'sector' | 'ddrrc' | 'rdrrc' | 'ndrrc' | 'pmo' | 'admin' };
     CompositeTypes: { [_ in never]: never };
   };
 };

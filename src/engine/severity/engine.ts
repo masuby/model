@@ -159,6 +159,8 @@ export interface SeverityResult {
   complete: boolean;
   missing: string[];
   reliability: Reliability;
+  /** The zero rule (methodology): no people in need, or no impact or no humanitarian conditions, means no severity to publish. */
+  zeroRule: 'noPeopleInNeed' | 'zeroImpact' | 'zeroConditions' | null;
 }
 
 export type ReliabilityKey = SeverityCategoryKey;
@@ -231,7 +233,13 @@ export function computeSeverity(input: SeverityInput): SeverityResult {
     const g = informGeometric([dimensions.impact.score, dimensions.conditions.score], [w.impactVsConditions.impact, w.impactVsConditions.conditions])!;
     severity = w.geo * g + w.complexity * dimensions.complexity.score!;
   }
-  const cat = severityCategory(severity);
+  // The zero rule (issue SEV-01): a crisis with no people in need, or whose impact or humanitarian
+  // conditions score zero, has no severity to publish. The index is 0 and no category is given, so a
+  // scenario with nobody affected can never show a severity level.
+  const zeroRule: SeverityResult['zeroRule'] =
+    raw.peopleInNeed === 0 ? 'noPeopleInNeed' : complete && dimensions.impact.score === 0 ? 'zeroImpact' : complete && dimensions.conditions.score === 0 ? 'zeroConditions' : null;
+  if (zeroRule) severity = 0;
+  const cat = zeroRule ? null : severityCategory(severity);
   return {
     severity: isNum(severity) ? round1(severity) : null,
     category: cat?.key ?? null,
@@ -242,6 +250,7 @@ export function computeSeverity(input: SeverityInput): SeverityResult {
     complete,
     missing,
     reliability: reliability(input, total ? (have / total) * 100 : 0),
+    zeroRule,
   };
 }
 

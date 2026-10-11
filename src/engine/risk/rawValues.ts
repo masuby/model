@@ -11,30 +11,46 @@
  *      submitted value: submitted scores where present, baseline scores for the rest, combined with the
  *      workbook weights exactly as `computeFromRaw` does. Groups with no submitted value are untouched.
  *
+ * A value is either measured (natural unit, standardised here with the workbook method) or a 0–10 score
+ * the institution computed with that same method (`valueType: 'score'`, e.g. with the NORMAL Excel tool);
+ * a deposited score enters the Core only with a citable source, recorded in its lineage.
+ *
  * The result is a set of council-level overrides stamped with every input and its level, merged with
  * the direct 0–10 edits so that the most recent approved value wins.
  */
 import { leafForWorkbookComponent } from './hierarchy';
-import { isNum, round1, weightedMean } from './math';
-import { placeKey } from './model';
-import { SPECS, standardise, usedSpecs, type IndicatorSpec, type SpecTable } from './standardise';
+import { noteById, noteIndicators } from './notes';
+import { clamp10, isNum, round1, weightedMean } from './math';
+import { placeKey } from './place';
+import { ACTIVE_SPECS, standardise, usedSpecs, type IndicatorSpec, type SpecTable } from './standardise';
 import type { EditRef, EditStamp, LeafInput, Overrides, RiskModel, Unit } from './types';
 
 export type RawLevel = 'national' | 'region' | 'council';
+/** 'raw' = a measured value in the indicator's unit; 'score' = a 0–10 score computed with the INFORM method. */
+export type RawValueType = 'raw' | 'score';
 
-/** One approved measured value. */
+/** One approved measured value (or deposited score). */
 export interface RawValue {
   specId: string;
   /** 'TZ', a region id ('R-arusha') or a council id ('C001'). */
   unitId: string;
   level: RawLevel;
-  /** Natural-unit value; null records "no data" explicitly. */
+  /** Natural-unit value, or the 0–10 score when `valueType` is 'score'; null records "no data" explicitly. */
   value: number | null;
+  valueType?: RawValueType;
+  /** How a deposited score was computed ('inform' = the workbook method). */
+  method?: string | null;
+  /** Citable source (publication, dataset or official letter). */
+  source?: string | null;
   dataset?: string | null;
   period?: string | null;
   institution?: string | null;
   author?: string | null;
   at: string;
+  /** The dated release the value belongs to (the Benchmark 2026); absent for values submitted through the portal. */
+  release?: string | null;
+  /** Short evidence the source gives with the value (the storms behind a cyclone swath, the IPC district…). */
+  detail?: string | null;
 }
 
 /** INFORM baseline measured values per district (src/data/inform-baseline-raw.json). */
@@ -57,6 +73,9 @@ export function scoreable(spec: IndicatorSpec): boolean {
 export const scoreRaw = (spec: IndicatorSpec, raw: number | null | undefined): number | null =>
   isNum(raw) && scoreable(spec) ? standardise(raw, spec) : null;
 
+/** A deposited 0–10 score as the engine stores it (one decimal, clamped), or null for no data. */
+export const depositedScore = (v: number | null | undefined): number | null => (isNum(v) ? round1(clamp10(v)) : null);
+
 export interface LeafSpecs {
   ref: EditRef;
   component: string;
@@ -66,7 +85,7 @@ export interface LeafSpecs {
 const leafCache = new WeakMap<SpecTable, LeafSpecs[]>();
 
 /** The used workbook indicators grouped by the model leaf they feed (components without a leaf are skipped). */
-export function leafSpecs(specs: SpecTable = SPECS): LeafSpecs[] {
+export function leafSpecs(specs: SpecTable = ACTIVE_SPECS): LeafSpecs[] {
   const hit = leafCache.get(specs);
   if (hit) return hit;
   const byRef = new Map<EditRef, LeafSpecs>();
@@ -83,7 +102,7 @@ export function leafSpecs(specs: SpecTable = SPECS): LeafSpecs[] {
 }
 
 /** The model leaf a workbook indicator feeds, if any. */
-export function leafOfSpec(specId: string, specs: SpecTable = SPECS): EditRef | null {
+export function leafOfSpec(specId: string, specs: SpecTable = ACTIVE_SPECS): EditRef | null {
   return leafSpecs(specs).find((l) => l.specs.some((s) => s.id === specId))?.ref ?? null;
 }
 
@@ -123,27 +142,33 @@ export function baselineValue(baseline: BaselineRaw | null | undefined, specId: 
 /** The value a council currently has for one indicator, with its level (submitted, else baseline). */
 export function councilInput(idx: RawIndex, spec: IndicatorSpec, council: Unit, baseline: BaselineRaw | null): LeafInput {
   const r = resolveForCouncil(idx, spec.id, council);
-  if (r)
+  if (r) {
+    const deposited = r.valueType === 'score';
     return {
       specId: spec.id,
-      raw: r.value,
-      score: scoreRaw(spec, r.value),
+      raw: deposited ? null : r.value,
+      score: deposited ? depositedScore(r.value) : scoreRaw(spec, r.value),
       level: r.level,
       unitId: r.unitId,
       dataset: r.dataset ?? null,
       period: r.period ?? null,
       institution: r.institution ?? null,
       at: r.at,
+      valueType: deposited ? 'score' : 'raw',
+      source: r.source ?? null,
+      ...(r.release ? { release: r.release } : {}),
+      ...(r.detail ? { detail: r.detail } : {}),
     };
+  }
   const raw = baselineValue(baseline, spec.id, council.sourceId);
-  return { specId: spec.id, raw, score: scoreRaw(spec, raw), level: 'baseline', unitId: council.sourceId };
+  return { specId: spec.id, raw, score: scoreRaw(spec, raw), level: 'baseline', unitId: council.sourceId, valueType: 'raw' };
 }
 
 /**
  * Council-level leaf overrides from the approved measured values. Only leaves with at least one
  * submitted indicator value (at any level that applies to the council) are produced.
  */
-export function deriveRawOverrides(values: readonly RawValue[], model: RiskModel, baseline: BaselineRaw | null, specs: SpecTable = SPECS): Overrides {
+export function deriveRawOverrides(values: readonly RawValue[], model: RiskModel, baseline: BaselineRaw | null, specs: SpecTable = ACTIVE_SPECS): Overrides {
   if (!values.length) return {};
   const idx = indexRawValues(values);
   const submittedSpecs = new Set(values.map((v) => v.specId));
@@ -154,6 +179,12 @@ export function deriveRawOverrides(values: readonly RawValue[], model: RiskModel
       const inputs = leaf.specs.map((s) => councilInput(idx, s, council, baseline));
       const submitted = inputs.filter((i) => i.level !== 'baseline');
       if (!submitted.length) continue;
+      // A workbook value the validation withheld (the council's unit carries the note) does not come
+      // back through the baseline: the leaf is recomputed from the submitted values and the
+      // remaining workbook indicators only, as the quarantine itself does.
+      const note = noteById(council.quarantined?.[leaf.ref]);
+      const withheldSpecs = note ? noteIndicators(note) : [];
+      for (const i of inputs) if (i.level === 'baseline' && withheldSpecs.includes(i.specId)) Object.assign(i, { raw: null, score: null, withheld: true });
       const mean = weightedMean(inputs.map((i) => [i.score, weightOf(specs[i.specId])] as const));
       const newest = submitted.reduce((a, b) => ((b.at ?? '') > (a.at ?? '') ? b : a));
       const stamp: EditStamp = {
@@ -163,6 +194,9 @@ export function deriveRawOverrides(values: readonly RawValue[], model: RiskModel
         at: newest.at ?? new Date(0).toISOString(),
         inputs,
       };
+      // A leaf built only from a dated release (the Benchmark 2026) is not an institution's update.
+      const release = submitted.every((i) => i.release) ? submitted[0].release : null;
+      if (release) stamp.release = release;
       (out[council.id] ??= {})[leaf.ref] = stamp;
     }
   }

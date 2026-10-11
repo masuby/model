@@ -8,14 +8,14 @@
     "name": "SPEI-12 drought depth",
     "unit": "index",
     "transform": "None",
-    "resolved_min": 0.0,
-    "resolved_max": 3.0,
+    "resolved_min": 1.35,
+    "resolved_max": 1.75,
     "sign": "Increase Risk",
     "weight": 0.25,
     "use": "Yes",
     "outlier": "No",
     "denominator": "None",
-    "basis": "Vicente-Serrano 2010 SPEI - depth of SPEI-12 below -1 (Thornthwaite PET from ERA5 t2m)"
+    "basis": "Vicente-Serrano 2010 SPEI - mean magnitude of SPEI-12 in drought months (Thornthwaite PET from ERA5 t2m); range fitted to the council span 1.38-1.74 (1.35-1.75) (10 October 2026 recheck: the earlier 0-3 range left every council between 4.6 and 5.8)"
   },
   "HA.NAT.DR-ARID": {
     "id": "HA.NAT.DR-ARID",
@@ -45,13 +45,13 @@
     "unit": "ratio",
     "transform": "None",
     "resolved_min": 0.1,
-    "resolved_max": 0.35,
+    "resolved_max": 0.3,
     "sign": "Increase Risk",
     "weight": 0.15,
     "use": "Yes",
     "outlier": "No",
     "denominator": "None",
-    "basis": "Nicholson 2017 - East African rainfall among the world's most variable"
+    "basis": "Nicholson 2017 - East African rainfall among the world's most variable; range fitted to the council span 0.11-0.29 (recheck 10 October 2026)"
   },
   "HA.NAT.DR-SEAS": {
     "id": "HA.NAT.DR-SEAS",
@@ -98,14 +98,14 @@
     "name": "Soil moisture",
     "unit": "mm",
     "transform": "None",
-    "resolved_min": 4.0,
-    "resolved_max": 26.0,
+    "resolved_min": 3.9,
+    "resolved_max": 25.5,
     "sign": "Decrease Risk",
     "weight": 0.1,
     "use": "Yes",
     "outlier": "No",
     "denominator": "None",
-    "basis": "NASA-USDA SMAP 10km surface soil moisture (ssm mm) 2015-2022 mean (GEE); lower=drier"
+    "basis": "NASA-USDA SMAP 10km surface soil moisture (ssm mm) 2015-2022 mean (GEE); lower=drier; range fitted to the council span 3.93-25.4 (recheck 10 October 2026)"
   },
   "HA.NAT.DR-WLEV": {
     "id": "HA.NAT.DR-WLEV",
@@ -135,13 +135,13 @@
     "unit": "days/yr",
     "transform": "None",
     "resolved_min": 0.0,
-    "resolved_max": 20.0,
+    "resolved_max": 10.0,
     "sign": "Increase Risk",
     "weight": 0.3,
     "use": "Yes",
     "outlier": "No",
     "denominator": "None",
-    "basis": "CHIRPS v3 daily - mean annual count of days above 50 mm (heavy-rain trigger)"
+    "basis": "CHIRPS daily, days per year with council-mean rainfall above 50 mm, 2015-2024; range fitted to the council span 0-9.2 (recheck 10 October 2026)"
   },
   "HA.NAT.FL-R100": {
     "id": "HA.NAT.FL-R100",
@@ -153,13 +153,13 @@
     "unit": "days/yr",
     "transform": "None",
     "resolved_min": 0.0,
-    "resolved_max": 8.0,
+    "resolved_max": 2.5,
     "sign": "Increase Risk",
     "weight": 0.15,
     "use": "Yes",
     "outlier": "No",
     "denominator": "None",
-    "basis": "CHIRPS v3 daily - days above 100 mm (very-heavy intensity)"
+    "basis": "CHIRPS daily, days per year with council-mean rainfall above 100 mm, 2015-2024; range fitted to the council span 0-2.4 (recheck 10 October 2026)"
   },
   "HA.NAT.FL-WLEV": {
     "id": "HA.NAT.FL-WLEV",
@@ -204,16 +204,16 @@
     "component": "Flood",
     "sector": "PMO-DMD",
     "name": "Recorded flood impact events",
-    "unit": "events/decade",
+    "unit": "events 2010-2024",
     "transform": "None",
     "resolved_min": 0.0,
-    "resolved_max": 10.0,
+    "resolved_max": 2.0,
     "sign": "Increase Risk",
     "weight": 0.15,
     "use": "Yes",
     "outlier": "No",
     "denominator": "None",
-    "basis": "PMO-DMD/DesInventar - documented flood disasters with impact"
+    "basis": "Recorded flood events 2010-2024 compiled from PMO-DMD; DesInventar; EM-DAT and press reports (data-source/flood_events.csv); to be replaced by the events the committees validate through the Data portal"
   },
   "HA.NAT.LS-SUSC": {
     "id": "HA.NAT.LS-SUSC",
@@ -323,6 +323,24 @@
     "denominator": "None",
     "basis": "GST seismic catalogue - historical earthquake density (Rift belt)"
   },
+  "HA.NAT.EQ-FELT": {
+    "id": "HA.NAT.EQ-FELT",
+    "dimension": "Hazards & Exposure",
+    "category": "Natural",
+    "component": "Earthquake",
+    "sector": "GST",
+    "name": "Maximum felt intensity",
+    "unit": "intensity",
+    "transform": "None",
+    "resolved_min": 5.6,
+    "resolved_max": 7.7,
+    "sign": "Increase Risk",
+    "weight": 0.3,
+    "use": "Yes",
+    "outlier": "No",
+    "denominator": "None",
+    "basis": "USGS catalogue 1960-2024, M >= 4.5: maximum over events of 1.5 M - 1.5 log10(R + 15) at the council centroid (a simple intensity attenuation); records the shaking of events the GEM exposure index misses (Bukoba 2016); range fitted to the council span 5.64-7.62 (5.6-7.7)"
+  },
   "HA.NAT.CO-WAVE": {
     "id": "HA.NAT.CO-WAVE",
     "dimension": "Hazards & Exposure",
@@ -411,7 +429,7 @@
     "use": "Yes",
     "outlier": "No",
     "denominator": "None",
-    "basis": "NEMC - mangrove decline removes the natural coastal buffer"
+    "basis": "NEMC - mangrove decline removes the natural coastal buffer  raising exposure"
   },
   "HA.NAT.HW-DAYS": {
     "id": "HA.NAT.HW-DAYS",
@@ -448,5 +466,77 @@
     "outlier": "No",
     "denominator": "None",
     "basis": "Albrecht 2016 BAMS - NASA LIS/OTD flash density (Lake Victoria basin hotspot)"
+  },
+  "VU.VG.DP-UNHCR": {
+    "id": "VU.VG.DP-UNHCR",
+    "dimension": "Vulnerability",
+    "category": "Vulnerable Groups",
+    "component": "Displaced People",
+    "sector": "UNHCR",
+    "name": "Refugees and asylum-seekers hosted",
+    "unit": "number of people",
+    "transform": "Logarithm",
+    "resolved_min": -6.907755279,
+    "resolved_max": 11.77529,
+    "sign": "Increase Risk",
+    "weight": 1.0,
+    "use": "Yes",
+    "outlier": "No",
+    "denominator": "None",
+    "basis": "UNHCR Tanzania operational data 2024 (camp and urban populations rounded; Nyarugusu and Nduta); a different group from the IDMC internally displaced of the workbook; logarithm and floor as the workbook IDP indicator; the workbook carries a refugees indicator (VU.VG.DP-REF) switched off, so this member keeps its own id"
+  },
+  "CC.INF.HC-DENS": {
+    "id": "CC.INF.HC-DENS",
+    "dimension": "Coping Capacity",
+    "category": "Infrastructure",
+    "component": "Access to health care",
+    "sector": "MoH",
+    "name": "Health facilities per 10,000 people",
+    "unit": "per 10,000 people",
+    "transform": "None",
+    "resolved_min": 0.0,
+    "resolved_max": 6.1,
+    "sign": "Decrease Risk",
+    "weight": 1.0,
+    "use": "Yes",
+    "outlier": "No",
+    "denominator": "None",
+    "basis": "2022 PHC geodatabase: dispensaries, health centres and hospitals per 10,000 people on the council polygon (drug outlets, pharmacies, traditional medicine shops and laboratories excluded; recheck 10 October 2026); range fitted to the council span 0.33-6.04 (0-6.1)"
+  },
+  "CC.INF.EDU-DENS": {
+    "id": "CC.INF.EDU-DENS",
+    "dimension": "Coping Capacity",
+    "category": "Infrastructure",
+    "component": "Education",
+    "sector": "MoEST",
+    "name": "Schools per 10,000 people",
+    "unit": "per 10,000 people",
+    "transform": "None",
+    "resolved_min": 0.0,
+    "resolved_max": 20.0,
+    "sign": "Decrease Risk",
+    "weight": 1.0,
+    "use": "Yes",
+    "outlier": "No",
+    "denominator": "None",
+    "basis": "2022 PHC geodatabase: schools from pre-primary to secondary per 10,000 people on the council polygon (recheck 10 October 2026); range fitted to the council span 1.4-18.8"
+  },
+  "CC.INS.DRR-STAT": {
+    "id": "CC.INS.DRR-STAT",
+    "dimension": "Coping Capacity",
+    "category": "Institutional",
+    "component": "DRR implementation",
+    "sector": "PMO-DMD",
+    "name": "DRM arrangements in place (EPRP AA EOCC ERT RVCA)",
+    "unit": "count of 5",
+    "transform": "None",
+    "resolved_min": 0.0,
+    "resolved_max": 5.0,
+    "sign": "Decrease Risk",
+    "weight": 1.0,
+    "use": "Yes",
+    "outlier": "No",
+    "denominator": "None",
+    "basis": "PMO-DMD list of June 2026 (district EPRPs; drought anticipatory-action plans; regional EOCCs) and the DRR records the committees approve through the Data portal; computed by the engine from each council's recorded arrangements"
   }
 }

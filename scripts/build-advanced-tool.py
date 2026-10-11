@@ -19,6 +19,13 @@ standardiser shows 0-10 (the proven INFORM pipeline). The component then aggrega
 only TMA rainfall is available for landslide and GST susceptibility is blank, the component is simply the
 TMA evidence; it does not become "the case" for everyone, and a missing source never drags the number down.
 
+Since October 2026 the baskets reach beyond hazards (refugees hosted, facility densities, DRM
+arrangements), and the component preview follows the engine exactly (src/engine/risk/advanced.ts):
+each component row also carries a LOCKED "Core" cell, the council's workbook value of the group with
+the weight of its workbook indicators in use, so that
+  component = (k * core + sum(w_i * s_i)) / (k + sum(w_i))   over the sub-indicators with data.
+The category columns average the components present, per dimension and category.
+
 Output: inform_sheets/INFORM_TZ_Advanced_Tool.xlsx  (a LOCAL file in the INFORM data folder - NOT served
 online; a separate workbook from the normal tool, kept local, never downloadable from the public website).
 """
@@ -30,6 +37,38 @@ from openpyxl.utils import get_column_letter
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 adv = list(csv.DictReader(open(os.path.join(ROOT, 'data-source/inform_advanced_spec.csv'))))
+import json as _json
+
+def _norm(s): return ''.join(ch for ch in str(s).lower() if ch.isalnum())
+
+# Where each component sits in the Core dataset (dimension field, category, leaf), as the engine maps it.
+LEAF = {
+    'drought': ('hazardExposure', 'natural', 'drought'), 'flood': ('hazardExposure', 'natural', 'flood'),
+    'landslide': ('hazardExposure', 'natural', 'landslide'), 'stormscyclone': ('hazardExposure', 'natural', 'stormsCyclone'),
+    'earthquake': ('hazardExposure', 'natural', 'earthquake'), 'coastalhazards': ('hazardExposure', 'natural', 'coastalHazards'),
+    'heatwave': ('hazardExposure', 'natural', 'heatwave'), 'lightning': ('hazardExposure', 'natural', 'lightning'),
+    'displacedpeople': ('vulnerability', 'vulnerableGroups', 'displacedPeople'),
+    'accesstohealthcare': ('lackCopingCapacity', 'infrastructure', 'accessHealth'),
+    'education': ('lackCopingCapacity', 'infrastructure', 'education'),
+    'drrimplementation': ('lackCopingCapacity', 'institutional', 'drrImplementation'),
+}
+CATEGORY_LABEL = {('hazardExposure', 'natural'): 'Natural hazards (advanced)', ('vulnerability', 'vulnerableGroups'): 'Vulnerable groups (advanced)',
+                  ('lackCopingCapacity', 'infrastructure'): 'Infrastructure (advanced)', ('lackCopingCapacity', 'institutional'): 'Institutional (advanced)'}
+# k = workbook indicators in use per component (the Core member's weight)
+_core_spec = _json.load(open(os.path.join(ROOT, 'src/data/inform-indicator-spec.json')))
+K = {}
+for _s in _core_spec.values():
+    if _s.get('use') == 'Yes':
+        K[_norm(_s['component'])] = K.get(_norm(_s['component']), 0) + 1
+# the Core value of each council's group: its workbook unit's leaf value
+_core = _json.load(open(os.path.join(ROOT, 'src/data/tanzania-inform-risk.json')))
+_unit_by_name = {_norm(u['admin']['adm2Name']): u for u in _core['subnational']['adm2']}
+_registry = list(csv.DictReader(open(os.path.join(ROOT, 'data-source/council_registry.csv'))))
+_unit_of = {r['code']: _unit_by_name[_norm(r['workbook_unit'])] for r in _registry}
+def core_value(code, comp):
+    f, c, leaf = LEAF[_norm(comp)]
+    v = _unit_of[code][f][c].get(leaf)
+    return v if isinstance(v, (int, float)) else None
 
 # group by component, keep a stable component order (as first seen), so each component's sub-indicators
 # occupy a CONTIGUOUS block of columns (needed for the present-only weighted-average SUMPRODUCT range).
@@ -116,16 +155,28 @@ for ci, a in enumerate(adv):
         c.alignment = Alignment(wrap_text=True, vertical='top'); sh.column_dimensions[L].width = 12
     s = span.setdefault(comp, [col, col]); s[1] = col
 
-# component columns on the Components sheet
-ccol = {}
+# component columns on the Components sheet: for each component a locked "Core" cell (the council's workbook
+# value of the group, weight k = its workbook indicators in use) and the component result.
+ccol = {}   # component -> result column
+kcol = {}   # component -> Core column
 for k, comp in enumerate(comp_order):
-    col = 4 + k
-    c = comp_sheet.cell(HEADR, col, comp); c.font = Font(bold=True, color='FFFFFF', size=9); c.fill = HEAD
-    c.alignment = Alignment(wrap_text=True, vertical='top'); comp_sheet.column_dimensions[get_column_letter(col)].width = 13
-    ccol[comp] = col
-natcol = 4 + len(comp_order)
-c = comp_sheet.cell(HEADR, natcol, 'Natural (advanced)'); c.font = Font(bold=True, color='FFFFFF', size=9); c.fill = HEAD
-c.alignment = Alignment(wrap_text=True, vertical='top'); comp_sheet.column_dimensions[get_column_letter(natcol)].width = 14
+    col = 4 + 2 * k
+    c = comp_sheet.cell(HEADR, col, f'{comp}: Core (k={K.get(_norm(comp), 0)})'); c.font = Font(bold=True, color='FFFFFF', size=8); c.fill = HEAD
+    c.alignment = Alignment(wrap_text=True, vertical='top'); comp_sheet.column_dimensions[get_column_letter(col)].width = 11
+    c = comp_sheet.cell(HEADR, col + 1, comp); c.font = Font(bold=True, color='FFFFFF', size=9); c.fill = HEAD
+    c.alignment = Alignment(wrap_text=True, vertical='top'); comp_sheet.column_dimensions[get_column_letter(col + 1)].width = 13
+    kcol[comp] = col; ccol[comp] = col + 1
+# category columns: one per (dimension, category) the components belong to, in that order
+cats = []
+for comp in comp_order:
+    f, c, _ = LEAF[_norm(comp)]
+    if (f, c) not in cats: cats.append((f, c))
+catcol = {}
+for j, cat in enumerate(cats):
+    col = 4 + 2 * len(comp_order) + j
+    c = comp_sheet.cell(HEADR, col, CATEGORY_LABEL[cat]); c.font = Font(bold=True, color='FFFFFF', size=9); c.fill = HEAD
+    c.alignment = Alignment(wrap_text=True, vertical='top'); comp_sheet.column_dimensions[get_column_letter(col)].width = 14
+    catcol[cat] = col
 
 for ri, (reg, name, code) in enumerate(councils):
     r = HEADR + 1 + ri
@@ -141,20 +192,26 @@ for ri, (reg, name, code) in enumerate(councils):
         base = f"10*(({x})-{mn})/({mx}-{mn})"
         expr = f'IF({sg}="Decrease Risk",10-{base},{base})'
         sc.cell(r, col, f'=IF({val}="","",IFERROR(MAX(0,MIN(10,ROUND({expr},1))),"No data"))').font = Font(size=9, color='1F6F3D')
-    # components = weighted average over PRESENT cells only (blank skips, no bias)
+    # components = (k * core + sum of w_i * s_i) / (k + sum of w_i) over the PRESENT sub-indicator cells
+    # (blank skips, no bias); with no sub-indicator present the cell stays blank (the Core value stands).
     for comp, (c0, c1) in span.items():
         a0, a1 = get_column_letter(c0), get_column_letter(c1)
         rng = f"'Advanced 0-10'!{a0}{r}:{a1}{r}"
         wts = f"'Advanced Entry'!{a0}$9:{a1}$9"
+        kv = core_value(code, comp); kk = K.get(_norm(comp), 0)
+        kcell = comp_sheet.cell(r, kcol[comp], kv if kv is not None else '')
+        kcell.font = Font(size=9, color='64748B'); kcell.number_format = '0.00'
+        KL = get_column_letter(kcol[comp])
         denom = f"SUMPRODUCT(ISNUMBER({rng})*{wts})"
         numer = f"SUMPRODUCT(IFERROR({rng}*1,0)*{wts})"
-        comp_sheet.cell(r, ccol[comp], f'=IF({denom}=0,"",ROUND({numer}/{denom},1))').font = Font(size=9, bold=True, color='B45309')
-    # Natural category (advanced) = average over the components present (skips empty components)
-    n0, n1 = get_column_letter(4), get_column_letter(3 + len(comp_order))
-    crng = f"{n0}{r}:{n1}{r}"
-    nd = f"SUMPRODUCT(--ISNUMBER({crng}))"
-    nn = f"SUMPRODUCT(IFERROR({crng}*1,0))"
-    comp_sheet.cell(r, natcol, f'=IF({nd}=0,"",ROUND({nn}/{nd},1))').font = Font(size=9, bold=True, color='1F3A5F')
+        corek = f"IF(ISNUMBER({KL}{r}),{kk},0)"
+        corev = f"IF(ISNUMBER({KL}{r}),{KL}{r}*{kk},0)"
+        comp_sheet.cell(r, ccol[comp], f'=IF({denom}=0,"",ROUND(({corev}+{numer})/({corek}+{denom}),1))').font = Font(size=9, bold=True, color='B45309')
+    # categories (advanced) = average over the components present, per dimension and category
+    for cat, col in catcol.items():
+        members = [get_column_letter(ccol[comp]) for comp in comp_order if LEAF[_norm(comp)][:2] == cat]
+        cells_ = ','.join(f'{L}{r}' for L in members)
+        comp_sheet.cell(r, col, f'=IF(COUNT({cells_})=0,"",ROUND(AVERAGE({cells_}),1))').font = Font(size=9, bold=True, color='1F3A5F')
 
 for sh in (entry, sc, comp_sheet):
     sh.freeze_panes = 'D11'

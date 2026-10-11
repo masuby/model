@@ -6,12 +6,15 @@
 import { QueryClient, QueryClientProvider, useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import type { Session } from '@supabase/supabase-js';
 import * as React from 'react';
+import type { AdvancedInputs, buildAdvancedModel as BuildAdvancedModel } from '@/engine/risk/advanced';
 import { buildModel } from '@/engine/risk/model';
-import type { BaselineRaw } from '@/engine/risk/rawValues';
-import type { EditRef, Overrides, RiskModel } from '@/engine/risk/types';
+import { BENCHMARK_AT, BENCHMARK_VALUES } from '@/engine/risk/benchmark';
+import type { BaselineRaw, RawValue } from '@/engine/risk/rawValues';
+import type { DrrRecordsByUnit, EditRef, Overrides, RiskModel } from '@/engine/risk/types';
+import { appliedBy, overridesAsOf, rawAsOf } from './versions';
 import { createLocalRepository, demoProfile } from './local';
 import { createSupabaseClient, createSupabaseRepository, supabaseConfigured, type SupabaseClient } from './supabase';
-import { APPLIED_DIRECTLY_NOTE, type NewRawSubmission, type NewSubmission, type Profile, type Repository, type RequestKind, type Role } from './types';
+import { APPLIED_DIRECTLY_NOTE, approvedDrrByUnit, type CommitteeRecord, type DrrFields, type NewCommitteeRecord, type NewRawSubmission, type NewSubmission, type Profile, type Repository, type RequestKind, type Role } from './types';
 
 export const queryClient = new QueryClient({
   defaultOptions: { queries: { staleTime: 60_000, refetchOnWindowFocus: false, retry: 1 } },
@@ -209,13 +212,25 @@ export function useOverrides() {
   return useQuery({ queryKey: ['overrides', repo.mode], queryFn: () => repo.getOverrides() });
 }
 
-/** One model per overrides object, however many components ask for it. */
+/** What the live model is built from: approved edits and measured values, and approved DRR records. */
+interface ModelInputs {
+  overrides: Overrides;
+  drr: DrrRecordsByUnit;
+  /** False for a dated version before the Benchmark 2026 date (its values did not exist yet). */
+  benchmark?: boolean;
+}
+
+/** One model per inputs object, however many components ask for it. */
 const modelCache = new WeakMap<object, RiskModel>();
-const EMPTY_OVERRIDES = {};
+const EMPTY_INPUTS: ModelInputs = { overrides: {}, drr: {} };
 function toModel(data: unknown): RiskModel {
-  if (!data || typeof data !== 'object' || !Object.keys(data).length) return BASE_MODEL;
+  if (!data || typeof data !== 'object') return BASE_MODEL;
+  const inputs = data as Partial<ModelInputs>;
+  const overrides = inputs.overrides ?? {};
+  const drr = inputs.drr ?? {};
+  if (!Object.keys(overrides).length && !Object.keys(drr).length && inputs.benchmark !== false) return BASE_MODEL;
   let model = modelCache.get(data);
-  if (!model) modelCache.set(data, (model = buildModel(data as Overrides)));
+  if (!model) modelCache.set(data, (model = buildModel(overrides, { ...(Object.keys(drr).length ? { drr } : {}), ...(inputs.benchmark === false ? { benchmark: false } : {}) })));
   return model;
 }
 
@@ -228,11 +243,62 @@ export const loadBaseline = (): Promise<BaselineRaw> =>
  * Direct 0–10 edits merged with the council values recomputed from approved measured values. The
  * measured-value engine (with the workbook's indicator specifications) loads only when such values exist.
  */
-async function modelInputs(repo: Repository): Promise<Overrides> {
-  const [overrides, raw] = await Promise.all([repo.getOverrides(), repo.getRawValues()]);
-  if (!raw.length) return overrides;
+/**
+ * The institutional indicators' values the approved DRR records give their councils (institutional.ts):
+ * dated by the record's approval, so they supersede the Benchmark 2026 values of the published lists.
+ */
+async function institutionalValues(committee: readonly CommitteeRecord[]): Promise<RawValue[]> {
+  const approved = committee.filter((r) => r.kind === 'drr' && r.status === 'approved' && r.level !== 'national');
+  if (!approved.length) return [];
+  const [{ institutionalRecordValues }, { drrFor }, { regionIdOf }] = await Promise.all([import('@/engine/risk/institutional'), import('@/engine/risk/model'), import('@/engine/risk/rawValues')]);
+  const records = approved.map((r) => ({ unitId: r.unitId, level: r.level as 'council' | 'region', regionId: r.regionId, payload: r.payload as DrrFields as DrrRecordsByUnit[string], source: r.source, at: r.reviewedAt ?? r.createdAt, authorRole: r.authorRole }));
+  return institutionalRecordValues(records, BASE_MODEL.councils, drrFor, regionIdOf);
+}
+
+async function modelInputs(repo: Repository): Promise<ModelInputs> {
+  const [overrides, raw, committee] = await Promise.all([repo.getOverrides(), repo.getRawValues(), repo.listCommitteeRecords()]);
+  const drr = approvedDrrByUnit(committee) as DrrRecordsByUnit;
+  const institutional = await institutionalValues(committee);
+  if (!raw.length && !institutional.length) return { overrides, drr };
+  // The benchmark values join the institutions' values so that a leaf recomputed from a new measured
+  // value also sees the benchmark values of its other indicators (the most recent approved value wins).
   const [{ deriveRawOverrides, mergeOverrides }, baseline] = await Promise.all([import('@/engine/risk/rawValues'), loadBaseline()]);
-  return mergeOverrides(overrides, deriveRawOverrides(raw, BASE_MODEL, baseline), BASE_MODEL);
+  return { overrides: mergeOverrides(overrides, portalOnly(deriveRawOverrides([...BENCHMARK_VALUES, ...raw, ...institutional], BASE_MODEL, baseline)), BASE_MODEL), drr };
+}
+
+/**
+ * The benchmark values join the derivation so that a group recomputed from an institution's value keeps
+ * the benchmark values of its other indicators; the groups built from benchmark values alone are already
+ * applied inside buildModel (BENCHMARK_OVERRIDES) and are dropped here, so `overrides` holds updates only.
+ */
+function portalOnly(derived: Overrides): Overrides {
+  const out: Overrides = {};
+  for (const [unitId, refs] of Object.entries(derived)) {
+    const kept = Object.fromEntries(Object.entries(refs ?? {}).filter(([, stamp]) => stamp && !stamp.release));
+    if (Object.keys(kept).length) out[unitId] = kept;
+  }
+  return out;
+}
+
+/** The same inputs as they stood at the end of `date` (yyyy-mm-dd): a dated version of the data (DE-06). */
+async function modelInputsAsOf(repo: Repository, date: string): Promise<ModelInputs> {
+  const [overrides, raw, committee] = await Promise.all([repo.getOverrides(), repo.getRawValues(), repo.listCommitteeRecords()]);
+  const committeeKept = committee.filter((r) => appliedBy(r.reviewedAt ?? r.createdAt, date));
+  const drr = approvedDrrByUnit(committeeKept) as DrrRecordsByUnit;
+  const kept = overridesAsOf(overrides, date);
+  const benchmark = date >= BENCHMARK_AT.slice(0, 10);
+  const rawKept = rawAsOf(raw, date);
+  const institutional = await institutionalValues(committeeKept);
+  if (!rawKept.length && !institutional.length) return { overrides: kept, drr, benchmark };
+  const [{ deriveRawOverrides, mergeOverrides }, baseline] = await Promise.all([import('@/engine/risk/rawValues'), loadBaseline()]);
+  return { overrides: mergeOverrides(kept, portalOnly(deriveRawOverrides(benchmark ? [...BENCHMARK_VALUES, ...rawKept, ...institutional] : [...rawKept, ...institutional], BASE_MODEL, baseline)), BASE_MODEL), drr, benchmark };
+}
+
+/** The model as it stood at the end of a day (a dated version), or null while it loads; the baseline for a date before any approval. */
+export function useModelAsOf(date: string | null): RiskModel | null {
+  const { repo } = useData();
+  const { data } = useQuery({ queryKey: ['model-asof', repo.mode, date], queryFn: () => modelInputsAsOf(repo, date!), select: toModel, enabled: !!date });
+  return date ? (data ?? null) : null;
 }
 
 /**
@@ -242,12 +308,46 @@ async function modelInputs(repo: Repository): Promise<Overrides> {
  */
 export function useModel(): RiskModel {
   const { repo } = useData();
-  const { data } = useQuery({ queryKey: ['model', repo.mode], queryFn: () => modelInputs(repo), select: toModel, placeholderData: EMPTY_OVERRIDES });
+  const { data } = useQuery({ queryKey: ['model', repo.mode], queryFn: () => modelInputs(repo), select: toModel, placeholderData: EMPTY_INPUTS });
   return data ?? BASE_MODEL;
 }
 
 /** The model before any edit: the published INFORM baseline. */
 export const baseModel = (): RiskModel => BASE_MODEL;
+
+/** The Advancement layer's inputs (per-council sub-indicator values with their provenance), loaded on demand. */
+let advancementInputsPromise: Promise<AdvancedInputs> | null = null;
+export const loadAdvancementInputs = (): Promise<AdvancedInputs> =>
+  (advancementInputsPromise ??= import('@/data/tanzania-advanced-inputs.json').then((m) => (m.default ?? m) as unknown as AdvancedInputs));
+
+export function useAdvancementInputs(): AdvancedInputs | null {
+  const { data } = useQuery({ queryKey: ['advancement-inputs'], queryFn: loadAdvancementInputs, staleTime: Infinity });
+  return data ?? null;
+}
+
+type AdvancedEngine = { buildAdvancedModel: typeof BuildAdvancedModel };
+let advancedEnginePromise: Promise<AdvancedEngine> | null = null;
+const loadAdvancedEngine = (): Promise<AdvancedEngine> => (advancedEnginePromise ??= import('@/engine/risk/advanced'));
+
+/** One Advancement model per Core model, however many components ask for it. */
+const advancedCache = new WeakMap<RiskModel, RiskModel>();
+
+/**
+ * The model with the Advancement layer applied: the Core as currently shown (with every approved value)
+ * plus the Tanzanian sub-indicator baskets on the exploded hazard groups. Computed beside the Core, never
+ * in its place; null until the inputs and the engine have loaded.
+ */
+export function useAdvancedModel(): RiskModel | null {
+  const core = useModel();
+  const inputs = useAdvancementInputs();
+  const { data: engine } = useQuery({ queryKey: ['advancement-engine'], queryFn: loadAdvancedEngine, staleTime: Infinity });
+  return React.useMemo(() => {
+    if (!inputs || !engine) return null;
+    let m = advancedCache.get(core);
+    if (!m) advancedCache.set(core, (m = engine.buildAdvancedModel(core, inputs)));
+    return m;
+  }, [core, inputs, engine]);
+}
 
 export function useSubmissions() {
   const { repo, profile } = useData();
@@ -260,7 +360,7 @@ export function useAudit(limit = 100) {
 }
 
 /** Every query that shows shared data; all are refreshed after any write. */
-export const DATA_KEYS = ['model', 'overrides', 'submissions', 'audit', 'assignments', 'requests', 'raw-values', 'raw-submissions', 'validations', 'profiles'];
+export const DATA_KEYS = ['model', 'overrides', 'committee-records', 'submissions', 'audit', 'assignments', 'requests', 'raw-values', 'raw-submissions', 'validations', 'profiles', 'notifications'];
 export const refreshData = (qc: QueryClient) => Promise.all(DATA_KEYS.map((k) => qc.invalidateQueries({ queryKey: [k] })));
 function useInvalidate() {
   const qc = useQueryClient();
@@ -337,6 +437,20 @@ export function useRequests() {
   return useQuery({ queryKey: ['requests', repo.mode, profile?.id], queryFn: () => repo.listRequests(), enabled: !!profile });
 }
 
+export function useNotifications() {
+  const { repo, profile } = useData();
+  return useQuery({ queryKey: ['notifications', repo.mode, profile?.id], queryFn: () => repo.listNotifications(profile!), enabled: !!profile && profile.role !== 'viewer' });
+}
+
+export function useMarkNotificationRead() {
+  const { repo, profile } = useData();
+  const qc = useQueryClient();
+  return useMutation({
+    mutationFn: (id: string) => repo.markNotificationRead(id, profile!),
+    onSuccess: () => qc.invalidateQueries({ queryKey: ['notifications'] }),
+  });
+}
+
 export function useRawValues() {
   const { repo } = useData();
   return useQuery({ queryKey: ['raw-values', repo.mode], queryFn: () => repo.getRawValues() });
@@ -399,8 +513,28 @@ export const useRevertRaw = () => useWorkflowMutation((repo, p, v: { specId: str
 export const useConfirmValues = () =>
   useWorkflowMutation((repo, p, v: { specId: string; requestId: string | null; note?: string }) => repo.confirmValues(v.specId, v.requestId, p, v.note));
 
-/** Set a user's role and institution (administrators). In demo mode the demo identity is re-read. */
+/** Set a user's role, institution and area scope (administrators). In demo mode the demo identity is re-read. */
 export function useUpdateProfile() {
   const { refreshDemoProfile } = useData();
-  return useWorkflowMutation((repo, _p, v: { id: string; role?: Role; institutionKey?: string | null }) => repo.updateProfile(v.id, v), refreshDemoProfile);
+  return useWorkflowMutation((repo, _p, v: { id: string; role?: Role; institutionKey?: string | null; scopeUnitId?: string | null }) => repo.updateProfile(v.id, v), refreshDemoProfile);
 }
+
+/* ------------------------------------------------------------------------------------------------ */
+/* Committee records (DRR capacity, guidance statements, event reports, warnings)                     */
+/* ------------------------------------------------------------------------------------------------ */
+
+export function useCommitteeRecords() {
+  const { repo, profile } = useData();
+  return useQuery({ queryKey: ['committee-records', repo.mode, profile?.id], queryFn: () => repo.listCommitteeRecords() });
+}
+
+/** Record committee content. Reviewers (PMO-DMD, administrators) may apply at once; warnings publish on entry. */
+export const useSubmitCommittee = () =>
+  useWorkflowMutation(async (repo, p, v: { input: NewCommitteeRecord; applyNow: boolean }) => {
+    const r = await repo.submitCommittee(v.input, p);
+    if (v.applyNow && r.status === 'pending') await repo.reviewCommittee(r.id, 'approved', p, APPLIED_DIRECTLY_NOTE);
+    return r;
+  });
+
+export const useReviewCommittee = () =>
+  useWorkflowMutation((repo, p, v: { id: string; decision: 'approved' | 'rejected'; note?: string }) => repo.reviewCommittee(v.id, v.decision, p, v.note));

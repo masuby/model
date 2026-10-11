@@ -1,6 +1,7 @@
 /**
  * qa-a11y.mjs - axe-core accessibility audit (WCAG 2.1 A/AA) of every route in day and night mode.
  *   node scripts/qa-a11y.mjs [baseUrl]
+ * Exits 1 when any serious or critical violation is found, so CI can gate on it (TST-02).
  */
 import AxeBuilder from '@axe-core/playwright';
 import { chromium } from 'playwright';
@@ -10,11 +11,15 @@ const ROUTES = [
   '/',
   '/explore',
   '/explore?metric=ind:hazard:flood&id=C041', // a dimension open on its indicator groups, with an area's guidance
+  '/explore?level=council&id=C051', // the risk communication panel: an area
+  '/explore?level=council&id=C051&metric=ind:hazard:stormsCyclone', // the panel: an area and a hazard's evidence
+  '/explore?level=region&id=TZ', // the panel: the country
   '/area/C041',
-  '/area/C019', // low risk: a yellow Advisory
-  '/area/C063', // high risk: a red Major warning
+  '/area/C019', // low risk: the yellow band
+  '/area/C063', // high risk: the red band
   '/area/C105', // a Tabora council: its own plan leads "What to do"
   '/area/R-njombe', // a region: "Know your risk" for each of its councils
+  '/area/C051/card/detailed?lang=en', // the detailed risk card for sectors and decision-makers
   '/insights',
   '/severity',
   '/learn',
@@ -22,7 +27,8 @@ const ROUTES = [
   '/methodology',
   '/data',
 ];
-const browser = await chromium.launch();
+// CHROME_PATH runs the audit with an installed Chrome instead of Playwright's own browser.
+const browser = await chromium.launch(process.env.CHROME_PATH ? { executablePath: process.env.CHROME_PATH } : {});
 let total = 0;
 for (const theme of ['light', 'dark']) {
   const ctx = await browser.newContext({ viewport: { width: 1440, height: 900 }, colorScheme: theme });
@@ -50,3 +56,5 @@ for (const theme of ['light', 'dark']) {
 }
 await browser.close();
 console.log(total ? `${total} serious/critical rule violations` : 'No serious or critical accessibility violations');
+// CI fails on any serious or critical finding (issue TST-02).
+if (total) process.exitCode = 1;

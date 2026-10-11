@@ -1,0 +1,31 @@
+code,name,reg,area_km2,coast_km,within5km_pct,lecz10_pct
+C057,Kilwa District,Lindi,15355.56,82.10,8.69,3.65
+C195,Mkoani Town,Kusini Pemba,252.42,53.04,90.68,30.17
+C063,Mtwara District,Mtwara,2163.58,50.20,26.73,15.29
+C192,Wete Town,Kaskazini Pemba,301.46,38.83,88.57,29.46
+C187,Kati Town,Kusini Unguja,527.27,33.91,53.74,20.32
+C055,Kigamboni Municipal,Dar es Salaam,559.72,31.24,57.06,17.33
+C059,Lindi Municipal,Lindi,3637.09,28.76,17.54,3.83
+C193,Micheweni District,Kaskazini Pemba,191.86,25.31,95.78,39.45
+C050,Mafia District,Pwani,467.62,24.53,98.17,35.29
+C043,Bagamoyo District,Pwani,1533.58,21.86,23.54,78.02
+C029,Pangani District,Tanga,1800.99,21.85,23.64,12.84
+C188,Kusini District,Kusini Unguja,360.45,21.60,78.32,20.30
+C033,Mkinga District,Tanga,2688.72,21.27,13.85,24.25
+C048,Mkuranga District,Pwani,3205.00,18.66,8.14,4.92
+C194,Chake Chake Town,Kusini Pemba,215.56,18.06,92.32,25.15
+C185,Kaskazini A Town,Kaskazini Unguja,244.84,18.05,89.18,11.64
+C028,Tanga City,Tanga,604.74,17.59,45.58,12.39
+C051,Kibiti District,Pwani,3718.47,10.70,40.79,35.62
+C186,Kaskazini B Town,Kaskazini Unguja,208.06,10.59,54.00,9.62
+C191,Magharibi B Municipal,Mjini Magharibi,109.51,10.48,86.15,12.14
+C052,Kinondoni Municipal,Dar es Salaam,266.97,7.27,64.06,16.31
+C044,Chalinze District,Pwani,6937.39,6.08,1.66,11.13
+C027,Muheza District,Tanga,1532.84,5.67,3.01,0.21
+C054,Temeke Municipal,Dar es Salaam,152.93,5.65,41.73,4.92
+C189,Mjini Municipal,Mjini Magharibi,14.81,5.16,100.00,28.32
+C065,Mtwara Mikindani Municipal,Mtwara,204.96,4.68,35.92,11.29
+C190,Magharibi A Municipal,Mjini Magharibi,109.43,3.55,70.67,5.49
+C058,Mtama District,Lindi,3312.79,3.39,6.87,1.78
+C049,Rufiji District,Pwani,9150.21,2.20,1.06,4.82
+C053,Dar es Salaam City,Dar es Salaam,350.98,0.78,4.49,1.17

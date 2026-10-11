@@ -5,19 +5,32 @@
  *
  * Resolution design (documented in docs/METHODOLOGY.md):
  *   • 170 INFORM source units - the country-workbook backbone (reference level).
- *   • 195 NBS-2022 councils - the headline level. Each council has its OWN Hazard & Exposure (computed
- *     on its own polygon); Vulnerability & Coping come from its source unit (survey data has no council
- *     breakdown). Council risk is computed live = ∛(H × V × LCC).
+ *   • 195 NBS-2022 councils - the headline level. In the Core every council carries the scores of its
+ *     workbook unit (the Core adds nothing to the workbook); it has its own census population and area.
+ *     Council risk is computed live = ∛(H × V × LCC), so approved edits propagate.
  *   • 31 regions - aggregated from their councils the INFORM way: indicator means → category means →
  *     scaled geometric mean → cube root (not a mean of risk scores).
- *   • National - the OFFICIAL INFORM Tanzania country figure (4.1), never a re-aggregation.
+ *   • National - the INFORM aggregate of the 195 councils, built exactly as the regions are. The
+ *     Tanzania workbook publishes no national score, and INFORM Global's country score uses other
+ *     indicators, so neither is shown as "the" national figure.
+ *
+ * Every category, dimension and risk score is derived at run time from the indicator values (the
+ * leaves), with the workbook's rules: categories are unrounded means, dimensions ROUND(scaled
+ * geomean, 1), risk ROUND(cube root, 1). Aggregates stored in the data files are never read.
  */
+import baselineRawJson from '@/data/inform-baseline-raw.json';
 import riskDataset from '@/data/tanzania-inform-risk.json';
 import councilIndex from '@/data/tanzania-councils-index.json';
-import councilHazardData from '@/data/tanzania-councils-data.json';
+import councilDrr from '@/data/tanzania-councils-drr.json';
+import councilExposure from '@/data/tanzania-councils-exposure.json';
 import { DIMENSIONS, DIMENSION_KEYS, type DimensionKey } from './hierarchy';
 import { dimensionScore, isNum, mean, riskScore, round1 } from './math';
-import type { CategoryValues, DimensionValues, EditRef, EditStamp, Exposure, Level, Overrides, RiskModel, Unit } from './types';
+import { BENCHMARK_VALUES } from './benchmark';
+import { isPortalStamp } from './stamps';
+import { noteApplies, noteIndicators, QUARANTINE_NOTES } from './notes';
+import { deriveRawOverrides, type BaselineRaw } from './rawValues';
+import { ACTIVE_SPECS, SPECS, standardise } from './standardise';
+import type { CategoryValues, DimensionValues, DrrRecordsByUnit, DrrStatus, EditRef, EditStamp, Exposure, Level, Overrides, RiskModel, Unit } from './types';
 
 /* ------------------------------------------------------------------------------------------------ */
 /* Raw dataset typing                                                                                 */
@@ -32,18 +45,12 @@ interface RawUnit {
   admin: { adm1Name: string; adm2Name: string; adm2Code: string; adm1Code?: string };
   hazardExposure: RawDimension & {
     exposure?: { index?: number; population?: number; density?: number; areaKm2?: number; _src?: string };
-    hazardFreq?: Record<string, number>;
-    events?: { flood?: number[] };
   };
   vulnerability: RawDimension;
   lackCopingCapacity: RawDimension;
   risk: number | null;
   facilities?: Unit['facilities'];
   drr?: Unit['drr'];
-}
-interface RawNational {
-  risk: number;
-  dimensions: { hazardExposure: RawDimension; vulnerability: RawDimension; lackCopingCapacity: RawDimension };
 }
 interface CouncilFeatureProps {
   code: string;
@@ -52,19 +59,44 @@ interface CouncilFeatureProps {
   src: string;
   isNew?: boolean;
   parent?: string;
+  formerly?: string;
 }
 
 const DATASET = riskDataset as unknown as {
-  national: RawNational;
   subnational: { adm2: RawUnit[] };
-  metadata: { asOf?: string; lastUpdated?: string };
+  metadata: { asOf?: string; release?: string; lastUpdated?: string; boundaries?: { set: string; councils: number; regions: number; districts: number; registry: string; procedure: string } };
 };
-const COUNCIL_HAZARD = councilHazardData as unknown as Record<string, { hazardExposure: RawUnit['hazardExposure']; risk: number }>;
+const COUNCIL_EXPOSURE = councilExposure as unknown as Record<string, { population: number | null; density: number | null; areaKm2: number | null; source: string }>;
+/**
+ * The councils' DRM arrangements and committee criteria from the published PMO-DMD lists, stored compactly
+ * by scripts/build-benchmark.py: one token per flag (e eprp, r rvca, a aa, t ert, o eocc, g training, a year
+ * after e or r; C/c S/s I/i the committee criteria met or not met, absent when not assessed).
+ */
+const DRR_LETTER: Record<string, 'eprp' | 'rvca' | 'aa' | 'ert' | 'eocc' | 'training'> = { e: 'eprp', r: 'rvca', a: 'aa', t: 'ert', o: 'eocc', g: 'training' };
+const GOV_LETTER: Record<string, 'committee' | 'stakeholders' | 'involvement'> = { c: 'committee', s: 'stakeholders', i: 'involvement' };
+function expandDrr(code: string): DrrStatus {
+  const out: DrrStatus = { eprp: false, aa: false, eocc: false, ert: false, rvca: false, training: false };
+  for (const m of code.matchAll(/([A-Za-z])(\d{4})?/g)) {
+    const letter = m[1];
+    const flag = DRR_LETTER[letter];
+    if (flag) {
+      out[flag] = true;
+      const year = m[2] ? Number(m[2]) : 0;
+      if (year && flag === 'eprp') out.eprpYear = year;
+      if (year && flag === 'rvca') out.rvcaYear = year;
+      continue;
+    }
+    const gov = GOV_LETTER[letter.toLowerCase()];
+    if (gov) out[gov] = letter === letter.toUpperCase();
+  }
+  return out;
+}
+const COUNCIL_DRR: Record<string, DrrStatus> = Object.fromEntries(Object.entries(councilDrr as unknown as Record<string, string>).map(([code, s]) => [code, expandDrr(s)]));
 /** Council attributes without geometry (scripts/build-council-index.mjs) - keeps boundaries out of the app shell. */
 const COUNCIL_FEATURES = (councilIndex as unknown as CouncilFeatureProps[]).map((properties) => ({ properties }));
 
-/** Normalise a place name for joins ("Dar-es-salaam" ≡ "Dar es Salaam"). */
-export const placeKey = (name: string | null | undefined): string => String(name ?? '').toLowerCase().replace(/[^a-z0-9]/g, '');
+import { placeKey } from './place';
+export { placeKey };
 
 /** Canonical region display names (from the NBS-2022 council file), keyed by placeKey. */
 const REGION_NAMES = new Map<string, string>();
@@ -75,6 +107,11 @@ export const regionDisplayName = (name: string): string => REGION_NAMES.get(plac
 /* Normalisation: raw dataset → clean Unit shape                                                     */
 /* ------------------------------------------------------------------------------------------------ */
 
+/**
+ * A dimension from its indicator values. Category and dimension scores are always recomputed with the
+ * workbook's rules (unrounded category means; ROUND(scaled geomean, 1)); the `aggregate` and `total`
+ * fields that the data files carry are ignored, so a stored rounding can never change a class.
+ */
 function readDimension(raw: RawDimension | undefined, dimKey: DimensionKey): DimensionValues {
   const def = DIMENSIONS.find((d) => d.key === dimKey)!;
   const categories: Record<string, CategoryValues> = {};
@@ -85,13 +122,9 @@ function readDimension(raw: RawDimension | undefined, dimKey: DimensionKey): Dim
       const v = rc[ind.key];
       indicators[ind.key] = isNum(v) ? v : null;
     }
-    categories[cat.key] = {
-      score: isNum(rc.aggregate) ? rc.aggregate : mean(Object.values(indicators)),
-      indicators,
-    };
+    categories[cat.key] = { score: mean(Object.values(indicators)), indicators };
   }
-  const total = raw?.total;
-  return { score: isNum(total) ? total : dimensionScore(Object.values(categories).map((c) => c.score)), categories };
+  return { score: dimensionScore(Object.values(categories).map((c) => c.score)), categories };
 }
 
 function readExposure(raw: RawUnit['hazardExposure']['exposure']): Exposure | undefined {
@@ -106,20 +139,19 @@ function readExposure(raw: RawUnit['hazardExposure']['exposure']): Exposure | un
 }
 
 function fromRawUnit(u: RawUnit, level: Level): Unit {
+  const dims = {
+    hazard: readDimension(u.hazardExposure, 'hazard'),
+    vulnerability: readDimension(u.vulnerability, 'vulnerability'),
+    coping: readDimension(u.lackCopingCapacity, 'coping'),
+  };
   return {
     id: u.admin.adm2Code,
     level,
     name: u.admin.adm2Name,
     region: regionDisplayName(u.admin.adm1Name),
-    dims: {
-      hazard: readDimension(u.hazardExposure, 'hazard'),
-      vulnerability: readDimension(u.vulnerability, 'vulnerability'),
-      coping: readDimension(u.lackCopingCapacity, 'coping'),
-    },
-    risk: isNum(u.risk) ? u.risk : null,
+    dims,
+    risk: riskScore(dims.hazard.score, dims.vulnerability.score, dims.coping.score),
     exposure: readExposure(u.hazardExposure.exposure),
-    floodHazard: u.hazardExposure.hazardFreq?.flood ?? null,
-    floodEvents: u.hazardExposure.events?.flood,
     facilities: u.facilities,
     drr: u.drr,
     edits: {},
@@ -151,8 +183,8 @@ function setIndicator(unit: Unit, dimKey: DimensionKey, key: string, value: numb
 /**
  * Apply a set of approved edits to a unit. Copy-on-write: a dimension is cloned only when one of its
  * indicators is edited, so unedited units can safely share the shipped (read-only) dimension objects.
- * Exposure edits amplify flood as INFORM's Hazard × Exposure term: flood = max(h, √(h × exposure)),
- * unless flood itself was edited. Edited dimensions are recomputed from their indicators.
+ * An exposure edit changes the exposure index shown; it never alters a score (the workbook's flood
+ * indicator already measures exposed population). Edited dimensions are recomputed from their indicators.
  */
 export function applyEdits(unit: Unit, edits: Partial<Record<EditRef, EditStamp>> | undefined): Unit {
   if (!edits || !Object.keys(edits).length) return unit;
@@ -182,11 +214,6 @@ export function applyEdits(unit: Unit, edits: Partial<Record<EditRef, EditStamp>
   if (exp && isNum(exp.value)) {
     unit.exposure = { ...(unit.exposure ?? { population: null, density: null }), index: exp.value };
     unit.edits['hazard:exposure'] = exp;
-    const h = unit.floodHazard;
-    if (isNum(h) && !edits['hazard:flood']) {
-      setIndicator(writable('hazard'), 'hazard', 'flood', round1(Math.max(h, Math.sqrt(h * Math.max(exp.value, 0)))));
-      touched.add('hazard');
-    }
   }
 
   for (const d of touched) recomputeDimension(unit.dims[d]);
@@ -244,76 +271,165 @@ export function aggregateUnits(members: Unit[], id: string, name: string, level:
 /* Build                                                                                              */
 /* ------------------------------------------------------------------------------------------------ */
 
-const BASE_SOURCES: Unit[] = DATASET.subnational.adm2.map((u) => fromRawUnit(u, 'source'));
+/* ------------------------------------------------------------------------------------------------ */
+/* Quarantine: workbook values that fail validation are withheld from the live model                  */
+/* ------------------------------------------------------------------------------------------------ */
 
-const NATIONAL: Unit = {
-  id: 'TZ',
-  level: 'national',
-  name: 'Tanzania',
-  region: 'Tanzania',
-  dims: {
-    hazard: readDimension(DATASET.national.dimensions.hazardExposure, 'hazard'),
-    vulnerability: readDimension(DATASET.national.dimensions.vulnerability, 'vulnerability'),
-    coping: readDimension(DATASET.national.dimensions.lackCopingCapacity, 'coping'),
-  },
-  risk: DATASET.national.risk,
-  edits: {},
-};
+/** Workbook indicators behind each group, by the workbook component name (matched like sources.ts). */
+const normName = (s: string): string => s.toLowerCase().replace(/[^a-z0-9]/g, '');
+const LEAF_BY_COMPONENT = new Map<string, EditRef>();
+for (const d of DIMENSIONS) for (const c of d.categories) for (const i of c.indicators) for (const n of [...i.workbook, i.en]) LEAF_BY_COMPONENT.set(normName(n), `${d.key}:${i.key}` as EditRef);
+const BASELINE = baselineRawJson as { units: string[]; values: Record<string, Array<number | null>> };
+/** The workbook's measured values per source unit (the evidence behind a workbook value). */
+export const WORKBOOK_RAW: { units: string[]; values: Record<string, Array<number | null>> } = BASELINE;
 
-/** Council-specific hazard dimensions, parsed once (read-only; applyEdits copies on write). */
-const COUNCIL_HAZARD_DIMS = new Map<string, DimensionValues>();
-function councilBaseHazard(code: string): DimensionValues | null {
-  const ch = COUNCIL_HAZARD[code];
-  if (!ch) return null;
-  let d = COUNCIL_HAZARD_DIMS.get(code);
-  if (!d) {
-    d = readDimension(ch.hazardExposure, 'hazard');
-    COUNCIL_HAZARD_DIMS.set(code, d);
+/**
+ * The group's value from its remaining workbook indicators once one is withheld: the mean of the
+ * standardised indicators that have data (the workbook's own rule for a group), or null when none is left.
+ */
+function groupWithout(unitId: string, ref: EditRef, excluded: readonly string[]): number | null {
+  const i = BASELINE.units.indexOf(unitId);
+  if (i < 0) return null;
+  const scores: number[] = [];
+  for (const spec of Object.values(SPECS)) {
+    if (spec.use !== 'Yes' || excluded.includes(spec.id) || LEAF_BY_COMPONENT.get(normName(spec.component ?? '')) !== ref) continue;
+    const s = standardise(BASELINE.values[spec.id]?.[i] ?? null, spec);
+    if (isNum(s)) scores.push(s);
   }
-  return d;
+  return scores.length ? mean(scores) : null;
 }
 
-export const OFFICIAL_NATIONAL_RISK = DATASET.national.risk;
-export const DATA_AS_OF = DATASET.metadata.asOf ?? DATASET.metadata.lastUpdated?.slice(0, 7) ?? '';
+/**
+ * Withhold the workbook values the integrity recheck quarantined (src/data/inform-data-notes.json,
+ * `quarantine: true`): a value that contradicts documented events, the workbook's other indicators or
+ * the indicator's own definition is treated as missing for the unit, as INFORM treats data that fails
+ * validation, until an institution supplies the value through the Data portal (an approved edit on the
+ * ref replaces it) or the workbook is corrected. A group with other indicators is recomputed from them.
+ * The workbook itself is untouched: buildModel(…, { workbookOnly: true }) builds it exactly.
+ */
+function applyQuarantine(unit: Unit): Unit {
+  const quarantined: NonNullable<Unit['quarantined']> = {};
+  const dims = { ...unit.dims };
+  for (const note of QUARANTINE_NOTES) {
+    const [dim, key] = note.ref.split(':') as [DimensionKey, string];
+    const current = Object.values(dims[dim].categories).find((c) => c && key in c.indicators)?.indicators[key];
+    if (!noteApplies(note, unit, isNum(current) ? current : null)) continue;
+    const catKey = Object.entries(dims[dim].categories).find(([, c]) => c && key in c.indicators)?.[0];
+    if (!catKey) continue;
+    const replacement = groupWithout(unit.id, note.ref as EditRef, noteIndicators(note));
+    const cat = dims[dim].categories[catKey];
+    dims[dim] = recomputeDimension({ score: null, categories: { ...dims[dim].categories, [catKey]: { ...cat, indicators: { ...cat.indicators, [key]: replacement } } } });
+    quarantined[note.ref as EditRef] = note.id;
+  }
+  if (!Object.keys(quarantined).length) return unit;
+  return { ...unit, dims, risk: riskScore(dims.hazard.score, dims.vulnerability.score, dims.coping.score), quarantined };
+}
 
-/** Build every level, applying the given approved edits. Pure: the shipped dataset is never mutated. */
-export function buildModel(overrides: Overrides = {}): RiskModel {
+/** The 170 workbook units exactly as the workbook has them (the reference the tests prove). */
+const BASE_SOURCES_WORKBOOK: Unit[] = DATASET.subnational.adm2.map((u) => fromRawUnit(u, 'source'));
+/** The 170 workbook units as the live model carries them: the quarantined values withheld. */
+const BASE_SOURCES: Unit[] = BASE_SOURCES_WORKBOOK.map(applyQuarantine);
+
+export const DATA_AS_OF = DATASET.metadata.asOf ?? DATASET.metadata.lastUpdated?.slice(0, 7) ?? '';
+/** The release of the Core dataset (metadata.release, e.g. core-2026.10), stamped on every export. */
+export const DATA_RELEASE: string = DATASET.metadata.release ?? 'core';
+/** The boundary set of the council level (metadata.boundaries), shown on the Methodology page (ADM-04). */
+export const BOUNDARY_SET: { set: string; councils: number; regions: number; districts: number; registry: string; procedure: string } | null = DATASET.metadata.boundaries ?? null;
+
+export interface ModelExtras {
+  /** Approved DRR capacity records by council or region id; a region's record supplies the EOCC of its councils. */
+  drr?: DrrRecordsByUnit;
+  /** Build from the workbook exactly, with no value withheld and no benchmark value (the verification tests); the live model never does. */
+  workbookOnly?: boolean;
+  /**
+   * Apply the Benchmark 2026 institutional values (benchmark.ts) as approved values under the given
+   * overrides (the more recent value wins). Default true; false for a dated version before the benchmark
+   * date and for the parity tests.
+   */
+  benchmark?: boolean;
+}
+
+/** The later of two approved stamps on the same leaf wins (a council's benchmark value against a newer approved edit). */
+function mergeStamps(benchmark: Partial<Record<EditRef, EditStamp>> | undefined, own: Partial<Record<EditRef, EditStamp>> | undefined): Partial<Record<EditRef, EditStamp>> | undefined {
+  if (!benchmark) return own;
+  if (!own) return benchmark;
+  const out: Partial<Record<EditRef, EditStamp>> = { ...benchmark };
+  for (const [ref, stamp] of Object.entries(own) as Array<[EditRef, EditStamp]>) {
+    const b = out[ref];
+    if (!b || Date.parse(stamp.at) >= Date.parse(b.at)) out[ref] = stamp;
+  }
+  return out;
+}
+
+/**
+ * A council's arrangements: its own approved record over the published flags; the region's centre, team,
+ * training and committee criteria over its own only where its own record is silent (the regional record
+ * speaks for the region's councils, a district record for the district).
+ */
+export function drrFor(published: DrrStatus | undefined, own: DrrRecordsByUnit[string] | undefined, region: DrrRecordsByUnit[string] | undefined): DrrStatus | undefined {
+  if (!own && !region) return published;
+  const out: DrrStatus = {
+    eprp: own?.eprp ?? published?.eprp ?? false,
+    aa: own?.aa ?? published?.aa ?? false,
+    eocc: region?.eocc ?? own?.eocc ?? published?.eocc ?? false,
+  };
+  const ert = own?.ert ?? region?.ert ?? published?.ert;
+  if (ert != null) out.ert = ert;
+  const rvca = own?.rvca ?? published?.rvca;
+  if (rvca != null) out.rvca = rvca;
+  const training = own?.training ?? region?.training ?? published?.training;
+  if (training != null) out.training = training;
+  for (const k of ['committee', 'stakeholders', 'involvement'] as const) {
+    const v = own?.[k] ?? region?.[k] ?? published?.[k];
+    if (v != null) out[k] = v;
+  }
+  const eprpYear = own?.eprpYear ?? published?.eprpYear;
+  if (eprpYear != null) out.eprpYear = eprpYear;
+  const rvcaYear = own?.rvcaYear ?? published?.rvcaYear;
+  if (rvcaYear != null) out.rvcaYear = rvcaYear;
+  return out;
+}
+
+/** Build every level, applying the given approved edits (and records). Pure: the shipped dataset is never mutated. */
+export function buildModel(overrides: Overrides = {}, extras: ModelExtras = {}): RiskModel {
   // 1. Source units (170) - Vulnerability & Coping backbone.
-  const sources = BASE_SOURCES.map((s) => applyEdits({ ...s, dims: { ...s.dims }, edits: {} }, overrides[s.id]));
+  const sources = (extras.workbookOnly ? BASE_SOURCES_WORKBOOK : BASE_SOURCES).map((s) => applyEdits({ ...s, dims: { ...s.dims }, edits: {} }, overrides[s.id]));
   const sourceByName = new Map(sources.map((s) => [placeKey(s.name), s]));
 
-  // 2. Councils (195) - own Hazard & Exposure; V & C from the (edited) source unit; risk live.
+  // 2. Councils (195) - the (edited) scores of their workbook unit, their own population; risk live.
   const councils: Unit[] = [];
   for (const f of COUNCIL_FEATURES) {
     const p = f.properties;
     const src = sourceByName.get(placeKey(p.src));
     if (!src) continue;
-    const ch = COUNCIL_HAZARD[String(p.code)];
-    const hazard = councilBaseHazard(String(p.code)) ?? src.dims.hazard;
+    const ex = COUNCIL_EXPOSURE[String(p.code)];
     const council: Unit = {
       id: String(p.code),
       level: 'council',
       name: p.name,
       region: regionDisplayName(p.reg),
       // Shared, read-only dimension objects; applyEdits copies on write.
-      dims: { hazard, vulnerability: src.dims.vulnerability, coping: src.dims.coping },
+      dims: { hazard: src.dims.hazard, vulnerability: src.dims.vulnerability, coping: src.dims.coping },
       risk: null,
-      exposure: ch ? readExposure(ch.hazardExposure.exposure) : src.exposure,
-      floodHazard: ch?.hazardExposure.hazardFreq?.flood ?? src.floodHazard,
-      floodEvents: src.floodEvents,
+      exposure: ex ? { index: null, population: ex.population, density: ex.density, areaKm2: ex.areaKm2, source: ex.source } : src.exposure,
       facilities: src.facilities,
-      drr: src.drr,
+      // The council's own published arrangements (district plans, regional centres and teams); the
+      // workbook unit's flags only for a council the lists do not cover.
+      drr: COUNCIL_DRR[String(p.code)] ?? src.drr,
       sourceId: src.id,
       sourceName: src.name,
       inheritedFrom: p.isNew ? (p.parent ?? src.name) : null,
-      // V & C edits made on the source unit are visible on every council that shares it.
-      edits: Object.fromEntries(Object.entries(src.edits).filter(([k]) => !k.startsWith('hazard:'))),
+      formerly: p.formerly ?? null,
+      // Edits made on the unit are visible on every council that shares it.
+      edits: { ...src.edits },
+      ...(src.quarantined ? { quarantined: src.quarantined } : {}),
     };
-    // Hazard/exposure edits keyed on the SOURCE unit (region/nation bulk entry, edits migrated from the
-    // previous app) apply to each of its councils first; the council's own edits then take precedence.
-    const srcHazard = Object.fromEntries(Object.entries(overrides[src.id] ?? {}).filter(([k]) => k.startsWith('hazard:')));
-    applyEdits(council, { ...srcHazard, ...overrides[council.id] });
+    // Values recorded for this council (measured values resolved per council, direct council edits)
+    // take precedence over the unit's; the Benchmark 2026 values count as approved values of their date.
+    const withBenchmark = !extras.workbookOnly && extras.benchmark !== false;
+    applyEdits(council, withBenchmark ? mergeStamps(BENCHMARK_OVERRIDES?.[council.id], overrides[council.id]) : overrides[council.id]);
     council.risk = riskScore(council.dims.hazard.score, council.dims.vulnerability.score, council.dims.coping.score);
+    if (extras.drr) council.drr = drrFor(council.drr, extras.drr[council.id], extras.drr[`R-${placeKey(council.region)}`]);
     councils.push(council);
   }
 
@@ -326,14 +442,16 @@ export function buildModel(overrides: Overrides = {}): RiskModel {
   }
   const regions = [...councilsByRegion.entries()].map(([k, list]) => aggregateUnits(list, `R-${k}`, list[0].region));
 
-  // 4. National - official figure.
-  const national: Unit = { ...NATIONAL, dims: { ...NATIONAL.dims }, edits: {} };
+  // 4. National - the INFORM aggregate of every council (never a mean of risk scores, never a
+  //    published figure: the workbook has none). Approved edits reach it through the councils.
+  const national = aggregateUnits(councils, 'TZ', 'Tanzania', 'national');
 
   const byId = new Map<string, Unit>();
   for (const u of [...sources, ...councils, ...regions, national]) byId.set(u.id, u);
 
-  const editCount = Object.values(overrides).reduce((s, e) => s + Object.keys(e ?? {}).length, 0);
-  return { councils, regions, national, sources, byId, councilsByRegion, asOf: DATA_AS_OF, editCount };
+  // Updates approved through the Data portal only: benchmark and Advancement stamps are not updates (stamps.ts).
+  const editCount = Object.values(overrides).reduce((s, e) => s + Object.values(e ?? {}).filter((st) => isPortalStamp(st)).length, 0);
+  return { councils, regions, national, sources, byId, councilsByRegion, asOf: DATA_AS_OF, editCount, ...(extras.drr ? { drrRecords: extras.drr } : {}) };
 }
 
 export function unitsAt(model: RiskModel, level: Level): Unit[] {
@@ -381,3 +499,11 @@ export function indicatorValue(unit: Unit, dim: DimensionKey, key: string): numb
   for (const cat of Object.values(unit.dims[dim].categories)) if (key in cat.indicators) return cat.indicators[key];
   return null;
 }
+
+/**
+ * The Benchmark 2026 values as council leaf stamps (benchmark.ts): derived once, like the data
+ * portal derives an institution's approved measured values, against the model without them, so that
+ * every stamp lists its inputs (the benchmark value and the workbook baseline of the leaf's other
+ * indicators). Built after `buildModel` is defined; `buildModel(…, { benchmark: false })` never reads it.
+ */
+export const BENCHMARK_OVERRIDES: Overrides = deriveRawOverrides(BENCHMARK_VALUES, buildModel({}, { benchmark: false }), BASELINE as unknown as BaselineRaw, ACTIVE_SPECS);

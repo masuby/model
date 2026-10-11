@@ -10,7 +10,9 @@
     "strongWinds",
     "heavyRainfall",
     "publicHealth",
-    "floods"
+    "floods",
+    "drought",
+    "wildfire"
    ],
    "know": [
     {
@@ -170,13 +172,13 @@
       "actions": {
        "en": [
         "Evacuate all households in flooded or collapse-prone houses now. Do not return until the committee declares the area safe.",
-        "Fire and Rescue (114), Police and Red Cross lead search and rescue. Keep the route to Kitete Regional Referral Hospital clear.",
+        "Fire and Rescue, Police and Red Cross lead search and rescue. Keep the route to Kitete Regional Referral Hospital clear.",
         "Open evacuation centres and register every household, with safe space for women, children, older persons and people with disabilities.",
         "Health team: treat injuries first, set up cholera treatment points and chlorinate water at every centre."
        ],
        "sw": [
         "Hamisha kaya zote zilizo kwenye nyumba zilizofurika au zilizo hatarini kuanguka sasa. Msirudi mpaka kamati itangaze eneo ni salama.",
-        "Zimamoto na Uokoaji (114), Polisi na Msalaba Mwekundu waongoze utafutaji na uokoaji. Njia ya kwenda Hospitali ya Rufaa ya Mkoa Kitete iwe wazi.",
+        "Zimamoto na Uokoaji, Polisi na Msalaba Mwekundu waongoze utafutaji na uokoaji. Njia ya kwenda Hospitali ya Rufaa ya Mkoa Kitete iwe wazi.",
         "Fungua vituo vya uokoaji na sajili kila kaya, kukiwa na nafasi salama kwa wanawake, watoto, wazee na watu wenye ulemavu.",
         "Timu ya afya: tibu majeruhi kwanza, anzisha vituo vya kutibu kipindupindu na weka klorini kwenye maji ya kila kituo."
        ]
@@ -204,7 +206,8 @@
     "setting": "Regional HQ; 308,741 people on 1,461 km². Railway/SGR junction, airport, regional referral hospital (Kitete). Unplanned settlements in valley bottoms and along seasonal streams.",
     "hazards": "Urban flash floods; strong winds; lightning; water shortage; cholera; market and dry-season fires.",
     "atRisk": "Households in low-lying informal settlements; markets, bus and rail stations; schools; travellers in transit."
-   }
+   },
+   "documented": "Urban flash floods; strong winds; lightning; water shortage; cholera; market and dry-season fires."
   },
   "C099": {
    "name": "Nzega Town Council",
@@ -212,7 +215,8 @@
     "drought",
     "heavyRainfall",
     "strongWinds",
-    "floods"
+    "floods",
+    "publicHealth"
    ],
    "know": [
     {
@@ -406,14 +410,16 @@
     "setting": "Commercial town where the T3 (Morogoro–Rwanda) and T8 (Tabora–Mwanza) roads meet. Chronic water stress; artisanal gold sites nearby.",
     "hazards": "Water shortage and drought; flash runoff in town drains; strong winds; cholera; road crashes in heavy rain.",
     "atRisk": "Households relying on shallow wells and vendors; market traders; truck and bus passengers on T3/T8."
-   }
+   },
+   "documented": "Water shortage and drought; flash runoff in town drains; strong winds; cholera; road crashes in heavy rain."
   },
   "C101": {
    "name": "Igunga District Council",
    "hazards": [
     "heavyRainfall",
     "floods",
-    "drought"
+    "drought",
+    "publicHealth"
    ],
    "know": [
     {
@@ -573,13 +579,13 @@
       "actions": {
        "en": [
         "Evacuate isolated villages now. Use boats or canoes only with life jackets and trained crews.",
-        "Call 114 and 190. Keep the T3 corridor and the route to Igunga District Hospital open.",
+        "Call 190. Keep the T3 corridor and the route to Igunga District Hospital open.",
         "Open camps on higher ground, register every household and plan food, seed and livestock support.",
         "Health team: treat injuries first, set up cholera treatment points in camps and chlorinate water."
        ],
        "sw": [
         "Hamisha vijiji vilivyotengwa sasa. Tumia boti au mitumbwi tu ukiwa na jaketi ya kujiokoa na waendeshaji waliofunzwa.",
-        "Piga 114 na 190. Barabara T3 na njia ya kwenda Hospitali ya Wilaya Igunga ziwe wazi.",
+        "Piga 190. Barabara T3 na njia ya kwenda Hospitali ya Wilaya Igunga ziwe wazi.",
         "Fungua kambi kwenye miinuko, sajili kila kaya na panga msaada wa chakula, mbegu na mifugo.",
         "Timu ya afya: tibu majeruhi kwanza, anzisha vituo vya kutibu kipindupindu kambini na weka klorini kwenye maji."
        ]
@@ -607,7 +613,8 @@
     "setting": "546,204 people on 7,064 km². Flat, low Manonga and Wembere plains with water-retaining clay soils; Mwamapuli rice irrigation scheme; T3 crosses the district.",
     "hazards": "Riverine and ponding floods; road cuts on T3 and drifts; dry spells; lightning; cholera; farmer–herder conflict over water and pasture.",
     "atRisk": "Plain and riverside villages; rice farmers; herders and cattle; travellers on T3."
-   }
+   },
+   "documented": "Riverine and ponding floods; road cuts on T3 and drifts; dry spells; lightning; cholera; farmer–herder conflict over water and pasture."
   },
   "C106": {
    "name": "Kaliua District Council",
@@ -615,7 +622,9 @@
     "heavyRainfall",
     "floods",
     "strongWinds",
-    "drought"
+    "drought",
+    "wildfire",
+    "publicHealth"
    ],
    "know": [
     {
@@ -785,13 +794,13 @@
       "actions": {
        "en": [
         "Evacuate threatened villages and camps now, to higher ground or upwind of fire.",
-        "Call 114 and 190. Coordinate with TRC to stop trains on flooded sections of the Kigoma line.",
+        "Call 190. Coordinate with TRC to stop trains on flooded sections of the Kigoma line.",
         "Open shelters and register every household; account for fishers and herders still out.",
         "Health team: treat injuries and burns first, then set up cholera treatment points in dense settlements."
        ],
        "sw": [
         "Hamisha vijiji na kambi vilivyo hatarini sasa, kwenda miinuko au upande ambao moto hauelekei.",
-        "Piga 114 na 190. Shirikiana na TRC kusimamisha treni kwenye sehemu zilizofurika za reli ya Kigoma.",
+        "Piga 190. Shirikiana na TRC kusimamisha treni kwenye sehemu zilizofurika za reli ya Kigoma.",
         "Fungua makazi na sajili kila kaya; hakiki wavuvi na wafugaji ambao bado hawajarudi.",
         "Timu ya afya: tibu majeruhi na walioungua kwanza, kisha anzisha vituo vya kutibu kipindupindu kwenye makazi yenye msongamano."
        ]
@@ -819,7 +828,8 @@
     "setting": "Most populous council (678,447 people on 14,050 km²). Western miombo; Malagarasi and Ugalla wetlands; railway to Kigoma; dense settlements such as Ulyankulu.",
     "hazards": "River and wetland floods; wildfire; drought; lightning; strong winds; human–wildlife conflict; cholera in dense settlements.",
     "atRisk": "Wetland and riverside villages; fishing camps; dense settlements; forest-edge farmers and herders."
-   }
+   },
+   "documented": "River and wetland floods; wildfire; drought; lightning; strong winds; human–wildlife conflict; cholera in dense settlements."
   },
   "C100": {
    "name": "Nzega District Council",
@@ -827,7 +837,8 @@
     "drought",
     "heavyRainfall",
     "floods",
-    "strongWinds"
+    "strongWinds",
+    "publicHealth"
    ],
    "know": [
     {
@@ -987,13 +998,13 @@
       "actions": {
        "en": [
         "Evacuate flooded villages and mining camps now.",
-        "Call 114 and 190. Rescue at a collapsed pit only by trained teams with shoring; no crowd digging.",
+        "Call 190. Rescue at a collapsed pit only by trained teams with shoring; no crowd digging.",
         "Open shelters, register households and miners, and start a food and livestock-feed assessment.",
         "Health team: treat injuries first, then screen for cholera and malnutrition."
        ],
        "sw": [
         "Hamisha vijiji vilivyofurika na kambi za wachimbaji sasa.",
-        "Piga 114 na 190. Uokoaji kwenye shimo lililoporomoka ufanywe na timu zilizofunzwa zenye vifaa vya kuzuia kuporomoka; umati usichimbe.",
+        "Piga 190. Uokoaji kwenye shimo lililoporomoka ufanywe na timu zilizofunzwa zenye vifaa vya kuzuia kuporomoka; umati usichimbe.",
         "Fungua makazi, sajili kaya na wachimbaji, na anza tathmini ya chakula na malisho ya mifugo.",
         "Timu ya afya: tibu majeruhi kwanza, kisha pima kipindupindu na utapiamlo."
        ]
@@ -1021,14 +1032,17 @@
     "setting": "Most densely settled rural council (Nzega district 574,498 people on 7,173 km²). Northern plains drain toward the Lake Victoria basin; Central Line passes via Bukene.",
     "hazards": "Dry spells and drought; mbuga flooding; lightning; strong winds; artisanal mine-pit flooding and collapse; livestock disease.",
     "atRisk": "Artisanal miners and mining camps; rice farmers in mbuga; herders; shallow-well users."
-   }
+   },
+   "documented": "Dry spells and drought; mbuga flooding; lightning; strong winds; artisanal mine-pit flooding and collapse; livestock disease."
   },
   "C104": {
    "name": "Sikonge District Council",
    "hazards": [
     "wildfire",
     "strongWinds",
-    "floods"
+    "floods",
+    "drought",
+    "heavyRainfall"
    ],
    "know": [
     {
@@ -1188,13 +1202,13 @@
       "actions": {
        "en": [
         "Evacuate threatened villages and forest camps now.",
-        "Call 114 and 190. TAWA rangers and Police secure the area.",
+        "Call 190. TAWA rangers and Police secure the area.",
         "Open shelters, register households and account for beekeepers and herders still in the forest.",
         "Health team: treat burns and injuries first; refer severe cases to Sikonge District Hospital or Kitete."
        ],
        "sw": [
         "Hamisha vijiji na kambi za misituni vilivyo hatarini sasa.",
-        "Piga 114 na 190. Askari wa TAWA na Polisi walinde eneo.",
+        "Piga 190. Askari wa TAWA na Polisi walinde eneo.",
         "Fungua makazi, sajili kaya na hakiki wafugaji nyuki na wafugaji ambao bado wako misituni.",
         "Timu ya afya: tibu walioungua na majeruhi kwanza; peleka wagonjwa mahututi Hospitali ya Wilaya Sikonge au Kitete."
        ]
@@ -1222,7 +1236,8 @@
     "setting": "335,686 people on 27,873 km², of which about 26,800 km² is forest and game reserve. Beekeeping and tobacco; T8 Tabora–Mbeya road and T23 branch to Mpanda at Ipole.",
     "hazards": "Wildfire; human–wildlife conflict; flash floods cutting T8/T23 and rural roads; drought; lightning.",
     "atRisk": "Beekeepers and forest users; forest-edge villages; herders; travellers on T8/T23."
-   }
+   },
+   "documented": "Wildfire; human–wildlife conflict; flash floods cutting T8/T23 and rural roads; drought; lightning."
   },
   "C103": {
    "name": "Urambo District Council",
@@ -1391,13 +1406,13 @@
       "actions": {
        "en": [
         "Evacuate threatened villages now, to higher ground or upwind of fire.",
-        "Call 114 and 190. Keep the road to Urambo District Hospital open.",
+        "Call 190. Keep the road to Urambo District Hospital open.",
         "Open shelters and register every household; note who is missing.",
         "Health team: treat burns and injuries first, then guard against cholera."
        ],
        "sw": [
         "Hamisha vijiji vilivyo hatarini sasa, kwenda miinuko au upande ambao moto hauelekei.",
-        "Piga 114 na 190. Barabara ya kwenda Hospitali ya Wilaya Urambo iwe wazi.",
+        "Piga 190. Barabara ya kwenda Hospitali ya Wilaya Urambo iwe wazi.",
         "Fungua makazi na sajili kila kaya; andika waliopotea.",
         "Timu ya afya: tibu walioungua na majeruhi kwanza, kisha zuia kipindupindu."
        ]
@@ -1425,7 +1440,8 @@
     "setting": "260,322 people on 5,415 km². Tobacco heartland; miombo, swamps and wetland margins linked to the Ugalla and Malagarasi systems; tsetse areas; limited piped water.",
     "hazards": "Erratic rainfall and drought; wildfire; wetland and river floods; windstorms damaging roofs and tobacco barns; lightning; human–wildlife conflict.",
     "atRisk": "Tobacco farmers and barns; wetland-margin villages; forest-edge households; children and herders at dawn and dusk."
-   }
+   },
+   "documented": "Erratic rainfall and drought; wildfire; wetland and river floods; windstorms damaging roofs and tobacco barns; lightning; human–wildlife conflict."
   },
   "C102": {
    "name": "Uyui District Council",
@@ -1594,13 +1610,13 @@
       "actions": {
        "en": [
         "Evacuate affected villages now. Do not return until the committee declares it safe.",
-        "Call 114 and 190. Coordinate with Tabora Municipal Council on access routes and referral to Kitete Hospital.",
+        "Call 190. Coordinate with Tabora Municipal Council on access routes and referral to Kitete Hospital.",
         "Open shelters and register every household; note who is missing.",
         "Health team: treat injuries first, then guard against cholera if water is contaminated."
        ],
        "sw": [
         "Hamisha vijiji vilivyoathirika sasa. Msirudi mpaka kamati itangaze ni salama.",
-        "Piga 114 na 190. Shirikiana na Manispaa ya Tabora kuhusu njia za kufika na rufaa kwenda Hospitali ya Kitete.",
+        "Piga 190. Shirikiana na Manispaa ya Tabora kuhusu njia za kufika na rufaa kwenda Hospitali ya Kitete.",
         "Fungua makazi na sajili kila kaya; andika waliopotea.",
         "Timu ya afya: tibu majeruhi kwanza, kisha zuia kipindupindu maji yakichafuka."
        ]
@@ -1628,7 +1644,8 @@
     "setting": "562,588 people on 11,966 km², surrounding Tabora Municipality. Mixed miombo and mbuga; tobacco and maize farming; long rural roads with drifts.",
     "hazards": "Dry spells and drought; flash floods at drifts and streams; strong winds; wildfire; lightning.",
     "atRisk": "Remote villages cut off in the Msimu; children crossing streams to school; tobacco farmers and barns."
-   }
+   },
+   "documented": "Dry spells and drought; flash floods at drifts and streams; strong winds; wildfire; lightning."
   }
  }
 }

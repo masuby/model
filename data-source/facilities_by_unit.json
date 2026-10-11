@@ -1,0 +1,1196 @@
+{
+ "source": "2022 Population and Housing Census geodatabase (NBS/OCGS): facilities counted on the 195 council polygons with the facility types filtered (scripts/spatial-join-facilities-councils.py) and summed over the councils of each INFORM workbook unit",
+ "built": "2026-10-10",
+ "units": {
+  "TZ0101": {
+   "name": "Kondoa",
+   "health": 68,
+   "education": 285,
+   "water": 2090,
+   "boreholes": 108
+  },
+  "TZ0102": {
+   "name": "Mpwapwa",
+   "health": 74,
+   "education": 299,
+   "water": 2857,
+   "boreholes": 70
+  },
+  "TZ0103": {
+   "name": "Kongwa",
+   "health": 71,
+   "education": 274,
+   "water": 2116,
+   "boreholes": 99
+  },
+  "TZ0104": {
+   "name": "Chamwino",
+   "health": 74,
+   "education": 264,
+   "water": 3333,
+   "boreholes": 198
+  },
+  "C006": {
+   "name": "Dodoma Urban",
+   "health": 102,
+   "education": 491,
+   "water": 1420,
+   "boreholes": 82
+  },
+  "TZ0106": {
+   "name": "Bahi",
+   "health": 53,
+   "education": 115,
+   "water": 1977,
+   "boreholes": 83
+  },
+  "TZ0107": {
+   "name": "Chemba",
+   "health": 54,
+   "education": 210,
+   "water": 2256,
+   "boreholes": 163
+  },
+  "TZ0201": {
+   "name": "Monduli",
+   "health": 47,
+   "education": 256,
+   "water": 1100,
+   "boreholes": 13
+  },
+  "C010": {
+   "name": "Meru",
+   "health": 65,
+   "education": 380,
+   "water": 2010,
+   "boreholes": 51
+  },
+  "TZ0206": {
+   "name": "Arusha",
+   "health": 70,
+   "education": 306,
+   "water": 1387,
+   "boreholes": 15
+  },
+  "TZ0207": {
+   "name": "Longido",
+   "health": 38,
+   "education": 259,
+   "water": 828,
+   "boreholes": 27
+  },
+  "TZ0204": {
+   "name": "Karatu",
+   "health": 69,
+   "education": 250,
+   "water": 1446,
+   "boreholes": 79
+  },
+  "TZ0205": {
+   "name": "Ngorongoro",
+   "health": 42,
+   "education": 261,
+   "water": 990,
+   "boreholes": 22
+  },
+  "C015": {
+   "name": "Arusha Urban",
+   "health": 85,
+   "education": 431,
+   "water": 1068,
+   "boreholes": 19
+  },
+  "TZ0301": {
+   "name": "Rombo",
+   "health": 49,
+   "education": 262,
+   "water": 1490,
+   "boreholes": 19
+  },
+  "TZ0302": {
+   "name": "Mwanga",
+   "health": 64,
+   "education": 207,
+   "water": 1325,
+   "boreholes": 37
+  },
+  "TZ0303": {
+   "name": "Same",
+   "health": 82,
+   "education": 362,
+   "water": 2327,
+   "boreholes": 75
+  },
+  "C019": {
+   "name": "Moshi Urban",
+   "health": 44,
+   "education": 200,
+   "water": 389,
+   "boreholes": 2
+  },
+  "TZ0304": {
+   "name": "Moshi",
+   "health": 115,
+   "education": 563,
+   "water": 2975,
+   "boreholes": 43
+  },
+  "TZ0305": {
+   "name": "Hai",
+   "health": 69,
+   "education": 274,
+   "water": 1503,
+   "boreholes": 25
+  },
+  "TZ0307": {
+   "name": "Siha",
+   "health": 28,
+   "education": 180,
+   "water": 889,
+   "boreholes": 3
+  },
+  "TZ0401": {
+   "name": "Lushoto",
+   "health": 105,
+   "education": 511,
+   "water": 4762,
+   "boreholes": 38
+  },
+  "TZ0402": {
+   "name": "Korogwe",
+   "health": 70,
+   "education": 301,
+   "water": 2078,
+   "boreholes": 44
+  },
+  "C026": {
+   "name": "Korogwe Township Authority",
+   "health": 18,
+   "education": 87,
+   "water": 281,
+   "boreholes": 10
+  },
+  "TZ0403": {
+   "name": "Muheza",
+   "health": 56,
+   "education": 224,
+   "water": 2210,
+   "boreholes": 62
+  },
+  "C028": {
+   "name": "Tanga Urban",
+   "health": 55,
+   "education": 351,
+   "water": 1119,
+   "boreholes": 32
+  },
+  "TZ0405": {
+   "name": "Pangani",
+   "health": 27,
+   "education": 76,
+   "water": 516,
+   "boreholes": 34
+  },
+  "TZ0406": {
+   "name": "Handeni",
+   "health": 66,
+   "education": 212,
+   "water": 2826,
+   "boreholes": 37
+  },
+  "C031": {
+   "name": "Handeni Mji",
+   "health": 13,
+   "education": 82,
+   "water": 390,
+   "boreholes": 16
+  },
+  "TZ0407": {
+   "name": "Kilindi",
+   "health": 55,
+   "education": 218,
+   "water": 2508,
+   "boreholes": 36
+  },
+  "TZ0408": {
+   "name": "Mkinga",
+   "health": 29,
+   "education": 178,
+   "water": 1463,
+   "boreholes": 61
+  },
+  "TZ0501": {
+   "name": "Kilosa",
+   "health": 89,
+   "education": 426,
+   "water": 3692,
+   "boreholes": 158
+  },
+  "TZ0502": {
+   "name": "Morogoro",
+   "health": 82,
+   "education": 253,
+   "water": 2616,
+   "boreholes": 44
+  },
+  "C036": {
+   "name": "Morogoro Urban",
+   "health": 94,
+   "education": 414,
+   "water": 1626,
+   "boreholes": 23
+  },
+  "TZ0503": {
+   "name": "Kilombero",
+   "health": 87,
+   "education": 503,
+   "water": 3038,
+   "boreholes": 45
+  },
+  "TZ0504": {
+   "name": "Ulanga",
+   "health": 55,
+   "education": 260,
+   "water": 2168,
+   "boreholes": 34
+  },
+  "TZ0506": {
+   "name": "Mvomero",
+   "health": 77,
+   "education": 310,
+   "water": 2710,
+   "boreholes": 63
+  },
+  "TZ0507": {
+   "name": "Gairo",
+   "health": 44,
+   "education": 151,
+   "water": 1454,
+   "boreholes": 22
+  },
+  "TZ0601": {
+   "name": "Bagamoyo",
+   "health": 111,
+   "education": 425,
+   "water": 3120,
+   "boreholes": 177
+  },
+  "TZ0602": {
+   "name": "Kibaha",
+   "health": 36,
+   "education": 143,
+   "water": 484,
+   "boreholes": 28
+  },
+  "C046": {
+   "name": "Kibaha Urban",
+   "health": 52,
+   "education": 230,
+   "water": 523,
+   "boreholes": 24
+  },
+  "TZ0603": {
+   "name": "Kisarawe",
+   "health": 46,
+   "education": 190,
+   "water": 1159,
+   "boreholes": 48
+  },
+  "TZ0604": {
+   "name": "Mkuranga",
+   "health": 71,
+   "education": 388,
+   "water": 2216,
+   "boreholes": 159
+  },
+  "TZ0605": {
+   "name": "Rufiji",
+   "health": 105,
+   "education": 269,
+   "water": 2200,
+   "boreholes": 188
+  },
+  "TZ0606": {
+   "name": "Mafia",
+   "health": 19,
+   "education": 69,
+   "water": 625,
+   "boreholes": 54
+  },
+  "TZ0701": {
+   "name": "Kinondoni",
+   "health": 304,
+   "education": 1067,
+   "water": 1517,
+   "boreholes": 51
+  },
+  "TZ0702": {
+   "name": "Ilala",
+   "health": 205,
+   "education": 858,
+   "water": 1212,
+   "boreholes": 91
+  },
+  "TZ0703": {
+   "name": "Temeke",
+   "health": 297,
+   "education": 1380,
+   "water": 1445,
+   "boreholes": 191
+  },
+  "TZ0801": {
+   "name": "Kilwa",
+   "health": 63,
+   "education": 241,
+   "water": 1261,
+   "boreholes": 63
+  },
+  "TZ0802": {
+   "name": "Lindi",
+   "health": 56,
+   "education": 141,
+   "water": 1398,
+   "boreholes": 34
+  },
+  "C059": {
+   "name": "Lindi Urban",
+   "health": 78,
+   "education": 154,
+   "water": 1135,
+   "boreholes": 37
+  },
+  "TZ0803": {
+   "name": "Nachingwea",
+   "health": 54,
+   "education": 171,
+   "water": 2018,
+   "boreholes": 28
+  },
+  "TZ0804": {
+   "name": "Liwale",
+   "health": 42,
+   "education": 107,
+   "water": 1216,
+   "boreholes": 52
+  },
+  "TZ0805": {
+   "name": "Ruangwa",
+   "health": 50,
+   "education": 132,
+   "water": 1890,
+   "boreholes": 38
+  },
+  "TZ0901": {
+   "name": "Mtwara",
+   "health": 69,
+   "education": 219,
+   "water": 2307,
+   "boreholes": 45
+  },
+  "C065": {
+   "name": "Mtwara Urban",
+   "health": 26,
+   "education": 144,
+   "water": 654,
+   "boreholes": 11
+  },
+  "TZ0902": {
+   "name": "Newala",
+   "health": 61,
+   "education": 215,
+   "water": 2136,
+   "boreholes": 4
+  },
+  "TZ0903": {
+   "name": "Masasi",
+   "health": 57,
+   "education": 222,
+   "water": 3651,
+   "boreholes": 25
+  },
+  "C069": {
+   "name": "Masasi  Township Authority",
+   "health": 19,
+   "education": 124,
+   "water": 957,
+   "boreholes": 15
+  },
+  "TZ0904": {
+   "name": "Tandahimba",
+   "health": 51,
+   "education": 212,
+   "water": 2349,
+   "boreholes": 9
+  },
+  "TZ0906": {
+   "name": "Nanyumbu",
+   "health": 28,
+   "education": 142,
+   "water": 2323,
+   "boreholes": 39
+  },
+  "TZ1001": {
+   "name": "Tunduru",
+   "health": 77,
+   "education": 276,
+   "water": 3279,
+   "boreholes": 97
+  },
+  "TZ1002": {
+   "name": "Songea",
+   "health": 67,
+   "education": 214,
+   "water": 1964,
+   "boreholes": 24
+  },
+  "C074": {
+   "name": "Songea Urban",
+   "health": 50,
+   "education": 227,
+   "water": 574,
+   "boreholes": 9
+  },
+  "TZ1003": {
+   "name": "Mbinga",
+   "health": 85,
+   "education": 472,
+   "water": 4068,
+   "boreholes": 7
+  },
+  "TZ1006": {
+   "name": "Nyasa",
+   "health": 44,
+   "education": 143,
+   "water": 1312,
+   "boreholes": 1
+  },
+  "TZ1005": {
+   "name": "Namtumbo",
+   "health": 59,
+   "education": 269,
+   "water": 1270,
+   "boreholes": 18
+  },
+  "TZ1101": {
+   "name": "Iringa",
+   "health": 100,
+   "education": 334,
+   "water": 3692,
+   "boreholes": 77
+  },
+  "C081": {
+   "name": "Iringa Urban",
+   "health": 47,
+   "education": 224,
+   "water": 1190,
+   "boreholes": 10
+  },
+  "C082": {
+   "name": "Mafinga Township Authority",
+   "health": 28,
+   "education": 131,
+   "water": 540,
+   "boreholes": 4
+  },
+  "TZ1102": {
+   "name": "Mufindi",
+   "health": 104,
+   "education": 351,
+   "water": 3324,
+   "boreholes": 82
+  },
+  "TZ1104": {
+   "name": "Kilolo",
+   "health": 70,
+   "education": 258,
+   "water": 2456,
+   "boreholes": 17
+  },
+  "TZ1201": {
+   "name": "Chunya",
+   "health": 47,
+   "education": 118,
+   "water": 1390,
+   "boreholes": 39
+  },
+  "TZ1202": {
+   "name": "Mbeya",
+   "health": 87,
+   "education": 310,
+   "water": 3757,
+   "boreholes": 14
+  },
+  "C087": {
+   "name": "Mbeya Urban",
+   "health": 84,
+   "education": 373,
+   "water": 1282,
+   "boreholes": 7
+  },
+  "TZ1203": {
+   "name": "Kyela",
+   "health": 52,
+   "education": 205,
+   "water": 1761,
+   "boreholes": 28
+  },
+  "TZ1204": {
+   "name": "Rungwe",
+   "health": 98,
+   "education": 349,
+   "water": 3028,
+   "boreholes": 3
+  },
+  "TZ1207": {
+   "name": "Mbarali",
+   "health": 73,
+   "education": 298,
+   "water": 3211,
+   "boreholes": 53
+  },
+  "TZ1301": {
+   "name": "Iramba",
+   "health": 11,
+   "education": 181,
+   "water": 1835,
+   "boreholes": 41
+  },
+  "TZ1302": {
+   "name": "Singida",
+   "health": 28,
+   "education": 155,
+   "water": 2221,
+   "boreholes": 117
+  },
+  "C094": {
+   "name": "Singida Urban",
+   "health": 20,
+   "education": 177,
+   "water": 823,
+   "boreholes": 72
+  },
+  "TZ1303": {
+   "name": "Manyoni",
+   "health": 47,
+   "education": 239,
+   "water": 2246,
+   "boreholes": 96
+  },
+  "TZ1305": {
+   "name": "Ikungi",
+   "health": 48,
+   "education": 249,
+   "water": 2381,
+   "boreholes": 80
+  },
+  "TZ1306": {
+   "name": "Mkalama",
+   "health": 43,
+   "education": 133,
+   "water": 1744,
+   "boreholes": 56
+  },
+  "TZ1401": {
+   "name": "Nzega",
+   "health": 72,
+   "education": 309,
+   "water": 3512,
+   "boreholes": 100
+  },
+  "TZ1402": {
+   "name": "Igunga",
+   "health": 78,
+   "education": 256,
+   "water": 2668,
+   "boreholes": 54
+  },
+  "TZ1403": {
+   "name": "Uyui",
+   "health": 66,
+   "education": 227,
+   "water": 2548,
+   "boreholes": 22
+  },
+  "TZ1404": {
+   "name": "Urambo",
+   "health": 34,
+   "education": 166,
+   "water": 1259,
+   "boreholes": 28
+  },
+  "TZ1405": {
+   "name": "Sikonge",
+   "health": 43,
+   "education": 159,
+   "water": 1668,
+   "boreholes": 28
+  },
+  "C105": {
+   "name": "Tabora Urban",
+   "health": 54,
+   "education": 214,
+   "water": 1439,
+   "boreholes": 24
+  },
+  "TZ1407": {
+   "name": "Kaliua",
+   "health": 54,
+   "education": 257,
+   "water": 2116,
+   "boreholes": 12
+  },
+  "TZ1501": {
+   "name": "Kalambo",
+   "health": 68,
+   "education": 312,
+   "water": 2248,
+   "boreholes": 16
+  },
+  "TZ1502": {
+   "name": "Sumbawanga",
+   "health": 79,
+   "education": 577,
+   "water": 2637,
+   "boreholes": 15
+  },
+  "C109": {
+   "name": "Sumbawanga Urban",
+   "health": 53,
+   "education": 184,
+   "water": 1804,
+   "boreholes": 27
+  },
+  "TZ1503": {
+   "name": "Nkasi",
+   "health": 74,
+   "education": 515,
+   "water": 2525,
+   "boreholes": 84
+  },
+  "TZ1601": {
+   "name": "Kibondo",
+   "health": 48,
+   "education": 131,
+   "water": 1944,
+   "boreholes": 35
+  },
+  "TZ1602": {
+   "name": "Kasulu",
+   "health": 48,
+   "education": 73,
+   "water": 1340,
+   "boreholes": 13
+  },
+  "C113": {
+   "name": "Kasulu Township Authority",
+   "health": 24,
+   "education": 105,
+   "water": 624,
+   "boreholes": 2
+  },
+  "TZ1603": {
+   "name": "Kigoma",
+   "health": 42,
+   "education": 157,
+   "water": 1568,
+   "boreholes": 22
+  },
+  "C115": {
+   "name": "Kigoma  Urban",
+   "health": 31,
+   "education": 120,
+   "water": 453,
+   "boreholes": 13
+  },
+  "TZ1605": {
+   "name": "Uvinza",
+   "health": 48,
+   "education": 202,
+   "water": 1657,
+   "boreholes": 11
+  },
+  "TZ1606": {
+   "name": "Buhigwe",
+   "health": 38,
+   "education": 72,
+   "water": 944,
+   "boreholes": 2
+  },
+  "TZ1607": {
+   "name": "Kakonko",
+   "health": 28,
+   "education": 35,
+   "water": 949,
+   "boreholes": 17
+  },
+  "TZ1704": {
+   "name": "Kahama",
+   "health": 88,
+   "education": 311,
+   "water": 3908,
+   "boreholes": 61
+  },
+  "C120": {
+   "name": "Kahama Township Authority",
+   "health": 52,
+   "education": 204,
+   "water": 1222,
+   "boreholes": 19
+  },
+  "TZ1702": {
+   "name": "Kishapu",
+   "health": 65,
+   "education": 187,
+   "water": 2057,
+   "boreholes": 20
+  },
+  "TZ1703": {
+   "name": "Shinyanga",
+   "health": 67,
+   "education": 190,
+   "water": 2953,
+   "boreholes": 30
+  },
+  "C124": {
+   "name": "Shinyanga Urban",
+   "health": 40,
+   "education": 174,
+   "water": 715,
+   "boreholes": 4
+  },
+  "TZ1801": {
+   "name": "Karagwe",
+   "health": 57,
+   "education": 237,
+   "water": 2405,
+   "boreholes": 47
+  },
+  "TZ1802": {
+   "name": "Bukoba",
+   "health": 46,
+   "education": 336,
+   "water": 2416,
+   "boreholes": 39
+  },
+  "C127": {
+   "name": "Bukoba Urban",
+   "health": 28,
+   "education": 144,
+   "water": 440,
+   "boreholes": 4
+  },
+  "TZ1803": {
+   "name": "Muleba",
+   "health": 66,
+   "education": 472,
+   "water": 3095,
+   "boreholes": 40
+  },
+  "TZ1804": {
+   "name": "Biharamulo",
+   "health": 32,
+   "education": 194,
+   "water": 1592,
+   "boreholes": 76
+  },
+  "TZ1805": {
+   "name": "Ngara",
+   "health": 64,
+   "education": 181,
+   "water": 1762,
+   "boreholes": 14
+  },
+  "TZ1808": {
+   "name": "Kyerwa",
+   "health": 42,
+   "education": 286,
+   "water": 2896,
+   "boreholes": 15
+  },
+  "TZ1807": {
+   "name": "Missenyi",
+   "health": 45,
+   "education": 212,
+   "water": 1606,
+   "boreholes": 58
+  },
+  "TZ1901": {
+   "name": "Ukerewe",
+   "health": 47,
+   "education": 147,
+   "water": 2200,
+   "boreholes": 47
+  },
+  "TZ1902": {
+   "name": "Magu",
+   "health": 62,
+   "education": 264,
+   "water": 2142,
+   "boreholes": 48
+  },
+  "TZ1903": {
+   "name": "Nyamagana",
+   "health": 84,
+   "education": 420,
+   "water": 1204,
+   "boreholes": 4
+  },
+  "TZ1904": {
+   "name": "Kwimba",
+   "health": 76,
+   "education": 219,
+   "water": 2901,
+   "boreholes": 35
+  },
+  "TZ1905": {
+   "name": "Sengerema",
+   "health": 111,
+   "education": 436,
+   "water": 3216,
+   "boreholes": 33
+  },
+  "TZ1906": {
+   "name": "Ilemela",
+   "health": 67,
+   "education": 388,
+   "water": 1045,
+   "boreholes": 16
+  },
+  "TZ1907": {
+   "name": "Misungwi",
+   "health": 67,
+   "education": 242,
+   "water": 3176,
+   "boreholes": 44
+  },
+  "TZ2001": {
+   "name": "Tarime",
+   "health": 82,
+   "education": 376,
+   "water": 2227,
+   "boreholes": 44
+  },
+  "TZ2002": {
+   "name": "Serengeti",
+   "health": 61,
+   "education": 230,
+   "water": 1357,
+   "boreholes": 26
+  },
+  "TZ2003": {
+   "name": "Musoma",
+   "health": 31,
+   "education": 178,
+   "water": 1371,
+   "boreholes": 17
+  },
+  "C145": {
+   "name": "Musoma Urban",
+   "health": 27,
+   "education": 226,
+   "water": 485,
+   "boreholes": 0
+  },
+  "TZ2004": {
+   "name": "Bunda",
+   "health": 61,
+   "education": 249,
+   "water": 1824,
+   "boreholes": 45
+  },
+  "C148": {
+   "name": "Butiama",
+   "health": 49,
+   "education": 171,
+   "water": 1363,
+   "boreholes": 39
+  },
+  "TZ2006": {
+   "name": "Rorya",
+   "health": 53,
+   "education": 227,
+   "water": 2192,
+   "boreholes": 47
+  },
+  "TZ2101": {
+   "name": "Babati",
+   "health": 66,
+   "education": 271,
+   "water": 2334,
+   "boreholes": 43
+  },
+  "C151": {
+   "name": "Babati Urban",
+   "health": 24,
+   "education": 109,
+   "water": 606,
+   "boreholes": 17
+  },
+  "TZ2102": {
+   "name": "Hanang",
+   "health": 46,
+   "education": 230,
+   "water": 2470,
+   "boreholes": 53
+  },
+  "TZ2103": {
+   "name": "Mbulu",
+   "health": 52,
+   "education": 255,
+   "water": 2952,
+   "boreholes": 58
+  },
+  "TZ2104": {
+   "name": "Simanjiro",
+   "health": 58,
+   "education": 283,
+   "water": 1471,
+   "boreholes": 102
+  },
+  "TZ2105": {
+   "name": "Kiteto",
+   "health": 45,
+   "education": 172,
+   "water": 1548,
+   "boreholes": 90
+  },
+  "TZ2204": {
+   "name": "Njombe",
+   "health": 37,
+   "education": 156,
+   "water": 1254,
+   "boreholes": 4
+  },
+  "C158": {
+   "name": "Njombe Urban",
+   "health": 72,
+   "education": 269,
+   "water": 1646,
+   "boreholes": 9
+  },
+  "C159": {
+   "name": "Makambako Township Authority",
+   "health": 28,
+   "education": 191,
+   "water": 778,
+   "boreholes": 4
+  },
+  "TZ2205": {
+   "name": "Ludewa",
+   "health": 76,
+   "education": 208,
+   "water": 1899,
+   "boreholes": 11
+  },
+  "TZ2203": {
+   "name": "Makete",
+   "health": 59,
+   "education": 188,
+   "water": 2075,
+   "boreholes": 0
+  },
+  "TZ2202": {
+   "name": "Wanging'ombe",
+   "health": 62,
+   "education": 314,
+   "water": 2697,
+   "boreholes": 33
+  },
+  "C163": {
+   "name": "Mpanda Urban",
+   "health": 35,
+   "education": 123,
+   "water": 572,
+   "boreholes": 20
+  },
+  "TZ2302": {
+   "name": "Mpanda",
+   "health": 66,
+   "education": 226,
+   "water": 2134,
+   "boreholes": 53
+  },
+  "TZ2303": {
+   "name": "Mlele",
+   "health": 33,
+   "education": 100,
+   "water": 1017,
+   "boreholes": 22
+  },
+  "TZ2401": {
+   "name": "Bariadi",
+   "health": 67,
+   "education": 284,
+   "water": 2014,
+   "boreholes": 99
+  },
+  "TZ2402": {
+   "name": "Itilima",
+   "health": 47,
+   "education": 152,
+   "water": 2035,
+   "boreholes": 48
+  },
+  "TZ2403": {
+   "name": "Meatu",
+   "health": 74,
+   "education": 200,
+   "water": 1853,
+   "boreholes": 39
+  },
+  "TZ2404": {
+   "name": "Maswa",
+   "health": 188,
+   "education": 226,
+   "water": 2090,
+   "boreholes": 62
+  },
+  "TZ2405": {
+   "name": "Busega",
+   "health": 39,
+   "education": 164,
+   "water": 1397,
+   "boreholes": 89
+  },
+  "TZ2501": {
+   "name": "Geita",
+   "health": 170,
+   "education": 841,
+   "water": 3624,
+   "boreholes": 86
+  },
+  "TZ2502": {
+   "name": "Nyang'hwale",
+   "health": 50,
+   "education": 150,
+   "water": 1358,
+   "boreholes": 27
+  },
+  "TZ2503": {
+   "name": "Mbogwe",
+   "health": 33,
+   "education": 282,
+   "water": 1683,
+   "boreholes": 45
+  },
+  "TZ2504": {
+   "name": "Bukombe",
+   "health": 29,
+   "education": 173,
+   "water": 1540,
+   "boreholes": 34
+  },
+  "TZ2505": {
+   "name": "Chato",
+   "health": 67,
+   "education": 309,
+   "water": 2741,
+   "boreholes": 73
+  },
+  "TZ2609": {
+   "name": "Momba",
+   "health": 92,
+   "education": 129,
+   "water": 1308,
+   "boreholes": 22
+  },
+  "C181": {
+   "name": "Tunduma",
+   "health": 46,
+   "education": 129,
+   "water": 512,
+   "boreholes": 86
+  },
+  "TZ2601": {
+   "name": "Songwe",
+   "health": 76,
+   "education": 97,
+   "water": 926,
+   "boreholes": 36
+  },
+  "TZ2606": {
+   "name": "Mbozi",
+   "health": 202,
+   "education": 318,
+   "water": 3388,
+   "boreholes": 43
+  },
+  "TZ2605": {
+   "name": "Ileje",
+   "health": 76,
+   "education": 142,
+   "water": 1718,
+   "boreholes": 2
+  },
+  "TZ5101": {
+   "name": "Kaskazini A",
+   "health": 54,
+   "education": 172,
+   "water": 264,
+   "boreholes": 276
+  },
+  "TZ5102": {
+   "name": "Kaskazini B",
+   "health": 32,
+   "education": 158,
+   "water": 194,
+   "boreholes": 142
+  },
+  "TZ5201": {
+   "name": "Kati",
+   "health": 60,
+   "education": 250,
+   "water": 271,
+   "boreholes": 176
+  },
+  "TZ5202": {
+   "name": "Kusini",
+   "health": 11,
+   "education": 54,
+   "water": 133,
+   "boreholes": 63
+  },
+  "TZ5302": {
+   "name": "Mjini",
+   "health": 34,
+   "education": 157,
+   "water": 371,
+   "boreholes": 202
+  },
+  "C190": {
+   "name": "Magharibi",
+   "health": 74,
+   "education": 452,
+   "water": 463,
+   "boreholes": 621
+  },
+  "TZ5401": {
+   "name": "Wete",
+   "health": 26,
+   "education": 144,
+   "water": 245,
+   "boreholes": 189
+  },
+  "TZ5402": {
+   "name": "Micheweni",
+   "health": 17,
+   "education": 78,
+   "water": 133,
+   "boreholes": 18
+  },
+  "TZ5501": {
+   "name": "Chake Chake",
+   "health": 28,
+   "education": 115,
+   "water": 190,
+   "boreholes": 200
+  },
+  "TZ5502": {
+   "name": "Mkoani",
+   "health": 18,
+   "education": 105,
+   "water": 209,
+   "boreholes": 197
+  }
+ }
+}

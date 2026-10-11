@@ -9,12 +9,12 @@
     "actions": {
      "en": [
       "Do not burn farms, grass or rubbish without permission from Village/Mtaa leaders.",
-      "Report any fire to Village/Mtaa leaders or call 114.",
+      "Report any fire to Village/Mtaa leaders or call 190.",
       "Follow forecasts from the Tanzania Meteorological Authority (TMA)."
      ],
      "sw": [
       "Usichome mashamba, nyasi wala taka bila kibali cha viongozi wa Kijiji/Mtaa.",
-      "Toa taarifa ya moto wowote kwa viongozi wa Kijiji/Mtaa au piga 114.",
+      "Toa taarifa ya moto wowote kwa viongozi wa Kijiji/Mtaa au piga 190.",
       "Fuatilia utabiri wa Mamlaka ya Hali ya Hewa Tanzania (TMA)."
      ]
     }
@@ -418,12 +418,12 @@
     },
     "actions": {
      "en": [
-      "Call 114 or 190.",
+      "Call 190.",
       "Cool burns with clean water and take the injured to a health facility.",
       "Health facilities: prepare for burns and breathing emergencies and refer serious cases to regional hospitals."
      ],
      "sw": [
-      "Piga 114 au 190.",
+      "Piga 190.",
       "Poza majeraha ya moto kwa maji safi na wapeleke majeruhi kituo cha afya.",
       "Vituo vya afya: jiandaeni kwa majeraha ya moto na matatizo ya kupumua na wapelekeni wagonjwa mahututi hospitali za mkoa."
      ]

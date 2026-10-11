@@ -57,7 +57,7 @@ def add():
 
 # 2: what INFORM is
 fill(add(), 'INFORM: how the Country Model Template is built', [
- ('INFORM is an open composite index of disaster risk: one 0–10 score per area (0 = lowest, 10 = highest). Tanzania runs the regional INFORM Country Model Template (Excel); the national INFORM risk is 4.1.', 0, NAVY, False),
+ ('INFORM is an open composite index of disaster risk: one 0–10 score per area (0 = lowest, 10 = highest). Tanzania runs the regional INFORM Country Model Template (Excel, 2024 release) at 170 district-level units. INFORM publishes no national figure for a subnational model; the INFORM aggregate of all 195 councils on the workbook data is 3.8 (Hazard & Exposure 2.4, Vulnerability 3.8, Lack of Coping 6.2).', 0, NAVY, False),
  ('Risk is built from three dimensions:', 0, NAVY, True),
  ('Hazard & Exposure: drought, flood, earthquake, cyclone, conflict … and who/what is exposed', 1, GREY, False),
  ('Vulnerability: poverty, health, nutrition, food insecurity, displacement', 1, GREY, False),
@@ -122,7 +122,7 @@ fill(add(), 'The honest problem: it all lives in deeply hidden Excel sheets', [
  ('Manual & single-file: one workbook, no version control, easy to break, hard to audit.', 0, NAVY, False),
  ('Closed to local data: no clean way to add a local indicator or feed council-level values.', 0, NAVY, False),
  ('No automation: no live update, no link to early warning or anticipatory action.', 0, NAVY, False),
- ('Result: the model stops at national / regional level. Local risk, where decisions are made, is out of reach.', 0, RED, True),
+ ('Result: the model stops at its 170 district-level units of 2024. Council, ward and village risk, where decisions are made, is out of reach.', 0, RED, True),
 ], sz0=14)
 
 # 7: engines mimic the Excel (scale-up)
@@ -142,11 +142,12 @@ fill(add(), 'Capturing real local data: the methods', [
  ('One accountable stakeholder per indicator: TMA (climate), GST (geology), NEMC (environment), MoH (health), NBS (statistics), MoA/MUCHALI (food), MoW (water), PMO-DMD (DRR).', 0, NAVY, False),
  ('Bottom-up aggregation: village → district → region → country; finer, well-filled data refines the higher level.', 0, NAVY, False),
  ('Authentic sources: NBS 2022 Census, TMA CHIRPS/ERA5, GST seismic, MoH TDHS, IPC/MUCHALI, TASAF, and satellite Earth Observation (validated before use).', 0, NAVY, False),
+ ('The regional INFORM core is never altered. Institutional values enter by the INFORM method with a citable source; every other Tanzanian addition is shown in a separate Advancement layer.', 0, GREEN, True),
 ], sz0=16)
 
 # 9: the gap
 fill(add(), 'The gap: what still has to be solved', [
- ('Subnational risk is not yet operational: decisions happen at council / ward level, but INFORM stops at national / regional.', 0, RED, True),
+ ('Subnational risk is not yet operational: decisions happen at council / ward level, but the regional INFORM model stops at 170 district-level units.', 0, RED, True),
  ('Local data is scattered and uneven: many key indicators exist only at region or national level.', 0, NAVY, False),
  ('No sustainable pipeline: capturing, validating and updating local data is still manual.', 0, NAVY, False),
  ('Earth-Observation indicators (vegetation, soil moisture, flood, landslide) need proper computation, downscaling and validation.', 0, NAVY, False),
@@ -169,7 +170,7 @@ fill(add(), 'Opportunities: research & financial support for member-state adopti
 fill(add(), 'Conclusion', [
  ('The Country Model Template math is fully understood and reproduced exactly: 8,664/8,664 cells, 170/170 risks.', 0, NAVY, False),
  ('It now runs at council level (195) because it is open code, not a hidden-sheet workbook.', 0, NAVY, False),
- ('Local-data capture and Earth Observation are working, with each layer validated before use.', 0, NAVY, False),
+ ('Earth-observation layers are shown apart from the Core as a labelled Advancement layer (12 of 25 sub-indicators filled); a composite drought index and a Sentinel-1 flood layer were withdrawn when validation failed.', 0, NAVY, False),
  ('Ask: research partnership + financing to integrate local data and support member-state adoption and local-level integration.', 0, GREEN, True),
 ], sz0=16)
 

@@ -1,0 +1,196 @@
+code,name,reg,police_region,region_crashes_per_yr,region_deaths_per_yr,region_pop_2022,pop2022,crashes_per_yr,land_km2,crashes_per_100km2
+C001,Kondoa District,Dodoma,Dodoma,66.5,54.5,3085625,244854,5.28,4577.91,0.1153
+C002,Kondoa Town,Dodoma,Dodoma,66.5,54.5,3085625,80443,1.73,1475.02,0.1175
+C003,Mpwapwa District,Dodoma,Dodoma,66.5,54.5,3085625,403247,8.69,7427.32,0.117
+C004,Kongwa District,Dodoma,Dodoma,66.5,54.5,3085625,443867,9.57,3917.88,0.2442
+C005,Chamwino District,Dodoma,Dodoma,66.5,54.5,3085625,486176,10.48,9085.11,0.1153
+C006,Dodoma City,Dodoma,Dodoma,66.5,54.5,3085625,765179,16.49,2601.73,0.6338
+C007,Bahi District,Dodoma,Dodoma,66.5,54.5,3085625,322526,6.95,5434.59,0.1279
+C008,Chemba District,Dodoma,Dodoma,66.5,54.5,3085625,339333,7.31,7445.0,0.0982
+C009,Monduli District,Arusha,Arusha,41.5,55.5,2356255,227585,4.01,6897.88,0.0581
+C010,Meru District,Arusha,Arusha,41.5,55.5,2356255,331603,5.84,1324.53,0.4409
+C011,Arusha District,Arusha,Arusha,41.5,55.5,2356255,449518,7.92,1260.49,0.6281
+C012,Longido District,Arusha,Arusha,41.5,55.5,2356255,175915,3.1,7985.56,0.0388
+C013,Karatu District,Arusha,Arusha,41.5,55.5,2356255,280454,4.94,3091.18,0.1598
+C014,Ngorongoro District,Arusha,Arusha,41.5,55.5,2356255,273549,4.82,14998.76,0.0321
+C015,Arusha City,Arusha,Arusha,41.5,55.5,2356255,617631,10.88,273.79,3.9732
+C016,Rombo District,Kilimanjaro,Kilimanjaro,41.0,64.0,1861934,275314,6.06,1445.82,0.4193
+C017,Mwanga District,Kilimanjaro,Kilimanjaro,41.0,64.0,1861934,148763,3.28,1949.13,0.1681
+C018,Same District,Kilimanjaro,Kilimanjaro,41.0,64.0,1861934,300303,6.61,6162.19,0.1073
+C019,Moshi Municipal,Kilimanjaro,Kilimanjaro,41.0,64.0,1861934,221733,4.88,54.27,8.9968
+C020,Moshi District,Kilimanjaro,Kilimanjaro,41.0,64.0,1861934,535803,11.8,1349.33,0.8744
+C021,Hai District,Kilimanjaro,Kilimanjaro,41.0,64.0,1861934,240999,5.31,911.02,0.5825
+C022,Siha District,Kilimanjaro,Kilimanjaro,41.0,64.0,1861934,139019,3.06,1203.2,0.2544
+C023,Lushoto District,Tanga,Tanga,42.0,53.5,2615597,350958,5.64,3518.79,0.1602
+C024,Bumbuli District,Tanga,Tanga,42.0,53.5,2615597,159373,2.56,797.22,0.321
+C025,Korogwe District,Tanga,Tanga,42.0,53.5,2615597,272870,4.38,3245.0,0.135
+C026,Korogwe Town,Tanga,Tanga,42.0,53.5,2615597,86551,1.39,212.17,0.655
+C027,Muheza District,Tanga,Tanga,42.0,53.5,2615597,238260,3.83,1533.81,0.2494
+C028,Tanga City,Tanga,Tanga,42.0,53.5,2615597,393429,6.32,573.32,1.1019
+C029,Pangani District,Tanga,Tanga,42.0,53.5,2615597,75642,1.21,1768.83,0.0687
+C030,Handeni District,Tanga,Tanga,42.0,53.5,2615597,384353,6.17,6604.6,0.0934
+C031,Handeni Town,Tanga,Tanga,42.0,53.5,2615597,108968,1.75,833.82,0.2098
+C032,Kilindi District,Tanga,Tanga,42.0,53.5,2615597,398391,6.4,7021.31,0.0911
+C033,Mkinga District,Tanga,Tanga,42.0,53.5,2615597,146802,2.36,2608.61,0.0904
+C034,Kilosa District,Morogoro,Morogoro,56.0,85.5,3197104,617032,10.81,11736.96,0.0921
+C035,Morogoro District,Morogoro,Morogoro,56.0,85.5,3197104,387736,6.79,11360.87,0.0598
+C036,Morogoro Municipal,Morogoro,Morogoro,56.0,85.5,3197104,471409,8.26,561.48,1.4706
+C037,Mlimba District,Morogoro,Morogoro,56.0,85.5,3197104,292536,5.12,6531.16,0.0785
+C038,Ifakara Town,Morogoro,Morogoro,56.0,85.5,3197104,290424,5.09,6618.36,0.0769
+C039,Ulanga District,Morogoro,Morogoro,56.0,85.5,3197104,232895,4.08,14001.23,0.0291
+C040,Malinyi District,Morogoro,Morogoro,56.0,85.5,3197104,225126,3.94,9528.96,0.0414
+C041,Mvomero District,Morogoro,Morogoro,56.0,85.5,3197104,421741,7.39,7683.76,0.0961
+C042,Gairo District,Morogoro,Morogoro,56.0,85.5,3197104,258205,4.52,2062.58,0.2193
+C043,Bagamoyo District,Pwani,Pwani,44.5,35.5,1669403,205478,5.48,1508.26,0.3632
+C044,Chalinze District,Pwani,Pwani,44.5,35.5,1669403,316759,8.44,6938.15,0.1217
+C045,Kibaha District,Pwani,Pwani,44.5,35.5,1669403,123367,3.29,1642.4,0.2002
+C046,Kibaha Town,Pwani,Pwani,44.5,35.5,1669403,265360,7.07,700.86,1.0093
+C047,Kisarawe District,Pwani,Pwani,44.5,35.5,1669403,159226,4.24,4685.38,0.0906
+C048,Mkuranga District,Pwani,Pwani,44.5,35.5,1669403,533033,14.21,3185.13,0.4461
+C049,Rufiji District,Pwani,Rufiji,43.5,32.0,355544,159906,19.56,9155.33,0.2137
+C050,Mafia District,Pwani,Pwani,44.5,35.5,1669403,66180,1.76,414.74,0.4254
+C051,Kibiti District,Pwani,Rufiji,43.5,32.0,355544,195638,23.94,2800.19,0.8548
+C052,Kinondoni Municipal,Dar es Salaam,Kinondoni,132.5,85.5,2069240,982328,62.9,252.77,24.8849
+C053,Dar es Salaam City,Dar es Salaam,Ilala,41.0,17.0,1649912,1649912,41.0,350.7,11.6909
+C054,Temeke Municipal,Dar es Salaam,Temeke,59.0,43.5,1664576,1346674,47.73,152.33,31.3347
+C055,Kigamboni Municipal,Dar es Salaam,Temeke,59.0,43.5,1664576,317902,11.27,546.64,2.0613
+C056,Ubungo Municipal,Dar es Salaam,Kinondoni,132.5,85.5,2069240,1086912,69.6,275.5,25.2626
+C057,Kilwa District,Lindi,Lindi,67.5,67.0,1194028,297676,16.83,15220.26,0.1106
+C058,Mtama District,Lindi,Lindi,67.5,67.0,1194028,166493,9.41,3305.51,0.2847
+C059,Lindi Municipal,Lindi,Lindi,67.5,67.0,1194028,174126,9.84,3597.69,0.2736
+C060,Nachingwea District,Lindi,Lindi,67.5,67.0,1194028,233655,13.21,5591.77,0.2362
+C061,Liwale District,Lindi,Lindi,67.5,67.0,1194028,136505,7.72,34407.16,0.0224
+C062,Ruangwa District,Lindi,Lindi,67.5,67.0,1194028,185573,10.49,2552.61,0.411
+C063,Mtwara District,Mtwara,Mtwara,36.5,26.0,1634947,158504,3.54,2069.47,0.171
+C064,Nanyamba Town,Mtwara,Mtwara,36.5,26.0,1634947,132624,2.96,1539.79,0.1923
+C065,Mtwara Mikindani Municipal,Mtwara,Mtwara,36.5,26.0,1634947,146772,3.28,204.79,1.6
+C066,Newala District,Mtwara,Mtwara,36.5,26.0,1634947,136939,3.06,1413.43,0.2163
+C067,Newala Town,Mtwara,Mtwara,36.5,26.0,1634947,104349,2.33,540.52,0.431
+C068,Masasi District,Mtwara,Mtwara,36.5,26.0,1634947,314778,7.03,4219.19,0.1666
+C069,Masasi Town,Mtwara,Mtwara,36.5,26.0,1634947,137585,3.07,567.17,0.5416
+C070,Tandahimba District,Mtwara,Mtwara,36.5,26.0,1634947,299073,6.68,2096.39,0.3185
+C071,Nanyumbu District,Mtwara,Mtwara,36.5,26.0,1634947,204323,4.56,5285.22,0.0863
+C072,Tunduru District,Ruvuma,Ruvuma,32.0,36.5,1848794,412054,7.13,18632.18,0.0383
+C073,Songea District,Ruvuma,Ruvuma,32.0,36.5,1848794,178201,3.08,7427.52,0.0415
+C074,Songea Municipal,Ruvuma,Ruvuma,32.0,36.5,1848794,286285,4.96,575.98,0.8603
+C075,Madaba District,Ruvuma,Ruvuma,32.0,36.5,1848794,65215,1.13,6623.73,0.017
+C076,Mbinga District,Ruvuma,Ruvuma,32.0,36.5,1848794,285582,4.94,3485.61,0.1418
+C077,Mbinga Town,Ruvuma,Ruvuma,32.0,36.5,1848794,158896,2.75,1242.24,0.2214
+C078,Nyasa District,Ruvuma,Ruvuma,32.0,36.5,1848794,191193,3.31,3206.72,0.1032
+C079,Namtumbo District,Ruvuma,Ruvuma,32.0,36.5,1848794,271368,4.7,21896.87,0.0215
+C080,Iringa District,Iringa,Iringa,41.5,32.5,1192728,315354,10.97,19816.25,0.0554
+C081,Iringa Municipal,Iringa,Iringa,41.5,32.5,1192728,202490,7.05,357.12,1.9729
+C082,Mafinga Town,Iringa,Iringa,41.5,32.5,1192728,122329,4.26,1130.48,0.3765
+C083,Mufindi District,Iringa,Iringa,41.5,32.5,1192728,288996,10.06,7135.13,0.1409
+C084,Kilolo District,Iringa,Iringa,41.5,32.5,1192728,263559,9.17,9246.62,0.0992
+C085,Chunya District,Mbeya,Mbeya,54.5,78.0,2343754,344471,8.01,19079.55,0.042
+C086,Mbeya District,Mbeya,Mbeya,54.5,78.0,2343754,371259,8.63,2726.06,0.3167
+C087,Mbeya City,Mbeya,Mbeya,54.5,78.0,2343754,541603,12.59,260.68,4.8312
+C088,Kyela District,Mbeya,Mbeya,54.5,78.0,2343754,266426,6.2,791.73,0.7825
+C089,Rungwe District,Mbeya,Mbeya,54.5,78.0,2343754,273536,6.36,1413.39,0.45
+C090,Busokelo District,Mbeya,Mbeya,54.5,78.0,2343754,100123,2.33,722.24,0.3224
+C091,Mbarali District,Mbeya,Mbeya,54.5,78.0,2343754,446336,10.38,13205.16,0.0786
+C092,Iramba District,Singida,Singida,57.0,55.5,2008058,328912,9.34,4452.67,0.2097
+C093,Singida District,Singida,Singida,57.0,55.5,2008058,284895,8.09,2485.28,0.3254
+C094,Singida Municipal,Singida,Singida,57.0,55.5,2008058,232459,6.6,729.86,0.9041
+C095,Manyoni District,Singida,Singida,57.0,55.5,2008058,279069,7.92,9545.19,0.083
+C096,Itigi District,Singida,Singida,57.0,55.5,2008058,215947,6.13,19120.41,0.0321
+C097,Ikungi District,Singida,Singida,57.0,55.5,2008058,411262,11.67,8575.49,0.1361
+C098,Mkalama District,Singida,Singida,57.0,55.5,2008058,255514,7.25,3076.11,0.2358
+C099,Nzega Town,Tabora,Tabora,24.0,33.0,3391679,125193,0.89,638.32,0.1388
+C100,Nzega District,Tabora,Tabora,24.0,33.0,3391679,574498,4.07,7230.41,0.0562
+C101,Igunga District,Tabora,Tabora,24.0,33.0,3391679,546204,3.87,7069.83,0.0547
+C102,Uyui District,Tabora,Tabora,24.0,33.0,3391679,562588,3.98,11460.55,0.0347
+C103,Urambo District,Tabora,Tabora,24.0,33.0,3391679,260322,1.84,5393.94,0.0342
+C104,Sikonge District,Tabora,Tabora,24.0,33.0,3391679,335686,2.38,26522.73,0.009
+C105,Tabora Municipal,Tabora,Tabora,24.0,33.0,3391679,308741,2.18,1478.79,0.1477
+C106,Kaliua District,Tabora,Tabora,24.0,33.0,3391679,678447,4.8,15646.0,0.0307
+C107,Kalambo District,Rukwa,Rukwa,21.0,20.5,1540519,316783,4.32,5641.5,0.0765
+C108,Sumbawanga District,Rukwa,Rukwa,21.0,20.5,1540519,494330,6.74,4736.03,0.1423
+C109,Sumbawanga Municipal,Rukwa,Rukwa,21.0,20.5,1540519,303986,4.14,1368.01,0.3029
+C110,Nkasi District,Rukwa,Rukwa,21.0,20.5,1540519,425420,5.8,9552.64,0.0607
+C111,Kibondo District,Kigoma,Kigoma,60.0,41.5,2470967,362922,8.81,13394.76,0.0658
+C112,Kasulu District,Kigoma,Kigoma,60.0,41.5,2470967,537767,13.06,7114.01,0.1836
+C113,Kasulu Town,Kigoma,Kigoma,60.0,41.5,2470967,238321,5.79,910.96,0.6353
+C114,Kigoma District,Kigoma,Kigoma,60.0,41.5,2470967,222792,5.41,1121.42,0.4824
+C115,Kigoma Ujiji Municipal,Kigoma,Kigoma,60.0,41.5,2470967,232388,5.64,96.88,5.8246
+C116,Uvinza District,Kigoma,Kigoma,60.0,41.5,2470967,458353,11.13,10308.83,0.108
+C117,Buhigwe District,Kigoma,Kigoma,60.0,41.5,2470967,240005,5.83,1514.89,0.3847
+C118,Kakonko District,Kigoma,Kigoma,60.0,41.5,2470967,178419,4.33,2210.21,0.196
+C119,Ushetu District,Shinyanga,Shinyanga,22.0,23.5,2241299,390593,3.83,4139.22,0.0926
+C120,Kahama Municipal,Shinyanga,Shinyanga,22.0,23.5,2241299,453654,4.45,1383.12,0.3219
+C121,Msalala District,Shinyanga,Shinyanga,22.0,23.5,2241299,378214,3.71,2626.3,0.1414
+C122,Kishapu District,Shinyanga,Shinyanga,22.0,23.5,2241299,335483,3.29,4262.73,0.0773
+C123,Shinyanga District,Shinyanga,Shinyanga,22.0,23.5,2241299,468611,4.6,3520.66,0.1307
+C124,Shinyanga Municipal,Shinyanga,Shinyanga,22.0,23.5,2241299,214744,2.11,551.64,0.3821
+C125,Karagwe District,Kagera,Kagera,39.0,42.0,2989299,385744,5.03,5118.42,0.0983
+C126,Bukoba District,Kagera,Kagera,39.0,42.0,2989299,322448,4.21,1594.69,0.2638
+C127,Bukoba Municipal,Kagera,Kagera,39.0,42.0,2989299,144938,1.89,81.6,2.3173
+C128,Muleba District,Kagera,Kagera,39.0,42.0,2989299,637659,8.32,3455.43,0.2408
+C129,Biharamulo District,Kagera,Kagera,39.0,42.0,2989299,457114,5.96,7369.71,0.0809
+C130,Ngara District,Kagera,Kagera,39.0,42.0,2989299,383092,5.0,3274.63,0.1526
+C131,Kyerwa District,Kagera,Kagera,39.0,42.0,2989299,412910,5.39,2547.66,0.2115
+C132,Missenyi District,Kagera,Kagera,39.0,42.0,2989299,245394,3.2,2830.21,0.1131
+C133,Ukerewe District,Mwanza,Mwanza,50.0,52.5,3699872,387815,5.24,588.58,0.8904
+C134,Magu District,Mwanza,Mwanza,50.0,52.5,3699872,421119,5.69,1520.23,0.3744
+C135,Mwanza City,Mwanza,Mwanza,50.0,52.5,3699872,594834,8.04,178.76,4.4969
+C136,Kwimba District,Mwanza,Mwanza,50.0,52.5,3699872,480025,6.49,3251.43,0.1995
+C137,Sengerema District,Mwanza,Mwanza,50.0,52.5,3699872,425415,5.75,1808.18,0.3179
+C138,Buchosa District,Mwanza,Mwanza,50.0,52.5,3699872,413110,5.58,1261.02,0.4427
+C139,Ilemela Municipal,Mwanza,Mwanza,50.0,52.5,3699872,509687,6.89,247.74,2.7803
+C140,Misungwi District,Mwanza,Mwanza,50.0,52.5,3699872,467867,6.32,2569.01,0.2461
+C141,Tarime District,Mara,Tarime - Rorya,21.0,31.0,892381,404848,9.53,1357.04,0.7021
+C142,Tarime Town,Mara,Tarime - Rorya,21.0,31.0,892381,133043,3.13,170.64,1.8348
+C143,Serengeti District,Mara,Mara,22.0,25.5,1479634,340349,5.06,11255.21,0.045
+C144,Musoma District,Mara,Mara,22.0,25.5,1479634,266665,3.96,1243.62,0.3188
+C145,Musoma Municipal,Mara,Mara,22.0,25.5,1479634,164172,2.44,73.23,3.3333
+C146,Bunda District,Mara,Mara,22.0,25.5,1479634,243822,3.63,2031.68,0.1784
+C147,Bunda Town,Mara,Mara,22.0,25.5,1479634,182970,2.72,986.03,0.2759
+C148,Butiama District,Mara,Mara,22.0,25.5,1479634,281656,4.19,1973.03,0.2123
+C149,Rorya District,Mara,Tarime - Rorya,21.0,31.0,892381,354490,8.34,1993.39,0.4185
+C150,Babati District,Manyara,Manyara,45.0,35.5,1892502,375200,8.92,5083.74,0.1755
+C151,Babati Town,Manyara,Manyara,45.0,35.5,1892502,129572,3.08,457.15,0.674
+C152,Hanang District,Manyara,Manyara,45.0,35.5,1892502,367391,8.74,3536.41,0.247
+C153,Mbulu District,Manyara,Manyara,45.0,35.5,1892502,238272,5.67,3021.94,0.1875
+C154,Mbulu Town,Manyara,Manyara,45.0,35.5,1892502,138593,3.3,872.04,0.3779
+C155,Simanjiro District,Manyara,Manyara,45.0,35.5,1892502,291169,6.92,19396.87,0.0357
+C156,Kiteto District,Manyara,Manyara,45.0,35.5,1892502,352305,8.38,12902.04,0.0649
+C157,Njombe District,Njombe,Njombe,21.5,21.0,889946,109311,2.64,3475.87,0.076
+C158,Njombe Town,Njombe,Njombe,21.5,21.0,889946,182127,4.4,3504.71,0.1255
+C159,Makambako Town,Njombe,Njombe,21.5,21.0,889946,146481,3.54,853.15,0.4148
+C160,Ludewa District,Njombe,Njombe,21.5,21.0,889946,151361,3.66,5861.35,0.0624
+C161,Makete District,Njombe,Njombe,21.5,21.0,889946,109160,2.64,4071.66,0.0648
+C162,Wanging'ombe District,Njombe,Njombe,21.5,21.0,889946,191506,4.63,3451.18,0.1341
+C163,Mpanda Municipal,Katavi,Katavi,21.5,22.0,1152958,245764,4.58,553.96,0.8273
+C164,Nsimbo District,Katavi,Katavi,21.5,22.0,1152958,201102,3.75,5932.61,0.0632
+C165,Tanganyika District,Katavi,Katavi,21.5,22.0,1152958,371836,6.93,16312.51,0.0425
+C166,Mlele District,Katavi,Katavi,21.5,22.0,1152958,118818,2.22,17368.32,0.0128
+C167,Mpimbwe District,Katavi,Katavi,21.5,22.0,1152958,215438,4.02,6071.16,0.0662
+C168,Bariadi District,Simiyu,Simiyu,39.5,39.5,2140497,383385,7.07,4595.12,0.154
+C169,Bariadi Town,Simiyu,Simiyu,39.5,39.5,2140497,260927,4.82,794.79,0.6058
+C170,Itilima District,Simiyu,Simiyu,39.5,39.5,2140497,419213,7.74,4719.29,0.1639
+C171,Meatu District,Simiyu,Simiyu,39.5,39.5,2140497,366941,6.77,8885.18,0.0762
+C172,Maswa District,Simiyu,Simiyu,39.5,39.5,2140497,427864,7.9,3671.82,0.215
+C173,Busega District,Simiyu,Simiyu,39.5,39.5,2140497,282167,5.21,1335.1,0.39
+C174,Geita District,Geita,Geita,35.5,36.0,2977608,1035214,12.34,3775.68,0.3269
+C175,Geita Town,Geita,Geita,35.5,36.0,2977608,361671,4.31,1055.09,0.4087
+C176,Nyang'hwale District,Geita,Geita,35.5,36.0,2977608,225803,2.69,1604.23,0.1678
+C177,Mbogwe District,Geita,Geita,35.5,36.0,2977608,362855,4.33,2121.12,0.204
+C178,Bukombe District,Geita,Geita,35.5,36.0,2977608,407102,4.85,8003.07,0.0606
+C179,Chato District,Geita,Geita,35.5,36.0,2977608,584963,6.97,2990.56,0.2332
+C180,Momba District,Songwe,Songwe,25.0,36.0,1344687,259781,4.83,4297.29,0.1124
+C181,Tunduma Town,Songwe,Songwe,25.0,36.0,1344687,219309,4.08,492.1,0.8286
+C182,Songwe District,Songwe,Songwe,25.0,36.0,1344687,229129,4.26,11024.04,0.0386
+C183,Mbozi District,Songwe,Songwe,25.0,36.0,1344687,510599,9.49,3827.7,0.248
+C184,Ileje District,Songwe,Songwe,25.0,36.0,1344687,125869,2.34,1864.21,0.1255
+C185,Kaskazini A Town,Kaskazini Unguja,Kaskazini Unguja,66.5,46.5,257290,157369,40.67,231.38,17.5789
+C186,Kaskazini B Town,Kaskazini Unguja,Kaskazini Unguja,66.5,46.5,257290,99921,25.83,204.14,12.6511
+C187,Kati Town,Kusini Unguja,Kusini Unguja,44.0,43.5,195873,132717,29.81,518.18,5.7534
+C188,Kusini District,Kusini Unguja,Kusini Unguja,44.0,43.5,195873,63156,14.19,350.04,4.053
+C189,Mjini Municipal,Mjini Magharibi,Mjini Magharibi,77.5,78.0,893169,219007,19.0,13.71,138.6081
+C190,Magharibi A Municipal,Mjini Magharibi,Mjini Magharibi,77.5,78.0,893169,329645,28.6,105.09,27.2178
+C191,Magharibi B Municipal,Mjini Magharibi,Mjini Magharibi,77.5,78.0,893169,344517,29.89,107.09,27.9145
+C192,Wete Town,Kaskazini Pemba,Kaskazini Pemba,23.0,18.5,272091,148712,12.57,281.98,4.458
+C193,Micheweni District,Kaskazini Pemba,Kaskazini Pemba,23.0,18.5,272091,123379,10.43,176.27,5.9167
+C194,Chake Chake Town,Kusini Pemba,Kusini Pemba,26.5,27.0,271350,136298,13.31,207.74,6.4075
+C195,Mkoani Town,Kusini Pemba,Kusini Pemba,26.5,27.0,271350,135052,13.19,241.39,5.4638

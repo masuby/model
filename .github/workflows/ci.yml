@@ -38,6 +38,8 @@ jobs:
 
       - name: Build
         run: npx vite build
+      - name: Entry size budget
+        run: npm run check:size
 
       - name: Upload build
         uses: actions/upload-artifact@v4
@@ -45,3 +47,39 @@ jobs:
           name: dist
           path: dist
           retention-days: 7
+
+  # Accessibility gate (issue TST-02): axe-core (WCAG 2.1 A/AA) over the main routes of the built site,
+  # in day and night mode; any serious or critical violation fails the job.
+  accessibility:
+    runs-on: ubuntu-latest
+    needs: verify
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Install
+        run: npm ci
+
+      - name: Download build
+        uses: actions/download-artifact@v4
+        with:
+          name: dist
+          path: dist
+
+      - name: Install Chromium for Playwright
+        run: npx playwright install --with-deps chromium
+
+      - name: Serve the build
+        run: |
+          (npx vite preview --port 4173 --strictPort > preview.log 2>&1 &)
+          for i in $(seq 1 60); do curl -sf http://localhost:4173/ > /dev/null && break; sleep 1; done
+          curl -sf http://localhost:4173/ > /dev/null
+
+      - name: Accessibility audit
+        run: npm run qa:a11y -- http://localhost:4173
+

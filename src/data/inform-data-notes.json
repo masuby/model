@@ -1,0 +1,221 @@
+{
+  "release": "core-2026.10",
+  "date": "2026-10-10",
+  "note": "Data notes of the indicator integrity recheck (docs/assessment/INFORM_TZ_Indicator_Integrity_core-2026.10.md): workbook values that contradict documented events, other indicators of the same workbook or the indicator's own definition. A note never changes a value: the Core keeps the workbook's figure, the note is shown beside it wherever it appears, and the query is raised with INFORM (JRC) and SADC. 'where' matches a unit by region, by workbook unit (name or code) or by its own value; councils match through the workbook unit they carry. 'quarantine' marks the values withheld from the live model: the group is treated as missing for the unit (INFORM's rule for data that fails validation) until an institution supplies the value through the Data portal or the workbook is corrected; the explorer, profiles and exports show 'no data' with the note. DN-09 is not withheld because the indicator never scores; DN-10 and DN-11 are explanations.",
+  "notes": [
+    {
+      "id": "DN-01",
+      "layer": "core",
+      "ref": "hazard:drought",
+      "indicator": "HA.NAT.DR-FRE",
+      "status": "queried",
+      "where": {
+        "regions": [
+          "Dar es Salaam"
+        ]
+      },
+      "en": "Value under query. The workbook's drought indicator (FAO historic drought frequency, one value per region) gives Dar es Salaam 19 drought years, the highest in Tanzania, above the semi-arid centre (Dodoma 11, Singida 10, Shinyanga 7, Simiyu 5). The FAO index is computed on cropland, of which Dar es Salaam has almost none, so the figure is noise rather than drought. The Core keeps the workbook's value; it has been raised with INFORM (JRC) and SADC, and the Advancement layer carries council-level drought members. Resolution (Benchmark 2026, 10 October 2026): the FAO stress-index series for Dar es Salaam confirms that its small cropland is flagged as stressed in most seasons, so the value is the source's own reading of a city with almost no agriculture, not a data error; agricultural drought frequency is not applicable to the five city councils and stays withheld. Their drought picture is carried by the Advancement layer's rainfall and vegetation members.",
+      "sw": "Thamani inahojiwa. Kiashiria cha ukame cha kitabu cha kazi (marudio ya kihistoria ya ukame ya FAO, thamani moja kwa kila mkoa) kinaipa Dar es Salaam miaka 19 ya ukame, ya juu zaidi Tanzania, juu ya kanda kame ya kati (Dodoma 11, Singida 10, Shinyanga 7, Simiyu 5). Fahirisi ya FAO hukokotolewa kwenye ardhi ya kilimo, ambayo Dar es Salaam haina karibu kabisa, hivyo takwimu hii ni kelele si ukame. Msingi unabaki na thamani ya kitabu cha kazi; imewasilishwa kwa INFORM (JRC) na SADC, na tabaka la Maendeleo hubeba viashiria vidogo vya ukame vya ngazi ya halmashauri. Utatuzi (Benchmark 2026, 10 Oktoba 2026): mfululizo wa fahirisi ya msongo ya FAO kwa Dar es Salaam unathibitisha kuwa ardhi yake ndogo ya kilimo huwekwa alama ya msongo misimu mingi, hivyo thamani ni usomaji wa chanzo chenyewe wa jiji lisilo na kilimo, si kosa la data; marudio ya ukame wa kilimo hayatumiki kwa halmashauri tano za jiji na yanabaki yamezuiliwa. Picha yao ya ukame inabebwa na vipengele vya mvua na uoto vya tabaka la Maendeleo.",
+      "evidence": "inform-baseline-raw.json HA.NAT.DR-FRE: Dar-es-salaam 19 (data range 5..19, score 10); Arusha 17; Manyara 14; Dodoma 11; Singida 10; Shinyanga 7; Simiyu 5. Source per the workbook Metadata sheet: FAO, 1984-2023, region. The three Dar es Salaam units back five councils.",
+      "raisedWith": "INFORM (JRC), SADC",
+      "issue": "UP-01",
+      "quarantine": true
+    },
+    {
+      "id": "DN-02",
+      "layer": "core",
+      "ref": "hazard:drought",
+      "indicator": "HA.NAT.DR-FRE",
+      "status": "explained",
+      "where": {
+        "regions": [
+          "Simiyu",
+          "Shinyanga",
+          "Mwanza",
+          "Tabora"
+        ]
+      },
+      "en": "Value under query. The same drought indicator gives Simiyu and Mwanza its minimum (5 years, score 0), Tabora 6 and Shinyanga 7, while the workbook's own food-security indicator places Simiyu (142) and Shinyanga (74) among the most food-insecure regions and the semi-arid Sukumaland records recurrent crop failure. The regional, cropland-based index flattens the drought-prone centre. Raised with INFORM (JRC) and SADC. Resolution (10 October 2026): FAO's own regional stress-index series (1984-2025, downloaded from GIEWS) gives the Lake zone moderate agricultural stress, consistent with the workbook's low frequency; the contradiction is with food insecurity, which the livelihoods group now measures directly (IPC 2026). The values are retained.",
+      "sw": "Thamani inahojiwa. Kiashiria hicho hicho cha ukame kinaipa Simiyu na Mwanza kiwango chake cha chini (miaka 5, alama 0), Tabora 6 na Shinyanga 7, wakati kiashiria cha uhakika wa chakula cha kitabu hicho hicho kinaiweka Simiyu (142) na Shinyanga (74) miongoni mwa mikoa yenye ukosefu mkubwa wa chakula, na eneo kame la Usukuma hurekodi kushindwa kwa mazao mara kwa mara. Fahirisi ya kimkoa inayotegemea ardhi ya kilimo inaficha kanda ya kati inayokumbwa na ukame. Imewasilishwa kwa INFORM (JRC) na SADC. Utatuzi (10 Oktoba 2026): mfululizo wa fahirisi ya msongo wa FAO wa kimkoa (1984-2025, kutoka GIEWS) unaonyesha msongo wa wastani wa kilimo kwa Kanda ya Ziwa, sawa na marudio ya chini ya kitabu cha kazi; mgongano ni na ukosefu wa chakula, ambao sasa unapimwa moja kwa moja na kundi la maisha (IPC 2026). Thamani zimebaki.",
+      "evidence": "HA.NAT.DR-FRE: Simiyu 5, Mwanza 5, Tabora 6, Shinyanga 7 (68 of 170 units sit at the minimum 5). VU.SE.LV-FS in the same workbook: Simiyu 142, Shinyanga 74, Mwanza 47, Tabora 57 (second, fifth, ninth and seventh highest of 31 regions).",
+      "raisedWith": "INFORM (JRC), SADC",
+      "issue": "UP-05",
+      "quarantine": false
+    },
+    {
+      "id": "DN-03",
+      "layer": "core",
+      "ref": "hazard:earthquake",
+      "indicator": "HA.NAT.EQ-EXP",
+      "status": "explained",
+      "where": {
+        "regions": [
+          "Kagera"
+        ]
+      },
+      "en": "Value under query. The GEM earthquake exposure index gives every Kagera unit 0, the same as the coast, although the Mw 5.9 Bukoba earthquake of 10 September 2016 (USGS catalogue, 27 km from Nsunga in Missenyi) damaged thousands of houses in Bukoba and Missenyi. The index counts people exposed to modelled shaking, which the global hazard model places low in Kagera. The Core keeps the workbook's value; the Advancement layer adds the recorded maximum felt intensity, so the 2016 event counts there. Resolution (10 October 2026): recomputed from the GEM Global Seismic Hazard Map v2023.1 itself, the workbook's index is the share of each council's area where the 475-year peak ground acceleration reaches 0.12 g (r = 0.96 with the workbook), and the Kagera councils lie at 0.03 to 0.06 g: the probabilistic model places them low despite the 2016 earthquake. The values are retained; the Advancement layer's felt-intensity and event-density members carry the observed seismicity.",
+      "sw": "Thamani inahojiwa. Fahirisi ya GEM ya kuathiriwa na tetemeko inaipa kila kitengo cha Kagera 0, sawa na pwani, ingawa tetemeko la Bukoba la Mw 5.9 la 10 Septemba 2016 (katalogi ya USGS, km 27 kutoka Nsunga, Missenyi) liliharibu maelfu ya nyumba Bukoba na Missenyi. Fahirisi huhesabu watu walio katika mtikisiko uliokadiriwa, ambao kielelezo cha kimataifa huuweka chini Kagera. Msingi unabaki na thamani ya kitabu cha kazi; tabaka la Maendeleo huongeza ukubwa wa juu wa mtikisiko uliorekodiwa, hivyo tukio la 2016 linahesabika huko. Utatuzi (10 Oktoba 2026): ikikokotolewa upya kutoka Ramani ya Hatari ya Tetemeko ya GEM v2023.1 yenyewe, fahirisi ya kitabu cha kazi ni sehemu ya eneo la kila halmashauri ambapo mtikisiko wa miaka 475 unafikia 0.12 g (r = 0.96 na kitabu cha kazi), na halmashauri za Kagera ziko 0.03 hadi 0.06 g: kielelezo cha uwezekano kinaziweka chini licha ya tetemeko la 2016. Thamani zimebaki; vipengele vya ukali uliohisiwa na msongamano wa matukio vya tabaka la Maendeleo vinabeba utetemeko uliorekodiwa.",
+      "evidence": "HA.NAT.EQ-EXP = 0 for all eight Kagera units (Karagwe, Bukoba, Muleba, Biharamulo, Ngara, Bukoba Urban, Missenyi, Kyerwa). data-source/usgs_earthquakes_tz.csv: 2016-09-10, -1.0355 31.6181, M 5.9, '27 km ENE of Nsunga, Tanzania'. earthquake_councils.csv max_felt: Missenyi 6.43 (35th of 195), Bukoba Municipal 6.27; n_events_50km 0 or 1.",
+      "raisedWith": "INFORM (JRC), SADC; GST for a national seismic zonation",
+      "issue": "UP-06",
+      "quarantine": false
+    },
+    {
+      "id": "DN-04",
+      "layer": "core",
+      "ref": "hazard:landslide",
+      "indicator": "HA.NAT.LS-EXP",
+      "status": "queried",
+      "where": {
+        "units": [
+          "Ukerewe"
+        ]
+      },
+      "en": "Value under query. Ukerewe, a low island in Lake Victoria, is the workbook's most landslide-exposed unit (index 1.0, score 10; the next is Same at 0.28). The World Bank landslide exposure layer appears to read the lake shore as hazard. The Advancement layer's slope member gives Ukerewe one of the lowest susceptibilities in the country. Raised with INFORM (JRC). Resolution (Benchmark 2026): the World Bank hazard map has no valid cell on the island (every cell is water or no-data, which the workbook counted as fully exposed); the benchmark records 0 for Ukerewe as an approved institutional value.",
+      "sw": "Thamani inahojiwa. Ukerewe, kisiwa tambarare katika Ziwa Victoria, ndicho kitengo chenye kuathiriwa zaidi na maporomoko ya ardhi katika kitabu cha kazi (fahirisi 1.0, alama 10; kinachofuata ni Same 0.28). Tabaka la Benki ya Dunia la maporomoko linaonekana kusoma ufukwe wa ziwa kama hatari. Kiashiria kidogo cha mteremko cha tabaka la Maendeleo kinaipa Ukerewe mojawapo ya uwezekano wa chini kabisa nchini. Imewasilishwa kwa INFORM (JRC). Utatuzi (Benchmark 2026): ramani ya hatari ya Benki ya Dunia haina seli halali kisiwani (kila seli ni maji au hakuna data, ambayo kitabu cha kazi kilihesabu kama iliyoathiriwa kabisa); benchmark inarekodi 0 kwa Ukerewe kama thamani ya kitaasisi iliyoidhinishwa.",
+      "evidence": "HA.NAT.LS-EXP: Ukerewe 1.0 (data range -6.9..0 after log; score 10); Same 0.284 (8.2); Ileje 0.272; Iringa Urban 0.263. landslide_slope_councils.csv: Ukerewe mean slope among the lowest 20 of 195 councils.",
+      "raisedWith": "INFORM (JRC)",
+      "issue": "UP-07",
+      "quarantine": true
+    },
+    {
+      "id": "DN-05",
+      "layer": "core",
+      "ref": "hazard:coastalHazards",
+      "indicator": "HA.NAT.CH-ERO",
+      "status": "artefact",
+      "where": {
+        "all": true
+      },
+      "en": "Known data artefact. Coastal erosion scores 0 for every unit because its reference range (−0.3 to 0 m/yr) maps every value to 0, and the only non-zero raw values (23 to 67 m/yr) sit in six landlocked Dodoma units, which points to misaligned rows in the workbook's indicator data. The coastal-hazards group therefore adds nothing to any score. Raised with INFORM (JRC) and SADC. Resolution (Benchmark 2026): the same source, Digital Earth Africa Coastlines, correctly joined to the councils gives every coastal council its shoreline retreat rate (Kibiti 1.2 m/yr, Mtwara 0.9, Mafia 0.8) and inland councils 0; the benchmark values replace the workbook's zeros.",
+      "sw": "Kasoro ya data inayojulikana. Mmomonyoko wa pwani hupata alama 0 kwa kila kitengo kwa sababu kiwango chake cha rejea (−0.3 hadi 0 m/mwaka) huweka kila thamani kuwa 0, na thamani pekee zisizo sifuri (23 hadi 67 m/mwaka) ziko katika vitengo sita vya Dodoma visivyo na pwani, jambo linaloonyesha safu zilizokosewa katika data ya viashiria ya kitabu cha kazi. Kundi la vitisho vya pwani hivyo haliongezi chochote kwenye alama yoyote. Imewasilishwa kwa INFORM (JRC) na SADC. Utatuzi (Benchmark 2026): chanzo kile kile, Digital Earth Africa Coastlines, kikiunganishwa ipasavyo na halmashauri, kinaipa kila halmashauri ya pwani kiwango chake cha kurudi nyuma kwa ufukwe (Kibiti 1.2 m/mwaka, Mtwara 0.9, Mafia 0.8) na halmashauri za bara 0; thamani za benchmark zinachukua nafasi ya sifuri za kitabu cha kazi.",
+      "evidence": "HA.NAT.CH-ERO raw: Bahi 67, Kondoa 45, Kongwa 45, Chemba 45, Mpwapwa 34, Dodoma Urban 23; 163 units 0; Mkinga empty. Custom range -0.3..0, sign Decrease Risk: every unit scores 0 (169 of 169).",
+      "raisedWith": "INFORM (JRC), SADC",
+      "issue": "UP-02",
+      "quarantine": true
+    },
+    {
+      "id": "DN-06",
+      "layer": "core",
+      "ref": "vulnerability:livelihoods",
+      "indicator": "VU.SE.LV-FS",
+      "status": "queried",
+      "where": {
+        "all": true
+      },
+      "en": "Value under query. The food-security indicator is labelled as the share of population in IPC phase 2 or higher, but Dodoma carries 149, Simiyu 142 and Manyara 102, which cannot be percentages (they look like thousands of people), and 110 units carry 0 where no IPC analysis was run, not where food is secure. Scores of 10 and 0 on this group are therefore not comparable. Raised with INFORM (JRC); institutions can replace the value through the Data portal. Resolution (Benchmark 2026): the IPC analysis of April 2026 gives the share of population in Phase 2 or worse for the 30 analysed districts (25 to 60%), and the activated IPC area-phase indicator classifies every council (Crisis in Maswa, Monduli and Same; Stressed in 27 districts; Minimal elsewhere). The workbook's values stay withheld.",
+      "sw": "Thamani inahojiwa. Kiashiria cha uhakika wa chakula kimeandikwa kama sehemu ya watu walio katika awamu ya 2 au zaidi ya IPC, lakini Dodoma ina 149, Simiyu 142 na Manyara 102, ambazo haziwezi kuwa asilimia (zinaonekana kama maelfu ya watu), na vitengo 110 vina 0 pale uchambuzi wa IPC haukufanyika, si pale chakula kilipo na uhakika. Alama 10 na 0 za kundi hili hivyo hazilinganishiki. Imewasilishwa kwa INFORM (JRC); taasisi zinaweza kubadilisha thamani kupitia lango la data. Utatuzi (Benchmark 2026): uchambuzi wa IPC wa Aprili 2026 unatoa sehemu ya watu walio katika Awamu ya 2 au mbaya zaidi kwa wilaya 30 zilizochambuliwa (25 hadi 60%), na kiashiria kilichoamilishwa cha awamu ya eneo ya IPC kinaainisha kila halmashauri (Mgogoro Maswa, Monduli na Same; Msongo wilaya 27; Kidogo kwingineko). Thamani za kitabu cha kazi zinabaki zimezuiliwa.",
+      "evidence": "VU.SE.LV-FS (unit '% pop phase 2 or higher', data range 0..149): Dodoma 149, Simiyu 142, Manyara 102, Tanga 85, Shinyanga 74, Arusha 62, Tabora 57, Singida 53, Mwanza 47; 110 of 170 units 0 (22 regions). Source per the Metadata sheet: IPC 2022-2024, region.",
+      "raisedWith": "INFORM (JRC); MoA / IPC technical working group",
+      "issue": "UP-03",
+      "quarantine": true
+    },
+    {
+      "id": "DN-07",
+      "layer": "core",
+      "ref": "vulnerability:displacedPeople",
+      "indicator": "VU.VG.DP-IDP",
+      "status": "queried",
+      "where": {
+        "regions": [
+          "Kaskazini Unguja",
+          "Manyara"
+        ]
+      },
+      "en": "Value under query. The internal-displacement indicator (IDMC 2023, one value per region) gives Kaskazini Unguja 30,080 people, a figure of the size of IDMC's national disaster-displacement count for Tanzania, and Manyara 0 although the Hanang (Katesh) landslide of 3 December 2023 displaced thousands. The regional assignment appears wrong. Raised with INFORM (JRC); PMO-DMD can enter the recorded figures through the Data portal. Resolution (Benchmark 2026): the 30,080 is IDMC's national disaster-displacement stock at the end of 2023 written on one region; the benchmark allocates IDMC's end-2024 stock (75,117) to the regions in proportion to the displacement events IDMC recorded in 2023-2025 (Morogoro, Pwani, Mbeya, Lindi, Arusha, Manyara and Katavi highest).",
+      "sw": "Thamani inahojiwa. Kiashiria cha wakimbizi wa ndani (IDMC 2023, thamani moja kwa kila mkoa) kinaipa Kaskazini Unguja watu 30,080, takwimu ya ukubwa wa hesabu ya kitaifa ya IDMC ya uhamisho wa majanga Tanzania, na Manyara 0 ingawa maporomoko ya Hanang (Katesh) ya 3 Desemba 2023 yaliwahamisha maelfu. Ugawaji wa kimkoa unaonekana kukosewa. Imewasilishwa kwa INFORM (JRC); PMO-DMD inaweza kuingiza takwimu zilizorekodiwa kupitia lango la data. Utatuzi (Benchmark 2026): 30,080 ni hesabu ya kitaifa ya IDMC ya waliohamishwa na maafa mwishoni mwa 2023 iliyoandikwa kwenye mkoa mmoja; benchmark inagawa hesabu ya IDMC ya mwishoni mwa 2024 (75,117) kwa mikoa kulingana na matukio ya uhamishaji yaliyorekodiwa na IDMC 2023-2025 (Morogoro, Pwani, Mbeya, Lindi, Arusha, Manyara na Katavi juu zaidi).",
+      "evidence": "VU.VG.DP-IDP: Kaskazini Unguja 30,080 (score 10); Mtwara 291 (7.3); Rukwa 146 (6.9); the other 28 regions 0, Manyara included. Source per the Metadata sheet: IDMC 2023, region.",
+      "raisedWith": "INFORM (JRC); PMO-DMD",
+      "issue": "UP-08",
+      "quarantine": true
+    },
+    {
+      "id": "DN-08",
+      "layer": "core",
+      "ref": "coping:communication",
+      "indicator": "CC.INF.COM-ELEC",
+      "status": "queried",
+      "where": {
+        "regions": [
+          "Dodoma"
+        ]
+      },
+      "en": "Value under query. Access to electricity is 100% for Dodoma region in the workbook (Global Data Lab), against 74% for Dar es Salaam and far less for every other region, while the same dataset gives Dodoma the lowest wealth index and income per head in Tanzania. The value is a data error that lowers Dodoma's lack of coping capacity. Raised with INFORM (JRC); NBS can replace it with the 2022 census figure through the Data portal. Resolution (Benchmark 2026): the 2022 census gives every council its share of households lit by electricity (Dodoma City 85%, Bahi 44%); the benchmark values replace the regional figure.",
+      "sw": "Thamani inahojiwa. Upatikanaji wa umeme ni 100% kwa mkoa wa Dodoma katika kitabu cha kazi (Global Data Lab), dhidi ya 74% kwa Dar es Salaam na chini zaidi kwa kila mkoa mwingine, wakati seti hiyo hiyo ya data inaipa Dodoma fahirisi ya chini kabisa ya utajiri na kipato kwa kila mtu Tanzania. Thamani hii ni kosa la data linalopunguza ukosefu wa uwezo wa kukabiliana wa Dodoma. Imewasilishwa kwa INFORM (JRC); NBS inaweza kuibadilisha na takwimu ya sensa ya 2022 kupitia lango la data. Utatuzi (Benchmark 2026): sensa ya 2022 inaipa kila halmashauri sehemu yake ya kaya zinazotumia umeme (Dodoma Jiji 85%, Bahi 44%); thamani za benchmark zinachukua nafasi ya takwimu ya kimkoa.",
+      "evidence": "CC.INF.COM-ELEC: Dodoma 100 (7 units), Mjini Magharibi 80.8, Dar-es-salaam 74.5, Kilimanjaro 41.5, median region 15.8. Same source (Global Data Lab): Dodoma IWI 19.1 (lowest), GNI 7.29 (lowest). Communication group score for Dodoma units 4.45 against 7.17 median.",
+      "raisedWith": "INFORM (JRC); NBS",
+      "issue": "UP-09",
+      "quarantine": true
+    },
+    {
+      "id": "DN-09",
+      "layer": "core",
+      "ref": "coping:accessHealth",
+      "indicator": "CC.INF.HC-FAC",
+      "status": "artefact",
+      "where": {
+        "all": true
+      },
+      "en": "Known data artefact. The density-of-health-facilities indicator never scores: its reference range is 0 to 0, and its raw values (25 for Kaskazini Unguja to 349 for Dodoma, labelled per capita) are facility counts by region, not densities. The access-to-health-care group is the mean of its other five indicators. Raised with INFORM (JRC); the Advancement layer scores the 2022 census facilities per 10,000 people.",
+      "sw": "Kasoro ya data inayojulikana. Kiashiria cha msongamano wa vituo vya afya hakipati alama kamwe: kiwango chake cha rejea ni 0 hadi 0, na thamani zake ghafi (25 kwa Kaskazini Unguja hadi 349 kwa Dodoma, zikiandikwa kwa kila mtu) ni hesabu za vituo kwa mkoa, si msongamano. Kundi la upatikanaji wa huduma za afya ni wastani wa viashiria vyake vingine vitano. Imewasilishwa kwa INFORM (JRC); tabaka la Maendeleo hupima vituo vya sensa ya 2022 kwa kila watu 10,000.",
+      "evidence": "CC.INF.HC-FAC: custom range 0..0, unit 'per capita', outlier Yes; raw 25..349, 31 distinct values (one per region). Source per the Metadata sheet: HDX 2019, region.",
+      "raisedWith": "INFORM (JRC), SADC",
+      "issue": "UP-04",
+      "quarantine": false
+    },
+    {
+      "id": "DN-10",
+      "layer": "core",
+      "ref": "hazard:earthquake",
+      "indicator": "HA.NAT.EQ-EXP",
+      "status": "explained",
+      "where": {
+        "valueAtLeast": 9.95
+      },
+      "en": "Explained. 49 units score 10 on earthquake because the GEM exposure index reaches its ceiling (raw 0.95 to 1.0) across the whole rift, from Dodoma and Arusha to Mbeya, Rukwa and Kigoma, so the Core cannot rank them against each other. The Advancement layer's event-density and felt-intensity members separate them.",
+      "sw": "Imeelezwa. Vitengo 49 hupata alama 10 za tetemeko kwa sababu fahirisi ya GEM ya kuathiriwa hufikia kikomo chake (ghafi 0.95 hadi 1.0) katika bonde lote la ufa, kutoka Dodoma na Arusha hadi Mbeya, Rukwa na Kigoma, hivyo Msingi hauwezi kuvipanga kimoja dhidi ya kingine. Viashiria vidogo vya msongamano wa matukio na ukubwa wa mtikisiko vya tabaka la Maendeleo huvitenganisha.",
+      "evidence": "hazardExposure.natural.earthquake: 49 of 169 units score 10 (raw >= 0.95 on a data range 0..1.000000072).",
+      "raisedWith": "",
+      "issue": "UP-10",
+      "quarantine": false
+    },
+    {
+      "id": "DN-11",
+      "layer": "core",
+      "ref": "hazard:flood",
+      "indicator": "HA.NAT.FL-EXP",
+      "status": "explained",
+      "where": {
+        "units": [
+          "Kinondoni"
+        ]
+      },
+      "en": "Explained. The JRC river-flood model gives Kinondoni 0.1% of people exposed against Ilala 1.4% and Temeke 2.2%, although the Msimbazi valley floods strike Kinondoni and Ilala alike: the model covers river floods, not the urban pluvial floods of Dar es Salaam. The Advancement layer's recorded flood events count Dar es Salaam's floods.",
+      "sw": "Imeelezwa. Kielelezo cha mafuriko ya mito cha JRC kinaipa Kinondoni 0.1% ya watu walioathiriwa dhidi ya Ilala 1.4% na Temeke 2.2%, ingawa mafuriko ya bonde la Msimbazi huikumba Kinondoni na Ilala sawasawa: kielelezo hushughulikia mafuriko ya mito, si mafuriko ya mvua ya mijini ya Dar es Salaam. Matukio ya mafuriko yaliyorekodiwa ya tabaka la Maendeleo huhesabu mafuriko ya Dar es Salaam.",
+      "evidence": "HA.NAT.FL-EXP raw: Kinondoni 0.001 (score 1.2), Ilala 0.014 (4.7), Temeke 0.022 (5.4). flood_events.csv: Dar es Salaam 2 recorded events 2010-2024 (Kinondoni, Temeke, Ubungo 1 each).",
+      "raisedWith": "",
+      "issue": "UP-11",
+      "quarantine": false
+    },
+    {
+      "id": "DN-12",
+      "layer": "core",
+      "ref": "hazard:internalViolence",
+      "indicator": "HA.HUM.VIO-EVE",
+      "indicators": [
+        "HA.HUM.VIO-EVE",
+        "HA.HUM.VIO-FAT"
+      ],
+      "status": "decision",
+      "where": {
+        "all": true
+      },
+      "en": "Withheld by programme decision (10 October 2026). The workbook's internal violence group counts the political violence events and fatalities that ACLED recorded in each region over 2020-2024 (Kigoma 57 events, Dar es Salaam 29, Mtwara 28 with 49 fatalities; most regions fewer than 10). Counts of this kind follow what the news reports, mix different kinds of violence and are kept by region only, and the programme judges them too complicated to read and to communicate as a council's hazard. The live model therefore carries no internal violence data: the group shows no value, and the human hazard category is the mean of its other groups (conflict intensity and conflict risk, hazardous material, vehicle accidents). The workbook keeps its values, and an institution can supply a validated council series through the Data portal.",
+      "sw": "Imezuiliwa kwa uamuzi wa programu (10 Oktoba 2026). Kundi la vurugu za ndani la kitabu cha kazi huhesabu matukio ya vurugu za kisiasa na vifo ambavyo ACLED ilirekodi katika kila mkoa kwa 2020-2024 (Kigoma matukio 57, Dar es Salaam 29, Mtwara 28 yenye vifo 49; mikoa mingi chini ya 10). Hesabu za aina hii hufuata kile kinachoripotiwa na vyombo vya habari, huchanganya aina tofauti za vurugu na hutunzwa kwa mkoa tu, na programu inaziona kuwa ngumu mno kusoma na kuwasilisha kama hatari ya halmashauri. Kwa hiyo kielelezo hai hakibebi data ya vurugu za ndani: kundi halionyeshi thamani, na kundi la vitisho vya kibinadamu ni wastani wa makundi yake mengine (ukubwa wa migogoro na hatari ya migogoro, vitu hatarishi, ajali za barabarani). Kitabu cha kazi kinahifadhi thamani zake, na taasisi inaweza kuwasilisha mfululizo wa halmashauri uliothibitishwa kupitia Lango la data.",
+      "evidence": "HA.HUM.VIO-EVE (ACLED 2020-2024, region): Kigoma 57, Dar es Salaam 29, Mtwara 28, Mwanza 17, Geita 17, Arusha 13, Morogoro 11; 24 regions 10 or fewer. HA.HUM.VIO-FAT: Mtwara 49, Kigoma 23, Pwani 10, Geita 10; 26 regions 8 or fewer.",
+      "raisedWith": "PMO-DMD (programme decision)",
+      "issue": "DATA-06",
+      "quarantine": true
+    }
+  ]
+}

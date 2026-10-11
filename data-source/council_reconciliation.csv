@@ -1,196 +1,196 @@
-counc_code,council_name,type,district,region,data_unit,is_new
-11,Kondoa District,District,Kondoa,Dodoma,Kondoa,
-22,Kondoa Town,Town,Kondoa,Dodoma,Kondoa,
-11,Mpwapwa District,District,Mpwapwa,Dodoma,Mpwapwa,
-11,Kongwa District,District,Kongwa,Dodoma,Kongwa,
-11,Chamwino District,District,Chamwino,Dodoma,Chamwino,
-14,Dodoma City,City,Dodoma,Dodoma,Dodoma Urban,
-11,Bahi District,District,Bahi,Dodoma,Bahi,
-11,Chemba District,District,Chemba,Dodoma,Chemba,
-11,Monduli District,District,Monduli,Arusha,Monduli,
-11,Meru District,District,Arumeru,Arusha,Meru,
-21,Arusha District,District,Arumeru,Arusha,Arusha,
-11,Longido District,District,Longido,Arusha,Longido,
-11,Karatu District,District,Karatu,Arusha,Karatu,
-11,Ngorongoro District,District,Ngorongoro,Arusha,Ngorongoro,
-14,Arusha City,City,Arusha,Arusha,Arusha Urban,
-11,Rombo District,District,Rombo,Kilimanjaro,Rombo,
-11,Mwanga District,District,Mwanga,Kilimanjaro,Mwanga,
-11,Same District,District,Same,Kilimanjaro,Same,
-13,Moshi Municipal,Municipal,Moshi,Kilimanjaro,Moshi Urban,
-21,Moshi District,District,Moshi,Kilimanjaro,Moshi,
-11,Hai District,District,Hai,Kilimanjaro,Hai,
-11,Siha District,District,Siha,Kilimanjaro,Siha,
-11,Lushoto District,District,Lushoto,Tanga,Lushoto,
-21,Bumbuli District,District,Lushoto,Tanga,Lushoto,yes
-11,Korogwe District,District,Korogwe,Tanga,Korogwe,
-22,Korogwe Town,Town,Korogwe,Tanga,Korogwe,
-11,Muheza District,District,Muheza,Tanga,Muheza,
-14,Tanga City,City,Tanga,Tanga,Tanga Urban,
-11,Pangani District,District,Pangani,Tanga,Pangani,
-11,Handeni District,District,Handeni,Tanga,Handeni,
-22,Handeni Town,Town,Handeni,Tanga,Handeni,
-11,Kilindi District,District,Kilindi,Tanga,Kilindi,
-11,Mkinga District,District,Mkinga,Tanga,Mkinga,
-11,Kilosa District,District,Kilosa,Morogoro,Kilosa,
-11,Morogoro District,District,Morogoro,Morogoro,Morogoro,
-23,Morogoro Municipal,Municipal,Morogoro,Morogoro,Morogoro Urban,
-11,Mlimba District,District,Kilombero,Morogoro,Kilombero,yes
-22,Ifakara Town,Town,Kilombero,Morogoro,Kilombero,yes
-11,Ulanga District,District,Ulanga,Morogoro,Ulanga,
-11,Malinyi District,District,Malinyi,Morogoro,Ulanga,yes
-11,Mvomero District,District,Mvomero,Morogoro,Mvomero,
-11,Gairo District,District,Gairo,Morogoro,Gairo,
-11,Bagamoyo District,District,Bagamoyo,Pwani,Bagamoyo,
-21,Chalinze District,District,Bagamoyo,Pwani,Bagamoyo,yes
-11,Kibaha District,District,Kibaha,Pwani,Kibaha,
-22,Kibaha Town,Town,Kibaha,Pwani,Kibaha,
-11,Kisarawe District,District,Kisarawe,Pwani,Kisarawe,
-11,Mkuranga District,District,Mkuranga,Pwani,Mkuranga,
-11,Rufiji District,District,Rufiji,Pwani,Rufiji,
-11,Mafia District,District,Mafia,Pwani,Mafia,
-11,Kibiti District,District,Kibiti,Pwani,Rufiji,yes
-13,Kinondoni Municipal,Municipal,Kinondoni,Dar es Salaam,Kinondoni,
-14,Dar Es Salaam City,City,Ilala,Dar es Salaam,Ilala,yes
-13,Temeke Municipal,Municipal,Temeke,Dar es Salaam,Temeke,
-13,Kigamboni Municipal,Municipal,Kigamboni,Dar es Salaam,Temeke,yes
-13,Ubungo Municipal,Municipal,Ubungo,Dar es Salaam,Kinondoni,yes
-11,Kilwa District,District,Kilwa,Lindi,Kilwa,
-11,Mtama District,District,Lindi,Lindi,Lindi,yes
-23,Lindi Municipal,Municipal,Lindi,Lindi,Lindi Urban,
-11,Nachingwea District,District,Nachingwea,Lindi,Nachingwea,
-11,Liwale District,District,Liwale,Lindi,Liwale,
-11,Ruangwa District,District,Ruangwa,Lindi,Ruangwa,
-11,Mtwara District,District,Mtwara,Mtwara,Mtwara,
-22,Nanyamba Town,Town,Mtwara,Mtwara,Mtwara,yes
-33,Mtwara Mikindani Municipal,Municipal,Mtwara,Mtwara,Mtwara,yes
-11,Newala District,District,Newala,Mtwara,Newala,
-22,Newala Town,Town,Newala,Mtwara,Newala,
-11,Masasi District,District,Masasi,Mtwara,Masasi,
-22,Masasi Town,Town,Masasi,Mtwara,Masasi,
-11,Tandahimba District,District,Tandahimba,Mtwara,Tandahimba,
-11,Nanyumbu District,District,Nanyumbu,Mtwara,Nanyumbu,
-11,Tunduru District,District,Tunduru,Ruvuma,Tunduru,
-11,Songea District,District,Songea,Ruvuma,Songea,
-23,Songea Municipal,Municipal,Songea,Ruvuma,Songea Urban,
-31,Madaba District,District,Songea,Ruvuma,Songea,yes
-11,Mbinga District,District,Mbinga,Ruvuma,Mbinga,
-22,Mbinga Town,Town,Mbinga,Ruvuma,Mbinga,
-11,Nyasa District,District,Nyasa,Ruvuma,Nyasa,
-11,Namtumbo District,District,Namtumbo,Ruvuma,Namtumbo,
-11,Iringa District,District,Iringa,Iringa,Iringa,
-23,Iringa Municipal,Municipal,Iringa,Iringa,Iringa Urban,
-12,Mafinga Town,Town,Mufindi,Iringa,Mufindi,yes
-21,Mufindi District,District,Mufindi,Iringa,Mufindi,
-11,Kilolo District,District,Kilolo,Iringa,Kilolo,
-11,Chunya District,District,Chunya,Mbeya,Chunya,
-11,Mbeya District,District,Mbeya,Mbeya,Mbeya,
-24,Mbeya City,City,Mbeya,Mbeya,Mbeya Urban,
-11,Kyela District,District,Kyela,Mbeya,Kyela,
-11,Rungwe District,District,Rungwe,Mbeya,Rungwe,
-21,Busokelo District,District,Rungwe,Mbeya,Rungwe,yes
-11,Mbarali District,District,Mbarali,Mbeya,Mbarali,
-11,Iramba District,District,Iramba,Singida,Iramba,
-11,Singida District,District,Singida,Singida,Singida,
-23,Singida Municipal,Municipal,Singida,Singida,Singida Urban,
-11,Manyoni District,District,Manyoni,Singida,Manyoni,
-21,Itigi District,District,Manyoni,Singida,Manyoni,yes
-11,Ikungi District,District,Ikungi,Singida,Ikungi,
-11,Mkalama District,District,Mkalama,Singida,Mkalama,
-12,Nzega Town,Town,Nzega,Tabora,Nzega,
-21,Nzega District,District,Nzega,Tabora,Nzega,
-11,Igunga District,District,Igunga,Tabora,Igunga,
-11,Uyui District,District,Uyui,Tabora,Uyui,
-11,Urambo District,District,Urambo,Tabora,Urambo,
-11,Sikonge District,District,Sikonge,Tabora,Sikonge,
-13,Tabora Municipal,Municipal,Tabora,Tabora,Tabora Urban,
-11,Kaliua District,District,Kaliua,Tabora,Kaliua,
-11,Kalambo District,District,Kalambo,Rukwa,Kalambo,
-11,Sumbawanga District,District,Sumbawanga,Rukwa,Sumbawanga,
-23,Sumbawanga Municipal,Municipal,Sumbawanga,Rukwa,Sumbawanga Urban,
-11,Nkasi District,District,Nkasi,Rukwa,Nkasi,
-11,Kibondo District,District,Kibondo,Kigoma,Kibondo,
-11,Kasulu District,District,Kasulu,Kigoma,Kasulu,
-22,Kasulu Town,Town,Kasulu,Kigoma,Kasulu,
-11,Kigoma District,District,Kigoma,Kigoma,Kigoma,
-23,Kigoma Ujiji City,City,Kigoma,Kigoma,Kigoma,yes
-11,Uvinza District,District,Uvinza,Kigoma,Uvinza,
-11,Buhigwe District,District,Buhigwe,Kigoma,Buhigwe,
-11,Kakonko District,District,Kakonko,Kigoma,Kakonko,
-11,Ushetu District,District,Kahama,Shinyanga,Kahama,yes
-23,Kahama Municipal,Municipal,Kahama,Shinyanga,Kahama,
-31,Msalala District,District,Kahama,Shinyanga,Kahama,yes
-11,Kishapu District,District,Kishapu,Shinyanga,Kishapu,
-11,Shinyanga District,District,Shinyanga,Shinyanga,Shinyanga,
-13,Shinyanga Municipal,Municipal,Shinyanga,Shinyanga,Shinyanga Urban,
-11,Karagwe District,District,Karagwe,Kagera,Karagwe,
-11,Bukoba District,District,Bukoba,Kagera,Bukoba,
-23,Bukoba Municipal,Municipal,Bukoba,Kagera,Bukoba Urban,
-11,Muleba District,District,Muleba,Kagera,Muleba,
-11,Biharamulo District,District,Biharamulo,Kagera,Biharamulo,
-11,Ngara District,District,Ngara,Kagera,Ngara,
-11,Kyerwa District,District,Kyerwa,Kagera,Kyerwa,
-11,Missenyi District,District,Missenyi,Kagera,Missenyi,
-11,Ukerewe District,District,Ukerewe,Mwanza,Ukerewe,
-11,Magu District,District,Magu,Mwanza,Magu,
-14,Mwanza City,City,Nyamagana,Mwanza,Nyamagana,yes
-11,Kwimba District,District,Kwimba,Mwanza,Kwimba,
-11,Sengerema District,District,Sengerema,Mwanza,Sengerema,
-21,Buchosa District,District,Sengerema,Mwanza,Sengerema,yes
-13,Ilemela Municipal,Municipal,Ilemela,Mwanza,Ilemela,
-11,Misungwi District,District,Misungwi,Mwanza,Misungwi,
-11,Tarime District,District,Tarime,Mara,Tarime,
-12,Tarime Town,Town,Tarime,Mara,Tarime,
-11,Serengeti District,District,Serengeti,Mara,Serengeti,
-11,Musoma District,District,Musoma,Mara,Musoma,
-23,Musoma Municipal,Municipal,Musoma,Mara,Musoma Urban,
-11,Bunda District,District,Bunda,Mara,Bunda,
-12,Bunda Town,Town,Bunda,Mara,Bunda,
-11,Butiama District,District,Butiama,Mara,Butiama,
-11,Rorya District,District,Rorya,Mara,Rorya,
-11,Babati District,District,Babati,Manyara,Babati,
-22,Babati Town,Town,Babati,Manyara,Babati,
-11,Hanang District,District,Hanang,Manyara,Hanang,
-11,Mbulu District,District,Mbulu,Manyara,Mbulu,
-22,Mbulu Town,Town,Mbulu,Manyara,Mbulu,
-11,Simanjiro District,District,Simanjiro,Manyara,Simanjiro,
-11,Kiteto District,District,Kiteto,Manyara,Kiteto,
-11,Njombe District,District,Njombe,Njombe,Njombe,
-22,Njombe Town,Town,Njombe,Njombe,Njombe,
-32,Makambako Town,Town,Njombe,Njombe,Njombe,yes
-11,Ludewa District,District,Ludewa,Njombe,Ludewa,
-11,Makete District,District,Makete,Njombe,Makete,
-11,Wanging'Ombe District,District,Wanging'ombe,Njombe,Wanging'ombe,
-13,Mpanda Municipal,Municipal,Mpanda,Katavi,Mpanda Urban,
-21,Nsimbo District,District,Mpanda,Katavi,Mpanda,yes
-11,Tanganyika District,District,Tanganyika,Katavi,Mpanda,yes
-11,Mlele District,District,Mlele,Katavi,Mlele,
-21,Mpimbwe District,District,Mlele,Katavi,Mlele,yes
-11,Bariadi District,District,Bariadi,Simiyu,Bariadi,
-22,Bariadi Town,Town,Bariadi,Simiyu,Bariadi,
-11,Itilima District,District,Itilima,Simiyu,Itilima,
-11,Meatu District,District,Meatu,Simiyu,Meatu,
-11,Maswa District,District,Maswa,Simiyu,Maswa,
-11,Busega District,District,Busega,Simiyu,Busega,
-11,Geita District,District,Geita,Geita,Geita,
-22,Geita Town,Town,Geita,Geita,Geita,
-11,Nyang'Hwale District,District,Nyang'hwale,Geita,Nyang'hwale,
-11,Halmashuari Ya Wilaya Ya Mbogwe District,District,Mbogwe,Geita,Mbogwe,yes
-11,Bukombe District,District,Bukombe,Geita,Bukombe,
-11,Chato District,District,Chato,Geita,Chato,
-11,Momba District,District,Momba,Songwe,Momba,
-22,Tunduma Town,Town,Momba,Songwe,Tunduma,
-11,Songwe District,District,Songwe,Songwe,Songwe,
-11,Mbozi District,District,Mbozi,Songwe,Mbozi,
-11,Ileje District,District,Ileje,Songwe,Ileje,
-12,Kaskazini A Town,Town,Kaskazini A,Kaskazini Unguja,Kaskazini A,
-12,Kaskazini B Town,Town,Kaskazini B,Kaskazini Unguja,Kaskazini B,
-12,Kati Town,Town,Kati,Kusini Unguja,Kati,
-11,Kusini District,District,Kusini,Kusini Unguja,Kusini,
-13,Mjini Municipal,Municipal,Mjini,Mjini Magharibi,Mjini,
-13,Magharibi A Municipal,Municipal,Magharibi A,Mjini Magharibi,Magharibi,yes
-01,Magharibi B Municipal,Municipal,Magharibi B,Mjini Magharibi,Magharibi,yes
-12,Wete Town,Town,Wete,Kaskazini Pemba,Wete,
-11,Micheweni District,District,Micheweni,Kaskazini Pemba,Micheweni,
-12,Chake Chake Town,Town,Chake Chake,Kusini Pemba,Chake Chake,
-12,Mkoani Town,Town,Mkoani,Kusini Pemba,Mkoani,
+code,council_name,type,district,region,workbook_unit,link,shared_with
+C001,Kondoa District,District,Kondoa,Dodoma,Kondoa,own,Kondoa Town
+C002,Kondoa Town,Town,Kondoa,Dodoma,Kondoa,own,Kondoa District
+C003,Mpwapwa District,District,Mpwapwa,Dodoma,Mpwapwa,own,
+C004,Kongwa District,District,Kongwa,Dodoma,Kongwa,own,
+C005,Chamwino District,District,Chamwino,Dodoma,Chamwino,own,
+C006,Dodoma City,City,Dodoma,Dodoma,Dodoma Urban,own,
+C007,Bahi District,District,Bahi,Dodoma,Bahi,own,
+C008,Chemba District,District,Chemba,Dodoma,Chemba,own,
+C009,Monduli District,District,Monduli,Arusha,Monduli,own,
+C010,Meru District,District,Arumeru,Arusha,Meru,own,
+C011,Arusha District,District,Arumeru,Arusha,Arusha,own,
+C012,Longido District,District,Longido,Arusha,Longido,own,
+C013,Karatu District,District,Karatu,Arusha,Karatu,own,
+C014,Ngorongoro District,District,Ngorongoro,Arusha,Ngorongoro,own,
+C015,Arusha City,City,Arusha,Arusha,Arusha Urban,own,
+C016,Rombo District,District,Rombo,Kilimanjaro,Rombo,own,
+C017,Mwanga District,District,Mwanga,Kilimanjaro,Mwanga,own,
+C018,Same District,District,Same,Kilimanjaro,Same,own,
+C019,Moshi Municipal,Municipal,Moshi,Kilimanjaro,Moshi Urban,own,
+C020,Moshi District,District,Moshi,Kilimanjaro,Moshi,own,
+C021,Hai District,District,Hai,Kilimanjaro,Hai,own,
+C022,Siha District,District,Siha,Kilimanjaro,Siha,own,
+C023,Lushoto District,District,Lushoto,Tanga,Lushoto,own,Bumbuli District
+C024,Bumbuli District,District,Lushoto,Tanga,Lushoto,inherits,Lushoto District
+C025,Korogwe District,District,Korogwe,Tanga,Korogwe,own,
+C026,Korogwe Town,Town,Korogwe,Tanga,Korogwe Township Authority,own,
+C027,Muheza District,District,Muheza,Tanga,Muheza,own,
+C028,Tanga City,City,Tanga,Tanga,Tanga Urban,own,
+C029,Pangani District,District,Pangani,Tanga,Pangani,own,
+C030,Handeni District,District,Handeni,Tanga,Handeni,own,
+C031,Handeni Town,Town,Handeni,Tanga,Handeni Mji,own,
+C032,Kilindi District,District,Kilindi,Tanga,Kilindi,own,
+C033,Mkinga District,District,Mkinga,Tanga,Mkinga,own,
+C034,Kilosa District,District,Kilosa,Morogoro,Kilosa,own,
+C035,Morogoro District,District,Morogoro,Morogoro,Morogoro,own,
+C036,Morogoro Municipal,Municipal,Morogoro,Morogoro,Morogoro Urban,own,
+C037,Mlimba District,District,Kilombero,Morogoro,Kilombero,inherits,Ifakara Town
+C038,Ifakara Town,Town,Kilombero,Morogoro,Kilombero,inherits,Mlimba District
+C039,Ulanga District,District,Ulanga,Morogoro,Ulanga,own,Malinyi District
+C040,Malinyi District,District,Malinyi,Morogoro,Ulanga,inherits,Ulanga District
+C041,Mvomero District,District,Mvomero,Morogoro,Mvomero,own,
+C042,Gairo District,District,Gairo,Morogoro,Gairo,own,
+C043,Bagamoyo District,District,Bagamoyo,Pwani,Bagamoyo,own,Chalinze District
+C044,Chalinze District,District,Bagamoyo,Pwani,Bagamoyo,inherits,Bagamoyo District
+C045,Kibaha District,District,Kibaha,Pwani,Kibaha,own,
+C046,Kibaha Town,Town,Kibaha,Pwani,Kibaha Urban,own,
+C047,Kisarawe District,District,Kisarawe,Pwani,Kisarawe,own,
+C048,Mkuranga District,District,Mkuranga,Pwani,Mkuranga,own,
+C049,Rufiji District,District,Rufiji,Pwani,Rufiji,own,Kibiti District
+C050,Mafia District,District,Mafia,Pwani,Mafia,own,
+C051,Kibiti District,District,Kibiti,Pwani,Rufiji,inherits,Rufiji District
+C052,Kinondoni Municipal,Municipal,Kinondoni,Dar es Salaam,Kinondoni,own,Ubungo Municipal
+C053,Dar es Salaam City,City,Ilala,Dar es Salaam,Ilala,renamed,
+C054,Temeke Municipal,Municipal,Temeke,Dar es Salaam,Temeke,own,Kigamboni Municipal
+C055,Kigamboni Municipal,Municipal,Kigamboni,Dar es Salaam,Temeke,inherits,Temeke Municipal
+C056,Ubungo Municipal,Municipal,Ubungo,Dar es Salaam,Kinondoni,inherits,Kinondoni Municipal
+C057,Kilwa District,District,Kilwa,Lindi,Kilwa,own,
+C058,Mtama District,District,Lindi,Lindi,Lindi,renamed,
+C059,Lindi Municipal,Municipal,Lindi,Lindi,Lindi Urban,own,
+C060,Nachingwea District,District,Nachingwea,Lindi,Nachingwea,own,
+C061,Liwale District,District,Liwale,Lindi,Liwale,own,
+C062,Ruangwa District,District,Ruangwa,Lindi,Ruangwa,own,
+C063,Mtwara District,District,Mtwara,Mtwara,Mtwara,own,Nanyamba Town
+C064,Nanyamba Town,Town,Mtwara,Mtwara,Mtwara,inherits,Mtwara District
+C065,Mtwara Mikindani Municipal,Municipal,Mtwara,Mtwara,Mtwara Urban,own,
+C066,Newala District,District,Newala,Mtwara,Newala,own,Newala Town
+C067,Newala Town,Town,Newala,Mtwara,Newala,own,Newala District
+C068,Masasi District,District,Masasi,Mtwara,Masasi,own,
+C069,Masasi Town,Town,Masasi,Mtwara,Masasi  Township Authority,own,
+C070,Tandahimba District,District,Tandahimba,Mtwara,Tandahimba,own,
+C071,Nanyumbu District,District,Nanyumbu,Mtwara,Nanyumbu,own,
+C072,Tunduru District,District,Tunduru,Ruvuma,Tunduru,own,
+C073,Songea District,District,Songea,Ruvuma,Songea,own,Madaba District
+C074,Songea Municipal,Municipal,Songea,Ruvuma,Songea Urban,own,
+C075,Madaba District,District,Songea,Ruvuma,Songea,inherits,Songea District
+C076,Mbinga District,District,Mbinga,Ruvuma,Mbinga,own,Mbinga Town
+C077,Mbinga Town,Town,Mbinga,Ruvuma,Mbinga,own,Mbinga District
+C078,Nyasa District,District,Nyasa,Ruvuma,Nyasa,own,
+C079,Namtumbo District,District,Namtumbo,Ruvuma,Namtumbo,own,
+C080,Iringa District,District,Iringa,Iringa,Iringa,own,
+C081,Iringa Municipal,Municipal,Iringa,Iringa,Iringa Urban,own,
+C082,Mafinga Town,Town,Mufindi,Iringa,Mafinga Township Authority,own,
+C083,Mufindi District,District,Mufindi,Iringa,Mufindi,own,
+C084,Kilolo District,District,Kilolo,Iringa,Kilolo,own,
+C085,Chunya District,District,Chunya,Mbeya,Chunya,own,
+C086,Mbeya District,District,Mbeya,Mbeya,Mbeya,own,
+C087,Mbeya City,City,Mbeya,Mbeya,Mbeya Urban,own,
+C088,Kyela District,District,Kyela,Mbeya,Kyela,own,
+C089,Rungwe District,District,Rungwe,Mbeya,Rungwe,own,Busokelo District
+C090,Busokelo District,District,Rungwe,Mbeya,Rungwe,inherits,Rungwe District
+C091,Mbarali District,District,Mbarali,Mbeya,Mbarali,own,
+C092,Iramba District,District,Iramba,Singida,Iramba,own,
+C093,Singida District,District,Singida,Singida,Singida,own,
+C094,Singida Municipal,Municipal,Singida,Singida,Singida Urban,own,
+C095,Manyoni District,District,Manyoni,Singida,Manyoni,own,Itigi District
+C096,Itigi District,District,Manyoni,Singida,Manyoni,inherits,Manyoni District
+C097,Ikungi District,District,Ikungi,Singida,Ikungi,own,
+C098,Mkalama District,District,Mkalama,Singida,Mkalama,own,
+C099,Nzega Town,Town,Nzega,Tabora,Nzega,own,Nzega District
+C100,Nzega District,District,Nzega,Tabora,Nzega,own,Nzega Town
+C101,Igunga District,District,Igunga,Tabora,Igunga,own,
+C102,Uyui District,District,Uyui,Tabora,Uyui,own,
+C103,Urambo District,District,Urambo,Tabora,Urambo,own,
+C104,Sikonge District,District,Sikonge,Tabora,Sikonge,own,
+C105,Tabora Municipal,Municipal,Tabora,Tabora,Tabora Urban,own,
+C106,Kaliua District,District,Kaliua,Tabora,Kaliua,own,
+C107,Kalambo District,District,Kalambo,Rukwa,Kalambo,own,
+C108,Sumbawanga District,District,Sumbawanga,Rukwa,Sumbawanga,own,
+C109,Sumbawanga Municipal,Municipal,Sumbawanga,Rukwa,Sumbawanga Urban,own,
+C110,Nkasi District,District,Nkasi,Rukwa,Nkasi,own,
+C111,Kibondo District,District,Kibondo,Kigoma,Kibondo,own,
+C112,Kasulu District,District,Kasulu,Kigoma,Kasulu,own,
+C113,Kasulu Town,Town,Kasulu,Kigoma,Kasulu Township Authority,own,
+C114,Kigoma District,District,Kigoma,Kigoma,Kigoma,own,
+C115,Kigoma Ujiji Municipal,Municipal,Kigoma,Kigoma,Kigoma  Urban,own,
+C116,Uvinza District,District,Uvinza,Kigoma,Uvinza,own,
+C117,Buhigwe District,District,Buhigwe,Kigoma,Buhigwe,own,
+C118,Kakonko District,District,Kakonko,Kigoma,Kakonko,own,
+C119,Ushetu District,District,Kahama,Shinyanga,Kahama,inherits,Msalala District
+C120,Kahama Municipal,Municipal,Kahama,Shinyanga,Kahama Township Authority,own,
+C121,Msalala District,District,Kahama,Shinyanga,Kahama,inherits,Ushetu District
+C122,Kishapu District,District,Kishapu,Shinyanga,Kishapu,own,
+C123,Shinyanga District,District,Shinyanga,Shinyanga,Shinyanga,own,
+C124,Shinyanga Municipal,Municipal,Shinyanga,Shinyanga,Shinyanga Urban,own,
+C125,Karagwe District,District,Karagwe,Kagera,Karagwe,own,
+C126,Bukoba District,District,Bukoba,Kagera,Bukoba,own,
+C127,Bukoba Municipal,Municipal,Bukoba,Kagera,Bukoba Urban,own,
+C128,Muleba District,District,Muleba,Kagera,Muleba,own,
+C129,Biharamulo District,District,Biharamulo,Kagera,Biharamulo,own,
+C130,Ngara District,District,Ngara,Kagera,Ngara,own,
+C131,Kyerwa District,District,Kyerwa,Kagera,Kyerwa,own,
+C132,Missenyi District,District,Missenyi,Kagera,Missenyi,own,
+C133,Ukerewe District,District,Ukerewe,Mwanza,Ukerewe,own,
+C134,Magu District,District,Magu,Mwanza,Magu,own,
+C135,Mwanza City,City,Nyamagana,Mwanza,Nyamagana,renamed,
+C136,Kwimba District,District,Kwimba,Mwanza,Kwimba,own,
+C137,Sengerema District,District,Sengerema,Mwanza,Sengerema,own,Buchosa District
+C138,Buchosa District,District,Sengerema,Mwanza,Sengerema,inherits,Sengerema District
+C139,Ilemela Municipal,Municipal,Ilemela,Mwanza,Ilemela,own,
+C140,Misungwi District,District,Misungwi,Mwanza,Misungwi,own,
+C141,Tarime District,District,Tarime,Mara,Tarime,own,Tarime Town
+C142,Tarime Town,Town,Tarime,Mara,Tarime,own,Tarime District
+C143,Serengeti District,District,Serengeti,Mara,Serengeti,own,
+C144,Musoma District,District,Musoma,Mara,Musoma,own,
+C145,Musoma Municipal,Municipal,Musoma,Mara,Musoma Urban,own,
+C146,Bunda District,District,Bunda,Mara,Bunda,own,Bunda Town
+C147,Bunda Town,Town,Bunda,Mara,Bunda,own,Bunda District
+C148,Butiama District,District,Butiama,Mara,Butiama,own,
+C149,Rorya District,District,Rorya,Mara,Rorya,own,
+C150,Babati District,District,Babati,Manyara,Babati,own,
+C151,Babati Town,Town,Babati,Manyara,Babati Urban,own,
+C152,Hanang District,District,Hanang,Manyara,Hanang,own,
+C153,Mbulu District,District,Mbulu,Manyara,Mbulu,own,Mbulu Town
+C154,Mbulu Town,Town,Mbulu,Manyara,Mbulu,own,Mbulu District
+C155,Simanjiro District,District,Simanjiro,Manyara,Simanjiro,own,
+C156,Kiteto District,District,Kiteto,Manyara,Kiteto,own,
+C157,Njombe District,District,Njombe,Njombe,Njombe,own,
+C158,Njombe Town,Town,Njombe,Njombe,Njombe Urban,own,
+C159,Makambako Town,Town,Njombe,Njombe,Makambako Township Authority,own,
+C160,Ludewa District,District,Ludewa,Njombe,Ludewa,own,
+C161,Makete District,District,Makete,Njombe,Makete,own,
+C162,Wanging'ombe District,District,Wanging'ombe,Njombe,Wanging'ombe,own,
+C163,Mpanda Municipal,Municipal,Mpanda,Katavi,Mpanda Urban,own,
+C164,Nsimbo District,District,Mpanda,Katavi,Mpanda,inherits,Tanganyika District
+C165,Tanganyika District,District,Tanganyika,Katavi,Mpanda,inherits,Nsimbo District
+C166,Mlele District,District,Mlele,Katavi,Mlele,own,Mpimbwe District
+C167,Mpimbwe District,District,Mlele,Katavi,Mlele,inherits,Mlele District
+C168,Bariadi District,District,Bariadi,Simiyu,Bariadi,own,Bariadi Town
+C169,Bariadi Town,Town,Bariadi,Simiyu,Bariadi,own,Bariadi District
+C170,Itilima District,District,Itilima,Simiyu,Itilima,own,
+C171,Meatu District,District,Meatu,Simiyu,Meatu,own,
+C172,Maswa District,District,Maswa,Simiyu,Maswa,own,
+C173,Busega District,District,Busega,Simiyu,Busega,own,
+C174,Geita District,District,Geita,Geita,Geita,own,Geita Town
+C175,Geita Town,Town,Geita,Geita,Geita,own,Geita District
+C176,Nyang'hwale District,District,Nyang'hwale,Geita,Nyang'hwale,own,
+C177,Mbogwe District,District,Mbogwe,Geita,Mbogwe,own,
+C178,Bukombe District,District,Bukombe,Geita,Bukombe,own,
+C179,Chato District,District,Chato,Geita,Chato,own,
+C180,Momba District,District,Momba,Songwe,Momba,own,
+C181,Tunduma Town,Town,Momba,Songwe,Tunduma,own,
+C182,Songwe District,District,Songwe,Songwe,Songwe,own,
+C183,Mbozi District,District,Mbozi,Songwe,Mbozi,own,
+C184,Ileje District,District,Ileje,Songwe,Ileje,own,
+C185,Kaskazini A Town,Town,Kaskazini A,Kaskazini Unguja,Kaskazini A,own,
+C186,Kaskazini B Town,Town,Kaskazini B,Kaskazini Unguja,Kaskazini B,own,
+C187,Kati Town,Town,Kati,Kusini Unguja,Kati,own,
+C188,Kusini District,District,Kusini,Kusini Unguja,Kusini,own,
+C189,Mjini Municipal,Municipal,Mjini,Mjini Magharibi,Mjini,own,
+C190,Magharibi A Municipal,Municipal,Magharibi A,Mjini Magharibi,Magharibi,inherits,Magharibi B Municipal
+C191,Magharibi B Municipal,Municipal,Magharibi B,Mjini Magharibi,Magharibi,inherits,Magharibi A Municipal
+C192,Wete Town,Town,Wete,Kaskazini Pemba,Wete,own,
+C193,Micheweni District,District,Micheweni,Kaskazini Pemba,Micheweni,own,
+C194,Chake Chake Town,Town,Chake Chake,Kusini Pemba,Chake Chake,own,
+C195,Mkoani Town,Town,Mkoani,Kusini Pemba,Mkoani,own,
