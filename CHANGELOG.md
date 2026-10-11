@@ -2,6 +2,16 @@
 
 ## Unreleased
 
+### The home page shows the national risk picture as charts (11 October 2026)
+
+- The four bare figures under the headline (national risk, councils assessed, people covered, councils at
+  high risk) are replaced by six charts in the scales' own colours (`NationalCharts`): risk and its
+  three parts on their class tracks; the councils by class on every scale as stacked bars; the climate
+  year by year (heatwave days, rainfall); and the national value of every indicator group of Hazard &
+  Exposure, Vulnerability and Lack of Coping Capacity, highest first. The distribution table of the
+  highest-risk section is folded into the stacked bars. The map caption names the model only, and the
+  footer no longer links to the source code.
+
 ### The Data portal's action library covers every indicator group, with lead sectors (11 October 2026)
 
 - The Committee desk's "Reducing risk" entry (PMO-DMD writes, the NDRRC reviews) now takes **any of the 32

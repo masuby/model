@@ -134,7 +134,6 @@
     "build": "Build {{build}}",
     "methodology": "Methodology",
     "sources": "Data sources",
-    "github": "Source code",
     "rights": "Open data and open methodology."
   },
   "states": {

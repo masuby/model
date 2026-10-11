@@ -315,7 +315,8 @@
       "heatSummary": "Wastani 1991-2020: siku {{base}} kwa mwaka; 2015-2024: siku {{recent}}.",
       "rain": "Mvua kwa mwaka, {{from}}-{{to}} (mm)",
       "rainSummary": "Kawaida 1991-2020: mm {{normal}}. Kavu zaidi {{dryYear}} (mm {{dry}}), mvua zaidi {{wetYear}} (mm {{wet}}).",
-      "heavySummary": "Siku {{days}} kwa mwaka zenye mm 50 au zaidi.",
+      "heavySummary_one": "Siku {{count}} kwa mwaka yenye mm 50 au zaidi.",
+      "heavySummary_other": "Siku {{count}} kwa mwaka zenye mm 50 au zaidi.",
       "noTrends": "Hakuna mfululizo wa hali ya hewa hapa."
     }
   }

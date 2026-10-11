@@ -1,20 +1,22 @@
 /**
- * Home - editorial landing page (docs/DESIGN_LANGUAGE.md): serif headline, key figures separated by
- * rules, a lightweight SVG map, and ruled sections instead of card grids. No decorative motion.
+ * Home - editorial landing page (docs/DESIGN_LANGUAGE.md): serif headline, a lightweight SVG map, the
+ * national risk picture as charts in the scales' colours, and ruled sections instead of card grids. No
+ * decorative motion.
  */
 import { ArrowRight } from 'lucide-react';
 import * as React from 'react';
 import { useTranslation } from 'react-i18next';
 import workbookSources from '@/data/inform-workbook-sources.json';
 import { Link, useNavigate } from 'react-router-dom';
-import { KeyFigures, PageContainer, Section, SectionHeading } from '@/components/layout/Page';
+import { PageContainer, Section, SectionHeading } from '@/components/layout/Page';
 import { ClassBadge, ClassDot } from '@/components/risk/RiskBadge';
 import { Button } from '@/components/ui/button';
 import { useModel } from '@/data-layer/DataProvider';
-import { CLASS_COLORS, CLASS_KEYS, classify, type ClassKey } from '@/engine/risk/classes';
+import { CLASS_COLORS, CLASS_KEYS, classify } from '@/engine/risk/classes';
 import { parseMetric } from '@/engine/risk/metrics';
 import { topDrivers } from '@/engine/risk/model';
-import { formatCompact, formatScore } from '@/lib/utils';
+import { formatScore } from '@/lib/utils';
+import { NationalCharts } from './components/NationalCharts';
 
 const StaticMap = React.lazy(() => import('@/components/map/StaticMap'));
 
@@ -28,21 +30,11 @@ const SOURCES = (() => {
 const DIMS = ['hazard', 'vulnerability', 'coping'] as const;
 
 export default function HomePage() {
-  const { t, i18n } = useTranslation(['home', 'common', 'indicators']);
+  const { t } = useTranslation(['home', 'common', 'indicators']);
   const model = useModel();
   const navigate = useNavigate();
   const riskMetric = React.useMemo(() => parseMetric('risk'), []);
 
-  const counts = React.useMemo(() => {
-    const c = Object.fromEntries(CLASS_KEYS.map((k) => [k, 0])) as Record<ClassKey, number>;
-    for (const u of model.councils) {
-      const k = classify(u.risk)?.key;
-      if (k) c[k]++;
-    }
-    return c;
-  }, [model]);
-  const highOrAbove = counts.high + counts.veryHigh;
-  const population = model.councils.reduce((s, c) => s + (c.exposure?.population ?? 0), 0);
   const top = React.useMemo(() => [...model.councils].sort((a, b) => (b.risk ?? 0) - (a.risk ?? 0)).slice(0, 10), [model]);
   const national = model.national;
 
@@ -64,23 +56,6 @@ export default function HomePage() {
             </Button>
           </div>
 
-          <KeyFigures
-            className="mt-14 border-t border-border pt-8"
-            items={[
-              {
-                label: t('figures.national'),
-                value: (
-                  <span className="flex items-baseline gap-3">
-                    {formatScore(national.risk)}
-                    <ClassBadge value={national.risk} size="sm" className="-translate-y-[3px]" />
-                  </span>
-                ),
-              },
-              { label: t('figures.councils'), value: model.councils.length },
-              { label: t('figures.people'), value: formatCompact(population, i18n.language) },
-              { label: t('figures.high'), value: highOrAbove, sub: t('kpi.highRiskSub', { pct: Math.round((highOrAbove / model.councils.length) * 100) }) },
-            ]}
-          />
         </div>
 
         <figure className="w-full">
@@ -102,8 +77,13 @@ export default function HomePage() {
         </figure>
       </PageContainer>
 
-      {/* ---------------------------------------------------------------------- How the index works */}
+      {/* ------------------------------------------------------------------ The national risk picture */}
       <PageContainer>
+        <Section>
+          <SectionHeading title={t('picture.title')} description={t('picture.lead')} />
+          <NationalCharts model={model} />
+        </Section>
+
         <Section>
           <SectionHeading title={t('formula.title')} description={t('formula.lead')} />
           <div className="grid gap-y-8 md:grid-cols-3 md:divide-x md:divide-border">
@@ -146,7 +126,7 @@ export default function HomePage() {
               </Button>
             }
           />
-          <div className="grid gap-12 lg:grid-cols-[1.6fr_1fr]">
+          <div>
             <ol className="divide-y divide-border border-y border-border">
               {top.map((u, i) => {
                 const driver = topDrivers(u, 1, 'hazard')[0];
@@ -171,30 +151,6 @@ export default function HomePage() {
               })}
             </ol>
 
-            <div>
-              <h3 className="text-base font-semibold">{t('top.distribution')}</h3>
-              <div className="mt-5 flex h-3 overflow-hidden">
-                {CLASS_KEYS.map((k) =>
-                  counts[k] ? <div key={k} style={{ width: `${(counts[k] / model.councils.length) * 100}%`, background: CLASS_COLORS[k] }} title={`${t(`common:classes.${k}`)}: ${counts[k]}`} /> : null,
-                )}
-              </div>
-              <table className="mt-5 w-full text-sm">
-                <tbody className="divide-y divide-border">
-                  {[...CLASS_KEYS].reverse().map((k) => (
-                    <tr key={k}>
-                      <td className="py-2.5">
-                        <span className="flex items-center gap-2.5">
-                          <span className="inline-block size-2.5 shrink-0 rounded-[2px]" style={{ background: CLASS_COLORS[k] }} aria-hidden />
-                          {t(`common:classes.${k}`)}
-                        </span>
-                      </td>
-                      <td className="num py-2.5 text-right font-medium">{counts[k]}</td>
-                      <td className="num w-14 py-2.5 text-right text-muted-foreground">{Math.round((counts[k] / model.councils.length) * 100)}%</td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
           </div>
         </Section>
 

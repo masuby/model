@@ -23,7 +23,7 @@ import { parseMetric, rampColor } from '@/engine/risk/metrics';
 import { indicatorValue, placeKey } from '@/engine/risk/model';
 import { dataNotesFor, worstStatus } from '@/engine/risk/notes';
 import type { RiskModel, Unit } from '@/engine/risk/types';
-import { ClimateTrends } from '@/features/explore/components/AreaInsight';
+import { ClimateTrends } from '@/features/explore/components/ClimateTrends';
 import { EvidenceItem } from '@/features/explore/components/Evidence';
 import { coarseOf, dimensionGroups, evidenceFor, groupRanks, memberSpread, type TopGroup } from '@/features/explore/lib/riskPanel';
 import { ALERT_COLOR, planMessage, riskBandFor } from '@/features/guide/alert';

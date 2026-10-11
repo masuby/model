@@ -315,7 +315,8 @@
       "heatSummary": "1991-2020 average {{base}} days a year; 2015-2024 {{recent}}.",
       "rain": "Rainfall a year, {{from}}-{{to}} (mm)",
       "rainSummary": "Normal 1991-2020: {{normal}} mm. Driest {{dryYear}} ({{dry}} mm), wettest {{wetYear}} ({{wet}} mm).",
-      "heavySummary": "{{days}} days a year with 50 mm or more.",
+      "heavySummary_one": "{{count}} day a year with 50 mm or more.",
+      "heavySummary_other": "{{count}} days a year with 50 mm or more.",
       "noTrends": "No climate series here."
     }
   }

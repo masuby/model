@@ -220,11 +220,6 @@ function Footer() {
                   {t('footer.sources')}
                 </Link>
               </li>
-              <li>
-                <a className="text-foreground/80 hover:text-primary" href="https://github.com/masuby/model" target="_blank" rel="noreferrer">
-                  {t('footer.github')}
-                </a>
-              </li>
             </ul>
           </div>
         </div>

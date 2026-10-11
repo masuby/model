@@ -30,7 +30,6 @@
     "title": "Highest-risk councils",
     "lead": "Ranked by INFORM Risk. Select a council to see what drives its score.",
     "all": "Open the full ranking",
-    "distribution": "How councils are distributed across risk classes",
     "drivers": "Main driver",
     "rank": "Rank",
     "council": "Council",
@@ -56,11 +55,19 @@
     "primary": "Start exploring",
     "secondary": "Read the methodology"
   },
-  "mapSource": "INFORM Risk by council. Sources: INFORM Tanzania model, NBS 2022 census.",
-  "figures": {
-    "national": "National INFORM Risk",
-    "councils": "Councils assessed",
-    "people": "People covered",
-    "high": "Councils at high risk"
+  "mapSource": "INFORM Risk by council. Sources: INFORM Tanzania model.",
+  "picture": {
+    "title": "The national risk picture",
+    "lead": "Tanzania today, read from the same model as every council: the risk and its parts, where the councils fall, the climate year by year, and what weighs in each dimension.",
+    "parts": "Risk and its parts",
+    "partsNote": "INFORM aggregate of {{councils}} councils · {{people}} people (2022 census)",
+    "trackAria": "{{label}}: {{score}} out of 10, {{cls}}",
+    "classes": "Councils by class",
+    "classesNote": "{{high}} councils ({{pct}}%) at high or very high risk",
+    "highOrAbove": "{{count}} high or above",
+    "trends": "Hazard trends",
+    "groupsNote": "National value of each indicator group, highest first",
+    "dimensionScore": "Dimension score",
+    "more": "and {{count}} more groups"
   }
 }

@@ -30,7 +30,6 @@
     "title": "Halmashauri zenye hatari kubwa zaidi",
     "lead": "Zimepangwa kwa Hatari ya INFORM. Chagua halmashauri kuona kinachoendesha alama yake.",
     "all": "Fungua orodha kamili",
-    "distribution": "Mgawanyo wa halmashauri kwa madaraja ya hatari",
     "drivers": "Kichocheo kikuu",
     "rank": "Nafasi",
     "council": "Halmashauri",
@@ -56,11 +55,19 @@
     "primary": "Anza kuchunguza",
     "secondary": "Soma mbinu"
   },
-  "mapSource": "Hatari ya INFORM kwa halmashauri. Vyanzo: mfumo wa INFORM Tanzania, Sensa ya 2022 ya NBS.",
-  "figures": {
-    "national": "Hatari ya INFORM Kitaifa",
-    "councils": "Halmashauri zilizopimwa",
-    "people": "Watu waliohusishwa",
-    "high": "Halmashauri zenye hatari kubwa"
+  "mapSource": "Hatari ya INFORM kwa halmashauri. Vyanzo: mfumo wa INFORM Tanzania.",
+  "picture": {
+    "title": "Picha ya hatari ya kitaifa",
+    "lead": "Tanzania leo, kutoka kwenye modeli ileile ya kila halmashauri: hatari na sehemu zake, halmashauri ziko wapi, hali ya hewa mwaka kwa mwaka, na kinachobeba uzito katika kila kipimo.",
+    "parts": "Hatari na sehemu zake",
+    "partsNote": "Mjumuiko wa INFORM wa halmashauri {{councils}} · watu {{people}} (sensa ya 2022)",
+    "trackAria": "{{label}}: {{score}} kati ya 10, {{cls}}",
+    "classes": "Halmashauri kwa daraja",
+    "classesNote": "Halmashauri {{high}} ({{pct}}%) zenye hatari ya juu au ya juu sana",
+    "highOrAbove": "{{count}} za juu au zaidi",
+    "trends": "Mienendo ya vitisho",
+    "groupsNote": "Thamani ya kitaifa ya kila kundi la viashiria, ya juu kwanza",
+    "dimensionScore": "Alama ya kipimo",
+    "more": "na makundi {{count}} zaidi"
   }
 }
