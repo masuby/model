@@ -67,8 +67,6 @@
     "relationAria": "INFORM risk, hazard, vulnerability and lack of coping capacity across the {{count}} councils ranked by risk",
     "relationLeft": "Highest risk",
     "relationRight": "Lowest risk",
-    "trends": "Hazard trends",
-    "heat": "Heatwave days a year, {{from}}-{{to}}",
-    "heatNote": "{{base}} days a year in 1991-2020, {{recent}} in 2015-2024"
+    "pieCentre": "councils"
   }
 }

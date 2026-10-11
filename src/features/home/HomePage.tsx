@@ -41,7 +41,8 @@ export default function HomePage() {
   return (
     <div>
       {/* ---------------------------------------------------------------------------------- Hero */}
-      <PageContainer className="grid items-center gap-12 pt-12 pb-16 lg:grid-cols-[1fr_minmax(0,520px)] lg:gap-16 lg:pt-20 lg:pb-20">
+      {/* The charts take the room: the map sits a little to the right, into the page margin, and the columns stay closer. */}
+      <PageContainer className="grid items-center gap-12 pt-12 pb-16 lg:grid-cols-[minmax(0,1fr)_minmax(0,500px)] lg:gap-10 lg:pt-20 lg:pb-20 xl:gap-12">
         <div>
           <h1 className="max-w-2xl text-[2.6rem] leading-[1.05] text-balance sm:text-[3.4rem] lg:text-[3.8rem]">{t('title')}</h1>
           <p className="mt-6 max-w-xl text-lg leading-relaxed text-muted-foreground">{t('lead', { councils: model.councils.length, regions: model.regions.length })}</p>
@@ -59,7 +60,7 @@ export default function HomePage() {
           <NationalCharts model={model} className="mt-12 border-t border-border pt-8" />
         </div>
 
-        <figure className="w-full">
+        <figure className="w-full lg:-mr-8 lg:w-[calc(100%+2rem)] xl:-mr-10 xl:w-[calc(100%+2.5rem)]">
           <div className="aspect-[1000/966] w-full">
             <React.Suspense fallback={<div className="size-full rounded-md bg-muted/60" />}>
               <StaticMap model={model} metric={riskMetric} className="size-full" onSelect={(u) => navigate(`/area/${u.id}`)} />

@@ -1,18 +1,15 @@
 /**
- * The national risk picture under the home page's headline, where the four figures were: four compact
+ * The national risk picture under the home page's headline, where the four figures were: three compact
  * charts in each scale's own colours. Risk and its three parts on their class tracks; the councils by
- * risk class as a pie; how the three parts relate to risk across all the councils; and heatwave days
- * year by year for Tanzania.
+ * risk class as a pie; and how the three parts relate to risk across all the councils.
  */
 import * as React from 'react';
 import { useTranslation } from 'react-i18next';
-import { CLASS_KEYS, classColor, classify, THRESHOLDS, type ClassKey, type Scale } from '@/engine/risk/classes';
+import { CLASS_KEYS, classColor, classify, readableOn, THRESHOLDS, type ClassKey, type Scale } from '@/engine/risk/classes';
 import { DIMENSIONS, type DimensionKey } from '@/engine/risk/hierarchy';
 import { isNum } from '@/engine/risk/math';
 import type { RiskModel, Unit } from '@/engine/risk/types';
-import { YearBars } from '@/features/explore/components/ClimateTrends';
-import { meanOver, seriesFor, useTrends } from '@/features/explore/lib/trends';
-import { cn, formatCompact, formatNumber, formatScore } from '@/lib/utils';
+import { cn, formatCompact, formatScore } from '@/lib/utils';
 
 type PartKey = 'risk' | DimensionKey;
 const PARTS: ReadonlyArray<{ key: PartKey; scale: Scale }> = [{ key: 'risk', scale: 'risk' }, ...DIMENSIONS.map((d) => ({ key: d.key, scale: d.scale }))];
@@ -43,17 +40,16 @@ export function NationalCharts({ model, className }: { model: RiskModel; classNa
       <Block title={t('picture.pie')} note={t('picture.pieNote', { high, pct: Math.round((high / model.councils.length) * 100) })}>
         <ClassPie counts={counts} total={model.councils.length} />
       </Block>
-      <Block title={t('picture.relation')} note={t('picture.relationNote', { count: model.councils.length, window: SMOOTH })}>
+      <Block title={t('picture.relation')} note={t('picture.relationNote', { count: model.councils.length, window: SMOOTH })} className="sm:col-span-2">
         <RelationLines model={model} />
       </Block>
-      <HeatTrend unit={national} />
     </div>
   );
 }
 
-function Block({ title, note, children }: { title: string; note?: string; children: React.ReactNode }) {
+function Block({ title, note, className, children }: { title: string; note?: string; className?: string; children: React.ReactNode }) {
   return (
-    <section>
+    <section className={className}>
       <h3 className="text-sm font-semibold">{title}</h3>
       {note && <p className="mt-0.5 text-xs leading-snug text-muted-foreground">{note}</p>}
       <div className="mt-3">{children}</div>
@@ -96,32 +92,68 @@ function PartTracks({ unit }: { unit: Unit }) {
   );
 }
 
-/** The councils by risk class as a pie in the risk palette, with the count and share of each class beside it. */
+/** A donut slice from angle a0 to a1 (radians from twelve o'clock), with a small gap on each side. */
+function arc(a0: number, a1: number, R: number, r: number, gap: number): string {
+  const g = a1 - a0 > 2 * gap ? gap : 0;
+  const s = a0 + g;
+  const e = a1 - g;
+  const pt = (rad: number, a: number) => [50 + rad * Math.sin(a), 50 - rad * Math.cos(a)];
+  const [x0, y0] = pt(R, s);
+  const [x1, y1] = pt(R, e);
+  const [x2, y2] = pt(r, e);
+  const [x3, y3] = pt(r, s);
+  const large = e - s > Math.PI ? 1 : 0;
+  return `M${x0.toFixed(2)},${y0.toFixed(2)} A${R},${R} 0 ${large} 1 ${x1.toFixed(2)},${y1.toFixed(2)} L${x2.toFixed(2)},${y2.toFixed(2)} A${r},${r} 0 ${large} 0 ${x3.toFixed(2)},${y3.toFixed(2)} Z`;
+}
+
+/**
+ * The councils by risk class as a donut in the risk palette: one slice per class with its share written
+ * on it when there is room, the total in the middle, and the count and share of every class beside it.
+ */
 function ClassPie({ counts, total }: { counts: Record<ClassKey, number>; total: number }) {
   const { t } = useTranslation(['home', 'common']);
-  const r = 40;
-  const c = 2 * Math.PI * r;
-  let offset = 0;
+  const R = 48;
+  const r = 29;
+  let angle = 0;
   const slices = CLASS_KEYS.map((k) => {
     const share = total ? counts[k] / total : 0;
-    const slice = { key: k, share, dash: `${share * c} ${c - share * c}`, offset: -offset * c };
-    offset += share;
-    return slice;
+    const a0 = angle;
+    const a1 = angle + share * 2 * Math.PI;
+    angle = a1;
+    const mid = (a0 + a1) / 2;
+    const lr = (R + r) / 2;
+    return { key: k, share, d: arc(a0, a1, R, r, 0.028), lx: 50 + lr * Math.sin(mid), ly: 50 - lr * Math.cos(mid) };
   });
   const label = CLASS_KEYS.map((k) => `${t(`common:classes.${k}`)} ${counts[k]} (${Math.round((counts[k] / total) * 100)}%)`).join(', ');
   return (
     <div className="flex items-center gap-5">
-      <svg viewBox="0 0 100 100" className="size-28 shrink-0 -rotate-90" role="img" aria-label={`${t('picture.pie')}: ${label}`}>
-        <circle cx="50" cy="50" r={r} fill="none" stroke="var(--muted)" strokeWidth="18" />
+      <svg viewBox="0 0 100 100" className="size-36 shrink-0" role="img" aria-label={`${t('picture.pie')}: ${label}`}>
         {slices.map((s) =>
-          s.share > 0 ? <circle key={s.key} cx="50" cy="50" r={r} fill="none" stroke={classColor(s.key, 'risk')} strokeWidth="18" strokeDasharray={s.dash} strokeDashoffset={s.offset} /> : null,
+          s.share > 0 ? (
+            <path key={s.key} d={s.d} fill={classColor(s.key, 'risk')} stroke="var(--background)" strokeWidth={0.6} strokeLinejoin="round">
+              <title>{`${t(`common:classes.${s.key}`)}: ${counts[s.key]} (${Math.round(s.share * 100)}%)`}</title>
+            </path>
+          ) : null,
         )}
+        {slices.map((s) =>
+          s.share >= 0.08 ? (
+            <text key={`l-${s.key}`} x={s.lx} y={s.ly} textAnchor="middle" dominantBaseline="central" fontSize="7" fontWeight="600" fill={readableOn(classColor(s.key, 'risk'))} className="num">
+              {Math.round(s.share * 100)}%
+            </text>
+          ) : null,
+        )}
+        <text x="50" y="47" textAnchor="middle" dominantBaseline="central" fontSize="14" fontWeight="700" fill="currentColor" className="num">
+          {total}
+        </text>
+        <text x="50" y="59" textAnchor="middle" dominantBaseline="central" fontSize="6" fill="currentColor" fillOpacity={0.65}>
+          {t('picture.pieCentre')}
+        </text>
       </svg>
-      <ul className="min-w-0 flex-1 space-y-1 text-xs">
+      <ul className="min-w-0 flex-1 space-y-1.5 text-xs">
         {[...CLASS_KEYS].reverse().map((k) => (
-          <li key={k} className="flex items-baseline justify-between gap-2">
+          <li key={k} className={cn('flex items-baseline justify-between gap-2', !counts[k] && 'text-muted-foreground')}>
             <span className="inline-flex min-w-0 items-center gap-1.5">
-              <span className="size-2 shrink-0 rounded-[2px]" style={{ background: classColor(k, 'risk') }} aria-hidden />
+              <span className="size-2.5 shrink-0 rounded-[2px]" style={{ background: classColor(k, 'risk'), opacity: counts[k] ? 1 : 0.35 }} aria-hidden />
               <span className="truncate">{t(`common:classes.${k}`)}</span>
             </span>
             <span className="num shrink-0">
@@ -146,9 +178,10 @@ function smooth(values: number[], window: number): number[] {
 /** The three parts against risk across every council: councils ranked by risk, highest first, each part a smoothed line. */
 function RelationLines({ model }: { model: RiskModel }) {
   const { t } = useTranslation(['home', 'common']);
-  const W = 320;
-  const H = 120;
-  const PAD = { l: 18, r: 4, t: 6, b: 16 };
+  // The drawing stretches to the block's width (preserveAspectRatio none); labels stay HTML so they keep their size on a phone.
+  const W = 600;
+  const H = 150;
+  const PAD = 3;
   const ranked = React.useMemo(() => model.councils.filter((u) => isNum(u.risk)).sort((a, b) => b.risk! - a.risk!), [model]);
   const lines = React.useMemo(
     () =>
@@ -161,32 +194,34 @@ function RelationLines({ model }: { model: RiskModel }) {
       })),
     [ranked],
   );
-  const x = (i: number) => PAD.l + (i / Math.max(1, ranked.length - 1)) * (W - PAD.l - PAD.r);
-  const y = (v: number) => PAD.t + (1 - v / 10) * (H - PAD.t - PAD.b);
+  const x = (i: number) => (i / Math.max(1, ranked.length - 1)) * W;
+  const y = (v: number) => PAD + (1 - v / 10) * (H - 2 * PAD);
   const path = (points: number[]) => points.map((v, i) => `${i ? 'L' : 'M'}${x(i).toFixed(1)},${y(v).toFixed(1)}`).join(' ');
   const name = (key: PartKey) => (key === 'risk' ? t('common:informRisk') : t(`common:dimensions.${key}Short`));
   return (
     <div>
-      <svg viewBox={`0 0 ${W} ${H}`} className="h-32 w-full" role="img" aria-label={t('picture.relationAria', { count: ranked.length })}>
-        {[0, 5, 10].map((v) => (
-          <g key={v}>
-            <line x1={PAD.l} x2={W - PAD.r} y1={y(v)} y2={y(v)} stroke="currentColor" strokeOpacity={0.15} strokeWidth={0.75} />
-            <text x={PAD.l - 4} y={y(v)} textAnchor="end" dominantBaseline="central" fontSize="8" fill="currentColor" fillOpacity={0.6}>
-              {v}
-            </text>
-          </g>
-        ))}
-        {lines.map((l) => (
-          <path key={l.key} d={path(l.points)} fill="none" stroke={LINE[l.key]} strokeWidth={l.key === 'risk' ? 2 : 1.5} strokeLinejoin="round" strokeLinecap="round" />
-        ))}
-        <text x={PAD.l} y={H - 3} fontSize="8" fill="currentColor" fillOpacity={0.6}>
-          {t('picture.relationLeft')}
-        </text>
-        <text x={W - PAD.r} y={H - 3} textAnchor="end" fontSize="8" fill="currentColor" fillOpacity={0.6}>
-          {t('picture.relationRight')}
-        </text>
-      </svg>
-      <p className="mt-1 flex flex-wrap gap-x-3 gap-y-1 text-[11px] text-muted-foreground" aria-hidden>
+      <div className="flex gap-2">
+        <div className="num flex h-36 shrink-0 flex-col justify-between text-[10px] leading-none text-muted-foreground" aria-hidden>
+          <span>10</span>
+          <span>5</span>
+          <span>0</span>
+        </div>
+        <div className="min-w-0 flex-1">
+          <svg viewBox={`0 0 ${W} ${H}`} preserveAspectRatio="none" className="h-36 w-full" role="img" aria-label={t('picture.relationAria', { count: ranked.length })}>
+            {[0, 5, 10].map((v) => (
+              <line key={v} x1={0} x2={W} y1={y(v)} y2={y(v)} stroke="currentColor" strokeOpacity={0.15} strokeWidth={1} vectorEffect="non-scaling-stroke" />
+            ))}
+            {lines.map((l) => (
+              <path key={l.key} d={path(l.points)} fill="none" stroke={LINE[l.key]} strokeWidth={l.key === 'risk' ? 2.25 : 1.5} strokeLinejoin="round" strokeLinecap="round" vectorEffect="non-scaling-stroke" />
+            ))}
+          </svg>
+          <p className="mt-1 flex justify-between text-[10px] text-muted-foreground" aria-hidden>
+            <span>{t('picture.relationLeft')}</span>
+            <span>{t('picture.relationRight')}</span>
+          </p>
+        </div>
+      </div>
+      <p className="mt-2 flex flex-wrap gap-x-3 gap-y-1 text-[11px] text-muted-foreground" aria-hidden>
         {PARTS.map(({ key }) => (
           <span key={key} className="inline-flex items-center gap-1.5">
             <span className="inline-block h-0.5 w-4 rounded" style={{ background: LINE[key] }} />
@@ -195,23 +230,5 @@ function RelationLines({ model }: { model: RiskModel }) {
         ))}
       </p>
     </div>
-  );
-}
-
-/** Heatwave days a year for Tanzania, 1991-2024, against the 1991-2020 average. */
-function HeatTrend({ unit }: { unit: Unit }) {
-  const { t, i18n } = useTranslation('home');
-  const { data } = useTrends();
-  const heat = seriesFor(data?.heat, unit);
-  if (!heat) return <Block title={t('picture.trends')}>{<div className="h-20 animate-pulse rounded bg-muted/60" aria-hidden />}</Block>;
-  const base = meanOver(heat, 1991, 2020);
-  const recent = meanOver(heat, 2015, 2024);
-  const fmt = (v: number | null) => (v == null ? '' : formatNumber(Math.round(v), i18n.language));
-  const note = t('picture.heatNote', { base: fmt(base), recent: fmt(recent) });
-  return (
-    <Block title={t('picture.trends')} note={t('picture.heat', { from: heat[0].year, to: heat[heat.length - 1].year })}>
-      <YearBars points={heat} mean={base} color="#e8590c" label={note} />
-      <p className="mt-1 text-xs leading-snug text-muted-foreground">{note}</p>
-    </Block>
   );
 }

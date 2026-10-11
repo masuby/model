@@ -67,8 +67,6 @@
     "relationAria": "Hatari ya INFORM, vitisho, udhaifu na ukosefu wa uwezo wa kukabiliana katika halmashauri {{count}} zikipangwa kwa hatari",
     "relationLeft": "Hatari ya juu zaidi",
     "relationRight": "Hatari ya chini zaidi",
-    "trends": "Mienendo ya vitisho",
-    "heat": "Siku za joto kali kwa mwaka, {{from}}-{{to}}",
-    "heatNote": "Siku {{base}} kwa mwaka 1991-2020, siku {{recent}} 2015-2024"
+    "pieCentre": "halmashauri"
   }
 }
