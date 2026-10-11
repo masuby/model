@@ -4,9 +4,11 @@
 
 INFORM Tanzania applies the [INFORM](https://drmkc.jrc.ec.europa.eu/inform-index) methodology of the
 European Commission Joint Research Centre and IASC partners to all **195 councils** and **31 regions**
-of the United Republic of Tanzania, using Tanzanian data (NBS 2022 census, CHIRPS/ERA5 climate, USGS,
-TDHS-MIS, HBS, IPC/MUCHALI, UNHCR, …). It is an open, transparent and reproducible index to target
-preparedness, anticipatory action and investment.
+of the United Republic of Tanzania. Its Core reproduces the INFORM Sub-national SADC 2024 workbook for
+Tanzania exactly; institutions update the workbook's indicators through the Data portal, and Tanzanian
+additions (council climate and terrain indices from CHIRPS, ERA5, MODIS, SMAP and SRTM, the 2022 census
+exposure) are shown in a separate, labelled Advancement layer. It is an open, transparent and
+reproducible index to target preparedness, anticipatory action and investment.
 
 | | |
 |---|---|

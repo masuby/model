@@ -27,6 +27,26 @@ URL `https://eovhjdkwtxuidndypozp.supabase.co`). Migrations `0001` to `0005` are
 was verified end-to-end against it (sector / reviewer / admin / anonymous, 15/15 checks), and the
 institutional data workflow (`0004`, `0005`) with rolled-back dry runs before each was applied.
 
+**Pending on the production project (apply in order, SQL editor or `supabase db push`):**
+
+| Migration | What it adds |
+|---|---|
+| `0006_score_deposits.sql` | deposits of 0-10 scores computed by institutions |
+| `0007_committee_roles_drr.sql` | the disaster-management committee roles with an area scope, and committee records (DRR arrangements, statements, events, warnings, the action library) with their review |
+| `0008_advanced_members.sql` | the Advancement layer's sub-indicators as workflow indicators |
+| `0009_public_views.sql` | public views so no officer's name reaches anonymous clients (`indicator_values_public`, `raw_values_public`) |
+| `0010_validate_units.sql` | direct-edit submissions validated against the model |
+| `0011_notifications.sql` | notifications of requests, due dates and decisions |
+| `0012_felt_intensity_member.sql` | the felt-intensity earthquake member |
+| `0013_assign_custodians.sql` | a responsible institution for every workflow indicator |
+| `0014_benchmark_activations.sql` | the seven template indicators the Benchmark 2026 activates |
+| `0015_benchmark_hazmat_crashes.sql` | hazardous material (sites) and vehicle accidents (crash density) |
+| `0016_institutional_indicators.sql` | the two institutional indicators (DRM arrangements, committee functioning) |
+
+Until they are applied, the public pages work from the shipped model (the data layer falls back to it
+when a view or table is missing) but the Data portal's committee desk, deposits, notifications,
+custodians and the activated indicators fail for signed-in users.
+
 Without Supabase keys the Data portal runs in demo mode (browser-local). To set up a new environment:
 
 1. Create a project (region close to users; `eu-west-1` or `ap-south-1` are reasonable from Tanzania).

@@ -4,6 +4,10 @@
   multi-domain data hunt across climate, geophysical, environment/fire, health/food, socioeconomic and
   coping/governance corners. For each indicator: the best authentic dataset, the true native granularity,
   cited Tanzania values, and an honest verdict on whether it can be taken to council/district or is a gap.
+- **Status (October 2026):** the Core's source for every value is the workbook's Metadata sheet
+  (`src/data/inform-workbook-sources.json`), shown beside each indicator on the site; nothing from this
+  register is written into the Core. The register is the roadmap for the **Advancement layer**, whose
+  filled sub-indicators (12 of 25) are listed with their method in `src/data/tanzania-advanced-inputs.json`.
 - **Hard rule (authenticity):** per-council numbers are NEVER fabricated. Where data is region- or
   national-level, the council inherits a **labelled region proxy**, not an invented figure. Gaps are
   recorded as gaps, with the authentic path to close them.
@@ -53,7 +57,7 @@ On disk: `usgs_earthquakes_tz.csv` (555 events M≥4.5 1960–2024), `earthquake
 | Coastal erosion | IMS-Dar/TCMP shoreline surveys | hotspot | Dar ~3 m/yr (>5 local); Maziwe I. eroded away by ~1983 | GAP (m/yr per unit); coastal only |
 | Mangrove buffer loss | Global Mangrove Watch / Wetlands Intl | polygon→coastal council | Rufiji delta (~53,255 ha) loses ~378 ha/yr (~0.5%/yr); national ~0.7%/yr | fillable for ~14 coastal councils |
 | Environmental degradation | Central-TZ dryland studies; HADO/Kondoa (UNCCD) | region/zone | Kondoa Eroded Area; Dodoma/Singida/Shinyanga semi-arid belt | qualitative regional |
-| Hazardous material | ASGM mercury studies (BGS/SUA/UDSM); NEMC industrial inventory | district cluster | Geita/Rwamagasa ~27 kg Hg/yr; L. Victoria fish Hg up to 3.5 mg/kg | on disk; upgrade basis |
+| Hazardous material | **Benchmark 2026 (10 Oct 2026)**: OpenStreetMap installations (fuel, LPG, tank farms, thermal power, mines, landfills, wastewater, factories, industrial areas), the 2022 census mapping (small-scale industries, hospitals) and the NEMC environmental certificates of July-September 2026 (490 certificates, 210 hazardous projects placed by ward); ASGM mercury studies (BGS/SUA/UDSM) and NEMC's Mwanza water-quality roadmap (2023) as corroboration | council (sites per 100 km2) | 10,341 sites; densest in Zanzibar Town, Temeke, Kinondoni, Dar es Salaam City, Mwanza City, Arusha City; Geita/Rwamagasa ~27 kg Hg/yr | **IN** (HA.HUM.HMAT activated) |
 
 ---
 
@@ -109,7 +113,8 @@ On disk: `usgs_earthquakes_tz.csv` (555 events M≥4.5 1960–2024), `earthquake
 
 ## H. Authentic upgrade paths (gaps that ARE fillable, next phase)
 
-These need a raster/dataset download + zonal extraction (the same pattern as the existing CHIRPS pipeline), then min-max into the council layer (raise-only where appropriate):
+These need a raster/dataset download + zonal extraction (the same pattern as the existing CHIRPS pipeline), then min-max into the Advancement layer as a weighted sub-indicator beside the workbook member of its
+group (never written into the Core):
 
 - **Earthquake PGA** ← GEM SSA grid (zonal max per council).
 - **Landslide** ← NASA LHASA ~1 km susceptibility (zonal mean).

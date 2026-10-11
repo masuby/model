@@ -1,0 +1,4497 @@
+{
+ "date": "2026-10-10",
+ "release": "core-2026.10",
+ "advancementRelease": "adv-2026.10",
+ "units": 170,
+ "councils": 195,
+ "checks": [
+  {
+   "id": "CHK-01",
+   "layer": "core",
+   "group": "hazard:drought",
+   "check": "Dar es Salaam is not the most drought-prone region (FAO drought frequency)",
+   "pass": false,
+   "detail": "Dar es Salaam 19 years; Dodoma 11, Singida 10, Shinyanga 7, Simiyu 5",
+   "note": "DN-01, DN-02"
+  },
+  {
+   "id": "CHK-02a",
+   "layer": "core",
+   "group": "hazard:earthquake",
+   "check": "Kagera carries earthquake exposure in the workbook (Bukoba 2016, Mw 5.9)",
+   "pass": false,
+   "detail": "workbook Kagera councils: 0, 0, 0, 0, 0, 0, 0, 0; withheld live",
+   "note": "DN-03"
+  },
+  {
+   "id": "CHK-02b",
+   "layer": "advancement",
+   "group": "hazard:earthquake",
+   "check": "The Advancement layer's seismicity and felt-intensity members give Kagera a value above the workbook's 0",
+   "pass": true,
+   "detail": "Advancement Kagera councils: Karagwe District 0.5, Bukoba District 0.6, Bukoba Municipal 0.7, Muleba District 0.5, Biharamulo District 0.6, Ngara District 0.6, Kyerwa District 0.4, Missenyi District 0.8",
+   "note": "DN-03"
+  },
+  {
+   "id": "CHK-03a",
+   "layer": "core",
+   "group": "hazard:landslide",
+   "check": "The most landslide-exposed unit of the workbook is not the flat island of Ukerewe",
+   "pass": false,
+   "detail": "workbook maximum: Ukerewe 10; withheld live",
+   "note": "DN-04"
+  },
+  {
+   "id": "CHK-03b",
+   "layer": "advancement",
+   "group": "hazard:landslide",
+   "check": "Ukerewe's Advancement landslide value (slope and rainfall members) sits well below the workbook's 10",
+   "pass": true,
+   "detail": "workbook 10, Advancement 0.6",
+   "note": "DN-04"
+  },
+  {
+   "id": "CHK-04",
+   "layer": "core",
+   "group": "hazard:coastalHazards",
+   "check": "Non-zero coastal-erosion values occur only in coastal regions",
+   "pass": false,
+   "detail": "inland non-zero: Kondoa 45, Mpwapwa 34, Kongwa 45, Dodoma Urban 23, Bahi 67, Chemba 45",
+   "note": "DN-05"
+  },
+  {
+   "id": "CHK-05",
+   "layer": "core",
+   "group": "vulnerability:livelihoods",
+   "check": "Food-security values are percentages (at most 100)",
+   "pass": false,
+   "detail": "maximum 149 (Dodoma); 110 units at 0",
+   "note": "DN-06"
+  },
+  {
+   "id": "CHK-06",
+   "layer": "core",
+   "group": "vulnerability:displacedPeople",
+   "check": "Manyara records internal displacement after the Hanang landslide of December 2023",
+   "pass": false,
+   "detail": "Manyara 0; Kaskazini Unguja 30080",
+   "note": "DN-07"
+  },
+  {
+   "id": "CHK-07",
+   "layer": "core",
+   "group": "coping:communication",
+   "check": "Access to electricity in Dodoma is below Dar es Salaam",
+   "pass": false,
+   "detail": "Dodoma 100%, Dar es Salaam 74.47%",
+   "note": "DN-08"
+  },
+  {
+   "id": "CHK-08",
+   "layer": "core",
+   "group": "coping:accessHealth",
+   "check": "The density-of-health-facilities indicator can score",
+   "pass": false,
+   "detail": "reference range 0..0",
+   "note": "DN-09"
+  },
+  {
+   "id": "CHK-09",
+   "layer": "core",
+   "group": "hazard:earthquake",
+   "check": "The earthquake index separates the rift units (fewer than a fifth at the ceiling)",
+   "pass": false,
+   "detail": "49 of 170 units score 10",
+   "note": "DN-10"
+  },
+  {
+   "id": "CHK-10",
+   "layer": "advancement",
+   "group": "coping:accessHealth",
+   "check": "Health-facility density is filled for every council and its maximum is within 5x the median",
+   "pass": true,
+   "detail": "filled 195; median 1.705, max 6.038 per 10,000 (Ileje District 6.038)",
+   "note": ""
+  },
+  {
+   "id": "CHK-11",
+   "layer": "advancement",
+   "group": "all baskets",
+   "check": "Every member's reference range fits its council span (the layer's own rule)",
+   "pass": true,
+   "detail": "all fit",
+   "note": ""
+  },
+  {
+   "id": "CHK-12",
+   "layer": "advancement",
+   "group": "hazard:drought",
+   "check": "The SPEI member spreads the councils over at least 5 score points",
+   "pass": true,
+   "detail": "spread 8.9 points over range 1.35..1.75",
+   "note": ""
+  },
+  {
+   "id": "CHK-13",
+   "layer": "core",
+   "group": "all groups",
+   "check": "Every unit without a unit-specific withheld value carries the same 23 filled groups (Mkinga excepted)",
+   "pass": true,
+   "detail": "23 of 32; Mkinga 19; 170 units carry a unit-specific withheld value",
+   "note": ""
+  },
+  {
+   "id": "CHK-14",
+   "layer": "core",
+   "group": "data notes",
+   "check": "Every data note reaches at least one council",
+   "pass": true,
+   "detail": "12 notes",
+   "note": ""
+  },
+  {
+   "id": "CHK-15",
+   "layer": "advancement",
+   "group": "hazard:drought",
+   "check": "Dar es Salaam's Advancement drought (council drought members) sits below the workbook's 10",
+   "pass": true,
+   "detail": "Kinondoni Municipal workbook 10 / live withheld / Advancement 6.3; Dar es Salaam City workbook 10 / live withheld / Advancement 6; Temeke Municipal workbook 10 / live withheld / Advancement 6; Kigamboni Municipal workbook 10 / live withheld / Advancement 5.3; Ubungo Municipal workbook 10 / live withheld / Advancement 5.6",
+   "note": "DN-01"
+  },
+  {
+   "id": "CHK-16",
+   "layer": "core",
+   "group": "quarantine",
+   "check": "The live model withholds exactly the quarantined values and keeps every other workbook value",
+   "pass": true,
+   "detail": "359 values withheld after validation over 170 units, 170 withheld by programme decision; 0 other differences; national risk 3.8 (workbook) / 3.9 (live)",
+   "note": ""
+  }
+ ],
+ "rawIndicators": [
+  {
+   "id": "CC.INF.COM-ELEC",
+   "name": "Access to electricity",
+   "component": "Communication",
+   "dimension": "Coping Capacity",
+   "unit": "%",
+   "keyedAt": "Adm1",
+   "normalisation": "Data range",
+   "range": [
+    8.7,
+    100
+   ],
+   "sign": "Decrease Risk",
+   "source": "Global Data Lab 2013 - 2022 (region)",
+   "n": 170,
+   "distinct": 25,
+   "min": 8.7,
+   "median": 15.83,
+   "mean": 22.483588235294103,
+   "max": 100,
+   "zeros": 0,
+   "atMin": 7,
+   "atMax": 7,
+   "q1": 11.92,
+   "q3": 24.33,
+   "top": [
+    "Kondoa 100",
+    "Mpwapwa 100",
+    "Kongwa 100",
+    "Chamwino 100",
+    "Dodoma Urban 100"
+   ],
+   "bottom": [
+    "Kalambo 8.7",
+    "Sumbawanga 8.7",
+    "Nkasi 8.7",
+    "Sumbawanga Urban 8.7",
+    "Mpanda Urban 8.7"
+   ],
+   "outliers": [
+    "Kondoa 100",
+    "Mpwapwa 100",
+    "Kongwa 100",
+    "Chamwino 100",
+    "Dodoma Urban 100",
+    "Bahi 100",
+    "Chemba 100",
+    "Kinondoni 74.47",
+    "Ilala 74.47",
+    "Temeke 74.47",
+    "Magharibi 80.76",
+    "Mjini 80.76"
+   ],
+   "flags": [
+    "12 far outlier(s) beyond 3 IQR"
+   ],
+   "notes": [
+    "DN-08"
+   ]
+  },
+  {
+   "id": "CC.INF.COM-INT",
+   "name": "Internet access",
+   "component": "Communication",
+   "dimension": "Coping Capacity",
+   "unit": "%",
+   "keyedAt": "Adm1",
+   "normalisation": "Data range",
+   "range": [
+    0,
+    0
+   ],
+   "sign": "Decrease Risk",
+   "source": "Global Data Lab 2011 - 2022 (region)",
+   "n": 0,
+   "distinct": 0,
+   "min": null,
+   "median": null,
+   "mean": null,
+   "max": null,
+   "zeros": 0,
+   "atMin": 0,
+   "atMax": 0,
+   "q1": null,
+   "q3": null,
+   "top": [],
+   "bottom": [],
+   "outliers": [],
+   "flags": [
+    "empty",
+    "degenerate reference range (min = max): never scores"
+   ],
+   "notes": []
+  },
+  {
+   "id": "CC.INF.COM-PHONE",
+   "name": "Cellphone ownership",
+   "component": "Communication",
+   "dimension": "Coping Capacity",
+   "unit": "%",
+   "keyedAt": "Adm1",
+   "normalisation": "Data range",
+   "range": [
+    57.09,
+    98.82
+   ],
+   "sign": "Decrease Risk",
+   "source": "Global Data Lab 2011 - 2022 (region)",
+   "n": 170,
+   "distinct": 24,
+   "min": 57.09,
+   "median": 78.17,
+   "mean": 77.19029411764718,
+   "max": 98.82,
+   "zeros": 0,
+   "atMin": 7,
+   "atMax": 2,
+   "q1": 71.95,
+   "q3": 80.12,
+   "top": [
+    "Magharibi 98.82",
+    "Mjini 98.82",
+    "Kinondoni 96.58",
+    "Ilala 96.58",
+    "Temeke 96.58"
+   ],
+   "bottom": [
+    "Kalambo 57.09",
+    "Sumbawanga 57.09",
+    "Nkasi 57.09",
+    "Sumbawanga Urban 57.09",
+    "Mpanda Urban 57.09"
+   ],
+   "outliers": [],
+   "flags": [],
+   "notes": []
+  },
+  {
+   "id": "CC.INF.ECO-GDP",
+   "name": "Gross National Income per capita",
+   "component": "Economic capacity",
+   "dimension": "Coping Capacity",
+   "unit": "Log - Thousands of US$",
+   "keyedAt": "Adm1",
+   "normalisation": "Data range",
+   "range": [
+    7.29,
+    8.97
+   ],
+   "sign": "Decrease Risk",
+   "source": "Global Data Lab 2022 (region)",
+   "n": 170,
+   "distinct": 21,
+   "min": 7.29,
+   "median": 7.56,
+   "mean": 7.610588235294105,
+   "max": 8.97,
+   "zeros": 0,
+   "atMin": 7,
+   "atMax": 2,
+   "q1": 7.43,
+   "q3": 7.64,
+   "top": [
+    "Magharibi 8.97",
+    "Mjini 8.97",
+    "Kinondoni 8.56",
+    "Ilala 8.56",
+    "Temeke 8.56"
+   ],
+   "bottom": [
+    "Kondoa 7.29",
+    "Mpwapwa 7.29",
+    "Kongwa 7.29",
+    "Chamwino 7.29",
+    "Dodoma Urban 7.29"
+   ],
+   "outliers": [
+    "Kinondoni 8.56",
+    "Ilala 8.56",
+    "Temeke 8.56",
+    "Magharibi 8.97",
+    "Mjini 8.97"
+   ],
+   "flags": [
+    "5 far outlier(s) beyond 3 IQR"
+   ],
+   "notes": []
+  },
+  {
+   "id": "CC.INF.ECO-INC",
+   "name": "Household income",
+   "component": "Economic capacity",
+   "dimension": "Coping Capacity",
+   "unit": "US$ per capita",
+   "keyedAt": "National",
+   "normalisation": "Custom",
+   "range": [
+    369.9,
+    12866.6
+   ],
+   "sign": "Decrease Risk",
+   "source": "World Bank 2017-2021 (national)",
+   "n": 170,
+   "distinct": 1,
+   "min": 908.67,
+   "median": 908.67,
+   "mean": 908.6700000000006,
+   "max": 908.67,
+   "zeros": 0,
+   "atMin": 170,
+   "atMax": 170,
+   "q1": 908.67,
+   "q3": 908.67,
+   "top": [
+    "Kondoa 908.67",
+    "Mpwapwa 908.67",
+    "Kongwa 908.67",
+    "Chamwino 908.67",
+    "Dodoma Urban 908.67"
+   ],
+   "bottom": [
+    "Kondoa 908.67",
+    "Mpwapwa 908.67",
+    "Kongwa 908.67",
+    "Chamwino 908.67",
+    "Dodoma Urban 908.67"
+   ],
+   "outliers": [],
+   "flags": [
+    "constant (one value for the whole country)"
+   ],
+   "notes": []
+  },
+  {
+   "id": "CC.INF.ECO-IWI",
+   "name": "International Wealth Index",
+   "component": "Economic capacity",
+   "dimension": "Coping Capacity",
+   "unit": "index",
+   "keyedAt": "Adm1",
+   "normalisation": "Data range",
+   "range": [
+    19.11,
+    67.88
+   ],
+   "sign": "Decrease Risk",
+   "source": "Global Data Lab 2013 - 2022 (region)",
+   "n": 170,
+   "distinct": 25,
+   "min": 19.11,
+   "median": 26.9,
+   "mean": 28.47417647058825,
+   "max": 67.88,
+   "zeros": 0,
+   "atMin": 7,
+   "atMax": 2,
+   "q1": 23.28,
+   "q3": 29.32,
+   "top": [
+    "Magharibi 67.88",
+    "Mjini 67.88",
+    "Kinondoni 56.16",
+    "Ilala 56.16",
+    "Temeke 56.16"
+   ],
+   "bottom": [
+    "Kondoa 19.11",
+    "Mpwapwa 19.11",
+    "Kongwa 19.11",
+    "Chamwino 19.11",
+    "Dodoma Urban 19.11"
+   ],
+   "outliers": [
+    "Kinondoni 56.16",
+    "Ilala 56.16",
+    "Temeke 56.16",
+    "Magharibi 67.88",
+    "Mjini 67.88"
+   ],
+   "flags": [
+    "5 far outlier(s) beyond 3 IQR"
+   ],
+   "notes": []
+  },
+  {
+   "id": "CC.INF.EDU-ALIT",
+   "name": "Adult literacy rate",
+   "component": "Education",
+   "dimension": "Coping Capacity",
+   "unit": "%",
+   "keyedAt": "National",
+   "normalisation": "Custom",
+   "range": [
+    60,
+    96.2
+   ],
+   "sign": "Decrease Risk",
+   "source": "World Bank 2020-2022 (national)",
+   "n": 170,
+   "distinct": 1,
+   "min": 82.02,
+   "median": 82.02,
+   "mean": 82.02000000000031,
+   "max": 82.02,
+   "zeros": 0,
+   "atMin": 170,
+   "atMax": 170,
+   "q1": 82.02,
+   "q3": 82.02,
+   "top": [
+    "Kondoa 82.02",
+    "Mpwapwa 82.02",
+    "Kongwa 82.02",
+    "Chamwino 82.02",
+    "Dodoma Urban 82.02"
+   ],
+   "bottom": [
+    "Kondoa 82.02",
+    "Mpwapwa 82.02",
+    "Kongwa 82.02",
+    "Chamwino 82.02",
+    "Dodoma Urban 82.02"
+   ],
+   "outliers": [],
+   "flags": [
+    "constant (one value for the whole country)"
+   ],
+   "notes": []
+  },
+  {
+   "id": "CC.INF.EDU-YRS",
+   "name": "Mean years at school",
+   "component": "Education",
+   "dimension": "Coping Capacity",
+   "unit": "years",
+   "keyedAt": "Adm1",
+   "normalisation": "Data range",
+   "range": [
+    3.94,
+    8.71
+   ],
+   "sign": "Decrease Risk",
+   "source": "Global Data Lab 2022 (region)",
+   "n": 170,
+   "distinct": 24,
+   "min": 3.94,
+   "median": 5.22,
+   "mean": 5.254470588235292,
+   "max": 8.71,
+   "zeros": 0,
+   "atMin": 7,
+   "atMax": 2,
+   "q1": 4.65,
+   "q3": 5.54,
+   "top": [
+    "Magharibi 8.71",
+    "Mjini 8.71",
+    "Kinondoni 8.54",
+    "Ilala 8.54",
+    "Temeke 8.54"
+   ],
+   "bottom": [
+    "Nzega 3.94",
+    "Igunga 3.94",
+    "Uyui 3.94",
+    "Urambo 3.94",
+    "Sikonge 3.94"
+   ],
+   "outliers": [
+    "Kinondoni 8.54",
+    "Ilala 8.54",
+    "Temeke 8.54",
+    "Magharibi 8.71",
+    "Mjini 8.71"
+   ],
+   "flags": [
+    "5 far outlier(s) beyond 3 IQR"
+   ],
+   "notes": []
+  },
+  {
+   "id": "CC.INF.HC-BCG",
+   "name": "BCG Immunization Coverage",
+   "component": "Access to health care",
+   "dimension": "Coping Capacity",
+   "unit": "%",
+   "keyedAt": "Adm1",
+   "normalisation": "Data range",
+   "range": [
+    90.4,
+    100
+   ],
+   "sign": "Decrease Risk",
+   "source": "Global Data Lab 2006 - 2021 (region)",
+   "n": 170,
+   "distinct": 15,
+   "min": 90.4,
+   "median": 97.8,
+   "mean": 96.77705882352932,
+   "max": 100,
+   "zeros": 0,
+   "atMin": 12,
+   "atMax": 45,
+   "q1": 95.9,
+   "q3": 100,
+   "top": [
+    "Kondoa 100",
+    "Mpwapwa 100",
+    "Kongwa 100",
+    "Chamwino 100",
+    "Dodoma Urban 100"
+   ],
+   "bottom": [
+    "Ukerewe 90.4",
+    "Magu 90.4",
+    "Nyamagana 90.4",
+    "Kwimba 90.4",
+    "Sengerema 90.4"
+   ],
+   "outliers": [],
+   "flags": [],
+   "notes": []
+  },
+  {
+   "id": "CC.INF.HC-DTP",
+   "name": "DTP3 Immunization Coverage",
+   "component": "Access to health care",
+   "dimension": "Coping Capacity",
+   "unit": "%",
+   "keyedAt": "Adm1",
+   "normalisation": "Data range",
+   "range": [
+    69.9,
+    98.6
+   ],
+   "sign": "Decrease Risk",
+   "source": "Global Data Lab 2006 - 2021 (region)",
+   "n": 170,
+   "distinct": 24,
+   "min": 69.9,
+   "median": 92.2,
+   "mean": 91.01529411764716,
+   "max": 98.6,
+   "zeros": 0,
+   "atMin": 7,
+   "atMax": 7,
+   "q1": 88.4,
+   "q3": 96.9,
+   "top": [
+    "Kondoa 98.6",
+    "Mpwapwa 98.6",
+    "Kongwa 98.6",
+    "Chamwino 98.6",
+    "Dodoma Urban 98.6"
+   ],
+   "bottom": [
+    "Nzega 69.9",
+    "Igunga 69.9",
+    "Uyui 69.9",
+    "Urambo 69.9",
+    "Sikonge 69.9"
+   ],
+   "outliers": [],
+   "flags": [],
+   "notes": []
+  },
+  {
+   "id": "CC.INF.HC-EXP",
+   "name": "Health expenditure per capita",
+   "component": "Access to health care",
+   "dimension": "Coping Capacity",
+   "unit": "US$ per capita",
+   "keyedAt": "National",
+   "normalisation": "Custom",
+   "range": [
+    19.3,
+    758.2
+   ],
+   "sign": "Decrease Risk",
+   "source": "WHO 2017-2021 (national)",
+   "n": 170,
+   "distinct": 1,
+   "min": 37.52,
+   "median": 37.52,
+   "mean": 37.520000000000145,
+   "max": 37.52,
+   "zeros": 0,
+   "atMin": 170,
+   "atMax": 170,
+   "q1": 37.52,
+   "q3": 37.52,
+   "top": [
+    "Kondoa 37.52",
+    "Mpwapwa 37.52",
+    "Kongwa 37.52",
+    "Chamwino 37.52",
+    "Dodoma Urban 37.52"
+   ],
+   "bottom": [
+    "Kondoa 37.52",
+    "Mpwapwa 37.52",
+    "Kongwa 37.52",
+    "Chamwino 37.52",
+    "Dodoma Urban 37.52"
+   ],
+   "outliers": [],
+   "flags": [
+    "constant (one value for the whole country)"
+   ],
+   "notes": []
+  },
+  {
+   "id": "CC.INF.HC-FAC",
+   "name": "Density of health facilities",
+   "component": "Access to health care",
+   "dimension": "Coping Capacity",
+   "unit": "per capita",
+   "keyedAt": "Adm1",
+   "normalisation": "Custom",
+   "range": [
+    0,
+    0
+   ],
+   "sign": "Decrease Risk",
+   "source": "HDX 2019 (region)",
+   "n": 170,
+   "distinct": 31,
+   "min": 25,
+   "median": 252,
+   "mean": 240.61764705882354,
+   "max": 349,
+   "zeros": 0,
+   "atMin": 2,
+   "atMax": 7,
+   "q1": 203,
+   "q3": 287,
+   "top": [
+    "Kondoa 349",
+    "Mpwapwa 349",
+    "Kongwa 349",
+    "Chamwino 349",
+    "Dodoma Urban 349"
+   ],
+   "bottom": [
+    "Kaskazini A 25",
+    "Kaskazini B 25",
+    "Magharibi 26",
+    "Mjini 26",
+    "Chake Chake 29"
+   ],
+   "outliers": [],
+   "flags": [
+    "degenerate reference range (min = max): never scores"
+   ],
+   "notes": [
+    "DN-09"
+   ]
+  },
+  {
+   "id": "CC.INF.HC-MEASLES",
+   "name": "Measles Immunization Coverage",
+   "component": "Access to health care",
+   "dimension": "Coping Capacity",
+   "unit": "%",
+   "keyedAt": "Adm1",
+   "normalisation": "Data range",
+   "range": [
+    75.80887488,
+    100
+   ],
+   "sign": "Decrease Risk",
+   "source": "Global Data Lab 2006 - 2021 (region)",
+   "n": 170,
+   "distinct": 26,
+   "min": 75.80887488,
+   "median": 93.4293118,
+   "mean": 92.33138580982359,
+   "max": 100,
+   "zeros": 0,
+   "atMin": 5,
+   "atMax": 36,
+   "q1": 87.79679808,
+   "q3": 98.85006514,
+   "top": [
+    "Kondoa 100",
+    "Mpwapwa 100",
+    "Kongwa 100",
+    "Chamwino 100",
+    "Dodoma Urban 100"
+   ],
+   "bottom": [
+    "Shinyanga Urban 75.809",
+    "Kishapu 75.809",
+    "Shinyanga 75.809",
+    "Kahama 75.809",
+    "Kahama Township Authority 75.809"
+   ],
+   "outliers": [],
+   "flags": [],
+   "notes": []
+  },
+  {
+   "id": "CC.INF.HC-PHY",
+   "name": "Physicians density",
+   "component": "Access to health care",
+   "dimension": "Coping Capacity",
+   "unit": "per 10,000 population",
+   "keyedAt": "National",
+   "normalisation": "Custom",
+   "range": [
+    0.5,
+    6.8
+   ],
+   "sign": "Decrease Risk",
+   "source": "WHO 2018 (national)",
+   "n": 170,
+   "distinct": 1,
+   "min": 0.5,
+   "median": 0.5,
+   "mean": 0.5,
+   "max": 0.5,
+   "zeros": 0,
+   "atMin": 170,
+   "atMax": 170,
+   "q1": 0.5,
+   "q3": 0.5,
+   "top": [
+    "Kondoa 0.5",
+    "Mpwapwa 0.5",
+    "Kongwa 0.5",
+    "Chamwino 0.5",
+    "Dodoma Urban 0.5"
+   ],
+   "bottom": [
+    "Kondoa 0.5",
+    "Mpwapwa 0.5",
+    "Kongwa 0.5",
+    "Chamwino 0.5",
+    "Dodoma Urban 0.5"
+   ],
+   "outliers": [],
+   "flags": [
+    "constant (one value for the whole country)"
+   ],
+   "notes": []
+  },
+  {
+   "id": "CC.INF.WASH-SAN",
+   "name": "People using at least basic sanitation services (% of population)",
+   "component": "WASH",
+   "dimension": "Coping Capacity",
+   "unit": "%",
+   "keyedAt": "National",
+   "normalisation": "Custom",
+   "range": [
+    15,
+    99
+   ],
+   "sign": "Decrease Risk",
+   "source": "WHO/UNICEF Joint Monitoring Programme (JMP) for Water Supply and Sanitation 2022 (national)",
+   "n": 170,
+   "distinct": 1,
+   "min": 31,
+   "median": 31,
+   "mean": 31,
+   "max": 31,
+   "zeros": 0,
+   "atMin": 170,
+   "atMax": 170,
+   "q1": 31,
+   "q3": 31,
+   "top": [
+    "Kondoa 31",
+    "Mpwapwa 31",
+    "Kongwa 31",
+    "Chamwino 31",
+    "Dodoma Urban 31"
+   ],
+   "bottom": [
+    "Kondoa 31",
+    "Mpwapwa 31",
+    "Kongwa 31",
+    "Chamwino 31",
+    "Dodoma Urban 31"
+   ],
+   "outliers": [],
+   "flags": [
+    "constant (one value for the whole country)"
+   ],
+   "notes": []
+  },
+  {
+   "id": "CC.INF.WASH-WF",
+   "name": "People using at least basic drinking water services (% of population)",
+   "component": "WASH",
+   "dimension": "Coping Capacity",
+   "unit": "%",
+   "keyedAt": "National",
+   "normalisation": "Custom",
+   "range": [
+    35,
+    99
+   ],
+   "sign": "Decrease Risk",
+   "source": "WHO/UNICEF Joint Monitoring Programme (JMP) for Water Supply and Sanitation 2022 (national)",
+   "n": 170,
+   "distinct": 1,
+   "min": 61,
+   "median": 61,
+   "mean": 61,
+   "max": 61,
+   "zeros": 0,
+   "atMin": 170,
+   "atMax": 170,
+   "q1": 61,
+   "q3": 61,
+   "top": [
+    "Kondoa 61",
+    "Mpwapwa 61",
+    "Kongwa 61",
+    "Chamwino 61",
+    "Dodoma Urban 61"
+   ],
+   "bottom": [
+    "Kondoa 61",
+    "Mpwapwa 61",
+    "Kongwa 61",
+    "Chamwino 61",
+    "Dodoma Urban 61"
+   ],
+   "outliers": [],
+   "flags": [
+    "constant (one value for the whole country)"
+   ],
+   "notes": []
+  },
+  {
+   "id": "CC.INS.DRR-EWS",
+   "name": "Early Warning System",
+   "component": "DRR implementation",
+   "dimension": "Coping Capacity",
+   "unit": "number of people",
+   "keyedAt": "National",
+   "normalisation": "Custom",
+   "range": [
+    0,
+    989030
+   ],
+   "sign": "Decrease Risk",
+   "source": "Anticipation Hub 2023 (national)",
+   "n": 170,
+   "distinct": 1,
+   "min": 0,
+   "median": 0,
+   "mean": 0,
+   "max": 0,
+   "zeros": 170,
+   "atMin": 170,
+   "atMax": 170,
+   "q1": 0,
+   "q3": 0,
+   "top": [
+    "Kondoa 0",
+    "Mpwapwa 0",
+    "Kongwa 0",
+    "Chamwino 0",
+    "Dodoma Urban 0"
+   ],
+   "bottom": [
+    "Kondoa 0",
+    "Mpwapwa 0",
+    "Kongwa 0",
+    "Chamwino 0",
+    "Dodoma Urban 0"
+   ],
+   "outliers": [],
+   "flags": [
+    "constant (one value for the whole country)"
+   ],
+   "notes": []
+  },
+  {
+   "id": "CC.INS.DRR-SEN",
+   "name": "Sendai Framework for Action",
+   "component": "DRR implementation",
+   "dimension": "Coping Capacity",
+   "unit": "index",
+   "keyedAt": "National",
+   "normalisation": "Custom",
+   "range": [
+    0,
+    1
+   ],
+   "sign": "Decrease Risk",
+   "source": "UNDRR 2017-2022 (national)",
+   "n": 170,
+   "distinct": 1,
+   "min": 0.7,
+   "median": 0.7,
+   "mean": 0.700000000000002,
+   "max": 0.7,
+   "zeros": 0,
+   "atMin": 170,
+   "atMax": 170,
+   "q1": 0.7,
+   "q3": 0.7,
+   "top": [
+    "Kondoa 0.7",
+    "Mpwapwa 0.7",
+    "Kongwa 0.7",
+    "Chamwino 0.7",
+    "Dodoma Urban 0.7"
+   ],
+   "bottom": [
+    "Kondoa 0.7",
+    "Mpwapwa 0.7",
+    "Kongwa 0.7",
+    "Chamwino 0.7",
+    "Dodoma Urban 0.7"
+   ],
+   "outliers": [],
+   "flags": [
+    "constant (one value for the whole country)"
+   ],
+   "notes": []
+  },
+  {
+   "id": "CC.INS.GOV-EFF",
+   "name": "Government effectiveness",
+   "component": "Governance",
+   "dimension": "Coping Capacity",
+   "unit": "index",
+   "keyedAt": "National",
+   "normalisation": "Custom",
+   "range": [
+    -1.7,
+    0.8
+   ],
+   "sign": "Decrease Risk",
+   "source": "World Bank 2018-2022 (national)",
+   "n": 170,
+   "distinct": 1,
+   "min": -0.69,
+   "median": -0.69,
+   "mean": -0.6899999999999985,
+   "max": -0.69,
+   "zeros": 0,
+   "atMin": 170,
+   "atMax": 170,
+   "q1": -0.69,
+   "q3": -0.69,
+   "top": [
+    "Kondoa -0.69",
+    "Mpwapwa -0.69",
+    "Kongwa -0.69",
+    "Chamwino -0.69",
+    "Dodoma Urban -0.69"
+   ],
+   "bottom": [
+    "Kondoa -0.69",
+    "Mpwapwa -0.69",
+    "Kongwa -0.69",
+    "Chamwino -0.69",
+    "Dodoma Urban -0.69"
+   ],
+   "outliers": [],
+   "flags": [
+    "constant (one value for the whole country)"
+   ],
+   "notes": []
+  },
+  {
+   "id": "CC.INS.GOV-SCI",
+   "name": "Subnational Corruption Index",
+   "component": "Governance",
+   "dimension": "Coping Capacity",
+   "unit": "index",
+   "keyedAt": "Adm1",
+   "normalisation": "Data range",
+   "range": [
+    64.9,
+    79.5
+   ],
+   "sign": "Decrease Risk",
+   "source": "Global Data Lab 2022 (region)",
+   "n": 170,
+   "distinct": 24,
+   "min": 64.9,
+   "median": 76,
+   "mean": 75.19941176470597,
+   "max": 79.5,
+   "zeros": 0,
+   "atMin": 2,
+   "atMax": 6,
+   "q1": 74,
+   "q3": 77.7,
+   "top": [
+    "Kilwa 79.5",
+    "Lindi 79.5",
+    "Nachingwea 79.5",
+    "Liwale 79.5",
+    "Ruangwa 79.5"
+   ],
+   "bottom": [
+    "Chake Chake 64.9",
+    "Mkoani 64.9",
+    "Magharibi 66.8",
+    "Mjini 66.8",
+    "Kati 67.2"
+   ],
+   "outliers": [],
+   "flags": [],
+   "notes": []
+  },
+  {
+   "id": "HA.HUM.CI-CBAR",
+   "name": "Conflict Barometer",
+   "component": "Conflict Intensity",
+   "dimension": "Hazards & Exposure",
+   "unit": "Index",
+   "keyedAt": "Adm1",
+   "normalisation": "Custom",
+   "range": [
+    0,
+    5
+   ],
+   "sign": "Increase Risk",
+   "source": "Heidelberg Institute for International Conflict Research 2022 (region)",
+   "n": 170,
+   "distinct": 1,
+   "min": 0,
+   "median": 0,
+   "mean": 0,
+   "max": 0,
+   "zeros": 170,
+   "atMin": 170,
+   "atMax": 170,
+   "q1": 0,
+   "q3": 0,
+   "top": [
+    "Kondoa 0",
+    "Mpwapwa 0",
+    "Kongwa 0",
+    "Chamwino 0",
+    "Dodoma Urban 0"
+   ],
+   "bottom": [
+    "Kondoa 0",
+    "Mpwapwa 0",
+    "Kongwa 0",
+    "Chamwino 0",
+    "Dodoma Urban 0"
+   ],
+   "outliers": [],
+   "flags": [
+    "constant (one value for the whole country)"
+   ],
+   "notes": []
+  },
+  {
+   "id": "HA.HUM.CR-GCRI",
+   "name": "GCRI derived Conflict probability",
+   "component": "Conflict Risk",
+   "dimension": "Hazards & Exposure",
+   "unit": "%",
+   "keyedAt": "National",
+   "normalisation": "Custom",
+   "range": [
+    0,
+    99.1
+   ],
+   "sign": "Increase Risk",
+   "source": "JRC 2024 (national)",
+   "n": 170,
+   "distinct": 1,
+   "min": 7.14,
+   "median": 7.14,
+   "mean": 7.140000000000005,
+   "max": 7.14,
+   "zeros": 0,
+   "atMin": 170,
+   "atMax": 170,
+   "q1": 7.14,
+   "q3": 7.14,
+   "top": [
+    "Kondoa 7.14",
+    "Mpwapwa 7.14",
+    "Kongwa 7.14",
+    "Chamwino 7.14",
+    "Dodoma Urban 7.14"
+   ],
+   "bottom": [
+    "Kondoa 7.14",
+    "Mpwapwa 7.14",
+    "Kongwa 7.14",
+    "Chamwino 7.14",
+    "Dodoma Urban 7.14"
+   ],
+   "outliers": [],
+   "flags": [
+    "constant (one value for the whole country)"
+   ],
+   "notes": []
+  },
+  {
+   "id": "HA.HUM.VIO-EVE",
+   "name": "Number of Events",
+   "component": "Internal Violence",
+   "dimension": "Hazards & Exposure",
+   "unit": "Number",
+   "keyedAt": "Adm1",
+   "normalisation": "Data range",
+   "range": [
+    0.0009995003331,
+    4.043068812
+   ],
+   "sign": "Increase Risk",
+   "source": "ACLED 2020-2024 (region)",
+   "n": 170,
+   "distinct": 15,
+   "min": 1,
+   "median": 7,
+   "mean": 10.635294117647058,
+   "max": 57,
+   "zeros": 0,
+   "atMin": 13,
+   "atMax": 8,
+   "q1": 4,
+   "q3": 11,
+   "top": [
+    "Kibondo 57",
+    "Kasulu 57",
+    "Kigoma 57",
+    "Kigoma  Urban 57",
+    "Uvinza 57"
+   ],
+   "bottom": [
+    "Iramba 1",
+    "Singida 1",
+    "Manyoni 1",
+    "Singida Urban 1",
+    "Ikungi 1"
+   ],
+   "outliers": [
+    "Kibondo 57",
+    "Kasulu 57",
+    "Kigoma 57",
+    "Kigoma  Urban 57",
+    "Uvinza 57",
+    "Buhigwe 57",
+    "Kakonko 57",
+    "Kasulu Township Authority 57"
+   ],
+   "flags": [
+    "8 far outlier(s) beyond 3 IQR"
+   ],
+   "notes": [
+    "DN-12"
+   ]
+  },
+  {
+   "id": "HA.HUM.VIO-FAT",
+   "name": "Number of Fatalities",
+   "component": "Internal Violence",
+   "dimension": "Hazards & Exposure",
+   "unit": "Number",
+   "keyedAt": "Adm1",
+   "normalisation": "Data range",
+   "range": [
+    -6.907755279,
+    3.891840706
+   ],
+   "sign": "Increase Risk",
+   "source": "ACLED 2020-2024 (region)",
+   "n": 170,
+   "distinct": 11,
+   "min": 0,
+   "median": 3,
+   "mean": 6.064705882352941,
+   "max": 49,
+   "zeros": 31,
+   "atMin": 31,
+   "atMax": 7,
+   "q1": 1,
+   "q3": 7,
+   "top": [
+    "Mtwara 49",
+    "Newala 49",
+    "Masasi 49",
+    "Tandahimba 49",
+    "Mtwara Urban 49"
+   ],
+   "bottom": [
+    "Kondoa 0",
+    "Mpwapwa 0",
+    "Kongwa 0",
+    "Chamwino 0",
+    "Dodoma Urban 0"
+   ],
+   "outliers": [
+    "Mtwara 49",
+    "Newala 49",
+    "Masasi 49",
+    "Tandahimba 49",
+    "Mtwara Urban 49",
+    "Nanyumbu 49",
+    "Masasi  Township Authority 49"
+   ],
+   "flags": [
+    "7 far outlier(s) beyond 3 IQR"
+   ],
+   "notes": []
+  },
+  {
+   "id": "HA.NAT.CH-ERO",
+   "name": "Coastal Erosion",
+   "component": "Coastal hazards",
+   "dimension": "Hazards & Exposure",
+   "unit": "meters / year",
+   "keyedAt": "Adm2",
+   "normalisation": "Custom",
+   "range": [
+    -0.3,
+    0
+   ],
+   "sign": "Decrease Risk",
+   "source": "Digital Earth Africa 2000 - 2022 (district)",
+   "n": 169,
+   "distinct": 5,
+   "min": 0,
+   "median": 0,
+   "mean": 1.532544378698225,
+   "max": 67,
+   "zeros": 163,
+   "atMin": 163,
+   "atMax": 1,
+   "q1": 0,
+   "q3": 0,
+   "top": [
+    "Bahi 67",
+    "Kondoa 45",
+    "Kongwa 45",
+    "Chemba 45",
+    "Mpwapwa 34"
+   ],
+   "bottom": [
+    "Chamwino 0",
+    "Monduli 0",
+    "Meru 0",
+    "Arusha Urban 0",
+    "Karatu 0"
+   ],
+   "outliers": [],
+   "flags": [
+    "1 units without a value"
+   ],
+   "notes": [
+    "DN-05"
+   ]
+  },
+  {
+   "id": "HA.NAT.DE-ERO",
+   "name": "Soil Erosion",
+   "component": "Environmental Degradation",
+   "dimension": "Hazards & Exposure",
+   "unit": "Mg/ha/yr",
+   "keyedAt": "National",
+   "normalisation": "Data range",
+   "range": [
+    1.7,
+    15.9
+   ],
+   "sign": "Increase Risk",
+   "source": "JRC year unknown (region)",
+   "n": 170,
+   "distinct": 25,
+   "min": 1.7,
+   "median": 5.2,
+   "mean": 6.1705882352941215,
+   "max": 15.9,
+   "zeros": 0,
+   "atMin": 3,
+   "atMax": 6,
+   "q1": 3.7,
+   "q3": 7.1,
+   "top": [
+    "Njombe Urban 15.9",
+    "Wanging'ombe 15.9",
+    "Makete 15.9",
+    "Njombe 15.9",
+    "Ludewa 15.9"
+   ],
+   "bottom": [
+    "Mpanda Urban 1.7",
+    "Mpanda 1.7",
+    "Mlele 1.7",
+    "Nzega 2.2",
+    "Igunga 2.2"
+   ],
+   "outliers": [],
+   "flags": [],
+   "notes": []
+  },
+  {
+   "id": "HA.NAT.DR-FRE",
+   "name": "Historic Drought Frequency",
+   "component": "Drought",
+   "dimension": "Hazards & Exposure",
+   "unit": "years",
+   "keyedAt": "Adm1",
+   "normalisation": "Data range",
+   "range": [
+    5,
+    19
+   ],
+   "sign": "Increase Risk",
+   "source": "FAO 1984-2023 (region)",
+   "n": 170,
+   "distinct": 11,
+   "min": 5,
+   "median": 6,
+   "mean": 7.6117647058823525,
+   "max": 19,
+   "zeros": 0,
+   "atMin": 68,
+   "atMax": 3,
+   "q1": 5,
+   "q3": 9,
+   "top": [
+    "Kinondoni 19",
+    "Ilala 19",
+    "Temeke 19",
+    "Monduli 17",
+    "Meru 17"
+   ],
+   "bottom": [
+    "Kilwa 5",
+    "Lindi 5",
+    "Nachingwea 5",
+    "Liwale 5",
+    "Ruangwa 5"
+   ],
+   "outliers": [],
+   "flags": [],
+   "notes": [
+    "DN-01",
+    "DN-02"
+   ]
+  },
+  {
+   "id": "HA.NAT.ED-DEF",
+   "name": "Deforestation - Treecover Loss",
+   "component": "Environmental Degradation",
+   "dimension": "Hazards & Exposure",
+   "unit": "%",
+   "keyedAt": "Adm2",
+   "normalisation": "Data range",
+   "range": [
+    -6.907755279,
+    -1.002357813
+   ],
+   "sign": "Increase Risk",
+   "source": "Global Forest Watch 2000-2022 (district)",
+   "n": 169,
+   "distinct": 158,
+   "min": 0,
+   "median": 0.04639401935,
+   "mean": 0.06364609288134081,
+   "max": 0.3660130719,
+   "zeros": 5,
+   "atMin": 5,
+   "atMax": 1,
+   "q1": 0.01369863014,
+   "q3": 0.08248009101,
+   "top": [
+    "Kusini 0.366",
+    "Mafinga Township Authority 0.358",
+    "Mtwara 0.355",
+    "Mkuranga 0.259",
+    "Kaskazini A 0.246"
+   ],
+   "bottom": [
+    "Arusha Urban 0",
+    "Moshi Urban 0",
+    "Iringa Urban 0",
+    "Shinyanga Urban 0",
+    "Nyamagana 0"
+   ],
+   "outliers": [
+    "Mtwara 0.355",
+    "Mafinga Township Authority 0.358",
+    "Kusini 0.366"
+   ],
+   "flags": [
+    "1 units without a value",
+    "3 far outlier(s) beyond 3 IQR"
+   ],
+   "notes": []
+  },
+  {
+   "id": "HA.NAT.EQ-EXP",
+   "name": "Earthquake exposure",
+   "component": "Earthquake",
+   "dimension": "Hazards & Exposure",
+   "unit": "index",
+   "keyedAt": "Adm2",
+   "normalisation": "Data range",
+   "range": [
+    0,
+    1.000000072
+   ],
+   "sign": "Increase Risk",
+   "source": "Global Earthquake Model (GEM) 2023 (district)",
+   "n": 169,
+   "distinct": 57,
+   "min": 0,
+   "median": 0.1886390421,
+   "mean": 0.44149310328762376,
+   "max": 1.000000072,
+   "zeros": 64,
+   "atMin": 64,
+   "atMax": 1,
+   "q1": 0,
+   "q3": 0.9999999394,
+   "top": [
+    "Mwanga 1",
+    "Sumbawanga Urban 1",
+    "Tunduma 1",
+    "Moshi 1",
+    "Babati Urban 1"
+   ],
+   "bottom": [
+    "Tanga Urban 0",
+    "Pangani 0",
+    "Handeni 0",
+    "Kilindi 0",
+    "Handeni Mji 0"
+   ],
+   "outliers": [],
+   "flags": [
+    "1 units without a value"
+   ],
+   "notes": [
+    "DN-03",
+    "DN-10"
+   ]
+  },
+  {
+   "id": "HA.NAT.FL-EXP",
+   "name": "Flood exposure",
+   "component": "Flood",
+   "dimension": "Hazards & Exposure",
+   "unit": "%",
+   "keyedAt": "Adm2",
+   "normalisation": "Data range",
+   "range": [
+    -6.907755279,
+    -1.148853505
+   ],
+   "sign": "Increase Risk",
+   "source": "JRC modelled (district)",
+   "n": 169,
+   "distinct": 71,
+   "min": 0,
+   "median": 0.015,
+   "mean": 0.03332544378698225,
+   "max": 0.316,
+   "zeros": 20,
+   "atMin": 20,
+   "atMax": 1,
+   "q1": 0.005,
+   "q3": 0.048,
+   "top": [
+    "Kyela 0.316",
+    "Pangani 0.279",
+    "Musoma Urban 0.207",
+    "Rufiji 0.177",
+    "Korogwe Township Authority 0.165"
+   ],
+   "bottom": [
+    "Arusha Urban 0",
+    "Rombo 0",
+    "Moshi Urban 0",
+    "Siha 0",
+    "Morogoro Urban 0"
+   ],
+   "outliers": [
+    "Pangani 0.279",
+    "Kyela 0.316",
+    "Musoma Urban 0.207"
+   ],
+   "flags": [
+    "1 units without a value",
+    "3 far outlier(s) beyond 3 IQR"
+   ],
+   "notes": [
+    "DN-11"
+   ]
+  },
+  {
+   "id": "HA.NAT.LS-EXP",
+   "name": "Landslide exposure",
+   "component": "Landslide",
+   "dimension": "Hazards & Exposure",
+   "unit": "%",
+   "keyedAt": "Adm2",
+   "normalisation": "Data range",
+   "range": [
+    -6.907755279,
+    0.0009995003331
+   ],
+   "sign": "Increase Risk",
+   "source": "World Bank 1980-2018 (district)",
+   "n": 169,
+   "distinct": 110,
+   "min": 0,
+   "median": 0.009210009323,
+   "mean": 0.043677543250150885,
+   "max": 1,
+   "zeros": 43,
+   "atMin": 43,
+   "atMax": 1,
+   "q1": 0,
+   "q3": 0.03987573495,
+   "top": [
+    "Ukerewe 1",
+    "Same 0.284",
+    "Ileje 0.272",
+    "Iringa Urban 0.263",
+    "Mvomero 0.226"
+   ],
+   "bottom": [
+    "Moshi Urban 0",
+    "Kibaha 0",
+    "Kibaha Urban 0",
+    "Kinondoni 0",
+    "Ilala 0"
+   ],
+   "outliers": [
+    "Same 0.284",
+    "Lushoto 0.164",
+    "Korogwe 0.217",
+    "Morogoro 0.22",
+    "Mvomero 0.226",
+    "Mbinga 0.217",
+    "Iringa Urban 0.263",
+    "Kilolo 0.175",
+    "Rungwe 0.165",
+    "Kigoma 0.202",
+    "Ukerewe 1",
+    "Makete 0.223",
+    "Ludewa 0.179",
+    "Ileje 0.272"
+   ],
+   "flags": [
+    "1 units without a value",
+    "14 far outlier(s) beyond 3 IQR"
+   ],
+   "notes": [
+    "DN-04"
+   ]
+  },
+  {
+   "id": "HA.NAT.ST-TC2",
+   "name": "Cyclone exposure - max speed",
+   "component": "Storms & Cyclone",
+   "dimension": "Hazards & Exposure",
+   "unit": "%",
+   "keyedAt": "Adm2",
+   "normalisation": "Data range",
+   "range": [
+    0,
+    18.10675049
+   ],
+   "sign": "Increase Risk",
+   "source": "4TU.Research Data 2023 (district)",
+   "n": 169,
+   "distinct": 2,
+   "min": 0,
+   "median": 0,
+   "mean": 0.10714053544378697,
+   "max": 18.10675049,
+   "zeros": 168,
+   "atMin": 168,
+   "atMax": 1,
+   "q1": 0,
+   "q3": 0,
+   "top": [
+    "Mtwara 18.107",
+    "Kondoa 0",
+    "Mpwapwa 0",
+    "Kongwa 0",
+    "Chamwino 0"
+   ],
+   "bottom": [
+    "Kondoa 0",
+    "Mpwapwa 0",
+    "Kongwa 0",
+    "Chamwino 0",
+    "Dodoma Urban 0"
+   ],
+   "outliers": [],
+   "flags": [
+    "1 units without a value"
+   ],
+   "notes": []
+  },
+  {
+   "id": "HA.NAT.VC-EXP",
+   "name": "Volcano exposure",
+   "component": "Volcano",
+   "dimension": "Hazards & Exposure",
+   "unit": "index",
+   "keyedAt": "Adm1",
+   "normalisation": "Data range",
+   "range": [
+    0,
+    4
+   ],
+   "sign": "Increase Risk",
+   "source": "NOAA year unknown (region)",
+   "n": 170,
+   "distinct": 3,
+   "min": 0,
+   "median": 0,
+   "mean": 0.23529411764705882,
+   "max": 4,
+   "zeros": 157,
+   "atMin": 157,
+   "atMax": 7,
+   "q1": 0,
+   "q3": 0,
+   "top": [
+    "Monduli 4",
+    "Meru 4",
+    "Arusha Urban 4",
+    "Karatu 4",
+    "Ngorongoro 4"
+   ],
+   "bottom": [
+    "Kondoa 0",
+    "Mpwapwa 0",
+    "Kongwa 0",
+    "Chamwino 0",
+    "Dodoma Urban 0"
+   ],
+   "outliers": [],
+   "flags": [],
+   "notes": []
+  },
+  {
+   "id": "HA.NAT.WF-BURN",
+   "name": "Burned Area",
+   "component": "Wildfire",
+   "dimension": "Hazards & Exposure",
+   "unit": "%",
+   "keyedAt": "Adm1",
+   "normalisation": "Data range",
+   "range": [
+    0,
+    49
+   ],
+   "sign": "Increase Risk",
+   "source": "JRC (GWIS) 2019-2023 (region)",
+   "n": 170,
+   "distinct": 22,
+   "min": 0,
+   "median": 19,
+   "mean": 18.03529411764706,
+   "max": 49,
+   "zeros": 8,
+   "atMin": 8,
+   "atMax": 3,
+   "q1": 5,
+   "q3": 27,
+   "top": [
+    "Mpanda Urban 49",
+    "Mpanda 49",
+    "Mlele 49",
+    "Kilwa 46",
+    "Lindi 46"
+   ],
+   "bottom": [
+    "Kati 0",
+    "Kusini 0",
+    "Magharibi 0",
+    "Mjini 0",
+    "Wete 0"
+   ],
+   "outliers": [],
+   "flags": [],
+   "notes": []
+  },
+  {
+   "id": "HA.NAT.WF-FWI",
+   "name": "Fire Weather Index",
+   "component": "Wildfire",
+   "dimension": "Hazards & Exposure",
+   "unit": "index",
+   "keyedAt": "Adm1",
+   "normalisation": "Data range",
+   "range": [
+    0,
+    120
+   ],
+   "sign": "Increase Risk",
+   "source": "GFDRR 2022 (region)",
+   "n": 170,
+   "distinct": 22,
+   "min": 0,
+   "median": 81,
+   "mean": 77.19411764705882,
+   "max": 120,
+   "zeros": 13,
+   "atMin": 13,
+   "atMax": 7,
+   "q1": 67,
+   "q3": 95,
+   "top": [
+    "Nzega 120",
+    "Igunga 120",
+    "Uyui 120",
+    "Urambo 120",
+    "Sikonge 120"
+   ],
+   "bottom": [
+    "Kinondoni 0",
+    "Ilala 0",
+    "Temeke 0",
+    "Kaskazini A 0",
+    "Kaskazini B 0"
+   ],
+   "outliers": [],
+   "flags": [],
+   "notes": []
+  },
+  {
+   "id": "VU.SE.DEP-DR",
+   "name": "Dependency Ratio",
+   "component": "Economic Dependency",
+   "dimension": "Vulnerability",
+   "unit": "ratio",
+   "keyedAt": "Adm1",
+   "normalisation": "Data range",
+   "range": [
+    55,
+    121.8
+   ],
+   "sign": "Increase Risk",
+   "source": "Global Data Lab 2011 - 2022 (region)",
+   "n": 170,
+   "distinct": 24,
+   "min": 55,
+   "median": 98.5,
+   "mean": 101.52999999999999,
+   "max": 121.8,
+   "zeros": 0,
+   "atMin": 3,
+   "atMax": 7,
+   "q1": 94.4,
+   "q3": 114.1,
+   "top": [
+    "Tarime 121.8",
+    "Serengeti 121.8",
+    "Musoma 121.8",
+    "Bunda 121.8",
+    "Musoma Urban 121.8"
+   ],
+   "bottom": [
+    "Kinondoni 55",
+    "Ilala 55",
+    "Temeke 55",
+    "Magharibi 65.9",
+    "Mjini 65.9"
+   ],
+   "outliers": [],
+   "flags": [],
+   "notes": []
+  },
+  {
+   "id": "VU.SE.DEP-ODA",
+   "name": "Net ODA received (% of GNI)",
+   "component": "Economic Dependency",
+   "dimension": "Vulnerability",
+   "unit": "%",
+   "keyedAt": "National",
+   "normalisation": "Custom",
+   "range": [
+    0.2,
+    14.5
+   ],
+   "sign": "Increase Risk",
+   "source": "World Bank 2018-2022 (national)",
+   "n": 170,
+   "distinct": 1,
+   "min": 3.75,
+   "median": 3.75,
+   "mean": 3.75,
+   "max": 3.75,
+   "zeros": 0,
+   "atMin": 170,
+   "atMax": 170,
+   "q1": 3.75,
+   "q3": 3.75,
+   "top": [
+    "Kondoa 3.75",
+    "Mpwapwa 3.75",
+    "Kongwa 3.75",
+    "Chamwino 3.75",
+    "Dodoma Urban 3.75"
+   ],
+   "bottom": [
+    "Kondoa 3.75",
+    "Mpwapwa 3.75",
+    "Kongwa 3.75",
+    "Chamwino 3.75",
+    "Dodoma Urban 3.75"
+   ],
+   "outliers": [],
+   "flags": [
+    "constant (one value for the whole country)"
+   ],
+   "notes": []
+  },
+  {
+   "id": "VU.SE.DEP-REM",
+   "name": "Personal remittances",
+   "component": "Economic Dependency",
+   "dimension": "Vulnerability",
+   "unit": "%",
+   "keyedAt": "National",
+   "normalisation": "Custom",
+   "range": [
+    0,
+    6.4
+   ],
+   "sign": "Increase Risk",
+   "source": "World Bank 2019-2023 (national)",
+   "n": 170,
+   "distinct": 1,
+   "min": 0.67,
+   "median": 0.67,
+   "mean": 0.6700000000000015,
+   "max": 0.67,
+   "zeros": 0,
+   "atMin": 170,
+   "atMax": 170,
+   "q1": 0.67,
+   "q3": 0.67,
+   "top": [
+    "Kondoa 0.67",
+    "Mpwapwa 0.67",
+    "Kongwa 0.67",
+    "Chamwino 0.67",
+    "Dodoma Urban 0.67"
+   ],
+   "bottom": [
+    "Kondoa 0.67",
+    "Mpwapwa 0.67",
+    "Kongwa 0.67",
+    "Chamwino 0.67",
+    "Dodoma Urban 0.67"
+   ],
+   "outliers": [],
+   "flags": [
+    "constant (one value for the whole country)"
+   ],
+   "notes": []
+  },
+  {
+   "id": "VU.SE.HAB-INF",
+   "name": "Population in informal settlements",
+   "component": "Habitat",
+   "dimension": "Vulnerability",
+   "unit": "%",
+   "keyedAt": "National",
+   "normalisation": "Custom",
+   "range": [
+    17,
+    78.4
+   ],
+   "sign": "Increase Risk",
+   "source": "UN Habitat 2022 (national)",
+   "n": 170,
+   "distinct": 1,
+   "min": 70.09,
+   "median": 70.09,
+   "mean": 70.09000000000012,
+   "max": 70.09,
+   "zeros": 0,
+   "atMin": 170,
+   "atMax": 170,
+   "q1": 70.09,
+   "q3": 70.09,
+   "top": [
+    "Kondoa 70.09",
+    "Mpwapwa 70.09",
+    "Kongwa 70.09",
+    "Chamwino 70.09",
+    "Dodoma Urban 70.09"
+   ],
+   "bottom": [
+    "Kondoa 70.09",
+    "Mpwapwa 70.09",
+    "Kongwa 70.09",
+    "Chamwino 70.09",
+    "Dodoma Urban 70.09"
+   ],
+   "outliers": [],
+   "flags": [
+    "constant (one value for the whole country)"
+   ],
+   "notes": []
+  },
+  {
+   "id": "VU.SE.HAB-URB",
+   "name": "Urban Population",
+   "component": "Habitat",
+   "dimension": "Vulnerability",
+   "unit": "%",
+   "keyedAt": "Adm1",
+   "normalisation": "Data range",
+   "range": [
+    6.3,
+    100
+   ],
+   "sign": "Increase Risk",
+   "source": "Global Data Lab 2013 - 2022 (region)",
+   "n": 170,
+   "distinct": 25,
+   "min": 6.3,
+   "median": 22.44,
+   "mean": 24.67470588235296,
+   "max": 100,
+   "zeros": 0,
+   "atMin": 2,
+   "atMax": 3,
+   "q1": 15.14,
+   "q3": 30.07,
+   "top": [
+    "Kinondoni 100",
+    "Ilala 100",
+    "Temeke 100",
+    "Magharibi 51.28",
+    "Mjini 51.28"
+   ],
+   "bottom": [
+    "Kati 6.3",
+    "Kusini 6.3",
+    "Kaskazini A 7.46",
+    "Kaskazini B 7.46",
+    "Karagwe 9.75"
+   ],
+   "outliers": [
+    "Kinondoni 100",
+    "Ilala 100",
+    "Temeke 100"
+   ],
+   "flags": [
+    "3 far outlier(s) beyond 3 IQR"
+   ],
+   "notes": []
+  },
+  {
+   "id": "VU.SE.LV-FS",
+   "name": "Food Security - Insufficient food",
+   "component": "Livelihoods",
+   "dimension": "Vulnerability",
+   "unit": "% pop phase 2 or higher",
+   "keyedAt": "Adm1",
+   "normalisation": "Data range",
+   "range": [
+    0,
+    149
+   ],
+   "sign": "Increase Risk",
+   "source": "IPC 2022-2024 (region)",
+   "n": 170,
+   "distinct": 10,
+   "min": 0,
+   "median": 0,
+   "mean": 29.794117647058822,
+   "max": 149,
+   "zeros": 110,
+   "atMin": 110,
+   "atMax": 7,
+   "q1": 0,
+   "q3": 57,
+   "top": [
+    "Kondoa 149",
+    "Mpwapwa 149",
+    "Kongwa 149",
+    "Chamwino 149",
+    "Dodoma Urban 149"
+   ],
+   "bottom": [
+    "Rombo 0",
+    "Mwanga 0",
+    "Same 0",
+    "Moshi 0",
+    "Hai 0"
+   ],
+   "outliers": [],
+   "flags": [
+    "values above 100 on a percentage indicator"
+   ],
+   "notes": [
+    "DN-06"
+   ]
+  },
+  {
+   "id": "VU.SE.POV-GDI",
+   "name": "Gender Development Index",
+   "component": "Development & Poverty",
+   "dimension": "Vulnerability",
+   "unit": "index",
+   "keyedAt": "Adm1",
+   "normalisation": "Data range",
+   "range": [
+    0.91,
+    0.97
+   ],
+   "sign": "Decrease Risk",
+   "source": "Global Data Lab 2022 (region)",
+   "n": 170,
+   "distinct": 7,
+   "min": 0.91,
+   "median": 0.94,
+   "mean": 0.9342352941176472,
+   "max": 0.97,
+   "zeros": 0,
+   "atMin": 53,
+   "atMax": 7,
+   "q1": 0.91,
+   "q3": 0.95,
+   "top": [
+    "Rombo 0.97",
+    "Mwanga 0.97",
+    "Same 0.97",
+    "Moshi 0.97",
+    "Hai 0.97"
+   ],
+   "bottom": [
+    "Bagamoyo 0.91",
+    "Kibaha 0.91",
+    "Kisarawe 0.91",
+    "Mkuranga 0.91",
+    "Rufiji 0.91"
+   ],
+   "outliers": [],
+   "flags": [],
+   "notes": []
+  },
+  {
+   "id": "VU.SE.POV-GINI",
+   "name": "Wealth Inequality",
+   "component": "Development & Poverty",
+   "dimension": "Vulnerability",
+   "unit": "index",
+   "keyedAt": "Adm1",
+   "normalisation": "Data range",
+   "range": [
+    0.16,
+    0.44
+   ],
+   "sign": "Increase Risk",
+   "source": "Global Data Lab 2011 - 2022 (region)",
+   "n": 170,
+   "distinct": 15,
+   "min": 0.16,
+   "median": 0.38,
+   "mean": 0.36964705882352933,
+   "max": 0.44,
+   "zeros": 0,
+   "atMin": 2,
+   "atMax": 14,
+   "q1": 0.36,
+   "q3": 0.39,
+   "top": [
+    "Kilosa 0.44",
+    "Morogoro 0.44",
+    "Kilombero 0.44",
+    "Ulanga 0.44",
+    "Morogoro Urban 0.44"
+   ],
+   "bottom": [
+    "Magharibi 0.16",
+    "Mjini 0.16",
+    "Kinondoni 0.2",
+    "Ilala 0.2",
+    "Temeke 0.2"
+   ],
+   "outliers": [
+    "Kinondoni 0.2",
+    "Ilala 0.2",
+    "Temeke 0.2",
+    "Kaskazini A 0.23",
+    "Kaskazini B 0.23",
+    "Kati 0.22",
+    "Kusini 0.22",
+    "Magharibi 0.16",
+    "Mjini 0.16"
+   ],
+   "flags": [
+    "9 far outlier(s) beyond 3 IQR"
+   ],
+   "notes": []
+  },
+  {
+   "id": "VU.SE.POV-HDI",
+   "name": "Human Development Index",
+   "component": "Development & Poverty",
+   "dimension": "Vulnerability",
+   "unit": "index",
+   "keyedAt": "Adm1",
+   "normalisation": "Data range",
+   "range": [
+    0.45,
+    0.68
+   ],
+   "sign": "Decrease Risk",
+   "source": "Global Data Lab 2022 (region)",
+   "n": 170,
+   "distinct": 13,
+   "min": 0.45,
+   "median": 0.51,
+   "mean": 0.5120588235294122,
+   "max": 0.68,
+   "zeros": 0,
+   "atMin": 14,
+   "atMax": 2,
+   "q1": 0.48,
+   "q3": 0.54,
+   "top": [
+    "Magharibi 0.68",
+    "Mjini 0.68",
+    "Kinondoni 0.62",
+    "Ilala 0.62",
+    "Temeke 0.62"
+   ],
+   "bottom": [
+    "Nzega 0.45",
+    "Igunga 0.45",
+    "Uyui 0.45",
+    "Urambo 0.45",
+    "Sikonge 0.45"
+   ],
+   "outliers": [],
+   "flags": [],
+   "notes": []
+  },
+  {
+   "id": "VU.SE.POV-MPI",
+   "name": "Multidimensional Poverty Index",
+   "component": "Development & Poverty",
+   "dimension": "Vulnerability",
+   "unit": "index",
+   "keyedAt": "Adm1",
+   "normalisation": "Data range",
+   "range": [
+    0.132,
+    0.39
+   ],
+   "sign": "Increase Risk",
+   "source": "OPHI 2012-2021 (region)",
+   "n": 170,
+   "distinct": 9,
+   "min": 0.132,
+   "median": 0.318,
+   "mean": 0.2776529411764705,
+   "max": 0.39,
+   "zeros": 0,
+   "atMin": 10,
+   "atMax": 20,
+   "q1": 0.201,
+   "q3": 0.346,
+   "top": [
+    "Nzega 0.39",
+    "Igunga 0.39",
+    "Uyui 0.39",
+    "Urambo 0.39",
+    "Sikonge 0.39"
+   ],
+   "bottom": [
+    "Kaskazini A 0.132",
+    "Kaskazini B 0.132",
+    "Kati 0.132",
+    "Kusini 0.132",
+    "Magharibi 0.132"
+   ],
+   "outliers": [],
+   "flags": [],
+   "notes": []
+  },
+  {
+   "id": "VU.VG.CH-MORTCH",
+   "name": "Child mortality",
+   "component": "Children Health and Nutrition",
+   "dimension": "Vulnerability",
+   "unit": "per 1,000 live births ",
+   "keyedAt": "Adm1",
+   "normalisation": "Data range",
+   "range": [
+    3.68,
+    42.48
+   ],
+   "sign": "Increase Risk",
+   "source": "Global Data Lab 2006 - 2021 (region)",
+   "n": 170,
+   "distinct": 25,
+   "min": 3.68,
+   "median": 26.71,
+   "mean": 25.18476470588235,
+   "max": 42.48,
+   "zeros": 0,
+   "atMin": 2,
+   "atMax": 12,
+   "q1": 17.5,
+   "q3": 35.37,
+   "top": [
+    "Ukerewe 42.48",
+    "Magu 42.48",
+    "Nyamagana 42.48",
+    "Kwimba 42.48",
+    "Sengerema 42.48"
+   ],
+   "bottom": [
+    "Kaskazini A 3.68",
+    "Kaskazini B 3.68",
+    "Kati 5.1",
+    "Kusini 5.1",
+    "Rombo 8.13"
+   ],
+   "outliers": [],
+   "flags": [],
+   "notes": []
+  },
+  {
+   "id": "VU.VG.CH-MORTINF",
+   "name": "Infant mortality",
+   "component": "Children Health and Nutrition",
+   "dimension": "Vulnerability",
+   "unit": "per 1,000 live births ",
+   "keyedAt": "Adm1",
+   "normalisation": "Data range",
+   "range": [
+    28.27,
+    76.57
+   ],
+   "sign": "Increase Risk",
+   "source": "Global Data Lab 2011 - 2022 (region)",
+   "n": 170,
+   "distinct": 25,
+   "min": 28.27,
+   "median": 47.61,
+   "mean": 50.50447058823533,
+   "max": 76.57,
+   "zeros": 0,
+   "atMin": 6,
+   "atMax": 11,
+   "q1": 40.15,
+   "q3": 58.29,
+   "top": [
+    "Chunya 76.57",
+    "Mbeya 76.57",
+    "Kyela 76.57",
+    "Rungwe 76.57",
+    "Mbarali 76.57"
+   ],
+   "bottom": [
+    "Iramba 28.27",
+    "Singida 28.27",
+    "Manyoni 28.27",
+    "Singida Urban 28.27",
+    "Ikungi 28.27"
+   ],
+   "outliers": [],
+   "flags": [],
+   "notes": []
+  },
+  {
+   "id": "VU.VG.CH-MORTNEO",
+   "name": "Neonatal mortality",
+   "component": "Children Health and Nutrition",
+   "dimension": "Vulnerability",
+   "unit": "per 1,000 live births ",
+   "keyedAt": "Adm1",
+   "normalisation": "Data range",
+   "range": [
+    10.05,
+    49.95
+   ],
+   "sign": "Increase Risk",
+   "source": "Global Data Lab 2006 - 2021 (region)",
+   "n": 170,
+   "distinct": 25,
+   "min": 10.05,
+   "median": 27.52,
+   "mean": 29.184882352941152,
+   "max": 49.95,
+   "zeros": 0,
+   "atMin": 7,
+   "atMax": 6,
+   "q1": 23.31,
+   "q3": 38.2,
+   "top": [
+    "Kilwa 49.95",
+    "Lindi 49.95",
+    "Nachingwea 49.95",
+    "Liwale 49.95",
+    "Ruangwa 49.95"
+   ],
+   "bottom": [
+    "Kilosa 10.05",
+    "Morogoro 10.05",
+    "Kilombero 10.05",
+    "Ulanga 10.05",
+    "Morogoro Urban 10.05"
+   ],
+   "outliers": [],
+   "flags": [],
+   "notes": []
+  },
+  {
+   "id": "VU.VG.CH-UW",
+   "name": "Children Underweight",
+   "component": "Children Health and Nutrition",
+   "dimension": "Vulnerability",
+   "unit": "%",
+   "keyedAt": "Adm1",
+   "normalisation": "Data range",
+   "range": [
+    6.2,
+    20
+   ],
+   "sign": "Increase Risk",
+   "source": "Global Data Lab 2000 - 2022 (region)",
+   "n": 170,
+   "distinct": 23,
+   "min": 6.2,
+   "median": 12.4,
+   "mean": 13.748823529411762,
+   "max": 20,
+   "zeros": 0,
+   "atMin": 3,
+   "atMax": 8,
+   "q1": 11,
+   "q3": 15.8,
+   "top": [
+    "Kibondo 20",
+    "Kasulu 20",
+    "Kigoma 20",
+    "Kigoma  Urban 20",
+    "Uvinza 20"
+   ],
+   "bottom": [
+    "Kinondoni 6.2",
+    "Ilala 6.2",
+    "Temeke 6.2",
+    "Magharibi 8.8",
+    "Mjini 8.8"
+   ],
+   "outliers": [],
+   "flags": [],
+   "notes": []
+  },
+  {
+   "id": "VU.VG.DP-IDP",
+   "name": "Internal Displaced People",
+   "component": "Displaced People",
+   "dimension": "Vulnerability",
+   "unit": "number of people",
+   "keyedAt": "Adm1",
+   "normalisation": "Data range",
+   "range": [
+    -6.907755279,
+    10.31161581
+   ],
+   "sign": "Increase Risk",
+   "source": "IDMC 2023 (region)",
+   "n": 170,
+   "distinct": 4,
+   "min": 0,
+   "median": 0,
+   "mean": 369.3,
+   "max": 30080,
+   "zeros": 157,
+   "atMin": 157,
+   "atMax": 2,
+   "q1": 0,
+   "q3": 0,
+   "top": [
+    "Kaskazini A 30080",
+    "Kaskazini B 30080",
+    "Mtwara 291",
+    "Newala 291",
+    "Masasi 291"
+   ],
+   "bottom": [
+    "Kondoa 0",
+    "Mpwapwa 0",
+    "Kongwa 0",
+    "Chamwino 0",
+    "Dodoma Urban 0"
+   ],
+   "outliers": [],
+   "flags": [],
+   "notes": [
+    "DN-07"
+   ]
+  },
+  {
+   "id": "VU.VG.HC-LEXP",
+   "name": "Life Expectancy",
+   "component": "Health Conditions",
+   "dimension": "Vulnerability",
+   "unit": "years",
+   "keyedAt": "National",
+   "normalisation": "Data range",
+   "range": [
+    63.94,
+    72.08
+   ],
+   "sign": "Decrease Risk",
+   "source": "Global Data Lab 2022 (region)",
+   "n": 170,
+   "distinct": 25,
+   "min": 63.94,
+   "median": 67.7,
+   "mean": 67.43547058823532,
+   "max": 72.08,
+   "zeros": 0,
+   "atMin": 7,
+   "atMax": 13,
+   "q1": 65.15,
+   "q3": 68.91,
+   "top": [
+    "Monduli 72.08",
+    "Meru 72.08",
+    "Arusha Urban 72.08",
+    "Karatu 72.08",
+    "Ngorongoro 72.08"
+   ],
+   "bottom": [
+    "Kondoa 63.94",
+    "Mpwapwa 63.94",
+    "Kongwa 63.94",
+    "Chamwino 63.94",
+    "Dodoma Urban 63.94"
+   ],
+   "outliers": [],
+   "flags": [],
+   "notes": []
+  },
+  {
+   "id": "VU.VG.HC-MALAPREV",
+   "name": "Malaria prevalence",
+   "component": "Health Conditions",
+   "dimension": "Vulnerability",
+   "unit": "max malaria prevalence per person",
+   "keyedAt": "Adm1",
+   "normalisation": "Data range",
+   "range": [
+    0.11,
+    0.37
+   ],
+   "sign": "Increase Risk",
+   "source": "Malaria Atlas Project 2022 (region)",
+   "n": 170,
+   "distinct": 19,
+   "min": 0.11,
+   "median": 0.25,
+   "mean": 0.2507058823529412,
+   "max": 0.37,
+   "zeros": 0,
+   "atMin": 2,
+   "atMax": 8,
+   "q1": 0.2,
+   "q3": 0.3,
+   "top": [
+    "Kibondo 0.37",
+    "Kasulu 0.37",
+    "Kigoma 0.37",
+    "Kigoma  Urban 0.37",
+    "Uvinza 0.37"
+   ],
+   "bottom": [
+    "Wete 0.11",
+    "Micheweni 0.11",
+    "Kaskazini A 0.12",
+    "Kaskazini B 0.12",
+    "Chake Chake 0.12"
+   ],
+   "outliers": [],
+   "flags": [],
+   "notes": []
+  },
+  {
+   "id": "VU.VG.HC-MEASLES",
+   "name": "Measles Incidence",
+   "component": "Health Conditions",
+   "dimension": "Vulnerability",
+   "unit": "per 1,000,000 population",
+   "keyedAt": "National",
+   "normalisation": "Custom",
+   "range": [
+    2.9,
+    1595.4
+   ],
+   "sign": "Increase Risk",
+   "source": "WHO 2019-2023 (national)",
+   "n": 170,
+   "distinct": 1,
+   "min": 11.38,
+   "median": 11.38,
+   "mean": 11.38000000000005,
+   "max": 11.38,
+   "zeros": 0,
+   "atMin": 170,
+   "atMax": 170,
+   "q1": 11.38,
+   "q3": 11.38,
+   "top": [
+    "Kondoa 11.38",
+    "Mpwapwa 11.38",
+    "Kongwa 11.38",
+    "Chamwino 11.38",
+    "Dodoma Urban 11.38"
+   ],
+   "bottom": [
+    "Kondoa 11.38",
+    "Mpwapwa 11.38",
+    "Kongwa 11.38",
+    "Chamwino 11.38",
+    "Dodoma Urban 11.38"
+   ],
+   "outliers": [],
+   "flags": [
+    "constant (one value for the whole country)"
+   ],
+   "notes": []
+  }
+ ],
+ "groups": [
+  {
+   "ref": "hazard:coastalHazards",
+   "name": "Coastal hazards",
+   "n": 169,
+   "distinct": 1,
+   "min": 0,
+   "median": 0,
+   "mean": 0,
+   "max": 0,
+   "zeros": 169,
+   "atMin": 169,
+   "atMax": 169,
+   "q1": 0,
+   "q3": 0,
+   "top": [
+    "Kondoa 0",
+    "Mpwapwa 0",
+    "Kongwa 0",
+    "Chamwino 0",
+    "Dodoma Urban 0"
+   ],
+   "bottom": [
+    "Kondoa 0",
+    "Mpwapwa 0",
+    "Kongwa 0",
+    "Chamwino 0",
+    "Dodoma Urban 0"
+   ],
+   "notes": [
+    "DN-05"
+   ],
+   "councilsWithNote": 195,
+   "withheldUnits": 170
+  },
+  {
+   "ref": "hazard:drought",
+   "name": "Drought",
+   "n": 170,
+   "distinct": 11,
+   "min": 0,
+   "median": 0.7,
+   "mean": 1.864705882352942,
+   "max": 10,
+   "zeros": 68,
+   "atMin": 68,
+   "atMax": 3,
+   "q1": 0,
+   "q3": 2.9,
+   "top": [
+    "Kinondoni 10",
+    "Ilala 10",
+    "Temeke 10",
+    "Monduli 8.6",
+    "Meru 8.6"
+   ],
+   "bottom": [
+    "Kilwa 0",
+    "Lindi 0",
+    "Nachingwea 0",
+    "Liwale 0",
+    "Ruangwa 0"
+   ],
+   "notes": [
+    "DN-01",
+    "DN-02"
+   ],
+   "councilsWithNote": 33,
+   "withheldUnits": 3
+  },
+  {
+   "ref": "hazard:earthquake",
+   "name": "Earthquake",
+   "n": 169,
+   "distinct": 36,
+   "min": 0,
+   "median": 1.9,
+   "mean": 4.414201183431953,
+   "max": 10,
+   "zeros": 71,
+   "atMin": 71,
+   "atMax": 49,
+   "q1": 0,
+   "q3": 10,
+   "top": [
+    "Kondoa 10",
+    "Dodoma Urban 10",
+    "Bahi 10",
+    "Chemba 10",
+    "Monduli 10"
+   ],
+   "bottom": [
+    "Tanga Urban 0",
+    "Pangani 0",
+    "Handeni 0",
+    "Kilindi 0",
+    "Handeni Mji 0"
+   ],
+   "notes": [
+    "DN-03",
+    "DN-10"
+   ],
+   "councilsWithNote": 62,
+   "withheldUnits": 0
+  },
+  {
+   "ref": "hazard:environmentalDegradation",
+   "name": "Environmental degradation",
+   "n": 170,
+   "distinct": 88,
+   "min": 0.55,
+   "median": 4.55,
+   "mean": 4.557647058823531,
+   "max": 9.5,
+   "zeros": 0,
+   "atMin": 1,
+   "atMax": 1,
+   "q1": 3.6,
+   "q3": 5.4,
+   "top": [
+    "Njombe Urban 9.5",
+    "Njombe 9.3",
+    "Makete 8.8",
+    "Makambako Township Authority 8.6",
+    "Wanging'ombe 8.5"
+   ],
+   "bottom": [
+    "Shinyanga Urban 0.6",
+    "Kishapu 0.9",
+    "Itilima 1.1",
+    "Shinyanga 1.4",
+    "Maswa 1.4"
+   ],
+   "notes": [],
+   "councilsWithNote": 0,
+   "withheldUnits": 0
+  },
+  {
+   "ref": "hazard:flood",
+   "name": "Flood",
+   "n": 169,
+   "distinct": 54,
+   "min": 0,
+   "median": 4.8,
+   "mean": 4.640236686390532,
+   "max": 10,
+   "zeros": 20,
+   "atMin": 20,
+   "atMax": 1,
+   "q1": 3.1,
+   "q3": 6.8,
+   "top": [
+    "Kyela 10",
+    "Pangani 9.8",
+    "Musoma Urban 9.3",
+    "Rufiji 9",
+    "Korogwe Township Authority 8.9"
+   ],
+   "bottom": [
+    "Arusha Urban 0",
+    "Rombo 0",
+    "Moshi Urban 0",
+    "Siha 0",
+    "Morogoro Urban 0"
+   ],
+   "notes": [
+    "DN-11"
+   ],
+   "councilsWithNote": 2,
+   "withheldUnits": 0
+  },
+  {
+   "ref": "hazard:heatwave",
+   "name": "Heatwave",
+   "n": 0,
+   "distinct": 0,
+   "min": null,
+   "median": null,
+   "mean": null,
+   "max": null,
+   "zeros": 0,
+   "atMin": 0,
+   "atMax": 0,
+   "q1": null,
+   "q3": null,
+   "top": [],
+   "bottom": [],
+   "notes": [],
+   "councilsWithNote": 0,
+   "withheldUnits": 0
+  },
+  {
+   "ref": "hazard:landslide",
+   "name": "Landslide",
+   "n": 169,
+   "distinct": 64,
+   "min": 0,
+   "median": 3.4,
+   "mean": 3.239053254437872,
+   "max": 10,
+   "zeros": 46,
+   "atMin": 46,
+   "atMax": 1,
+   "q1": 0,
+   "q3": 5.4,
+   "top": [
+    "Ukerewe 10",
+    "Same 8.2",
+    "Iringa Urban 8.1",
+    "Ileje 8.1",
+    "Mvomero 7.9"
+   ],
+   "bottom": [
+    "Moshi Urban 0",
+    "Kibaha 0",
+    "Kibaha Urban 0",
+    "Kinondoni 0",
+    "Ilala 0"
+   ],
+   "notes": [
+    "DN-04"
+   ],
+   "councilsWithNote": 1,
+   "withheldUnits": 1
+  },
+  {
+   "ref": "hazard:lightning",
+   "name": "Lightning",
+   "n": 0,
+   "distinct": 0,
+   "min": null,
+   "median": null,
+   "mean": null,
+   "max": null,
+   "zeros": 0,
+   "atMin": 0,
+   "atMax": 0,
+   "q1": null,
+   "q3": null,
+   "top": [],
+   "bottom": [],
+   "notes": [],
+   "councilsWithNote": 0,
+   "withheldUnits": 0
+  },
+  {
+   "ref": "hazard:stormsCyclone",
+   "name": "Storms & cyclones",
+   "n": 169,
+   "distinct": 2,
+   "min": 0,
+   "median": 0,
+   "mean": 0.05917159763313609,
+   "max": 10,
+   "zeros": 168,
+   "atMin": 168,
+   "atMax": 1,
+   "q1": 0,
+   "q3": 0,
+   "top": [
+    "Mtwara 10",
+    "Kondoa 0",
+    "Mpwapwa 0",
+    "Kongwa 0",
+    "Chamwino 0"
+   ],
+   "bottom": [
+    "Kondoa 0",
+    "Mpwapwa 0",
+    "Kongwa 0",
+    "Chamwino 0",
+    "Dodoma Urban 0"
+   ],
+   "notes": [],
+   "councilsWithNote": 0,
+   "withheldUnits": 0
+  },
+  {
+   "ref": "hazard:volcano",
+   "name": "Volcano",
+   "n": 170,
+   "distinct": 3,
+   "min": 0,
+   "median": 0,
+   "mean": 0.5882352941176471,
+   "max": 10,
+   "zeros": 157,
+   "atMin": 157,
+   "atMax": 7,
+   "q1": 0,
+   "q3": 0,
+   "top": [
+    "Monduli 10",
+    "Meru 10",
+    "Arusha Urban 10",
+    "Karatu 10",
+    "Ngorongoro 10"
+   ],
+   "bottom": [
+    "Kondoa 0",
+    "Mpwapwa 0",
+    "Kongwa 0",
+    "Chamwino 0",
+    "Dodoma Urban 0"
+   ],
+   "notes": [],
+   "councilsWithNote": 0,
+   "withheldUnits": 0
+  },
+  {
+   "ref": "hazard:wildfire",
+   "name": "Wildfire",
+   "n": 170,
+   "distinct": 26,
+   "min": 0,
+   "median": 5.15,
+   "mean": 5.059411764705881,
+   "max": 9.4,
+   "zeros": 8,
+   "atMin": 8,
+   "atMax": 3,
+   "q1": 3.9,
+   "q3": 6.5,
+   "top": [
+    "Mpanda Urban 9.4",
+    "Mpanda 9.4",
+    "Mlele 9.4",
+    "Kilwa 7.9",
+    "Lindi 7.9"
+   ],
+   "bottom": [
+    "Kati 0",
+    "Kusini 0",
+    "Magharibi 0",
+    "Mjini 0",
+    "Wete 0"
+   ],
+   "notes": [],
+   "councilsWithNote": 0,
+   "withheldUnits": 0
+  },
+  {
+   "ref": "hazard:zoonoses",
+   "name": "Zoonoses, plants & pests",
+   "n": 0,
+   "distinct": 0,
+   "min": null,
+   "median": null,
+   "mean": null,
+   "max": null,
+   "zeros": 0,
+   "atMin": 0,
+   "atMax": 0,
+   "q1": null,
+   "q3": null,
+   "top": [],
+   "bottom": [],
+   "notes": [],
+   "councilsWithNote": 0,
+   "withheldUnits": 0
+  },
+  {
+   "ref": "hazard:conflictIntensity",
+   "name": "Conflict intensity",
+   "n": 170,
+   "distinct": 1,
+   "min": 0,
+   "median": 0,
+   "mean": 0,
+   "max": 0,
+   "zeros": 170,
+   "atMin": 170,
+   "atMax": 170,
+   "q1": 0,
+   "q3": 0,
+   "top": [
+    "Kondoa 0",
+    "Mpwapwa 0",
+    "Kongwa 0",
+    "Chamwino 0",
+    "Dodoma Urban 0"
+   ],
+   "bottom": [
+    "Kondoa 0",
+    "Mpwapwa 0",
+    "Kongwa 0",
+    "Chamwino 0",
+    "Dodoma Urban 0"
+   ],
+   "notes": [],
+   "councilsWithNote": 0,
+   "withheldUnits": 0
+  },
+  {
+   "ref": "hazard:conflictRisk",
+   "name": "Conflict risk",
+   "n": 170,
+   "distinct": 1,
+   "min": 0.7,
+   "median": 0.7,
+   "mean": 0.700000000000002,
+   "max": 0.7,
+   "zeros": 0,
+   "atMin": 170,
+   "atMax": 170,
+   "q1": 0.7,
+   "q3": 0.7,
+   "top": [
+    "Kondoa 0.7",
+    "Mpwapwa 0.7",
+    "Kongwa 0.7",
+    "Chamwino 0.7",
+    "Dodoma Urban 0.7"
+   ],
+   "bottom": [
+    "Kondoa 0.7",
+    "Mpwapwa 0.7",
+    "Kongwa 0.7",
+    "Chamwino 0.7",
+    "Dodoma Urban 0.7"
+   ],
+   "notes": [],
+   "councilsWithNote": 0,
+   "withheldUnits": 0
+  },
+  {
+   "ref": "hazard:hazardousMaterial",
+   "name": "Hazardous material",
+   "n": 0,
+   "distinct": 0,
+   "min": null,
+   "median": null,
+   "mean": null,
+   "max": null,
+   "zeros": 0,
+   "atMin": 0,
+   "atMax": 0,
+   "q1": null,
+   "q3": null,
+   "top": [],
+   "bottom": [],
+   "notes": [],
+   "councilsWithNote": 0,
+   "withheldUnits": 0
+  },
+  {
+   "ref": "hazard:internalViolence",
+   "name": "Internal violence",
+   "n": 170,
+   "distinct": 23,
+   "min": 0,
+   "median": 6.05,
+   "mean": 5.50705882352941,
+   "max": 9.65,
+   "zeros": 13,
+   "atMin": 13,
+   "atMax": 8,
+   "q1": 4.9,
+   "q3": 7,
+   "top": [
+    "Kibondo 9.7",
+    "Kasulu 9.7",
+    "Kigoma 9.7",
+    "Kigoma  Urban 9.7",
+    "Uvinza 9.7"
+   ],
+   "bottom": [
+    "Iramba 0",
+    "Singida 0",
+    "Manyoni 0",
+    "Singida Urban 0",
+    "Ikungi 0"
+   ],
+   "notes": [
+    "DN-12"
+   ],
+   "councilsWithNote": 195,
+   "withheldUnits": 170
+  },
+  {
+   "ref": "hazard:vehicleAccidents",
+   "name": "Vehicle accidents",
+   "n": 0,
+   "distinct": 0,
+   "min": null,
+   "median": null,
+   "mean": null,
+   "max": null,
+   "zeros": 0,
+   "atMin": 0,
+   "atMax": 0,
+   "q1": null,
+   "q3": null,
+   "top": [],
+   "bottom": [],
+   "notes": [],
+   "councilsWithNote": 0,
+   "withheldUnits": 0
+  },
+  {
+   "ref": "vulnerability:developmentPoverty",
+   "name": "Development & poverty",
+   "n": 170,
+   "distinct": 27,
+   "min": 0.825,
+   "median": 6.5,
+   "mean": 6.601323529411763,
+   "max": 9.3,
+   "zeros": 0,
+   "atMin": 2,
+   "atMax": 7,
+   "q1": 5.325,
+   "q3": 8.3,
+   "top": [
+    "Kalambo 9.3",
+    "Sumbawanga 9.3",
+    "Nkasi 9.3",
+    "Sumbawanga Urban 9.3",
+    "Mpanda Urban 9.3"
+   ],
+   "bottom": [
+    "Magharibi 0.8",
+    "Mjini 0.8",
+    "Kati 2.2",
+    "Kusini 2.2",
+    "Rombo 2.7"
+   ],
+   "notes": [],
+   "councilsWithNote": 0,
+   "withheldUnits": 0
+  },
+  {
+   "ref": "vulnerability:economicDependency",
+   "name": "Economic dependency",
+   "n": 170,
+   "distinct": 21,
+   "min": 1.166666667,
+   "median": 3.333333333,
+   "mean": 3.484705882364713,
+   "max": 4.5,
+   "zeros": 0,
+   "atMin": 3,
+   "atMax": 7,
+   "q1": 3.133333333,
+   "q3": 4.1,
+   "top": [
+    "Tarime 4.5",
+    "Serengeti 4.5",
+    "Musoma 4.5",
+    "Bunda 4.5",
+    "Musoma Urban 4.5"
+   ],
+   "bottom": [
+    "Kinondoni 1.2",
+    "Ilala 1.2",
+    "Temeke 1.2",
+    "Magharibi 1.7",
+    "Mjini 1.7"
+   ],
+   "notes": [],
+   "councilsWithNote": 0,
+   "withheldUnits": 0
+  },
+  {
+   "ref": "vulnerability:habitat",
+   "name": "Habitat",
+   "n": 170,
+   "distinct": 20,
+   "min": 4.3,
+   "median": 5.15,
+   "mean": 5.280588235294108,
+   "max": 9.3,
+   "zeros": 0,
+   "atMin": 2,
+   "atMax": 3,
+   "q1": 4.75,
+   "q3": 5.55,
+   "top": [
+    "Kinondoni 9.3",
+    "Ilala 9.3",
+    "Temeke 9.3",
+    "Magharibi 6.7",
+    "Mjini 6.7"
+   ],
+   "bottom": [
+    "Kati 4.3",
+    "Kusini 4.3",
+    "Kaskazini A 4.3",
+    "Kaskazini B 4.3",
+    "Karagwe 4.5"
+   ],
+   "notes": [],
+   "councilsWithNote": 0,
+   "withheldUnits": 0
+  },
+  {
+   "ref": "vulnerability:livelihoods",
+   "name": "Livelihoods",
+   "n": 170,
+   "distinct": 10,
+   "min": 0,
+   "median": 0,
+   "mean": 2.0017647058823527,
+   "max": 10,
+   "zeros": 110,
+   "atMin": 110,
+   "atMax": 7,
+   "q1": 0,
+   "q3": 3.8,
+   "top": [
+    "Kondoa 10",
+    "Mpwapwa 10",
+    "Kongwa 10",
+    "Chamwino 10",
+    "Dodoma Urban 10"
+   ],
+   "bottom": [
+    "Rombo 0",
+    "Mwanga 0",
+    "Same 0",
+    "Moshi 0",
+    "Hai 0"
+   ],
+   "notes": [
+    "DN-06"
+   ],
+   "councilsWithNote": 195,
+   "withheldUnits": 170
+  },
+  {
+   "ref": "vulnerability:displacedPeople",
+   "name": "Displaced people",
+   "n": 170,
+   "distinct": 4,
+   "min": 0,
+   "median": 0,
+   "mean": 0.5805882352941176,
+   "max": 10,
+   "zeros": 157,
+   "atMin": 157,
+   "atMax": 2,
+   "q1": 0,
+   "q3": 0,
+   "top": [
+    "Kaskazini A 10",
+    "Kaskazini B 10",
+    "Mtwara 7.3",
+    "Newala 7.3",
+    "Masasi 7.3"
+   ],
+   "bottom": [
+    "Kondoa 0",
+    "Mpwapwa 0",
+    "Kongwa 0",
+    "Chamwino 0",
+    "Dodoma Urban 0"
+   ],
+   "notes": [
+    "DN-07"
+   ],
+   "councilsWithNote": 9,
+   "withheldUnits": 8
+  },
+  {
+   "ref": "vulnerability:healthConditions",
+   "name": "Health conditions",
+   "n": 170,
+   "distinct": 29,
+   "min": 0.6,
+   "median": 4.533333333,
+   "mean": 3.741764705852941,
+   "max": 5.833333333,
+   "zeros": 0,
+   "atMin": 2,
+   "atMax": 4,
+   "q1": 3,
+   "q3": 4.9,
+   "top": [
+    "Kalambo 5.8",
+    "Sumbawanga 5.8",
+    "Nkasi 5.8",
+    "Sumbawanga Urban 5.8",
+    "Shinyanga Urban 5.7"
+   ],
+   "bottom": [
+    "Kati 0.6",
+    "Kusini 0.6",
+    "Chake Chake 0.6",
+    "Mkoani 0.6",
+    "Monduli 0.8"
+   ],
+   "notes": [],
+   "councilsWithNote": 0,
+   "withheldUnits": 0
+  },
+  {
+   "ref": "vulnerability:childrenHealthNutrition",
+   "name": "Children health & nutrition",
+   "n": 170,
+   "distinct": 22,
+   "min": 2.575,
+   "median": 5.675,
+   "mean": 5.103235294117648,
+   "max": 8.225,
+   "zeros": 0,
+   "atMin": 6,
+   "atMax": 7,
+   "q1": 4.025,
+   "q3": 5.925,
+   "top": [
+    "Kalambo 8.2",
+    "Sumbawanga 8.2",
+    "Nkasi 8.2",
+    "Sumbawanga Urban 8.2",
+    "Mpanda Urban 8.2"
+   ],
+   "bottom": [
+    "Iramba 2.6",
+    "Singida 2.6",
+    "Manyoni 2.6",
+    "Singida Urban 2.6",
+    "Ikungi 2.6"
+   ],
+   "notes": [],
+   "councilsWithNote": 0,
+   "withheldUnits": 0
+  },
+  {
+   "ref": "vulnerability:economic",
+   "name": "Economic (vulnerable groups)",
+   "n": 0,
+   "distinct": 0,
+   "min": null,
+   "median": null,
+   "mean": null,
+   "max": null,
+   "zeros": 0,
+   "atMin": 0,
+   "atMax": 0,
+   "q1": null,
+   "q3": null,
+   "top": [],
+   "bottom": [],
+   "notes": [],
+   "councilsWithNote": 0,
+   "withheldUnits": 0
+  },
+  {
+   "ref": "coping:accessHealth",
+   "name": "Access to health care",
+   "n": 170,
+   "distinct": 29,
+   "min": 3.96,
+   "median": 5.52,
+   "mean": 5.799176470588236,
+   "max": 9.68,
+   "zeros": 0,
+   "atMin": 7,
+   "atMax": 7,
+   "q1": 4.38,
+   "q3": 6.4,
+   "top": [
+    "Nzega 9.7",
+    "Igunga 9.7",
+    "Uyui 9.7",
+    "Urambo 9.7",
+    "Sikonge 9.7"
+   ],
+   "bottom": [
+    "Kondoa 4",
+    "Mpwapwa 4",
+    "Kongwa 4",
+    "Chamwino 4",
+    "Dodoma Urban 4"
+   ],
+   "notes": [
+    "DN-09"
+   ],
+   "councilsWithNote": 195,
+   "withheldUnits": 0
+  },
+  {
+   "ref": "coping:economicCapacity",
+   "name": "Economic capacity",
+   "n": 170,
+   "distinct": 21,
+   "min": 3.2,
+   "median": 8.866666667,
+   "mean": 8.589607843188233,
+   "max": 9.866666667,
+   "zeros": 0,
+   "atMin": 2,
+   "atMax": 7,
+   "q1": 8.466666667,
+   "q3": 9.3,
+   "top": [
+    "Kondoa 9.9",
+    "Mpwapwa 9.9",
+    "Kongwa 9.9",
+    "Chamwino 9.9",
+    "Dodoma Urban 9.9"
+   ],
+   "bottom": [
+    "Magharibi 3.2",
+    "Mjini 3.2",
+    "Kinondoni 4.8",
+    "Ilala 4.8",
+    "Temeke 4.8"
+   ],
+   "notes": [],
+   "councilsWithNote": 0,
+   "withheldUnits": 0
+  },
+  {
+   "ref": "coping:wash",
+   "name": "WASH",
+   "n": 170,
+   "distinct": 1,
+   "min": 7,
+   "median": 7,
+   "mean": 7,
+   "max": 7,
+   "zeros": 0,
+   "atMin": 170,
+   "atMax": 170,
+   "q1": 7,
+   "q3": 7,
+   "top": [
+    "Kondoa 7",
+    "Mpwapwa 7",
+    "Kongwa 7",
+    "Chamwino 7",
+    "Dodoma Urban 7"
+   ],
+   "bottom": [
+    "Kondoa 7",
+    "Mpwapwa 7",
+    "Kongwa 7",
+    "Chamwino 7",
+    "Dodoma Urban 7"
+   ],
+   "notes": [],
+   "councilsWithNote": 0,
+   "withheldUnits": 0
+  },
+  {
+   "ref": "coping:communication",
+   "name": "Communication",
+   "n": 170,
+   "distinct": 23,
+   "min": 1.05,
+   "median": 7.25,
+   "mean": 6.836176470588245,
+   "max": 10,
+   "zeros": 0,
+   "atMin": 2,
+   "atMax": 7,
+   "q1": 5.95,
+   "q3": 7.8,
+   "top": [
+    "Kalambo 10",
+    "Sumbawanga 10",
+    "Nkasi 10",
+    "Sumbawanga Urban 10",
+    "Mpanda Urban 10"
+   ],
+   "bottom": [
+    "Magharibi 1.1",
+    "Mjini 1.1",
+    "Kinondoni 1.6",
+    "Ilala 1.6",
+    "Temeke 1.6"
+   ],
+   "notes": [
+    "DN-08"
+   ],
+   "councilsWithNote": 8,
+   "withheldUnits": 7
+  },
+  {
+   "ref": "coping:education",
+   "name": "Education",
+   "n": 170,
+   "distinct": 21,
+   "min": 1.95,
+   "median": 5.6,
+   "mean": 5.572647058823525,
+   "max": 6.95,
+   "zeros": 0,
+   "atMin": 2,
+   "atMax": 7,
+   "q1": 5.25,
+   "q3": 6.2,
+   "top": [
+    "Nzega 7",
+    "Igunga 7",
+    "Uyui 7",
+    "Urambo 7",
+    "Sikonge 7"
+   ],
+   "bottom": [
+    "Magharibi 1.9",
+    "Mjini 1.9",
+    "Kinondoni 2.1",
+    "Ilala 2.1",
+    "Temeke 2.1"
+   ],
+   "notes": [],
+   "councilsWithNote": 0,
+   "withheldUnits": 0
+  },
+  {
+   "ref": "coping:drrImplementation",
+   "name": "DRR implementation",
+   "n": 170,
+   "distinct": 1,
+   "min": 6.5,
+   "median": 6.5,
+   "mean": 6.5,
+   "max": 6.5,
+   "zeros": 0,
+   "atMin": 170,
+   "atMax": 170,
+   "q1": 6.5,
+   "q3": 6.5,
+   "top": [
+    "Kondoa 6.5",
+    "Mpwapwa 6.5",
+    "Kongwa 6.5",
+    "Chamwino 6.5",
+    "Dodoma Urban 6.5"
+   ],
+   "bottom": [
+    "Kondoa 6.5",
+    "Mpwapwa 6.5",
+    "Kongwa 6.5",
+    "Chamwino 6.5",
+    "Dodoma Urban 6.5"
+   ],
+   "notes": [],
+   "councilsWithNote": 0,
+   "withheldUnits": 0
+  },
+  {
+   "ref": "coping:governance",
+   "name": "Governance",
+   "n": 170,
+   "distinct": 24,
+   "min": 3,
+   "median": 4.2,
+   "mean": 4.473235294117652,
+   "max": 8,
+   "zeros": 0,
+   "atMin": 6,
+   "atMax": 2,
+   "q1": 3.6,
+   "q3": 4.9,
+   "top": [
+    "Chake Chake 8",
+    "Mkoani 8",
+    "Magharibi 7.3",
+    "Mjini 7.3",
+    "Kati 7.2"
+   ],
+   "bottom": [
+    "Kilwa 3",
+    "Lindi 3",
+    "Nachingwea 3",
+    "Liwale 3",
+    "Ruangwa 3"
+   ],
+   "notes": [],
+   "councilsWithNote": 0,
+   "withheldUnits": 0
+  }
+ ],
+ "members": [
+  {
+   "id": "HA.NAT.DR-ARID",
+   "name": "Aridity (P/PET)",
+   "component": "Drought",
+   "unit": "ratio",
+   "weight": 0.15,
+   "sign": "Decrease Risk",
+   "range": [
+    0.5,
+    2.8
+   ],
+   "source": "CHIRPS v3 monthly precipitation and ERA5 2 m temperature (Thornthwaite PET)",
+   "method": "Annual P / PET on the council polygon, 1991-2020 climatology (scripts/compute-aridity.py)",
+   "resolution": "council",
+   "filled": 195,
+   "n": 195,
+   "distinct": 194,
+   "min": 0.5304,
+   "median": 0.9546,
+   "mean": 1.0784000000000002,
+   "max": 2.7972,
+   "zeros": 0,
+   "atMin": 1,
+   "atMax": 1,
+   "q1": 0.8272,
+   "q3": 1.2187,
+   "top": [
+    "Rungwe District 2.797",
+    "Busokelo District 2.67",
+    "Rombo District 2.432",
+    "Makete District 2.394",
+    "Njombe Town 2.175"
+   ],
+   "bottom": [
+    "Bahi District 0.53",
+    "Iringa District 0.532",
+    "Manyoni District 0.574",
+    "Chamwino District 0.587",
+    "Kishapu District 0.608"
+   ],
+   "flags": []
+  },
+  {
+   "id": "HA.NAT.DR-NDVI",
+   "name": "Mean NDVI (greenness)",
+   "component": "Drought",
+   "unit": "index",
+   "weight": 0.1,
+   "sign": "Decrease Risk",
+   "range": [
+    0.25,
+    0.7
+   ],
+   "source": "MODIS MOD13Q1 NDVI (250 m), Google Earth Engine",
+   "method": "Zonal mean greenness on the council polygon, 2001-2020 (scripts/compute-gee-eo.py)",
+   "resolution": "council",
+   "filled": 195,
+   "n": 195,
+   "distinct": 187,
+   "min": 0.2866,
+   "median": 0.5414,
+   "mean": 0.5240615384615385,
+   "max": 0.6645,
+   "zeros": 0,
+   "atMin": 1,
+   "atMax": 1,
+   "q1": 0.4683,
+   "q3": 0.5829,
+   "top": [
+    "Muheza District 0.664",
+    "Mtama District 0.653",
+    "Rungwe District 0.65",
+    "Kati Town 0.648",
+    "Busokelo District 0.647"
+   ],
+   "bottom": [
+    "Mjini Municipal 0.287",
+    "Longido District 0.349",
+    "Monduli District 0.355",
+    "Dodoma City 0.362",
+    "Kishapu District 0.365"
+   ],
+   "flags": []
+  },
+  {
+   "id": "HA.NAT.DR-SOIL",
+   "name": "Soil moisture",
+   "component": "Drought",
+   "unit": "mm",
+   "weight": 0.1,
+   "sign": "Decrease Risk",
+   "range": [
+    3.9,
+    25.5
+   ],
+   "source": "NASA-USDA SMAP 10 km surface soil moisture, Google Earth Engine",
+   "method": "Zonal mean, 2015-2022 (scripts/compute-gee-eo.py)",
+   "resolution": "council",
+   "filled": 194,
+   "n": 194,
+   "distinct": 186,
+   "min": 3.9311,
+   "median": 11.8572,
+   "mean": 12.66720515463918,
+   "max": 25.4,
+   "zeros": 0,
+   "atMin": 1,
+   "atMax": 9,
+   "q1": 10.0722,
+   "q3": 14.0778,
+   "top": [
+    "Mafia District 25.4",
+    "Ukerewe District 25.4",
+    "Kaskazini A Town 25.4",
+    "Kusini District 25.4",
+    "Magharibi B Municipal 25.4"
+   ],
+   "bottom": [
+    "Mwanga District 3.931",
+    "Same District 5.977",
+    "Chamwino District 6.459",
+    "Simanjiro District 6.686",
+    "Kongwa District 6.846"
+   ],
+   "flags": []
+  },
+  {
+   "id": "HA.NAT.FL-R50",
+   "name": "Extreme wet days (>50 mm)",
+   "component": "Flood",
+   "unit": "days/yr",
+   "weight": 0.3,
+   "sign": "Increase Risk",
+   "range": [
+    0,
+    10
+   ],
+   "source": "CHIRPS daily rainfall",
+   "method": "Days with council-mean rainfall above 50 mm, per year, 2015-2024 (scripts/compute-council-climate.py)",
+   "resolution": "council",
+   "filled": 195,
+   "n": 195,
+   "distinct": 41,
+   "min": 0,
+   "median": 0.4,
+   "mean": 0.9589743589743587,
+   "max": 9.2,
+   "zeros": 16,
+   "atMin": 16,
+   "atMax": 1,
+   "q1": 0.2,
+   "q3": 1,
+   "top": [
+    "Mkoani Town 9.2",
+    "Mafia District 7.7",
+    "Chake Chake Town 7.6",
+    "Kaskazini B Town 6.3",
+    "Wete Town 6.1"
+   ],
+   "bottom": [
+    "Kondoa District 0",
+    "Kongwa District 0",
+    "Bahi District 0",
+    "Chemba District 0",
+    "Liwale District 0"
+   ],
+   "flags": [
+    "maximum is 23.0x the median"
+   ]
+  },
+  {
+   "id": "HA.NAT.FL-R100",
+   "name": "Very-heavy days (>100 mm)",
+   "component": "Flood",
+   "unit": "days/yr",
+   "weight": 0.15,
+   "sign": "Increase Risk",
+   "range": [
+    0,
+    2.5
+   ],
+   "source": "CHIRPS daily rainfall",
+   "method": "Days with council-mean rainfall above 100 mm, per year, 2015-2024 (scripts/compute-council-climate.py)",
+   "resolution": "council",
+   "filled": 195,
+   "n": 195,
+   "distinct": 14,
+   "min": 0,
+   "median": 0,
+   "mean": 0.10923076923076921,
+   "max": 2.4,
+   "zeros": 145,
+   "atMin": 145,
+   "atMax": 1,
+   "q1": 0,
+   "q3": 0.1,
+   "top": [
+    "Mkoani Town 2.4",
+    "Chake Chake Town 2.2",
+    "Wete Town 1.4",
+    "Kaskazini B Town 1.2",
+    "Mafia District 1.1"
+   ],
+   "bottom": [
+    "Kondoa District 0",
+    "Kondoa Town 0",
+    "Mpwapwa District 0",
+    "Kongwa District 0",
+    "Chamwino District 0"
+   ],
+   "flags": []
+  },
+  {
+   "id": "HA.NAT.LS-SUSC",
+   "name": "Slope susceptibility (mean)",
+   "component": "Landslide",
+   "unit": "degrees",
+   "weight": 0.55,
+   "sign": "Increase Risk",
+   "range": [
+    0.6,
+    16
+   ],
+   "source": "SRTM 30 m elevation, Google Earth Engine",
+   "method": "Mean terrain slope on the council polygon, degrees (scripts/compute-gee-eo2.py)",
+   "resolution": "council",
+   "filled": 195,
+   "n": 195,
+   "distinct": 191,
+   "min": 0.648,
+   "median": 2.662,
+   "mean": 3.579446153846153,
+   "max": 15.889,
+   "zeros": 0,
+   "atMin": 1,
+   "atMax": 1,
+   "q1": 1.831,
+   "q3": 4.822,
+   "top": [
+    "Bumbuli District 15.889",
+    "Makete District 12.502",
+    "Ludewa District 10.918",
+    "Kilolo District 10.777",
+    "Ileje District 10.014"
+   ],
+   "bottom": [
+    "Kusini District 0.648",
+    "Kishapu District 0.736",
+    "Urambo District 0.805",
+    "Kwimba District 0.89",
+    "Shinyanga District 0.894"
+   ],
+   "flags": [
+    "maximum is 6.0x the median"
+   ]
+  },
+  {
+   "id": "HA.NAT.LS-RAIN",
+   "name": "Triggering rainfall (max 1-day)",
+   "component": "Landslide",
+   "unit": "mm",
+   "weight": 0.45,
+   "sign": "Increase Risk",
+   "range": [
+    33,
+    200
+   ],
+   "source": "CHIRPS daily rainfall, Google Earth Engine",
+   "method": "Mean annual maximum 1-day rainfall, 2015-2023 (scripts/compute-gee-eo2.py)",
+   "resolution": "council",
+   "filled": 195,
+   "n": 195,
+   "distinct": 195,
+   "min": 33.323,
+   "median": 59.422,
+   "mean": 75.99259487179482,
+   "max": 198.139,
+   "zeros": 0,
+   "atMin": 1,
+   "atMax": 1,
+   "q1": 46.243,
+   "q3": 95.119,
+   "top": [
+    "Korogwe Town 198.139",
+    "Mkoani Town 193.584",
+    "Kaskazini A Town 192.77",
+    "Wete Town 192.425",
+    "Kaskazini B Town 188.816"
+   ],
+   "bottom": [
+    "Tunduma Town 33.323",
+    "Musoma Municipal 34.804",
+    "Meatu District 35.916",
+    "Kigoma Ujiji Municipal 36.333",
+    "Bariadi Town 36.673"
+   ],
+   "flags": []
+  },
+  {
+   "id": "HA.NAT.ST-WIND",
+   "name": "Extreme wind speed",
+   "component": "Storms & Cyclone",
+   "unit": "m/s",
+   "weight": 0.4,
+   "sign": "Increase Risk",
+   "range": [
+    3,
+    15
+   ],
+   "source": "ERA5-Land daily 10 m wind, Google Earth Engine",
+   "method": "Period maximum of daily maximum wind speed, 2015-2023 (scripts/compute-gee-eo2.py)",
+   "resolution": "council",
+   "filled": 195,
+   "n": 195,
+   "distinct": 186,
+   "min": 3.367,
+   "median": 5.428,
+   "mean": 5.968723076923075,
+   "max": 14.509,
+   "zeros": 0,
+   "atMin": 1,
+   "atMax": 1,
+   "q1": 4.832,
+   "q3": 6.361,
+   "top": [
+    "Micheweni District 14.509",
+    "Wete Town 14.328",
+    "Mafia District 14.2",
+    "Chake Chake Town 13.969",
+    "Mkoani Town 13.561"
+   ],
+   "bottom": [
+    "Moshi Municipal 3.367",
+    "Meru District 3.536",
+    "Mbinga Town 3.698",
+    "Kibondo District 3.742",
+    "Rombo District 3.746"
+   ],
+   "flags": []
+  },
+  {
+   "id": "HA.NAT.HW-DAYS",
+   "name": "Hot days (Tmax > 35C)",
+   "component": "Heatwave",
+   "unit": "days/yr",
+   "weight": 1,
+   "sign": "Increase Risk",
+   "range": [
+    0,
+    35
+   ],
+   "source": "ERA5-Land daily maximum 2 m temperature, Google Earth Engine",
+   "method": "Days per year with Tmax above 35 C, 2015-2023 (scripts/compute-gee-eo2.py)",
+   "resolution": "council",
+   "filled": 195,
+   "n": 195,
+   "distinct": 132,
+   "min": 0,
+   "median": 0.107,
+   "mean": 1.6002102564102567,
+   "max": 33.051,
+   "zeros": 54,
+   "atMin": 54,
+   "atMax": 1,
+   "q1": 0,
+   "q3": 1.158,
+   "top": [
+    "Nanyumbu District 33.051",
+    "Rufiji District 19.278",
+    "Ifakara Town 18.424",
+    "Morogoro District 17.693",
+    "Masasi District 16.763"
+   ],
+   "bottom": [
+    "Kondoa District 0",
+    "Kondoa Town 0",
+    "Moshi Municipal 0",
+    "Siha District 0",
+    "Gairo District 0"
+   ],
+   "flags": [
+    "maximum is 308.9x the median"
+   ]
+  },
+  {
+   "id": "HA.NAT.DR-SPEI",
+   "name": "SPEI-12 drought depth",
+   "component": "Drought",
+   "unit": "index",
+   "weight": 0.25,
+   "sign": "Increase Risk",
+   "range": [
+    1.35,
+    1.75
+   ],
+   "source": "CHIRPS v3 monthly rainfall and ERA5 2 m temperature",
+   "method": "Mean magnitude of SPEI-12 during drought months on the council polygon, 1991-2024 (scripts/compute-council-drought-members.py)",
+   "resolution": "council",
+   "filled": 194,
+   "n": 194,
+   "distinct": 188,
+   "min": 1.3792,
+   "median": 1.5016,
+   "mean": 1.5130835051546383,
+   "max": 1.7359,
+   "zeros": 0,
+   "atMin": 1,
+   "atMax": 1,
+   "q1": 1.4669,
+   "q3": 1.5539,
+   "top": [
+    "Chemba District 1.736",
+    "Itigi District 1.729",
+    "Kondoa Town 1.722",
+    "Simanjiro District 1.712",
+    "Chamwino District 1.701"
+   ],
+   "bottom": [
+    "Madaba District 1.379",
+    "Nsimbo District 1.385",
+    "Mlele District 1.389",
+    "Mpanda Municipal 1.403",
+    "Biharamulo District 1.409"
+   ],
+   "flags": []
+  },
+  {
+   "id": "HA.NAT.DR-CV",
+   "name": "Rainfall variability (CV)",
+   "component": "Drought",
+   "unit": "ratio",
+   "weight": 0.15,
+   "sign": "Increase Risk",
+   "range": [
+    0.1,
+    0.3
+   ],
+   "source": "CHIRPS v3 monthly rainfall",
+   "method": "Interannual coefficient of variation of annual rainfall on the council polygon, 1991-2024 (scripts/compute-council-drought-members.py)",
+   "resolution": "council",
+   "filled": 194,
+   "n": 194,
+   "distinct": 181,
+   "min": 0.1131,
+   "median": 0.1868,
+   "mean": 0.19006804123711346,
+   "max": 0.2885,
+   "zeros": 0,
+   "atMin": 1,
+   "atMax": 1,
+   "q1": 0.1567,
+   "q3": 0.2247,
+   "top": [
+    "Tanga City 0.288",
+    "Mbulu District 0.283",
+    "Mkinga District 0.282",
+    "Karatu District 0.275",
+    "Muheza District 0.274"
+   ],
+   "bottom": [
+    "Uvinza District 0.113",
+    "Kigoma Ujiji Municipal 0.116",
+    "Makete District 0.116",
+    "Kigoma District 0.117",
+    "Buhigwe District 0.12"
+   ],
+   "flags": []
+  },
+  {
+   "id": "HA.NAT.EQ-HIST",
+   "name": "Historical seismicity density",
+   "component": "Earthquake",
+   "unit": "events/100yr",
+   "weight": 0.3,
+   "sign": "Increase Risk",
+   "range": [
+    0,
+    50
+   ],
+   "source": "USGS earthquake catalogue, M >= 4.5",
+   "method": "Events within 50 km of the council centroid, 1960-2024, scaled to events per 100 years (x 100/65; scripts/compute-council-earthquake.py)",
+   "resolution": "council",
+   "filled": 195,
+   "n": 195,
+   "distinct": 14,
+   "min": 0,
+   "median": 0,
+   "mean": 2.43787487179487,
+   "max": 41.5385,
+   "zeros": 101,
+   "atMin": 101,
+   "atMax": 1,
+   "q1": 0,
+   "q3": 3.0769,
+   "top": [
+    "Chemba District 41.538",
+    "Longido District 27.692",
+    "Mkalama District 18.462",
+    "Babati Town 18.462",
+    "Mbulu District 18.462"
+   ],
+   "bottom": [
+    "Mpwapwa District 0",
+    "Kongwa District 0",
+    "Chamwino District 0",
+    "Meru District 0",
+    "Rombo District 0"
+   ],
+   "flags": []
+  },
+  {
+   "id": "HA.NAT.EQ-FELT",
+   "name": "Maximum felt intensity",
+   "component": "Earthquake",
+   "unit": "intensity",
+   "weight": 0.3,
+   "sign": "Increase Risk",
+   "range": [
+    5.6,
+    7.7
+   ],
+   "source": "USGS earthquake catalogue, M >= 4.5",
+   "method": "Maximum felt intensity at the council centroid over the events of 1960-2024: max of 1.5 M - 1.5 log10(R + 15), a simple attenuation (scripts/compute-council-earthquake.py)",
+   "resolution": "council",
+   "filled": 195,
+   "n": 195,
+   "distinct": 183,
+   "min": 5.644,
+   "median": 6.102,
+   "mean": 6.15956923076923,
+   "max": 7.62,
+   "zeros": 0,
+   "atMin": 1,
+   "atMax": 1,
+   "q1": 5.9,
+   "q3": 6.304,
+   "top": [
+    "Mbulu District 7.62",
+    "Tanganyika District 7.173",
+    "Uvinza District 7.172",
+    "Mkalama District 7.032",
+    "Mbulu Town 7.031"
+   ],
+   "bottom": [
+    "Chake Chake Town 5.644",
+    "Mkoani Town 5.647",
+    "Wete Town 5.65",
+    "Micheweni District 5.651",
+    "Magharibi A Municipal 5.67"
+   ],
+   "flags": []
+  },
+  {
+   "id": "VU.VG.DP-UNHCR",
+   "name": "Refugees and asylum-seekers hosted",
+   "component": "Displaced People",
+   "unit": "number of people",
+   "weight": 1,
+   "sign": "Increase Risk",
+   "range": [
+    -6.907755279,
+    11.77529
+   ],
+   "source": "UNHCR Tanzania operational data 2024 (rounded camp and urban figures)",
+   "method": "Refugees and asylum-seekers hosted in the district (Nyarugusu, Nduta, transit and urban caseloads), copied to its councils (data-source/displaced_refugees.csv)",
+   "resolution": "district",
+   "filled": 8,
+   "n": 8,
+   "distinct": 6,
+   "min": 2000,
+   "median": 12000,
+   "mean": 44687.5,
+   "max": 130000,
+   "zeros": 0,
+   "atMin": 2,
+   "atMax": 2,
+   "q1": 2500,
+   "q3": 75000,
+   "top": [
+    "Kasulu District 130000",
+    "Kasulu Town 130000",
+    "Kibondo District 75000",
+    "Kakonko District 12000",
+    "Uvinza District 4000"
+   ],
+   "bottom": [
+    "Kigoma District 2000",
+    "Kigoma Ujiji Municipal 2000",
+    "Dar es Salaam City 2500",
+    "Uvinza District 4000",
+    "Kakonko District 12000"
+   ],
+   "flags": [
+    "maximum is 10.8x the median"
+   ]
+  },
+  {
+   "id": "HA.NAT.FL-EVENT",
+   "name": "Recorded flood impact events",
+   "component": "Flood",
+   "unit": "events 2010-2024",
+   "weight": 0.15,
+   "sign": "Increase Risk",
+   "range": [
+    0,
+    2
+   ],
+   "source": "Recorded flood events compiled from PMO-DMD, DesInventar, EM-DAT and press reports",
+   "method": "Number of recorded flood events in the district, 2010-2024 (data-source/flood_events.csv), copied to its councils; the committees' validated event reports replace this file",
+   "resolution": "district",
+   "filled": 34,
+   "n": 34,
+   "distinct": 2,
+   "min": 1,
+   "median": 1,
+   "mean": 1.1764705882352942,
+   "max": 2,
+   "zeros": 0,
+   "atMin": 28,
+   "atMax": 6,
+   "q1": 1,
+   "q3": 1,
+   "top": [
+    "Kilosa District 2",
+    "Mlimba District 2",
+    "Ifakara Town 2",
+    "Rufiji District 2",
+    "Dar es Salaam City 2"
+   ],
+   "bottom": [
+    "Bahi District 1",
+    "Mwanga District 1",
+    "Same District 1",
+    "Morogoro District 1",
+    "Morogoro Municipal 1"
+   ],
+   "flags": []
+  },
+  {
+   "id": "CC.INF.HC-DENS",
+   "name": "Health facilities per 10,000 people",
+   "component": "Access to health care",
+   "unit": "per 10,000 people",
+   "weight": 1,
+   "sign": "Decrease Risk",
+   "range": [
+    0,
+    6.1
+   ],
+   "source": "2022 Population and Housing Census geodatabase (NBS/OCGS), facilities spatially joined to the 195 council polygons with the facility types filtered",
+   "method": "Health facilities (dispensaries, health centres, hospitals) per 10,000 people of the council (2022 census; scripts/spatial-join-facilities-councils.py)",
+   "resolution": "council",
+   "filled": 195,
+   "n": 195,
+   "distinct": 194,
+   "min": 0.3344,
+   "median": 1.7053,
+   "mean": 1.908989743589742,
+   "max": 6.038,
+   "zeros": 0,
+   "atMin": 1,
+   "atMax": 1,
+   "q1": 1.3328,
+   "q3": 2.1601,
+   "top": [
+    "Ileje District 6.038",
+    "Makete District 5.405",
+    "Ludewa District 5.021",
+    "Kati Town 4.521",
+    "Lindi Municipal 4.479"
+   ],
+   "bottom": [
+    "Iramba District 0.334",
+    "Itigi District 0.695",
+    "Biharamulo District 0.7",
+    "Bukombe District 0.712",
+    "Kaliua District 0.796"
+   ],
+   "flags": []
+  },
+  {
+   "id": "CC.INF.EDU-DENS",
+   "name": "Schools per 10,000 people",
+   "component": "Education",
+   "unit": "per 10,000 people",
+   "weight": 1,
+   "sign": "Decrease Risk",
+   "range": [
+    0,
+    20
+   ],
+   "source": "2022 Population and Housing Census geodatabase (NBS/OCGS), facilities spatially joined to the 195 council polygons with the facility types filtered",
+   "method": "Schools (pre-primary to secondary) per 10,000 people of the council (2022 census; scripts/spatial-join-facilities-councils.py)",
+   "resolution": "council",
+   "filled": 195,
+   "n": 195,
+   "distinct": 195,
+   "min": 1.3575,
+   "median": 7.1663,
+   "mean": 7.649995897435892,
+   "max": 18.8371,
+   "zeros": 0,
+   "atMin": 1,
+   "atMax": 1,
+   "q1": 5.503,
+   "q3": 9.5164,
+   "top": [
+    "Kati Town 18.837",
+    "Makete District 17.222",
+    "Wanging'ombe District 16.396",
+    "Kaskazini B Town 15.813",
+    "Njombe Town 14.77"
+   ],
+   "bottom": [
+    "Kasulu District 1.357",
+    "Kakonko District 1.962",
+    "Mpimbwe District 2.924",
+    "Buhigwe District 3",
+    "Mlele District 3.114"
+   ],
+   "flags": []
+  },
+  {
+   "id": "CC.INS.DRR-STAT",
+   "name": "DRM arrangements in place (EPRP AA EOCC ERT RVCA)",
+   "component": "DRR implementation",
+   "unit": "count of 5",
+   "weight": 1,
+   "sign": "Decrease Risk",
+   "range": [
+    0,
+    5
+   ],
+   "source": "PMO-DMD list of DRM arrangements (June 2026) and the DRR records approved through the Data portal",
+   "method": "Count of the arrangements recorded for the council (EPRP, anticipatory action, EOCC, ERT, RVCA), 0 to 5, computed by the engine from the council's record (src/engine/risk/advanced.ts)",
+   "resolution": "council",
+   "filled": 46,
+   "n": 0,
+   "distinct": 0,
+   "min": null,
+   "median": null,
+   "mean": null,
+   "max": null,
+   "zeros": 0,
+   "atMin": 0,
+   "atMax": 0,
+   "q1": null,
+   "q3": null,
+   "top": [],
+   "bottom": [],
+   "flags": []
+  }
+ ],
+ "notes": [
+  {
+   "id": "DN-01",
+   "ref": "hazard:drought",
+   "indicator": "HA.NAT.DR-FRE",
+   "status": "queried",
+   "where": {
+    "regions": [
+     "Dar es Salaam"
+    ]
+   },
+   "issue": "UP-01",
+   "evidence": "inform-baseline-raw.json HA.NAT.DR-FRE: Dar-es-salaam 19 (data range 5..19, score 10); Arusha 17; Manyara 14; Dodoma 11; Singida 10; Shinyanga 7; Simiyu 5. Source per the workbook Metadata sheet: FAO, 1984-2023, region. The three Dar es Salaam units back five councils."
+  },
+  {
+   "id": "DN-02",
+   "ref": "hazard:drought",
+   "indicator": "HA.NAT.DR-FRE",
+   "status": "explained",
+   "where": {
+    "regions": [
+     "Simiyu",
+     "Shinyanga",
+     "Mwanza",
+     "Tabora"
+    ]
+   },
+   "issue": "UP-05",
+   "evidence": "HA.NAT.DR-FRE: Simiyu 5, Mwanza 5, Tabora 6, Shinyanga 7 (68 of 170 units sit at the minimum 5). VU.SE.LV-FS in the same workbook: Simiyu 142, Shinyanga 74, Mwanza 47, Tabora 57 (second, fifth, ninth and seventh highest of 31 regions)."
+  },
+  {
+   "id": "DN-03",
+   "ref": "hazard:earthquake",
+   "indicator": "HA.NAT.EQ-EXP",
+   "status": "explained",
+   "where": {
+    "regions": [
+     "Kagera"
+    ]
+   },
+   "issue": "UP-06",
+   "evidence": "HA.NAT.EQ-EXP = 0 for all eight Kagera units (Karagwe, Bukoba, Muleba, Biharamulo, Ngara, Bukoba Urban, Missenyi, Kyerwa). data-source/usgs_earthquakes_tz.csv: 2016-09-10, -1.0355 31.6181, M 5.9, '27 km ENE of Nsunga, Tanzania'. earthquake_councils.csv max_felt: Missenyi 6.43 (35th of 195), Bukoba Municipal 6.27; n_events_50km 0 or 1."
+  },
+  {
+   "id": "DN-04",
+   "ref": "hazard:landslide",
+   "indicator": "HA.NAT.LS-EXP",
+   "status": "queried",
+   "where": {
+    "units": [
+     "Ukerewe"
+    ]
+   },
+   "issue": "UP-07",
+   "evidence": "HA.NAT.LS-EXP: Ukerewe 1.0 (data range -6.9..0 after log; score 10); Same 0.284 (8.2); Ileje 0.272; Iringa Urban 0.263. landslide_slope_councils.csv: Ukerewe mean slope among the lowest 20 of 195 councils."
+  },
+  {
+   "id": "DN-05",
+   "ref": "hazard:coastalHazards",
+   "indicator": "HA.NAT.CH-ERO",
+   "status": "artefact",
+   "where": {
+    "all": true
+   },
+   "issue": "UP-02",
+   "evidence": "HA.NAT.CH-ERO raw: Bahi 67, Kondoa 45, Kongwa 45, Chemba 45, Mpwapwa 34, Dodoma Urban 23; 163 units 0; Mkinga empty. Custom range -0.3..0, sign Decrease Risk: every unit scores 0 (169 of 169)."
+  },
+  {
+   "id": "DN-06",
+   "ref": "vulnerability:livelihoods",
+   "indicator": "VU.SE.LV-FS",
+   "status": "queried",
+   "where": {
+    "all": true
+   },
+   "issue": "UP-03",
+   "evidence": "VU.SE.LV-FS (unit '% pop phase 2 or higher', data range 0..149): Dodoma 149, Simiyu 142, Manyara 102, Tanga 85, Shinyanga 74, Arusha 62, Tabora 57, Singida 53, Mwanza 47; 110 of 170 units 0 (22 regions). Source per the Metadata sheet: IPC 2022-2024, region."
+  },
+  {
+   "id": "DN-07",
+   "ref": "vulnerability:displacedPeople",
+   "indicator": "VU.VG.DP-IDP",
+   "status": "queried",
+   "where": {
+    "regions": [
+     "Kaskazini Unguja",
+     "Manyara"
+    ]
+   },
+   "issue": "UP-08",
+   "evidence": "VU.VG.DP-IDP: Kaskazini Unguja 30,080 (score 10); Mtwara 291 (7.3); Rukwa 146 (6.9); the other 28 regions 0, Manyara included. Source per the Metadata sheet: IDMC 2023, region."
+  },
+  {
+   "id": "DN-08",
+   "ref": "coping:communication",
+   "indicator": "CC.INF.COM-ELEC",
+   "status": "queried",
+   "where": {
+    "regions": [
+     "Dodoma"
+    ]
+   },
+   "issue": "UP-09",
+   "evidence": "CC.INF.COM-ELEC: Dodoma 100 (7 units), Mjini Magharibi 80.8, Dar-es-salaam 74.5, Kilimanjaro 41.5, median region 15.8. Same source (Global Data Lab): Dodoma IWI 19.1 (lowest), GNI 7.29 (lowest). Communication group score for Dodoma units 4.45 against 7.17 median."
+  },
+  {
+   "id": "DN-09",
+   "ref": "coping:accessHealth",
+   "indicator": "CC.INF.HC-FAC",
+   "status": "artefact",
+   "where": {
+    "all": true
+   },
+   "issue": "UP-04",
+   "evidence": "CC.INF.HC-FAC: custom range 0..0, unit 'per capita', outlier Yes; raw 25..349, 31 distinct values (one per region). Source per the Metadata sheet: HDX 2019, region."
+  },
+  {
+   "id": "DN-10",
+   "ref": "hazard:earthquake",
+   "indicator": "HA.NAT.EQ-EXP",
+   "status": "explained",
+   "where": {
+    "valueAtLeast": 9.95
+   },
+   "issue": "UP-10",
+   "evidence": "hazardExposure.natural.earthquake: 49 of 169 units score 10 (raw >= 0.95 on a data range 0..1.000000072)."
+  },
+  {
+   "id": "DN-11",
+   "ref": "hazard:flood",
+   "indicator": "HA.NAT.FL-EXP",
+   "status": "explained",
+   "where": {
+    "units": [
+     "Kinondoni"
+    ]
+   },
+   "issue": "UP-11",
+   "evidence": "HA.NAT.FL-EXP raw: Kinondoni 0.001 (score 1.2), Ilala 0.014 (4.7), Temeke 0.022 (5.4). flood_events.csv: Dar es Salaam 2 recorded events 2010-2024 (Kinondoni, Temeke, Ubungo 1 each)."
+  },
+  {
+   "id": "DN-12",
+   "ref": "hazard:internalViolence",
+   "indicator": "HA.HUM.VIO-EVE",
+   "status": "decision",
+   "where": {
+    "all": true
+   },
+   "issue": "DATA-06",
+   "evidence": "HA.HUM.VIO-EVE (ACLED 2020-2024, region): Kigoma 57, Dar es Salaam 29, Mtwara 28, Mwanza 17, Geita 17, Arusha 13, Morogoro 11; 24 regions 10 or fewer. HA.HUM.VIO-FAT: Mtwara 49, Kigoma 23, Pwani 10, Geita 10; 26 regions 8 or fewer."
+  }
+ ]
+}

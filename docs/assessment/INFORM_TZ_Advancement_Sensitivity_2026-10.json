@@ -1,0 +1,982 @@
+{
+ "date": "2026-10-10",
+ "release": "adv-2026.10",
+ "councils": 195,
+ "national": {
+  "core": 4.1,
+  "advancement": 4
+ },
+ "coreVsAdv": {
+  "rho": 0.944,
+  "maxDelta": 0.4,
+  "riskClass": 34,
+  "hazardClass": 40,
+  "movers": [
+   {
+    "id": "C001",
+    "name": "Kondoa District",
+    "from": 4.3,
+    "to": 3.9,
+    "delta": -0.4
+   },
+   {
+    "id": "C002",
+    "name": "Kondoa Town",
+    "from": 4.3,
+    "to": 3.9,
+    "delta": -0.4
+   },
+   {
+    "id": "C053",
+    "name": "Dar es Salaam City",
+    "from": 3.7,
+    "to": 4.1,
+    "delta": 0.4
+   },
+   {
+    "id": "C110",
+    "name": "Nkasi District",
+    "from": 5.1,
+    "to": 4.7,
+    "delta": -0.4
+   },
+   {
+    "id": "C003",
+    "name": "Mpwapwa District",
+    "from": 4.3,
+    "to": 4,
+    "delta": -0.3
+   },
+   {
+    "id": "C004",
+    "name": "Kongwa District",
+    "from": 4.1,
+    "to": 3.8,
+    "delta": -0.3
+   },
+   {
+    "id": "C006",
+    "name": "Dodoma City",
+    "from": 4.1,
+    "to": 3.8,
+    "delta": -0.3
+   },
+   {
+    "id": "C009",
+    "name": "Monduli District",
+    "from": 4.3,
+    "to": 4,
+    "delta": -0.3
+   },
+   {
+    "id": "C010",
+    "name": "Meru District",
+    "from": 4.4,
+    "to": 4.1,
+    "delta": -0.3
+   },
+   {
+    "id": "C011",
+    "name": "Arusha District",
+    "from": 4.4,
+    "to": 4.1,
+    "delta": -0.3
+   }
+  ]
+ },
+ "sensitivity": [
+  {
+   "variant": "Equal weights (every member 1)",
+   "rho": 0.98,
+   "maxDelta": 0.2,
+   "riskClass": 16,
+   "hazardClass": 16
+  },
+  {
+   "variant": "HA.NAT.DR-SPEI × 0.5",
+   "rho": 0.998,
+   "maxDelta": 0.1,
+   "riskClass": 0,
+   "hazardClass": 4
+  },
+  {
+   "variant": "HA.NAT.DR-SPEI × 2",
+   "rho": 0.997,
+   "maxDelta": 0.1,
+   "riskClass": 4,
+   "hazardClass": 2
+  },
+  {
+   "variant": "HA.NAT.DR-SPEI left out",
+   "rho": 0.996,
+   "maxDelta": 0.1,
+   "riskClass": 3,
+   "hazardClass": 5
+  },
+  {
+   "variant": "HA.NAT.DR-ARID × 0.5",
+   "rho": 0.997,
+   "maxDelta": 0.1,
+   "riskClass": 1,
+   "hazardClass": 2
+  },
+  {
+   "variant": "HA.NAT.DR-ARID × 2",
+   "rho": 0.996,
+   "maxDelta": 0.1,
+   "riskClass": 7,
+   "hazardClass": 7
+  },
+  {
+   "variant": "HA.NAT.DR-ARID left out",
+   "rho": 0.995,
+   "maxDelta": 0.1,
+   "riskClass": 4,
+   "hazardClass": 6
+  },
+  {
+   "variant": "HA.NAT.DR-CV × 0.5",
+   "rho": 0.999,
+   "maxDelta": 0.1,
+   "riskClass": 0,
+   "hazardClass": 1
+  },
+  {
+   "variant": "HA.NAT.DR-CV × 2",
+   "rho": 0.998,
+   "maxDelta": 0.1,
+   "riskClass": 3,
+   "hazardClass": 1
+  },
+  {
+   "variant": "HA.NAT.DR-CV left out",
+   "rho": 0.999,
+   "maxDelta": 0.1,
+   "riskClass": 1,
+   "hazardClass": 4
+  },
+  {
+   "variant": "HA.NAT.DR-SEAS × 0.5",
+   "rho": 1,
+   "maxDelta": 0,
+   "riskClass": 0,
+   "hazardClass": 0
+  },
+  {
+   "variant": "HA.NAT.DR-SEAS × 2",
+   "rho": 1,
+   "maxDelta": 0,
+   "riskClass": 0,
+   "hazardClass": 0
+  },
+  {
+   "variant": "HA.NAT.DR-SEAS left out",
+   "rho": 1,
+   "maxDelta": 0,
+   "riskClass": 0,
+   "hazardClass": 0
+  },
+  {
+   "variant": "HA.NAT.DR-NDVI × 0.5",
+   "rho": 0.999,
+   "maxDelta": 0.1,
+   "riskClass": 1,
+   "hazardClass": 1
+  },
+  {
+   "variant": "HA.NAT.DR-NDVI × 2",
+   "rho": 0.999,
+   "maxDelta": 0.1,
+   "riskClass": 1,
+   "hazardClass": 1
+  },
+  {
+   "variant": "HA.NAT.DR-NDVI left out",
+   "rho": 0.999,
+   "maxDelta": 0.1,
+   "riskClass": 1,
+   "hazardClass": 2
+  },
+  {
+   "variant": "HA.NAT.DR-SOIL × 0.5",
+   "rho": 0.998,
+   "maxDelta": 0.1,
+   "riskClass": 1,
+   "hazardClass": 2
+  },
+  {
+   "variant": "HA.NAT.DR-SOIL × 2",
+   "rho": 0.998,
+   "maxDelta": 0.1,
+   "riskClass": 3,
+   "hazardClass": 3
+  },
+  {
+   "variant": "HA.NAT.DR-SOIL left out",
+   "rho": 0.997,
+   "maxDelta": 0.1,
+   "riskClass": 2,
+   "hazardClass": 2
+  },
+  {
+   "variant": "HA.NAT.DR-WLEV × 0.5",
+   "rho": 1,
+   "maxDelta": 0,
+   "riskClass": 0,
+   "hazardClass": 0
+  },
+  {
+   "variant": "HA.NAT.DR-WLEV × 2",
+   "rho": 1,
+   "maxDelta": 0,
+   "riskClass": 0,
+   "hazardClass": 0
+  },
+  {
+   "variant": "HA.NAT.DR-WLEV left out",
+   "rho": 1,
+   "maxDelta": 0,
+   "riskClass": 0,
+   "hazardClass": 0
+  },
+  {
+   "variant": "HA.NAT.FL-R50 × 0.5",
+   "rho": 0.996,
+   "maxDelta": 0.1,
+   "riskClass": 6,
+   "hazardClass": 3
+  },
+  {
+   "variant": "HA.NAT.FL-R50 × 2",
+   "rho": 0.994,
+   "maxDelta": 0.1,
+   "riskClass": 6,
+   "hazardClass": 7
+  },
+  {
+   "variant": "HA.NAT.FL-R50 left out",
+   "rho": 0.992,
+   "maxDelta": 0.1,
+   "riskClass": 10,
+   "hazardClass": 9
+  },
+  {
+   "variant": "HA.NAT.FL-R100 × 0.5",
+   "rho": 0.997,
+   "maxDelta": 0.1,
+   "riskClass": 5,
+   "hazardClass": 2
+  },
+  {
+   "variant": "HA.NAT.FL-R100 × 2",
+   "rho": 0.996,
+   "maxDelta": 0.1,
+   "riskClass": 2,
+   "hazardClass": 3
+  },
+  {
+   "variant": "HA.NAT.FL-R100 left out",
+   "rho": 0.996,
+   "maxDelta": 0.1,
+   "riskClass": 7,
+   "hazardClass": 3
+  },
+  {
+   "variant": "HA.NAT.FL-WLEV × 0.5",
+   "rho": 1,
+   "maxDelta": 0,
+   "riskClass": 0,
+   "hazardClass": 0
+  },
+  {
+   "variant": "HA.NAT.FL-WLEV × 2",
+   "rho": 1,
+   "maxDelta": 0,
+   "riskClass": 0,
+   "hazardClass": 0
+  },
+  {
+   "variant": "HA.NAT.FL-WLEV left out",
+   "rho": 1,
+   "maxDelta": 0,
+   "riskClass": 0,
+   "hazardClass": 0
+  },
+  {
+   "variant": "HA.NAT.FL-BASIN × 0.5",
+   "rho": 1,
+   "maxDelta": 0,
+   "riskClass": 0,
+   "hazardClass": 0
+  },
+  {
+   "variant": "HA.NAT.FL-BASIN × 2",
+   "rho": 1,
+   "maxDelta": 0,
+   "riskClass": 0,
+   "hazardClass": 0
+  },
+  {
+   "variant": "HA.NAT.FL-BASIN left out",
+   "rho": 1,
+   "maxDelta": 0,
+   "riskClass": 0,
+   "hazardClass": 0
+  },
+  {
+   "variant": "HA.NAT.FL-EVENT × 0.5",
+   "rho": 1,
+   "maxDelta": 0.1,
+   "riskClass": 0,
+   "hazardClass": 1
+  },
+  {
+   "variant": "HA.NAT.FL-EVENT × 2",
+   "rho": 1,
+   "maxDelta": 0,
+   "riskClass": 0,
+   "hazardClass": 0
+  },
+  {
+   "variant": "HA.NAT.FL-EVENT left out",
+   "rho": 1,
+   "maxDelta": 0.1,
+   "riskClass": 0,
+   "hazardClass": 1
+  },
+  {
+   "variant": "HA.NAT.LS-SUSC × 0.5",
+   "rho": 0.997,
+   "maxDelta": 0.1,
+   "riskClass": 4,
+   "hazardClass": 4
+  },
+  {
+   "variant": "HA.NAT.LS-SUSC × 2",
+   "rho": 0.997,
+   "maxDelta": 0.1,
+   "riskClass": 2,
+   "hazardClass": 4
+  },
+  {
+   "variant": "HA.NAT.LS-SUSC left out",
+   "rho": 0.993,
+   "maxDelta": 0.1,
+   "riskClass": 5,
+   "hazardClass": 5
+  },
+  {
+   "variant": "HA.NAT.LS-RAIN × 0.5",
+   "rho": 0.996,
+   "maxDelta": 0.1,
+   "riskClass": 3,
+   "hazardClass": 2
+  },
+  {
+   "variant": "HA.NAT.LS-RAIN × 2",
+   "rho": 0.996,
+   "maxDelta": 0.1,
+   "riskClass": 2,
+   "hazardClass": 3
+  },
+  {
+   "variant": "HA.NAT.LS-RAIN left out",
+   "rho": 0.993,
+   "maxDelta": 0.1,
+   "riskClass": 5,
+   "hazardClass": 5
+  },
+  {
+   "variant": "HA.NAT.ST-FREQ × 0.5",
+   "rho": 1,
+   "maxDelta": 0,
+   "riskClass": 0,
+   "hazardClass": 0
+  },
+  {
+   "variant": "HA.NAT.ST-FREQ × 2",
+   "rho": 1,
+   "maxDelta": 0,
+   "riskClass": 0,
+   "hazardClass": 0
+  },
+  {
+   "variant": "HA.NAT.ST-FREQ left out",
+   "rho": 1,
+   "maxDelta": 0,
+   "riskClass": 0,
+   "hazardClass": 0
+  },
+  {
+   "variant": "HA.NAT.ST-WIND × 0.5",
+   "rho": 0.997,
+   "maxDelta": 0.1,
+   "riskClass": 1,
+   "hazardClass": 5
+  },
+  {
+   "variant": "HA.NAT.ST-WIND × 2",
+   "rho": 0.995,
+   "maxDelta": 0.1,
+   "riskClass": 5,
+   "hazardClass": 4
+  },
+  {
+   "variant": "HA.NAT.ST-WIND left out",
+   "rho": 0.994,
+   "maxDelta": 0.2,
+   "riskClass": 7,
+   "hazardClass": 7
+  },
+  {
+   "variant": "HA.NAT.EQ-PGA × 0.5",
+   "rho": 1,
+   "maxDelta": 0,
+   "riskClass": 0,
+   "hazardClass": 0
+  },
+  {
+   "variant": "HA.NAT.EQ-PGA × 2",
+   "rho": 1,
+   "maxDelta": 0,
+   "riskClass": 0,
+   "hazardClass": 0
+  },
+  {
+   "variant": "HA.NAT.EQ-PGA left out",
+   "rho": 1,
+   "maxDelta": 0,
+   "riskClass": 0,
+   "hazardClass": 0
+  },
+  {
+   "variant": "HA.NAT.EQ-HIST × 0.5",
+   "rho": 0.996,
+   "maxDelta": 0.1,
+   "riskClass": 4,
+   "hazardClass": 3
+  },
+  {
+   "variant": "HA.NAT.EQ-HIST × 2",
+   "rho": 0.995,
+   "maxDelta": 0.1,
+   "riskClass": 6,
+   "hazardClass": 4
+  },
+  {
+   "variant": "HA.NAT.EQ-HIST left out",
+   "rho": 0.993,
+   "maxDelta": 0.1,
+   "riskClass": 6,
+   "hazardClass": 7
+  },
+  {
+   "variant": "HA.NAT.EQ-FELT × 0.5",
+   "rho": 0.996,
+   "maxDelta": 0.1,
+   "riskClass": 4,
+   "hazardClass": 3
+  },
+  {
+   "variant": "HA.NAT.EQ-FELT × 2",
+   "rho": 0.996,
+   "maxDelta": 0.1,
+   "riskClass": 3,
+   "hazardClass": 6
+  },
+  {
+   "variant": "HA.NAT.EQ-FELT left out",
+   "rho": 0.991,
+   "maxDelta": 0.1,
+   "riskClass": 5,
+   "hazardClass": 4
+  },
+  {
+   "variant": "HA.NAT.CO-WAVE × 0.5",
+   "rho": 1,
+   "maxDelta": 0,
+   "riskClass": 0,
+   "hazardClass": 0
+  },
+  {
+   "variant": "HA.NAT.CO-WAVE × 2",
+   "rho": 1,
+   "maxDelta": 0,
+   "riskClass": 0,
+   "hazardClass": 0
+  },
+  {
+   "variant": "HA.NAT.CO-WAVE left out",
+   "rho": 1,
+   "maxDelta": 0,
+   "riskClass": 0,
+   "hazardClass": 0
+  },
+  {
+   "variant": "HA.NAT.CO-WIND × 0.5",
+   "rho": 1,
+   "maxDelta": 0,
+   "riskClass": 0,
+   "hazardClass": 0
+  },
+  {
+   "variant": "HA.NAT.CO-WIND × 2",
+   "rho": 1,
+   "maxDelta": 0,
+   "riskClass": 0,
+   "hazardClass": 0
+  },
+  {
+   "variant": "HA.NAT.CO-WIND left out",
+   "rho": 1,
+   "maxDelta": 0,
+   "riskClass": 0,
+   "hazardClass": 0
+  },
+  {
+   "variant": "HA.NAT.CO-SURGE × 0.5",
+   "rho": 1,
+   "maxDelta": 0,
+   "riskClass": 0,
+   "hazardClass": 0
+  },
+  {
+   "variant": "HA.NAT.CO-SURGE × 2",
+   "rho": 1,
+   "maxDelta": 0,
+   "riskClass": 0,
+   "hazardClass": 0
+  },
+  {
+   "variant": "HA.NAT.CO-SURGE left out",
+   "rho": 1,
+   "maxDelta": 0,
+   "riskClass": 0,
+   "hazardClass": 0
+  },
+  {
+   "variant": "HA.NAT.CO-EROS × 0.5",
+   "rho": 1,
+   "maxDelta": 0,
+   "riskClass": 0,
+   "hazardClass": 0
+  },
+  {
+   "variant": "HA.NAT.CO-EROS × 2",
+   "rho": 1,
+   "maxDelta": 0,
+   "riskClass": 0,
+   "hazardClass": 0
+  },
+  {
+   "variant": "HA.NAT.CO-EROS left out",
+   "rho": 1,
+   "maxDelta": 0,
+   "riskClass": 0,
+   "hazardClass": 0
+  },
+  {
+   "variant": "HA.NAT.CO-MANG × 0.5",
+   "rho": 1,
+   "maxDelta": 0,
+   "riskClass": 0,
+   "hazardClass": 0
+  },
+  {
+   "variant": "HA.NAT.CO-MANG × 2",
+   "rho": 1,
+   "maxDelta": 0,
+   "riskClass": 0,
+   "hazardClass": 0
+  },
+  {
+   "variant": "HA.NAT.CO-MANG left out",
+   "rho": 1,
+   "maxDelta": 0,
+   "riskClass": 0,
+   "hazardClass": 0
+  },
+  {
+   "variant": "HA.NAT.HW-DAYS × 0.5",
+   "rho": 1,
+   "maxDelta": 0,
+   "riskClass": 0,
+   "hazardClass": 0
+  },
+  {
+   "variant": "HA.NAT.HW-DAYS × 2",
+   "rho": 1,
+   "maxDelta": 0,
+   "riskClass": 0,
+   "hazardClass": 0
+  },
+  {
+   "variant": "HA.NAT.HW-DAYS left out",
+   "rho": 0.987,
+   "maxDelta": 0.2,
+   "riskClass": 26,
+   "hazardClass": 22
+  },
+  {
+   "variant": "HA.NAT.LI-FLASH × 0.5",
+   "rho": 1,
+   "maxDelta": 0,
+   "riskClass": 0,
+   "hazardClass": 0
+  },
+  {
+   "variant": "HA.NAT.LI-FLASH × 2",
+   "rho": 1,
+   "maxDelta": 0,
+   "riskClass": 0,
+   "hazardClass": 0
+  },
+  {
+   "variant": "HA.NAT.LI-FLASH left out",
+   "rho": 1,
+   "maxDelta": 0,
+   "riskClass": 0,
+   "hazardClass": 0
+  },
+  {
+   "variant": "VU.VG.DP-UNHCR × 0.5",
+   "rho": 1,
+   "maxDelta": 0.1,
+   "riskClass": 0,
+   "hazardClass": 0
+  },
+  {
+   "variant": "VU.VG.DP-UNHCR × 2",
+   "rho": 1,
+   "maxDelta": 0.1,
+   "riskClass": 0,
+   "hazardClass": 0
+  },
+  {
+   "variant": "VU.VG.DP-UNHCR left out",
+   "rho": 0.998,
+   "maxDelta": 0.2,
+   "riskClass": 0,
+   "hazardClass": 0
+  },
+  {
+   "variant": "CC.INF.HC-DENS × 0.5",
+   "rho": 1,
+   "maxDelta": 0.1,
+   "riskClass": 1,
+   "hazardClass": 0
+  },
+  {
+   "variant": "CC.INF.HC-DENS × 2",
+   "rho": 0.998,
+   "maxDelta": 0.1,
+   "riskClass": 0,
+   "hazardClass": 0
+  },
+  {
+   "variant": "CC.INF.HC-DENS left out",
+   "rho": 0.999,
+   "maxDelta": 0.1,
+   "riskClass": 1,
+   "hazardClass": 0
+  },
+  {
+   "variant": "CC.INF.EDU-DENS × 0.5",
+   "rho": 0.998,
+   "maxDelta": 0.1,
+   "riskClass": 0,
+   "hazardClass": 0
+  },
+  {
+   "variant": "CC.INF.EDU-DENS × 2",
+   "rho": 0.999,
+   "maxDelta": 0.1,
+   "riskClass": 1,
+   "hazardClass": 0
+  },
+  {
+   "variant": "CC.INF.EDU-DENS left out",
+   "rho": 0.998,
+   "maxDelta": 0.1,
+   "riskClass": 0,
+   "hazardClass": 0
+  },
+  {
+   "variant": "CC.INS.DRR-STAT × 0.5",
+   "rho": 1,
+   "maxDelta": 0.1,
+   "riskClass": 1,
+   "hazardClass": 0
+  },
+  {
+   "variant": "CC.INS.DRR-STAT × 2",
+   "rho": 0.998,
+   "maxDelta": 0.1,
+   "riskClass": 0,
+   "hazardClass": 0
+  },
+  {
+   "variant": "CC.INS.DRR-STAT left out",
+   "rho": 0.999,
+   "maxDelta": 0.1,
+   "riskClass": 1,
+   "hazardClass": 0
+  }
+ ],
+ "agreement": [
+  {
+   "group": "drought",
+   "documentedIn": 83,
+   "filled": 195,
+   "aucCore": 0.6383703944164908,
+   "aucAdvancement": 0.7183734939759037
+  },
+  {
+   "group": "flood",
+   "documentedIn": 195,
+   "filled": 195,
+   "aucCore": null,
+   "aucAdvancement": null
+  },
+  {
+   "group": "landslide",
+   "documentedIn": 175,
+   "filled": 195,
+   "aucCore": 0.6580924855491329,
+   "aucAdvancement": 0.7372857142857143
+  },
+  {
+   "group": "stormsCyclone",
+   "documentedIn": 105,
+   "filled": 195,
+   "aucCore": 0.4887640449438202,
+   "aucAdvancement": 0.5358201058201059
+  },
+  {
+   "group": "earthquake",
+   "documentedIn": 29,
+   "filled": 195,
+   "aucCore": 0.8117788461538461,
+   "aucAdvancement": 0.7565434150394682
+  },
+  {
+   "group": "coastalHazards",
+   "documentedIn": 62,
+   "filled": 0,
+   "aucCore": null,
+   "aucAdvancement": null
+  }
+ ],
+ "coverage": [
+  {
+   "id": "HA.NAT.DR-SPEI",
+   "name": "SPEI-12 drought depth",
+   "weight": 0.25,
+   "filled": 194,
+   "resolution": "council"
+  },
+  {
+   "id": "HA.NAT.DR-ARID",
+   "name": "Aridity (P/PET)",
+   "weight": 0.15,
+   "filled": 195,
+   "resolution": "council"
+  },
+  {
+   "id": "HA.NAT.DR-CV",
+   "name": "Rainfall variability (CV)",
+   "weight": 0.15,
+   "filled": 194,
+   "resolution": "council"
+  },
+  {
+   "id": "HA.NAT.DR-SEAS",
+   "name": "Growing-season failure frequency",
+   "weight": 0.2,
+   "filled": 0,
+   "resolution": "withheld"
+  },
+  {
+   "id": "HA.NAT.DR-NDVI",
+   "name": "Mean NDVI (greenness)",
+   "weight": 0.1,
+   "filled": 195,
+   "resolution": "council"
+  },
+  {
+   "id": "HA.NAT.DR-SOIL",
+   "name": "Soil moisture",
+   "weight": 0.1,
+   "filled": 194,
+   "resolution": "council"
+  },
+  {
+   "id": "HA.NAT.DR-WLEV",
+   "name": "Water levels (% of normal)",
+   "weight": 0.05,
+   "filled": 0,
+   "resolution": "unavailable"
+  },
+  {
+   "id": "HA.NAT.FL-R50",
+   "name": "Extreme wet days (>50 mm)",
+   "weight": 0.3,
+   "filled": 195,
+   "resolution": "council"
+  },
+  {
+   "id": "HA.NAT.FL-R100",
+   "name": "Very-heavy days (>100 mm)",
+   "weight": 0.15,
+   "filled": 195,
+   "resolution": "council"
+  },
+  {
+   "id": "HA.NAT.FL-WLEV",
+   "name": "River peak above normal",
+   "weight": 0.2,
+   "filled": 0,
+   "resolution": "unavailable"
+  },
+  {
+   "id": "HA.NAT.FL-BASIN",
+   "name": "Basin flood records",
+   "weight": 0.2,
+   "filled": 0,
+   "resolution": "unavailable"
+  },
+  {
+   "id": "HA.NAT.FL-EVENT",
+   "name": "Recorded flood impact events",
+   "weight": 0.15,
+   "filled": 34,
+   "resolution": "district"
+  },
+  {
+   "id": "HA.NAT.LS-SUSC",
+   "name": "Slope susceptibility (mean)",
+   "weight": 0.55,
+   "filled": 195,
+   "resolution": "council"
+  },
+  {
+   "id": "HA.NAT.LS-RAIN",
+   "name": "Triggering rainfall (max 1-day)",
+   "weight": 0.45,
+   "filled": 195,
+   "resolution": "council"
+  },
+  {
+   "id": "HA.NAT.ST-FREQ",
+   "name": "Cyclone/strong-wind frequency",
+   "weight": 0.6,
+   "filled": 0,
+   "resolution": "unavailable"
+  },
+  {
+   "id": "HA.NAT.ST-WIND",
+   "name": "Extreme wind speed",
+   "weight": 0.4,
+   "filled": 195,
+   "resolution": "council"
+  },
+  {
+   "id": "HA.NAT.EQ-PGA",
+   "name": "Seismic hazard (PGA 475-yr)",
+   "weight": 0.7,
+   "filled": 0,
+   "resolution": "unavailable"
+  },
+  {
+   "id": "HA.NAT.EQ-HIST",
+   "name": "Historical seismicity density",
+   "weight": 0.3,
+   "filled": 195,
+   "resolution": "council"
+  },
+  {
+   "id": "HA.NAT.EQ-FELT",
+   "name": "Maximum felt intensity",
+   "weight": 0.3,
+   "filled": 195,
+   "resolution": "council"
+  },
+  {
+   "id": "HA.NAT.CO-WAVE",
+   "name": "Significant wave height (Hs 99th pct)",
+   "weight": 0.25,
+   "filled": 0,
+   "resolution": "unavailable"
+  },
+  {
+   "id": "HA.NAT.CO-WIND",
+   "name": "Extreme onshore wind",
+   "weight": 0.2,
+   "filled": 0,
+   "resolution": "unavailable"
+  },
+  {
+   "id": "HA.NAT.CO-SURGE",
+   "name": "Storm-surge frequency",
+   "weight": 0.2,
+   "filled": 0,
+   "resolution": "unavailable"
+  },
+  {
+   "id": "HA.NAT.CO-EROS",
+   "name": "Shoreline retreat / erosion rate",
+   "weight": 0.2,
+   "filled": 0,
+   "resolution": "unavailable"
+  },
+  {
+   "id": "HA.NAT.CO-MANG",
+   "name": "Mangrove loss (protective buffer)",
+   "weight": 0.15,
+   "filled": 0,
+   "resolution": "unavailable"
+  },
+  {
+   "id": "HA.NAT.HW-DAYS",
+   "name": "Hot days (Tmax > 35C)",
+   "weight": 1,
+   "filled": 195,
+   "resolution": "council"
+  },
+  {
+   "id": "HA.NAT.LI-FLASH",
+   "name": "Flash density",
+   "weight": 1,
+   "filled": 0,
+   "resolution": "unavailable"
+  },
+  {
+   "id": "VU.VG.DP-UNHCR",
+   "name": "Refugees and asylum-seekers hosted",
+   "weight": 1,
+   "filled": 8,
+   "resolution": "district"
+  },
+  {
+   "id": "CC.INF.HC-DENS",
+   "name": "Health facilities per 10,000 people",
+   "weight": 1,
+   "filled": 195,
+   "resolution": "council"
+  },
+  {
+   "id": "CC.INF.EDU-DENS",
+   "name": "Schools per 10,000 people",
+   "weight": 1,
+   "filled": 195,
+   "resolution": "council"
+  },
+  {
+   "id": "CC.INS.DRR-STAT",
+   "name": "DRM arrangements in place (EPRP AA EOCC ERT RVCA)",
+   "weight": 1,
+   "filled": 46,
+   "resolution": "council"
+  }
+ ]
+}

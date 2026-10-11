@@ -24,6 +24,10 @@ If a pattern is common on AI-generated landing pages, it is probably wrong here.
 ## 2. Colour encodes data, nothing else
 
 - Colour means something: INFORM classes, dimensions in charts, state (error/success).
+- One palette per scale (`CLASS_PALETTES`): overall risk pale yellow → deep red, in the families of the
+  three risk bands (yellow, orange, red; no green for low risk); hazard yellow → brown, vulnerability
+  blue, lack of coping capacity green, as the INFORM SADC 2024 workbook colours them. An indicator takes
+  its dimension's ramp. Text on a fill is chosen by luminance (`readableOn`), never fixed.
 - **Banned:** decorative gradients, blurred colour orbs, dotted/grid backgrounds, glass/frosted panels,
   coloured strips or "banners" on top of boxes, tinted icon tiles, gradient text, glowing rings,
   pulsing "live" dots.

@@ -7,6 +7,17 @@
 > engine **exactly** as the official INFORM workbook (v1). The engine math is never edited here. You
 > change **data** (a leaf value, a source) or **structure** (which indicators exist); the engine then
 > recomputes the category, dimension and risk deterministically by the exact Excel formulas.
+>
+> **Superseded, October 2026.** These procedures refer to the first JavaScript engine (`riskModel.js`,
+> `DIMENSION_TREE`, `NATIONAL_UNIT`, `indicatorSources.js`, browser storage), replaced in September 2026
+> by the TypeScript engine in `src/engine/risk` (structure in `hierarchy.ts`, specification in
+> `src/data/inform-indicator-spec.json`, tests in `src/engine/risk/__tests__/`). Values now change only
+> through the Data portal (measured values, or 0-10 scores by the INFORM method with a citable source,
+> reviewed by the owning institution's chain), never by editing the dataset; the Core dataset is rebuilt
+> from the workbook by `scripts/build-core.mjs`. The integrity assessment of October 2026
+> (`docs/assessment/`) removed two rules that this document stated: there is **no raise-only floor** and
+> **no fixed "official" national value**; the national figure is the INFORM aggregate of the councils
+> (3.8 on the Core) and recomputes with them. The corrected rules are marked below.
 
 ---
 
@@ -101,8 +112,8 @@ For a council, district or region officer correcting a value to reflect reality 
 
 - An **Exposure** edit only **amplifies** flood (`flood = max(hazard, sqrt(hazard × exposure))`); it can
   never pull a documented flood hazard down.
-- An explicit dimension-total edit, if given, wins over the recomputed total (for an externally supplied
-  official figure).
+- *[Removed October 2026]* Dimension totals are always derived from the indicators and cannot be
+  overridden by hand.
 - These edits live in the browser (localStorage, single device) until promoted to the shared backend.
   They do not change the shipped dataset; they overlay it at view time.
 
@@ -137,11 +148,9 @@ new CHIRPS or ERA5 window, a new IPC or MUCHALI bulletin, a new survey).
    // unit.risk = r1(risk(H,V,LCC));
    ```
 
-4. **Apply the floors and the official line:**
-   - **Raise-only for documented hazards** - a refreshed hazard takes `max(new, documented floor)`, so a
-     known hazard is never silently lowered.
-   - **National stays official** - never re-aggregate the national value from the units; it is the
-     authoritative INFORM Tanzania figure (`NATIONAL_UNIT`).
+4. **No floors and no fixed national line (since October 2026):** a refreshed value replaces the
+   previous value for the units it covers, up or down, with its source and method recorded; the
+   national figure is recomputed as the INFORM aggregate of the councils and is never set by hand.
 5. **Update the source registry** `indicatorSources.js` so `INDICATOR_SOURCE['<dim>:<k>']` names the new
    authority, dataset and method - the tooltip and detail must tell the truth about where the number now
    comes from.
@@ -182,10 +191,11 @@ can move risk up **or down**.
 
 **Review gate before a structural delete:**
 
-- **Do not delete to make a documented hazard disappear.** If removing a leaf would lower a unit's
-  documented hazard, that violates the raise-only principle - keep the leaf (set the place to `null`
-  instead, per 3A) unless the indicator is genuinely retired model-wide on authority.
-- **Keep national official** - a structural delete must not be used to alter the official national value.
+- **Do not delete to make a hazard disappear.** A leaf is retired only model-wide, on the authority of
+  the indicator's custodian, with the reason logged; to mark one place as unknown set it to `null`
+  (per 3A).
+- **The national aggregate recomputes** with every change; a structural delete must never be used to
+  steer it.
 - **A category must keep at least one leaf** - an empty category aggregates to `null` and drops out of
   the dimension geomean, which is rarely what you want.
 
@@ -207,9 +217,10 @@ Run all four. An update or delete is not done until these pass.
    its categories and every `risk` equals `H^(1/3)·V^(1/3)·LCC^(1/3)`, at **both** the 170 source units
    and the 195 councils. This is the same check that currently returns **0 mismatches** at both levels;
    keep it at zero.
-3. **National unchanged:** the official `NATIONAL_UNIT` value is untouched by the change.
-4. **Direction-of-change review:** for a hazard update or any structural delete, confirm no documented
-   hazard was silently lowered (raise-only), and that data-coverage changed only where you intended.
+3. **National recomputed:** the national aggregate changed only through the councils' values; nothing
+   set it directly.
+4. **Direction-of-change review:** for a hazard update or any structural delete, confirm that every
+   value moved for a sourced reason and that data-coverage changed only where you intended.
 
 Then commit with a message that states the indicator, the source, and the before/after, and deploy by the
 normal route.
@@ -221,7 +232,7 @@ normal route.
 | You want to ... | Do this | Engine effect |
 |---|---|---|
 | Correct a value at one place | Data Entry -> edit leaf -> pick authority -> Apply (PMO/Admin direct; sector -> approve) | override stored; category AVERAGE, dimension scaled GEOMEAN, risk ∛ recompute; provenance stamped |
-| Refresh a whole indicator from new evidence | Script: raw CSV -> standardise 0-10 (exact pipeline) -> write leaf -> recompute -> raise-only floor -> update source registry -> verify | values change; engine recomputes; national kept official |
+| Refresh a whole indicator from new evidence | Data portal: the custodian submits the measured values at their level -> the engine standardises by the workbook specification -> review -> recompute -> provenance stamped | values change for the units covered; engine recomputes; the national aggregate recomputes |
 | Mark "no data" at one place | Set leaf to `null` (not `0`) | excluded from averages; coverage drops; risk recomputes over remaining leaves |
 | Retire an indicator model-wide | Remove `{k,label}` from `DIMENSION_TREE`; null/remove the leaf in data; remove from `INDICATOR_SOURCE`; rebuild; review | category averages fewer leaves; dimension and risk move - confirm intended |
 

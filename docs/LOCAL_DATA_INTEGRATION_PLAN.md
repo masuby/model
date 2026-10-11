@@ -7,6 +7,15 @@
 > transparency - while keeping the INFORM engine exactly as the workbook. Everything here is grounded
 > in the actual *Tanzania - Country Model Template* workbook and proven against it. Nothing is invented.
 > This is document 5 of the set (Manual, Exact-formula, Paper/v2, Procedures, **Plan**).
+>
+> **Status, October 2026.** Phases 1 to 5 are built: the standardiser from the workbook specification,
+> the raw layer, data entry in natural units (or 0-10 scores by the INFORM method with a citable source),
+> Supabase submission and review by the owning institution's chain, and provenance on every value. The
+> sector tools of Phase 6 exist and await regeneration. Two guardrails in Section 8 were superseded by
+> the integrity assessment of October 2026 (`docs/assessment/`): there is **no "official" national
+> figure** (the national value is the INFORM aggregate of the 195 councils, 3.8 on the Core, labelled as
+> not an official INFORM figure) and there is **no raise-only rule** (the Core carries the workbook values
+> and approved institutional values only; every other Tanzanian addition is a separate Advancement layer).
 
 ---
 
@@ -194,7 +203,7 @@ whatever is switched on, so the set flexes without touching a formula.
 | No data (a unit) | `"No data"` sentinel | excluded from that unit's average only | automatic |
 
 **Three rules that follow:**
-1. **Add/Delete are not raise-only** - they re-weight the component average up or down, so they are
+1. **Add/Delete move the component average up or down**, so they are
    governed (approval + logged reason). The `Use` flag makes them auditable and reversible (data is
    switched, never destroyed).
 2. **A value amendment is local or global by reference type** - with a fixed reference it changes only
@@ -226,7 +235,8 @@ and only then move on - honestly and authentically.
 
 - The aggregation engine (AVERAGE / scaled GEOMEAN / cube-root) - unchanged, 0/195.
 - The standardisation formulas (stages 2-5) - proven to reproduce the workbook.
-- National figures kept official; raise-only respected where it applies; missing = excluded.
+- The national figure is the INFORM aggregate of the councils, labelled as not an official INFORM figure;
+  no raise-only floor anywhere; missing = excluded.
 - The golden fixture (the workbook's own cached rows) remains the regression guard for both engines.
 
 # 9. Verification (how each phase earns trust)

@@ -1,8 +1,36 @@
 % Advancing the INFORM Hazard Evidence for Tanzania while Preserving the INFORM Engine: a CHIRPS/ERA5/NBS multi-criteria drought case study
 % INFORM Tanzania (inform.co.tz)
-% 2026-06-03
+% 2026-06-03, corrected 2026-10-09
 
-> **Status - proposal for INFORM Calc Engine v2.** The operational model (**v1**) keeps the INFORM
+> **Status, corrected 9 October 2026.** This paper (June 2026) proposed advancing the hazard evidence
+> under a "raise-only" rule and quoted national figures from the working dataset. The integrity
+> assessment of October 2026 (`docs/assessment/INFORM_TZ_Integrity_Assessment_2026-10.md`) superseded
+> both, and the corrections are recorded here so that no copy of this paper circulates without them:
+>
+> 1. **The national figures in Section 2** (Hazard 2.2, Vulnerability 5.5, Lack-of-Coping 5.9, Risk 4.1)
+>    were the **Kondoa district row** of the workbook, not a national value. The INFORM aggregate of the
+>    195 councils on the workbook data is **3.8** (Hazard & Exposure 2.4, Vulnerability 3.8, Lack of
+>    Coping Capacity 6.2), and INFORM publishes no official national figure for a subnational model.
+> 2. **Raise-only is withdrawn.** The Core carries the workbook values exactly (built by
+>    `scripts/build-core.mjs`, reproduced at 8,664/8,664 standardised values and 170/170 risks). Earth
+>    observation evidence enters a separate **Advancement layer** as weighted sub-indicators beside the
+>    workbook member of each indicator group, over the members with data, and is shown beside the Core on
+>    every profile, never in its place. Nothing floors, raises or lowers a Core value.
+> 3. **The blended drought composite of Section 3 is withdrawn.** It scored wet highland councils
+>    (Lushoto) 10 by selecting the erratic short rains as the main season. Aridity, SPEI depth, rainfall
+>    variability, NDVI and soil moisture now enter the Advancement layer as separate members with their
+>    sources; the growing-season member is withheld until both rainy seasons are scored (issue MET-01).
+> 4. **The flood = max(H, sqrt(H x E)) rule of Section 6 is removed** from the model. Heavy-rainfall
+>    frequency enters the Advancement layer; exposure is shown as the 2022 census population, not
+>    multiplied into any hazard.
+> 5. **Earthquake** in the Core is the workbook's GEM exposure index; the USGS catalogue (events within
+>    50 km) is an Advancement member, not a Core source.
+>
+> The Tier 1 engine-fidelity items of Section 8 are closed by the Core rebuild. The body below is kept
+> as the record of the June 2026 proposal; where it states a method no longer used, the status is marked
+> in brackets.
+
+> **Original status note (June 2026) - proposal for INFORM Calc Engine v2.** The operational model (**v1**) keeps the INFORM
 > aggregation engine **exactly** as the official Excel workbook - verified formula-by-formula, written in
 > the code in the workbook's own literal form (product `GEOMEAN`, product of cube roots, `AVERAGE`,
 > min-max). The advancements documented in this paper are a **proposal**; once validated ("when it
@@ -51,6 +79,7 @@ Our work separates two concerns:
    incoherent for Tanzania, and authoritative national data exist, we **recompute the indicator** from
    primary data using the **same standardisation method** the engine prescribes, and we apply it
    **raise-only** (the computed value may raise a documented hazard but never silently lower it).
+   *[Withdrawn October 2026: evidence enters the separate Advancement layer; the Core is never raised or lowered.]*
 
 This paper makes the second concern explicit and auditable, using **drought** as the worked case, because
 drought is the hazard most consequential for Tanzanian food security and the one for which the densest
@@ -60,8 +89,9 @@ observational record exists.
 
 We reproduced a unit end-to-end against the workbook: for Kondoa, the workbook's own Hazard dimension is
 `scaled-geomean(Natural 3.544, Human 0.683) = 2.2`, and our implementation returns the same 2.2 for the
-same inputs; the national value matches the workbook to the decimal (Hazard 2.2, Vulnerability 5.5,
-Lack-of-Coping 5.9, Risk 4.1). The engine is therefore **unchanged**; only indicator *inputs* differ where
+same inputs; the figures we quoted as national (Hazard 2.2, Vulnerability 5.5, Lack-of-Coping 5.9,
+Risk 4.1) *[are Kondoa's row, not a national value; corrected October 2026: the INFORM aggregate of the
+195 councils is 3.8 (2.4, 3.8, 6.2)]*. The engine is therefore **unchanged**; only indicator *inputs* differed where
 we advanced them. Two engine-level options the workbook supports but our recompute scripts do not yet apply
 - **Tukey IQR capping** of recomputed series, and **custom (fixed) reference ranges** instead of the
 Tanzania data range - are recorded as **future work** (Section 7) and are not changed here.
@@ -99,6 +129,7 @@ Drought relevant to communities is more than a single statistic; following the d
 The blended score `0.30*aridity + 0.20*variability + 0.15*SPEI-depth + 0.35*season-failure` is then
 **min-max standardised to 0-10** - exactly the INFORM normalisation - and applied **raise-only** (the
 advanced value replaces the initial only where it is higher, so no documented drought area is downgraded).
+*[Withdrawn October 2026: the blend and the floor are out of the model; the members enter the Advancement layer separately and the season-failure member is withheld.]*
 
 **Weighting rationale.** Aridity is the baseline (a dry climate is intrinsically drought-exposed);
 variability and SPEI add the *dynamic* deficit; **growing-season failure carries the largest weight (0.35)**
@@ -137,7 +168,8 @@ dimension, which cube-roots with Vulnerability and Lack-of-Coping into Risk. No 
 
 \*Dar es Salaam retains 10 under the raise-only floor; the computed value is ~6-7. This is a flagged
 artifact (the initial 10 is documented-but-wrong) queued for correction via Data Entry, *not* an advancement
-outcome.
+outcome. *[October 2026: the "initial" column of this table was the adjusted dataset, not the workbook; in
+the workbook Ilala's drought is the historic-frequency indicator like every other unit.]*
 
 **Pattern.** The advanced layer is **monotone in rainfall**: the five driest councils (Longido, Monduli,
 Singida, Manyoni, Kondoa, all 668-771 mm) score 7.0-9.7; the wettest (Kyela, Kilombero, 1,600-2,000 mm)
@@ -147,6 +179,7 @@ their identical semi-arid climate to the (correctly high) pastoral districts.
 # 6. Other advancements (summary)
 
 The same *initial -> advanced (same standardisation) -> raise-only* discipline was applied to:
+*[All withdrawn from the Core in October 2026; see Status.]*
 
 - **Flood / heavy rainfall.** Advanced from a static INFORM value to **CHIRPS v3 daily** counts of days
   > 50 mm and > 100 mm (2015-2024), combined with documented flood events and the INFORM **Hazard x
@@ -169,7 +202,7 @@ water balance.
 
 **Impact / outcome.** Risk rises where the evidence supports it (the central semi-arid belt and the
 pastoral north), in line with IPC/MUCHALI food-insecurity classifications, and the change is auditably
-raise-only. Because risk is a cube root of three dimensions, a drought rise of several points lifts the
+raise-only *[no longer: the Core is the workbook; the Advancement layer is shown beside it]*. Because risk is a cube root of three dimensions, a drought rise of several points lifts the
 Hazard dimension modestly and the risk score by a fraction - appropriately, since drought is one of twelve
 natural hazards.
 
@@ -178,7 +211,8 @@ and Singida are textbook semi-arid, food-insecure districts that the initial lay
 advancement closes that gap with transparent, reproducible evidence. Where the initial layer was already
 correct (pastoral Longido/Monduli), the advancement merely confirms and slightly raises it; where the
 initial layer was wrong-high (the Dar artifact), raise-only deliberately does **not** advance it down - that
-case is handled separately as a documented correction.
+case is handled separately as a documented correction. *[October 2026: moot; the Core is the workbook and
+the Advancement layer is shown beside it.]*
 
 # 8. The v2 roadmap - a structured issue register
 
@@ -224,7 +258,7 @@ regression guard pinning **both** engines to the workbook.
 
 Several hazards are still **documented overlays** (expert-placed, not computed). v2 advances each the way
 drought was advanced - computed from an authoritative observational product, standardised by the unchanged
-engine, applied **raise-only**:
+engine, applied **raise-only** *[October 2026: as members of the Advancement layer, never as floors on the Core]*:
 
 | Hazard | v1 overlay | v2 evidence | Standard metric | Source |
 |---|---|---|---|---|
@@ -284,7 +318,8 @@ Engine v2.
 - **Weights** for the drought blend (0.30/0.20/0.15/0.35) are an explicit modelling choice; the sensitivity
   analysis (Tier 4) is what will defend or revise them.
 - **Raise-only** is honest but asymmetric: it cannot correct a documented-but-too-high value (the Dar
-  artifact), which is handled separately as a Data-Entry correction, not an advancement.
+  artifact), which is handled separately as a Data-Entry correction, not an advancement. *[Resolved by
+  withdrawing the rule: the Core is the workbook and the Advancement layer is shown beside it.]*
 - The **register is not exhaustive** and is expected to grow; it is a working backlog, not a finished spec.
 - Every Tier-2/3/4 item is **unvalidated** until its own evidence passes review - listing it here is a
   commitment to test it, not a claim that it is already right.

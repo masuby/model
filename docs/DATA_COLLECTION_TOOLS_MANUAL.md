@@ -1,5 +1,19 @@
 # INFORM Tanzania: Data Collection Tools & System Operations Manual
 
+> **Regenerated 10 October 2026 (issues TOOL-01, TOOL-02, SRC-07).** Both tools and both benchmarks are
+> rebuilt from the corrected council registry (`data-source/council_registry.csv`): every council row
+> carries the raw values of its **own** workbook unit (the twelve urban councils their own units, Butiama its
+> own values), with no fallback to a neighbour. `scripts/fill-collection-tool.py` also writes
+> `data-source/collection_benchmark_values.json`, which `src/engine/risk/__tests__/tools.test.ts` checks in CI
+> against the workbook. The ADVANCED tool now holds the 30 sub-indicators of the 12 Advancement baskets (hazards,
+> refugees hosted, facility densities, DRM arrangements) and its component preview follows the engine exactly:
+> each component row carries a locked *Core* cell (the council's workbook value of the group, weight = its
+> workbook indicators in use), so component = (k·core + Σwᵢsᵢ)/(k + Σwᵢ) over the members with data;
+> `node scripts/verify-advanced-tool.mjs` recalculates the benchmark in LibreOffice and compares every
+> component cell with the engine (2,340 of 2,340 agree). The benchmark values are those of
+> `src/data/tanzania-advanced-inputs.json` (`scripts/fill-advanced-tool.py`).
+
+
 - **Version:** 1.0
 - **Audience:** INFORM TZ system maintainers, sector focal points (TMA, GST, NEMC, MoA, MoW, MoH, NBS, PMO‑DMD, …), and the national coordination team.
 - **Companion documents:** `INFORM_CALCULATION_ENGINE.md` (the exact engine math), `INDICATOR_UPDATE_DELETE_PROCEDURES.md` (engine‑side indicator changes), `METHODOLOGY_MANUAL.md`, `USER_MANUAL.md` (the web app).
@@ -207,7 +221,7 @@ inform_sheets/INFORM_TZ_Collection_Tool.xlsx     (NORMAL)
 inform_sheets/INFORM_TZ_Advanced_Tool.xlsx       (ADVANCED)
 ```
 
-They sit alongside `TZ_INFORM_model.xlsx` and the source CSVs. You **send them to sectors directly** (email/shared drive); they are not downloadable from inform.co.tz. `*.xlsx` is git‑ignored, so the tools are local and **regenerable** from the scripts: the scripts are the source of truth, not the binary. (Stale `…/​*.xlsx` links on the site return a clean **404**, not the app shell.)
+They sit alongside the INFORM SADC 2024 workbook (`data-source/tanzania-inform-risk.xlsx`) and the source CSVs. You **send them to sectors directly** (email/shared drive); they are not downloadable from inform.co.tz. `*.xlsx` is git‑ignored, so the tools are local and **regenerable** from the scripts: the scripts are the source of truth, not the binary. (Stale `…/​*.xlsx` links on the site return a clean **404**, not the app shell.)
 
 ---
 
@@ -302,7 +316,7 @@ For the tools themselves, the standardiser and the present‑only aggregation ar
 | `src/data/inform-indicator-spec.json` | the built spec the engine + tools read |
 | `src/services/standardise.js` | the standardiser + `computeFromRaw` (weighted, present‑only) |
 | `src/services/__tests__/` | the golden / flexibility / parity test suites |
-| `inform_sheets/TZ_INFORM_model.xlsx` | the official regional INFORM workbook (ground truth) |
+| `data-source/tanzania-inform-risk.xlsx` | the official regional INFORM workbook (INFORM Sub-national SADC 2024, ground truth; `inform_sheets/TZ_INFORM_model.xlsx` is an older copy) |
 | `docs/INFORM_CALCULATION_ENGINE.md` | the exact engine math |
 | `docs/INDICATOR_UPDATE_DELETE_PROCEDURES.md` | engine‑side indicator change SOP |
 

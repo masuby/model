@@ -7,6 +7,33 @@ Where a method is approximate, or a value looks too close to a neighbour, it is 
 here openly** so we can improve it together, not hidden. Numbers below are real, taken
 from the current dataset (`src/data/tanzania-inform-risk.json`).
 
+> **Superseded, 9 October 2026.** This manual describes the pipeline that built the dataset up to
+> September 2026: computed drought and flood indices folded into the INFORM values with a "raise-only"
+> floor, flood amplified by exposure, documented overlays and hand grades for the empty hazards, and the
+> Kondoa district row quoted as the "official national INFORM value (4.1)". The integrity assessment of
+> October 2026 (`docs/assessment/INFORM_TZ_Integrity_Assessment_2026-10.md`) found that this changed
+> 165 of 170 units of the INFORM SADC 2024 workbook and that the national figure was not national.
+> Since then:
+>
+> - **The Core is the workbook, exactly** (`scripts/build-core.mjs`; reproduced by tests at 8,664/8,664
+>   standardised values and 170/170 risks). Sections 1 and 5 below (the three aggregation rules) remain
+>   correct; the worked numbers now come from `docs/WORKED_EXAMPLE.md`, regenerated from the engine.
+> - **The national figure is the INFORM aggregate of the 195 councils**: 3.8 (Hazard & Exposure 2.4,
+>   Vulnerability 3.8, Lack of Coping Capacity 6.2) on the workbook exactly, and 4.1 (2.6, 4.2, 6.2) on the
+>   live model after the validation quarantine of 10 October 2026 (section 8), labelled as not an official
+>   INFORM figure.
+> - **Every Tanzanian computation is out of the Core.** Where kept, it is a documented sub-indicator of
+>   the **Advancement layer**, computed from its own inputs and shown on each profile beside the Core.
+>   There is no raise-only floor, no flood x exposure rule, no overlay and no hand grade anywhere.
+> - **Councils carry their workbook unit's values** until institutions enter council values through the
+>   Data portal (measured values, or 0-10 scores by the INFORM method with a citable source), reviewed by
+>   the owning institution's chain; an approved council value applies to that council alone.
+>
+> The current methodology is the Methodology page of the site (`/methodology`), the worked example and
+> the assessment. Sections marked *legacy* below are kept as the record of the retired pipeline and must
+> not be read as the current method.
+
+
 ---
 
 ## 1. The risk journey (one picture)
@@ -18,8 +45,8 @@ from the current dataset (`src/data/tanzania-inform-risk.json`).
  Hazard&Exposure · Vulnerability · Lack-of-Coping ──∛(H×V×LCC)──▶ RISK 0–10 ──▶ class
 ```
 
-Three rules, taken **exactly from the Tanzania INFORM Excel** (`TZ_INFORM_model.xlsx`, locked
-by `excelParity.test.js`):
+Three rules, taken **exactly from the Tanzania INFORM Excel** (the INFORM SADC 2024 workbook,
+`data-source/tanzania-inform-risk.xlsx`, locked by `src/engine/risk/__tests__/workbook.golden.test.ts`):
 
 | Step | Method | Where |
 |---|---|---|
@@ -27,13 +54,17 @@ by `excelParity.test.js`):
 | category → dimension | **INFORM scaled geometric mean** | Excel Box 6 (below) |
 | dimension → risk | **∛(H × V × LCC)** (geometric mean) | INFORM Risk index |
 
-The same three rules run in the offline build (`scripts/apply-climate-hazards.mjs`) **and**
-live in the app when you edit (`riskModel.applyEdits`), so a computed value and an edited
-value behave identically.
+The same three rules run in the engine (`src/engine/risk/model.ts`) for the shipped Core and for
+every approved data update, so a workbook value and an institutional value behave identically.
 
 ---
 
 ## 2. Standardization: turning a raw number into 0–10
+
+*Legacy in part (October 2026): the Core standardises every indicator by the workbook's own
+specification (denominator, outlier fence, logarithm, the indicator's reference range, direction), not by
+a min-max over Tanzania's districts; the population example below described a removed exposure
+indicator. See `docs/WORKED_EXAMPLE.md`, step 1.*
 
 Every indicator must sit on the same 0–10 scale ("higher = more risk") before it can be
 combined. We use **min-max** scaling across Tanzania's districts:
@@ -67,6 +98,10 @@ their scores stay close (and yes, sometimes they look "too close", that is hones
 ---
 
 ## 3. Hazard indicators: what we compute, honestly
+
+*Legacy (retired October 2026): none of the computations in this section is in the Core. The drought
+composite was withdrawn (it scored wet highland councils 10); its members enter the Advancement layer
+separately. The flood and exposure rules, the floors and the overlays are removed.*
 
 ### 3.1 Drought (computed, CHIRPS v3 + ERA5)
 Drought is **slow** and hits communities through **failed growing seasons** (→ food
@@ -118,7 +153,7 @@ a sparsely-populated but flood-prone district keeps its full documented hazard.
 > 2.1: hiding known flood areas). That bug was caught by a before/after audit and fixed:
 > **exposure now amplifies only; a documented flood hazard is never lowered.**
 
-### 3.4 Other hazards: deepened one by one (all raise-only)
+### 3.4 Other hazards: deepened one by one (all raise-only) *[legacy: removed from the Core]*
 Each is floored at the documented baseline (`hazard_baseline.csv`): computed/overlay evidence
 can raise a hazard, never lower it.
 - **Storms & tropical cyclone**: coastal exposure overlay graded south→north, based on **Cyclone Hidaya
@@ -134,13 +169,19 @@ can raise a hazard, never lower it.
   armyworm (maize belts), livestock disease (pastoral), tsetse (western miombo).
 - **Earthquake, landslide, coastal hazards, wildfire, environmental degradation** keep their
   **documented / INFORM SADC** values (earthquake already follows the rift; the others are
-  differentiated). Next: wildfire from MODIS/VIIRS, earthquake refine from USGS, using the same overlay pattern.
+  differentiated). *[Legacy plan: fire detections and the USGS event record are Advancement-layer members,
+  never overlays on the Core.]*
 - **Vulnerability & coping** indicators are the next dimensions to deepen, so the Risk total will
   keep evolving as the model becomes more complete. That is expected and documented, not drift.
 
 ---
 
 ## 4. Vulnerability & Coping: current sources
+
+*Legacy (retired October 2026): the Core's vulnerability and coping values are the workbook's (Global
+Data Lab, World Bank, WHO, UNHCR and others, per the workbook's Metadata sheet). The HBS, TDHS, THIS,
+UNHCR, IPC and census-facility rebuilds below are out of the Core; institutions may re-enter them
+through the Data portal on the indicator's own definition.*
 
 - **Development & poverty**: NBS Household Budget Survey 2017/18 (poverty headcount); already
   differentiated by region (Kigoma/Geita/Kagera highest → Dar/Kilimanjaro lowest).
@@ -167,10 +208,11 @@ can raise a hazard, never lower it.
 ## 5. Aggregation: the exact formulas
 
 ### 5.1 Indicator → Category: MEAN
-`category = average of its indicators` (ignoring blanks). E.g. Kondoa Natural-hazards =
-mean(drought 8.6, flood 3.8, earthquake 10, landslide 4.7, wildfire 4.75, lightning 3,
-zoonoses 4, heatwave 3.3, …) = **3.9**. *(Adding real low hazards like lightning/heat can
-nudge the mean: INFORM averages all hazard types; it never falls below the documented baseline.)*
+`category = average of its indicators` (ignoring blanks). E.g. Rufiji Natural-hazards =
+mean(coastal 0, drought 2.9, earthquake 0.7, env. degradation 5.4, flood 9.0, landslide 5.2,
+storms 0, volcano 0, wildfire 4.5) = **3.08** (heatwave, lightning and zoonoses have no data and are
+excluded). *(Before the mean, each indicator group is itself the mean of its workbook indicators with
+data: see `docs/WORKED_EXAMPLE.md`, step 2.)*
 
 ### 5.2 Category → Dimension: INFORM scaled geometric mean (Excel Box 6)
 > **dimension = (10 − GEOMEAN( (10−c₁)/10·9 + 1 , (10−c₂)/10·9 + 1 , … )) / 9 × 10**
@@ -179,9 +221,9 @@ Because the scores are inverted before the geometric mean, the result is always 
 plain average: a **high** category weighs more than a low one, so a serious problem in one category is
 not averaged away by a benign one.
 
-**Worked example: Kondoa Hazard:** Natural 3.9, Human 1.3 (plain average 2.6).
-scaled: (10−3.9)/10·9+1 = 6.49 ; (10−1.3)/10·9+1 = 8.83.
-GEOMEAN = √(6.49 × 8.83) = 7.570. dimension = (10 − 7.570)/9 × 10 = **2.7** (≥ 2.6). ✔ matches stored.
+**Worked example: Rufiji Hazard:** Natural 3.08, Human 2.50 (plain average 2.79).
+scaled: (10−3.08)/10·9+1 = 7.228 ; (10−2.50)/10·9+1 = 7.750.
+GEOMEAN = √(7.228 × 7.750) = 7.4845. dimension = ROUND((10 − 7.4845)/9 × 10, 1) = **2.8** (≥ 2.79). ✔ matches the engine.
 
 > **Full end-to-end worked example** (real data, every indicator from raw value → standardisation →
 > 0-10 → category → dimension → risk, plus how the four levels harmonise): see
@@ -193,8 +235,9 @@ GEOMEAN = √(6.49 × 8.83) = 7.570. dimension = (10 − 7.570)/9 × 10 = **2.7*
 ### 5.3 Dimension → Risk: cube root
 > **Risk = ∛(Hazard × Vulnerability × LackOfCoping)**
 
-**Kondoa:** ∛(2.7 × 5.4 × 4.7) = ∛68.53 = **4.1** (Medium). ✔ (The in-app Methodology page recomputes
-this example live from the engine for any council.)
+**Rufiji:** ∛(2.8 × 3.8 × 6.0) = ∛63.84 = 3.995 → **4.0** (Medium). **Kondoa:** ∛(2.2 × 5.5 × 5.9) =
+∛71.39 = **4.1** (Medium). ✔ (The in-app Methodology page recomputes this example live from the engine
+for any council.)
 
 Then `Risk` is classed with the **Tanzania thresholds** (Very-Low < 2.5 < Low < 3.4 < Medium
 < 4.3 < High < 5.9 < Very-High).
@@ -211,12 +254,17 @@ geomean) **excludes null entirely**: it is *not* read as 0:
 In **Data Entry**, clearing a field sets it back to no-data (`null`): it removes data rather than
 zeroing it. Each district shows a **data-coverage %** (share of the 32 leaf indicators that have
 data) as a reliability cue, so a score built on sparse data is flagged for what it is. The
-ambiguous INFORM `economic` slot is deliberately left no-data everywhere (170/170 null) and by
-design affects nothing. *(Locked by tests in `climateIntegrity.test.js`.)*
+ambiguous INFORM `economic` slot has no workbook data anywhere (170/170 null) and by
+design affects nothing. *(Locked by tests in `src/engine/risk/__tests__/`.)*
 
 ---
 
 ## 6. Keying data in (Data Entry): same formulas, with provenance
+
+*Legacy (retired October 2026): the steps below describe the browser-only editor of the first
+version. Values now enter through the Data portal of the site: institutions submit measured values in
+natural units, or 0-10 scores by the INFORM method with a citable source, for the nation, a region or a
+council; the owning institution's reviewer approves; the engine recomputes every level.*
 
 1. Pick **role** (PMO/Admin apply directly; Sector officer submits for approval), region, district.
 2. Edit a **dimension score** directly, or **Fill indicators** to set each 0–10 leaf, for
@@ -235,6 +283,10 @@ Storage today is the browser (`localStorage`); the Supabase schema is ready for 
 
 ## 7. Data sources (per indicator)
 
+*Legacy (retired October 2026): the Core's source for every indicator is the workbook's Metadata sheet
+(`src/data/inform-workbook-sources.json`), shown on the site beside each value. The table below lists
+the sources of the retired pipeline.*
+
 | Indicator | Authority | Dataset | How standardized |
 |---|---|---|---|
 | Drought | TMA / MoA | CHIRPS v3 1991-2024 + ERA5 t2m | aridity+variability+SPEI-depth+season-fail, min-max |
@@ -250,7 +302,80 @@ Storage today is the browser (`localStorage`); the Supabase schema is ready for 
 
 ---
 
+## 7b. Benchmark 2026: institutional values for the empty and the withheld indicators
+
+The SADC workbook lists template indicators without data (heatwave, lightning, vehicle accidents, hazardous
+material, sea-level rise, the IPC classification, female-headed households, disability) and carries a few values that failed
+validation (coastal erosion 0 everywhere, a single cyclone unit, food security, displacement, Dodoma's
+electricity, Ukerewe's landslide). The Benchmark 2026 (`docs/BENCHMARK_2026.md`) supplies for those
+indicators measured values prepared from public, citable datasets, in the shape the Data portal produces
+for an institution's approved values. The engine applies them as approved institutional values of
+10 October 2026: the lineage is shown wherever the value appears, the hold on a replaced workbook value is
+lifted, and a newer approved value from the portal supersedes the benchmark value. The workbook itself is
+never changed.
+
+- Activation: a template indicator gets a Tanzanian definition (unit, keyed level, direction,
+  normalisation and reference range), exactly as the workbook's Metadata sheet defines every indicator in
+  use; the reference range of an activated indicator is resolved from the Tanzanian data, the workbook's
+  own rule for its "Data range" indicators. The food-security percentage's range is re-resolved to 0 to 100.
+- Replacement: an existing indicator keeps its workbook definition and range; the benchmark value is a
+  measurement in the same unit from the same or a better source (Digital Earth Africa for coastal
+  erosion, the 2022 census for electricity, IDMC for displacement).
+- Recheck: where the recomputation from the workbook's own source reproduces the workbook (Kagera's
+  earthquake index, the Lake zone's drought frequency), the value is retained and the data note explains.
+- Human hazards measured where they happen: vehicle accidents as the density of recorded road crashes
+  (police statistics 2024-2025, each police region's crashes shared among its councils by population and
+  divided by land area, so the cities, where people and traffic are densest, carry them) and hazardous
+  material as the density of sites that produce, store, process or dispose of hazardous materials
+  (OpenStreetMap installations, the 2022 census mapping of industries and hospitals, the NEMC environmental
+  certificates of July-September 2026). Both are log-transformed, as the workbook does for its counts.
+- Internal violence (ACLED events and fatalities by region) is withheld from the live model by programme
+  decision (data note DN-12): too complicated to read and communicate as a council's hazard. The workbook
+  keeps the values; the human category is the mean of the other groups.
+- Institutions measured at the council (11 October 2026, `src/engine/risk/institutional.ts`): two Tanzanian
+  indicators added inside the workbook's institutional groups, beside its national Sendai score,
+  anticipatory-action coverage, government-effectiveness score and regional corruption index. *DRM
+  arrangements in place* (DRR implementation) is the share of five arrangements the council has (EPRP,
+  RVCA, trained ERT, EOCC, DRR training of the committee); an arrangement not recorded is not in place,
+  the registers being PMO-DMD's own. *Disaster management committee functioning* (Governance) is the share
+  of the assessed criteria met (committee active, stakeholder collaboration, involvement in DRR); the law
+  and policy are the same everywhere and are not scored, and a council has a value only once assessed.
+  Both are fixed 0 to 100 scales that decrease risk. The published lists seed them through the Benchmark
+  2026; the committees' approved records supersede them through the Data portal. A council's arrangements
+  lower its own lack of coping capacity and, through the unweighted means of the INFORM aggregation, its
+  region's and the country's in proportion to the councils covered.
+- What remains empty: zoonoses, plants and pests (no validated national dataset at council level yet);
+  agricultural drought for the five Dar es Salaam councils (not applicable).
+
 ## 8. Honest limitations: the "to-improve" list (flag & discuss)
+
+*Legacy in part (October 2026): items 1 to 4b, 6, 8 and 9 describe the retired pipeline. The current
+limitations are the eleven items of the Methodology page (hazard aggregation rule, SADC classes, global
+sources, six empty groups, coherence, relative ranges, inheriting councils, shared units, Advancement
+status, precision, no reliability score).*
+
+*Sensitivities and releases (October 2026):* the Methodology page shows, beside the Core and never on a
+map, what INFORM Global's hazard rules would give (inverted geometric mean of the natural hazards; human
+hazard as the conflict maximum; Advanced model section), Tanzanian class thresholds by natural breaks for
+risk, the dimensions and the categories (Classification section), the guidance's coherence check over the
+councils (Quality section; the report per release is `docs/assessment/INFORM_TZ_Coherence_<release>.md`,
+`node scripts/coherence-report.mjs`), and a lack-of-reliability score on every council profile (missing
+groups, age of the data, inherited or shared values; `src/engine/risk/variants.ts`). Releases, validation
+and the update cycle: `docs/RELEASES.md`; boundary changes: `data-source/BOUNDARIES.md` and
+`python3 scripts/check-boundaries.py`. Decisions D11 and D12 remain with PMO-DMD. The indicator integrity
+recheck of 10 October 2026 (`node scripts/integrity-recheck.mjs`,
+`docs/assessment/INFORM_TZ_Indicator_Integrity_<release>.md`) rechecked every value of every indicator: eleven
+workbook values carry a data note on the site (`src/data/inform-data-notes.json`) and are raised with INFORM
+(JRC); in the Advancement layer the facility densities were recomputed on the council polygons with the
+census facility types filtered, a felt-intensity earthquake member was added and six member ranges fitted.
+
+*Validation quarantine (10 October 2026):* a workbook value that fails validation is withheld from the live
+model (treated as missing for the unit, as INFORM's guidance treats data that fails validation; a group with
+other indicators is recomputed from them) until an institution supplies it through the Data portal or the
+workbook is corrected: 391 values over the 170 units (coastal erosion and food security for every unit;
+Dar es Salaam's and the Lake zone's drought; Kagera's earthquake; Ukerewe's landslide; Dodoma's electricity;
+two displaced-people rows). The workbook stays reproduced exactly for the tests (`buildModel` with
+`workbookOnly`). Live national aggregate 4.1 against 3.8 on the workbook; 62 councils change class.
 
 1. **Drought exposure is agricultural, not urban.** We multiply *flood* by population exposure
    but **not drought**: multiplying drought by urban density would wrongly demote pastoral
@@ -273,33 +398,37 @@ Storage today is the browser (`localStorage`); the Supabase schema is ready for 
    wet highland councils with caution.
 5. **Administrative structure: the model now speaks the real NBS-2022 structure by default.**
    The explorer, the ranked table, the charts and Data Entry all open on the **195 councils (LGAs)**,
-   aggregating to the **31 regions**, with the **official INFORM country value (4.1)** as the national
-   figure. This is a *consistent scaling of the same source*: the model was built from the INFORM
-   Tanzania **country-model workbook** (170 council-level units, the **reference/backing**), and the
-   195 NBS-2022 councils are derived from it. **195/195 councils carry data**: 167 match an INFORM unit
-   directly; **28 new/split councils** (Kibiti←Rufiji, Ubungo←Kinondoni, Kigamboni←Temeke,
-   Mlimba/Ifakara←Kilombero, Magharibi A/B…) **inherit their parent's data, flagged on hover/in the
-   list**, until council-specific data exists (**never fabricated**). Because the data is 170-resolution,
-   **34 INFORM source units back more than one council** (e.g. Mtwara → Mtwara District + Nanyamba Town +
-   Mtwara Mikindani Municipal). Each council has its **own Hazard & Exposure** (computed on its own polygon), so
-   **hazard edits apply to that council**; **Vulnerability & Coping edits are keyed by the shared source unit and
-   flow to every council that shares it**: the Data portal shows which unit receives each change and which
-   councils it updates. Council risk is computed live as ∛(H × V × LCC), so approved edits reach the map,
-   regions and profiles immediately. **Regions aggregate from their councils the INFORM way** (indicator means →
-   categories → scaled geomean → cube root; facilities summed over distinct source units, so no double
-   counting). The **170 INFORM units remain available as a labelled "source/reference" level**, and the
-   **national value is kept official**, never a unit-mean. Official NBS 2022: 31 regions · 150
+   aggregating to the **31 regions**, with the **INFORM aggregate of the 195 councils (3.8 on the workbook, 4.1 live, not an
+   official INFORM figure)** as the national figure *[corrected October 2026: the "official 4.1" quoted
+   here before was Kondoa's row]*. This is a *consistent scaling of the same source*: the model was built
+   from the INFORM Tanzania **country-model workbook** (170 district-level units, the **reference**),
+   and the 195 NBS-2022 councils are derived from it. **195/195 councils carry data**: 175 take the
+   values of their workbook unit directly; **20 councils created after the workbook's boundaries**
+   (Kibiti←Rufiji, Ubungo←Kinondoni, Kigamboni←Temeke, Mlimba/Ifakara←Kilombero…) **inherit their
+   parent's values, flagged**, until council values are approved (**never fabricated**). Because the data
+   is 170-resolution, **25 workbook units back two councils each**. A council carries its unit's values
+   for all three dimensions; an **approved council value (measured or scored) applies to that council
+   alone**, and the Data portal shows which councils each change reaches. Council risk is computed live
+   as ∛(H × V × LCC), so approved values reach the map, regions and profiles immediately. **Regions
+   aggregate from their councils the INFORM way** (indicator means → groups → categories → scaled geomean
+   → cube root; facilities summed over distinct workbook units, so no double counting). The **170
+   workbook units remain available as a labelled reference level**. Official NBS 2022: 31 regions · 150
    districts · 195 councils · 4,344 wards. Reconciliation: `scripts/export-councils.py` →
    `tanzania-councils.json` + `council_reconciliation.csv`.
-6. **Wildfire, earthquake, lightning, storms** are still INFORM baseline, not yet physically
-   recomputed (MODIS/VIIRS fire, USGS seismicity are the next sources).
-7. **Standardization is relative to Tanzania** (min over our 150 districts), not INFORM's fixed
-   global reference values. Fine for a national tool; note when comparing to global INFORM.
-8. **Precautionary by design.** Flood and drought are *floored* at the documented baseline:
-   computed evidence can **raise** a hazard but never **lower** it. This errs toward flagging
+6. **Wildfire, earthquake, lightning, storms** are the workbook's values in the Core (earthquake is the
+   GEM exposure index). Fire detections, the USGS event record and LIS/OTD lightning density are
+   Advancement-layer members, present or planned, never Core sources.
+7. **Standardization uses the workbook's own reference ranges** (17 fixed pairs and 36 data ranges
+   over the 170 units, frozen at the 2024 release), not INFORM Global's. Subnational models are not
+   comparable with INFORM Global; never set the two side by side as if they were.
+8. **Precautionary by design** *[legacy: the floor was removed in October 2026; the Core is the
+   workbook and the Advancement layer is shown beside it]*. Flood and drought were *floored* at the
+   documented baseline: computed evidence could **raise** a hazard but never **lower** it. This errs toward flagging
    risk (safer for planning) at the cost of keeping a few possibly-overstated documented values
    (see #4). A before/after audit confirms **0 districts** had flood or risk-class lowered.
-9. **Risk evolves as the model is completed, by design.** Populating previously-blank hazards
+9. **Risk evolves as the model is completed, by design** *[legacy: these fills were hand grades and
+   overlays inside the Core and were removed in October 2026; the six empty groups stay empty in the
+   Core until filled in the Advancement layer or by institutions]*. Populating previously-blank hazards
    (storms, heatwave, lightning, volcano, zoonoses, earthquake-refine, wildfire-refine, plus the
    technological hazards road-accidents & hazmat) raised High-risk districts from **18 → 43**,
    all raise-only (a value-audit confirms **0 districts below their documented baseline**). The
