@@ -42,22 +42,22 @@ export default function HomePage() {
     <div>
       {/* ---------------------------------------------------------------------------------- Hero */}
       {/* The charts take the room: the map sits a little to the right, into the page margin, and the columns stay closer. */}
-      <PageContainer className="grid items-center gap-12 pt-12 pb-16 lg:grid-cols-[minmax(0,1fr)_minmax(0,500px)] lg:gap-10 lg:pt-20 lg:pb-20 xl:gap-12">
+      <PageContainer className="grid items-start gap-10 pt-6 pb-10 lg:grid-cols-[minmax(0,1fr)_minmax(0,500px)] lg:gap-10 lg:pt-5 lg:pb-12 xl:gap-12">
         <div>
-          <h1 className="max-w-2xl text-[2.6rem] leading-[1.05] text-balance sm:text-[3.4rem] lg:text-[3.8rem]">{t('title')}</h1>
-          <p className="mt-6 max-w-xl text-lg leading-relaxed text-muted-foreground">{t('lead', { councils: model.councils.length, regions: model.regions.length })}</p>
-          <div className="mt-8 flex flex-wrap gap-3">
-            <Button size="lg" asChild>
+          <h1 className="max-w-2xl text-[2.2rem] leading-[1.05] text-balance sm:text-[2.6rem] lg:text-[2.75rem]">{t('title')}</h1>
+          <p className="mt-3 max-w-xl text-base leading-relaxed text-muted-foreground lg:text-[1.05rem]">{t('lead', { councils: model.councils.length, regions: model.regions.length })}</p>
+          <div className="mt-4 flex flex-wrap gap-3">
+            <Button asChild>
               <Link to="/explore">
                 {t('ctaExplore')} <ArrowRight />
               </Link>
             </Button>
-            <Button size="lg" variant="outline" asChild>
+            <Button variant="outline" asChild>
               <Link to="/methodology">{t('cta.secondary')}</Link>
             </Button>
           </div>
 
-          <NationalCharts model={model} className="mt-12 border-t border-border pt-8" />
+          <NationalCharts model={model} className="mt-5 border-t border-border pt-4" />
         </div>
 
         <figure className="w-full lg:-mr-8 lg:w-[calc(100%+2rem)] xl:-mr-10 xl:w-[calc(100%+2.5rem)]">

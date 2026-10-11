@@ -19,7 +19,9 @@
   risk (one line each, averaged over nine councils, labels kept readable on phones). The map sits a
   little further right, into the page margin, so the charts have the room. The distribution table of
   the highest-risk section is folded into the donut. The map caption names the model only, and the
-  footer no longer links to the source code.
+  footer no longer links to the source code. The hero is tighter (a smaller headline, less space above
+  and between the lead, the buttons and the charts), so the relation chart is in the first view on a
+  1366 × 768 screen.
 
 ### The Data portal's action library covers every indicator group, with lead sectors (11 October 2026)
 

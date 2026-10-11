@@ -33,7 +33,7 @@ export function NationalCharts({ model, className }: { model: RiskModel; classNa
   }, [model]);
   const high = counts.high + counts.veryHigh;
   return (
-    <div className={cn('grid gap-x-8 gap-y-8 sm:grid-cols-2', className)}>
+    <div className={cn('grid gap-x-8 gap-y-5 sm:grid-cols-2', className)}>
       <Block title={t('picture.parts')} note={t('picture.partsNote', { councils: model.councils.length, people: formatCompact(population, i18n.language) })}>
         <PartTracks unit={national} />
       </Block>
@@ -52,7 +52,7 @@ function Block({ title, note, className, children }: { title: string; note?: str
     <section className={className}>
       <h3 className="text-sm font-semibold">{title}</h3>
       {note && <p className="mt-0.5 text-xs leading-snug text-muted-foreground">{note}</p>}
-      <div className="mt-3">{children}</div>
+      <div className="mt-2.5">{children}</div>
     </section>
   );
 }
@@ -61,7 +61,7 @@ function Block({ title, note, className, children }: { title: string; note?: str
 function PartTracks({ unit }: { unit: Unit }) {
   const { t } = useTranslation(['home', 'common']);
   return (
-    <ul className="space-y-2.5">
+    <ul className="space-y-2">
       {PARTS.map(({ key, scale }) => {
         const v = valueOf(unit, key);
         const c = classify(v, scale);
@@ -127,7 +127,7 @@ function ClassPie({ counts, total }: { counts: Record<ClassKey, number>; total: 
   const label = CLASS_KEYS.map((k) => `${t(`common:classes.${k}`)} ${counts[k]} (${Math.round((counts[k] / total) * 100)}%)`).join(', ');
   return (
     <div className="flex items-center gap-5">
-      <svg viewBox="0 0 100 100" className="size-36 shrink-0" role="img" aria-label={`${t('picture.pie')}: ${label}`}>
+      <svg viewBox="0 0 100 100" className="size-32 shrink-0" role="img" aria-label={`${t('picture.pie')}: ${label}`}>
         {slices.map((s) =>
           s.share > 0 ? (
             <path key={s.key} d={s.d} fill={classColor(s.key, 'risk')} stroke="var(--background)" strokeWidth={0.6} strokeLinejoin="round">
@@ -201,13 +201,13 @@ function RelationLines({ model }: { model: RiskModel }) {
   return (
     <div>
       <div className="flex gap-2">
-        <div className="num flex h-36 shrink-0 flex-col justify-between text-[10px] leading-none text-muted-foreground" aria-hidden>
+        <div className="num flex h-24 shrink-0 flex-col justify-between text-[10px] leading-none text-muted-foreground" aria-hidden>
           <span>10</span>
           <span>5</span>
           <span>0</span>
         </div>
         <div className="min-w-0 flex-1">
-          <svg viewBox={`0 0 ${W} ${H}`} preserveAspectRatio="none" className="h-36 w-full" role="img" aria-label={t('picture.relationAria', { count: ranked.length })}>
+          <svg viewBox={`0 0 ${W} ${H}`} preserveAspectRatio="none" className="h-24 w-full" role="img" aria-label={t('picture.relationAria', { count: ranked.length })}>
             {[0, 5, 10].map((v) => (
               <line key={v} x1={0} x2={W} y1={y(v)} y2={y(v)} stroke="currentColor" strokeOpacity={0.15} strokeWidth={1} vectorEffect="non-scaling-stroke" />
             ))}
