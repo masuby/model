@@ -6,7 +6,10 @@
  */
 import { ALL_INDICATORS, DIMENSIONS, leafForWorkbookComponent, type DimensionKey, type IndicatorLocation } from '@/engine/risk/hierarchy';
 import { ADVANCED_SPECS, SPECS, usedSpecs, type IndicatorSpec } from '@/engine/risk/standardise';
-import { AUTHORITIES, AUTHORITY_KEYS, INDICATOR_SOURCES, sourceFor, type Authority, type SourceInfo } from '@/engine/risk/sources';
+import { benchmarkDatasetFor, type BenchmarkDataset } from '@/engine/risk/benchmark';
+import { leafSpecs } from '@/engine/risk/rawValues';
+import { AUTHORITIES, AUTHORITY_KEYS, custodianFor, sourceFor, type Authority, type Custodian, type SourceInfo } from '@/engine/risk/sources';
+import { ACTIVE_SPECS } from '@/engine/risk/standardise';
 import { NO_VALUE, toCsv } from '@/lib/utils';
 
 /* ------------------------------------------------------------------------------------------------ */
@@ -21,6 +24,9 @@ export interface SectionDef {
   depth: 0 | 1;
 }
 
+// The live documentation is operational: what a reader needs to use the scores. The research analyses
+// (the Advancement baskets, the quality checks, the sensitivities, the corrections) are reported in the
+// assessment reports (docs/assessment) and the thesis, not duplicated here (decision of 10 October 2026).
 export const SECTIONS: readonly SectionDef[] = [
   { id: 'overview', number: '01', depth: 0 },
   { id: 'structure', number: '02', depth: 0 },
@@ -29,15 +35,32 @@ export const SECTIONS: readonly SectionDef[] = [
   { id: 'geometric', number: '04', depth: 0 },
   { id: 'classification', number: '05', depth: 0 },
   { id: 'levels', number: '06', depth: 0 },
-  { id: 'advanced', number: '07', depth: 0 },
-  { id: 'severity', number: '08', depth: 0 },
-  { id: 'sources', number: '09', depth: 0 },
-  { id: 'quality', number: '10', depth: 0 },
-  { id: 'limitations', number: '11', depth: 0 },
-  { id: 'changelog', number: '12', depth: 0 },
-  { id: 'references', number: '13', depth: 0 },
+  { id: 'severity', number: '07', depth: 0 },
+  { id: 'sources', number: '08', depth: 0 },
+  { id: 'limitations', number: '09', depth: 0 },
+  { id: 'references', number: '10', depth: 0 },
 ];
 export const SECTION_IDS: readonly string[] = SECTIONS.map((s) => s.id);
+
+/**
+ * The summary page (UX-04): seven short sections and the list of the full documentation pages. Each
+ * summary section links to the full section of the same id at /methodology/<id>.
+ */
+export const SUMMARY_SECTIONS: readonly SectionDef[] = [
+  { id: 'overview', number: '01', depth: 0 },
+  { id: 'structure', number: '02', depth: 0 },
+  { id: 'pipeline', number: '03', depth: 0 },
+  { id: 'geometric', number: '04', depth: 0 },
+  { id: 'classification', number: '05', depth: 0 },
+  { id: 'levels', number: '06', depth: 0 },
+  { id: 'limitations', number: '07', depth: 0 },
+  { id: 'documentation', number: '08', depth: 0 },
+];
+export const SUMMARY_IDS: readonly string[] = SUMMARY_SECTIONS.map((s) => s.id);
+/** "1" … "8" on the summary page. */
+export const summaryNumber = (id: string): string => String(Number(SUMMARY_SECTIONS.find((s) => s.id === id)?.number ?? '')) || '';
+/** The full-documentation page for a section id (every id of SECTIONS has one). */
+export const sectionPath = (id: string): string => `/methodology/${id}`;
 
 /** Document numbering as printed: "3" for a section, "3.1" for its first sub-section. */
 export const DISPLAY_NUMBERS: ReadonlyMap<string, string> = (() => {
@@ -127,7 +150,7 @@ export function findAuthority(keyOrLabel: string | null | undefined): Authority 
 /* ------------------------------------------------------------------------------------------------ */
 
 export type Resolution = SourceInfo['resolution'];
-export const RESOLUTIONS: readonly Resolution[] = ['council', 'district', 'region', 'national', 'overlay'];
+export const RESOLUTIONS: readonly Resolution[] = ['council', 'district', 'region', 'national', 'none'];
 
 export interface RegisterRow {
   ref: string;
@@ -137,28 +160,34 @@ export interface RegisterRow {
   key: string;
   /** Canonical English name (used in exports). */
   en: string;
+  /** Where the Core value comes from (the workbook's metadata). */
   source: SourceInfo;
+  /** The Tanzanian institution responsible for keeping the group current. */
+  custodian: Custodian;
+  /** The Benchmark 2026 datasets supplying institutional values to the group's indicators (benchmark.ts). */
+  benchmark: BenchmarkDataset[];
 }
 
-const EXPOSURE_SOURCE = INDICATOR_SOURCES['hazard:exposure'];
+export const REGISTER_ROWS: readonly RegisterRow[] = ALL_INDICATORS.map((l) => ({
+  ref: leafRef(l),
+  dim: l.dimension.key,
+  category: l.category.key,
+  key: l.indicator.key,
+  en: l.indicator.en,
+  source: sourceFor(l.dimension.key, l.indicator.key),
+  custodian: custodianFor(l.dimension.key, l.indicator.key),
+  benchmark: (leafSpecs(ACTIVE_SPECS).find((x) => x.ref === leafRef(l))?.specs ?? []).flatMap((spec) => {
+    const d = benchmarkDatasetFor(spec.id);
+    return d ? [d] : [];
+  }),
+}));
 
-export const REGISTER_ROWS: readonly RegisterRow[] = [
-  ...ALL_INDICATORS.map((l) => ({
-    ref: leafRef(l),
-    dim: l.dimension.key,
-    category: l.category.key,
-    key: l.indicator.key,
-    en: l.indicator.en,
-    source: sourceFor(l.dimension.key, l.indicator.key),
-  })),
-  ...(EXPOSURE_SOURCE ? [{ ref: 'hazard:exposure', dim: 'hazard' as const, category: null, key: 'exposure', en: 'Population exposure', source: EXPOSURE_SOURCE }] : []),
-];
-
-export function registerCsv(rows: readonly RegisterRow[]): string {
-  const header = ['dimension', 'category', 'indicator_key', 'indicator', 'lead_authority', 'lead_authority_name', 'partners', 'dataset', 'method', 'resolution'];
+export function registerCsv(rows: readonly RegisterRow[], preamble: ReadonlyArray<ReadonlyArray<string>> = []): string {
+  const header = ['dimension', 'category', 'indicator_key', 'indicator', 'core_source', 'core_dataset', 'core_method', 'core_resolution', 'responsible_institution', 'responsible_institution_name', 'partners', 'benchmark_2026_dataset', 'benchmark_2026_source', 'benchmark_2026_period'];
   const dimEn = (d: DimensionKey) => DIMENSIONS.find((x) => x.key === d)!.en;
   const catEn = (d: DimensionKey, c: string | null) => (c ? (DIMENSIONS.find((x) => x.key === d)!.categories.find((x) => x.key === c)?.en ?? c) : 'Exposure');
   return toCsv([
+    ...preamble,
     header,
     ...rows.map((r) => [
       dimEn(r.dim),
@@ -166,18 +195,23 @@ export function registerCsv(rows: readonly RegisterRow[]): string {
       r.key,
       r.en,
       AUTHORITIES[r.source.by].label,
-      AUTHORITIES[r.source.by].full,
-      (r.source.also ?? []).map((a) => AUTHORITIES[a].label).join('; '),
       r.source.dataset,
       r.source.method,
       r.source.resolution,
+      AUTHORITIES[r.custodian.by].label,
+      AUTHORITIES[r.custodian.by].full,
+      r.custodian.also.map((a) => AUTHORITIES[a].label).join('; '),
+      r.benchmark.map((b) => `${b.indicator}: ${b.dataset}`).join(' | '),
+      r.benchmark.map((b) => b.source).join(' | '),
+      r.benchmark.map((b) => b.period).join(' | '),
     ]),
   ]);
 }
 
-export function workbookCsv(specs: readonly IndicatorSpec[]): string {
+export function workbookCsv(specs: readonly IndicatorSpec[], preamble: ReadonlyArray<ReadonlyArray<string>> = []): string {
   const header = ['id', 'name', 'dimension', 'category', 'component', 'unit', 'denominator', 'outlier_cap', 'transform', 'normalisation', 'reference_min', 'reference_max', 'direction', 'keyed_at', 'in_use'];
   return toCsv([
+    ...preamble,
     header,
     ...specs.map((s) => [
       s.id,

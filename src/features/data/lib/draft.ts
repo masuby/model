@@ -1,7 +1,7 @@
 /** Score-entry draft rows: what the person typed, evaluated against the unit's current value. */
 import type { Unit } from '@/engine/risk/types';
 import { parseScoreInput, sameScore, type ScoreError } from './scores';
-import { currentValue, EXPOSURE_REF, type DraftChange, type EditableField } from './targets';
+import { currentValue, type DraftChange, type EditableField } from './targets';
 
 export interface RowDraft {
   text: string;
@@ -26,7 +26,7 @@ export function evaluateRow(field: EditableField, unit: Unit, draft: RowDraft | 
   const current = currentValue(unit, field.ref);
   const base: RowEval = { field, current, draft, next: undefined, error: null, change: null };
   if (!draft) return base;
-  if (draft.noData && field.ref !== EXPOSURE_REF) {
+  if (draft.noData) {
     return current === null ? base : { ...base, next: null, change: { ref: field.ref, value: null } };
   }
   const parsed = parseScoreInput(draft.text);

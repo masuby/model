@@ -118,3 +118,6 @@ export function consistency(units: readonly Unit[]): { dims: { ok: number; total
   }
   return { dims: { ok: dOk, total: dTotal }, risk: { ok: rOk, total: rTotal } };
 }
+
+/** A correlation coefficient set with a true minus sign. */
+export const formatR = (r: number | null | undefined): string => (r == null ? 'n/a' : r.toFixed(2).replace(/^-/, '−'));

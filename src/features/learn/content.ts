@@ -67,7 +67,6 @@ export const CONTENT_VARS = [
   'geo',
   'arith',
   'classScore',
-  'sqrtVal',
 ] as const;
 export type ContentVars = Record<(typeof CONTENT_VARS)[number], string>;
 

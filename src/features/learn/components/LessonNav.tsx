@@ -62,9 +62,15 @@ export function LessonSideNav({ current, sections, active }: { current: LessonId
       <div className="mt-6 border-t border-border pt-4">
         <div className="flex items-baseline justify-between text-sm">
           <span className="text-muted-foreground">{t('nav.course')}</span>
-          <span className="num font-medium">{t('nav.done', { done, total: LESSONS.length })}</span>
+          <span className="num text-base font-semibold">{t('nav.done', { done, total: LESSONS.length })}</span>
         </div>
-        <Progress value={(done / LESSONS.length) * 100} label={t('nav.course')} className="mt-2 h-1 rounded-none" indicatorClassName={cn('rounded-none', complete ? 'bg-success' : 'bg-foreground/70')} />
+        {/* One segment per lesson, so the progress reads at a glance even on a narrow column. */}
+        <ol className="mt-2.5 grid gap-1" style={{ gridTemplateColumns: `repeat(${LESSONS.length}, minmax(0, 1fr))` }} aria-hidden>
+          {LESSONS.map((l) => (
+            <li key={l.id} className={cn('h-2', isCompleted(progress, l.id) ? (complete ? 'bg-success' : 'bg-foreground/70') : l.id === current ? 'bg-primary/60' : 'bg-muted')} />
+          ))}
+        </ol>
+        <Progress value={(done / LESSONS.length) * 100} label={t('nav.course')} className="sr-only" />
       </div>
 
       <ol className="mt-5 grid min-w-0 grid-cols-1">

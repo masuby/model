@@ -41,8 +41,8 @@ export function AreaSection({
   children: React.ReactNode;
 }) {
   return (
-    <section id={id} aria-labelledby={`${id}-title`} className={cn('scroll-mt-28 border-t border-border py-12 sm:py-16 print:py-6', className)}>
-      <div className="area-heading mb-8 flex flex-col gap-4 sm:mb-10 sm:flex-row sm:items-end sm:justify-between print:mb-6">
+    <section id={id} aria-labelledby={`${id}-title`} className={cn('scroll-mt-28 border-t border-border py-9 sm:py-16 print:py-6', className)}>
+      <div className="area-heading mb-6 flex flex-col gap-4 sm:mb-10 sm:flex-row sm:items-end sm:justify-between print:mb-6">
         <div className="max-w-3xl">
           <Kicker className="mb-3">
             <span className="num">{index}</span>
@@ -167,7 +167,7 @@ export function ResolutionChip({ resolution, className, focusable = true }: { re
   const { t } = useTranslation('area');
   return (
     <Tooltip content={t(`resolution.${resolution}.desc`)}>
-      <span tabIndex={focusable ? 0 : undefined} className={cn('cursor-help text-xs whitespace-nowrap text-muted-foreground underline decoration-border decoration-dotted underline-offset-4', resolution === 'overlay' && 'italic', className)}>
+      <span tabIndex={focusable ? 0 : undefined} className={cn('cursor-help text-xs whitespace-nowrap text-muted-foreground underline decoration-border decoration-dotted underline-offset-4', className)}>
         {t(`resolution.${resolution}.label`)}
       </span>
     </Tooltip>

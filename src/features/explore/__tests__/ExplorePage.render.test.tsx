@@ -4,7 +4,7 @@
  * string drives (and is driven by) level, lens, selection, comparison and view, the ranking table sorts,
  * filters and exports, both languages have every key, and React logs no errors.
  */
-import { act, cleanup, fireEvent, render, screen, within } from '@testing-library/react';
+import { act, cleanup, fireEvent, render, screen, waitFor, within } from '@testing-library/react';
 import { MemoryRouter, Route, Routes, useLocation } from 'react-router-dom';
 import { afterEach, beforeAll, beforeEach, describe, expect, it, vi } from 'vitest';
 import i18n from '@/i18n';
@@ -13,8 +13,10 @@ import { DataProvider } from '@/data-layer/DataProvider';
 import type { Metric } from '@/engine/risk/metrics';
 import { buildModel, placeKey } from '@/engine/risk/model';
 import type { Unit } from '@/engine/risk/types';
-import { alertFor } from '@/features/guide/alert';
+import { riskBandFor } from '@/features/guide/alert';
+import { usePrefs } from '@/state/prefs';
 import ExplorePage from '../ExplorePage';
+import { MobileSheet } from '../components/MobileSheet';
 
 const model = buildModel();
 const council = model.councils.find((c) => c.inheritedFrom) ?? model.councils[0];
@@ -35,6 +37,8 @@ vi.mock('@/components/map/RiskMap', () => ({
 }));
 
 let desktop = true;
+/** At 1280 px and wider (the controls open beside the map); narrower desktops open them as a drawer. */
+let wide = true;
 const missing: string[] = [];
 let errors: ReturnType<typeof vi.spyOn>;
 
@@ -50,7 +54,7 @@ beforeAll(() => {
   vi.stubGlobal('ResizeObserver', Noop);
   vi.stubGlobal('IntersectionObserver', Noop);
   window.matchMedia = ((q: string) => ({
-    matches: desktop && /min-width:\s*(1024|1280)px/.test(q),
+    matches: desktop && (/min-width:\s*1024px/.test(q) || (wide && /min-width:\s*1280px/.test(q))),
     media: q,
     onchange: null,
     addEventListener() {},
@@ -65,6 +69,7 @@ beforeAll(() => {
 
 beforeEach(async () => {
   desktop = true;
+  wide = true;
   missing.length = 0;
   errors = vi.spyOn(console, 'error');
   await i18n.changeLanguage('en');
@@ -140,6 +145,8 @@ describe('ExplorePage - desktop', () => {
 
   it('carries the selection to the region level and focuses it', async () => {
     await renderAt(`?level=council&id=${council.id}`);
+    // With an area open on a wide screen the controls fold to a rail; open them to switch the level.
+    fireEvent.click(screen.getByRole('button', { name: 'Show the controls' }));
     fireEvent.click(screen.getByRole('radio', { name: /Regions/ }));
     const regionId = `R-${placeKey(council.region)}`;
     expect(params().get('level')).toBe('region');
@@ -218,19 +225,178 @@ describe('ExplorePage - desktop', () => {
     expect(screen.queryByRole('group', { name: /^Indicator groups of/ })).not.toBeInTheDocument();
   });
 
-  it('says what to do in the area card, with the alert category and a link to the full guidance', async () => {
+  it('communicates the risk in the panel: the level on its colour band, two messages and the hazards, never a warning level', async () => {
     await renderAt(`?level=council&id=${council.id}`);
-    const card = await screen.findByRole('complementary', { name: `Details for ${council.name}` });
-    expect(within(card).getByText('What to do')).toBeInTheDocument();
-    // The alert category follows the risk level: a badge beside the risk class, and a line in "What to do".
-    const alert = alertFor(council.risk)!;
-    const category = ['Advisory', 'Warning', 'Major warning'][alert.level - 1];
-    const cls = i18n.t(`common:classes.${alert.cls}`);
-    expect(within(card).getByTitle(`Alert category from the ${cls} risk level`)).toHaveTextContent(`Alert category: ${category}`);
-    expect(within(card).getByText(`From the ${cls} risk level`)).toBeInTheDocument();
-    const link = await within(card).findByRole('link', { name: /What to do before and during a warning/ }, { timeout: 20_000 });
-    expect(link).toHaveAttribute('href', `/area/${council.id}#actions`);
-    expect(within(card).getByText('Main hazards here')).toBeInTheDocument();
+    const panel = await screen.findByRole('complementary', { name: `Details for ${council.name}` });
+    const cls = i18n.t(`common:classes.${riskBandFor(council.risk)!.cls}`);
+    expect(within(panel).getByText(`${cls} risk`)).toBeInTheDocument();
+    expect(within(panel).getByText('If you live or work here')).toBeInTheDocument();
+    expect(within(panel).getByText('If you plan, build, invest or settle here')).toBeInTheDocument();
+    expect(within(panel).getByText(new RegExp(`^Risk here is ${cls.toLowerCase()}\\.`))).toBeInTheDocument();
+    expect(within(panel).getByRole('heading', { name: 'Highest-scoring indicator groups' })).toBeInTheDocument();
+    expect(within(panel).queryByText(/Alert category|Major warning|^Warning$|Advisory|Preparedness priority|What helps|Take action|Be prepared/)).not.toBeInTheDocument();
+    expect(within(panel).getByRole('link', { name: /View full profile/ })).toHaveAttribute('href', `/area/${council.id}`);
+    expect(within(panel).getByRole('link', { name: /Risk card/ })).toHaveAttribute('href', `/area/${council.id}/card`);
+  });
+
+  it("lists the same hazards as the profile, the model's scores included (Kibiti: strong winds first), and folds the human hazards", async () => {
+    await renderAt('?level=council&id=C051');
+    const panel = await screen.findByRole('complementary', { name: 'Details for Kibiti District' });
+    const rows = await within(panel).findAllByRole('button', { name: /Show the evidence$/ }, { timeout: 20_000 });
+    // Three per dimension: the hazards, then the vulnerability groups, then the coping groups.
+    expect(rows.slice(0, 4).map((b) => b.getAttribute('aria-label')!.split(':')[0])).toEqual(['Storms & cyclones', 'Flood', 'Coastal hazards', 'Displaced people']);
+    expect(rows[6].getAttribute('aria-label')!.split(':')[0]).toBe('Economic capacity');
+    expect(rows[0].getAttribute('aria-label')).toBe('Storms & cyclones: 10.0. Show the evidence');
+    expect(within(panel).getAllByText('National value').length).toBeGreaterThan(0);
+    expect(within(panel).getAllByText('Regional value').length).toBeGreaterThan(0);
+  });
+
+  it('opens the evidence of a hazard: the map follows, the sources and storms show, Escape returns to the area', async () => {
+    await renderAt('?level=council&id=C051');
+    const panel = await screen.findByRole('complementary', { name: 'Details for Kibiti District' });
+    const storms = await within(panel).findByRole('button', { name: /^Storms & cyclones: 10\.0/ }, { timeout: 20_000 });
+    fireEvent.click(storms);
+    expect(params().get('metric')).toBe('ind:hazard:stormsCyclone');
+    const view = screen.getByRole('complementary', { name: 'Details for Kibiti District' });
+    expect(within(view).getByRole('heading', { level: 3, name: 'Storms & cyclones' })).toBeInTheDocument();
+    expect(within(view).getByText('What the data say')).toBeInTheDocument();
+    expect(within(view).getByText('Storms: Jobo 2021, Hidaya 2024')).toBeInTheDocument();
+    expect(within(view).getByText('Benchmark 2026 · 1980-2026 · TMA')).toBeInTheDocument();
+    expect(document.activeElement).toBe(within(view).getByRole('heading', { level: 2, name: 'Kibiti District' }));
+    fireEvent.keyDown(document.activeElement!, { key: 'Escape' });
+    expect(params().get('metric')).toBeNull();
+    expect(params().get('id')).toBe('C051');
+    expect(within(screen.getByRole('complementary', { name: 'Details for Kibiti District' })).getByRole('heading', { name: 'Highest-scoring indicator groups' })).toBeInTheDocument();
+  });
+
+  it('moves focus to the panel when someone selects an area, not when a link opens with one', async () => {
+    await renderAt(`?level=council&id=${council.id}`);
+    expect(document.activeElement?.id).not.toBe('risk-panel-heading');
+    cleanup();
+    await renderAt();
+    fireEvent.click(screen.getByRole('button', { name: 'stub-select' }));
+    const panel = await screen.findByRole('complementary', { name: `Details for ${council.name}` });
+    expect(document.activeElement).toBe(within(panel).getByRole('heading', { level: 2, name: council.name }));
+    fireEvent.keyDown(document.activeElement!, { key: 'Escape' });
+    expect(params().get('id')).toBeNull();
+    // The selection started nowhere that survives (the controls were folded): focus lands on the search.
+    await waitFor(() => expect(document.activeElement).toBe(screen.getByRole('combobox', { name: 'Find a council or region' })));
+  });
+
+  it('climbs the breadcrumb to the region and to Tanzania', async () => {
+    await renderAt(`?level=council&id=${council.id}`);
+    const panel = await screen.findByRole('complementary', { name: `Details for ${council.name}` });
+    const crumbs = within(panel).getByRole('navigation', { name: 'Where this area sits' });
+    fireEvent.click(within(crumbs).getByRole('button', { name: 'Tanzania' }));
+    expect(params().get('id')).toBe('TZ');
+    // The map shows the whole country.
+    expect(screen.getByTestId('map').dataset.focus).toBe('TZ');
+    const country = await screen.findByRole('complementary', { name: `Details for ${model.national.name}` });
+    expect(within(country).getByRole('heading', { level: 2, name: 'Tanzania' })).toBeInTheDocument();
+    expect(within(country).getByRole('heading', { name: 'Highest-scoring indicator groups' })).toBeInTheDocument();
+    expect(within(country).getByText('Councils by risk class')).toBeInTheDocument();
+    // The country's highest-scoring hazard group opens its evidence: the spread over the regions.
+    const wildfire = await within(country).findByRole('button', { name: /^Wildfire: [\d.]+\. Show the evidence/ }, { timeout: 20_000 });
+    fireEvent.click(wildfire);
+    expect(params().get('metric')).toBe('ind:hazard:wildfire');
+    const view = screen.getByRole('complementary', { name: `Details for ${model.national.name}` });
+    expect(await within(view).findByRole('heading', { level: 3, name: 'Wildfire' }, { timeout: 20_000 })).toBeInTheDocument();
+    expect(within(view).getByText(/^\d+ of \d+ have a value; highest:$/)).toBeInTheDocument();
+  }, SLOW);
+
+  it('folds the controls to a rail while the panel is docked, and opens them again', async () => {
+    await renderAt(`?level=council&id=${council.id}`);
+    expect(screen.queryByRole('radiogroup', { name: 'Colour by' })).not.toBeInTheDocument();
+    fireEvent.click(screen.getByRole('button', { name: 'Show the controls' }));
+    expect(screen.getByRole('radiogroup', { name: 'Colour by' })).toBeInTheDocument();
+    fireEvent.click(screen.getByRole('button', { name: 'Hide the controls' }));
+    expect(screen.queryByRole('radiogroup', { name: 'Colour by' })).not.toBeInTheDocument();
+  });
+
+  it('below 1280 px the panel docks too, and the controls open as a drawer that Escape folds again', async () => {
+    wide = false;
+    await renderAt(`?level=council&id=${council.id}`);
+    expect(screen.getByRole('complementary', { name: `Details for ${council.name}` })).toBeInTheDocument();
+    fireEvent.click(screen.getByRole('button', { name: 'Show the controls' }));
+    const lenses = screen.getByRole('radiogroup', { name: 'Colour by' });
+    expect(screen.getByRole('complementary', { name: `Details for ${council.name}` })).toBeInTheDocument();
+    fireEvent.keyDown(within(lenses).getAllByRole('radio')[0], { key: 'Escape' });
+    expect(screen.queryByRole('radiogroup', { name: 'Colour by' })).not.toBeInTheDocument();
+    expect(screen.getByRole('button', { name: 'Show the controls' })).toBeInTheDocument();
+    expect(params().get('id')).toBe(council.id);
+  });
+
+  it('shows the area beside the map: its map and trends on the left, what its data say on the right', async () => {
+    await renderAt('?level=council&id=C051');
+    const insight = screen.getByRole('complementary', { name: 'Map and trends of Kibiti District' });
+    expect(within(insight).getByRole('heading', { name: 'Map of Kibiti District' })).toBeInTheDocument();
+    expect(within(insight).getByRole('heading', { name: 'Trends and charts' })).toBeInTheDocument();
+    expect(within(insight).getByRole('heading', { name: 'Risk and its parts' })).toBeInTheDocument();
+    expect(await within(insight).findByText(/^Heatwave days a year, 1991-2024/, {}, { timeout: 20_000 })).toBeInTheDocument();
+    expect(within(insight).getByText(/^INFORM SADC 2024: [\d.]+ → now [\d.]+$/)).toBeInTheDocument();
+    // The hazard profile opens a hazard's evidence in the risk panel.
+    fireEvent.click(within(insight).getByRole('button', { name: /^Storms & cyclones: 10\.0/ }));
+    expect(params().get('metric')).toBe('ind:hazard:stormsCyclone');
+    const panel = screen.getByRole('complementary', { name: 'Details for Kibiti District' });
+    expect(within(panel).getByRole('heading', { level: 3, name: 'Storms & cyclones' })).toBeInTheDocument();
+    fireEvent.click(within(panel).getByRole('button', { name: 'Kibiti District: overview' }));
+    expect(within(screen.getByRole('complementary', { name: 'Details for Kibiti District' })).getByRole('heading', { name: 'What the data say about Kibiti District' })).toBeInTheDocument();
+    // The controls open as a drawer over the column.
+    fireEvent.click(within(insight).getByRole('button', { name: 'Show the controls' }));
+    expect(screen.getByRole('radiogroup', { name: 'Colour by' })).toBeInTheDocument();
+  });
+
+  it('below 1280 px the map and trends of the area fold inside the risk panel', async () => {
+    wide = false;
+    await renderAt('?level=council&id=C051');
+    const panel = screen.getByRole('complementary', { name: 'Details for Kibiti District' });
+    expect(screen.queryByRole('complementary', { name: 'Map and trends of Kibiti District' })).not.toBeInTheDocument();
+    expect(within(panel).getByText('Map of Kibiti District')).toBeInTheDocument();
+    expect(within(panel).getByText('Trends and charts')).toBeInTheDocument();
+    // Open, not folded away: the map and the charts are in view without a click.
+    for (const label of ['Map of Kibiti District', 'Trends and charts']) expect(within(panel).getByText(label).closest('details')?.open).toBe(true);
+  });
+
+  it('lets the reader widen either panel: a handle that steps with the arrow keys and a button to the reading width', async () => {
+    act(() => usePrefs.setState({ panelWidths: { left: null, right: null } }));
+    // jsdom's window is 1024 px wide; the handles clamp so the map keeps 360 px, so give them a laptop screen.
+    const innerWidth = window.innerWidth;
+    Object.defineProperty(window, 'innerWidth', { configurable: true, value: 1440 });
+    await renderAt('?level=council&id=C051');
+    const right = screen.getByRole('separator', { name: 'Width of the right panel: drag, or use the arrow keys' });
+    const before = Number(right.getAttribute('aria-valuenow'));
+    fireEvent.keyDown(right, { key: 'ArrowLeft' });
+    expect(usePrefs.getState().panelWidths.right).toBe(before + 16);
+    fireEvent.keyDown(right, { key: 'Enter' });
+    expect(usePrefs.getState().panelWidths.right).toBeNull();
+    const panel = screen.getByRole('complementary', { name: 'Details for Kibiti District' });
+    fireEvent.click(within(panel).getByRole('button', { name: 'Widen the panel' }));
+    expect(usePrefs.getState().panelWidths.right).toBeGreaterThanOrEqual(400);
+    expect(within(panel).getByRole('button', { name: 'Narrow the panel' })).toHaveAttribute('aria-pressed', 'true');
+    const left = screen.getByRole('separator', { name: 'Width of the left panel: drag, or use the arrow keys' });
+    fireEvent.keyDown(left, { key: 'ArrowRight' });
+    expect(usePrefs.getState().panelWidths.left).toBeGreaterThan(0);
+    act(() => usePrefs.setState({ panelWidths: { left: null, right: null } }));
+    Object.defineProperty(window, 'innerWidth', { configurable: true, value: innerWidth });
+  });
+
+  it('moves to a neighbouring council from the keyboard on the map of the area', async () => {
+    await renderAt('?level=council&id=C051');
+    const insight = screen.getByRole('complementary', { name: 'Map and trends of Kibiti District' });
+    const mafia = model.councils.find((c) => c.name === 'Mafia District')!;
+    // The region's councils are buttons named with their value; the country inset is pointer-only.
+    const button = await within(insight).findByRole('button', { name: /^Mafia District: INFORM Risk [\d.]+, / }, { timeout: 20_000 });
+    expect(within(insight).queryByRole('button', { name: /^Pwani: / })).not.toBeInTheDocument();
+    fireEvent.keyDown(button, { key: 'Enter' });
+    expect(params().get('id')).toBe(mafia.id);
+  });
+
+  it('counts only updates approved through the portal: no "Updated" badge from the Benchmark 2026', async () => {
+    await renderAt('?level=council&id=C051');
+    const card = await screen.findByRole('complementary', { name: 'Details for Kibiti District' });
+    expect(within(card).queryByText('Updated')).not.toBeInTheDocument();
+    expect(within(card).queryByText(/approved data update/)).not.toBeInTheDocument();
+    expect(within(card).queryByText(/^Benchmark 2026/)).not.toBeInTheDocument();
   });
 
   it('pins areas to the comparison tray and removes them', async () => {
@@ -296,6 +462,29 @@ describe('ExplorePage - mobile', () => {
     fireEvent.click(screen.getByRole('button', { name: 'Close details' }));
     expect(params().get('id')).toBeNull();
     expect(await screen.findByRole('group', { name: 'Colour by' })).toBeInTheDocument();
+  });
+
+  it('starts the sheet body from its top when the area or the hazard changes', () => {
+    const props = { expanded: true, onExpandedChange: () => {}, peek: <p>peek</p>, containerHeight: 800, label: 'Sheet' };
+    const { rerender } = render(
+      <MobileSheet {...props} scrollKey="C051|risk">
+        <p>body</p>
+      </MobileSheet>,
+    );
+    const body = screen.getByText('body').parentElement!;
+    body.scrollTop = 120;
+    rerender(
+      <MobileSheet {...props} scrollKey="C051|risk">
+        <p>body</p>
+      </MobileSheet>,
+    );
+    expect(body.scrollTop).toBe(120);
+    rerender(
+      <MobileSheet {...props} scrollKey="C051|ind:hazard:stormsCyclone">
+        <p>body</p>
+      </MobileSheet>,
+    );
+    expect(body.scrollTop).toBe(0);
   });
 
   it("puts a dimension's indicator groups in a second row under the lens tabs", async () => {

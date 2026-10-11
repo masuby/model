@@ -99,14 +99,16 @@ describe('buildPastePlan', () => {
     expect(plan.ready).toHaveLength(2);
   });
 
-  it('deduplicates V/C onto the shared source unit and flags disagreeing values', () => {
+  it('applies vulnerability and coping values to each council (finest level wins): councils of one unit may differ', () => {
     const same = buildPastePlan('Kondoa District, 9.9\nKondoa Town, 9.9', 'council', 'coping:wash', model);
-    expect(same.targets).toHaveLength(1);
-    expect(same.targets[0]).toMatchObject({ unitId: 'TZ0101', level: 'source', status: 'ready', via: ['Kondoa District', 'Kondoa Town'] });
+    expect(same.targets.map((t) => [t.unitId, t.level, t.status])).toEqual([
+      ['C001', 'council', 'ready'],
+      ['C002', 'council', 'ready'],
+    ]);
 
-    const conflict = buildPastePlan('Kondoa District, 9.9\nKondoa Town, 1.0', 'council', 'coping:wash', model);
-    expect(conflict.targets[0].status).toBe('conflict');
-    expect(conflict.ready).toHaveLength(0);
+    const differ = buildPastePlan('Kondoa District, 9.9\nKondoa Town, 1.0', 'council', 'coping:wash', model);
+    expect(differ.targets.map((t) => t.value)).toEqual([9.9, 1]);
+    expect(differ.ready).toHaveLength(2);
   });
 
   it('matches values-only lines in council order', () => {
@@ -115,14 +117,14 @@ describe('buildPastePlan', () => {
     expect(plan.targets.map((t) => t.unitId)).toEqual([model.councils[0].id, model.councils[1].id]);
   });
 
-  it('applies a region value to every member council (hazard) or its distinct source units (V/C)', () => {
+  it('applies a region value to every member council, for hazard and for vulnerability and coping alike', () => {
     const region = model.regions.find((r) => r.name === 'Dodoma')!;
     const members = model.councils.filter((c) => c.region === 'Dodoma');
     const hazard = buildPastePlan('Dodoma\t9.9', 'region', 'hazard:drought', model);
     expect(hazard.targets).toHaveLength(members.length);
     const vc = buildPastePlan(`${region.name}\t9.9`, 'region', 'vulnerability:habitat', model);
-    expect(vc.targets).toHaveLength(new Set(members.map((m) => m.sourceId)).size);
-    expect(vc.targets.every((t) => t.level === 'source')).toBe(true);
+    expect(vc.targets).toHaveLength(members.length);
+    expect(vc.targets.every((t) => t.level === 'council')).toBe(true);
   });
 
   it('applies a nation value everywhere and warns about extra lines', () => {
@@ -131,12 +133,10 @@ describe('buildPastePlan', () => {
     expect(plan.issues.map((i) => i.kind)).toEqual(['extraValue']);
   });
 
-  it('marks unchanged values and refuses no-data for exposure', () => {
+  it('marks unchanged values', () => {
     const cur = currentValue(model.byId.get('C001')!, 'hazard:drought');
     const plan = buildPastePlan(`C001\t${cur}`, 'council', 'hazard:drought', model);
     expect(plan.targets[0].status).toBe('unchanged');
-    const exp = buildPastePlan('C001\tn/a', 'council', 'hazard:exposure', model);
-    expect(exp.issues[0].kind).toBe('noDataNotAllowed');
   });
 
   it('flags duplicates, ambiguity and missing names', () => {

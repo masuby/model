@@ -8,6 +8,8 @@
  */
 import { BadgeCheck, ChevronRight, Loader2, Mail, Search, Sparkles, UserCheck, X } from 'lucide-react';
 import * as React from 'react';
+import { Inbox } from '../components/Inbox';
+import { TemplateIO } from '../components/TemplateIO';
 import { useTranslation } from 'react-i18next';
 import { useSearchParams } from 'react-router-dom';
 import { toast } from 'sonner';
@@ -186,6 +188,8 @@ function IndicatorList({ onOpen }: { onOpen: (id: string) => void }) {
           <p className="mt-1.5 text-sm leading-relaxed text-muted-foreground">{t('workflow.mine.lead')}</p>
         </div>
       )}
+      {!reviewer && <Inbox onOpen={onOpen} />}
+      {!reviewer && <TemplateIO specIds={rows.map((w) => w.spec.id)} institution={myInstitution!} />}
 
       {/* Filters */}
       <div className="mt-6 flex flex-col gap-3 border-b border-border pb-4 lg:flex-row lg:flex-wrap lg:items-center">

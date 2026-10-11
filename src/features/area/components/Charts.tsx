@@ -273,7 +273,7 @@ export function IndicatorChart({ view }: { view: AreaView }) {
     return (
       <g>
         <rect x={bx} y={y} width={bw} height={height} rx={4} fill={th.cursor} />
-        <rect x={x} y={y} width={w} height={height} rx={4} fill={rampColor(d.value)} stroke={th.axis} strokeWidth={0.75} />
+        <rect x={x} y={y} width={w} height={height} rx={4} fill={rampColor(d.value, dim)} stroke={th.axis} strokeWidth={0.75} />
         {refX != null && <line x1={refX} x2={refX} y1={y - 3} y2={y + height + 3} stroke={refColor} strokeWidth={3} strokeLinecap="round" style={{ filter: `drop-shadow(0 0 1px ${surface})` }} />}
         <text x={x + w + 6} y={cy} dominantBaseline="central" fontSize={11} fontWeight={700} fill={th.dark ? '#e7ecf5' : '#0b1324'} className="num">
           {formatScore(d.value)}
@@ -294,7 +294,7 @@ export function IndicatorChart({ view }: { view: AreaView }) {
     if (!d) return null;
     return (
       <TipShell title={d.name} sub={d.category}>
-        <TipRow color={d.value == null ? undefined : rampColor(d.value)} label={unit.name} value={d.value == null ? t('common:classes.noData') : formatScore(d.value)} />
+        <TipRow color={d.value == null ? undefined : rampColor(d.value, dim)} label={unit.name} value={d.value == null ? t('common:classes.noData') : formatScore(d.value)} />
         {activeRef && <TipRow color={refColor} label={refName} value={d.refValue == null ? t('common:classes.noData') : formatScore(d.refValue)} />}
       </TipShell>
     );
@@ -359,7 +359,7 @@ export function IndicatorChart({ view }: { view: AreaView }) {
       <div className="mt-4 grid gap-4 border-t border-border pt-4 text-xs text-muted-foreground sm:grid-cols-[minmax(0,260px)_1fr] sm:items-center">
         <div>
           <div className="mb-1.5 font-medium">{t('charts.indicators.ramp')}</div>
-          <RampLegend />
+          <RampLegend scale={dim} />
         </div>
         <div className="flex flex-wrap gap-x-5 gap-y-2">
           {activeRef && <Key color={refColor} kind="tick" label={t('charts.indicators.refKey', { name: refName })} />}

@@ -47,8 +47,8 @@ export const isHighOrAbove = (u: Unit): boolean => (classify(u.risk, 'risk')?.in
 /* ------------------------------------------------------------------------------------------------ */
 
 export type Resolution = SourceInfo['resolution'];
-/** Most local → least local; `overlay` = documented hazard overlay pending local measurement. */
-export const RESOLUTIONS: readonly Resolution[] = ['council', 'district', 'region', 'national', 'overlay'];
+/** Most local → least local; `none` = no indicator with data in the workbook. */
+export const RESOLUTIONS: readonly Resolution[] = ['council', 'district', 'region', 'national', 'none'];
 export const LOCAL_RESOLUTIONS: readonly Resolution[] = ['council', 'district'];
 
 export interface ResolutionGroup {
@@ -273,6 +273,15 @@ export function topDriverCounts(units: readonly Unit[]): DriverCount[] {
     }
   }
   return [...map.values()].sort((a, b) => b.count - a.count || b.sole - a.sole || a.key.localeCompare(b.key));
+}
+
+/** The units where an indicator group is the (joint) top-scoring group, by the rule of `topDriverCounts`. */
+export function topDriverUnits(units: readonly Unit[], dim: DimensionKey, key: string): Unit[] {
+  return units.filter((u) => {
+    const [first] = topDrivers(u, 1);
+    if (!first) return false;
+    return topDrivers(u, ALL_INDICATORS.length).some((d) => d.dim === dim && d.key === key && Math.abs(d.value - first.value) < 1e-9);
+  });
 }
 
 export interface IndicatorStat {

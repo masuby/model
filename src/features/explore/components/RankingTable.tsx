@@ -7,13 +7,17 @@
 import { ArrowDown, ArrowUp, ArrowUpDown, FileSpreadsheet, GitCompareArrows, Search, X } from 'lucide-react';
 import * as React from 'react';
 import { useTranslation } from 'react-i18next';
+import { DataNoteMark } from '@/components/risk/DataNoteMark';
 import { ClassDot } from '@/components/risk/RiskBadge';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/primitives';
-import { CLASS_COLORS, classify, type Scale } from '@/engine/risk/classes';
+import { classColor, classify, type Scale } from '@/engine/risk/classes';
 import type { DimensionKey } from '@/engine/risk/hierarchy';
 import { parseMetric } from '@/engine/risk/metrics';
+import { dataNotesFor, noteText, type DataNote } from '@/engine/risk/notes';
 import type { Unit } from '@/engine/risk/types';
+import { portalEditCount } from '@/engine/risk/stamps';
+import { exportFileName, exportPreamble, exportStamp } from '@/lib/exports';
 import { cn, downloadText, formatScore, NO_VALUE, slug, toCsv } from '@/lib/utils';
 import { matchesClass, normalizeText, sortUnits, type SortKey } from '../lib/explore';
 import { useExplore } from '../lib/ExploreContext';
@@ -52,6 +56,8 @@ export function RankingTable({ bottomPad = 0, aside, footer }: { bottomPad?: num
   const rows = React.useMemo(() => sortUnits(filtered, state.sort, state.dir, metric, collator), [filtered, state.sort, state.dir, metric, collator]);
 
   const showMetricCol = metric.kind === 'indicator';
+  // The data notes of the indicator lens (a workbook value under query travels with the value).
+  const notesOf = (u: Unit): DataNote[] => (metric.kind === 'indicator' && metric.dimension && metric.indicator ? dataNotesFor(u, metric.dimension, metric.indicator) : []);
   const activeCol: SortKey = metric.kind === 'risk' ? 'risk' : metric.kind === 'dimension' ? metric.dimension! : 'metric';
   const showRegion = state.level !== 'region';
   const classMetric = metric.kind === 'indicator' ? RISK : metric;
@@ -73,32 +79,48 @@ export function RankingTable({ bottomPad = 0, aside, footer }: { bottomPad?: num
       t('table.name'),
       t('common:labels.region'),
       t('table.level'),
-      ...(showMetricCol ? [metricLabel(metric)] : []),
+      ...(showMetricCol ? [metricLabel(metric), t('table.dataNote')] : []),
       t('common:informRisk'),
       t('common:dimensions.hazard'),
       t('common:dimensions.vulnerability'),
       t('common:dimensions.coping'),
       classHeader,
       t('common:labels.population'),
+      t('common:export.unit'),
+      t('common:export.inheritedFrom'),
+      t('common:export.approvedValues'),
     ];
     const body = rows.map((u) => {
       const cls = classMetric.classOf(classMetric.get(u));
+      const approved = portalEditCount(u);
       return [
         ranks.get(u.id) ?? '',
         u.id,
         u.name,
         u.region,
         t(`common:levels.${u.level}`),
-        ...(showMetricCol ? [csvScore(metric.get(u))] : []),
+        ...(showMetricCol
+          ? [
+              csvScore(metric.get(u)),
+              notesOf(u)
+                .map((n) => noteText(n, i18n.language))
+                .join(' '),
+            ]
+          : []),
         csvScore(u.risk),
         csvScore(u.dims.hazard.score),
         csvScore(u.dims.vulnerability.score),
         csvScore(u.dims.coping.score),
         cls ? t(`common:classes.${cls.key}`) : '',
         u.exposure?.population ?? '',
+        u.level === 'council' ? (u.sourceName ?? '') : '',
+        u.inheritedFrom ?? '',
+        approved,
       ];
     });
-    downloadText(`inform-tz-${state.level}-${slug(metricLabel(metric))}${state.cls ? `-${state.cls}` : ''}.csv`, toCsv([header, ...body]), 'text/csv;charset=utf-8');
+    // The stamp names the layer shown; the Advancement layer carries its own release (EXP-01).
+    const stamp = exportStamp(`${t(`common:levels.${state.level}`)} · ${metricLabel(metric)}${state.cls ? ` · ${t(`common:classes.${state.cls}`)}` : ''}`, { layer: state.layer });
+    downloadText(exportFileName(`${state.level}-${slug(metricLabel(metric))}${state.cls ? `-${state.cls}` : ''}`, stamp), toCsv([...exportPreamble(t, stamp), header, ...body]), 'text/csv;charset=utf-8');
   };
 
   // A render helper (not a component) so header buttons keep focus across re-sorts.
@@ -138,11 +160,12 @@ export function RankingTable({ bottomPad = 0, aside, footer }: { bottomPad?: num
   const dimVisibility = (d: DimensionKey) => (d === activeCol ? undefined : 'hidden @lg:table-cell');
 
   // Only the active column carries its colour key; the others are plain numbers.
-  const scoreCell = (col: SortKey, v: number | null | undefined, dot: React.ReactNode, className?: string) => (
+  const scoreCell = (col: SortKey, v: number | null | undefined, dot: React.ReactNode, className?: string, extra?: React.ReactNode) => (
     <td className={cn('px-2.5 py-3 text-right', className)}>
       <span className={cn('num inline-flex items-center justify-end gap-2', col === activeCol ? 'font-semibold text-foreground' : 'text-muted-foreground')}>
         {col === activeCol && dot}
         {formatScore(v)}
+        {extra}
       </span>
     </td>
   );
@@ -177,7 +200,7 @@ export function RankingTable({ bottomPad = 0, aside, footer }: { bottomPad?: num
               className="inline-flex h-9 items-center gap-2 rounded-md border border-border px-3 text-sm font-medium hover:bg-muted"
               aria-label={t('table.clearClass', { cls: t(`common:classes.${state.cls}`) })}
             >
-              <span aria-hidden className="size-2.5" style={{ background: CLASS_COLORS[state.cls] }} />
+              <span aria-hidden className="size-2.5" style={{ background: classColor(state.cls, metric.scale ?? 'risk') }} />
               {t(`common:classes.${state.cls}`)}
               <X className="size-3.5 text-muted-foreground" />
             </button>
@@ -249,7 +272,7 @@ export function RankingTable({ bottomPad = 0, aside, footer }: { bottomPad?: num
                         {showRegion && <div className="text-xs text-muted-foreground @2xl:hidden">{u.region}</div>}
                       </td>
                       {showRegion && <td className="hidden px-3 py-3 whitespace-nowrap text-muted-foreground @2xl:table-cell">{u.region}</td>}
-                      {showMetricCol && scoreCell('metric', metric.get(u), <MetricDot metric={metric} value={metric.get(u)} />)}
+                      {showMetricCol && scoreCell('metric', metric.get(u), <MetricDot metric={metric} value={metric.get(u)} />, undefined, <DataNoteMark notes={notesOf(u)} />)}
                       {scoreCell('risk', u.risk, <ClassDot value={u.risk} className={dotHiddenWithClass} />)}
                       {DIMS.map((d) => (
                         <React.Fragment key={d}>

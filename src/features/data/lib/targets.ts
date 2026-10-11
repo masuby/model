@@ -2,10 +2,11 @@
  * Edit targets and live impact - the rules that decide WHICH unit receives an edit, and what the map
  * would show after approval.
  *
- *   • Hazard & Exposure indicators (and the exposure index) are council-own: edits target the council.
+ *   • Hazard & Exposure indicators are council-own: edits target the council.
  *   • Vulnerability & Lack of Coping Capacity come from the council's INFORM source unit
- *     (`unit.sourceId`), shared by sibling councils - edits MUST target the source unit, so every
- *     council that shares it moves together (this is exactly how `buildModel` applies overrides).
+ *     (`unit.sourceId`), shared by sibling councils. A value entered for a council applies to that
+ *     council alone (the finest level wins, as for measured values); only when the person says the
+ *     figure is the unit's does the edit target the source unit, so every council sharing it moves.
  *
  * The preview runs the engine's own `applyEdits` on a `structuredClone` of the unit, so it is the same
  * arithmetic the model will run once the change is approved.
@@ -16,40 +17,41 @@ import { applyEdits, indicatorValue } from '@/engine/risk/model';
 import type { EditRef, EditStamp, RiskModel, Unit } from '@/engine/risk/types';
 import { sameScore } from './scores';
 
-export const EXPOSURE_REF = 'hazard:exposure' as const satisfies EditRef;
-
 export interface EditableField {
   ref: EditRef;
   dim: DimensionKey;
-  /** Category key, or 'exposure' for the population-exposure index. */
+  /** Category key. */
   category: string;
   key: string;
 }
 
-/** Every value a person can edit for a council: the 32 indicator leaves plus the exposure index. */
-export const EDITABLE_FIELDS: readonly EditableField[] = [
-  ...DIMENSIONS.flatMap((d) =>
-    d.categories.flatMap((c) => c.indicators.map((i) => ({ ref: `${d.key}:${i.key}` as EditRef, dim: d.key, category: c.key, key: i.key }))),
-  ),
-  { ref: EXPOSURE_REF, dim: 'hazard', category: 'exposure', key: 'exposure' },
-];
+/**
+ * Every value a person can edit for a council: the 32 indicator leaves. (The population-exposure index
+ * of the earlier model is no longer a score: the workbook's hazard indicators already count exposed
+ * people. The engine still reads stored `hazard:exposure` edits, for the index shown beside a council.)
+ */
+export const EDITABLE_FIELDS: readonly EditableField[] = DIMENSIONS.flatMap((d) =>
+  d.categories.flatMap((c) => c.indicators.map((i) => ({ ref: `${d.key}:${i.key}` as EditRef, dim: d.key, category: c.key, key: i.key }))),
+);
 
 const FIELD_BY_REF = new Map(EDITABLE_FIELDS.map((f) => [f.ref, f]));
 export const fieldFor = (ref: string): EditableField | null => FIELD_BY_REF.get(ref as EditRef) ?? null;
 export const isEditRef = (ref: unknown): ref is EditRef => typeof ref === 'string' && FIELD_BY_REF.has(ref as EditRef);
 
 export type TargetKind = 'council' | 'source';
-/** Hazard (incl. exposure) is council-own; Vulnerability and Coping live on the shared source unit. */
+/** Where the workbook keeps the data: Hazard per council; Vulnerability and Coping on the shared source unit. */
 export const targetKind = (ref: EditRef): TargetKind => (ref.startsWith('hazard:') ? 'council' : 'source');
 
-/** The unit id that must receive an edit of `ref` entered for `council`. */
-export function targetUnitId(council: Unit, ref: EditRef): string {
-  return targetKind(ref) === 'source' && council.sourceId ? council.sourceId : council.id;
+/** Where a council's Vulnerability and Coping edits land: the council alone (default) or its whole workbook unit. */
+export type TargetScope = 'council' | 'unit';
+
+/** The unit id that receives an edit of `ref` entered for `council`. */
+export function targetUnitId(council: Unit, ref: EditRef, scope: TargetScope = 'council'): string {
+  return scope === 'unit' && targetKind(ref) === 'source' && council.sourceId ? council.sourceId : council.id;
 }
 
-/** Current value of an editable field on a unit (exposure → exposure index). */
+/** Current value of an editable field on a unit. */
 export function currentValue(unit: Unit, ref: EditRef): number | null {
-  if (ref === EXPOSURE_REF) return unit.exposure?.index ?? null;
   const [dim, key] = ref.split(':') as [DimensionKey, string];
   return indicatorValue(unit, dim, key);
 }
@@ -83,11 +85,7 @@ export const summarise = (u: Unit): DimSummary => ({
 
 export type ValueMap = Partial<Record<EditRef, number | null>>;
 
-/**
- * The unit as it would be after the given values are approved. Uses the engine's `applyEdits` on a
- * deep clone. One subtlety is reproduced exactly: when flood was already edited (approved), a new
- * exposure value must NOT re-amplify flood - the real model skips amplification whenever flood is edited.
- */
+/** The unit as it would be after the given values are approved: the engine's `applyEdits` on a deep clone. */
 export function simulate(unit: Unit, values: ValueMap): Unit {
   const clone = structuredClone(unit);
   const refs = Object.keys(values) as EditRef[];
@@ -95,9 +93,6 @@ export function simulate(unit: Unit, values: ValueMap): Unit {
   const at = new Date(0).toISOString();
   const edits: Partial<Record<EditRef, EditStamp>> = {};
   for (const ref of refs) edits[ref] = { value: values[ref] ?? null, at };
-  if (EXPOSURE_REF in edits && !('hazard:flood' in edits) && unit.edits['hazard:flood']) {
-    edits['hazard:flood'] = { value: currentValue(unit, 'hazard:flood'), at };
-  }
   applyEdits(clone, edits);
   return clone;
 }
@@ -163,15 +158,16 @@ function chunk<T>(xs: T[], size: number): T[][] {
 }
 
 /**
- * Turn the changes drafted for one council into submissions with the correct target unit:
- * council-own (Hazard, exposure) changes go to the council; Vulnerability & Coping changes go to the
- * council's source unit. When both kinds exist, two submissions are produced (council first).
- * Changes whose value equals the target's current value are dropped.
+ * Turn the changes drafted for one council into submissions with the correct target unit. By default
+ * every change goes to the council; with scope 'unit', Vulnerability & Coping changes go to the
+ * council's source unit instead (reaching every council that shares it) and two submissions are
+ * produced when both kinds exist (council first). Changes whose value equals the target's current value
+ * are dropped.
  */
-export function buildSubmissions(model: RiskModel, council: Unit, changes: readonly DraftChange[], meta: SubmissionMeta): NewSubmission[] {
+export function buildSubmissions(model: RiskModel, council: Unit, changes: readonly DraftChange[], meta: SubmissionMeta, scope: TargetScope = 'council'): NewSubmission[] {
   const groups = new Map<string, Change[]>();
   for (const c of changes) {
-    const targetId = targetUnitId(council, c.ref);
+    const targetId = targetUnitId(council, c.ref, scope);
     const target = model.byId.get(targetId) ?? council;
     const previous = currentValue(target, c.ref);
     if (sameScore(previous, c.value)) continue;

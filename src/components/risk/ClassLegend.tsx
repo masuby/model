@@ -1,6 +1,6 @@
 import { useTranslation } from 'react-i18next';
-import { CLASS_COLORS, CLASS_KEYS, classRanges, NO_DATA_COLOR, type ClassKey, type Scale } from '@/engine/risk/classes';
-import { RAMP_STOPS } from '@/engine/risk/metrics';
+import { CLASS_KEYS, classColor, classRanges, NO_DATA_COLOR, type ClassKey, type Scale } from '@/engine/risk/classes';
+import { rampStops } from '@/engine/risk/metrics';
 import { cn } from '@/lib/utils';
 
 /** Legend for a class scale. Clickable entries act as a class filter when `onToggle` is given. */
@@ -29,7 +29,7 @@ export function ClassLegend({
         const dim = active && !isActive;
         const content = (
           <>
-            <span className="inline-block size-2.5 shrink-0 rounded-[2px]" style={{ background: CLASS_COLORS[k] }} />
+            <span className="inline-block size-2.5 shrink-0 rounded-[2px]" style={{ background: classColor(k, scale) }} />
             <span className="flex-1 truncate text-left">{t(`classes.${k}`)}</span>
             <span className="num text-[11px] text-muted-foreground">{counts ? (counts[k] ?? 0) : ranges[i]}</span>
           </>
@@ -59,11 +59,11 @@ export function ClassLegend({
   );
 }
 
-/** Continuous 0–10 legend used for single-indicator lenses. */
-export function RampLegend({ className }: { className?: string }) {
+/** Continuous 0–10 legend used for single-indicator lenses, in the palette of the indicators' dimension. */
+export function RampLegend({ scale = 'risk', className }: { scale?: Scale; className?: string }) {
   return (
     <div className={cn('flex flex-col gap-1.5', className)}>
-      <div className="h-2 w-full" style={{ background: `linear-gradient(90deg, ${RAMP_STOPS.join(',')})` }} />
+      <div className="h-2 w-full" style={{ background: `linear-gradient(90deg, ${rampStops(scale).join(',')})` }} />
       <div className="num flex justify-between text-[11px] text-muted-foreground">
         <span>0</span>
         <span>2.5</span>

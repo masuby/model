@@ -1,0 +1,1 @@
+The tool-import test carries its fixture inline (base64 of a three-council collection tool built with openpyxl: sheets 'How to use', 'Council Entry' with indicator names in row 1 and the header in row 10, 'Council 0-10').

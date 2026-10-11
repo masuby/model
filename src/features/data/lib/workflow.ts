@@ -7,25 +7,12 @@
 import type { Assignment, DataRequest, RawEntry, RawSubmission, Validation } from '@/data-layer/types';
 import { isOverdue } from '@/data-layer/types';
 import { findIndicator } from '@/engine/risk/hierarchy';
-import { isNum } from '@/engine/risk/math';
+import { isNum, round1 } from '@/engine/risk/math';
 import { buildModel } from '@/engine/risk/model';
-import {
-  baselineValue,
-  councilInput,
-  deriveRawOverrides,
-  leafOfSpec,
-  mergeOverrides,
-  NATIONAL_ID,
-  regionIdOf,
-  scoreable,
-  scoreRaw,
-  type BaselineRaw,
-  type RawIndex,
-  type RawLevel,
-  type RawValue,
-} from '@/engine/risk/rawValues';
-import { AUTHORITIES, sourceFor } from '@/engine/risk/sources';
-import { ADVANCED_SPECS, SPECS, usedSpecs, type IndicatorSpec } from '@/engine/risk/standardise';
+import { baselineValue, councilInput, depositedScore, deriveRawOverrides, leafOfSpec, mergeOverrides, NATIONAL_ID, regionIdOf, scoreable, scoreRaw, type BaselineRaw, type RawIndex, type RawLevel, type RawValue } from '@/engine/risk/rawValues';
+import { AUTHORITIES, custodianFor } from '@/engine/risk/sources';
+import { ACTIVE_SPECS, ADVANCED_SPECS, usedSpecs, type IndicatorSpec } from '@/engine/risk/standardise';
+import type { RawValueType } from '@/engine/risk/rawValues';
 import type { EditRef, Overrides, RiskModel, Unit, ValueLevel } from '@/engine/risk/types';
 import { buildCouncilIndex, buildRegionIndex, normaliseName } from './names';
 import { isNoDataToken, splitLine } from './paste';
@@ -49,9 +36,9 @@ export interface WorkflowIndicator {
 const SPEC_ID_RE = /^[A-Z]{2}\.[A-Z]{2,3}\.[A-Za-z0-9-]+$/;
 export const isSpecId = (s: string | null | undefined): s is string => !!s && SPEC_ID_RE.test(s);
 
-/** Every indicator in the workflow: the INFORM ones in model order, then the advanced benchmark set. */
+/** Every indicator in the workflow: the INFORM ones in model order (with the Benchmark 2026 activations), then the advanced set. */
 export const WORKFLOW_INDICATORS: readonly WorkflowIndicator[] = [
-  ...usedSpecs().map((spec) => ({ spec, core: true, leaf: leafOfSpec(spec.id), scoreable: scoreable(spec) })),
+  ...usedSpecs(ACTIVE_SPECS).map((spec) => ({ spec, core: true, leaf: leafOfSpec(spec.id), scoreable: scoreable(spec) })),
   ...Object.values(ADVANCED_SPECS).map((spec) => ({ spec, core: false, leaf: null, scoreable: scoreable(spec) })),
 ];
 const BY_ID = new Map(WORKFLOW_INDICATORS.map((w) => [w.spec.id, w]));
@@ -61,7 +48,7 @@ type T = (key: string, opts?: Record<string, unknown>) => string;
 
 /** Translated name of a workbook indicator (falls back to the workbook's English name). */
 export function specLabel(t: T, specId: string): string {
-  const spec = SPECS[specId] ?? ADVANCED_SPECS[specId];
+  const spec = ACTIVE_SPECS[specId] ?? ADVANCED_SPECS[specId];
   return t(`data:specs.${specKey(specId)}`, { defaultValue: spec?.name ?? specId });
 }
 
@@ -91,8 +78,7 @@ export function suggestedOwner(w: WorkflowIndicator): string | null {
   const leaf = w.leaf ?? (groupKey(w) ? `${dimensionOf(w)}:${groupKey(w)}` : null);
   if (!leaf) return null;
   const [dim, key] = leaf.split(':') as ['hazard' | 'vulnerability' | 'coping', string];
-  const by = sourceFor(dim, key).by;
-  return by === 'INFORM' ? null : by;
+  return custodianFor(dim, key).by;
 }
 
 /* ------------------------------------------------------------------------------------------------ */
@@ -158,7 +144,12 @@ export function indicatorStatuses(data: WorkflowData, today = new Date()): Map<s
 /* ------------------------------------------------------------------------------------------------ */
 
 export interface CurrentValue {
+  /** Measured value in the indicator's unit (null for a deposited score or no data). */
   raw: number | null;
+  /** The deposited 0–10 score, when `valueType` is 'score'. */
+  score?: number | null;
+  valueType?: RawValueType;
+  source?: string | null;
   level: ValueLevel;
   /** Where it was recorded (region/council id, 'TZ', or the INFORM district for the baseline). */
   unitId?: string;
@@ -185,7 +176,20 @@ export interface Sheet {
   regions: Array<SheetRow & { councils: SheetRow[] }>;
 }
 
-const fromRaw = (v: RawValue): CurrentValue => ({ raw: v.value, level: v.level, unitId: v.unitId, at: v.at, dataset: v.dataset ?? null, institution: v.institution ?? null });
+const fromRaw = (v: RawValue): CurrentValue => {
+  const deposited = v.valueType === 'score';
+  return {
+    raw: deposited ? null : v.value,
+    score: deposited ? depositedScore(v.value) : undefined,
+    valueType: deposited ? 'score' : 'raw',
+    source: v.source ?? null,
+    level: v.level,
+    unitId: v.unitId,
+    at: v.at,
+    dataset: v.dataset ?? null,
+    institution: v.institution ?? null,
+  };
+};
 
 export function buildSheet(model: RiskModel, spec: IndicatorSpec, idx: RawIndex, baseline: BaselineRaw | null): Sheet {
   const nationalOwn = idx.national.get(spec.id) ?? null;
@@ -203,7 +207,17 @@ export function buildSheet(model: RiskModel, spec: IndicatorSpec, idx: RawIndex,
           level: 'council',
           parentId: region.id,
           own: cOwn,
-          current: { raw: input.raw, level: input.level, unitId: input.unitId, at: input.at, dataset: input.dataset ?? null, institution: input.institution ?? null },
+          current: {
+            raw: input.raw,
+            score: input.valueType === 'score' ? input.score : undefined,
+            valueType: input.valueType ?? 'raw',
+            source: input.source ?? null,
+            level: input.level,
+            unitId: input.unitId,
+            at: input.at,
+            dataset: input.dataset ?? null,
+            institution: input.institution ?? null,
+          },
         };
       });
       let current: CurrentValue | null = own ? fromRaw(own) : nationalOwn ? fromRaw(nationalOwn) : null;
@@ -239,11 +253,19 @@ export function rangeFlag(spec: IndicatorSpec, value: number | null): 'low' | 'h
   return null;
 }
 
-/** 0–10 preview of a measured value (null when it cannot be scored). */
-export const previewScore = (spec: IndicatorSpec, value: number | null): number | null => scoreRaw(spec, value);
+/** 0–10 preview of an entered value: standardised when measured, taken as is when it is a deposited score. */
+export const previewScore = (spec: IndicatorSpec, value: number | null, valueType: RawValueType = 'raw'): number | null =>
+  valueType === 'score' ? depositedScore(value) : scoreRaw(spec, value);
 
-/** Entries to submit from the typed drafts (unit id → text). Unchanged and empty cells are skipped. */
-export function draftEntries(sheet: Sheet, drafts: ReadonlyMap<string, string>): { entries: RawEntry[]; invalid: string[] } {
+/** The 0–10 score a unit has today from a current value (deposited score, or the measured value standardised). */
+export const currentScore = (spec: IndicatorSpec, current: CurrentValue | null | undefined): number | null =>
+  !current ? null : current.valueType === 'score' ? (current.score ?? null) : scoreRaw(spec, current.raw);
+
+/**
+ * Entries to submit from the typed drafts (unit id → text). Unchanged and empty cells are skipped; for
+ * score deposits a value outside 0–10 is invalid and scores are kept to one decimal.
+ */
+export function draftEntries(sheet: Sheet, drafts: ReadonlyMap<string, string>, valueType: RawValueType = 'raw'): { entries: RawEntry[]; invalid: string[] } {
   const rows = new Map<string, SheetRow>([[sheet.national.unit.id, sheet.national]]);
   for (const r of sheet.regions) {
     rows.set(r.unit.id, r);
@@ -256,11 +278,11 @@ export function draftEntries(sheet: Sheet, drafts: ReadonlyMap<string, string>):
     if (!row) continue;
     const p = parseCell(text);
     if (p.kind === 'empty') continue;
-    if (p.kind === 'invalid') {
+    if (p.kind === 'invalid' || (valueType === 'score' && p.kind === 'value' && (p.value < 0 || p.value > 10))) {
       invalid.push(unitId);
       continue;
     }
-    const value = p.kind === 'noData' ? null : p.value;
+    const value = p.kind === 'noData' ? null : valueType === 'score' ? round1(p.value) : p.value;
     const previous = row.own ? row.own.value : null;
     if (row.own && previous === value) continue;
     entries.push({ unitId, level: row.level, value, previous });
@@ -307,12 +329,12 @@ export interface ImpactInputs {
  * Councils whose scores would change if these measured values were approved, most-changed first. Runs
  * the real pipeline (measured values → groups → dimensions → risk) on the would-be data.
  */
-export function rawImpact(inp: ImpactInputs, specId: string, entries: readonly RawEntry[], at = new Date().toISOString()): AffectedImpact[] {
+export function rawImpact(inp: ImpactInputs, specId: string, entries: readonly RawEntry[], at = new Date().toISOString(), valueType: RawValueType = 'raw'): AffectedImpact[] {
   if (!entries.length) return [];
   const replaced = new Set(entries.map((e) => e.unitId));
   const nextRaw: RawValue[] = [
     ...inp.raw.filter((v) => !(v.specId === specId && replaced.has(v.unitId))),
-    ...entries.map((e) => ({ specId, unitId: e.unitId, level: e.level, value: e.value, at })),
+    ...entries.map((e) => ({ specId, unitId: e.unitId, level: e.level, value: e.value, valueType, at })),
   ];
   const after = buildModel(mergeOverrides(inp.explicit, deriveRawOverrides(nextRaw, inp.base, inp.baseline), inp.base));
   const out: AffectedImpact[] = [];

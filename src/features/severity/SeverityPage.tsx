@@ -21,6 +21,7 @@ import { useModel } from '@/data-layer/DataProvider';
 import type { AffectedGroup } from '@/engine/severity/definitions';
 import { computeSeverity, type SeverityInput } from '@/engine/severity/engine';
 import type { Unit } from '@/engine/risk/types';
+import { exportFileName, exportMeta, exportPreamble, exportStamp } from '@/lib/exports';
 import { cn, downloadText, formatNumber, formatScore, toCsv } from '@/lib/utils';
 import { AreaPicker } from './components/AreaPicker';
 import { SeverityChip, Step } from './components/bits';
@@ -182,9 +183,16 @@ export default function SeverityPage() {
   const illustrative = state.scenario !== 'custom';
 
   const exportCtx = (): ExportContext => ({ state, result, councils, totals, lang, t: tr });
-  const fileBase = `inform-tz-severity-${state.scenario}-${new Date().toISOString().slice(0, 10)}`;
-  const onExportJson = () => downloadText(`${fileBase}.json`, JSON.stringify(buildExportJson(exportCtx()), null, 2), 'application/json;charset=utf-8');
-  const onExportCsv = () => downloadText(`${fileBase}.csv`, toCsv(buildCsvRows(exportCtx())), 'text/csv;charset=utf-8');
+  const stamp = () => exportStamp(`${t('header.title')} · ${scenarioLabel}`);
+  const fileBase = `severity-${state.scenario}-${new Date().toISOString().slice(0, 10)}`;
+  const onExportJson = () => {
+    const s = stamp();
+    downloadText(exportFileName(fileBase, s, 'json'), JSON.stringify({ ...exportMeta(t, s), ...buildExportJson(exportCtx()) }, null, 2), 'application/json;charset=utf-8');
+  };
+  const onExportCsv = () => {
+    const s = stamp();
+    downloadText(exportFileName(fileBase, s), toCsv([...exportPreamble(t, s), ...buildCsvRows(exportCtx())]), 'text/csv;charset=utf-8');
+  };
   const onCopySummary = async () => {
     const text = buildSummary(exportCtx());
     if (await copyText(text)) toast.success(t('results.copied'), { description: text.split('\n')[0] });
@@ -312,6 +320,8 @@ export default function SeverityPage() {
 
         <section id="sev-method" className={lowerSection} aria-labelledby="sev-method-heading">
           <SectionHeading eyebrow={t('method.eyebrow')} title={<span id="sev-method-heading">{t('method.title')}</span>} description={t('method.lead')} />
+          {/* The 2026 revision of the methodology is tracked here (SEV-02): what it keeps, what it proposes. */}
+          <p className="mt-4 max-w-3xl text-sm leading-relaxed text-muted-foreground">{t('method.revision')}</p>
           {lowerReady ? <Methodology result={lowPriorityResult} /> : <div className="min-h-[60rem]" data-deferred="pending" />}
         </section>
       </PageContainer>
@@ -333,7 +343,7 @@ export default function SeverityPage() {
               <span className="text-xs text-muted-foreground">/ 5</span>
             </>
           )}
-          <SeverityChip score={result.complete ? result.severity : null} size="sm" />
+          <SeverityChip score={result.complete && !result.zeroRule ? result.severity : null} size="sm" />
           <span className="ml-auto inline-flex items-center gap-1 text-sm font-medium text-primary">
             {t('results.mobileCta')} <ArrowRight className="size-3.5" aria-hidden />
           </span>

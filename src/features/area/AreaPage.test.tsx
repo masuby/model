@@ -1,5 +1,5 @@
 // @vitest-environment jsdom
-import { act, fireEvent, render, screen, within } from '@testing-library/react';
+import { act, render, screen, within } from '@testing-library/react';
 import { MemoryRouter, Route, Routes } from 'react-router-dom';
 import type * as Recharts from 'recharts';
 import { beforeAll, beforeEach, describe, expect, it, vi } from 'vitest';
@@ -8,8 +8,8 @@ import i18n from '@/i18n';
 import { TooltipProvider } from '@/components/ui/primitives';
 import { DataProvider, queryClient } from '@/data-layer/DataProvider';
 import { buildModel, placeKey } from '@/engine/risk/model';
-import { alertFor } from '@/features/guide/alert';
-import { isStatusRow, loadHazardGuide, loadRegionGuide } from '@/features/guide/data';
+import { riskBandFor } from '@/features/guide/alert';
+import { loadRegionGuide } from '@/features/guide/data';
 import AreaPage from './AreaPage';
 import { loadCharts } from './components/ChartSlot';
 
@@ -58,11 +58,11 @@ beforeEach(() => {
 
 const model = buildModel();
 
-function renderAt(id: string) {
+function renderAt(id: string, search = '') {
   return render(
     <DataProvider>
       <TooltipProvider>
-        <MemoryRouter initialEntries={[`/area/${id}`]}>
+        <MemoryRouter initialEntries={[`/area/${id}${search}`]}>
           <Routes>
             <Route path="/area/:id" element={<AreaPage />} />
           </Routes>
@@ -91,11 +91,14 @@ describe('AreaPage', { timeout: 90_000 }, () => {
     ['national', 'TZ', model.national.name],
   ])('renders the %s profile', async (_label, id, name) => {
     await i18n.changeLanguage('en');
-    renderAt(id);
+    // The Analysis view holds the evidence; the default view leads with what to do (UX-01).
+    renderAt(id, '?view=analysis');
     expect(screen.getByRole('heading', { level: 1, name })).toBeInTheDocument();
     expect(screen.getByRole('navigation', { name: 'Breadcrumb' })).toBeInTheDocument();
     expect(screen.getByText('Every indicator group, with its source')).toBeInTheDocument();
-    expect(screen.getByText('How this profile is calculated', { selector: 'h2' })).toBeInTheDocument();
+    expect(screen.getByText('What drives the score', { selector: 'h2' })).toBeInTheDocument();
+    expect(screen.queryByText('How this profile is calculated', { selector: 'h2' })).not.toBeInTheDocument();
+    expect(screen.getByRole('link', { name: /the Methodology page/ })).toHaveAttribute('href', '/methodology');
     expect(document.title).toContain(name);
     // Charts rendered as SVG (categories radar, distribution beeswarm, indicator bars).
     expect(document.querySelectorAll('svg.recharts-surface').length).toBeGreaterThanOrEqual(3);
@@ -103,7 +106,7 @@ describe('AreaPage', { timeout: 90_000 }, () => {
 
   it('renders in Kiswahili', async () => {
     await i18n.changeLanguage('sw');
-    renderAt(council.id);
+    renderAt(council.id, '?view=analysis');
     expect(screen.getByText('Kila kundi la viashiria na chanzo chake')).toBeInTheDocument();
     await i18n.changeLanguage('en');
   });
@@ -111,7 +114,7 @@ describe('AreaPage', { timeout: 90_000 }, () => {
   it('defers heavy sections until they near the viewport, and renders them all before printing', async () => {
     await i18n.changeLanguage('en');
     vi.stubGlobal('IntersectionObserver', Noop); // nothing ever scrolls into view
-    renderAt(council.id);
+    renderAt(council.id, '?view=analysis');
     // Section headings are always there (the nav and print need them); the heavy content is not yet.
     expect(screen.getByText('Every indicator group, with its source', { selector: 'h2' })).toBeInTheDocument();
     expect(document.querySelectorAll('svg.recharts-surface')).toHaveLength(0);
@@ -134,7 +137,7 @@ describe('AreaPage', { timeout: 90_000 }, () => {
     );
     queryClient.clear();
     try {
-      renderAt(kondoa.id);
+      renderAt(kondoa.id, '?view=analysis');
       // A lazy chunk: allow for a busy machine (the suite runs files in parallel).
       expect((await screen.findAllByText('Figures behind this score', {}, { timeout: 45_000 })).length).toBeGreaterThan(0);
       expect(screen.getAllByText('Regional figure').length).toBeGreaterThan(0);
@@ -148,57 +151,47 @@ describe('AreaPage', { timeout: 90_000 }, () => {
     }
   });
 
-  it('tells people what to do: the local advice, every hazard at each alert level, and the incident guide', async () => {
+  it('communicates the risk: the level on its colour band, what it means for residents and planners, the hazards and the area statements, never a warning level', async () => {
     await i18n.changeLanguage('en');
     const c = model.councils.find((x) => placeKey(x.region) !== 'tabora')!;
     const guide = (await loadRegionGuide(placeKey(c.region)))!.councils[c.id];
-    const levels = await loadHazardGuide(guide.hazards[0]);
     renderAt(c.id);
     const section = document.getElementById('actions')!;
-    expect(within(section).getByRole('heading', { level: 2, name: `What to do in ${c.name}` })).toBeInTheDocument();
-    // The alert category follows the risk level, in the hero (a link to this section) and here.
-    const alert = alertFor(c.risk)!;
-    const category = ['Advisory', 'Warning', 'Major warning'][alert.level - 1];
-    expect(screen.getByRole('link', { name: new RegExp(`^Alert category: ${category}\\s*What to do$`) })).toHaveAttribute('href', '#actions');
-    const status = within(section).getByRole('region', { name: `Alert category for ${c.name}` });
-    expect(within(status).getByText(category)).toBeInTheDocument();
-    expect(within(status).getByText(new RegExp(`assessed risk level: ${i18n.t(`common:classes.${alert.cls}`)}`))).toBeInTheDocument();
-    expect(within(section).getByRole('link', { name: 'Call 190 (Emergency)' })).toHaveAttribute('href', 'tel:190');
-    // Know your risk: the guide's own statement for this council, and what helps.
+    expect(within(section).getByRole('heading', { level: 2, name: `The risk in ${c.name}` })).toBeInTheDocument();
+    // The risk level is the INFORM class on its colour band, in the hero (a link to this section) and here.
+    const risk = riskBandFor(c.risk)!;
+    const cls = i18n.t(`common:classes.${risk.cls}`);
+    expect(screen.getByRole('link', { name: new RegExp(`^Risk level: ${cls} risk\\s*Know the risk$`) })).toHaveAttribute('href', '#actions');
+    // The default view leads with the risk; the analysis is one switch away.
+    expect(screen.getByRole('radio', { name: 'Risk' })).toHaveAttribute('aria-checked', 'true');
+    const status = within(section).getByRole('region', { name: `Risk level for ${c.name}` });
+    expect(within(status).getByText(`${cls}, ${c.risk!.toFixed(1)} out of 10 on the INFORM risk scale`)).toBeInTheDocument();
+    expect(within(status).getByText('If you live or work here')).toBeInTheDocument();
+    expect(within(status).getByText('If you plan, build, invest or settle here')).toBeInTheDocument();
+    expect(within(status).getByText(new RegExp(`^Risk here is ${cls.toLowerCase()}\\.`))).toBeInTheDocument();
+    // No warning level, no advice, one emergency number.
+    expect(within(section).queryByText(/Advisory|Major warning|Take action|What helps|Be prepared/)).not.toBeInTheDocument();
+    expect(within(section).getByRole('link', { name: 'Call 190' })).toHaveAttribute('href', 'tel:190');
+    expect(within(section).queryByText('114')).not.toBeInTheDocument();
+    // The reconciled hazard list with its bands.
+    expect(await within(section).findByRole('heading', { name: `Hazards in ${c.name}` }, { timeout: 20_000 })).toBeInTheDocument();
+    // The nature of the area as the guide records it, one click away, without the advice.
+    expect(await within(section).findByRole('heading', { level: 3, name: 'The area and its hazards' }, { timeout: 20_000 })).toBeInTheDocument();
     expect((await within(section).findAllByText(guide.know[0].risk.en, {}, { timeout: 20_000 })).length).toBeGreaterThan(0);
-    expect(within(section).getAllByText('What helps').length).toBeGreaterThan(0);
-    // The hazards the guide documents here come first, the first one open at the area's alert category.
-    const hazards = within(section).getByRole('radiogroup', { name: `Hazards in ${c.name}` });
-    expect(within(hazards).getAllByRole('radio')).toHaveLength(guide.hazards.length);
-    expect(within(hazards).getAllByRole('radio')[0]).toHaveAttribute('aria-checked', 'true');
-    expect(within(section).getByRole('radio', { name: new RegExp(`^${category} ·`) })).toHaveAttribute('aria-checked', 'true');
-    expect(within(section).getByText(`· ${c.name}'s alert category`)).toBeInTheDocument();
-    expect(within(section).getByRole('combobox', { name: 'Other hazards' })).toBeInTheDocument();
-    // A major warning: what people may see, and what to do.
-    fireEvent.click(within(section).getByRole('radio', { name: /^Major warning/ }));
-    const top = levels['3']!.find((r) => !isStatusRow(r))!;
-    expect((await within(section).findAllByText(top.impact.en, {}, { timeout: 20_000 })).length).toBeGreaterThan(0);
-    expect(within(section).getAllByText(top.actions.en[0]).length).toBeGreaterThan(0);
-    // The incident guide, folded.
-    expect(await within(section).findByRole('heading', { level: 3, name: 'Incidents and accidents' }, { timeout: 20_000 })).toBeInTheDocument();
+    if (guide.know[0].advice?.en) expect(within(section).queryByText(guide.know[0].advice.en)).not.toBeInTheDocument();
   });
 
-  it("leads with the council's own plan where the guide has one, in Kiswahili", async () => {
+  it('communicates the risk in Kiswahili', async () => {
     await i18n.changeLanguage('sw');
     try {
       const c = model.councils.find((x) => placeKey(x.region) === 'tabora')!;
-      const plan = (await loadRegionGuide('tabora'))!.councils[c.id].levels!;
       renderAt(c.id);
       const section = document.getElementById('actions')!;
-      expect(within(section).getByRole('region', { name: `Aina ya tahadhari kwa ${c.name}` })).toBeInTheDocument();
-      const hazards = await within(section).findByRole('radiogroup', { name: `Majanga katika ${c.name}` }, { timeout: 20_000 });
-      const first = within(hazards).getAllByRole('radio')[0];
-      expect(first).toHaveTextContent(`Mpango wa halmashauri ya ${c.name}`);
-      expect(first).toHaveAttribute('aria-checked', 'true');
-      // The plan opens at the council's alert category.
-      const level = String(alertFor(c.risk)!.level) as '1' | '2' | '3';
-      const row = plan[level]!.find((r) => !isStatusRow(r))!;
-      expect(within(section).getAllByText(row.impact.sw).length).toBeGreaterThan(0);
+      expect(within(section).getByRole('region', { name: `Kiwango cha hatari cha ${c.name}` })).toBeInTheDocument();
+      expect(within(section).getByText('Ukiishi au kufanya kazi hapa')).toBeInTheDocument();
+      expect(within(section).getByText('Ukipanga, kujenga, kuwekeza au kuhamia hapa')).toBeInTheDocument();
+      expect(await within(section).findByRole('heading', { name: `Vitisho katika ${c.name}` }, { timeout: 20_000 })).toBeInTheDocument();
+      expect(within(section).queryByText(/Ushauri|Tahadhari kubwa|Chukua hatua/)).not.toBeInTheDocument();
     } finally {
       await i18n.changeLanguage('en');
     }

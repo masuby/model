@@ -15,13 +15,13 @@ import { Textarea } from '@/components/ui/primitives';
 import { baseModel, loadBaseline, useData, useModel, useOverrides, useRawValues, useRequests, useReviewRaw } from '@/data-layer/DataProvider';
 import type { RawSubmission } from '@/data-layer/types';
 import { isNum } from '@/engine/risk/math';
-import { indexRawValues, scoreRaw } from '@/engine/risk/rawValues';
+import { depositedScore, indexRawValues, scoreRaw } from '@/engine/risk/rawValues';
 import { cn, formatScore, NO_VALUE } from '@/lib/utils';
 import { ImpactList } from '../components/ImpactPreview';
 import { NOTE_MAX } from '../components/SubmitPanel';
 import { errorMessage } from '../lib/batch';
 import { dateTime, relativeTime } from '../lib/format';
-import { buildSheet, councilsReached, rawImpact, specLabel, workflowIndicator, type SheetRow } from '../lib/workflow';
+import { buildSheet, councilsReached, rangeFlag, rawImpact, specLabel, workflowIndicator, type SheetRow } from '../lib/workflow';
 import { formatRaw, InstitutionLabel, LevelTag, RequestSummary } from '../workflow/bits';
 
 export function RawReviewList({ items }: { items: RawSubmission[] }) {
@@ -68,7 +68,7 @@ function RawReviewItem({ submission: s }: { submission: RawSubmission }) {
   const impacts = React.useMemo(
     () =>
       w?.core && explicit.data && rawValues.data && baseline.data
-        ? rawImpact({ explicit: explicit.data, raw: rawValues.data, base: baseModel(), baseline: baseline.data, current: model }, s.specId, s.entries)
+        ? rawImpact({ explicit: explicit.data, raw: rawValues.data, base: baseModel(), baseline: baseline.data, current: model }, s.specId, s.entries, undefined, s.valueType ?? 'raw')
         : [],
     [w, explicit.data, rawValues.data, baseline.data, model, s],
   );
@@ -115,6 +115,19 @@ function RawReviewItem({ submission: s }: { submission: RawSubmission }) {
             {s.period && ` (${s.period})`}
           </dd>
         </div>
+        <div>
+          <dt className="inline text-muted-foreground">{t('workflow.review.valueType')}: </dt>
+          <dd className="inline">
+            {t(`workflow.sheet.type.${s.valueType ?? 'raw'}`)}
+            {s.valueType === 'score' && ` · ${t('workflow.sheet.method.inform')}`}
+          </dd>
+        </div>
+        {s.source && (
+          <div>
+            <dt className="inline text-muted-foreground">{t('workflow.sheet.source')}: </dt>
+            <dd className="inline">{s.source}</dd>
+          </div>
+        )}
         {request && (
           <div>
             <dt className="inline text-muted-foreground">{t('workflow.sheet.request')}: </dt>
@@ -151,19 +164,35 @@ function RawReviewItem({ submission: s }: { submission: RawSubmission }) {
               <tbody>
                 {s.entries.map((e) => {
                   const row = rows.get(e.unitId);
+                  const deposit = s.valueType === 'score';
                   const before = row?.current?.raw ?? null;
-                  const sBefore = spec ? scoreRaw(spec, before) : null;
-                  const sAfter = spec ? scoreRaw(spec, e.value) : null;
+                  const sBefore = row?.current?.valueType === 'score' ? (row.current.score ?? null) : spec ? scoreRaw(spec, before) : null;
+                  const sAfter = deposit ? depositedScore(e.value) : spec ? scoreRaw(spec, e.value) : null;
+                  // A measured value far outside the indicator's usual range is flagged for the reviewer (DE-05).
+                  const flag = !deposit && spec && isNum(e.value) ? rangeFlag(spec, e.value) : null;
                   return (
                     <tr key={e.unitId} className="border-b border-border">
                       <th scope="row" className="py-2 pr-3 text-left font-normal">
                         <span className="font-medium">{row?.unit.name ?? e.unitId}</span> <LevelTag level={e.level} className="ml-1" />
                       </th>
                       <td className="num py-2 pr-3 text-muted-foreground">
-                        {isNum(before) ? formatRaw(before, lang) : NO_VALUE}
+                        {row?.current?.valueType === 'score' ? (isNum(sBefore) ? `${formatScore(sBefore)} (${t('workflow.sheet.scoreTag')})` : NO_VALUE) : isNum(before) ? formatRaw(before, lang) : NO_VALUE}
                         {row?.current && row.current.level !== e.level && <span className="ml-1 text-xs">({t(`common:valueLevel.${row.current.level}`)})</span>}
                       </td>
-                      <td className="num py-2 pr-3 font-medium">{isNum(e.value) ? formatRaw(e.value, lang) : t('workflow.sheet.noDataShort')}</td>
+                      <td className="num py-2 pr-3 font-medium">
+                        {isNum(e.value) ? (deposit ? formatScore(e.value) : formatRaw(e.value, lang)) : t('workflow.sheet.noDataShort')}
+                        {/* An approval that switches the group's method (measured value against 0-10 score) is said so (MET-05). */}
+                        {row?.current && (row.current.valueType ?? 'raw') !== (s.valueType ?? 'raw') && (
+                          <span className="ml-1.5 text-xs font-normal text-warning">
+                            ⚠ {t('workflow.review.methodSwitch', { from: t(`workflow.sheet.type.${row.current.valueType ?? 'raw'}`), to: t(`workflow.sheet.type.${s.valueType ?? 'raw'}`) })}
+                          </span>
+                        )}
+                        {flag && (
+                          <span className="ml-1.5 text-xs font-normal text-warning" title={t(flag === 'high' ? 'workflow.sheet.high' : 'workflow.sheet.low')}>
+                            ⚠ {t(flag === 'high' ? 'workflow.sheet.high' : 'workflow.sheet.low')}
+                          </span>
+                        )}
+                      </td>
                       <td className="num py-2 text-right">
                         <span className="text-muted-foreground">{isNum(sBefore) ? formatScore(sBefore) : NO_VALUE}</span> → {isNum(sAfter) ? formatScore(sAfter) : NO_VALUE}
                       </td>

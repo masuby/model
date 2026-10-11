@@ -23,6 +23,7 @@ export function DocSection({
   children,
   sub = false,
   className,
+  number,
 }: {
   id: string;
   /**
@@ -36,8 +37,11 @@ export function DocSection({
   /** A sub-section: continues its parent (no top rule) and takes a smaller serif title. */
   sub?: boolean;
   className?: string;
+  /** The number shown; the document's own numbering by default (the summary page numbers its sections 1 to 8). */
+  number?: string;
 }) {
   const showLabel = label != null && label !== '' && !(typeof label === 'string' && typeof title === 'string' && label.trim() === title.trim());
+  const shown = number ?? displayNumber(id);
   return (
     <section id={id} aria-labelledby={`${id}-title`} className={cn('scroll-mt-[124px] lg:scroll-mt-24', sub ? 'pb-16 sm:pb-20' : 'border-t border-border py-16 first:border-t-0 first:pt-0 sm:py-20', className)}>
       <header className="max-w-3xl">
@@ -45,19 +49,19 @@ export function DocSection({
             inline before the title instead of standing alone. */}
         {showLabel && (
           <p className="flex items-baseline gap-2 text-sm text-muted-foreground">
-            <span className="num font-medium text-foreground">{displayNumber(id)}</span>
+            <span className="num font-medium text-foreground">{shown}</span>
             <span aria-hidden>·</span>
             <span>{label}</span>
           </p>
         )}
         {sub ? (
           <h3 id={`${id}-title`} tabIndex={-1} className={cn('font-display text-[1.45rem] leading-snug font-semibold text-balance outline-none sm:text-[1.7rem]', showLabel && 'mt-3')}>
-            {!showLabel && <span className="num mr-3 font-sans text-[0.7em] font-medium text-muted-foreground">{displayNumber(id)}</span>}
+            {!showLabel && <span className="num mr-3 font-sans text-[0.7em] font-medium text-muted-foreground">{shown}</span>}
             {title}
           </h3>
         ) : (
           <h2 id={`${id}-title`} tabIndex={-1} className={cn('text-[1.75rem] leading-[1.15] text-balance outline-none sm:text-[2.25rem]', showLabel && 'mt-3')}>
-            {!showLabel && <span className="num mr-3 font-sans text-[0.6em] font-medium text-muted-foreground">{displayNumber(id)}</span>}
+            {!showLabel && <span className="num mr-3 font-sans text-[0.6em] font-medium text-muted-foreground">{shown}</span>}
             {title}
           </h2>
         )}
@@ -102,7 +106,7 @@ export function Callout({ tone = 'note', title, children, className }: { tone?: 
 
 /**
  * The resolution mark, encoded by shape and value (not by teal shade alone): filled dark (council), filled
- * mid (district), ring (region), filled grey (national), dashed ring (documented overlay).
+ * mid (district), ring (region), filled grey (national), dashed ring (no data in the workbook).
  */
 export function ResolutionDot({ value, className }: { value: Resolution; className?: string }) {
   return <span className={cn('inline-block size-2.5 shrink-0 rounded-full', RESOLUTION_CLASS[value], className)} aria-hidden />;

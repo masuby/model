@@ -2,9 +2,10 @@
  * Home - editorial landing page (docs/DESIGN_LANGUAGE.md): serif headline, key figures separated by
  * rules, a lightweight SVG map, and ruled sections instead of card grids. No decorative motion.
  */
-import { ArrowRight, ArrowUpRight } from 'lucide-react';
+import { ArrowRight } from 'lucide-react';
 import * as React from 'react';
 import { useTranslation } from 'react-i18next';
+import workbookSources from '@/data/inform-workbook-sources.json';
 import { Link, useNavigate } from 'react-router-dom';
 import { KeyFigures, PageContainer, Section, SectionHeading } from '@/components/layout/Page';
 import { ClassBadge, ClassDot } from '@/components/risk/RiskBadge';
@@ -17,16 +18,12 @@ import { formatCompact, formatScore } from '@/lib/utils';
 
 const StaticMap = React.lazy(() => import('@/components/map/StaticMap'));
 
-const MODULES = [
-  { to: '/explore', key: 'explore' },
-  { to: '/insights', key: 'insights' },
-  { to: '/severity', key: 'severity' },
-  { to: '/learn', key: 'learn' },
-  { to: '/methodology', key: 'methodology' },
-  { to: '/data', key: 'data' },
-] as const;
-
-const SOURCES = ['NBS 2022 Population and Housing Census', 'CHIRPS v3 rainfall', 'ERA5 climate reanalysis', 'USGS earthquake catalogue', 'TDHS-MIS 2022', 'Household Budget Survey 2017/18', 'IPC / MUCHALI', 'UNHCR', 'INFORM Sub-national SADC 2024'];
+/** The publishers behind the Core, as the INFORM SADC 2024 workbook records them, most-used first; then the census that gives population and facilities. */
+const SOURCES = (() => {
+  const count = new Map<string, number>();
+  for (const c of Object.values((workbookSources as { components: Record<string, { sources: string[] }> }).components)) for (const s of c.sources) count.set(s, (count.get(s) ?? 0) + 1);
+  return [...[...count.entries()].sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0])).map(([s]) => s), 'NBS 2022 Population and Housing Census (population, facilities)'];
+})();
 
 const DIMS = ['hazard', 'vulnerability', 'coping'] as const;
 
@@ -55,7 +52,7 @@ export default function HomePage() {
       <PageContainer className="grid items-center gap-12 pt-12 pb-16 lg:grid-cols-[1fr_minmax(0,520px)] lg:gap-16 lg:pt-20 lg:pb-20">
         <div>
           <h1 className="max-w-2xl text-[2.6rem] leading-[1.05] text-balance sm:text-[3.4rem] lg:text-[3.8rem]">{t('title')}</h1>
-          <p className="mt-6 max-w-xl text-lg leading-relaxed text-muted-foreground">{t('lead')}</p>
+          <p className="mt-6 max-w-xl text-lg leading-relaxed text-muted-foreground">{t('lead', { councils: model.councils.length, regions: model.regions.length })}</p>
           <div className="mt-8 flex flex-wrap gap-3">
             <Button size="lg" asChild>
               <Link to="/explore">
@@ -201,24 +198,6 @@ export default function HomePage() {
           </div>
         </Section>
 
-        {/* --------------------------------------------------------------------------- Modules */}
-        <Section>
-          <SectionHeading title={t('modules.title')} />
-          <ul className="grid border-t border-border md:grid-cols-2 md:gap-x-12">
-            {MODULES.map((m) => (
-              <li key={m.to} className="border-b border-border">
-                <Link to={m.to} className="group flex items-start justify-between gap-6 py-5">
-                  <span>
-                    <span className="block text-base font-semibold group-hover:text-primary">{t(`common:nav.${m.key}`)}</span>
-                    <span className="mt-1 block text-sm leading-relaxed text-muted-foreground">{t(`modules.${m.key}`)}</span>
-                  </span>
-                  <ArrowUpRight className="mt-0.5 size-4 shrink-0 text-muted-foreground transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-hover:text-primary" />
-                </Link>
-              </li>
-            ))}
-          </ul>
-        </Section>
-
         {/* ---------------------------------------------------------------------------- Sources */}
         <Section>
           <div className="grid gap-6 md:grid-cols-[1fr_2fr] md:gap-12">
@@ -236,25 +215,6 @@ export default function HomePage() {
           </div>
         </Section>
 
-        {/* -------------------------------------------------------------------------------- Close */}
-        <Section className="pb-4">
-          <div className="grid items-end gap-8 md:grid-cols-[1.4fr_1fr]">
-            <div>
-              <h2 className="text-[1.8rem] leading-tight text-balance sm:text-[2.3rem]">{t('cta.title')}</h2>
-              <p className="mt-4 max-w-2xl text-lg leading-relaxed text-muted-foreground">{t('cta.lead')}</p>
-            </div>
-            <div className="flex flex-wrap gap-3 md:justify-end">
-              <Button size="lg" asChild>
-                <Link to="/explore">
-                  {t('cta.primary')} <ArrowRight />
-                </Link>
-              </Button>
-              <Button size="lg" variant="outline" asChild>
-                <Link to="/learn">{t('ctaLearn')}</Link>
-              </Button>
-            </div>
-          </div>
-        </Section>
       </PageContainer>
     </div>
   );

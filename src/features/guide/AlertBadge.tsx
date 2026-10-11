@@ -1,10 +1,11 @@
 /**
- * The alert category as a coloured mark: a dot (in selectors and lists) or a filled badge (beside the
- * risk class). The badge always names the category, so colour is never the only signal.
+ * The risk level of an area as a filled badge in its colour band ("High risk" on orange), and a coloured
+ * dot for the warning levels of published warnings. The badge always names the INFORM class, so colour
+ * is never the only signal.
  */
 import { useTranslation } from 'react-i18next';
 import { cn } from '@/lib/utils';
-import { ALERT_COLOR, onAlertColor } from './alert';
+import { ALERT_COLOR, onAlertColor, riskBandFor } from './alert';
 import type { AlertLevel } from './data';
 
 export function AlertDot({ level, className }: { level: AlertLevel; className?: string }) {
@@ -12,16 +13,18 @@ export function AlertDot({ level, className }: { level: AlertLevel; className?: 
   return <span aria-hidden className={cn('inline-block size-2.5 shrink-0 rounded-full ring-1 ring-foreground/30', className)} style={{ background: ALERT_COLOR[level] }} />;
 }
 
-export function AlertBadge({ level, size = 'md', title, className }: { level: AlertLevel; size?: 'sm' | 'md'; title?: string; className?: string }) {
-  const { t } = useTranslation('guide');
+/** "{Class} risk" on the class's colour band; nothing without a score. */
+export function RiskBandBadge({ risk, size = 'md', className }: { risk: number | null | undefined; size?: 'sm' | 'md'; className?: string }) {
+  const { t } = useTranslation(['guide', 'common']);
+  const r = riskBandFor(risk);
+  if (!r) return null;
   return (
     <span
-      title={title}
       className={cn('inline-flex items-center rounded-full font-semibold whitespace-nowrap', size === 'sm' ? 'px-2 py-0.5 text-[11px]' : 'px-3 py-1 text-sm', className)}
-      style={{ background: ALERT_COLOR[level], color: onAlertColor(level) }}
+      style={{ background: r.color, color: onAlertColor(r.band) }}
     >
       {/* The space sits outside the hidden label, where accessible-name computation keeps it. */}
-      <span className="sr-only">{t('alert.label')}:</span> {t(`levels.${level}.name`)}
+      <span className="sr-only">{t('guide:risk.label')}:</span> <span>{t('guide:risk.badge', { cls: t(`common:classes.${r.cls}`) })}</span>
     </span>
   );
 }

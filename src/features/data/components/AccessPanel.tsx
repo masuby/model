@@ -16,7 +16,7 @@ import { cn, NO_VALUE } from '@/lib/utils';
 import { errorMessage } from '../lib/batch';
 import { RoleBadge } from './common';
 
-const DEMO_ROLES: Role[] = ['viewer', 'sector', 'pmo', 'admin'];
+const DEMO_ROLES: Role[] = ['viewer', 'sector', 'ddrrc', 'rdrrc', 'ndrrc', 'pmo', 'admin'];
 
 export function AccessPanel() {
   const { mode, profile, authLoading, signedIn, authError } = useData();
@@ -51,7 +51,8 @@ function DemoBanner({ role }: { role: Role }) {
   const { setDemoRole } = useData();
   const current = DEMO_ROLES.includes(role) ? role : 'pmo';
   return (
-    <section aria-labelledby="demo-title" className="grid gap-5 border-l-2 border-warning py-1 pl-5 lg:grid-cols-[minmax(0,1fr)_auto] lg:items-center lg:gap-16">
+    // The seven-role chooser wraps onto two rows rather than squeezing the notice to a sliver.
+    <section aria-labelledby="demo-title" className="grid gap-5 border-l-2 border-warning py-1 pl-5 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.3fr)] lg:items-center lg:gap-12">
       <div className="max-w-2xl">
         <h2 id="demo-title" className="font-sans text-base font-semibold tracking-normal">
           {t('mode.demoTitle')}

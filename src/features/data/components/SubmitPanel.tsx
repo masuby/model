@@ -13,11 +13,11 @@ import { Dialog, DialogContent, Input, Label, Select, SelectItem, Textarea } fro
 import { useData, useModel, useSubmit } from '@/data-layer/DataProvider';
 import { canReview, canSubmit, type NewSubmission } from '@/data-layer/types';
 import type { DimensionKey } from '@/engine/risk/hierarchy';
-import { AUTHORITIES, AUTHORITY_KEYS, INDICATOR_SOURCES, sourceFor, type AuthorityKey } from '@/engine/risk/sources';
+import { AUTHORITIES, AUTHORITY_KEYS, custodianFor, type AuthorityKey } from '@/engine/risk/sources';
 import type { EditRef, Unit } from '@/engine/risk/types';
 import { cn, NO_VALUE } from '@/lib/utils';
 import { errorMessage } from '../lib/batch';
-import { buildSubmissions, sharingCouncils, type DraftChange, type Impact } from '../lib/targets';
+import { buildSubmissions, sharingCouncils, type DraftChange, type Impact, type TargetScope } from '../lib/targets';
 import { ChangeTable } from './ChangeTable';
 import { Callout, LevelBadge } from './common';
 
@@ -32,14 +32,14 @@ const DATASET_MAX = 200;
 
 /** Authorities a contributor can cite (the INFORM baseline and computed products are not sources of new data). */
 export const AUTHORITY_OPTIONS = AUTHORITY_KEYS.filter((k) => k !== 'INFORM' && k !== 'CHC');
-const KNOWN_DATASETS = [...new Set(Object.values(INDICATOR_SOURCES).map((s) => s!.dataset))].sort();
+const KNOWN_DATASETS = ['2022 Population and Housing Census', 'TDHS-MIS 2022', 'Household Budget Survey 2017/18', 'THIS 2022-23', 'MUCHALI / IPC analysis', 'DHIS2', 'HRHIS', 'BEST', 'TMA climate records', 'UNHCR registration'].sort();
 
 /** The usual authority for these indicators (most common among them), or null. */
 export function suggestAuthority(refs: readonly EditRef[]): AuthorityKey | null {
   const count = new Map<AuthorityKey, number>();
   for (const ref of refs) {
     const [dim, key] = ref.split(':') as [DimensionKey, string];
-    const by = sourceFor(dim, key).by;
+    const by = custodianFor(dim, key).by;
     if ((AUTHORITY_OPTIONS as readonly string[]).includes(by)) count.set(by, (count.get(by) ?? 0) + 1);
   }
   let best: AuthorityKey | null = null;
@@ -269,6 +269,7 @@ export function EntrySubmitCard({
   setMeta,
   blocking,
   onSubmitted,
+  scope = 'council',
   className,
   children,
 }: {
@@ -278,6 +279,8 @@ export function EntrySubmitCard({
   impact: Impact;
   meta: MetaState;
   setMeta: React.Dispatch<React.SetStateAction<MetaState>>;
+  /** Where Vulnerability & Coping changes land: the council (default) or its whole workbook unit. */
+  scope?: TargetScope;
   /** Number of invalid fields in the form (blocks submission). */
   blocking: number;
   /** Called with the refs that were submitted successfully. */
@@ -302,8 +305,8 @@ export function EntrySubmitCard({
   const [confirmOpen, setConfirmOpen] = React.useState(false);
   const [busy, setBusy] = React.useState(false);
   const submissions = React.useMemo(
-    () => buildSubmissions(model, council, changes, { authority, dataset: meta.dataset, note: meta.note }),
-    [model, council, changes, authority, meta.dataset, meta.note],
+    () => buildSubmissions(model, council, changes, { authority, dataset: meta.dataset, note: meta.note }, scope),
+    [model, council, changes, authority, meta.dataset, meta.note, scope],
   );
 
   const onReview = () => {

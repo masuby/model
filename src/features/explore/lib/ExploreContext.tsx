@@ -20,6 +20,7 @@ import {
   translateSelection,
   writeExploreState,
   type Basemap,
+  type ExploreLayer,
   type ExploreLevel,
   type ExploreState,
   type ExploreView,
@@ -32,6 +33,7 @@ export interface ExploreActions {
   select: (u: Unit, opts?: { focus?: boolean }) => void;
   deselect: () => void;
   setLevel: (level: ExploreLevel) => void;
+  setLayer: (layer: ExploreLayer) => void;
   setMetric: (key: string) => void;
   setClass: (cls: ClassKey | null) => void;
   setView: (view: ExploreView, opts?: { focusSelection?: boolean }) => void;
@@ -56,6 +58,10 @@ export interface ExploreApi {
   selected: Unit | null;
   compare: Unit[];
   focusId: string | null;
+  /** Counts the selections people make (not the one a link opens with), so the panel takes focus only then. */
+  selectSeq: number;
+  /** The last selection the panel took focus for (shared by every placement, so a re-mount never takes it twice). */
+  focusedSeq: React.MutableRefObject<number>;
   isDesktop: boolean;
   sheetExpanded: boolean;
   metricLabel: ReturnType<typeof useMetricLabel>;
@@ -94,15 +100,31 @@ async function copyText(text: string): Promise<boolean> {
   }
 }
 
-export function ExploreProvider({ model, isDesktop, children }: { model: RiskModel; isDesktop: boolean; children: React.ReactNode }) {
+export function ExploreProvider({
+  model: core,
+  advanced = null,
+  isDesktop,
+  children,
+}: {
+  /** The Core model. */
+  model: RiskModel;
+  /** The Core with the Advancement layer, once computed (shown when the state asks for that layer). */
+  advanced?: RiskModel | null;
+  isDesktop: boolean;
+  children: React.ReactNode;
+}) {
   const { t } = useTranslation('explore');
   const metricLabel = useMetricLabel();
   const [params, setParams] = useSearchParams();
-  const lookup = React.useCallback((id: string) => model.byId.get(id), [model]);
+  // Ids are the same in both models, so the Core resolves them whichever layer is shown.
+  const lookup = React.useCallback((id: string) => core.byId.get(id), [core]);
   const state = React.useMemo(() => readExploreState(params, lookup), [params, lookup]);
+  const model = state.layer === 'advancement' && advanced ? advanced : core;
 
   const [focusId, setFocusId] = React.useState<string | null>(() => state.id);
   const [sheetExpanded, setSheetExpanded] = React.useState(false);
+  const [selectSeq, setSelectSeq] = React.useState(0);
+  const focusedSeq = React.useRef(0);
 
   const update = React.useCallback(
     (patch: Partial<ExploreState>) => setParams((prev) => writeExploreState({ ...readExploreState(prev, lookup), ...patch }), { replace: true }),
@@ -125,11 +147,20 @@ export function ExploreProvider({ model, isDesktop, children }: { model: RiskMod
   const actions = React.useMemo<ExploreActions>(
     () => ({
       select: (u, opts) => {
+        if (u.level === 'national') {
+          // The nation has no polygon of its own: the map keeps its level (and, asked to, shows the whole
+          // country), the panel shows the country.
+          update({ id: u.id });
+          if (opts?.focus) setFocusId(u.id);
+          setSelectSeq((n) => n + 1);
+          return;
+        }
         if (!isExplorable(u)) return;
         const s = live.current;
         update({ id: u.id, level: u.level === s.level ? s.level : (u.level as ExploreLevel) });
         if (opts?.focus) setFocusId(u.id);
         setSheetExpanded(false);
+        setSelectSeq((n) => n + 1);
       },
       deselect: () => update({ id: null }),
       setLevel: (level) => {
@@ -139,6 +170,7 @@ export function ExploreProvider({ model, isDesktop, children }: { model: RiskMod
         update({ level, id });
         if (id) setFocusId(id);
       },
+      setLayer: (layer) => update({ layer }),
       setMetric: (key) => {
         const m = parseMetric(key);
         update({ metric: m.key, ...(m.kind === 'indicator' ? { cls: null } : {}) });
@@ -174,8 +206,8 @@ export function ExploreProvider({ model, isDesktop, children }: { model: RiskMod
   );
 
   const value = React.useMemo<ExploreApi>(
-    () => ({ model, state, metric, units, stats, ranks, selected, compare, focusId, isDesktop, sheetExpanded, metricLabel, actions }),
-    [model, state, metric, units, stats, ranks, selected, compare, focusId, isDesktop, sheetExpanded, metricLabel, actions],
+    () => ({ model, state, metric, units, stats, ranks, selected, compare, focusId, selectSeq, focusedSeq, isDesktop, sheetExpanded, metricLabel, actions }),
+    [model, state, metric, units, stats, ranks, selected, compare, focusId, selectSeq, isDesktop, sheetExpanded, metricLabel, actions],
   );
   return <Ctx.Provider value={value}>{children}</Ctx.Provider>;
 }

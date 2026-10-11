@@ -13,7 +13,8 @@
     "menu": "Menyu",
     "skipToContent": "Ruka hadi maudhui",
     "main": "Kuu",
-    "mobile": "Menyu kuu"
+    "mobile": "Menyu kuu",
+    "others": "Nyingine"
   },
   "theme": {
     "label": "Mwonekano",
@@ -119,7 +120,7 @@
     "of": "kati ya",
     "outOf": "kati ya {{max}}",
     "asOf": "Data hadi {{date}}",
-    "official": "Rasmi",
+    "aggregate": "Mjumuiko wa halmashauri",
     "edited": "Imesasishwa",
     "inherited": "Inarithi data kutoka {{parent}}",
     "sharedSource": "Data ya udhaifu na uwezo wa kukabiliana inatoka {{source}}",
@@ -158,6 +159,81 @@
     "national": "Takwimu ya taifa",
     "region": "Takwimu ya mkoa",
     "council": "Takwimu ya halmashauri",
-    "baseline": "Msingi wa INFORM"
+    "baseline": "Msingi wa INFORM",
+    "district": "Takwimu ya wilaya"
+  },
+  "export": {
+    "title": "Hamisho la INFORM Tanzania",
+    "release": "Toleo la data",
+    "layer": "Tabaka",
+    "layers": {
+      "core": "Msingi (kitabu cha kazi cha INFORM SADC 2024 pamoja na thamani za kitaasisi zilizoidhinishwa)",
+      "advancement": "Maboresho (Msingi pamoja na viashiria-vidogo vya Tanzania, vinavyoonyeshwa kando)"
+    },
+    "asOf": "Data hadi",
+    "generated": "Limetengenezwa",
+    "scope": "Linahusu",
+    "lineage": "Asili ya thamani",
+    "lineages": {
+      "workbook": "thamani ya kitengo katika kitabu cha kazi cha INFORM SADC 2024",
+      "benchmark": "thamani ya Benchmark 2026 (thamani ya kitaasisi iliyoandaliwa kutoka seti za data za umma, 10 Oktoba 2026)",
+      "institution": "thamani iliyoidhinishwa kutoka taasisi kupitia Lango la data",
+      "advancement": "Tabaka la Maboresho (viashiria-vidogo vya Tanzania kando ya thamani ya kitabu cha kazi)",
+      "inherited": "thamani ya kitabu cha kazi ya kitengo ambacho halmashauri mpya ilitokana nacho",
+      "none": "hakuna thamani (kitabu cha kazi hakina data; haihesabiwi katika wastani wowote)"
+    },
+    "disclaimer": "Kanusho",
+    "unit": "Kitengo cha kitabu cha kazi",
+    "inheritedFrom": "Imerithi kutoka",
+    "approvedValues": "Thamani za kitaasisi zilizoidhinishwa"
+  },
+  "dataNote": {
+    "label": "Taarifa ya data",
+    "status": {
+      "queried": "Thamani inahojiwa",
+      "artefact": "Kasoro ya data inayojulikana",
+      "explained": "Imeelezwa",
+      "decision": "Imezuiliwa kwa uamuzi wa programu"
+    },
+    "inline": {
+      "queried": "inahojiwa",
+      "artefact": "kasoro ya data inayojulikana",
+      "explained": "imeelezwa",
+      "decision": "imezuiliwa kwa uamuzi wa programu"
+    },
+    "withheld": "Imezuiliwa kwenye kielelezo hai: thamani ya kitabu cha kazi inahojiwa",
+    "withheldShort": "imezuiliwa",
+    "withheldDecision": "Imezuiliwa kwenye kielelezo hai kwa uamuzi wa programu"
+  },
+  "textSize": {
+    "label": "Ukubwa wa maandishi",
+    "toggle": "Badilisha ukubwa wa maandishi",
+    "normal": "Kawaida",
+    "large": "Kubwa",
+    "larger": "Kubwa zaidi",
+    "largest": "Kubwa sana"
+  },
+  "sectors": {
+    "pmo": "OWM-IMM na Kamati za Usimamizi wa Maafa",
+    "poralg": "TAMISEMI na halmashauri",
+    "tma": "Mamlaka ya Hali ya Hewa Tanzania (TMA)",
+    "water": "Maji (Wizara ya Maji, bodi za mabonde, RUWASA, mamlaka za maji)",
+    "works": "Ujenzi na barabara (TANROADS, TARURA)",
+    "lands": "Ardhi, nyumba na mipango miji",
+    "agriculture": "Kilimo na mifugo",
+    "health": "Afya",
+    "education": "Elimu",
+    "environment": "Mazingira (OMR, NEMC)",
+    "forestry": "Misitu na wanyamapori (TFS, TANAPA, TAWA)",
+    "fire": "Jeshi la Zimamoto na Uokoaji",
+    "energy": "Nishati (TANESCO, REA)",
+    "tcra": "Mawasiliano (TCRA, watoa huduma)",
+    "finance": "Fedha na mipango",
+    "social": "Maendeleo ya jamii na hifadhi ya jamii (TASAF)",
+    "police": "Jeshi la Polisi",
+    "home": "Mambo ya Ndani (huduma za wakimbizi na uhamiaji)",
+    "transport": "Udhibiti wa usafiri (LATRA)",
+    "industry": "Viwanda na biashara (OSHA, GCLA)",
+    "gst": "Taasisi ya Jiolojia na Utafiti wa Madini Tanzania (GST)"
   }
 }

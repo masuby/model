@@ -115,7 +115,7 @@ export function Dimensions({ view }: { view: AreaView }) {
                           <span>{t(`common:categories.${cat.key}`)}</span>
                           {v == null ? <NoDataPill /> : <span className="num font-semibold">{formatScore(v)}</span>}
                         </div>
-                        <CompareTrack size="sm" value={v} color={rampColor(v)} refs={nat != null ? [{ kind: 'national', label: t('breadcrumb.country'), value: nat }] : []} showLegend={false} />
+                        <CompareTrack size="sm" value={v} color={rampColor(v, def.key)} refs={nat != null ? [{ kind: 'national', label: t('breadcrumb.country'), value: nat }] : []} showLegend={false} />
                       </li>
                     );
                   })}

@@ -53,12 +53,15 @@ const router = createBrowserRouter([
     children: [
       { index: true, element: lazyPage('home') },
       { path: 'explore', element: lazyPage('explore') },
+      { path: 'area/:id/card/detailed', element: lazyPage('cardDetailed') },
+      { path: 'area/:id/card', element: lazyPage('card') },
       { path: 'area/:id', element: lazyPage('area') },
       { path: 'insights', element: lazyPage('insights') },
       { path: 'severity', element: lazyPage('severity') },
       { path: 'learn', element: lazyPage('learn') },
       { path: 'learn/:lessonId', element: lazyPage('learn') },
       { path: 'methodology', element: lazyPage('methodology') },
+      { path: 'methodology/:section', element: lazyPage('methodologySection') },
       { path: 'data', element: lazyPage('data') },
       // Legacy routes from the previous app (keep old links and bookmarks working). vercel.json answers
       // these with permanent redirects too; these cover navigations served by the service worker.

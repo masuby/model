@@ -9,34 +9,38 @@
  * source method); source and resolution tooltips are hover-only because the key above explains them.
  * On phones each dimension starts folded behind a disclosure button (everything prints unfolded).
  */
-import { ChevronDown, FileSpreadsheet, PencilLine } from 'lucide-react';
+import { ChevronDown, Database, FileSpreadsheet, PencilLine } from 'lucide-react';
 import * as React from 'react';
 import { useTranslation } from 'react-i18next';
 import { DIMENSION_TEXT } from '@/components/charts/theme';
 import { Note } from '@/components/layout/Page';
+import { DataNoteLine, DataNoteMark } from '@/components/risk/DataNoteMark';
 import { ClassBadge } from '@/components/risk/RiskBadge';
 import { Button } from '@/components/ui/button';
 import { Tooltip } from '@/components/ui/primitives';
 import { DIMENSIONS, type DimensionKey } from '@/engine/risk/hierarchy';
 import { rampColor } from '@/engine/risk/metrics';
+import { dataNotesFor, isWithheld, noteText } from '@/engine/risk/notes';
 import { AUTHORITIES, authorityKind, authorityLabel, sourceLabel, type SourceInfo } from '@/engine/risk/sources';
 import type { EditStamp, LeafInput } from '@/engine/risk/types';
+import { exportFileName, exportPreamble, exportStamp, lineageOf } from '@/lib/exports';
 import { cn, downloadText, formatDate, formatScore, slug, toCsv } from '@/lib/utils';
 import { delta, formatDelta, type AreaView, type IndicatorRow } from '../lib';
 import { DIM_SHORT, NoDataPill, ResolutionChip, useMediaQuery } from './bits';
 import { useDeferred } from './Deferred';
+import { isBenchmarkStamp, isPortalStamp } from '@/engine/risk/stamps';
 
-const RESOLUTIONS: ReadonlyArray<SourceInfo['resolution']> = ['council', 'district', 'region', 'national', 'overlay'];
+const RESOLUTIONS: ReadonlyArray<SourceInfo['resolution']> = ['council', 'district', 'region', 'national', 'none'];
 
 /** Sticky offset: app header + the section nav (44 px tabs + 2 px rules). */
 const STICKY_TOP = 'top-[calc(var(--header-h)+46px)]';
 
-function ValueCell({ value }: { value: number | null }) {
+function ValueCell({ value, scale }: { value: number | null; scale: DimensionKey }) {
   if (value == null) return <NoDataPill focusable={false} />;
   return (
     <div className="flex items-center justify-end gap-3">
       <div className="hidden h-1 w-20 bg-muted sm:block" aria-hidden>
-        <div className="h-full" style={{ width: `${value * 10}%`, background: rampColor(value) }} />
+        <div className="h-full" style={{ width: `${value * 10}%`, background: rampColor(value, scale) }} />
       </div>
       <span className="num w-8 text-right font-semibold">{formatScore(value)}</span>
     </div>
@@ -75,7 +79,17 @@ function SourceCell({ row, unitLevel }: { row: IndicatorRow; unitLevel: string }
           <span className="block text-muted-foreground">{row.source.dataset}</span>
         </span>
       </Tooltip>
-      {row.edit && (
+      {row.edit && isBenchmarkStamp(row.edit) && (
+        <span className="mt-1.5 flex max-w-full items-center gap-1 text-xs text-muted-foreground">
+          <Database className="size-3 shrink-0" aria-hidden />
+          <span className="truncate">
+            {unitLevel === 'region'
+              ? t('table.benchmarkMembers')
+              : t('table.benchmark', { authority: authorityLabel(String(row.edit.authority ?? '')) || t('notices.unknownAuthority'), date: formatDate(row.edit.at, i18n.language) })}
+          </span>
+        </span>
+      )}
+      {row.edit && !isBenchmarkStamp(row.edit) && (
         <span className="mt-1.5 flex max-w-full items-center gap-1 text-xs text-primary">
           <PencilLine className="size-3 shrink-0" aria-hidden />
           <span className="truncate">
@@ -122,6 +136,8 @@ export function IndicatorTable({ view }: { view: AreaView }) {
       t('csv.resolution'),
       t('csv.editedBy'),
       t('csv.editedAt'),
+      t('csv.lineage'),
+      t('csv.dataNote'),
     ];
     const body = rows.map((r) => [
       t(`common:dimensions.${r.dim}`),
@@ -135,8 +151,13 @@ export function IndicatorTable({ view }: { view: AreaView }) {
       t(`resolution.${measuredResolution(measuredInputs(r.edit, unit.level)) ?? r.source.resolution}.label`),
       r.edit ? authorityLabel(String(r.edit.authority ?? '')) : '',
       r.edit ? formatDate(r.edit.at, i18n.language) : '',
+      lineageOf(r.edit ?? undefined, unit, r.value),
+      dataNotesFor(unit, r.dim, r.key)
+        .map((n) => noteText(n, i18n.language))
+        .join(' '),
     ]);
-    downloadText(`inform-tz-${slug(unit.name)}-indicators.csv`, toCsv([header, ...body]), 'text/csv;charset=utf-8');
+    const stamp = exportStamp(`${unit.name} (${t(`common:levels.${unit.level}`)})`);
+    downloadText(exportFileName(`${slug(unit.name)}-indicators`, stamp), toCsv([...exportPreamble(t, stamp), header, ...body]), 'text/csv;charset=utf-8');
   };
 
   const th = 'sticky z-10 bg-background py-3 text-xs font-medium text-muted-foreground shadow-[inset_0_-1px_0_var(--border)]';
@@ -226,6 +247,8 @@ export function IndicatorTable({ view }: { view: AreaView }) {
                     const row = byKey.get(`${def.key}:${ind.key}`)!;
                     const d = delta(row.value, row.national);
                     const resolution = measuredResolution(measuredInputs(row.edit, unit.level)) ?? row.source.resolution;
+                    // A workbook value under query, a known artefact or an explanation travels with the value (the integrity recheck).
+                    const notes = dataNotesFor(unit, def.key, ind.key);
                     return (
                       <tr key={ind.key} className="border-b border-border align-top transition-colors duration-150 hover:bg-muted/40">
                         <th scope="row" className="py-3 pr-3 text-left font-normal">
@@ -240,7 +263,7 @@ export function IndicatorTable({ view }: { view: AreaView }) {
                           >
                             <span tabIndex={0} className={cn('text-foreground', row.value == null && 'text-muted-foreground')}>
                               {t(`indicators:${ind.key}`)}
-                              {row.edit && (
+                              {isPortalStamp(row.edit) && (
                                 <>
                                   <PencilLine className="ml-1.5 inline size-3 -translate-y-px text-primary" aria-hidden />
                                   <span className="sr-only"> ({t('common:labels.edited')})</span>
@@ -248,6 +271,12 @@ export function IndicatorTable({ view }: { view: AreaView }) {
                               )}
                             </span>
                           </Tooltip>
+                          {notes.length > 0 && (
+                            <>
+                              <DataNoteMark notes={notes} className="ml-1.5" />
+                              <DataNoteLine notes={notes} withheld={isWithheld(unit, def.key, ind.key)} className="mt-0.5" />
+                            </>
+                          )}
                           <div className="mt-1 lg:hidden print:hidden">
                             <SourceCell row={row} unitLevel={unit.level} />
                           </div>
@@ -256,7 +285,7 @@ export function IndicatorTable({ view }: { view: AreaView }) {
                           </div>
                         </th>
                         <td className="px-3 py-3 text-right">
-                          <ValueCell value={row.value} />
+                          <ValueCell value={row.value} scale={row.dim} />
                         </td>
                         {!isNational && (
                           <td className="num hidden px-3 py-3 text-right md:table-cell print:table-cell">

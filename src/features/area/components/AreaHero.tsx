@@ -4,7 +4,7 @@
  * and a thin class-band scale); key figures in a ruled row beneath; and any notes about how this
  * unit's data were built, set off by a left rule. No boxes, no widgets, no decoration.
  */
-import { ChevronRight, Compass, GitCompareArrows, Link2, Printer } from 'lucide-react';
+import { ChevronDown, ChevronRight, Compass, FileText, GitCompareArrows, Link2, Printer } from 'lucide-react';
 import * as React from 'react';
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
@@ -15,11 +15,13 @@ import { Button } from '@/components/ui/button';
 import { CLASS_COLORS, CLASS_KEYS, classify, THRESHOLDS } from '@/engine/risk/classes';
 import { findIndicator } from '@/engine/risk/hierarchy';
 import { authorityLabel } from '@/engine/risk/sources';
-import { alertFor } from '@/features/guide/alert';
-import { AlertBadge } from '@/features/guide/AlertBadge';
+import type { WarningPayload } from '@/data-layer/types';
+import { ALERT_COLOR } from '@/features/guide/alert';
+import { RiskBandBadge } from '@/features/guide/AlertBadge';
+import { useAreaRecords } from '@/features/guide/data';
 import { cn, formatCompact, formatDate, formatNumber, formatScore, NO_VALUE } from '@/lib/utils';
 import { compareHref, editList, explorerHref, type AreaView } from '../lib';
-import { OutOf10 } from './bits';
+import { OutOf10, useMediaQuery } from './bits';
 import { useDeferred } from './Deferred';
 
 function Breadcrumb({ view }: { view: AreaView }) {
@@ -56,13 +58,58 @@ function Breadcrumb({ view }: { view: AreaView }) {
   );
 }
 
+/**
+ * Official warnings in force for this area (recorded by the NDRRC or PMO-DMD from TMA bulletins): the
+ * warning's colour, hazard, areas, validity and issuer. The level itself (1 to 3) stays in the record and
+ * sets the colour; no level wording is shown anywhere on the site (user decision of 10 October 2026).
+ * Nothing is shown when none is in force.
+ */
+function ActiveWarningBanner({ view }: { view: AreaView }) {
+  const { t, i18n } = useTranslation(['guide', 'area', 'data']);
+  const { unit, model } = view;
+  const { warnings } = useAreaRecords(unit);
+  if (!warnings.length) return null;
+  return (
+    <div className="mt-8 grid max-w-3xl gap-3" role="status">
+      {warnings.map((r) => {
+        const w = r.payload as WarningPayload;
+        const names = (w.areas ?? []).map((id) => (id === 'TZ' ? t('data:committee.warning.wholeCountry') : (model.byId.get(id)?.name ?? id)));
+        return (
+          <div key={r.id} className="border-l-4 py-1 pl-4" style={{ borderColor: ALERT_COLOR[w.alertLevel] }}>
+            <p className="flex flex-wrap items-center gap-2 text-sm font-semibold">
+              <span className="size-3 rounded-full" style={{ background: ALERT_COLOR[w.alertLevel] }} aria-hidden />
+              {t('guide:banner.title', { hazard: r.hazard ? t(`guide:hazards.${r.hazard}`) : '' })}
+              {w.title && <span className="font-normal text-muted-foreground">· {w.title}</span>}
+            </p>
+            <p className="mt-1 text-sm text-muted-foreground">
+              {t(r.validTo ? 'guide:banner.detail' : 'guide:banner.detailOpen', {
+                areas: names.join(', '),
+                from: r.validFrom ? formatDate(r.validFrom, i18n.language) : '',
+                to: r.validTo ? formatDate(r.validTo, i18n.language) : '',
+                issuer: w.issuer,
+              })}
+              {w.bulletin && ` · ${w.bulletin}`}
+              {' · '}
+              <a href="#actions" className="font-medium text-primary underline-offset-4 hover:underline">
+                {t('guide:banner.actions')}
+              </a>
+            </p>
+          </div>
+        );
+      })}
+    </div>
+  );
+}
+
 /** Notes on how this unit's figures were built (aggregation, shared data, reviewed edits). */
 function Notices({ view }: { view: AreaView }) {
   const { t, i18n } = useTranslation(['area', 'common', 'indicators']);
   const { unit, model } = view;
+  const phone = useMediaQuery('(max-width: 639px)');
+  const { printing } = useDeferred();
   const items = React.useMemo(() => {
     const out: Array<{ key: string; body: React.ReactNode }> = [];
-    if (unit.level === 'national') out.push({ key: 'official', body: t('notices.official') });
+    if (unit.level === 'national') out.push({ key: 'aggregate', body: t('notices.nationalAggregate', { count: model.councils.length }) });
     if (unit.level === 'region') out.push({ key: 'agg', body: t('notices.aggregated', { count: unit.members ?? 0 }) });
     if (unit.level === 'source') {
       const n = model.councils.filter((c) => c.sourceId === unit.id).length;
@@ -71,6 +118,9 @@ function Notices({ view }: { view: AreaView }) {
     if (unit.level === 'council' && unit.inheritedFrom) out.push({ key: 'inh', body: t('notices.inherited', { parent: unit.inheritedFrom }) });
     if (unit.level === 'council' && unit.sourceId) {
       const shared = model.councils.filter((c) => c.sourceId === unit.sourceId).length;
+      // Stamps the council did not take from its unit: values recorded for this council itself.
+      const unitEdits = (model.byId.get(unit.sourceId)?.edits ?? {}) as Record<string, unknown>;
+      const own = Object.entries(unit.edits).filter(([ref, stamp]) => stamp && unitEdits[ref] !== stamp).length;
       out.push({
         key: 'shared',
         body: (
@@ -79,12 +129,14 @@ function Notices({ view }: { view: AreaView }) {
             <Link to={`/area/${unit.sourceId}`} className="font-medium text-primary underline-offset-4 hover:underline">
               {unit.sourceName}
             </Link>
-            .
+            {own ? t('notices.ownValues', { count: own }) : '.'}
           </>
         ),
       });
     }
-    const edits = editList(unit);
+    const benchmark = editList(unit, 'benchmark').filter((e) => e.ref !== 'hazard:exposure');
+    if (benchmark.length) out.push({ key: 'benchmark', body: t(unit.level === 'region' ? 'notices.benchmarkMembers' : 'notices.benchmark', { count: benchmark.length }) });
+    const edits = editList(unit, 'portal');
     if (edits.length) {
       const latest = edits[0];
       const [dim, key] = latest.ref.split(':');
@@ -107,12 +159,23 @@ function Notices({ view }: { view: AreaView }) {
   }, [unit, model, t, i18n.language]);
 
   if (!items.length) return null;
-  return (
-    <div className="mt-8 grid max-w-3xl gap-3">
+  const list = (
+    <div className="grid max-w-3xl gap-3">
       {items.map((it) => (
         <Note key={it.key}>{it.body}</Note>
       ))}
     </div>
+  );
+  // On a phone the notes fold behind one line, so the guidance stays within the first screens (UX-01).
+  if (!phone) return <div className="mt-8">{list}</div>;
+  return (
+    <details open={printing || undefined} className="group mt-6 max-w-3xl">
+      <summary className="flex cursor-pointer list-none items-center gap-2 text-sm font-medium [&::-webkit-details-marker]:hidden">
+        <ChevronDown className="size-4 text-muted-foreground transition-transform group-open:rotate-180" aria-hidden />
+        {t('notices.title', { count: items.length })}
+      </summary>
+      <div className="mt-4">{list}</div>
+    </details>
   );
 }
 
@@ -134,14 +197,13 @@ function ScoreScale({ value, className }: { value: number | null | undefined; cl
 }
 
 /**
- * The headline score, set as type: label, serif numeral, one line of class and date, the alert category
- * that class sets (a link to "What to do"), the scale.
+ * The headline score, set as type: label, serif numeral, one line of class and date, the preparedness
+ * priority that class sets (a link to "What to do"), the scale.
  */
 function Score({ view, className }: { view: AreaView; className?: string }) {
   const { t } = useTranslation(['area', 'common', 'guide']);
   const { unit, model } = view;
   const cls = classify(unit.risk);
-  const alert = alertFor(unit.risk);
   return (
     <div className={className}>
       <div className="text-sm font-medium text-muted-foreground">{t('common:informRisk')}</div>
@@ -155,21 +217,22 @@ function Score({ view, className }: { view: AreaView; className?: string }) {
         <span className="text-muted-foreground">
           <span aria-hidden>· </span>
           {t('common:labels.asOf', { date: model.asOf })}
-          {unit.level === 'national' && <> · {t('common:labels.official')}</>}
+          {unit.level === 'national' && <> · {t('common:labels.aggregate')}</>}
         </span>
       </p>
-      {alert && (
+      {cls && (
         <a
           href="#actions"
           onClick={(e) => {
             e.preventDefault();
             document.getElementById('actions')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
           }}
-          title={t('guide:alert.title', { cls: t(`common:classes.${alert.cls}`) })}
-          className="group mt-2.5 inline-flex items-center gap-2 text-sm"
+          title={t('guide:risk.title', { cls: t(`common:classes.${cls.key}`) })}
+          className="group mt-2.5 inline-flex flex-wrap items-center gap-x-2 gap-y-1 text-sm"
         >
-          <AlertBadge level={alert.level} size="sm" />{' '}
-          <span className="text-muted-foreground underline-offset-4 transition-colors group-hover:text-foreground group-hover:underline">{t('guide:alert.link')}</span>
+          {/* The risk level in its colour band (very low and low yellow, medium and high orange, very high red). */}
+          <RiskBandBadge risk={unit.risk} size="sm" />
+          <span className="text-muted-foreground underline-offset-4 transition-colors group-hover:text-foreground group-hover:underline">{t('guide:risk.link')}</span>
         </a>
       )}
       <ScoreScale value={unit.risk} className="mt-4" />
@@ -177,43 +240,18 @@ function Score({ view, className }: { view: AreaView; className?: string }) {
   );
 }
 
-export function AreaHero({ view }: { view: AreaView }) {
+/** Rank, population, area and coverage: in the hero from tablets up, under "What to do" on a phone (UX-01). */
+export function AreaFigures({ view, className }: { view: AreaView; className?: string }) {
   const { t, i18n } = useTranslation(['area', 'common']);
-  const { print } = useDeferred();
-  const { unit, region, coverage, population, area, density, rank, model } = view;
+  const { unit, coverage, population, area, density, rank, model } = view;
   const lang = i18n.language;
   const peers = t(`peers.${unit.level}`);
-
-  const copyLink = async () => {
-    try {
-      await navigator.clipboard.writeText(window.location.href);
-      toast.success(t('actions.copied'));
-    } catch {
-      toast.error(t('actions.copyFailed'));
-    }
-  };
 
   const above = React.useMemo(() => {
     if (unit.level !== 'national' || typeof unit.risk !== 'number') return null;
     const r = unit.risk;
     return { councils: model.councils.filter((c) => (c.risk ?? -1) > r).length, regions: model.regions.filter((c) => (c.risk ?? -1) > r).length };
   }, [unit, model]);
-
-  const subtitle =
-    unit.level === 'council' || unit.level === 'source' ? (
-      <>
-        {t(`levelOf.${unit.level}`)}{' '}
-        {region ? (
-          <Link to={`/area/${region.id}`} className="text-foreground underline decoration-border underline-offset-4 transition-colors hover:text-primary hover:decoration-primary">
-            {t('levelOf.regionName', { region: unit.region })}
-          </Link>
-        ) : (
-          <span className="text-foreground">{t('levelOf.regionName', { region: unit.region })}</span>
-        )}
-      </>
-    ) : (
-      t(`levelOf.${unit.level}`)
-    );
 
   const of = (n: number, total: number) => (
     <>
@@ -251,22 +289,54 @@ export function AreaHero({ view }: { view: AreaView }) {
     },
     { label: t('common:labels.coverage'), value: `${coverage.pct}%`, sub: t('facts.coverageSub', { have: coverage.have, total: coverage.total }) },
   ];
+  return <KeyFigures className={className} items={figures} />;
+}
+
+export function AreaHero({ view }: { view: AreaView }) {
+  const { t } = useTranslation(['area', 'common']);
+  const { print } = useDeferred();
+  const { unit, region } = view;
+
+  const copyLink = async () => {
+    try {
+      await navigator.clipboard.writeText(window.location.href);
+      toast.success(t('actions.copied'));
+    } catch {
+      toast.error(t('actions.copyFailed'));
+    }
+  };
+
+  const subtitle =
+    unit.level === 'council' || unit.level === 'source' ? (
+      <>
+        {t(`levelOf.${unit.level}`)}{' '}
+        {region ? (
+          <Link to={`/area/${region.id}`} className="text-foreground underline decoration-border underline-offset-4 transition-colors hover:text-primary hover:decoration-primary">
+            {t('levelOf.regionName', { region: unit.region })}
+          </Link>
+        ) : (
+          <span className="text-foreground">{t('levelOf.regionName', { region: unit.region })}</span>
+        )}
+      </>
+    ) : (
+      t(`levelOf.${unit.level}`)
+    );
 
   return (
     <header aria-labelledby="area-title">
-      <PageContainer className="pt-8 pb-12 sm:pt-10 sm:pb-14 print:pt-2 print:pb-6">
+      <PageContainer className="pt-6 pb-8 sm:pt-10 sm:pb-14 print:pt-2 print:pb-6">
         <Breadcrumb view={view} />
         {/*
           Title, score and actions share one grid: stacked on phones (score before the actions), and from
           md up the score takes the right column, its bottom edge level with the action row.
         */}
-        <div className="mt-10 grid gap-y-8 md:grid-cols-[minmax(0,1fr)_auto] md:gap-x-12 lg:mt-12 print:mt-4 print:grid-cols-[minmax(0,1fr)_auto] print:gap-x-8">
+        <div className="mt-6 grid gap-y-6 sm:mt-10 sm:gap-y-8 md:grid-cols-[minmax(0,1fr)_auto] md:gap-x-12 lg:mt-12 print:mt-4 print:grid-cols-[minmax(0,1fr)_auto] print:gap-x-8">
           <div className="min-w-0 md:col-start-1 md:row-start-1 print:col-start-1 print:row-start-1">
             <Kicker>{t('eyebrow')}</Kicker>
-            <h1 id="area-title" className="mt-3 text-[2.6rem] leading-[1.04] text-balance sm:text-[3.4rem] xl:text-[4rem]">
+            <h1 id="area-title" className="mt-2 text-[2.2rem] leading-[1.06] text-balance sm:mt-3 sm:text-[3.4rem] xl:text-[4rem]">
               {unit.name}
             </h1>
-            <p className="mt-4 text-lg text-muted-foreground">{subtitle}</p>
+            <p className="mt-3 text-base text-muted-foreground sm:mt-4 sm:text-lg">{subtitle}</p>
           </div>
 
           <Score
@@ -274,31 +344,40 @@ export function AreaHero({ view }: { view: AreaView }) {
             className="max-w-xs md:col-start-2 md:row-span-2 md:row-start-1 md:w-72 md:self-end md:border-l md:border-border md:pl-10 lg:pl-12 print:col-start-2 print:row-start-1 print:w-60 print:max-w-none print:self-end print:border-l print:border-border print:pl-8"
           />
 
+          {/* On a phone the secondary actions keep their icon only, so the row stays one line (UX-01). */}
           <div className="no-print flex flex-wrap items-center gap-2 md:col-start-1 md:row-start-2">
             <Button variant="outline" onClick={print}>
               <Printer /> {t('actions.print')}
             </Button>
-            <Button variant="ghost" onClick={() => void copyLink()}>
-              <Link2 /> {t('actions.copy')}
-            </Button>
-            <Button variant="ghost" asChild>
-              <Link to={explorerHref(unit)}>
-                <Compass /> {t('actions.explore')}
+            <Button variant="outline" asChild>
+              <Link to={`/area/${unit.id}/card?lang=sw`}>
+                <FileText /> {t('actions.card')}
               </Link>
             </Button>
             <Button variant="ghost" asChild>
-              <Link to={compareHref(unit)}>
-                <GitCompareArrows /> {t('actions.compare')}
+              <Link to={`/area/${unit.id}/card/detailed?lang=sw`} aria-label={t('actions.cardDetailed')}>
+                <FileText /> <span className="hidden sm:inline">{t('actions.cardDetailed')}</span>
+              </Link>
+            </Button>
+            <Button variant="ghost" onClick={() => void copyLink()} aria-label={t('actions.copy')}>
+              <Link2 /> <span className="hidden sm:inline">{t('actions.copy')}</span>
+            </Button>
+            <Button variant="ghost" asChild>
+              <Link to={explorerHref(unit)} aria-label={t('actions.explore')}>
+                <Compass /> <span className="hidden sm:inline">{t('actions.explore')}</span>
+              </Link>
+            </Button>
+            <Button variant="ghost" asChild>
+              <Link to={compareHref(unit)} aria-label={t('actions.compare')}>
+                <GitCompareArrows /> <span className="hidden sm:inline">{t('actions.compare')}</span>
               </Link>
             </Button>
           </div>
         </div>
 
-        <KeyFigures
-          className="mt-12 border-t border-border pt-8 [&_dd:first-of-type]:text-[1.65rem] lg:[&_dd:first-of-type]:text-[2.1rem] print:mt-6"
-          items={figures}
-        />
+        <AreaFigures view={view} className="mt-12 hidden border-t border-border pt-8 sm:grid md:flex [&_dd:first-of-type]:text-[1.65rem] lg:[&_dd:first-of-type]:text-[2.1rem] print:mt-6 print:flex" />
 
+        <ActiveWarningBanner view={view} />
         <Notices view={view} />
       </PageContainer>
     </header>

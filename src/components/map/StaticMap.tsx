@@ -2,6 +2,10 @@
  * StaticMap - a lightweight SVG choropleth (no Leaflet, no GeoJSON at runtime). Paths are pre-projected
  * and simplified by scripts/build-svg-map.mjs. Use it wherever pan/zoom is not needed: the home hero,
  * area locators, click-to-select pickers. For full exploration use RiskMap.
+ *
+ * With `onSelect`, the areas are buttons: a click, Enter or Space selects one, and they are in the tab
+ * order (the emphasised ones only, when a set is emphasised, so a region's councils are a few tab stops
+ * rather than all 195). `keyboard={false}` keeps a map pointer-only, for a small inset beside a bigger map.
  */
 import * as React from 'react';
 import { useTranslation } from 'react-i18next';
@@ -40,6 +44,8 @@ export interface StaticMapProps {
   hoverCard?: boolean;
   /** Extra line in the hover card, e.g. "Click to add". */
   hint?: string;
+  /** Put the selectable areas in the tab order (default true with `onSelect`). */
+  keyboard?: boolean;
   className?: string;
   'aria-label'?: string;
 }
@@ -55,6 +61,7 @@ export default function StaticMap({
   focusId = null,
   hoverCard = true,
   hint,
+  keyboard = true,
   className,
   'aria-label': ariaLabel,
 }: StaticMapProps) {
@@ -72,8 +79,14 @@ export default function StaticMap({
       return;
     }
     const el = svgRef.current?.querySelector<SVGPathElement>(`[data-id="${CSS.escape(focusId)}"]`);
-    if (!el) return;
-    const b = el.getBBox();
+    // getBBox needs a layout engine (absent in tests, and it throws on an element not yet rendered).
+    if (!el || typeof el.getBBox !== 'function') return;
+    let b: DOMRect;
+    try {
+      b = el.getBBox();
+    } catch {
+      return;
+    }
     const size = Math.max(b.width, b.height) * 2.2 + 40;
     const cx = b.x + b.width / 2;
     const cy = b.y + b.height / 2;
@@ -83,6 +96,7 @@ export default function StaticMap({
   const selected = new Set(selectedIds);
   const emphasised = emphasiseIds ? new Set(emphasiseIds) : null;
   const label = ariaLabel ?? t('a11y.mapOf', { metric: t(metric.labelKey) });
+  const selectable = !!onSelect;
 
   const onMove = (e: React.PointerEvent<SVGPathElement>, unit: Unit) => {
     if (!hoverCard) return;
@@ -90,19 +104,29 @@ export default function StaticMap({
     if (!box) return;
     setHover({ unit, x: e.clientX - box.left, y: e.clientY - box.top });
   };
+  // Keyboard focus shows the same card as the pointer, over the middle of the area.
+  const onFocus = (e: React.FocusEvent<SVGPathElement>, unit: Unit) => {
+    if (!hoverCard) return;
+    const box = svgRef.current?.parentElement?.getBoundingClientRect();
+    const r = e.currentTarget.getBoundingClientRect?.();
+    if (!box || !r) return;
+    setHover({ unit, x: r.left - box.left + r.width / 2, y: r.top - box.top + r.height / 2 });
+  };
 
   return (
     <div
       className={cn('relative select-none', focusId && 'overflow-hidden rounded-md border border-border bg-[var(--map-bg)]', className)}
       onPointerLeave={() => setHover(null)}
     >
-      <svg ref={svgRef} viewBox={viewBox} className="size-full" role="img" aria-label={label} preserveAspectRatio="xMidYMid meet">
+      {/* A picture when it only shows; a group of buttons when the areas select. */}
+      <svg ref={svgRef} viewBox={viewBox} className="size-full" role={selectable ? 'group' : 'img'} aria-label={label} preserveAspectRatio="xMidYMid meet">
         <g>
           {set.units.map((p) => {
             const unit = unitFor(p.id);
             const v = unit ? metric.get(unit) : null;
             const cls = metric.classOf(v);
             const dim = (!!filterClass && cls?.key !== filterClass) || (!!emphasised && !!unit && !emphasised.has(unit.id));
+            const focusable = selectable && keyboard && !!unit && (!emphasised || emphasised.has(unit.id));
             return (
               <path
                 key={p.id}
@@ -113,9 +137,23 @@ export default function StaticMap({
                 stroke="var(--map-stroke)"
                 strokeWidth={0.6}
                 vectorEffect="non-scaling-stroke"
-                className={cn(onSelect && unit && 'cursor-pointer')}
+                className={cn(selectable && unit && 'cursor-pointer', focusable && 'outline-none focus-visible:[stroke:#0b1324] focus-visible:[stroke-width:2.5px]')}
+                role={focusable ? 'button' : undefined}
+                tabIndex={focusable ? 0 : undefined}
+                aria-label={focusable && unit ? `${unit.name}: ${t(metric.labelKey)} ${formatScore(v)}${cls ? `, ${t(`classes.${cls.key}`)}` : ''}` : undefined}
                 onPointerMove={unit ? (e) => onMove(e, unit) : undefined}
                 onClick={unit && onSelect ? () => onSelect(unit) : undefined}
+                onFocus={focusable && unit ? (e) => onFocus(e, unit) : undefined}
+                onBlur={focusable ? () => setHover(null) : undefined}
+                onKeyDown={
+                  focusable && unit && onSelect
+                    ? (e) => {
+                        if (e.key !== 'Enter' && e.key !== ' ') return;
+                        e.preventDefault();
+                        onSelect(unit);
+                      }
+                    : undefined
+                }
               />
             );
           })}

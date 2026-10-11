@@ -12,11 +12,13 @@ import './area-print.css';
 import { ArrowRight } from 'lucide-react';
 import * as React from 'react';
 import { useTranslation } from 'react-i18next';
-import { Link, useLocation, useNavigate, useParams } from 'react-router-dom';
+import { Link, useLocation, useNavigate, useParams, useSearchParams } from 'react-router-dom';
 import { Kicker, PageContainer } from '@/components/layout/Page';
 import { Button } from '@/components/ui/button';
+import { Segmented } from '@/components/ui/primitives';
 import { useModel } from '@/data-layer/DataProvider';
 import { formatDate } from '@/lib/utils';
+import { Advancement } from './components/Advancement';
 import { AreaHero } from './components/AreaHero';
 import { AreaSection, useMediaQuery } from './components/bits';
 import { ChartSlot, loadCharts, usePrefetchCharts } from './components/ChartSlot';
@@ -24,13 +26,11 @@ import { Deferred, DeferredProvider } from './components/Deferred';
 import { Dimensions } from './components/Dimensions';
 import { Drivers } from './components/Drivers';
 import { IndicatorTable } from './components/IndicatorTable';
-import { Methodology } from './components/Methodology';
-import { Overview } from './components/Overview';
-import { Places } from './components/Places';
+import { KeyFindings, Overview } from './components/Overview';
 import { SectionNav } from './components/SectionNav';
 import { Services } from './components/Services';
 import { WhatToDo } from './components/WhatToDo';
-import { buildAreaView, placeListsFor, resolveUnit, servicesFor, type AreaView } from './lib';
+import { buildAreaView, explorerHref, resolveUnit, servicesFor, type AreaView } from './lib';
 
 function AreaNotFound({ id }: { id?: string }) {
   const { t } = useTranslation(['area', 'common']);
@@ -94,6 +94,7 @@ function placeholderHeights(view: AreaView, places: number, lists: number, drrRe
       chartsBottom: hazardRows * 30 + 360,
       drivers: national ? 1490 : 2140,
       table: 640, // each dimension starts folded on phones
+      advancement: 1500,
       places: places * 44 + 420,
       services: drrRecorded ? 1200 : 940,
     };
@@ -103,6 +104,7 @@ function placeholderHeights(view: AreaView, places: number, lists: number, drrRe
       chartsBottom: hazardRows * 30 + 260,
       drivers: national ? 1190 : 1800,
       table: rows * 82 + 700, // sources sit under each indicator name below 1024 px
+      advancement: 1250,
       places: places * 44 + 420,
       services: 660,
     };
@@ -111,54 +113,99 @@ function placeholderHeights(view: AreaView, places: number, lists: number, drrRe
     chartsBottom: hazardRows * 30 + 260,
     drivers: national ? 920 : 1060,
     table: rows * 58 + 700,
+    advancement: 980,
     // One list sits beside its summary; several lists each stack their summary above the list.
     places: lists > 1 ? places * 44 + 420 : Math.ceil(places / (layout === 'wide' && places > 12 ? 2 : 1)) * 46 + 70,
     services: 640,
   };
 }
 
+type ViewMode = 'risk' | 'analysis';
+const ANALYSIS_IDS: ReadonlySet<string> = new Set(['why', 'charts', 'indicators', 'advancement', 'services', 'dimensions', 'drivers']);
+
+/** Where the rest of the profile is: the other view, the explorer (neighbours, regions) and the Methodology page. */
+function ViewLinks({ mode, unit, onSwitch }: { mode: ViewMode; unit: AreaView['unit']; onSwitch: (m: ViewMode) => void }) {
+  const { t } = useTranslation('area');
+  return (
+    <nav aria-label={t('views.label')} className="no-print border-t border-border py-8 pb-16 sm:pb-20">
+      <ul className="grid gap-3 text-sm">
+        <li>
+          <button type="button" onClick={() => onSwitch(mode === 'risk' ? 'analysis' : 'risk')} className="inline-flex items-center gap-1 font-medium text-primary underline-offset-4 hover:underline">
+            {t(mode === 'risk' ? 'links.analysis' : 'links.risk')} <ArrowRight className="size-3.5" aria-hidden />
+          </button>
+        </li>
+        {unit.level !== 'national' && (
+          <li>
+            <Link to={explorerHref(unit)} className="inline-flex items-center gap-1 font-medium text-primary underline-offset-4 hover:underline">
+              {t('links.places')} <ArrowRight className="size-3.5" aria-hidden />
+            </Link>
+          </li>
+        )}
+        <li>
+          <Link to="/methodology" className="inline-flex items-center gap-1 font-medium text-primary underline-offset-4 hover:underline">
+            {t('links.method')} <ArrowRight className="size-3.5" aria-hidden />
+          </Link>
+        </li>
+      </ul>
+    </nav>
+  );
+}
+
 function AreaReport({ view }: { view: AreaView }) {
   const { t } = useTranslation(['area', 'common']);
   usePrefetchCharts();
   const { unit, model } = view;
-  const placeLists = React.useMemo(() => placeListsFor(model, unit).filter((l) => l.units.length > 0), [model, unit]);
-  const hasPlaces = placeLists.length > 0;
   const phone = useMediaQuery('(max-width: 639px)');
   const desktop = useMediaQuery('(min-width: 1024px)');
   const wide = useMediaQuery('(min-width: 1280px)');
   const layout: Layout = phone ? 'phone' : wide ? 'wide' : desktop ? 'desktop' : 'tablet';
   const h = React.useMemo(
     () =>
-      placeholderHeights(
-        view,
-        placeLists.reduce((n, l) => Math.max(n, l.units.length), 0),
-        placeLists.length,
-        servicesFor(model, unit).drr.recorded > 0,
-        layout,
-      ),
-    [view, placeLists, model, unit, layout],
+      placeholderHeights(view, 0, 0, servicesFor(model, unit).drr.recorded > 0, layout),
+    [view, model, unit, layout],
   );
 
+  // Two views (UX-01): 'Risk and what to do' for people and committees (the default), 'Analysis' for
+  // coordinators and analysts. A link into an analysis section (#indicators, #advancement) opens that view.
+  const [params, setParams] = useSearchParams();
+  const mode: ViewMode = params.get('view') === 'analysis' ? 'analysis' : 'risk';
+  const setMode = React.useCallback(
+    (m: ViewMode) =>
+      setParams(
+        (prev) => {
+          const next = new URLSearchParams(prev);
+          if (m === 'analysis') next.set('view', 'analysis');
+          else next.delete('view');
+          return next;
+        },
+        { replace: true },
+      ),
+    [setParams],
+  );
   const sections = React.useMemo(
     () =>
-      [
-        { id: 'overview', label: t('nav.overview') },
-        { id: 'actions', label: t('nav.actions') },
-        { id: 'dimensions', label: t('nav.dimensions') },
-        { id: 'charts', label: t('nav.charts') },
-        { id: 'drivers', label: t('nav.drivers') },
-        { id: 'indicators', label: t('nav.indicators') },
-        ...(hasPlaces ? [{ id: 'places', label: t('nav.places') }] : []),
-        { id: 'services', label: t('nav.services') },
-        { id: 'method', label: t('nav.method') },
-      ] as Array<{ id: string; label: string }>,
-    [t, hasPlaces],
+      (mode === 'risk'
+        ? [
+            { id: 'actions', label: t('nav.actions') },
+            { id: 'overview', label: t('nav.overview') },
+          ]
+        : [
+            { id: 'why', label: t('nav.why') },
+            { id: 'charts', label: t('nav.charts') },
+            { id: 'indicators', label: t('nav.indicators') },
+            { id: 'advancement', label: t('nav.advancement') },
+            { id: 'services', label: t('nav.services') },
+          ]) as Array<{ id: string; label: string }>,
+    [t, mode],
   );
-  const n = (id: string) => sections.findIndex((s) => s.id === id) + 1;
 
   // Arriving on a section link (the explorer's "What to do" opens /area/<id>#actions): scroll to it, and
   // keep it in place while the map and charts above it load, until the reader scrolls themselves.
   const { hash } = useLocation();
+  React.useEffect(() => {
+    const id = decodeURIComponent(hash.slice(1));
+    if (ANALYSIS_IDS.has(id) && mode !== 'analysis') setMode('analysis');
+  }, [hash, mode, setMode]);
   React.useEffect(() => {
     const id = decodeURIComponent(hash.slice(1));
     if (!id) return;
@@ -187,77 +234,88 @@ function AreaReport({ view }: { view: AreaView }) {
           <PrintHeader view={view} />
         </PageContainer>
         <AreaHero view={view} />
-        <SectionNav sections={sections} unit={unit} />
+        <PageContainer className="no-print">
+          <div className="flex flex-wrap items-center gap-3 border-t border-border pt-5">
+            <span className="text-sm font-medium text-muted-foreground">{t('views.label')}</span>
+            <Segmented
+              value={mode}
+              onValueChange={(v) => setMode(v as ViewMode)}
+              options={[
+                { value: 'risk', label: t('views.risk') },
+                { value: 'analysis', label: t('views.analysis') },
+              ]}
+              aria-label={t('views.label')}
+            />
+          </div>
+        </PageContainer>
+        <SectionNav key={mode} sections={sections} unit={unit} />
 
         <PageContainer>
-          <AreaSection id="overview" index={n('overview')} eyebrow={t('sections.overview.eyebrow')} title={t('sections.overview.title', { name: unit.name })} className="border-t-0">
-            <Overview view={view} />
-          </AreaSection>
+          {mode === 'risk' ? (
+            <>
+              <AreaSection id="actions" index={1} eyebrow={t('sections.actions.eyebrow')} title={t('sections.actions.title', { name: unit.name })} description={t('sections.actions.lead')} className="border-t-0">
+                <WhatToDo key={unit.id} unit={unit} />
+              </AreaSection>
+              <AreaSection id="overview" index={2} eyebrow={t('sections.overview.eyebrow')} title={t('sections.overview.title', { name: unit.name })}>
+                <Overview view={view} />
+              </AreaSection>
+              <ViewLinks mode={mode} unit={unit} onSwitch={setMode} />
+            </>
+          ) : (
+            <>
+              <AreaSection id="why" index={1} eyebrow={t('sections.why.eyebrow')} title={t('sections.why.title')} description={t('sections.why.lead')} className="border-t-0">
+                <div className="mb-14">
+                  <KeyFindings view={view} />
+                </div>
+                <Dimensions view={view} />
+                <div className="mt-14">
+                  <Deferred minHeight={h.drivers}>
+                    <Drivers view={view} />
+                  </Deferred>
+                </div>
+              </AreaSection>
 
-          <AreaSection
-            id="actions"
-            index={n('actions')}
-            eyebrow={t('sections.actions.eyebrow')}
-            title={t('sections.actions.title', { name: unit.name })}
-            description={t('sections.actions.lead')}
-          >
-            <WhatToDo key={unit.id} unit={unit} />
-          </AreaSection>
+              <AreaSection id="charts" index={2} eyebrow={t('sections.charts.eyebrow')} title={t(`sections.charts.title.${unit.level}`)} description={t(`sections.charts.lead.${unit.level}`)} className="print:break-before-page">
+                <Deferred minHeight={h.chartsTop}>
+                  <div className="grid gap-x-12 gap-y-14 lg:grid-cols-2 print:grid-cols-1">
+                    <ChartSlot name="CategoryChart" view={view} />
+                    <ChartSlot name="DistributionChart" view={view} />
+                  </div>
+                </Deferred>
+                <div className="mt-14">
+                  <Deferred minHeight={h.chartsBottom}>
+                    <ChartSlot name="IndicatorChart" view={view} minHeight={h.chartsBottom} />
+                  </Deferred>
+                </div>
+              </AreaSection>
 
-          <AreaSection id="dimensions" index={n('dimensions')} eyebrow={t('sections.dimensions.eyebrow')} title={t('sections.dimensions.title')} description={t('sections.dimensions.lead')}>
-            <Dimensions view={view} />
-          </AreaSection>
+              <AreaSection
+                id="indicators"
+                index={3}
+                eyebrow={t('sections.indicators.eyebrow')}
+                title={t('sections.indicators.title')}
+                description={t('sections.indicators.lead', { count: view.rows.length })}
+                className="print:break-before-page"
+              >
+                <Deferred minHeight={h.table}>
+                  <IndicatorTable view={view} />
+                </Deferred>
+              </AreaSection>
 
-          <AreaSection id="charts" index={n('charts')} eyebrow={t('sections.charts.eyebrow')} title={t(`sections.charts.title.${unit.level}`)} description={t(`sections.charts.lead.${unit.level}`)} className="print:break-before-page">
-            <Deferred minHeight={h.chartsTop}>
-              <div className="grid gap-x-12 gap-y-14 lg:grid-cols-2 print:grid-cols-1">
-                <ChartSlot name="CategoryChart" view={view} />
-                <ChartSlot name="DistributionChart" view={view} />
-              </div>
-            </Deferred>
-            <div className="mt-14">
-              <Deferred minHeight={h.chartsBottom}>
-                <ChartSlot name="IndicatorChart" view={view} minHeight={h.chartsBottom} />
-              </Deferred>
-            </div>
-          </AreaSection>
+              <AreaSection id="advancement" index={4} eyebrow={t('sections.advancement.eyebrow')} title={t('sections.advancement.title')} description={t('sections.advancement.lead')}>
+                <Deferred minHeight={h.advancement}>
+                  <Advancement view={view} />
+                </Deferred>
+              </AreaSection>
 
-          <AreaSection id="drivers" index={n('drivers')} eyebrow={t('sections.drivers.eyebrow')} title={t('sections.drivers.title')} description={t('sections.drivers.lead')}>
-            <Deferred minHeight={h.drivers}>
-              <Drivers view={view} />
-            </Deferred>
-          </AreaSection>
-
-          <AreaSection
-            id="indicators"
-            index={n('indicators')}
-            eyebrow={t('sections.indicators.eyebrow')}
-            title={t('sections.indicators.title')}
-            description={t('sections.indicators.lead', { count: view.rows.length })}
-            className="print:break-before-page"
-          >
-            <Deferred minHeight={h.table}>
-              <IndicatorTable view={view} />
-            </Deferred>
-          </AreaSection>
-
-          {hasPlaces && (
-            <AreaSection id="places" index={n('places')} eyebrow={t('sections.places.eyebrow')} title={t(`sections.places.title.${unit.level}`, { region: unit.region })} description={t('sections.places.lead')}>
-              <Deferred minHeight={h.places}>
-                <Places view={view} lists={placeLists} />
-              </Deferred>
-            </AreaSection>
+              <AreaSection id="services" index={5} eyebrow={t('sections.services.eyebrow')} title={t('sections.services.title')} description={t('sections.services.lead')}>
+                <Deferred minHeight={h.services}>
+                  <Services view={view} />
+                </Deferred>
+              </AreaSection>
+              <ViewLinks mode={mode} unit={unit} onSwitch={setMode} />
+            </>
           )}
-
-          <AreaSection id="services" index={n('services')} eyebrow={t('sections.services.eyebrow')} title={t('sections.services.title')} description={t('sections.services.lead')}>
-            <Deferred minHeight={h.services}>
-              <Services view={view} />
-            </Deferred>
-          </AreaSection>
-
-          <AreaSection id="method" index={n('method')} eyebrow={t('sections.method.eyebrow')} title={t('sections.method.title')} className="pb-16 sm:pb-20">
-            <Methodology view={view} />
-          </AreaSection>
         </PageContainer>
       </div>
     </DeferredProvider>
@@ -268,14 +326,15 @@ export default function AreaPage() {
   const { id } = useParams<{ id: string }>();
   const model = useModel();
   const navigate = useNavigate();
+  const location = useLocation();
   const { t } = useTranslation('area');
   const unit = React.useMemo(() => resolveUnit(model, id), [model, id]);
   const view = React.useMemo(() => (unit ? buildAreaView(model, unit) : null), [model, unit]);
 
   // Canonicalise hand-typed ids (/area/c001 → /area/C001) so shared links are stable.
   React.useEffect(() => {
-    if (unit && id !== unit.id) navigate(`/area/${unit.id}`, { replace: true });
-  }, [unit, id, navigate]);
+    if (unit && id !== unit.id) navigate({ pathname: `/area/${unit.id}`, search: location.search, hash: location.hash }, { replace: true });
+  }, [unit, id, navigate, location.search, location.hash]);
 
   // The document title doubles as the default PDF file name when saving.
   React.useEffect(() => {

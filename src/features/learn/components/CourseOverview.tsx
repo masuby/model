@@ -14,7 +14,7 @@ import { cn, NO_VALUE } from '@/lib/utils';
 import { usePrefs } from '@/state/prefs';
 import { COMPLETE_SLUG, LESSON_BY_ID, LESSONS, TOTAL_MINUTES, TOTAL_QUESTIONS, type LessonId } from '../course';
 import { useProgress } from '../hooks';
-import { averageScore, completedCount, courseProgressPct, isCourseComplete, nextIncomplete } from '../progress';
+import { averageScore, completedCount, courseProgressPct, isCompleted, isCourseComplete, nextIncomplete } from '../progress';
 import { preloadWidget } from '../widgets';
 import { FigureRow } from './FigureRow';
 import { RichText } from './RichText';
@@ -90,9 +90,15 @@ export function CourseOverview() {
               <h2 id="learn-progress" className="font-sans text-sm font-medium tracking-normal text-muted-foreground">
                 {t('overview.yourProgress')}
               </h2>
-              <p className="num mt-1.5 text-3xl font-semibold tracking-tight sm:text-[2.1rem]">{pct}%</p>
-              <p className="mt-1 text-sm">{t('overview.lessonsDone', { done, total: LESSONS.length })}</p>
-              <Progress value={pct} label={t('overview.progressLabel', { pct })} className="mt-4 h-1 rounded-none" indicatorClassName={cn('rounded-none', complete ? 'bg-success' : 'bg-foreground/70')} />
+              <p className="num mt-1.5 font-display text-[2.8rem] leading-none font-semibold tracking-tight sm:text-[3.2rem]">{pct}%</p>
+              <p className="mt-2 text-base">{t('overview.lessonsDone', { done, total: LESSONS.length })}</p>
+              {/* One segment per lesson: the course's shape, not only a percentage. */}
+              <ol className="mt-4 grid gap-1" style={{ gridTemplateColumns: `repeat(${LESSONS.length}, minmax(0, 1fr))` }} aria-hidden>
+                {LESSONS.map((l) => (
+                  <li key={l.id} className={cn('h-2.5', isCompleted(progress, l.id) ? (complete ? 'bg-success' : 'bg-foreground/70') : 'bg-muted')} />
+                ))}
+              </ol>
+              <Progress value={pct} label={t('overview.progressLabel', { pct })} className="sr-only" />
               <dl className="mt-5 divide-y divide-border border-y border-border text-sm">
                 {avg != null && (
                   <div className="flex items-baseline justify-between gap-4 py-2.5">

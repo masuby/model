@@ -56,6 +56,7 @@ export function DimensionProfile({ unit, dim, reference }: { unit: Unit; dim: 'v
                     key={ind.key}
                     label={t(`indicators:${ind.key}`)}
                     value={c?.indicators[ind.key]}
+                    scale={dim}
                     highlight={top?.key === ind.key}
                     reference={national.dims[dim].categories[cat.key]?.indicators[ind.key]}
                     referenceLabel={t('learn:widget.national')}

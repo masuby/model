@@ -122,10 +122,18 @@
       "help": "Vifo vilivyosababishwa na tukio, pamoja na watu waliopotea wanaodhaniwa kufariki.",
       "short": "Vifo"
     },
-    "level5": { "short": "Watu katika kiwango 5" },
-    "level4": { "short": "Watu katika kiwango 4" },
-    "level3": { "short": "Watu katika kiwango 3" },
-    "level2": { "short": "Watu katika kiwango 2" },
+    "level5": {
+      "short": "Watu katika kiwango 5"
+    },
+    "level4": {
+      "short": "Watu katika kiwango 4"
+    },
+    "level3": {
+      "short": "Watu katika kiwango 3"
+    },
+    "level2": {
+      "short": "Watu katika kiwango 2"
+    },
     "groups": {
       "label": "Makundi ya watu yaliyoathirika",
       "help": "Weka alama kwa kila kundi lililoathirika na janga. Kadiri makundi yanavyotofautiana, ndivyo ukabilianaji unavyokuwa mgumu zaidi.",
@@ -255,16 +263,37 @@
   "access": {
     "notSet": "Bado haijatathminiwa. Chagua alama kuanzia 0 (hakuna vikwazo) hadi 3 (vikwazo vikubwa).",
     "level": {
-      "0": { "name": "Hakuna", "desc": "Hakuna vikwazo vya ufikiaji: misaada na watu wanafikiana bila tatizo." },
-      "1": { "name": "Kidogo", "desc": "Vikwazo au ucheleweshaji wa hapa na pale; watu wengi wanafikiwa." },
-      "2": { "name": "Wastani", "desc": "Vikwazo vya mara kwa mara; sehemu za eneo au za watu ni vigumu kufikiwa." },
-      "3": { "name": "Vikubwa", "desc": "Vikwazo vikubwa; sehemu kubwa ya watu walioathirika haiwezi kufikiwa." }
+      "0": {
+        "name": "Hakuna",
+        "desc": "Hakuna vikwazo vya ufikiaji: misaada na watu wanafikiana bila tatizo."
+      },
+      "1": {
+        "name": "Kidogo",
+        "desc": "Vikwazo au ucheleweshaji wa hapa na pale; watu wengi wanafikiwa."
+      },
+      "2": {
+        "name": "Wastani",
+        "desc": "Vikwazo vya mara kwa mara; sehemu za eneo au za watu ni vigumu kufikiwa."
+      },
+      "3": {
+        "name": "Vikubwa",
+        "desc": "Vikwazo vikubwa; sehemu kubwa ya watu walioathirika haiwezi kufikiwa."
+      }
     }
   },
   "reliabilityInput": {
-    "low": { "name": "Chini", "desc": "Taarifa zisizothibitishwa, chanzo kimoja au makadirio ya jumla." },
-    "medium": { "name": "Wastani", "desc": "Tathmini za sehemu au takwimu rasmi za awali." },
-    "high": { "name": "Juu", "desc": "Tathmini ya sekta nyingi iliyothibitishwa au takwimu rasmi." }
+    "low": {
+      "name": "Chini",
+      "desc": "Taarifa zisizothibitishwa, chanzo kimoja au makadirio ya jumla."
+    },
+    "medium": {
+      "name": "Wastani",
+      "desc": "Tathmini za sehemu au takwimu rasmi za awali."
+    },
+    "high": {
+      "name": "Juu",
+      "desc": "Tathmini ya sekta nyingi iliyothibitishwa au takwimu rasmi."
+    }
   },
   "reliabilityNote": "Kielelezo cha uaminifu huunganisha uaminifu wa vyanzo, upya wa data na ukamilifu wake. Huonyeshwa kando ya alama ya ukali na hakiibadilishi kamwe.",
   "unit": {
@@ -373,7 +402,13 @@
     "copyShort": "Nakili muhtasari",
     "copied": "Muhtasari umenakiliwa. Ubandike kwenye ripoti yako ya hali.",
     "copyFailed": "Imeshindikana kunakili.",
-    "mobileCta": "Matokeo kamili"
+    "mobileCta": "Matokeo kamili",
+    "zero": {
+      "title": "Hakuna ukali wa kuchapisha",
+      "noPeopleInNeed": "Hakuna mtu mwenye mahitaji ya kibinadamu katika hali hii (ngazi ya 3 hadi 5 hazina watu), hivyo fahirisi ni 0 na hakuna daraja linalotolewa.",
+      "zeroImpact": "Kipimo cha athari kina alama 0, hivyo fahirisi ni 0 na hakuna daraja linalotolewa.",
+      "zeroConditions": "Kipimo cha hali za kibinadamu kina alama 0, hivyo fahirisi ni 0 na hakuna daraja linalotolewa."
+    }
   },
   "table": {
     "eyebrow": "Viashiria",
@@ -444,7 +479,8 @@
     },
     "adaptTitle": "Marekebisho kwa Tanzania",
     "adapt": "Muundo, uzito, ujumlishaji wa kijiometri na madaraja ya kupandisha alama yanafuata mbinu rasmi. Masafa ya rejea ya viashiria ni vigezo vya urekebishaji kwa majanga ya ngazi za chini nchini Tanzania; thamani za awali za Jamii na usalama ni viashiria vya kimuundo vya kitaifa.",
-    "denominators": "Vigawanyo vya kitaifa: watu {{pop}} (Sensa ya NBS 2022) na km² {{area}}."
+    "denominators": "Vigawanyo vya kitaifa: watu {{pop}} (Sensa ya NBS 2022) na km² {{area}}.",
+    "revision": "Fahirisi ya Ukali ya INFORM, Dhana na Mbinu, Toleo la 2026 (Poljansek na wenzake, JRC): kipimo cha uendeshaji cha 0 hadi 5, madaraja ya kuzungusha juu na wastani wa kijiometri wa 70% wa athari na hali pamoja na 30% ya ugumu vinavyotumika hapa havijabadilika; inapendekeza kubadilisha fahirisi kuwa 0 hadi 10 na kupima mkusanyiko wa hali kwa mfululizo. Ukurasa huu unabaki na toleo la uendeshaji hadi mapendekezo hayo yatakapoanza kutumika, na unasema hivyo hapa."
   },
   "summary": {
     "title": "Ukali wa INFORM: {{name}}",

@@ -59,6 +59,7 @@ export function PlaceSearch({ className, glass = false }: { className?: string; 
         ref={inputRef}
         type="search"
         role="combobox"
+        data-place-search
         aria-label={t('search.label')}
         aria-expanded={showList}
         aria-controls={listId}

@@ -12,74 +12,141 @@
   },
   "levels": {
     "1": {
-      "name": "Advisory",
-      "call": "Be prepared",
+      "label": "Level 1 (yellow)",
       "colour": "Yellow",
       "short": "Level 1"
     },
     "2": {
-      "name": "Warning",
-      "call": "Take action",
+      "label": "Level 2 (orange)",
       "colour": "Orange",
       "short": "Level 2"
     },
     "3": {
-      "name": "Major warning",
-      "call": "Take action immediately",
+      "label": "Level 3 (red)",
       "colour": "Red",
       "short": "Level 3"
     }
   },
-  "alert": {
-    "label": "Alert category",
-    "for": "Alert category for {{name}}",
-    "basis": "Set by the assessed risk level: {{cls}} ({{score}}).",
-    "rule": "Very low and low risk: Advisory (yellow). Medium risk: Warning (orange). High and very high risk: Major warning (red).",
-    "official": "This category follows from the INFORM risk level, not from a forecast. When TMA issues a warning, follow that warning.",
-    "current": "{{name}}'s alert category",
-    "from": "From the {{cls}} risk level",
-    "link": "What to do",
-    "title": "Alert category from the {{cls}} risk level"
+  "risk": {
+    "label": "Risk level",
+    "for": "Risk level for {{name}}",
+    "badge": "{{cls}} risk",
+    "basis": "{{cls}}, {{score}} out of 10 on the INFORM risk scale",
+    "title": "{{cls}} risk: know the risk in this area",
+    "link": "Know the risk",
+    "live": "If you live or work here",
+    "plan": "If you plan, build, invest or settle here",
+    "band": {
+      "1": {
+        "live": "Risk here is {{cls}}. The hazards listed below still occur: know them, and keep basic preparedness at home and at work.",
+        "plan": "New settlement, business and investment face few hazard constraints here. Keep to the land-use plan and the building rules so the risk stays low.",
+        "planHazard": "Overall risk is {{cls}} here, but the {{hazard}} hazard is very high ({{score}} out of 10). Plan new settlement, business and investment for it: keep to the land-use plan and build to the standards that address it."
+      },
+      "2": {
+        "live": "Risk here is {{cls}}. Expect the hazards listed below to disrupt life and livelihoods from time to time: know the safe places and routes, and keep household and business plans ready.",
+        "plan": "Be careful with new settlement and business activities: avoid the exposed zones, build to standard, keep drainage and access routes clear, and insure what can be insured."
+      },
+      "3": {
+        "live": "Risk here is {{cls}}. The hazards listed below strike often or hard and the area's capacity to cope is limited: know the safe places and routes and prepare for disruption.",
+        "plan": "Avoid adding more residents or new business activities in the exposed zones. Strict land-use and building standards apply; protective works, moving the most exposed households and stronger local response capacity come first."
+      }
+    }
   },
   "emergency": {
-    "label": "In an emergency",
-    "main": "Emergency",
-    "fire": "Fire and Rescue",
-    "call": "Call {{number}} ({{name}})"
+    "label": "In an emergency call",
+    "call": "Call {{number}}"
   },
   "know": {
-    "title": "Know your risk",
-    "lead": "Where the danger lies in {{name}}, and what helps the people who live and work there.",
-    "leadMany": "Where the danger lies in each council of {{name}}, and what helps the people who live and work there.",
-    "helps": "What helps",
+    "title": "The area and its hazards",
+    "lead": "What the Risk Action Guide Book records about {{name}}: the nature of the area and where its hazards lie.",
+    "leadMany": "What the Risk Action Guide Book records about each council of {{name}}: the nature of the area and where its hazards lie.",
     "openCouncil": "{{name}} profile",
-    "empty": "The guide has no local statement for this area yet. The hazard guidance below still applies."
-  },
-  "warnings": {
-    "title": "When a warning is issued",
-    "lead": "The Tanzania Meteorological Authority (TMA) and Disaster Management Committees issue warnings at three levels. Choose a hazard and a level to see what to expect and what to do.",
-    "hazards": "Hazards in {{name}}",
-    "hazardsNational": "Hazards",
-    "other": "Other hazards",
-    "plan": "{{name}} council plan",
-    "level": "Alert level",
-    "expect": "What you may see",
-    "do": "What to do",
-    "more_one": "Show {{count}} more",
-    "more_other": "Show {{count}} more",
-    "less": "Show fewer",
-    "status": "Until the warning is lifted",
-    "error": "This guidance could not be loaded. Check your connection and try again."
+    "empty": "The guide has no statement about this area yet; the district committee (DDRRC) can write one through the Data portal.",
+    "updated": "Updated by the {{role}}, approved by {{by}}, {{date}}.",
+    "statements_one": "{{count}} statement",
+    "statements_other": "{{count}} statements",
+    "summaryMany": "{{count}} councils: {{names}}",
+    "summaryOne": "{{area}}",
+    "summaryNone": "No statement about this area yet"
   },
   "incidents": {
     "title": "Incidents and accidents",
-    "lead": "Immediate actions for common emergencies, wherever you are."
+    "lead": "Immediate actions for common emergencies, wherever you are.",
+    "summary": "{{count}} groups of incidents, with the first actions for each."
   },
-  "source": "From the Risk Action Guide Book, based on the National Disaster Management Strategy 2022 to 2027 and the National Disaster Preparedness and Response Plan 2022. It is general guidance: always follow official warnings from TMA and the instructions of your Disaster Management Committee.",
   "summary": {
-    "title": "What to do",
+    "title": "Know the risk",
     "hazards": "Main hazards here",
     "hazardsMany": "Main hazards in this area",
-    "more": "What to do before and during a warning"
+    "more": "Know the risk in this area"
+  },
+  "events": {
+    "title": "Reported events",
+    "lead": "Hazard events reported by the district committee and validated by the regional committee.",
+    "validated": "validated by {{by}}, {{date}}"
+  },
+  "banner": {
+    "title": "Official warning in force: {{hazard}}",
+    "detail": "{{areas}} · valid {{from}} to {{to}} · issued by {{issuer}}",
+    "actions": "Know the risk in this area",
+    "detailOpen": "{{areas}} · valid from {{from}}, until lifted · issued by {{issuer}}"
+  },
+  "hazardList": {
+    "title": "Hazards in {{name}}",
+    "noScore": "No score",
+    "guidance": {
+      "guide": "Guidance below (choose the hazard)",
+      "incidents": "See the incident guide",
+      "needed": "No guidance yet ({{owner}})",
+      "outOfScope": "Outside disaster-risk guidance"
+    },
+    "summary": "{{count}} hazards; highest priority: {{top}}"
+  },
+  "vc": {
+    "title": "Reducing risk over time",
+    "lead": "What reduces the vulnerability and strengthens the coping capacity that weigh most in {{name}}, from the PMO-DMD action library reviewed by the national committee.",
+    "lead_sector": "lead: {{sector}}",
+    "none": "No actions published yet for this group.",
+    "by": "PMO-DMD library, reviewed {{date}} ({{by}}).",
+    "summary": "{{count}} indicator groups weigh most here; {{n}} have published actions."
+  },
+  "sms": {
+    "title": "Text message for this hazard and level",
+    "lead": "{{n}} of 160 characters: the level’s call and the guide’s first action, for radio, notice boards and SMS.",
+    "copy": "Copy the message",
+    "copied": "Message copied",
+    "copyFailed": "Could not copy; select the text instead."
+  },
+  "more": {
+    "statements": "Show {{count}} more",
+    "councils": "Show all {{count}} councils",
+    "hazards": "Show all {{count}} hazards",
+    "less": "Show less"
+  },
+  "statements": {
+    "title": "What the data say about {{name}}",
+    "titleNational": "What the data say about Tanzania",
+    "overall": {
+      "council": "{{name}} is at {{cls}} risk: {{score}} out of 10 on the INFORM scale, ranked {{rank}} of {{of}} councils in Tanzania (1 is the highest) and {{regionRank}} of {{regionOf}} in {{region}} region.",
+      "region": "{{name}} region is at {{cls}} risk: {{score}} out of 10 on the INFORM scale, ranked {{rank}} of {{of}} regions (1 is the highest).",
+      "source": "{{name}} is at {{cls}} risk: {{score}} out of 10 on the INFORM scale, ranked {{rank}} of {{of}} workbook units.",
+      "national": "Tanzania as a whole is at {{cls}} risk: {{score}} out of 10 on the INFORM scale."
+    },
+    "driver": "Of the three parts of the score, {{dim}} weighs most here: {{score}} out of 10, against {{national}} for Tanzania.",
+    "driverNational": "Of the three parts of the score, {{dim}} weighs most: {{score}} out of 10.",
+    "hazards_one": "The hazard that scores highest here is {{list}}.",
+    "hazards_other": "The hazards that score highest here are {{list}}.",
+    "hazardsLow": "No natural hazard scores 5 or more out of 10 here; the highest is {{item}}.",
+    "hazardsNone": "No natural hazard has a score here.",
+    "human_one": "Among the human hazards, {{list}} scores high here.",
+    "human_other": "Among the human hazards, {{list}} score high here.",
+    "vulnerability": "Vulnerability is {{cls}}: {{score}} out of 10.",
+    "vulnerabilityGroups": "Vulnerability is {{cls}}: {{score}} out of 10, raised most by {{list}}.",
+    "coping": "Lack of coping capacity is {{cls}}: {{score}} out of 10.",
+    "copingGroups": "Lack of coping capacity is {{cls}}: {{score}} out of 10; the largest gaps are {{list}}.",
+    "people": "About {{population}} people live here, {{density}} per km².",
+    "peopleNoDensity": "About {{population}} people live here.",
+    "item": "{{name}} ({{score}})",
+    "and": "and"
   }
 }

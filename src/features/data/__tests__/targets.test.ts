@@ -1,10 +1,9 @@
 import { applyEdits, buildModel } from '@/engine/risk/model';
-import type { EditRef, Overrides } from '@/engine/risk/types';
+import type { EditRef } from '@/engine/risk/types';
 import {
   buildSubmissions,
   currentValue,
   EDITABLE_FIELDS,
-  EXPOSURE_REF,
   impactOf,
   siblingsOf,
   simulate,
@@ -18,18 +17,20 @@ const kondoa = model.byId.get('C001')!; // Kondoa District - shares TZ0101 with 
 const meta = { authority: 'TMA', dataset: ' CHIRPS v3 ', note: '  checked  ' };
 
 describe('edit targets', () => {
-  it('lists the 32 indicators plus the exposure index', () => {
-    expect(EDITABLE_FIELDS).toHaveLength(33);
-    expect(EDITABLE_FIELDS.at(-1)!.ref).toBe(EXPOSURE_REF);
+  it('lists the 32 indicator leaves and nothing else (no exposure index)', () => {
+    expect(EDITABLE_FIELDS).toHaveLength(32);
+    expect(EDITABLE_FIELDS.some((f) => f.ref === 'hazard:exposure')).toBe(false);
   });
 
   it('keeps hazard council-own and sends V/C to the source unit', () => {
     expect(targetKind('hazard:flood')).toBe('council');
-    expect(targetKind(EXPOSURE_REF)).toBe('council');
     expect(targetKind('vulnerability:habitat')).toBe('source');
     expect(targetKind('coping:wash')).toBe('source');
     expect(targetUnitId(kondoa, 'hazard:drought')).toBe('C001');
-    expect(targetUnitId(kondoa, 'coping:wash')).toBe('TZ0101');
+    // A value entered for a council applies to the council (finest level wins) unless the unit is chosen.
+    expect(targetUnitId(kondoa, 'coping:wash')).toBe('C001');
+    expect(targetUnitId(kondoa, 'coping:wash', 'unit')).toBe('TZ0101');
+    expect(targetUnitId(kondoa, 'hazard:drought', 'unit')).toBe('C001');
   });
 
   it('finds sibling councils that share the source unit', () => {
@@ -60,16 +61,11 @@ describe('simulate / impact', () => {
     expect(currentValue(next, 'vulnerability:habitat')).toBeNull();
   });
 
-  it('amplifies flood with exposure like the engine, and not when flood was already edited', () => {
+  it('a stored exposure edit changes the index shown and never a score', () => {
     const withExposure = buildModel({ C001: { 'hazard:exposure': { value: 10, at: '' } } }).byId.get('C001')!;
-    expect(simulate(kondoa, { [EXPOSURE_REF]: 10 }).dims.hazard.score).toBe(withExposure.dims.hazard.score);
-
-    const overrides: Overrides = { C001: { 'hazard:flood': { value: 2, at: '' } } };
-    const floodEdited = buildModel(overrides).byId.get('C001')!;
-    const expected = buildModel({ C001: { ...overrides.C001, 'hazard:exposure': { value: 10, at: '' } } }).byId.get('C001')!;
-    const preview = simulate(floodEdited, { [EXPOSURE_REF]: 10 });
-    expect(currentValue(preview, 'hazard:flood')).toBe(2);
-    expect(preview.risk).toBe(expected.risk);
+    expect(withExposure.exposure?.index).toBe(10);
+    expect(withExposure.dims.hazard.score).toBe(kondoa.dims.hazard.score);
+    expect(withExposure.risk).toBe(kondoa.risk);
   });
 
   it('reports before/after summaries', () => {
@@ -86,23 +82,41 @@ describe('simulate / impact', () => {
 });
 
 describe('buildSubmissions', () => {
-  it('splits council-own and source-unit changes into two submissions', () => {
+  it('sends every change to the council by default (finest level wins), including vulnerability and coping', () => {
     const subs = buildSubmissions(
       model,
       kondoa,
       [
         { ref: 'vulnerability:habitat', value: 7 },
         { ref: 'hazard:flood', value: 8.5 },
-        { ref: EXPOSURE_REF, value: 6 },
         { ref: 'coping:wash', value: null },
       ],
       meta,
+    );
+    expect(subs).toHaveLength(1);
+    expect(subs[0].unitId).toBe('C001');
+    expect(subs[0].changes.map((c) => c.ref)).toEqual(['vulnerability:habitat', 'hazard:flood', 'coping:wash']);
+    expect(subs[0].changes[0].previous).toBe(currentValue(kondoa, 'vulnerability:habitat'));
+  });
+
+  it('with the unit scope, splits council-own and unit changes into two submissions', () => {
+    const subs = buildSubmissions(
+      model,
+      kondoa,
+      [
+        { ref: 'vulnerability:habitat', value: 7 },
+        { ref: 'hazard:flood', value: 8.5 },
+        { ref: 'hazard:drought', value: 6 },
+        { ref: 'coping:wash', value: null },
+      ],
+      meta,
+      'unit',
     );
     expect(subs).toHaveLength(2);
     const [own, shared] = subs;
     expect(own.unitId).toBe('C001');
     expect(own.unitName).toBe('Kondoa District');
-    expect(own.changes.map((c) => c.ref)).toEqual(['hazard:flood', EXPOSURE_REF]);
+    expect(own.changes.map((c) => c.ref)).toEqual(['hazard:flood', 'hazard:drought']);
     expect(shared.unitId).toBe('TZ0101');
     expect(shared.changes.map((c) => c.ref)).toEqual(['vulnerability:habitat', 'coping:wash']);
     expect(shared.changes[1].value).toBeNull();

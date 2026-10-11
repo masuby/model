@@ -6,7 +6,7 @@
 import { ArrowDown, ArrowRight } from 'lucide-react';
 import * as React from 'react';
 import { useTranslation } from 'react-i18next';
-import { CLASS_COLORS, CLASS_KEYS, classRanges, type ClassKey, type Scale } from '@/engine/risk/classes';
+import { CLASS_KEYS, classColor, classRanges, type ClassKey, type Scale } from '@/engine/risk/classes';
 import { ALL_INDICATORS, DIMENSIONS, type DimensionKey } from '@/engine/risk/hierarchy';
 import { SEVERITY_WEIGHTS } from '@/engine/severity/definitions';
 import { cn } from '@/lib/utils';
@@ -94,7 +94,7 @@ function ClassThresholds() {
     ...DIMENSIONS.map((d) => ({ scale: d.scale, key: d.key, label: t(`common:dimensions.${d.key}`) })),
   ];
   const ranges = rows.map((r) => classRanges(r.scale));
-  const swatch = (k: ClassKey) => <span className="size-2.5 shrink-0" style={{ background: CLASS_COLORS[k] }} aria-hidden />;
+  const swatch = (k: ClassKey, scale: Scale = 'risk') => <span className="size-2.5 shrink-0" style={{ background: classColor(k, scale) }} aria-hidden />;
   const head = 'text-left text-xs font-medium text-muted-foreground';
 
   return (
@@ -126,7 +126,10 @@ function ClassThresholds() {
               </th>
               {rows.map((r, j) => (
                 <td key={r.key} className={cn('num px-1 py-2.5 whitespace-nowrap last:pr-0', r.scale === 'risk' ? 'font-medium text-foreground' : 'text-foreground/85')}>
-                  {ranges[j][i]}
+                  <span className="inline-flex items-center gap-1.5">
+                    {swatch(k, r.scale)}
+                    {ranges[j][i]}
+                  </span>
                 </td>
               ))}
             </tr>
@@ -160,7 +163,10 @@ function ClassThresholds() {
               </th>
               {ranges[j].map((range, i) => (
                 <td key={CLASS_KEYS[i]} className="num px-2 py-2.5 whitespace-nowrap text-foreground/85">
-                  {range}
+                  <span className="inline-flex items-center gap-1.5">
+                    {swatch(CLASS_KEYS[i], r.scale)}
+                    {range}
+                  </span>
                 </td>
               ))}
             </tr>

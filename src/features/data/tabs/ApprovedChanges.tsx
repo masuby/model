@@ -10,8 +10,10 @@ import { toast } from 'sonner';
 import { Button } from '@/components/ui/button';
 import { Dialog, DialogContent, Input, Tooltip } from '@/components/ui/primitives';
 import { useModel, useOverrides, useRevert } from '@/data-layer/DataProvider';
+import { Versions } from '../components/Versions';
 import { authorityLabel } from '@/engine/risk/sources';
 import type { EditRef, EditStamp, RiskModel, Unit } from '@/engine/risk/types';
+import { exportFileName, exportPreamble, exportStamp } from '@/lib/exports';
 import { downloadText, formatScore, NO_VALUE, toCsv } from '@/lib/utils';
 import { useRefLabel } from '../components/ChangeTable';
 import { Delta, EmptyState, ErrorState, LevelBadge, ListSkeleton, ScoreValue } from '../components/common';
@@ -83,7 +85,8 @@ export function ApprovedChanges() {
     for (const g of groups)
       for (const r of g.rows)
         rows.push([g.unitId, g.unit?.name ?? g.unitId, g.unit?.region ?? '', label(r.ref).name, r.baseline, r.stamp.value, r.stamp.authority ?? '', r.stamp.dataset ?? '', r.stamp.author ?? '', r.stamp.at, r.stamp.note ?? '']);
-    downloadText(`inform-approved-changes-${new Date().toISOString().slice(0, 10)}.csv`, toCsv(rows), 'text/csv;charset=utf-8');
+    const stamp = exportStamp(t('tabs.approved'));
+    downloadText(exportFileName(`approved-changes-${new Date().toISOString().slice(0, 10)}`, stamp), toCsv([...exportPreamble(t, stamp), ...rows]), 'text/csv;charset=utf-8');
   };
 
   const doRevert = async () => {
@@ -103,6 +106,7 @@ export function ApprovedChanges() {
 
   return (
     <div>
+      <Versions />
       <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
         <div className="relative flex-1 sm:max-w-md">
           <Search className="pointer-events-none absolute top-1/2 left-3 size-4 -translate-y-1/2 text-muted-foreground" aria-hidden />

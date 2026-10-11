@@ -25,27 +25,28 @@
     "source": "Vitengo vya INFORM",
     "reference": "Rejea",
     "note": {
-      "council": "Halmashauri {{count}} (NBS 2022), ngazi kuu. Vitisho na Mfiduo hukokotolewa kwa kila halmashauri; udhaifu na uwezo wa kukabiliana hutoka kwenye kitengo cha chanzo cha INFORM cha halmashauri husika.",
-      "region": "Mikoa {{count}}, iliyojumlishwa kutoka halmashauri zake kwa mbinu ya INFORM (wastani wa viashiria, kisha wastani wa kijiometri uliopimwa).",
-      "source": "Vitengo {{count}} vya kitabu cha INFORM SADC 2024, vinaonyeshwa kwa rejea tu. Halmashauri ndizo ngazi kuu."
-    }
+      "council": "Halmashauri {{count}} (NBS 2022).",
+      "region": "Mikoa {{count}}, iliyojumlishwa kutoka halmashauri zake.",
+      "source": "Vitengo {{count}} vya kitabu cha kazi cha INFORM SADC 2024."
+    },
+    "referenceLink": "Vitengo {{count}} vya kitabu cha kazi"
   },
   "lens": {
     "label": "Paka rangi kwa",
     "scoresFor": "Alama zinazoonyeshwa ni za {{name}}.",
-    "scoresNational": "Alama zinazoonyeshwa: takwimu rasmi za kitaifa.",
+    "scoresNational": "Alama zinazoonyeshwa: mjumuiko wa kitaifa wa halmashauri zote.",
     "source": "Chanzo",
     "resolution": "Kiwango cha undani",
     "backToRisk": "Rudi kwenye hatari kwa ujumla",
     "groupsOf": "Makundi ya viashiria ya {{dimension}}",
-    "groupsHint": "Chagua kipimo uone makundi yake ya viashiria, kama Mafuriko au Ukame chini ya Vitisho na Mfiduo."
+    "groupsHint": "Chagua kipimo uone makundi yake ya viashiria."
   },
   "resolution": {
-    "council": "Halmashauri: hukokotolewa kwa kila halmashauri",
+    "council": "Halmashauri: imerekodiwa kwa halmashauri hii",
     "district": "Wilaya: thamani moja kwa halmashauri za wilaya moja",
     "region": "Mkoa: makadirio ya tafiti, sawa kwa kila halmashauri ya mkoa",
     "national": "Taifa: thamani moja kwa nchi nzima",
-    "overlay": "Tabaka lililorekodiwa: mfiduo uliobainishwa na wataalamu"
+    "none": "Hakuna data: hakuna kiashiria cha kitabu chenye data kwa kundi hili"
   },
   "legend": {
     "label": "Ufunguo na kichujio",
@@ -63,9 +64,10 @@
   "honesty": {
     "label": "Kuhusu vipimo hivi",
     "title": "Jinsi ya kusoma rangi",
+    "palette": "Hatari kwa ujumla hupakwa rangi kutoka manjano hafifu hadi nyekundu iliyokolea, katika familia za mikanda yake mitatu ya rangi; kila kipimo huhifadhi rangi za kitabu cha INFORM SADC 2024: vitisho manjano hadi kahawia, uathirikaji buluu, ukosefu wa uwezo wa kukabiliana kijani.",
     "indicator": "Mwonekano wa kiashiria kimoja hutumia kipimo endelevu cha 0–10: INFORM huweka madaraja kwa hatari kwa ujumla na kwa vipimo vitatu pekee.",
     "dimension": "Hatari na kila kipimo vina viwango vyake vya madaraja vya INFORM, hivyo alama ileile inaweza kuangukia madaraja tofauti.",
-    "national": "Thamani ya kitaifa ni takwimu rasmi ya INFORM Tanzania, si wastani wa halmashauri au mikoa.",
+    "national": "Thamani ya kitaifa ni mjumuiko wa INFORM wa halmashauri zote (wastani wa makundi ya viashiria kwanza, kama mikoa), si wastani wa alama za hatari na si alama ya INFORM ya kimataifa.",
     "more": "Soma kuhusu mbinu →"
   },
   "stats": {
@@ -73,7 +75,7 @@
     "mean": "Wastani",
     "min": "Chini zaidi",
     "max": "Juu zaidi",
-    "national": "Kitaifa (rasmi)",
+    "national": "Kitaifa (mjumuiko)",
     "nationalShort": "Kitaifa",
     "areas_one": "eneo {{count}}",
     "areas_other": "maeneo {{count}}",
@@ -109,20 +111,17 @@
     "label": "Maelezo ya {{name}}",
     "close": "Funga maelezo",
     "rank": "Nafasi ya hatari",
-    "national": "Kitaifa (rasmi)",
+    "national": "Kitaifa (mjumuiko)",
     "regionRisk": "Mkoa wa {{name}}",
     "dimensions": "Vipimo",
     "markerRegion": "Mstari wa alama: mkoa wa {{name}}",
-    "markerNational": "Mstari wa alama: takwimu rasmi ya kitaifa",
+    "markerNational": "Mstari wa alama: mjumuiko wa kitaifa",
     "drivers": "Vichocheo vikuu",
     "driversHint": "Viashiria vyenye alama za juu zaidi (0–10). Chagua kimoja kupaka ramani rangi kwa kiashiria hicho.",
     "colourBy": "Paka ramani rangi kwa {{name}}",
     "people": "Watu",
     "popSource": "Chanzo: {{source}}",
     "coverageDetail": "Makundi ya viashiria {{have}} kati ya {{total}} yana data",
-    "regionNote_one": "Umejumlishwa kutoka halmashauri {{count}} kwa mbinu ya INFORM.",
-    "regionNote_other": "Umejumlishwa kutoka halmashauri {{count}} kwa mbinu ya INFORM.",
-    "sourceNote": "Kitengo cha rejea kutoka kitabu cha INFORM SADC 2024. Halmashauri ndizo ngazi kuu.",
     "editedNote_one": "Inajumuisha sasisho {{count}} la data lililoidhinishwa.",
     "editedNote_other": "Inajumuisha masasisho {{count}} ya data yaliyoidhinishwa.",
     "inheritedBadge": "Data iliyorithiwa",
@@ -160,12 +159,164 @@
     "riskClass": "Daraja la hatari",
     "clearClass": "Ondoa kichujio cha {{cls}}",
     "selectRow": "Onyesha maelezo ya {{name}}",
-    "empty": "Hakuna eneo linalolingana na vichujio hivi."
+    "empty": "Hakuna eneo linalolingana na vichujio hivi.",
+    "dataNote": "Taarifa ya data"
   },
   "footer": {
     "asOf": "Data hadi {{date}}",
     "methodology": "Mbinu",
     "method": "Mbinu ya INFORM · JRC na washirika",
     "learn": "Jinsi INFORM inavyofanya kazi"
+  },
+  "layer": {
+    "label": "Tabaka",
+    "core": "Msingi",
+    "advancement": "Maboresho",
+    "note": {
+      "core": "Thamani za kitabu cha kazi cha INFORM SADC 2024 na thamani za kitaasisi zilizoidhinishwa.",
+      "advancement": "Msingi pamoja na viashiria-vidogo vya Tanzania, vinavyoonyeshwa ukiomba.",
+      "loading": "Inakokotoa Tabaka la Maboresho…"
+    }
+  },
+  "riskPanel": {
+    "breadcrumb": "Mahali eneo hili lilipo",
+    "country": "Tanzania",
+    "skip": "Ruka hadi hatari ya {{name}}",
+    "riskTitle": "Kiwango cha hatari",
+    "top": {
+      "title": "Makundi ya viashiria yenye alama za juu zaidi",
+      "more": "Onyesha vyote {{count}}",
+      "less": "Onyesha vichache",
+      "open": "{{name}}: {{score}}. Onyesha ushahidi",
+      "empty": "Hakuna kundi lenye thamani hapa."
+    },
+    "coarse": {
+      "region": "Thamani ya mkoa",
+      "national": "Thamani ya kitaifa",
+      "regionTitle": "Thamani moja kwa mkoa mzima, inayorudiwa kwa kila halmashauri yake",
+      "nationalTitle": "Thamani moja kwa nchi nzima"
+    },
+    "nature": {
+      "title": "Asili ya eneo",
+      "councils": "Halmashauri zenye mwongozo",
+      "more_one": "na halmashauri {{count}} zaidi",
+      "more_other": "na halmashauri {{count}} zaidi",
+      "empty": "Mwongozo hauna maelezo kwa eneo hili."
+    },
+    "warnings": {
+      "title": "Tahadhari zinazotumika"
+    },
+    "scores": {
+      "title": "Jinsi alama inavyojengwa",
+      "councilsByClass": "Halmashauri kwa kiwango cha hatari"
+    },
+    "group": {
+      "back": "{{name}}: muhtasari",
+      "score": "Alama hapa",
+      "outOf": "kati ya 10",
+      "noValue": "Hakuna thamani hapa",
+      "compareRegion": "Mkoa wa {{name}}",
+      "compareNational": "Tanzania",
+      "rankLevel": "#{{rank}} kati ya {{of}} {{level}}",
+      "rankRegion": "#{{rank}} kati ya {{of}} katika {{region}}",
+      "levels": {
+        "council": "halmashauri",
+        "region": "mikoa",
+        "source": "vitengo vya kitabu cha kazi"
+      },
+      "evidence": "Data zinasema nini",
+      "evidenceRegion": "Katika halmashauri zake",
+      "evidenceNational": "Katika mikoa",
+      "spread": "{{withData}} kati ya {{total}} zina thamani; za juu zaidi:",
+      "noEvidence": "Hakuna thamani iliyopimwa kwa kundi hili hapa.",
+      "scoreOf": "{{score}} kati ya 10",
+      "origin": {
+        "workbook": "Kitabu cha kazi cha INFORM SADC 2024",
+        "benchmark": "Benchmark 2026",
+        "portal": "Imeidhinishwa kupitia Lango la data",
+        "advancement": "Tabaka la Maendeleo"
+      },
+      "withheld": "Imezuiliwa baada ya uhakiki (dokezo {{note}})",
+      "detail": {
+        "storms": "Vimbunga: {{list}}",
+        "segments": "Sehemu {{retreating}} kati ya {{all}} za ufukwe zinarudi nyuma",
+        "police": "Mkoa wa polisi wa {{name}}",
+        "ipc": "Wilaya ya {{district}}, Awamu ya IPC {{phase}}",
+        "grid": "Umeme wa gridi pekee: wasifu wa sensa hautoi mgawanyo wa nishati ya jua kwa halmashauri",
+        "nocell": "Ramani ya kimataifa haina seli halali ya hatari kisiwani",
+        "events_one": "Tukio {{count}} la uhamishaji lilirekodiwa 2023-2025",
+        "events_other": "Matukio {{count}} ya uhamishaji yalirekodiwa 2023-2025",
+        "crashes": "Mkoa wa polisi wa {{region}}: ajali {{regionCrashes}} zilizorekodiwa kwa mwaka (2024-2025), takriban {{crashes}} kati yake hapa kwa uwiano wa watu",
+        "sites_one": "eneo {{count}}",
+        "sites_other": "maeneo {{count}}",
+        "sitesFuel": "mafuta na gesi {{count}}",
+        "sitesIndustrial": "viwanda {{count}}",
+        "sitesMining": "madini {{count}}",
+        "sitesWaste": "taka na nishati {{count}}",
+        "sitesHealth_one": "hospitali {{count}}",
+        "sitesHealth_other": "hospitali {{count}}",
+        "sitesNemc": "{{count}} yamethibitishwa na NEMC Julai-Septemba 2026",
+        "drrIn": "Ipo: {{list}}",
+        "drrOut": "haipo: {{list}}",
+        "drrNone": "Hakuna mpango wowote kati ya mitano uliorekodiwa",
+        "govMet": "Imetimizwa: {{list}}",
+        "govNot": "haijatimizwa: {{list}}",
+        "drrItems": {
+          "eprp": "mpango wa kujiandaa na kukabiliana na dharura",
+          "rvca": "tathmini ya hatari, udhaifu na uwezo",
+          "ert": "timu ya kukabiliana na dharura iliyofunzwa",
+          "eocc": "kituo cha operesheni na mawasiliano ya dharura",
+          "training": "mafunzo ya kamati kuhusu kupunguza hatari",
+          "committee": "kamati inafanya kazi",
+          "stakeholders": "ushirikiano wa wadau",
+          "involvement": "ushiriki katika masuala ya kupunguza hatari"
+        }
+      },
+      "warnings": "Tahadhari zinazotumika kwa kitisho hiki",
+      "indicatorTable": "Fungua jedwali la viashiria",
+      "withheldDecision": "Imezuiliwa kwa uamuzi wa programu (dokezo {{note}})"
+    },
+    "actions": {
+      "card": "Kadi ya hatari",
+      "copy": "Nakili kiungo",
+      "cardDetailed": "Kadi ya hatari ya kina"
+    },
+    "rail": {
+      "open": "Onyesha vidhibiti",
+      "close": "Ficha vidhibiti"
+    },
+    "width": {
+      "widen": "Panua paneli",
+      "narrow": "Finya paneli",
+      "handle": "Upana wa paneli ya {{name}}: buruta, au tumia vitufe vya mishale",
+      "left": "kushoto",
+      "right": "kulia",
+      "reset": "Upana wa kawaida"
+    }
+  },
+  "insight": {
+    "label": "Ramani na mienendo ya {{name}}",
+    "map": {
+      "title": "Ramani ya {{name}}",
+      "label": "Ramani ya {{name}} na maeneo yanayoizunguka, yenye rangi kama ramani kuu",
+      "inset": "Mahali mkoa wa {{region}} ulipo Tanzania",
+      "select": "Chagua kwenda hapo"
+    },
+    "charts": {
+      "title": "Mienendo na chati",
+      "parts": "Hatari na sehemu zake",
+      "partAria": "{{label}}: {{value}} hapa; mkoa {{region}}; Tanzania {{national}}",
+      "history": "INFORM SADC 2024: {{workbook}} → sasa {{live}}",
+      "profile": "Wasifu wa hatari",
+      "groupAria": "{{name}}: {{score}}. Onyesha ushahidi",
+      "noGroups": "Hakuna kundi lenye thamani hapa.",
+      "climate": "Hali ya hewa mwaka kwa mwaka",
+      "heat": "Siku za joto kali kwa mwaka, {{from}}-{{to}}",
+      "heatSummary": "Wastani 1991-2020: siku {{base}} kwa mwaka; 2015-2024: siku {{recent}}.",
+      "rain": "Mvua kwa mwaka, {{from}}-{{to}} (mm)",
+      "rainSummary": "Kawaida 1991-2020: mm {{normal}}. Kavu zaidi {{dryYear}} (mm {{dry}}), mvua zaidi {{wetYear}} (mm {{wet}}).",
+      "heavySummary": "Siku {{days}} kwa mwaka zenye mm 50 au zaidi.",
+      "noTrends": "Hakuna mfululizo wa hali ya hewa hapa."
+    }
   }
 }

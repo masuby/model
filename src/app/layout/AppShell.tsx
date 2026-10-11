@@ -1,15 +1,17 @@
-import { Menu, Search } from 'lucide-react';
+import { ChevronDown, Menu, Search } from 'lucide-react';
 import * as React from 'react';
 import { useTranslation } from 'react-i18next';
-import { Link, NavLink, Outlet, useLocation } from 'react-router-dom';
+import { Link, NavLink, Outlet, useLocation, useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Dialog, DialogTrigger, Kbd, SheetContent } from '@/components/ui/overlays';
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from '@/components/ui/primitives';
 import { useData } from '@/data-layer/DataProvider';
 import { cn } from '@/lib/utils';
 import { useCommandPalette } from './useCommandPalette';
 import { LanguageSwitcher } from './LanguageSwitcher';
 import { prefetchRoute } from '../routes';
 import { Logo } from './Logo';
+import { TextSizeToggle, useTextSizeSync } from './TextSizeToggle';
 import { ThemeToggle, useThemeSync } from './ThemeToggle';
 
 /** The search palette (cmdk + its index) is fetched the first time it opens, or on hover of the search box. */
@@ -25,6 +27,37 @@ export const NAV = [
   { to: '/methodology', key: 'methodology' },
   { to: '/data', key: 'data' },
 ] as const;
+/** The two destinations in the header; the rest sit in the 'Others' menu (decision of 10 October 2026). */
+const PRIMARY_KEYS: ReadonlyArray<(typeof NAV)[number]['key']> = ['explore', 'data'];
+export const PRIMARY_NAV = NAV.filter((n) => PRIMARY_KEYS.includes(n.key));
+export const OTHER_NAV = NAV.filter((n) => !PRIMARY_KEYS.includes(n.key));
+
+const NAV_LINK = 'relative px-2 py-2 text-sm font-medium whitespace-nowrap text-muted-foreground transition-colors hover:text-foreground xl:px-3';
+const NAV_ACTIVE = 'text-foreground after:absolute after:inset-x-2 after:-bottom-[13px] after:h-0.5 after:bg-foreground xl:after:inset-x-3';
+
+/** Insights, Crisis severity, Learn and Methodology behind one trigger, which reads as active when one of them is open. */
+function OthersMenu() {
+  const { t } = useTranslation();
+  const { pathname } = useLocation();
+  const navigate = useNavigate();
+  const active = OTHER_NAV.some((n) => pathname.startsWith(n.to));
+  return (
+    <DropdownMenu modal={false}>
+      <DropdownMenuTrigger asChild>
+        <button type="button" className={cn(NAV_LINK, 'inline-flex items-center gap-1', active && NAV_ACTIVE)} aria-current={active ? 'true' : undefined}>
+          {t('nav.others')} <ChevronDown className="size-3.5 opacity-60" aria-hidden />
+        </button>
+      </DropdownMenuTrigger>
+      <DropdownMenuContent align="start" className="w-52">
+        {OTHER_NAV.map((n) => (
+          <DropdownMenuItem key={n.to} onSelect={() => navigate(n.to)} onPointerEnter={() => prefetchRoute(n.to)} className={cn(pathname.startsWith(n.to) && 'font-semibold')}>
+            {t(`nav.${n.key}`)}
+          </DropdownMenuItem>
+        ))}
+      </DropdownMenuContent>
+    </DropdownMenu>
+  );
+}
 
 function ScrollToTop() {
   const { pathname, hash } = useLocation();
@@ -89,20 +122,12 @@ function Header({ onSearch }: { onSearch: () => void }) {
         </Link>
 
         <nav className="ml-2 hidden items-center lg:flex xl:ml-4" aria-label={t('nav.main')}>
-          {NAV.map((n) => (
-            <NavLink
-              key={n.to}
-              to={n.to}
-              className={({ isActive }) =>
-                cn(
-                  'relative px-2 py-2 text-sm font-medium whitespace-nowrap text-muted-foreground transition-colors hover:text-foreground xl:px-3',
-                  isActive && 'text-foreground after:absolute after:inset-x-2 after:-bottom-[13px] after:h-0.5 after:bg-foreground xl:after:inset-x-3',
-                )
-              }
-            >
+          {PRIMARY_NAV.map((n) => (
+            <NavLink key={n.to} to={n.to} className={({ isActive }) => cn(NAV_LINK, isActive && NAV_ACTIVE)}>
               {t(`nav.${n.key}`)}
             </NavLink>
           ))}
+          <OthersMenu />
         </nav>
 
         <div className="ml-auto flex items-center gap-0.5 sm:gap-1">
@@ -121,6 +146,7 @@ function Header({ onSearch }: { onSearch: () => void }) {
             <Search />
           </Button>
           <LanguageSwitcher />
+          <TextSizeToggle />
           <ThemeToggle />
           <Dialog open={mobileOpen} onOpenChange={setMobileOpen}>
             <DialogTrigger asChild>
@@ -130,13 +156,19 @@ function Header({ onSearch }: { onSearch: () => void }) {
             </DialogTrigger>
             <SheetContent side="right" title={<Logo />}>
               <nav className="flex flex-col gap-1 p-3" aria-label={t('nav.mobile')}>
-                {[{ to: '/', key: 'home' } as const, ...NAV].map((n) => (
+                {[{ to: '/', key: 'home' } as const, ...PRIMARY_NAV].map((n) => (
                   <NavLink
                     key={n.to}
                     to={n.to}
                     end={n.to === '/'}
-                    className={({ isActive }) => cn('border-b border-border px-2 py-3.5 text-base font-medium transition-colors last:border-b-0 hover:text-primary', isActive && 'text-primary')}
+                    className={({ isActive }) => cn('border-b border-border px-2 py-3.5 text-base font-medium transition-colors hover:text-primary', isActive && 'text-primary')}
                   >
+                    {t(`nav.${n.key}`)}
+                  </NavLink>
+                ))}
+                <p className="px-2 pt-4 pb-1 text-xs font-semibold tracking-wide text-muted-foreground uppercase">{t('nav.others')}</p>
+                {OTHER_NAV.map((n) => (
+                  <NavLink key={n.to} to={n.to} className={({ isActive }) => cn('border-b border-border px-2 py-3.5 text-base font-medium transition-colors last:border-b-0 hover:text-primary', isActive && 'text-primary')}>
                     {t(`nav.${n.key}`)}
                   </NavLink>
                 ))}
@@ -155,43 +187,46 @@ function Footer() {
   const build = typeof __BUILD__ !== 'undefined' ? __BUILD__ : 'dev';
   return (
     <footer className="site-footer mt-24 border-t border-border">
-      <div className="mx-auto grid max-w-[1320px] gap-10 px-4 py-12 sm:px-6 md:grid-cols-[1.4fr_1fr_1fr] lg:px-8">
+      <div className="mx-auto grid max-w-[1320px] gap-10 px-4 py-10 sm:px-6 sm:py-12 md:grid-cols-[1.4fr_1fr_1fr] lg:px-8">
         <div className="max-w-md">
           <Logo />
           <p className="mt-4 text-sm leading-relaxed text-muted-foreground">{t('footer.about')}</p>
           <p className="mt-3 text-xs leading-relaxed text-muted-foreground">{t('footer.disclaimer')}</p>
         </div>
-        <div>
-          <h4 className="text-sm font-semibold">{t('nav.menu')}</h4>
-          <ul className="mt-4 grid gap-2 text-sm">
-            {NAV.map((n) => (
-              <li key={n.to}>
-                <Link to={n.to} className="text-foreground/80 hover:text-primary">
-                  {t(`nav.${n.key}`)}
+        {/* The two link lists sit side by side on a phone (one column each on wider screens). */}
+        <div className="grid grid-cols-2 gap-6 md:contents">
+          <div>
+            <h4 className="text-sm font-semibold">{t('nav.menu')}</h4>
+            <ul className="mt-4 grid gap-2 text-sm">
+              {NAV.map((n) => (
+                <li key={n.to}>
+                  <Link to={n.to} className="text-foreground/80 hover:text-primary">
+                    {t(`nav.${n.key}`)}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+          <div>
+            <h4 className="text-sm font-semibold">INFORM</h4>
+            <ul className="mt-4 grid gap-2 text-sm">
+              <li>
+                <a className="text-foreground/80 hover:text-primary" href="https://drmkc.jrc.ec.europa.eu/inform-index" target="_blank" rel="noreferrer">
+                  INFORM (JRC)
+                </a>
+              </li>
+              <li>
+                <Link className="text-foreground/80 hover:text-primary" to="/methodology/sources">
+                  {t('footer.sources')}
                 </Link>
               </li>
-            ))}
-          </ul>
-        </div>
-        <div>
-          <h4 className="text-sm font-semibold">INFORM</h4>
-          <ul className="mt-4 grid gap-2 text-sm">
-            <li>
-              <a className="text-foreground/80 hover:text-primary" href="https://drmkc.jrc.ec.europa.eu/inform-index" target="_blank" rel="noreferrer">
-                INFORM (JRC)
-              </a>
-            </li>
-            <li>
-              <Link className="text-foreground/80 hover:text-primary" to="/methodology#sources">
-                {t('footer.sources')}
-              </Link>
-            </li>
-            <li>
-              <a className="text-foreground/80 hover:text-primary" href="https://github.com/masuby/model" target="_blank" rel="noreferrer">
-                {t('footer.github')}
-              </a>
-            </li>
-          </ul>
+              <li>
+                <a className="text-foreground/80 hover:text-primary" href="https://github.com/masuby/model" target="_blank" rel="noreferrer">
+                  {t('footer.github')}
+                </a>
+              </li>
+            </ul>
+          </div>
         </div>
       </div>
       <div className="border-t border-border">
@@ -209,6 +244,7 @@ function Footer() {
 export function AppShell() {
   const { t } = useTranslation();
   useThemeSync();
+  useTextSizeSync();
   useLinkPrefetch();
   const palette = useCommandPalette();
   const { pathname } = useLocation();

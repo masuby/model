@@ -6,11 +6,12 @@
  */
 import type { AuditEntry, Change, NewSubmission, Submission } from '@/data-layer/types';
 import { isNum, round1 } from '@/engine/risk/math';
-import { sourceFor } from '@/engine/risk/sources';
+import { DATA_AS_OF, DATA_RELEASE } from '@/engine/risk/model';
+import { custodianFor } from '@/engine/risk/sources';
 import type { DimensionKey } from '@/engine/risk/hierarchy';
 import type { EditRef, Overrides, RiskModel } from '@/engine/risk/types';
 import { sameScore } from './scores';
-import { currentValue, EXPOSURE_REF, isEditRef, MAX_CHANGES_PER_SUBMISSION, sharingCouncils, targetKind } from './targets';
+import { currentValue, isEditRef, MAX_CHANGES_PER_SUBMISSION, sharingCouncils, targetKind } from './targets';
 
 export const EXPORT_FORMAT = 'inform-tanzania/data-export';
 export const EXPORT_VERSION = 1;
@@ -23,6 +24,9 @@ export interface DataExport {
   format: typeof EXPORT_FORMAT;
   version: typeof EXPORT_VERSION;
   exportedAt: string;
+  /** The release of the Core dataset and the month its data is as of (EXP-01). */
+  release?: string;
+  dataAsOf?: string;
   mode: 'local' | 'supabase';
   exportedBy?: string;
   overrides: Overrides;
@@ -35,6 +39,8 @@ export function buildExport(args: { mode: 'local' | 'supabase'; overrides: Overr
     format: EXPORT_FORMAT,
     version: EXPORT_VERSION,
     exportedAt: (args.now ?? new Date()).toISOString(),
+    release: DATA_RELEASE,
+    dataAsOf: DATA_AS_OF,
     mode: args.mode,
     ...(args.exportedBy ? { exportedBy: args.exportedBy } : {}),
     overrides: args.overrides,
@@ -108,7 +114,7 @@ function normaliseValue(v: unknown): { ok: true; value: number | null } | { ok: 
 function resolveTargets(model: RiskModel, unitId: string, ref: EditRef): { ok: true; ids: string[] } | { ok: false; kind: ImportIssueKind } {
   const unit = model.byId.get(unitId);
   if (!unit) return { ok: false, kind: 'unknownUnit' };
-  if (unit.level === 'council') return { ok: true, ids: [targetKind(ref) === 'source' && unit.sourceId ? unit.sourceId : unit.id] };
+  if (unit.level === 'council') return { ok: true, ids: [unit.id] };
   if (unit.level === 'source') {
     if (targetKind(ref) === 'source') return { ok: true, ids: [unit.id] };
     const councils = sharingCouncils(model, unit.id);
@@ -143,7 +149,7 @@ export function planImport(file: ImportFile, model: RiskModel, opts: { includeOv
       return;
     }
     const v = normaliseValue(value);
-    if (!v.ok || (ref === EXPOSURE_REF && v.value === null)) {
+    if (!v.ok) {
       issues.push({ where, kind: 'badValue' });
       return;
     }
@@ -153,7 +159,7 @@ export function planImport(file: ImportFile, model: RiskModel, opts: { includeOv
       return;
     }
     const [dim, key] = ref.split(':') as [DimensionKey, string];
-    const authority = meta.authority ?? sourceFor(dim, key).by;
+    const authority = meta.authority ?? custodianFor(dim, key).by;
     for (const id of t.ids) {
       const gk = JSON.stringify([id, authority, meta.dataset ?? '', meta.note ?? '']);
       if (!groups.has(gk)) groups.set(gk, { unitId: id, authority, dataset: meta.dataset, note: meta.note, changes: new Map() });

@@ -13,7 +13,8 @@
     "menu": "Menu",
     "skipToContent": "Skip to content",
     "main": "Main",
-    "mobile": "Main menu"
+    "mobile": "Main menu",
+    "others": "Others"
   },
   "theme": {
     "label": "Theme",
@@ -119,7 +120,7 @@
     "of": "of",
     "outOf": "out of {{max}}",
     "asOf": "Data as of {{date}}",
-    "official": "Official",
+    "aggregate": "Aggregate of councils",
     "edited": "Updated",
     "inherited": "Inherits data from {{parent}}",
     "sharedSource": "Vulnerability and coping data come from {{source}}",
@@ -158,6 +159,81 @@
     "national": "National figure",
     "region": "Regional figure",
     "council": "Council figure",
-    "baseline": "INFORM baseline"
+    "baseline": "INFORM baseline",
+    "district": "District figure"
+  },
+  "export": {
+    "title": "INFORM Tanzania export",
+    "release": "Data release",
+    "layer": "Layer",
+    "layers": {
+      "core": "Core (INFORM SADC 2024 workbook plus approved institutional values)",
+      "advancement": "Advancement (the Core plus the Tanzanian sub-indicators, shown apart)"
+    },
+    "asOf": "Data as of",
+    "generated": "Generated",
+    "scope": "Covers",
+    "lineage": "Lineage of values",
+    "lineages": {
+      "workbook": "the INFORM SADC 2024 workbook value of the unit",
+      "benchmark": "a Benchmark 2026 value (an institutional value prepared from public datasets, 10 October 2026)",
+      "institution": "a value approved from an institution through the Data portal",
+      "advancement": "the Advancement layer (Tanzanian sub-indicators beside the workbook value)",
+      "inherited": "the workbook value of the unit a new council was carved from",
+      "none": "no value (the workbook has no data; excluded from every mean)"
+    },
+    "disclaimer": "Disclaimer",
+    "unit": "Workbook unit",
+    "inheritedFrom": "Inherited from",
+    "approvedValues": "Approved institutional values"
+  },
+  "dataNote": {
+    "label": "Data note",
+    "status": {
+      "queried": "Value under query",
+      "artefact": "Known data artefact",
+      "explained": "Explained",
+      "decision": "Withheld by programme decision"
+    },
+    "inline": {
+      "queried": "under query",
+      "artefact": "a known data artefact",
+      "explained": "explained",
+      "decision": "withheld by programme decision"
+    },
+    "withheld": "Withheld from the live model: workbook value under query",
+    "withheldShort": "withheld",
+    "withheldDecision": "Withheld from the live model by programme decision"
+  },
+  "textSize": {
+    "label": "Text size",
+    "toggle": "Change the text size",
+    "normal": "Normal",
+    "large": "Large",
+    "larger": "Larger",
+    "largest": "Largest"
+  },
+  "sectors": {
+    "pmo": "PMO-DMD and the Disaster Management Committees",
+    "poralg": "PO-RALG and the council",
+    "tma": "Tanzania Meteorological Authority (TMA)",
+    "water": "Water (Ministry of Water, basin boards, RUWASA, water authorities)",
+    "works": "Works and roads (TANROADS, TARURA)",
+    "lands": "Lands, housing and urban planning",
+    "agriculture": "Agriculture and livestock",
+    "health": "Health",
+    "education": "Education",
+    "environment": "Environment (VPO, NEMC)",
+    "forestry": "Forestry and wildlife (TFS, TANAPA, TAWA)",
+    "fire": "Fire and Rescue Force",
+    "energy": "Energy (TANESCO, REA)",
+    "tcra": "Communications (TCRA, operators)",
+    "finance": "Finance and planning",
+    "social": "Community development and social protection (TASAF)",
+    "police": "Police Force",
+    "home": "Home Affairs (refugee and migration services)",
+    "transport": "Transport regulation (LATRA)",
+    "industry": "Industry and trade (OSHA, GCLA)",
+    "gst": "Geological Survey of Tanzania (GST)"
   }
 }

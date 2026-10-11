@@ -1,11 +1,12 @@
 /**
- * The alert category follows the assessed risk level: very low and low risk are an Advisory (yellow),
- * medium a Warning (orange), high and very high a Major warning (red).
+ * The risk level of an area for communication: its INFORM class in one of three colours (very low and
+ * low yellow, medium and high orange, very high red). The class is named; no warning level is derived
+ * from it.
  */
 import { describe, expect, it } from 'vitest';
 import { CLASS_KEYS, THRESHOLDS } from '@/engine/risk/classes';
 import { buildModel } from '@/engine/risk/model';
-import { ALERT_BY_CLASS, ALERT_COLOR, alertFor, onAlertColor } from '../alert';
+import { ALERT_COLOR, BAND_BY_CLASS, onAlertColor, riskBandFor } from '../alert';
 
 /** WCAG 2 contrast ratio of two #rrggbb colours. */
 function contrast(a: string, b: string) {
@@ -17,41 +18,38 @@ function contrast(a: string, b: string) {
   return (hi + 0.05) / (lo + 0.05);
 }
 
-describe('alert category from the risk level', () => {
-  it('follows the rule for every risk class', () => {
-    expect(ALERT_BY_CLASS).toEqual({ veryLow: 1, low: 1, medium: 2, high: 3, veryHigh: 3 });
-    for (const k of CLASS_KEYS) expect(ALERT_BY_CLASS[k]).toBeDefined();
-  });
-
-  it('reads the risk thresholds, each the start of the next class', () => {
+describe('risk level and colour band from the risk class', () => {
+  it('maps very low and low to yellow, medium and high to orange, very high to red', () => {
+    expect(BAND_BY_CLASS).toEqual({ veryLow: 1, low: 1, medium: 2, high: 2, veryHigh: 3 });
     const [lowFrom, mediumFrom, highFrom, veryHighFrom] = THRESHOLDS.risk;
-    expect(alertFor(0)).toMatchObject({ level: 1, cls: 'veryLow' });
-    expect(alertFor(lowFrom - 0.01)).toMatchObject({ level: 1, cls: 'veryLow' });
-    expect(alertFor(lowFrom)).toMatchObject({ level: 1, cls: 'low' });
-    expect(alertFor(mediumFrom - 0.01)).toMatchObject({ level: 1, cls: 'low' });
-    expect(alertFor(mediumFrom)).toMatchObject({ level: 2, cls: 'medium' });
-    expect(alertFor(highFrom - 0.01)).toMatchObject({ level: 2, cls: 'medium' });
-    expect(alertFor(highFrom)).toMatchObject({ level: 3, cls: 'high' });
-    expect(alertFor(veryHighFrom)).toMatchObject({ level: 3, cls: 'veryHigh' });
-    expect(alertFor(10)).toMatchObject({ level: 3, cls: 'veryHigh', score: 10 });
+    expect(riskBandFor(0)).toMatchObject({ cls: 'veryLow', index: 0, band: 1, color: ALERT_COLOR[1] });
+    expect(riskBandFor(lowFrom - 0.01)).toMatchObject({ cls: 'veryLow', band: 1 });
+    expect(riskBandFor(lowFrom)).toMatchObject({ cls: 'low', index: 1, band: 1 });
+    expect(riskBandFor(mediumFrom)).toMatchObject({ cls: 'medium', index: 2, band: 2, color: ALERT_COLOR[2] });
+    expect(riskBandFor(highFrom - 0.01)).toMatchObject({ cls: 'medium', band: 2 });
+    expect(riskBandFor(highFrom)).toMatchObject({ cls: 'high', index: 3, band: 2 });
+    expect(riskBandFor(veryHighFrom)).toMatchObject({ cls: 'veryHigh', index: 4, band: 3, color: ALERT_COLOR[3] });
+    expect(riskBandFor(10)).toMatchObject({ cls: 'veryHigh', score: 10, band: 3 });
+    for (const k of CLASS_KEYS) expect([1, 2, 3]).toContain(BAND_BY_CLASS[k]);
   });
 
-  it('has no category without a score', () => {
-    expect(alertFor(null)).toBeNull();
-    expect(alertFor(undefined)).toBeNull();
-    expect(alertFor(Number.NaN)).toBeNull();
+  it('has no level without a score', () => {
+    expect(riskBandFor(null)).toBeNull();
+    expect(riskBandFor(undefined)).toBeNull();
+    expect(riskBandFor(Number.NaN)).toBeNull();
   });
 
-  it('gives every area with a score its category', () => {
+  it('gives every area with a score its level', () => {
     const model = buildModel();
     for (const u of [...model.councils, ...model.regions, ...model.sources, model.national]) {
       if (u.risk == null) continue;
-      expect(alertFor(u.risk), u.name).not.toBeNull();
+      expect(riskBandFor(u.risk), u.name).not.toBeNull();
     }
   });
 
-  it('uses distinct colours, with legible text on each (WCAG AA)', () => {
+  it('keeps the three colours distinct and legible, and names no warning level', () => {
     expect(new Set(Object.values(ALERT_COLOR)).size).toBe(3);
     for (const level of [1, 2, 3] as const) expect(contrast(ALERT_COLOR[level], onAlertColor(level))).toBeGreaterThanOrEqual(4.5);
+    expect(Object.keys(riskBandFor(5)!).sort()).toEqual(['band', 'cls', 'color', 'index', 'score']);
   });
 });

@@ -22,21 +22,24 @@
   "tabs": {
     "label": "Sehemu za lango la data",
     "select": "Sehemu",
-    "scores": "Ingiza alama",
-    "paste": "Bandika kwa wingi",
     "queue": "Foleni ya uhakiki",
     "mine": "Mawasilisho yangu",
     "approved": "Mabadiliko yaliyoidhinishwa",
     "activity": "Shughuli",
     "pendingSr": "zinasubiri",
     "indicators": "Viashiria",
-    "people": "Watu"
+    "people": "Watu",
+    "committee": "Dawati la kamati",
+    "control": "Udhibiti wa data"
   },
   "roles": {
     "viewer": "Mgeni",
     "sector": "Afisa wa sekta",
     "pmo": "Mkaguzi wa PMO",
-    "admin": "Msimamizi"
+    "admin": "Msimamizi",
+    "ddrrc": "Kamati ya Maafa ya Wilaya (DDRRC)",
+    "rdrrc": "Kamati ya Maafa ya Mkoa (RDRRC)",
+    "ndrrc": "Kamati ya Maafa ya Taifa (NDRRC)"
   },
   "levels": {
     "council": "Halmashauri",
@@ -58,7 +61,10 @@
       "viewer": "Kusoma tu: tazama mabadiliko yaliyoidhinishwa.",
       "sector": "Ingiza takwimu za viashiria vya taasisi yako na uzitume kwa uhakiki wa PMO.",
       "pmo": "Kabidhi viashiria, tuma maombi, kisha hakiki, idhinisha, kataa na rejesha. Maingizo yako mwenyewe yanaweza kutumika mara moja.",
-      "admin": "Ufikiaji kamili: kila kitu ambacho mkaguzi wa PMO anaweza kufanya, pamoja na kusimamia watu na taasisi zao."
+      "admin": "Ufikiaji kamili: kila kitu ambacho mkaguzi wa PMO anaweza kufanya, pamoja na kusimamia watu na taasisi zao.",
+      "ddrrc": "Rekodi mipango ya kupunguza maafa ya halmashauri yako (Wilaya ya Kondoa katika onyesho hili) na uitume kwa kamati ya mkoa kuidhinishwa.",
+      "rdrrc": "Rekodi kwa Mkoa wa Dodoma na halmashauri zake, na uidhinishe rekodi za halmashauri; kamati ya taifa huidhinisha za mkoa.",
+      "ndrrc": "Idhinisha rekodi za mikoa na urekodi kwa eneo lolote."
     },
     "account": "Akaunti yako",
     "live": "Imeunganishwa na hifadhidata ya pamoja ya kitaifa",
@@ -138,43 +144,6 @@
     "lead_other": "Una thamani {{count}} ambazo hazijahifadhiwa kwa halmashauri hii. Ukibadilisha halmashauri zitafutwa.",
     "keep": "Endelea kuhariri",
     "confirm": "Futa na ubadilishe"
-  },
-  "scores": {
-    "pickTitle": "Halmashauri",
-    "pickLead": "Chagua halmashauri ambayo unasasisha alama za viashiria vyake.",
-    "emptyTitle": "Anza kwa kuchagua halmashauri",
-    "emptyLead": "Utaona makundi yote 32 ya viashiria pamoja na thamani na vyanzo vyake vya sasa, na onyesho la moja kwa moja la jinsi mabadiliko yako yanavyosogeza hatari ya halmashauri.",
-    "hint": "Andika alama mpya ya 0–10 kando ya kiashiria chochote. Iache tupu ili kubaki na thamani ya sasa.",
-    "changeCount_one": "Badiliko {{count}} liko tayari",
-    "changeCount_other": "Mabadiliko {{count}} yako tayari",
-    "errorCount_one": "Thamani {{count}} inahitaji kurekebishwa",
-    "errorCount_other": "Thamani {{count}} zinahitaji kurekebishwa",
-    "changedOnly": "Zilizobadilishwa tu",
-    "clearAll": "Futa zote",
-    "noneChanged": "Bado hakuna thamani iliyobadilishwa.",
-    "current": "Sasa",
-    "about": "Kuhusu {{name}}",
-    "pending": "Inasubiri uhakiki",
-    "pendingTip": "Tayari umetuma thamani ya kiashiria hiki. Inasubiri mkaguzi wa PMO.",
-    "sharedTitle": "Alama za udhaifu na uwezo wa kukabiliana huhifadhiwa kwenye kitengo cha chanzo cha INFORM “{{source}}”",
-    "sharedSiblings_one": "Data za tafiti zinazozitegemea hazijagawanywa kwa halmashauri, kwa hiyo badiliko lolote kwenye safu hizi linatumika pia kwa {{names}}.",
-    "sharedSiblings_other": "Data za tafiti zinazozitegemea hazijagawanywa kwa halmashauri, kwa hiyo badiliko lolote kwenye safu hizi linatumika pia kwa {{names}}.",
-    "sharedAlone": "Hakuna halmashauri nyingine inayotumia kitengo hiki cha chanzo, kwa hiyo badiliko lolote kwenye safu hizi linaathiri {{council}} pekee.",
-    "updatedBy": "Imesasishwa · {{authority}} · {{date}}",
-    "exposureGroup": "Mfiduo",
-    "exposureNote": "Huongeza mafuriko: mafuriko = max(h, √(h × mfiduo)).",
-    "exposureFloodEdited": "Thamani yako ya mafuriko inatangulia ukuzaji unaotokana na mfiduo.",
-    "exposureDesc": "Fahirisi ya mfiduo wa watu (0–10) kutokana na idadi ya watu na eneo la halmashauri. Huongeza hatari ya mafuriko kama sehemu ya Hatari × Mfiduo ya INFORM.",
-    "markNoData": "Weka {{name}} kama hakuna data",
-    "noDataOn": "Imewekwa kama hakuna data. Bofya kutendua.",
-    "noDataOff": "Weka kama hakuna data (haitajumuishwa kwenye wastani, si sifuri)",
-    "resetRow": "Rudisha {{name}}",
-    "reviewNow": "Hakiki",
-    "errors": {
-      "notNumber": "Weka namba, kwa mfano 6.5.",
-      "range": "Alama ni kuanzia 0 hadi 10.",
-      "decimals": "Tumia desimali moja tu, kwa mfano 6.5."
-    }
   },
   "preview": {
     "eyebrow": "Onyesho la moja kwa moja",
@@ -408,7 +377,7 @@
     "appliedDirectly": "Imetumika moja kwa moja na mkaguzi"
   },
   "approved": {
-    "emptyTitle": "Msingi rasmi unatumika",
+    "emptyTitle": "Msingi wa INFORM SADC 2024 unatumika",
     "emptyLead": "Bado hakuna mabadiliko yaliyoidhinishwa. Kila ramani inaonyesha thamani za INFORM Sub-national SADC 2024.",
     "search": "Chuja kwa eneo, kiashiria, mamlaka…",
     "count_one": "Thamani {{count}} iliyoidhinishwa katika {{units}}",
@@ -425,7 +394,7 @@
     "revertTip": "Rudisha thamani ya msingi ({{value}})",
     "revertAria": "Rejesha {{indicator}} ya {{unit}}",
     "revertTitle": "Urejeshe kwenye msingi?",
-    "revertLead": "{{indicator}} ya {{unit}} itarudi kwenye thamani rasmi ya msingi. Urejeshaji huu unarekodiwa.",
+    "revertLead": "{{indicator}} ya {{unit}} itarudi kwenye thamani ya msingi ya INFORM SADC 2024. Urejeshaji huu unarekodiwa.",
     "revertConfirm": "Rejesha",
     "revertedToast": "{{indicator}} ya {{unit}} imerudi kwenye msingi",
     "revertError": "Urejeshaji umeshindikana",
@@ -520,7 +489,7 @@
     "resetWarn": "Hamisha nakala ya JSON kwanza kama unaweza kuhitaji data hii tena. Hifadhidata ya pamoja haiathiriki.",
     "resetAck": "Naelewa: futa data iliyo kwenye kivinjari hiki",
     "resetConfirm": "Futa data ya ndani",
-    "resetDone": "Data ya ndani imefutwa. Msingi rasmi umerudi."
+    "resetDone": "Data ya ndani imefutwa. Msingi wa INFORM SADC 2024 umerudi."
   },
   "authorities": {
     "NBS": "Ofisi ya Taifa ya Takwimu",
@@ -584,7 +553,19 @@
     "events_100yr": "matukio kwa miaka 100",
     "m_yr": "mita kwa mwaka",
     "pct_decade": "% kwa muongo",
-    "flashes_km2_yr": "miale kwa km² kwa mwaka"
+    "flashes_km2_yr": "miale kwa km² kwa mwaka",
+    "per_10_000_people": "kwa kila watu 10,000",
+    "count_of_5": "idadi (0 hadi 5)",
+    "events_2010_2024": "matukio yaliyorekodiwa, 2010 hadi 2024",
+    "intensity": "ukubwa wa mtikisiko uliohisiwa",
+    "strokes_km2_yr": "mapigo ya radi kwa km² kwa mwaka",
+    "deaths_per_100_000": "vifo kwa watu 100,000",
+    "phase_1_5": "awamu ya IPC (1 hadi 5)",
+    "fraction_of_area": "sehemu ya eneo",
+    "crashes_per_100_km2": "ajali kwa km² 100 kwa mwaka",
+    "sites_per_100_km2": "maeneo kwa km² 100",
+    "pct_of_5_arrangements": "% ya mipango mitano",
+    "pct_of_assessed_criteria": "% ya vigezo vilivyotathminiwa"
   },
   "specs": {
     "HA_NAT_CH-ERO": "Mmomonyoko wa pwani",
@@ -653,6 +634,7 @@
     "HA_NAT_DR-SPEI": "Ukubwa wa ukame (SPEI-12)",
     "HA_NAT_DR-WLEV": "Viwango vya maji (% ya kawaida)",
     "HA_NAT_EQ-HIST": "Msongamano wa matetemeko ya ardhi ya kihistoria",
+    "HA_NAT_EQ-FELT": "Ukubwa wa juu wa mtikisiko uliohisiwa",
     "HA_NAT_EQ-PGA": "Hatari ya tetemeko (mchapuko wa juu wa ardhi, miaka 475)",
     "HA_NAT_FL-BASIN": "Kumbukumbu za mafuriko za bonde",
     "HA_NAT_FL-EVENT": "Matukio ya mafuriko yaliyorekodiwa",
@@ -664,7 +646,21 @@
     "HA_NAT_LS-RAIN": "Mvua inayochochea (siku yenye mvua nyingi zaidi)",
     "HA_NAT_LS-SUSC": "Uwezekano wa maporomoko kwa mteremko (wastani wa mteremko)",
     "HA_NAT_ST-FREQ": "Marudio ya vimbunga na upepo mkali",
-    "HA_NAT_ST-WIND": "Kasi ya juu ya upepo"
+    "HA_NAT_ST-WIND": "Kasi ya juu ya upepo",
+    "CC_INF_HC-DENS": "Vituo vya afya kwa kila watu 10,000 (sensa 2022)",
+    "CC_INF_EDU-DENS": "Shule kwa kila watu 10,000 (sensa 2022)",
+    "CC_INS_DRR-STAT": "Mipango ya menejimenti ya maafa iliyopo (EPRP, hatua za mapema, EOCC, ERT, RVCA)",
+    "VU_VG_DP-UNHCR": "Wakimbizi na waomba hifadhi wanaohifadhiwa (UNHCR)",
+    "HA_NAT_CH-SEA": "Kupanda kwa kina cha bahari: ukanda wa pwani wa mwinuko mdogo",
+    "HA_NAT_HW-EXP": "Siku za joto kali",
+    "HA_NAT_LI-CAS": "Msongamano wa radi",
+    "HA_HUM_ACC": "Ajali za barabarani kwa km² 100",
+    "VU_SE_LV-IPC": "Awamu ya IPC ya ukosefu mkubwa wa chakula",
+    "VU_VG_ECO-FEMHH": "Kaya zinazoongozwa na wanawake",
+    "VU_VG_HC-DISAB": "Watu wenye ulemavu",
+    "HA_HUM_HMAT": "Maeneo ya vitu hatarishi kwa km² 100",
+    "CC_INS_DRR-ARR": "Mipango ya usimamizi wa maafa iliyopo (mpango, tathmini, timu iliyofunzwa, kituo, mafunzo)",
+    "CC_INS_GOV-DMC": "Utendaji wa kamati ya usimamizi wa maafa"
   },
   "workflow": {
     "advanced": "Kiashiria cha ziada, bado si sehemu ya alama",
@@ -809,7 +805,8 @@
         "area": "Eneo",
         "now": "Thamani ya sasa",
         "new": "Thamani mpya",
-        "score": "Alama (0 hadi 10)"
+        "score": "Alama (0 hadi 10)",
+        "newScore": "Alama mpya (0 hadi 10)"
       },
       "national": "Tanzania (taifa)",
       "councils_one": "halmashauri {{count}}",
@@ -843,7 +840,23 @@
       "applied_other": "Thamani {{count}} zimehifadhiwa na kutumika",
       "sent_one": "Thamani {{count}} imetumwa kwa uhakiki",
       "sent_other": "Thamani {{count}} zimetumwa kwa uhakiki",
-      "error": "Imeshindikana kuhifadhi thamani"
+      "error": "Imeshindikana kuhifadhi thamani",
+      "type": {
+        "label": "Unaingiza nini?",
+        "raw": "Thamani zilizopimwa",
+        "score": "Alama 0–10 (mbinu ya INFORM)",
+        "rawHint": "Takwimu katika kizio cha kiashiria chenyewe. Injini huzipima kwa mbinu ya kitabu na kuonyesha alama ya 0–10 kabla hujatuma.",
+        "scoreHint": "Alama ulizokokotoa kwa kipimaji cha INFORM, kwa mfano kwa zana ya Excel ya NORMAL. Huingia katika Msingi tu zikiwa na chanzo kinachoweza kutajwa. Alama zilizokokotolewa kwa mbinu nyingine hazikubaliwi hapa: ni za Tabaka la Maboresho."
+      },
+      "method": {
+        "inform": "Kipimaji cha INFORM (mbinu ya kitabu)"
+      },
+      "source": "Chanzo kinachoweza kutajwa",
+      "sourcePlaceholder": "mf. NBS (2024). Utafiti wa Bajeti ya Kaya 2022/23, ripoti kuu, jedwali 4.2",
+      "sourceRequired": "lazima kwa alama",
+      "needSource": "Taja chapisho, seti ya data au barua rasmi ambayo alama zinatoka.",
+      "outOfRange": "Alama lazima iwe kati ya 0 na 10.",
+      "scoreTag": "alama 0–10"
     },
     "paste": {
       "button": "Bandika kutoka jedwali",
@@ -883,7 +896,9 @@
       "values_other": "Thamani {{count}} · halmashauri zitakazozitumia: {{reached}}",
       "proposed": "Inayopendekezwa",
       "approved": "Imeidhinishwa: {{name}}",
-      "rejected": "Imekataliwa: {{name}}"
+      "rejected": "Imekataliwa: {{name}}",
+      "valueType": "Thamani",
+      "methodSwitch": "Inabadilisha mbinu ya kundi hili: kutoka {{from}} kwenda {{to}}"
     },
     "approved": {
       "measuredTitle_one": "Thamani {{count}} iliyopimwa",
@@ -914,7 +929,357 @@
       "saved": "Imehifadhiwa: {{name}}",
       "error": "Imeshindikana kuhifadhi badiliko",
       "emptyTitle": "Hakuna aliyepatikana",
-      "emptyLead": "Watu huonekana hapa baada ya kuingia kwa mara ya kwanza."
+      "emptyLead": "Watu huonekana hapa baada ya kuingia kwa mara ya kwanza.",
+      "scopeOf": "Eneo la {{name}}",
+      "noScope": "Hakuna eneo lililowekwa",
+      "noScopeNeeded": "Hakuna eneo linalohitajika"
+    }
+  },
+  "committee": {
+    "lead": "Kinachorekodiwa na kamati za usimamizi wa maafa, kwenye mnyororo wa Kitabu cha Mwongozo wa Hatua za Hatari: mipango ya kila halmashauri na mkoa, taarifa watu wanazosoma chini ya Fahamu hatari yako, ripoti za matukio ya vitisho, na tahadhari rasmi. Kila rekodi hutaja inategemea nini; ngazi iliyo juu huidhinisha; rekodi zilizoidhinishwa huonekana kwenye wasifu wa maeneo.",
+    "scope": {
+      "ddrrc": "Unarekodi kwa halmashauri yako; kamati ya mkoa huidhinisha.",
+      "rdrrc": "Unarekodi kwa mkoa wako na halmashauri zake, na kuidhinisha rekodi za halmashauri; kamati ya taifa huidhinisha za mkoa.",
+      "ndrrc": "Unarekodi kwa eneo lolote, kuidhinisha rekodi za mikoa na kuchapisha tahadhari.",
+      "reviewer": "PMO-DMD: unaweza kurekodi kwa eneo lolote, kuidhinisha rekodi yoyote na kuchapisha tahadhari.",
+      "none": "Akaunti yako bado haina eneo. Omba msimamizi aweke halmashauri au mkoa unaouwakilisha."
+    },
+    "noScopeTitle": "Hakuna eneo la kurekodi",
+    "kindLabel": "Cha kurekodi",
+    "kinds": {
+      "drr": "Uwezo wa DRR",
+      "guidance": "Fahamu hatari yako",
+      "event": "Ripoti ya tukio",
+      "warning": "Tahadhari",
+      "vc": "Kupunguza hatari"
+    },
+    "kindLead": {
+      "drr": "Kama mipango ipo: mpango wa kujiandaa na kukabiliana pamoja na tathmini yake ya hatari na udhaifu, hatua za mapema, timu ya kukabiliana iliyofunzwa, kituo cha operesheni, mafunzo ya kamati kuhusu kupunguza hatari; na jinsi kamati inavyofanya kazi: inafanya kazi, inashirikiana na wadau, inashiriki masuala ya kupunguza hatari. Injini hupima mitano ya kwanza kama mipango ya usimamizi wa maafa iliyopo na vigezo vitatu kama utendaji wa kamati.",
+      "guidance": "Taarifa watu wanayosoma kwenye wasifu wa halmashauri: hatari iko wapi na nini husaidia. Badilisha mstari wa kitabu cha mwongozo au ongeza mpya, kwa Kiingereza na Kiswahili.",
+      "event": "Tukio la kitisho lililotokea: lini, nini, na athari zake. Kamati ya mkoa huthibitisha.",
+      "warning": "Tahadhari rasmi kama ilivyotolewa na TMA: kitisho, kiwango, maeneo na muda. Huchapishwa mara moja kwenye maeneo yaliyotajwa na huondoka tarehe ya mwisho.",
+      "vc": "Maktaba ya hatua: kwa kila kundi la viashiria la INFORM (vitisho, udhaifu na uwezo wa kukabiliana), kinachokipunguza na sekta zinazoongoza. PMO-DMD huandika, kamati ya taifa hupitia; hatua na sekta huonekana kwenye kadi ya hatari ya kina na kwenye kila eneo ambako kundi lina uzito mkubwa zaidi."
+    },
+    "recordTitle": {
+      "drr": "Rekodi mipango",
+      "guidance": "Andika au sasisha taarifa",
+      "event": "Ripoti tukio",
+      "warning": "Rekodi tahadhari rasmi",
+      "vc": "Andika au sasisha hatua za kundi"
+    },
+    "unit": "Eneo",
+    "pendingNotice": "Rekodi ya eneo hili inasubiri kuidhinishwa; mpya huchukua nafasi yake ikishaidhinishwa.",
+    "drr": {
+      "current": "Rekodi iliyoidhinishwa ya {{date}}, imeidhinishwa na {{by}}.",
+      "noCurrent": "Bado hakuna rekodi iliyoidhinishwa; wasifu huonyesha orodha ya PMO-DMD pale ilipo.",
+      "fields": {
+        "eprp": "Mpango wa kujiandaa na kukabiliana na dharura (EPRP)",
+        "aa": "Itifaki ya hatua za mapema (AA)",
+        "ert": "Timu ya kukabiliana na dharura iliyofunzwa (ERT)",
+        "rvca": "Tathmini ya hatari, udhaifu na uwezo (RVCA)",
+        "eocc": "Kituo cha uendeshaji na mawasiliano ya dharura (EOCC)",
+        "training": "Mafunzo ya kupunguza hatari za maafa yaliyotolewa kwa kamati",
+        "committee": "Kamati inafanya kazi (hukutana na kutunza kumbukumbu zake)",
+        "stakeholders": "Ushirikiano wa wadau (washirika, sekta, sekta binafsi na asasi za kiraia hushirikiana na kamati)",
+        "involvement": "Ushiriki katika masuala ya kupunguza hatari (kupunguza hatari kwenye mipango na bajeti; hushiriki shughuli za kitaifa)"
+      },
+      "yes": "Ipo",
+      "no": "Haipo",
+      "unknown": "Haijulikani",
+      "year": "Mwaka",
+      "yearOf": "Mwaka wa {{item}}",
+      "lead": "Mipango mitano ya kwanza (mpango, tathmini, timu iliyofunzwa, kituo, mafunzo) hupima mipango ya usimamizi wa maafa ya halmashauri; vigezo vitatu vya kamati hupima utendaji wake. Vyote huingia kwenye Msingi kama viashiria vya kitaasisi na kupunguza ukosefu wa uwezo wa kukabiliana wa halmashauri, mkoa wake na nchi."
+    },
+    "guidance": {
+      "replaces": "Taarifa",
+      "newStatement": "Taarifa mpya",
+      "replacesRow": "Inachukua nafasi ya taarifa {{n}} ya kitabu cha mwongozo",
+      "area": "Eneo ndani ya halmashauri",
+      "risk": "Hatari iko wapi",
+      "advice": "Nini husaidia"
+    },
+    "event": {
+      "hazard": "Kitisho",
+      "date": "Tarehe",
+      "description": "Kilichotokea",
+      "descriptionPlaceholder": "mf. Mafuriko ya ghafla kando ya mto Bubu baada ya mvua ya mm 110 usiku; kata mbili zilikatika kwa siku moja.",
+      "deaths": "Vifo",
+      "injured": "Majeruhi",
+      "affected": "Watu walioathirika",
+      "displaced": "Watu waliohama"
+    },
+    "warning": {
+      "level": "Kiwango cha tahadhari",
+      "areas": "Maeneo",
+      "addArea": "Ongeza eneo…",
+      "removeArea": "Ondoa {{name}}",
+      "wholeCountry": "Nchi nzima",
+      "from": "Kuanzia",
+      "to": "Hadi (tupu: hadi itakapoondolewa)",
+      "issuer": "Imetolewa na",
+      "bulletin": "Rejea ya taarifa",
+      "bulletinPlaceholder": "mf. Tahadhari ya hali mbaya ya hewa ya TMA na. 12/2026 ya 9 Okt 2026",
+      "title": "Kichwa (hiari)",
+      "titlePlaceholder": "mf. Mvua kubwa na upepo mkali pwani",
+      "incomplete": "Ongeza angalau eneo moja, rejea ya taarifa na tarehe ya kuanzia.",
+      "publish": "Chapisha tahadhari",
+      "published": "Tahadhari imechapishwa kwenye maeneo yaliyotajwa",
+      "inForce_one": "Tahadhari {{count}} inatumika leo.",
+      "inForce_other": "Tahadhari {{count}} zinatumika leo.",
+      "activeTitle_one": "Tahadhari {{count}} inatumika",
+      "activeTitle_other": "Tahadhari {{count}} zinatumika",
+      "validity": "inatumika {{from}} hadi {{to}}",
+      "untilLifted": "hadi itakapoondolewa",
+      "withdraw": "Ondoa",
+      "withdrawn": "Tahadhari imeondolewa",
+      "withdrawnNote": "Imeondolewa",
+      "validityOpen": "inatumika kuanzia {{from}}, hadi itakapoondolewa"
+    },
+    "source": {
+      "drr": "Rekodi inategemea nini",
+      "guidance": "Taarifa inategemea nini",
+      "event": "Imeripotiwa na / chanzo",
+      "warning": "Rejea ya taarifa",
+      "vc": "Hatua zinategemea nini"
+    },
+    "sourcePlaceholder": {
+      "drr": "mf. EPRP ya halmashauri iliyopitishwa na baraza kamili tarehe 12 Machi 2026; kumbukumbu za DDRRC zipo",
+      "guidance": "mf. Kikao cha DDRRC cha 3 Sept 2026; tathmini za hatari za kata 2025",
+      "event": "mf. Ripoti ya hali ya DDRRC ya 10 Jan 2026; watendaji wa kata",
+      "warning": "mf. Tahadhari ya hali mbaya ya hewa ya TMA na. 12/2026",
+      "vc": "mf. Mkakati wa Taifa wa Usimamizi wa Maafa 2022-2027, sehemu ya 4; sera au programu ya sekta"
+    },
+    "needSource": "Sema rekodi inategemea nini (hati, kumbukumbu, barua, taarifa).",
+    "incomplete": {
+      "drr": "Jibu angalau kipengele kimoja.",
+      "guidance": "Andika eneo na hatari iko wapi (kwa angalau lugha moja).",
+      "event": "Toa tarehe na ueleze kilichotokea.",
+      "vc": "Andika hatua (kwa angalau lugha moja)."
+    },
+    "notAllowed": "Nafasi yako haiwezi kurekodi hili kwa eneo hili.",
+    "send": "Tuma kuidhinishwa",
+    "apply": "Hifadhi na utumie",
+    "sendInstead": "Tuma kuidhinishwa badala yake",
+    "sent": "Imetumwa kuidhinishwa",
+    "applied": "Imehifadhiwa na kutumika",
+    "error": "Rekodi haikuweza kuhifadhiwa",
+    "chainTitle": "Nani anaidhinisha nini",
+    "chain": {
+      "council": "Rekodi za halmashauri: kamati ya wilaya (DDRRC) hurekodi, kamati ya mkoa (RDRRC) huidhinisha.",
+      "region": "Rekodi za mkoa: RDRRC hurekodi, kamati ya taifa (NDRRC) huidhinisha.",
+      "national": "Maudhui ya kitaifa: NDRRC hurekodi, PMO-DMD huchapisha; maktaba ya hatua huandaliwa na PMO-DMD na kupitiwa na NDRRC.",
+      "warning": "Tahadhari: NDRRC au PMO-DMD huzirekodi kutoka taarifa ya TMA; huchapishwa mara moja na zinaweza kuondolewa."
+    },
+    "chainNote": "PMO-DMD na wasimamizi wanaweza kurekodi au kuidhinisha popote; hakuna anayeidhinisha ripoti yake mwenyewe. Kila hatua huhifadhiwa kwenye kumbukumbu ya shughuli.",
+    "reviewTitle_one": "Rekodi {{count}} inasubiri idhini yako",
+    "reviewTitle_other": "Rekodi {{count}} zinasubiri idhini yako",
+    "byLine": "Imerekodiwa na {{name}} ({{role}})",
+    "byLineNoRole": "Imerekodiwa na {{name}}",
+    "approve": "Idhinisha",
+    "reject": "Kataa",
+    "reasonRequired": "Sababu inahitajika ili kukataa.",
+    "approved": "Imeidhinishwa: {{name}}",
+    "rejected": "Imekataliwa: {{name}}",
+    "historyTitle": {
+      "drr": "Mipango iliyoidhinishwa katika eneo lako",
+      "guidance": "Taarifa zilizoidhinishwa katika eneo lako",
+      "event": "Ripoti za matukio zilizothibitishwa katika eneo lako",
+      "warning": "Tahadhari zilizorekodiwa",
+      "vc": "Maingizo ya maktaba yaliyochapishwa"
+    },
+    "historyEmpty": "Bado hakuna kilichoidhinishwa katika eneo lako.",
+    "approvedBy": "imeidhinishwa na {{name}}, {{date}}",
+    "vc": {
+      "group": "Kundi la INFORM",
+      "why": "Kwa nini ni muhimu",
+      "actions": "Hatua zinazokipunguza",
+      "current": "Ingizo lililochapishwa la {{date}}, limepitiwa na {{by}}. Kuhifadhi huchukua nafasi yake likishaidhinishwa.",
+      "noCurrent": "Bado hakuna ingizo lililochapishwa kwa kundi hili.",
+      "leadSectors": "Sekta zinazoongoza",
+      "leadSectorsHint": "Chagua moja au zaidi. Pendekezo la kundi limechaguliwa tayari; kadi ya hatari ya kina huonyesha kilichohifadhiwa hapa."
+    }
+  },
+  "inbox": {
+    "title": "Kikasha",
+    "unread_one": "{{count}} haijasomwa",
+    "unread_other": "{{count}} hazijasomwa",
+    "kinds": {
+      "request": "Ombi",
+      "reminder": "Kikumbusho",
+      "decision": "Uamuzi"
+    },
+    "due": "Mwisho {{date}}",
+    "open": "Fungua kiashiria",
+    "markRead": "Weka alama imesomwa",
+    "markAll": "Weka alama zote zimesomwa",
+    "showAll": "Onyesha zote {{count}}",
+    "showFewer": "Onyesha chache",
+    "email": {
+      "queued": "barua pepe iko kwenye foleni (mtumaji wa Ofisi bado hajawekwa)",
+      "sent": "barua pepe imetumwa",
+      "failed": "barua pepe imeshindwa",
+      "none": "hakuna barua pepe katika hali hii"
+    }
+  },
+  "template": {
+    "title": "Fanya kazi nje ya mtandao kwa kiolezo",
+    "lead_one": "Pakua faili moja lenye kiashiria chako {{count}} na kila eneo (nchi, kila mkoa, kila halmashauri), jaza thamani mpya katika lahajedwali unayopenda, kisha lipakie tena. Mistari isiyo na thamani mpya hupuuzwa; andika n/a kwa hakuna data; weka value_type kuwa score kwa alama za 0 hadi 10 kwa mbinu ya INFORM na utaje chanzo.",
+    "lead_other": "Pakua faili moja lenye viashiria vyako {{count}} na kila eneo (nchi, kila mkoa, kila halmashauri), jaza thamani mpya katika lahajedwali unayopenda, kisha lipakie tena. Mistari isiyo na thamani mpya hupuuzwa; andika n/a kwa hakuna data; weka value_type kuwa score kwa alama za 0 hadi 10 kwa mbinu ya INFORM na utaje chanzo.",
+    "scope": "Kiolezo cha {{institution}}: viashiria {{count}} kwa eneo",
+    "download": "Pakua kiolezo (CSV)",
+    "upload": "Pakia kiolezo kilichojazwa (CSV) au zana ya ukusanyaji (XLSX)",
+    "downloaded_one": "Kiolezo chenye kiashiria {{count}} kimepakuliwa",
+    "downloaded_other": "Kiolezo chenye viashiria {{count}} kimepakuliwa",
+    "tooLarge": "Faili ni kubwa kuliko MB 5.",
+    "error": "Kiolezo hakikuweza kuchakatwa",
+    "read": "{{file}}: mistari {{rows}} imesomwa, {{filled}} ikiwa na thamani mpya, kwa viashiria {{indicators}}.",
+    "perIndicator_one": "thamani {{count}}",
+    "perIndicator_other": "thamani {{count}}",
+    "answersRequest": "inajibu ombi lililo wazi",
+    "issues_one": "Tatizo {{count}} la kurekebisha kabla ya kutuma:",
+    "issues_other": "Matatizo {{count}} ya kurekebisha kabla ya kutuma:",
+    "issue": {
+      "unknownIndicator": "Mstari {{line}}: kiashiria {{detail}} hakijulikani",
+      "unknownArea": "Mstari {{line}}: eneo {{detail}} halijulikani",
+      "levelMismatch": "Mstari {{line}}: ngazi hailingani na eneo {{detail}}",
+      "notNumber": "Mstari {{line}}: {{detail}} si namba",
+      "scoreRange": "Mstari {{line}}: alama lazima iwe kati ya 0 na 10 ({{detail}})",
+      "mixedTypes": "{{detail}}: kila mstari wa kiashiria kimoja lazima ubebe aina moja ya thamani",
+      "sourceMissing": "{{detail}}: alama zinahitaji chanzo angalau kwenye mstari mmoja",
+      "notScoreable": "{{detail}}: kitabu cha kazi hakiwezi kupa alama kiashiria hiki, tuma thamani zilizopimwa",
+      "duplicate": "Mstari {{line}}: {{detail}} inajitokeza mara mbili"
+    },
+    "note": "Imepakiwa kutoka kiolezo {{file}}",
+    "send_one": "Tuma wasilisho {{count}} kwa mapitio",
+    "send_other": "Tuma mawasilisho {{count}} kwa mapitio",
+    "sent_one": "Wasilisho {{count}} limetumwa kwa mapitio (thamani {{values}})",
+    "sent_other": "Mawasilisho {{count}} yametumwa kwa mapitio (thamani {{values}})",
+    "toolIgnored": "Viashiria {{skipped}} nje ya uingizaji huu na safu {{unknown}} zisizolingana vimerukwa."
+  },
+  "versions": {
+    "title": "Matoleo",
+    "lead": "Toleo ni hali ya data iliyoidhinishwa mwishoni mwa siku ambayo kitu kiliidhinishwa. Linganisha matoleo mawili: thamani ya kitaifa, mikoa na halmashauri ambazo hatari yake ilibadilika, na zilipo.",
+    "from": "Kutoka toleo",
+    "to": "Hadi toleo",
+    "now": "Sasa (la hivi karibuni)",
+    "version": "{{date}} · thamani {{count}} zilizoidhinishwa",
+    "authors": "na {{names}}",
+    "none": "Hakuna thamani zilizoidhinishwa bado, hivyo toleo pekee ni msingi wa INFORM SADC 2024.",
+    "loading": "Inajenga matoleo…",
+    "national": "Hatari ya kitaifa ya INFORM",
+    "changed_one": "Eneo {{count}} limebadilisha hatari",
+    "changed_other": "Maeneo {{count}} yamebadilisha hatari",
+    "unchanged": "Hakuna eneo lililobadilisha hatari kati ya matoleo haya.",
+    "map": "Halmashauri ambazo hatari yake ilibadilika, kwenye ramani ya toleo la sasa",
+    "col": {
+      "area": "Eneo",
+      "from": "Kutoka",
+      "to": "Hadi",
+      "change": "Mabadiliko"
+    }
+  },
+  "control": {
+    "title": "Udhibiti wa data",
+    "lead": "Skrini moja kwa Ofisi: nani anahudumia kiashiria kipi, kila taasisi imefikia wapi, na kila thamani hai inatoka wapi. Ugawaji na maombi yanayofanywa hapa hufika kwenye kichupo cha Viashiria na kikasha cha taasisi zenyewe.",
+    "summary": {
+      "serving": "Taasisi zinazohudumia data",
+      "assigned": "Viashiria vilivyogawiwa",
+      "core": "Viashiria vya INFORM vilivyogawiwa",
+      "unassigned": "Havijagawiwa",
+      "open": "Maombi yaliyo wazi",
+      "overdue": "Yaliyopitwa na muda",
+      "pending": "Yanayosubiri mapitio",
+      "withheld": "Thamani za halmashauri zilizozuiliwa"
+    },
+    "institutions": {
+      "title": "Taasisi na viashiria vyake",
+      "lead": "Kila taasisi na viashiria inavyohusika navyo, maombi yake yaliyo wazi na mawasilisho yake. Fungua safu kuona viashiria na kufika kwenye karatasi zake za kuingiza.",
+      "col": {
+        "institution": "Taasisi",
+        "assigned": "Vilivyogawiwa",
+        "requests": "Maombi wazi",
+        "overdue": "Yamepitwa",
+        "pending": "Yanasubiri mapitio",
+        "updated": "Vyenye thamani zilizoidhinishwa",
+        "lastUpdate": "Idhini ya mwisho",
+        "actions": "Vitendo"
+      },
+      "suggested_one": "Kiashiria {{count}} kisichogawiwa kina taasisi hii kama chanzo chake cha kawaida",
+      "suggested_other": "Viashiria {{count}} visivyogawiwa vina taasisi hii kama chanzo chao cha kawaida",
+      "none": "Hakuna taasisi iliyo na ugawaji bado.",
+      "advanced_one": "{{count}} cha juu",
+      "advanced_other": "{{count}} vya juu",
+      "kind": {
+        "national": "Taasisi ya Tanzania",
+        "global": "Seti ya data ya kimataifa"
+      }
+    },
+    "actions": {
+      "assignSuggested": "Gawia viashiria vyake vya kawaida",
+      "assignAll": "Gawia kila kiashiria kisichogawiwa kwa chanzo chake cha kawaida",
+      "request": "Omba masasisho",
+      "export": "Pakua mgawanyo (CSV)",
+      "open": "Fungua karatasi ya kuingiza",
+      "show": "Onyesha viashiria",
+      "hide": "Ficha viashiria",
+      "assigned": "Viashiria {{count}} vimegawiwa kwa {{institution}}",
+      "assignedAll_one": "Kiashiria {{count}} kimegawiwa",
+      "assignedAll_other": "Viashiria {{count}} vimegawiwa"
+    },
+    "indicator": {
+      "request": "ombi liko wazi",
+      "overdue": "limepitwa na muda",
+      "pending_one": "{{count}} linasubiri mapitio",
+      "pending_other": "{{count}} yanasubiri mapitio",
+      "updated": "imeidhinishwa {{date}}",
+      "never": "haijasasishwa kamwe"
+    },
+    "values": {
+      "workbookWithheld": "{{n}} zimebadilishwa na thamani zilizoidhinishwa",
+      "title": "Kila thamani hai inatoka wapi",
+      "lead": "Kwa kila moja ya makundi 32 ya viashiria, halmashauri ambazo thamani yake hai ni ya kitabu cha kazi, thamani ya Benchmark 2026 iliyoandaliwa kutoka seti za data za umma, thamani iliyowasilishwa na taasisi kupitia lango, thamani iliyozuiliwa baada ya uhakiki, au hakuna thamani. Thamani mpya zaidi iliyoidhinishwa kupitia lango inachukua nafasi ya thamani ya benchmark au iliyozuiliwa kwa halmashauri hiyo.",
+      "col": {
+        "group": "Kundi la viashiria",
+        "workbook": "Kitabu cha kazi",
+        "benchmark": "Benchmark 2026",
+        "institutional": "Taasisi (lango)",
+        "withheld": "Zimezuiliwa",
+        "empty": "Hakuna data",
+        "notes": "Taarifa za data"
+      },
+      "note": "Thamani zilizozuiliwa ni taarifa za data zilizowekwa karantini (docs/assessment, rejista ya uadilifu na maswali kwa washirika); ukurasa wa Mbinu unazieleza."
+    },
+    "request": {
+      "title": "Omba masasisho kutoka {{institution}}",
+      "lead": "Kila kiashiria kilichogawiwa kwa taasisi hupata ombi la sasisho; linaonekana katika kikasha cha taasisi na kwenye orodha yake ya viashiria.",
+      "due": "Tarehe ya mwisho",
+      "message": "Ujumbe (si lazima)",
+      "placeholder": "Kinachohitajika, na kwa kipindi au utafiti gani?",
+      "send_one": "Tuma ombi {{count}}",
+      "send_other": "Tuma maombi {{count}}",
+      "sent_one": "Ombi {{count}} limetumwa",
+      "sent_other": "Maombi {{count}} yametumwa",
+      "error": "Maombi hayakuweza kutumwa"
+    },
+    "csv": {
+      "institution": "Taasisi",
+      "kind": "Aina",
+      "indicator": "Kiashiria",
+      "group": "Kundi",
+      "core": "Msingi",
+      "status": "Hali",
+      "lastUpdate": "Idhini ya mwisho"
+    },
+    "import": {
+      "title": "Ingiza zana ya ukusanyaji iliyojazwa",
+      "lead": "Pakia Zana ya Ukusanyaji au kitabu cha Benchmark 2026 kama taasisi inavyokirudisha (xlsx), au kiolezo cha CSV. Kila kiashiria chenye thamani kinakuwa uwasilishaji mmoja kwenye foleni ya mapitio; hakuna kinachoingia kwenye kielelezo hadi kiidhinishwe."
+    }
+  },
+  "scores": {
+    "errors": {
+      "notNumber": "Weka namba, kwa mfano 6.5.",
+      "range": "Alama ni kuanzia 0 hadi 10.",
+      "decimals": "Tumia desimali moja tu, kwa mfano 6.5."
     }
   }
 }

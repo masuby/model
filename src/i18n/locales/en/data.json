@@ -22,21 +22,24 @@
   "tabs": {
     "label": "Data portal sections",
     "select": "Section",
-    "scores": "Enter scores",
-    "paste": "Bulk paste",
     "queue": "Review queue",
     "mine": "My submissions",
     "approved": "Approved changes",
     "activity": "Activity",
     "pendingSr": "pending",
     "indicators": "Indicators",
-    "people": "People"
+    "people": "People",
+    "committee": "Committee desk",
+    "control": "Data control"
   },
   "roles": {
     "viewer": "Visitor",
     "sector": "Sector officer",
     "pmo": "PMO reviewer",
-    "admin": "Administrator"
+    "admin": "Administrator",
+    "ddrrc": "District DRM committee (DDRRC)",
+    "rdrrc": "Regional DRM committee (RDRRC)",
+    "ndrrc": "National DRM committee (NDRRC)"
   },
   "levels": {
     "council": "Council",
@@ -58,7 +61,10 @@
       "viewer": "Read-only: browse the approved changes.",
       "sector": "Enter figures for your institution’s indicators and send them for PMO review.",
       "pmo": "Assign indicators, send requests, then review, approve, reject and revert. Your own entries can apply immediately.",
-      "admin": "Full access: everything a PMO reviewer can do, plus managing people and their institutions."
+      "admin": "Full access: everything a PMO reviewer can do, plus managing people and their institutions.",
+      "ddrrc": "Record the DRR arrangements of your council (Kondoa District in this demo) and send them to the regional committee for approval.",
+      "rdrrc": "Record for Dodoma Region and its councils, and approve the councils’ records; the national committee approves the region’s.",
+      "ndrrc": "Approve regional records and record for any area."
     },
     "account": "Your account",
     "live": "Connected to the shared national database",
@@ -138,43 +144,6 @@
     "lead_other": "You have {{count}} unsaved values for this council. Switching council will discard them.",
     "keep": "Keep editing",
     "confirm": "Discard and switch"
-  },
-  "scores": {
-    "pickTitle": "Council",
-    "pickLead": "Choose the council whose indicator scores you are updating.",
-    "emptyTitle": "Start by choosing a council",
-    "emptyLead": "You will see all 32 indicator groups with their current values and sources, and a live preview of how your changes move the council’s risk.",
-    "hint": "Type a new 0–10 score next to any indicator. Leave it blank to keep the current value.",
-    "changeCount_one": "{{count}} change ready",
-    "changeCount_other": "{{count}} changes ready",
-    "errorCount_one": "{{count}} value needs fixing",
-    "errorCount_other": "{{count}} values need fixing",
-    "changedOnly": "Changed only",
-    "clearAll": "Clear all",
-    "noneChanged": "No values changed yet.",
-    "current": "Current",
-    "about": "About {{name}}",
-    "pending": "Pending review",
-    "pendingTip": "You already sent a value for this indicator. It is waiting for a PMO reviewer.",
-    "sharedTitle": "Vulnerability and coping scores are stored on the INFORM source unit “{{source}}”",
-    "sharedSiblings_one": "The survey data behind them has no council breakdown, so a change to any of these rows also applies to {{names}}.",
-    "sharedSiblings_other": "The survey data behind them has no council breakdown, so a change to any of these rows also applies to {{names}}.",
-    "sharedAlone": "No other council uses this source unit, so a change to any of these rows affects only {{council}}.",
-    "updatedBy": "Updated · {{authority}} · {{date}}",
-    "exposureGroup": "Exposure",
-    "exposureNote": "Amplifies flood: flood = max(h, √(h × exposure)).",
-    "exposureFloodEdited": "Your flood value takes precedence over exposure amplification.",
-    "exposureDesc": "Population exposure index (0–10) from council population and area. It amplifies the flood hazard as INFORM’s Hazard × Exposure term.",
-    "markNoData": "Mark {{name}} as no data",
-    "noDataOn": "Marked as no data. Click to undo.",
-    "noDataOff": "Mark as no data (left out of averages, not zero)",
-    "resetRow": "Reset {{name}}",
-    "reviewNow": "Review",
-    "errors": {
-      "notNumber": "Enter a number, for example 6.5.",
-      "range": "Scores run from 0 to 10.",
-      "decimals": "Use at most one decimal, for example 6.5."
-    }
   },
   "preview": {
     "eyebrow": "Live preview",
@@ -408,7 +377,7 @@
     "appliedDirectly": "Applied directly by a reviewer"
   },
   "approved": {
-    "emptyTitle": "The official baseline is in use",
+    "emptyTitle": "The INFORM SADC 2024 baseline is in use",
     "emptyLead": "No approved changes yet. Every map shows the INFORM Sub-national SADC 2024 values.",
     "search": "Filter by unit, indicator, authority…",
     "count_one": "{{count}} approved value across {{units}}",
@@ -425,7 +394,7 @@
     "revertTip": "Restore the baseline value ({{value}})",
     "revertAria": "Revert {{indicator}} for {{unit}}",
     "revertTitle": "Revert to the baseline?",
-    "revertLead": "{{indicator}} for {{unit}} will go back to the official baseline value. The revert is logged.",
+    "revertLead": "{{indicator}} for {{unit}} will go back to the INFORM SADC 2024 baseline value. The revert is logged.",
     "revertConfirm": "Revert",
     "revertedToast": "{{indicator}} for {{unit}} is back to the baseline",
     "revertError": "Revert failed",
@@ -520,7 +489,7 @@
     "resetWarn": "Export a JSON copy first if you might need this data again. The shared database is not affected.",
     "resetAck": "I understand: delete the data in this browser",
     "resetConfirm": "Delete local data",
-    "resetDone": "Local data cleared. The official baseline is back."
+    "resetDone": "Local data cleared. The INFORM SADC 2024 baseline is back."
   },
   "authorities": {
     "NBS": "National Bureau of Statistics",
@@ -584,7 +553,19 @@
     "events_100yr": "events per 100 years",
     "m_yr": "metres per year",
     "pct_decade": "% per decade",
-    "flashes_km2_yr": "flashes per km² per year"
+    "flashes_km2_yr": "flashes per km² per year",
+    "per_10_000_people": "per 10,000 people",
+    "count_of_5": "count (0 to 5)",
+    "events_2010_2024": "recorded events, 2010 to 2024",
+    "intensity": "felt intensity (attenuated magnitude)",
+    "strokes_km2_yr": "lightning strokes per km² per year",
+    "deaths_per_100_000": "deaths per 100,000 people",
+    "phase_1_5": "IPC phase (1 to 5)",
+    "fraction_of_area": "fraction of area",
+    "crashes_per_100_km2": "crashes per 100 km² a year",
+    "sites_per_100_km2": "sites per 100 km²",
+    "pct_of_5_arrangements": "% of the five arrangements",
+    "pct_of_assessed_criteria": "% of the assessed criteria"
   },
   "specs": {
     "HA_NAT_CH-ERO": "Coastal erosion",
@@ -653,6 +634,7 @@
     "HA_NAT_DR-SPEI": "Drought depth (SPEI-12)",
     "HA_NAT_DR-WLEV": "Water levels (% of normal)",
     "HA_NAT_EQ-HIST": "Historical earthquake density",
+    "HA_NAT_EQ-FELT": "Maximum felt intensity",
     "HA_NAT_EQ-PGA": "Seismic hazard (peak ground acceleration, 475-year)",
     "HA_NAT_FL-BASIN": "Basin flood records",
     "HA_NAT_FL-EVENT": "Recorded flood impact events",
@@ -664,7 +646,21 @@
     "HA_NAT_LS-RAIN": "Triggering rainfall (wettest day)",
     "HA_NAT_LS-SUSC": "Slope susceptibility (mean slope)",
     "HA_NAT_ST-FREQ": "Cyclone and strong wind frequency",
-    "HA_NAT_ST-WIND": "Extreme wind speed"
+    "HA_NAT_ST-WIND": "Extreme wind speed",
+    "CC_INF_HC-DENS": "Health facilities per 10,000 people (2022 census)",
+    "CC_INF_EDU-DENS": "Schools per 10,000 people (2022 census)",
+    "CC_INS_DRR-STAT": "DRM arrangements in place (EPRP, anticipatory action, EOCC, ERT, RVCA)",
+    "VU_VG_DP-UNHCR": "Refugees and asylum-seekers hosted (UNHCR)",
+    "HA_NAT_CH-SEA": "Sea level rise: low-elevation coastal zone",
+    "HA_NAT_HW-EXP": "Heatwave days",
+    "HA_NAT_LI-CAS": "Lightning stroke density",
+    "HA_HUM_ACC": "Road traffic crashes per 100 km²",
+    "VU_SE_LV-IPC": "IPC acute food insecurity area phase",
+    "VU_VG_ECO-FEMHH": "Female-headed households",
+    "VU_VG_HC-DISAB": "People living with disabilities",
+    "HA_HUM_HMAT": "Hazardous-material sites per 100 km²",
+    "CC_INS_DRR-ARR": "DRM arrangements in place (plan, assessment, trained team, centre, training)",
+    "CC_INS_GOV-DMC": "Disaster management committee functioning"
   },
   "workflow": {
     "advanced": "Advanced indicator, not part of the score yet",
@@ -809,7 +805,8 @@
         "area": "Area",
         "now": "Value today",
         "new": "New value",
-        "score": "Score (0 to 10)"
+        "score": "Score (0 to 10)",
+        "newScore": "New score (0 to 10)"
       },
       "national": "Tanzania (national)",
       "councils_one": "{{count}} council",
@@ -843,7 +840,23 @@
       "applied_other": "{{count}} values saved and applied",
       "sent_one": "{{count}} value sent for review",
       "sent_other": "{{count}} values sent for review",
-      "error": "Could not save the values"
+      "error": "Could not save the values",
+      "type": {
+        "label": "What are you entering?",
+        "raw": "Measured values",
+        "score": "0–10 scores (INFORM method)",
+        "rawHint": "Figures in the indicator’s own unit. The engine standardises them with the workbook method and shows the 0–10 score before you send.",
+        "scoreHint": "Scores you computed with the INFORM standardiser, for example with the NORMAL Excel tool. They enter the Core only with a citable source. Scores computed by another method are not accepted here: they belong to the Advancement layer."
+      },
+      "method": {
+        "inform": "INFORM standardiser (workbook method)"
+      },
+      "source": "Citable source",
+      "sourcePlaceholder": "e.g. NBS (2024). Household Budget Survey 2022/23, main report, table 4.2",
+      "sourceRequired": "required for scores",
+      "needSource": "Cite the publication, dataset or official letter the scores come from.",
+      "outOfRange": "A score must be between 0 and 10.",
+      "scoreTag": "0–10 score"
     },
     "paste": {
       "button": "Paste from a spreadsheet",
@@ -883,7 +896,9 @@
       "values_other": "{{count}} values · councils that will use them: {{reached}}",
       "proposed": "Proposed",
       "approved": "Approved: {{name}}",
-      "rejected": "Rejected: {{name}}"
+      "rejected": "Rejected: {{name}}",
+      "valueType": "Values",
+      "methodSwitch": "Changes this group's method: from {{from}} to {{to}}"
     },
     "approved": {
       "measuredTitle_one": "{{count}} measured value",
@@ -914,7 +929,357 @@
       "saved": "Saved: {{name}}",
       "error": "Could not save the change",
       "emptyTitle": "Nobody found",
-      "emptyLead": "People appear here after they first sign in."
+      "emptyLead": "People appear here after they first sign in.",
+      "scopeOf": "Area of {{name}}",
+      "noScope": "No area set",
+      "noScopeNeeded": "No area scope"
+    }
+  },
+  "committee": {
+    "lead": "What the disaster-management committees record, on the chain of the Risk Action Guide Book: the arrangements of each council and region, the statements people read under Know your risk, hazard event reports, and official warnings. Each record names what it rests on; the level above approves it; approved records show on the area profiles.",
+    "scope": {
+      "ddrrc": "You record for your council; the regional committee approves.",
+      "rdrrc": "You record for your region and its councils, and approve the councils’ records; the national committee approves the region’s.",
+      "ndrrc": "You record for any area, approve regional records and publish warnings.",
+      "reviewer": "PMO-DMD: you may record for any area, approve any record and publish warnings.",
+      "none": "Your account has no area yet. Ask an administrator to set the council or region you act for."
+    },
+    "noScopeTitle": "No area to record for",
+    "kindLabel": "What to record",
+    "kinds": {
+      "drr": "DRR capacity",
+      "guidance": "Know your risk",
+      "event": "Event report",
+      "warning": "Warning",
+      "vc": "Reducing risk"
+    },
+    "kindLead": {
+      "drr": "Whether the arrangements are in place: preparedness and response plan with its risk and vulnerability assessment, anticipatory action, trained response team, operations centre, DRR training of the committee; and how the committee functions: active, collaborating with stakeholders, involved in DRR issues. The engine scores the first five as DRM arrangements in place and the three criteria as committee functioning.",
+      "guidance": "The statement people read on the council’s profile: where the danger lies and what helps. Replace a guide-book row or add a new one, in English and Kiswahili.",
+      "event": "A hazard event that happened: when, what, and its impacts. The regional committee validates it.",
+      "warning": "An official warning as issued by TMA: hazard, level, areas and validity. It is published at once on the areas named and lifts on its end date.",
+      "vc": "The action library: for each INFORM indicator group (hazards, vulnerability and coping capacity), what reduces it and which sectors lead. PMO-DMD writes, the national committee reviews; the actions and the sectors appear on the detailed risk card and on every area where the group weighs most."
+    },
+    "recordTitle": {
+      "drr": "Record the arrangements",
+      "guidance": "Write or update a statement",
+      "event": "Report an event",
+      "warning": "Record an official warning",
+      "vc": "Write or update the actions for a group"
+    },
+    "unit": "Area",
+    "pendingNotice": "A record for this area is awaiting approval; a new one replaces it once approved.",
+    "drr": {
+      "current": "Approved record of {{date}}, approved by {{by}}.",
+      "noCurrent": "No approved record yet; the profile shows the PMO-DMD list where it has an entry.",
+      "fields": {
+        "eprp": "Emergency preparedness and response plan (EPRP)",
+        "aa": "Anticipatory action protocol (AA)",
+        "ert": "Trained emergency response team (ERT)",
+        "rvca": "Risk and vulnerability capacity assessment (RVCA)",
+        "eocc": "Emergency operations and communication centre (EOCC)",
+        "training": "DRR training delivered to the committee",
+        "committee": "Committee active (meets and keeps its records)",
+        "stakeholders": "Stakeholder collaboration (partners, sectors, private sector and civil society work with the committee)",
+        "involvement": "Involvement in DRR issues (DRR in the plans and budget; takes part in national DRR activities)"
+      },
+      "yes": "In place",
+      "no": "Not in place",
+      "unknown": "Not known",
+      "year": "Year",
+      "yearOf": "Year of {{item}}",
+      "lead": "The first five arrangements (plan, assessment, trained team, centre, training) score the council's DRM arrangements; the three committee criteria score its functioning. Both enter the Core as institutional indicators and lower the lack of coping capacity of the council, its region and the country."
+    },
+    "guidance": {
+      "replaces": "Statement",
+      "newStatement": "New statement",
+      "replacesRow": "Replaces guide-book statement {{n}}",
+      "area": "Area within the council",
+      "risk": "Where the danger lies",
+      "advice": "What helps"
+    },
+    "event": {
+      "hazard": "Hazard",
+      "date": "Date",
+      "description": "What happened",
+      "descriptionPlaceholder": "e.g. Flash floods along the Bubu river after 110 mm of rain overnight; two wards cut off for a day.",
+      "deaths": "Deaths",
+      "injured": "Injured",
+      "affected": "People affected",
+      "displaced": "People displaced"
+    },
+    "warning": {
+      "level": "Warning level",
+      "areas": "Areas",
+      "addArea": "Add an area…",
+      "removeArea": "Remove {{name}}",
+      "wholeCountry": "Whole country",
+      "from": "Valid from",
+      "to": "Valid to (empty: until lifted)",
+      "issuer": "Issued by",
+      "bulletin": "Bulletin reference",
+      "bulletinPlaceholder": "e.g. TMA severe weather warning no. 12/2026 of 9 Oct 2026",
+      "title": "Headline (optional)",
+      "titlePlaceholder": "e.g. Heavy rain and strong winds over the coast",
+      "incomplete": "Add at least one area, the bulletin reference and the start date.",
+      "publish": "Publish the warning",
+      "published": "Warning published on the areas named",
+      "inForce_one": "{{count}} warning in force today.",
+      "inForce_other": "{{count}} warnings in force today.",
+      "activeTitle_one": "{{count}} warning in force",
+      "activeTitle_other": "{{count}} warnings in force",
+      "validity": "valid {{from}} to {{to}}",
+      "untilLifted": "until lifted",
+      "withdraw": "Withdraw",
+      "withdrawn": "Warning withdrawn",
+      "withdrawnNote": "Withdrawn",
+      "validityOpen": "valid from {{from}}, until lifted"
+    },
+    "source": {
+      "drr": "What the record rests on",
+      "guidance": "What the statement rests on",
+      "event": "Reported by / source",
+      "warning": "Bulletin reference",
+      "vc": "What the actions rest on"
+    },
+    "sourcePlaceholder": {
+      "drr": "e.g. Council EPRP approved by the full council on 12 March 2026; DDRRC minutes on file",
+      "guidance": "e.g. DDRRC meeting of 3 Sept 2026; ward risk assessments 2025",
+      "event": "e.g. DDRRC situation report of 10 Jan 2026; ward executive officers",
+      "warning": "e.g. TMA severe weather warning no. 12/2026",
+      "vc": "e.g. National Disaster Management Strategy 2022-2027, section 4; sector policy or programme"
+    },
+    "needSource": "Say what the record rests on (document, minutes, letter, bulletin).",
+    "incomplete": {
+      "drr": "Answer at least one item.",
+      "guidance": "Write the area and where the danger lies (in at least one language).",
+      "event": "Give the date and describe what happened.",
+      "vc": "Write the actions (in at least one language)."
+    },
+    "notAllowed": "Your role cannot record this for this area.",
+    "send": "Send for approval",
+    "apply": "Save and apply",
+    "sendInstead": "Send for approval instead",
+    "sent": "Sent for approval",
+    "applied": "Saved and applied",
+    "error": "Could not save the record",
+    "chainTitle": "Who approves what",
+    "chain": {
+      "council": "Council records: the district committee (DDRRC) records, the regional committee (RDRRC) approves.",
+      "region": "Region records: the RDRRC records, the national committee (NDRRC) approves.",
+      "national": "National content: the NDRRC records, PMO-DMD publishes; the action library is drafted by PMO-DMD and reviewed by the NDRRC.",
+      "warning": "Warnings: the NDRRC or PMO-DMD records them from the TMA bulletin; they are published at once and may be withdrawn."
+    },
+    "chainNote": "PMO-DMD and administrators may record or approve anywhere; nobody approves their own report. Every step is kept in the activity log.",
+    "reviewTitle_one": "{{count}} record awaiting your approval",
+    "reviewTitle_other": "{{count}} records awaiting your approval",
+    "byLine": "Recorded by {{name}} ({{role}})",
+    "byLineNoRole": "Recorded by {{name}}",
+    "approve": "Approve",
+    "reject": "Reject",
+    "reasonRequired": "A reason is required to reject.",
+    "approved": "Approved: {{name}}",
+    "rejected": "Rejected: {{name}}",
+    "historyTitle": {
+      "drr": "Approved arrangements in your area",
+      "guidance": "Approved statements in your area",
+      "event": "Validated event reports in your area",
+      "warning": "Warnings recorded",
+      "vc": "Published library entries"
+    },
+    "historyEmpty": "Nothing approved in your area yet.",
+    "approvedBy": "approved by {{name}}, {{date}}",
+    "vc": {
+      "group": "INFORM group",
+      "why": "Why it matters",
+      "actions": "Actions that reduce it",
+      "current": "Published entry of {{date}}, reviewed by {{by}}. Saving replaces it once approved.",
+      "noCurrent": "No entry published for this group yet.",
+      "leadSectors": "Lead sectors",
+      "leadSectorsHint": "Choose one or more. The proposal for the group is pre-selected; the detailed risk card shows what is saved here."
+    }
+  },
+  "inbox": {
+    "title": "Inbox",
+    "unread_one": "{{count}} unread",
+    "unread_other": "{{count}} unread",
+    "kinds": {
+      "request": "Request",
+      "reminder": "Reminder",
+      "decision": "Decision"
+    },
+    "due": "Due {{date}}",
+    "open": "Open the indicator",
+    "markRead": "Mark as read",
+    "markAll": "Mark all as read",
+    "showAll": "Show all {{count}}",
+    "showFewer": "Show fewer",
+    "email": {
+      "queued": "e-mail queued (the Office's sender is not configured yet)",
+      "sent": "e-mail sent",
+      "failed": "e-mail failed",
+      "none": "no e-mail in this mode"
+    }
+  },
+  "template": {
+    "title": "Work offline with a template",
+    "lead_one": "Download one file with your {{count}} indicator and every area (the country, each region, each council), fill the new values in the spreadsheet of your choice, and upload it back. Rows without a new value are ignored; write n/a for no data; set value_type to score for 0 to 10 scores by the INFORM method and name the source.",
+    "lead_other": "Download one file with your {{count}} indicators and every area (the country, each region, each council), fill the new values in the spreadsheet of your choice, and upload it back. Rows without a new value are ignored; write n/a for no data; set value_type to score for 0 to 10 scores by the INFORM method and name the source.",
+    "scope": "Template for {{institution}}: {{count}} indicators by area",
+    "download": "Download the template (CSV)",
+    "upload": "Upload a filled template (CSV) or collection tool (XLSX)",
+    "downloaded_one": "Template with {{count}} indicator downloaded",
+    "downloaded_other": "Template with {{count}} indicators downloaded",
+    "tooLarge": "The file is larger than 5 MB.",
+    "error": "The template could not be processed",
+    "read": "{{file}}: {{rows}} rows read, {{filled}} with a new value, for {{indicators}} indicator(s).",
+    "perIndicator_one": "{{count}} value",
+    "perIndicator_other": "{{count}} values",
+    "answersRequest": "answers the open request",
+    "issues_one": "{{count}} problem to fix before sending:",
+    "issues_other": "{{count}} problems to fix before sending:",
+    "issue": {
+      "unknownIndicator": "Line {{line}}: unknown indicator {{detail}}",
+      "unknownArea": "Line {{line}}: unknown area {{detail}}",
+      "levelMismatch": "Line {{line}}: the level does not match the area {{detail}}",
+      "notNumber": "Line {{line}}: {{detail}} is not a number",
+      "scoreRange": "Line {{line}}: a score must be between 0 and 10 ({{detail}})",
+      "mixedTypes": "{{detail}}: every row of one indicator must carry the same value type",
+      "sourceMissing": "{{detail}}: scores need a source on at least one row",
+      "notScoreable": "{{detail}}: the workbook cannot score this indicator, send measured values",
+      "duplicate": "Line {{line}}: {{detail}} appears twice"
+    },
+    "note": "Uploaded from the template {{file}}",
+    "send_one": "Send {{count}} submission for review",
+    "send_other": "Send {{count}} submissions for review",
+    "sent_one": "{{count}} submission sent for review ({{values}} values)",
+    "sent_other": "{{count}} submissions sent for review ({{values}} values)",
+    "toolIgnored": "Ignored {{skipped}} indicator(s) outside this import and {{unknown}} unmatched column(s)."
+  },
+  "versions": {
+    "title": "Versions",
+    "lead": "A version is the state of the approved data at the end of a day on which something was approved. Compare two versions: the national value, the regions and councils whose risk changed, and where they are.",
+    "from": "From version",
+    "to": "To version",
+    "now": "Now (latest)",
+    "version": "{{date}} · {{count}} approved values",
+    "authors": "by {{names}}",
+    "none": "No approved values yet, so the only version is the INFORM SADC 2024 baseline.",
+    "loading": "Building the versions…",
+    "national": "National INFORM risk",
+    "changed_one": "{{count}} area changed risk",
+    "changed_other": "{{count}} areas changed risk",
+    "unchanged": "No area changed risk between these versions.",
+    "map": "Councils whose risk changed, on the current version's map",
+    "col": {
+      "area": "Area",
+      "from": "From",
+      "to": "To",
+      "change": "Change"
+    }
+  },
+  "control": {
+    "title": "Data control",
+    "lead": "One screen for the Office: who serves which indicator, how far each institution is, and where every live value comes from. Assignments and requests made here reach the institutions' own Indicators tab and inbox.",
+    "summary": {
+      "serving": "Institutions serving data",
+      "assigned": "Indicators assigned",
+      "core": "INFORM indicators assigned",
+      "unassigned": "Not assigned",
+      "open": "Open requests",
+      "overdue": "Overdue",
+      "pending": "Waiting for review",
+      "withheld": "Council values withheld live"
+    },
+    "institutions": {
+      "title": "Institutions and their indicators",
+      "lead": "Each institution with the indicators it is responsible for, its open requests and its submissions. Open a row to see the indicators and reach their entry sheets.",
+      "col": {
+        "institution": "Institution",
+        "assigned": "Assigned",
+        "requests": "Open requests",
+        "overdue": "Overdue",
+        "pending": "Waiting for review",
+        "updated": "With approved values",
+        "lastUpdate": "Last approved",
+        "actions": "Actions"
+      },
+      "suggested_one": "{{count}} unassigned indicator has this institution as its usual source",
+      "suggested_other": "{{count}} unassigned indicators have this institution as their usual source",
+      "none": "No institution holds an assignment yet.",
+      "advanced_one": "{{count}} advanced",
+      "advanced_other": "{{count}} advanced",
+      "kind": {
+        "national": "Tanzanian institution",
+        "global": "Global dataset"
+      }
+    },
+    "actions": {
+      "assignSuggested": "Assign its usual indicators",
+      "assignAll": "Assign every unassigned indicator to its usual source",
+      "request": "Request updates",
+      "export": "Download the distribution (CSV)",
+      "open": "Open the entry sheet",
+      "show": "Show indicators",
+      "hide": "Hide indicators",
+      "assigned": "Assigned {{count}} indicators to {{institution}}",
+      "assignedAll_one": "Assigned {{count}} indicator",
+      "assignedAll_other": "Assigned {{count}} indicators"
+    },
+    "indicator": {
+      "request": "request open",
+      "overdue": "overdue",
+      "pending_one": "{{count}} waiting for review",
+      "pending_other": "{{count}} waiting for review",
+      "updated": "approved {{date}}",
+      "never": "never updated"
+    },
+    "values": {
+      "workbookWithheld": "{{n}} replaced by approved values",
+      "title": "Where every live value comes from",
+      "lead": "For each of the 32 indicator groups, the councils whose live value is the workbook's, a Benchmark 2026 value prepared from public datasets, a value an institution submitted through the portal, a value withheld after validation, or no value. A newer value approved through the portal replaces a benchmark or a withheld value for that council.",
+      "col": {
+        "group": "Indicator group",
+        "workbook": "Workbook",
+        "benchmark": "Benchmark 2026",
+        "institutional": "Institutions (portal)",
+        "withheld": "Withheld",
+        "empty": "No data",
+        "notes": "Data notes"
+      },
+      "note": "Withheld values are the data notes marked for quarantine (docs/assessment, the integrity register and the queries to the partners); the Methodology page explains them."
+    },
+    "request": {
+      "title": "Request updates from {{institution}}",
+      "lead": "Every indicator assigned to the institution gets an update request; it appears in the institution's inbox and on its indicator list.",
+      "due": "Due date",
+      "message": "Message (optional)",
+      "placeholder": "What is needed, and for which period or survey?",
+      "send_one": "Send {{count}} request",
+      "send_other": "Send {{count}} requests",
+      "sent_one": "{{count}} request sent",
+      "sent_other": "{{count}} requests sent",
+      "error": "The requests could not be sent"
+    },
+    "csv": {
+      "institution": "Institution",
+      "kind": "Kind",
+      "indicator": "Indicator",
+      "group": "Group",
+      "core": "Core",
+      "status": "Status",
+      "lastUpdate": "Last approved"
+    },
+    "import": {
+      "title": "Import a filled collection tool",
+      "lead": "Upload the Collection Tool or the Benchmark 2026 workbook as an institution returns it (xlsx), or a CSV template. Every indicator with a value becomes one submission in the review queue; nothing enters the model until it is approved."
+    }
+  },
+  "scores": {
+    "errors": {
+      "notNumber": "Enter a number, for example 6.5.",
+      "range": "Scores run from 0 to 10.",
+      "decimals": "Use at most one decimal, for example 6.5."
     }
   }
 }

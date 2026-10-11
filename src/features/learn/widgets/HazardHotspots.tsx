@@ -76,7 +76,7 @@ export default function HazardHotspots() {
                 <span className="block truncate text-xs text-muted-foreground">{u.region}</span>
               </span>
               <span className="hidden h-1.5 bg-muted sm:block" aria-hidden>
-                <span className="block h-full" style={{ width: `${(v / 10) * 100}%`, background: rampColor(v) }} />
+                <span className="block h-full" style={{ width: `${(v / 10) * 100}%`, background: rampColor(v, 'hazard') }} />
               </span>
               <span className="num text-right font-semibold">{formatScore(v)}</span>
               <ArrowRight className="size-3.5 text-muted-foreground transition-transform duration-150 group-hover:translate-x-0.5 group-hover:text-primary" aria-hidden />

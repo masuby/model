@@ -25,27 +25,28 @@
     "source": "INFORM units",
     "reference": "Reference",
     "note": {
-      "council": "{{count}} councils (NBS 2022), the headline level. Hazard & Exposure is computed for each council; vulnerability and coping come from the council’s INFORM source unit.",
-      "region": "{{count}} regions, aggregated from their councils the INFORM way (indicator means, then the scaled geometric mean).",
-      "source": "The {{count}} units of the INFORM SADC 2024 workbook, shown for reference. Councils are the headline level."
-    }
+      "council": "{{count}} councils (NBS 2022).",
+      "region": "{{count}} regions, aggregated from their councils.",
+      "source": "The {{count}} units of the INFORM SADC 2024 workbook."
+    },
+    "referenceLink": "The {{count}} workbook units"
   },
   "lens": {
     "label": "Colour by",
     "scoresFor": "Scores shown for {{name}}.",
-    "scoresNational": "Scores shown: official national figures.",
+    "scoresNational": "Scores shown: the national aggregate of all councils.",
     "source": "Source",
     "resolution": "Resolution",
     "backToRisk": "Back to overall risk",
     "groupsOf": "Indicator groups of {{dimension}}",
-    "groupsHint": "Choose a dimension to see its indicator groups, such as Flood or Drought under Hazard & Exposure."
+    "groupsHint": "Choose a dimension to see its indicator groups."
   },
   "resolution": {
-    "council": "Council: computed for each council",
+    "council": "Council: recorded for this council",
     "district": "District: shared by the councils of a district",
     "region": "Region: survey estimate, the same for every council in the region",
     "national": "National: one value for the whole country",
-    "overlay": "Documented overlay: expert-mapped exposure"
+    "none": "No data: no workbook indicator has data for this group"
   },
   "legend": {
     "label": "Legend & filter",
@@ -63,9 +64,10 @@
   "honesty": {
     "label": "About these scales",
     "title": "How to read the colours",
+    "palette": "Overall risk is coloured from pale yellow to deep red, in the families of its three colour bands; each dimension keeps the palette of the INFORM SADC 2024 workbook: hazard yellow to brown, vulnerability blue, lack of coping capacity green.",
     "indicator": "Single-indicator lenses use a continuous 0–10 scale: INFORM defines classes only for overall risk and the three dimensions.",
     "dimension": "Risk and each dimension have their own INFORM class thresholds, so the same score can fall in different classes.",
-    "national": "The national value is the official INFORM Tanzania figure, not an average of councils or regions.",
+    "national": "The national value is the INFORM aggregate of all councils (indicator groups averaged first, as for regions), not an average of risk scores and not the INFORM Global country score.",
     "more": "Read the methodology →"
   },
   "stats": {
@@ -73,7 +75,7 @@
     "mean": "Mean",
     "min": "Lowest",
     "max": "Highest",
-    "national": "National (official)",
+    "national": "National (aggregate)",
     "nationalShort": "National",
     "areas_one": "{{count}} area",
     "areas_other": "{{count}} areas",
@@ -109,20 +111,17 @@
     "label": "Details for {{name}}",
     "close": "Close details",
     "rank": "Risk rank",
-    "national": "National (official)",
+    "national": "National (aggregate)",
     "regionRisk": "{{name}} region",
     "dimensions": "Dimensions",
     "markerRegion": "Marker: {{name}} region",
-    "markerNational": "Marker: official national figure",
+    "markerNational": "Marker: national aggregate",
     "drivers": "Top drivers",
     "driversHint": "Highest-scoring indicators (0–10). Select one to colour the map by it.",
     "colourBy": "Colour the map by {{name}}",
     "people": "People",
     "popSource": "Source: {{source}}",
     "coverageDetail": "{{have}} of {{total}} indicator groups have data",
-    "regionNote_one": "Aggregated from {{count}} council with the INFORM method.",
-    "regionNote_other": "Aggregated from {{count}} councils with the INFORM method.",
-    "sourceNote": "Reference unit from the INFORM SADC 2024 workbook. Councils are the headline level.",
     "editedNote_one": "Includes {{count}} approved data update.",
     "editedNote_other": "Includes {{count}} approved data updates.",
     "inheritedBadge": "Inherited data",
@@ -160,12 +159,164 @@
     "riskClass": "Risk class",
     "clearClass": "Remove the {{cls}} filter",
     "selectRow": "Show details for {{name}}",
-    "empty": "No area matches these filters."
+    "empty": "No area matches these filters.",
+    "dataNote": "Data note"
   },
   "footer": {
     "asOf": "Data as of {{date}}",
     "methodology": "Methodology",
     "method": "INFORM methodology · JRC & partners",
     "learn": "How INFORM works"
+  },
+  "layer": {
+    "label": "Layer",
+    "core": "Core",
+    "advancement": "Advancement",
+    "note": {
+      "core": "INFORM SADC 2024 workbook values and the approved institutional values.",
+      "advancement": "The Core plus the Tanzanian sub-indicators, shown on request.",
+      "loading": "Computing the Advancement layer…"
+    }
+  },
+  "riskPanel": {
+    "breadcrumb": "Where this area sits",
+    "country": "Tanzania",
+    "skip": "Skip to the risk in {{name}}",
+    "riskTitle": "Risk level",
+    "top": {
+      "title": "Highest-scoring indicator groups",
+      "more": "Show all {{count}}",
+      "less": "Show fewer",
+      "open": "{{name}}: {{score}}. Show the evidence",
+      "empty": "No group has a value here."
+    },
+    "coarse": {
+      "region": "Regional value",
+      "national": "National value",
+      "regionTitle": "One value for the whole region, repeated on each of its councils",
+      "nationalTitle": "One value for the whole country"
+    },
+    "nature": {
+      "title": "The nature of the area",
+      "councils": "Councils with guidance",
+      "more_one": "and {{count}} more council",
+      "more_other": "and {{count}} more councils",
+      "empty": "The guide has no statement for this area."
+    },
+    "warnings": {
+      "title": "Warnings in force"
+    },
+    "scores": {
+      "title": "How the score is built",
+      "councilsByClass": "Councils by risk class"
+    },
+    "group": {
+      "back": "{{name}}: overview",
+      "score": "Score here",
+      "outOf": "out of 10",
+      "noValue": "No value here",
+      "compareRegion": "{{name}} region",
+      "compareNational": "Tanzania",
+      "rankLevel": "#{{rank}} of {{of}} {{level}}",
+      "rankRegion": "#{{rank}} of {{of}} in {{region}}",
+      "levels": {
+        "council": "councils",
+        "region": "regions",
+        "source": "workbook units"
+      },
+      "evidence": "What the data say",
+      "evidenceRegion": "Across its councils",
+      "evidenceNational": "Across the regions",
+      "spread": "{{withData}} of {{total}} have a value; highest:",
+      "noEvidence": "No measured value for this group here.",
+      "scoreOf": "{{score}} of 10",
+      "origin": {
+        "workbook": "INFORM SADC 2024 workbook",
+        "benchmark": "Benchmark 2026",
+        "portal": "Approved through the Data portal",
+        "advancement": "Advancement layer"
+      },
+      "withheld": "Withheld after validation (note {{note}})",
+      "detail": {
+        "storms": "Storms: {{list}}",
+        "segments": "{{retreating}} of {{all}} shoreline segments retreating",
+        "police": "{{name}} police region",
+        "ipc": "{{district}} district, IPC Phase {{phase}}",
+        "grid": "Grid electricity only: the census profile gives no solar breakdown by council",
+        "nocell": "The global map has no valid hazard cell on the island",
+        "events_one": "{{count}} displacement event recorded in 2023-2025",
+        "events_other": "{{count}} displacement events recorded in 2023-2025",
+        "crashes": "{{region}} police region: {{regionCrashes}} recorded crashes a year (2024-2025), about {{crashes}} of them here by population",
+        "sites_one": "{{count}} site",
+        "sites_other": "{{count}} sites",
+        "sitesFuel": "{{count}} fuel and gas",
+        "sitesIndustrial": "{{count}} industrial",
+        "sitesMining": "{{count}} mining",
+        "sitesWaste": "{{count}} waste and power",
+        "sitesHealth_one": "{{count}} hospital",
+        "sitesHealth_other": "{{count}} hospitals",
+        "sitesNemc": "{{count}} certified by NEMC in July-September 2026",
+        "drrIn": "In place: {{list}}",
+        "drrOut": "not in place: {{list}}",
+        "drrNone": "None of the five arrangements recorded",
+        "govMet": "Met: {{list}}",
+        "govNot": "not met: {{list}}",
+        "drrItems": {
+          "eprp": "emergency preparedness and response plan",
+          "rvca": "risk vulnerability and capacity assessment",
+          "ert": "trained emergency response team",
+          "eocc": "emergency operations and communication centre",
+          "training": "DRR training of the committee",
+          "committee": "committee active",
+          "stakeholders": "stakeholder collaboration",
+          "involvement": "involvement in DRR issues"
+        }
+      },
+      "warnings": "Warnings in force for this hazard",
+      "indicatorTable": "Open the indicator table",
+      "withheldDecision": "Withheld by programme decision (note {{note}})"
+    },
+    "actions": {
+      "card": "Risk card",
+      "copy": "Copy link",
+      "cardDetailed": "Detailed risk card"
+    },
+    "rail": {
+      "open": "Show the controls",
+      "close": "Hide the controls"
+    },
+    "width": {
+      "widen": "Widen the panel",
+      "narrow": "Narrow the panel",
+      "handle": "Width of the {{name}} panel: drag, or use the arrow keys",
+      "left": "left",
+      "right": "right",
+      "reset": "Default width"
+    }
+  },
+  "insight": {
+    "label": "Map and trends of {{name}}",
+    "map": {
+      "title": "Map of {{name}}",
+      "label": "Map of {{name}} and its surroundings, coloured like the main map",
+      "inset": "Where {{region}} region lies in Tanzania",
+      "select": "Select to move there"
+    },
+    "charts": {
+      "title": "Trends and charts",
+      "parts": "Risk and its parts",
+      "partAria": "{{label}}: {{value}} here; region {{region}}; Tanzania {{national}}",
+      "history": "INFORM SADC 2024: {{workbook}} → now {{live}}",
+      "profile": "Risk profile",
+      "groupAria": "{{name}}: {{score}}. Show the evidence",
+      "noGroups": "No group has a value here.",
+      "climate": "Climate year by year",
+      "heat": "Heatwave days a year, {{from}}-{{to}}",
+      "heatSummary": "1991-2020 average {{base}} days a year; 2015-2024 {{recent}}.",
+      "rain": "Rainfall a year, {{from}}-{{to}} (mm)",
+      "rainSummary": "Normal 1991-2020: {{normal}} mm. Driest {{dryYear}} ({{dry}} mm), wettest {{wetYear}} ({{wet}} mm).",
+      "heavySummary": "{{days}} days a year with 50 mm or more.",
+      "noTrends": "No climate series here."
+    }
   }
 }

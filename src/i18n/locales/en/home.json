@@ -1,11 +1,11 @@
 {
   "eyebrow": "INFORM Sub-national · United Republic of Tanzania",
   "title": "See where disasters would hurt most, before they strike.",
-  "lead": "An open, evidence-based index of disaster risk for every one of Tanzania’s 195 councils and 31 regions, built on the global INFORM methodology and Tanzanian data.",
+  "lead": "An open, evidence-based index of disaster risk for every one of Tanzania’s {{councils}} councils and {{regions}} regions, built on the global INFORM methodology and Tanzanian data.",
   "ctaExplore": "Explore the risk map",
   "ctaLearn": "How INFORM works",
   "nationalRisk": "National INFORM Risk",
-  "nationalNote": "Official INFORM Tanzania country value",
+  "nationalNote": "INFORM aggregate of all {{councils}} councils",
   "mapCaption": "Council-level INFORM Risk",
   "kpi": {
     "councils": "Councils analysed",
@@ -47,8 +47,8 @@
     "data": "Ministries and agencies submit updated data; PMO reviews and approves it."
   },
   "sources": {
-    "title": "Built on authoritative data",
-    "lead": "Every indicator is traceable to its authority, dataset and method."
+    "title": "Built on the INFORM SADC 2024 workbook",
+    "lead": "Every Core score is a workbook value from a published dataset, listed indicator by indicator on the Methodology page. Tanzanian institutions keep the indicators current through the Data portal; other Tanzanian evidence is kept in a separate Advancement layer."
   },
   "cta": {
     "title": "Evidence for preparedness, anticipatory action and investment",

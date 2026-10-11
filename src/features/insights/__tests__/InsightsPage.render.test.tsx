@@ -76,16 +76,24 @@ function renderPage() {
   );
 }
 
-const SECTION_IDS = ['kpis', 'regions', 'dimensions', 'hazards', 'classes', 'drivers', 'coverage', 'correlation'];
+/** The decision view (UX-05): the findings and four charts; the analyst view adds three more. */
+const MAIN_IDS = ['kpis', 'regions', 'dimensions', 'hazards', 'coverage'];
+const ANALYST_IDS = ['kpis', 'classes', 'drivers', 'correlation'];
 
-/** Wait until every story section has mounted its heading (chart sections load after the first paint). */
-async function allSectionsRendered(container: HTMLElement) {
+/** Wait until every section of the current view has mounted its heading (chart sections load after the first paint). */
+async function allSectionsRendered(container: HTMLElement, ids: readonly string[] = MAIN_IDS) {
   await waitFor(
     () => {
-      for (const id of SECTION_IDS) expect(container.querySelector(`section#${id} h2`)).not.toBeNull();
+      for (const id of ids) expect(container.querySelector(`section#${id} h2`)).not.toBeNull();
     },
     { timeout: SLOW },
   );
+}
+
+/** Switch to the analyst charts (the second view). */
+async function openAnalystView(container: HTMLElement) {
+  fireEvent.click(screen.getByRole('radio', { name: i18n.t('insights:views.analyst') }));
+  await allSectionsRendered(container, ANALYST_IDS);
 }
 
 const RAW_KEY = /(?<![A-Za-z])(kpi|regions|scatter|matrix|classes|drivers|coverage|correlation|findings|notes|nav|lens)\.[a-z][a-zA-Z]+/;
@@ -100,16 +108,24 @@ describe('InsightsPage', () => {
       const { container } = renderPage();
 
       expect(screen.getByRole('heading', { level: 1, name: i18n.t('insights:title') })).toBeInTheDocument();
-      // Every section anchor exists from the first paint (the sticky nav links to them).
-      for (const id of SECTION_IDS) expect(container.querySelector(`section#${id}`)).not.toBeNull();
+      // Every section anchor of the decision view exists from the first paint (the sticky nav links to them);
+      // the analyst charts wait behind their view (UX-05: at most five sections in the main view).
+      for (const id of MAIN_IDS) expect(container.querySelector(`section#${id}`)).not.toBeNull();
+      for (const id of ANALYST_IDS.slice(1)) expect(container.querySelector(`section#${id}`)).toBeNull();
+      expect(container.querySelectorAll('[data-id]').length).toBe(MAIN_IDS.length);
       await allSectionsRendered(container);
 
       // Hazard matrix: a header row plus one row per region.
       const model = buildModel();
       expect(within(screen.getByRole('table')).getAllByRole('row')).toHaveLength(model.regions.length + 1);
 
-      // Recharts surfaces: ranking, scatter, distribution, drivers ×2, coverage, donut.
-      expect(container.querySelectorAll('svg.recharts-surface').length).toBeGreaterThanOrEqual(7);
+      // Recharts surfaces in the decision view: ranking, scatter, coverage, donut.
+      expect(container.querySelectorAll('svg.recharts-surface').length).toBeGreaterThanOrEqual(4);
+      // The analyst view: distribution, drivers ×2, correlation.
+      await openAnalystView(container);
+      for (const id of ANALYST_IDS) expect(container.querySelector(`section#${id}`), id).not.toBeNull();
+      for (const id of MAIN_IDS.slice(1)) expect(container.querySelector(`section#${id}`), id).toBeNull();
+      expect(container.querySelectorAll('svg.recharts-surface').length).toBeGreaterThanOrEqual(3);
 
       // No raw i18n keys leaked into the page.
       expect(container.textContent).not.toMatch(RAW_KEY);
@@ -152,19 +168,15 @@ describe('InsightsPage', () => {
       expect(screen.getByRole('heading', { level: 1 })).toHaveTextContent(i18n.t('insights:title', { lng: 'sw' }));
       // Every section heading and every chart's figure note is in Kiswahili.
       const sw = (key: string, opts?: Record<string, unknown>) => i18n.t(`insights:${key}`, { lng: 'sw', ...opts });
-      const titles: Record<string, string> = {
-        kpis: 'findings.title',
-        regions: 'regions.title',
-        dimensions: 'scatter.title',
-        hazards: 'matrix.title',
-        classes: 'classes.title',
-        drivers: 'drivers.title',
-        coverage: 'coverage.title',
-        correlation: 'correlation.title',
-      };
-      for (const [id, key] of Object.entries(titles)) expect(container.querySelector(`section#${id} h2`)).toHaveTextContent(sw(key));
-      for (const key of ['regions.caption', 'classes.caption', 'correlation.caption', 'coverage.histCaption']) expect(screen.getByText(sw(key))).toBeInTheDocument();
+      const main: Record<string, string> = { kpis: 'findings.title', regions: 'regions.title', dimensions: 'scatter.title', hazards: 'matrix.title', coverage: 'coverage.title' };
+      for (const [id, key] of Object.entries(main)) expect(container.querySelector(`section#${id} h2`)).toHaveTextContent(sw(key));
+      for (const key of ['regions.caption', 'coverage.histCaption']) expect(screen.getByText(sw(key))).toBeInTheDocument();
       expect(container.querySelector('#coverage')).toHaveTextContent(sw('coverage.showSources'));
+      expect(container.textContent).not.toMatch(RAW_KEY);
+      await openAnalystView(container);
+      const analyst: Record<string, string> = { classes: 'classes.title', drivers: 'drivers.title', correlation: 'correlation.title' };
+      for (const [id, key] of Object.entries(analyst)) expect(container.querySelector(`section#${id} h2`)).toHaveTextContent(sw(key));
+      for (const key of ['classes.caption', 'correlation.caption']) expect(screen.getByText(sw(key))).toBeInTheDocument();
       expect(container.textContent).not.toMatch(RAW_KEY);
     },
     SLOW,

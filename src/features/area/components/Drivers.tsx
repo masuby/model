@@ -12,6 +12,8 @@ import { ClassBadge } from '@/components/risk/RiskBadge';
 import { DIMENSION_BY_KEY } from '@/engine/risk/hierarchy';
 import { rampColor } from '@/engine/risk/metrics';
 import { topDrivers } from '@/engine/risk/model';
+import { dataNotesFor } from '@/engine/risk/notes';
+import { DataNoteLine, DataNoteMark } from '@/components/risk/DataNoteMark';
 import { sourceFor } from '@/engine/risk/sources';
 import { formatScore } from '@/lib/utils';
 import { formatDelta, weakestDimension, type AreaView, type IndicatorRow } from '../lib';
@@ -92,6 +94,7 @@ export function Drivers({ view }: { view: AreaView }) {
         <ol className="area-breakable mt-5 divide-y divide-border border-y border-border">
           {drivers.map((d, i) => {
             const row = byRef.get(`${d.dim}:${d.key}`);
+            const notes = dataNotesFor(unit, d.dim, d.key);
             const refs: TrackRef[] = [];
             if (row?.region != null && region) refs.push({ kind: 'region', label: region.name, value: row.region });
             if (row?.national != null) refs.push({ kind: 'national', label: t('breadcrumb.country'), value: row.national });
@@ -101,7 +104,11 @@ export function Drivers({ view }: { view: AreaView }) {
                 <div className="min-w-0">
                   <div className="flex items-start justify-between gap-x-6">
                     <div className="min-w-0">
-                      <h4 className="text-base font-semibold">{t(`indicators:${d.key}`)}</h4>
+                      <h4 className="text-base font-semibold">
+                        {t(`indicators:${d.key}`)}
+                        {notes.length > 0 && <DataNoteMark notes={notes} className="ml-1.5" />}
+                      </h4>
+                      {notes.length > 0 && <DataNoteLine notes={notes} className="mt-0.5" />}
                       <div className="mt-1 flex flex-wrap items-center gap-x-2 gap-y-1 text-xs text-muted-foreground">
                         <DimTag dim={d.dim} />
                         <span aria-hidden>·</span>
@@ -115,7 +122,7 @@ export function Drivers({ view }: { view: AreaView }) {
                       <OutOf10 className="text-sm tracking-normal" />
                     </div>
                   </div>
-                  <CompareTrack className="mt-4" value={d.value} color={rampColor(d.value)} refs={refs} />
+                  <CompareTrack className="mt-4" value={d.value} color={rampColor(d.value, d.dim)} refs={refs} />
                   <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{t(`indicators:desc.${d.key}`)}</p>
                 </div>
               </li>

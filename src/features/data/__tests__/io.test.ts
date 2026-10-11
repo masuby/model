@@ -54,8 +54,8 @@ describe('planImport', () => {
     expect(plan.issues).toEqual([]);
     const byUnit = Object.fromEntries(plan.submissions.map((s) => [`${s.unitId}|${s.authority}`, s.changes.map((c) => [c.ref, c.value])]));
     expect(byUnit['C001|TMA']).toEqual([['hazard:flood', 9.1]]);
-    expect(byUnit['TZ0101|MOW']).toEqual([['coping:wash', 9.5]]); // V/C on a council → its source unit
-    expect(byUnit['TZ0101|NBS']).toEqual([['vulnerability:habitat', null]]); // default authority from the source table
+    expect(byUnit['C001|MOW']).toEqual([['coping:wash', 9.5]]); // V/C on a council stays on the council (finest level wins)
+    expect(byUnit['TZ0101|NBS']).toEqual([['vulnerability:habitat', null]]); // a unit-level value, default authority from the custodian table
     expect(plan.values).toBe(3);
   });
 
@@ -75,7 +75,8 @@ describe('planImport', () => {
       { includeOverrides: true, includePending: false },
     );
     expect(plan.submissions).toEqual([]);
-    expect(plan.issues.map((i) => i.kind).sort()).toEqual(['badValue', 'badValue', 'badValue', 'unknownIndicator', 'unknownUnit', 'unsupportedUnit']);
+    // `hazard:exposure` is no longer an editable indicator (the workbook's hazard indicators already count exposed people).
+    expect(plan.issues.map((i) => i.kind).sort()).toEqual(['badValue', 'badValue', 'unknownIndicator', 'unknownIndicator', 'unknownUnit', 'unsupportedUnit']);
   });
 
   it('replays only pending submissions and skips unchanged values', () => {

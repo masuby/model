@@ -141,7 +141,9 @@ describe('drivers', () => {
     const before = indicatorStats(model.councils).find((s) => s.key === 'drought')!;
     const after = indicatorStats(edited.councils).find((s) => s.key === 'drought')!;
     const original = model.councils[0].dims.hazard.categories.natural.indicators.drought ?? 0;
-    expect(after.mean!).toBeCloseTo(before.mean! + (10 - original) / model.councils.length, 6);
+    // Over the councils that carry a drought value (the quarantine withholds it for some), not all 195.
+    expect(after.n).toBe(before.n);
+    expect(after.mean!).toBeCloseTo(before.mean! + (10 - original) / before.n, 6);
   });
 });
 

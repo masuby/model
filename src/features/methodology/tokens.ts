@@ -3,7 +3,7 @@ import type { KeyedLevel, Resolution } from './data';
 /**
  * Data resolution, encoded by shape and value rather than by teal shade alone, so the five marks stay
  * distinct at 10 px: council = filled dark teal, district = filled mid teal, region = teal ring, national =
- * filled grey, documented overlay = dashed ring (an overlay is not a measurement). Every mark is at least
+ * filled grey, no data in the workbook = dashed ring. Every mark is at least
  * 3:1 against the page in both themes (WCAG 1.4.11) and always sits next to a text label or an sr-only name.
  */
 export const RESOLUTION_CLASS: Record<Resolution, string> = {
@@ -11,7 +11,7 @@ export const RESOLUTION_CLASS: Record<Resolution, string> = {
   district: 'bg-[#2a8f83] dark:bg-[#3f9a8e]',
   region: 'border-2 border-[#3d8f85] dark:border-[#5bbfb2]',
   national: 'bg-[#6b7280] dark:bg-[#8b95a7]',
-  overlay: 'border-[1.5px] border-dashed border-muted-foreground',
+  none: 'border-[1.5px] border-dashed border-muted-foreground',
 };
 
 /**

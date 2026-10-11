@@ -2,21 +2,9 @@ import { describe, expect, it } from 'vitest';
 import baselineJson from '@/data/inform-baseline-raw.json';
 import type { DataRequest, RawSubmission } from '@/data-layer/types';
 import { buildModel } from '@/engine/risk/model';
-import { indexRawValues, regionIdOf, type BaselineRaw, type RawValue } from '@/engine/risk/rawValues';
+import { indexRawValues, regionIdOf, scoreRaw, type BaselineRaw, type RawValue } from '@/engine/risk/rawValues';
 import { SPECS } from '@/engine/risk/standardise';
-import {
-  buildSheet,
-  councilsReached,
-  draftEntries,
-  indicatorStatuses,
-  isSpecId,
-  parseCell,
-  parseRawPaste,
-  rangeFlag,
-  suggestedOwner,
-  WORKFLOW_INDICATORS,
-  workflowIndicator,
-} from '../lib/workflow';
+import { buildSheet, councilsReached, draftEntries, indicatorStatuses, isSpecId, parseCell, parseRawPaste, previewScore, rangeFlag, suggestedOwner, WORKFLOW_INDICATORS, workflowIndicator } from '../lib/workflow';
 
 const model = buildModel();
 const baseline = baselineJson as BaselineRaw;
@@ -25,9 +13,16 @@ const kondoa = model.byId.get('C001')!;
 const dodoma = model.regions.find((r) => r.name === 'Dodoma')!;
 
 describe('indicators', () => {
-  it('lists the 53 INFORM indicators and the 25 advanced ones', () => {
-    expect(WORKFLOW_INDICATORS.filter((w) => w.core)).toHaveLength(53);
-    expect(WORKFLOW_INDICATORS.filter((w) => !w.core)).toHaveLength(25);
+  it('lists the 53 INFORM indicators with the 8 Benchmark 2026 activations and the 2 institutional indicators, and the 30 advanced ones', () => {
+    expect(WORKFLOW_INDICATORS.filter((w) => w.core)).toHaveLength(63);
+    // The institutional indicators are PMO-DMD's, computed from the committees' records.
+    expect(suggestedOwner(workflowIndicator('CC.INS.DRR-ARR')!)).toBe('PMO');
+    expect(workflowIndicator('CC.INS.GOV-DMC')).toMatchObject({ core: true, leaf: 'coping:governance', scoreable: true });
+    expect(WORKFLOW_INDICATORS.filter((w) => w.core && w.spec.id === 'HA.NAT.HW-EXP')).toHaveLength(1);
+    // Hazardous material is NEMC's to report, vehicle accidents the Police's.
+    expect(suggestedOwner(workflowIndicator('HA.HUM.HMAT')!)).toBe('NEMC');
+    expect(suggestedOwner(workflowIndicator('HA.HUM.ACC')!)).toBe('TPF');
+    expect(WORKFLOW_INDICATORS.filter((w) => !w.core)).toHaveLength(30);
     expect(workflowIndicator(MPI)).toMatchObject({ core: true, leaf: 'vulnerability:developmentPoverty', scoreable: true });
     expect(workflowIndicator('CC.INF.COM-INT')!.scoreable).toBe(false);
     expect(isSpecId(MPI)).toBe(true);
@@ -114,6 +109,22 @@ describe('entry sheet', () => {
       { unitId: kondoa.id, level: 'council', value: 0.5, previous: null },
     ]);
     expect(invalid).toEqual(['C003']);
+  });
+
+  it('accepts deposited 0–10 scores, rejecting values outside 0–10 and keeping one decimal', () => {
+    const drafts = new Map([
+      [kondoa.id, '7,55'],
+      [model.byId.get('C003')!.id, '11'],
+      ['TZ', 'n/a'],
+    ]);
+    const { entries, invalid } = draftEntries(sheet, drafts, 'score');
+    expect(entries).toEqual([
+      { unitId: 'TZ', level: 'national', value: null, previous: null },
+      { unitId: kondoa.id, level: 'council', value: 7.6, previous: null },
+    ]);
+    expect(invalid).toEqual(['C003']);
+    expect(previewScore(SPECS[MPI], 7.55, 'score')).toBe(7.6);
+    expect(previewScore(SPECS[MPI], 0.5)).toBe(scoreRaw(SPECS[MPI], 0.5));
   });
 
   it('counts the councils a submission reaches', () => {

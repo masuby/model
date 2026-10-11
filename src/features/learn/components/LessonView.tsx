@@ -91,7 +91,7 @@ export function LessonView({ id }: { id: LessonId }) {
           <LessonSideNav current={id} sections={content.sections} active={active} />
         </aside>
 
-        <article className="min-w-0 max-w-[44rem]">
+        <article className="min-w-0 max-w-[58rem]">
           {/* Objectives */}
           {content.objectives.length > 0 && (
             <section aria-labelledby={`${id}-objectives`}>

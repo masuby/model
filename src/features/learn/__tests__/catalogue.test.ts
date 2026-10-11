@@ -160,7 +160,11 @@ describe('quiz worked numbers come from the engine', () => {
     expect(parseLesson(en.lessons.risk).quiz[2].options).toEqual(['Very low', 'Low', 'Medium', 'High', 'Very high']);
   });
 
-  it('flood rule example keeps the documented hazard', () => {
-    expect(Number(QUIZ_VARS.sqrtVal)).toBeLessThan(9.8);
+  it('the exposure lesson teaches INFORM’s per-hazard exposure, not a separate exposure index', () => {
+    const lesson = parseLesson(en.lessons.exposure);
+    const text = JSON.stringify(lesson.sections.flatMap((s) => s.blocks).filter((b) => !('tone' in b && b.tone === 'warn')));
+    expect(text).not.toMatch(/exposure index|log-scaled|√/);
+    expect(LESSONS.find((l) => l.id === 'exposure')!.answers).toEqual([2, 1, 0]);
+    expect(lesson.quiz[1].options[1]).toMatch(/Inside each hazard indicator/);
   });
 });

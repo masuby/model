@@ -8,9 +8,10 @@
  *  • per hazard: what to expect and what to do at each of the three alert levels;
  *  • the incident and accident rapid-response guide.
  */
-import { useQuery } from '@tanstack/react-query';
+import { useQueries, useQuery } from '@tanstack/react-query';
 import * as React from 'react';
-import { useModel } from '@/data-layer/DataProvider';
+import { useCommitteeRecords, useModel } from '@/data-layer/DataProvider';
+import { activeWarnings, type CommitteeRecord, type EventPayload, type GuidancePayload } from '@/data-layer/types';
 import { placeKey } from '@/engine/risk/model';
 import type { RiskModel, Unit } from '@/engine/risk/types';
 
@@ -128,6 +129,111 @@ export function useAreaGuide(unit: Unit | null): AreaGuide {
     });
     return { loading: !!regionKey && q.isLoading, entries, hazards: rankHazards(entries.map((e) => e.guide.hazards)) };
   }, [councils, q.data, q.isLoading, regionKey]);
+}
+
+/** The region guides, combined: whether any is still loading, and the documented hazards by council id. */
+const combineGuides = (results: Array<{ isLoading: boolean; data?: RegionGuide | null }>) => ({
+  loading: results.some((r) => r.isLoading),
+  guides: results.map((r) => r.data ?? null),
+});
+
+/** The documented hazards of every council in the country (all region files), for national findings. */
+export function useAllGuides(enabled = true): { loading: boolean; hazardsByCouncil: Map<string, HazardKey[]> } {
+  const model = useModel();
+  const keys = React.useMemo(() => [...new Set(model.councils.map((c) => placeKey(c.region)))], [model]);
+  const { loading, guides } = useQueries({
+    queries: keys.map((k) => ({ queryKey: ['guide', 'region', k], queryFn: () => loadRegionGuide(k), staleTime: Infinity, enabled })),
+    combine: combineGuides,
+  });
+  const loaded = guides.filter(Boolean).length;
+  const hazardsByCouncil = React.useMemo(() => {
+    const m = new Map<string, HazardKey[]>();
+    for (const g of guides) if (g) for (const [id, cg] of Object.entries(g.councils)) m.set(id, cg.hazards);
+    return m;
+    // `guides` is a fresh array per render; the map is rebuilt only when another file has arrived.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [loaded, keys]);
+  return { loading, hazardsByCouncil };
+}
+
+/** A "Know your risk" row as shown: the guide book's, or a committee statement that replaced or added one. */
+export interface KnowRowView extends KnowRow {
+  from: 'guide' | 'committee';
+  record?: CommitteeRecord;
+}
+
+/**
+ * The guide book's rows for a council with the approved committee statements applied: a statement that
+ * replaces row i stands in its place (the latest approved wins); new statements follow the rows.
+ */
+export function applyGuidance(rows: readonly KnowRow[], records: readonly CommitteeRecord[], councilId: string): KnowRowView[] {
+  const approved = records
+    .filter((r) => r.kind === 'guidance' && r.unitId === councilId && r.status === 'approved')
+    .sort((a, b) => (a.reviewedAt ?? a.createdAt).localeCompare(b.reviewedAt ?? b.createdAt));
+  const replaced = new Map<number, CommitteeRecord>();
+  const added: CommitteeRecord[] = [];
+  for (const r of approved) {
+    const p = r.payload as GuidancePayload;
+    if (p.replaces != null && Number.isInteger(p.replaces) && p.replaces >= 0 && p.replaces < rows.length) replaced.set(p.replaces, r);
+    else added.push(r);
+  }
+  const view = (r: CommitteeRecord): KnowRowView => {
+    const p = r.payload as GuidancePayload;
+    return { area: p.area, risk: p.risk, advice: p.advice, from: 'committee', record: r };
+  };
+  return [...rows.map((row, i) => (replaced.has(i) ? view(replaced.get(i)!) : { ...row, from: 'guide' as const })), ...added.map(view)];
+}
+
+/** A vulnerability-and-coping action of the library, keyed by INFORM group ('coping:wash'). */
+export interface VcAction {
+  group: string;
+  leadSector?: string | null;
+  /** The lead sectors PMO-DMD chose for the group (sector keys). */
+  leadSectors: string[];
+  why: Text;
+  actions: Text;
+  record: CommitteeRecord;
+}
+
+/** The library: the latest approved national guidance of topic 'vc' per INFORM group (PMO-DMD writes, the NDRRC reviews). */
+export function vcActions(records: readonly CommitteeRecord[]): Map<string, VcAction> {
+  const out = new Map<string, VcAction>();
+  const approved = records
+    .filter((r) => r.kind === 'guidance' && r.level === 'national' && r.status === 'approved' && (r.payload as GuidancePayload).topic === 'vc')
+    .sort((a, b) => (a.reviewedAt ?? a.createdAt).localeCompare(b.reviewedAt ?? b.createdAt));
+  for (const r of approved) {
+    const p = r.payload as GuidancePayload;
+    if (!p.group) continue;
+    out.set(p.group, { group: p.group, leadSector: p.leadSector ?? null, leadSectors: p.leadSectors ?? [], why: p.risk, actions: p.advice, record: r });
+  }
+  return out;
+}
+
+/** Approved event reports of these councils, newest first. */
+export function reportedEvents(records: readonly CommitteeRecord[], councilIds: readonly string[], limit = 8): CommitteeRecord[] {
+  const ids = new Set(councilIds);
+  return records
+    .filter((r) => r.kind === 'event' && r.status === 'approved' && ids.has(r.unitId))
+    .sort((a, b) => ((b.payload as EventPayload).date ?? '').localeCompare((a.payload as EventPayload).date ?? ''))
+    .slice(0, limit);
+}
+
+/** The committee records that concern an area: approved statements, events, and the warnings in force. */
+export function useAreaRecords(unit: Unit | null) {
+  const model = useModel();
+  const q = useCommitteeRecords();
+  return React.useMemo(() => {
+    const records = q.data ?? [];
+    if (!unit) return { records, warnings: [] as CommitteeRecord[], events: [] as CommitteeRecord[] };
+    const councils = guideCouncils(model, unit);
+    const scope =
+      unit.level === 'national'
+        ? { id: 'TZ', councilIds: [...model.regions.map((r) => r.id), ...model.councils.map((c) => c.id)] }
+        : unit.level === 'region'
+          ? { id: unit.id, councilIds: councils.map((c) => c.id) }
+          : { id: unit.id, regionId: `R-${placeKey(unit.region)}`, councilIds: unit.level === 'source' ? councils.map((c) => c.id) : [] };
+    return { records, warnings: activeWarnings(records, scope), events: reportedEvents(records, councils.map((c) => c.id)) };
+  }, [q.data, model, unit]);
 }
 
 export function useHazardGuide(key: HazardKey | null) {

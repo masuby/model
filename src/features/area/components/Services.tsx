@@ -1,8 +1,8 @@
 /**
  * Capacity on the ground: facility counts as a full-width row of key figures (with per-capita rates),
- * then the three disaster-risk-reduction arrangements - as columns separated by vertical rules when
- * any district has a record, or as one short ruled definition list when nothing is recorded yet (the
- * lead already says so; three "Not recorded" columns would only repeat it).
+ * then the disaster-risk-reduction arrangements (the five the engine scores, and anticipatory action) and
+ * the committee criteria - as ruled columns when any council has a record, or as one short ruled
+ * definition list when nothing is recorded yet (the lead already says so).
  */
 import { CircleCheck, CircleDashed, CircleX } from 'lucide-react';
 import * as React from 'react';
@@ -16,16 +16,18 @@ import { per10k, servicesFor, type AreaView, type ServicesInfo } from '../lib';
 import { SubHeading } from './bits';
 
 const FACILITIES: ReadonlyArray<keyof Facilities> = ['health', 'education', 'water', 'boreholes'];
-const DRR_KEYS = ['eprp', 'aa', 'eocc'] as const;
+const DRR_KEYS = ['eprp', 'rvca', 'ert', 'eocc', 'training', 'aa'] as const;
+const COMMITTEE_KEYS = ['committee', 'stakeholders', 'involvement'] as const;
 
-/** One arrangement's recorded status (only rendered when at least one district has a record). */
-function DrrItem({ k, info, className }: { k: (typeof DRR_KEYS)[number]; info: ServicesInfo; className?: string }) {
+/** One arrangement's recorded status (only rendered when at least one council has a record). */
+function DrrItem({ k, info, className }: { k: (typeof DRR_KEYS)[number] | (typeof COMMITTEE_KEYS)[number]; info: ServicesInfo; className?: string }) {
   const { t } = useTranslation(['area', 'common']);
   const aggregate = info.basis === 'aggregate';
   const n = info.drr[k];
   const recorded = info.drr.recorded;
 
-  const status: 'yes' | 'no' | 'partial' = !aggregate ? (n ? 'yes' : 'no') : n === recorded ? 'yes' : n === 0 ? 'no' : 'partial';
+  const flag = info.drr.flags?.[k];
+  const status: 'yes' | 'no' | 'partial' | 'unknown' = !aggregate ? (flag === true ? 'yes' : flag === false ? 'no' : 'unknown') : n === recorded ? 'yes' : n === 0 ? 'no' : 'partial';
   const Icon = status === 'yes' ? CircleCheck : status === 'no' ? CircleX : CircleDashed;
   const tone = status === 'yes' ? 'text-success' : status === 'no' ? 'text-danger' : 'text-muted-foreground';
 
@@ -35,7 +37,7 @@ function DrrItem({ k, info, className }: { k: (typeof DRR_KEYS)[number]; info: S
       <h4 className="mt-1 text-base leading-snug font-semibold">{t(`services.drr.${k}.name`)}</h4>
       <div className={cn('mt-3 flex items-center gap-2 text-sm font-medium', tone)}>
         <Icon className="size-4 shrink-0" aria-hidden />
-        {aggregate ? t('services.drr.countOf', { n, total: recorded }) : n ? t('services.drr.inPlace') : t('services.drr.notInPlace')}
+        {aggregate ? t('services.drr.countOf', { n, total: recorded }) : status === 'yes' ? t('services.drr.inPlace') : status === 'no' ? t('services.drr.notInPlace') : t('services.drr.notRecorded')}
       </div>
       {aggregate && (
         <Progress
@@ -114,18 +116,27 @@ export function Services({ view }: { view: AreaView }) {
           title={t('services.drrTitle')}
           lead={
             info.basis === 'aggregate'
-              ? t('services.drrLeadAggregate', { recorded: info.drr.recorded, total: info.districts })
+              ? t('services.drrLeadAggregate', { recorded: info.drr.recorded, total: info.drr.total })
               : info.drr.recorded
                 ? t('services.drrLead')
                 : t('services.drrLeadNone')
           }
         />
         {info.drr.recorded > 0 ? (
-          <ul className="mt-6 grid divide-y divide-border border-y border-border md:grid-cols-3 md:divide-x md:divide-y-0 md:py-6 print:grid-cols-3 print:divide-x print:divide-y-0">
-            {DRR_KEYS.map((k, i) => (
-              <DrrItem key={k} k={k} info={info} className={i === 0 ? 'md:pr-8' : i === 1 ? 'md:px-8' : 'md:pl-8'} />
-            ))}
-          </ul>
+          <>
+            <ul className="mt-6 grid divide-y divide-border border-y border-border md:grid-cols-2 md:gap-x-10 xl:grid-cols-3 xl:gap-x-10">
+              {DRR_KEYS.map((k) => (
+                <DrrItem key={k} k={k} info={info} />
+              ))}
+            </ul>
+            <h3 className="mt-8 text-sm font-semibold">{t('services.committeeTitle')}</h3>
+            <p className="mt-1 text-sm leading-relaxed text-muted-foreground">{t('services.committeeLead')}</p>
+            <ul className="mt-4 grid divide-y divide-border border-y border-border md:grid-cols-3 md:gap-x-10">
+              {COMMITTEE_KEYS.map((k) => (
+                <DrrItem key={k} k={k} info={info} />
+              ))}
+            </ul>
+          </>
         ) : (
           <dl className="mt-6 divide-y divide-border border-y border-border text-sm">
             {DRR_KEYS.map((k) => (

@@ -202,7 +202,7 @@ export function DataCoverage({ model }: { model: RiskModel }) {
       <div className="mt-14 max-w-3xl border-l-2 border-warning pl-5">
         <h3 className="text-base font-semibold">{t('coverage.honestTitle')}</h3>
         <p className="mt-2 text-sm leading-relaxed text-pretty text-muted-foreground">
-          {t('coverage.honestBody', { national: count('national'), overlay: count('overlay'), region: count('region'), total: nInd })}
+          {t('coverage.honestBody', { national: count('national'), region: count('region'), district: count('district'), none: count('none'), total: nInd })}
         </p>
         <p className="mt-4 flex flex-wrap gap-x-6 gap-y-2 text-sm font-medium">
           <Link to="/methodology" className="inline-flex items-center gap-1 text-primary underline-offset-4 hover:underline">

@@ -1,11 +1,11 @@
 {
   "eyebrow": "INFORM Ngazi za Chini · Jamhuri ya Muungano wa Tanzania",
   "title": "Tambua mahali majanga yangeleta madhara makubwa zaidi, kabla hayajatokea.",
-  "lead": "Kielelezo huria cha hatari za maafa kinachotegemea ushahidi kwa kila moja ya halmashauri 195 na mikoa 31 ya Tanzania, kilichojengwa juu ya mbinu ya kimataifa ya INFORM na data za Tanzania.",
+  "lead": "Kielelezo huria cha hatari za maafa kinachotegemea ushahidi kwa kila moja ya halmashauri {{councils}} na mikoa {{regions}} ya Tanzania, kilichojengwa juu ya mbinu ya kimataifa ya INFORM na data za Tanzania.",
   "ctaExplore": "Chunguza ramani ya hatari",
   "ctaLearn": "Jinsi INFORM inavyofanya kazi",
   "nationalRisk": "Hatari ya INFORM Kitaifa",
-  "nationalNote": "Thamani rasmi ya INFORM kwa Tanzania",
+  "nationalNote": "Mjumuiko wa INFORM wa halmashauri zote {{councils}}",
   "mapCaption": "Hatari ya INFORM kwa halmashauri",
   "kpi": {
     "councils": "Halmashauri zilizochambuliwa",
@@ -47,8 +47,8 @@
     "data": "Wizara na taasisi huwasilisha data mpya; Ofisi ya Waziri Mkuu huikagua na kuiidhinisha."
   },
   "sources": {
-    "title": "Imejengwa juu ya data zenye mamlaka",
-    "lead": "Kila kiashiria kinafuatilika hadi mamlaka, seti ya data na mbinu yake."
+    "title": "Imejengwa juu ya kitabu cha INFORM SADC 2024",
+    "lead": "Kila alama ya Msingi ni thamani ya kitabu kutoka seti ya data iliyochapishwa, iliyoorodheshwa kiashiria kwa kiashiria kwenye ukurasa wa Mbinu. Taasisi za Tanzania husasisha viashiria kupitia Lango la data; ushahidi mwingine wa Tanzania huwekwa katika Tabaka la Maboresho tofauti."
   },
   "cta": {
     "title": "Ushahidi kwa ajili ya maandalizi, hatua za mapema na uwekezaji",

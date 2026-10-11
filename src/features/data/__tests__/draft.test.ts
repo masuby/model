@@ -1,10 +1,9 @@
 import { buildModel } from '@/engine/risk/model';
 import { countDirty, evaluateRow, isRowDirty } from '../lib/draft';
-import { currentValue, EDITABLE_FIELDS, EXPOSURE_REF, fieldFor } from '../lib/targets';
+import { currentValue, EDITABLE_FIELDS, fieldFor } from '../lib/targets';
 
 const council = buildModel().byId.get('C001')!;
 const flood = fieldFor('hazard:flood')!;
-const exposure = fieldFor(EXPOSURE_REF)!;
 
 describe('evaluateRow', () => {
   it('is a no-op without a draft or with a blank / unchanged value', () => {
@@ -23,9 +22,8 @@ describe('evaluateRow', () => {
     expect(evaluateRow(flood, council, { text: '6.55', noData: false }).error).toBe('decimals');
     expect(evaluateRow(flood, council, { text: 'x', noData: false }).error).toBe('notNumber');
   });
-  it('marks no data as a null change, but never for exposure', () => {
+  it('marks no data as a null change', () => {
     expect(evaluateRow(flood, council, { text: '', noData: true }).change).toEqual({ ref: 'hazard:flood', value: null });
-    expect(evaluateRow(exposure, council, { text: '', noData: true }).change).toBeNull();
   });
   it('counts dirty rows', () => {
     expect(isRowDirty({ text: '', noData: false })).toBe(false);

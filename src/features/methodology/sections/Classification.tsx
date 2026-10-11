@@ -1,6 +1,6 @@
 import { useTranslation } from 'react-i18next';
 import { onClassColor } from '@/components/risk/RiskBadge';
-import { CLASS_COLORS, CLASS_KEYS, classify, classRanges, THRESHOLDS, type Scale } from '@/engine/risk/classes';
+import { CLASS_KEYS, classColor, classify, classRanges, THRESHOLDS, type Scale } from '@/engine/risk/classes';
 import { Callout, Cases, DocSection, Formula, Line, N, Op, P, SubHeading, Txt, V } from '../ui';
 import { NO_VALUE } from '@/lib/utils';
 
@@ -27,7 +27,7 @@ function ScaleBar({ scale }: { scale: Scale }) {
             <div
               key={k}
               className="flex min-w-0 items-center justify-center overflow-hidden px-1 text-[11px] font-medium whitespace-nowrap"
-              style={{ width: `${(bounds[i + 1] - bounds[i]) * 10}%`, background: CLASS_COLORS[k], color: onClassColor(CLASS_COLORS[k]) }}
+              style={{ width: `${(bounds[i + 1] - bounds[i]) * 10}%`, background: classColor(k, scale), color: onClassColor(classColor(k, scale)) }}
             >
               <span className="hidden truncate md:inline">{t(`classes.${k}`)}</span>
             </div>
@@ -124,14 +124,14 @@ export function ClassificationSection() {
               return (
                 <tr key={k}>
                   <th scope="row" className="py-2.5 pr-2 text-left font-normal whitespace-nowrap sm:pr-4">
-                    <span className="inline-flex items-center gap-2 sm:gap-2.5">
-                      <span className="size-2.5 rounded-[2px]" style={{ background: CLASS_COLORS[k] }} aria-hidden />
-                      {t(`common:classes.${k}`)}
-                    </span>
+                    {t(`common:classes.${k}`)}
                   </th>
                   {SCALES.map((s) => (
                     <td key={s} className="num px-2 py-2.5 text-right whitespace-nowrap sm:px-4 sm:text-[13px]">
-                      {classRanges(s)[i]}
+                      <span className="inline-flex items-center gap-2">
+                        <span className="size-2.5 rounded-[2px]" style={{ background: classColor(k, s) }} aria-hidden />
+                        {classRanges(s)[i]}
+                      </span>
                     </td>
                   ))}
                 </tr>
@@ -160,6 +160,7 @@ export function ClassificationSection() {
           </span>
         </Callout>
       </div>
+
     </DocSection>
   );
 }

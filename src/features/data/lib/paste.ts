@@ -7,7 +7,7 @@
 import type { EditRef, RiskModel, Unit } from '@/engine/risk/types';
 import { buildCouncilIndex, buildRegionIndex, type MatchResult, type NameIndex } from './names';
 import { parseScoreInput, sameScore } from './scores';
-import { currentValue, EXPOSURE_REF, targetKind } from './targets';
+import { currentValue } from './targets';
 
 export type PasteLevel = 'council' | 'region' | 'nation';
 export type RowError = 'empty' | 'notNumber' | 'range';
@@ -169,7 +169,6 @@ export function buildPastePlan(text: string, level: PasteLevel, ref: EditRef, mo
   const valid: PasteRow[] = [];
   for (const r of rows) {
     if (r.error) issues.push({ lineNo: r.lineNo, text: r.text, kind: r.error, severity: 'error' });
-    else if (r.value === null && ref === EXPOSURE_REF) issues.push({ lineNo: r.lineNo, text: r.text, kind: 'noDataNotAllowed', severity: 'error' });
     else valid.push(r);
   }
 
@@ -214,9 +213,9 @@ export function buildPastePlan(text: string, level: PasteLevel, ref: EditRef, mo
     }
   }
 
-  // Resolve councils onto edit targets.
+  // Resolve councils onto edit targets: every value applies to its council (the finest level wins).
   const targets: PlanTarget[] = [];
-  if (targetKind(ref) === 'council') {
+  {
     for (const a of assign.values()) {
       const previous = currentValue(a.council, ref);
       targets.push({
@@ -233,34 +232,7 @@ export function buildPastePlan(text: string, level: PasteLevel, ref: EditRef, mo
         rounded: a.rounded,
       });
     }
-  } else {
-    const bySource = new Map<string, Assignment[]>();
-    for (const a of assign.values()) {
-      const sid = a.council.sourceId ?? a.council.id;
-      if (!bySource.has(sid)) bySource.set(sid, []);
-      bySource.get(sid)!.push(a);
-    }
-    for (const [sid, list] of bySource) {
-      const unit = model.byId.get(sid) ?? list[0].council;
-      const distinct: Array<number | null> = [];
-      for (const a of list) if (!distinct.some((d) => sameScore(d, a.value))) distinct.push(a.value);
-      const value = list[list.length - 1].value;
-      const previous = currentValue(unit, ref);
-      targets.push({
-        unitId: sid,
-        unitName: unit.name,
-        region: unit.region || list[0].council.region,
-        level: 'source',
-        value,
-        previous,
-        via: list.map((a) => a.council.name),
-        lineNos: [...new Set(list.map((a) => a.lineNo))],
-        status: distinct.length > 1 ? 'conflict' : sameScore(previous, value) ? 'unchanged' : 'ready',
-        loose: list.some((a) => a.loose),
-        rounded: list.some((a) => a.rounded),
-        ...(distinct.length > 1 ? { conflictValues: distinct } : {}),
-      });
-    }
+
   }
 
   issues.sort((a, b) => a.lineNo - b.lineNo);

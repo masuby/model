@@ -270,7 +270,17 @@ export function ResultsPanel({
         <h2 className="mt-1 text-[1.35rem] leading-tight">{t('results.title')}</h2>
         <p className="mt-1 truncate text-sm text-muted-foreground">{illustrative ? t('results.scenarioIllustrative', { name: scenarioLabel }) : scenarioLabel}</p>
 
-        {result.complete && isNum(result.severity) ? (
+        {result.zeroRule ? (
+          // The zero rule: nobody in need, or no impact or no conditions, means an index of 0 and no category.
+          <div className="mt-6" role="status">
+            <div className="flex items-baseline gap-2" aria-hidden>
+              <span className="num font-display text-[3.75rem] leading-[0.9] font-semibold tracking-tight">0.0</span>
+              <span className="text-base text-muted-foreground">/ 5</span>
+            </div>
+            <p className="mt-2 text-sm font-medium">{t('results.zero.title')}</p>
+            <p className="mt-1 text-sm leading-relaxed text-muted-foreground">{t(`results.zero.${result.zeroRule}`)}</p>
+          </div>
+        ) : result.complete && isNum(result.severity) ? (
           <div className="mt-6 flex items-end justify-between gap-3">
             <div className="flex items-baseline gap-2" aria-hidden>
               <span className="num font-display text-[3.75rem] leading-[0.9] font-semibold tracking-tight">{formatScore(result.severity)}</span>
@@ -293,7 +303,7 @@ export function ResultsPanel({
             </span>
           </div>
         )}
-        <CategoryBar score={result.complete ? result.severity : null} className="mt-6" />
+        <CategoryBar score={result.complete && !result.zeroRule ? result.severity : null} className="mt-6" />
       </div>
 
       {(!result.complete || issueCount > 0) && (

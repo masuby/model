@@ -2,7 +2,9 @@
  * The entry sheet for one indicator. Every area is listed (the country, each region and, one click
  * away, its councils) with the value that applies there today and where it comes from (a council,
  * regional or national figure, or the INFORM baseline). New values are typed or pasted from a
- * spreadsheet, with a live 0–10 preview; the source is required. Officers send for PMO review;
+ * spreadsheet, with a live 0–10 preview; the source is required. An institution that computed 0–10
+ * scores itself with the INFORM method (the NORMAL Excel tool) deposits them as scores, with a citable
+ * source. Officers send for PMO review;
  * reviewers may apply at once. Values that exist only for some councils, or only for regions, are fine:
  * each council takes its own value, else its region's, else the national one.
  */
@@ -15,9 +17,9 @@ import { Kicker } from '@/components/layout/Page';
 import { Button } from '@/components/ui/button';
 import { Input, Label, Segmented, Textarea } from '@/components/ui/primitives';
 import { loadBaseline, useAssignments, useCloseRequest, useModel, useRawValues, useRequests, useSubmitRaw } from '@/data-layer/DataProvider';
-import { canEnterIndicator } from '@/data-layer/types';
+import { canEnterIndicator, type RawValueType } from '@/data-layer/types';
 import { isNum } from '@/engine/risk/math';
-import { indexRawValues, regionIdOf, scoreRaw } from '@/engine/risk/rawValues';
+import { indexRawValues, regionIdOf } from '@/engine/risk/rawValues';
 import type { IndicatorSpec } from '@/engine/risk/standardise';
 import type { Unit } from '@/engine/risk/types';
 import { cn, formatDate, formatScore, NO_VALUE } from '@/lib/utils';
@@ -29,10 +31,12 @@ import { increasesRisk, naturalRange, unitKey } from '../lib/raw';
 import {
   buildSheet,
   councilsReached,
+  currentScore,
   draftEntries,
   groupKey,
   parseCell,
   parseRawPaste,
+  previewScore,
   rangeFlag,
   specLabel,
   workflowIndicator,
@@ -65,6 +69,8 @@ export function IndicatorSheet({ specId, onBack }: { specId: string; onBack: () 
   const [drafts, setDrafts] = React.useState<ReadonlyMap<string, string>>(new Map());
   const [expanded, setExpanded] = React.useState<ReadonlySet<string>>(new Set());
   const [find, setFind] = React.useState('');
+  const [valueType, setValueType] = React.useState<RawValueType>('raw');
+  const [source, setSource] = React.useState('');
   const [dataset, setDataset] = React.useState('');
   const [period, setPeriod] = React.useState('');
   const [note, setNote] = React.useState('');
@@ -76,7 +82,7 @@ export function IndicatorSheet({ specId, onBack }: { specId: string; onBack: () 
 
   const idx = React.useMemo(() => indexRawValues(rawValues.data ?? []), [rawValues.data]);
   const sheet = React.useMemo(() => buildSheet(model, spec, idx, baseline.data ?? null), [model, spec, idx, baseline.data]);
-  const { entries, invalid } = React.useMemo(() => draftEntries(sheet, drafts), [sheet, drafts]);
+  const { entries, invalid } = React.useMemo(() => draftEntries(sheet, drafts, valueType), [sheet, drafts, valueType]);
   const reached = React.useMemo(() => councilsReached(model, idx, specId, entries), [model, idx, specId, entries]);
 
   const owner = assignments.data?.find((a) => a.specId === specId)?.institutionKey ?? null;
@@ -123,11 +129,25 @@ export function IndicatorSheet({ specId, onBack }: { specId: string; onBack: () 
   };
 
   const datasetOk = dataset.trim().length >= 2;
+  // Scores are accepted only for indicators the workbook can score, and only with a citable source (D4).
+  const canDeposit = w.core && w.scoreable;
+  const sourceOk = valueType !== 'score' || source.trim().length >= 3;
+  const ready = entries.length > 0 && !invalid.length && datasetOk && sourceOk;
   const send = async (applyNow: boolean) => {
-    if (!entries.length || invalid.length || !datasetOk) return;
+    if (!ready) return;
     try {
       await submit.mutateAsync({
-        input: { specId, entries, dataset: dataset.trim(), period: period.trim() || undefined, note: note.trim() || undefined, requestId: openRequest?.id ?? null },
+        input: {
+          specId,
+          entries,
+          valueType,
+          method: valueType === 'score' ? 'inform' : undefined,
+          source: source.trim() || undefined,
+          dataset: dataset.trim(),
+          period: period.trim() || undefined,
+          note: note.trim() || undefined,
+          requestId: openRequest?.id ?? null,
+        },
         applyNow,
       });
       toast.success(applyNow ? t('workflow.sheet.applied', { count: entries.length }) : t('workflow.sheet.sent', { count: entries.length }));
@@ -244,7 +264,7 @@ export function IndicatorSheet({ specId, onBack }: { specId: string; onBack: () 
               </th>
               {canEnter && (
                 <th scope="col" className="py-2.5 pr-3 font-medium">
-                  {t('workflow.sheet.col.new')}
+                  {t(valueType === 'score' ? 'workflow.sheet.col.newScore' : 'workflow.sheet.col.new')}
                 </th>
               )}
               <th scope="col" className="py-2.5 text-right font-medium">
@@ -253,7 +273,7 @@ export function IndicatorSheet({ specId, onBack }: { specId: string; onBack: () 
             </tr>
           </thead>
           <tbody>
-            {matches(sheet.national.unit) && <Row row={sheet.national} spec={spec} draft={drafts.get(sheet.national.unit.id)} onDraft={setDraft} canEnter={canEnter} label={t('workflow.sheet.national')} />}
+            {matches(sheet.national.unit) && <Row row={sheet.national} spec={spec} valueType={valueType} draft={drafts.get(sheet.national.unit.id)} onDraft={setDraft} canEnter={canEnter} label={t('workflow.sheet.national')} />}
             {visibleRegions.map((r) => {
               const open = isOpen(r.unit.id);
               return (
@@ -261,6 +281,7 @@ export function IndicatorSheet({ specId, onBack }: { specId: string; onBack: () 
                   <Row
                     row={r}
                     spec={spec}
+                    valueType={valueType}
                     draft={drafts.get(r.unit.id)}
                     onDraft={setDraft}
                     canEnter={canEnter}
@@ -279,7 +300,7 @@ export function IndicatorSheet({ specId, onBack }: { specId: string; onBack: () 
                   {open &&
                     r.councils
                       .filter((c) => !q || matches(c.unit) || matches(r.unit))
-                      .map((c) => <Row key={c.unit.id} row={c} spec={spec} draft={drafts.get(c.unit.id)} onDraft={setDraft} canEnter={canEnter} indent />)}
+                      .map((c) => <Row key={c.unit.id} row={c} spec={spec} valueType={valueType} draft={drafts.get(c.unit.id)} onDraft={setDraft} canEnter={canEnter} indent />)}
                 </React.Fragment>
               );
             })}
@@ -294,7 +315,28 @@ export function IndicatorSheet({ specId, onBack }: { specId: string; onBack: () 
           <h3 id="sheet-send" className="font-display text-xl font-semibold">
             {t('workflow.sheet.sendTitle')}
           </h3>
+          {canDeposit && (
+            <div className="mt-4 max-w-3xl">
+              <Segmented
+                value={valueType}
+                onValueChange={(v) => setValueType(v as RawValueType)}
+                options={[
+                  { value: 'raw', label: t('workflow.sheet.type.raw') },
+                  { value: 'score', label: t('workflow.sheet.type.score') },
+                ]}
+                size="sm"
+                aria-label={t('workflow.sheet.type.label')}
+              />
+              <p className="mt-2 max-w-[70ch] text-sm leading-relaxed text-muted-foreground">{t(valueType === 'score' ? 'workflow.sheet.type.scoreHint' : 'workflow.sheet.type.rawHint')}</p>
+            </div>
+          )}
           <div className="mt-4 grid max-w-3xl gap-4 sm:grid-cols-[2fr_1fr]">
+            <div className="space-y-1.5 sm:col-span-2">
+              <Label htmlFor="sheet-source">
+                {t('workflow.sheet.source')} <span className="font-normal text-muted-foreground">({t(valueType === 'score' ? 'workflow.sheet.sourceRequired' : 'meta.recommended')})</span>
+              </Label>
+              <Input id="sheet-source" value={source} onChange={(e) => setSource(e.target.value)} maxLength={500} placeholder={t('workflow.sheet.sourcePlaceholder')} aria-required={valueType === 'score' || undefined} />
+            </div>
             <div className="space-y-1.5">
               <Label htmlFor="sheet-dataset">{t('workflow.sheet.dataset')}</Label>
               <Input id="sheet-dataset" value={dataset} onChange={(e) => setDataset(e.target.value)} maxLength={200} placeholder={t('workflow.sheet.datasetPlaceholder')} aria-required="true" />
@@ -330,14 +372,15 @@ export function IndicatorSheet({ specId, onBack }: { specId: string; onBack: () 
             </p>
           )}
           {entries.length > 0 && !datasetOk && <p className="mt-1 text-sm text-muted-foreground">{t('workflow.sheet.needDataset')}</p>}
+          {entries.length > 0 && datasetOk && !sourceOk && <p className="mt-1 text-sm text-muted-foreground">{t('workflow.sheet.needSource')}</p>}
 
           <div className="mt-5 flex flex-wrap gap-2">
-            <Button onClick={() => send(reviewer)} disabled={!entries.length || invalid.length > 0 || !datasetOk || submit.isPending}>
+            <Button onClick={() => send(reviewer)} disabled={!ready || submit.isPending}>
               {submit.isPending ? <Loader2 className="animate-spin" aria-hidden /> : <Send aria-hidden />}
               {reviewer ? t('workflow.sheet.apply') : t('workflow.sheet.send')}
             </Button>
             {reviewer && (
-              <Button variant="outline" onClick={() => send(false)} disabled={!entries.length || invalid.length > 0 || !datasetOk || submit.isPending}>
+              <Button variant="outline" onClick={() => send(false)} disabled={!ready || submit.isPending}>
                 {t('workflow.sheet.sendForReview')}
               </Button>
             )}
@@ -358,6 +401,7 @@ export function IndicatorSheet({ specId, onBack }: { specId: string; onBack: () 
 function Row({
   row,
   spec,
+  valueType,
   draft,
   onDraft,
   canEnter,
@@ -367,6 +411,7 @@ function Row({
 }: {
   row: SheetRow;
   spec: IndicatorSpec;
+  valueType: RawValueType;
   draft: string | undefined;
   onDraft: (unitId: string, text: string) => void;
   canEnter: boolean;
@@ -377,9 +422,11 @@ function Row({
   const { t, i18n } = useTranslation(['data', 'common']);
   const parsed = draft ? parseCell(draft) : null;
   const newValue = parsed?.kind === 'value' ? parsed.value : null;
-  const flag = rangeFlag(spec, newValue);
+  const deposit = valueType === 'score';
+  const outOfRange = deposit && newValue != null && (newValue < 0 || newValue > 10);
+  const flag = deposit ? null : rangeFlag(spec, newValue);
   const inputId = `v-${row.unit.id}`;
-  const score = parsed ? (parsed.kind === 'value' ? scoreRaw(spec, parsed.value) : null) : scoreRaw(spec, row.current?.raw ?? null);
+  const score = parsed ? (parsed.kind === 'value' && !outOfRange ? previewScore(spec, parsed.value, valueType) : null) : currentScore(spec, row.current);
   const flagId = `${inputId}-flag`;
 
   return (
@@ -402,13 +449,18 @@ function Row({
             value={draft ?? ''}
             onChange={(e) => onDraft(row.unit.id, e.target.value)}
             aria-label={t('workflow.sheet.newFor', { name: row.unit.name })}
-            aria-invalid={parsed?.kind === 'invalid' || undefined}
-            aria-describedby={flag || parsed?.kind === 'invalid' ? flagId : undefined}
+            aria-invalid={parsed?.kind === 'invalid' || outOfRange || undefined}
+            aria-describedby={flag || outOfRange || parsed?.kind === 'invalid' ? flagId : undefined}
             className="num h-9 w-24 sm:w-36"
           />
           {parsed?.kind === 'invalid' && (
             <p id={flagId} className="mt-1 text-xs text-danger">
               {t('workflow.sheet.notANumber')}
+            </p>
+          )}
+          {outOfRange && (
+            <p id={flagId} className="mt-1 text-xs text-danger">
+              {t('workflow.sheet.outOfRange')}
             </p>
           )}
           {flag && (
@@ -429,7 +481,13 @@ function Current({ current, varies, lang }: { current: CurrentValue | null; vari
   if (!current) return <span className="text-muted-foreground">{varies ? t('workflow.sheet.varies') : NO_VALUE}</span>;
   return (
     <span className="inline-flex flex-wrap items-center gap-x-2 gap-y-1">
-      <span className="num font-medium">{isNum(current.raw) ? formatRaw(current.raw, lang) : t('workflow.sheet.noDataShort')}</span>
+      {current.valueType === 'score' ? (
+        <span className="num font-medium">
+          {isNum(current.score) ? formatScore(current.score) : t('workflow.sheet.noDataShort')} <span className="text-xs font-normal text-muted-foreground">{t('workflow.sheet.scoreTag')}</span>
+        </span>
+      ) : (
+        <span className="num font-medium">{isNum(current.raw) ? formatRaw(current.raw, lang) : t('workflow.sheet.noDataShort')}</span>
+      )}
       <LevelTag level={current.level} />
       {current.at && <span className="text-xs text-muted-foreground">{shortDate(current.at, lang)}</span>}
     </span>

@@ -122,10 +122,18 @@
       "help": "Deaths caused by the event, including missing people presumed dead.",
       "short": "Fatalities"
     },
-    "level5": { "short": "People at level 5" },
-    "level4": { "short": "People at level 4" },
-    "level3": { "short": "People at level 3" },
-    "level2": { "short": "People at level 2" },
+    "level5": {
+      "short": "People at level 5"
+    },
+    "level4": {
+      "short": "People at level 4"
+    },
+    "level3": {
+      "short": "People at level 3"
+    },
+    "level2": {
+      "short": "People at level 2"
+    },
     "groups": {
       "label": "Population groups affected",
       "help": "Tick every group the crisis affects. The more diverse the groups, the more complex the response.",
@@ -255,16 +263,37 @@
   "access": {
     "notSet": "Not assessed yet. Pick a score from 0 (no constraints) to 3 (high constraints).",
     "level": {
-      "0": { "name": "None", "desc": "No access constraints: aid and people move freely." },
-      "1": { "name": "Low", "desc": "Occasional restrictions or delays; most people can be reached." },
-      "2": { "name": "Moderate", "desc": "Regular restrictions; parts of the area or population are hard to reach." },
-      "3": { "name": "High", "desc": "Severe restrictions; large parts of the affected population cannot be reached." }
+      "0": {
+        "name": "None",
+        "desc": "No access constraints: aid and people move freely."
+      },
+      "1": {
+        "name": "Low",
+        "desc": "Occasional restrictions or delays; most people can be reached."
+      },
+      "2": {
+        "name": "Moderate",
+        "desc": "Regular restrictions; parts of the area or population are hard to reach."
+      },
+      "3": {
+        "name": "High",
+        "desc": "Severe restrictions; large parts of the affected population cannot be reached."
+      }
     }
   },
   "reliabilityInput": {
-    "low": { "name": "Low", "desc": "Unverified reports, a single source or rough estimates." },
-    "medium": { "name": "Medium", "desc": "Partial assessments or preliminary official figures." },
-    "high": { "name": "High", "desc": "Verified multi-sector assessment or official statistics." }
+    "low": {
+      "name": "Low",
+      "desc": "Unverified reports, a single source or rough estimates."
+    },
+    "medium": {
+      "name": "Medium",
+      "desc": "Partial assessments or preliminary official figures."
+    },
+    "high": {
+      "name": "High",
+      "desc": "Verified multi-sector assessment or official statistics."
+    }
   },
   "reliabilityNote": "The reliability index combines source reliability, recency and data completeness. It is shown next to the severity score and never changes it.",
   "unit": {
@@ -373,7 +402,13 @@
     "copyShort": "Copy summary",
     "copied": "Summary copied. Paste it into your situation report.",
     "copyFailed": "Could not copy to the clipboard.",
-    "mobileCta": "Full result"
+    "mobileCta": "Full result",
+    "zero": {
+      "title": "No severity to publish",
+      "noPeopleInNeed": "Nobody is in humanitarian need in this scenario (levels 3 to 5 are empty), so the index is 0 and no category is given.",
+      "zeroImpact": "The impact dimension scores 0, so the index is 0 and no category is given.",
+      "zeroConditions": "The humanitarian-conditions dimension scores 0, so the index is 0 and no category is given."
+    }
   },
   "table": {
     "eyebrow": "Indicators",
@@ -444,7 +479,8 @@
     },
     "adaptTitle": "Tanzania adaptation",
     "adapt": "The structure, weights, geometric aggregation and round-up categories follow the official method. The indicator reference ranges are calibration parameters for sub-national Tanzanian crises; the Society & safety defaults are national structural indicators.",
-    "denominators": "National denominators: {{pop}} people (NBS 2022 census) and {{area}} km²."
+    "denominators": "National denominators: {{pop}} people (NBS 2022 census) and {{area}} km².",
+    "revision": "INFORM Severity Index, Concept and Methodology, Version 2026 (Poljansek et al., JRC): the operational 0 to 5 scale, the round-up categories and the 70% geometric mean of impact and conditions plus 30% complexity used here are unchanged; it recommends rescaling the index to 0 to 10 and scoring the concentration of conditions continuously. This page keeps the operational version until those proposals become operational, and says so here."
   },
   "summary": {
     "title": "INFORM Severity: {{name}}",

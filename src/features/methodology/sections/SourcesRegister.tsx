@@ -5,6 +5,7 @@ import { Button } from '@/components/ui/button';
 import { Input, Segmented, Select, SelectItem, Switch, Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/primitives';
 import { DIMENSION_KEYS, type DimensionKey } from '@/engine/risk/hierarchy';
 import { AUTHORITIES } from '@/engine/risk/sources';
+import { exportFileName, exportPreamble, exportStamp } from '@/lib/exports';
 import { cn, downloadText, NO_VALUE } from '@/lib/utils';
 import { ALL_SPECS, hasDenominator, isDecrease, isUsed, keyedLevel, REGISTER_ROWS, registerCsv, RESOLUTIONS, specDimension, workbookCsv, type RegisterRow, type Resolution } from '../data';
 import { DocSection, ResolutionBadge } from '../ui';
@@ -34,13 +35,13 @@ function ResultBar({ shown, total, onDownload }: { shown: number; total: number;
 
 /**
  * One register row on a phone: a disclosure showing the indicator, its place in the hierarchy and its
- * resolution; the authority, dataset and method open beneath it.
+ * resolution; the responsible institution and the Core dataset and method open beneath it.
  */
 function RegisterItem({ row, label, category }: { row: RegisterRow; label: string; category: string }) {
   const { t } = useTranslation(['methodology', 'common']);
   const [open, setOpen] = React.useState(false);
   const panelId = React.useId();
-  const lead = AUTHORITIES[row.source.by];
+  const lead = AUTHORITIES[row.custodian.by];
   return (
     <li>
       <button type="button" aria-expanded={open} aria-controls={open ? panelId : undefined} onClick={() => setOpen((o) => !o)} className="flex w-full items-start gap-3 py-3.5 text-left">
@@ -61,16 +62,24 @@ function RegisterItem({ row, label, category }: { row: RegisterRow; label: strin
           <dd>
             <span className="font-medium">{lead.label}</span> · {lead.full}
           </dd>
-          {row.source.also && row.source.also.length > 0 && (
+          {row.custodian.also.length > 0 && (
             <>
               <dt className="text-muted-foreground">{t('methodology:sources.col.partners')}</dt>
-              <dd>{row.source.also.map((a) => AUTHORITIES[a].label).join(', ')}</dd>
+              <dd>{row.custodian.also.map((a) => AUTHORITIES[a].label).join(', ')}</dd>
             </>
           )}
           <dt className="text-muted-foreground">{t('methodology:sources.col.dataset')}</dt>
           <dd>{row.source.dataset}</dd>
           <dt className="text-muted-foreground">{t('methodology:sources.col.method')}</dt>
           <dd>{row.source.method}</dd>
+          {row.benchmark.map((b) => (
+            <React.Fragment key={b.indicator}>
+              <dt className="text-muted-foreground">{t('methodology:sources.col.benchmark')}</dt>
+              <dd>
+                <span className="font-medium">{b.dataset}</span> · {b.source} · {b.period} · {t('methodology:sources.benchmarkValues', { n: b.values, institution: AUTHORITIES[b.institution as keyof typeof AUTHORITIES]?.label ?? b.institution })}
+              </dd>
+            </React.Fragment>
+          ))}
         </dl>
       )}
     </li>
@@ -98,8 +107,8 @@ function GroupsRegister() {
       REGISTER_ROWS.filter((r) => {
         if (dim !== 'all' && r.dim !== dim) return false;
         if (res !== 'all' && r.source.resolution !== res) return false;
-        const lead = AUTHORITIES[r.source.by];
-        return includes([label(r), r.en, catLabel(r), lead.label, lead.full, r.source.dataset, r.source.method, ...(r.source.also ?? []).flatMap((a) => [AUTHORITIES[a].label, AUTHORITIES[a].full])], q);
+        const lead = AUTHORITIES[r.custodian.by];
+        return includes([label(r), r.en, catLabel(r), lead.label, lead.full, r.source.dataset, r.source.method, ...r.custodian.also.flatMap((a) => [AUTHORITIES[a].label, AUTHORITIES[a].full])], q);
       }),
     [dim, res, q, label, catLabel],
   );
@@ -123,7 +132,14 @@ function GroupsRegister() {
           </Select>
         </div>
       </div>
-      <ResultBar shown={rows.length} total={REGISTER_ROWS.length} onDownload={() => downloadText('inform-tanzania-indicator-register.csv', registerCsv(rows), 'text/csv;charset=utf-8')} />
+      <ResultBar
+        shown={rows.length}
+        total={REGISTER_ROWS.length}
+        onDownload={() => {
+          const stamp = exportStamp(t('methodology:sections.sources'));
+          downloadText(exportFileName('indicator-register', stamp), registerCsv(rows, exportPreamble(t, stamp)), 'text/csv;charset=utf-8');
+        }}
+      />
 
       <div className="mt-3">
         {rows.length === 0 ? (
@@ -167,7 +183,7 @@ function GroupsRegister() {
                 </thead>
                 <tbody className="divide-y divide-border">
                   {rows.map((r) => {
-                    const lead = AUTHORITIES[r.source.by];
+                    const lead = AUTHORITIES[r.custodian.by];
                     return (
                       <tr key={r.ref} className="align-top">
                         <th scope="row" className="py-3.5 pr-4 text-left font-normal">
@@ -179,13 +195,21 @@ function GroupsRegister() {
                         <td className="px-4 py-3.5">
                           <div className="font-medium">{lead.label}</div>
                           <div className="text-xs leading-snug text-muted-foreground">{lead.full}</div>
-                          {r.source.also && r.source.also.length > 0 && (
-                            <div className="mt-1 text-xs text-muted-foreground" title={r.source.also.map((a) => AUTHORITIES[a].full).join(' · ')}>
-                              + {r.source.also.map((a) => AUTHORITIES[a].label).join(', ')}
+                          {r.custodian.also.length > 0 && (
+                            <div className="mt-1 text-xs text-muted-foreground" title={r.custodian.also.map((a) => AUTHORITIES[a].full).join(' · ')}>
+                              + {r.custodian.also.map((a) => AUTHORITIES[a].label).join(', ')}
                             </div>
                           )}
                         </td>
-                        <td className="max-w-64 px-4 py-3.5 text-[13px] leading-relaxed">{r.source.dataset}</td>
+                        <td className="max-w-64 px-4 py-3.5 text-[13px] leading-relaxed">
+                          {r.source.dataset}
+                          {r.benchmark.map((b) => (
+                            <div key={b.indicator} className="mt-1.5 border-l-2 border-primary/40 pl-2 text-xs leading-snug text-muted-foreground">
+                              <span className="font-medium text-foreground">{t('methodology:sources.col.benchmark')}:</span> {b.dataset} · {b.source} · {b.period} ·{' '}
+                              {t('methodology:sources.benchmarkValues', { n: b.values, institution: AUTHORITIES[b.institution as keyof typeof AUTHORITIES]?.label ?? b.institution })}
+                            </div>
+                          ))}
+                        </td>
                         <td className="max-w-64 px-4 py-3.5 text-[13px] leading-relaxed text-muted-foreground">{r.source.method}</td>
                         <td className="py-3.5 pl-4">
                           <ResolutionBadge value={r.source.resolution} />
@@ -237,7 +261,14 @@ function WorkbookRegister() {
           </label>
         </div>
       </div>
-      <ResultBar shown={rows.length} total={ALL_SPECS.length} onDownload={() => downloadText('inform-tanzania-workbook-indicators.csv', workbookCsv(rows), 'text/csv;charset=utf-8')} />
+      <ResultBar
+        shown={rows.length}
+        total={ALL_SPECS.length}
+        onDownload={() => {
+          const stamp = exportStamp(t('methodology:sections.sources'));
+          downloadText(exportFileName('workbook-indicators', stamp), workbookCsv(rows, exportPreamble(t, stamp)), 'text/csv;charset=utf-8');
+        }}
+      />
 
       <div className="mt-3">
         {rows.length === 0 ? (

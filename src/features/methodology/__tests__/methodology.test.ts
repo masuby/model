@@ -88,10 +88,14 @@ describe('live worked example', () => {
 });
 
 describe('register and advanced baskets', () => {
-  it('the register covers every indicator group plus exposure', () => {
+  it('the register covers every indicator group, with a Core source and a responsible institution each', () => {
     const refs = new Set(REGISTER_ROWS.map((r) => r.ref));
     for (const l of ALL_INDICATORS) expect(refs.has(leafRef(l))).toBe(true);
-    expect(refs.has('hazard:exposure')).toBe(true);
+    expect(REGISTER_ROWS).toHaveLength(ALL_INDICATORS.length);
+    for (const r of REGISTER_ROWS) {
+      expect(r.source.by).toBe('INFORM');
+      expect(r.custodian.by).not.toBe('INFORM');
+    }
     expect(registerCsv(REGISTER_ROWS).split('\n')).toHaveLength(REGISTER_ROWS.length + 1);
   });
 

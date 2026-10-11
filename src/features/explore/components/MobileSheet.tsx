@@ -18,6 +18,7 @@ export function MobileSheet({
   above,
   containerHeight,
   label,
+  scrollKey,
 }: {
   expanded: boolean;
   onExpandedChange: (open: boolean) => void;
@@ -27,10 +28,16 @@ export function MobileSheet({
   above?: React.ReactNode;
   containerHeight: number;
   label: string;
+  /** When it changes (another area, another hazard), the body starts again from its top. */
+  scrollKey?: string;
 }) {
   const { t } = useTranslation('explore');
   const [peekRef, peekH] = useElementHeight<HTMLDivElement>();
   const bodyId = React.useId();
+  const bodyRef = React.useRef<HTMLDivElement>(null);
+  React.useLayoutEffect(() => {
+    if (bodyRef.current) bodyRef.current.scrollTop = 0;
+  }, [scrollKey]);
   const drag = React.useRef<{ y: number; t: number; moved: boolean } | null>(null);
   const suppressClick = React.useRef(false);
   const collapsed = Math.round(peekH + HANDLE);
@@ -98,7 +105,7 @@ export function MobileSheet({
         <div ref={peekRef} className="shrink-0">
           {peek}
         </div>
-        <div id={bodyId} inert={!expanded} className="min-h-0 flex-1 overflow-y-auto overscroll-contain border-t border-border">
+        <div ref={bodyRef} id={bodyId} inert={!expanded} className="min-h-0 flex-1 overflow-y-auto overscroll-contain border-t border-border">
           {opened ? children : null}
         </div>
       </div>

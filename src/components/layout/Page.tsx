@@ -86,12 +86,12 @@ export function Section({ className, children, id, ruled = true }: { className?:
 /** A row of key figures separated by vertical rules (wraps to two columns on small screens). */
 export function KeyFigures({ items, className }: { items: Array<{ label: React.ReactNode; value: React.ReactNode; sub?: React.ReactNode }>; className?: string }) {
   return (
-    <dl className={cn('grid grid-cols-2 gap-y-6 md:flex md:divide-x md:divide-border', className)}>
+    <dl className={cn('grid grid-cols-2 gap-y-4 sm:gap-y-6 md:flex md:divide-x md:divide-border', className)}>
       {items.map((it, i) => (
         <div key={i} className={cn('min-w-0 md:flex-1 md:px-6 md:first:pl-0 md:last:pr-0', i % 2 === 1 && 'border-l border-border pl-4 md:border-l-0')}>
-          <dt className="text-sm text-muted-foreground">{it.label}</dt>
-          <dd className="num mt-1.5 text-3xl font-semibold tracking-tight sm:text-[2.1rem]">{it.value}</dd>
-          {it.sub && <dd className="mt-1 text-sm text-muted-foreground">{it.sub}</dd>}
+          <dt className="text-xs text-muted-foreground sm:text-sm">{it.label}</dt>
+          <dd className="num mt-1 text-2xl font-semibold tracking-tight sm:mt-1.5 sm:text-[2.1rem]">{it.value}</dd>
+          {it.sub && <dd className="mt-0.5 text-xs text-muted-foreground sm:mt-1 sm:text-sm">{it.sub}</dd>}
         </div>
       ))}
     </dl>

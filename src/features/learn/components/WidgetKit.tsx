@@ -8,6 +8,7 @@ import * as React from 'react';
 import { useTranslation } from 'react-i18next';
 import { Select, SelectGroup, SelectItem } from '@/components/ui/primitives';
 import { useModel } from '@/data-layer/DataProvider';
+import type { Scale } from '@/engine/risk/classes';
 import { rampColor } from '@/engine/risk/metrics';
 import type { RiskModel, Unit } from '@/engine/risk/types';
 import { cn, formatScore } from '@/lib/utils';
@@ -193,7 +194,7 @@ export function LabeledSlider({
 /* ------------------------------------------------------------------------------------------------ */
 
 /** A 0–10 indicator bar coloured on the continuous indicator ramp; missing data is shown as such. */
-export function IndicatorBar({ label, value, highlight = false, reference, referenceLabel }: { label: string; value: number | null | undefined; highlight?: boolean; reference?: number | null; referenceLabel?: string }) {
+export function IndicatorBar({ label, value, scale = 'risk', highlight = false, reference, referenceLabel }: { label: string; value: number | null | undefined; scale?: Scale; highlight?: boolean; reference?: number | null; referenceLabel?: string }) {
   const { t } = useTranslation('common');
   const has = typeof value === 'number' && Number.isFinite(value);
   return (
@@ -204,7 +205,7 @@ export function IndicatorBar({ label, value, highlight = false, reference, refer
       </div>
       <div className="relative h-1.5 w-full bg-muted">
         {has ? (
-          <div className="h-full transition-[width] duration-150" style={{ width: `${(value / 10) * 100}%`, background: rampColor(value) }} />
+          <div className="h-full transition-[width] duration-150" style={{ width: `${(value / 10) * 100}%`, background: rampColor(value, scale) }} />
         ) : (
           <div className="h-full w-full [background:repeating-linear-gradient(45deg,var(--input)_0_4px,transparent_4px_8px)]" />
         )}

@@ -24,12 +24,12 @@ const isZero = (v: number | null | undefined): v is number => isNum(v) && Math.r
  * nearest ramp colour where one does (never more than a few tenths away; the printed value is exact).
  */
 function readableFill(v: number): string {
-  const fill = rampColor(v);
+  const fill = rampColor(v, 'hazard');
   if (!needsPlate(fill)) return fill;
   for (let d = 0.05; d <= 1.5; d += 0.05)
     for (const w of [v - d, v + d]) {
       if (w < 0 || w > 10) continue;
-      const alt = rampColor(w);
+      const alt = rampColor(w, 'hazard');
       if (!needsPlate(alt)) return alt;
     }
   return fill;
@@ -110,7 +110,7 @@ export function HazardMatrix({ model }: { model: RiskModel }) {
         description={t('matrix.chartSub')}
         csv={csv}
         filename="hazard-hotspot-matrix"
-        actions={<RampLegend className="hidden w-44 md:flex" />}
+        actions={<RampLegend scale="hazard" className="hidden w-44 md:flex" />}
       >
         {/* Off-screen SVG twin of the table: this is what "Download image" exports. */}
         <div aria-hidden className="h-0 overflow-hidden">
@@ -191,7 +191,7 @@ export function HazardMatrix({ model }: { model: RiskModel }) {
           </table>
         </div>
         <div className="mt-4 flex flex-wrap items-center gap-x-6 gap-y-2 text-xs text-muted-foreground">
-          <RampLegend className="w-56 md:hidden" />
+          <RampLegend scale="hazard" className="w-56 md:hidden" />
           <span className="inline-flex items-center gap-2">
             <span className="inline-block size-3.5 shadow-[inset_0_0_0_2px_var(--foreground)]" aria-hidden />
             {t('matrix.maxLegend')}

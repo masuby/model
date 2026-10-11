@@ -2,22 +2,26 @@ import { ChevronDown } from 'lucide-react';
 import * as React from 'react';
 import { useTranslation } from 'react-i18next';
 import { cn } from '@/lib/utils';
-import { displayNumber, SECTION_IDS, SECTIONS, sectionKey } from './data';
+import { displayNumber, SECTIONS, sectionKey, type SectionDef } from './data';
 import { useScrollSpy } from './hooks';
 
 interface TocProps {
   onNavigate: (id: string) => void;
+  /** The sections listed (the full document by default; the summary page passes its own). */
+  sections?: readonly SectionDef[];
+  /** The number printed before each title (the document numbering by default). */
+  numberOf?: (id: string) => string;
 }
 
 /** Scroll-spy lives here (not in the page) so scrolling re-renders only the table of contents. */
 const SPY_OFFSET = 140;
 
 /** Plain-text contents list; the current section is marked by a rule on the left and heavier text. */
-function TocList({ active, onNavigate, className }: TocProps & { active: string; className?: string }) {
+function TocList({ active, onNavigate, className, sections, numberOf }: Required<Pick<TocProps, 'sections' | 'numberOf'>> & TocProps & { active: string; className?: string }) {
   const { t } = useTranslation('methodology');
   return (
     <ol className={cn('flex flex-col border-l border-border', className)}>
-      {SECTIONS.map((s) => {
+      {sections.map((s) => {
         const isActive = s.id === active;
         return (
           <li key={s.id}>
@@ -35,7 +39,7 @@ function TocList({ active, onNavigate, className }: TocProps & { active: string;
               )}
             >
               {/* Sub-sections keep their number ("3.1"), in a wider column so it aligns under its parent's. */}
-              <span className={cn('num shrink-0 text-xs text-muted-foreground', s.depth ? 'w-7' : 'w-4')}>{displayNumber(s.id)}</span>
+              <span className={cn('num shrink-0 text-xs text-muted-foreground', s.depth ? 'w-7' : 'w-4')}>{numberOf(s.id)}</span>
               <span>{t(sectionKey(s.id))}</span>
             </a>
           </li>
@@ -46,13 +50,14 @@ function TocList({ active, onNavigate, className }: TocProps & { active: string;
 }
 
 /** Sticky table of contents with scroll-spy (desktop). */
-export function DesktopToc({ onNavigate }: TocProps) {
+export function DesktopToc({ onNavigate, sections = SECTIONS, numberOf = displayNumber }: TocProps) {
   const { t } = useTranslation('methodology');
-  const active = useScrollSpy(SECTION_IDS, SPY_OFFSET);
+  const ids = React.useMemo(() => sections.map((s) => s.id), [sections]);
+  const active = useScrollSpy(ids, SPY_OFFSET);
   return (
     <nav aria-label={t('toc.title')} className="sticky top-24 max-h-[calc(100dvh-7rem)] overflow-y-auto pb-6">
       <p className="mb-3 text-sm font-medium">{t('toc.title')}</p>
-      <TocList active={active} onNavigate={onNavigate} />
+      <TocList active={active} onNavigate={onNavigate} sections={sections} numberOf={numberOf} />
       <button
         type="button"
         onClick={() => window.scrollTo({ top: 0, behavior: window.matchMedia?.('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' })}
@@ -65,11 +70,12 @@ export function DesktopToc({ onNavigate }: TocProps) {
 }
 
 /** Collapsible table of contents pinned under the header (mobile / tablet). */
-export function MobileToc({ onNavigate }: TocProps) {
+export function MobileToc({ onNavigate, sections = SECTIONS, numberOf = displayNumber }: TocProps) {
   const { t } = useTranslation('methodology');
-  const active = useScrollSpy(SECTION_IDS, SPY_OFFSET);
+  const ids = React.useMemo(() => sections.map((s) => s.id), [sections]);
+  const active = useScrollSpy(ids, SPY_OFFSET);
   const [open, setOpen] = React.useState(false);
-  const current = SECTIONS.find((s) => s.id === active) ?? SECTIONS[0];
+  const current = sections.find((s) => s.id === active) ?? sections[0];
   const listId = React.useId();
 
   React.useEffect(() => {
@@ -87,7 +93,7 @@ export function MobileToc({ onNavigate }: TocProps) {
           <span className="mx-2 text-muted-foreground" aria-hidden>
             ·
           </span>
-          <span className="num mr-1.5 font-medium">{displayNumber(current.id)}</span>
+          <span className="num mr-1.5 font-medium">{numberOf(current.id)}</span>
           <span className="font-medium">{t(sectionKey(current.id))}</span>
         </span>
         <span className="sr-only">{open ? t('toc.hide') : t('toc.show')}</span>
@@ -96,6 +102,8 @@ export function MobileToc({ onNavigate }: TocProps) {
       <div id={listId} hidden={!open} className="max-h-[60dvh] overflow-y-auto border-t border-border px-4 py-3 sm:px-6">
         <TocList
           active={active}
+          sections={sections}
+          numberOf={numberOf}
           onNavigate={(id) => {
             setOpen(false);
             onNavigate(id);

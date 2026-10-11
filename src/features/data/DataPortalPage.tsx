@@ -19,47 +19,50 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/primit
 import { useData, useModel, useOverrides, useRawSubmissions, useRawValues } from '@/data-layer/DataProvider';
 import { formatDate, formatNumber } from '@/lib/utils';
 import { AccessPanel, ContributorAccess } from './components/AccessPanel';
-import { ErrorState, ListSkeleton } from './components/common';
+import { ListSkeleton } from './components/common';
 import { DataToolsMenu } from './components/DataTools';
 import { useMySubmissions, usePendingQueue, usePermissions } from './hooks';
 import { relativeTime } from './lib/format';
 import { ActivityLog } from './tabs/ActivityLog';
 import { Approved } from './tabs/Approved';
 import { MySubmissions } from './tabs/MySubmissions';
-import { ScoreEntry } from './tabs/ScoreEntry';
 
-type TabKey = 'indicators' | 'queue' | 'scores' | 'paste' | 'mine' | 'approved' | 'activity' | 'people';
+type TabKey = 'indicators' | 'control' | 'queue' | 'committee' | 'mine' | 'approved' | 'activity' | 'people';
 interface TabDef {
   key: TabKey;
-  show: (p: { canSubmit: boolean; canReview: boolean; isAdmin: boolean }) => boolean;
+  show: (p: { canSubmit: boolean; canReview: boolean; canRecordCommittee: boolean; isAdmin: boolean; isPmo: boolean }) => boolean;
 }
 
-// Institutions work through the indicators they are assigned (measured values). Direct 0–10 scores and
-// bulk paste stay with reviewers, for the few indicator groups that have no workbook indicator.
+// Every value enters as a measured value in its own unit (the entry sheet, a template or a filled
+// collection tool) and the engine computes the scores; no screen types a 0-10 score (removed on
+// 10 October 2026: the Benchmark 2026 activations gave every group an indicator the workbook method scores).
 const TABS: readonly TabDef[] = [
   { key: 'indicators', show: (p) => p.canSubmit },
   { key: 'queue', show: (p) => p.canReview },
-  { key: 'scores', show: (p) => p.canReview },
-  { key: 'paste', show: (p) => p.canReview },
+  // One screen for the Office: the distribution of data-serving responsibilities and the lineage of every value.
+  { key: 'control', show: (p) => p.isAdmin || p.isPmo },
+  { key: 'committee', show: (p) => p.canRecordCommittee },
   { key: 'mine', show: (p) => p.canSubmit },
   { key: 'approved', show: () => true },
   { key: 'activity', show: (p) => p.canReview },
   { key: 'people', show: (p) => p.isAdmin },
 ];
 /** Reviewers land on their queue, so it leads their tab row. */
-const REVIEWER_ORDER: readonly TabKey[] = ['queue', 'indicators', 'scores', 'paste', 'mine', 'approved', 'activity', 'people'];
+const REVIEWER_ORDER: readonly TabKey[] = ['queue', 'control', 'indicators', 'committee', 'mine', 'approved', 'activity', 'people'];
 
 /** Tools split out of the page chunk. Import promises are cached, so prefetching is free. */
 const LOADERS = {
   indicators: () => import('./tabs/Indicators'),
-  paste: () => import('./tabs/BulkPaste'),
+  control: () => import('./tabs/Control'),
   queue: () => import('./tabs/Review'),
   people: () => import('./tabs/People'),
+  committee: () => import('./tabs/CommitteeDesk'),
 };
 const Indicators = React.lazy(() => LOADERS.indicators().then((m) => ({ default: m.Indicators })));
-const BulkPaste = React.lazy(() => LOADERS.paste().then((m) => ({ default: m.BulkPaste })));
+const Control = React.lazy(() => LOADERS.control().then((m) => ({ default: m.Control })));
 const Review = React.lazy(() => LOADERS.queue().then((m) => ({ default: m.Review })));
 const People = React.lazy(() => LOADERS.people().then((m) => ({ default: m.People })));
+const CommitteeDesk = React.lazy(() => LOADERS.committee().then((m) => ({ default: m.CommitteeDesk })));
 const prefetch = (key: TabKey) => {
   if (key in LOADERS) void LOADERS[key as keyof typeof LOADERS]().catch(() => undefined);
 };
@@ -75,21 +78,20 @@ export default function DataPortalPage() {
   const rawSubmissions = useRawSubmissions();
   const rawValues = useRawValues();
   const isAdmin = profile?.role === 'admin';
+  const isPmo = profile?.role === 'pmo';
   const rawPending = React.useMemo(() => (rawSubmissions.data ?? []).filter((s) => s.status === 'pending'), [rawSubmissions.data]);
   const pending = { length: pendingScores.length + (perms.canReview ? rawPending.length : 0) };
   const [params, setParams] = useSearchParams();
 
   const tabs = React.useMemo(() => {
-    const shown = TABS.filter((tab) => tab.show({ canSubmit: perms.canSubmit, canReview: perms.canReview, isAdmin }));
+    const shown = TABS.filter((tab) => tab.show({ canSubmit: perms.canSubmit, canReview: perms.canReview, canRecordCommittee: perms.canRecordCommittee, isAdmin, isPmo }));
     return perms.canReview ? [...shown].sort((a, b) => REVIEWER_ORDER.indexOf(a.key) - REVIEWER_ORDER.indexOf(b.key)) : shown;
-  }, [perms.canSubmit, perms.canReview, isAdmin]);
+  }, [perms.canSubmit, perms.canReview, perms.canRecordCommittee, isAdmin, isPmo]);
   // Deterministic landing tab per role (no jump once data loads): reviewers start on their queue,
   // institutions on their indicators.
-  const defaultTab: TabKey = perms.canReview ? 'queue' : perms.canSubmit ? 'indicators' : 'approved';
+  const defaultTab: TabKey = perms.canReview ? 'queue' : perms.canSubmit ? 'indicators' : perms.canRecordCommittee ? 'committee' : 'approved';
   const requested = params.get('tab') as TabKey | null;
   const active: TabKey = requested && tabs.some((x) => x.key === requested) ? requested : defaultTab;
-  const councilParam = params.get('council');
-  const councilId = councilParam && model.byId.get(councilParam)?.level === 'council' ? councilParam : null;
   const [visited, setVisited] = React.useState<ReadonlySet<TabKey>>(() => new Set([active]));
   const listRef = React.useRef<HTMLDivElement>(null);
 
@@ -163,18 +165,15 @@ export default function DataPortalPage() {
       : []),
   ];
 
-  const gate = (node: React.ReactNode) =>
-    overrides.isLoading ? <ListSkeleton rows={2} /> : overrides.isError ? <ErrorState error={overrides.error} onRetry={() => void overrides.refetch()} /> : node;
-
   const body: Record<TabKey, () => React.ReactNode> = {
     indicators: () => <Indicators />,
+    control: () => <Control />,
     queue: () => <Review />,
-    scores: () => gate(<ScoreEntry councilId={councilId} onCouncilChange={(id) => setParam('council', id)} />),
-    paste: () => gate(<BulkPaste />),
     mine: () => <MySubmissions onStart={() => onTab('indicators')} />,
     approved: () => <Approved />,
     activity: () => <ActivityLog />,
     people: () => <People />,
+    committee: () => <CommitteeDesk />,
   };
 
   const tabLabel = (key: TabKey) => t(`tabs.${key}`);

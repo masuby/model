@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next';
 import { DIMENSION_COLORS, DIMENSION_TEXT } from '@/components/charts/theme';
 import { Button } from '@/components/ui/button';
 import { ALL_INDICATORS, DIMENSIONS, type DimensionDef, type IndicatorDef } from '@/engine/risk/hierarchy';
-import { AUTHORITIES, sourceFor } from '@/engine/risk/sources';
+import { AUTHORITIES, custodianFor, sourceFor } from '@/engine/risk/sources';
 import { cn } from '@/lib/utils';
 import { hasDenominator, isDecrease, isUsed, KEYED_LEVELS, keyedLevel, leafRef, RESOLUTIONS, SPEC_STATS, WORKBOOK_BY_LEAF } from '../data';
 import { LEVEL_CLASS } from '../tokens';
@@ -23,7 +23,7 @@ const Leaf = React.memo(function Leaf({ dim, ind, open, onToggle }: { dim: Dimen
   const src = sourceFor(dim.key, ind.key);
   const specs = WORKBOOK_BY_LEAF.get(ref) ?? [];
   const used = specs.filter(isUsed).length;
-  const lead = AUTHORITIES[src.by];
+  const lead = AUTHORITIES[custodianFor(dim.key, ind.key).by];
 
   return (
     <div className="border-t border-border first:border-t-0">

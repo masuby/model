@@ -1,9 +1,8 @@
 import { useTranslation } from 'react-i18next';
 import { SERIES } from '@/components/charts/theme';
 import { isNum } from '@/engine/risk/math';
-import { indicatorValue } from '@/engine/risk/model';
 import type { Unit } from '@/engine/risk/types';
-import { cn, formatNumber, formatScore, NO_VALUE } from '@/lib/utils';
+import { cn, formatNumber } from '@/lib/utils';
 import { CouncilPicker, Finding, useCouncil, WidgetFrame } from '../components/WidgetKit';
 
 const LOG_MAX = 5; // 10^5 people per km² - above any Tanzanian council
@@ -19,7 +18,7 @@ const SIDE = [
   { key: 'b', color: SERIES[1] },
 ] as const;
 
-/** Lesson 2 - compare the population density (exposure) of two councils, on a log axis. */
+/** Lesson 2 - compare the population and density of two councils (the context of exposure), on a log axis. */
 export default function ExposureCompare() {
   const { t, i18n } = useTranslation(['learn', 'common', 'indicators']);
   const [a, setA] = useCouncil('Kinondoni Municipal');
@@ -33,7 +32,6 @@ export default function ExposureCompare() {
   const denser = isNum(da) && isNum(db) ? (da >= db ? a : b) : null;
   const other = denser === a ? b : a;
   const positions = units.map((u) => logPos(u.exposure?.density));
-  const idxGap = isNum(a.exposure?.index) && isNum(b.exposure?.index) ? Math.abs(a.exposure.index - b.exposure.index) : null;
 
   return (
     <WidgetFrame
@@ -51,9 +49,6 @@ export default function ExposureCompare() {
             [t('common:labels.population'), formatNumber(u.exposure?.population, lang)],
             [t('common:labels.area'), formatNumber(areaOf(u), lang, { maximumFractionDigits: 0 }), t('common:units.km2')],
             [t('common:labels.density'), formatNumber(u.exposure?.density, lang, { maximumFractionDigits: 0 }), t('common:units.perKm2')],
-            [t('indicators:exposure'), formatScore(u.exposure?.index), t('widgets.exposureCompare.indexSub')],
-            [t('widgets.exposureCompare.floodBefore'), formatScore(u.floodHazard)],
-            [t('widgets.exposureCompare.floodAfter'), formatScore(indicatorValue(u, 'hazard', 'flood'))],
           ];
           return (
             <div key={SIDE[i].key} className={cn(i === 0 ? 'md:pr-7' : 'md:pl-7')}>
@@ -118,7 +113,6 @@ export default function ExposureCompare() {
                 denser: denser.name,
                 other: other.name,
                 ratio: formatNumber(ratio, lang, { maximumFractionDigits: ratio < 10 ? 1 : 0 }),
-                gap: idxGap == null ? NO_VALUE : formatScore(idxGap),
               })}
         </Finding>
       )}

@@ -9,10 +9,13 @@ import { Link } from 'react-router-dom';
 import { KeyFigures } from '@/components/layout/Page';
 import { ClassBadge } from '@/components/risk/RiskBadge';
 import { THRESHOLDS } from '@/engine/risk/classes';
+import { ALL_INDICATORS } from '@/engine/risk/hierarchy';
 import { isNum } from '@/engine/risk/math';
 import type { RiskModel } from '@/engine/risk/types';
+import { CROSSWALK } from '@/features/guide/crosswalk';
+import { useAllGuides } from '@/features/guide/data';
 import { formatCompact, formatNumber, formatScore, NO_VALUE } from '@/lib/utils';
-import { HIGH_INDEX, resolutionBreakdown, topDriverCounts, type Headline } from '../analytics';
+import { HIGH_INDEX, resolutionBreakdown, topDriverCounts, topDriverUnits, type Headline } from '../analytics';
 import { InsightSection } from '../ui';
 
 /** A figure with a smaller "/ total" suffix. */
@@ -76,9 +79,11 @@ export function HeadlineFigures({ h, className }: { h: Headline; className?: str
 export function KeyFindings({ model, h }: { model: RiskModel; h: Headline }) {
   const { t, i18n } = useTranslation(['insights', 'common', 'indicators']);
   const lang = i18n.language;
+  // The Risk Action Guide Book's documented hazards, to say how far the model's top driver agrees with them (UX-08).
+  const guides = useAllGuides();
 
   const findings = React.useMemo(() => {
-    const out: Array<{ id: string; href: string; text: string }> = [];
+    const out: Array<{ id: string; href: string; text: string; analyst?: boolean }> = [];
 
     // How uneven the regions are: how many sit above the national value, and the spread.
     const national = h.nationalRisk;
@@ -104,15 +109,31 @@ export function KeyFindings({ model, h }: { model: RiskModel; h: Headline }) {
     const hotPop = hot.reduce((s, u) => s + (u.exposure?.population ?? 0), 0);
     out.push({ id: 'hot', href: '#dimensions', text: t('findings.hot', { count: hot.length, total: h.councils, pop: formatCompact(hotPop, lang) }) });
 
+    // The most common top-scoring group, and whether local guidance documents it. The rule: the top of
+    // the 32 indicator groups across all three dimensions, ties counted for each.
     const lead = topDriverCounts(model.councils)[0];
-    if (lead) out.push({ id: 'driver', href: '#drivers', text: t('findings.driver', { indicator: t(`indicators:${lead.key}`), count: lead.count, total: h.councils }) });
+    if (lead) {
+      const base = { indicator: t(`indicators:${lead.key}`), count: lead.count, total: h.councils, groups: ALL_INDICATORS.length };
+      let text: string;
+      if (lead.dim !== 'hazard') text = t('findings.driverOther', { ...base, dimension: t(`common:dimensions.${lead.dim}`) });
+      else {
+        const guideHazards = CROSSWALK.filter((e) => e.guide && e.groups.includes(`hazard:${lead.key}`)).map((e) => e.guide!);
+        if (!guideHazards.length) text = t('findings.driverHazardNoGuide', base);
+        else if (guides.loading) text = t('findings.driver', base);
+        else {
+          const documented = topDriverUnits(model.councils, lead.dim, lead.key).filter((u) => (guides.hazardsByCouncil.get(u.id) ?? []).some((hz) => guideHazards.includes(hz))).length;
+          text = t('findings.driverHazard', { ...base, documented });
+        }
+      }
+      out.push({ id: 'driver', href: '#drivers', analyst: true, text });
+    }
 
     // What the evidence cannot yet do: indicators with one value for the whole country or per region.
     const res = resolutionBreakdown();
     const n = (r: string) => res.find((g) => g.resolution === r)?.count ?? 0;
     out.push({ id: 'data', href: '#coverage', text: t('findings.data', { national: n('national'), region: n('region'), total: h.indicatorTotal }) });
     return out;
-  }, [model, h, t, lang]);
+  }, [model, h, t, lang, guides]);
 
   return (
     <InsightSection id="kpis" title={t('findings.title')} lead={t('findings.lead')}>
@@ -122,12 +143,13 @@ export function KeyFindings({ model, h }: { model: RiskModel; h: Headline }) {
             <span className="num pt-[3px] text-sm font-semibold text-muted-foreground">{i + 1}</span>
             <div className="min-w-0">
               <p className="text-[1.0625rem] leading-relaxed text-pretty">{f.text}</p>
-              <a href={f.href} className="no-print mt-2 inline-flex items-center gap-1 text-sm font-medium text-primary underline-offset-4 hover:underline">
+              {/* A chart of the analyst view opens that view (the link carries the view in its query). */}
+              <Link to={{ search: f.analyst ? '?view=analyst' : '', hash: f.href }} className="no-print mt-2 inline-flex items-center gap-1 text-sm font-medium text-primary underline-offset-4 hover:underline">
                 {t('findings.see')}
                 {/* Distinct link names for screen-reader link lists ("See the chart: Regions"). */}
                 <span className="sr-only">: {t(`nav.${f.href.slice(1)}`)}</span>
                 <ArrowDown className="size-3.5" aria-hidden />
-              </a>
+              </Link>
             </div>
           </li>
         ))}

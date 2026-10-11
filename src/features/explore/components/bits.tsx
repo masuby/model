@@ -4,8 +4,8 @@ import * as React from 'react';
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/primitives';
-import { CLASS_COLORS, CLASS_KEYS, classify, THRESHOLDS, type Scale } from '@/engine/risk/classes';
-import { metricColor, RAMP_STOPS, type Metric } from '@/engine/risk/metrics';
+import { CLASS_KEYS, classColor, classify, THRESHOLDS, type Scale } from '@/engine/risk/classes';
+import { metricColor, rampStops, type Metric } from '@/engine/risk/metrics';
 import { cn, formatScore } from '@/lib/utils';
 import { useExplore } from '../lib/ExploreContext';
 
@@ -66,7 +66,7 @@ export function ClassScale({ value, scale = 'risk', className }: { value: number
         <div className="flex h-2 gap-px">
           {CLASS_KEYS.map((k, i) => {
             const on = c?.index === i;
-            return <span key={k} className={cn('h-full', !on && 'bg-muted')} style={{ width: `${(bounds[i + 1] - bounds[i]) * 10}%`, background: on ? CLASS_COLORS[k] : undefined }} />;
+            return <span key={k} className={cn('h-full', !on && 'bg-muted')} style={{ width: `${(bounds[i + 1] - bounds[i]) * 10}%`, background: on ? classColor(k, scale) : undefined }} />;
           })}
         </div>
         {pct != null && <span className="absolute -top-1 h-4 w-0.5 -translate-x-1/2 bg-foreground" style={{ left: `${pct}%` }} />}
@@ -86,7 +86,7 @@ export function MiniLegend({ className }: { className?: string }) {
   if (metric.kind === 'indicator') {
     return (
       <div className={className}>
-        <div className="h-2" style={{ background: `linear-gradient(90deg, ${RAMP_STOPS.join(',')})` }} />
+        <div className="h-2" style={{ background: `linear-gradient(90deg, ${rampStops(metric.palette).join(',')})` }} />
         <div className="num mt-1.5 flex justify-between text-xs text-muted-foreground">
           <span>0 · {t('legend.lower')}</span>
           <span>
@@ -118,7 +118,7 @@ export function MiniLegend({ className }: { className?: string }) {
                   state.cls && !active && 'opacity-40 group-hover:opacity-80',
                   active && 'outline-2 outline-offset-1 outline-foreground',
                 )}
-                style={{ background: CLASS_COLORS[k] }}
+                style={{ background: classColor(k, metric.palette) }}
               />
               <span className={cn('num text-center text-xs', active ? 'font-semibold text-foreground' : 'text-muted-foreground group-hover:text-foreground')}>{count}</span>
             </button>
@@ -140,7 +140,7 @@ export function MapKey({ className }: { className?: string }) {
   if (metric.kind === 'indicator') {
     return (
       <div className={className} aria-hidden>
-        <div className="h-2" style={{ background: `linear-gradient(90deg, ${RAMP_STOPS.join(',')})` }} />
+        <div className="h-2" style={{ background: `linear-gradient(90deg, ${rampStops(metric.palette).join(',')})` }} />
         <div className="num mt-1.5 flex justify-between text-xs text-muted-foreground">
           <span>0 · {t('legend.lower')}</span>
           <span>
@@ -154,7 +154,7 @@ export function MapKey({ className }: { className?: string }) {
     <div className={className} aria-hidden>
       <div className="grid grid-cols-5 gap-px">
         {CLASS_KEYS.map((k) => (
-          <span key={k} className="h-2" style={{ background: CLASS_COLORS[k] }} />
+          <span key={k} className="h-2" style={{ background: classColor(k, metric.palette) }} />
         ))}
       </div>
       <div className="mt-1.5 flex justify-between text-xs text-muted-foreground">
@@ -182,6 +182,7 @@ export function ScaleInfo({ className, align = 'start' }: { className?: string; 
       <PopoverContent align={align} className="w-[min(21rem,calc(100vw-2rem))] p-5">
         <div className="font-display text-base font-semibold">{t('honesty.title')}</div>
         <ul className="mt-3 divide-y divide-border text-sm leading-relaxed text-muted-foreground">
+          <li className="py-2.5">{t('honesty.palette')}</li>
           <li className="py-2.5">{t('honesty.indicator')}</li>
           <li className="py-2.5">{t('honesty.dimension')}</li>
           <li className="py-2.5">{t('honesty.national')}</li>

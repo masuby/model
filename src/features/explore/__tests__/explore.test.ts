@@ -71,10 +71,11 @@ describe('URL state', () => {
     expect(readExploreState(new URLSearchParams(`id=${model.sources[0].id}`), lookup).level).toBe('source');
   });
 
-  it('ignores the national unit as a selection and caps the comparison at three', () => {
+  it("selects the nation (the panel's breadcrumb root) but never pins it, and caps the comparison at three", () => {
     const ids = model.councils.slice(0, 5).map((c) => c.id);
-    const s = readExploreState(new URLSearchParams(`id=TZ&cmp=${ids.join(',')},${ids[0]}`), lookup);
-    expect(s.id).toBeNull();
+    const s = readExploreState(new URLSearchParams(`id=TZ&cmp=TZ,${ids.join(',')},${ids[0]}`), lookup);
+    expect(s.id).toBe('TZ');
+    expect(s.level).toBe('council');
     expect(s.cmp).toEqual(ids.slice(0, MAX_COMPARE));
   });
 

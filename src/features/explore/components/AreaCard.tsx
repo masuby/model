@@ -1,95 +1,27 @@
 /**
- * The selected area: header (name, class, flags), body (rank, where the score sits on its class scale,
- * dimensions vs. region or national, top drivers, people, data coverage, provenance notes) and actions
- * (profile, compare). A flat floating panel over the desktop map, a docked column beside the ranking
- * table, and the bottom sheet on mobile. Sections are separated by hairline rules; the dimension and
+ * How an area's score is built (the analysis inside the risk communication panel, RiskPanel.tsx): rank,
+ * where the score sits on its class scale, dimensions against the region or the nation, top drivers,
+ * people, data coverage and provenance notes. Sections are separated by hairline rules; the dimension and
  * driver rows share one row style.
  */
-import { ArrowRight, GitCompareArrows, MapPinned, Paintbrush, Pencil, X } from 'lucide-react';
+import { Paintbrush } from 'lucide-react';
 import * as React from 'react';
 import { useTranslation } from 'react-i18next';
-import { Link } from 'react-router-dom';
-import { ClassBadge, ClassDot } from '@/components/risk/RiskBadge';
-import { Badge } from '@/components/ui/badge';
-import { Button } from '@/components/ui/button';
+import { ClassDot } from '@/components/risk/RiskBadge';
 import { Progress } from '@/components/ui/primitives';
 import { classify, NO_DATA_COLOR } from '@/engine/risk/classes';
 import { DIMENSIONS } from '@/engine/risk/hierarchy';
 import { parseMetric, rampColor } from '@/engine/risk/metrics';
 import { dataCoverage, topDrivers, unitsAt } from '@/engine/risk/model';
+import { dataNotesFor } from '@/engine/risk/notes';
+import { DataNoteMark } from '@/components/risk/DataNoteMark';
 import type { Unit } from '@/engine/risk/types';
-import { alertFor } from '@/features/guide/alert';
-import { AlertBadge } from '@/features/guide/AlertBadge';
 import { cn, formatNumber, formatScore, NO_VALUE } from '@/lib/utils';
-import { coverageCounts, editCount, MAX_COMPARE, rankUnits, referenceUnit } from '../lib/explore';
+import { coverageCounts, editCount, rankUnits, referenceUnit } from '../lib/explore';
 import { useExplore } from '../lib/ExploreContext';
-import { AreaGuide } from './AreaGuide';
 import { ClassScale, MetricValue, Notice, SectionTitle } from './bits';
 
 const RISK = parseMetric('risk');
-
-export function AreaHeader({ unit, onClose }: { unit: Unit; onClose: () => void }) {
-  const { t } = useTranslation(['explore', 'common', 'guide']);
-  const edits = editCount(unit);
-  const alert = alertFor(unit.risk);
-  return (
-    <div className="flex items-start gap-3">
-      <div className="min-w-0 flex-1">
-        <p className="truncate text-sm text-muted-foreground">
-          {t(`common:levels.${unit.level}`)}
-          {unit.level !== 'region' && ` · ${unit.region}`}
-        </p>
-        <h2 className="mt-0.5 text-[1.4rem] leading-tight text-balance">{unit.name}</h2>
-        <div className="mt-2.5 flex flex-wrap items-center gap-1.5">
-          <ClassBadge value={unit.risk} showScore size="sm" />
-          {alert && <AlertBadge level={alert.level} size="sm" title={t('guide:alert.title', { cls: t(`common:classes.${alert.cls}`) })} />}
-          {edits > 0 && (
-            <Badge variant="outline" title={t('card.editedNote', { count: edits })}>
-              <Pencil /> {t('common:labels.edited')}
-            </Badge>
-          )}
-          {unit.level === 'source' && <Badge variant="outline">{t('level.reference')}</Badge>}
-          {unit.inheritedFrom && <Badge variant="outline">{t('card.inheritedBadge')}</Badge>}
-        </div>
-      </div>
-      <Button variant="ghost" size="icon-sm" onClick={onClose} aria-label={t('card.close')} className="-mt-1 -mr-2 shrink-0">
-        <X />
-      </Button>
-    </div>
-  );
-}
-
-export function AreaActions({ unit, className }: { unit: Unit; className?: string }) {
-  const { t } = useTranslation('explore');
-  const { state, actions } = useExplore();
-  const inCompare = state.cmp.includes(unit.id);
-  const full = !inCompare && state.cmp.length >= MAX_COMPARE;
-  return (
-    <div className={cn('grid gap-2', className)}>
-      <div className="flex gap-2">
-        <Button asChild className="flex-1">
-          <Link to={`/area/${unit.id}`}>
-            {t('card.viewProfile')} <ArrowRight />
-          </Link>
-        </Button>
-        <Button
-          variant={inCompare ? 'secondary' : 'outline'}
-          aria-pressed={inCompare}
-          onClick={() => actions.toggleCompare(unit)}
-          title={full ? t('compare.fullHint') : undefined}
-          className={cn(full && 'opacity-60')}
-        >
-          <GitCompareArrows /> {inCompare ? t('card.comparing') : t('card.compare')}
-        </Button>
-      </div>
-      {state.view === 'table' && (
-        <Button variant="ghost" size="sm" onClick={() => actions.setView('map', { focusSelection: true })}>
-          <MapPinned /> {t('view.showOnMap')}
-        </Button>
-      )}
-    </div>
-  );
-}
 
 /** A labelled figure in a row of figures separated by vertical rules. */
 function Figure({ label, children, sub, className }: { label: React.ReactNode; children: React.ReactNode; sub?: React.ReactNode; className?: string }) {
@@ -249,10 +181,13 @@ export function AreaBody({ unit }: { unit: Unit }) {
                         <span className={cn('truncate text-sm', active ? 'font-semibold' : 'font-medium')}>{t(`indicators:${d.key}`)}</span>
                         <Paintbrush className="size-3 shrink-0 text-muted-foreground opacity-0 transition-opacity group-hover:opacity-100 group-focus-visible:opacity-100" aria-hidden />
                       </span>
-                      <span className="num text-sm font-semibold">{formatScore(d.value)}</span>
+                      <span className="num inline-flex items-center gap-1 text-sm font-semibold">
+                        {formatScore(d.value)}
+                        <DataNoteMark notes={dataNotesFor(unit, d.dim, d.key)} focusable={false} />
+                      </span>
                     </span>
                     <span className="mt-1.5 block h-1 bg-muted">
-                      <span className="block h-full" style={{ width: `${pct(d.value)}%`, background: rampColor(d.value) }} />
+                      <span className="block h-full" style={{ width: `${pct(d.value)}%`, background: rampColor(d.value, d.dim) }} />
                     </span>
                     <span className="mt-1 block truncate text-xs text-muted-foreground">
                       {t(`common:dimensions.${d.dim}Short`)} · {t(`common:categories.${d.category}`)}
@@ -265,9 +200,6 @@ export function AreaBody({ unit }: { unit: Unit }) {
           <p className="mt-2 text-xs leading-relaxed text-muted-foreground">{t('card.driversHint')}</p>
         </section>
       )}
-
-      {/* What to do, from the Risk Action Guide Book */}
-      <AreaGuide unit={unit} />
 
       {/* People */}
       <section className="py-6">
@@ -310,49 +242,13 @@ export function AreaBody({ unit }: { unit: Unit }) {
       </section>
 
       {/* Provenance notes */}
-      {(unit.inheritedFrom || (unit.level === 'council' && unit.sourceName) || unit.level === 'region' || unit.level === 'source' || edits > 0) && (
+      {(unit.inheritedFrom || (unit.level === 'council' && unit.sourceName) || edits > 0) && (
         <section className="space-y-3 pt-6">
           {unit.inheritedFrom && <Notice tone="warning">{t('common:labels.inherited', { parent: unit.inheritedFrom })}</Notice>}
           {unit.level === 'council' && unit.sourceName && <Notice>{t('common:labels.sharedSource', { source: unit.sourceName })}</Notice>}
-          {unit.level === 'region' && <Notice>{t('card.regionNote', { count: unit.members ?? 0 })}</Notice>}
-          {unit.level === 'source' && <Notice tone="warning">{t('card.sourceNote')}</Notice>}
           {edits > 0 && <Notice tone="primary">{t('card.editedNote', { count: edits })}</Notice>}
         </section>
       )}
     </div>
-  );
-}
-
-/**
- * Desktop area panel with a fixed header and actions and a scrolling body: `floating` over the map (a
- * flat panel with a small lift), `docked` as a ruled column beside the ranking table.
- */
-export function AreaCardPanel({ placement, style }: { placement: 'floating' | 'docked'; style?: React.CSSProperties }) {
-  const { t } = useTranslation('explore');
-  const { selected, actions } = useExplore();
-  if (!selected) return null;
-  return (
-    <aside
-      aria-label={t('card.label', { name: selected.name })}
-      style={style}
-      onKeyDown={(e) => {
-        if (e.key === 'Escape' && !e.defaultPrevented) actions.deselect();
-      }}
-      className={
-        placement === 'floating'
-          ? 'glass absolute right-4 z-30 flex w-[360px] max-w-[calc(100%-2rem)] flex-col overflow-hidden rounded-lg'
-          : 'flex w-[320px] shrink-0 flex-col border-l border-border bg-background xl:w-[360px]'
-      }
-    >
-      <div className="shrink-0 border-b border-border px-5 pt-4 pb-4">
-        <AreaHeader unit={selected} onClose={actions.deselect} />
-      </div>
-      <div key={selected.id} className="min-h-0 flex-1 overflow-y-auto overscroll-contain px-5 pt-5 pb-6">
-        <AreaBody unit={selected} />
-      </div>
-      <div className="shrink-0 border-t border-border px-4 py-3">
-        <AreaActions unit={selected} />
-      </div>
-    </aside>
   );
 }

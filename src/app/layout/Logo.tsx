@@ -16,7 +16,7 @@ export function LogoMark({ className }: { className?: string }) {
         <path d="M-2 62 L62 -2 L66 2 L2 66 Z" fill="#0b0f19" />
       </g>
       <circle cx="32" cy="32" r="13" fill="#fff" />
-      <path d="M32 22.5 L40.5 37.5 L23.5 37.5 Z" fill="#d73027" />
+      <path d="M32 22.5 L40.5 37.5 L23.5 37.5 Z" fill="#dc2626" />
       <rect x="31" y="27.5" width="2" height="5.5" rx="1" fill="#fff" />
       <circle cx="32" cy="35" r="1.1" fill="#fff" />
     </svg>

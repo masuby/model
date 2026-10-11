@@ -20,6 +20,7 @@ import { placeKey } from '@/engine/risk/model';
 import type { Level, RiskModel, Unit } from '@/engine/risk/types';
 import { formatNumber, formatScore } from '@/lib/utils';
 import { resolveTheme, usePrefs } from '@/state/prefs';
+import { portalEditCount } from '@/engine/risk/stamps';
 
 /** Uniform padding in px, or Leaflet-style corner paddings [x, y]. */
 export type MapPadding = number | { topLeft: [number, number]; bottomRight: [number, number] };
@@ -105,7 +106,10 @@ function FitTo({ bounds, padding }: { bounds: L.LatLngBoundsExpression | null; p
   const map = useMap();
   const padKey = JSON.stringify(padding); // compared by value: inline objects must not re-trigger a flight
   React.useEffect(() => {
-    if (bounds) map.flyToBounds(bounds, { ...paddingOptions(JSON.parse(padKey) as MapPadding), duration: 0.5, maxZoom: 8 });
+    if (!bounds) return;
+    // A panel that opens beside the map resizes it in the same moment: measure before flying.
+    map.invalidateSize({ pan: false });
+    map.flyToBounds(bounds, { ...paddingOptions(JSON.parse(padKey) as MapPadding), duration: 0.5, maxZoom: 8 });
   }, [bounds, map, padKey]);
   return null;
 }
@@ -218,7 +222,7 @@ export default function RiskMap({
       ${cls ? `<div style="font-size:11px;text-align:right;opacity:.75">${tr(`classes.${cls.key}`)}</div>` : ''}
       ${m.kind !== 'risk' ? `<div style="display:flex;justify-content:space-between;font-size:11px;opacity:.7;margin-top:6px"><span>${tr('informRisk')}</span><b>${formatScore(u.risk)}</b></div>` : ''}
       ${pop ? `<div style="display:flex;justify-content:space-between;font-size:11px;opacity:.7;margin-top:2px"><span>${tr('labels.population')}</span><b>${formatNumber(pop, lang)}</b></div>` : ''}
-      ${Object.keys(u.edits).length ? `<div style="font-size:11px;color:#2563eb;margin-top:6px">● ${tr('labels.edited')}</div>` : ''}
+      ${portalEditCount(u) ? `<div style="font-size:11px;color:#2563eb;margin-top:6px">● ${tr('labels.edited')}</div>` : ''}
       ${hint ? `<div style="font-size:11px;opacity:.6;margin-top:8px;border-top:1px solid rgba(127,127,127,.25);padding-top:6px">${esc(hint)}</div>` : ''}
     </div>`;
   }, []);
@@ -244,10 +248,12 @@ export default function RiskMap({
 
   const focusBounds = React.useMemo<L.LatLngBoundsExpression | null>(() => {
     if (!focusId) return null;
+    // The country has no polygon of its own: focusing it shows the whole of Tanzania.
+    if (focusId === model.national.id) return TZ_BOUNDS;
     const f = geo.features.find((ft) => unitOf(ft)?.id === focusId);
     if (!f) return null;
     return L.geoJSON(f).getBounds();
-  }, [focusId, geo, unitOf]);
+  }, [focusId, geo, unitOf, model]);
 
   const tiles =
     theme === 'dark'

@@ -34,13 +34,12 @@ const CLASS_QUESTION_SCORE = round1((THRESHOLDS.risk[2] + THRESHOLDS.risk[3]) / 
 
 /**
  * Values interpolated into quiz questions. The "extreme hazard only" case (H 9, V 1, LCC 1) shows why
- * INFORM uses a geometric mean; the flood case is the documented "exposure never lowers flood" rule.
+ * INFORM uses a geometric mean.
  */
 export const QUIZ_VARS = {
   geo: one(riskScore(9, 1, 1)),
   arith: one(round1(mean([9, 1, 1]) ?? 0)),
   classScore: one(CLASS_QUESTION_SCORE),
-  sqrtVal: one(round1(Math.sqrt(9.8 * 2.9))),
 } as const;
 
 export interface LessonMeta {
@@ -57,8 +56,8 @@ export interface LessonMeta {
 
 export const LESSONS: readonly LessonMeta[] = [
   { id: 'hazard', n: 1, minutes: 8, widget: 'hazardHotspots', answers: [1, 2, 0, 3] },
-  { id: 'exposure', n: 2, minutes: 7, widget: 'exposureCompare', answers: [2, 0, 1] },
-  { id: 'vulnerability', n: 3, minutes: 9, widget: 'vulnerabilityProfile', answers: [2, 3, 0, 1] },
+  { id: 'exposure', n: 2, minutes: 7, widget: 'exposureCompare', answers: [2, 1, 0] },
+  { id: 'vulnerability', n: 3, minutes: 9, widget: 'vulnerabilityProfile', answers: [2, 3, 0, 0] },
   { id: 'coping', n: 4, minutes: 8, widget: 'copingWhatIf', answers: [2, 0, 3] },
   { id: 'risk', n: 5, minutes: 12, widget: 'riskPlayground', answers: [2, 1, classify(CLASS_QUESTION_SCORE, 'risk')!.index, 0] },
   { id: 'severity', n: 6, minutes: 10, widget: 'severityCalculator', answers: [1, 2, 0, 3] },

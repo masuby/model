@@ -2,7 +2,7 @@
 import { useQueryClient } from '@tanstack/react-query';
 import * as React from 'react';
 import { refreshData, useData, useSubmissions } from '@/data-layer/DataProvider';
-import { APPLIED_DIRECTLY_NOTE, canReview, canSubmit, type NewSubmission, type Profile, type Submission } from '@/data-layer/types';
+import { APPLIED_DIRECTLY_NOTE, canRecordCommittee, canReview, canSubmit, type NewSubmission, type Profile, type Submission } from '@/data-layer/types';
 import { runInBatches } from './lib/batch';
 
 /** The shipped baseline (no approved edits), for "baseline → current". */
@@ -14,7 +14,7 @@ export { APPLIED_DIRECTLY_NOTE };
 export function usePermissions() {
   const { profile, mode, authLoading } = useData();
   const role = profile?.role ?? null;
-  return { role, profile, mode, authLoading, signedIn: !!profile, canSubmit: canSubmit(role), canReview: canReview(role) };
+  return { role, profile, mode, authLoading, signedIn: !!profile, canSubmit: canSubmit(role), canReview: canReview(role), canRecordCommittee: canRecordCommittee(role) };
 }
 
 /**

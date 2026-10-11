@@ -46,7 +46,7 @@ function groupsOf(dim: DimensionKey) {
 /**
  * The lens list (desktop panel): the four headline lenses as a radio group (arrow keys move and select,
  * one tab stop), with the open dimension's indicator groups listed under it. Scores are for the selected
- * area, else the official national figure.
+ * area, else the national aggregate of all councils.
  */
 export function LensTiles({ labelledBy }: { labelledBy?: string }) {
   const { t } = useTranslation(['explore', 'common']);

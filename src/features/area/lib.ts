@@ -7,9 +7,10 @@ import { classify, type ClassInfo } from '@/engine/risk/classes';
 import { DIMENSIONS, type DimensionKey } from '@/engine/risk/hierarchy';
 import { isNum, mean } from '@/engine/risk/math';
 import { placeKey, unitsAt } from '@/engine/risk/model';
-import { sourceFor, type SourceInfo } from '@/engine/risk/sources';
-import type { EditRef, EditStamp, Facilities, Level, RiskModel, Unit } from '@/engine/risk/types';
+import { editSource, sourceFor, type SourceInfo } from '@/engine/risk/sources';
+import type { DrrStatus, EditRef, EditStamp, Facilities, Level, RiskModel, Unit } from '@/engine/risk/types';
 import { NO_VALUE } from '@/lib/utils';
+import { stampOrigin, type StampOrigin } from '@/engine/risk/stamps';
 
 /* ------------------------------------------------------------------------------------------------ */
 /* Resolution                                                                                         */
@@ -137,7 +138,8 @@ export function indicatorRows(unit: Unit, region: Unit | null, national: Unit | 
   const rows: IndicatorRow[] = [];
   for (const def of DIMENSIONS)
     for (const cat of def.categories)
-      for (const ind of cat.indicators)
+      for (const ind of cat.indicators) {
+        const edit = unit.edits[`${def.key}:${ind.key}` as EditRef] ?? null;
         rows.push({
           dim: def.key,
           category: cat.key,
@@ -145,9 +147,11 @@ export function indicatorRows(unit: Unit, region: Unit | null, national: Unit | 
           value: leaf(unit, def.key, cat.key, ind.key),
           region: leaf(region, def.key, cat.key, ind.key),
           national: national && national !== unit ? leaf(national, def.key, cat.key, ind.key) : null,
-          source: sourceFor(def.key, ind.key),
-          edit: unit.edits[`${def.key}:${ind.key}` as EditRef] ?? null,
+          // The value's own lineage: the institution that submitted it, else the workbook's metadata.
+          source: edit ? editSource(edit, unit.level) : sourceFor(def.key, ind.key),
+          edit,
         });
+      }
   return rows;
 }
 
@@ -256,9 +260,10 @@ export function beeswarm<T>(items: readonly T[], value: (t: T) => number | null 
 /* Edits                                                                                              */
 /* ------------------------------------------------------------------------------------------------ */
 
-export function editList(unit: Unit): Array<{ ref: EditRef; stamp: EditStamp }> {
+/** The unit's stamped values, newest first; `origin` keeps one kind (portal updates, benchmark or Advancement values). */
+export function editList(unit: Unit, origin?: StampOrigin): Array<{ ref: EditRef; stamp: EditStamp }> {
   return (Object.entries(unit.edits) as Array<[EditRef, EditStamp | undefined]>)
-    .filter((e): e is [EditRef, EditStamp] => !!e[1])
+    .filter((e): e is [EditRef, EditStamp] => !!e[1] && (!origin || stampOrigin(e[1]) === origin))
     .map(([ref, stamp]) => ({ ref, stamp }))
     .sort((a, b) => String(b.stamp.at).localeCompare(String(a.stamp.at)));
 }
@@ -284,7 +289,8 @@ export interface ServicesInfo {
   /** Districts (INFORM source units) the figures cover, and how many carry facility / DRR records. */
   districts: number;
   withFacilities: number;
-  drr: { eprp: number; aa: number; eocc: number; recorded: number };
+  /** Arrangements in place and committee criteria met, over the councils in scope (`total`), of which `recorded` have any record. */
+  drr: { eprp: number; aa: number; ert: number; rvca: number; eocc: number; training: number; committee: number; stakeholders: number; involvement: number; recorded: number; total: number; flags: Partial<DrrStatus> | null };
   sourceId?: string;
   sourceName?: string;
   /** Councils sharing the source unit (council basis only). */
@@ -323,12 +329,23 @@ export function servicesFor(model: RiskModel, unit: Unit): ServicesInfo {
       }
     : null;
   const pop = withFac.reduce((a, s) => a + (s.exposure?.population ?? 0), 0);
-  const drrUnits = sources.filter((s) => s.drr);
+  // DRR arrangements are recorded per council (committee records over the published list), so they are
+  // counted over councils: the council itself, a region's councils, or all of them.
+  const drrScope: Unit[] = unit.level === 'council' || unit.level === 'source' ? [unit] : unit.level === 'region' ? membersOfRegion(model, unit) : model.councils;
+  const drrUnits = drrScope.filter((s) => s.drr);
   const drr = {
     eprp: drrUnits.filter((s) => s.drr?.eprp).length,
     aa: drrUnits.filter((s) => s.drr?.aa).length,
+    ert: drrUnits.filter((s) => s.drr?.ert).length,
+    rvca: drrUnits.filter((s) => s.drr?.rvca).length,
     eocc: drrUnits.filter((s) => s.drr?.eocc).length,
+    training: drrUnits.filter((s) => s.drr?.training).length,
+    committee: drrUnits.filter((s) => s.drr?.committee).length,
+    stakeholders: drrUnits.filter((s) => s.drr?.stakeholders).length,
+    involvement: drrUnits.filter((s) => s.drr?.involvement).length,
     recorded: drrUnits.length,
+    total: drrScope.length,
+    flags: drrScope.length === 1 ? (drrScope[0].drr ?? null) : null,
   };
   return {
     basis,

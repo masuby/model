@@ -2,16 +2,21 @@
  * Overview: a lightweight SVG locator map (no Leaflet) beside the key findings, written as a short
  * report paragraph - a serif lede and a ruled list - rather than icon tiles in a card.
  */
+import { ChevronDown } from 'lucide-react';
 import * as React from 'react';
 import { Trans, useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 import { Segmented } from '@/components/ui/primitives';
 import { CLASS_COLORS, CLASS_KEYS, classify } from '@/engine/risk/classes';
 import { parseMetric } from '@/engine/risk/metrics';
-import { placeKey, topDrivers } from '@/engine/risk/model';
+import { DATA_AS_OF, placeKey, topDrivers } from '@/engine/risk/model';
+import { dataNotesFor, worstStatus } from '@/engine/risk/notes';
+import { lackOfReliability } from '@/engine/risk/variants';
 import { formatScore } from '@/lib/utils';
 import { delta, placeListsFor, rankAmong, weakestDimension, type AreaView } from '../lib';
-import { SubHeading } from './bits';
+import { AreaFigures } from './AreaHero';
+import { SubHeading, useMediaQuery } from './bits';
+import { useDeferred } from './Deferred';
 
 const StaticMap = React.lazy(() => import('@/components/map/StaticMap'));
 
@@ -82,7 +87,8 @@ function LocatorMap({ view }: { view: AreaView }) {
   );
 }
 
-function KeyFindings({ view }: { view: AreaView }) {
+/** The key findings (rank, distance from the national value, weakest dimension, top driver, coverage): the opening of the Analysis view. */
+export function KeyFindings({ view }: { view: AreaView }) {
   const { t } = useTranslation(['area', 'common', 'indicators']);
   const { unit, rank, national, model, coverage, region } = view;
   const b = <strong className="font-semibold text-foreground" />;
@@ -92,6 +98,7 @@ function KeyFindings({ view }: { view: AreaView }) {
   const top = React.useMemo(() => topDrivers(unit, 1)[0], [unit]);
   const d = delta(unit.risk, national.risk);
   const peers = t(`peers.${unit.level}`);
+  const reliability = React.useMemo(() => (unit.level === 'council' || unit.level === 'source' ? lackOfReliability(unit, model, DATA_AS_OF) : null), [unit, model]);
 
   const localRank = React.useMemo(() => {
     if (unit.level !== 'council' && unit.level !== 'source') return null;
@@ -155,16 +162,33 @@ function KeyFindings({ view }: { view: AreaView }) {
         />
       ),
     });
-  if (top) findings.push({ key: 'driver', body: <Trans t={t} i18nKey="glance.driver" values={{ indicator: t(`indicators:${top.key}`), score: formatScore(top.value) }} components={{ b }} /> });
+  if (top) {
+    findings.push({ key: 'driver', body: <Trans t={t} i18nKey="glance.driver" values={{ indicator: t(`indicators:${top.key}`), score: formatScore(top.value) }} components={{ b }} /> });
+    // A top driver whose workbook value is under query says so here, where the driver is named (the integrity recheck).
+    const topNotes = dataNotesFor(unit, top.dim, top.key).filter((n) => n.status !== 'explained');
+    if (topNotes.length)
+      findings.push({
+        key: 'driverNote',
+        body: <Trans t={t} i18nKey="glance.driverNote" values={{ indicator: t(`indicators:${top.key}`), status: t(`common:dataNote.inline.${worstStatus(topNotes)}`) }} components={{ b }} />,
+      });
+  }
   findings.push({ key: 'coverage', body: <Trans t={t} i18nKey="glance.coverage" values={{ have: coverage.have, total: coverage.total }} components={{ b }} /> });
+  // Lack of reliability after INFORM's index (MET-14): missing groups, age of the data, inherited or shared values. Councils and workbook units only.
+  if (reliability) {
+    const inherited = unit.inheritedFrom ? t('glance.inheritedNote', { parent: model.byId.get(unit.inheritedFrom)?.name ?? unit.inheritedFrom }) : reliability.inherited > 0 ? t('glance.sharedNote') : '';
+    findings.push({
+      key: 'reliability',
+      body: <Trans t={t} i18nKey="glance.reliability" values={{ lack: formatScore(reliability.lack), age: reliability.ageYears.toFixed(1), inherited }} components={{ b }} />,
+    });
+  }
 
   return (
-    <div className="border-t border-border pt-5">
+    <div className="max-w-3xl">
       <SubHeading title={t('glance.title')} />
-      <p className="mt-6 font-display text-[1.45rem] leading-snug text-balance text-muted-foreground [&_strong]:font-semibold sm:text-[1.7rem]">{lede}</p>
-      <ul className="mt-6 divide-y divide-border border-t border-border">
+      <p className="mt-5 font-display text-[1.35rem] leading-snug text-balance text-muted-foreground [&_strong]:font-semibold sm:text-[1.6rem]">{lede}</p>
+      <ul className="mt-5 divide-y divide-border border-y border-border">
         {findings.map((f) => (
-          <li key={f.key} className="py-3.5 leading-relaxed text-muted-foreground">
+          <li key={f.key} className="py-3 leading-relaxed text-muted-foreground">
             {f.body}
           </li>
         ))}
@@ -173,11 +197,30 @@ function KeyFindings({ view }: { view: AreaView }) {
   );
 }
 
+/** The risk view's overview: where the area is. The findings sit in the Analysis view (UX-01); on a phone the map waits behind one line. */
 export function Overview({ view }: { view: AreaView }) {
+  const { t } = useTranslation('area');
+  const phone = useMediaQuery('(max-width: 639px)');
+  const { printing } = useDeferred();
+  if (!phone)
+    return (
+      <div className="max-w-3xl">
+        <LocatorMap view={view} />
+      </div>
+    );
   return (
-    <div className="grid gap-12 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.05fr)] lg:gap-16 print:grid-cols-2 print:gap-8">
-      <LocatorMap view={view} />
-      <KeyFindings view={view} />
+    <div className="max-w-3xl">
+      {/* The key figures sit here on a phone (the hero keeps them from tablets up). */}
+      <AreaFigures view={view} className="mb-6 border-b border-border pb-6" />
+      <details open={printing || undefined} className="group">
+        <summary className="flex cursor-pointer list-none items-center gap-2 text-sm font-medium [&::-webkit-details-marker]:hidden">
+          <ChevronDown className="size-4 text-muted-foreground transition-transform group-open:rotate-180" aria-hidden />
+          {t('map.show', { name: view.unit.name })}
+        </summary>
+        <div className="mt-4">
+          <LocatorMap view={view} />
+        </div>
+      </details>
     </div>
   );
 }

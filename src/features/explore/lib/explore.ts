@@ -7,6 +7,7 @@
 import { CLASS_KEYS, type ClassKey } from '@/engine/risk/classes';
 import { ALL_INDICATORS, DIMENSION_KEYS, type DimensionKey } from '@/engine/risk/hierarchy';
 import { parseMetric, type Metric, type MetricKey } from '@/engine/risk/metrics';
+import { portalEditCount, stampCount } from '@/engine/risk/stamps';
 import { placeKey } from '@/engine/risk/model';
 import type { Level, RiskModel, Unit } from '@/engine/risk/types';
 
@@ -18,6 +19,8 @@ export type ExploreLevel = Exclude<Level, 'national'>;
 export const EXPLORE_LEVELS: readonly ExploreLevel[] = ['council', 'region', 'source'];
 export type ExploreView = 'map' | 'table';
 export type Basemap = 'none' | 'streets';
+/** Which model the explorer shows: the Core, or the Core with the Advancement layer (decision D2: Core by default). */
+export type ExploreLayer = 'core' | 'advancement';
 export type SortKey = 'name' | 'region' | 'metric' | 'risk' | DimensionKey;
 export const SORT_KEYS: readonly SortKey[] = ['name', 'region', 'metric', 'risk', ...DIMENSION_KEYS];
 export type SortDir = 'asc' | 'desc';
@@ -36,6 +39,7 @@ export interface ExploreState {
   basemap: Basemap;
   sort: SortKey;
   dir: SortDir;
+  layer: ExploreLayer;
 }
 
 export const DEFAULT_STATE: ExploreState = {
@@ -48,6 +52,7 @@ export const DEFAULT_STATE: ExploreState = {
   basemap: 'none',
   sort: 'metric',
   dir: 'desc',
+  layer: 'core',
 };
 
 const isLevel = (v: unknown): v is ExploreLevel => EXPLORE_LEVELS.includes(v as ExploreLevel);
@@ -65,9 +70,11 @@ export function readExploreState(params: URLSearchParams, lookup?: (id: string) 
     const u = lookup(id);
     return !!u && isLevel(u.level);
   };
+  // The nation can be selected (the panel's breadcrumb root) but never pinned or used as a map level.
+  const selectable = (id: string) => valid(id) || (!!lookup && lookup(id)?.level === 'national');
 
   const rawId = params.get('id');
-  const id = rawId && valid(rawId) ? rawId : null;
+  const id = rawId && selectable(rawId) ? rawId : null;
   const rawLevel = params.get('level');
   const inferred = id && lookup ? lookup(id)?.level : undefined;
   const level: ExploreLevel = isLevel(rawLevel) ? rawLevel : isLevel(inferred) ? inferred : DEFAULT_STATE.level;
@@ -88,6 +95,7 @@ export function readExploreState(params: URLSearchParams, lookup?: (id: string) 
     basemap: params.get('basemap') === 'streets' ? 'streets' : 'none',
     sort: isSortKey(rawSort) ? rawSort : DEFAULT_STATE.sort,
     dir: params.get('dir') === 'asc' ? 'asc' : 'desc',
+    layer: params.get('layer') === 'advancement' ? 'advancement' : 'core',
   };
 }
 
@@ -103,6 +111,7 @@ export function writeExploreState(s: ExploreState): URLSearchParams {
   if (s.basemap !== DEFAULT_STATE.basemap) p.set('basemap', s.basemap);
   if (s.sort !== DEFAULT_STATE.sort) p.set('sort', s.sort);
   if (s.dir !== DEFAULT_STATE.dir) p.set('dir', s.dir);
+  if (s.layer !== DEFAULT_STATE.layer) p.set('layer', s.layer);
   return p;
 }
 
@@ -117,7 +126,7 @@ export function translateSelection(model: RiskModel, id: string | null, to: Expl
   return null;
 }
 
-/** The unit an area is compared against: a council's region, otherwise the official national figure. */
+/** The unit an area is compared against: a council's region, otherwise the national aggregate of all councils. */
 export function referenceUnit(model: RiskModel, u: Unit): Unit {
   if (u.level === 'council') return model.byId.get(`R-${placeKey(u.region)}`) ?? model.national;
   return model.national;
@@ -270,4 +279,7 @@ export function coverageCounts(u: Unit): { have: number; total: number } {
   return { have, total: ALL_INDICATORS.length };
 }
 
-export const editCount = (u: Unit): number => Object.keys(u.edits).length;
+/** Values updated through the Data portal (benchmark and Advancement stamps are not updates; stamps.ts). */
+export const editCount = (u: Unit): number => portalEditCount(u);
+/** Indicator groups carrying a Benchmark 2026 value. */
+export const benchmarkCount = (u: Unit): number => stampCount(u, 'benchmark');

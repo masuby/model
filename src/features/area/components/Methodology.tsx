@@ -7,8 +7,7 @@ import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
 import { Note } from '@/components/layout/Page';
 import { Button } from '@/components/ui/button';
-import { CLASS_COLORS, CLASS_KEYS, classRanges, type Scale } from '@/engine/risk/classes';
-import { OFFICIAL_NATIONAL_RISK } from '@/engine/risk/model';
+import { CLASS_KEYS, classColor, classRanges, type Scale } from '@/engine/risk/classes';
 import { formatScore } from '@/lib/utils';
 import type { AreaView } from '../lib';
 import { SubHeading } from './bits';
@@ -40,8 +39,8 @@ export function Methodology({ view }: { view: AreaView }) {
           ))}
         </ol>
         <Note className="mt-8">
-          <p className="text-foreground">{t(`method.level.${unit.level}`, { value: formatScore(OFFICIAL_NATIONAL_RISK) })}</p>
-          {unit.level !== 'national' && <p className="mt-2">{t('method.officialNote', { value: formatScore(OFFICIAL_NATIONAL_RISK) })}</p>}
+          <p className="text-foreground">{t(`method.level.${unit.level}`, { value: formatScore(model.national.risk) })}</p>
+          {unit.level !== 'national' && <p className="mt-2">{t('method.officialNote', { value: formatScore(model.national.risk) })}</p>}
         </Note>
         <Button variant="outline" className="no-print mt-8" asChild>
           <Link to="/methodology">
@@ -71,14 +70,14 @@ export function Methodology({ view }: { view: AreaView }) {
               return (
                 <tr key={k}>
                   <th scope="row" className="py-2.5 pr-2 text-left font-normal sm:pr-3">
-                    <span className="inline-flex items-center gap-2 whitespace-nowrap sm:gap-2.5">
-                      <span className="size-2.5 shrink-0" style={{ background: CLASS_COLORS[k] }} aria-hidden />
-                      {t(`common:classes.${k}`)}
-                    </span>
+                    {t(`common:classes.${k}`)}
                   </th>
                   {SCALES.map((s) => (
                     <td key={s.scale} className="num py-2.5 pl-2 text-right whitespace-nowrap text-muted-foreground">
-                      {classRanges(s.scale)[i]}
+                      <span className="inline-flex items-center gap-2">
+                        <span className="size-2.5 shrink-0" style={{ background: classColor(k, s.scale) }} aria-hidden />
+                        {classRanges(s.scale)[i]}
+                      </span>
                     </td>
                   ))}
                 </tr>

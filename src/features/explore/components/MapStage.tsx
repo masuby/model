@@ -57,10 +57,10 @@ export function MapStage({ hidden = false }: { hidden?: boolean }) {
           className="size-full"
           tooltipHint={t('map.hint')}
           fitPadding={
-            // Keep the target clear of floating UI: lens key (top-left), area card (right) and the
-            // comparison tray (bottom) on desktop; the search bar and bottom sheet on phones.
+            // Keep the target clear of floating UI: lens key (top-left) and the comparison tray (bottom) on
+            // desktop, where the risk panel docks beside the map; the search bar and bottom sheet on phones.
             isDesktop
-              ? { topLeft: [48, 104], bottomRight: [state.id && state.view === 'map' ? 416 : 48, compare.length ? 168 : 48] }
+              ? { topLeft: [48, 104], bottomRight: [48, compare.length ? 168 : 48] }
               : { topLeft: [16, 72], bottomRight: [16, 190] }
           }
         />

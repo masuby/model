@@ -12,7 +12,7 @@ import { Dialog, DialogContent, Input } from '@/components/ui/primitives';
 import { useModel, useRawValues, useRevertRaw } from '@/data-layer/DataProvider';
 import { isNum } from '@/engine/risk/math';
 import type { RawLevel, RawValue } from '@/engine/risk/rawValues';
-import { formatDate } from '@/lib/utils';
+import { formatDate, formatScore } from '@/lib/utils';
 import { usePermissions } from '../hooks';
 import { errorMessage } from '../lib/batch';
 import { matchesQuery } from '../lib/format';
@@ -108,7 +108,10 @@ export function ApprovedMeasured() {
                         <th scope="row" className="py-2 pr-3 text-left font-normal">
                           {model.byId.get(v.unitId)?.name ?? v.unitId} <LevelTag level={v.level} className="ml-1" />
                         </th>
-                        <td className="num py-2 pr-3 text-right font-medium">{isNum(v.value) ? formatRaw(v.value, lang) : t('workflow.sheet.noDataShort')}</td>
+                        <td className="num py-2 pr-3 text-right font-medium">
+                          {isNum(v.value) ? (v.valueType === 'score' ? formatScore(v.value) : formatRaw(v.value, lang)) : t('workflow.sheet.noDataShort')}
+                          {v.valueType === 'score' && <span className="ml-1 text-xs font-normal text-muted-foreground">{t('workflow.sheet.scoreTag')}</span>}
+                        </td>
                         <td className="py-2 pr-3">
                           {v.dataset}
                           {v.period && <span className="text-muted-foreground"> ({v.period})</span>}

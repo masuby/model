@@ -9,11 +9,11 @@ import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Segmented } from '@/components/ui/primitives';
-import { CLASS_COLORS, CLASS_KEYS, classRanges, NO_DATA_COLOR } from '@/engine/risk/classes';
+import { CLASS_KEYS, classColor, classRanges, NO_DATA_COLOR } from '@/engine/risk/classes';
 import { ALL_INDICATORS } from '@/engine/risk/hierarchy';
-import { RAMP_STOPS } from '@/engine/risk/metrics';
+import { rampStops } from '@/engine/risk/metrics';
 import { cn, formatDate } from '@/lib/utils';
-import { EXPLORE_LEVELS, matchesClass, sortUnits, type ExploreLevel } from '../lib/explore';
+import { EXPLORE_LEVELS, matchesClass, sortUnits, type ExploreLayer, type ExploreLevel } from '../lib/explore';
 import { useExplore } from '../lib/ExploreContext';
 import { MetricValue, ScaleInfo, SectionTitle } from './bits';
 import { IndicatorDetails, LensTiles } from './LensPicker';
@@ -36,19 +36,23 @@ function useLevelCounts(): Record<ExploreLevel, number> {
   return { council: model.councils.length, region: model.regions.length, source: model.sources.length };
 }
 
-/** Councils / Regions / INFORM units, with the number of areas under each label. */
+/**
+ * Councils / Regions, with the number of areas under each label. The 170 workbook units are an analyst's
+ * reference level (UX-07): the switch offers them only once chosen through the note below or a link.
+ */
 export function LevelSwitch({ className }: { className?: string }) {
   const { t } = useTranslation(['explore', 'common']);
   const { state, actions } = useExplore();
   const counts = useLevelCounts();
+  const levels = EXPLORE_LEVELS.filter((l) => l !== 'source' || state.level === 'source');
   return (
     <Segmented<ExploreLevel>
       size="sm"
       value={state.level}
       onValueChange={actions.setLevel}
       aria-label={t('level.label')}
-      className={cn('grid w-full grid-cols-3 [&>button]:justify-center [&>button]:py-1.5', className)}
-      options={EXPLORE_LEVELS.map((l) => ({
+      className={cn('grid w-full [&>button]:justify-center [&>button]:py-1.5', levels.length === 3 ? 'grid-cols-3' : 'grid-cols-2', className)}
+      options={levels.map((l) => ({
         value: l,
         label: (
           <span className="flex flex-col items-center leading-tight">
@@ -61,16 +65,50 @@ export function LevelSwitch({ className }: { className?: string }) {
   );
 }
 
-/** What the current level is (and, for INFORM units, that it is a reference level). */
+/** What the current level is (and, for INFORM units, that it is a reference level), with the way to the reference level. */
 export function LevelNote({ className }: { className?: string }) {
   const { t } = useTranslation('explore');
-  const { state } = useExplore();
+  const { state, actions } = useExplore();
   const counts = useLevelCounts();
   return (
     <p className={cn('text-xs leading-relaxed text-muted-foreground', className)}>
       {state.level === 'source' && <span className="font-medium text-warning">{t('level.reference')} · </span>}
       {t(`level.note.${state.level}`, { count: counts[state.level] })}
+      {state.level !== 'source' && (
+        <>
+          {' '}
+          <button type="button" onClick={() => actions.setLevel('source')} className="font-medium text-primary underline-offset-4 hover:underline">
+            {t('level.referenceLink', { count: counts.source })}
+          </button>
+        </>
+      )}
     </p>
+  );
+}
+
+/**
+ * Core / Advancement (decision D2: the Core by default). The Advancement layer is the Core plus the
+ * Tanzanian sub-indicators, computed beside it; the note under the switch says what it is.
+ */
+export function LayerSwitch({ className, note = true }: { className?: string; note?: boolean }) {
+  const { t } = useTranslation('explore');
+  const { state, actions, model } = useExplore();
+  const computing = state.layer === 'advancement' && !model.councils.some((c) => Object.values(c.edits).some((e) => e?.authority === 'CHC'));
+  return (
+    <div className={className}>
+      <Segmented<ExploreLayer>
+        size="sm"
+        value={state.layer}
+        onValueChange={actions.setLayer}
+        aria-label={t('layer.label')}
+        className="grid w-full grid-cols-2 [&>button]:justify-center [&>button]:py-1.5"
+        options={[
+          { value: 'core', label: t('layer.core') },
+          { value: 'advancement', label: t('layer.advancement') },
+        ]}
+      />
+      {note && <p className="mt-2 text-xs leading-relaxed text-muted-foreground">{computing ? t('layer.note.loading') : t(`layer.note.${state.layer}`)}</p>}
+    </div>
   );
 }
 
@@ -90,7 +128,8 @@ function ClassFilterLegend() {
   const { t } = useTranslation(['explore', 'common']);
   const { metric, stats, state, actions } = useExplore();
   const counts = stats.classCounts;
-  const ranges = classRanges(metric.scale ?? 'risk');
+  const scale = metric.scale ?? 'risk';
+  const ranges = classRanges(scale);
   const total = Math.max(1, stats.total);
   const missing = stats.total - stats.withData;
   const row = 'grid w-full grid-cols-[0.75rem_1fr_4.25rem_2rem_3.25rem] items-center gap-2.5 rounded-md px-2 py-1.5 text-left text-sm';
@@ -111,11 +150,11 @@ function ClassFilterLegend() {
                 onClick={() => actions.setClass(active ? null : k)}
                 className={cn(row, 'transition-colors duration-150 hover:bg-muted/70', active && 'bg-muted')}
               >
-                <span aria-hidden className={cn('size-3 transition-opacity duration-150', dim && 'opacity-40')} style={{ background: CLASS_COLORS[k] }} />
+                <span aria-hidden className={cn('size-3 transition-opacity duration-150', dim && 'opacity-40')} style={{ background: classColor(k, scale) }} />
                 <span className={cn('truncate', active ? 'font-semibold' : 'font-medium', dim && 'text-muted-foreground')}>{t(`common:classes.${k}`)}</span>
                 <span className="num text-right text-xs text-muted-foreground">{ranges[i]}</span>
                 <span className={cn('num text-right font-medium', dim && 'text-muted-foreground')}>{count}</span>
-                <Share value={count} total={total} color={CLASS_COLORS[k]} dim={dim} />
+                <Share value={count} total={total} color={classColor(k, scale)} dim={dim} />
               </button>
             </li>
           );
@@ -141,7 +180,7 @@ function LegendBlock() {
   if (metric.kind === 'indicator') {
     return (
       <div>
-        <div className="h-2.5" style={{ background: `linear-gradient(90deg, ${RAMP_STOPS.join(',')})` }} />
+        <div className="h-2.5" style={{ background: `linear-gradient(90deg, ${rampStops(metric.palette).join(',')})` }} />
         <div className="num mt-1.5 flex justify-between text-xs text-muted-foreground">
           <span>0 · {t('legend.lower')}</span>
           <span>5</span>
@@ -219,12 +258,20 @@ export function ControlPanel({ variant }: { variant: 'desktop' | 'sheet' }) {
   const body = (
     <div className={desktop ? undefined : 'pb-6'}>
       {desktop ? (
-        <LevelNote className={cn('pt-5 pb-6', pad)} />
+        <div className={cn('pt-5 pb-6', pad)}>
+          <LevelNote />
+          <LayerSwitch className="mt-5" />
+        </div>
       ) : (
-        <Section id={`${uid}-level`} title={t('level.label')} pad={pad}>
-          <LevelSwitch />
-          <LevelNote className="mt-3" />
-        </Section>
+        <>
+          <Section id={`${uid}-level`} title={t('level.label')} pad={pad}>
+            <LevelSwitch />
+            <LevelNote className="mt-3" />
+          </Section>
+          <Section id={`${uid}-layer`} title={t('layer.label')} pad={pad}>
+            <LayerSwitch />
+          </Section>
+        </>
       )}
 
       {/* On mobile the sheet's peek already holds the lens tabs; the body only adds the indicator note. */}

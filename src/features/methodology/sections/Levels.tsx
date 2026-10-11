@@ -3,6 +3,7 @@ import { useTranslation } from 'react-i18next';
 import { ClassBadge } from '@/components/risk/RiskBadge';
 import { useModel } from '@/data-layer/DataProvider';
 import { mean } from '@/engine/risk/math';
+import { BOUNDARY_SET } from '@/engine/risk/model';
 import { formatScore } from '@/lib/utils';
 import { Callout, DocSection, Fn, Formula, Line, N, Op, P, Paren, Sep, SubHeading, Txt } from '../ui';
 
@@ -48,6 +49,11 @@ export function LevelsSection() {
                 {k !== 'national' && <span className="text-sm font-normal text-muted-foreground">{t(`levels.${k}.tag`)}</span>}
               </h3>
               <p className="mt-1.5 max-w-[68ch] text-sm leading-relaxed text-muted-foreground">{body[k]}</p>
+              {k === 'councils' && BOUNDARY_SET && (
+                <p className="mt-2 max-w-[68ch] text-xs leading-relaxed text-muted-foreground">
+                  {t('levels.boundaries', { set: BOUNDARY_SET.set, councils: BOUNDARY_SET.councils, regions: BOUNDARY_SET.regions, districts: BOUNDARY_SET.districts })}
+                </p>
+              )}
               {k === 'councils' && (
                 <Callout tone="caution" className="mt-3 text-foreground/85">
                   {t('levels.councils.inherited', { n: inherited.length, examples })}
@@ -57,6 +63,7 @@ export function LevelsSection() {
           </li>
         ))}
       </ol>
+
 
       <div className="mt-14 grid gap-12 lg:grid-cols-2 lg:gap-0 lg:divide-x lg:divide-border">
         <div className="lg:pr-10">
