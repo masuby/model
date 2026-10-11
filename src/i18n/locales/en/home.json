@@ -57,17 +57,14 @@
   },
   "mapSource": "INFORM Risk by council. Sources: INFORM Tanzania model.",
   "picture": {
-    "title": "The national risk picture",
-    "lead": "Tanzania today, read from the same model as every council: the risk and its parts, where the councils fall, the climate year by year, and what weighs in each dimension.",
     "parts": "Risk and its parts",
-    "partsNote": "INFORM aggregate of {{councils}} councils · {{people}} people (2022 census)",
+    "partsNote": "{{councils}} councils · {{people}} people",
     "trackAria": "{{label}}: {{score}} out of 10, {{cls}}",
     "classes": "Councils by class",
     "classesNote": "{{high}} councils ({{pct}}%) at high or very high risk",
     "highOrAbove": "{{count}} high or above",
     "trends": "Hazard trends",
-    "groupsNote": "National value of each indicator group, highest first",
-    "dimensionScore": "Dimension score",
-    "more": "and {{count}} more groups"
+    "heat": "Heatwave days a year, {{from}}-{{to}}",
+    "heatNote": "{{base}} days a year in 1991-2020, {{recent}} in 2015-2024"
   }
 }

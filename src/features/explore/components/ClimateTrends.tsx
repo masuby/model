@@ -9,7 +9,7 @@ import { formatNumber } from '@/lib/utils';
 import { meanOver, seriesFor, useTrends } from '../lib/trends';
 
 /** Bars for one value a year, with a dashed line at the 1991-2020 mean; bars can be coloured by the side of the mean they fall on. */
-function YearBars({ points, mean, color, above, below, label }: { points: Array<{ year: number; value: number }>; mean: number | null; color?: string; above?: string; below?: string; label: string }) {
+export function YearBars({ points, mean, color, above, below, label }: { points: Array<{ year: number; value: number }>; mean: number | null; color?: string; above?: string; below?: string; label: string }) {
   const max = Math.max(...points.map((p) => p.value), mean ?? 0) || 1;
   const w = 6;
   const gap = 2;

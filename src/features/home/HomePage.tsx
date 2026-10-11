@@ -56,6 +56,7 @@ export default function HomePage() {
             </Button>
           </div>
 
+          <NationalCharts model={model} className="mt-12 border-t border-border pt-8" />
         </div>
 
         <figure className="w-full">
@@ -77,13 +78,8 @@ export default function HomePage() {
         </figure>
       </PageContainer>
 
-      {/* ------------------------------------------------------------------ The national risk picture */}
+      {/* ---------------------------------------------------------------------- How the index works */}
       <PageContainer>
-        <Section>
-          <SectionHeading title={t('picture.title')} description={t('picture.lead')} />
-          <NationalCharts model={model} />
-        </Section>
-
         <Section>
           <SectionHeading title={t('formula.title')} description={t('formula.lead')} />
           <div className="grid gap-y-8 md:grid-cols-3 md:divide-x md:divide-border">
