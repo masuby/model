@@ -42,7 +42,7 @@ export default function HomePage() {
     <div>
       {/* ---------------------------------------------------------------------------------- Hero */}
       {/* The charts take the room: the map sits a little to the right, into the page margin, and the columns stay closer. */}
-      <PageContainer className="grid items-start gap-10 pt-6 pb-10 lg:grid-cols-[minmax(0,1fr)_minmax(0,500px)] lg:gap-10 lg:pt-5 lg:pb-12 xl:gap-12">
+      <PageContainer className="grid items-start gap-10 pt-6 pb-10 lg:grid-cols-[minmax(0,1fr)_minmax(0,460px)] lg:gap-10 lg:pt-5 lg:pb-12 xl:gap-12">
         <div>
           <h1 className="max-w-2xl text-[2.2rem] leading-[1.05] text-balance sm:text-[2.6rem] lg:text-[2.75rem]">{t('title')}</h1>
           <p className="mt-3 max-w-xl text-base leading-relaxed text-muted-foreground lg:text-[1.05rem]">{t('lead')}</p>

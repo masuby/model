@@ -2,6 +2,12 @@
 
 ## Unreleased
 
+### More room for the live values on the home page (13 October 2026)
+
+- The two charts under the headline have more horizontal space: a wider charts column (the map column
+  is a little narrower, still reaching into the page margin), more air between the two charts, between
+  each label and its value, and between the donut and its legend.
+
 ### Silent on the administrative counts, and a steady layout on phones (13 October 2026)
 
 - The site no longer states how many councils and regions there are: the home page's lead, the note

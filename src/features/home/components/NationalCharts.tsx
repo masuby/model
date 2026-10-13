@@ -33,7 +33,7 @@ export function NationalCharts({ model, className }: { model: RiskModel; classNa
   }, [model]);
   const high = counts.high + counts.veryHigh;
   return (
-    <div className={cn('grid gap-x-8 gap-y-5 sm:grid-cols-2', className)}>
+    <div className={cn('grid gap-x-12 gap-y-5 sm:grid-cols-2 lg:gap-x-14', className)}>
       <Block title={t('picture.parts')} note={t('picture.partsNote', { people: formatCompact(population, i18n.language) })}>
         <PartTracks unit={national} />
       </Block>
@@ -72,7 +72,7 @@ function PartTracks({ unit }: { unit: Unit }) {
           <li key={key}>
             <div className="flex items-baseline justify-between gap-2 text-xs">
               <span className={cn('truncate', key === 'risk' && 'font-semibold')}>{label}</span>
-              <span className="num inline-flex shrink-0 items-baseline gap-1.5">
+              <span className="num inline-flex shrink-0 items-baseline gap-3 pl-3">
                 <span className="text-muted-foreground">{cls}</span>
                 <span className="font-semibold">{formatScore(v)}</span>
               </span>
@@ -127,7 +127,7 @@ function ClassPie({ counts, total, high }: { counts: Record<ClassKey, number>; t
   });
   const label = CLASS_KEYS.map((k) => `${t(`common:classes.${k}`)} ${counts[k]} (${Math.round((counts[k] / total) * 100)}%)`).join(', ');
   return (
-    <div className="flex items-center gap-5">
+    <div className="flex items-center gap-7">
       <svg viewBox="0 0 100 100" className="size-32 shrink-0" role="img" aria-label={`${t('picture.pie')}: ${label}`}>
         {slices.map((s) =>
           s.share > 0 ? (
@@ -150,7 +150,7 @@ function ClassPie({ counts, total, high }: { counts: Record<ClassKey, number>; t
           {t('picture.pieCentre')}
         </text>
       </svg>
-      <ul className="min-w-0 flex-1 space-y-1.5 text-xs">
+      <ul className="min-w-0 flex-1 space-y-2 text-xs">
         {[...CLASS_KEYS].reverse().map((k) => (
           <li key={k} className={cn('flex items-baseline justify-between gap-2', !counts[k] && 'text-muted-foreground')}>
             <span className="inline-flex min-w-0 items-center gap-1.5">
