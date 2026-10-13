@@ -58,13 +58,11 @@
   },
   "know": {
     "title": "The area and its hazards",
-    "lead": "What the Risk Action Guide Book records about {{name}}: the nature of the area and where its hazards lie.",
-    "leadMany": "What the Risk Action Guide Book records about each council of {{name}}: the nature of the area and where its hazards lie.",
+    "lead": "{{name}}: the nature of the area and where its hazards lie.",
+    "leadMany": "Each council of {{name}} and its hazards.",
     "openCouncil": "{{name}} profile",
     "empty": "The guide has no statement about this area yet; the district committee (DDRRC) can write one through the Data portal.",
     "updated": "Updated by the {{role}}, approved by {{by}}, {{date}}.",
-    "statements_one": "{{count}} statement",
-    "statements_other": "{{count}} statements",
     "summaryMany": "{{count}} councils: {{names}}",
     "summaryOne": "{{area}}",
     "summaryNone": "No statement about this area yet"

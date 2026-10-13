@@ -2,6 +2,15 @@
 
 ## Unreleased
 
+### Data notes as a status word; a region's councils and their hazards in view (13 October 2026)
+
+- A data note beside a value now shows only its status (value under query, known artefact, withheld by
+  decision, explained), in the tooltip, the status line and the CSV downloads; the notes' texts stay in
+  the data notes register and the Methodology page.
+- On a region's profile, "The area and its hazards" opens on the list of its councils, each with the
+  hazards the Risk Action Guide Book records for it; the statement counts are gone and the leads read
+  in one line.
+
 ### Profiles state the data, not how it was built (13 October 2026)
 
 - The "About the data" notes under a profile's headline are gone: the aggregation rule, the shared

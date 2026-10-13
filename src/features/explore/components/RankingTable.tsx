@@ -14,7 +14,7 @@ import { Input } from '@/components/ui/primitives';
 import { classColor, classify, type Scale } from '@/engine/risk/classes';
 import type { DimensionKey } from '@/engine/risk/hierarchy';
 import { parseMetric } from '@/engine/risk/metrics';
-import { dataNotesFor, noteText, type DataNote } from '@/engine/risk/notes';
+import { dataNotesFor, type DataNote } from '@/engine/risk/notes';
 import type { Unit } from '@/engine/risk/types';
 import { portalEditCount } from '@/engine/risk/stamps';
 import { exportFileName, exportPreamble, exportStamp } from '@/lib/exports';
@@ -103,8 +103,8 @@ export function RankingTable({ bottomPad = 0, aside, footer }: { bottomPad?: num
           ? [
               csvScore(metric.get(u)),
               notesOf(u)
-                .map((n) => noteText(n, i18n.language))
-                .join(' '),
+                .map((n) => `${n.id}: ${t(`common:dataNote.status.${n.status}`)}`)
+                .join('; '),
             ]
           : []),
         csvScore(u.risk),

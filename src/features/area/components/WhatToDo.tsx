@@ -200,12 +200,11 @@ function AreaNature({ unit, guide }: { unit: Unit; guide: ReturnType<typeof useA
     <>
       <ul className="divide-y divide-border border-y border-border">
         {councils.shown.map((e) => (
-          <li key={e.council.id} className="grid gap-x-6 gap-y-1 py-3 sm:grid-cols-[minmax(0,1fr)_minmax(0,2fr)_auto] sm:items-baseline">
+          <li key={e.council.id} className="grid gap-x-6 gap-y-1 py-3 sm:grid-cols-[minmax(0,1fr)_minmax(0,2fr)] sm:items-baseline">
             <Link to={`/area/${e.council.id}#actions`} className="font-semibold hover:underline" aria-label={t('know.openCouncil', { name: e.council.name })}>
               {e.council.name}
             </Link>
             <span className="text-sm text-muted-foreground">{e.guide.hazards.map((h) => t(`hazards.${h}`)).join(', ')}</span>
-            <span className="text-xs text-muted-foreground">{t('know.statements', { count: applyGuidance(e.guide.know, area.records, e.council.id).length })}</span>
           </li>
         ))}
       </ul>
@@ -239,7 +238,8 @@ function AreaNature({ unit, guide }: { unit: Unit; guide: ReturnType<typeof useA
       ? t('know.summaryOne', { count: rows.length, area: pick(rows[0].row.area, lang) })
       : t('know.summaryNone');
   return (
-    <Fold id="know-title" title={t('know.title')} lead={many ? t('know.leadMany', { name: unit.name }) : t('know.lead', { name: unit.name })} summary={summary}>
+    // A region or the nation opens on its councils and their hazards; a council keeps the fold closed behind its summary line.
+    <Fold id="know-title" title={t('know.title')} lead={many ? t('know.leadMany', { name: unit.name }) : t('know.lead', { name: unit.name })} summary={summary} open={many}>
       {body}
       <ReportedEvents events={area.events} many={many} />
     </Fold>

@@ -20,7 +20,7 @@ import { Button } from '@/components/ui/button';
 import { Tooltip } from '@/components/ui/primitives';
 import { DIMENSIONS, type DimensionKey } from '@/engine/risk/hierarchy';
 import { rampColor } from '@/engine/risk/metrics';
-import { dataNotesFor, isWithheld, noteText } from '@/engine/risk/notes';
+import { dataNotesFor, isWithheld } from '@/engine/risk/notes';
 import { AUTHORITIES, authorityKind, authorityLabel, sourceLabel, type SourceInfo } from '@/engine/risk/sources';
 import type { EditStamp, LeafInput } from '@/engine/risk/types';
 import { exportFileName, exportPreamble, exportStamp, lineageOf } from '@/lib/exports';
@@ -153,8 +153,8 @@ export function IndicatorTable({ view }: { view: AreaView }) {
       r.edit ? formatDate(r.edit.at, i18n.language) : '',
       lineageOf(r.edit ?? undefined, unit, r.value),
       dataNotesFor(unit, r.dim, r.key)
-        .map((n) => noteText(n, i18n.language))
-        .join(' '),
+        .map((n) => `${n.id}: ${t(`common:dataNote.status.${n.status}`)}`)
+        .join('; '),
     ]);
     const stamp = exportStamp(`${unit.name} (${t(`common:levels.${unit.level}`)})`);
     downloadText(exportFileName(`${slug(unit.name)}-indicators`, stamp), toCsv([...exportPreamble(t, stamp), header, ...body]), 'text/csv;charset=utf-8');

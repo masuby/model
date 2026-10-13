@@ -58,13 +58,11 @@
   },
   "know": {
     "title": "Eneo na vitisho vyake",
-    "lead": "Kitabu cha Mwongozo wa Hatua za Kukabili Hatari kinasema nini kuhusu {{name}}: hali ya eneo na vitisho vyake viko wapi.",
-    "leadMany": "Kitabu cha Mwongozo wa Hatua za Kukabili Hatari kinasema nini kuhusu kila halmashauri ya {{name}}: hali ya eneo na vitisho vyake viko wapi.",
+    "lead": "{{name}}: hali ya eneo na vitisho vyake viko wapi.",
+    "leadMany": "Kila halmashauri ya {{name}} na vitisho vyake.",
     "openCouncil": "Wasifu wa {{name}}",
     "empty": "Mwongozo bado hauna taarifa ya eneo hili; kamati ya wilaya (DDRRC) inaweza kuiandika kupitia Lango la data.",
     "updated": "Imesasishwa na {{role}}, imeidhinishwa na {{by}}, {{date}}.",
-    "statements_one": "Taarifa {{count}}",
-    "statements_other": "Taarifa {{count}}",
     "summaryMany": "Halmashauri {{count}}: {{names}}",
     "summaryOne": "{{area}}",
     "summaryNone": "Hakuna taarifa ya eneo hili bado"
