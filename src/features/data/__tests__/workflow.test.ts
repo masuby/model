@@ -13,8 +13,10 @@ const kondoa = model.byId.get('C001')!;
 const dodoma = model.regions.find((r) => r.name === 'Dodoma')!;
 
 describe('indicators', () => {
-  it('lists the 53 INFORM indicators with the 8 Benchmark 2026 activations and the 2 institutional indicators, and the 30 advanced ones', () => {
-    expect(WORKFLOW_INDICATORS.filter((w) => w.core)).toHaveLength(63);
+  it('lists the 53 INFORM indicators with the 10 Benchmark 2026 activations and the 2 institutional indicators, and the 30 advanced ones', () => {
+    expect(WORKFLOW_INDICATORS.filter((w) => w.core)).toHaveLength(65);
+    expect(suggestedOwner(workflowIndicator('HA.NAT.EQ-INT')!)).toBe('GST');
+    expect(suggestedOwner(workflowIndicator('HA.NAT.DR-DOC')!)).toBe('PMO');
     // The institutional indicators are PMO-DMD's, computed from the committees' records.
     expect(suggestedOwner(workflowIndicator('CC.INS.DRR-ARR')!)).toBe('PMO');
     expect(workflowIndicator('CC.INS.GOV-DMC')).toMatchObject({ core: true, leaf: 'coping:governance', scoreable: true });

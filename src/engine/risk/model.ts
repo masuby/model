@@ -319,7 +319,9 @@ function applyQuarantine(unit: Unit): Unit {
     const replacement = groupWithout(unit.id, note.ref as EditRef, noteIndicators(note));
     const cat = dims[dim].categories[catKey];
     dims[dim] = recomputeDimension({ score: null, categories: { ...dims[dim].categories, [catKey]: { ...cat, indicators: { ...cat.indicators, [key]: replacement } } } });
-    quarantined[note.ref as EditRef] = note.id;
+    // Where two notes withhold the same group (a unit's own query and a programme decision), the first in
+    // the register names the hold: the specific query before the general decision.
+    quarantined[note.ref as EditRef] ??= note.id;
   }
   if (!Object.keys(quarantined).length) return unit;
   return { ...unit, dims, risk: riskScore(dims.hazard.score, dims.vulnerability.score, dims.coping.score), quarantined };

@@ -38,6 +38,10 @@ export function useDetailText() {
         return t('riskPanel.group.detail.nocell');
       case 'events':
         return t('riskPanel.group.detail.events', { count: Number(payload) });
+      case 'quakes':
+        return t('riskPanel.group.detail.quakes', { count: Number(payload) });
+      case 'rain':
+        return t('riskPanel.group.detail.rain', { mm: formatRaw(Number(payload), lang) });
       case 'crashes': {
         const [region, regionCrashes, crashes] = payload.split('/');
         const about = (n: number) => formatRaw(n >= 10 ? Math.round(n) : Math.round(n * 10) / 10, lang);

@@ -57,7 +57,9 @@ describe('valuesControl', () => {
     // No institution has submitted anything yet: every stamped value is the Benchmark 2026.
     expect(rows.reduce((n, r) => n + r.institutional, 0)).toBe(0);
     const drought = rows.find((r) => r.key === 'drought')!;
-    expect(drought.withheld).toBe(5); // the five Dar es Salaam councils (DN-01); the Lake zone was explained (DN-02)
+    // Since 14 October 2026 the Benchmark 2026 drought index covers every council in place of the withheld workbook value.
+    expect(drought.withheld).toBe(0);
+    expect(drought.benchmark).toBe(model.councils.length);
     expect(drought.notes.map((n) => n.id)).toEqual(['DN-01', 'DN-02']);
     // The Benchmark 2026 supplies coastal erosion and the heatwave days for every council as institutional values.
     const coastal = rows.find((r) => r.key === 'coastalHazards')!;
@@ -69,9 +71,10 @@ describe('valuesControl', () => {
     // Before the benchmark the hold covered every council, and an approved institutional value lifts it.
     expect(valuesControl(buildModel({}, { benchmark: false })).find((r) => r.key === 'coastalHazards')!.withheld).toBe(model.councils.length);
     // An approved institutional value shows as institutional, and lifts the hold.
-    const edited = buildModel({ C053: { 'hazard:drought': { value: 4, at: '2026-10-01T00:00:00Z', authority: 'TMA' } } });
+    // Dated after the Benchmark 2026 (10 October): a newer approved value replaces the benchmark's; an older one would not.
+    const edited = buildModel({ C053: { 'hazard:drought': { value: 4, at: '2026-10-15T00:00:00Z', authority: 'TMA' } } });
     const after = valuesControl(edited).find((r) => r.key === 'drought')!;
     expect(after.institutional).toBe(1);
-    expect(after.withheld).toBe(drought.withheld - 1);
+    expect(after.benchmark).toBe(drought.benchmark - 1); // the newer institutional value takes the benchmark's place
   });
 });

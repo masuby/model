@@ -72,7 +72,7 @@
   },
   "schema": {
     "title": "Database update pending",
-    "lead": "The shared database is behind this version of the portal. Apply migrations 0006 to 0016 from the repository's supabase/migrations folder in the Supabase SQL editor, in order. Until then these parts are unavailable:",
+    "lead": "The shared database is behind this version of the portal. Apply migrations 0006 to 0017 from the repository's supabase/migrations folder in the Supabase SQL editor, in order. Until then these parts are unavailable:",
     "parts": {
       "committee": "the committee desk and its records",
       "notifications": "notifications and the inbox",

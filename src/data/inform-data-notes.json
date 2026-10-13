@@ -26,21 +26,16 @@
       "layer": "core",
       "ref": "hazard:drought",
       "indicator": "HA.NAT.DR-FRE",
-      "status": "explained",
+      "status": "decision",
       "where": {
-        "regions": [
-          "Simiyu",
-          "Shinyanga",
-          "Mwanza",
-          "Tabora"
-        ]
+        "all": true
       },
-      "en": "Value under query. The same drought indicator gives Simiyu and Mwanza its minimum (5 years, score 0), Tabora 6 and Shinyanga 7, while the workbook's own food-security indicator places Simiyu (142) and Shinyanga (74) among the most food-insecure regions and the semi-arid Sukumaland records recurrent crop failure. The regional, cropland-based index flattens the drought-prone centre. Raised with INFORM (JRC) and SADC. Resolution (10 October 2026): FAO's own regional stress-index series (1984-2025, downloaded from GIEWS) gives the Lake zone moderate agricultural stress, consistent with the workbook's low frequency; the contradiction is with food insecurity, which the livelihoods group now measures directly (IPC 2026). The values are retained.",
-      "sw": "Thamani inahojiwa. Kiashiria hicho hicho cha ukame kinaipa Simiyu na Mwanza kiwango chake cha chini (miaka 5, alama 0), Tabora 6 na Shinyanga 7, wakati kiashiria cha uhakika wa chakula cha kitabu hicho hicho kinaiweka Simiyu (142) na Shinyanga (74) miongoni mwa mikoa yenye ukosefu mkubwa wa chakula, na eneo kame la Usukuma hurekodi kushindwa kwa mazao mara kwa mara. Fahirisi ya kimkoa inayotegemea ardhi ya kilimo inaficha kanda ya kati inayokumbwa na ukame. Imewasilishwa kwa INFORM (JRC) na SADC. Utatuzi (10 Oktoba 2026): mfululizo wa fahirisi ya msongo wa FAO wa kimkoa (1984-2025, kutoka GIEWS) unaonyesha msongo wa wastani wa kilimo kwa Kanda ya Ziwa, sawa na marudio ya chini ya kitabu cha kazi; mgongano ni na ukosefu wa chakula, ambao sasa unapimwa moja kwa moja na kundi la maisha (IPC 2026). Thamani zimebaki.",
+      "en": "Withheld by programme decision (14 October 2026). The workbook's drought indicator is the FAO historic drought frequency, one value per region computed on cropland, which gives Simiyu and Mwanza its minimum (5 years, score 0), Tabora 6 and Shinyanga 7, while the Risk Action Guide Book records drought as a recurrent hazard across Shinyanga, Simiyu, Dodoma, Singida and Manyara and the workbook's own food-security indicator places Simiyu and Shinyanga among the most food-insecure regions. Queried with INFORM (JRC) and SADC on 10 October 2026; FAO's regional stress-index series confirmed the low frequency for the Lake zone, so the index is the source's reading, not a data error, but one value per region cannot rank councils. The live model therefore withholds the workbook's value for every unit and carries, for every council, the Benchmark 2026 drought hazard index: 0 where the Risk Action Guide Book records no drought hazard, and where it does, the council's mean annual rainfall (CHIRPS 1991-2024) placed on the span of all councils, the driest scoring 10. Of the council measures on file, annual rainfall separates the Guide Book's 83 drought councils best (AUC 0.84), but alone it would rank the humid coast in the middle, so the documentation gates it. The workbook keeps its values.",
+      "sw": "Imezuiliwa kwa uamuzi wa programu (14 Oktoba 2026). Kiashiria cha ukame cha kitabu cha kazi ni marudio ya ukame ya kihistoria ya FAO, thamani moja kwa kila mkoa iliyokokotolewa kwenye ardhi ya kilimo, inayotoa Simiyu na Mwanza kiwango chake cha chini (miaka 5, alama 0), Tabora 6 na Shinyanga 7, wakati Kitabu cha Mwongozo wa Hatua dhidi ya Hatari kinaandika ukame kama kitisho cha mara kwa mara kote Shinyanga, Simiyu, Dodoma, Singida na Manyara, na kiashiria cha uhakika wa chakula cha kitabu chenyewe kinaweka Simiyu na Shinyanga miongoni mwa mikoa yenye uhaba mkubwa wa chakula. Iliulizwa kwa INFORM (JRC) na SADC tarehe 10 Oktoba 2026; mfululizo wa fahirisi ya msongo wa FAO ulithibitisha marudio ya chini kwa kanda ya Ziwa, hivyo fahirisi ni usomaji wa chanzo, si kosa la data, lakini thamani moja kwa mkoa haiwezi kupanga halmashauri. Hivyo kielelezo hai huzuia thamani ya kitabu kwa kila kitengo na hubeba, kwa kila halmashauri, fahirisi ya kitisho cha ukame ya Benchmark 2026: 0 pale Kitabu cha Mwongozo wa Hatua dhidi ya Hatari hakiandiki kitisho cha ukame, na pale kinapoandika, wastani wa mvua ya mwaka ya halmashauri (CHIRPS 1991-2024) ukiwekwa kwenye wigo wa halmashauri zote, kavu zaidi ikipata 10. Kati ya vipimo vya halmashauri vilivyopo, mvua ya mwaka hutenganisha vizuri zaidi halmashauri 83 za ukame za Kitabu cha Mwongozo (AUC 0.84), lakini peke yake ingeweka pwani yenye unyevu katikati, hivyo uandikaji huiongoza. Kitabu cha kazi kinahifadhi thamani zake.",
       "evidence": "HA.NAT.DR-FRE: Simiyu 5, Mwanza 5, Tabora 6, Shinyanga 7 (68 of 170 units sit at the minimum 5). VU.SE.LV-FS in the same workbook: Simiyu 142, Shinyanga 74, Mwanza 47, Tabora 57 (second, fifth, ninth and seventh highest of 31 regions).",
-      "raisedWith": "INFORM (JRC), SADC",
+      "raisedWith": "INFORM (JRC) and SADC; PMO-DMD (programme decision)",
       "issue": "UP-05",
-      "quarantine": false
+      "quarantine": true
     },
     {
       "id": "DN-03",
@@ -53,8 +48,8 @@
           "Kagera"
         ]
       },
-      "en": "Value under query. The GEM earthquake exposure index gives every Kagera unit 0, the same as the coast, although the Mw 5.9 Bukoba earthquake of 10 September 2016 (USGS catalogue, 27 km from Nsunga in Missenyi) damaged thousands of houses in Bukoba and Missenyi. The index counts people exposed to modelled shaking, which the global hazard model places low in Kagera. The Core keeps the workbook's value; the Advancement layer adds the recorded maximum felt intensity, so the 2016 event counts there. Resolution (10 October 2026): recomputed from the GEM Global Seismic Hazard Map v2023.1 itself, the workbook's index is the share of each council's area where the 475-year peak ground acceleration reaches 0.12 g (r = 0.96 with the workbook), and the Kagera councils lie at 0.03 to 0.06 g: the probabilistic model places them low despite the 2016 earthquake. The values are retained; the Advancement layer's felt-intensity and event-density members carry the observed seismicity.",
-      "sw": "Thamani inahojiwa. Fahirisi ya GEM ya kuathiriwa na tetemeko inaipa kila kitengo cha Kagera 0, sawa na pwani, ingawa tetemeko la Bukoba la Mw 5.9 la 10 Septemba 2016 (katalogi ya USGS, km 27 kutoka Nsunga, Missenyi) liliharibu maelfu ya nyumba Bukoba na Missenyi. Fahirisi huhesabu watu walio katika mtikisiko uliokadiriwa, ambao kielelezo cha kimataifa huuweka chini Kagera. Msingi unabaki na thamani ya kitabu cha kazi; tabaka la Maendeleo huongeza ukubwa wa juu wa mtikisiko uliorekodiwa, hivyo tukio la 2016 linahesabika huko. Utatuzi (10 Oktoba 2026): ikikokotolewa upya kutoka Ramani ya Hatari ya Tetemeko ya GEM v2023.1 yenyewe, fahirisi ya kitabu cha kazi ni sehemu ya eneo la kila halmashauri ambapo mtikisiko wa miaka 475 unafikia 0.12 g (r = 0.96 na kitabu cha kazi), na halmashauri za Kagera ziko 0.03 hadi 0.06 g: kielelezo cha uwezekano kinaziweka chini licha ya tetemeko la 2016. Thamani zimebaki; vipengele vya ukali uliohisiwa na msongamano wa matukio vya tabaka la Maendeleo vinabeba utetemeko uliorekodiwa.",
+      "en": "Value under query. The GEM earthquake exposure index gives every Kagera unit 0, the same as the coast, although the Mw 5.9 Bukoba earthquake of 10 September 2016 (USGS catalogue, 27 km from Nsunga in Missenyi) damaged thousands of houses in Bukoba and Missenyi. The index counts people exposed to modelled shaking, which the global hazard model places low in Kagera. The Core keeps the workbook's value; the Advancement layer adds the recorded maximum felt intensity, so the 2016 event counts there. Resolution (10 October 2026): recomputed from the GEM Global Seismic Hazard Map v2023.1 itself, the workbook's index is the share of each council's area where the 475-year peak ground acceleration reaches 0.12 g (r = 0.96 with the workbook), and the Kagera councils lie at 0.03 to 0.06 g: the probabilistic model places them low despite the 2016 earthquake. The values are retained; the Advancement layer's felt-intensity and event-density members carry the observed seismicity. Resolution (14 October 2026): the Earthquake group now carries the recorded felt intensity for every council (data note DN-10), so the 2016 Bukoba earthquake counts for Missenyi and Bukoba.",
+      "sw": "Thamani inahojiwa. Fahirisi ya GEM ya kuathiriwa na tetemeko inaipa kila kitengo cha Kagera 0, sawa na pwani, ingawa tetemeko la Bukoba la Mw 5.9 la 10 Septemba 2016 (katalogi ya USGS, km 27 kutoka Nsunga, Missenyi) liliharibu maelfu ya nyumba Bukoba na Missenyi. Fahirisi huhesabu watu walio katika mtikisiko uliokadiriwa, ambao kielelezo cha kimataifa huuweka chini Kagera. Msingi unabaki na thamani ya kitabu cha kazi; tabaka la Maendeleo huongeza ukubwa wa juu wa mtikisiko uliorekodiwa, hivyo tukio la 2016 linahesabika huko. Utatuzi (10 Oktoba 2026): ikikokotolewa upya kutoka Ramani ya Hatari ya Tetemeko ya GEM v2023.1 yenyewe, fahirisi ya kitabu cha kazi ni sehemu ya eneo la kila halmashauri ambapo mtikisiko wa miaka 475 unafikia 0.12 g (r = 0.96 na kitabu cha kazi), na halmashauri za Kagera ziko 0.03 hadi 0.06 g: kielelezo cha uwezekano kinaziweka chini licha ya tetemeko la 2016. Thamani zimebaki; vipengele vya ukali uliohisiwa na msongamano wa matukio vya tabaka la Maendeleo vinabeba utetemeko uliorekodiwa. Utatuzi (14 Oktoba 2026): kundi la Tetemeko sasa hubeba ukubwa wa mtetemo uliorekodiwa kwa kila halmashauri (taarifa ya data DN-10), hivyo tetemeko la Bukoba la 2016 linahesabiwa kwa Missenyi na Bukoba.",
       "evidence": "HA.NAT.EQ-EXP = 0 for all eight Kagera units (Karagwe, Bukoba, Muleba, Biharamulo, Ngara, Bukoba Urban, Missenyi, Kyerwa). data-source/usgs_earthquakes_tz.csv: 2016-09-10, -1.0355 31.6181, M 5.9, '27 km ENE of Nsunga, Tanzania'. earthquake_councils.csv max_felt: Missenyi 6.43 (35th of 195), Bukoba Municipal 6.27; n_events_50km 0 or 1.",
       "raisedWith": "INFORM (JRC), SADC; GST for a national seismic zonation",
       "issue": "UP-06",
@@ -168,16 +163,16 @@
       "layer": "core",
       "ref": "hazard:earthquake",
       "indicator": "HA.NAT.EQ-EXP",
-      "status": "explained",
+      "status": "artefact",
       "where": {
-        "valueAtLeast": 9.95
+        "all": true
       },
-      "en": "Explained. 49 units score 10 on earthquake because the GEM exposure index reaches its ceiling (raw 0.95 to 1.0) across the whole rift, from Dodoma and Arusha to Mbeya, Rukwa and Kigoma, so the Core cannot rank them against each other. The Advancement layer's event-density and felt-intensity members separate them.",
-      "sw": "Imeelezwa. Vitengo 49 hupata alama 10 za tetemeko kwa sababu fahirisi ya GEM ya kuathiriwa hufikia kikomo chake (ghafi 0.95 hadi 1.0) katika bonde lote la ufa, kutoka Dodoma na Arusha hadi Mbeya, Rukwa na Kigoma, hivyo Msingi hauwezi kuvipanga kimoja dhidi ya kingine. Viashiria vidogo vya msongamano wa matukio na ukubwa wa mtikisiko vya tabaka la Maendeleo huvitenganisha.",
+      "en": "Known data artefact. 49 of the 170 workbook units score 10 on earthquake because the GEM exposure index reaches its ceiling (raw 0.95 to 1.0) across the whole rift, from Dodoma and Arusha to Mbeya, Rukwa and Kigoma, so the Core cannot rank them against each other, and in 35 of the councils concerned the Risk Action Guide Book records no earthquake hazard at all (Shinyanga Municipal, Same, Singida, Manyara, Lushoto). Resolution (14 October 2026): the workbook's value is withheld for every unit and the Earthquake group carries, for every council, the maximum felt intensity recorded by the USGS catalogue (magnitude 4.5 and above, 1960-2024, a simple attenuation to the council centroid) of the Benchmark 2026, which ranks Mbulu, Kigoma, Rukwa, Hanang and Kondoa first: a measure of observed seismicity, not a probabilistic hazard model. The workbook keeps its values.",
+      "sw": "Kasoro inayojulikana ya data. Vitengo 49 kati ya 170 vya kitabu cha kazi vinapata 10 kwenye tetemeko kwa sababu fahirisi ya kuathirika ya GEM inafikia ukomo wake (ghafi 0.95 hadi 1.0) kote kwenye bonde la ufa, kutoka Dodoma na Arusha hadi Mbeya, Rukwa na Kigoma, hivyo Msingi hauwezi kuvipanga dhidi ya kingine, na katika halmashauri 35 kati ya zinazohusika Kitabu cha Mwongozo wa Hatua dhidi ya Hatari hakiandiki kitisho cha tetemeko kabisa (Shinyanga Manispaa, Same, Singida, Manyara, Lushoto). Utatuzi (14 Oktoba 2026): thamani ya kitabu imezuiliwa kwa kila kitengo na kundi la Tetemeko hubeba, kwa kila halmashauri, ukubwa wa juu wa mtetemo uliorekodiwa na orodha ya USGS (ukubwa 4.5 na zaidi, 1960-2024, upunguaji rahisi hadi katikati ya halmashauri) ya Benchmark 2026, unaoweka Mbulu, Kigoma, Rukwa, Hanang na Kondoa mbele: kipimo cha mitetemo iliyoonekana, si kielelezo cha uwezekano wa hatari. Kitabu cha kazi kinahifadhi thamani zake.",
       "evidence": "hazardExposure.natural.earthquake: 49 of 169 units score 10 (raw >= 0.95 on a data range 0..1.000000072).",
-      "raisedWith": "",
+      "raisedWith": "PMO-DMD (programme decision); INFORM (JRC) and SADC informed",
       "issue": "UP-10",
-      "quarantine": false
+      "quarantine": true
     },
     {
       "id": "DN-11",
@@ -210,11 +205,49 @@
       "where": {
         "all": true
       },
-      "en": "Withheld by programme decision (10 October 2026). The workbook's internal violence group counts the political violence events and fatalities that ACLED recorded in each region over 2020-2024 (Kigoma 57 events, Dar es Salaam 29, Mtwara 28 with 49 fatalities; most regions fewer than 10). Counts of this kind follow what the news reports, mix different kinds of violence and are kept by region only, and the programme judges them too complicated to read and to communicate as a council's hazard. The live model therefore carries no internal violence data: the group shows no value, and the human hazard category is the mean of its other groups (conflict intensity and conflict risk, hazardous material, vehicle accidents). The workbook keeps its values, and an institution can supply a validated council series through the Data portal.",
+      "en": "Withheld by programme decision (10 October 2026). The workbook's internal violence group counts the political violence events and fatalities that ACLED recorded in each region over 2020-2024 (Kigoma 57 events, Dar es Salaam 29, Mtwara 28 with 49 fatalities; most regions fewer than 10). Counts of this kind follow what the news reports, mix different kinds of violence and are kept by region only, and the programme judges them too complicated to read and to communicate as a council's hazard. The live model therefore carries no internal violence data: the group shows no value, and the human hazard category is the mean of its other groups (hazardous material, vehicle accidents). The workbook keeps its values, and an institution can supply a validated council series through the Data portal.",
       "sw": "Imezuiliwa kwa uamuzi wa programu (10 Oktoba 2026). Kundi la vurugu za ndani la kitabu cha kazi huhesabu matukio ya vurugu za kisiasa na vifo ambavyo ACLED ilirekodi katika kila mkoa kwa 2020-2024 (Kigoma matukio 57, Dar es Salaam 29, Mtwara 28 yenye vifo 49; mikoa mingi chini ya 10). Hesabu za aina hii hufuata kile kinachoripotiwa na vyombo vya habari, huchanganya aina tofauti za vurugu na hutunzwa kwa mkoa tu, na programu inaziona kuwa ngumu mno kusoma na kuwasilisha kama hatari ya halmashauri. Kwa hiyo kielelezo hai hakibebi data ya vurugu za ndani: kundi halionyeshi thamani, na kundi la vitisho vya kibinadamu ni wastani wa makundi yake mengine (ukubwa wa migogoro na hatari ya migogoro, vitu hatarishi, ajali za barabarani). Kitabu cha kazi kinahifadhi thamani zake, na taasisi inaweza kuwasilisha mfululizo wa halmashauri uliothibitishwa kupitia Lango la data.",
       "evidence": "HA.HUM.VIO-EVE (ACLED 2020-2024, region): Kigoma 57, Dar es Salaam 29, Mtwara 28, Mwanza 17, Geita 17, Arusha 13, Morogoro 11; 24 regions 10 or fewer. HA.HUM.VIO-FAT: Mtwara 49, Kigoma 23, Pwani 10, Geita 10; 26 regions 8 or fewer.",
       "raisedWith": "PMO-DMD (programme decision)",
       "issue": "DATA-06",
+      "quarantine": true
+    },
+    {
+      "id": "DN-13",
+      "layer": "core",
+      "ref": "hazard:conflictIntensity",
+      "indicator": "HA.HUM.CI-CBAR",
+      "indicators": [
+        "HA.HUM.CI-CBAR"
+      ],
+      "status": "decision",
+      "where": {
+        "all": true
+      },
+      "en": "Withheld by programme decision (13 October 2026). The workbook's conflict intensity is the national Conflict Barometer value applied to every unit; the programme judges conflict measures of this kind unfit to communicate as a council's hazard. The live model carries no conflict intensity data: the group shows no value, and the human hazard category is the mean of its other groups (hazardous material, vehicle accidents). The workbook keeps its value.",
+      "sw": "Imezuiliwa kwa uamuzi wa programu (13 Oktoba 2026). Ukubwa wa mgogoro wa kitabu cha kazi ni thamani ya kitaifa ya Conflict Barometer inayotumika kwa kila kitengo; programu inaona vipimo vya migogoro vya aina hii havifai kuwasilishwa kama kitisho cha halmashauri. Kielelezo hai hakina data ya ukubwa wa mgogoro: kundi halionyeshi thamani, na kategoria ya vitisho vya binadamu ni wastani wa makundi yake mengine (vitu hatarishi, ajali za barabarani). Kitabu cha kazi kinahifadhi thamani yake.",
+      "evidence": "HA.HUM.CI-CBAR (Conflict Barometer, national): one value for every unit of the INFORM SADC 2024 workbook.",
+      "raisedWith": "PMO-DMD (programme decision)",
+      "issue": "DATA-07",
+      "quarantine": true
+    },
+    {
+      "id": "DN-14",
+      "layer": "core",
+      "ref": "hazard:conflictRisk",
+      "indicator": "HA.HUM.CR-GCRI",
+      "indicators": [
+        "HA.HUM.CR-GCRI"
+      ],
+      "status": "decision",
+      "where": {
+        "all": true
+      },
+      "en": "Withheld by programme decision (13 October 2026). The workbook's conflict risk is the national Global Conflict Risk Index value applied to every unit; the programme judges it unfit to communicate as a council's hazard. The live model carries no conflict risk data: the group shows no value, and the human hazard category is the mean of its other groups (hazardous material, vehicle accidents). The workbook keeps its value.",
+      "sw": "Imezuiliwa kwa uamuzi wa programu (13 Oktoba 2026). Hatari ya mgogoro ya kitabu cha kazi ni thamani ya kitaifa ya Global Conflict Risk Index inayotumika kwa kila kitengo; programu inaona haifai kuwasilishwa kama kitisho cha halmashauri. Kielelezo hai hakina data ya hatari ya mgogoro: kundi halionyeshi thamani, na kategoria ya vitisho vya binadamu ni wastani wa makundi yake mengine (vitu hatarishi, ajali za barabarani). Kitabu cha kazi kinahifadhi thamani yake.",
+      "evidence": "HA.HUM.CR-GCRI (Global Conflict Risk Index, national): one value for every unit of the INFORM SADC 2024 workbook.",
+      "raisedWith": "PMO-DMD (programme decision)",
+      "issue": "DATA-08",
       "quarantine": true
     }
   ]

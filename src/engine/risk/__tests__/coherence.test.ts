@@ -62,14 +62,16 @@ describe('coherence of the Core', () => {
 
   it('names the groups with one value for the whole country and the groups empty in the workbook', () => {
     const s = coherenceSummary(model.sources);
-    // Coastal erosion and food security are withheld by the quarantine, and internal violence by programme
-    // decision (DN-12), so they are empty in the live model's workbook units; the Benchmark 2026 fills the
-    // template groups for the councils, not for the workbook units.
-    expect(s.constant.map((g) => g.indicator).sort()).toEqual(['conflictIntensity', 'conflictRisk', 'drrImplementation', 'wash'].sort());
-    expect(s.empty.map((g) => g.indicator).sort()).toEqual(['coastalHazards', 'economic', 'hazardousMaterial', 'heatwave', 'internalViolence', 'lightning', 'livelihoods', 'vehicleAccidents', 'zoonoses'].sort());
+    // Coastal erosion and food security are withheld by the quarantine, and internal violence, conflict
+    // intensity and conflict risk by programme decision (DN-12 to DN-14), so they are empty in the live
+    // model's workbook units; the Benchmark 2026 fills the template groups for the councils, not for the
+    // workbook units.
+    expect(s.constant.map((g) => g.indicator).sort()).toEqual(['drrImplementation', 'wash'].sort());
+    // Earthquake and drought are withheld for the workbook units too (DN-10, DN-02): their council measures live on the councils.
+    expect(s.empty.map((g) => g.indicator).sort()).toEqual(['coastalHazards', 'conflictIntensity', 'conflictRisk', 'drought', 'earthquake', 'economic', 'hazardousMaterial', 'heatwave', 'internalViolence', 'lightning', 'livelihoods', 'vehicleAccidents', 'zoonoses'].sort());
     const cov = groupCoverage(model.sources);
     expect(cov).toHaveLength(ALL_INDICATORS.length);
-    expect(cov.filter((g) => g.empty)).toHaveLength(9);
+    expect(cov.filter((g) => g.empty)).toHaveLength(13);
     expect(cov.filter((g) => !g.empty && !g.constant).every((g) => g.distinct > 1)).toBe(true);
   });
 });

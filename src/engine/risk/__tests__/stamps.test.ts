@@ -50,6 +50,6 @@ describe('stamp origin', () => {
 describe('the Benchmark 2026 file stays small', () => {
   it('is stored compactly: dataset metadata once, values as plain maps', () => {
     expect(JSON.stringify(benchmarkFile).length).toBeLessThan(100_000);
-    expect(BENCHMARK_VALUES).toHaveLength(2815);
+    expect(BENCHMARK_VALUES).toHaveLength(3205); // 2,815 of 10 October, plus the earthquake felt intensity and the drought index of 14 October (195 councils each)
   });
 });

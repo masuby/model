@@ -475,12 +475,12 @@
     "items": {
       "global": {
         "title": "Every workbook indicator is a global dataset",
-        "now": "All 53 scoring indicators of the workbook come from global sources (Global Data Lab, World Bank, WHO, JRC, FAO, GEM, ACLED and others). 15 carry one value for the whole country, 33 vary only between regions and 4 between districts, so most differences between councils in vulnerability and coping are differences between regions. Several are old: child mortality, underweight and immunisation cover 2006 to 2021.",
+        "now": "All 53 scoring indicators of the workbook come from global sources (Global Data Lab, World Bank, WHO, JRC, FAO, GEM, ACLED and others). 15 carry one value for the whole country, 33 vary only between regions and 4 between districts, so most differences between councils in vulnerability and coping are differences between regions. Several are old: child mortality, underweight and immunisation cover 2006 to 2021. Two of them are replaced at council level by programme decision of 14 October 2026: the earthquake exposure, at its ceiling across the rift, by the maximum felt intensity recorded by the USGS catalogue, and the regional drought frequency by the drought PMO-DMD's Guide Book records, graded by rainfall.",
         "next": "Institutions replace the global proxies with Tanzanian data on the same definition through the Data portal: the 2022 census, the 2022 demographic and health survey and routine information systems."
       },
       "empty": {
         "title": "Six indicator groups are empty in the workbook; five are filled with Tanzanian data",
-        "now": "The workbook leaves heatwave, lightning, zoonoses and pests, hazardous material, vehicle accidents and the economic vulnerable-groups indicator empty for every Tanzanian unit. Five are filled from Tanzanian data: heatwave days (ERA5-Land), lightning density (WWLLN), road crashes (police statistics), hazardous-material sites (OpenStreetMap, the 2022 census and NEMC certificates) and female-headed households (2022 census). Zoonoses and pests stay empty, and internal violence shows no value by decision of the programme.",
+        "now": "The workbook leaves heatwave, lightning, zoonoses and pests, hazardous material, vehicle accidents and the economic vulnerable-groups indicator empty for every Tanzanian unit. Five are filled from Tanzanian data: heatwave days (ERA5-Land), lightning density (WWLLN), road crashes (police statistics), hazardous-material sites (OpenStreetMap, the 2022 census and NEMC certificates) and female-headed households (2022 census). Zoonoses and pests stay empty, and conflict intensity, conflict risk and internal violence show no value by decision of the programme.",
         "next": "Fill zoonoses and pests from the One Health surveillance of the Ministry of Health and the Ministry of Livestock and Fisheries."
       },
       "queried": {

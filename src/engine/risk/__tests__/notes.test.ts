@@ -43,20 +43,20 @@ describe('data notes', () => {
   it('follow the workbook unit: the five Dar es Salaam councils carry the drought note, every Kagera council the earthquake note, Ubungo Kinondoni\'s flood note', () => {
     const dar = model.councils.filter((c) => placeKey(c.region) === 'daressalaam');
     expect(dar).toHaveLength(5);
-    for (const c of dar) expect(dataNotesFor(c, 'hazard', 'drought').map((n) => n.id)).toEqual(['DN-01']);
+    for (const c of dar) expect(dataNotesFor(c, 'hazard', 'drought').map((n) => n.id)).toEqual(['DN-01', 'DN-02']);
     const kagera = model.councils.filter((c) => placeKey(c.region) === 'kagera');
     expect(kagera).toHaveLength(8);
-    for (const c of kagera) expect(dataNotesFor(c, 'hazard', 'earthquake').map((n) => n.id)).toEqual(['DN-03']);
+    for (const c of kagera) expect(dataNotesFor(c, 'hazard', 'earthquake').map((n) => n.id)).toEqual(['DN-10', 'DN-03']); // the ceiling artefact for every unit, then Kagera's own note
     const ubungo = model.councils.find((c) => c.name.startsWith('Ubungo'))!;
     expect(ubungo.sourceName).toBe('Kinondoni');
     expect(dataNotesFor(ubungo, 'hazard', 'flood').map((n) => n.id)).toEqual(['DN-11']);
     // The region itself carries a regional note, not a unit note.
     const darRegion = model.regions.find((r) => placeKey(r.name) === 'daressalaam')!;
-    expect(dataNotesFor(darRegion, 'hazard', 'drought').map((n) => n.id)).toEqual(['DN-01']);
+    expect(dataNotesFor(darRegion, 'hazard', 'drought').map((n) => n.id)).toEqual(['DN-01', 'DN-02']);
     expect(dataNotesFor(darRegion, 'hazard', 'flood')).toEqual([]);
-    // A value note follows the value: Kondoa's earthquake is 10, Ngorongoro's 7.2.
+    // Since 14 October 2026 the earthquake artefact note covers every unit (the index is withheld everywhere).
     expect(dataNotesFor(model.byId.get('C001')!, 'hazard', 'earthquake').map((n) => n.id)).toEqual(['DN-10']);
-    expect(dataNotesFor(model.councils.find((c) => c.name.startsWith('Ngorongoro'))!, 'hazard', 'earthquake')).toEqual([]);
+    expect(dataNotesFor(model.councils.find((c) => c.name.startsWith('Ngorongoro'))!, 'hazard', 'earthquake').map((n) => n.id)).toEqual(['DN-10']);
     // Queries come before explanations.
     expect(worstStatus(DATA_NOTES)).toBe('queried');
     expect(unitDataNotes(model.byId.get('C001')!).map((x) => x.note.id)).toContain('DN-08');
@@ -72,6 +72,19 @@ describe('data notes', () => {
     expect(dn12.en).toMatch(/^Withheld by programme decision/);
   });
 
+  it('withhold conflict intensity and conflict risk by programme decision: every unit (DN-13, DN-14)', () => {
+    for (const [id, ref, spec] of [
+      ['DN-13', 'hazard:conflictIntensity', 'HA.HUM.CI-CBAR'],
+      ['DN-14', 'hazard:conflictRisk', 'HA.HUM.CR-GCRI'],
+    ] as const) {
+      const note = DATA_NOTES.find((n) => n.id === id)!;
+      expect(note).toMatchObject({ status: 'decision', quarantine: true, ref, where: { all: true } });
+      expect(noteIndicators(note)).toEqual([spec]);
+      for (const c of model.councils) expect(c.quarantined?.[ref], `${c.name} ${ref}`).toBe(id);
+      for (const c of model.councils) expect(c.dims.hazard.categories.human?.indicators[ref.split(':')[1]], c.name).toBeNull();
+    }
+  });
+
   it('state facts that still hold in the Core', () => {
     expect(rawOf('HA.NAT.DR-FRE', 'Kinondoni')).toBe(19);
     expect(rawOf('HA.NAT.DR-FRE', 'Bariadi')).toBe(5);
@@ -83,12 +96,13 @@ describe('data notes', () => {
     expect(rawOf('VU.VG.DP-IDP', 'Hanang')).toBe(0);
     expect(rawOf('CC.INF.COM-ELEC', 'Kondoa')).toBe(100);
     expect((spec as Record<string, { resolved_min: number; resolved_max: number }>)['CC.INF.HC-FAC']).toMatchObject({ resolved_min: 0, resolved_max: 0 });
-    expect(model.sources.filter((u) => (u.dims.hazard.categories.natural.indicators.earthquake ?? 0) >= 9.95)).toHaveLength(49);
+    // The ceiling is a fact of the workbook (the live model withholds the index, DN-10).
+    expect(buildModel({}, { workbookOnly: true }).sources.filter((u) => (u.dims.hazard.categories.natural.indicators.earthquake ?? 0) >= 9.95)).toHaveLength(49);
     const s = dataNotesSummary(model);
     // The programme's decisions are counted apart from the recheck's findings.
     expect(s.notes).toBe(DATA_NOTES.filter((n) => !isDecision(n)).length);
-    expect(s.decisions).toBe(1);
-    expect(s.decided).toBe(195); // internal violence, withheld for every council (DN-12)
+    expect(s.decisions).toBe(4);
+    expect(s.decided).toBe(3 * 195); // internal violence, conflict intensity and conflict risk stay withheld for every council (DN-12 to DN-14); the drought decision (DN-02) is replaced by the benchmark index everywhere
     expect(s.queried).toBe(DATA_NOTES.filter((n) => n.status === 'queried').length);
     expect(s.queried).toBe(5); // DN-02 and DN-03 explained on 10 October 2026
     expect(s.councils).toBe(195); // the coastal-erosion and food-security notes reach every council

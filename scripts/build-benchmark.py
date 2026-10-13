@@ -348,6 +348,55 @@ dataset("idmc-idp", "VU.VG.DP-IDP", idp, level="region", unit="people", source="
         method=f"build-benchmark.py: {used} displacement updates with a region or district in their location; an update naming several regions is split equally; the national stock of {STOCK_2024:,} is allocated in proportion to each region's share of the 2023-2025 displacements; regions without a recorded displacement 0",
         note="Replaces the workbook's displacement values (the national stock of 30,080 written on Kaskazini Unguja alone, Manyara 0 after the Hanang landslide; data note DN-07) with a documented regional allocation of IDMC's own figures.")
 
+# -------------------------------------------------- earthquake and drought at council level (14 October 2026)
+# Two workbook measures the programme replaces because they cannot rank the councils: the GEM earthquake
+# exposure index sits at its ceiling in 49 units (data note DN-10), and the FAO drought frequency is one
+# value per region that gives the semi-arid Lake zone its minimum (DN-02). The council measures already
+# computed in the repository take their place; the workbook's values are withheld by the notes.
+def read_source(name: str) -> list[dict]:
+    with open(ROOT / "data-source" / name, encoding="utf-8") as f:
+        return list(csv.DictReader(f))
+
+
+eqc = {r["code"]: r for r in read_source("earthquake_councils.csv")}
+felt = {c: num(eqc[c]["max_felt"]) for c in CODES if c in eqc and num(eqc[c]["max_felt"]) is not None}
+details["earthquake-felt"] = {c: f"quakes:{int(float(eqc[c]['n_events_50km']))}" for c in CODES if c in eqc and int(float(eqc[c]["n_events_50km"] or 0)) > 0}
+activate("HA.NAT.EQ-INT", name="Earthquake: maximum felt intensity from recorded earthquakes (USGS 1960-2024)", unit="intensity", keyed_at="Adm2", sign="Increase Risk", normalisation="Data range", vals=list(felt.values()),
+         basis="Tanzanian council measure in the Earthquake component, replacing the workbook's exposure index that sits at its ceiling across the rift; range resolved from the councils as the workbook does", source="USGS",
+         place={"dimension": "Hazards & Exposure", "category": "Natural", "component": "Earthquake", "sector": "GST"})
+dataset("earthquake-felt", "HA.NAT.EQ-INT", felt, level="council", unit="intensity",
+        source="USGS earthquake catalogue (ComCat), magnitude 4.5 and above, 1960-2024, Tanzania and its surroundings (data-source/usgs_earthquakes_tz.csv)",
+        dataset_name="Maximum felt intensity at the council centroid over the recorded earthquakes: 1.5 M - 1.5 log10(R + 15), a simple attenuation",
+        period="1960-2024", resolution="council", institution="GST",
+        method="scripts/compute-council-earthquake.py: for every catalogue event the intensity at the council centroid by the attenuation above, the maximum over events; the events within 50 km are counted as evidence",
+        note="Replaces, by programme decision of 14 October 2026, the workbook's GEM exposure index, which sits at its ceiling in 49 units and cannot rank them (data note DN-10), with the shaking the catalogue records for each council: a measure of observed seismicity, not a probabilistic hazard model.")
+
+# Drought: the hazard PMO-DMD's Risk Action Guide Book records for a council, graded by how dry the council
+# is (mean annual CHIRPS rainfall 1991-2024, council mean). Validation against the Guide Book's documented
+# drought (83 councils): annual rainfall separates them best of the council measures on file (AUC 0.84;
+# aridity 0.78; SPEI depth 0.58; season-failure frequency 0.51), but on its own it ranks the humid coast and
+# the lake shore in the middle, where the Guide Book records no drought; the documentation therefore gates
+# the grade. Councils without documented drought carry 0, a measured no-hazard, not a missing value.
+guide_drought: set[str] = set()
+for gf in sorted((ROOT / "src" / "data" / "action-guide" / "regions").glob("*.json")):
+    for cid, entry in json.load(open(gf, encoding="utf-8"))["councils"].items():
+        if "drought" in (entry.get("hazards") or []):
+            guide_drought.add(cid)
+rain = {r["code"]: num(r["mean_annual_rain"]) for r in read_source("drought_members_councils.csv") if num(r["mean_annual_rain"]) is not None}
+r_lo, r_hi = min(rain.values()), max(rain.values())
+# A council without a rainfall cell (Mjini, the Zanzibar town) carries 0 if the Guide Book records no drought there.
+drought_idx = {c: (round(10 * (r_hi - rain[c]) / (r_hi - r_lo), 1) if c in guide_drought else 0.0) for c in CODES if c in rain or c not in guide_drought}
+details["drought-documented"] = {c: f"rain:{round(rain[c])}" for c in CODES if c in rain and c in guide_drought}
+activate("HA.NAT.DR-DOC", name="Drought: recorded by PMO-DMD's Risk Action Guide Book, graded by mean annual rainfall (CHIRPS 1991-2024)", unit="index", keyed_at="Adm2", sign="Increase Risk", normalisation="Fixed (0 to 10)", vals=list(drought_idx.values()), fixed=(0, 10),
+         basis="Tanzanian council measure in the Drought component, replacing the workbook's regional FAO frequency: 0 where the Guide Book records no drought hazard; where it does, 10 for the driest council and down to 0 for the wettest, on the council span of mean annual rainfall", source="PMO-DMD Guide Book; CHIRPS",
+         place={"dimension": "Hazards & Exposure", "category": "Natural", "component": "Drought", "sector": "PMO"})
+dataset("drought-documented", "HA.NAT.DR-DOC", drought_idx, level="council", unit="index",
+        source="PMO-DMD, Risk Action Guide Book (the hazards recorded for each council); CHIRPS v3 monthly rainfall, council mean 1991-2024 (data-source/drought_members_councils.csv)",
+        dataset_name=f"Drought hazard index: 0 where the Guide Book records no drought; otherwise 10 x ({round(r_hi)} - mean annual rainfall) / ({round(r_hi)} - {round(r_lo)}) mm",
+        period="Guide Book 2022; rainfall 1991-2024", resolution="council", institution="PMO",
+        method=f"build-benchmark.py: the Guide Book's hazard list per council (src/data/action-guide/regions) gates the grade; the grade is the council's mean annual CHIRPS rainfall placed on the span of all councils ({round(r_lo)} to {round(r_hi)} mm), driest 10; {len(guide_drought)} councils carry a grade",
+        note="Replaces, by programme decision of 14 October 2026, the workbook's FAO drought frequency, one value per region that gives the semi-arid Lake zone its minimum and cannot resolve councils (data note DN-02), with the drought hazard PMO-DMD records, graded by dryness. Validated against the Guide Book: annual rainfall alone separates the documented councils best of the measures on file (AUC 0.84) but ranks the humid coast in the middle, so the documentation gates it.")
+
 # --------------------------------------------------------------------------------------- output
 # Compact form: each dataset's metadata once, its values as {unitId: value}. The engine rebuilds the
 # full records (benchmark.ts); the file stays a few tens of kilobytes instead of a megabyte of repeated
@@ -361,7 +410,7 @@ out = {
     "layer": "benchmark",
     "built": dt.datetime.now(dt.timezone.utc).isoformat(timespec="seconds"),
     "at": AT,
-    "note": "Benchmark 2026: institutional values prepared from public, citable datasets for the indicators the SADC workbook leaves empty or carries with values that failed validation. Applied by the engine as approved institutional values (lineage shown), supersedable through the data portal; the workbook itself is unchanged.",
+    "note": "Benchmark 2026: institutional values prepared from public, citable datasets for the indicators the SADC workbook leaves empty or carries with values that failed validation, extended on 14 October 2026 with the council measures of earthquake (USGS felt intensity) and drought (aridity). Applied by the engine as approved institutional values (lineage shown), supersedable through the data portal; the workbook itself is unchanged.",
     "activations": activations,
     "respec": respec,
     "datasets": datasets,

@@ -137,7 +137,8 @@ describe('drivers', () => {
 
   it('reflects approved edits (nothing is hard-coded)', () => {
     const id = model.councils[0].id;
-    const edited = buildModel({ [id]: { 'hazard:drought': { value: 10, at: '2026-01-01T00:00:00Z' } } });
+    // Dated after the Benchmark 2026 (10 October 2026), so the approved value takes the benchmark's place.
+    const edited = buildModel({ [id]: { 'hazard:drought': { value: 10, at: '2026-10-15T00:00:00Z' } } });
     const before = indicatorStats(model.councils).find((s) => s.key === 'drought')!;
     const after = indicatorStats(edited.councils).find((s) => s.key === 'drought')!;
     const original = model.councils[0].dims.hazard.categories.natural.indicators.drought ?? 0;

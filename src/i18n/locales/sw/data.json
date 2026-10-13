@@ -72,7 +72,7 @@
   },
   "schema": {
     "title": "Sasisho la hifadhidata linasubiri",
-    "lead": "Hifadhidata ya pamoja iko nyuma ya toleo hili la lango. Tekeleza uhamisho 0006 hadi 0016 kutoka folda ya supabase/migrations ya hazina katika kihariri cha SQL cha Supabase, kwa mpangilio. Hadi hapo sehemu hizi hazipatikani:",
+    "lead": "Hifadhidata ya pamoja iko nyuma ya toleo hili la lango. Tekeleza uhamisho 0006 hadi 0017 kutoka folda ya supabase/migrations ya hazina katika kihariri cha SQL cha Supabase, kwa mpangilio. Hadi hapo sehemu hizi hazipatikani:",
     "parts": {
       "committee": "dawati la kamati na kumbukumbu zake",
       "notifications": "arifa na kikasha",

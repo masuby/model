@@ -20,14 +20,14 @@ describe('dimension groups', () => {
     ]);
     expect(hazard[0].metricKey).toBe('ind:hazard:stormsCyclone');
     expect(hazard.find((g) => g.key === 'volcano')).toBeUndefined(); // 0: no hazard here
-    expect(hazard.find((g) => g.key === 'drought')?.coarse).toBe('region');
+    expect(hazard.find((g) => g.key === 'drought')).toBeUndefined(); // 0: the Guide Book records no drought in Kibiti, so the index is a measured zero and the group is left out
     expect(hazard.find((g) => g.key === 'stormsCyclone')?.coarse).toBeNull();
-    // Road crashes and hazardous-material sites are council values; conflict risk stays a national value.
+    // Road crashes and hazardous-material sites are council values; the conflict groups are withheld (DN-13, DN-14).
     expect(hazard.filter((g) => ['vehicleAccidents', 'hazardousMaterial', 'conflictRisk'].includes(g.key)).map((g) => [g.key, g.coarse])).toEqual([
       ['vehicleAccidents', null],
       ['hazardousMaterial', null],
-      ['conflictRisk', 'national'],
     ]);
+    expect(hazard.find((g) => g.key === 'conflictIntensity')).toBeUndefined();
     const vulnerability = dimensionGroups(unit, 'vulnerability');
     expect(vulnerability[0]).toMatchObject({ key: 'displacedPeople', score: 9.5, coarse: 'region', metricKey: 'ind:vulnerability:displacedPeople' });
     expect(vulnerability.find((g) => g.key === 'livelihoods')?.score).toBe(0); // a measured 0 stays
@@ -55,12 +55,14 @@ describe('evidence', () => {
   });
 
   it('a workbook value carries the workbook source and year', () => {
-    const [drought] = evidenceFor(model.byId.get('C051')!, 'hazard', 'drought');
-    expect(drought).toMatchObject({ specId: 'HA.NAT.DR-FRE', raw: 9, origin: 'workbook', source: 'FAO', period: '1984-2023', institution: 'INFORM' });
+    const flood = evidenceFor(model.byId.get('C051')!, 'hazard', 'flood').find((e) => e.origin === 'workbook')!;
+    expect(flood).toMatchObject({ origin: 'workbook', institution: 'INFORM' });
+    expect(flood.specId).toMatch(/^HA\.NAT\.FL/);
+    expect(flood.raw).not.toBeNull();
   });
 
   it('a withheld workbook value says so, with its note', () => {
-    const [drought] = evidenceFor(model.byId.get('C052')!, 'hazard', 'drought');
+    const drought = evidenceFor(model.byId.get('C052')!, 'hazard', 'drought').find((e) => e.origin === 'workbook')!;
     expect(drought).toMatchObject({ raw: null, withheld: 'DN-01', origin: 'workbook' });
   });
 

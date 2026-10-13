@@ -42,6 +42,7 @@ institutional data workflow (`0004`, `0005`) with rolled-back dry runs before ea
 | `0014_benchmark_activations.sql` | the seven template indicators the Benchmark 2026 activates |
 | `0015_benchmark_hazmat_crashes.sql` | hazardous material (sites) and vehicle accidents (crash density) |
 | `0016_institutional_indicators.sql` | the two institutional indicators (DRM arrangements, committee functioning) |
+| `0017_earthquake_drought_measures.sql` | the council earthquake (USGS felt intensity) and drought (Guide Book, graded by rainfall) measures |
 
 Until they are applied, the public pages work from the shipped model (the data layer falls back to it
 when a view or table is missing) but the Data portal's committee desk, deposits, notifications,

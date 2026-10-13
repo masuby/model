@@ -3,7 +3,8 @@
  * register (same keys, labels and kind: Tanzanian institution or global dataset), and its indicator list
  * with migrations 0008's and 0012's is the workflow's (the 53 INFORM indicators flagged core, plus the 30 advanced ones);
  * migrations 0014 and 0015 flag the Benchmark 2026 activations core with their Tanzanian names, and 0016 the
- * two institutional indicators the engine computes from the committees' records.
+ * two institutional indicators the engine computes from the committees' records; 0017 adds the council earthquake and
+ * drought measures of 14 October 2026.
  */
 import workflowSql from '../../../supabase/migrations/0004_data_workflow.sql?raw';
 import membersSql from '../../../supabase/migrations/0008_advanced_members.sql?raw';
@@ -11,6 +12,7 @@ import feltSql from '../../../supabase/migrations/0012_felt_intensity_member.sql
 import activatedSql from '../../../supabase/migrations/0014_benchmark_activations.sql?raw';
 import revisedSql from '../../../supabase/migrations/0015_benchmark_hazmat_crashes.sql?raw';
 import institutionalSql from '../../../supabase/migrations/0016_institutional_indicators.sql?raw';
+import measuresSql from '../../../supabase/migrations/0017_earthquake_drought_measures.sql?raw';
 import custodiansSql from '../../../supabase/migrations/0013_assign_custodians.sql?raw';
 import viewsSql from '../../../supabase/migrations/0009_public_views.sql?raw';
 import unitsSql from '../../../supabase/migrations/0010_validate_units.sql?raw';
@@ -41,17 +43,17 @@ describe('migration 0004 seeds', () => {
     }
   });
 
-  it('seeds the workflow indicators, the INFORM ones flagged core (with the members of migrations 0008 and 0012 and the activations of 0014 to 0016)', () => {
+  it('seeds the workflow indicators, the INFORM ones flagged core (with the members of migrations 0008 and 0012 and the activations of 0014 to 0017)', () => {
     // Later migrations upsert on spec_id: the last row for an id wins, as in the database.
-    const rows = [...seedRows(workflowSql, 'indicators'), ...seedRows(membersSql, 'indicators'), ...seedRows(feltSql, 'indicators'), ...seedRows(activatedSql, 'indicators'), ...seedRows(revisedSql, 'indicators'), ...seedRows(institutionalSql, 'indicators')];
+    const rows = [...seedRows(workflowSql, 'indicators'), ...seedRows(membersSql, 'indicators'), ...seedRows(feltSql, 'indicators'), ...seedRows(activatedSql, 'indicators'), ...seedRows(revisedSql, 'indicators'), ...seedRows(institutionalSql, 'indicators'), ...seedRows(measuresSql, 'indicators')];
     const seeded = new Map(rows.map((r) => [r[0], r[r.length - 1] === 'true']));
     expect([...seeded.keys()].sort()).toEqual(WORKFLOW_INDICATORS.map((w) => w.spec.id).sort());
     for (const w of WORKFLOW_INDICATORS) expect(seeded.get(w.spec.id), w.spec.id).toBe(w.core);
-    expect([...seeded.values()].filter(Boolean)).toHaveLength(63);
-    const activated = new Set([...seedRows(activatedSql, 'indicators'), ...seedRows(revisedSql, 'indicators'), ...seedRows(institutionalSql, 'indicators')].map((r) => r[0]));
+    expect([...seeded.values()].filter(Boolean)).toHaveLength(65);
+    const activated = new Set([...seedRows(activatedSql, 'indicators'), ...seedRows(revisedSql, 'indicators'), ...seedRows(institutionalSql, 'indicators'), ...seedRows(measuresSql, 'indicators')].map((r) => r[0]));
     expect([...activated].sort()).toEqual(Object.keys(ACTIVATED_SPECS).sort());
     // The names the portal shows are the activation's own.
-    const names = new Map([...seedRows(activatedSql, 'indicators'), ...seedRows(revisedSql, 'indicators'), ...seedRows(institutionalSql, 'indicators')].map((r) => [r[0], r[1]]));
+    const names = new Map([...seedRows(activatedSql, 'indicators'), ...seedRows(revisedSql, 'indicators'), ...seedRows(institutionalSql, 'indicators'), ...seedRows(measuresSql, 'indicators')].map((r) => [r[0], r[1]]));
     for (const [id, spec] of Object.entries(ACTIVATED_SPECS)) expect(names.get(id), id).toBe(spec.name);
   });
 });

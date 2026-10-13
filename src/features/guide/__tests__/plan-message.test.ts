@@ -20,10 +20,11 @@ describe('planning message', () => {
     const expected = model.councils.filter((c) => riskBandFor(c.risk)?.band === 1 && planningHazard(c));
     expect(named.map((c) => c.name).sort()).toEqual(expected.map((c) => c.name).sort());
     for (const c of named) expect(planningHazard(c)!.score).toBeGreaterThanOrEqual(8);
+    // A council outside the low band keeps its band message whatever its hazards.
     const moshi = model.councils.find((c) => c.name === 'Moshi Municipal')!;
-    expect(planningHazard(moshi)).toEqual({ key: 'earthquake', score: 10 });
-    expect(riskBandFor(moshi.risk)!.band).toBe(2);
-    expect(planMessage(moshi, riskBandFor(moshi.risk)!).key).toBe('risk.band.2.plan');
+    const band = riskBandFor(moshi.risk)!;
+    expect(band.band).toBeGreaterThan(1);
+    expect(planMessage(moshi, band).key).toBe(`risk.band.${band.band}.plan`);
   });
 
   it('keeps the band message elsewhere, including higher bands with very high hazards', () => {

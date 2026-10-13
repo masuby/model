@@ -32,7 +32,41 @@ For each of the 195 councils, the hazard group the live model ranks first (its h
 
 Kawetire/Kawetele: no place of that name occurs in the system’s data (the Guide Book files, the committee records, the benchmark evidence or the thesis data under the repository). The Mbeya file records Busokelo (Rungwe slopes), Kyela (Lake Nyasa flood plain) and Rungwe (Tukuyu and the volcanic slopes); nothing is attributed to Mbeya District that belongs to Rungwe.
 
-## Every council
+## Resolution of 14 October 2026 (same day)
+
+Three changes were made, by programme decision, and the audit was run again:
+
+1. **Earthquake.** The workbook's GEM exposure index is withheld for every unit (data note DN-10 became a known artefact with a hold) and the Earthquake group carries, for every council, the maximum felt intensity recorded by the USGS catalogue (magnitude 4.5 and above, 1960–2024; 1.5 M − 1.5 log10(R + 15) at the council centroid), ranged over the councils. Mbulu, Tanganyika, Uvinza, Mkalama and Hanang lead; Shinyanga Municipal scores 3.2, Same 1.8.
+2. **Drought.** The workbook's FAO regional frequency is withheld for every unit (DN-02 became a programme decision with a hold) and the Drought group carries the Benchmark 2026 drought hazard index: 0 where PMO-DMD's Risk Action Guide Book records no drought, and where it does, the council's mean annual CHIRPS rainfall (1991–2024) on the span of all councils, the driest scoring 10. Validation against the Guide Book's 83 drought councils: annual rainfall alone separates them best of the council measures on file (AUC 0.84; aridity 0.78; SPEI depth 0.58; season-failure frequency 0.51), but alone it ranks the humid coast and the lake shore in the middle, so the documentation gates it. An aridity index without the gate was tried first and rejected: it put drought first in 106 councils, Dar es Salaam and Kibiti among them.
+3. **Conflict intensity, conflict risk and internal violence** are withheld everywhere (DN-12 to DN-14).
+
+**Result: 72 of 195 councils still contradict the Guide Book (111 before).** The first groups now: drought 58, wildfire 26, flood 25, stormsCyclone 18, environmentalDegradation 17, landslide 15, hazardousMaterial 9, volcano 6, lightning 6, heatwave 6, vehicleAccidents 5, coastalHazards 2, earthquake 2.
+
+What remains, honestly: environmental degradation (the workbook's deforestation value) still heads nine councils in Kagera and elsewhere; the workbook's wildfire heads Geita's Nyang'hwale, Mbogwe and Bukombe and the Shinyanga districts where the Guide Book records heavy rainfall and floods first; lightning (WWLLN) heads Bukoba Municipal and Kasulu, which is true of the lake shore; hazardous-material sites head Kahama and other mining towns. Same District reads drought first (the Guide Book lists drought first for Same) with landslide 8.2 second, and Bunda drought 7.4 with flood 7.1 second. Kagera's earthquake (the 2016 Bukoba event) scores 4.0 on the recorded intensity, below its floods and heat.
+
+The national picture after the three changes: INFORM Risk 4.3 (High on the SADC thresholds; 3.9 Medium before), councils 2 low, 92 medium, 101 high (14, 144, 37 before). The rise comes from the human-hazard category, which is now the mean of hazardous-material sites and road crashes alone, and from drought scoring 7 to 10 across the semi-arid centre.
+
+## The named cases after the resolution
+
+| Council | First three hazard groups now |
+|---|---|
+| Kondoa District (Dodoma) | drought, landslide, floods, strongWinds, wildfire, heavyRainfall |
+| Same District (Kilimanjaro) | drought, floods, landslide, strongWinds, heavyRainfall |
+| Mbeya District (Mbeya) | heavyRainfall, landslide, floods, earthquake |
+| Kyela District (Mbeya) | floods, largeWaves, heavyRainfall, earthquake, publicHealth |
+| Rungwe District (Mbeya) | heavyRainfall, landslide, floods, earthquake |
+| Kishapu District (Shinyanga) | drought, strongWinds, floods, heavyRainfall |
+| Shinyanga Municipal (Shinyanga) | drought, strongWinds, floods, heavyRainfall |
+| Bukoba Municipal (Kagera) | floods, largeWaves, heavyRainfall, publicHealth, earthquake |
+| Missenyi District (Kagera) | floods, largeWaves, heavyRainfall, earthquake |
+| Musoma District (Mara) | floods, largeWaves, heavyRainfall, publicHealth |
+| Bunda District (Mara) | floods, largeWaves, heavyRainfall, publicHealth, drought |
+| Rorya District (Mara) | floods, largeWaves, heavyRainfall, publicHealth |
+| Mlele District (Katavi) | drought, wildfire, floods, heavyRainfall |
+| Geita District (Geita) | heavyRainfall, floods, publicHealth, largeWaves |
+| Chato District (Geita) | floods, largeWaves, heavyRainfall, publicHealth |
+
+## Every council (before the resolution)
 
 | Council | ✗ | Model: first three hazard groups (0–10) | Guide Book hazards |
 |---|---|---|---|

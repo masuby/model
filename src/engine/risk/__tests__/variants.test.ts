@@ -20,7 +20,8 @@ describe("INFORM Global's hazard rule as a sensitivity", () => {
       expect(g.natural).not.toBeNull();
       expect(g.natural!).toBeGreaterThanOrEqual(u.dims.hazard.categories.natural.score! - 1e-9);
       const conflict = [u.dims.hazard.categories.human.indicators.conflictIntensity, u.dims.hazard.categories.human.indicators.conflictRisk].filter((x): x is number => typeof x === 'number');
-      expect(g.human).toBe(Math.max(...conflict));
+      // The live model withholds both conflict groups (DN-13, DN-14), so the conflict maximum is empty there.
+      expect(g.human).toBe(conflict.length ? Math.max(...conflict) : null);
       const a = globalRuleOf(u, NATURAL_GEOMEAN);
       expect(a.human).toBeCloseTo(u.dims.hazard.categories.human.score!, 9);
     }
@@ -39,10 +40,10 @@ describe("INFORM Global's hazard rule as a sensitivity", () => {
     expect(Object.values(a.classes.core).reduce((x, y) => x + y, 0)).toBe(170);
     expect(Object.values(b.classes.global).reduce((x, y) => x + y, 0)).toBe(170);
     // On the live model coastal erosion is withheld (its zero no longer sits in the natural mean) and
-    // internal violence by programme decision (DN-12): the human category is lower, so the natural rule
-    // weighs more in the hazard dimension and moves more units than on the workbook.
+    // the human groups by programme decision (DN-12 to DN-14): the workbook units carry no human hazard
+    // at all, so the natural rule alone moves fewer units than on the workbook.
     const live = globalRuleSummary(model.sources, NATURAL_GEOMEAN);
-    expect(live.riskClassChanges).toBe(59);
+    expect(live.riskClassChanges).toBe(35); // re-measured on 14 October 2026 with the earthquake and drought council measures
     expect(live.meanHazardDelta).toBeGreaterThan(0);
   });
 });
@@ -80,14 +81,14 @@ describe('lack of reliability', () => {
     const r = lackOfReliability(rufiji, model, DATA_AS_OF, today);
     const k = lackOfReliability(kibiti, model, DATA_AS_OF, today);
     expect(r.groupsTotal).toBe(32);
-    expect(r.groupsWithData).toBe(30); // the Benchmark 2026 fills every group but zoonoses and hazardous material
-    expect(r.missing).toBeCloseTo(2 / 32, 6);
+    expect(r.groupsWithData).toBe(28); // zoonoses is empty; internal violence, conflict intensity and conflict risk are withheld (DN-12 to DN-14)
+    expect(r.missing).toBeCloseTo(4 / 32, 6);
     expect(r.ageYears).toBeLessThan(1.86); // 2024-12 to 2026-10 for the workbook groups; the benchmark groups are dated 2026-10
     expect(r.ageYears).toBeGreaterThan(0.5);
     expect(r.inherited).toBe(0.5); // Rufiji's unit also backs Kibiti
     expect(k.inherited).toBe(1);
     expect(k.lack).toBeGreaterThan(r.lack);
-    expect(r.lack).toBeCloseTo(10 * (0.5 * (2 / 32) + 0.3 * (r.ageYears / 5) + 0.2 * 0.5), 0);
+    expect(r.lack).toBeCloseTo(10 * (0.5 * (4 / 32) + 0.3 * (r.ageYears / 5) + 0.2 * 0.5), 0);
     const own = model.councils.find((c) => c.sourceId && model.councils.filter((o) => o.sourceId === c.sourceId).length === 1)!;
     expect(lackOfReliability(own, model, DATA_AS_OF, today).inherited).toBe(0);
   });
@@ -108,7 +109,7 @@ describe('regional aggregation rule (MET-07)', () => {
     expect(plain.nationalDelta).toBe(0);
     const units = regionalRuleSummary(model, 'units');
     expect(units.regions).toBe(31);
-    expect(units.changed).toBeLessThanOrEqual(6);
+    expect(units.changed).toBeLessThanOrEqual(8);
     expect(units.maxDelta).toBeLessThanOrEqual(0.2);
     const pop = regionalRuleSummary(model, 'population');
     expect(pop.changed).toBeLessThanOrEqual(31);

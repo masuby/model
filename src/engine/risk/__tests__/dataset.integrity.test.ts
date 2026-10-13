@@ -90,12 +90,14 @@ describe('the Core is the workbook', () => {
             }
           }
     }
-    // Every unit loses coastal erosion and food security, and internal violence by programme decision
-    // (DN-12); Dar es Salaam's drought, Ukerewe's landslide, Dodoma's electricity and the two
+    // Every unit loses coastal erosion and food security, and internal violence, conflict intensity and
+    // conflict risk by programme decision (DN-12 to DN-14); Dar es Salaam's drought, Ukerewe's landslide, Dodoma's electricity and the two
     // displaced-people rows are withheld as well. The Lake zone's drought and Kagera's earthquake were
     // explained on 10 October 2026 (DN-02, DN-03) and are retained.
     const unitsIn = (...regions: string[]) => workbook.sources.filter((u) => regions.includes(placeKey(u.region))).length;
-    expect(withheld).toBe(170 * 3 + unitsIn('daressalaam') + 1 + unitsIn('dodoma') + unitsIn('kaskaziniunguja', 'manyara'));
+    // Since 14 October 2026 the earthquake exposure (DN-10) and the drought frequency (DN-02) are withheld for
+    // every unit as well, so Dar es Salaam's drought (DN-01) no longer adds a unit of its own.
+    expect(withheld).toBe(170 * 7 + 1 + unitsIn('dodoma') + unitsIn('kaskaziniunguja', 'manyara'));
     // Internal violence has no value left anywhere in the live model: both of its indicators are withheld.
     expect(model.sources.every((u) => indicatorValue(u, 'hazard', 'internalViolence') === null)).toBe(true);
     expect(model.councils.every((c) => indicatorValue(c, 'hazard', 'internalViolence') === null)).toBe(true);

@@ -2,6 +2,30 @@
 
 ## Unreleased
 
+### The data discrepancies resolved: conflict groups withheld, earthquake and drought measured per council, the lakes whole (14 October 2026)
+
+- Conflict intensity, conflict risk and internal violence carry no data anywhere in the live model, by
+  programme decision (data notes DN-12 to DN-14); the human-hazard category is the mean of hazardous
+  material and vehicle accidents.
+- The workbook's earthquake exposure, at its ceiling in 49 units so that "Earthquake" headed 77 councils
+  against the Guide Book, is withheld (DN-10, a known artefact) and the Earthquake group carries for every
+  council the maximum felt intensity recorded by the USGS catalogue (1960-2024), ranged over the councils.
+- The workbook's regional FAO drought frequency, at its minimum across the semi-arid Lake zone, is withheld
+  (DN-02, a programme decision) and the Drought group carries the Benchmark 2026 drought hazard index: 0
+  where PMO-DMD's Risk Action Guide Book records no drought, otherwise the council's mean annual rainfall
+  (CHIRPS 1991-2024) on the span of all councils, the driest scoring 10. Annual rainfall separates the
+  Guide Book's drought councils best of the measures on file (AUC 0.84) and the documentation gates it; an
+  ungated aridity index was tried and rejected because it put drought first on the humid coast.
+- Both measures are Core workflow indicators (migration 0017, owners GST and PMO-DMD) with their evidence
+  (earthquakes within 50 km, mean annual rainfall) in the explorer. The first hazard now contradicts the
+  Guide Book in 72 councils instead of 111; docs/assessment/INFORM_TZ_Driver_Discrepancies_2026-10-14.md
+  records what remains. National INFORM Risk reads 4.3 (High on the SADC thresholds) with 101 councils
+  high, 92 medium and 2 low.
+- The three lakes that cross the border (Victoria, Tanganyika, Nyasa) are drawn whole and faintly beyond
+  Tanzania on the static maps and the explorer map, from the public-domain Natural Earth lakes.
+- Where two notes withhold the same value, the first in the register names the hold (a unit's own query
+  before the general decision).
+
 ### No stories on the pages; risk communication in two messages (14 October 2026)
 
 - The generated "What the data say about…" statements are gone from the explorer panel, the risk card

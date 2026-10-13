@@ -39,8 +39,8 @@ describe('crosswalk', () => {
     const documented = ['drought', 'landslide', 'floods', 'strongWinds', 'wildfire', 'heavyRainfall'] as const;
     const items = reconciledHazards(kondoa, documented);
     const byKey = Object.fromEntries(items.map((i) => [i.key, i]));
-    // Earthquake is modelled at 10 but not documented by the guide: in the list, from the model, very high.
-    expect(byKey.earthquake).toMatchObject({ basis: 'modelled', band: 'veryHigh', score: 10, guidance: 'guide' });
+    // Earthquake is modelled (the USGS felt intensity, 4.7) but not documented by the guide: in the list, from the model.
+    expect(byKey.earthquake).toMatchObject({ basis: 'modelled', band: 'medium', score: 4.7, guidance: 'guide' });
     // Every documented hazard is in the list, documented or both.
     for (const h of documented) expect(['documented', 'both']).toContain(byKey[h].basis);
     // Conflict groups appear only with a score and are marked outside DRR guidance.
@@ -49,7 +49,7 @@ describe('crosswalk', () => {
     // Highest band first.
     const bands = items.map((i) => (i.band ? ['veryLow', 'low', 'medium', 'high', 'veryHigh'].indexOf(i.band) : -1));
     expect([...bands].sort((a, b) => b - a)).toEqual(bands);
-    expect(guideHazardsOf(items)[0]).toBe('earthquake');
+    expect(guideHazardsOf(items)[0]).toBe('drought'); // documented and scored 9.4
     expect(items.every((i) => i.basis !== 'modelled' || (i.score ?? 0) > 0)).toBe(true);
   });
 
