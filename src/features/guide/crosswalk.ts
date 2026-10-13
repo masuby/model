@@ -105,8 +105,11 @@ export function reconciledHazards(unit: Unit, documented: readonly HazardKey[]):
  * the INFORM groups behind it. One function for every list (profile, explorer card, risk card), so the
  * same council never shows two different hazard lists.
  */
-export function hazardItemName(t: (key: string) => string, item: Pick<HazardItem, 'guide' | 'groups'>): string {
-  return item.guide ? t(`guide:hazards.${item.guide}`) : item.groups.map((g) => t(`indicators:${g.split(':')[1]}`)).join(', ');
+export function hazardItemName(t: (key: string) => string, item: Pick<HazardItem, 'guide' | 'groups'> & { basis?: HazardItem['basis'] }): string {
+  // The Guide Book's "Earthquake and tsunami" names the hazard only where the guide documents it; a
+  // council the model alone scores (an inland one by Lake Victoria, say) reads the INFORM group's name.
+  const modelledOnly = item.guide === 'earthquake' && item.basis === 'modelled';
+  return item.guide && !modelledOnly ? t(`guide:hazards.${item.guide}`) : item.groups.map((g) => t(`indicators:${g.split(':')[1]}`)).join(', ');
 }
 
 /** The guide hazards of the reconciled list, in its order (for the warning-level tables). */

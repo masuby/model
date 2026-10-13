@@ -20,7 +20,7 @@ import type { WarningPayload } from '@/data-layer/types';
 import { ALERT_COLOR, planMessage, riskBandFor } from '@/features/guide/alert';
 import { AreaStatements } from '@/features/guide/AreaStatements';
 import { RiskBandBadge } from '@/features/guide/AlertBadge';
-import { reconciledHazards, type HazardItem } from '@/features/guide/crosswalk';
+import { hazardItemName, reconciledHazards, type HazardItem } from '@/features/guide/crosswalk';
 import { applyGuidance, pick, useAreaGuide, useAreaRecords } from '@/features/guide/data';
 import type { DimensionKey } from '@/engine/risk/hierarchy';
 import { parseMetric } from '@/engine/risk/metrics';
@@ -216,7 +216,7 @@ export default function RiskCardPage() {
               return (
                 <li key={i.key} className="flex items-baseline justify-between gap-3 py-1.5">
                   <span className="font-medium">
-                    {i.guide ? t(`guide:hazards.${i.guide}`) : i.groups.map((g) => t(`indicators:${g.split(':')[1]}`)).join(', ')}
+                    {hazardItemName(t, i)}
                     {status && <span className="ml-1.5 text-[10px] font-normal text-muted-foreground">({t(`common:dataNote.status.${status}`)})</span>}
                   </span>
                   <span className="num shrink-0 text-right text-muted-foreground">

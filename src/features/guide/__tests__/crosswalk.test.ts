@@ -6,7 +6,7 @@
 import { describe, expect, it } from 'vitest';
 import { DIMENSIONS } from '@/engine/risk/hierarchy';
 import { buildModel } from '@/engine/risk/model';
-import { bandFor, CROSSWALK, GUIDE_HAZARDS_COVERED, guideHazardsOf, reconciledHazards } from '../crosswalk';
+import { bandFor, CROSSWALK, GUIDE_HAZARDS_COVERED, guideHazardsOf, hazardItemName, reconciledHazards } from '../crosswalk';
 import { HAZARD_KEYS } from '../data';
 
 const model = buildModel();
@@ -53,4 +53,14 @@ describe('crosswalk', () => {
     expect(items.every((i) => i.basis !== 'modelled' || (i.score ?? 0) > 0)).toBe(true);
   });
 
+});
+
+describe('hazard names', () => {
+  const t = (key: string) => ({ 'guide:hazards.earthquake': 'Earthquake and tsunami', 'indicators:earthquake': 'Earthquake', 'guide:hazards.floods': 'Floods' })[key] ?? key;
+  it('names a modelled-only earthquake by the INFORM group, and the documented one by the guide', () => {
+    expect(hazardItemName(t, { guide: 'earthquake', groups: ['hazard:earthquake'], basis: 'modelled' })).toBe('Earthquake');
+    expect(hazardItemName(t, { guide: 'earthquake', groups: ['hazard:earthquake'], basis: 'documented' })).toBe('Earthquake and tsunami');
+    expect(hazardItemName(t, { guide: 'earthquake', groups: ['hazard:earthquake'], basis: 'both' })).toBe('Earthquake and tsunami');
+    expect(hazardItemName(t, { guide: 'floods', groups: ['hazard:flood'], basis: 'modelled' })).toBe('Floods');
+  });
 });

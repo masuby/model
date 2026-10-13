@@ -82,7 +82,7 @@
     "chartSub": "Rangi = daraja la Hatari ya INFORM · ukubwa = idadi ya watu · mistari ya vistari = vizingiti vya madaraja",
     "aria_one": "Mchoro wa halmashauri {{total}} kwa vitisho na udhaifu; halmashauri {{count}} iko katika kona ya vitisho vya juu na udhaifu wa juu.",
     "aria_other": "Mchoro wa halmashauri {{total}} kwa vitisho na udhaifu; halmashauri {{count}} ziko katika kona ya vitisho vya juu na udhaifu wa juu.",
-    "xAxis": "Vitisho na Mfiduo (0–10)",
+    "xAxis": "Vitisho na Kuathirika (0–10)",
     "yAxis": "Udhaifu (0–10)",
     "hotLabel": "Vitisho vya juu × udhaifu wa juu",
     "legendClasses": "Madaraja ya hatari",

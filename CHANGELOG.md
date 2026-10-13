@@ -2,6 +2,16 @@
 
 ## Unreleased
 
+### Kiswahili of Tanzanian disaster management: "kuathirika", not "mfiduo"; no tsunami inland (13 October 2026)
+
+- "Mfiduo" (exposure) is replaced throughout the Kiswahili texts by the terms the Risk Action Guide
+  Book itself uses: the dimension is "Vitisho na Kuathirika", the datasets read "Kuathirika kwa
+  mafuriko", "Kuathirika kwa matetemeko ya ardhi", the people indicator "Watu walio hatarini", and
+  the lessons speak of "kuathirika" with its own agreements.
+- The Guide Book's "Earthquake and tsunami" names a hazard only where the guide documents it; a
+  council the model alone scores on the earthquake group (an inland one by Lake Victoria, such as
+  Tarime) reads "Earthquake" / "Tetemeko la ardhi" on its profile, statements and risk card.
+
 ### More room for the live values on the home page (13 October 2026)
 
 - The map sits in the middle of the hero row rather than at its top, and the relation chart reads

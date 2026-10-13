@@ -165,7 +165,7 @@
       },
       "3": {
         "title": "Ubadilishaji",
-        "body": "Viashiria vilivyopindika sana (idadi ya matukio, mfiduo) hubadilishwa kwa logi; nyongeza ya 0.001 huiweka sifuri halisi kuwa na thamani.",
+        "body": "Viashiria vilivyopindika sana (idadi ya matukio, kuathirika) hubadilishwa kwa logi; nyongeza ya 0.001 huiweka sifuri halisi kuwa na thamani.",
         "formula": "x double prime ni sawa na logi asilia ya 0.001 kujumlisha x prime"
       },
       "4": {
@@ -224,7 +224,7 @@
     "title": "Kwa nini wastani wa kijiometri?",
     "lead": "Namna ya kujumlisha huakisi maana ya hatari. INFORM hutumia wastani wa kijiometri mara mbili, kwa msisitizo unaopingana.",
     "p1": "Wastani wa kawaida huruhusu alama ya juu ya kipimo kimoja kufidia alama ya chini ya kipimo kingine. Hatari haifanyi kazi hivyo: tetemeko kubwa la ardhi jangwani lisilo na watu si janga, na jamii maskini isiyo na kitisho chochote haiko hatarini kukumbwa nalo. Kwa hiyo INFORM huzidisha vipimo vitatu (wastani wa kijiometri), hivyo thamani ndogo sana katika kipimo kimojawapo hushusha hatari.",
-    "p2": "Ndani ya kipimo, INFORM hufanya kinyume chake. Wastani wa kijiometri huchukuliwa kwenye mizani iliyogeuzwa (10 − c), hivyo kipimo hakiwi chini ya wastani wa kawaida wa kategoria zake: halmashauri inayokabili kitisho kikubwa cha asili hubaki na alama ya juu ya Vitisho na Mfiduo hata kama vitisho vinavyosababishwa na binadamu ni vidogo.",
+    "p2": "Ndani ya kipimo, INFORM hufanya kinyume chake. Wastani wa kijiometri huchukuliwa kwenye mizani iliyogeuzwa (10 − c), hivyo kipimo hakiwi chini ya wastani wa kawaida wa kategoria zake: halmashauri inayokabili kitisho kikubwa cha asili hubaki na alama ya juu ya Vitisho na Kuathirika hata kama vitisho vinavyosababishwa na binadamu ni vidogo.",
     "riskPanel": "Vipimo → Hatari ya INFORM",
     "presets": "Mifano",
     "preset": {
@@ -237,7 +237,7 @@
     "scaledGeo": "Wastani wa kijiometri uliopimwa upya (INFORM)",
     "riskNote": "Vipimo vyote vitatu vikiwa sawa, wastani wote miwili hukubaliana. Kipimo kimoja kikikaribia sifuri, wastani wa kijiometri hushuka kuelekea sifuri huku wastani wa kawaida bado ukionyesha hatari ya wastani.",
     "dimPanel": "Kategoria → kipimo",
-    "dimHint": "Kategoria mbili za kipimo cha Vitisho na Mfiduo.",
+    "dimHint": "Kategoria mbili za kipimo cha Vitisho na Kuathirika.",
     "dimNote": "Wastani wa kijiometri uliopimwa upya daima uko sawa au juu ya wastani wa kawaida: kategoria moja kali huweka kipimo kizima juu."
   },
   "classification": {
@@ -251,7 +251,7 @@
     "class": "Daraja",
     "own": "Kila ramani, beji, kipima na jedwali katika mfumo huu hupanga kipimo kwa vizingiti vya kipimo hicho, na Hatari ya INFORM kwa vizingiti vya hatari. Kutumia vizingiti vya hatari kwa kipimo (kama toleo lililopita la zana lilivyofanya) hukiweka katika daraja lisilo sahihi, kwa sababu vipimo havina mgawanyo mmoja.",
     "exampleTitle": "Namba ileile, daraja tofauti",
-    "example": "Alama ya {{value}} ni {{hazardClass}} kwenye mizani ya Vitisho na Mfiduo lakini ni {{riskClass}} tu kwenye mizani ya Hatari ya INFORM.",
+    "example": "Alama ya {{value}} ni {{hazardClass}} kwenye mizani ya Vitisho na Kuathirika lakini ni {{riskClass}} tu kwenye mizani ya Hatari ya INFORM.",
     "if": "kama"
   },
   "levels": {
@@ -380,7 +380,7 @@
     "count": "{{shown}} kati ya {{total}} vinaonyeshwa",
     "download": "Pakua CSV",
     "empty": "Hakuna kiashiria kinacholingana na vichujio hivi.",
-    "exposure": "Mfiduo",
+    "exposure": "Kuathirika",
     "captionGroups": "Vyanzo vya data kwa kila kundi la viashiria",
     "captionWorkbook": "Maelezo ya kiufundi ya viashiria vya kitabu",
     "usedOnly": "Vinavyotumika tu",
@@ -467,7 +467,7 @@
       "chirps": "Mvua ya satelaiti na vituo iliyo nyuma ya vielelezo vya ukame na mvua kubwa vya halmashauri vya Tabaka la Maboresho (CHIRPS v3); haitumiki katika Msingi.",
       "era5": "Joto la uchambuzi upya lililo nyuma ya vielelezo vya uvukizi, SPEI na joto vya Tabaka la Maboresho; halitumiki katika Msingi.",
       "spei": "Kielelezo cha ukame ambacho kina chake huingia katika kiashiria cha ukame.",
-      "census": "Idadi ya watu na maeneo ya halmashauri yaliyo nyuma ya mfiduo na kila kigawanyo cha kwa-kila-mtu."
+      "census": "Idadi ya watu na maeneo ya halmashauri yaliyo nyuma ya kuathirika na kila kigawanyo cha kwa-kila-mtu."
     },
     "newTab": "(hufunguka katika kichupo kipya)",
     "citeTitle": "Jinsi ya kunukuu mbinu hii",
@@ -483,7 +483,7 @@
         "1": "Kila thamani ghafi huwa alama ya 0–10 kwa vipimo vya kitabu cha kazi kwa kiashiria hicho: kigawanyo, uzio wa thamani zilizokithiri, logariti, kiwango rejea na mwelekeo wa athari.",
         "2": "Viashiria hupata wastani kuwa kundi lao, na makundi kuwa kategoria yao, kwa wanachama wenye data pekee: thamani inayokosekana kamwe haihesabiwi kama sifuri.",
         "3": "Kategoria mbili za kipimo huunganishwa kwa wastani wa kijiometri uliopimwa wa INFORM, desimali moja: kategoria moja kali huweka kipimo juu.",
-        "4": "Hatari ni mzizi wa tatu wa Vitisho na Mfiduo × Udhaifu × Ukosefu wa Uwezo wa Kukabiliana: kubwa pale tu vyote vitatu vipo."
+        "4": "Hatari ni mzizi wa tatu wa Vitisho na Kuathirika × Udhaifu × Ukosefu wa Uwezo wa Kukabiliana: kubwa pale tu vyote vitatu vipo."
       }
     },
     "documentation": {

@@ -89,7 +89,7 @@
     "dimensions": {
       "eyebrow": "Vipimo vitatu",
       "title": "Jinsi alama inavyoundwa",
-      "lead": "INFORM huunganisha Vitisho na Mfiduo, Udhaifu na Ukosefu wa Uwezo wa Kukabiliana kwa wastani wa kijiometri. Kila kipimo kina vizingiti vyake vya madaraja, hivyo linganisha madaraja (si namba ghafi) kati ya vipimo."
+      "lead": "INFORM huunganisha Vitisho na Kuathirika, Udhaifu na Ukosefu wa Uwezo wa Kukabiliana kwa wastani wa kijiometri. Kila kipimo kina vizingiti vyake vya madaraja, hivyo linganisha madaraja (si namba ghafi) kati ya vipimo."
     },
     "charts": {
       "eyebrow": "Ulinganisho",
@@ -437,7 +437,7 @@
       "indicators": "Kila kundi la viashiria linapewa alama kuanzia 0 hadi 10, ambapo juu zaidi daima inamaanisha hatari zaidi.",
       "categories": "Kategoria ni wastani wa makundi yake ya viashiria; makundi yasiyo na data yanarukwa, hayahesabiwi kamwe kama sifuri.",
       "dimensions": "Kipimo huunganisha kategoria zake kwa wastani wa kijiometri uliopimwa wa INFORM, na kukadiriwa hadi desimali moja.",
-      "risk": "Hatari ya INFORM ni kipeo cha tatu cha Vitisho na Mfiduo × Udhaifu × Ukosefu wa Uwezo wa Kukabiliana."
+      "risk": "Hatari ya INFORM ni kipeo cha tatu cha Vitisho na Kuathirika × Udhaifu × Ukosefu wa Uwezo wa Kukabiliana."
     },
     "level": {
       "council": "Halmashauri hushiriki data ya udhaifu na uwezo wa kukabiliana ya kitengo chao cha chanzo cha INFORM kwa sababu data za tafiti za kaya hazigawanywi kwa halmashauri.",

@@ -294,7 +294,7 @@
       "duplicate": "{{suggestion}} imejitokeza zaidi ya mara moja. Thamani ya mwisho ndiyo inatumika.",
       "extraValue": "Thamani ya kwanza pekee ndiyo inatumika katika ngazi ya taifa.",
       "tooManyValues": "Thamani ni nyingi kuliko maeneo yaliyo kwenye kiolezo.",
-      "noDataNotAllowed": "Mfiduo hauwezi kuwekwa kama hakuna data."
+      "noDataNotAllowed": "Kuathirika hakuwezi kuwekwa kama hakuna data."
     },
     "leadSector": "Kila eneo linakuwa uwasilishaji wake katika foleni ya uhakiki ya PMO.",
     "leadReviewer": "Kama mkaguzi, thamani zako zinatumika kwenye ramani mara moja, uwasilishaji mmoja kwa kila eneo.",
@@ -570,13 +570,13 @@
   "specs": {
     "HA_NAT_CH-ERO": "Mmomonyoko wa pwani",
     "HA_NAT_DR-FRE": "Marudio ya ukame wa kihistoria",
-    "HA_NAT_EQ-EXP": "Mfiduo wa matetemeko ya ardhi",
+    "HA_NAT_EQ-EXP": "Kuathirika kwa matetemeko ya ardhi",
     "HA_NAT_ED-DEF": "Ukataji misitu (upotevu wa uoto wa miti)",
     "HA_NAT_DE-ERO": "Mmomonyoko wa udongo",
-    "HA_NAT_FL-EXP": "Mfiduo wa mafuriko",
-    "HA_NAT_LS-EXP": "Mfiduo wa maporomoko ya ardhi",
-    "HA_NAT_ST-TC2": "Mfiduo wa vimbunga (kasi ya juu ya upepo)",
-    "HA_NAT_VC-EXP": "Mfiduo wa volkano",
+    "HA_NAT_FL-EXP": "Kuathirika kwa mafuriko",
+    "HA_NAT_LS-EXP": "Kuathirika kwa maporomoko ya ardhi",
+    "HA_NAT_ST-TC2": "Kuathirika kwa vimbunga (kasi ya juu ya upepo)",
+    "HA_NAT_VC-EXP": "Kuathirika kwa volkano",
     "HA_NAT_WF-BURN": "Eneo lililoungua",
     "HA_NAT_WF-FWI": "Fahirisi ya hali ya hewa ya moto",
     "HA_HUM_CR-GCRI": "Uwezekano wa migogoro (GCRI)",

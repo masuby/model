@@ -20,7 +20,7 @@
     "eyebrow": "Mfumo wa INFORM",
     "title": "Hatari hutokea pale vitisho, udhaifu na uwezo mdogo wa kukabiliana vinapokutana",
     "lead": "INFORM huunganisha vipimo vitatu kwa wastani wa kijiometri, hivyo eneo huwa na hatari kubwa pale tu vipimo vyote vitatu vikiwa juu. Mfumo imara wa afya au umaskini mdogo hupunguza hatari kweli, hata pale mafuriko au ukame ni ya mara kwa mara.",
-    "equation": "Hatari = ∛(Vitisho na Mfiduo × Udhaifu × Ukosefu wa Uwezo wa Kukabiliana)",
+    "equation": "Hatari = ∛(Vitisho na Kuathirika × Udhaifu × Ukosefu wa Uwezo wa Kukabiliana)",
     "national": "Tanzania leo",
     "result": "Tanzania: ∛({{h}} × {{v}} × {{c}}) = {{r}}"
   },

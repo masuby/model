@@ -3,7 +3,7 @@
     "kicker": "Kozi ya bure, ya kujisomea",
     "eyebrowShort": "Jifunze",
     "title": "Elewa hatari za maafa nchini Tanzania",
-    "lead": "Masomo saba mafupi ya vitendo kuhusu jinsi INFORM inavyopima vitisho, mfiduo, udhaifu, uwezo wa kukabiliana, hatari na ukali wa janga, kwa kutumia data halisi za Tanzania. Jaribu kila wazo kwa takwimu hai za halmashauri, kisha jipime kwa jaribio fupi.",
+    "lead": "Masomo saba mafupi ya vitendo kuhusu jinsi INFORM inavyopima vitisho, kuathirika, udhaifu, uwezo wa kukabiliana, hatari na ukali wa janga, kwa kutumia data halisi za Tanzania. Jaribu kila wazo kwa takwimu hai za halmashauri, kisha jipime kwa jaribio fupi.",
     "methodology": "Soma mbinu",
     "start": "Anza kozi",
     "continue": "Endelea na somo la {{n}}",
@@ -141,7 +141,7 @@
     },
     "exposureCompare": {
       "title": "Linganisha idadi ya watu wa halmashauri mbili",
-      "lead": "Watu, eneo na msongamano kutoka Sensa ya 2022, muktadha wa mfiduo, kwenye mhimili wa logariti.",
+      "lead": "Watu, eneo na msongamano kutoka Sensa ya 2022, muktadha wa kuathirika, kwenye mhimili wa logariti.",
       "a": "Halmashauri A",
       "b": "Halmashauri B",
       "pick": "Chagua halmashauri",
@@ -291,7 +291,7 @@
     "disaster": {
       "hazard": "Kitisho",
       "hazardQ": "Nini kinaweza kutokea?",
-      "exposure": "Mfiduo",
+      "exposure": "Kuathirika",
       "exposureQ": "Nani yuko njiani?",
       "vulnerability": "Udhaifu",
       "vulnerabilityQ": "Wangedhurika kiasi gani?",
@@ -352,7 +352,7 @@
     "aria": "Cheti cha kukamilisha kozi cha {{name}}",
     "title": "Cheti cha Kukamilisha Kozi",
     "certifies": "Hiki ni kuthibitisha kwamba",
-    "body": "amekamilisha masomo yote {{lessons}} ya “Kuelewa hatari za maafa nchini Tanzania”: vitisho, mfiduo, udhaifu, uwezo wa kukabiliana, Hatari ya INFORM, ukali wa janga na kutumia INFORM kufanya maamuzi.",
+    "body": "amekamilisha masomo yote {{lessons}} ya “Kuelewa hatari za maafa nchini Tanzania”: vitisho, kuathirika, udhaifu, uwezo wa kukabiliana, Hatari ya INFORM, ukali wa janga na kutumia INFORM kufanya maamuzi.",
     "score": "Wastani wa alama za majaribio",
     "date": "Tarehe ya kukamilisha"
   },
@@ -387,7 +387,7 @@
             {
               "type": "callout",
               "tone": "key",
-              "text": "Majanga hayasababishwi na kitisho peke yake. Ndiyo sababu INFORM hupima kitisho <i>pamoja</i> na mfiduo, udhaifu na uwezo wa kukabiliana."
+              "text": "Majanga hayasababishwi na kitisho peke yake. Ndiyo sababu INFORM hupima kitisho <i>pamoja</i> na kuathirika, udhaifu na uwezo wa kukabiliana."
             }
           ]
         },
@@ -397,7 +397,7 @@
           "blocks": [
             {
               "type": "p",
-              "text": "Katika INFORM, kitisho ni sehemu ya kipimo cha kwanza, <b>Vitisho na Mfiduo</b>. Kwa Tanzania kinaunganisha viashiria {{hazardCount}} vya vitisho katika makundi mawili:"
+              "text": "Katika INFORM, kitisho ni sehemu ya kipimo cha kwanza, <b>Vitisho na Kuathirika</b>. Kwa Tanzania kinaunganisha viashiria {{hazardCount}} vya vitisho katika makundi mawili:"
             },
             {
               "type": "compare",
@@ -456,11 +456,11 @@
           "blocks": [
             {
               "type": "p",
-              "text": "Viashiria vinawekewa wastani ili kupata alama za makundi mawili, ya asili na ya binadamu. Kisha makundi hayo mawili yanaunganishwa kwa <b>wastani wa kijiometri uliopimwa</b> wa INFORM kupata alama ya Vitisho na Mfiduo. Somo la 5 linaonyesha jinsi hasa."
+              "text": "Viashiria vinawekewa wastani ili kupata alama za makundi mawili, ya asili na ya binadamu. Kisha makundi hayo mawili yanaunganishwa kwa <b>wastani wa kijiometri uliopimwa</b> wa INFORM kupata alama ya Vitisho na Kuathirika. Somo la 5 linaonyesha jinsi hasa."
             },
             {
               "type": "p",
-              "text": "Alama ya kitaifa ya Vitisho na Mfiduo ya Tanzania ni <b>{{nH}}</b>, ambayo ni “{{nHClass}}” kwenye kipimo cha vitisho."
+              "text": "Alama ya kitaifa ya Vitisho na Kuathirika ya Tanzania ni <b>{{nH}}</b>, ambayo ni “{{nHClass}}” kwenye kipimo cha vitisho."
             },
             {
               "type": "callout",
@@ -512,20 +512,20 @@
             "Janga, kwa sababu mvua ilikuwa kubwa mno",
             "Tatizo la udhaifu",
             "Kushindwa kwa uwezo wa kukabiliana",
-            "Kitisho kisicho na mfiduo karibu kabisa, hivyo hatari ni ndogo"
+            "Kitisho kisicho na kuathirika karibu kabisa, hivyo hatari ni ndogo"
           ],
-          "explain": "Bila watu au mali zilizo njiani, hatari ni ndogo. Hatari inahitaji kitisho <i>na</i> mfiduo, udhaifu na ukosefu wa uwezo wa kukabiliana."
+          "explain": "Bila watu au mali zilizo njiani, hatari ni ndogo. Hatari inahitaji kitisho <i>na</i> kuathirika, udhaifu na ukosefu wa uwezo wa kukabiliana."
         }
       ]
     },
     "exposure": {
-      "title": "Mfiduo",
+      "title": "Kuathirika",
       "subtitle": "Nani na nini kiko njiani mwa madhara",
-      "summary": "Kwa nini mafuriko yaleyale yana uzito zaidi pale watu wanapoishi, na jinsi INFORM inavyohesabu watu walio ndani ya kila eneo la kitisho badala ya kupima mfiduo mara moja.",
+      "summary": "Kwa nini mafuriko yaleyale yana uzito zaidi pale watu wanapoishi, na jinsi INFORM inavyohesabu watu walio ndani ya kila eneo la kitisho badala ya kupima kuathirika mara moja.",
       "objectives": [
-        "Fafanua <b>mfiduo</b> na ueleze kwa nini INFORM inauunganisha na kitisho.",
-        "Eleza jinsi INFORM inavyopima mfiduo <b>kitisho kwa kitisho</b>: watu, au sehemu ya watu, walio ndani ya eneo la kila kitisho.",
-        "Soma idadi ya watu, eneo na msongamano wa halmashauri mbili kutoka sensa ya 2022 na useme vinakuambia nini, na havikuambii nini, kuhusu mfiduo."
+        "Fafanua <b>kuathirika</b> na ueleze kwa nini INFORM inakuunganisha na kitisho.",
+        "Eleza jinsi INFORM inavyopima kuathirika <b>kitisho kwa kitisho</b>: watu, au sehemu ya watu, walio ndani ya eneo la kila kitisho.",
+        "Soma idadi ya watu, eneo na msongamano wa halmashauri mbili kutoka sensa ya 2022 na useme vinakuambia nini, na havikuambii nini, kuhusu kuathirika."
       ],
       "sections": [
         {
@@ -534,16 +534,16 @@
           "blocks": [
             {
               "type": "p",
-              "text": "<b>Mfiduo</b> unaeleza watu, nyumba, mashamba, barabara na huduma zilizo mahali ambapo kitisho kinaweza kupiga. Mafuriko makubwa katika bonde lisilo na watu hayamdhuru mtu; mafuriko ya wastani katika mji wenye watu wengi yanaweza kuathiri maelfu ya kaya."
+              "text": "<b>Kuathirika</b> unaeleza watu, nyumba, mashamba, barabara na huduma zilizo mahali ambapo kitisho kinaweza kupiga. Mafuriko makubwa katika bonde lisilo na watu hayamdhuru mtu; mafuriko ya wastani katika mji wenye watu wengi yanaweza kuathiri maelfu ya kaya."
             },
             {
               "type": "p",
-              "text": "Ndiyo sababu INFORM haitenganishi kitisho na mfiduo: kipimo cha kwanza kinaitwa kihalisi <b>Vitisho na Mfiduo</b>."
+              "text": "Ndiyo sababu INFORM haitenganishi kitisho na kuathirika: kipimo cha kwanza kinaitwa kihalisi <b>Vitisho na Kuathirika</b>."
             },
             {
               "type": "callout",
               "tone": "key",
-              "text": "Mfiduo unajibu swali moja: <i>nani au nini kiko njiani mwa madhara?</i> Bado hauelezi wangedhurika kiasi gani. Hilo ni udhaifu, somo linalofuata."
+              "text": "Kuathirika kunajibu swali moja: <i>nani au nini kiko njiani mwa madhara?</i> Bado hauelezi wangedhurika kiasi gani. Hilo ni udhaifu, somo linalofuata."
             }
           ]
         },
@@ -553,21 +553,21 @@
           "blocks": [
             {
               "type": "p",
-              "text": "INFORM haipimi mfiduo mara moja kwa halmashauri. Kila kiashiria cha kitisho cha asili tayari huhesabu watu walio <i>ndani ya eneo la kitisho hicho</i>: mfiduo wa mafuriko ni sehemu ya watu walio katika maeneo yanayokadiriwa kuwa na mafuriko (JRC), mfiduo wa maporomoko ni sehemu ya watu walio katika ardhi inayoweza kuporomoka (Benki ya Dunia), mfiduo wa vimbunga ni sehemu ya watu wanaofikiwa na upepo wa vimbunga (4TU STORM), na viashiria vya tetemeko na volkano ni vielelezo vya mfiduo (GEM, NOAA)."
+              "text": "INFORM haipimi kuathirika mara moja kwa halmashauri. Kila kiashiria cha kitisho cha asili tayari huhesabu watu walio <i>ndani ya eneo la kitisho hicho</i>: kuathirika kwa mafuriko ni sehemu ya watu walio katika maeneo yanayokadiriwa kuwa na mafuriko (JRC), kuathirika kwa maporomoko ni sehemu ya watu walio katika ardhi inayoweza kuporomoka (Benki ya Dunia), kuathirika kwa vimbunga ni sehemu ya watu wanaofikiwa na upepo wa vimbunga (4TU STORM), na viashiria vya tetemeko na volkano ni vielelezo vya kuathirika (GEM, NOAA)."
             },
             {
               "type": "p",
-              "text": "Hivyo halmashauri yenye bonde kubwa la mafuriko lakini watu wachache ndani yake hupata alama ya chini ya mafuriko, wakati mji wenye watu wengi kwenye bonde dogo hupata alama ya juu. Kitisho na mfiduo huunganishwa ndani ya kila kiashiria, ndiyo maana kipimo kinaitwa Vitisho na Mfiduo na kielelezo hakina alama tofauti ya mfiduo."
+              "text": "Hivyo halmashauri yenye bonde kubwa la mafuriko lakini watu wachache ndani yake hupata alama ya chini ya mafuriko, wakati mji wenye watu wengi kwenye bonde dogo hupata alama ya juu. Kitisho na kuathirika huunganishwa ndani ya kila kiashiria, ndiyo maana kipimo kinaitwa Vitisho na Kuathirika na kielelezo hakina alama tofauti ya kuathirika."
             },
             {
               "type": "formula",
-              "text": "mfiduo wa mafuriko (%) = watu wanaoishi katika maeneo ya mafuriko ÷ idadi ya watu wa halmashauri × 100",
+              "text": "kuathirika kwa mafuriko (%) = watu wanaoishi katika maeneo ya mafuriko ÷ idadi ya watu wa halmashauri × 100",
               "caption": "Kila kiashiria kisha hupimwa kuwa 0–10 dhidi ya thamani za chini na za juu kabisa kati ya vitengo vya Tanzania."
             },
             {
               "type": "callout",
               "tone": "key",
-              "text": "Msongamano pekee si mfiduo. Halmashauri ya wafugaji yenye watu watano kwa km² inaweza bado kuwa na wengi wao wakiishi kwenye bonde la mafuriko; jiji lenye watu wengi lililo sehemu za juu linaweza kuwa na karibu hakuna. Ndiyo maana INFORM husoma ramani za vitisho na gridi za watu kwa pamoja."
+              "text": "Msongamano pekee si kuathirika. Halmashauri ya wafugaji yenye watu watano kwa km² inaweza bado kuwa na wengi wao wakiishi kwenye bonde la mafuriko; jiji lenye watu wengi lililo sehemu za juu linaweza kuwa na karibu hakuna. Ndiyo maana INFORM husoma ramani za vitisho na gridi za watu kwa pamoja."
             }
           ]
         },
@@ -596,36 +596,36 @@
             {
               "type": "callout",
               "tone": "warn",
-              "text": "Kabla ya Oktoba 2026 tovuti hii ilipima mfiduo kama msongamano wa watu kwa logariti na kuuruhusu kuongeza kiashiria cha mafuriko (mafuriko = max(h, √(h × E))). Kanuni hiyo haikuwa ya INFORM. Imeondolewa kwenye Msingi, ambapo kiashiria cha mafuriko sasa ni thamani ya kitabu chenyewe; uboreshaji wowote wa Tanzania ni wa Tabaka la Maboresho lililoandikwa."
+              "text": "Kabla ya Oktoba 2026 tovuti hii ilipima kuathirika kama msongamano wa watu kwa logariti na kuuruhusu kuongeza kiashiria cha mafuriko (mafuriko = max(h, √(h × E))). Kanuni hiyo haikuwa ya INFORM. Imeondolewa kwenye Msingi, ambapo kiashiria cha mafuriko sasa ni thamani ya kitabu chenyewe; uboreshaji wowote wa Tanzania ni wa Tabaka la Maboresho lililoandikwa."
             }
           ]
         }
       ],
       "takeaways": [
-        "Mfiduo ni watu na mali zilizo njiani mwa madhara.",
+        "Kuathirika ni watu na mali zilizo njiani mwa madhara.",
         "INFORM inaupima kitisho kwa kitisho, ndani ya kila kiashiria cha kitisho: watu, au sehemu ya watu, walio katika eneo la kitisho hicho.",
-        "Idadi ya watu, eneo na msongamano wa sensa ni muktadha wa kusoma alama, si alama tofauti ya mfiduo."
+        "Idadi ya watu, eneo na msongamano wa sensa ni muktadha wa kusoma alama, si alama tofauti ya kuathirika."
       ],
       "quiz": [
         {
-          "q": "Mfiduo unapima nini?",
+          "q": "Kuathirika kunapima nini?",
           "options": [
             "Jinsi kaya zilivyo maskini",
             "Mara ngapi mafuriko hutokea",
             "Nani na nini kiko mahali ambapo kitisho kinaweza kupiga",
             "Uimara wa serikali za mitaa"
           ],
-          "explain": "Mfiduo unahusu kuwepo njiani mwa madhara. Umaskini ni sehemu ya udhaifu, marudio ya mafuriko ni sehemu ya kitisho, na uimara wa serikali ni sehemu ya uwezo wa kukabiliana."
+          "explain": "Kuathirika kunahusu kuwepo njiani mwa madhara. Umaskini ni sehemu ya udhaifu, marudio ya mafuriko ni sehemu ya kitisho, na uimara wa serikali ni sehemu ya uwezo wa kukabiliana."
         },
         {
-          "q": "INFORM huingiza mfiduo vipi katika alama ya hatari?",
+          "q": "INFORM huingiza kuathirika vipi katika alama ya hatari?",
           "options": [
-            "Kupitia kielelezo kimoja cha mfiduo kwa halmashauri kinachozidisha kila kitisho",
+            "Kupitia kielelezo kimoja cha kuathirika kwa halmashauri kinachozidisha kila kitisho",
             "Ndani ya kila kiashiria cha kitisho, kinachohesabu watu walio katika eneo la kitisho hicho",
-            "Haiuingizi: mfiduo umeachwa nje ya INFORM",
+            "Haiuingizi: kuathirika kumeachwa nje ya INFORM",
             "Kupitia msongamano wa watu wa mkoa"
           ],
-          "explain": "Hakuna alama tofauti ya mfiduo. Viashiria vya mafuriko, maporomoko, vimbunga, tetemeko na volkano kila kimoja huhesabu watu, au sehemu ya watu, walio ndani ya eneo lake la kitisho."
+          "explain": "Hakuna alama tofauti ya kuathirika. Viashiria vya mafuriko, maporomoko, vimbunga, tetemeko na volkano kila kimoja huhesabu watu, au sehemu ya watu, walio ndani ya eneo lake la kitisho."
         },
         {
           "q": "Halmashauri mbili zina mabonde ya mafuriko ya ukubwa sawa na watu 400,000 kila moja. Katika halmashauri A karibu kila mtu anaishi bondeni; katika B karibu kila mtu anaishi sehemu za juu. Ipi inapata alama ya juu zaidi ya kiashiria cha mafuriko?",
@@ -635,7 +635,7 @@
             "Zote sawa: eneo la mafuriko ni sawa",
             "Hakuna: kiashiria cha mafuriko hakijali watu wanaishi wapi"
           ],
-          "explain": "Mfiduo wa mafuriko ni sehemu ya watu walio katika maeneo ya mafuriko. Eneo la kitisho sawa, idadi ya watu sawa, lakini watu wengi zaidi wa A wako ndani ya eneo hilo, hivyo A inapata alama ya juu zaidi."
+          "explain": "Kuathirika kwa mafuriko ni sehemu ya watu walio katika maeneo ya mafuriko. Eneo la kitisho sawa, idadi ya watu sawa, lakini watu wengi zaidi wa A wako ndani ya eneo hilo, hivyo A inapata alama ya juu zaidi."
         }
       ]
     },
@@ -644,7 +644,7 @@
       "subtitle": "Kwa nini tukio lilelile huwaumiza baadhi ya watu zaidi",
       "summary": "Umaskini, afya, ukosefu wa chakula na kuhama makazi: hali zinazowafanya watu kuwa rahisi zaidi kudhurika.",
       "objectives": [
-        "Eleza <b>udhaifu</b> na jinsi unavyotofautiana na mfiduo.",
+        "Eleza <b>udhaifu</b> na jinsi unavyotofautiana na kuathirika.",
         "Taja makundi mawili ya udhaifu ya INFORM na viashiria vyake.",
         "Soma wasifu wa udhaifu wa halmashauri na utambue kinachouendesha."
       ],
@@ -664,7 +664,7 @@
             {
               "type": "callout",
               "tone": "key",
-              "text": "Mfiduo unaeleza <i>nani yuko njiani</i>. Udhaifu unaeleza <i>wangedhurika kiasi gani</i>."
+              "text": "Kuathirika kunaeleza <i>nani yuko njiani</i>. Udhaifu unaeleza <i>wangedhurika kiasi gani</i>."
             }
           ]
         },
@@ -731,11 +731,11 @@
           "q": "Vijiji viwili vinakumbwa na mafuriko yaleyale. Kimoja kinateseka zaidi kwa sababu kaya ni maskini zaidi na watoto wengi wana utapiamlo. Wazo lipi la INFORM linaeleza tofauti hiyo?",
           "options": [
             "Kitisho",
-            "Mfiduo",
+            "Kuathirika",
             "Udhaifu",
             "Ukali wa janga"
           ],
-          "explain": "Kitisho na mfiduo ni sawa; kinachotofautiana ni jinsi watu walivyo rahisi kudhurika, yaani udhaifu wao."
+          "explain": "Kitisho na kuathirika ni sawa; kinachotofautiana ni jinsi watu walivyo rahisi kudhurika, yaani udhaifu wao."
         },
         {
           "q": "Kiashiria kipi ni cha kundi la <b>makundi hatarishi</b>?",
@@ -900,7 +900,7 @@
           "blocks": [
             {
               "type": "p",
-              "text": "Hatari ya INFORM inaunganisha vipimo vitatu ulivyojifunza, yaani Vitisho na Mfiduo (H), Udhaifu (V) na Ukosefu wa Uwezo wa Kukabiliana (LCC), kuwa alama moja kati ya 0 na 10:"
+              "text": "Hatari ya INFORM inaunganisha vipimo vitatu ulivyojifunza, yaani Vitisho na Kuathirika (H), Udhaifu (V) na Ukosefu wa Uwezo wa Kukabiliana (LCC), kuwa alama moja kati ya 0 na 10:"
             },
             {
               "type": "formula",
@@ -1158,7 +1158,7 @@
             "Utata",
             "Uaminifu",
             "Hali ya watu walioathirika",
-            "Vitisho na Mfiduo"
+            "Vitisho na Kuathirika"
           ],
           "explain": "Ndani ya sehemu ya kijiometri, Athari ina uzito wa ⅓ na Hali ya watu walioathirika ⅔. Uaminifu huripotiwa kando na si sehemu ya alama."
         },
