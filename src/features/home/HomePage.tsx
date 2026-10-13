@@ -60,7 +60,8 @@ export default function HomePage() {
           <NationalCharts model={model} className="mt-5 border-t border-border pt-4" />
         </div>
 
-        <figure className="w-full lg:-mr-8 lg:w-[calc(100%+2rem)] lg:self-center xl:-mr-10 xl:w-[calc(100%+2.5rem)]">
+        {/* The map bleeds into the page margin: the padding (2rem) plus what the viewport leaves beside the 1320 px container, up to 3.25rem, never past the edge. */}
+        <figure className="w-full lg:-mr-[var(--bleed)] lg:w-[calc(100%+var(--bleed))] lg:self-center" style={{ ['--bleed' as string]: 'clamp(2rem, calc(2rem + (100vw - 1320px) / 2 - 4px), 3.25rem)' }}>
           <div className="aspect-[1000/966] w-full">
             <React.Suspense fallback={<div className="size-full rounded-md bg-muted/60" />}>
               <StaticMap model={model} metric={riskMetric} className="size-full" onSelect={(u) => navigate(`/area/${u.id}`)} />

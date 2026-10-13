@@ -6,6 +6,8 @@
 
 - The map sits in the middle of the hero row rather than at its top, and the relation chart reads
   stronger: black, bold title, note, axis labels and legend, thicker lines and a firmer baseline.
+- The map reaches further right: it bleeds into the page margin by the padding plus half of what the
+  viewport leaves beside the container, up to 3.25rem, and never past the screen's edge.
 - The two charts under the headline have more horizontal space: a wider charts column (the map column
   is a little narrower, still reaching into the page margin), more air between the two charts, between
   each label and its value, and between the donut and its legend.
