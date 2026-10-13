@@ -1,6 +1,7 @@
 /**
  * Supabase repository: shared, multi-user persistence with row-level security.
- * Schema: supabase/migrations/0001–0004. Every write that changes what the public sees runs server-side
+ * Schema: supabase/migrations/0001–0016; a database still on an older migration is read with fallbacks
+ * (see `schemaGaps`). Every write that changes what the public sees runs server-side
  * in a security-definer function (review_submission, submit_raw_values, review_raw_submission …),
  * which re-checks the caller's role and institution and writes an audit entry in the same transaction.
  */
@@ -191,9 +192,60 @@ const toRequest = (r: RequestRow): DataRequest => ({
   responseNote: r.response_note,
 });
 
-function must<T>(res: { data: T | null; error: { message: string } | null }): T {
-  if (res.error) throw new Error(res.error.message);
+/** A database error with PostgREST's code, so a reader can tell a missing table or column from a real failure. */
+export class DbError extends Error {
+  constructor(
+    message: string,
+    readonly code: string | null = null,
+  ) {
+    super(message);
+    this.name = 'DbError';
+  }
+}
+
+function must<T>(res: { data: T | null; error: { message: string; code?: string | null } | null }): T {
+  if (res.error) throw new DbError(res.error.message, res.error.code ?? null);
   return res.data as T;
+}
+
+/* ------------------------------------------------------------------------------------------------ */
+/* An older database                                                                                  */
+/* ------------------------------------------------------------------------------------------------ */
+
+/**
+ * The shared database may be behind the application (a migration in supabase/migrations not yet
+ * applied). A read that meets a table or column the older schema lacks falls back to what it has, and
+ * the gap is recorded here so the portal can tell an administrator what to apply.
+ */
+const gaps: string[] = [];
+let gapsSnapshot: readonly string[] = [];
+const gapListeners = new Set<() => void>();
+export const schemaGaps = (): readonly string[] => gapsSnapshot;
+export function subscribeSchemaGaps(listener: () => void): () => void {
+  gapListeners.add(listener);
+  return () => {
+    gapListeners.delete(listener);
+  };
+}
+function recordGap(name: string): void {
+  if (gaps.includes(name)) return;
+  gaps.push(name);
+  gapsSnapshot = [...gaps];
+  for (const l of gapListeners) l();
+}
+export const isMissingRelation = (e: unknown): boolean => e instanceof DbError && (e.code === 'PGRST205' || e.code === '42P01' || /could not find the table|relation .* does not exist/i.test(e.message));
+export const isMissingColumn = (e: unknown): boolean => e instanceof DbError && (e.code === '42703' || /column .* does not exist/i.test(e.message));
+export const isMissingFunction = (e: unknown): boolean => e instanceof DbError && (e.code === 'PGRST202' || /could not find the function/i.test(e.message));
+
+/** Run a read; where its table is missing, record the gap and return `fallback`. */
+async function orFallback<T>(name: string, run: () => Promise<T>, fallback: T): Promise<T> {
+  try {
+    return await run();
+  } catch (e) {
+    if (!isMissingRelation(e)) throw e;
+    recordGap(name);
+    return fallback;
+  }
 }
 
 /** PostgREST caps a response at 1000 rows; read a table page by page (the query must be ordered). */
@@ -215,7 +267,7 @@ export function createSupabaseRepository(sb: SupabaseClient): Repository {
     async getOverrides() {
       const rows = (await signedIn())
         ? await selectAll((a, b) => sb.from('indicator_values').select('unit_id, ref, value, authority, dataset, note, author_name, updated_at').order('unit_id').order('ref').range(a, b))
-        : (await selectAll((a, b) => sb.from('indicator_values_public').select('unit_id, ref, value, authority, dataset, note, updated_at').order('unit_id').order('ref').range(a, b))).map((r) => ({ ...r, author_name: null }));
+        : (await orFallback('indicator_values_public', () => selectAll((a, b) => sb.from('indicator_values_public').select('unit_id, ref, value, authority, dataset, note, updated_at').order('unit_id').order('ref').range(a, b)), [])).map((r) => ({ ...r, author_name: null }));
       const out: Overrides = {};
       for (const r of rows) {
         (out[r.unit_id] ??= {})[r.ref as EditRef] = {
@@ -300,7 +352,7 @@ export function createSupabaseRepository(sb: SupabaseClient): Repository {
       return must(await sb.rpc('create_requests', { p_spec_ids: specIds, p_kind: kind, p_due: dueDate ?? undefined, p_message: message }));
     },
     async listNotifications() {
-      const rows = must(await sb.from('notifications').select('*').order('created_at', { ascending: false }).limit(300));
+      const rows = await orFallback('notifications', async () => must(await sb.from('notifications').select('*').order('created_at', { ascending: false }).limit(300)), []);
       return rows.map((r) => ({
         id: r.id,
         institutionKey: r.institution_key,
@@ -323,15 +375,44 @@ export function createSupabaseRepository(sb: SupabaseClient): Repository {
       must(await sb.rpc('close_request', { p_id: id, p_status: status, p_note: note }));
     },
     async getRawValues(): Promise<RawValue[]> {
-      const rows = (await signedIn())
-        ? await selectAll((a, b) =>
+      interface Row {
+        spec_id: string;
+        unit_id: string;
+        level: string;
+        value: number | string | null;
+        value_type?: string | null;
+        method?: string | null;
+        source?: string | null;
+        dataset: string | null;
+        period: string | null;
+        institution_key: string | null;
+        author_name: string | null;
+        updated_at: string;
+      }
+      let rows: Row[];
+      if (await signedIn()) {
+        try {
+          rows = await selectAll((a, b) =>
             sb.from('raw_values').select('spec_id, unit_id, level, value, value_type, method, source, dataset, period, institution_key, author_name, updated_at').order('spec_id').order('unit_id').range(a, b),
+          );
+        } catch (e) {
+          // Before migration 0006 a value has no type, method or source: read what the table has.
+          if (!isMissingColumn(e)) throw e;
+          recordGap('raw_values.value_type');
+          rows = await selectAll((a, b) => sb.from('raw_values').select('spec_id, unit_id, level, value, dataset, period, institution_key, author_name, updated_at').order('spec_id').order('unit_id').range(a, b));
+        }
+      } else {
+        rows = (
+          await orFallback(
+            'raw_values_public',
+            () =>
+              selectAll((a, b) =>
+                sb.from('raw_values_public').select('spec_id, unit_id, level, value, value_type, method, source, dataset, period, institution_key, updated_at').order('spec_id').order('unit_id').range(a, b),
+              ),
+            [],
           )
-        : (
-            await selectAll((a, b) =>
-              sb.from('raw_values_public').select('spec_id, unit_id, level, value, value_type, method, source, dataset, period, institution_key, updated_at').order('spec_id').order('unit_id').range(a, b),
-            )
-          ).map((r) => ({ ...r, author_name: null }));
+        ).map((r) => ({ ...r, author_name: null }));
+      }
       return rows
         .filter((r) => LEVELS.includes(r.level as RawLevel))
         .map((r) => ({
@@ -340,8 +421,8 @@ export function createSupabaseRepository(sb: SupabaseClient): Repository {
           level: r.level as RawLevel,
           value: r.value == null ? null : Number(r.value),
           valueType: r.value_type === 'score' ? ('score' as const) : ('raw' as const),
-          method: r.method,
-          source: r.source,
+          method: r.method ?? null,
+          source: r.source ?? null,
           dataset: r.dataset,
           period: r.period,
           institution: r.institution_key,
@@ -357,19 +438,31 @@ export function createSupabaseRepository(sb: SupabaseClient): Repository {
       return [...must(pending), ...must(decided)].map(toRawSubmission).sort((a, b) => b.createdAt.localeCompare(a.createdAt));
     },
     async submitRaw(input) {
-      const id = must(
-        await sb.rpc('submit_raw_values', {
-          p_spec_id: input.specId,
-          p_entries: input.entries.map((e) => ({ unit_id: e.unitId, level: e.level, value: e.value, previous: e.previous ?? null })) as unknown as Json,
-          p_dataset: input.dataset,
-          p_period: input.period,
-          p_note: input.note,
-          p_request_id: input.requestId ?? undefined,
-          p_value_type: input.valueType ?? 'raw',
-          p_method: input.valueType === 'score' ? (input.method ?? 'inform') : undefined,
-          p_source: input.source,
-        }),
-      );
+      const base = {
+        p_spec_id: input.specId,
+        p_entries: input.entries.map((e) => ({ unit_id: e.unitId, level: e.level, value: e.value, previous: e.previous ?? null })) as unknown as Json,
+        p_dataset: input.dataset,
+        p_period: input.period,
+        p_note: input.note,
+        p_request_id: input.requestId ?? undefined,
+      };
+      let id: string;
+      try {
+        id = must(
+          await sb.rpc('submit_raw_values', {
+            ...base,
+            p_value_type: input.valueType ?? 'raw',
+            p_method: input.valueType === 'score' ? (input.method ?? 'inform') : undefined,
+            p_source: input.source,
+          }),
+        );
+      } catch (e) {
+        // Before migration 0006 the function takes no value type, method or source: a measured value still goes through.
+        if (!isMissingFunction(e)) throw e;
+        recordGap('submit_raw_values');
+        if (input.valueType === 'score') throw new DbError('Score deposits need the pending database update (migration 0006).', 'PGRST202');
+        id = must(await sb.rpc('submit_raw_values', base));
+      }
       return toRawSubmission(must(await sb.from('raw_submissions').select('*').eq('id', id).single()));
     },
     async reviewRaw(id, decision, _reviewer, note) {
@@ -381,7 +474,7 @@ export function createSupabaseRepository(sb: SupabaseClient): Repository {
     async listValidations(): Promise<Validation[]> {
       const rows = (await signedIn())
         ? must(await sb.from('indicator_validations').select('*').order('validated_at', { ascending: false }).limit(1000))
-        : must(await sb.from('indicator_validations_public').select('*').order('validated_at', { ascending: false }).limit(1000)).map((r) => ({ ...r, validated_by_name: '', validated_by: null }));
+        : (await orFallback('indicator_validations_public', async () => must(await sb.from('indicator_validations_public').select('*').order('validated_at', { ascending: false }).limit(1000)), [])).map((r) => ({ ...r, validated_by_name: '', validated_by: null }));
       return rows.map((r) => ({
         id: String(r.id),
         specId: r.spec_id,
@@ -396,14 +489,30 @@ export function createSupabaseRepository(sb: SupabaseClient): Repository {
       must(await sb.rpc('confirm_values', { p_spec_id: specId, p_request_id: requestId ?? undefined, p_note: note }));
     },
     async listProfiles(): Promise<Profile[]> {
-      const rows = must(await sb.from('profiles').select('id, full_name, institution, institution_key, role, scope_unit_id').order('full_name'));
+      interface Row {
+        id: string;
+        full_name: string;
+        institution: string | null;
+        institution_key: string | null;
+        role: string;
+        scope_unit_id?: string | null;
+      }
+      let rows: Row[];
+      try {
+        rows = must(await sb.from('profiles').select('id, full_name, institution, institution_key, role, scope_unit_id').order('full_name'));
+      } catch (e) {
+        // Before migration 0007 a profile has no area scope.
+        if (!isMissingColumn(e)) throw e;
+        recordGap('profiles.scope_unit_id');
+        rows = must(await sb.from('profiles').select('id, full_name, institution, institution_key, role').order('full_name'));
+      }
       return rows.map((r) => ({
         id: r.id,
         fullName: r.full_name || 'User',
         institution: r.institution,
         institutionKey: r.institution_key,
         role: ROLES.includes(r.role as Role) ? (r.role as Role) : 'viewer',
-        scopeUnitId: r.scope_unit_id,
+        scopeUnitId: r.scope_unit_id ?? null,
       }));
     },
     async updateProfile(id, patch) {
@@ -414,7 +523,7 @@ export function createSupabaseRepository(sb: SupabaseClient): Repository {
       must(await sb.from('profiles').update(update).eq('id', id));
     },
     async listCommitteeRecords(): Promise<CommitteeRecord[]> {
-      const rows = must(await sb.from('committee_records').select('*').order('created_at', { ascending: false }).limit(3000));
+      const rows = await orFallback('committee_records', async () => must(await sb.from('committee_records').select('*').order('created_at', { ascending: false }).limit(3000)), []);
       return rows.map(toCommitteeRecord);
     },
     async submitCommittee(input) {

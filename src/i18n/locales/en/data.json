@@ -70,6 +70,17 @@
     "profileErrorTitle": "Your account could not be loaded",
     "profileErrorLead": "You are signed in, but your INFORM profile was not found or could not be read. Ask a PMO administrator to check your account, or sign out and try again."
   },
+  "schema": {
+    "title": "Database update pending",
+    "lead": "The shared database is behind this version of the portal. Apply migrations 0006 to 0016 from the repository's supabase/migrations folder in the Supabase SQL editor, in order. Until then these parts are unavailable:",
+    "parts": {
+      "committee": "the committee desk and its records",
+      "notifications": "notifications and the inbox",
+      "deposits": "score deposits, and the method and source of a value",
+      "publicViews": "approved values for visitors",
+      "scopes": "committee roles with an area"
+    }
+  },
   "signIn": {
     "title": "Sign in to contribute",
     "lead": "The portal is for government officers and partners who maintain INFORM data. Anyone can browse approved changes; contributing needs an account.",

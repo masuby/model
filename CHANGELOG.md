@@ -2,6 +2,16 @@
 
 ## Unreleased
 
+### The portal works with a database still on an older migration (13 October 2026)
+
+- A live database that has not received migrations 0006 to 0016 no longer breaks the portal: values are
+  read without their type, method and source where the column does not exist yet, the committee desk,
+  notifications and the public views read as empty where their tables do not exist, a measured value
+  still goes through the older submit function (a score deposit says plainly that it needs the update),
+  and the people list reads without the area scope. Each gap met is recorded, and administrators and
+  PMO reviewers see a "Database update pending" notice naming the parts that stay unavailable until the
+  migrations are applied.
+
 ### Plain words on the Methodology page and the portal (13 October 2026)
 
 - The Methodology page states the data simply: the register's columns read "Dataset" and "Method", a

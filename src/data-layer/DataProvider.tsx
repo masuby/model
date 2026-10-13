@@ -13,7 +13,7 @@ import type { BaselineRaw, RawValue } from '@/engine/risk/rawValues';
 import type { DrrRecordsByUnit, EditRef, Overrides, RiskModel } from '@/engine/risk/types';
 import { appliedBy, overridesAsOf, rawAsOf } from './versions';
 import { createLocalRepository, demoProfile } from './local';
-import { createSupabaseClient, createSupabaseRepository, supabaseConfigured, type SupabaseClient } from './supabase';
+import { createSupabaseClient, createSupabaseRepository, schemaGaps, subscribeSchemaGaps, supabaseConfigured, type SupabaseClient } from './supabase';
 import { APPLIED_DIRECTLY_NOTE, approvedDrrByUnit, type CommitteeRecord, type DrrFields, type NewCommitteeRecord, type NewRawSubmission, type NewSubmission, type Profile, type Repository, type RequestKind, type Role } from './types';
 
 export const queryClient = new QueryClient({
@@ -191,6 +191,11 @@ export function DataProvider({ children }: { children: React.ReactNode }) {
       <DataProviderInner>{children}</DataProviderInner>
     </QueryClientProvider>
   );
+}
+
+/** The parts of the shared database this version needs and the live one lacks (empty in demo mode, and once every migration is applied). */
+export function useSchemaGaps(): readonly string[] {
+  return React.useSyncExternalStore(subscribeSchemaGaps, schemaGaps, schemaGaps);
 }
 
 export function useData(): DataContextValue {
