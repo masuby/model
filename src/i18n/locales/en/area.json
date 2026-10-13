@@ -45,27 +45,7 @@
     "density": "{{value}} people per km²"
   },
   "notices": {
-    "nationalAggregate": "This national value is the INFORM aggregate of all {{count}} councils, built exactly as the regions are (indicator groups averaged, then categories, dimensions and the cube root). It is not an official INFORM country score: the Tanzania workbook publishes none, and INFORM Global uses other indicators and is not comparable.",
-    "aggregated_one": "Aggregated from {{count}} council the INFORM way (indicator groups averaged first, then categories and dimensions), not as an average of risk scores.",
-    "aggregated_other": "Aggregated from {{count}} councils the INFORM way (indicator groups averaged first, then categories and dimensions), not as an average of risk scores.",
-    "sourceUnit_one": "A reference unit of the {{total}}-unit INFORM workbook. {{count}} council uses its vulnerability and coping data.",
-    "sourceUnit_other": "A reference unit of the {{total}}-unit INFORM workbook. {{count}} councils use its vulnerability and coping data.",
-    "inherited": "A newly created council: it inherits its data from {{parent}} until its own figures are published.",
-    "shared_one": "In the Core every score of this council comes from INFORM source unit",
-    "shared_other": "In the Core every score is shared by {{count}} councils and comes from INFORM source unit",
-    "edits_one": "{{count}} value has been updated through reviewed data entry.",
-    "edits_other": "{{count}} values have been updated through reviewed data entry.",
-    "editsMembers_one": "Includes {{count}} reviewed update made in its councils.",
-    "editsMembers_other": "Includes {{count}} reviewed updates made in its councils.",
-    "latestEdit": "Latest: {{indicator}} by {{authority}}, {{date}}.",
-    "unknownAuthority": "an authorised officer",
-    "ownValues_one": ", except {{count}} value recorded for this council.",
-    "ownValues_other": ", except {{count}} values recorded for this council.",
-    "title": "About the data ({{count}})",
-    "benchmark_one": "{{count}} indicator group carries a Benchmark 2026 value: an institutional value prepared from public datasets and dated 10 October 2026; a newer value approved through the Data portal replaces it.",
-    "benchmark_other": "{{count}} indicator groups carry Benchmark 2026 values: institutional values prepared from public datasets and dated 10 October 2026; a newer value approved through the Data portal replaces them.",
-    "benchmarkMembers_one": "Its councils carry Benchmark 2026 values in {{count}} indicator group (institutional values prepared from public datasets, 10 October 2026).",
-    "benchmarkMembers_other": "Its councils carry Benchmark 2026 values in {{count}} indicator groups (institutional values prepared from public datasets, 10 October 2026)."
+    "unknownAuthority": "an authorised officer"
   },
   "nav": {
     "label": "Sections of this profile",
@@ -89,7 +69,7 @@
     "dimensions": {
       "eyebrow": "The three dimensions",
       "title": "How the score is built",
-      "lead": "INFORM combines Hazard & Exposure, Vulnerability and Lack of Coping Capacity with a geometric mean. Each dimension is classed on its own thresholds, so compare classes (not raw numbers) across dimensions."
+      "lead": "INFORM combines Hazard & Exposure, Vulnerability and Lack of Coping Capacity with a geometric mean."
     },
     "charts": {
       "eyebrow": "Comparisons",
@@ -100,8 +80,8 @@
         "national": "The national picture"
       },
       "lead": {
-        "council": "How this profile compares with the regional and national picture, and where it sits among its peers. Download any chart as an image, or its data as CSV.",
-        "source": "How this profile compares with the regional and national picture, and where it sits among its peers. Download any chart as an image, or its data as CSV.",
+        "council": "Compared with the region, the nation and its peers.",
+        "source": "Compared with the region, the nation and its peers.",
         "region": "How this region compares with the national picture, and where it sits among the other regions. Download any chart as an image, or its data as CSV.",
         "national": "The category and indicator group scores of the official national profile, and how the councils spread around it. Download any chart as an image, or its data as CSV."
       }
@@ -114,7 +94,7 @@
     "indicators": {
       "eyebrow": "Evidence",
       "title": "Every indicator group, with its source",
-      "lead": "All {{count}} indicator groups behind the score, arranged by dimension and category, with the responsible authority, the dataset and how local the data are."
+      "lead": "The indicator groups behind the score, by dimension and category."
     },
     "places": {
       "eyebrow": "Places",
@@ -138,12 +118,12 @@
     "advancement": {
       "eyebrow": "Advancement layer",
       "title": "What Tanzanian sub-indicators would change",
-      "lead": "A separate layer that adds council-level evidence to the Core’s indicator groups. It is computed beside the Core and shown only here; nothing above it changes."
+      "lead": "A separate layer of council-level evidence, shown only here."
     },
     "why": {
       "eyebrow": "Why this score",
       "title": "What drives the score",
-      "lead": "The three dimensions and the indicator groups that weigh most. Each dimension is classed on its own thresholds, so compare classes, not raw numbers, across dimensions."
+      "lead": "The three dimensions and the indicator groups that weigh most."
     }
   },
   "glance": {
@@ -162,8 +142,8 @@
     "coverage": "<b>{{have}} of {{total}} indicator groups</b> carry data; missing ones are left out of the averages, never counted as zero.",
     "nationalOverall": "Tanzania’s INFORM Risk, aggregated from all its councils, is <b>{{score}} ({{cls}})</b>.",
     "nationalAbove": "<b>{{n}} of {{total}} councils</b> score above the national value.",
-    "reliability": "Lack of reliability, after INFORM’s index, is <b>{{lack}} of 10</b>: from the missing groups above, the age of the data (about {{age}} years){{inherited}}.",
-    "inheritedNote": " and values inherited from {{parent}}",
+    "reliability": "Lack of reliability: <b>{{lack}} of 10</b>{{inherited}}.",
+    "inheritedNote": " · data inherited from {{parent}}",
     "sharedNote": " and values shared with another council",
     "driverNote": "<b>Data note:</b> the workbook value of {{indicator}} is {{status}}; the note is beside it in the indicator table and in the integrity register."
   },
@@ -178,10 +158,9 @@
   },
   "dims": {
     "categories": "Categories",
-    "tickNote": "In the category rows, the tick marks the national value.",
-    "scaleNote": "Classes use each dimension’s own INFORM thresholds (see Methodology below).",
-    "arrowsRegion": "Arrows compare with the region and the nation: red means higher (more risk), green means lower.",
-    "arrowsNation": "Arrows compare with the nation: red means higher (more risk), green means lower.",
+    "tickNote": "The tick marks the national value.",
+    "arrowsRegion": "Arrows compare with the region and the nation.",
+    "arrowsNation": "Arrows compare with the nation.",
     "nationalNote": "National aggregate of councils"
   },
   "delta": {
@@ -266,10 +245,10 @@
     "topTitle": "Top drivers",
     "topLead": "The five indicator groups with the highest scores across all dimensions.",
     "note": {
-      "council": "Scores run from 0 to 10 and higher always means more risk. For Lack of Coping Capacity, a high score means fewer resources. On each track the ring marks the regional value and the tick the national value.",
-      "source": "Scores run from 0 to 10 and higher always means more risk. For Lack of Coping Capacity, a high score means fewer resources. On each track the ring marks the regional value and the tick the national value.",
-      "region": "Scores run from 0 to 10 and higher always means more risk. For Lack of Coping Capacity, a high score means fewer resources. On each track the tick marks the national value.",
-      "national": "Scores run from 0 to 10 and higher always means more risk. For Lack of Coping Capacity, a high score means fewer resources."
+      "council": "Scores run from 0 to 10; higher means more risk. The ring marks the regional value and the tick the national value.",
+      "source": "Scores run from 0 to 10; higher means more risk. The ring marks the regional value and the tick the national value.",
+      "region": "Scores run from 0 to 10; higher means more risk. The tick marks the national value.",
+      "national": "Scores run from 0 to 10; higher means more risk."
     },
     "weakestEyebrow": "Weakest dimension",
     "weakestBody": "The {{dim}} dimension is classed {{cls}} on its own INFORM scale, the highest of the three relative to its thresholds and the clearest signal of where this area stands out.",

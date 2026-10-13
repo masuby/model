@@ -4,23 +4,21 @@
  * and a thin class-band scale); key figures in a ruled row beneath; and any notes about how this
  * unit's data were built, set off by a left rule. No boxes, no widgets, no decoration.
  */
-import { ChevronDown, ChevronRight, Compass, FileText, GitCompareArrows, Link2, Printer } from 'lucide-react';
+import { ChevronRight, Compass, FileText, GitCompareArrows, Link2, Printer } from 'lucide-react';
 import * as React from 'react';
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
 import { toast } from 'sonner';
-import { KeyFigures, Kicker, Note, PageContainer } from '@/components/layout/Page';
+import { KeyFigures, Kicker, PageContainer } from '@/components/layout/Page';
 import { ClassDot } from '@/components/risk/RiskBadge';
 import { Button } from '@/components/ui/button';
 import { CLASS_COLORS, CLASS_KEYS, classify, THRESHOLDS } from '@/engine/risk/classes';
-import { findIndicator } from '@/engine/risk/hierarchy';
-import { authorityLabel } from '@/engine/risk/sources';
 import type { WarningPayload } from '@/data-layer/types';
 import { ALERT_COLOR } from '@/features/guide/alert';
 import { useAreaRecords } from '@/features/guide/data';
 import { cn, formatCompact, formatDate, formatNumber, formatScore, NO_VALUE } from '@/lib/utils';
-import { compareHref, editList, explorerHref, type AreaView } from '../lib';
-import { OutOf10, useMediaQuery } from './bits';
+import { compareHref, explorerHref, type AreaView } from '../lib';
+import { OutOf10 } from './bits';
 import { useDeferred } from './Deferred';
 
 function Breadcrumb({ view }: { view: AreaView }) {
@@ -100,83 +98,6 @@ function ActiveWarningBanner({ view }: { view: AreaView }) {
   );
 }
 
-/** Notes on how this unit's figures were built (aggregation, shared data, reviewed edits). */
-function Notices({ view }: { view: AreaView }) {
-  const { t, i18n } = useTranslation(['area', 'common', 'indicators']);
-  const { unit, model } = view;
-  const phone = useMediaQuery('(max-width: 639px)');
-  const { printing } = useDeferred();
-  const items = React.useMemo(() => {
-    const out: Array<{ key: string; body: React.ReactNode }> = [];
-    if (unit.level === 'national') out.push({ key: 'aggregate', body: t('notices.nationalAggregate', { count: model.councils.length }) });
-    if (unit.level === 'region') out.push({ key: 'agg', body: t('notices.aggregated', { count: unit.members ?? 0 }) });
-    if (unit.level === 'source') {
-      const n = model.councils.filter((c) => c.sourceId === unit.id).length;
-      out.push({ key: 'src', body: t('notices.sourceUnit', { count: n, total: model.sources.length }) });
-    }
-    if (unit.level === 'council' && unit.inheritedFrom) out.push({ key: 'inh', body: t('notices.inherited', { parent: unit.inheritedFrom }) });
-    if (unit.level === 'council' && unit.sourceId) {
-      const shared = model.councils.filter((c) => c.sourceId === unit.sourceId).length;
-      // Stamps the council did not take from its unit: values recorded for this council itself.
-      const unitEdits = (model.byId.get(unit.sourceId)?.edits ?? {}) as Record<string, unknown>;
-      const own = Object.entries(unit.edits).filter(([ref, stamp]) => stamp && unitEdits[ref] !== stamp).length;
-      out.push({
-        key: 'shared',
-        body: (
-          <>
-            {t('notices.shared', { count: shared })}{' '}
-            <Link to={`/area/${unit.sourceId}`} className="font-medium text-primary underline-offset-4 hover:underline">
-              {unit.sourceName}
-            </Link>
-            {own ? t('notices.ownValues', { count: own }) : '.'}
-          </>
-        ),
-      });
-    }
-    const benchmark = editList(unit, 'benchmark').filter((e) => e.ref !== 'hazard:exposure');
-    if (benchmark.length) out.push({ key: 'benchmark', body: t(unit.level === 'region' ? 'notices.benchmarkMembers' : 'notices.benchmark', { count: benchmark.length }) });
-    const edits = editList(unit, 'portal');
-    if (edits.length) {
-      const latest = edits[0];
-      const [dim, key] = latest.ref.split(':');
-      const name = key === 'exposure' ? t('indicators:exposure') : findIndicator(`${dim}:${key}`) ? t(`indicators:${key}`) : latest.ref;
-      out.push({
-        key: 'edits',
-        body: (
-          <>
-            <span className="text-foreground">{t(unit.level === 'region' ? 'notices.editsMembers' : 'notices.edits', { count: edits.length })}</span>{' '}
-            {t('notices.latestEdit', {
-              indicator: name,
-              authority: authorityLabel(String(latest.stamp.authority ?? '')) || t('notices.unknownAuthority'),
-              date: formatDate(latest.stamp.at, i18n.language),
-            })}
-          </>
-        ),
-      });
-    }
-    return out;
-  }, [unit, model, t, i18n.language]);
-
-  if (!items.length) return null;
-  const list = (
-    <div className="grid max-w-3xl gap-3">
-      {items.map((it) => (
-        <Note key={it.key}>{it.body}</Note>
-      ))}
-    </div>
-  );
-  // On a phone the notes fold behind one line, so the guidance stays within the first screens (UX-01).
-  if (!phone) return <div className="mt-8">{list}</div>;
-  return (
-    <details open={printing || undefined} className="group mt-6 max-w-3xl">
-      <summary className="flex cursor-pointer list-none items-center gap-2 text-sm font-medium [&::-webkit-details-marker]:hidden">
-        <ChevronDown className="size-4 text-muted-foreground transition-transform group-open:rotate-180" aria-hidden />
-        {t('notices.title', { count: items.length })}
-      </summary>
-      <div className="mt-4">{list}</div>
-    </details>
-  );
-}
 
 /** The 0–10 risk scale as five flat class bands (widths follow the thresholds), ticked at the score. */
 function ScoreScale({ value, className }: { value: number | null | undefined; className?: string }) {
@@ -362,7 +283,6 @@ export function AreaHero({ view }: { view: AreaView }) {
         <AreaFigures view={view} className="mt-12 hidden border-t border-border pt-8 sm:grid md:flex [&_dd:first-of-type]:text-[1.65rem] lg:[&_dd:first-of-type]:text-[2.1rem] print:mt-6 print:flex" />
 
         <ActiveWarningBanner view={view} />
-        <Notices view={view} />
       </PageContainer>
     </header>
   );

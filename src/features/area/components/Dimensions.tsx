@@ -127,15 +127,11 @@ export function Dimensions({ view }: { view: AreaView }) {
           );
         })}
       </div>
-      <p className="mt-12 max-w-3xl text-sm leading-relaxed text-muted-foreground">
-        {t('dims.scaleNote')}
-        {!isNational && (
-          <>
-            {' '}
-            {t(region ? 'dims.arrowsRegion' : 'dims.arrowsNation')} {t('dims.tickNote')}
-          </>
-        )}
-      </p>
+      {!isNational && (
+        <p className="mt-12 max-w-3xl text-sm leading-relaxed text-muted-foreground">
+          {t(region ? 'dims.arrowsRegion' : 'dims.arrowsNation')} {t('dims.tickNote')}
+        </p>
+      )}
     </>
   );
 }

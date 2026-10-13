@@ -2,6 +2,14 @@
 
 ## Unreleased
 
+### Profiles state the data, not how it was built (13 October 2026)
+
+- The "About the data" notes under a profile's headline are gone: the aggregation rule, the shared
+  workbook unit, the Benchmark 2026 note and the reviewed-update line (the indicator table still names
+  the source and date of every value, and the Methodology page explains the rules).
+- The analysis view's section leads and reading notes are one short line each: what the section holds,
+  which way the arrows and ticks read; no restatement of the thresholds or the layers.
+
 ### The portal works with a database still on an older migration (13 October 2026)
 
 - A live database that has not received migrations 0006 to 0016 no longer breaks the portal: values are
