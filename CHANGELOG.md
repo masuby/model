@@ -2,6 +2,13 @@
 
 ## Unreleased
 
+### No duplicated figures on the profile (13 October 2026)
+
+- The hero's score block no longer repeats the risk level as a badge with a "Know the risk" link under
+  the class name (the Risk view's top row carries the badge and the messages), and the sticky section
+  bar is shown only when a view has more than one section, so the Risk view no longer repeats the
+  area's name and score under the view switch.
+
 ### The profile opens with the map, the hazards and the risk level in one row (11 October 2026)
 
 - The Risk view of an area profile now starts with one row across the width: the locator map (zoomed

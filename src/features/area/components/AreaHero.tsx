@@ -17,7 +17,6 @@ import { findIndicator } from '@/engine/risk/hierarchy';
 import { authorityLabel } from '@/engine/risk/sources';
 import type { WarningPayload } from '@/data-layer/types';
 import { ALERT_COLOR } from '@/features/guide/alert';
-import { RiskBandBadge } from '@/features/guide/AlertBadge';
 import { useAreaRecords } from '@/features/guide/data';
 import { cn, formatCompact, formatDate, formatNumber, formatScore, NO_VALUE } from '@/lib/utils';
 import { compareHref, editList, explorerHref, type AreaView } from '../lib';
@@ -220,21 +219,6 @@ function Score({ view, className }: { view: AreaView; className?: string }) {
           {unit.level === 'national' && <> · {t('common:labels.aggregate')}</>}
         </span>
       </p>
-      {cls && (
-        <a
-          href="#actions"
-          onClick={(e) => {
-            e.preventDefault();
-            document.getElementById('actions')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
-          }}
-          title={t('guide:risk.title', { cls: t(`common:classes.${cls.key}`) })}
-          className="group mt-2.5 inline-flex flex-wrap items-center gap-x-2 gap-y-1 text-sm"
-        >
-          {/* The risk level in its colour band (very low and low yellow, medium and high orange, very high red). */}
-          <RiskBandBadge risk={unit.risk} size="sm" />
-          <span className="text-muted-foreground underline-offset-4 transition-colors group-hover:text-foreground group-hover:underline">{t('guide:risk.link')}</span>
-        </a>
-      )}
       <ScoreScale value={unit.risk} className="mt-4" />
     </div>
   );

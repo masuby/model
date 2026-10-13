@@ -247,7 +247,7 @@ function AreaReport({ view }: { view: AreaView }) {
             />
           </div>
         </PageContainer>
-        <SectionNav key={mode} sections={sections} unit={unit} />
+        {sections.length > 1 && <SectionNav key={mode} sections={sections} unit={unit} />}
 
         <PageContainer>
           {mode === 'risk' ? (

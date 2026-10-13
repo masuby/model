@@ -158,10 +158,9 @@ describe('AreaPage', { timeout: 90_000 }, () => {
     renderAt(c.id);
     const section = document.getElementById('actions')!;
     expect(within(section).getByRole('heading', { level: 2, name: `The risk in ${c.name}` })).toBeInTheDocument();
-    // The risk level is the INFORM class on its colour band, in the hero (a link to this section) and here.
+    // The risk level is the INFORM class on its colour band, shown once: here, not in the hero.
     const risk = riskBandFor(c.risk)!;
     const cls = i18n.t(`common:classes.${risk.cls}`);
-    expect(screen.getByRole('link', { name: new RegExp(`^Risk level: ${cls} risk\\s*Know the risk$`) })).toHaveAttribute('href', '#actions');
     // The default view leads with the risk; the analysis is one switch away.
     expect(screen.getByRole('radio', { name: 'Risk' })).toHaveAttribute('aria-checked', 'true');
     const status = within(section).getByRole('region', { name: `Risk level for ${c.name}` });
