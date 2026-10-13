@@ -2,6 +2,13 @@
 
 ## Unreleased
 
+### National, Regional, Council above the home map (13 October 2026)
+
+- A switch above the landing map draws Tanzania by council (the default), by region, or as one piece in
+  the colour of its national INFORM risk class, with the national score beside the switch; a click on
+  the national map opens the national profile, on the other two the area's profile. The caption names
+  the level shown.
+
 ### The Data portal opens on the sign-in (13 October 2026)
 
 - A visitor to the Data portal sees the sign-in panel first (email link or password), on one screen;

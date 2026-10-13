@@ -11,9 +11,10 @@ import { Link, useNavigate } from 'react-router-dom';
 import { PageContainer, Section, SectionHeading } from '@/components/layout/Page';
 import { ClassBadge, ClassDot } from '@/components/risk/RiskBadge';
 import { Button } from '@/components/ui/button';
+import { Segmented } from '@/components/ui/primitives';
 import { useModel } from '@/data-layer/DataProvider';
 import { CLASS_COLORS, CLASS_KEYS, classify } from '@/engine/risk/classes';
-import { parseMetric } from '@/engine/risk/metrics';
+import { parseMetric, type Metric } from '@/engine/risk/metrics';
 import { topDrivers } from '@/engine/risk/model';
 import { formatScore } from '@/lib/utils';
 import { NationalCharts } from './components/NationalCharts';
@@ -34,6 +35,10 @@ export default function HomePage() {
   const model = useModel();
   const navigate = useNavigate();
   const riskMetric = React.useMemo(() => parseMetric('risk'), []);
+  // The map's level: councils (the headline level), regions, or the country as one piece in its own class.
+  const [level, setLevel] = React.useState<'national' | 'region' | 'council'>('council');
+  const nationalMetric = React.useMemo<Metric>(() => ({ ...riskMetric, get: () => model.national.risk }), [riskMetric, model]);
+  const nationalClass = classify(model.national.risk);
 
   const top = React.useMemo(() => [...model.councils].sort((a, b) => (b.risk ?? 0) - (a.risk ?? 0)).slice(0, 10), [model]);
   const national = model.national;
@@ -62,13 +67,42 @@ export default function HomePage() {
 
         {/* The map bleeds into the page margin: the padding (2rem) plus what the viewport leaves beside the 1320 px container, up to 3.25rem, never past the edge. */}
         <figure className="w-full lg:-mr-[var(--bleed)] lg:w-[calc(100%+var(--bleed))] lg:self-center" style={{ ['--bleed' as string]: 'clamp(2rem, calc(2rem + (100vw - 1320px) / 2 - 4px), 3.25rem)' }}>
+          <div className="mb-3 flex flex-wrap items-center justify-between gap-3">
+            <Segmented
+              size="sm"
+              value={level}
+              onValueChange={(v) => setLevel(v as typeof level)}
+              aria-label={t('mapLevel.label')}
+              options={[
+                { value: 'national', label: t('mapLevel.national') },
+                { value: 'region', label: t('mapLevel.region') },
+                { value: 'council', label: t('mapLevel.council') },
+              ]}
+            />
+            {level === 'national' && nationalClass && (
+              <span className="num inline-flex items-center gap-1.5 text-sm">
+                <ClassDot value={model.national.risk} />
+                <span className="font-semibold">{formatScore(model.national.risk)}</span>
+                <span className="text-muted-foreground">{t(`common:classes.${nationalClass.key}`)}</span>
+              </span>
+            )}
+          </div>
           <div className="aspect-[1000/966] w-full">
             <React.Suspense fallback={<div className="size-full rounded-md bg-muted/60" />}>
-              <StaticMap model={model} metric={riskMetric} className="size-full" onSelect={(u) => navigate(`/area/${u.id}`)} />
+              <StaticMap
+                key={level}
+                model={model}
+                level={level === 'council' ? 'council' : 'region'}
+                metric={level === 'national' ? nationalMetric : riskMetric}
+                hoverCard={level !== 'national'}
+                className="size-full"
+                aria-label={t(`mapLevel.aria.${level}`)}
+                onSelect={(u) => navigate(level === 'national' ? '/area/TZ' : `/area/${u.id}`)}
+              />
             </React.Suspense>
           </div>
           <figcaption className="mt-4 flex flex-col gap-3 border-t border-border pt-3 text-xs text-muted-foreground sm:flex-row sm:items-center sm:justify-between">
-            <span>{t('mapSource')}</span>
+            <span>{t(`mapLevel.source.${level}`)}</span>
             <span className="flex shrink-0 items-center gap-1.5 whitespace-nowrap" aria-label={t('mapCaption')}>
               <span>{t('common:classes.veryLow')}</span>
               {CLASS_KEYS.map((k) => (

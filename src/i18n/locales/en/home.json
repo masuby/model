@@ -54,7 +54,6 @@
     "primary": "Start exploring",
     "secondary": "Read the methodology"
   },
-  "mapSource": "INFORM Risk by council. Sources: INFORM Tanzania model.",
   "picture": {
     "parts": "Risk and its parts",
     "partsNote": "{{people}} people (2022 census)",
@@ -67,5 +66,21 @@
     "relationLeft": "Highest risk",
     "relationRight": "Lowest risk",
     "pieCentre": "high or above"
+  },
+  "mapLevel": {
+    "label": "Map level",
+    "national": "National",
+    "region": "Regional",
+    "council": "Council",
+    "aria": {
+      "national": "Map of Tanzania in the colour of its national INFORM risk",
+      "region": "Map of Tanzania coloured by INFORM risk, by region",
+      "council": "Map of Tanzania coloured by INFORM risk, by council"
+    },
+    "source": {
+      "national": "National INFORM Risk. Sources: INFORM Tanzania model.",
+      "region": "INFORM Risk by region. Sources: INFORM Tanzania model.",
+      "council": "INFORM Risk by council. Sources: INFORM Tanzania model."
+    }
   }
 }

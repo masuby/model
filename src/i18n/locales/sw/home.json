@@ -54,7 +54,6 @@
     "primary": "Anza kuchunguza",
     "secondary": "Soma mbinu"
   },
-  "mapSource": "Hatari ya INFORM kwa halmashauri. Vyanzo: mfumo wa INFORM Tanzania.",
   "picture": {
     "parts": "Hatari na sehemu zake",
     "partsNote": "Watu {{people}} (sensa ya 2022)",
@@ -67,5 +66,21 @@
     "relationLeft": "Hatari ya juu zaidi",
     "relationRight": "Hatari ya chini zaidi",
     "pieCentre": "juu au zaidi"
+  },
+  "mapLevel": {
+    "label": "Ngazi ya ramani",
+    "national": "Kitaifa",
+    "region": "Mkoa",
+    "council": "Halmashauri",
+    "aria": {
+      "national": "Ramani ya Tanzania kwa rangi ya hatari yake ya INFORM kitaifa",
+      "region": "Ramani ya Tanzania iliyopakwa rangi kwa hatari ya INFORM, kwa mkoa",
+      "council": "Ramani ya Tanzania iliyopakwa rangi kwa hatari ya INFORM, kwa halmashauri"
+    },
+    "source": {
+      "national": "Hatari ya INFORM kitaifa. Vyanzo: mfumo wa INFORM Tanzania.",
+      "region": "Hatari ya INFORM kwa mkoa. Vyanzo: mfumo wa INFORM Tanzania.",
+      "council": "Hatari ya INFORM kwa halmashauri. Vyanzo: mfumo wa INFORM Tanzania."
+    }
   }
 }
