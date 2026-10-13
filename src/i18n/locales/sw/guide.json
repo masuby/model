@@ -30,25 +30,24 @@
   },
   "risk": {
     "label": "Kiwango cha hatari",
-    "for": "Kiwango cha hatari cha {{name}}",
+    "communication": "Mawasiliano ya hatari",
     "badge": "Hatari {{cls}}",
     "basis": "{{cls}}, {{score}} kati ya 10 kwenye kipimo cha hatari cha INFORM",
     "title": "Hatari {{cls}}: fahamu hatari ya eneo hili",
-    "link": "Fahamu hatari",
     "live": "Ukiishi au kufanya kazi hapa",
     "plan": "Ukipanga, kujenga, kuwekeza au kuhamia hapa",
     "band": {
       "1": {
-        "live": "Hatari hapa ni {{cls}}. Vitisho vilivyoorodheshwa hapa chini bado hutokea: vifahamu, na uwe na maandalizi ya msingi nyumbani na kazini.",
+        "live": "Vitisho vilivyoorodheshwa hapa chini bado hutokea: vifahamu, na uwe na maandalizi ya msingi nyumbani na kazini.",
         "plan": "Makazi mapya, biashara na uwekezaji vina vikwazo vichache vya vitisho hapa. Fuata mpango wa matumizi ya ardhi na kanuni za ujenzi ili hatari ibaki chini.",
-        "planHazard": "Hatari kwa ujumla ni {{cls}} hapa, lakini hatari ya {{hazard}} ni kubwa sana ({{score}} kati ya 10). Panga makazi mapya, biashara na uwekezaji kwa kuizingatia: fuata mpango wa matumizi ya ardhi na jenga kwa viwango vinavyoikabili."
+        "planHazard": "Kitisho cha {{hazard}} ni cha juu sana ({{score}} kati ya 10): panga makazi mapya, biashara na uwekezaji kwa kukizingatia; fuata mpango wa matumizi ya ardhi na ujenge kwa viwango vinavyokabili kitisho hicho."
       },
       "2": {
-        "live": "Hatari hapa ni {{cls}}. Tarajia vitisho vilivyoorodheshwa hapa chini kuvuruga maisha na riziki mara kwa mara: fahamu maeneo na njia salama, na uwe na mipango ya kaya na biashara tayari.",
+        "live": "Tarajia vitisho vilivyoorodheshwa hapa chini kuvuruga maisha na riziki mara kwa mara: fahamu maeneo na njia salama, na uwe na mipango ya kaya na biashara tayari.",
         "plan": "Kuwa makini na makazi mapya na shughuli za biashara: epuka kanda zilizo hatarini, jenga kwa viwango, weka mifereji na njia za kupita wazi, na kata bima kwa kinachoweza kukatiwa."
       },
       "3": {
-        "live": "Hatari hapa ni {{cls}}. Vitisho vilivyoorodheshwa hapa chini hutokea mara nyingi au kwa nguvu na uwezo wa eneo kukabiliana ni mdogo: fahamu maeneo na njia salama na ujiandae kwa usumbufu.",
+        "live": "Vitisho vilivyoorodheshwa hapa chini hutokea mara nyingi au kwa nguvu na uwezo wa eneo kukabiliana ni mdogo: fahamu maeneo na njia salama na ujiandae kwa usumbufu.",
         "plan": "Epuka kuongeza wakazi au shughuli mpya za biashara katika kanda zilizo hatarini. Viwango vikali vya matumizi ya ardhi na ujenzi vinatumika; kazi za kinga, kuhamisha kaya zilizo hatarini zaidi na kuimarisha uwezo wa kukabiliana wa eneo huja kwanza."
       }
     }
@@ -59,14 +58,10 @@
   },
   "know": {
     "title": "Eneo na vitisho vyake",
-    "lead": "{{name}}: hali ya eneo na vitisho vyake viko wapi.",
     "leadMany": "Kila halmashauri ya {{name}} na vitisho vyake.",
     "openCouncil": "Wasifu wa {{name}}",
     "empty": "Mwongozo bado hauna taarifa ya eneo hili; kamati ya wilaya (DDRRC) inaweza kuiandika kupitia Lango la data.",
-    "updated": "Imesasishwa na {{role}}, imeidhinishwa na {{by}}, {{date}}.",
-    "summaryMany": "Halmashauri {{count}}: {{names}}",
-    "summaryOne": "{{area}}",
-    "summaryNone": "Hakuna taarifa ya eneo hili bado"
+    "summaryMany": "Halmashauri {{count}}: {{names}}"
   },
   "incidents": {
     "title": "Matukio na ajali",
@@ -103,7 +98,7 @@
   },
   "vc": {
     "title": "Kupunguza hatari kwa muda",
-    "lead": "Kinachopunguza udhaifu na kuimarisha uwezo wa kukabiliana vyenye uzito mkubwa zaidi katika {{name}}, kutoka maktaba ya hatua ya PMO-DMD iliyopitiwa na kamati ya taifa.",
+    "lead": "Hatua kwa sababu zenye uzito mkubwa zaidi katika {{name}}.",
     "lead_sector": "kiongozi: {{sector}}",
     "none": "Bado hakuna hatua zilizochapishwa kwa kundi hili.",
     "by": "Maktaba ya PMO-DMD, imepitiwa {{date}} ({{by}}).",
@@ -117,35 +112,8 @@
     "copyFailed": "Haikuweza kunakili; chagua maandishi badala yake."
   },
   "more": {
-    "statements": "Onyesha {{count}} zaidi",
     "councils": "Onyesha halmashauri zote {{count}}",
     "hazards": "Onyesha vitisho vyote {{count}}",
     "less": "Onyesha vichache"
-  },
-  "statements": {
-    "title": "Data zinasema nini kuhusu {{name}}",
-    "titleNational": "Data zinasema nini kuhusu Tanzania",
-    "overall": {
-      "council": "Kiwango cha hatari cha {{name}} ni cha {{cls}}: {{score}} kati ya 10 kwenye kipimo cha INFORM, nafasi ya {{rank}} kati ya halmashauri {{of}} nchini (1 ni ya hatari zaidi) na nafasi ya {{regionRank}} kati ya {{regionOf}} katika mkoa wa {{region}}.",
-      "region": "Kiwango cha hatari cha mkoa wa {{name}} ni cha {{cls}}: {{score}} kati ya 10 kwenye kipimo cha INFORM, nafasi ya {{rank}} kati ya mikoa {{of}} (1 ni ya hatari zaidi).",
-      "source": "Kiwango cha hatari cha {{name}} ni cha {{cls}}: {{score}} kati ya 10 kwenye kipimo cha INFORM, nafasi ya {{rank}} kati ya vitengo {{of}} vya kitabu cha kazi.",
-      "national": "Kiwango cha hatari cha Tanzania kwa ujumla ni cha {{cls}}: {{score}} kati ya 10 kwenye kipimo cha INFORM."
-    },
-    "driver": "Kati ya sehemu tatu za alama, {{dim}} ina uzito mkubwa zaidi hapa: {{score}} kati ya 10, ikilinganishwa na {{national}} kwa Tanzania.",
-    "driverNational": "Kati ya sehemu tatu za alama, {{dim}} ina uzito mkubwa zaidi: {{score}} kati ya 10.",
-    "hazards_one": "Kitisho chenye alama ya juu zaidi hapa ni {{list}}.",
-    "hazards_other": "Vitisho vyenye alama za juu zaidi hapa ni {{list}}.",
-    "hazardsLow": "Hakuna kitisho cha asili chenye alama 5 au zaidi kati ya 10 hapa; cha juu zaidi ni {{item}}.",
-    "hazardsNone": "Hakuna kitisho cha asili chenye alama hapa.",
-    "human_one": "Miongoni mwa vitisho vya kibinadamu, {{list}} kina alama ya juu hapa.",
-    "human_other": "Miongoni mwa vitisho vya kibinadamu, {{list}} vina alama za juu hapa.",
-    "vulnerability": "Udhaifu ni wa kiwango cha {{cls}}: {{score}} kati ya 10.",
-    "vulnerabilityGroups": "Udhaifu ni wa kiwango cha {{cls}}: {{score}} kati ya 10, unaoongezwa zaidi na {{list}}.",
-    "coping": "Ukosefu wa uwezo wa kukabiliana ni wa kiwango cha {{cls}}: {{score}} kati ya 10.",
-    "copingGroups": "Ukosefu wa uwezo wa kukabiliana ni wa kiwango cha {{cls}}: {{score}} kati ya 10; mapengo makubwa zaidi ni {{list}}.",
-    "people": "Takriban watu {{population}} wanaishi hapa, {{density}} kwa km².",
-    "peopleNoDensity": "Takriban watu {{population}} wanaishi hapa.",
-    "item": "{{name}} ({{score}})",
-    "and": "na"
   }
 }

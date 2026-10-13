@@ -28,7 +28,7 @@ import { dataNotesFor } from '@/engine/risk/notes';
 import type { DimensionKey } from '@/engine/risk/hierarchy';
 import { authorityLabel } from '@/engine/risk/sources';
 import { DataNoteMark } from '@/components/risk/DataNoteMark';
-import { applyGuidance, pick, useAreaGuide, useAreaRecords, vcActions } from '@/features/guide/data';
+import { pick, useAreaGuide, useAreaRecords, vcActions } from '@/features/guide/data';
 import type { CommitteeRecord, EventPayload } from '@/data-layer/types';
 import { cn, formatDate, formatScore } from '@/lib/utils';
 import type { AreaView } from '../lib';
@@ -38,8 +38,6 @@ import { LocatorMap } from './LocatorMap';
 import { useDeferred } from './Deferred';
 
 /** Statements about the area shown before "Show more" (one on a phone). */
-const FIRST_STATEMENTS = 2;
-const FIRST_STATEMENTS_PHONE = 1;
 /** Councils listed on a region's block before "Show all". */
 const FIRST_COUNCILS = 4;
 /** Hazards shown before "Show all": the highest priority bands first. */
@@ -88,11 +86,12 @@ export function WhatToDo({ view }: { view: AreaView }) {
 }
 
 /**
- * The area's risk level: its INFORM class on its colour band, and what that level means for people who
- * live and work here and for those who plan, build, invest or settle here. Risk to live with, not a warning.
+ * Risk communication: the area's INFORM class on its colour band with the score, and the two messages of
+ * that level, for people who live and work here and for those who plan, build, invest or settle here.
+ * Risk to live with, not a warning.
  */
 function RiskStatus({ unit, risk }: { unit: Unit; risk: AreaRisk }) {
-  const { t } = useTranslation(['guide', 'common']);
+  const { t } = useTranslation(['guide', 'common', 'indicators']);
   const cls = t(`common:classes.${risk.cls}`);
   const vars = { cls: cls.toLowerCase(), name: unit.name };
   const plan = planMessage(unit, risk);
@@ -100,7 +99,7 @@ function RiskStatus({ unit, risk }: { unit: Unit; risk: AreaRisk }) {
   return (
     <section aria-labelledby="risk-title" className="border-l-4 py-1 pl-5" style={{ borderColor: risk.color }}>
       <h3 id="risk-title" className="text-sm font-medium text-muted-foreground">
-        {t('risk.for', { name: unit.name })}
+        {t('risk.communication')}
       </h3>
       <p className="mt-2.5 flex flex-wrap items-center gap-x-3 gap-y-1.5">
         <RiskBandBadge risk={risk.score} />
@@ -176,27 +175,32 @@ function MoreButton({ all, label, less, onClick, className }: { all: boolean; la
 }
 
 /**
- * The nature of the area as the Risk Action Guide Book records it (the committees' approved updates in
- * their place), one click away: the statements say where the hazards lie, not what to do.
+ * For a region or the nation: its councils, each with the hazards the Risk Action Guide Book records for
+ * it, open on the page. A council's profile lists its hazards above, so here only the events the
+ * committees reported remain for it; the Guide Book's statements are not repeated.
  */
 function AreaNature({ unit, guide }: { unit: Unit; guide: ReturnType<typeof useAreaGuide> }) {
-  const { t, i18n } = useTranslation(['guide', 'data']);
-  const lang = i18n.language;
+  const { t } = useTranslation(['guide', 'data']);
   const many = unit.level !== 'council';
   const area = useAreaRecords(unit);
-  const phone = useMediaQuery(PHONE);
-  const rows = guide.entries.flatMap((e) => applyGuidance(e.guide.know, area.records, e.council.id).map((row) => ({ council: e.council, row })));
-  const statements = useShowMore(rows, phone ? FIRST_STATEMENTS_PHONE : FIRST_STATEMENTS);
   const councils = useShowMore(guide.entries, FIRST_COUNCILS);
   const names = guide.entries.map((e) => e.council.name);
+  if (!many) {
+    if (!area.events.length) return null;
+    return (
+      <Fold id="know-title" title={t('events.title')} open>
+        <ReportedEvents events={area.events} many={false} titled={false} />
+      </Fold>
+    );
+  }
   const body = guide.loading ? (
     <div className="space-y-3" aria-hidden>
       <div className="h-4 w-2/3 animate-pulse bg-muted" />
       <div className="h-4 w-1/2 animate-pulse bg-muted" />
     </div>
-  ) : !rows.length ? (
+  ) : !guide.entries.length ? (
     <p className="text-muted-foreground">{t('know.empty')}</p>
-  ) : many ? (
+  ) : (
     <>
       <ul className="divide-y divide-border border-y border-border">
         {councils.shown.map((e) => (
@@ -210,49 +214,23 @@ function AreaNature({ unit, guide }: { unit: Unit; guide: ReturnType<typeof useA
       </ul>
       {councils.more && <MoreButton all={councils.all} label={t('more.councils', { count: guide.entries.length })} less={t('more.less')} onClick={councils.toggle} />}
     </>
-  ) : (
-    <>
-      <ul className="divide-y divide-border border-y border-border">
-        {statements.shown.map(({ council, row }, i) => (
-          <li key={`${council.id}-${i}`} className="max-w-3xl py-5">
-            <p className="text-sm text-muted-foreground">{pick(row.area, lang)}</p>
-            <p className="mt-2 leading-relaxed">{pick(row.risk, lang)}</p>
-            {row.from === 'committee' && row.record && (
-              <p className="mt-2 text-xs text-muted-foreground">
-                {t('know.updated', {
-                  role: row.record.authorRole ? t(`data:roles.${row.record.authorRole}`) : row.record.authorName,
-                  by: row.record.reviewerName ?? row.record.authorName,
-                  date: formatDate(row.record.reviewedAt ?? row.record.createdAt, lang),
-                })}
-              </p>
-            )}
-          </li>
-        ))}
-      </ul>
-      {statements.more && <MoreButton all={statements.all} label={t('more.statements', { count: statements.hidden })} less={t('more.less')} onClick={statements.toggle} />}
-    </>
   );
-  const summary = many
-    ? t('know.summaryMany', { count: names.length, names: names.slice(0, 4).join(', ') + (names.length > 4 ? ' …' : '') })
-    : rows.length
-      ? t('know.summaryOne', { count: rows.length, area: pick(rows[0].row.area, lang) })
-      : t('know.summaryNone');
+  const summary = t('know.summaryMany', { count: names.length, names: names.slice(0, 4).join(', ') + (names.length > 4 ? ' …' : '') });
   return (
-    // A region or the nation opens on its councils and their hazards; a council keeps the fold closed behind its summary line.
-    <Fold id="know-title" title={t('know.title')} lead={many ? t('know.leadMany', { name: unit.name }) : t('know.lead', { name: unit.name })} summary={summary} open={many}>
+    <Fold id="know-title" title={t('know.title')} lead={t('know.leadMany', { name: unit.name })} summary={summary} open>
       {body}
-      <ReportedEvents events={area.events} many={many} />
+      <ReportedEvents events={area.events} many />
     </Fold>
   );
 }
 
 /** Hazard events the committees reported and the region validated, newest first. */
-function ReportedEvents({ events, many }: { events: readonly CommitteeRecord[]; many: boolean }) {
+function ReportedEvents({ events, many, titled = true }: { events: readonly CommitteeRecord[]; many: boolean; titled?: boolean }) {
   const { t, i18n } = useTranslation(['guide', 'data']);
   if (!events.length) return null;
   return (
-    <div className="mt-8">
-      <h4 className="text-sm font-semibold">{t('events.title')}</h4>
+    <div className={titled ? 'mt-8' : undefined}>
+      {titled && <h4 className="text-sm font-semibold">{t('events.title')}</h4>}
       <p className="mt-1 text-sm text-muted-foreground">{t('events.lead')}</p>
       <ul className="mt-3 divide-y divide-border border-y border-border text-sm">
         {events.map((r) => {

@@ -230,9 +230,10 @@ describe('ExplorePage - desktop', () => {
     const panel = await screen.findByRole('complementary', { name: `Details for ${council.name}` });
     const cls = i18n.t(`common:classes.${riskBandFor(council.risk)!.cls}`);
     expect(within(panel).getByText(`${cls} risk`)).toBeInTheDocument();
+    expect(within(panel).getByRole('heading', { name: 'Risk communication' })).toBeInTheDocument();
     expect(within(panel).getByText('If you live or work here')).toBeInTheDocument();
     expect(within(panel).getByText('If you plan, build, invest or settle here')).toBeInTheDocument();
-    expect(within(panel).getByText(new RegExp(`^Risk here is ${cls.toLowerCase()}\\.`))).toBeInTheDocument();
+    expect(within(panel).queryByText(/^Risk here is/)).not.toBeInTheDocument();
     expect(within(panel).getByRole('heading', { name: 'Highest-scoring indicator groups' })).toBeInTheDocument();
     expect(within(panel).queryByText(/Alert category|Major warning|^Warning$|Advisory|Preparedness priority|What helps|Take action|Be prepared/)).not.toBeInTheDocument();
     expect(within(panel).getByRole('link', { name: /View full profile/ })).toHaveAttribute('href', `/area/${council.id}`);
@@ -339,7 +340,7 @@ describe('ExplorePage - desktop', () => {
     const panel = screen.getByRole('complementary', { name: 'Details for Kibiti District' });
     expect(within(panel).getByRole('heading', { level: 3, name: 'Storms & cyclones' })).toBeInTheDocument();
     fireEvent.click(within(panel).getByRole('button', { name: 'Kibiti District: overview' }));
-    expect(within(screen.getByRole('complementary', { name: 'Details for Kibiti District' })).getByRole('heading', { name: 'What the data say about Kibiti District' })).toBeInTheDocument();
+    expect(within(screen.getByRole('complementary', { name: 'Details for Kibiti District' })).getByRole('heading', { name: 'Highest-scoring indicator groups' })).toBeInTheDocument();
     // The controls open as a drawer over the column.
     fireEvent.click(within(insight).getByRole('button', { name: 'Show the controls' }));
     expect(screen.getByRole('radiogroup', { name: 'Colour by' })).toBeInTheDocument();

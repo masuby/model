@@ -32,14 +32,13 @@ import type { Unit } from '@/engine/risk/types';
 import { ALERT_COLOR, planMessage, riskBandFor } from '@/features/guide/alert';
 import { guideHazardName, isCoastal } from '@/features/guide/crosswalk';
 import { RiskBandBadge } from '@/features/guide/AlertBadge';
-import { pick, useAreaGuide, useAreaRecords, type HazardKey } from '@/features/guide/data';
+import { useAreaGuide, useAreaRecords, type HazardKey } from '@/features/guide/data';
 import { cn, formatDate, formatScore, NO_VALUE } from '@/lib/utils';
 import { MAX_COMPARE } from '../lib/explore';
 import { useExplore } from '../lib/ExploreContext';
 import { coarseOf, dimensionGroups, evidenceFor, groupRanks, guideKeysFor, memberSpread, type TopGroup } from '../lib/riskPanel';
 import { EvidenceItem } from './Evidence';
 import { PanelResizer, PanelWidthButton, usePanelWidth } from './PanelResizer';
-import { AreaStatements } from '@/features/guide/AreaStatements';
 import { AreaBody } from './AreaCard';
 import { AreaCharts, AreaNavMap } from './AreaInsight';
 import { SectionTitle } from './bits';
@@ -239,8 +238,7 @@ export function PanelBody({ unit, groupRef, onOpenGroup, onBack, withInsight = f
 function AreaView({ unit, onOpenGroup, withInsight }: { unit: Unit; onOpenGroup: (metricKey: string) => void; withInsight: boolean }) {
   return (
     <div className="divide-y divide-border">
-      <Statements unit={unit} />
-      <RiskLevel unit={unit} />
+      <RiskCommunication unit={unit} />
       <TopGroups unit={unit} onOpen={onOpenGroup} />
       <Warnings unit={unit} />
       {unit.level !== 'national' && <Nature unit={unit} />}
@@ -251,18 +249,6 @@ function AreaView({ unit, onOpenGroup, withInsight }: { unit: Unit; onOpenGroup:
 }
 
 /** What the area's own data say: sentences generated from its scores, hazards, vulnerability, coping gaps and people. */
-function Statements({ unit }: { unit: Unit }) {
-  const { t } = useTranslation(['explore', 'guide']);
-  const { model } = useExplore();
-  return (
-    <section aria-labelledby="risk-statements-title" className="pb-6">
-      <SectionTitle as="h3" id="risk-statements-title" className="mb-2">
-        {unit.level === 'national' ? t('guide:statements.titleNational') : t('guide:statements.title', { name: unit.name })}
-      </SectionTitle>
-      <AreaStatements model={model} unit={unit} />
-    </section>
-  );
-}
 
 /** Without the left column (narrow screens, phones): the map of the area and its charts, folded. */
 function InsightFolds({ unit }: { unit: Unit }) {
@@ -290,8 +276,9 @@ function InsightFolds({ unit }: { unit: Unit }) {
   );
 }
 
-/** The risk level's two messages: for residents, and for those who plan, build or invest here. */
-function RiskLevel({ unit }: { unit: Unit }) {
+
+/** Risk communication: the two messages of the area's risk level, for residents and for those who plan, build or invest here. */
+function RiskCommunication({ unit }: { unit: Unit }) {
   const { t } = useTranslation(['explore', 'guide', 'common', 'indicators']);
   const risk = riskBandFor(unit.risk);
   if (!risk) return null;
@@ -299,9 +286,9 @@ function RiskLevel({ unit }: { unit: Unit }) {
   const plan = planMessage(unit, risk);
   const planVars = plan.hazard ? { ...vars, hazard: t(`indicators:${plan.hazard.key}`).toLowerCase(), score: formatScore(plan.hazard.score) } : vars;
   return (
-    <section aria-labelledby="risk-level-title" className="pb-6">
-      <SectionTitle as="h3" id="risk-level-title" className="mb-2">
-        {t('riskPanel.riskTitle')}
+    <section aria-labelledby="risk-communication-title" className="pb-6">
+      <SectionTitle as="h3" id="risk-communication-title" className="mb-2">
+        {t('guide:risk.communication')}
       </SectionTitle>
       <dl className="space-y-3 border-l-4 pl-3 text-sm leading-relaxed" style={{ borderColor: risk.color }}>
         <div>
@@ -444,13 +431,12 @@ function WarningItem({ record, names, lang }: { record: CommitteeRecord; names: 
 
 /** The guide's statements about the place (no advice), folded. */
 function Nature({ unit }: { unit: Unit }) {
-  const { t, i18n } = useTranslation(['explore', 'guide']);
+  const { t } = useTranslation(['explore', 'guide']);
   const guide = useAreaGuide(unit);
-  const lang = i18n.language;
   const council = unit.level === 'council';
-  const statements = council ? (guide.entries[0]?.guide.know ?? []) : [];
   const councils = council ? [] : guide.entries;
-  if (!guide.loading && !statements.length && !councils.length) return null;
+  // A council's hazards are listed above; the Guide Book's statements are not repeated here.
+  if (council || (!guide.loading && !councils.length)) return null;
   return (
     <section className="py-6">
       <details className="group">
@@ -458,31 +444,18 @@ function Nature({ unit }: { unit: Unit }) {
           <span className="text-sm font-semibold">{t('riskPanel.nature.title')}</span>
           <ChevronDown className="size-4 text-muted-foreground transition-transform group-open:rotate-180" aria-hidden />
         </summary>
-        {council ? (
-          <ul className="mt-2 space-y-3">
-            {statements.map((row, i) => (
-              <li key={i}>
-                <p className="text-xs text-muted-foreground">{pick(row.area, lang)}</p>
-                <p className="mt-1 text-sm leading-relaxed">{pick(row.risk, lang)}</p>
-              </li>
-            ))}
-          </ul>
-        ) : (
-          <>
-            <p className="mt-2 text-xs font-medium text-muted-foreground">{t('riskPanel.nature.councils')}</p>
-            <ul className="mt-1 space-y-1.5 text-sm">
-              {councils.slice(0, 4).map((e) => (
-                <li key={e.council.id}>
-                  <Link to={`/area/${e.council.id}#actions`} className="font-medium hover:underline">
-                    {e.council.name}
-                  </Link>
-                  <span className="text-muted-foreground"> · {e.guide.hazards.map((h) => guideHazardName(t, h, isCoastal(e.council))).join(', ')}</span>
-                </li>
-              ))}
-            </ul>
-            {councils.length > 4 && <p className="mt-1 text-xs text-muted-foreground">{t('riskPanel.nature.more', { count: councils.length - 4 })}</p>}
-          </>
-        )}
+        <p className="mt-2 text-xs font-medium text-muted-foreground">{t('riskPanel.nature.councils')}</p>
+        <ul className="mt-1 space-y-1.5 text-sm">
+          {councils.slice(0, 4).map((e) => (
+            <li key={e.council.id}>
+              <Link to={`/area/${e.council.id}#actions`} className="font-medium hover:underline">
+                {e.council.name}
+              </Link>
+              <span className="text-muted-foreground"> · {e.guide.hazards.map((h) => guideHazardName(t, h, isCoastal(e.council))).join(', ')}</span>
+            </li>
+          ))}
+        </ul>
+        {councils.length > 4 && <p className="mt-1 text-xs text-muted-foreground">{t('riskPanel.nature.more', { count: councils.length - 4 })}</p>}
       </details>
     </section>
   );

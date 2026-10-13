@@ -217,11 +217,6 @@ export function AreaBody({ unit }: { unit: Unit }) {
             {formatNumber(area, lang, { maximumFractionDigits: 0 })}
           </Figure>
         </dl>
-        {unit.exposure?.source && (
-          <p className="mt-3 truncate text-xs text-muted-foreground" title={unit.exposure.source}>
-            {t('card.popSource', { source: unit.exposure.source })}
-          </p>
-        )}
       </section>
 
       {/* Coverage */}

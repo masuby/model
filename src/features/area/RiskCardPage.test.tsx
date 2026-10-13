@@ -47,7 +47,8 @@ describe('RiskCardPage', { timeout: 60_000 }, () => {
     expect(screen.getByRole('heading', { level: 1, name: 'Kondoa District' })).toBeInTheDocument();
     expect(screen.getByText('190')).toBeInTheDocument();
     expect(await screen.findByText('Vitisho katika Kondoa District', {}, { timeout: 20_000 })).toBeInTheDocument();
-    expect(await screen.findByText('Eneo na vitisho vyake', {}, { timeout: 20_000 })).toBeInTheDocument();
+    expect(screen.getByText('Mawasiliano ya hatari')).toBeInTheDocument();
+    expect(screen.queryByText('Eneo na vitisho vyake')).not.toBeInTheDocument();
     expect(document.title).toContain('Kondoa District');
     view.unmount();
     await waitFor(() => expect(i18n.language).toBe('en'));
@@ -62,13 +63,14 @@ describe('RiskCardPage', { timeout: 60_000 }, () => {
     expect(screen.queryByText(/Advisory|Major warning|Take action/)).not.toBeInTheDocument();
   });
 
-  it("carries statements generated from the area's own data, beside a map of where it lies", async () => {
+  it('shows where the area lies and the risk communication, with no generated statements', async () => {
     renderCard('/area/C051/card?lang=en');
     await waitFor(() => expect(i18n.language).toBe('en'));
-    expect(screen.getByRole('heading', { name: 'What the data say about Kibiti District' })).toBeInTheDocument();
-    expect(screen.getByText(/^Kibiti District is at high risk: [\d.]+ out of 10 on the INFORM scale, ranked \d+ of 195 councils in Tanzania/)).toBeInTheDocument();
-    expect(await screen.findByText(/^The hazards that score highest here are strong winds \(10\.0\)/, {}, { timeout: 20_000 })).toBeInTheDocument();
-    expect(screen.getByText(/^About 195,638 people live here/)).toBeInTheDocument();
+    expect(screen.queryByRole('heading', { name: 'What the data say about Kibiti District' })).not.toBeInTheDocument();
+    expect(screen.queryByText(/^Kibiti District is at high risk/)).not.toBeInTheDocument();
+    expect(screen.getByText('Risk communication')).toBeInTheDocument();
+    expect(screen.getByText('If you live or work here')).toBeInTheDocument();
+    expect(screen.queryByText(/^Risk here is/)).not.toBeInTheDocument();
     expect(await screen.findByRole('img', { name: 'Where Kibiti District lies' }, { timeout: 20_000 })).toBeInTheDocument();
   });
 });

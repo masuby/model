@@ -151,7 +151,7 @@ describe('AreaPage', { timeout: 90_000 }, () => {
     }
   });
 
-  it('communicates the risk: the level on its colour band, what it means for residents and planners, the hazards and the area statements, never a warning level', async () => {
+  it('communicates the risk: the level on its colour band, the two messages and the hazards, never a warning level or the area statements', async () => {
     await i18n.changeLanguage('en');
     const c = model.councils.find((x) => placeKey(x.region) !== 'tabora')!;
     const guide = (await loadRegionGuide(placeKey(c.region)))!.councils[c.id];
@@ -163,21 +163,22 @@ describe('AreaPage', { timeout: 90_000 }, () => {
     const cls = i18n.t(`common:classes.${risk.cls}`);
     // The default view leads with the risk; the analysis is one switch away.
     expect(screen.getByRole('radio', { name: 'Risk' })).toHaveAttribute('aria-checked', 'true');
-    const status = within(section).getByRole('region', { name: `Risk level for ${c.name}` });
+    const status = within(section).getByRole('region', { name: 'Risk communication' });
     expect(within(status).getByText(`${cls}, ${c.risk!.toFixed(1)} out of 10 on the INFORM risk scale`)).toBeInTheDocument();
+    // Risk communication: the two messages of the level, without a sentence stating the level first.
+    expect(within(status).getByRole('heading', { name: 'Risk communication' })).toBeInTheDocument();
     expect(within(status).getByText('If you live or work here')).toBeInTheDocument();
     expect(within(status).getByText('If you plan, build, invest or settle here')).toBeInTheDocument();
-    expect(within(status).getByText(new RegExp(`^Risk here is ${cls.toLowerCase()}\\.`))).toBeInTheDocument();
+    expect(within(status).queryByText(/^Risk here is/)).not.toBeInTheDocument();
     // No warning level, no advice, one emergency number.
     expect(within(section).queryByText(/Advisory|Major warning|Take action|What helps|Be prepared/)).not.toBeInTheDocument();
     expect(within(section).getByRole('link', { name: 'Call 190' })).toHaveAttribute('href', 'tel:190');
     expect(within(section).queryByText('114')).not.toBeInTheDocument();
     // The reconciled hazard list with its bands.
     expect(await within(section).findByRole('heading', { name: `Hazards in ${c.name}` }, { timeout: 20_000 })).toBeInTheDocument();
-    // The nature of the area as the guide records it, one click away, without the advice.
-    expect(await within(section).findByRole('heading', { level: 3, name: 'The area and its hazards' }, { timeout: 20_000 })).toBeInTheDocument();
-    expect((await within(section).findAllByText(guide.know[0].risk.en, {}, { timeout: 20_000 })).length).toBeGreaterThan(0);
-    if (guide.know[0].advice?.en) expect(within(section).queryByText(guide.know[0].advice.en)).not.toBeInTheDocument();
+    // The Guide Book's statements about the area are not repeated on a council's profile.
+    expect(within(section).queryByRole('heading', { level: 3, name: 'The area and its hazards' })).not.toBeInTheDocument();
+    expect(within(section).queryByText(guide.know[0].risk.en)).not.toBeInTheDocument();
   });
 
   it('communicates the risk in Kiswahili', async () => {
@@ -186,7 +187,8 @@ describe('AreaPage', { timeout: 90_000 }, () => {
       const c = model.councils.find((x) => placeKey(x.region) === 'tabora')!;
       renderAt(c.id);
       const section = document.getElementById('actions')!;
-      expect(within(section).getByRole('region', { name: `Kiwango cha hatari cha ${c.name}` })).toBeInTheDocument();
+      expect(within(section).getByRole('region', { name: 'Mawasiliano ya hatari' })).toBeInTheDocument();
+      expect(within(section).queryByText(/^Hatari hapa ni/)).not.toBeInTheDocument();
       expect(within(section).getByText('Ukiishi au kufanya kazi hapa')).toBeInTheDocument();
       expect(within(section).getByText('Ukipanga, kujenga, kuwekeza au kuhamia hapa')).toBeInTheDocument();
       expect(await within(section).findByRole('heading', { name: `Vitisho katika ${c.name}` }, { timeout: 20_000 })).toBeInTheDocument();

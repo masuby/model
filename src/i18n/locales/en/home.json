@@ -19,7 +19,7 @@
   "formula": {
     "eyebrow": "The INFORM model",
     "title": "Risk is where hazard, vulnerability and weak coping capacity meet",
-    "lead": "INFORM combines three dimensions with a geometric mean, so a place is only high-risk when all three are elevated. A strong health system or low poverty genuinely lowers risk, even where floods or droughts are frequent.",
+    "lead": "INFORM combines the three dimensions with a geometric mean.",
     "equation": "Risk = ∛(Hazard & Exposure × Vulnerability × Lack of Coping Capacity)",
     "national": "Tanzania today",
     "result": "Tanzania: ∛({{h}} × {{v}} × {{c}}) = {{r}}"
@@ -46,7 +46,7 @@
   },
   "sources": {
     "title": "Built on the INFORM SADC 2024 workbook",
-    "lead": "Every Core score is a workbook value from a published dataset, listed indicator by indicator on the Methodology page. Tanzanian institutions keep the indicators current through the Data portal; other Tanzanian evidence is kept in a separate Advancement layer."
+    "lead": "Every score is a workbook value from a published dataset, listed on the Methodology page."
   },
   "cta": {
     "title": "Evidence for preparedness, anticipatory action and investment",

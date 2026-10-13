@@ -2,6 +2,18 @@
 
 ## Unreleased
 
+### No stories on the pages; risk communication in two messages (14 October 2026)
+
+- The generated "What the data say about…" statements are gone from the explorer panel, the risk card
+  and the detailed card, and the Guide Book's narrative statements about an area (its nature, where its
+  hazards lie, what helps) no longer appear on a council's profile, card or panel; a region's profile
+  and panel keep the list of its councils with their hazards. The events the committees report stay.
+- The two messages of the risk level, for people who live or work here and for those who plan, build,
+  invest or settle here, stand under the title "Risk communication" on the profile, the explorer panel
+  and the cards, and go straight to the message: no opening "Risk here is medium."
+- Shorter leads on the home page (the geometric mean, the sources) and under the actions; the
+  explorer's population source line and the colouring hint are gone.
+
 ### The climate year-by-year charts are gone (14 October 2026)
 
 - The heatwave-days and rainfall bar charts with their notes and source line no longer appear in the

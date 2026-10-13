@@ -18,10 +18,9 @@ import { Segmented } from '@/components/ui/primitives';
 import { useModel } from '@/data-layer/DataProvider';
 import type { WarningPayload } from '@/data-layer/types';
 import { ALERT_COLOR, planMessage, riskBandFor } from '@/features/guide/alert';
-import { AreaStatements } from '@/features/guide/AreaStatements';
 import { RiskBandBadge } from '@/features/guide/AlertBadge';
 import { guideHazardName, hazardItemName, isCoastal, reconciledHazards, type HazardItem } from '@/features/guide/crosswalk';
-import { applyGuidance, pick, useAreaGuide, useAreaRecords } from '@/features/guide/data';
+import { useAreaGuide, useAreaRecords } from '@/features/guide/data';
 import type { DimensionKey } from '@/engine/risk/hierarchy';
 import { parseMetric } from '@/engine/risk/metrics';
 import { placeKey } from '@/engine/risk/model';
@@ -91,7 +90,6 @@ export default function RiskCardPage() {
   }
   const risk = riskBandFor(unit.risk);
   const clsLabel = risk ? t(`common:classes.${risk.cls}`) : '';
-  const rows = guide.entries.flatMap((e) => applyGuidance(e.guide.know, area.records, e.council.id).map((row) => ({ council: e.council, row }))).slice(0, unit.level === 'council' ? 3 : 4);
   const drr = services?.drr;
   const drrKeys = ['eprp', 'aa', 'ert', 'rvca', 'eocc'] as const;
   const today = formatDate(new Date().toISOString(), lang);
@@ -178,33 +176,6 @@ export default function RiskCardPage() {
         </section>
       )}
 
-      {/* What the area's own data say, beside where it lies */}
-      <section className="mt-4 grid items-start gap-x-6 gap-y-3 md:grid-cols-[1fr_9.5rem] print:grid-cols-[1fr_9.5rem]">
-        <div>
-          <h2 className="text-[12px] font-semibold tracking-wide text-muted-foreground uppercase">
-            {unit.level === 'national' ? t('guide:statements.titleNational') : t('guide:statements.title', { name: unit.name })}
-          </h2>
-          <AreaStatements model={model} unit={unit} className="mt-1.5 text-[12px] [&_ul]:text-[12px]" />
-        </div>
-        {unit.level !== 'national' && (
-          <div className="aspect-square w-full max-w-[9.5rem] border border-border">
-            <React.Suspense fallback={<div className="size-full bg-muted/50" />}>
-              <StaticMap
-                model={model}
-                level={unit.level === 'region' ? 'region' : 'council'}
-                metric={riskMetric}
-                selectedIds={[unit.id]}
-                emphasiseIds={unit.level === 'region' ? undefined : (model.councilsByRegion.get(placeKey(unit.region)) ?? []).map((c) => c.id)}
-                focusId={unit.id}
-                hoverCard={false}
-                className="size-full"
-                aria-label={t('card.locator', { name: unit.name })}
-              />
-            </React.Suspense>
-          </div>
-        )}
-      </section>
-
       <div className="mt-4 grid gap-x-8 gap-y-5 md:grid-cols-2 print:grid-cols-2">
         {/* Hazards */}
         <section>
@@ -229,42 +200,42 @@ export default function RiskCardPage() {
           </ul>
         </section>
 
-        {/* What the risk level means: for residents, and for those who plan, build or invest here */}
-        {risk && (
-          <section className="border-l-4 pl-2.5" style={{ borderColor: risk.color }}>
-            <h2 className="text-[12px] font-semibold tracking-wide text-muted-foreground uppercase">{t('guide:risk.for', { name: unit.name })}</h2>
-            <p className="mt-1 font-semibold">{t('guide:risk.live')}</p>
-            <p className="text-[12px] leading-snug">{t(`guide:risk.band.${risk.band}.live`, { cls: clsLabel.toLowerCase() })}</p>
-            <p className="mt-1.5 font-semibold">{t('guide:risk.plan')}</p>
-            <p className="text-[12px] leading-snug">
-              {(() => {
-                const plan = planMessage(unit, risk);
-                return t(`guide:${plan.key}`, { cls: clsLabel.toLowerCase(), ...(plan.hazard ? { hazard: t(`indicators:${plan.hazard.key}`).toLowerCase(), score: formatScore(plan.hazard.score) } : {}) });
-              })()}
-            </p>
-          </section>
+        {/* Risk communication, and where it lies */}
+        <div className="space-y-3">
+          {risk && (
+            <section className="border-l-4 pl-2.5" style={{ borderColor: risk.color }}>
+              <h2 className="text-[12px] font-semibold tracking-wide text-muted-foreground uppercase">{t('guide:risk.communication')}</h2>
+              <p className="mt-1 font-semibold">{t('guide:risk.live')}</p>
+              <p className="text-[12px] leading-snug">{t(`guide:risk.band.${risk.band}.live`, { cls: clsLabel.toLowerCase() })}</p>
+              <p className="mt-1.5 font-semibold">{t('guide:risk.plan')}</p>
+              <p className="text-[12px] leading-snug">
+                {(() => {
+                  const plan = planMessage(unit, risk);
+                  return t(`guide:${plan.key}`, { cls: clsLabel.toLowerCase(), ...(plan.hazard ? { hazard: t(`indicators:${plan.hazard.key}`).toLowerCase(), score: formatScore(plan.hazard.score) } : {}) });
+                })()}
+              </p>
+            </section>
+          )}
+        {unit.level !== 'national' && (
+          <div className="aspect-square w-full max-w-[9.5rem] border border-border md:justify-self-end print:justify-self-end">
+            <React.Suspense fallback={<div className="size-full bg-muted/50" />}>
+              <StaticMap
+                model={model}
+                level={unit.level === 'region' ? 'region' : 'council'}
+                metric={riskMetric}
+                selectedIds={[unit.id]}
+                emphasiseIds={unit.level === 'region' ? undefined : (model.councilsByRegion.get(placeKey(unit.region)) ?? []).map((c) => c.id)}
+                focusId={unit.id}
+                hoverCard={false}
+                className="size-full"
+                aria-label={t('card.locator', { name: unit.name })}
+              />
+            </React.Suspense>
+          </div>
         )}
+        </div>
       </div>
 
-      {/* The area and its hazards, as the guide records them */}
-      <section className="mt-5">
-        <h2 className="text-[12px] font-semibold tracking-wide text-muted-foreground uppercase">{t('guide:know.title')}</h2>
-        {rows.length ? (
-          <ul className="mt-1.5 divide-y divide-border border-y border-border">
-            {rows.map(({ council, row }, i) => (
-              <li key={`${council.id}-${i}`} className="py-2">
-                <p className="font-medium">
-                  {unit.level !== 'council' && `${council.name}: `}
-                  {pick(row.area, lang)}
-                </p>
-                <p className="text-[12px]">{pick(row.risk, lang)}</p>
-              </li>
-            ))}
-          </ul>
-        ) : (
-          <p className="mt-1 text-[12px] text-muted-foreground">{t('guide:know.empty')}</p>
-        )}
-      </section>
 
       {/* DRR arrangements */}
       {drr && drr.recorded > 0 && (

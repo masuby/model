@@ -30,25 +30,24 @@
   },
   "risk": {
     "label": "Risk level",
-    "for": "Risk level for {{name}}",
+    "communication": "Risk communication",
     "badge": "{{cls}} risk",
     "basis": "{{cls}}, {{score}} out of 10 on the INFORM risk scale",
     "title": "{{cls}} risk: know the risk in this area",
-    "link": "Know the risk",
     "live": "If you live or work here",
     "plan": "If you plan, build, invest or settle here",
     "band": {
       "1": {
-        "live": "Risk here is {{cls}}. The hazards listed below still occur: know them, and keep basic preparedness at home and at work.",
+        "live": "The hazards listed below still occur: know them, and keep basic preparedness at home and at work.",
         "plan": "New settlement, business and investment face few hazard constraints here. Keep to the land-use plan and the building rules so the risk stays low.",
-        "planHazard": "Overall risk is {{cls}} here, but the {{hazard}} hazard is very high ({{score}} out of 10). Plan new settlement, business and investment for it: keep to the land-use plan and build to the standards that address it."
+        "planHazard": "The {{hazard}} hazard is very high ({{score}} out of 10): plan new settlement, business and investment for it: keep to the land-use plan and build to the standards that address it."
       },
       "2": {
-        "live": "Risk here is {{cls}}. Expect the hazards listed below to disrupt life and livelihoods from time to time: know the safe places and routes, and keep household and business plans ready.",
+        "live": "Expect the hazards listed below to disrupt life and livelihoods from time to time: know the safe places and routes, and keep household and business plans ready.",
         "plan": "Be careful with new settlement and business activities: avoid the exposed zones, build to standard, keep drainage and access routes clear, and insure what can be insured."
       },
       "3": {
-        "live": "Risk here is {{cls}}. The hazards listed below strike often or hard and the area's capacity to cope is limited: know the safe places and routes and prepare for disruption.",
+        "live": "The hazards listed below strike often or hard and the area's capacity to cope is limited: know the safe places and routes and prepare for disruption.",
         "plan": "Avoid adding more residents or new business activities in the exposed zones. Strict land-use and building standards apply; protective works, moving the most exposed households and stronger local response capacity come first."
       }
     }
@@ -59,14 +58,10 @@
   },
   "know": {
     "title": "The area and its hazards",
-    "lead": "{{name}}: the nature of the area and where its hazards lie.",
     "leadMany": "Each council of {{name}} and its hazards.",
     "openCouncil": "{{name}} profile",
     "empty": "The guide has no statement about this area yet; the district committee (DDRRC) can write one through the Data portal.",
-    "updated": "Updated by the {{role}}, approved by {{by}}, {{date}}.",
-    "summaryMany": "{{count}} councils: {{names}}",
-    "summaryOne": "{{area}}",
-    "summaryNone": "No statement about this area yet"
+    "summaryMany": "{{count}} councils: {{names}}"
   },
   "incidents": {
     "title": "Incidents and accidents",
@@ -103,7 +98,7 @@
   },
   "vc": {
     "title": "Reducing risk over time",
-    "lead": "What reduces the vulnerability and strengthens the coping capacity that weigh most in {{name}}, from the PMO-DMD action library reviewed by the national committee.",
+    "lead": "Actions on the factors that weigh most in {{name}}.",
     "lead_sector": "lead: {{sector}}",
     "none": "No actions published yet for this group.",
     "by": "PMO-DMD library, reviewed {{date}} ({{by}}).",
@@ -117,35 +112,8 @@
     "copyFailed": "Could not copy; select the text instead."
   },
   "more": {
-    "statements": "Show {{count}} more",
     "councils": "Show all {{count}} councils",
     "hazards": "Show all {{count}} hazards",
     "less": "Show less"
-  },
-  "statements": {
-    "title": "What the data say about {{name}}",
-    "titleNational": "What the data say about Tanzania",
-    "overall": {
-      "council": "{{name}} is at {{cls}} risk: {{score}} out of 10 on the INFORM scale, ranked {{rank}} of {{of}} councils in Tanzania (1 is the highest) and {{regionRank}} of {{regionOf}} in {{region}} region.",
-      "region": "{{name}} region is at {{cls}} risk: {{score}} out of 10 on the INFORM scale, ranked {{rank}} of {{of}} regions (1 is the highest).",
-      "source": "{{name}} is at {{cls}} risk: {{score}} out of 10 on the INFORM scale, ranked {{rank}} of {{of}} workbook units.",
-      "national": "Tanzania as a whole is at {{cls}} risk: {{score}} out of 10 on the INFORM scale."
-    },
-    "driver": "Of the three parts of the score, {{dim}} weighs most here: {{score}} out of 10, against {{national}} for Tanzania.",
-    "driverNational": "Of the three parts of the score, {{dim}} weighs most: {{score}} out of 10.",
-    "hazards_one": "The hazard that scores highest here is {{list}}.",
-    "hazards_other": "The hazards that score highest here are {{list}}.",
-    "hazardsLow": "No natural hazard scores 5 or more out of 10 here; the highest is {{item}}.",
-    "hazardsNone": "No natural hazard has a score here.",
-    "human_one": "Among the human hazards, {{list}} scores high here.",
-    "human_other": "Among the human hazards, {{list}} score high here.",
-    "vulnerability": "Vulnerability is {{cls}}: {{score}} out of 10.",
-    "vulnerabilityGroups": "Vulnerability is {{cls}}: {{score}} out of 10, raised most by {{list}}.",
-    "coping": "Lack of coping capacity is {{cls}}: {{score}} out of 10.",
-    "copingGroups": "Lack of coping capacity is {{cls}}: {{score}} out of 10; the largest gaps are {{list}}.",
-    "people": "About {{population}} people live here, {{density}} per km².",
-    "peopleNoDensity": "About {{population}} people live here.",
-    "item": "{{name}} ({{score}})",
-    "and": "and"
   }
 }

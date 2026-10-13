@@ -28,8 +28,7 @@ import { coarseOf, dimensionGroups, evidenceFor, groupRanks, memberSpread, type 
 import { ALERT_COLOR, planMessage, riskBandFor } from '@/features/guide/alert';
 import { guideHazardName, isCoastal } from '@/features/guide/crosswalk';
 import { RiskBandBadge } from '@/features/guide/AlertBadge';
-import { AreaStatements } from '@/features/guide/AreaStatements';
-import { applyGuidance, pick, useAreaGuide, useAreaRecords, vcActions, type VcAction } from '@/features/guide/data';
+import { pick, useAreaGuide, useAreaRecords, vcActions, type VcAction } from '@/features/guide/data';
 import { formatDate, formatScore, NO_VALUE } from '@/lib/utils';
 import { EMERGENCY_NUMBER } from './components/WhatToDo';
 import { resolveUnit, servicesFor } from './lib';
@@ -93,7 +92,6 @@ export default function DetailedRiskCardPage() {
   const national = unit.level === 'national' ? null : model.national;
   const risk = riskBandFor(unit.risk);
   const clsLabel = risk ? t(`common:classes.${risk.cls}`) : '';
-  const rows = guide.entries.flatMap((e) => applyGuidance(e.guide.know, area.records, e.council.id).map((row) => ({ council: e.council, row }))).slice(0, unit.level === 'council' ? 6 : 8);
   const drr = services?.drr;
   const today = formatDate(new Date().toISOString(), lang);
   const url = typeof window !== 'undefined' ? `${window.location.origin}/area/${unit.id}` : `/area/${unit.id}`;
@@ -182,12 +180,8 @@ export default function DetailedRiskCardPage() {
         </section>
       )}
 
-      {/* What the data say, beside where it lies */}
-      <section className="keep mt-4 grid items-start gap-x-6 gap-y-3 md:grid-cols-[1fr_9.5rem] print:grid-cols-[1fr_9.5rem]">
-        <div>
-          <h2 className={H2}>{unit.level === 'national' ? t('guide:statements.titleNational') : t('guide:statements.title', { name: unit.name })}</h2>
-          <AreaStatements model={model} unit={unit} className="mt-1.5 text-[12px] [&_ul]:text-[12px]" />
-        </div>
+      {/* Where it lies */}
+      <section className="keep mt-4 flex justify-end">
         {unit.level !== 'national' && (
           <div className="aspect-square w-full max-w-[9.5rem] border border-border">
             <React.Suspense fallback={<div className="size-full bg-muted/50" />}>
@@ -208,10 +202,10 @@ export default function DetailedRiskCardPage() {
         )}
       </section>
 
-      {/* The risk level's two messages */}
+      {/* Risk communication: the two messages of the level */}
       {risk && (
         <section className="keep mt-4 border-l-4 pl-2.5" style={{ borderColor: risk.color }}>
-          <h2 className={H2}>{t('guide:risk.for', { name: unit.name })}</h2>
+          <h2 className={H2}>{t('guide:risk.communication')}</h2>
           <div className="mt-1 grid gap-x-6 gap-y-1.5 md:grid-cols-2 print:grid-cols-2">
             <div>
               <p className="font-semibold">{t('guide:risk.live')}</p>
@@ -229,6 +223,7 @@ export default function DetailedRiskCardPage() {
           </div>
         </section>
       )}
+
 
       {/* Risk and its parts */}
       <section className="keep mt-5">
@@ -360,31 +355,6 @@ export default function DetailedRiskCardPage() {
         </div>
       </section>
 
-      {/* The area and its hazards, with what helps */}
-      <section className="mt-5">
-        <h2 className={H2}>{t('guide:know.title')}</h2>
-        {rows.length ? (
-          <ul className="mt-1.5 divide-y divide-border border-y border-border">
-            {rows.map(({ council, row }, i) => (
-              <li key={`${council.id}-${i}`} className="keep py-2">
-                <p className="font-medium">
-                  {unit.level !== 'council' && `${council.name}: `}
-                  {pick(row.area, lang)}
-                </p>
-                <p className="text-[12px]">{pick(row.risk, lang)}</p>
-                {pick(row.advice, lang) && (
-                  <p className="mt-0.5 text-[12px] text-muted-foreground">
-                    <span className="font-medium text-foreground">{t('detailed.helps')}: </span>
-                    {pick(row.advice, lang)}
-                  </p>
-                )}
-              </li>
-            ))}
-          </ul>
-        ) : (
-          <p className="mt-1 text-[12px] text-muted-foreground">{t('guide:know.empty')}</p>
-        )}
-      </section>
 
       {/* DRR arrangements and the committee */}
       {drr && (

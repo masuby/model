@@ -19,7 +19,7 @@
   "formula": {
     "eyebrow": "Mfumo wa INFORM",
     "title": "Hatari hutokea pale vitisho, udhaifu na uwezo mdogo wa kukabiliana vinapokutana",
-    "lead": "INFORM huunganisha vipimo vitatu kwa wastani wa kijiometri, hivyo eneo huwa na hatari kubwa pale tu vipimo vyote vitatu vikiwa juu. Mfumo imara wa afya au umaskini mdogo hupunguza hatari kweli, hata pale mafuriko au ukame ni ya mara kwa mara.",
+    "lead": "INFORM huunganisha vipimo vitatu kwa wastani wa kijiometri.",
     "equation": "Hatari = ∛(Vitisho na Kuathirika × Udhaifu × Ukosefu wa Uwezo wa Kukabiliana)",
     "national": "Tanzania leo",
     "result": "Tanzania: ∛({{h}} × {{v}} × {{c}}) = {{r}}"
@@ -46,7 +46,7 @@
   },
   "sources": {
     "title": "Imejengwa juu ya kitabu cha INFORM SADC 2024",
-    "lead": "Kila alama ya Msingi ni thamani ya kitabu kutoka seti ya data iliyochapishwa, iliyoorodheshwa kiashiria kwa kiashiria kwenye ukurasa wa Mbinu. Taasisi za Tanzania husasisha viashiria kupitia Lango la data; ushahidi mwingine wa Tanzania huwekwa katika Tabaka la Maboresho tofauti."
+    "lead": "Kila alama ni thamani ya kitabu kutoka seti ya data iliyochapishwa, iliyoorodheshwa kwenye ukurasa wa Mbinu."
   },
   "cta": {
     "title": "Ushahidi kwa ajili ya maandalizi, hatua za mapema na uwekezaji",
