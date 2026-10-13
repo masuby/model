@@ -12,13 +12,20 @@ import { formatR } from '../derive';
 
 type Status = 'open' | 'inProgress' | 'planned';
 
-/** Keep in step with LIMITATIONS in ../Summary.tsx. */
+/** The data notes of the Core first, then the roadmap items: what each limitation is today and the step that addresses it. */
 const ITEMS: ReadonlyArray<{ key: string; status: Status }> = [
-  { key: 'queried', status: 'inProgress' },
-  { key: 'empty', status: 'open' },
-  { key: 'inherit', status: 'inProgress' },
   { key: 'global', status: 'inProgress' },
+  { key: 'empty', status: 'open' },
+  { key: 'queried', status: 'inProgress' },
+  { key: 'inherit', status: 'inProgress' },
+  { key: 'surveys', status: 'planned' },
+  { key: 'relative', status: 'open' },
+  { key: 'drought', status: 'open' },
+  { key: 'bimodal', status: 'open' },
+  { key: 'sentinel', status: 'open' },
   { key: 'advanced', status: 'inProgress' },
+  { key: 'precision', status: 'planned' },
+  { key: 'freshness', status: 'inProgress' },
 ];
 
 /** Status is state, so it may carry colour - as a small dot beside a plain word, never a tinted pill. */
@@ -76,9 +83,9 @@ export function LimitationsSection() {
               </div>
               <dl className="mt-3 grid gap-x-5 gap-y-2 text-sm leading-relaxed sm:grid-cols-[6.5rem_minmax(0,1fr)]">
                 <dt className="text-muted-foreground">{t('limitations.today')}</dt>
-                <dd className="max-w-[68ch] text-foreground/85">{t(`limitations.items.${item.key}.now`, vars)}</dd>
+                <dd className="min-w-0 max-w-[68ch] break-words text-foreground/85">{t(`limitations.items.${item.key}.now`, vars)}</dd>
                 <dt className="text-muted-foreground">{t('limitations.next')}</dt>
-                <dd className="max-w-[68ch] text-muted-foreground">{t(`limitations.items.${item.key}.next`, vars)}</dd>
+                <dd className="min-w-0 max-w-[68ch] break-words text-muted-foreground">{t(`limitations.items.${item.key}.next`, vars)}</dd>
               </dl>
             </div>
           </li>

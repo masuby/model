@@ -7,6 +7,7 @@ import { Button } from '@/components/ui/button';
 import { TooltipProvider } from '@/components/ui/overlays';
 import { DataProvider } from '@/data-layer/DataProvider';
 import { resolveTheme, usePrefs } from '@/state/prefs';
+import SectionRedirect from '@/features/methodology/SectionRedirect';
 import { AppShell } from './layout/AppShell';
 import { PageLoader } from './PageLoader';
 import { loadRoute, type RouteKey } from './routes';
@@ -61,7 +62,8 @@ const router = createBrowserRouter([
       { path: 'learn', element: lazyPage('learn') },
       { path: 'learn/:lessonId', element: lazyPage('learn') },
       { path: 'methodology', element: lazyPage('methodology') },
-      { path: 'methodology/:section', element: lazyPage('methodologySection') },
+      // The full document is one page; links to a section's own page (an earlier layout) open it at that section.
+      { path: 'methodology/:section', element: <SectionRedirect /> },
       { path: 'data', element: lazyPage('data') },
       // Legacy routes from the previous app (keep old links and bookmarks working). vercel.json answers
       // these with permanent redirects too; these cover navigations served by the service worker.

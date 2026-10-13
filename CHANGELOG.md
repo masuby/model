@@ -2,6 +2,23 @@
 
 ## Unreleased
 
+### The Methodology as one document again, the map switch in the middle, the portal figures back (13 October 2026)
+
+- The Methodology is one page again, with its thirteen sections and the "On this page" contents:
+  Overview, Model structure, The calculation pipeline (with the live worked example), Why a geometric
+  mean, Classification, Administrative levels, Advanced multi-source model, Crisis severity method, Data
+  sources register, Quality assurance, Limitations & roadmap, Corrections in this version and
+  References. The three sections dropped on 11 October (the advanced baskets, the quality checks with
+  the live self-check, the corrections) are back as they were; "Limitations & roadmap" carries the
+  Core's data notes first and then the roadmap items (vulnerability and coping coarser than hazard,
+  scaling relative to Tanzania, drought not multiplied by exposure, drought seasons in bimodal
+  highlands, the Sentinel-1 layer, precision, freshness). The summary page and the section pages of
+  11 October are gone; a section's own path (`/methodology/sources`) opens the document at that section.
+- On the home page the National · Regional · Council switch stands in the middle above the map; in
+  national mode the score and class sit at its right (under it on phones).
+- The Data portal's figures row (values in use, awaiting review, last approved change) shows again to
+  everyone, as before; the councils figure stays out.
+
 ### National, Regional, Council above the home map (13 October 2026)
 
 - A switch above the landing map draws Tanzania by council (the default), by region, or as one piece in

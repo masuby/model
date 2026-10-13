@@ -67,20 +67,23 @@ export default function HomePage() {
 
         {/* The map bleeds into the page margin: the padding (2rem) plus what the viewport leaves beside the 1320 px container, up to 3.25rem, never past the edge. */}
         <figure className="w-full lg:-mr-[var(--bleed)] lg:w-[calc(100%+var(--bleed))] lg:self-center" style={{ ['--bleed' as string]: 'clamp(2rem, calc(2rem + (100vw - 1320px) / 2 - 4px), 3.25rem)' }}>
-          <div className="mb-3 flex flex-wrap items-center justify-between gap-3">
-            <Segmented
-              size="sm"
-              value={level}
-              onValueChange={(v) => setLevel(v as typeof level)}
-              aria-label={t('mapLevel.label')}
-              options={[
-                { value: 'national', label: t('mapLevel.national') },
-                { value: 'region', label: t('mapLevel.region') },
-                { value: 'council', label: t('mapLevel.council') },
-              ]}
-            />
+          {/* The level switch stands in the middle above the map; in national mode the score and class sit at the right (under the switch on phones). */}
+          <div className="relative mb-3 flex flex-col items-center gap-2 sm:block">
+            <div className="flex justify-center">
+              <Segmented
+                size="sm"
+                value={level}
+                onValueChange={(v) => setLevel(v as typeof level)}
+                aria-label={t('mapLevel.label')}
+                options={[
+                  { value: 'national', label: t('mapLevel.national') },
+                  { value: 'region', label: t('mapLevel.region') },
+                  { value: 'council', label: t('mapLevel.council') },
+                ]}
+              />
+            </div>
             {level === 'national' && nationalClass && (
-              <span className="num inline-flex items-center gap-1.5 text-sm">
+              <span className="num inline-flex items-center gap-1.5 text-sm sm:absolute sm:top-1/2 sm:right-0 sm:-translate-y-1/2">
                 <ClassDot value={model.national.risk} />
                 <span className="font-semibold">{formatScore(model.national.risk)}</span>
                 <span className="text-muted-foreground">{t(`common:classes.${nationalClass.key}`)}</span>

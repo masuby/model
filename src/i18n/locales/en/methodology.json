@@ -7,11 +7,13 @@
     "geometric": "Why a geometric mean",
     "classification": "Classification",
     "levels": "Administrative levels",
+    "advanced": "Advanced multi-source model",
     "severity": "Crisis severity method",
     "sources": "Data sources register",
-    "limitations": "Data notes and limitations",
-    "references": "References",
-    "documentation": "Full documentation"
+    "quality": "Quality assurance",
+    "limitations": "Limitations & roadmap",
+    "changelog": "Corrections in this version",
+    "references": "References"
   },
   "toc": {
     "title": "On this page",
@@ -304,6 +306,30 @@
       "note": "Shown as a sensitivity; no map uses it."
     }
   },
+  "advanced": {
+    "title": "An advanced, multi-source model on the same engine",
+    "lead": "Some INFORM indicator groups rest on a single global proxy. The advanced model expands {{groups}} of them into baskets of {{n}} Tanzanian sub-indicators: satellite, reanalysis and sector records.",
+    "p1": "Each sub-indicator carries its own specification (unit, reference range, direction, lead sector) and is standardised exactly as in steps 1–4. It then joins the workbook indicator(s) of its group.",
+    "how": "Inside an expanded group the workbook indicators (weight 1 each) and the sub-indicators (their basket weights) are combined by a weighted mean over the members that have data. Blank members drop out and the remaining weights renormalise, so a partly filled basket introduces no bias.",
+    "formulaLabel": "g equals the sum of w i times s i over the sum of w i, taken only over members with data",
+    "formulaCaption": "Blank-skip weighting: members without data leave both sums.",
+    "weights": "where wᵢ = 1 for a workbook indicator and the basket weight for a sub-indicator.",
+    "degradeTitle": "Degrades exactly to standard INFORM",
+    "degrade": "With no advanced data present, the result is byte-identical to the genuine INFORM workbook, as verified by an automated test on real district data.",
+    "basketsTitle": "{{groups}} baskets · {{n}} sub-indicators",
+    "basketsLead": "All {{groups}} baskets are in {{where}}. Open a basket to see its sub-indicators; the weight column gives each one’s basket weight. Names, units and bases are recorded as in the specification.",
+    "members_one": "{{count}} sub-indicator",
+    "members_other": "{{count}} sub-indicators",
+    "workbookLine": "Workbook indicator (w = 1):",
+    "noWorkbook": "none switched on",
+    "status": "The advanced baskets are an extension of the engine for analysis and benchmarking; scores shown elsewhere in this application follow the standard INFORM structure until sector data fill the baskets.",
+    "col": {
+      "name": "Sub-indicator",
+      "lead": "Lead · unit",
+      "basis": "Basis",
+      "weight": "Weight"
+    }
+  },
   "severity": {
     "title": "Crisis severity: the official INFORM Severity Index method",
     "lead": "INFORM Risk describes the structural likelihood of harm before a crisis. The INFORM Severity Index measures how severe an ongoing crisis is. INFORM Tanzania implements the JRC/ACAPS method for sub-national Tanzanian crises.",
@@ -408,9 +434,54 @@
     },
     "benchmarkValues": "{{n}} values, {{institution}}"
   },
+  "quality": {
+    "title": "Quality assurance",
+    "lead": "The engine is guarded by automated tests that run on every change. They compare the code with the official workbook’s own cached values and lock in the model’s invariants.",
+    "rows": "{{n}} reference rows",
+    "live": {
+      "pass": "All consistent",
+      "fail": "Inconsistency detected",
+      "title": "Live self-check, running in your browser",
+      "body": "When this page loaded, every council’s dimension scores were re-derived from its categories and every risk score from its dimensions, using the engine.",
+      "dims": "Dimension scores",
+      "risk": "Risk scores"
+    },
+    "checks": {
+      "standardise": {
+        "title": "Standardisation reproduces the workbook",
+        "body": "Every one of the {{used}} indicators in use, for every district: raw value → 0–10 matches the workbook exactly, across fixed and data-range references, log transforms and inverted indicators."
+      },
+      "pipeline": {
+        "title": "The full raw → risk pipeline",
+        "body": "Hazard, vulnerability, coping and risk rebuilt from raw values match the workbook for all {{units}} source units."
+      },
+      "parity": {
+        "title": "Workbook cell parity",
+        "body": "Category means, dimension scores and risk match the workbook’s cached cells and an independent re-implementation of the literal Excel expressions, including rounding at one decimal."
+      },
+      "invariants": {
+        "title": "Model invariants",
+        "body": "{{councils}} councils each with data; {{inherited}} inheriting councils flagged; {{regions}} regions including Dar es Salaam; national kept official; missing data excluded and zero included; updates flow council → region; more hazard never lowers risk."
+      },
+      "flexibility": {
+        "title": "Indicator flexibility",
+        "body": "Adding or removing an indicator through the workbook’s Use flag re-weights its group, and the same raw value gives the same score at any resolution."
+      },
+      "advanced": {
+        "title": "Advanced model",
+        "body": "With no advanced data, the multi-source engine with its {{n}} sub-indicators is byte-identical to standard INFORM; partial baskets aggregate only the members present."
+      },
+      "severity": {
+        "title": "Severity conformance",
+        "body": "Geometric aggregation fixed points, ROUNDUP categories including Medium, the 70/30 formula, monotonicity and reliability behave as the published method specifies."
+      }
+    },
+    "reproduce": "Reproduce it yourself",
+    "reproduceHint": "from the repository root; the whole suite runs in seconds."
+  },
   "limitations": {
-    "title": "Data notes and limitations",
-    "lead": "What a reader must know about the data behind the scores: the workbook values withheld after validation, the groups the workbook leaves empty, the councils that inherit a neighbour’s data, where the data come from, and the Advancement layer shown beside the Core. The technical analyses (sensitivities, coherence, corrections) are reported in the assessment reports and the thesis.",
+    "title": "Limitations and planned improvements",
+    "lead": "A composite index is only as good as its inputs. These are the known weaknesses of the current version, each paired with the step that addresses it.",
     "today": "Today",
     "next": "Next",
     "status": {
@@ -429,25 +500,93 @@
         "now": "The workbook leaves heatwave, lightning, zoonoses and pests, hazardous material, vehicle accidents and the economic vulnerable-groups indicator empty for every Tanzanian unit. The Benchmark 2026 activates five of them with Tanzanian data: heatwave days (ERA5-Land), lightning stroke density (WWLLN), recorded road crashes per 100 km² (police statistics, shared among councils by population so the big cities carry them), hazardous-material sites per 100 km² (OpenStreetMap, the 2022 census mapping and the NEMC certificates of July to September 2026) and female-headed households (2022 census). Zoonoses and pests stay empty and enter no score. Internal violence is withheld by programme decision (data note DN-12): the workbook keeps its ACLED counts, the live model shows no value. The density of health facilities can never score in the workbook (its range is 0 to 0).",
         "next": "Fill zoonoses and pests from the One Health surveillance of the Ministry of Health and the Ministry of Livestock and Fisheries; extend the NEMC certificate series month by month; report the degenerate indicators to the SADC and INFORM partners."
       },
+      "queried": {
+        "title": "{{withheld}} values are withheld from the live model; {{replaced}} were replaced by approved values",
+        "now": "The indicator-by-indicator recheck of 10 October 2026 compared every workbook value with documented events, with the other indicators of the workbook and with each indicator's own definition. It found values that contradict them: Dar es Salaam's drought frequency, the semi-arid Lake zone's drought minimum, Kagera's earthquake exposure, Ukerewe's landslide exposure, Dodoma's electricity access, the displaced-people and food-security rows and the coastal-erosion rows. The live model withholds them, as INFORM treats data that fails validation: the group is missing for those units ({{withheld}} values, {{withheldUnits}} workbook units, {{withheldCouncils}} councils; a group with other indicators is recomputed from them), and every place that shows the value says so with the note. The workbook itself is kept exactly and proven by the tests; {{notes}} notes on {{noteGroups}} indicator groups reach {{councils}} councils. Of the {{withheldWorkbook}} workbook values the recheck quarantined, the Benchmark 2026 of 10 October 2026 replaced {{replaced}} council values with approved institutional values (coastal erosion, cyclone exposure, food security, displacement, Dodoma's electricity, Ukerewe's landslide); {{withheld}} remain withheld in {{withheldCouncils}} councils (agricultural drought for Dar es Salaam, not applicable to a city).",
+        "next": "The queries are raised with INFORM (JRC) and SADC for the next workbook release (docs/assessment/INFORM_TZ_Upstream_Queries_{{release}}.md); an institution replaces a withheld value through the Data portal with a citable source, which lifts the hold for that unit. The register is docs/assessment/INFORM_TZ_Indicator_Integrity_{{release}}.md, regenerated with every release."
+      },
       "inherit": {
         "title": "{{inherited}} councils inherit a neighbour’s unit",
         "now": "Councils created or split after the workbook’s boundaries (Kibiti, Ubungo and Kigamboni among them) carry the values of the unit they were carved from until council-specific data exist. They are flagged, never fabricated. With them, 25 workbook units each back two councils.",
         "next": "Council-level values entered by institutions take precedence for that council alone (finest level wins)."
+      },
+      "surveys": {
+        "title": "Vulnerability and coping are coarser than hazard",
+        "now": "Survey-based indicators exist at regional or source-unit level, and {{shared}} source units each back more than one council, so those councils share values.",
+        "next": "Small-area estimates and council-level administrative data as ministries submit them."
+      },
+      "relative": {
+        "title": "Scaling is relative to Tanzania",
+        "now": "Data-range references are frozen at the minimum and maximum across Tanzanian units, not INFORM’s global reference values. Scores compare well within Tanzania; compare them with global INFORM with care.",
+        "next": "Adopt policy or literature bounds (such as 0–100% for rates) where they are more defensible, recorded per indicator in the specification."
+      },
+      "drought": {
+        "title": "Drought is not multiplied by exposure",
+        "now": "Flood is amplified by population exposure; drought is not, because multiplying drought by urban density would wrongly demote pastoral and semi-arid communities such as Longido.",
+        "next": "An agricultural exposure layer (cropland and livestock) for drought."
+      },
+      "bimodal": {
+        "title": "Drought season in bimodal highlands",
+        "now": "The drought index scores the season it detects as the main rainy season. In a few bimodal highland councils it picks the erratic short rains (October–January) instead of the reliable long rains, which inflates drought: Lushoto computes to 10.0 on the 0–10 scale. Treat very high drought in wet highland councils with caution.",
+        "next": "Score both rainy seasons in bimodal areas (or the season that matters for local livelihoods) and validate against MUCHALI/IPC food-security history."
+      },
+      "sentinel": {
+        "title": "The Sentinel-1 flood layer is excluded",
+        "now": "A Sentinel-1 radar flood-frequency layer was computed for every council but failed validation: its simple backscatter threshold classed smooth dry surfaces (the Lake Natron soda flats, salt and clay pans) as water, so semi-arid councils outranked the Rufiji and Kilombero flood plains. It is not used.",
+        "next": "Dry-versus-wet-season change detection with terrain and water-body masking, validated against recorded floods before any use."
       },
       "advanced": {
         "title": "The Advancement layer is shown apart, with gaps",
         "now": "Since October 2026 the Advancement layer is computed from the filled sub-indicators (council climate and terrain indices from CHIRPS, ERA5-Land, MODIS, SMAP, SRTM and the USGS catalogue) and shown on every profile beside the Core. Thirteen of the 25 sub-indicators are unfilled or withheld; the indices measure intensity rather than exposed people; the weights are proposed and the reference ranges relative. The survey measures and expert grades that the site showed before October 2026 are not in it: they need a source, a method and a date before they can enter.",
         "next": "Fill the remaining baskets (TMA, basin boards, NEMC, GEM, LIS/OTD), convert intensity to exposed population on the census grid, calibrate the weights against recorded events, then decide the default view (decision D2)."
       },
-      "queried": {
-        "title": "{{withheld}} values are withheld from the live model; {{replaced}} were replaced by approved values",
-        "now": "The indicator-by-indicator recheck of 10 October 2026 compared every workbook value with documented events, with the other indicators of the workbook and with each indicator's own definition. It found values that contradict them: Dar es Salaam's drought frequency, the semi-arid Lake zone's drought minimum, Kagera's earthquake exposure, Ukerewe's landslide exposure, Dodoma's electricity access, the displaced-people and food-security rows and the coastal-erosion rows. The live model withholds them, as INFORM treats data that fails validation: the group is missing for those units ({{withheld}} values, {{withheldUnits}} workbook units, {{withheldCouncils}} councils; a group with other indicators is recomputed from them), and every place that shows the value says so with the note. The workbook itself is kept exactly and proven by the tests; {{notes}} notes on {{noteGroups}} indicator groups reach {{councils}} councils. Of the {{withheldWorkbook}} workbook values the recheck quarantined, the Benchmark 2026 of 10 October 2026 replaced {{replaced}} council values with approved institutional values (coastal erosion, cyclone exposure, food security, displacement, Dodoma's electricity, Ukerewe's landslide); {{withheld}} remain withheld in {{withheldCouncils}} councils (agricultural drought for Dar es Salaam, not applicable to a city).",
-        "next": "The queries are raised with INFORM (JRC) and SADC for the next workbook release (docs/assessment/INFORM_TZ_Upstream_Queries_{{release}}.md); an institution replaces a withheld value through the Data portal with a citable source, which lifts the hold for that unit. The register is docs/assessment/INFORM_TZ_Indicator_Integrity_{{release}}.md, regenerated with every release."
+      "precision": {
+        "title": "Close scores are not precise rankings",
+        "now": "Min–max scaling keeps the real spacing between units, so several semi-arid councils sit within a few tenths of each other. A difference of 0.1 is not meaningful.",
+        "next": "Publish uncertainty ranges alongside scores as the time series grows."
+      },
+      "freshness": {
+        "title": "Some inputs age quickly",
+        "now": "Refugee figures, for example, reflect 2024 camp populations; camp closures since then are not yet reflected. Outdated inputs are flagged in the source register.",
+        "next": "Dated snapshots and a refresh calendar per indicator, so every score is reported “as of” its data."
       }
     },
     "closingTitle": "How limitations are tracked",
     "closing": "Each item above is tracked, and each can be improved through the Data portal or in code without changing the INFORM engine. As gaps close, scores will change as the picture becomes more complete, and every change remains traceable to a sourced indicator.",
     "sourcesNote": "Sources: INFORM Tanzania Methodology & Data-Integrity Manual (§8), Local Data Integration Plan (§2) and the Indicator Source Register."
+  },
+  "changelog": {
+    "title": "Corrections in this version",
+    "lead": "This rebuild fixes issues found by an audit of the previous application. Each correction is locked in by an automated test.",
+    "before": "Before",
+    "after": "Now",
+    "items": {
+      "thresholds": {
+        "title": "Official per-dimension thresholds",
+        "before": "Dimension maps and badges were coloured with the INFORM Risk thresholds.",
+        "after": "Each dimension is classified with its own thresholds from the workbook’s Thresholds sheet."
+      },
+      "live": {
+        "title": "Council risk recomputed live",
+        "before": "Council risk could be read from a stored figure, so an approved update did not always reach it.",
+        "after": "Council risk is always computed as ∛(H × V × LCC) from current values; approved updates propagate to the council and its region."
+      },
+      "dar": {
+        "title": "Dar es Salaam region join fixed",
+        "before": "A spelling mismatch (“Dar-es-salaam” versus “Dar es Salaam”) broke the join between councils and their region.",
+        "after": "Place names are normalised before joining; all 31 regions, including Dar es Salaam, aggregate from their councils."
+      },
+      "severity": {
+        "title": "Severity follows the official method",
+        "before": "The severity calculator used a simplified scheme with no Medium category.",
+        "after": "The JRC/ACAPS structure: 70/30 weighting, inverted geometric aggregation, ROUNDUP categories including Medium, and a separate reliability rating."
+      },
+      "totals": {
+        "title": "Dimension-total overrides removed",
+        "before": "Dimension totals could be edited directly, disconnecting them from their indicators.",
+        "after": "Totals are always derived from indicators, so every score can be traced back to its inputs."
+      }
+    }
   },
   "references": {
     "title": "References",
@@ -472,36 +611,5 @@
     "newTab": "(opens in a new tab)",
     "citeTitle": "How to cite this methodology",
     "cite": "INFORM Tanzania. Methodology of the sub-national INFORM Risk and crisis-severity model for Tanzania (data as of {{date}})."
-  },
-  "summary": {
-    "eyebrow": "Methodology · Summary",
-    "lead": "How INFORM Tanzania measures risk, in seven short sections. Each opens to its full documentation page.",
-    "open": "Read the full section: {{title}}",
-    "pipeline": {
-      "title": "From a raw measurement to a risk score",
-      "steps": {
-        "1": "Each raw value becomes a 0–10 score by the workbook’s specification for that indicator: denominator, outlier fence, logarithm, reference range and direction of effect.",
-        "2": "Indicators average into their indicator group, and groups into their category, over the members with data: a missing value never counts as zero.",
-        "3": "The two categories of a dimension combine by INFORM’s scaled geometric mean, rounded to one decimal: one severe category keeps the dimension high.",
-        "4": "Risk is the cube root of Hazard & Exposure × Vulnerability × Lack of Coping Capacity: high only where all three are present."
-      }
-    },
-    "documentation": {
-      "title": "Full documentation",
-      "lead": "The complete methodology, one page per section, for analysts and reviewers: the specification cell for cell, the live worked example, the crisis severity method, the sources register, the data notes and the references."
-    },
-    "levels": {
-      "councils": "The {{n}} councils of the 2022 census carry the scores of their workbook unit ({{units}} units) and their own census population; approved council values apply to that council alone.",
-      "regions": "The {{n}} regions are built from their councils the INFORM way (indicator means, category means, scaled geometric mean, cube root), never by averaging risk scores.",
-      "national": "The national value, {{value}}, is the same aggregate over all councils. The workbook publishes no national score and INFORM Global is not comparable."
-    }
-  },
-  "section": {
-    "eyebrow": "Section {{n}} of {{total}}",
-    "back": "Methodology summary",
-    "prev": "Previous",
-    "next": "Next",
-    "breadcrumb": "Methodology document",
-    "pager": "Previous and next sections"
   }
 }

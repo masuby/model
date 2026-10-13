@@ -182,7 +182,7 @@ export function Advancement({ view }: { view: AreaView }) {
           </ul>
         </Note>
         <Button variant="outline" className="no-print mt-8" asChild>
-          <Link to="/methodology/structure">
+          <Link to="/methodology#structure">
             {t('advancement.link')} <ArrowRight />
           </Link>
         </Button>

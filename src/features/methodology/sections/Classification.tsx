@@ -100,15 +100,16 @@ export function ClassificationSection() {
       <SubHeading id="classification-table" className="mt-14">
         {t('classification.tableCaption')}
       </SubHeading>
+      {/* Phones: fixed column widths, tighter cells and no colour squares, so the five columns fit a 360 px screen without scrolling. */}
       <div className="mt-3 overflow-x-auto">
-        <table aria-labelledby="classification-table" className="w-full border-collapse text-xs sm:text-sm">
+        <table aria-labelledby="classification-table" className="w-full table-fixed border-collapse text-xs sm:table-auto sm:text-sm">
           <thead>
             <tr className="border-b border-foreground/25 text-left text-xs text-muted-foreground">
               <th scope="col" className="py-2.5 pr-2 font-medium sm:pr-4">
                 {t('classification.class')}
               </th>
               {SCALES.map((s) => (
-                <th key={s} scope="col" className="px-2 py-2.5 text-right font-medium sm:px-4">
+                <th key={s} scope="col" className="px-1.5 py-2.5 text-right font-medium sm:px-4">
                   {/* H / V / LCC on phones, so all five columns fit without scrolling; screen readers get the full name. */}
                   <span className="sm:hidden" aria-hidden>
                     {s === 'risk' ? t('vars.risk') : SCALE_TAG[s]}
@@ -127,9 +128,9 @@ export function ClassificationSection() {
                     {t(`common:classes.${k}`)}
                   </th>
                   {SCALES.map((s) => (
-                    <td key={s} className="num px-2 py-2.5 text-right whitespace-nowrap sm:px-4 sm:text-[13px]">
-                      <span className="inline-flex items-center gap-2">
-                        <span className="size-2.5 rounded-[2px]" style={{ background: classColor(k, s) }} aria-hidden />
+                    <td key={s} className="num px-1.5 py-2.5 text-right whitespace-nowrap sm:px-4 sm:text-[13px]">
+                      <span className="inline-flex items-center sm:gap-2">
+                        <span className="hidden size-2.5 rounded-[2px] sm:inline-block" style={{ background: classColor(k, s) }} aria-hidden />
                         {classRanges(s)[i]}
                       </span>
                     </td>

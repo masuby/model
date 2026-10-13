@@ -218,7 +218,7 @@ function Footer() {
                 </a>
               </li>
               <li>
-                <Link className="text-foreground/80 hover:text-primary" to="/methodology/sources">
+                <Link className="text-foreground/80 hover:text-primary" to="/methodology#sources">
                   {t('footer.sources')}
                 </Link>
               </li>

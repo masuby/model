@@ -24,9 +24,6 @@ export interface SectionDef {
   depth: 0 | 1;
 }
 
-// The live documentation is operational: what a reader needs to use the scores. The research analyses
-// (the Advancement baskets, the quality checks, the sensitivities, the corrections) are reported in the
-// assessment reports (docs/assessment) and the thesis, not duplicated here (decision of 10 October 2026).
 export const SECTIONS: readonly SectionDef[] = [
   { id: 'overview', number: '01', depth: 0 },
   { id: 'structure', number: '02', depth: 0 },
@@ -35,32 +32,15 @@ export const SECTIONS: readonly SectionDef[] = [
   { id: 'geometric', number: '04', depth: 0 },
   { id: 'classification', number: '05', depth: 0 },
   { id: 'levels', number: '06', depth: 0 },
-  { id: 'severity', number: '07', depth: 0 },
-  { id: 'sources', number: '08', depth: 0 },
-  { id: 'limitations', number: '09', depth: 0 },
-  { id: 'references', number: '10', depth: 0 },
+  { id: 'advanced', number: '07', depth: 0 },
+  { id: 'severity', number: '08', depth: 0 },
+  { id: 'sources', number: '09', depth: 0 },
+  { id: 'quality', number: '10', depth: 0 },
+  { id: 'limitations', number: '11', depth: 0 },
+  { id: 'changelog', number: '12', depth: 0 },
+  { id: 'references', number: '13', depth: 0 },
 ];
 export const SECTION_IDS: readonly string[] = SECTIONS.map((s) => s.id);
-
-/**
- * The summary page (UX-04): seven short sections and the list of the full documentation pages. Each
- * summary section links to the full section of the same id at /methodology/<id>.
- */
-export const SUMMARY_SECTIONS: readonly SectionDef[] = [
-  { id: 'overview', number: '01', depth: 0 },
-  { id: 'structure', number: '02', depth: 0 },
-  { id: 'pipeline', number: '03', depth: 0 },
-  { id: 'geometric', number: '04', depth: 0 },
-  { id: 'classification', number: '05', depth: 0 },
-  { id: 'levels', number: '06', depth: 0 },
-  { id: 'limitations', number: '07', depth: 0 },
-  { id: 'documentation', number: '08', depth: 0 },
-];
-export const SUMMARY_IDS: readonly string[] = SUMMARY_SECTIONS.map((s) => s.id);
-/** "1" … "8" on the summary page. */
-export const summaryNumber = (id: string): string => String(Number(SUMMARY_SECTIONS.find((s) => s.id === id)?.number ?? '')) || '';
-/** The full-documentation page for a section id (every id of SECTIONS has one). */
-export const sectionPath = (id: string): string => `/methodology/${id}`;
 
 /** Document numbering as printed: "3" for a section, "3.1" for its first sub-section. */
 export const DISPLAY_NUMBERS: ReadonlyMap<string, string> = (() => {

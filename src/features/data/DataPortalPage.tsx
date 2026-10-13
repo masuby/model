@@ -179,8 +179,7 @@ export default function DataPortalPage() {
   return (
     <div>
       <PageHeader eyebrow={t('page.eyebrow')} title={t('page.title')} description={t('page.lead')} actions={<DataToolsMenu />}>
-        {/* The figures are for people at work in the portal; a visitor sees the sign-in first, on one screen. */}
-        {profile && <KeyFigures className="mt-10 border-t border-border pt-7" items={figures} />}
+        <KeyFigures className="mt-10 border-t border-border pt-7" items={figures} />
       </PageHeader>
 
       <PageContainer className="pt-10 pb-20 sm:pt-12">

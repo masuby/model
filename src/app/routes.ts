@@ -22,7 +22,6 @@ export const ROUTES = {
   severity: { load: () => import('@/features/severity/SeverityPage'), ns: ['severity'] },
   learn: { load: () => import('@/features/learn/LearnPage'), ns: ['learn'] },
   methodology: { load: () => import('@/features/methodology/MethodologyPage'), ns: ['methodology'] },
-  methodologySection: { load: () => import('@/features/methodology/SectionPage'), ns: ['methodology'] },
   data: { load: () => import('@/features/data/DataPortalPage'), ns: ['data'] },
   notFound: { load: () => import('./NotFound'), ns: [] },
 } satisfies Record<string, RouteDef>;
@@ -44,7 +43,6 @@ const PATH_TO_ROUTE: Array<[RegExp, RouteKey]> = [
   [/^\/insights/, 'insights'],
   [/^\/severity/, 'severity'],
   [/^\/learn/, 'learn'],
-  [/^\/methodology\/./, 'methodologySection'],
   [/^\/methodology/, 'methodology'],
   [/^\/data/, 'data'],
 ];
