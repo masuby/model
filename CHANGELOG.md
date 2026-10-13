@@ -4,6 +4,8 @@
 
 ### More room for the live values on the home page (13 October 2026)
 
+- The map sits in the middle of the hero row rather than at its top, and the relation chart reads
+  stronger: black, bold title, note, axis labels and legend, thicker lines and a firmer baseline.
 - The two charts under the headline have more horizontal space: a wider charts column (the map column
   is a little narrower, still reaching into the page margin), more air between the two charts, between
   each label and its value, and between the donut and its legend.

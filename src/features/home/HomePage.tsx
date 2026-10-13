@@ -60,7 +60,7 @@ export default function HomePage() {
           <NationalCharts model={model} className="mt-5 border-t border-border pt-4" />
         </div>
 
-        <figure className="w-full lg:-mr-8 lg:w-[calc(100%+2rem)] xl:-mr-10 xl:w-[calc(100%+2.5rem)]">
+        <figure className="w-full lg:-mr-8 lg:w-[calc(100%+2rem)] lg:self-center xl:-mr-10 xl:w-[calc(100%+2.5rem)]">
           <div className="aspect-[1000/966] w-full">
             <React.Suspense fallback={<div className="size-full rounded-md bg-muted/60" />}>
               <StaticMap model={model} metric={riskMetric} className="size-full" onSelect={(u) => navigate(`/area/${u.id}`)} />

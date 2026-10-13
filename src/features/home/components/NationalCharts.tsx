@@ -40,18 +40,18 @@ export function NationalCharts({ model, className }: { model: RiskModel; classNa
       <Block title={t('picture.pie')} note={t('picture.pieNote', { high, pct: Math.round((high / model.councils.length) * 100) })}>
         <ClassPie counts={counts} total={model.councils.length} high={high} />
       </Block>
-      <Block title={t('picture.relation')} note={t('picture.relationNote')} className="sm:col-span-2">
+      <Block title={t('picture.relation')} note={t('picture.relationNote')} strong className="sm:col-span-2">
         <RelationLines model={model} />
       </Block>
     </div>
   );
 }
 
-function Block({ title, note, className, children }: { title: string; note?: string; className?: string; children: React.ReactNode }) {
+function Block({ title, note, strong = false, className, children }: { title: string; note?: string; strong?: boolean; className?: string; children: React.ReactNode }) {
   return (
     <section className={className}>
-      <h3 className="text-sm font-semibold">{title}</h3>
-      {note && <p className="mt-0.5 text-xs leading-snug text-muted-foreground">{note}</p>}
+      <h3 className={strong ? 'text-base font-bold' : 'text-sm font-semibold'}>{title}</h3>
+      {note && <p className={cn('mt-0.5 leading-snug', strong ? 'text-sm font-medium text-foreground' : 'text-xs text-muted-foreground')}>{note}</p>}
       <div className="mt-2.5">{children}</div>
     </section>
   );
@@ -202,7 +202,7 @@ function RelationLines({ model }: { model: RiskModel }) {
   return (
     <div>
       <div className="flex gap-2">
-        <div className="num flex h-24 shrink-0 flex-col justify-between text-[10px] leading-none text-muted-foreground" aria-hidden>
+        <div className="num flex h-24 shrink-0 flex-col justify-between text-xs leading-none font-bold text-foreground" aria-hidden>
           <span>10</span>
           <span>5</span>
           <span>0</span>
@@ -210,22 +210,22 @@ function RelationLines({ model }: { model: RiskModel }) {
         <div className="min-w-0 flex-1">
           <svg viewBox={`0 0 ${W} ${H}`} preserveAspectRatio="none" className="h-24 w-full" role="img" aria-label={t('picture.relationAria')}>
             {[0, 5, 10].map((v) => (
-              <line key={v} x1={0} x2={W} y1={y(v)} y2={y(v)} stroke="currentColor" strokeOpacity={0.15} strokeWidth={1} vectorEffect="non-scaling-stroke" />
+              <line key={v} x1={0} x2={W} y1={y(v)} y2={y(v)} stroke="currentColor" strokeOpacity={v === 0 ? 0.6 : 0.25} strokeWidth={v === 0 ? 1.25 : 1} vectorEffect="non-scaling-stroke" />
             ))}
             {lines.map((l) => (
-              <path key={l.key} d={path(l.points)} fill="none" stroke={LINE[l.key]} strokeWidth={l.key === 'risk' ? 2.25 : 1.5} strokeLinejoin="round" strokeLinecap="round" vectorEffect="non-scaling-stroke" />
+              <path key={l.key} d={path(l.points)} fill="none" stroke={LINE[l.key]} strokeWidth={l.key === 'risk' ? 3 : 2.25} strokeLinejoin="round" strokeLinecap="round" vectorEffect="non-scaling-stroke" />
             ))}
           </svg>
-          <p className="mt-1 flex justify-between text-[10px] text-muted-foreground" aria-hidden>
+          <p className="mt-1 flex justify-between text-xs font-bold text-foreground" aria-hidden>
             <span>{t('picture.relationLeft')}</span>
             <span>{t('picture.relationRight')}</span>
           </p>
         </div>
       </div>
-      <p className="mt-2 flex flex-wrap gap-x-3 gap-y-1 text-[11px] text-muted-foreground" aria-hidden>
+      <p className="mt-2 flex flex-wrap gap-x-5 gap-y-1 text-sm font-bold text-foreground" aria-hidden>
         {PARTS.map(({ key }) => (
           <span key={key} className="inline-flex items-center gap-1.5">
-            <span className="inline-block h-0.5 w-4 rounded" style={{ background: LINE[key] }} />
+            <span className="inline-block h-1 w-6 rounded" style={{ background: LINE[key] }} />
             {name(key)}
           </span>
         ))}
