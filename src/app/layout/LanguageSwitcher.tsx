@@ -13,7 +13,7 @@ export function LanguageSwitcher() {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <Button variant="ghost" size="md" className="h-9 gap-1.5 px-2 sm:h-10 sm:px-2.5" aria-label={t('language.label')}>
+        <Button variant="ghost" size="md" className="h-8 gap-1.5 px-1.5 sm:h-10 sm:px-2.5" aria-label={t('language.label')}>
           <Languages className="hidden sm:block" />
           <span className="text-xs font-semibold">{current.short}</span>
         </Button>

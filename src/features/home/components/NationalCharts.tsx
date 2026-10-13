@@ -34,13 +34,13 @@ export function NationalCharts({ model, className }: { model: RiskModel; classNa
   const high = counts.high + counts.veryHigh;
   return (
     <div className={cn('grid gap-x-8 gap-y-5 sm:grid-cols-2', className)}>
-      <Block title={t('picture.parts')} note={t('picture.partsNote', { councils: model.councils.length, people: formatCompact(population, i18n.language) })}>
+      <Block title={t('picture.parts')} note={t('picture.partsNote', { people: formatCompact(population, i18n.language) })}>
         <PartTracks unit={national} />
       </Block>
       <Block title={t('picture.pie')} note={t('picture.pieNote', { high, pct: Math.round((high / model.councils.length) * 100) })}>
-        <ClassPie counts={counts} total={model.councils.length} />
+        <ClassPie counts={counts} total={model.councils.length} high={high} />
       </Block>
-      <Block title={t('picture.relation')} note={t('picture.relationNote', { count: model.councils.length, window: SMOOTH })} className="sm:col-span-2">
+      <Block title={t('picture.relation')} note={t('picture.relationNote')} className="sm:col-span-2">
         <RelationLines model={model} />
       </Block>
     </div>
@@ -108,9 +108,10 @@ function arc(a0: number, a1: number, R: number, r: number, gap: number): string 
 
 /**
  * The councils by risk class as a donut in the risk palette: one slice per class with its share written
- * on it when there is room, the total in the middle, and the count and share of every class beside it.
+ * on it when there is room, the share at high or above in the middle, and the count and share of every
+ * class beside it.
  */
-function ClassPie({ counts, total }: { counts: Record<ClassKey, number>; total: number }) {
+function ClassPie({ counts, total, high }: { counts: Record<ClassKey, number>; total: number; high: number }) {
   const { t } = useTranslation(['home', 'common']);
   const R = 48;
   const r = 29;
@@ -143,7 +144,7 @@ function ClassPie({ counts, total }: { counts: Record<ClassKey, number>; total: 
           ) : null,
         )}
         <text x="50" y="47" textAnchor="middle" dominantBaseline="central" fontSize="14" fontWeight="700" fill="currentColor" className="num">
-          {total}
+          {Math.round((high / total) * 100)}%
         </text>
         <text x="50" y="59" textAnchor="middle" dominantBaseline="central" fontSize="6" fill="currentColor" fillOpacity={0.65}>
           {t('picture.pieCentre')}
@@ -207,7 +208,7 @@ function RelationLines({ model }: { model: RiskModel }) {
           <span>0</span>
         </div>
         <div className="min-w-0 flex-1">
-          <svg viewBox={`0 0 ${W} ${H}`} preserveAspectRatio="none" className="h-24 w-full" role="img" aria-label={t('picture.relationAria', { count: ranked.length })}>
+          <svg viewBox={`0 0 ${W} ${H}`} preserveAspectRatio="none" className="h-24 w-full" role="img" aria-label={t('picture.relationAria')}>
             {[0, 5, 10].map((v) => (
               <line key={v} x1={0} x2={W} y1={y(v)} y2={y(v)} stroke="currentColor" strokeOpacity={0.15} strokeWidth={1} vectorEffect="non-scaling-stroke" />
             ))}

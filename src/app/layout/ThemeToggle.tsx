@@ -34,7 +34,7 @@ export function ThemeToggle() {
     <DropdownMenu>
       <Tooltip content={t('theme.toggle')}>
         <DropdownMenuTrigger asChild>
-          <Button variant="ghost" size="icon" aria-label={t('theme.toggle')} className="relative size-9 sm:size-10">
+          <Button variant="ghost" size="icon" aria-label={t('theme.toggle')} className="relative size-8 sm:size-10">
             <Sun className={`transition-transform duration-150 ${resolved === 'dark' ? 'scale-0' : 'scale-100'}`} />
             <Moon className={`absolute transition-transform duration-150 ${resolved === 'dark' ? 'scale-100' : 'scale-0'}`} />
           </Button>

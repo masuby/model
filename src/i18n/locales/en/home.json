@@ -1,11 +1,10 @@
 {
   "eyebrow": "INFORM Sub-national · United Republic of Tanzania",
   "title": "See where disasters would hurt most, before they strike.",
-  "lead": "An open, evidence-based index of disaster risk for every one of Tanzania’s {{councils}} councils and {{regions}} regions, built on the global INFORM methodology and Tanzanian data.",
+  "lead": "An open, evidence-based index of disaster risk for every council and region of Tanzania, built on the global INFORM methodology and Tanzanian data.",
   "ctaExplore": "Explore the risk map",
   "ctaLearn": "How INFORM works",
   "nationalRisk": "National INFORM Risk",
-  "nationalNote": "INFORM aggregate of all {{councils}} councils",
   "mapCaption": "Council-level INFORM Risk",
   "kpi": {
     "councils": "Councils analysed",
@@ -58,15 +57,15 @@
   "mapSource": "INFORM Risk by council. Sources: INFORM Tanzania model.",
   "picture": {
     "parts": "Risk and its parts",
-    "partsNote": "{{councils}} councils · {{people}} people",
+    "partsNote": "{{people}} people (2022 census)",
     "trackAria": "{{label}}: {{score}} out of 10, {{cls}}",
     "pie": "Councils by risk class",
     "pieNote": "{{high}} councils ({{pct}}%) at high or very high risk",
     "relation": "How the parts relate to risk",
-    "relationNote": "The {{count}} councils ranked by risk, highest first; each line averaged over {{window}} councils",
-    "relationAria": "INFORM risk, hazard, vulnerability and lack of coping capacity across the {{count}} councils ranked by risk",
+    "relationNote": "Councils ranked by risk, highest first; each line smoothed over its neighbours",
+    "relationAria": "INFORM risk, hazard, vulnerability and lack of coping capacity across the councils ranked by risk",
     "relationLeft": "Highest risk",
     "relationRight": "Lowest risk",
-    "pieCentre": "councils"
+    "pieCentre": "high or above"
   }
 }

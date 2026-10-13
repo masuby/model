@@ -2,6 +2,17 @@
 
 ## Unreleased
 
+### Silent on the administrative counts, and a steady layout on phones (13 October 2026)
+
+- The site no longer states how many councils and regions there are: the home page's lead, the note
+  under "Risk and its parts", the relation chart's note and the explorer's level switch and notes name
+  councils and regions without their counts, and the donut's centre shows the share of councils at high
+  or very high risk instead of the total.
+- On a phone the header no longer overflows the screen (every page was 7 px wider than the viewport
+  since the text-size button joined the header): the button is hidden there and the text size is chosen
+  in the phone menu instead. Checked on every main page at 390, 768 and 1366 px: no horizontal
+  overflow, no page errors, at the normal and the largest text size.
+
 ### No duplicated figures on the profile (13 October 2026)
 
 - The hero's score block no longer repeats the risk level as a badge with a "Know the risk" link under

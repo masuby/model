@@ -31,11 +31,6 @@ function Section({ id, title, action, children, pad }: { id: string; title: Reac
   );
 }
 
-function useLevelCounts(): Record<ExploreLevel, number> {
-  const { model } = useExplore();
-  return { council: model.councils.length, region: model.regions.length, source: model.sources.length };
-}
-
 /**
  * Councils / Regions, with the number of areas under each label. The 170 workbook units are an analyst's
  * reference level (UX-07): the switch offers them only once chosen through the note below or a link.
@@ -43,7 +38,6 @@ function useLevelCounts(): Record<ExploreLevel, number> {
 export function LevelSwitch({ className }: { className?: string }) {
   const { t } = useTranslation(['explore', 'common']);
   const { state, actions } = useExplore();
-  const counts = useLevelCounts();
   const levels = EXPLORE_LEVELS.filter((l) => l !== 'source' || state.level === 'source');
   return (
     <Segmented<ExploreLevel>
@@ -55,10 +49,7 @@ export function LevelSwitch({ className }: { className?: string }) {
       options={levels.map((l) => ({
         value: l,
         label: (
-          <span className="flex flex-col items-center leading-tight">
-            <span className="text-center text-[13px] whitespace-normal">{t(`level.${l}`)}</span>
-            <span className="num mt-0.5 text-xs font-normal text-muted-foreground">{counts[l]}</span>
-          </span>
+          <span className="text-center text-[13px] whitespace-normal leading-tight">{t(`level.${l}`)}</span>
         ),
       }))}
     />
@@ -69,16 +60,15 @@ export function LevelSwitch({ className }: { className?: string }) {
 export function LevelNote({ className }: { className?: string }) {
   const { t } = useTranslation('explore');
   const { state, actions } = useExplore();
-  const counts = useLevelCounts();
   return (
     <p className={cn('text-xs leading-relaxed text-muted-foreground', className)}>
       {state.level === 'source' && <span className="font-medium text-warning">{t('level.reference')} · </span>}
-      {t(`level.note.${state.level}`, { count: counts[state.level] })}
+      {t(`level.note.${state.level}`)}
       {state.level !== 'source' && (
         <>
           {' '}
           <button type="button" onClick={() => actions.setLevel('source')} className="font-medium text-primary underline-offset-4 hover:underline">
-            {t('level.referenceLink', { count: counts.source })}
+            {t('level.referenceLink')}
           </button>
         </>
       )}

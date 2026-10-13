@@ -656,7 +656,7 @@ export function PanelActions({ unit, groupRef, className }: { unit: Unit; groupR
   const full = !inCompare && state.cmp.length >= MAX_COMPARE;
   return (
     <div className={cn('grid gap-2', className)}>
-      <div className="flex gap-2">
+      <div className="flex flex-wrap gap-2">
         <Button asChild className="flex-1">
           <Link to={groupRef ? `/area/${unit.id}?view=analysis#indicators` : `/area/${unit.id}`}>
             {groupRef ? t('riskPanel.group.indicatorTable') : t('card.viewProfile')} <ArrowRight />

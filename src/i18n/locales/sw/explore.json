@@ -25,11 +25,11 @@
     "source": "Vitengo vya INFORM",
     "reference": "Rejea",
     "note": {
-      "council": "Halmashauri {{count}} (NBS 2022).",
-      "region": "Mikoa {{count}}, iliyojumlishwa kutoka halmashauri zake.",
-      "source": "Vitengo {{count}} vya kitabu cha kazi cha INFORM SADC 2024."
+      "council": "Halmashauri za sensa ya 2022 (NBS).",
+      "region": "Mikoa, iliyojumlishwa kutoka halmashauri zake.",
+      "source": "Vitengo vya kitabu cha kazi cha INFORM SADC 2024."
     },
-    "referenceLink": "Vitengo {{count}} vya kitabu cha kazi"
+    "referenceLink": "Vitengo vya kitabu cha kazi, kwa wachambuzi"
   },
   "lens": {
     "label": "Paka rangi kwa",

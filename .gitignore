@@ -27,6 +27,7 @@ vendor/
 
 # Build outputs
 dist
+dist-demo/
 dist-ssr
 dist/
 build/

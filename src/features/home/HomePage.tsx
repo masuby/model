@@ -45,7 +45,7 @@ export default function HomePage() {
       <PageContainer className="grid items-start gap-10 pt-6 pb-10 lg:grid-cols-[minmax(0,1fr)_minmax(0,500px)] lg:gap-10 lg:pt-5 lg:pb-12 xl:gap-12">
         <div>
           <h1 className="max-w-2xl text-[2.2rem] leading-[1.05] text-balance sm:text-[2.6rem] lg:text-[2.75rem]">{t('title')}</h1>
-          <p className="mt-3 max-w-xl text-base leading-relaxed text-muted-foreground lg:text-[1.05rem]">{t('lead', { councils: model.councils.length, regions: model.regions.length })}</p>
+          <p className="mt-3 max-w-xl text-base leading-relaxed text-muted-foreground lg:text-[1.05rem]">{t('lead')}</p>
           <div className="mt-4 flex flex-wrap gap-3">
             <Button asChild>
               <Link to="/explore">
@@ -98,7 +98,7 @@ export default function HomePage() {
             ))}
           </div>
           <p className="mt-10 flex flex-wrap items-center gap-x-3 gap-y-2 border-t border-border pt-6 font-display text-xl sm:text-2xl">
-            <span className="whitespace-nowrap">
+            <span className="sm:whitespace-nowrap">
               {t('formula.result', {
                 h: formatScore(national.dims.hazard.score),
                 v: formatScore(national.dims.vulnerability.score),

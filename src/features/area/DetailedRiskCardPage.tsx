@@ -233,7 +233,8 @@ export default function DetailedRiskCardPage() {
       {/* Risk and its parts */}
       <section className="keep mt-5">
         <h2 className={H2}>{t('detailed.parts')}</h2>
-        <table className="mt-1.5 w-full text-[12px]">
+        <div className="mt-1.5 overflow-x-auto">
+        <table className="w-full text-[12px]">
           <thead>
             <tr className="border-b border-foreground/40 text-left text-[11px] text-muted-foreground">
               <th scope="col" className="py-1 pr-2 font-medium">
@@ -283,6 +284,7 @@ export default function DetailedRiskCardPage() {
             })}
           </tbody>
         </table>
+        </div>
       </section>
 
       {/* High-scoring groups of each dimension */}
@@ -321,7 +323,8 @@ export default function DetailedRiskCardPage() {
       {/* Every group */}
       <section className="page mt-5">
         <h2 className={H2}>{t('detailed.all')}</h2>
-        <table className="mt-1.5 w-full text-[11px]">
+        <div className="mt-1.5 overflow-x-auto">
+        <table className="w-full text-[11px]">
           <thead>
             <tr className="border-b border-foreground/40 text-left text-[10px] text-muted-foreground">
               <th scope="col" className="py-1 pr-2 font-medium">
@@ -354,6 +357,7 @@ export default function DetailedRiskCardPage() {
             ))}
           </tbody>
         </table>
+        </div>
       </section>
 
       {/* The area and its hazards, with what helps */}

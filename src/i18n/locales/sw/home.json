@@ -1,11 +1,10 @@
 {
   "eyebrow": "INFORM Ngazi za Chini · Jamhuri ya Muungano wa Tanzania",
   "title": "Tambua mahali majanga yangeleta madhara makubwa zaidi, kabla hayajatokea.",
-  "lead": "Kielelezo huria cha hatari za maafa kinachotegemea ushahidi kwa kila moja ya halmashauri {{councils}} na mikoa {{regions}} ya Tanzania, kilichojengwa juu ya mbinu ya kimataifa ya INFORM na data za Tanzania.",
+  "lead": "Kielelezo huria cha hatari za maafa kinachotegemea ushahidi kwa kila halmashauri na mkoa wa Tanzania, kilichojengwa juu ya mbinu ya kimataifa ya INFORM na data za Tanzania.",
   "ctaExplore": "Chunguza ramani ya hatari",
   "ctaLearn": "Jinsi INFORM inavyofanya kazi",
   "nationalRisk": "Hatari ya INFORM Kitaifa",
-  "nationalNote": "Mjumuiko wa INFORM wa halmashauri zote {{councils}}",
   "mapCaption": "Hatari ya INFORM kwa halmashauri",
   "kpi": {
     "councils": "Halmashauri zilizochambuliwa",
@@ -58,15 +57,15 @@
   "mapSource": "Hatari ya INFORM kwa halmashauri. Vyanzo: mfumo wa INFORM Tanzania.",
   "picture": {
     "parts": "Hatari na sehemu zake",
-    "partsNote": "Halmashauri {{councils}} · watu {{people}}",
+    "partsNote": "Watu {{people}} (sensa ya 2022)",
     "trackAria": "{{label}}: {{score}} kati ya 10, {{cls}}",
     "pie": "Halmashauri kwa daraja la hatari",
     "pieNote": "Halmashauri {{high}} ({{pct}}%) zenye hatari ya juu au ya juu sana",
     "relation": "Jinsi sehemu zinavyohusiana na hatari",
-    "relationNote": "Halmashauri {{count}} zikipangwa kwa hatari, ya juu kwanza; kila mstari ni wastani wa halmashauri {{window}}",
-    "relationAria": "Hatari ya INFORM, vitisho, udhaifu na ukosefu wa uwezo wa kukabiliana katika halmashauri {{count}} zikipangwa kwa hatari",
+    "relationNote": "Halmashauri zikipangwa kwa hatari, ya juu kwanza; kila mstari umelainishwa",
+    "relationAria": "Hatari ya INFORM, vitisho, udhaifu na ukosefu wa uwezo wa kukabiliana katika halmashauri zikipangwa kwa hatari",
     "relationLeft": "Hatari ya juu zaidi",
     "relationRight": "Hatari ya chini zaidi",
-    "pieCentre": "halmashauri"
+    "pieCentre": "juu au zaidi"
   }
 }

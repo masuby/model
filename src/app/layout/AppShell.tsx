@@ -11,7 +11,7 @@ import { useCommandPalette } from './useCommandPalette';
 import { LanguageSwitcher } from './LanguageSwitcher';
 import { prefetchRoute } from '../routes';
 import { Logo } from './Logo';
-import { TextSizeToggle, useTextSizeSync } from './TextSizeToggle';
+import { TextSizeChoice, TextSizeToggle, useTextSizeSync } from './TextSizeToggle';
 import { ThemeToggle, useThemeSync } from './ThemeToggle';
 
 /** The search palette (cmdk + its index) is fetched the first time it opens, or on hover of the search box. */
@@ -142,15 +142,16 @@ function Header({ onSearch }: { onSearch: () => void }) {
             <span className="flex-1 truncate text-left">{t('search.placeholder')}</span>
             <Kbd>{isMac ? '⌘K' : 'Ctrl K'}</Kbd>
           </button>
-          <Button variant="ghost" size="icon" className="size-9 md:hidden" onClick={onSearch} onPointerDown={preloadPalette} aria-label={t('search.open')}>
+          <Button variant="ghost" size="icon" className="size-8 sm:size-9 md:hidden" onClick={onSearch} onPointerDown={preloadPalette} aria-label={t('search.open')}>
             <Search />
           </Button>
           <LanguageSwitcher />
-          <TextSizeToggle />
+          {/* On a phone the text size lives in the menu: the header row has no room for a fifth button. */}
+          <TextSizeToggle className="hidden sm:inline-flex" />
           <ThemeToggle />
           <Dialog open={mobileOpen} onOpenChange={setMobileOpen}>
             <DialogTrigger asChild>
-              <Button variant="ghost" size="icon" className="size-9 lg:hidden" aria-label={t('nav.menu')}>
+              <Button variant="ghost" size="icon" className="size-8 sm:size-9 lg:hidden" aria-label={t('nav.menu')}>
                 <Menu />
               </Button>
             </DialogTrigger>
@@ -172,6 +173,7 @@ function Header({ onSearch }: { onSearch: () => void }) {
                     {t(`nav.${n.key}`)}
                   </NavLink>
                 ))}
+                <TextSizeChoice className="pt-5 sm:hidden" />
               </nav>
             </SheetContent>
           </Dialog>

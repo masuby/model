@@ -29,7 +29,7 @@ export function Logo({ compact = false }: { compact?: boolean }) {
       <LogoMark />
       {!compact && (
         <span className="font-display text-[1.05rem] leading-none font-semibold tracking-tight whitespace-nowrap sm:text-[1.2rem]">
-          INFORM <span className="font-normal text-muted-foreground">Tanzania</span>
+          INFORM <span className="logo-word font-normal text-muted-foreground">Tanzania</span>
         </span>
       )}
     </span>

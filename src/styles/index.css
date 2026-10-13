@@ -166,6 +166,22 @@
   html[data-text-size='largest'] {
     font-size: 137.5%;
   }
+  /* A phone already reads large: the steps are gentler there, so the header and the panels keep their room. */
+  @media (max-width: 639px) {
+    html[data-text-size='large'] {
+      font-size: 106.25%;
+    }
+    html[data-text-size='larger'] {
+      font-size: 112.5%;
+    }
+    html[data-text-size='largest'] {
+      font-size: 118.75%;
+    }
+    /* With enlarged text the phone header keeps the mark and "INFORM"; the second word returns at normal size. */
+    html[data-text-size] .logo-word {
+      display: none;
+    }
+  }
   body {
     @apply bg-background text-foreground font-sans antialiased;
     font-feature-settings: 'cv02', 'cv03', 'cv04', 'cv11';

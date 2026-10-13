@@ -25,11 +25,11 @@
     "source": "INFORM units",
     "reference": "Reference",
     "note": {
-      "council": "{{count}} councils (NBS 2022).",
-      "region": "{{count}} regions, aggregated from their councils.",
-      "source": "The {{count}} units of the INFORM SADC 2024 workbook."
+      "council": "Councils of the 2022 census (NBS).",
+      "region": "Regions, aggregated from their councils.",
+      "source": "The units of the INFORM SADC 2024 workbook."
     },
-    "referenceLink": "The {{count}} workbook units"
+    "referenceLink": "The workbook units, for analysts"
   },
   "lens": {
     "label": "Colour by",
