@@ -18,6 +18,7 @@ import { ArrowLeft, ArrowRight, ChevronDown, ChevronRight, FileText, GitCompareA
 import * as React from 'react';
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
+import { useModel } from '@/data-layer/DataProvider';
 import { DataNoteLine, DataNoteMark } from '@/components/risk/DataNoteMark';
 import { Button } from '@/components/ui/button';
 import type { WarningPayload } from '@/data-layer/types';
@@ -29,6 +30,7 @@ import { dataNotesFor, isWithheld } from '@/engine/risk/notes';
 import type { CommitteeRecord } from '@/data-layer/types';
 import type { Unit } from '@/engine/risk/types';
 import { ALERT_COLOR, planMessage, riskBandFor } from '@/features/guide/alert';
+import { guideHazardName, isCoastal } from '@/features/guide/crosswalk';
 import { RiskBandBadge } from '@/features/guide/AlertBadge';
 import { pick, useAreaGuide, useAreaRecords, type HazardKey } from '@/features/guide/data';
 import { cn, formatDate, formatScore, NO_VALUE } from '@/lib/utils';
@@ -423,10 +425,11 @@ function Warnings({ unit, hazards }: { unit: Unit; hazards?: readonly HazardKey[
 
 function WarningItem({ record, names, lang }: { record: CommitteeRecord; names: string[]; lang: string }) {
   const { t } = useTranslation(['guide']);
+  const model = useModel();
   const w = record.payload as WarningPayload;
   return (
     <li className="border-l-4 pl-3 text-sm" style={{ borderColor: ALERT_COLOR[w.alertLevel] }}>
-      <p className="font-medium">{t('guide:banner.title', { hazard: record.hazard ? t(`guide:hazards.${record.hazard}`) : '' })}</p>
+      <p className="font-medium">{t('guide:banner.title', { hazard: record.hazard ? guideHazardName(t, record.hazard, isCoastal(model.byId.get(record.unitId) ?? model.national)) : '' })}</p>
       <p className="mt-0.5 text-xs text-muted-foreground">
         {t(record.validTo ? 'guide:banner.detail' : 'guide:banner.detailOpen', {
           areas: names.join(', '),
@@ -473,7 +476,7 @@ function Nature({ unit }: { unit: Unit }) {
                   <Link to={`/area/${e.council.id}#actions`} className="font-medium hover:underline">
                     {e.council.name}
                   </Link>
-                  <span className="text-muted-foreground"> · {e.guide.hazards.map((h) => t(`guide:hazards.${h}`)).join(', ')}</span>
+                  <span className="text-muted-foreground"> · {e.guide.hazards.map((h) => guideHazardName(t, h, isCoastal(e.council))).join(', ')}</span>
                 </li>
               ))}
             </ul>

@@ -27,6 +27,7 @@ import { ClimateTrends } from '@/features/explore/components/ClimateTrends';
 import { EvidenceItem } from '@/features/explore/components/Evidence';
 import { coarseOf, dimensionGroups, evidenceFor, groupRanks, memberSpread, type TopGroup } from '@/features/explore/lib/riskPanel';
 import { ALERT_COLOR, planMessage, riskBandFor } from '@/features/guide/alert';
+import { guideHazardName, isCoastal } from '@/features/guide/crosswalk';
 import { RiskBandBadge } from '@/features/guide/AlertBadge';
 import { AreaStatements } from '@/features/guide/AreaStatements';
 import { applyGuidance, pick, useAreaGuide, useAreaRecords, vcActions, type VcAction } from '@/features/guide/data';
@@ -171,7 +172,7 @@ export default function DetailedRiskCardPage() {
             const w = r.payload as WarningPayload;
             return (
               <p key={r.id} className="border-l-4 pl-3" style={{ borderColor: ALERT_COLOR[w.alertLevel] }}>
-                <span className="font-semibold">{t('guide:banner.title', { hazard: r.hazard ? t(`guide:hazards.${r.hazard}`) : '' })}</span>{' '}
+                <span className="font-semibold">{t('guide:banner.title', { hazard: r.hazard ? guideHazardName(t, r.hazard, isCoastal(unit)) : '' })}</span>{' '}
                 <span className="text-muted-foreground">
                   {r.validFrom ? formatDate(r.validFrom, lang) : ''}
                   {r.validTo ? ` – ${formatDate(r.validTo, lang)}` : ` (${t('data:committee.warning.untilLifted')})`} · {w.issuer}
@@ -427,7 +428,7 @@ export default function DetailedRiskCardPage() {
             {area.events.slice(0, 6).map((r) => (
               <li key={r.id} className="py-1">
                 <span className="num text-muted-foreground">{formatDate((r.payload as EventPayload).date ?? r.createdAt, lang)}</span>{' '}
-                <span className="font-medium">{r.hazard ? t(`guide:hazards.${r.hazard}`) : ''}</span>{' '}
+                <span className="font-medium">{r.hazard ? guideHazardName(t, r.hazard, isCoastal(model.byId.get(r.unitId) ?? unit)) : ''}</span>{' '}
                 <span className="text-muted-foreground">{model.byId.get(r.unitId)?.name ?? r.unitId}</span>
                 {(r.payload as EventPayload).description && <span className="block text-muted-foreground">{(r.payload as EventPayload).description}</span>}
               </li>

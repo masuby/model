@@ -15,6 +15,7 @@ import { Button } from '@/components/ui/button';
 import { CLASS_COLORS, CLASS_KEYS, classify, THRESHOLDS } from '@/engine/risk/classes';
 import type { WarningPayload } from '@/data-layer/types';
 import { ALERT_COLOR } from '@/features/guide/alert';
+import { guideHazardName, isCoastal } from '@/features/guide/crosswalk';
 import { useAreaRecords } from '@/features/guide/data';
 import { cn, formatCompact, formatDate, formatNumber, formatScore, NO_VALUE } from '@/lib/utils';
 import { compareHref, explorerHref, type AreaView } from '../lib';
@@ -75,7 +76,7 @@ function ActiveWarningBanner({ view }: { view: AreaView }) {
           <div key={r.id} className="border-l-4 py-1 pl-4" style={{ borderColor: ALERT_COLOR[w.alertLevel] }}>
             <p className="flex flex-wrap items-center gap-2 text-sm font-semibold">
               <span className="size-3 rounded-full" style={{ background: ALERT_COLOR[w.alertLevel] }} aria-hidden />
-              {t('guide:banner.title', { hazard: r.hazard ? t(`guide:hazards.${r.hazard}`) : '' })}
+              {t('guide:banner.title', { hazard: r.hazard ? guideHazardName(t, r.hazard, isCoastal(unit)) : '' })}
               {w.title && <span className="font-normal text-muted-foreground">· {w.title}</span>}
             </p>
             <p className="mt-1 text-sm text-muted-foreground">

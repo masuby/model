@@ -37,6 +37,7 @@ import {
 } from '@/data-layer/types';
 import { DIMENSIONS, type DimensionKey } from '@/engine/risk/hierarchy';
 import { SECTOR_KEYS, sectorsFor } from '@/features/guide/sectors';
+import { guideHazardName, isCoastal } from '@/features/guide/crosswalk';
 import { regionIdOf } from '@/engine/risk/rawValues';
 import { authorityLabel } from '@/engine/risk/sources';
 import type { RiskModel, Unit } from '@/engine/risk/types';
@@ -348,7 +349,7 @@ function AreaForm({ kind, records }: { kind: Exclude<CommitteeKind, 'warning'>; 
                 <Select value={ev.hazard} onValueChange={(v) => setEv((e) => ({ ...e, hazard: v as HazardKey }))} aria-label={t('committee.event.hazard')} className="h-9 w-full">
                   {HAZARD_KEYS.map((h) => (
                     <SelectItem key={h} value={h}>
-                      {t(`guide:hazards.${h}`)}
+                      {guideHazardName(t, h, !!target && isCoastal(target.unit))}
                     </SelectItem>
                   ))}
                 </Select>
@@ -471,7 +472,7 @@ function WarningForm({ records }: { records: readonly CommitteeRecord[] }) {
             <Select value={hazard} onValueChange={(v) => setHazard(v as HazardKey)} aria-label={t('committee.event.hazard')} className="h-9 w-full">
               {HAZARD_KEYS.map((h) => (
                 <SelectItem key={h} value={h}>
-                  {t(`guide:hazards.${h}`)}
+                  {guideHazardName(t, h, true)}
                 </SelectItem>
               ))}
             </Select>
@@ -731,7 +732,7 @@ function ActiveWarnings({ records, profile }: { records: readonly CommitteeRecor
                   <span className="rounded-sm px-1.5 py-px text-xs" style={{ background: ALERT_COLOR[w.alertLevel], color: onAlertColor(w.alertLevel) }}>
                     {t(`guide:levels.${w.alertLevel}.label`)}
                   </span>
-                  {r.hazard ? t(`guide:hazards.${r.hazard}`) : ''}
+                  {r.hazard ? guideHazardName(t, r.hazard, isCoastal(model.byId.get(r.unitId) ?? model.national)) : ''}
                   {w.title && <span className="font-normal text-muted-foreground">· {w.title}</span>}
                 </p>
                 <p className="mt-1 text-sm text-muted-foreground">
@@ -759,6 +760,7 @@ function ActiveWarnings({ records, profile }: { records: readonly CommitteeRecor
 
 function PayloadSummary({ r, className }: { r: CommitteeRecord; className?: string }) {
   const { t, i18n } = useTranslation(['data', 'guide', 'indicators']);
+  const model = useModel();
   const lang = i18n.language;
   if (r.kind === 'drr') {
     const f = r.payload as DrrFields;
@@ -801,7 +803,7 @@ function PayloadSummary({ r, className }: { r: CommitteeRecord; className?: stri
     return (
       <div className={cn('text-sm', className)}>
         <p className="font-medium">
-          {r.hazard ? t(`guide:hazards.${r.hazard}`) : ''} · {formatDate(p.date, lang)}
+          {r.hazard ? guideHazardName(t, r.hazard, isCoastal(model.byId.get(r.unitId) ?? model.national)) : ''} · {formatDate(p.date, lang)}
         </p>
         <p className="mt-1 leading-relaxed">{p.description}</p>
         {counts.length > 0 && <p className="mt-1 text-muted-foreground">{counts.join(' · ')}</p>}
@@ -905,7 +907,7 @@ function History({ kind, records, profile }: { kind: DeskKind; records: readonly
               </p>
               {r.kind === 'warning' ? (
                 <p className="mt-1 text-sm text-muted-foreground">
-                  {r.hazard ? t(`guide:hazards.${r.hazard}`, { ns: 'guide' }) : ''} · {t(r.validTo ? 'committee.warning.validity' : 'committee.warning.validityOpen', { from: r.validFrom ? formatDate(r.validFrom, i18n.language) : '', to: r.validTo ? formatDate(r.validTo, i18n.language) : '' })}
+                  {r.hazard ? guideHazardName(t, r.hazard, isCoastal(model.byId.get(r.unitId) ?? model.national)) : ''} · {t(r.validTo ? 'committee.warning.validity' : 'committee.warning.validityOpen', { from: r.validFrom ? formatDate(r.validFrom, i18n.language) : '', to: r.validTo ? formatDate(r.validTo, i18n.language) : '' })}
                 </p>
               ) : (
                 <PayloadSummary r={r} className="mt-2" />

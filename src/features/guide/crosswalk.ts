@@ -105,11 +105,24 @@ export function reconciledHazards(unit: Unit, documented: readonly HazardKey[]):
  * the INFORM groups behind it. One function for every list (profile, explorer card, risk card), so the
  * same council never shows two different hazard lists.
  */
-export function hazardItemName(t: (key: string) => string, item: Pick<HazardItem, 'guide' | 'groups'> & { basis?: HazardItem['basis'] }): string {
-  // The Guide Book's "Earthquake and tsunami" names the hazard only where the guide documents it; a
-  // council the model alone scores (an inland one by Lake Victoria, say) reads the INFORM group's name.
-  const modelledOnly = item.guide === 'earthquake' && item.basis === 'modelled';
-  return item.guide && !modelledOnly ? t(`guide:hazards.${item.guide}`) : item.groups.map((g) => t(`indicators:${g.split(':')[1]}`)).join(', ');
+/**
+ * Whether the area has a sea coast: its coastal-hazards group scores above 0 (the low-elevation coastal
+ * zone and shoreline retreat of the Benchmark 2026; inland councils score 0, a region or the nation
+ * carries the mean of its councils).
+ */
+export const isCoastal = (unit: Unit): boolean => {
+  const v = indicatorValue(unit, 'hazard', 'coastalHazards');
+  return isNum(v) && v > 0;
+};
+
+/** The Guide Book's name of a hazard for an area: "Earthquake and tsunami" on the coast, "Earthquake" inland. */
+export function guideHazardName(t: (key: string) => string, hazard: HazardKey | string, coastal: boolean): string {
+  return hazard === 'earthquake' && coastal ? t('guide:hazards.earthquakeCoastal') : t(`guide:hazards.${hazard}`);
+}
+
+/** The name of a reconciled hazard: the Guide Book's (for the area's coast or not), or the INFORM groups' where the guide has none. */
+export function hazardItemName(t: (key: string) => string, item: Pick<HazardItem, 'guide' | 'groups'>, coastal = false): string {
+  return item.guide ? guideHazardName(t, item.guide, coastal) : item.groups.map((g) => t(`indicators:${g.split(':')[1]}`)).join(', ');
 }
 
 /** The guide hazards of the reconciled list, in its order (for the warning-level tables). */

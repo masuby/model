@@ -2,6 +2,12 @@
 
 ## Unreleased
 
+### Tsunami only on the coast (13 October 2026)
+
+- The Guide Book's earthquake hazard reads "Earthquake and tsunami" only for areas with a sea coast
+  (those whose coastal-hazards group scores above 0) and "Earthquake" everywhere inland, on profiles,
+  statements, risk cards, the explorer panel, a region's council list and the committee desk.
+
 ### Data notes as a status word; a region's councils and their hazards in view (13 October 2026)
 
 - A data note beside a value now shows only its status (value under query, known artefact, withheld by

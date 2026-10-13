@@ -7,7 +7,8 @@
     "largeWaves": "Large waves",
     "wildfire": "Wildfire",
     "drought": "Drought",
-    "earthquake": "Earthquake and tsunami",
+    "earthquake": "Earthquake",
+    "earthquakeCoastal": "Earthquake and tsunami",
     "publicHealth": "Public health"
   },
   "levels": {

@@ -20,7 +20,7 @@ import type { WarningPayload } from '@/data-layer/types';
 import { ALERT_COLOR, planMessage, riskBandFor } from '@/features/guide/alert';
 import { AreaStatements } from '@/features/guide/AreaStatements';
 import { RiskBandBadge } from '@/features/guide/AlertBadge';
-import { hazardItemName, reconciledHazards, type HazardItem } from '@/features/guide/crosswalk';
+import { guideHazardName, hazardItemName, isCoastal, reconciledHazards, type HazardItem } from '@/features/guide/crosswalk';
 import { applyGuidance, pick, useAreaGuide, useAreaRecords } from '@/features/guide/data';
 import type { DimensionKey } from '@/engine/risk/hierarchy';
 import { parseMetric } from '@/engine/risk/metrics';
@@ -167,7 +167,7 @@ export default function RiskCardPage() {
             return (
               <p key={r.id} className="border-l-4 pl-3" style={{ borderColor: ALERT_COLOR[w.alertLevel] }}>
                 <span className="inline-block size-2.5 rounded-full align-middle" style={{ background: ALERT_COLOR[w.alertLevel] }} aria-hidden />{' '}
-                <span className="font-semibold">{t('guide:banner.title', { hazard: r.hazard ? t(`guide:hazards.${r.hazard}`) : '' })}</span>{' '}
+                <span className="font-semibold">{t('guide:banner.title', { hazard: r.hazard ? guideHazardName(t, r.hazard, isCoastal(unit)) : '' })}</span>{' '}
                 <span className="text-muted-foreground">
                   {r.validFrom ? formatDate(r.validFrom, lang) : ''}
                   {r.validTo ? ` – ${formatDate(r.validTo, lang)}` : ` (${t('data:committee.warning.untilLifted')})`} · {w.issuer}
@@ -216,7 +216,7 @@ export default function RiskCardPage() {
               return (
                 <li key={i.key} className="flex items-baseline justify-between gap-3 py-1.5">
                   <span className="font-medium">
-                    {hazardItemName(t, i)}
+                    {hazardItemName(t, i, isCoastal(unit))}
                     {status && <span className="ml-1.5 text-[10px] font-normal text-muted-foreground">({t(`common:dataNote.status.${status}`)})</span>}
                   </span>
                   <span className="num shrink-0 text-right text-muted-foreground">

@@ -6,7 +6,7 @@
 import { describe, expect, it } from 'vitest';
 import { DIMENSIONS } from '@/engine/risk/hierarchy';
 import { buildModel } from '@/engine/risk/model';
-import { bandFor, CROSSWALK, GUIDE_HAZARDS_COVERED, guideHazardsOf, hazardItemName, reconciledHazards } from '../crosswalk';
+import { bandFor, CROSSWALK, GUIDE_HAZARDS_COVERED, guideHazardName, guideHazardsOf, hazardItemName, isCoastal, reconciledHazards } from '../crosswalk';
 import { HAZARD_KEYS } from '../data';
 
 const model = buildModel();
@@ -56,11 +56,20 @@ describe('crosswalk', () => {
 });
 
 describe('hazard names', () => {
-  const t = (key: string) => ({ 'guide:hazards.earthquake': 'Earthquake and tsunami', 'indicators:earthquake': 'Earthquake', 'guide:hazards.floods': 'Floods' })[key] ?? key;
-  it('names a modelled-only earthquake by the INFORM group, and the documented one by the guide', () => {
-    expect(hazardItemName(t, { guide: 'earthquake', groups: ['hazard:earthquake'], basis: 'modelled' })).toBe('Earthquake');
-    expect(hazardItemName(t, { guide: 'earthquake', groups: ['hazard:earthquake'], basis: 'documented' })).toBe('Earthquake and tsunami');
-    expect(hazardItemName(t, { guide: 'earthquake', groups: ['hazard:earthquake'], basis: 'both' })).toBe('Earthquake and tsunami');
-    expect(hazardItemName(t, { guide: 'floods', groups: ['hazard:flood'], basis: 'modelled' })).toBe('Floods');
+  const t = (key: string) => ({ 'guide:hazards.earthquake': 'Earthquake', 'guide:hazards.earthquakeCoastal': 'Earthquake and tsunami', 'indicators:earthquake': 'Earthquake', 'guide:hazards.floods': 'Floods' })[key] ?? key;
+  it('says tsunami only on the coast: an inland earthquake reads "Earthquake", a coastal one "Earthquake and tsunami"', () => {
+    expect(hazardItemName(t, { guide: 'earthquake', groups: ['hazard:earthquake'] })).toBe('Earthquake');
+    expect(hazardItemName(t, { guide: 'earthquake', groups: ['hazard:earthquake'] }, false)).toBe('Earthquake');
+    expect(hazardItemName(t, { guide: 'earthquake', groups: ['hazard:earthquake'] }, true)).toBe('Earthquake and tsunami');
+    expect(hazardItemName(t, { guide: 'floods', groups: ['hazard:flood'] }, true)).toBe('Floods');
+    expect(guideHazardName(t, 'earthquake', true)).toBe('Earthquake and tsunami');
+  });
+  it('knows the coast from the coastal-hazards group: Kibiti and Tanga region are coastal, Kondoa and Tarime are not', () => {
+    const model = buildModel();
+    expect(isCoastal(model.byId.get('C051')!)).toBe(true); // Kibiti
+    expect(isCoastal(model.regions.find((r) => r.name === 'Tanga')!)).toBe(true);
+    expect(isCoastal(model.national)).toBe(true);
+    expect(isCoastal(model.byId.get('C001')!)).toBe(false); // Kondoa
+    expect(isCoastal(model.councils.find((c) => c.name.startsWith('Tarime'))!)).toBe(false);
   });
 });

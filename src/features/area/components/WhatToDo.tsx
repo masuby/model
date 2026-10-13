@@ -22,7 +22,7 @@ import { Button } from '@/components/ui/button';
 import type { Unit } from '@/engine/risk/types';
 import { type AreaRisk, planMessage, riskBandFor } from '@/features/guide/alert';
 import { RiskBandBadge } from '@/features/guide/AlertBadge';
-import { hazardItemName, reconciledHazards, type HazardItem } from '@/features/guide/crosswalk';
+import { guideHazardName, hazardItemName, isCoastal, reconciledHazards, type HazardItem } from '@/features/guide/crosswalk';
 import { topDrivers } from '@/engine/risk/model';
 import { dataNotesFor } from '@/engine/risk/notes';
 import type { DimensionKey } from '@/engine/risk/hierarchy';
@@ -204,7 +204,7 @@ function AreaNature({ unit, guide }: { unit: Unit; guide: ReturnType<typeof useA
             <Link to={`/area/${e.council.id}#actions`} className="font-semibold hover:underline" aria-label={t('know.openCouncil', { name: e.council.name })}>
               {e.council.name}
             </Link>
-            <span className="text-sm text-muted-foreground">{e.guide.hazards.map((h) => t(`hazards.${h}`)).join(', ')}</span>
+            <span className="text-sm text-muted-foreground">{e.guide.hazards.map((h) => guideHazardName(t, h, isCoastal(e.council))).join(', ')}</span>
           </li>
         ))}
       </ul>
@@ -285,7 +285,7 @@ function HazardList({ unit, items }: { unit: Unit; items: readonly HazardItem[] 
   const { t } = useTranslation(['guide', 'common', 'indicators']);
   const list = useShowMore(items, FIRST_HAZARDS);
   if (!items.length) return null;
-  const name = (i: HazardItem) => hazardItemName(t, i);
+  const name = (i: HazardItem) => hazardItemName(t, i, isCoastal(unit));
   // The data notes of the INFORM groups behind the hazard (a workbook value under query travels with the score).
   const notesOf = (i: HazardItem) => i.groups.flatMap((g) => dataNotesFor(unit, g.split(':')[0] as DimensionKey, g.split(':')[1]));
   const many = unit.level !== 'council';

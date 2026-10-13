@@ -8,7 +8,7 @@ import { useTranslation } from 'react-i18next';
 import type { TFunction } from 'i18next';
 import type { RiskModel, Unit } from '@/engine/risk/types';
 import { cn, formatNumber, formatScore } from '@/lib/utils';
-import { hazardItemName } from './crosswalk';
+import { hazardItemName, isCoastal } from './crosswalk';
 import { useAreaGuide } from './data';
 import { areaStatements, type AreaStatement, type GroupScore } from './statements';
 
@@ -36,12 +36,12 @@ export function statementText(t: TFunction, s: AreaStatement, unit: Unit, lang: 
         : t('guide:statements.driver', { dim, score: formatScore(s.score), national: formatScore(s.national) });
     }
     case 'hazards': {
-      const list = joinList(s.items.map((h) => t('guide:statements.item', { name: inSentence(hazardItemName(t, h)), score: formatScore(h.score) })), and);
+      const list = joinList(s.items.map((h) => t('guide:statements.item', { name: inSentence(hazardItemName(t, h, isCoastal(unit))), score: formatScore(h.score) })), and);
       return t('guide:statements.hazards', { count: s.items.length, list });
     }
     case 'hazardsLow':
       return s.top
-        ? t('guide:statements.hazardsLow', { item: t('guide:statements.item', { name: inSentence(hazardItemName(t, s.top)), score: formatScore(s.top.score) }) })
+        ? t('guide:statements.hazardsLow', { item: t('guide:statements.item', { name: inSentence(hazardItemName(t, s.top, isCoastal(unit))), score: formatScore(s.top.score) }) })
         : t('guide:statements.hazardsNone');
     case 'human':
       return t('guide:statements.human', { count: s.items.length, list: joinList(s.items.map(group), and) });

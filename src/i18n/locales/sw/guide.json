@@ -7,7 +7,8 @@
     "largeWaves": "Mawimbi makubwa",
     "wildfire": "Moto wa misitu na vichaka",
     "drought": "Ukame",
-    "earthquake": "Tetemeko la ardhi na tsunami",
+    "earthquake": "Tetemeko la ardhi",
+    "earthquakeCoastal": "Tetemeko la ardhi na tsunami",
     "publicHealth": "Afya ya jamii"
   },
   "levels": {
