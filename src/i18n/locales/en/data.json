@@ -14,8 +14,6 @@
     "awaiting": "Awaiting review",
     "awaitingReviewer": "Submissions in your queue",
     "awaitingMine": "Your submissions still pending",
-    "councils": "Councils covered",
-    "councilsSub": "All councils of the 2022 census",
     "latest": "Last approved change",
     "latestSub": "Applied to the map {{when}}"
   },

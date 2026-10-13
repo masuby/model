@@ -2,6 +2,12 @@
 
 ## Unreleased
 
+### The Data portal opens on the sign-in (13 October 2026)
+
+- A visitor to the Data portal sees the sign-in panel first (email link or password), on one screen;
+  the figures row (values in effect, awaiting review, last change) shows only to people signed in, and
+  the "Councils covered" figure is gone with the other administrative counts.
+
 ### Kiswahili of Tanzanian disaster management: "kuathirika", not "mfiduo"; no tsunami inland (13 October 2026)
 
 - "Mfiduo" (exposure) is replaced throughout the Kiswahili texts by the terms the Risk Action Guide

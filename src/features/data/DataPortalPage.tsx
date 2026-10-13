@@ -16,7 +16,7 @@ import { useTranslation } from 'react-i18next';
 import { useSearchParams } from 'react-router-dom';
 import { KeyFigures, PageContainer, PageHeader } from '@/components/layout/Page';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/primitives';
-import { useData, useModel, useOverrides, useRawSubmissions, useRawValues } from '@/data-layer/DataProvider';
+import { useData, useOverrides, useRawSubmissions, useRawValues } from '@/data-layer/DataProvider';
 import { formatDate, formatNumber } from '@/lib/utils';
 import { AccessPanel, ContributorAccess } from './components/AccessPanel';
 import { ListSkeleton } from './components/common';
@@ -72,7 +72,6 @@ export default function DataPortalPage() {
   const { profile, authLoading } = useData();
   const perms = usePermissions();
   const overrides = useOverrides();
-  const model = useModel();
   const { pending: pendingScores } = usePendingQueue();
   const { mine } = useMySubmissions();
   const rawSubmissions = useRawSubmissions();
@@ -153,7 +152,6 @@ export default function DataPortalPage() {
     ...(worker
       ? [{ label: t('stats.awaiting'), value: formatNumber(awaiting, i18n.language), sub: perms.canReview ? t('stats.awaitingReviewer') : t('stats.awaitingMine') }]
       : []),
-    { label: t('stats.councils'), value: formatNumber(model.councils.length, i18n.language), sub: t('stats.councilsSub') },
     ...(stats.latest
       ? [
           {
@@ -181,7 +179,8 @@ export default function DataPortalPage() {
   return (
     <div>
       <PageHeader eyebrow={t('page.eyebrow')} title={t('page.title')} description={t('page.lead')} actions={<DataToolsMenu />}>
-        <KeyFigures className="mt-10 border-t border-border pt-7" items={figures} />
+        {/* The figures are for people at work in the portal; a visitor sees the sign-in first, on one screen. */}
+        {profile && <KeyFigures className="mt-10 border-t border-border pt-7" items={figures} />}
       </PageHeader>
 
       <PageContainer className="pt-10 pb-20 sm:pt-12">
