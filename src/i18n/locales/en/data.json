@@ -844,7 +844,7 @@
         "raw": "Measured values",
         "score": "0–10 scores (INFORM method)",
         "rawHint": "Figures in the indicator’s own unit. The engine standardises them with the workbook method and shows the 0–10 score before you send.",
-        "scoreHint": "Scores you computed with the INFORM standardiser, for example with the NORMAL Excel tool. They enter the Core only with a citable source. Scores computed by another method are not accepted here: they belong to the Advancement layer."
+        "scoreHint": "Scores you computed with the INFORM standardiser, for example with the NORMAL Excel tool. They enter the model only with a citable source. Scores computed by another method are not accepted here: they belong to the Advancement layer."
       },
       "method": {
         "inform": "INFORM standardiser (workbook method)"
@@ -1235,7 +1235,7 @@
     "values": {
       "workbookWithheld": "{{n}} replaced by approved values",
       "title": "Where every live value comes from",
-      "lead": "For each of the 32 indicator groups, the councils whose live value is the workbook's, a Benchmark 2026 value prepared from public datasets, a value an institution submitted through the portal, a value withheld after validation, or no value. A newer value approved through the portal replaces a benchmark or a withheld value for that council.",
+      "lead": "For each of the 32 indicator groups, the councils whose live value is the workbook’s, a Benchmark 2026 value, a value an institution entered through the portal, a value withheld after validation, or no value. A value approved through the portal replaces a benchmark or a withheld value for that council.",
       "col": {
         "group": "Indicator group",
         "workbook": "Workbook",
@@ -1245,7 +1245,7 @@
         "empty": "No data",
         "notes": "Data notes"
       },
-      "note": "Withheld values are the data notes marked for quarantine (docs/assessment, the integrity register and the queries to the partners); the Methodology page explains them."
+      "note": "Withheld values failed validation against documented events; the Methodology page lists them."
     },
     "request": {
       "title": "Request updates from {{institution}}",

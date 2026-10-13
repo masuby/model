@@ -94,7 +94,6 @@ export function LimitationsSection() {
       <Callout className="mt-10" title={t('limitations.closingTitle')}>
         {t('limitations.closing')}
       </Callout>
-      <p className="mt-6 max-w-[72ch] text-xs leading-relaxed text-muted-foreground">{t('limitations.sourcesNote')}</p>
     </DocSection>
   );
 }

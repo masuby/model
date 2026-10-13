@@ -844,7 +844,7 @@
         "raw": "Thamani zilizopimwa",
         "score": "Alama 0–10 (mbinu ya INFORM)",
         "rawHint": "Takwimu katika kizio cha kiashiria chenyewe. Injini huzipima kwa mbinu ya kitabu na kuonyesha alama ya 0–10 kabla hujatuma.",
-        "scoreHint": "Alama ulizokokotoa kwa kipimaji cha INFORM, kwa mfano kwa zana ya Excel ya NORMAL. Huingia katika Msingi tu zikiwa na chanzo kinachoweza kutajwa. Alama zilizokokotolewa kwa mbinu nyingine hazikubaliwi hapa: ni za Tabaka la Maboresho."
+        "scoreHint": "Alama ulizokokotoa kwa kipimaji cha INFORM, kwa mfano kwa zana ya Excel ya NORMAL. Huingia katika kielelezo tu zikiwa na chanzo kinachoweza kutajwa. Alama zilizokokotolewa kwa mbinu nyingine hazikubaliwi hapa: ni za Tabaka la Maboresho."
       },
       "method": {
         "inform": "Kipimaji cha INFORM (mbinu ya kitabu)"
@@ -1235,7 +1235,7 @@
     "values": {
       "workbookWithheld": "{{n}} zimebadilishwa na thamani zilizoidhinishwa",
       "title": "Kila thamani hai inatoka wapi",
-      "lead": "Kwa kila moja ya makundi 32 ya viashiria, halmashauri ambazo thamani yake hai ni ya kitabu cha kazi, thamani ya Benchmark 2026 iliyoandaliwa kutoka seti za data za umma, thamani iliyowasilishwa na taasisi kupitia lango, thamani iliyozuiliwa baada ya uhakiki, au hakuna thamani. Thamani mpya zaidi iliyoidhinishwa kupitia lango inachukua nafasi ya thamani ya benchmark au iliyozuiliwa kwa halmashauri hiyo.",
+      "lead": "Kwa kila kundi kati ya 32 ya viashiria, halmashauri ambazo thamani yake hai ni ya kitabu, thamani ya Benchmark 2026, thamani iliyoingizwa na taasisi kupitia lango, thamani iliyozuiliwa baada ya uhakiki, au hakuna thamani. Thamani iliyoidhinishwa kupitia lango huchukua nafasi ya thamani ya benchmark au iliyozuiliwa kwa halmashauri hiyo.",
       "col": {
         "group": "Kundi la viashiria",
         "workbook": "Kitabu cha kazi",
@@ -1245,7 +1245,7 @@
         "empty": "Hakuna data",
         "notes": "Taarifa za data"
       },
-      "note": "Thamani zilizozuiliwa ni taarifa za data zilizowekwa karantini (docs/assessment, rejista ya uadilifu na maswali kwa washirika); ukurasa wa Mbinu unazieleza."
+      "note": "Thamani zilizozuiliwa zilishindwa uhakiki dhidi ya matukio yaliyoandikwa; ukurasa wa Mbinu unaziorodhesha."
     },
     "request": {
       "title": "Omba masasisho kutoka {{institution}}",

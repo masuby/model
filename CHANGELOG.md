@@ -2,6 +2,16 @@
 
 ## Unreleased
 
+### Plain words on the Methodology page and the portal (13 October 2026)
+
+- The Methodology page states the data simply: the register's columns read "Dataset" and "Method", a
+  Benchmark 2026 value names its dataset in one line (its full definition and source stay in the CSV
+  download and the thesis), the quality checks no longer print test-file paths or a command to run,
+  and the limitations, levels, overview and advanced-model texts lose their work-log wording (dates of
+  passes, decision codes, file paths, "byte-identical", "golden test"). The same in Kiswahili.
+- Values of the Benchmark 2026 carry the one-line dataset name wherever a profile or the portal shows
+  the figures behind a score.
+
 ### A Data management area on the Data portal for everyone (13 October 2026)
 
 - The Data portal now carries a "Data management" area that everyone sees, signed in or not: for each of

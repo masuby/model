@@ -44,6 +44,10 @@ export interface BenchmarkRespec {
 }
 
 export interface BenchmarkDataset {
+  /** The dataset's key in the release file. */
+  key: string;
+  /** One-line name for the pages (the full definition and source stay in `dataset` and `source`, and in the downloads). */
+  title: string;
   indicator: string;
   name: string | null;
   unit: string;
@@ -58,6 +62,8 @@ export interface BenchmarkDataset {
   note: string;
 }
 
+type BenchmarkDatasetRecord = Omit<BenchmarkDataset, 'key' | 'title'>;
+
 interface BenchmarkFile {
   release: string;
   layer: string;
@@ -66,7 +72,7 @@ interface BenchmarkFile {
   note: string;
   activations: Record<string, BenchmarkActivation>;
   respec: Record<string, BenchmarkRespec>;
-  datasets: Record<string, BenchmarkDataset>;
+  datasets: Record<string, BenchmarkDatasetRecord>;
   /** Compact: for each dataset key, the value of every unit (council or region id). */
   values: Record<string, Record<string, number>>;
   /** Short per-value evidence where the source gives one (dataset key → unit id → text). */
@@ -75,15 +81,40 @@ interface BenchmarkFile {
 
 const FILE = file as unknown as BenchmarkFile;
 
+/** The one-line names of the datasets as the pages print them; a dataset without one takes its source up to the first bracket. */
+const TITLES: Record<string, string> = {
+  'coastal-erosion': 'Digital Earth Africa coastlines',
+  'coastal-lecz': 'Copernicus DEM, low-elevation coastal zone',
+  'cyclone-swath': 'IBTrACS tropical cyclone tracks',
+  'heatwave-days': 'ERA5-Land heatwave days',
+  'lightning-density': 'WWLLN lightning climatology',
+  'road-crashes': 'Police road traffic crash statistics',
+  'hazmat-sites': 'OpenStreetMap, 2022 census and NEMC certificates',
+  'ipc-phase2plus': 'IPC acute food insecurity analysis',
+  'ipc-area-phase': 'IPC area classification',
+  'census-electricity': '2022 census regional profiles',
+  'census-phone': '2022 census regional profiles',
+  'census-literacy': '2022 census regional profiles',
+  'census-female-headed': '2022 census regional profiles',
+  'census-disability': '2022 census regional profiles',
+  'landslide-ukerewe': 'World Bank global landslide hazard map',
+  'drr-arrangements': 'PMO-DMD preparedness records',
+  'committee-functioning': 'PMO-DMD committee assessment',
+  'idmc-idp': 'IDMC internal displacement data',
+};
+const titleOf = (key: string, d: BenchmarkDatasetRecord): string => TITLES[key] ?? d.source.split(/[(,;]/)[0].trim();
+const DATASETS: Readonly<Record<string, BenchmarkDataset>> = Object.fromEntries(Object.entries(FILE.datasets).map(([key, d]) => [key, { ...d, key, title: titleOf(key, d) }]));
+
 /** The full records, rebuilt from the compact file: one RawValue per dataset and unit, stamped with the release. */
 function expand(f: BenchmarkFile): RawValue[] {
   const out: RawValue[] = [];
   for (const [key, byUnit] of Object.entries(f.values)) {
-    const d = f.datasets[key];
+    const d = DATASETS[key];
     if (!d) continue;
     for (const [unitId, value] of Object.entries(byUnit)) {
       const detail = f.details?.[key]?.[unitId];
-      out.push({ specId: d.indicator, unitId, level: d.level, value, valueType: 'raw', source: d.source, dataset: d.dataset, period: d.period, institution: d.institution, at: f.at, release: f.release, ...(detail ? { detail } : {}) });
+      // The value names its dataset by the one-line title; the full definition stays with the dataset record.
+      out.push({ specId: d.indicator, unitId, level: d.level, value, valueType: 'raw', source: d.source, dataset: d.title, period: d.period, institution: d.institution, at: f.at, release: f.release, ...(detail ? { detail } : {}) });
     }
   }
   return out;
@@ -95,12 +126,12 @@ export const BENCHMARK_AT: string = FILE.at;
 export const BENCHMARK_NOTE: string = FILE.note;
 export const BENCHMARK_ACTIVATIONS: Readonly<Record<string, BenchmarkActivation>> = FILE.activations;
 export const BENCHMARK_RESPEC: Readonly<Record<string, BenchmarkRespec>> = FILE.respec;
-export const BENCHMARK_DATASETS: Readonly<Record<string, BenchmarkDataset>> = FILE.datasets;
+export const BENCHMARK_DATASETS: Readonly<Record<string, BenchmarkDataset>> = DATASETS;
 /** The values, in the data portal's RawValue shape (council or region level, natural units), each carrying the release. */
 export const BENCHMARK_VALUES: readonly RawValue[] = expand(FILE);
 
 /** The benchmark dataset behind an indicator, if any. */
-export const benchmarkDatasetFor = (specId: string): BenchmarkDataset | null => Object.values(FILE.datasets).find((d) => d.indicator === specId) ?? null;
+export const benchmarkDatasetFor = (specId: string): BenchmarkDataset | null => Object.values(DATASETS).find((d) => d.indicator === specId) ?? null;
 
 /** The indicator ids the benchmark supplies values for. */
 export const BENCHMARK_SPEC_IDS: readonly string[] = [...new Set(BENCHMARK_VALUES.map((v) => v.specId))];

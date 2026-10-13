@@ -35,7 +35,7 @@ function ResultBar({ shown, total, onDownload }: { shown: number; total: number;
 
 /**
  * One register row on a phone: a disclosure showing the indicator, its place in the hierarchy and its
- * resolution; the responsible institution and the Core dataset and method open beneath it.
+ * resolution; the responsible institution and the dataset and method open beneath it.
  */
 function RegisterItem({ row, label, category }: { row: RegisterRow; label: string; category: string }) {
   const { t } = useTranslation(['methodology', 'common']);
@@ -76,7 +76,7 @@ function RegisterItem({ row, label, category }: { row: RegisterRow; label: strin
             <React.Fragment key={b.indicator}>
               <dt className="text-muted-foreground">{t('methodology:sources.col.benchmark')}</dt>
               <dd>
-                <span className="font-medium">{b.dataset}</span> · {b.source} · {b.period} · {t('methodology:sources.benchmarkValues', { n: b.values, institution: AUTHORITIES[b.institution as keyof typeof AUTHORITIES]?.label ?? b.institution })}
+                <span className="font-medium">{b.title}</span> · {b.period} · {AUTHORITIES[b.institution as keyof typeof AUTHORITIES]?.label ?? b.institution}
               </dd>
             </React.Fragment>
           ))}
@@ -205,8 +205,7 @@ function GroupsRegister() {
                           {r.source.dataset}
                           {r.benchmark.map((b) => (
                             <div key={b.indicator} className="mt-1.5 border-l-2 border-primary/40 pl-2 text-xs leading-snug text-muted-foreground">
-                              <span className="font-medium text-foreground">{t('methodology:sources.col.benchmark')}:</span> {b.dataset} · {b.source} · {b.period} ·{' '}
-                              {t('methodology:sources.benchmarkValues', { n: b.values, institution: AUTHORITIES[b.institution as keyof typeof AUTHORITIES]?.label ?? b.institution })}
+                              <span className="font-medium text-foreground">{t('methodology:sources.col.benchmark')}:</span> {b.title} · {b.period} · {AUTHORITIES[b.institution as keyof typeof AUTHORITIES]?.label ?? b.institution}
                             </div>
                           ))}
                         </td>

@@ -10,17 +10,6 @@ import { DocSection } from '../ui';
 const CHECKS = ['standardise', 'pipeline', 'parity', 'invariants', 'flexibility', 'advanced', 'severity'] as const;
 type Check = (typeof CHECKS)[number];
 
-/** The test file that locks each check in (paths under src/engine). */
-const FILES: Record<Check, string> = {
-  standardise: 'risk/__tests__/standardise.golden.test.ts',
-  pipeline: 'risk/__tests__/pipeline.golden.test.ts',
-  parity: 'risk/__tests__/workbook.golden.test.ts',
-  invariants: 'risk/__tests__/model.test.ts · dataset.integrity.test.ts',
-  flexibility: 'risk/__tests__/flexibility.test.ts',
-  advanced: 'risk/__tests__/advanced.test.ts',
-  severity: 'severity/__tests__/severity.test.ts',
-};
-
 export function QualitySection() {
   const { t, i18n } = useTranslation('methodology');
   const model = useModel();
@@ -75,17 +64,11 @@ export function QualitySection() {
             </dt>
             <dd className="min-w-0">
               <p className="max-w-[68ch] text-sm leading-relaxed text-foreground/85">{t(`quality.checks.${c}.body`, vars)}</p>
-              <code className="mt-1.5 block font-mono text-[11.5px] break-words text-muted-foreground">{FILES[c]}</code>
             </dd>
           </div>
         ))}
       </dl>
 
-      <p className="mt-8 flex flex-wrap items-baseline gap-x-3 gap-y-2 text-sm">
-        <span className="font-medium">{t('quality.reproduce')}</span>
-        <code className="rounded-md bg-muted px-2 py-0.5 font-mono text-[13px]">npx vitest run</code>
-        <span className="text-muted-foreground">{t('quality.reproduceHint')}</span>
-      </p>
     </DocSection>
   );
 }

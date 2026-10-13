@@ -62,12 +62,12 @@
     "lead": "INFORM ni nini, utekelezaji huu wa Tanzania unaongeza nini, na umejengwa kwa ajili ya nani.",
     "p1": "INFORM (Kielelezo cha Usimamizi wa Hatari, kwa Kiingereza Index for Risk Management) ni tathmini huria ya kimataifa ya hatari ya majanga ya kibinadamu na maafa. Ni ushirikiano kati ya Kamati ya Kudumu ya Mashirika (IASC) na Kamisheni ya Ulaya, huku Kituo cha Utafiti cha Pamoja (JRC) kikiongoza upande wa kisayansi. Serikali, mashirika ya Umoja wa Mataifa na wafadhili huitumia kuamua wapi pa kuwekeza katika maandalizi na kinga.",
     "p2": "INFORM huiona hatari kama mahali vipimo vitatu vinapokutana: vitisho ambavyo watu wamefichuliwa navyo, kiwango cha udhaifu wao, na ukosefu wa uwezo wa kukabiliana. Vipimo hivi huunganishwa kwa wastani wa kijiometri, hivyo eneo huwa na hatari kubwa pale tu vyote vitatu vipo. Kitisho kikubwa katika eneo lililojiandaa vizuri na lenye ustahimilivu hakihesabiwi kama janga.",
-    "p3": "INFORM Tanzania inaileta mbinu hiyo hadi ngazi ambapo maamuzi hufanyika. Msingi wake (Core) unajenga upya kwa msimbo kitabu cha INFORM cha Tanzania (INFORM ngazi za chini SADC 2024) na kukirudia sawasawa: kila alama ya Msingi ni thamani ya kitabu chenyewe, inayoonyeshwa kwa halmashauri {{councils}} na mikoa {{regions}} ya Sensa ya Watu na Makazi ya 2022 kupitia vitengo {{sources}} vya kitabu, isipokuwa thamani ambazo ukaguzi wa uadilifu huzizuia kwenye kielelezo hai hadi zisahihishwe (tazama Mipaka). Data za Tanzania huingia kwa njia mbili: taasisi husasisha viashiria vya kitabu chenyewe kupitia Lango la data, na kila uboreshaji mwingine (vielelezo vya vitisho vya halmashauri, vipimo vya tafiti vyenye tafsiri nyingine, tathmini za wataalamu) ni wa Tabaka la Maboresho tofauti, linaloandikwa na kuonyeshwa mbali na Msingi, kamwe halichanganywi nalo.",
+    "p3": "INFORM Tanzania inaileta mbinu hiyo hadi ngazi ambapo maamuzi hufanyika. Inajenga upya kwa msimbo kitabu cha kazi cha INFORM cha Tanzania (INFORM ngazi za chini SADC 2024), inakirudia sawasawa, na kukiwasilisha kwa halmashauri {{councils}} na mikoa {{regions}} za Sensa ya Watu na Makazi ya 2022. Taasisi husasisha viashiria vya kitabu kupitia Lango la data; vielelezo vya vitisho vya halmashauri na vipimo vingine vya Tanzania huonyeshwa kando ya thamani za kitabu kama Tabaka la Maboresho, bila kuchanganywa nazo.",
     "glance": {
       "title": "Kwa mtazamo mmoja",
       "councils": "Halmashauri",
       "regions": "Mikoa",
-      "national": "Hatari ya INFORM kitaifa (mjumuiko wa halmashauri)",
+      "national": "Hatari ya INFORM kitaifa",
       "note": "Takwimu zote za ukurasa huu zinasomwa moja kwa moja kutoka kwenye kielelezo, pamoja na masasisho ya data yaliyoidhinishwa."
     },
     "adds": {
@@ -78,11 +78,11 @@
       },
       "local": {
         "title": "Ushahidi wa Tanzania",
-        "body": "Taasisi husasisha viashiria vya kitabu kupitia Lango la data, na mbinu, seti ya data na ngazi ya kila thamani hurekodiwa. Vielelezo vya vitisho vya halmashauri kutoka mvua ya CHIRPS v3 na joto la ERA5, vipimo vya tafiti vyenye tafsiri nyingine na tathmini za wataalamu huwekwa katika Tabaka la Maboresho tofauti, likiwa na lebo, kamwe si ndani ya Msingi."
+        "body": "Taasisi husasisha viashiria vya kitabu kupitia Lango la data, kila thamani ikiwa na seti yake ya data, mbinu na ngazi. Vielelezo vya vitisho vya halmashauri kutoka mvua ya CHIRPS na joto la ERA5 huonyeshwa kando yake kama Tabaka la Maboresho."
       },
       "open": {
         "title": "Wazi na unaothibitishika",
-        "body": "Kila fomula imechapishwa hapa na inarudiwa na majaribio ya kiotomatiki dhidi ya kitabu rasmi."
+        "body": "Kila fomula imechapishwa hapa na inakirudia kitabu rasmi."
       },
       "live": {
         "title": "Kielelezo hai",
@@ -117,7 +117,7 @@
     "groupCount_other": "makundi {{count}}",
     "levels": {
       "title": "Viashiria {{used}} vinavyotumika vinapimwa katika ngazi gani",
-      "note": "Viashiria {{used}} kati ya {{total}} vilivyo katika maelezo ya kiufundi ya kitabu vimewashwa (Use = Yes). Upau unaonyesha ngazi ambayo kitabu huingiza kila thamani ghafi; thamani ya utafiti wa kimkoa hutumika kwa kila halmashauri ya mkoa huo, na rejista iliyo hapa chini inaionyesha hivyo."
+      "note": "Viashiria {{used}} kati ya {{total}} vilivyo katika maelezo ya kiufundi ya kitabu vinatumika. Upau unaonyesha ngazi ambayo kila thamani ghafi huingizwa; thamani ya kimkoa hutumika kwa kila halmashauri ya mkoa huo, na rejista iliyo hapa chini inaionyesha hivyo."
     },
     "treeHint": "Chagua kundi la viashiria ili kulifungua. Alama iliyo kabla ya kila jina inaonyesha ngazi ya data iliyo nyuma ya thamani za leo; sehemu (mf. 2/3) inaonyesha viashiria vya kitabu vinavyotumika.",
     "legend": "Ngazi ya data:",
@@ -137,7 +137,7 @@
   "pipeline": {
     "title": "Kutoka thamani ghafi hadi alama ya hatari kwa hatua nane",
     "lead": "Hatua 1–4 husanifisha kila thamani ghafi kuwa kwenye mizani moja ya 0–10; hatua 5–8 huijumlisha kupanda juu ya mpangilio. Fomula ni zile za kitabu cha INFORM cha Tanzania, seli kwa seli.",
-    "intro": "Usanifishaji unafuata karatasi za uchakataji za kitabu; ujumlishaji unafuata karatasi ya INFORM SADC 2024 (seli Z, AK, AU na AV). Kila hatua imefungwa na jaribio la rejea dhidi ya thamani zilizohifadhiwa ndani ya kitabu. Kwa kuwa kiwango cha chini na cha juu cha kila kiashiria kimegandishwa, thamani husanifishwa vilevile iwe kielelezo kinaendeshwa kwa vitengo 170, halmashauri 195 au ngazi nyingine yoyote.",
+    "intro": "Usanifishaji unafuata karatasi za uchakataji za kitabu na ujumlishaji karatasi yake ya INFORM SADC 2024. Kiwango cha chini na cha juu cha kila kiashiria kimewekwa, hivyo thamani husanifishwa vilevile katika ngazi yoyote.",
     "applies": "Inatumika kwa viashiria {{n}} kati ya {{total}} vinavyotumika.",
     "appliesMinmax": "Viashiria {{custom}} vinatumia jozi ya rejea isiyobadilika na {{range}} vinatumia wigo wa data wa kitabu uliogandishwa; {{dec}} vimegeuzwa (Hupunguza hatari).",
     "where": {
@@ -216,7 +216,7 @@
     "mismatch": "Inatofautiana na thamani ya kielelezo {{value}}",
     "riskStep": "Hatua ya 8 · vipimo → hatari",
     "riskFormula": "Hatari ni kipeo cha tatu cha {{h}} mara {{v}} mara {{c}}, ambacho kinakadiriwa kuwa {{result}}",
-    "footnote": "Viashiria vilivyoandikwa “hakuna data” huachwa nje ya wastani wa kategoria badala ya kuhesabiwa kama sifuri; 0.0 ni sifuri halisi iliyopimwa, isipokuwa mmomonyoko wa pwani (0 kwa kila kitengo kutokana na kiwango chake cha rejea) na riziki (0 katika vitengo vingi).",
+    "footnote": "Viashiria vilivyoandikwa “hakuna data” huachwa nje ya wastani wa kategoria badala ya kuhesabiwa kama sifuri; 0.0 ni sifuri halisi iliyopimwa.",
     "recorded": "Thamani za kategoria zimehifadhiwa kwa desimali moja katika seti ya data ya chanzo, ndiyo sababu baadhi ya wastani hutofautiana na kategoria katika desimali ya pili.",
     "summary": "{{name}}: H {{h}}, V {{v}}, LCC {{c}}, Hatari ya INFORM {{risk}}. {{check}}",
     "summaryOk": "Thamani zote zinalingana na kielelezo.",
@@ -262,7 +262,7 @@
     "councils": {
       "tag": "Kuu",
       "title": "Halmashauri",
-      "body": "Halmashauri {{n}} za sensa ya 2022. Katika Msingi (Core) kila halmashauri hubeba alama za kitengo chake cha chanzo cha INFORM na idadi yake ya watu ya sensa; data za ngazi ya halmashauri huingia kupitia Lango la data au Tabaka la Maboresho. Hatari hukokotolewa papo hapo kama ∛(H × V × LCC), hivyo sasisho lililoidhinishwa huenea mara moja.",
+      "body": "Halmashauri {{n}} za sensa ya 2022. Kila halmashauri hubeba thamani za kitengo chake cha INFORM na idadi yake ya watu ya sensa; data za ngazi ya halmashauri huingia kupitia Lango la data. Hatari hukokotolewa papo hapo kama ∛(H × V × LCC), hivyo sasisho lililoidhinishwa hutumika mara moja.",
       "inherited": "Halmashauri {{n}} mpya au zilizogawanywa ({{examples}} …) zinarithi data ya wilaya mama hadi data mahususi ya halmashauri itakapopatikana. Zinaonyeshwa wazi kila zinapojitokeza, kamwe hazibuniwi."
     },
     "regions": {
@@ -276,7 +276,7 @@
     },
     "missing": {
       "title": "Data inayokosekana si sifuri",
-      "body": "Kiashiria kilicho wazi huhifadhiwa kama “hakuna data” (null) na huachwa nje ya kila wastani, hivyo hakiwezi kupandisha wala kushusha alama. 0 ni tofauti: huhesabiwa kama thamani halisi ya chini. Viashiria viwili vya kitabu huifanya iwe chini ya kipimo: mmomonyoko wa pwani hupata 0 kwa kila kitengo, chenye pwani au la, kwa sababu kiwango chake cha rejea huweka kila thamani kuwa 0, na riziki ni 0 katika vitengo vingi (tazama Mipaka).",
+      "body": "Kiashiria kilicho wazi huhifadhiwa kama “hakuna data” na huachwa nje ya kila wastani, hivyo hakiwezi kupandisha wala kushusha alama. 0 ni tofauti: ni thamani halisi na huhesabiwa.",
       "formula": "wastani wa 5, 5 na thamani inayokosekana ni {{result}}, si 3.3",
       "noData": "hakuna data",
       "not": "si 3.3"
@@ -290,21 +290,7 @@
       "body": "Kwa kuwa data za tafiti zipo katika ngazi ya kitabu, vitengo {{n}} vya chanzo vya INFORM kila kimoja hutoa thamani za udhaifu na uwezo wa kukabiliana kwa halmashauri zaidi ya moja. Lango la data huonyesha ni halmashauri zipi sasisho litazifikia."
     },
     "liveNote": "Alama za halmashauri na mikoa katika tovuti hii hukokotolewa upya kutoka viashiria vyake kielelezo kinapopakiwa. Masasisho yaliyoidhinishwa yanayotumika sasa: {{edits}}.",
-    "boundaries": "Seti ya mipaka: {{set}}. Halmashauri {{councils}} katika mikoa {{regions}} na wilaya {{districts}}; vitambulisho C001 hadi C{{councils}} vimewekwa na rejista ya halmashauri na hubadilika tu kupitia utaratibu wa mipaka (data-source/BOUNDARIES.md).",
-    "rule": {
-      "title": "Jinsi mikoa na taifa vinavyojengwa, na kanuni nyingine zingetoa nini",
-      "lead": "Mkoa, na taifa ({{national}}), huchukua wastani wa kawaida wa thamani za viashiria za halmashauri zake; kisha kategoria, vipimo na hatari hufuata kanuni za INFORM. Kitengo cha kitabu cha kazi kinachohudumia halmashauri mbili hivyo huhesabiwa mara mbili. Kanuni nyingine mbili hukokotolewa moja kwa moja kama hisia; Msingi unabaki na wastani wa kawaida hadi washirika wa SADC na INFORM watakapokubali uzito (uamuzi D11).",
-      "col": {
-        "rule": "Kanuni",
-        "changed": "Mikoa ambayo hatari yake hubadilika",
-        "maxDelta": "Mabadiliko makubwa zaidi",
-        "national": "Hatari ya kitaifa"
-      },
-      "core": "Wastani wa kawaida wa halmashauri (Msingi)",
-      "units": "Kila kitengo cha kitabu cha kazi kikihesabiwa mara moja",
-      "population": "Halmashauri zikipewa uzito wa idadi ya watu ya sensa",
-      "note": "Inaonyeshwa kama hisia; hakuna ramani inayoitumia."
-    }
+    "boundaries": "Mipaka: {{set}}."
   },
   "advanced": {
     "title": "Kielelezo cha kina cha vyanzo vingi juu ya injini ileile",
@@ -315,7 +301,7 @@
     "formulaCaption": "Uzito unaoruka tupu: wanachama wasio na data huondoka katika jumla zote mbili.",
     "weights": "ambapo wᵢ = 1 kwa kiashiria cha kitabu na uzito wa kikapu kwa kiashiria kidogo.",
     "degradeTitle": "Hurudi hasa kwenye INFORM ya kawaida",
-    "degrade": "Kukiwa hakuna data ya kina, matokeo ni sawa kabisa na kitabu halisi cha INFORM, kama ilivyothibitishwa na jaribio la kiotomatiki kwa data halisi za wilaya.",
+    "degrade": "Kukiwa hakuna data ya kina, matokeo ni yale ya kitabu cha INFORM sawasawa.",
     "basketsTitle": "Vikapu {{groups}} · viashiria vidogo {{n}}",
     "basketsLead": "Vikapu vyote {{groups}} viko katika {{where}}. Fungua kikapu kuona viashiria vyake vidogo; safu ya uzito inaonyesha uzito wa kila kimoja katika kikapu. Majina, vizio na misingi vimeandikwa kama ilivyo katika maelezo ya kiufundi.",
     "members_one": "kiashiria kidogo {{count}}",
@@ -393,10 +379,10 @@
   },
   "sources": {
     "title": "Rejista ya vyanzo vya data",
-    "lead": "Kila kundi la viashiria, seti ya data na mbinu iliyo nyuma ya thamani yake ya Msingi (zote kutoka kitabu cha INFORM ngazi za chini SADC 2024), ngazi ambayo data hizo zipo kwa kweli, na taasisi ya Tanzania inayohusika na kulisasisha kundi hilo. Thamani ya kimkoa inayotumika kwa halmashauri inaonyeshwa kuwa ya kimkoa.",
+    "lead": "Kila kundi la viashiria, seti ya data na mbinu iliyo nyuma ya thamani yake katika kitabu cha INFORM ngazi za chini SADC 2024, ngazi ambayo data zipo, na taasisi ya Tanzania inayohusika na kulisasisha. Thamani ya kimkoa inayotumika kwa halmashauri inaonyeshwa kuwa ya kimkoa.",
     "tabGroups": "Viashiria ({{n}})",
     "tabWorkbook": "Maelezo ya kitabu ({{n}})",
-    "workbookLead": "Maelezo kamili ya kiufundi ya uingizaji data yaliyotolewa kutoka kitabu cha Tanzania: kila kiashiria ghafi pamoja na kizio chake, uchakataji, rejea iliyogandishwa, mwelekeo na ngazi. Viashiria vyenye Use = Yes ndivyo vinavyolisha kielelezo.",
+    "workbookLead": "Maelezo ya kiufundi ya uingizaji data ya kitabu cha Tanzania: kila kiashiria ghafi pamoja na kizio chake, uchakataji, wigo wa rejea, mwelekeo na ngazi. Viashiria vinavyotumika ndivyo vinavyolisha kielelezo.",
     "search": "Tafuta kiashiria, taasisi au seti ya data…",
     "searchWorkbook": "Tafuta msimbo, kiashiria au kundi…",
     "dimension": "Chuja kwa kipimo",
@@ -414,14 +400,14 @@
     "dataRange": "wigo wa data uliogandishwa",
     "decrease": "Hupunguza hatari",
     "increase": "Huongeza hatari",
-    "note": "Maelezo ya seti za data na mbinu yameandikwa kwa Kiingereza kama kitabu kinavyoyatoa. Taasisi inayohusika ndiyo inayoombwa masasisho; si chanzo cha thamani ambayo haikuitoa. Vipakuliwa vina safu zinazoonyeshwa kwa sasa.",
+    "note": "Maelezo ya seti za data na mbinu yameandikwa kwa Kiingereza kama kitabu kinavyoyatoa. Vipakuliwa vina safu zinazoonyeshwa kwa sasa.",
     "range": "{{min}} hadi {{max}}",
     "col": {
       "indicator": "Kiashiria",
       "authority": "Taasisi inayohusika",
       "partners": "Washirika",
-      "dataset": "Seti ya data ya Msingi",
-      "method": "Mbinu ya Msingi",
+      "dataset": "Seti ya data",
+      "method": "Mbinu",
       "resolution": "Ngazi ya data",
       "code": "Msimbo",
       "unit": "Kizio",
@@ -431,37 +417,36 @@
       "level": "Huingizwa ngazi ya",
       "use": "Kinatumika",
       "benchmark": "Benchmark 2026"
-    },
-    "benchmarkValues": "thamani {{n}}, {{institution}}"
+    }
   },
   "quality": {
     "title": "Uhakiki wa ubora",
-    "lead": "Injini inalindwa na majaribio ya kiotomatiki yanayoendeshwa kila mabadiliko yanapofanyika. Hulinganisha msimbo na thamani zilizohifadhiwa ndani ya kitabu rasmi, na hufunga kanuni zisizobadilika za kielelezo.",
+    "lead": "Injini huhakikiwa dhidi ya thamani za kitabu rasmi chenyewe kila mabadiliko yanapofanyika.",
     "rows": "Safu {{n}} za rejea",
     "live": {
       "pass": "Vyote vinaendana",
       "fail": "Tofauti imegunduliwa",
-      "title": "Ukaguzi binafsi hai, ukiendeshwa ndani ya kivinjari chako",
-      "body": "Ukurasa huu ulipopakiwa, alama za vipimo za kila halmashauri zilikokotolewa upya kutoka kategoria zake, na kila alama ya hatari kutoka vipimo vyake, kwa kutumia injini.",
+      "title": "Ukaguzi binafsi hai",
+      "body": "Ukurasa huu ulipopakiwa, alama za vipimo za kila halmashauri zilikokotolewa upya kutoka kategoria zake, na kila alama ya hatari kutoka vipimo vyake.",
       "dims": "Alama za vipimo",
       "risk": "Alama za hatari"
     },
     "checks": {
       "standardise": {
         "title": "Usanifishaji unarudia kitabu",
-        "body": "Kila kimoja kati ya viashiria {{used}} vinavyotumika, kwa kila wilaya: thamani ghafi → 0–10 inalingana na kitabu sawasawa, kwa rejea zisizobadilika na za wigo wa data, ubadilishaji wa logi na viashiria vilivyogeuzwa."
+        "body": "Kila kimoja kati ya viashiria {{used}} vinavyotumika, kwa kila wilaya: thamani ghafi hutoa alama ya 0–10 ya kitabu sawasawa."
       },
       "pipeline": {
         "title": "Mchakato kamili wa ghafi → hatari",
-        "body": "Vitisho, udhaifu, uwezo wa kukabiliana na hatari vilivyojengwa upya kutoka thamani ghafi vinalingana na kitabu kwa vitengo vyote {{units}} vya chanzo."
+        "body": "Vitisho, udhaifu, uwezo wa kukabiliana na hatari vilivyojengwa upya kutoka thamani ghafi vinalingana na kitabu kwa vitengo vyote {{units}}."
       },
       "parity": {
         "title": "Ulinganifu na seli za kitabu",
-        "body": "Wastani wa kategoria, alama za vipimo na hatari vinalingana na seli zilizohifadhiwa za kitabu na utekelezaji huru wa semi halisi za Excel, pamoja na ukadiriaji wa desimali moja."
+        "body": "Wastani wa kategoria, alama za vipimo na hatari vinalingana na seli za kitabu chenyewe, pamoja na ukadiriaji wa desimali moja."
       },
       "invariants": {
         "title": "Kanuni zisizobadilika za kielelezo",
-        "body": "Halmashauri {{councils}} kila moja ikiwa na data; halmashauri {{inherited}} zinazorithi zimewekwa alama; mikoa {{regions}} ikiwemo Dar es Salaam; thamani ya kitaifa inabaki rasmi; data inayokosekana huachwa na sifuri huhesabiwa; masasisho huenea halmashauri → mkoa; vitisho zaidi kamwe havipunguzi hatari."
+        "body": "Halmashauri {{councils}} kila moja ikiwa na data; halmashauri {{inherited}} zinazorithi zimewekwa alama; mikoa {{regions}} ikiwemo Dar es Salaam; data inayokosekana huachwa na sifuri huhesabiwa; masasisho huenea kutoka halmashauri hadi mkoa; vitisho zaidi kamwe havipunguzi hatari."
       },
       "flexibility": {
         "title": "Unyumbufu wa viashiria",
@@ -469,15 +454,13 @@
       },
       "advanced": {
         "title": "Kielelezo cha kina",
-        "body": "Kukiwa hakuna data ya kina, injini ya vyanzo vingi yenye viashiria vidogo {{n}} ni sawa kabisa na INFORM ya kawaida; vikapu vilivyojazwa kiasi hujumlisha wanachama waliopo tu."
+        "body": "Kukiwa hakuna data ya kina, injini ya vyanzo vingi yenye viashiria vidogo {{n}} hutoa INFORM ya kawaida sawasawa; kikapu kilichojazwa kiasi hujumlisha wanachama waliopo tu."
       },
       "severity": {
         "title": "Ufuasi wa mbinu ya ukali",
         "body": "Ncha zisizobadilika za ujumlishaji wa kijiometri, kategoria za ROUNDUP ikiwemo Wastani, fomula ya 70/30, mwenendo wa kupanda pekee na uaminifu vinafanya kazi kama mbinu iliyochapishwa inavyoelekeza."
       }
-    },
-    "reproduce": "Rudia mwenyewe",
-    "reproduceHint": "kutoka mzizi wa hazina ya msimbo; majaribio yote huchukua sekunde chache."
+    }
   },
   "limitations": {
     "title": "Mapungufu na maboresho yaliyopangwa",
@@ -491,19 +474,19 @@
     },
     "items": {
       "global": {
-        "title": "Kila kiashiria cha Msingi ni seti ya data ya kimataifa",
-        "now": "Viashiria vyote 53 vya alama vya kitabu vinatoka vyanzo vya kimataifa (Global Data Lab, Benki ya Dunia, WHO, JRC, FAO, GEM, ACLED na vingine). 15 vina thamani moja kwa nchi nzima, 33 hutofautiana kati ya mikoa tu na 4 kati ya wilaya, hivyo tofauti nyingi kati ya halmashauri katika udhaifu na uwezo wa kukabiliana ni tofauti kati ya mikoa. Kadhaa ni vya zamani: vifo vya watoto, uzito pungufu na chanjo vinahusu 2006 hadi 2021. Tangu 11 Oktoba 2026 makundi mawili ya kitaasisi pia yana kiashiria cha Kitanzania cha ngazi ya halmashauri kila moja (mipango ya usimamizi wa maafa iliyopo; utendaji wa kamati ya usimamizi wa maafa), kinachorekodiwa na kamati kupitia Lango la data juu ya orodha za PMO-DMD.",
+        "title": "Kila kiashiria cha kitabu ni seti ya data ya kimataifa",
+        "now": "Viashiria vyote 53 vya alama vya kitabu vinatoka vyanzo vya kimataifa (Global Data Lab, Benki ya Dunia, WHO, JRC, FAO, GEM, ACLED na vingine). 15 vina thamani moja kwa nchi nzima, 33 hutofautiana kati ya mikoa tu na 4 kati ya wilaya, hivyo tofauti nyingi kati ya halmashauri katika udhaifu na uwezo wa kukabiliana ni tofauti kati ya mikoa. Kadhaa ni vya zamani: vifo vya watoto, uzito pungufu na chanjo vinahusu 2006 hadi 2021.",
         "next": "Taasisi hubadilisha makadirio ya kimataifa kwa data za Tanzania zenye tafsiri ileile kupitia Lango la data: sensa ya 2022, utafiti wa afya ya jamii wa 2022 na mifumo ya taarifa za kawaida."
       },
       "empty": {
-        "title": "Makundi sita ya viashiria hayana data kitabuni; Benchmark 2026 inajaza matano",
-        "now": "Kitabu cha kazi kinaacha joto kali, radi, magonjwa ya wanyama na mimea na visumbufu, vitu hatarishi, ajali za barabarani na kiashiria cha kiuchumi cha makundi dhaifu bila data kwa kila kitengo cha Tanzania. Benchmark 2026 inawasha matano kati yake kwa data za Tanzania: siku za joto kali (ERA5-Land), msongamano wa mapigo ya radi (WWLLN), ajali za barabarani zilizorekodiwa kwa km² 100 (takwimu za polisi, zimegawanywa kwa halmashauri kwa idadi ya watu ili miji mikubwa izibebe), maeneo ya vitu hatarishi kwa km² 100 (OpenStreetMap, ramani ya sensa ya 2022 na vyeti vya NEMC vya Julai hadi Septemba 2026) na kaya zinazoongozwa na wanawake (sensa ya 2022). Magonjwa ya wanyama na mimea na visumbufu yanabaki bila data na hayaingii kwenye alama yoyote. Vurugu za ndani zimezuiliwa kwa uamuzi wa programu (taarifa ya data DN-12): kitabu cha kazi kinahifadhi hesabu zake za ACLED, kielelezo hai hakionyeshi thamani. Msongamano wa vituo vya afya hauwezi kupata alama kamwe kitabuni (kiwango chake ni 0 hadi 0).",
-        "next": "Jaza magonjwa ya wanyama na mimea na visumbufu kutoka ufuatiliaji wa Afya Moja wa Wizara ya Afya na Wizara ya Mifugo na Uvuvi; endeleza mfululizo wa vyeti vya NEMC mwezi kwa mwezi; ripoti viashiria vyenye kasoro kwa washirika wa SADC na INFORM."
+        "title": "Makundi sita ya viashiria hayana data kitabuni; matano yamejazwa kwa data za Tanzania",
+        "now": "Kitabu cha kazi kinaacha joto kali, radi, magonjwa ya wanyama na mimea na visumbufu, vitu hatarishi, ajali za barabarani na kiashiria cha kiuchumi cha makundi dhaifu bila data kwa kila kitengo cha Tanzania. Matano yamejazwa kwa data za Tanzania: siku za joto kali (ERA5-Land), msongamano wa radi (WWLLN), ajali za barabarani (takwimu za polisi), maeneo ya vitu hatarishi (OpenStreetMap, sensa ya 2022 na vyeti vya NEMC) na kaya zinazoongozwa na wanawake (sensa ya 2022). Magonjwa ya wanyama na mimea na visumbufu yanabaki bila data, na vurugu za ndani hazionyeshi thamani kwa uamuzi wa programu.",
+        "next": "Jaza magonjwa ya wanyama na mimea na visumbufu kutoka ufuatiliaji wa Afya Moja wa Wizara ya Afya na Wizara ya Mifugo na Uvuvi."
       },
       "queried": {
-        "title": "Thamani {{withheld}} zimezuiliwa kutoka kwenye kielelezo hai; {{replaced}} zilibadilishwa na thamani zilizoidhinishwa",
-        "now": "Ukaguzi wa kiashiria kwa kiashiria wa 10 Oktoba 2026 ulilinganisha kila thamani ya kitabu cha kazi na matukio yaliyoandikwa, na viashiria vingine vya kitabu hicho na na ufafanuzi wa kiashiria chenyewe. Ulikuta thamani zinazopingana nazo: marudio ya ukame ya Dar es Salaam, kiwango cha chini cha ukame cha kanda kame ya Ziwa, kuathiriwa na tetemeko kwa Kagera, kuathiriwa na maporomoko kwa Ukerewe, upatikanaji wa umeme Dodoma, safu za wakimbizi wa ndani na uhakika wa chakula na safu za mmomonyoko wa pwani. Kielelezo hai huzizuia, kama INFORM inavyoshughulikia data zinazoshindwa uthibitisho: kundi hukosekana kwa vitengo hivyo (thamani {{withheld}}, vitengo {{withheldUnits}} vya kitabu cha kazi, halmashauri {{withheldCouncils}}; kundi lenye viashiria vingine hukokotolewa upya kutoka kwavyo), na kila mahali panapoonyesha thamani husema hivyo kwa taarifa. Kitabu cha kazi chenyewe kimehifadhiwa kamili na kuthibitishwa na majaribio; taarifa {{notes}} kwenye makundi {{noteGroups}} ya viashiria zinafikia halmashauri {{councils}}. Kati ya thamani {{withheldWorkbook}} za kitabu cha kazi zilizozuiliwa na uhakiki, Benchmark 2026 ya 10 Oktoba 2026 ilibadilisha thamani {{replaced}} za halmashauri kwa thamani za kitaasisi zilizoidhinishwa (mmomonyoko wa pwani, kuathiriwa na vimbunga, uhakika wa chakula, wakimbizi wa ndani, umeme wa Dodoma, maporomoko ya Ukerewe); {{withheld}} zimebaki zimezuiliwa katika halmashauri {{withheldCouncils}} (ukame wa kilimo kwa Dar es Salaam, hautumiki kwa jiji).",
-        "next": "Maswali yamewasilishwa kwa INFORM (JRC) na SADC kwa toleo lijalo la kitabu cha kazi (docs/assessment/INFORM_TZ_Upstream_Queries_{{release}}.md); taasisi hubadilisha thamani iliyozuiliwa kupitia lango la data ikiwa na chanzo kinachoweza kutajwa, jambo linaloondoa kizuizi kwa kitengo hicho. Rejista ni docs/assessment/INFORM_TZ_Indicator_Integrity_{{release}}.md, inayotengenezwa upya kwa kila toleo."
+        "title": "Thamani {{withheld}} za kitabu zimezuiliwa",
+        "now": "Kila thamani ya kitabu ilihakikiwa dhidi ya matukio yaliyoandikwa na ufafanuzi wa kiashiria chenyewe. Thamani zinazopingana nazo, zikiwemo marudio ya ukame ya Dar es Salaam, kuathirika kwa tetemeko kwa Kagera na kuathirika kwa maporomoko kwa Ukerewe, zimezuiliwa kwenye kielelezo hai, kama INFORM inavyoshughulikia data zinazoshindwa uhakiki, na kila mahali ambapo thamani hiyo ingeonyeshwa husema hivyo. {{replaced}} kati yake tayari zimebadilishwa na thamani zilizoidhinishwa.",
+        "next": "Maswali yako kwa INFORM (JRC) na SADC kwa toleo lijalo la kitabu; taasisi huondoa kizuizi kwa kuingiza thamani pamoja na chanzo chake kupitia Lango la data."
       },
       "inherit": {
         "title": "Halmashauri {{inherited}} hurithi kitengo cha jirani",
@@ -537,8 +520,8 @@
       },
       "advanced": {
         "title": "Tabaka la Maboresho linaonyeshwa kando, likiwa na mapengo",
-        "now": "Tangu Oktoba 2026 Tabaka la Maboresho hukokotolewa kutoka viashiria vidogo vilivyojazwa (vielelezo vya hali ya hewa na ardhi vya halmashauri kutoka CHIRPS, ERA5-Land, MODIS, SMAP, SRTM na orodha ya USGS) na kuonyeshwa kwenye kila wasifu kando ya Msingi. Viashiria vidogo 13 kati ya 25 havijajazwa au vimezuiliwa; vielelezo hupima ukubwa badala ya watu walio hatarini; uzito ni mapendekezo na viwango vya rejea ni vya kulinganisha. Vipimo vya tafiti na madaraja ya wataalamu yaliyoonyeshwa kabla ya Oktoba 2026 hayamo: yanahitaji chanzo, mbinu na tarehe kabla ya kuingia.",
-        "next": "Jaza vikapu vilivyobaki (TMA, bodi za mabonde, NEMC, GEM, LIS/OTD), badilisha ukubwa kuwa idadi ya watu walio hatarini kwenye gridi ya sensa, sawazisha uzito dhidi ya matukio yaliyorekodiwa, kisha amua mwonekano chaguomsingi (uamuzi D2)."
+        "now": "Tabaka la Maboresho hukokotolewa kutoka vielelezo vya hali ya hewa na ardhi vya halmashauri (CHIRPS, ERA5-Land, MODIS, SMAP, SRTM na orodha ya matetemeko ya USGS) na kuonyeshwa kwenye kila wasifu kando ya thamani za kitabu. Viashiria vidogo vingi bado havijajazwa; vielelezo hupima ukubwa badala ya watu walio hatarini, na uzito ni mapendekezo.",
+        "next": "Jaza vikapu vilivyobaki (TMA, bodi za mabonde, NEMC, GEM, LIS/OTD), badilisha ukubwa kuwa idadi ya watu walio hatarini na sawazisha uzito dhidi ya matukio yaliyorekodiwa."
       },
       "precision": {
         "title": "Alama zinazokaribiana si mpangilio sahihi",
@@ -552,12 +535,11 @@
       }
     },
     "closingTitle": "Jinsi mapungufu yanavyofuatiliwa",
-    "closing": "Kila kipengele hapo juu kinafuatiliwa, na kila kimoja kinaweza kuboreshwa kupitia Lango la data au kwa msimbo bila kubadilisha injini ya INFORM. Mapengo yanapozibwa, alama zitabadilika kadiri picha inavyokamilika zaidi, na kila mabadiliko yanabaki yakifuatilika hadi kiashiria chenye chanzo.",
-    "sourcesNote": "Vyanzo: Mwongozo wa Mbinu na Uadilifu wa Data wa INFORM Tanzania (§8), Mpango wa Kuunganisha Data za Ndani (§2) na Rejista ya Vyanzo vya Viashiria."
+    "closing": "Kila kipengele hushughulikiwa kupitia Lango la data au kwa msimbo bila kubadilisha injini ya INFORM. Mapengo yanapozibwa alama hubadilika, na kila mabadiliko hubaki yakifuatilika hadi thamani yenye chanzo."
   },
   "changelog": {
     "title": "Masahihisho katika toleo hili",
-    "lead": "Ujenzi huu mpya unarekebisha kasoro zilizobainika katika ukaguzi wa mfumo uliopita. Kila sahihisho limefungwa na jaribio la kiotomatiki.",
+    "lead": "Masahihisho ya toleo lililopita la mfumo huu.",
     "before": "Awali",
     "after": "Sasa",
     "items": {
@@ -603,8 +585,8 @@
       "informIndex": "Mpango wa kimataifa wa INFORM na matokeo yake yaliyochapishwa.",
       "oecd": "Mbinu bora za usanifishaji, uzito na ujumlishaji wa viashiria mchanganyiko.",
       "tukey": "Mipaka (Q₁ − 1.5·IQR, Q₃ + 1.5·IQR) inayotumika kuweka kikomo kwa thamani kali.",
-      "chirps": "Mvua ya satelaiti na vituo iliyo nyuma ya vielelezo vya ukame na mvua kubwa vya halmashauri vya Tabaka la Maboresho (CHIRPS v3); haitumiki katika Msingi.",
-      "era5": "Joto la uchambuzi upya lililo nyuma ya vielelezo vya uvukizi, SPEI na joto vya Tabaka la Maboresho; halitumiki katika Msingi.",
+      "chirps": "Mvua ya satelaiti na vituo iliyo nyuma ya vielelezo vya ukame na mvua kubwa vya halmashauri (CHIRPS v3).",
+      "era5": "Joto la uchambuzi upya lililo nyuma ya vielelezo vya uvukizi, SPEI na joto.",
       "spei": "Kielelezo cha ukame ambacho kina chake huingia katika kiashiria cha ukame.",
       "census": "Idadi ya watu na maeneo ya halmashauri yaliyo nyuma ya kuathirika na kila kigawanyo cha kwa-kila-mtu."
     },
