@@ -89,7 +89,7 @@ state/prefs.ts  theme, language, learning progress (persisted)
 - Filled collection tools import directly: `lib/xlsx-lite.ts` reads one worksheet of an .xlsx in the
   browser (zip central directory + DecompressionStream, no spreadsheet library), `lib/tool-import.ts` turns
   the 'Council Entry' sheet into the CSV template rows `parseTemplate` already reviews. `TemplateIO`
-  accepts .csv and .xlsx; with `allowAll` (the Data control tab) it takes every indicator, otherwise only
+  accepts .csv and .xlsx; with `allowAll` (the Data management tab) it takes every indicator, otherwise only
   the institution's.
 - Where a value comes from: `@/engine/risk/stamps` (`stampOrigin`, `isPortalStamp`, `isBenchmarkStamp`,
   `portalEditCount`, `stampCount`). An `EditStamp` is a portal update, a Benchmark 2026 value (`release`
@@ -104,7 +104,7 @@ state/prefs.ts  theme, language, learning progress (persisted)
   (the Indicators entry sheet, a CSV template, a filled collection tool) and `deriveRawOverrides` turns it
   into the leaf score with the workbook's standardisation; the engine's `EditStamp` overrides remain the
   internal shape of the benchmark stamps and the recomputed leaves.
-- Data control (Data portal, administrators and PMO reviewers only): `features/data/tabs/Control.tsx`
+- Data management (Data portal; everyone sees the read-only distribution in `features/data/components/ManagementOverview.tsx`, administrators and PMO reviewers the controls): `features/data/tabs/Control.tsx`
   over the pure functions in `features/data/lib/control.ts`. `distribution()` lists every institution
   with the indicators it serves, its open and overdue requests and the submissions waiting for review,
   and which unassigned indicators usually belong to it; `valuesControl()` counts, for each of the 32

@@ -24,7 +24,7 @@ import { openXlsx } from '../lib/xlsx-lite';
 const MAX_FILE = 5 * 1024 * 1024;
 
 /**
- * `allowAll` (the Office's import on the Data control tab) accepts every indicator of a filled tool;
+ * `allowAll` (the Office's import on the Data management tab) accepts every indicator of a filled tool;
  * an institution's import keeps only its own indicators.
  */
 export function TemplateIO({ specIds, institution, allowAll = false }: { specIds: readonly string[]; institution: string; allowAll?: boolean }) {

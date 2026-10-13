@@ -1,5 +1,5 @@
 /**
- * Data control (administrators and PMO-DMD): one screen for the distribution of data-serving
+ * Data management (administrators and PMO-DMD): one screen for the distribution of data-serving
  * responsibilities and for the lineage of every live value.
  *  • The summary: institutions serving, indicators assigned, requests open and overdue, submissions
  *    waiting, values withheld after validation.

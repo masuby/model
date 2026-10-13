@@ -21,6 +21,7 @@ import { formatDate, formatNumber } from '@/lib/utils';
 import { AccessPanel, ContributorAccess } from './components/AccessPanel';
 import { ListSkeleton } from './components/common';
 import { DataToolsMenu } from './components/DataTools';
+import { ManagementOverview } from './components/ManagementOverview';
 import { useMySubmissions, usePendingQueue, usePermissions } from './hooks';
 import { relativeTime } from './lib/format';
 import { ActivityLog } from './tabs/ActivityLog';
@@ -184,6 +185,9 @@ export default function DataPortalPage() {
 
       <PageContainer className="pt-10 pb-20 sm:pt-12">
         <AccessPanel />
+
+        {/* The management area stands on the page for everyone; administrators and PMO reviewers get it with its controls as a tab. */}
+        {!authLoading && !(isAdmin || isPmo) && <ManagementOverview className="mt-14 border-t border-border pt-10" />}
 
         {profile && !perms.canSubmit && <ContributorAccess className="mt-14" />}
 

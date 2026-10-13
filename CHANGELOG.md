@@ -2,6 +2,16 @@
 
 ## Unreleased
 
+### A Data management area on the Data portal for everyone (13 October 2026)
+
+- The Data portal now carries a "Data management" area that everyone sees, signed in or not: for each of
+  the 32 indicator groups, the responsible institution with its partners, the lead sectors, and the
+  councils by the source of their live value (the workbook, the Benchmark 2026, values institutions
+  entered, values withheld), with a "Sign in to manage" button that takes the reader to the sign-in
+  form. Administrators and PMO reviewers get the same area with its controls (assign, request updates,
+  import a filled tool, enter figures for any institution with the source recorded) as the
+  "Data management" tab, the former "Data control".
+
 ### The Methodology as one document again, the map switch in the middle, the portal figures back (13 October 2026)
 
 - The Methodology is one page again, with its thirteen sections and the "On this page" contents:

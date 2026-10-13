@@ -28,7 +28,7 @@
     "indicators": "Viashiria",
     "people": "Watu",
     "committee": "Dawati la kamati",
-    "control": "Udhibiti wa data"
+    "control": "Usimamizi wa data"
   },
   "roles": {
     "viewer": "Mgeni",
@@ -1177,7 +1177,7 @@
     }
   },
   "control": {
-    "title": "Udhibiti wa data",
+    "title": "Usimamizi wa data",
     "lead": "Skrini moja kwa Ofisi: nani anahudumia kiashiria kipi, kila taasisi imefikia wapi, na kila thamani hai inatoka wapi. Ugawaji na maombi yanayofanywa hapa hufika kwenye kichupo cha Viashiria na kikasha cha taasisi zenyewe.",
     "summary": {
       "serving": "Taasisi zinazohudumia data",
@@ -1272,6 +1272,30 @@
       "title": "Ingiza zana ya ukusanyaji iliyojazwa",
       "lead": "Pakia Zana ya Ukusanyaji au kitabu cha Benchmark 2026 kama taasisi inavyokirudisha (xlsx), au kiolezo cha CSV. Kila kiashiria chenye thamani kinakuwa uwasilishaji mmoja kwenye foleni ya mapitio; hakuna kinachoingia kwenye kielelezo hadi kiidhinishwe."
     }
+  },
+  "management": {
+    "eyebrow": "PMO-DMD",
+    "title": "Usimamizi wa data",
+    "lead": "Kila kundi la kiashiria lina taasisi inayohusika na sekta zinazoongoza. PMO-DMD hugawa viashiria, huomba masasisho, hupitia yaliyowasilishwa na inaweza kuingiza takwimu kwa niaba ya taasisi yoyote huku chanzo kikirekodiwa; thamani iliyoidhinishwa huchukua nafasi ya ile ya kitabu cha kazi kwa halmashauri hiyo na ngazi zote huhesabiwa upya.",
+    "signIn": "Ingia ili kusimamia",
+    "role": "Umeingia kama {{role}}. Wasimamizi na wakaguzi wa PMO husimamia mgawanyo.",
+    "summary": {
+      "groups": "Makundi ya viashiria",
+      "institutions": "Taasisi zinazohusika",
+      "institutional": "Makundi yenye thamani kutoka taasisi",
+      "withheld": "Makundi yenye thamani zilizozuiliwa"
+    },
+    "col": {
+      "group": "Kundi la kiashiria",
+      "institution": "Taasisi inayohusika",
+      "sectors": "Sekta zinazoongoza",
+      "workbook": "Kitabu cha kazi",
+      "benchmark": "Benchmark 2026",
+      "institutional": "Taasisi",
+      "withheld": "Zimezuiliwa"
+    },
+    "with": "pamoja na",
+    "note": "Halmashauri kulingana na chanzo cha thamani yake hai: kitabu cha kazi cha INFORM SADC 2024, Benchmark 2026 iliyoandaliwa kutoka seti za data za umma, thamani zilizoingizwa na taasisi kupitia lango hili, au thamani zilizozuiliwa baada ya uhakiki."
   },
   "scores": {
     "errors": {

@@ -28,7 +28,7 @@
     "indicators": "Indicators",
     "people": "People",
     "committee": "Committee desk",
-    "control": "Data control"
+    "control": "Data management"
   },
   "roles": {
     "viewer": "Visitor",
@@ -1177,7 +1177,7 @@
     }
   },
   "control": {
-    "title": "Data control",
+    "title": "Data management",
     "lead": "One screen for the Office: who serves which indicator, how far each institution is, and where every live value comes from. Assignments and requests made here reach the institutions' own Indicators tab and inbox.",
     "summary": {
       "serving": "Institutions serving data",
@@ -1272,6 +1272,30 @@
       "title": "Import a filled collection tool",
       "lead": "Upload the Collection Tool or the Benchmark 2026 workbook as an institution returns it (xlsx), or a CSV template. Every indicator with a value becomes one submission in the review queue; nothing enters the model until it is approved."
     }
+  },
+  "management": {
+    "eyebrow": "PMO-DMD",
+    "title": "Data management",
+    "lead": "Each indicator group has a responsible institution and lead sectors. PMO-DMD assigns the indicators, requests updates, reviews what comes in and can enter figures for any institution with the source recorded; an approved value replaces the workbook's for that council and every level recomputes.",
+    "signIn": "Sign in to manage",
+    "role": "Signed in as {{role}}. Administrators and PMO reviewers manage the distribution.",
+    "summary": {
+      "groups": "Indicator groups",
+      "institutions": "Responsible institutions",
+      "institutional": "Groups with values from institutions",
+      "withheld": "Groups with withheld values"
+    },
+    "col": {
+      "group": "Indicator group",
+      "institution": "Responsible institution",
+      "sectors": "Lead sectors",
+      "workbook": "Workbook",
+      "benchmark": "Benchmark 2026",
+      "institutional": "Institutions",
+      "withheld": "Withheld"
+    },
+    "with": "with",
+    "note": "Councils by the source of their live value: the INFORM SADC 2024 workbook, the Benchmark 2026 prepared from public datasets, values institutions entered through this portal, or values withheld after validation."
   },
   "scores": {
     "errors": {

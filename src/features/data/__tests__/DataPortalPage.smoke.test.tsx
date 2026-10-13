@@ -59,6 +59,9 @@ describe('DataPortalPage (local demo mode)', { timeout: 60_000 }, () => {
     // Visitors have a single section, shown under a plain heading rather than a one-item tab row.
     expect(screen.queryByRole('tab')).not.toBeInTheDocument();
     expect(screen.getByRole('heading', { name: 'Approved changes' })).toBeInTheDocument();
+    // The management area stands on the page for everyone: the 32 groups, their institutions and sources.
+    expect(screen.getByRole('heading', { name: 'Data management' })).toBeInTheDocument();
+    expect(document.querySelectorAll('section[aria-labelledby="management-title"] tbody tr')).toHaveLength(32);
     expect(await screen.findByText('The INFORM SADC 2024 baseline is in use')).toBeInTheDocument();
   });
 
@@ -116,6 +119,9 @@ describe('DataPortalPage (local demo mode)', { timeout: 60_000 }, () => {
     );
     renderAt('/data', 'pmo');
     expect(await screen.findByText(/by Officer B/, {}, slow)).toBeInTheDocument();
+    // Reviewers manage through the tab, so the read-only area is not repeated on their page.
+    expect([...document.querySelectorAll('[role="tab"]')].some((el) => el.textContent?.includes('Data management'))).toBe(true);
+    expect(document.querySelector('section[aria-labelledby="management-title"]')).toBeNull();
     const approve = [...document.querySelectorAll<HTMLButtonElement>('button')].filter((b) => b.textContent?.trim() === 'Approve').at(-1)!;
     fireEvent.click(approve);
     await waitFor(() => expect(stored('inform.v2.rawValues', [])).toHaveLength(1));
