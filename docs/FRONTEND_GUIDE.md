@@ -157,10 +157,9 @@ state/prefs.ts  theme, language, learning progress (persisted)
 - The selected area beside the map (`components/AreaInsight.tsx`): from 1280 px the explorer's left column
   becomes `InsightColumn` (a map of the area to move around from, built on `StaticMap` with the region's
   councils emphasised and a country inset, and `AreaCharts`: the risk and its parts against the region and
-  Tanzania, the hazard profile, the climate year by year and the change since the workbook); the controls
+  Tanzania, the hazard profile and the change since the workbook); the controls
   open as a drawer over it. Below 1280 px and on phones the same panels fold inside the risk panel
-  (`withInsight`). The climate series (`src/data/tanzania-council-trends.json`, `scripts/build-trends.py`)
-  load only when shown (`lib/trends.ts`).
+  (`withInsight`).
 - Institutional indicators (`@/engine/risk/institutional.ts`): the councils' DRM arrangements and committee
   criteria live on `unit.drr` (`DrrStatus`: the published flags of `src/data/tanzania-councils-drr.json`,
   merged with the committees' approved records by `drrFor` in `model.ts`). The Benchmark 2026 carries the

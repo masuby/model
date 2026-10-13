@@ -264,7 +264,7 @@ function Statements({ unit }: { unit: Unit }) {
   );
 }
 
-/** Without the left column (narrow screens, phones): the map of the area and its trends, folded. */
+/** Without the left column (narrow screens, phones): the map of the area and its charts, folded. */
 function InsightFolds({ unit }: { unit: Unit }) {
   const { t } = useTranslation('explore');
   const name = unit.level === 'national' ? t('riskPanel.country') : unit.name;

@@ -295,7 +295,7 @@
     }
   },
   "insight": {
-    "label": "Ramani na mienendo ya {{name}}",
+    "label": "Ramani na chati za {{name}}",
     "map": {
       "title": "Ramani ya {{name}}",
       "label": "Ramani ya {{name}} na maeneo yanayoizunguka, yenye rangi kama ramani kuu",
@@ -303,21 +303,13 @@
       "select": "Chagua kwenda hapo"
     },
     "charts": {
-      "title": "Mienendo na chati",
+      "title": "Chati",
       "parts": "Hatari na sehemu zake",
       "partAria": "{{label}}: {{value}} hapa; mkoa {{region}}; Tanzania {{national}}",
       "history": "INFORM SADC 2024: {{workbook}} → sasa {{live}}",
       "profile": "Wasifu wa hatari",
       "groupAria": "{{name}}: {{score}}. Onyesha ushahidi",
-      "noGroups": "Hakuna kundi lenye thamani hapa.",
-      "climate": "Hali ya hewa mwaka kwa mwaka",
-      "heat": "Siku za joto kali kwa mwaka, {{from}}-{{to}}",
-      "heatSummary": "Wastani 1991-2020: siku {{base}} kwa mwaka; 2015-2024: siku {{recent}}.",
-      "rain": "Mvua kwa mwaka, {{from}}-{{to}} (mm)",
-      "rainSummary": "Kawaida 1991-2020: mm {{normal}}. Kavu zaidi {{dryYear}} (mm {{dry}}), mvua zaidi {{wetYear}} (mm {{wet}}).",
-      "heavySummary_one": "Siku {{count}} kwa mwaka yenye mm 50 au zaidi.",
-      "heavySummary_other": "Siku {{count}} kwa mwaka zenye mm 50 au zaidi.",
-      "noTrends": "Hakuna mfululizo wa hali ya hewa hapa."
+      "noGroups": "Hakuna kundi lenye thamani hapa."
     }
   }
 }

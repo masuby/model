@@ -52,8 +52,7 @@ level is derived from the risk level.
    training, anticipatory action, committee active, stakeholder collaboration, involvement in DRR),
    in place / not in place / not recorded for a council, counts over the councils for a region or the
    country.
-10. **Climate year by year**: heatwave days 1991-2024 and rainfall 1981-2025 with the 1991-2020 normal.
-11. **Events reported by the committees** (when there are any), **footer** with the date and the link.
+10. **Events reported by the committees** (when there are any), **footer** with the date and the link.
 
 ## Design choices
 

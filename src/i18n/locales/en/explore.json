@@ -295,7 +295,7 @@
     }
   },
   "insight": {
-    "label": "Map and trends of {{name}}",
+    "label": "Map and charts of {{name}}",
     "map": {
       "title": "Map of {{name}}",
       "label": "Map of {{name}} and its surroundings, coloured like the main map",
@@ -303,21 +303,13 @@
       "select": "Select to move there"
     },
     "charts": {
-      "title": "Trends and charts",
+      "title": "Charts",
       "parts": "Risk and its parts",
       "partAria": "{{label}}: {{value}} here; region {{region}}; Tanzania {{national}}",
       "history": "INFORM SADC 2024: {{workbook}} → now {{live}}",
       "profile": "Risk profile",
       "groupAria": "{{name}}: {{score}}. Show the evidence",
-      "noGroups": "No group has a value here.",
-      "climate": "Climate year by year",
-      "heat": "Heatwave days a year, {{from}}-{{to}}",
-      "heatSummary": "1991-2020 average {{base}} days a year; 2015-2024 {{recent}}.",
-      "rain": "Rainfall a year, {{from}}-{{to}} (mm)",
-      "rainSummary": "Normal 1991-2020: {{normal}} mm. Driest {{dryYear}} ({{dry}} mm), wettest {{wetYear}} ({{wet}} mm).",
-      "heavySummary_one": "{{count}} day a year with 50 mm or more.",
-      "heavySummary_other": "{{count}} days a year with 50 mm or more.",
-      "noTrends": "No climate series here."
+      "noGroups": "No group has a value here."
     }
   }
 }

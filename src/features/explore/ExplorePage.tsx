@@ -3,7 +3,7 @@
  *
  * Desktop (≥1024 px): a 392 px control panel on the left and a full-bleed map. Selecting an area opens the
  * risk communication panel (RiskPanel), docked as a 400 px column on the right. From 1280 px the left column
- * then shows the area itself (InsightColumn: a map of the area to move around from, and its trends and
+ * then shows the area itself (InsightColumn: a map of the area to move around from, and its charts and
  * charts); below 1280 px it folds to a rail and those panels sit inside the risk panel. The controls open
  * again as a drawer over the left column. Table view swaps the map for a sortable ranking with the panel
  * docked beside it and the comparison under it.
@@ -60,7 +60,7 @@ function DesktopExplorer() {
   const { state, selected, compare } = useExplore();
   const wide = useMediaQuery('(min-width: 1280px)');
   // With an area open the risk panel docks beside the map. From 1280 px the left column shows the area's
-  // map and trends; below that it folds to a rail. Either way the controls open as a drawer over it.
+  // map and charts; below that it folds to a rail. Either way the controls open as a drawer over it.
   const docked = !!selected && state.view === 'map';
   const [controlsOpen, setControlsOpen] = React.useState(false);
   React.useEffect(() => {

@@ -326,13 +326,12 @@ describe('ExplorePage - desktop', () => {
     expect(params().get('id')).toBe(council.id);
   });
 
-  it('shows the area beside the map: its map and trends on the left, what its data say on the right', async () => {
+  it('shows the area beside the map: its map and charts on the left, what its data say on the right', async () => {
     await renderAt('?level=council&id=C051');
-    const insight = screen.getByRole('complementary', { name: 'Map and trends of Kibiti District' });
+    const insight = screen.getByRole('complementary', { name: 'Map and charts of Kibiti District' });
     expect(within(insight).getByRole('heading', { name: 'Map of Kibiti District' })).toBeInTheDocument();
-    expect(within(insight).getByRole('heading', { name: 'Trends and charts' })).toBeInTheDocument();
+    expect(within(insight).getByRole('heading', { name: 'Charts' })).toBeInTheDocument();
     expect(within(insight).getByRole('heading', { name: 'Risk and its parts' })).toBeInTheDocument();
-    expect(await within(insight).findByText(/^Heatwave days a year, 1991-2024/, {}, { timeout: 20_000 })).toBeInTheDocument();
     expect(within(insight).getByText(/^INFORM SADC 2024: [\d.]+ → now [\d.]+$/)).toBeInTheDocument();
     // The hazard profile opens a hazard's evidence in the risk panel.
     fireEvent.click(within(insight).getByRole('button', { name: /^Storms & cyclones: 10\.0/ }));
@@ -346,15 +345,15 @@ describe('ExplorePage - desktop', () => {
     expect(screen.getByRole('radiogroup', { name: 'Colour by' })).toBeInTheDocument();
   });
 
-  it('below 1280 px the map and trends of the area fold inside the risk panel', async () => {
+  it('below 1280 px the map and charts of the area fold inside the risk panel', async () => {
     wide = false;
     await renderAt('?level=council&id=C051');
     const panel = screen.getByRole('complementary', { name: 'Details for Kibiti District' });
-    expect(screen.queryByRole('complementary', { name: 'Map and trends of Kibiti District' })).not.toBeInTheDocument();
+    expect(screen.queryByRole('complementary', { name: 'Map and charts of Kibiti District' })).not.toBeInTheDocument();
     expect(within(panel).getByText('Map of Kibiti District')).toBeInTheDocument();
-    expect(within(panel).getByText('Trends and charts')).toBeInTheDocument();
+    expect(within(panel).getByText('Charts')).toBeInTheDocument();
     // Open, not folded away: the map and the charts are in view without a click.
-    for (const label of ['Map of Kibiti District', 'Trends and charts']) expect(within(panel).getByText(label).closest('details')?.open).toBe(true);
+    for (const label of ['Map of Kibiti District', 'Charts']) expect(within(panel).getByText(label).closest('details')?.open).toBe(true);
   });
 
   it('lets the reader widen either panel: a handle that steps with the arrow keys and a button to the reading width', async () => {
@@ -382,7 +381,7 @@ describe('ExplorePage - desktop', () => {
 
   it('moves to a neighbouring council from the keyboard on the map of the area', async () => {
     await renderAt('?level=council&id=C051');
-    const insight = screen.getByRole('complementary', { name: 'Map and trends of Kibiti District' });
+    const insight = screen.getByRole('complementary', { name: 'Map and charts of Kibiti District' });
     const mafia = model.councils.find((c) => c.name === 'Mafia District')!;
     // The region's councils are buttons named with their value; the country inset is pointer-only.
     const button = await within(insight).findByRole('button', { name: /^Mafia District: INFORM Risk [\d.]+, / }, { timeout: 20_000 });

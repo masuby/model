@@ -1,6 +1,6 @@
 /**
  * The selected area beside the map: a map of the area to move around from (its region's councils, the
- * neighbours one click away, and the country with the region marked), and trends and charts (the risk and
+ * neighbours one click away, and the country with the region marked), and charts (the risk and
  * its parts against the region and Tanzania, the risk profile (the groups of every dimension), heatwave days
  * and rainfall year by year,
  * and how the assessment changed since the INFORM SADC 2024 workbook).
@@ -21,7 +21,6 @@ import type { RiskModel, Unit } from '@/engine/risk/types';
 import { cn, formatScore } from '@/lib/utils';
 import { useExplore } from '../lib/ExploreContext';
 import { dimensionGroups } from '../lib/riskPanel';
-import { ClimateTrends } from './ClimateTrends';
 import { PanelWidthButton } from './PanelResizer';
 import { SectionTitle } from './bits';
 
@@ -243,12 +242,6 @@ export function AreaCharts({ unit }: { unit: Unit }) {
           {t('insight.charts.profile')}
         </SectionTitle>
         <RiskProfile unit={unit} />
-      </section>
-      <section>
-        <SectionTitle as="h3" className="mb-2">
-          {t('insight.charts.climate')}
-        </SectionTitle>
-        <ClimateTrends unit={unit} />
       </section>
     </div>
   );

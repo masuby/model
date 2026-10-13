@@ -23,7 +23,6 @@ import { parseMetric, rampColor } from '@/engine/risk/metrics';
 import { indicatorValue, placeKey } from '@/engine/risk/model';
 import { dataNotesFor, worstStatus } from '@/engine/risk/notes';
 import type { RiskModel, Unit } from '@/engine/risk/types';
-import { ClimateTrends } from '@/features/explore/components/ClimateTrends';
 import { EvidenceItem } from '@/features/explore/components/Evidence';
 import { coarseOf, dimensionGroups, evidenceFor, groupRanks, memberSpread, type TopGroup } from '@/features/explore/lib/riskPanel';
 import { ALERT_COLOR, planMessage, riskBandFor } from '@/features/guide/alert';
@@ -411,14 +410,6 @@ export default function DetailedRiskCardPage() {
           </ul>
         </section>
       )}
-
-      {/* Climate year by year */}
-      <section className="keep mt-5">
-        <h2 className={H2}>{t('detailed.climate')}</h2>
-        <div className="mt-1.5">
-          <ClimateTrends unit={unit} />
-        </div>
-      </section>
 
       {/* Events reported by the committees */}
       {area.events.length > 0 && (

@@ -2,6 +2,12 @@
 
 ## Unreleased
 
+### The climate year-by-year charts are gone (14 October 2026)
+
+- The heatwave-days and rainfall bar charts with their notes and source line no longer appear in the
+  explorer's chart column or on the detailed risk card; the column is titled "Charts". The climate
+  series file and its build script are removed.
+
 ### Tsunami only on the coast (13 October 2026)
 
 - The Guide Book's earthquake hazard reads "Earthquake and tsunami" only for areas with a sea coast
