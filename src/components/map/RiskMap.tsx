@@ -164,7 +164,7 @@ export default function RiskMap({
   const theme = resolveTheme(usePrefs((s) => s.theme));
   const loadedGeo = useGeo(level);
   const water = useGeo('water');
-  // The lakes that cross the border, whole: drawn faintly beneath the areas when there is no basemap.
+  // The lakes that cross the border, whole, drawn beneath the areas when there is no basemap: one surface with the national water, no line at the border.
   const lakes = useGeo('lakes');
   const geo = loadedGeo ?? EMPTY;
   const unitOf = useUnitResolver(model, level);
@@ -290,7 +290,7 @@ export default function RiskMap({
             key={`lakes-${theme}`}
             data={lakes}
             interactive={false}
-            style={() => ({ fillColor: getComputedStyle(document.documentElement).getPropertyValue('--map-water').trim(), fillOpacity: 0.45, stroke: false })}
+            style={() => ({ fillColor: getComputedStyle(document.documentElement).getPropertyValue('--map-water').trim(), fillOpacity: 1, stroke: false })}
           />
         )}
         {loadedGeo && <GeoJSON key={level} ref={layerRef} data={geo} style={style as L.StyleFunction} onEachFeature={onEach as (f: Feature, l: L.Layer) => void} />}
@@ -301,7 +301,8 @@ export default function RiskMap({
             interactive={false}
             style={() => {
               const css = getComputedStyle(document.documentElement);
-              return { fillColor: css.getPropertyValue('--map-water').trim(), fillOpacity: 1, color: css.getPropertyValue('--map-water-stroke').trim(), weight: 0.6 };
+              // No outline: it would draw the border as a line across the lake where the national water polygon is clipped.
+              return { fillColor: css.getPropertyValue('--map-water').trim(), fillOpacity: 1, stroke: false, weight: 0 };
             }}
           />
         )}
