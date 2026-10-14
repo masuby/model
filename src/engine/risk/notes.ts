@@ -100,11 +100,17 @@ export function noteApplies(note: DataNote, unit: Unit, value: number | null): b
   return true;
 }
 
-/** The notes that apply to a unit's value on an indicator group, queries first. */
+/**
+ * The notes that apply to a unit's value on an indicator group, queries first. A note that withholds the
+ * workbook value is not among them once the group carries a value: the hold was lifted by an approved value
+ * (the Benchmark 2026 or an institution's), and the figure shown is that value, not the one the note is about.
+ * Where the group has no value the hold stands and the note is shown.
+ */
 export function dataNotesFor(unit: Unit, dim: DimensionKey, indicator: string, layer: NoteLayer = 'core'): DataNote[] {
   const ref = `${dim}:${indicator}`;
   const value = valueOf(unit, dim, indicator);
-  return DATA_NOTES.filter((n) => n.layer === layer && n.ref === ref && noteApplies(n, unit, value)).sort(
+  const lifted = isNum(value);
+  return DATA_NOTES.filter((n) => n.layer === layer && n.ref === ref && !(n.quarantine && lifted) && noteApplies(n, unit, value)).sort(
     (a, b) => NOTE_STATUS_ORDER.indexOf(a.status) - NOTE_STATUS_ORDER.indexOf(b.status),
   );
 }

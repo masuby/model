@@ -34,7 +34,8 @@ describe('data notes', () => {
   it('reach at least one council each, and never the nation', () => {
     for (const n of DATA_NOTES) {
       const [dim, key] = n.ref.split(':') as ['hazard' | 'vulnerability' | 'coping', string];
-      const councils = model.councils.filter((c) => dataNotesFor(c, dim, key).includes(n));
+      // Reach is a matter of where the note applies; whether it is shown beside a value also depends on the hold.
+      const councils = model.councils.filter((c) => noteApplies(n, c, indicatorValue(c, dim, key)));
       expect(councils.length, n.id).toBeGreaterThan(0);
       expect(noteApplies(n, model.national, indicatorValue(model.national, dim, key))).toBe(false);
     }
@@ -43,20 +44,31 @@ describe('data notes', () => {
   it('follow the workbook unit: the five Dar es Salaam councils carry the drought note, every Kagera council the earthquake note, Ubungo Kinondoni\'s flood note', () => {
     const dar = model.councils.filter((c) => placeKey(c.region) === 'daressalaam');
     expect(dar).toHaveLength(5);
-    for (const c of dar) expect(dataNotesFor(c, 'hazard', 'drought').map((n) => n.id)).toEqual(['DN-01', 'DN-02']);
+    // DN-01 and DN-02 withhold the workbook's drought values; since 14 October 2026 the Benchmark 2026 drought
+    // index carries the group everywhere, so the lifted holds are not shown beside the live value.
+    for (const c of dar) {
+      expect(dataNotesFor(c, 'hazard', 'drought')).toEqual([]);
+      expect(DATA_NOTES.filter((n) => n.ref === 'hazard:drought' && noteApplies(n, c, indicatorValue(c, 'hazard', 'drought'))).map((n) => n.id)).toEqual(['DN-01', 'DN-02']);
+    }
     const kagera = model.councils.filter((c) => placeKey(c.region) === 'kagera');
     expect(kagera).toHaveLength(8);
-    for (const c of kagera) expect(dataNotesFor(c, 'hazard', 'earthquake').map((n) => n.id)).toEqual(['DN-10', 'DN-03']); // the ceiling artefact for every unit, then Kagera's own note
+    for (const c of kagera) expect(dataNotesFor(c, 'hazard', 'earthquake').map((n) => n.id)).toEqual(['DN-03']); // Kagera's own explanation; the ceiling artefact (DN-10) is lifted by the USGS felt intensity
     const ubungo = model.councils.find((c) => c.name.startsWith('Ubungo'))!;
     expect(ubungo.sourceName).toBe('Kinondoni');
     expect(dataNotesFor(ubungo, 'hazard', 'flood').map((n) => n.id)).toEqual(['DN-11']);
     // The region itself carries a regional note, not a unit note.
     const darRegion = model.regions.find((r) => placeKey(r.name) === 'daressalaam')!;
-    expect(dataNotesFor(darRegion, 'hazard', 'drought').map((n) => n.id)).toEqual(['DN-01', 'DN-02']);
+    expect(dataNotesFor(darRegion, 'hazard', 'drought')).toEqual([]);
+    expect(DATA_NOTES.filter((n) => n.ref === 'hazard:drought' && noteApplies(n, darRegion, indicatorValue(darRegion, 'hazard', 'drought'))).map((n) => n.id)).toEqual(['DN-01', 'DN-02']);
     expect(dataNotesFor(darRegion, 'hazard', 'flood')).toEqual([]);
-    // Since 14 October 2026 the earthquake artefact note covers every unit (the index is withheld everywhere).
-    expect(dataNotesFor(model.byId.get('C001')!, 'hazard', 'earthquake').map((n) => n.id)).toEqual(['DN-10']);
-    expect(dataNotesFor(model.councils.find((c) => c.name.startsWith('Ngorongoro'))!, 'hazard', 'earthquake').map((n) => n.id)).toEqual(['DN-10']);
+    // Since 14 October 2026 the earthquake artefact note covers every unit, and the USGS felt intensity carries the
+    // group everywhere: the note applies, the hold is lifted, nothing is shown beside the live value.
+    const kondoa = model.byId.get('C001')!;
+    expect(noteApplies(DATA_NOTES.find((n) => n.id === 'DN-10')!, kondoa, indicatorValue(kondoa, 'hazard', 'earthquake'))).toBe(true);
+    expect(dataNotesFor(kondoa, 'hazard', 'earthquake')).toEqual([]);
+    expect(dataNotesFor(model.councils.find((c) => c.name.startsWith('Ngorongoro'))!, 'hazard', 'earthquake')).toEqual([]);
+    // Where the group carries no value the hold stands and the note is shown.
+    expect(dataNotesFor(kondoa, 'hazard', 'internalViolence').map((n) => n.id)).toEqual(['DN-12']);
     // Queries come before explanations.
     expect(worstStatus(DATA_NOTES)).toBe('queried');
     expect(unitDataNotes(model.byId.get('C001')!).map((x) => x.note.id)).toContain('DN-08');

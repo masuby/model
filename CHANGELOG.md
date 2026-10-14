@@ -2,6 +2,13 @@
 
 ## Unreleased
 
+### A lifted hold is not shown beside the live value (14 October 2026)
+
+- A data note that withholds a workbook value no longer appears beside a group that carries an approved
+  value in its place (the Benchmark 2026 drought index and USGS felt intensity, an institution's value):
+  the figure shown is that value, not the one the note is about. Where a group has no value the hold
+  stands and the note is shown as before. The notes register on the Methodology page is unchanged.
+
 ### The risk cards in the reader's language (14 October 2026)
 
 - The profile's "Risk card (Kiswahili)" button is "Risk card" again, and the one-page and detailed risk
