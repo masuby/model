@@ -27,7 +27,7 @@ interface PathSet {
 const COUNCILS = councilPaths as PathSet;
 const REGIONS = regionPaths as PathSet;
 const WATER = (waterPaths as { water: string[] }).water;
-/** The lakes that cross the border, whole: drawn first in the water colour, so the lake is one surface across the border. */
+/** The lakes that cross the border, whole: only their outline, drawn first and faintly in the background. */
 const LAKES_BEYOND = (waterPaths as { beyond?: string[] }).beyond ?? [];
 
 export interface StaticMapProps {
@@ -124,7 +124,7 @@ export default function StaticMap({
       <svg ref={svgRef} viewBox={viewBox} className="size-full" role={selectable ? 'group' : 'img'} aria-label={label} preserveAspectRatio="xMidYMid meet">
         <g aria-hidden>
           {LAKES_BEYOND.map((d, i) => (
-            <path key={i} d={d} fill="var(--map-water)" stroke="none" pointerEvents="none" />
+            <path key={i} d={d} fill="none" stroke="var(--map-water-stroke)" strokeWidth={0.6} strokeOpacity={0.55} vectorEffect="non-scaling-stroke" pointerEvents="none" />
           ))}
         </g>
         <g>
@@ -166,9 +166,8 @@ export default function StaticMap({
           })}
         </g>
         <g aria-hidden>
-          {/* No outline: a stroke would draw the border as a line across the lake where the national water polygon is clipped. */}
           {WATER.map((d, i) => (
-            <path key={i} d={d} fill="var(--map-water)" stroke="none" pointerEvents="none" />
+            <path key={i} d={d} fill="var(--map-water)" stroke="var(--map-water-stroke)" strokeWidth={0.5} vectorEffect="non-scaling-stroke" pointerEvents="none" />
           ))}
         </g>
         {/* Selection outlines drawn last so they sit above neighbours and water. */}

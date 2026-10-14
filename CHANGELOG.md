@@ -21,9 +21,9 @@
   Guide Book in 72 councils instead of 111; docs/assessment/INFORM_TZ_Driver_Discrepancies_2026-10-14.md
   records what remains. National INFORM Risk reads 4.3 (High on the SADC thresholds) with 101 councils
   high, 92 medium and 2 low.
-- The three lakes that cross the border (Victoria, Tanganyika, Nyasa) are drawn whole beyond Tanzania on
-  the static maps and the explorer map, from the public-domain Natural Earth lakes, as one surface in the
-  water colour: no line crosses the lake where the national water polygon is clipped at the border.
+- The outlines of the three lakes that cross the border (Victoria, Tanganyika, Nyasa) show faintly in
+  the background beyond Tanzania on the static maps and the explorer map, from the public-domain Natural
+  Earth lakes; the water inside the country is drawn as before.
 - Where two notes withhold the same value, the first in the register names the hold (a unit's own query
   before the general decision).
 

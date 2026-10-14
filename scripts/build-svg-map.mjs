@@ -19,15 +19,15 @@ const read = (p) => JSON.parse(fs.readFileSync(ROOT + p, 'utf8'));
 const councils = read('src/data/tanzania-councils.json');
 const regions = read('src/data/tanzania-regions.json');
 const water = read('src/data/tanzania-waterbodies.json');
-// The lakes that cross the border, whole (Natural Earth 10 m, public domain): drawn faintly beyond Tanzania.
+// The lakes that cross the border, whole (Natural Earth 10 m, public domain): their outlines show faintly beyond Tanzania.
 const lakesBeyond = read('src/data/tanzania-lakes-beyond.json');
 
-// Frame: Tanzania's extent with a margin wide enough to show the lakes a little beyond the border
-// (Lake Victoria reaches 0.5° N, Lake Nyasa 14.4° S; the frame keeps about 0.6° of them).
-const LON0 = 28.9;
-const LON1 = 40.9;
-const LAT0 = -12.4;
-const LAT1 = -0.4;
+// Frame: Tanzania's extent with a small margin, enough for the outlines of the border lakes to show a
+// little beyond the country (Lake Victoria reaches 0.5° N, Lake Nyasa 14.4° S; about 0.4° of them shows).
+const LON0 = 28.95;
+const LON1 = 40.7;
+const LAT0 = -12.2;
+const LAT1 = -0.55;
 const PHI = ((LAT0 + LAT1) / 2) * (Math.PI / 180);
 const WIDTH = 1000;
 const K = WIDTH / ((LON1 - LON0) * Math.cos(PHI));
@@ -84,7 +84,7 @@ const files = {
   'src/data/tanzania-svg-water.json': {
     ...frame,
     water: water.features.filter((f) => !/ocean/i.test(String(f.properties.name))).map((f) => featurePath(f, 0.02)).filter(Boolean),
-    // Whole lakes, drawn first and faintly: the parts beyond the border show where the lake continues.
+    // Whole lakes: only their outline is drawn, faintly, in the background, so the parts beyond the border show where the lake continues.
     beyond: lakesBeyond.features.map((f) => featurePath(f, 0.02)).filter(Boolean),
   },
 };
