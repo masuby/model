@@ -4,7 +4,7 @@
  * SADC 2024 workbook, and readable text on every fill.
  */
 import { describe, expect, it } from 'vitest';
-import { ALERT_COLOR, BAND_BY_CLASS } from '@/features/guide/alert';
+import { ALERT_COLOR } from '@/features/guide/alert';
 import { CLASS_KEYS, CLASS_PALETTES, classColor, classify, contrastRatio, NO_DATA_COLOR, readableOn, relativeLuminance, SCALES, CLASS_COLORS } from '../classes';
 import { metricColor, parseMetric, rampColor, rampStops } from '../metrics';
 
