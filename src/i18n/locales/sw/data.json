@@ -960,21 +960,24 @@
       "guidance": "Fahamu hatari yako",
       "event": "Ripoti ya tukio",
       "warning": "Tahadhari",
-      "vc": "Kupunguza hatari"
+      "vc": "Kupunguza hatari",
+      "action": "Mawasiliano ya hatari"
     },
     "kindLead": {
       "drr": "Kama mipango ipo: mpango wa kujiandaa na kukabiliana pamoja na tathmini yake ya hatari na udhaifu, hatua za mapema, timu ya kukabiliana iliyofunzwa, kituo cha operesheni, mafunzo ya kamati kuhusu kupunguza hatari; na jinsi kamati inavyofanya kazi: inafanya kazi, inashirikiana na wadau, inashiriki masuala ya kupunguza hatari. Injini hupima mitano ya kwanza kama mipango ya usimamizi wa maafa iliyopo na vigezo vitatu kama utendaji wa kamati.",
       "guidance": "Taarifa watu wanayosoma kwenye wasifu wa halmashauri: hatari iko wapi na nini husaidia. Badilisha mstari wa kitabu cha mwongozo au ongeza mpya, kwa Kiingereza na Kiswahili.",
       "event": "Tukio la kitisho lililotokea: lini, nini, na athari zake. Kamati ya mkoa huthibitisha.",
       "warning": "Tahadhari rasmi kama ilivyotolewa na TMA: kitisho, kiwango, maeneo na muda. Huchapishwa mara moja kwenye maeneo yaliyotajwa na huondoka tarehe ya mwisho.",
-      "vc": "Maktaba ya hatua: kwa kila kundi la viashiria la INFORM (vitisho, udhaifu na uwezo wa kukabiliana), kinachokipunguza na sekta zinazoongoza. PMO-DMD huandika, kamati ya taifa hupitia; hatua na sekta huonekana kwenye kadi ya hatari ya kina na kwenye kila eneo ambako kundi lina uzito mkubwa zaidi."
+      "vc": "Maktaba ya hatua: kwa kila kundi la viashiria la INFORM (vitisho, udhaifu na uwezo wa kukabiliana), kinachokipunguza na sekta zinazoongoza. PMO-DMD huandika, kamati ya taifa hupitia; hatua na sekta huonekana kwenye kadi ya hatari ya kina na kwenye kila eneo ambako kundi lina uzito mkubwa zaidi.",
+      "action": "Mstari mmoja wa kile watu wanaweza kuona na cha kufanya, kwa hatari au kundi la udhaifu au uwezo wa kukabiliana, katika ngazi moja au ngazi zote: unasimama badala ya mstari wa Kitabu cha Mwongozo au unafuata mistari ya kitabu kwenye kichunguzi, wasifu na kadi za hatari za eneo lako (au kila mahali, kwa mistari ya kitaifa)."
     },
     "recordTitle": {
       "drr": "Rekodi mipango",
       "guidance": "Andika au sasisha taarifa",
       "event": "Ripoti tukio",
       "warning": "Rekodi tahadhari rasmi",
-      "vc": "Andika au sasisha hatua za kundi"
+      "vc": "Andika au sasisha hatua za kundi",
+      "action": "Andika mstari wa cha kufanya"
     },
     "unit": "Eneo",
     "pendingNotice": "Rekodi ya eneo hili inasubiri kuidhinishwa; mpya huchukua nafasi yake ikishaidhinishwa.",
@@ -1049,21 +1052,24 @@
       "guidance": "Taarifa inategemea nini",
       "event": "Imeripotiwa na / chanzo",
       "warning": "Rejea ya taarifa",
-      "vc": "Hatua zinategemea nini"
+      "vc": "Hatua zinategemea nini",
+      "action": "Mstari unategemea nini"
     },
     "sourcePlaceholder": {
       "drr": "mf. EPRP ya halmashauri iliyopitishwa na baraza kamili tarehe 12 Machi 2026; kumbukumbu za DDRRC zipo",
       "guidance": "mf. Kikao cha DDRRC cha 3 Sept 2026; tathmini za hatari za kata 2025",
       "event": "mf. Ripoti ya hali ya DDRRC ya 10 Jan 2026; watendaji wa kata",
       "warning": "mf. Tahadhari ya hali mbaya ya hewa ya TMA na. 12/2026",
-      "vc": "mf. Mkakati wa Taifa wa Usimamizi wa Maafa 2022-2027, sehemu ya 4; sera au programu ya sekta"
+      "vc": "mf. Mkakati wa Taifa wa Usimamizi wa Maafa 2022-2027, sehemu ya 4; sera au programu ya sekta",
+      "action": "mf. kikao cha DDRRC cha 3 Sept 2026; Kitabu cha Mwongozo wa Hatua dhidi ya Hatari 2026, sura 2.0"
     },
     "needSource": "Sema rekodi inategemea nini (hati, kumbukumbu, barua, taarifa).",
     "incomplete": {
       "drr": "Jibu angalau kipengele kimoja.",
       "guidance": "Andika eneo na hatari iko wapi (kwa angalau lugha moja).",
       "event": "Toa tarehe na ueleze kilichotokea.",
-      "vc": "Andika hatua (kwa angalau lugha moja)."
+      "vc": "Andika hatua (kwa angalau lugha moja).",
+      "action": "Andika angalau hatua moja (kwa angalau lugha moja)."
     },
     "notAllowed": "Nafasi yako haiwezi kurekodi hili kwa eneo hili.",
     "send": "Tuma kuidhinishwa",
@@ -1106,6 +1112,22 @@
       "noCurrent": "Bado hakuna ingizo lililochapishwa kwa kundi hili.",
       "leadSectors": "Sekta zinazoongoza",
       "leadSectorsHint": "Chagua moja au zaidi. Pendekezo la kundi limechaguliwa tayari; kadi ya hatari ya kina huonyesha kilichohifadhiwa hapa."
+    },
+    "action": {
+      "scope": "Inahusu",
+      "national": "Tanzania (kila eneo)",
+      "target": "Hatari au kundi",
+      "hazards": "Hatari za Kitabu cha Mwongozo",
+      "level": "Ngazi",
+      "levelAll": "Ngazi zote",
+      "replaces": "Mstari wa Kitabu cha Mwongozo",
+      "replacesNew": "Ongeza mstari mpya baada ya mistari ya kitabu",
+      "replacesRow": "Unasimama badala ya mstari {{n}} wa Kitabu cha Mwongozo",
+      "bookRows": "Kitabu kina mistari {{count}} hapa; chagua mmoja ili uubadilishe, au ongeza mstari mpya.",
+      "bookRowsNone": "Chagua ngazi ili kuona mistari ya kitabu kwa hatari; mistari ya kundi hushikilia ngazi zote.",
+      "impact": "Watu wanaweza kuona nini",
+      "actions": "Cha kufanya",
+      "actionsHint": "Hatua moja kwa kila mstari."
     }
   },
   "inbox": {
@@ -1282,6 +1304,15 @@
     "import": {
       "title": "Ingiza zana ya ukusanyaji iliyojazwa",
       "lead": "Pakia Zana ya Ukusanyaji au kitabu cha Benchmark 2026 kama taasisi inavyokirudisha (xlsx), au kiolezo cha CSV. Kila kiashiria chenye thamani kinakuwa uwasilishaji mmoja kwenye foleni ya mapitio; hakuna kinachoingia kwenye kielelezo hadi kiidhinishwe."
+    },
+    "communication": {
+      "title": "Mawasiliano ya hatari",
+      "lead": "Kile kichunguzi, wasifu na kadi za hatari zinasema kifanyike: mistari ya Kitabu cha Mwongozo kwa kila hatari katika ngazi yake na kwa kila kundi la udhaifu na uwezo wa kukabiliana, pamoja na mistari ya kamati inayosimama badala yake au kuifuata. Mistari huandikwa na kupitiwa kwenye dawati la kamati.",
+      "hazards": "Hatari kwenye Kitabu cha Mwongozo",
+      "groups": "Makundi kwenye Kitabu cha Mwongozo",
+      "approved": "Mistari ya kamati iliyochapishwa",
+      "pending": "Mistari ya kamati inayosubiri",
+      "open": "Fungua dawati la kamati"
     }
   },
   "management": {

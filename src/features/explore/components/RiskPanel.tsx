@@ -29,9 +29,11 @@ import { indicatorValue, placeKey } from '@/engine/risk/model';
 import { dataNotesFor, isWithheld } from '@/engine/risk/notes';
 import type { CommitteeRecord } from '@/data-layer/types';
 import type { Unit } from '@/engine/risk/types';
+import { useAreaCommunication } from '@/features/guide/actions';
+import { GroupActions, HazardActions } from '@/features/guide/ActionRows';
 import { ALERT_COLOR, planMessage, riskBandFor } from '@/features/guide/alert';
-import { guideHazardName, isCoastal } from '@/features/guide/crosswalk';
-import { RiskBandBadge } from '@/features/guide/AlertBadge';
+import { guideHazardName, isCoastal, reconciledHazards } from '@/features/guide/crosswalk';
+import { LevelBadge, RiskBandBadge } from '@/features/guide/AlertBadge';
 import { useAreaGuide, useAreaRecords, type HazardKey } from '@/features/guide/data';
 import { cn, formatDate, formatScore, NO_VALUE } from '@/lib/utils';
 import { MAX_COMPARE } from '../lib/explore';
@@ -278,18 +280,35 @@ function InsightFolds({ unit }: { unit: Unit }) {
 
 
 /** Risk communication: the two messages of the area's risk level, for residents and for those who plan, build or invest here. */
+/** The hazards and the groups the panel shows with their rows; the profile and the cards show more. */
+const PANEL_HAZARDS = 3;
+const PANEL_GROUPS = 2;
+
+/**
+ * Risk communication: the area's Guide Book level with the two standing messages, then the book's rows
+ * for the top hazards at each hazard's own level and for the vulnerability and coping groups at Level 2
+ * or 3 (docs/RISK_COMMUNICATION_DESIGN.md).
+ */
 function RiskCommunication({ unit }: { unit: Unit }) {
   const { t } = useTranslation(['explore', 'guide', 'common', 'indicators']);
-  const risk = riskBandFor(unit.risk);
+  const guide = useAreaGuide(unit);
+  const items = React.useMemo(() => reconciledHazards(unit, guide.hazards), [unit, guide.hazards]);
+  const comm = useAreaCommunication(unit, items, guide);
+  const risk = comm.risk;
   if (!risk) return null;
   const vars = { cls: t(`common:classes.${risk.cls}`).toLowerCase(), name: unit.name };
   const plan = planMessage(unit, risk);
   const planVars = plan.hazard ? { ...vars, hazard: t(`indicators:${plan.hazard.key}`).toLowerCase(), score: formatScore(plan.hazard.score) } : vars;
+  const hazards = comm.hazards.slice(0, PANEL_HAZARDS);
+  const groups = comm.groups.slice(0, PANEL_GROUPS);
   return (
     <section aria-labelledby="risk-communication-title" className="pb-6">
       <SectionTitle as="h3" id="risk-communication-title" className="mb-2">
         {t('guide:risk.communication')}
       </SectionTitle>
+      <p className="mb-3">
+        <LevelBadge level={risk.band} size="sm" />
+      </p>
       <dl className="space-y-3 border-l-4 pl-3 text-sm leading-relaxed" style={{ borderColor: risk.color }}>
         <div>
           <dt className="text-xs font-semibold tracking-wide text-muted-foreground uppercase">{t('guide:risk.live')}</dt>
@@ -300,6 +319,26 @@ function RiskCommunication({ unit }: { unit: Unit }) {
           <dd className="mt-1">{t(`guide:${plan.key}`, planVars)}</dd>
         </div>
       </dl>
+      {!comm.loading && hazards.length > 0 && (
+        <div className="mt-5">
+          <h4 className="text-xs font-semibold tracking-wide text-muted-foreground uppercase">{t('guide:actions.title')}</h4>
+          <div className="mt-2 space-y-4">
+            {hazards.map((h) => (
+              <HazardActions key={h.item.key} hazard={h} coastal={isCoastal(unit)} first={2} />
+            ))}
+          </div>
+        </div>
+      )}
+      {!comm.loading && groups.length > 0 && (
+        <div className="mt-5">
+          <h4 className="text-xs font-semibold tracking-wide text-muted-foreground uppercase">{t('guide:groups.title')}</h4>
+          <div className="mt-2 space-y-4">
+            {groups.map((g) => (
+              <GroupActions key={g.ref} group={g} first={1} intro={false} />
+            ))}
+          </div>
+        </div>
+      )}
     </section>
   );
 }

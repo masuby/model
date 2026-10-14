@@ -20,13 +20,13 @@ import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import type { Unit } from '@/engine/risk/types';
-import { type AreaRisk, planMessage, riskBandFor } from '@/features/guide/alert';
-import { RiskBandBadge } from '@/features/guide/AlertBadge';
+import { type AreaCommunication, useAreaCommunication } from '@/features/guide/actions';
+import { GroupActions, HazardActions } from '@/features/guide/ActionRows';
+import { type AreaRisk, levelForScore, planMessage, riskBandFor } from '@/features/guide/alert';
+import { LevelBadge, RiskBandBadge } from '@/features/guide/AlertBadge';
 import { guideHazardName, hazardItemName, isCoastal, reconciledHazards, type HazardItem } from '@/features/guide/crosswalk';
-import { topDrivers } from '@/engine/risk/model';
 import { dataNotesFor } from '@/engine/risk/notes';
 import type { DimensionKey } from '@/engine/risk/hierarchy';
-import { authorityLabel } from '@/engine/risk/sources';
 import { DataNoteMark } from '@/components/risk/DataNoteMark';
 import { pick, useAreaGuide, useAreaRecords, vcActions } from '@/features/guide/data';
 import type { CommitteeRecord, EventPayload } from '@/data-layer/types';
@@ -57,6 +57,7 @@ export function WhatToDo({ view }: { view: AreaView }) {
   // One hazard picture: the guide's documented hazards and the model's scored groups, reconciled (RC-03).
   const items = React.useMemo(() => reconciledHazards(unit, guide.hazards), [unit, guide.hazards]);
   const risk = riskBandFor(unit.risk);
+  const comm = useAreaCommunication(unit, items, guide);
 
   return (
     <div className={many ? 'space-y-8 sm:space-y-10' : 'space-y-10 sm:space-y-12'}>
@@ -79,8 +80,9 @@ export function WhatToDo({ view }: { view: AreaView }) {
         </div>
       </div>
 
+      <Actions unit={unit} comm={comm} />
       {!national && <AreaNature unit={unit} guide={guide} />}
-      <ReducingRisk unit={unit} />
+      <Groups unit={unit} comm={comm} />
     </div>
   );
 }
@@ -103,6 +105,7 @@ function RiskStatus({ unit, risk }: { unit: Unit; risk: AreaRisk }) {
       </h3>
       <p className="mt-2.5 flex flex-wrap items-center gap-x-3 gap-y-1.5">
         <RiskBandBadge risk={risk.score} />
+        <LevelBadge level={risk.band} />
         <span className="num text-sm text-muted-foreground">{t('risk.basis', { cls, score: formatScore(risk.score) })}</span>
       </p>
       <dl className="mt-5 grid gap-x-10 gap-y-4 sm:grid-cols-2 lg:grid-cols-1">
@@ -311,45 +314,66 @@ function HazardList({ unit, items }: { unit: Unit; items: readonly HazardItem[] 
 function Band({ item }: { item: HazardItem }) {
   const { t } = useTranslation(['guide', 'common']);
   if (!item.band) return <span className="text-muted-foreground">{t('hazardList.noScore')}</span>;
+  const level = levelForScore(item.score);
   return (
     <>
       <span className="font-medium">{t(`common:classes.${item.band}`)}</span>
       <span className="num text-muted-foreground"> · {formatScore(item.score)}</span>
+      {level && <LevelBadge level={level} size="sm" className="ml-2 align-middle" />}
     </>
   );
 }
 
-/** The action library for the area's top vulnerability and coping drivers (PMO-DMD writes, the NDRRC reviews). Folded. */
-function ReducingRisk({ unit }: { unit: Unit }) {
+/** What to do: the Guide Book's rows for each hazard at its own level here. Open for a council, folded for larger areas. */
+function Actions({ unit, comm }: { unit: Unit; comm: AreaCommunication }) {
+  const { t } = useTranslation(['guide', 'common', 'indicators']);
+  const list = useShowMore(comm.hazards, FIRST_HAZARDS);
+  if (comm.loading || !comm.hazards.length) return null;
+  const coastal = isCoastal(unit);
+  const top = comm.hazards
+    .slice(0, 3)
+    .map((h) => hazardItemName(t, h.item, coastal))
+    .join(', ');
+  return (
+    <Fold id="actions-title" title={t('actions.title')} lead={t('actions.lead', { name: unit.name })} summary={t('actions.summary', { count: comm.hazards.length, top })} open={unit.level === 'council'}>
+      <div className="divide-y divide-border border-y border-border">
+        {list.shown.map((h) => (
+          <div key={h.item.key} className="py-4">
+            <HazardActions hazard={h} coastal={coastal} first={3} />
+          </div>
+        ))}
+      </div>
+      {list.more && <MoreButton all={list.all} label={t('more.hazards', { count: comm.hazards.length })} less={t('more.less')} onClick={list.toggle} />}
+    </Fold>
+  );
+}
+
+/** What makes the difference here: the vulnerability and coping groups at Level 2 or 3, the guide's statement and rows for each, and the library's entry (PMO-DMD writes, the NDRRC reviews) when there is one. Folded. */
+function Groups({ unit, comm }: { unit: Unit; comm: AreaCommunication }) {
   const { t, i18n } = useTranslation(['guide', 'common', 'indicators']);
   const lang = i18n.language;
   const { records } = useAreaRecords(unit);
   const library = React.useMemo(() => vcActions(records), [records]);
-  const drivers = React.useMemo(() => [...topDrivers(unit, 3, 'vulnerability'), ...topDrivers(unit, 3, 'coping')], [unit]);
-  if (!drivers.length) return null;
-  const published = drivers.filter((d) => library.has(`${d.dim}:${d.key}`)).length;
+  if (comm.loading || !comm.groups.length) return null;
+  const top = comm.groups
+    .slice(0, 3)
+    .map((g) => t(`indicators:${g.key}`))
+    .join(', ');
   return (
-    <Fold id="reducing-title" title={t('vc.title')} lead={t('vc.lead', { name: unit.name })} summary={t('vc.summary', { count: drivers.length, n: published })}>
+    <Fold id="groups-title" title={t('groups.title')} lead={t('groups.lead', { name: unit.name })} summary={t('groups.summary', { count: comm.groups.length, top })}>
       <ul className="divide-y divide-border border-y border-border">
-        {drivers.map((d) => {
-          const action = library.get(`${d.dim}:${d.key}`);
+        {comm.groups.map((g) => {
+          const action = library.get(g.ref);
           return (
-            <li key={`${d.dim}:${d.key}`} className="grid gap-x-10 gap-y-2 py-4 lg:grid-cols-[minmax(0,1fr)_minmax(0,2fr)]">
-              <div>
-                <p className="font-medium">{t(`indicators:${d.key}`)}</p>
-                <p className="text-xs text-muted-foreground">
-                  {t(`common:dimensions.${d.dim}Short`)} · <span className="num">{formatScore(d.value)}</span>
-                  {action && (action.leadSectors.length || action.leadSector) && ` · ${t('vc.lead_sector', { sector: action.leadSectors.length ? action.leadSectors.map((k) => t(`common:sectors.${k}`, { defaultValue: k })).join(', ') : authorityLabel(action.leadSector!) })}`}
-                </p>
-              </div>
-              {action ? (
-                <div className="text-sm leading-relaxed">
+            <li key={g.ref} className="py-4">
+              <GroupActions group={g} first={2} />
+              {action && (
+                <div className="mt-2 border-l-2 border-border pl-3 text-sm leading-relaxed">
+                  {action.leadSectors.length > 0 && <p className="text-xs text-muted-foreground">{t('vc.lead_sector', { sector: action.leadSectors.map((k) => t(`common:sectors.${k}`, { defaultValue: k })).join(', ') })}</p>}
                   {pick(action.why, lang) && <p className="text-muted-foreground">{pick(action.why, lang)}</p>}
                   <p className={cn(pick(action.why, lang) && 'mt-1.5')}>{pick(action.actions, lang)}</p>
                   <p className="mt-1.5 text-xs text-muted-foreground">{t('vc.by', { by: action.record.reviewerName ?? action.record.authorName, date: formatDate(action.record.reviewedAt ?? action.record.createdAt, lang) })}</p>
                 </div>
-              ) : (
-                <p className="text-sm text-muted-foreground">{t('vc.none')}</p>
               )}
             </li>
           );

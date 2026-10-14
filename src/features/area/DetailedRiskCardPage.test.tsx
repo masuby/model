@@ -59,7 +59,8 @@ describe('DetailedRiskCardPage', { timeout: 60_000 }, () => {
     expect(await within(storms).findByText('Storms: Jobo 2021, Hidaya 2024', {}, { timeout: 20_000 })).toBeInTheDocument();
     const displaced = screen.getAllByText(/^Displaced people/)[0].closest('li')!;
     expect(within(displaced).getByText('9.5')).toBeInTheDocument();
-    expect(within(displaced).getByText(/PMO-DMD and the Disaster Management Committees/)).toBeInTheDocument();
+    // The lead sector on its line, and again in the Guide Book's statement on the group (since 14 October 2026).
+    expect(within(displaced).getAllByText(/PMO-DMD and the Disaster Management Committees/).length).toBeGreaterThan(0);
     // Every group in the table, with its category and source.
     const all = screen.getByText('All indicator groups').nextElementSibling as HTMLTableElement;
     expect(within(all).getAllByRole('row')).toHaveLength(ALL_INDICATORS.length + 1);
@@ -69,8 +70,8 @@ describe('DetailedRiskCardPage', { timeout: 60_000 }, () => {
     expect(screen.getByText('Emergency preparedness and response plan')).toBeInTheDocument();
     expect(screen.getByText('Stakeholder collaboration')).toBeInTheDocument();
     expect(document.title).toContain('Kibiti District');
-    // No warning level wording anywhere.
-    expect(screen.queryByText(/Advisory|Major warning|Take action immediately/)).not.toBeInTheDocument();
+    // The Guide Book level of the class in the header, and of each high-scoring group.
+    expect(screen.getAllByText(/^Level [123] · (Advisory|Warning|Major warning)$/).length).toBeGreaterThan(0);
   });
 
   it("follows the reader's language and names the country for the national card", async () => {

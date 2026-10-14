@@ -234,10 +234,20 @@ export interface GuidancePayload {
   advice: { en: string; sw: string };
   /** Index of the guide-book row this statement replaces, or null for a new statement. */
   replaces?: number | null;
-  /** 'vc' marks the national action library: risk-reducing actions per indicator group (PMO-DMD drafts, the NDRRC reviews). */
-  topic?: 'hazard' | 'vc';
+  /**
+   * 'vc' marks the national action library: risk-reducing actions per indicator group (PMO-DMD drafts, the
+   * NDRRC reviews); 'action' one row of the risk-communication library: an impact and its actions for a hazard
+   * (the record's `hazard`) or a group (`group`) at a level, or at every level when `level` is null, standing
+   * in place of the guide book's row `replaces` or added after the book's rows (docs/RISK_COMMUNICATION_DESIGN.md).
+   */
+  topic?: 'hazard' | 'vc' | 'action';
   /** Action library: the INFORM group ('hazard:flood', 'coping:wash'). */
   group?: string;
+  /** Risk-communication row: the level it holds at (1 yellow, 2 orange, 3 red), or null for every level. */
+  level?: 1 | 2 | 3 | null;
+  /** Risk-communication row: what people may see, and what to do, in both languages. */
+  impact?: { en: string; sw: string };
+  actions?: { en: string[]; sw: string[] };
   /** Action library: the lead sectors PMO-DMD chose (keys of src/features/guide/sectors.ts); `leadSector` is the older single authority. */
   leadSectors?: string[];
   leadSector?: string | null;
@@ -390,7 +400,8 @@ export function canReviewCommittee(
   if (record.authorId && record.authorId === profile.id) return false;
   if (record.level === 'council') return profile.role === 'rdrrc' && !!profile.scopeUnitId && profile.scopeUnitId === record.regionId;
   if (record.level === 'region') return profile.role === 'ndrrc';
-  return record.kind === 'guidance' && (record.payload as GuidancePayload | undefined)?.topic === 'vc' && profile.role === 'ndrrc';
+  const topic = record.kind === 'guidance' ? (record.payload as GuidancePayload | undefined)?.topic : undefined;
+  return (topic === 'vc' || topic === 'action') && profile.role === 'ndrrc';
 }
 
 /** The latest approved record of a kind for an area, if any. */

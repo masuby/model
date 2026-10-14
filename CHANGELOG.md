@@ -2,6 +2,27 @@
 
 ## Unreleased
 
+### Risk communication from the Risk Action Guide Book (14 October 2026)
+
+- The Guide Book's three levels follow the INFORM risk class, by PMO-DMD's decision: Very low and Low are
+  Level 1 (yellow, Advisory), Medium is Level 2 (orange, Warning), High and Very high are Level 3 (red,
+  Major warning). Every area shows its level beside its class on the explorer panel, the profile and both
+  risk cards; the map's "high" colour moves from deep orange to red so that map and level are one family.
+  One indicator group takes its level from its own score (under 4, 4 to 6, 6 and above), so the actions
+  shown for a hazard change when its value reaches the next level. Design: docs/RISK_COMMUNICATION_DESIGN.md.
+- What to do: the book's rows (what people may see, what to do) for each of the area's hazards at its
+  level, and for the vulnerability and coping groups at Level 2 or 3, with what each indicator measures; a
+  council's own rows (Tabora) come first. Shown on the panel (top three hazards, two groups), the profile
+  (folded), the one-page card (two rows per hazard) and the detailed card (every high-scoring group).
+- The updated Guide Book (with tracked changes accepted) is the source of the site's guide data again: the
+  nine hazards, the incidents guide, every council's statements, and the new chapters 11.0 Vulnerability and
+  12.0 Lack of Coping Capacity (one statement and one table per INFORM group).
+- The committee desk writes rows of the risk-communication library: for the country, a region or a council;
+  for a hazard or a group; at one level or every level; standing in place of a Guide Book row or added after
+  them; reviewed like any committee record. The Data management tab shows the library's state. No database
+  change is needed.
+- The Methodology page's Classification section documents the levels.
+
 ### A lifted hold is not shown beside the live value (14 October 2026)
 
 - A data note that withholds a workbook value no longer appears beside a group that carries an approved

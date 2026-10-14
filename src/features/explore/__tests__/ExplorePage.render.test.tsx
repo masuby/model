@@ -235,7 +235,7 @@ describe('ExplorePage - desktop', () => {
     expect(within(panel).getByText('If you plan, build, invest or settle here')).toBeInTheDocument();
     expect(within(panel).queryByText(/^Risk here is/)).not.toBeInTheDocument();
     expect(within(panel).getByRole('heading', { name: 'Highest-scoring indicator groups' })).toBeInTheDocument();
-    expect(within(panel).queryByText(/Alert category|Major warning|^Warning$|Advisory|Preparedness priority|What helps|Take action|Be prepared/)).not.toBeInTheDocument();
+    expect(within(panel).getAllByText(/^Level [123] · (Advisory|Warning|Major warning)$/).length).toBeGreaterThan(0);
     expect(within(panel).getByRole('link', { name: /View full profile/ })).toHaveAttribute('href', `/area/${council.id}`);
     expect(within(panel).getByRole('link', { name: /Risk card/ })).toHaveAttribute('href', `/area/${council.id}/card`);
   });

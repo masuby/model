@@ -15,18 +15,26 @@
     "1": {
       "label": "Ngazi ya 1 (njano)",
       "colour": "Njano",
-      "short": "Ngazi ya 1"
+      "short": "Ngazi ya 1",
+      "name": "Tahadhari",
+      "call": "Jiandae"
     },
     "2": {
       "label": "Ngazi ya 2 (chungwa)",
       "colour": "Machungwa",
-      "short": "Ngazi ya 2"
+      "short": "Ngazi ya 2",
+      "name": "Onyo",
+      "call": "Chukua hatua"
     },
     "3": {
       "label": "Ngazi ya 3 (nyekundu)",
       "colour": "Nyekundu",
-      "short": "Ngazi ya 3"
-    }
+      "short": "Ngazi ya 3",
+      "name": "Onyo kuu",
+      "call": "Chukua hatua mara moja"
+    },
+    "badge": "Ngazi ya {{n}} · {{name}}",
+    "label": "Ngazi"
   },
   "risk": {
     "label": "Kiwango cha hatari",
@@ -115,5 +123,23 @@
     "councils": "Onyesha halmashauri zote {{count}}",
     "hazards": "Onyesha vitisho vyote {{count}}",
     "less": "Onyesha vichache"
+  },
+  "actions": {
+    "title": "Cha kufanya",
+    "lead": "Mistari ya Kitabu cha Mwongozo kwa kila hatari katika ngazi yake hapa {{name}}: watu wanaweza kuona nini, na wafanye nini.",
+    "at": "{{hazard}}",
+    "areaLevel": "katika ngazi ya eneo",
+    "more": "Mistari yote {{count}}",
+    "less": "Mistari michache",
+    "none": "Hakuna mistari ya hatari hii katika ngazi hii bado.",
+    "council": "Mistari ya halmashauri hii yenyewe",
+    "summary": "Hatari {{count}} zenye hatua; ya juu zaidi: {{top}}"
+  },
+  "groups": {
+    "title": "Kinacholeta tofauti hapa",
+    "lead": "Makundi ya udhaifu na uwezo wa kukabiliana yaliyo Ngazi ya 2 au 3 hapa {{name}}, kila moja linapima nini, na nini husaidia.",
+    "measures": "Kinachopimwa",
+    "none": "Hakuna kundi la udhaifu au uwezo wa kukabiliana lililo Ngazi ya 2 au 3 hapa.",
+    "summary": "Makundi {{count}} yaliyo Ngazi ya 2 au 3; la juu zaidi: {{top}}"
   }
 }

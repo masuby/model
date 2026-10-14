@@ -5,9 +5,11 @@
  */
 import commonEn from '@/i18n/locales/en/common.json';
 import dataEn from '@/i18n/locales/en/data.json';
+import guideEn from '@/i18n/locales/en/guide.json';
 import indicatorsEn from '@/i18n/locales/en/indicators.json';
 import commonSw from '@/i18n/locales/sw/common.json';
 import dataSw from '@/i18n/locales/sw/data.json';
+import guideSw from '@/i18n/locales/sw/guide.json';
 import indicatorsSw from '@/i18n/locales/sw/indicators.json';
 import { AUTHORITY_KEYS } from '@/engine/risk/sources';
 import { ADVANCED_SPECS, usedSpecs } from '@/engine/risk/standardise';
@@ -16,8 +18,8 @@ import { EDITABLE_FIELDS } from '../lib/targets';
 
 type Tree = { [k: string]: string | Tree };
 const catalogues: Record<'en' | 'sw', Record<string, Tree>> = {
-  en: { data: dataEn as Tree, common: commonEn as Tree, indicators: indicatorsEn as Tree },
-  sw: { data: dataSw as Tree, common: commonSw as Tree, indicators: indicatorsSw as Tree },
+  en: { data: dataEn as Tree, common: commonEn as Tree, indicators: indicatorsEn as Tree, guide: guideEn as Tree },
+  sw: { data: dataSw as Tree, common: commonSw as Tree, indicators: indicatorsSw as Tree, guide: guideSw as Tree },
 };
 
 function has(lang: 'en' | 'sw', fullKey: string): boolean {
@@ -77,6 +79,8 @@ const DYNAMIC = [
   ...['hazard', 'vulnerability', 'coping'].flatMap((d) => [`common:dimensions.${d}`, `common:dimensions.${d}Short`]),
   ...['natural', 'human', 'socioEconomic', 'vulnerableGroups', 'infrastructure', 'institutional'].map((c) => `common:categories.${c}`),
   ...['veryLow', 'low', 'medium', 'high', 'veryHigh', 'noData'].map((c) => `common:classes.${c}`),
+  // The committee desk names the Guide Book levels (risk-communication rows).
+  ...[1, 2, 3].map((l) => `guide:levels.${l}.name`),
 ];
 
 describe('data portal translations', () => {

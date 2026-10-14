@@ -18,8 +18,10 @@ import { Button } from '@/components/ui/button';
 import { Segmented } from '@/components/ui/primitives';
 import { useModel } from '@/data-layer/DataProvider';
 import type { WarningPayload } from '@/data-layer/types';
+import { useAreaCommunication } from '@/features/guide/actions';
+import { GroupActions, HazardActions } from '@/features/guide/ActionRows';
 import { ALERT_COLOR, planMessage, riskBandFor } from '@/features/guide/alert';
-import { RiskBandBadge } from '@/features/guide/AlertBadge';
+import { LevelBadge, RiskBandBadge } from '@/features/guide/AlertBadge';
 import { guideHazardName, hazardItemName, isCoastal, reconciledHazards, type HazardItem } from '@/features/guide/crosswalk';
 import { useAreaGuide, useAreaRecords } from '@/features/guide/data';
 import type { DimensionKey } from '@/engine/risk/hierarchy';
@@ -74,6 +76,7 @@ export default function RiskCardPage() {
   const guide = useAreaGuide(unit);
   const area = useAreaRecords(unit);
   const items = React.useMemo(() => (unit ? reconciledHazards(unit, guide.hazards) : []), [unit, guide.hazards]);
+  const comm = useAreaCommunication(unit ?? model.national, items, guide);
   const services = React.useMemo(() => (unit ? servicesFor(model, unit) : null), [model, unit]);
   const riskMetric = React.useMemo(() => parseMetric('risk'), []);
 
@@ -151,8 +154,9 @@ export default function RiskCardPage() {
         </div>
         <div className="text-right">
           <p className="text-[11px] font-semibold tracking-wide text-muted-foreground uppercase">{t('guide:risk.label')}</p>
-          <p className="mt-1 flex items-center justify-end gap-2">
+          <p className="mt-1 flex flex-wrap items-center justify-end gap-2">
             <RiskBandBadge risk={unit.risk} />
+            {risk && <LevelBadge level={risk.band} />}
             <span className="num text-base text-muted-foreground">({formatScore(unit.risk)} / 10)</span>
           </p>
         </div>
@@ -243,6 +247,28 @@ export default function RiskCardPage() {
         </div>
       </div>
 
+
+      {/* What to do: the top hazards at their level, and the groups at Level 3 */}
+      {!comm.loading && (comm.hazards.length > 0 || comm.groups.some((g) => g.level === 3)) && (
+        <section className="mt-4">
+          <h2 className="text-[12px] font-semibold tracking-wide text-muted-foreground uppercase">{t('guide:actions.title')}</h2>
+          <div className="mt-1.5 grid gap-x-8 gap-y-3 md:grid-cols-2 print:grid-cols-2">
+            <div className="space-y-3">
+              {comm.hazards.slice(0, 3).map((h) => (
+                <HazardActions key={h.item.key} hazard={h} coastal={isCoastal(unit)} first={1} dense />
+              ))}
+            </div>
+            <div className="space-y-3">
+              {comm.groups
+                .filter((g) => g.level === 3)
+                .slice(0, 2)
+                .map((g) => (
+                  <GroupActions key={g.ref} group={g} first={1} dense intro={false} />
+                ))}
+            </div>
+          </div>
+        </section>
+      )}
 
       {/* DRR arrangements */}
       {drr && drr.recorded > 0 && (

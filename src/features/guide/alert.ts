@@ -1,26 +1,35 @@
 /**
- * Risk communication colours. The site communicates standing risk for people to live and plan with,
- * not warnings: every area is named by its INFORM risk class, and the class carries one of three
- * colours so it reads at a glance on the profile, the explorer panel and the risk card:
+ * Risk communication levels. Every area is named by its INFORM risk class, and the class carries one of
+ * the three levels of the Risk Action Guide Book, with the book's colour, name and call (PMO-DMD's
+ * decision of 14 October 2026, docs/RISK_COMMUNICATION_DESIGN.md):
  *
- *   INFORM risk class    colour          band
- *   Very low, Low        yellow          1
- *   Medium, High         orange          2
- *   Very high            red             3
+ *   INFORM risk class    level   colour    name            call
+ *   Very low, Low        1       yellow    Advisory        Be prepared
+ *   Medium               2       orange    Warning         Take action
+ *   High, Very high      3       red       Major warning   Take action immediately
  *
- * The band is a colour only. Warning levels (Advisory, Warning, Major warning: the three levels of the
- * Risk Action Guide Book) are never derived from the risk class and never shown with it; they exist only
- * on warnings the committees publish through the Data portal, which the banner shows while in force.
+ * The level shown with the class is the area's standing level; a warning the committees publish through
+ * the Data portal has its own level and validity and is shown beside it while in force. One indicator
+ * group takes its level from its own score, by the hazard list's display rule (levelForScore), so the
+ * actions shown for a hazard change when its value reaches the next level.
  */
 import { classify, type ClassKey } from '@/engine/risk/classes';
 import { isNum } from '@/engine/risk/math';
 import type { Unit } from '@/engine/risk/types';
+import { bandFor, type Band } from './crosswalk';
 import type { AlertLevel } from './data';
 
-/** 1 yellow, 2 orange, 3 red: the same three colours the published warnings use. */
+/** The Guide Book level of a class: 1 yellow, 2 orange, 3 red. */
 export type RiskBand = AlertLevel;
 
-export const BAND_BY_CLASS: Record<ClassKey, RiskBand> = { veryLow: 1, low: 1, medium: 2, high: 2, veryHigh: 3 };
+export const BAND_BY_CLASS: Record<ClassKey, RiskBand> = { veryLow: 1, low: 1, medium: 2, high: 3, veryHigh: 3 };
+
+/** The level of one indicator group by its score, through the hazard list's display rule (D7). */
+const LEVEL_BY_BAND: Record<Band, AlertLevel> = { veryLow: 1, low: 1, medium: 2, high: 3, veryHigh: 3 };
+export function levelForScore(score: number | null | undefined): AlertLevel | null {
+  const b = bandFor(score);
+  return b ? LEVEL_BY_BAND[b] : null;
+}
 
 /** The standard yellow, orange and red. */
 export const ALERT_COLOR: Record<AlertLevel, string> = { 1: '#facc15', 2: '#f97316', 3: '#dc2626' };

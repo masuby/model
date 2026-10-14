@@ -254,7 +254,22 @@
     "own": "Every map, badge, gauge and table in this application classifies a dimension with that dimension’s thresholds and INFORM Risk with the risk thresholds. Reusing the risk thresholds for a dimension (as the previous version of the tool did) misclassifies it, because the dimensions do not share a distribution.",
     "exampleTitle": "Same number, different class",
     "example": "A score of {{value}} is {{hazardClass}} on the Hazard & Exposure scale but only {{riskClass}} on the INFORM Risk scale.",
-    "if": "if"
+    "if": "if",
+    "levels": {
+      "title": "The Guide Book’s three levels",
+      "lead": "The Risk Action Guide Book communicates in three levels. Every area carries the level of its INFORM risk class, and every indicator group the level of its own score, by the hazard list’s display rule (under 2 very low, 2 to 4 low, 4 to 6 medium, 6 to 8 high, 8 and above very high), so the actions shown for a hazard change when its value reaches the next level. A warning the committees publish has its own level and validity and is shown beside the standing level while it is in force.",
+      "col": {
+        "level": "Level",
+        "name": "Name and call",
+        "classes": "INFORM risk classes",
+        "groups": "An indicator group’s score"
+      },
+      "groups": {
+        "1": "under 4",
+        "2": "4 to under 6",
+        "3": "6 and above"
+      }
+    }
   },
   "levels": {
     "title": "Three administrative levels, one consistent model",

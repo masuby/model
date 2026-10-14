@@ -56,6 +56,16 @@ export interface IncidentGroup {
   name: Text;
   rows: Array<{ incident: Text; actions: TextList }>;
 }
+/** One vulnerability or coping group as the guide states it (chapters 11.0 and 12.0): what it measures and what a high score means, and its rows, which hold at every level. */
+export interface IndicatorGuide {
+  /** The INFORM group ('vulnerability:livelihoods'). */
+  ref: string;
+  title: Text;
+  intro: Text;
+  rows: GuideRow[];
+}
+/** The two chapters' own statements. */
+export type DimensionGuides = Record<'vulnerability' | 'coping', { title: Text; intro: Text }>;
 
 export const HAZARD_KEYS = ['heavyRainfall', 'floods', 'landslide', 'strongWinds', 'largeWaves', 'wildfire', 'drought', 'earthquake', 'publicHealth'] as const;
 export type HazardKey = (typeof HAZARD_KEYS)[number];
@@ -73,6 +83,18 @@ export const isStatusRow = (r: GuideRow) => /^warning status$/i.test(r.impact.en
 
 const regionFiles = import.meta.glob<RegionGuide>('../../data/action-guide/regions/*.json', { import: 'default' });
 const hazardFiles = import.meta.glob<{ levels: GuideLevels }>('../../data/action-guide/hazards/*.json', { import: 'default' });
+const indicatorFiles = import.meta.glob<IndicatorGuide>('../../data/action-guide/indicators/*.json', { import: 'default' });
+/** The vulnerability and coping groups the guide states (by group key). */
+export const INDICATOR_GUIDE_KEYS: readonly string[] = Object.keys(indicatorFiles).map((f) => f.replace(/^.*\//, '').replace(/\.json$/, ''));
+
+/** The guide's statement on a vulnerability or coping group, by the group's key ('livelihoods'); null for a group the guide does not cover. */
+export function loadIndicatorGuide(groupKey: string): Promise<IndicatorGuide | null> {
+  const load = indicatorFiles[`../../data/action-guide/indicators/${groupKey}.json`];
+  return load ? load() : Promise.resolve(null);
+}
+export function loadDimensionGuides(): Promise<DimensionGuides> {
+  return import('../../data/action-guide/dimensions.json').then((m) => m.default as DimensionGuides);
+}
 
 export function loadRegionGuide(regionKey: string): Promise<RegionGuide | null> {
   const load = regionFiles[`../../data/action-guide/regions/${regionKey}.json`];
@@ -238,6 +260,47 @@ export function useAreaRecords(unit: Unit | null) {
 
 export function useHazardGuide(key: HazardKey | null) {
   return useQuery({ queryKey: ['guide', 'hazard', key], queryFn: () => loadHazardGuide(key!), enabled: !!key, staleTime: Infinity });
+}
+
+/** The level tables of several hazards at once, by hazard key. */
+export function useHazardGuides(keys: readonly HazardKey[]): { loading: boolean; byKey: ReadonlyMap<HazardKey, GuideLevels> } {
+  const stable = keys.join(',');
+  return useQueries({
+    queries: keys.map((k) => ({ queryKey: ['guide', 'hazard', k], queryFn: () => loadHazardGuide(k), staleTime: Infinity })),
+    combine: React.useCallback(
+      (results: Array<{ isLoading: boolean; data?: GuideLevels }>) => {
+        const byKey = new Map<HazardKey, GuideLevels>();
+        stable.split(',').forEach((k, i) => {
+          if (k && results[i]?.data) byKey.set(k as HazardKey, results[i].data!);
+        });
+        return { loading: results.some((r) => r.isLoading), byKey };
+      },
+      [stable],
+    ),
+  });
+}
+
+/** The guide's statements on several vulnerability or coping groups at once, by group key. */
+export function useIndicatorGuides(groupKeys: readonly string[]): { loading: boolean; byKey: ReadonlyMap<string, IndicatorGuide> } {
+  const stable = groupKeys.join(',');
+  return useQueries({
+    queries: groupKeys.map((k) => ({ queryKey: ['guide', 'indicator', k], queryFn: () => loadIndicatorGuide(k), staleTime: Infinity })),
+    combine: React.useCallback(
+      (results: Array<{ isLoading: boolean; data?: IndicatorGuide | null }>) => {
+        const byKey = new Map<string, IndicatorGuide>();
+        stable.split(',').forEach((k, i) => {
+          const d = results[i]?.data;
+          if (k && d) byKey.set(k, d);
+        });
+        return { loading: results.some((r) => r.isLoading), byKey };
+      },
+      [stable],
+    ),
+  });
+}
+
+export function useDimensionGuides() {
+  return useQuery({ queryKey: ['guide', 'dimensions'], queryFn: loadDimensionGuides, staleTime: Infinity });
 }
 
 export function useIncidentGuide(enabled = true) {

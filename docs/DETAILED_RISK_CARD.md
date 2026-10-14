@@ -76,3 +76,11 @@ level is derived from the risk level.
   sectors, why it matters and the actions; once approved, the detailed card shows the entry and its
   sectors under that group. Until then the proposal in `src/features/guide/sectors.ts` stands.
 - Decide whether the threshold stays at 5.0 or follows the hazard display bands (6 high, 8 very high).
+
+## Risk communication (14 October 2026)
+
+The header carries the area's Guide Book level beside its class (`LevelBadge`). Each high-scoring group
+block shows "What to do" with the group's level: a hazard group's rows are the book's rows for its guide
+hazard at that level (a council's own rows for Tabora); a vulnerability or coping group's rows are the
+book's chapter 11.0 or 12.0 rows, preceded by what the indicator measures; committee rows of the library
+stand in place of a book row or follow the rows. See `docs/RISK_COMMUNICATION_DESIGN.md`.

@@ -18,7 +18,9 @@ import { toast } from 'sonner';
 import { Button } from '@/components/ui/button';
 import { Dialog, DialogContent, Input, Label, Textarea } from '@/components/ui/primitives';
 import { dataNotesSummary } from '@/engine/risk/notes';
-import { useAssign, useAssignments, useCreateRequests, useInstitutions, useModel, useRawSubmissions, useRawValues, useRequests, useValidations } from '@/data-layer/DataProvider';
+import type { GuidancePayload } from '@/data-layer/types';
+import { HAZARD_KEYS, INDICATOR_GUIDE_KEYS } from '@/features/guide/data';
+import { useAssign, useAssignments, useCommitteeRecords, useCreateRequests, useInstitutions, useModel, useRawSubmissions, useRawValues, useRequests, useValidations } from '@/data-layer/DataProvider';
 import { exportFileName, exportPreamble, exportStamp } from '@/lib/exports';
 import { cn, downloadText, formatDate, formatNumber, toCsv } from '@/lib/utils';
 import { ErrorState, ListSkeleton } from '../components/common';
@@ -147,6 +149,9 @@ export function Control() {
           <Download /> {t('control.actions.export')}
         </Button>
       </div>
+
+      {/* Risk communication: the Guide Book's rows and the committees' rows on top of them */}
+      <CommunicationSummary />
 
       {/* The institutions */}
       <section aria-labelledby="control-institutions" className="mt-10">
@@ -377,5 +382,40 @@ function RequestAll({ row, onClose }: { row: InstitutionRow | null; onClose: () 
         </div>
       </DialogContent>
     </Dialog>
+  );
+}
+
+/** The risk-communication library: what the Guide Book covers, and the committees' rows (approved and waiting), with the way to the desk. */
+function CommunicationSummary() {
+  const { t, i18n } = useTranslation('data');
+  const records = useCommitteeRecords();
+  const rows = (records.data ?? []).filter((r) => r.kind === 'guidance' && (r.payload as GuidancePayload).topic === 'action');
+  const n = (x: number) => formatNumber(x, i18n.language);
+  const figures = [
+    ['hazards', n(HAZARD_KEYS.length)],
+    ['groups', n(INDICATOR_GUIDE_KEYS.length)],
+    ['approved', n(rows.filter((r) => r.status === 'approved').length)],
+    ['pending', n(rows.filter((r) => r.status === 'pending').length)],
+  ] as const;
+  return (
+    <section aria-labelledby="control-communication" className="mt-10">
+      <h4 id="control-communication" className="font-display text-lg font-semibold">
+        {t('control.communication.title')}
+      </h4>
+      <p className="mt-1 max-w-3xl text-sm leading-relaxed text-muted-foreground">{t('control.communication.lead')}</p>
+      <dl className="mt-4 grid grid-cols-2 gap-x-6 gap-y-4 sm:grid-cols-4">
+        {figures.map(([k, v]) => (
+          <div key={k} className="min-w-0">
+            <dt className="text-xs text-muted-foreground">{t(`control.communication.${k}`)}</dt>
+            <dd className="num mt-1 text-2xl font-semibold tracking-tight">{v}</dd>
+          </div>
+        ))}
+      </dl>
+      <p className="mt-3 text-sm">
+        <Link to="/data?tab=committee" className="font-medium text-primary hover:underline">
+          {t('control.communication.open')}
+        </Link>
+      </p>
+    </section>
   );
 }

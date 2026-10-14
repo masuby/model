@@ -30,7 +30,7 @@ describe('planning message', () => {
   it('keeps the band message elsewhere, including higher bands with very high hazards', () => {
     const kibiti = model.byId.get('C051')!;
     const risk = riskBandFor(kibiti.risk)!;
-    expect(risk.band).toBe(2);
-    expect(planMessage(kibiti, risk)).toEqual({ key: 'risk.band.2.plan', hazard: null });
+    expect(risk.band).toBe(3); // high risk: Level 3 since 14 October 2026
+    expect(planMessage(kibiti, risk)).toEqual({ key: 'risk.band.3.plan', hazard: null });
   });
 });

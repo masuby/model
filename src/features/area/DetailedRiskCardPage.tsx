@@ -25,9 +25,12 @@ import { dataNotesFor, worstStatus } from '@/engine/risk/notes';
 import type { RiskModel, Unit } from '@/engine/risk/types';
 import { EvidenceItem } from '@/features/explore/components/Evidence';
 import { coarseOf, dimensionGroups, evidenceFor, groupRanks, memberSpread, type TopGroup } from '@/features/explore/lib/riskPanel';
+import { type ActionRow, useAreaCommunication } from '@/features/guide/actions';
+import { ActionList } from '@/features/guide/ActionRows';
 import { ALERT_COLOR, planMessage, riskBandFor } from '@/features/guide/alert';
-import { guideHazardName, isCoastal } from '@/features/guide/crosswalk';
-import { RiskBandBadge } from '@/features/guide/AlertBadge';
+import { guideHazardName, isCoastal, reconciledHazards } from '@/features/guide/crosswalk';
+import { LevelBadge, RiskBandBadge } from '@/features/guide/AlertBadge';
+import type { AlertLevel, IndicatorGuide } from '@/features/guide/data';
 import { pick, useAreaGuide, useAreaRecords, vcActions, type VcAction } from '@/features/guide/data';
 import { formatDate, formatScore, NO_VALUE } from '@/lib/utils';
 import { EMERGENCY_NUMBER } from './components/WhatToDo';
@@ -68,6 +71,8 @@ export default function DetailedRiskCardPage() {
   const guide = useAreaGuide(unit);
   const area = useAreaRecords(unit);
   const library = React.useMemo(() => vcActions(area.records), [area.records]);
+  const items = React.useMemo(() => (unit ? reconciledHazards(unit, guide.hazards) : []), [unit, guide.hazards]);
+  const comm = useAreaCommunication(unit ?? model.national, items, guide);
   const services = React.useMemo(() => (unit ? servicesFor(model, unit) : null), [model, unit]);
   const riskMetric = React.useMemo(() => parseMetric('risk'), []);
 
@@ -151,8 +156,9 @@ export default function DetailedRiskCardPage() {
         </div>
         <div className="text-right">
           <p className={H2}>{t('guide:risk.label')}</p>
-          <p className="mt-1 flex items-center justify-end gap-2">
+          <p className="mt-1 flex flex-wrap items-center justify-end gap-2">
             <RiskBandBadge risk={unit.risk} />
+            {risk && <LevelBadge level={risk.band} />}
             <span className="num text-base text-muted-foreground">({formatScore(unit.risk)} / 10)</span>
           </p>
         </div>
@@ -299,9 +305,13 @@ export default function DetailedRiskCardPage() {
               </h3>
               {high.length ? (
                 <ul className="divide-y divide-border">
-                  {high.map((g) => (
-                    <GroupBlock key={g.key} model={model} unit={unit} region={region} national={national} group={g} lang={lang} library={library.get(`${g.dim}:${g.key}`) ?? null} />
-                  ))}
+                  {high.map((g) => {
+                    const ref = `${g.dim}:${g.key}`;
+                    const hazard = g.dim === 'hazard' ? comm.hazards.find((h) => h.item.groups.includes(ref as never)) : undefined;
+                    const vc = g.dim !== 'hazard' ? comm.groups.find((x) => x.ref === ref) : undefined;
+                    const book = hazard ? { level: hazard.level, rows: hazard.rows, guide: null } : vc ? { level: vc.level, rows: vc.rows, guide: vc.guide } : null;
+                    return <GroupBlock key={g.key} model={model} unit={unit} region={region} national={national} group={g} lang={lang} library={library.get(ref) ?? null} book={book} />;
+                  })}
                 </ul>
               ) : (
                 <p className="py-1.5 text-[12px] text-muted-foreground">
@@ -414,8 +424,8 @@ function rankOfRisk(model: RiskModel, unit: Unit): { rank: number; of: number } 
   return { rank: 1 + scored.filter((x) => x > v).length, of: scored.length };
 }
 
-/** One high-scoring group: score and comparison, the measured values, the lead sectors and the library's entry. */
-function GroupBlock({ model, unit, region, national, group, lang, library }: { model: RiskModel; unit: Unit; region: Unit | null; national: Unit | null; group: TopGroup; lang: string; library: VcAction | null }) {
+/** One high-scoring group: score and comparison, the measured values, the lead sectors, the Guide Book's level and rows, and the library's entry. */
+function GroupBlock({ model, unit, region, national, group, lang, library, book }: { model: RiskModel; unit: Unit; region: Unit | null; national: Unit | null; group: TopGroup; lang: string; library: VcAction | null; book: { level: AlertLevel; rows: ActionRow[]; guide: IndicatorGuide | null } | null }) {
   const { t } = useTranslation(['area', 'common', 'indicators', 'explore']);
   const scale = DIMENSION_BY_KEY[group.dim].scale;
   const evidence = React.useMemo(() => evidenceFor(unit, group.dim, group.key).slice(0, EVIDENCE_LINES), [unit, group.dim, group.key]);
@@ -463,6 +473,16 @@ function GroupBlock({ model, unit, region, national, group, lang, library }: { m
         <span className="font-medium">{t('detailed.sectors')}: </span>
         {sectors.map((s) => t(`common:sectors.${s}`, { defaultValue: s })).join(' · ')}
       </p>
+      {book && (
+        <div className="mt-1 text-[12px]">
+          <p className="flex flex-wrap items-center gap-2">
+            <span className="font-medium">{t('guide:actions.title')}</span>
+            <LevelBadge level={book.level} size="sm" />
+          </p>
+          {book.guide && <p className="mt-0.5 text-muted-foreground">{pick(book.guide.intro, lang)}</p>}
+          <ActionList rows={book.rows} first={book.guide ? 3 : 4} dense className="mt-0.5" />
+        </div>
+      )}
       {library && (
         <div className="mt-1 border-l-2 border-border pl-2 text-[12px]">
           <p className="font-medium">

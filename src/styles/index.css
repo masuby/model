@@ -30,9 +30,9 @@
   /* The five risk classes, pale yellow to deep red (the risk palette of src/engine/risk/classes.ts). */
   --color-class-vl: #fef08a;
   --color-class-l: #facc15;
-  --color-class-m: #fb923c;
-  --color-class-h: #ea580c;
-  --color-class-vh: #b91c1c;
+  --color-class-m: #f97316;
+  --color-class-h: #dc2626;
+  --color-class-vh: #991b1b;
 
   /* Small radii: institutional, not bubbly (see docs/DESIGN_LANGUAGE.md). */
   --radius-lg: 0.375rem;

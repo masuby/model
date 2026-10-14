@@ -15,18 +15,26 @@
     "1": {
       "label": "Level 1 (yellow)",
       "colour": "Yellow",
-      "short": "Level 1"
+      "short": "Level 1",
+      "name": "Advisory",
+      "call": "Be prepared"
     },
     "2": {
       "label": "Level 2 (orange)",
       "colour": "Orange",
-      "short": "Level 2"
+      "short": "Level 2",
+      "name": "Warning",
+      "call": "Take action"
     },
     "3": {
       "label": "Level 3 (red)",
       "colour": "Red",
-      "short": "Level 3"
-    }
+      "short": "Level 3",
+      "name": "Major warning",
+      "call": "Take action immediately"
+    },
+    "badge": "Level {{n}} · {{name}}",
+    "label": "Level"
   },
   "risk": {
     "label": "Risk level",
@@ -115,5 +123,23 @@
     "councils": "Show all {{count}} councils",
     "hazards": "Show all {{count}} hazards",
     "less": "Show less"
+  },
+  "actions": {
+    "title": "What to do",
+    "lead": "The Guide Book’s rows for each hazard at its level in {{name}}: what people may see, and what to do.",
+    "at": "{{hazard}}",
+    "areaLevel": "at the area’s level",
+    "more": "All {{count}} rows",
+    "less": "Fewer rows",
+    "none": "No rows for this hazard at this level yet.",
+    "council": "This council’s own rows",
+    "summary": "{{count}} hazards with actions; highest: {{top}}"
+  },
+  "groups": {
+    "title": "What makes the difference here",
+    "lead": "The vulnerability and coping groups at Level 2 or 3 in {{name}}, what each measures, and what helps.",
+    "measures": "What it measures",
+    "none": "No group of vulnerability or coping capacity is at Level 2 or 3 here.",
+    "summary": "{{count}} groups at Level 2 or 3; highest: {{top}}"
   }
 }

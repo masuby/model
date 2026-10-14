@@ -42,14 +42,15 @@ import { regionIdOf } from '@/engine/risk/rawValues';
 import { authorityLabel } from '@/engine/risk/sources';
 import type { RiskModel, Unit } from '@/engine/risk/types';
 import { ALERT_COLOR, onAlertColor } from '@/features/guide/alert';
-import { ALERT_LEVELS, HAZARD_KEYS, useAreaGuide, type AlertLevel, type HazardKey } from '@/features/guide/data';
+import { LevelBadge } from '@/features/guide/AlertBadge';
+import { ALERT_LEVELS, HAZARD_KEYS, useAreaGuide, useHazardGuide, useIndicatorGuides, type AlertLevel, type HazardKey } from '@/features/guide/data';
 import { cn, formatDate } from '@/lib/utils';
 import { EmptyState, ErrorState, ListSkeleton } from '../components/common';
 import { NOTE_MAX } from '../components/SubmitPanel';
 import { errorMessage } from '../lib/batch';
 
-/** What the desk offers: the record kinds, plus the action library (national guidance of topic 'vc'). */
-type DeskKind = CommitteeKind | 'vc';
+/** What the desk offers: the record kinds, the action library (national guidance of topic 'vc') and the risk-communication rows (guidance of topic 'action'). */
+type DeskKind = CommitteeKind | 'vc' | 'action';
 
 interface ScopedUnit {
   unit: Unit;
@@ -109,7 +110,7 @@ export function CommitteeDesk() {
   if (records.isLoading) return <ListSkeleton rows={3} />;
   if (records.isError) return <ErrorState error={records.error} onRetry={() => void records.refetch()} />;
 
-  const kinds: DeskKind[] = ['drr', 'guidance', 'event', ...(canWarn ? (['warning'] as const) : []), ...(canLibrary ? (['vc'] as const) : [])];
+  const kinds: DeskKind[] = ['drr', 'guidance', 'event', ...(canWarn ? (['warning'] as const) : []), ...(canLibrary ? (['vc'] as const) : []), 'action'];
   return (
     <div className="space-y-12">
       <div>
@@ -121,7 +122,7 @@ export function CommitteeDesk() {
         <p className="mt-2 max-w-3xl text-sm leading-relaxed text-muted-foreground">{t(`committee.kindLead.${kind}`)}</p>
       </div>
 
-      {kind === 'warning' ? <WarningForm records={all} /> : kind === 'vc' ? <LibraryForm records={all} /> : <AreaForm kind={kind} records={all} />}
+      {kind === 'warning' ? <WarningForm records={all} /> : kind === 'vc' ? <LibraryForm records={all} /> : kind === 'action' ? <ActionForm records={all} /> : <AreaForm kind={kind} records={all} />}
       <ReviewList records={all} profile={profile} />
       <ActiveWarnings records={all} profile={profile} />
       <History kind={kind} records={all} profile={profile} />
@@ -754,6 +755,185 @@ function ActiveWarnings({ records, profile }: { records: readonly CommitteeRecor
   );
 }
 
+
+/* ------------------------------------------------------------------------------------------------ */
+/* Risk-communication rows: an impact and its actions for a hazard or a group at a level              */
+/* ------------------------------------------------------------------------------------------------ */
+
+/** A row's target: a guide hazard ('hazard:floods') or a vulnerability or coping group ('coping:wash'). */
+const ACTION_TARGETS = [...HAZARD_KEYS.map((h) => ({ value: `guide:${h}`, dim: 'hazard' as DimensionKey })), ...VC_GROUPS.filter((g) => g.dim !== 'hazard').map((g) => ({ value: g.ref, dim: g.dim }))];
+
+/**
+ * One row of the risk-communication library (docs/RISK_COMMUNICATION_DESIGN.md): for the country, the
+ * person's region or council; for a hazard or a group; at one level or every level; standing in place of a
+ * Guide Book row or added after them. Reviewed like any committee record.
+ */
+function ActionForm({ records }: { records: readonly CommitteeRecord[] }) {
+  const { t, i18n } = useTranslation(['data', 'common', 'indicators', 'guide']);
+  const { profile } = useData();
+  const model = useModel();
+  const submit = useSubmitCommittee();
+  const reviewer = canReview(profile?.role);
+  const national = canSubmitCommittee(profile, { kind: 'guidance', unitId: 'TZ', level: 'national', regionId: null });
+  const units = React.useMemo(() => scopedUnits(model, profile, 'guidance'), [model, profile]);
+  const [scope, setScope] = React.useState<string>(() => (national ? 'TZ' : (units[0]?.unit.id ?? '')));
+  const [target, setTarget] = React.useState(ACTION_TARGETS[0].value);
+  const [level, setLevel] = React.useState<'all' | '1' | '2' | '3'>('all');
+  const [impact, setImpact] = React.useState({ en: '', sw: '' });
+  const [actions, setActions] = React.useState({ en: '', sw: '' });
+  const [replaces, setReplaces] = React.useState('new');
+  const [source, setSource] = React.useState('');
+  const hazardKey = target.startsWith('guide:') ? (target.slice(6) as HazardKey) : null;
+  const groupKey = hazardKey ? null : target.split(':')[1];
+  // The Guide Book's rows for the target at the level, so that a row to replace is chosen by what it says.
+  const hazardGuide = useHazardGuide(hazardKey);
+  const indicatorGuides = useIndicatorGuides(groupKey ? [groupKey] : []);
+  const bookRows = hazardKey ? (level === 'all' ? [] : (hazardGuide.data?.[level] ?? [])) : (indicatorGuides.byKey.get(groupKey!)?.rows ?? []);
+  React.useEffect(() => setReplaces('new'), [target, level]);
+  const lines = (x: string) => x.split('\n').map((l) => l.trim()).filter(Boolean);
+  const complete = lines(actions.en).length + lines(actions.sw).length > 0;
+  const ready = complete && source.trim().length >= 3 && !!scope;
+  const pendingHere = records.filter((r) => r.kind === 'guidance' && r.status === 'pending' && (r.payload as GuidancePayload).topic === 'action' && r.unitId === scope).length;
+  const labelOf = (value: string) => (value.startsWith('guide:') ? guideHazardName(t, value.slice(6), false) : t(`indicators:${value.split(':')[1]}`));
+
+  const send = async (applyNow: boolean) => {
+    if (!ready) return;
+    const payload: GuidancePayload = {
+      topic: 'action',
+      ...(hazardKey ? {} : { group: target }),
+      level: level === 'all' ? null : (Number(level) as AlertLevel),
+      impact: { en: impact.en.trim(), sw: impact.sw.trim() },
+      actions: { en: lines(actions.en), sw: lines(actions.sw) },
+      replaces: replaces === 'new' ? null : Number(replaces),
+      area: { en: '', sw: '' },
+      risk: { en: '', sw: '' },
+      advice: { en: '', sw: '' },
+    };
+    const su = scope === 'TZ' ? null : units.find((u) => u.unit.id === scope);
+    if (scope !== 'TZ' && !su) return;
+    const input: NewCommitteeRecord = su
+      ? { kind: 'guidance', unitId: su.unit.id, level: su.level, unitName: su.unit.name, region: su.unit.region, regionId: su.regionId, hazard: hazardKey, payload, source: source.trim() }
+      : { kind: 'guidance', unitId: 'TZ', level: 'national', unitName: 'Tanzania', region: '', regionId: null, hazard: hazardKey, payload, source: source.trim() };
+    try {
+      await submit.mutateAsync({ input, applyNow });
+      toast.success(t(applyNow ? 'committee.applied' : 'committee.sent'));
+      setImpact({ en: '', sw: '' });
+      setActions({ en: '', sw: '' });
+      setReplaces('new');
+    } catch (e) {
+      toast.error(t('committee.error'), { description: errorMessage(e) });
+    }
+  };
+
+  return (
+    <section aria-labelledby="action-title" className="grid gap-8 lg:grid-cols-[minmax(0,1fr)_minmax(300px,380px)] lg:gap-14">
+      <div className="min-w-0">
+        <h3 id="action-title" className="font-display text-xl font-semibold">
+          {t('committee.recordTitle.action')}
+        </h3>
+        <div className="mt-4 grid max-w-3xl gap-4 sm:grid-cols-3">
+          <div className="space-y-1.5">
+            <Label htmlFor="action-scope">{t('committee.action.scope')}</Label>
+            <Select value={scope} onValueChange={setScope} aria-label={t('committee.action.scope')} className="h-9 w-full">
+              {national && <SelectItem value="TZ">{t('committee.action.national')}</SelectItem>}
+              {units.map((u) => (
+                <SelectItem key={u.unit.id} value={u.unit.id}>
+                  {u.unit.name}
+                </SelectItem>
+              ))}
+            </Select>
+          </div>
+          <div className="space-y-1.5">
+            <Label htmlFor="action-target">{t('committee.action.target')}</Label>
+            <Select value={target} onValueChange={setTarget} aria-label={t('committee.action.target')} className="h-9 w-full">
+              <SelectGroup label={t('committee.action.hazards')}>
+                {ACTION_TARGETS.filter((x) => x.dim === 'hazard').map((x) => (
+                  <SelectItem key={x.value} value={x.value}>
+                    {labelOf(x.value)}
+                  </SelectItem>
+                ))}
+              </SelectGroup>
+              {DIMENSIONS.filter((d) => d.key !== 'hazard').map((d) => (
+                <SelectGroup key={d.key} label={t(`common:dimensions.${d.key}`)}>
+                  {ACTION_TARGETS.filter((x) => x.dim === d.key).map((x) => (
+                    <SelectItem key={x.value} value={x.value}>
+                      {labelOf(x.value)}
+                    </SelectItem>
+                  ))}
+                </SelectGroup>
+              ))}
+            </Select>
+          </div>
+          <div className="space-y-1.5">
+            <Label htmlFor="action-level">{t('committee.action.level')}</Label>
+            <Select value={level} onValueChange={(v) => setLevel(v as 'all' | '1' | '2' | '3')} aria-label={t('committee.action.level')} className="h-9 w-full">
+              <SelectItem value="all">{t('committee.action.levelAll')}</SelectItem>
+              {ALERT_LEVELS.map((l) => (
+                <SelectItem key={l} value={String(l)}>
+                  {t('guide:levels.badge', { n: l, name: t(`guide:levels.${l}.name`) })}
+                </SelectItem>
+              ))}
+            </Select>
+          </div>
+        </div>
+        <div className="mt-4 max-w-3xl space-y-1.5">
+          <Label htmlFor="action-replaces">{t('committee.action.replaces')}</Label>
+          <Select value={replaces} onValueChange={setReplaces} aria-label={t('committee.action.replaces')} className="h-9 w-full">
+            <SelectItem value="new">{t('committee.action.replacesNew')}</SelectItem>
+            {bookRows.map((row, i) => (
+              <SelectItem key={i} value={String(i)}>
+                {i + 1}. {(i18n.language.startsWith('sw') ? row.impact.sw || row.impact.en : row.impact.en || row.impact.sw).slice(0, 90)}
+              </SelectItem>
+            ))}
+          </Select>
+          <p className="text-xs text-muted-foreground">{bookRows.length ? t('committee.action.bookRows', { count: bookRows.length }) : t('committee.action.bookRowsNone')}</p>
+        </div>
+        <div className="mt-5 grid max-w-3xl gap-4">
+          <div className="grid gap-3 sm:grid-cols-2">
+            {(['en', 'sw'] as const).map((l) => (
+              <div key={l} className="space-y-1.5">
+                <Label htmlFor={`action-impact-${l}`}>
+                  {t('committee.action.impact')} <span className="font-normal text-muted-foreground">({l === 'en' ? 'English' : 'Kiswahili'})</span>
+                </Label>
+                <Input id={`action-impact-${l}`} value={impact[l]} onChange={(e) => setImpact((x) => ({ ...x, [l]: e.target.value }))} maxLength={300} />
+              </div>
+            ))}
+          </div>
+          <div className="grid gap-3 sm:grid-cols-2">
+            {(['en', 'sw'] as const).map((l) => (
+              <div key={l} className="space-y-1.5">
+                <Label htmlFor={`action-actions-${l}`}>
+                  {t('committee.action.actions')} <span className="font-normal text-muted-foreground">({l === 'en' ? 'English' : 'Kiswahili'})</span>
+                </Label>
+                <Textarea id={`action-actions-${l}`} value={actions[l]} onChange={(e) => setActions((x) => ({ ...x, [l]: e.target.value }))} maxLength={2000} className="min-h-28" placeholder={t('committee.action.actionsHint')} />
+              </div>
+            ))}
+          </div>
+          <div className="space-y-1.5">
+            <Label htmlFor="action-source">{t('committee.source.action')}</Label>
+            <Input id="action-source" value={source} onChange={(e) => setSource(e.target.value)} maxLength={500} placeholder={t('committee.sourcePlaceholder.action')} aria-required="true" />
+          </div>
+        </div>
+        {!complete && <p className="mt-3 text-sm text-muted-foreground">{t('committee.incomplete.action')}</p>}
+        {complete && source.trim().length < 3 && <p className="mt-3 text-sm text-muted-foreground">{t('committee.needSource')}</p>}
+        {pendingHere > 0 && <p className="mt-3 text-sm text-muted-foreground">{t('committee.pendingNotice', { count: pendingHere })}</p>}
+        <div className="mt-5 flex flex-wrap gap-2">
+          <Button onClick={() => send(reviewer)} disabled={!ready || submit.isPending}>
+            {submit.isPending ? <Loader2 className="animate-spin" aria-hidden /> : <Send aria-hidden />}
+            {reviewer ? t('committee.apply') : t('committee.send')}
+          </Button>
+          {reviewer && (
+            <Button variant="outline" onClick={() => send(false)} disabled={!ready || submit.isPending}>
+              {t('committee.sendInstead')}
+            </Button>
+          )}
+        </div>
+      </div>
+      <ChainAside />
+    </section>
+  );
+}
+
 /* ------------------------------------------------------------------------------------------------ */
 /* Review and history                                                                                 */
 /* ------------------------------------------------------------------------------------------------ */
@@ -778,6 +958,28 @@ function PayloadSummary({ r, className }: { r: CommitteeRecord; className?: stri
           );
         })}
       </ul>
+    );
+  }
+  if (r.kind === 'guidance' && (r.payload as GuidancePayload).topic === 'action') {
+    const p = r.payload as GuidancePayload;
+    const text = (x: { en: string; sw: string }) => (lang.startsWith('sw') ? x.sw || x.en : x.en || x.sw);
+    const list = p.actions ? (lang.startsWith('sw') ? (p.actions.sw.length ? p.actions.sw : p.actions.en) : p.actions.en.length ? p.actions.en : p.actions.sw) : [];
+    return (
+      <div className={cn('text-sm', className)}>
+        <p className="flex flex-wrap items-center gap-2 font-medium">
+          <span>{r.hazard ? guideHazardName(t, r.hazard, false) : p.group ? t(`indicators:${p.group.split(':')[1]}`) : ''}</span>
+          {p.level ? <LevelBadge level={p.level} size="sm" /> : <span className="text-xs font-normal text-muted-foreground">{t('committee.action.levelAll')}</span>}
+        </p>
+        {p.impact && text(p.impact) && <p className="mt-1 leading-relaxed">{text(p.impact)}</p>}
+        {list.length > 0 && (
+          <ul className="mt-1 list-disc pl-4 leading-relaxed">
+            {list.map((a, i) => (
+              <li key={i}>{a}</li>
+            ))}
+          </ul>
+        )}
+        <p className="mt-1 text-xs text-muted-foreground">{p.replaces == null ? t('committee.action.replacesNew') : t('committee.action.replacesRow', { n: p.replaces + 1 })}</p>
+      </div>
     );
   }
   if (r.kind === 'guidance') {
@@ -884,8 +1086,12 @@ function History({ kind, records, profile }: { kind: DeskKind; records: readonly
   const model = useModel();
   const items = React.useMemo(() => {
     if (kind === 'vc') return records.filter((r) => r.kind === 'guidance' && r.level === 'national' && r.status === 'approved' && (r.payload as GuidancePayload).topic === 'vc').slice(0, 30);
+    if (kind === 'action') {
+      const mine = new Set(scopedUnits(model, profile, 'guidance').map((u) => u.unit.id));
+      return records.filter((r) => r.kind === 'guidance' && r.status === 'approved' && (r.payload as GuidancePayload).topic === 'action' && (r.unitId === 'TZ' || mine.has(r.unitId))).slice(0, 30);
+    }
     const ids = new Set(scopedUnits(model, profile, kind === 'warning' ? 'drr' : kind).map((u) => u.unit.id));
-    const approved = records.filter((r) => r.kind === kind && r.status === 'approved' && (kind === 'warning' || ids.has(r.unitId)) && (kind !== 'guidance' || (r.payload as GuidancePayload).topic !== 'vc'));
+    const approved = records.filter((r) => r.kind === kind && r.status === 'approved' && (kind === 'warning' || ids.has(r.unitId)) && (kind !== 'guidance' || !['vc', 'action'].includes((r.payload as GuidancePayload).topic ?? '')));
     if (kind !== 'drr') return approved.slice(0, 30);
     const latest = new Map<string, CommitteeRecord>();
     for (const r of approved) if (!latest.has(r.unitId)) latest.set(r.unitId, r);

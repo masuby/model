@@ -960,21 +960,24 @@
       "guidance": "Know your risk",
       "event": "Event report",
       "warning": "Warning",
-      "vc": "Reducing risk"
+      "vc": "Reducing risk",
+      "action": "Risk communication"
     },
     "kindLead": {
       "drr": "Whether the arrangements are in place: preparedness and response plan with its risk and vulnerability assessment, anticipatory action, trained response team, operations centre, DRR training of the committee; and how the committee functions: active, collaborating with stakeholders, involved in DRR issues. The engine scores the first five as DRM arrangements in place and the three criteria as committee functioning.",
       "guidance": "The statement people read on the council’s profile: where the danger lies and what helps. Replace a guide-book row or add a new one, in English and Kiswahili.",
       "event": "A hazard event that happened: when, what, and its impacts. The regional committee validates it.",
       "warning": "An official warning as issued by TMA: hazard, level, areas and validity. It is published at once on the areas named and lifts on its end date.",
-      "vc": "The action library: for each INFORM indicator group (hazards, vulnerability and coping capacity), what reduces it and which sectors lead. PMO-DMD writes, the national committee reviews; the actions and the sectors appear on the detailed risk card and on every area where the group weighs most."
+      "vc": "The action library: for each INFORM indicator group (hazards, vulnerability and coping capacity), what reduces it and which sectors lead. PMO-DMD writes, the national committee reviews; the actions and the sectors appear on the detailed risk card and on every area where the group weighs most.",
+      "action": "One row of what people may see and what to do, for a hazard or a vulnerability or coping group, at one level or every level: it stands in place of a Guide Book row or follows the book’s rows on the explorer, the profile and the risk cards of your area (or everywhere, for national rows)."
     },
     "recordTitle": {
       "drr": "Record the arrangements",
       "guidance": "Write or update a statement",
       "event": "Report an event",
       "warning": "Record an official warning",
-      "vc": "Write or update the actions for a group"
+      "vc": "Write or update the actions for a group",
+      "action": "Write a row of what to do"
     },
     "unit": "Area",
     "pendingNotice": "A record for this area is awaiting approval; a new one replaces it once approved.",
@@ -1049,21 +1052,24 @@
       "guidance": "What the statement rests on",
       "event": "Reported by / source",
       "warning": "Bulletin reference",
-      "vc": "What the actions rest on"
+      "vc": "What the actions rest on",
+      "action": "What the row rests on"
     },
     "sourcePlaceholder": {
       "drr": "e.g. Council EPRP approved by the full council on 12 March 2026; DDRRC minutes on file",
       "guidance": "e.g. DDRRC meeting of 3 Sept 2026; ward risk assessments 2025",
       "event": "e.g. DDRRC situation report of 10 Jan 2026; ward executive officers",
       "warning": "e.g. TMA severe weather warning no. 12/2026",
-      "vc": "e.g. National Disaster Management Strategy 2022-2027, section 4; sector policy or programme"
+      "vc": "e.g. National Disaster Management Strategy 2022-2027, section 4; sector policy or programme",
+      "action": "e.g. DDRRC meeting of 3 Sept 2026; Risk Action Guide Book 2026, chapter 2.0"
     },
     "needSource": "Say what the record rests on (document, minutes, letter, bulletin).",
     "incomplete": {
       "drr": "Answer at least one item.",
       "guidance": "Write the area and where the danger lies (in at least one language).",
       "event": "Give the date and describe what happened.",
-      "vc": "Write the actions (in at least one language)."
+      "vc": "Write the actions (in at least one language).",
+      "action": "Write at least one action (in at least one language)."
     },
     "notAllowed": "Your role cannot record this for this area.",
     "send": "Send for approval",
@@ -1106,6 +1112,22 @@
       "noCurrent": "No entry published for this group yet.",
       "leadSectors": "Lead sectors",
       "leadSectorsHint": "Choose one or more. The proposal for the group is pre-selected; the detailed risk card shows what is saved here."
+    },
+    "action": {
+      "scope": "Applies to",
+      "national": "Tanzania (every area)",
+      "target": "Hazard or group",
+      "hazards": "Hazards of the Guide Book",
+      "level": "Level",
+      "levelAll": "Every level",
+      "replaces": "Guide Book row",
+      "replacesNew": "Add a new row after the book’s rows",
+      "replacesRow": "Stands in place of Guide Book row {{n}}",
+      "bookRows": "The book has {{count}} rows here; choose one to replace it, or add a new row.",
+      "bookRowsNone": "Choose a level to see the book’s rows for a hazard; a group’s rows hold at every level.",
+      "impact": "What people may see",
+      "actions": "What to do",
+      "actionsHint": "One action per line."
     }
   },
   "inbox": {
@@ -1282,6 +1304,15 @@
     "import": {
       "title": "Import a filled collection tool",
       "lead": "Upload the Collection Tool or the Benchmark 2026 workbook as an institution returns it (xlsx), or a CSV template. Every indicator with a value becomes one submission in the review queue; nothing enters the model until it is approved."
+    },
+    "communication": {
+      "title": "Risk communication",
+      "lead": "What the explorer, the profiles and the risk cards say to do: the Guide Book’s rows for each hazard at its level and for each vulnerability and coping group, with the committees’ rows standing in place of them or following them. The rows are written and reviewed at the committee desk.",
+      "hazards": "Hazards in the Guide Book",
+      "groups": "Groups in the Guide Book",
+      "approved": "Committee rows published",
+      "pending": "Committee rows waiting",
+      "open": "Open the committee desk"
     }
   },
   "management": {

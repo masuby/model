@@ -1,6 +1,8 @@
 import { useTranslation } from 'react-i18next';
 import { onClassColor } from '@/components/risk/RiskBadge';
 import { CLASS_KEYS, classColor, classify, classRanges, THRESHOLDS, type Scale } from '@/engine/risk/classes';
+import { ALERT_COLOR, BAND_BY_CLASS, onAlertColor } from '@/features/guide/alert';
+import { ALERT_LEVELS } from '@/features/guide/data';
 import { Callout, Cases, DocSection, Formula, Line, N, Op, P, SubHeading, Txt, V } from '../ui';
 import { NO_VALUE } from '@/lib/utils';
 
@@ -50,7 +52,7 @@ function ScaleBar({ scale }: { scale: Scale }) {
 }
 
 export function ClassificationSection() {
-  const { t } = useTranslation(['methodology', 'common']);
+  const { t } = useTranslation(['methodology', 'common', 'guide']);
   const label = useScaleLabel();
   const sample = 4;
   const onHazard = classify(sample, 'hazard');
@@ -144,6 +146,51 @@ export function ClassificationSection() {
 
       <div className="mt-12 grid gap-8 lg:grid-cols-2 lg:gap-12">
         <P className="text-[15px]">{t('classification.own')}</P>
+      <SubHeading id="classification-levels" className="mt-14">
+        {t('classification.levels.title')}
+      </SubHeading>
+      <p className="mt-1 max-w-[68ch] text-sm leading-relaxed text-muted-foreground">{t('classification.levels.lead')}</p>
+      <div className="mt-3 overflow-x-auto">
+        <table aria-labelledby="classification-levels" className="w-full border-collapse text-xs sm:text-sm">
+          <thead>
+            <tr className="border-b border-foreground/25 text-left text-xs text-muted-foreground">
+              <th scope="col" className="py-2.5 pr-3 font-medium">
+                {t('classification.levels.col.level')}
+              </th>
+              <th scope="col" className="px-3 py-2.5 font-medium">
+                {t('classification.levels.col.name')}
+              </th>
+              <th scope="col" className="px-3 py-2.5 font-medium">
+                {t('classification.levels.col.classes')}
+              </th>
+              <th scope="col" className="py-2.5 pl-3 font-medium">
+                {t('classification.levels.col.groups')}
+              </th>
+            </tr>
+          </thead>
+          <tbody className="divide-y divide-border">
+            {ALERT_LEVELS.map((level) => (
+              <tr key={level}>
+                <th scope="row" className="py-2.5 pr-3 text-left font-normal whitespace-nowrap">
+                  <span className="inline-flex items-center rounded-full px-2 py-0.5 text-[11px] font-semibold" style={{ background: ALERT_COLOR[level], color: onAlertColor(level) }}>
+                    {t(`guide:levels.${level}.short`)} · {t(`guide:levels.${level}.colour`)}
+                  </span>
+                </th>
+                <td className="px-3 py-2.5">
+                  {t(`guide:levels.${level}.name`)} · {t(`guide:levels.${level}.call`)}
+                </td>
+                <td className="px-3 py-2.5">
+                  {CLASS_KEYS.filter((k) => BAND_BY_CLASS[k] === level)
+                    .map((k) => t(`common:classes.${k}`))
+                    .join(', ')}
+                </td>
+                <td className="num py-2.5 pl-3">{t(`classification.levels.groups.${level}`)}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+
         <Callout title={t('classification.exampleTitle')}>
           {t('classification.example', { value: sample.toFixed(1), hazardClass: onHazard ? t(`common:classes.${onHazard.key}`) : NO_VALUE, riskClass: onRisk ? t(`common:classes.${onRisk.key}`) : NO_VALUE })}
           <span className="mt-3 flex flex-wrap items-center gap-2">
