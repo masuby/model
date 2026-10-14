@@ -12,6 +12,7 @@
 import fs from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import simplify from '@turf/simplify';
+import booleanPointInPolygon from '@turf/boolean-point-in-polygon';
 
 const ROOT = fileURLToPath(new URL('..', import.meta.url));
 const read = (p) => JSON.parse(fs.readFileSync(ROOT + p, 'utf8'));
@@ -19,6 +20,9 @@ const read = (p) => JSON.parse(fs.readFileSync(ROOT + p, 'utf8'));
 const councils = read('src/data/tanzania-councils.json');
 const regions = read('src/data/tanzania-regions.json');
 const water = read('src/data/tanzania-waterbodies.json');
+// The international boundary (NBS/PO-RALG lines): the stretches that run through the lakes are drawn as a faint
+// path on the water, so the Tanzanian part of Lake Tanganyika (and Nyasa) is told apart from the rest.
+const boundaryLines = read('data-source/geojson/International_Boundary_Lines.geojson');
 
 // Frame: Tanzania's extent with a small margin.
 const LON0 = 29.25;
@@ -53,6 +57,52 @@ function ringPath(ring) {
   return n >= 2 ? `${d}z` : '';
 }
 
+/** Open polyline (no closing `z`), for a boundary stretch. */
+function linePath(coords) {
+  const pts = coords.map(px);
+  if (pts.length < 2) return '';
+  let d = `M${pts[0][0]} ${pts[0][1]}l`;
+  let last = pts[0];
+  let n = 0;
+  for (let i = 1; i < pts.length; i++) {
+    const p = pts[i];
+    const dx = p[0] - last[0];
+    const dy = p[1] - last[1];
+    if (!dx && !dy) continue;
+    d += `${n ? (dx < 0 ? '' : ' ') : ''}${dx}${dy < 0 ? '' : ' '}${dy}`;
+    last = p;
+    n++;
+  }
+  return n >= 1 ? d : '';
+}
+
+/** Extent of a run in degrees (its bounding box's longer side). */
+const spanOf = (run) => Math.max(Math.max(...run.map((p) => p[0])) - Math.min(...run.map((p) => p[0])), Math.max(...run.map((p) => p[1])) - Math.min(...run.map((p) => p[1])));
+
+/** The runs of boundary vertices that lie inside a lake (the Indian Ocean left out), as simplified line strings. */
+function lakeBoundaries() {
+  const lakes = water.features.filter((f) => !/ocean/i.test(String(f.properties.name)));
+  const inLake = (pt) => lakes.some((lake) => booleanPointInPolygon(pt, lake));
+  const runs = [];
+  for (const f of boundaryLines.features) {
+    const lines = f.geometry.type === 'LineString' ? [f.geometry.coordinates] : f.geometry.type === 'MultiLineString' ? f.geometry.coordinates : [];
+    for (const line of lines) {
+      let run = [];
+      for (const pt of line) {
+        if (inLake(pt)) run.push(pt);
+        else {
+          if (run.length >= 2) runs.push(run);
+          run = [];
+        }
+      }
+      if (run.length >= 2) runs.push(run);
+    }
+  }
+  return runs
+    .filter((r) => r.length >= 8 && spanOf(r) >= 0.05) // a stretch across a lake, not a few vertices touching a shore or a river pool
+    .map((r) => simplify({ type: 'Feature', properties: {}, geometry: { type: 'LineString', coordinates: r } }, { tolerance: 0.004, highQuality: false }).geometry.coordinates);
+}
+
 /** Simplify one polygon; degenerate rings (fewer than 4 points) are dropped, never fatal. */
 function simplifyPolygon(poly, tolerance) {
   const rings = poly.filter((r) => r.length >= 4);
@@ -74,11 +124,19 @@ function featurePath(feature, tolerance) {
 }
 
 const frame = { viewBox: `0 0 ${WIDTH} ${HEIGHT}`, width: WIDTH, height: HEIGHT };
+const boundaries = lakeBoundaries();
 const files = {
   'src/data/tanzania-svg-councils.json': { ...frame, units: councils.features.map((f) => ({ id: String(f.properties.code), d: featurePath(f, 0.012) })) },
   'src/data/tanzania-svg-regions.json': { ...frame, units: regions.features.map((f) => ({ id: String(f.properties.reg_name), d: featurePath(f, 0.012) })) },
   // Lakes only: the Indian Ocean polygon would dominate a small map without adding information.
-  'src/data/tanzania-svg-water.json': { ...frame, water: water.features.filter((f) => !/ocean/i.test(String(f.properties.name))).map((f) => featurePath(f, 0.02)).filter(Boolean) },
+  'src/data/tanzania-svg-water.json': {
+    ...frame,
+    water: water.features.filter((f) => !/ocean/i.test(String(f.properties.name))).map((f) => featurePath(f, 0.02)).filter(Boolean),
+    // The international boundary through the lakes, as open paths drawn on the water.
+    boundaries: boundaries.map(linePath).filter(Boolean),
+  },
+  // The same stretches as GeoJSON for the explorer map.
+  'src/data/tanzania-lake-boundaries.json': { type: 'FeatureCollection', features: boundaries.map((coordinates) => ({ type: 'Feature', properties: {}, geometry: { type: 'LineString', coordinates } })) },
 };
 for (const [path, data] of Object.entries(files)) {
   fs.writeFileSync(ROOT + path, JSON.stringify(data));

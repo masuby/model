@@ -83,6 +83,7 @@
   --map-bg: #dfe8f3;
   --map-water: #a9cdee;
   --map-water-stroke: #6aa6dc;
+  --map-boundary: #4f6f91;
   --map-stroke: #ffffff;
   --grid: rgb(15 23 42 / 0.06);
   /* Dimension colours for TEXT (AA on surfaces); charts use the brighter DIMENSION_COLORS fills. */
@@ -116,6 +117,7 @@
   --map-bg: #0a1426;
   --map-water: #12345a;
   --map-water-stroke: #1f4d80;
+  --map-boundary: #6f93bd;
   --map-stroke: #0b1324;
   --grid: rgb(226 232 240 / 0.06);
   --dim-hazard-text: #fdba74;

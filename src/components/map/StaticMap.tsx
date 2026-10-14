@@ -27,6 +27,8 @@ interface PathSet {
 const COUNCILS = councilPaths as PathSet;
 const REGIONS = regionPaths as PathSet;
 const WATER = (waterPaths as { water: string[] }).water;
+/** The international boundary where it runs through the lakes (scripts/build-svg-map.mjs): a faint dashed path on the water. */
+const LAKE_BOUNDARIES = (waterPaths as { boundaries?: string[] }).boundaries ?? [];
 
 export interface StaticMapProps {
   model: RiskModel;
@@ -161,6 +163,9 @@ export default function StaticMap({
         <g aria-hidden>
           {WATER.map((d, i) => (
             <path key={i} d={d} fill="var(--map-water)" stroke="var(--map-water-stroke)" strokeWidth={0.5} vectorEffect="non-scaling-stroke" pointerEvents="none" />
+          ))}
+          {LAKE_BOUNDARIES.map((d, i) => (
+            <path key={`b${i}`} d={d} fill="none" stroke="var(--map-boundary)" strokeWidth={0.9} strokeOpacity={0.8} strokeDasharray="4 3" strokeLinecap="round" vectorEffect="non-scaling-stroke" pointerEvents="none" />
           ))}
         </g>
         {/* Selection outlines drawn last so they sit above neighbours and water. */}

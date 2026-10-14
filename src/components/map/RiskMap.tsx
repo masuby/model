@@ -8,12 +8,13 @@ import 'leaflet/dist/leaflet.css';
 import type { Feature, FeatureCollection, Geometry } from 'geojson';
 import L from 'leaflet';
 import * as React from 'react';
-import { GeoJSON, MapContainer, TileLayer, useMap } from 'react-leaflet';
+import { GeoJSON, MapContainer, Polyline, TileLayer, useMap } from 'react-leaflet';
 import { useTranslation } from 'react-i18next';
 import councilsUrl from '@/data/tanzania-councils.json?url';
 import districtsUrl from '@/data/tanzania-districts.json?url';
 import regionsUrl from '@/data/tanzania-regions.json?url';
 import waterUrl from '@/data/tanzania-waterbodies.json?url';
+import lakeBoundariesUrl from '@/data/tanzania-lake-boundaries.json?url';
 import type { ClassKey } from '@/engine/risk/classes';
 import { metricColor, type Metric } from '@/engine/risk/metrics';
 import { placeKey } from '@/engine/risk/model';
@@ -60,9 +61,9 @@ type Geo = FeatureCollection<Geometry, Props0>;
  * Boundaries are static files fetched on demand (and cached by the service worker), so the app bundle
  * carries no geometry and each level downloads only what it draws. One request per file per session.
  */
-const GEO_URL: Record<Level | 'water', string> = { council: councilsUrl, region: regionsUrl, national: regionsUrl, source: districtsUrl, water: waterUrl };
+const GEO_URL: Record<Level | 'water' | 'lakeBoundaries', string> = { council: councilsUrl, region: regionsUrl, national: regionsUrl, source: districtsUrl, water: waterUrl, lakeBoundaries: lakeBoundariesUrl };
 const geoCache = new Map<string, Promise<Geo>>();
-function loadGeo(key: Level | 'water'): Promise<Geo> {
+function loadGeo(key: Level | 'water' | 'lakeBoundaries'): Promise<Geo> {
   const url = GEO_URL[key];
   if (!geoCache.has(url)) {
     geoCache.set(
@@ -75,7 +76,7 @@ function loadGeo(key: Level | 'water'): Promise<Geo> {
   }
   return geoCache.get(url)!;
 }
-function useGeo(key: Level | 'water'): Geo | null {
+function useGeo(key: Level | 'water' | 'lakeBoundaries'): Geo | null {
   const [geo, setGeo] = React.useState<{ key: string; data: Geo } | null>(null);
   React.useEffect(() => {
     let alive = true;
@@ -163,6 +164,8 @@ export default function RiskMap({
   const theme = resolveTheme(usePrefs((s) => s.theme));
   const loadedGeo = useGeo(level);
   const water = useGeo('water');
+  // The international boundary where it runs through the lakes: a faint dashed line on the water.
+  const lakeBoundaries = useGeo('lakeBoundaries');
   const geo = loadedGeo ?? EMPTY;
   const unitOf = useUnitResolver(model, level);
   const layerRef = React.useRef<L.GeoJSON | null>(null);
@@ -294,6 +297,18 @@ export default function RiskMap({
             }}
           />
         )}
+        {water &&
+          lakeBoundaries &&
+          lakeBoundaries.features.map((f, i) =>
+            f.geometry.type === 'LineString' ? (
+              <Polyline
+                key={`lake-boundary-${i}-${theme}`}
+                positions={(f.geometry.coordinates as [number, number][]).map(([lng, lat]) => [lat, lng] as [number, number])}
+                interactive={false}
+                pathOptions={{ color: getComputedStyle(document.documentElement).getPropertyValue('--map-boundary').trim(), weight: 1.2, opacity: 0.85, dashArray: '5 4' }}
+              />
+            ) : null,
+          )}
         <FitTo bounds={focusBounds} padding={fitPadding} />
       </MapContainer>
     </div>

@@ -2,6 +2,13 @@
 
 ## Unreleased
 
+### The boundary through Lake Tanganyika (14 October 2026)
+
+- Where the international boundary runs through a lake, it is drawn as a faint dashed path on the water
+  of the home map, the profile maps and the explorer map, so the Tanzanian part of Lake Tanganyika (and
+  of Nyasa and Victoria along their borders) is told apart from the rest. The stretches come from the
+  national boundary lines (NBS/PO-RALG) clipped to the water bodies.
+
 ### The data discrepancies resolved: conflict groups withheld, earthquake and drought measured per council (14 October 2026)
 
 - Conflict intensity, conflict risk and internal violence carry no data anywhere in the live model, by
