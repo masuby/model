@@ -10,6 +10,11 @@
   national boundary lines (NBS/PO-RALG) clipped to the water bodies.
 - The explorer map draws these paths on the live site too: the boundary file is served as a hashed asset
   rather than inlined into the script, which the site's Content Security Policy would not let fetch().
+- The dashed path joins Tanzania's land border at both ends of each lake: the short stretch from the
+  Burundi corner at Kagunga to the tripoint in Lake Tanganyika was missing, and every stretch now runs
+  to the shore where the border leaves the water. Only Tanzania's own boundary is drawn; the arcs between
+  the DRC and Burundi and between the DRC and Zambia, which the boundary-lines file also carries, are left
+  out. Lake Nyasa carries the Tanzania–Malawi line from the Songwe mouth to the Mozambique tripoint.
 
 ### The data discrepancies resolved: conflict groups withheld, earthquake and drought measured per council (14 October 2026)
 
