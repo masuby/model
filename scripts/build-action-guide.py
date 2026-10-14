@@ -13,6 +13,9 @@ Writes, all bilingual (English and Kiswahili, as published in the guide), loaded
                                               and 12.0, added 14 October 2026): what the indicator measures
                                               and its impact -> action rows, which hold at every level
   src/data/action-guide/dimensions.json       the two chapters' own statements
+  src/data/action-guide/standing/<hazard>.json chapter 13.0 (added 14 October 2026): the standing actions by
+                                              hazard, what to keep doing all year where the hazard is present
+                                              (rows by who), and what goes further where its risk is high
 
 The per-council alert tables of the guide are only used to read each council's documented hazards: their
 generated sentences repeat one flood template (and some substitutions are broken), so the site shows the
@@ -483,6 +486,49 @@ assert set(guide['indicators']) == set(INDICATOR_CHAPTERS.values()), sorted(set(
 assert set(guide['dimensions']) == {'vulnerability', 'coping'}
 
 # ------------------------------------------------------------------------------------------------ #
+# Standing actions by hazard (chapter 13.0): per guide hazard, what to keep doing (rows by who) and what goes
+# further where the risk is high. A row for the coast (tsunami) is marked so that inland areas skip it.
+# ------------------------------------------------------------------------------------------------ #
+
+standing_rx = re.compile(r'^13\.(\d) (.+?) \| (.+)$')
+
+
+def who_rows(table, high: bool):
+    out = []
+    for r in table['rows'][1:]:
+        if len(r) < 4:
+            continue
+        who_en, who_sw = clean(' '.join(r[0])), clean(' '.join(r[1]))
+        actions_en, actions_sw = [clean(x) for x in r[2] if clean(x)], [clean(x) for x in r[3] if clean(x)]
+        if not who_en and not actions_en:
+            continue
+        out.append({'who': {'en': who_en, 'sw': who_sw}, 'actions': {'en': actions_en, 'sw': actions_sw}, 'high': high, 'coastal': bool(re.search(r'coast', who_en, re.I))})
+    return out
+
+
+guide['standing'] = {}
+standing_starts = [i for i, b in enumerate(blocks) if b['t'] == 'p' and standing_rx.match(b['text'])]
+for n, s in enumerate(standing_starts):
+    e = standing_starts[n + 1] if n + 1 < len(standing_starts) else index_of(is_p(r'^14\.0 '), s)
+    m = standing_rx.match(blocks[s]['text'])
+    section, title_en, title_sw = m.group(1), m.group(2).strip(), m.group(3).strip()
+    intro, _ = statement_after(s, e)
+    if section == '0':
+        guide['standingChapter'] = {'title': {'en': sentence(title_en), 'sw': sentence(title_sw)}, 'intro': intro}
+        continue
+    key = HAZARDS.get(title_en.upper())
+    assert key, f'unknown standing-actions hazard: {title_en}'
+    rows = []
+    for b in blocks[s + 1:e]:
+        if b['t'] == 'table' and head(b).startswith('WHO'):
+            rows.extend(who_rows(b, False))
+        elif b['t'] == 'table' and head(b).startswith('WHERE THE RISK IS HIGH'):
+            rows.extend(who_rows(b, True))
+    assert rows, f'{title_en}: no standing rows'
+    guide['standing'][key] = {'hazard': key, 'title': {'en': sentence(title_en), 'sw': sentence(title_sw)}, 'intro': intro, 'rows': rows}
+assert set(guide['standing']) == set(HAZARDS.values()), sorted(set(HAZARDS.values()) - set(guide['standing']))
+
+# ------------------------------------------------------------------------------------------------ #
 # Checks and output
 # ------------------------------------------------------------------------------------------------ #
 
@@ -511,7 +557,7 @@ dashes = [s for s in walk([guide, regions]) if '\u2014' in s]
 assert not dashes, dashes[:3]
 
 counts = Counter(h for r in regions.values() for c in r['councils'].values() for h in c['hazards'])
-print(f'hazards: {len(guide["hazards"])} | indicator groups: {len(guide["indicators"])} | incident groups: {len(guide["incidents"])} | regions: {len(regions)} | councils: {len(covered)} of {len(COUNCILS)}')
+print(f'hazards: {len(guide["hazards"])} | standing: {len(guide["standing"])} | indicator groups: {len(guide["indicators"])} | incident groups: {len(guide["incidents"])} | regions: {len(regions)} | councils: {len(covered)} of {len(COUNCILS)}')
 print('councils per documented hazard:', dict(counts.most_common()))
 print(f'problems ({len(problems)}):')
 for p in problems:
@@ -533,6 +579,8 @@ write(OUT / 'incidents.json', guide['incidents'])
 for ref, entry in guide['indicators'].items():
     write(OUT / 'indicators' / f"{ref.split(':')[1]}.json", entry)
 write(OUT / 'dimensions.json', guide['dimensions'])
+for key, entry in guide['standing'].items():
+    write(OUT / 'standing' / f'{key}.json', entry)
 for key, r in regions.items():
     write(OUT / 'regions' / f'{key}.json', r)
 print(f'written to {OUT.relative_to(ROOT)}')

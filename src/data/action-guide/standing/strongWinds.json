@@ -1,0 +1,111 @@
+{
+ "hazard": "strongWinds",
+ "title": {
+  "en": "Strong winds",
+  "sw": "Upepo mkali"
+ },
+ "intro": {
+  "en": "Strong winds strip roofs and bring down trees and power lines. A roof tied down and a yard kept clear are the work of every dry season.",
+  "sw": "Upepo mkali huvua paa na kuangusha miti na nyaya za umeme. Paa lililofungwa vizuri na uwanja uliowekwa wazi ni kazi ya kila kiangazi."
+ },
+ "rows": [
+  {
+   "who": {
+    "en": "Households",
+    "sw": "Kaya"
+   },
+   "actions": {
+    "en": [
+     "Tie down roofing sheets, fix loose doors and windows, and strengthen the corners of the house each dry season.",
+     "Trim trees near the house and the power line, and keep loose objects off the roof and the yard."
+    ],
+    "sw": [
+     "Fungeni vizuri mabati, rekebisheni milango na madirisha yaliyolegea, na imarisheni pembe za nyumba kila kiangazi.",
+     "Punguzeni matawi ya miti karibu na nyumba na nyaya za umeme, na ondoeni vitu vilivyolegea juu ya paa na uwanjani."
+    ]
+   },
+   "high": false,
+   "coastal": false
+  },
+  {
+   "who": {
+    "en": "Fishers and boat operators",
+    "sw": "Wavuvi na waendesha vyombo"
+   },
+   "actions": {
+    "en": [
+     "Keep life jackets on board, check the weather information from TMA and the beach management unit before every trip, and keep the boat maintained."
+    ],
+    "sw": [
+     "Kuweni na maboya ya kuokolea chomboni, angalieni taarifa za hali ya hewa za TMA na kitengo cha usimamizi wa mwalo kabla ya kila safari, na tunzeni chombo."
+    ]
+   },
+   "high": false,
+   "coastal": false
+  },
+  {
+   "who": {
+    "en": "Village, mtaa and ward committees",
+    "sw": "Kamati za kijiji, mtaa na kata"
+   },
+   "actions": {
+    "en": [
+     "Keep schools, markets and places of worship checked for weak roofs and leaning trees, and agree where people shelter in a storm."
+    ],
+    "sw": [
+     "Kagueni shule, masoko na nyumba za ibada kwa paa dhaifu na miti inayoinama, na kubalianeni watu wanajikinga wapi wakati wa dhoruba."
+    ]
+   },
+   "high": false,
+   "coastal": false
+  },
+  {
+   "who": {
+    "en": "Council and sectors",
+    "sw": "Halmashauri na sekta"
+   },
+   "actions": {
+    "en": [
+     "Apply the roofing and tie-down standards in building permits and school repairs; TANESCO keeps the lines clear of trees."
+    ],
+    "sw": [
+     "Tumieni viwango vya paa na ufungaji kwenye vibali vya ujenzi na ukarabati wa shule; TANESCO iweke nyaya mbali na miti."
+    ]
+   },
+   "high": false,
+   "coastal": false
+  },
+  {
+   "who": {
+    "en": "Households and committees",
+    "sw": "Kaya na kamati"
+   },
+   "actions": {
+    "en": [
+     "Build with hipped roofs, hurricane straps and short overhangs, and agree an inner room or a strong building as the shelter."
+    ],
+    "sw": [
+     "Jengeni paa zenye mteremko pande zote, vifungo vya chuma vya paa na mapaa yasiyotokeza sana, na kubalianeni chumba cha ndani au jengo imara kama kimbilio."
+    ]
+   },
+   "high": true,
+   "coastal": false
+  },
+  {
+   "who": {
+    "en": "Council and sectors",
+    "sw": "Halmashauri na sekta"
+   },
+   "actions": {
+    "en": [
+     "Strengthen the roofs of schools, clinics and markets in the windiest wards first, and keep the response team and the lines of supply ready for the season."
+    ],
+    "sw": [
+     "Imarisheni paa za shule, zahanati na masoko katika kata zenye upepo mkali zaidi kwanza, na wekeni timu ya kukabiliana na njia za usambazaji tayari kwa msimu."
+    ]
+   },
+   "high": true,
+   "coastal": false
+  }
+ ]
+}

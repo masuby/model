@@ -256,17 +256,16 @@
     "example": "Alama ya {{value}} ni {{hazardClass}} kwenye mizani ya Vitisho na Kuathirika lakini ni {{riskClass}} tu kwenye mizani ya Hatari ya INFORM.",
     "if": "kama",
     "levels": {
-      "title": "Jinsi hatua za Kitabu cha Mwongozo zinavyofuata daraja la INFORM",
-      "lead": "Kitabu cha Mwongozo wa Hatua dhidi ya Hatari kinapanga hatua zake kwa kila hatari katika seti tatu. Mfumo unaonyesha seti ya kwanza kwa maeneo yenye hatari ya INFORM ya Chini sana au Chini, ya pili kwa Wastani, ya tatu kwa Juu na Juu sana; hatari au kundi la viashiria hufuata alama yake yenyewe (chini ya 4, 4 hadi 6, 6 na zaidi). Maneno ya ngazi na rangi za kitabu hayaonyeshwi: tovuti inawasiliana kwa madaraja ya INFORM. Onyo linalotolewa na kamati ni rekodi tofauti yenye muda wake.",
+      "title": "Jinsi hatua za kudumu za Kitabu cha Mwongozo zinavyofuata alama",
+      "lead": "Sura ya hatua za kudumu ya Kitabu cha Mwongozo wa Hatua dhidi ya Hatari inasema cha kuendelea kufanya mwaka mzima pale hatari ilipo. Mfumo unaonyesha hatua hizi kwa kila hatari iliyoandikwa au kupewa alama katika eneo; pale alama ya hatari yenyewe ilipo juu au juu sana (6 na zaidi) hatua za hatari ya juu huongezwa, na makundi ya udhaifu na uwezo wa kukabiliana yenye alama ya wastani au zaidi (4 na zaidi) huonyesha kauli na hatua zake. Hakuna kinachoonyeshwa ambacho ni onyo: onyo ni rekodi tofauti inayotolewa na kamati, yenye muda wake. Majedwali ya maonyo ya kitabu hayaonyeshwi.",
       "col": {
-        "classes": "Daraja la hatari la INFORM",
-        "set": "Hatua za Kitabu cha Mwongozo zinazoonyeshwa",
-        "groups": "Alama ya hatari au kundi lenyewe"
+        "score": "Alama ya hatari au kundi",
+        "shown": "Kinachoonyeshwa"
       },
-      "set": {
-        "1": "seti ya kwanza",
-        "2": "seti ya pili",
-        "3": "seti ya tatu"
+      "rows": {
+        "1": "hatua za kudumu za hatari",
+        "2": "hatua za kudumu za hatari; kauli na hatua za kundi",
+        "3": "hatua za kudumu za hatari na za hatari ya juu; kauli na hatua za kundi"
       },
       "groups": {
         "1": "chini ya 4",

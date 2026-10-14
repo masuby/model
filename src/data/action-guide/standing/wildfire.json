@@ -1,0 +1,111 @@
+{
+ "hazard": "wildfire",
+ "title": {
+  "en": "Wildfire",
+  "sw": "Moto wa misitu na vichaka"
+ },
+ "intro": {
+  "en": "In the dry season, fires in bush, grass and forest spread fast. Firebreaks, careful burning and a village that knows what to do are the work of every year.",
+  "sw": "Wakati wa kiangazi, moto kwenye vichaka, nyasi na misitu huenea haraka. Njia za kuzuia moto, uchomaji wa uangalifu na kijiji kinachojua cha kufanya ni kazi ya kila mwaka."
+ },
+ "rows": [
+  {
+   "who": {
+    "en": "Households",
+    "sw": "Kaya"
+   },
+   "actions": {
+    "en": [
+     "Clear dry grass and leaves around the house, the kitchen and the stores at the start of each dry season, and keep water and sand at hand.",
+     "Never leave a fire unattended, and put out charcoal and cooking fires fully."
+    ],
+    "sw": [
+     "Safisheni nyasi kavu na majani kuzunguka nyumba, jiko na maghala mwanzoni mwa kila kiangazi, na wekeni maji na mchanga karibu.",
+     "Msiache moto bila kuuangalia, na zimeni kabisa moto wa mkaa na wa kupikia."
+    ]
+   },
+   "high": false,
+   "coastal": false
+  },
+  {
+   "who": {
+    "en": "Farmers, herders and beekeepers",
+    "sw": "Wakulima, wafugaji na wafugaji wa nyuki"
+   },
+   "actions": {
+    "en": [
+     "Burn fields only with the leaders' permission, early in the morning, with a cleared firebreak and people on watch; smoke bees with care."
+    ],
+    "sw": [
+     "Chomeni mashamba kwa ruhusa ya viongozi tu, asubuhi mapema, kwa njia ya kuzuia moto iliyosafishwa na watu wa kuangalia; tumieni moshi kwa nyuki kwa uangalifu."
+    ]
+   },
+   "high": false,
+   "coastal": false
+  },
+  {
+   "who": {
+    "en": "Village, mtaa and ward committees",
+    "sw": "Kamati za kijiji, mtaa na kata"
+   },
+   "actions": {
+    "en": [
+     "Keep firebreaks cut around the village, the school and the forest edge each dry season, and agree the signal and the meeting point when fire is seen."
+    ],
+    "sw": [
+     "Kateni njia za kuzuia moto kuzunguka kijiji, shule na ukingo wa msitu kila kiangazi, na kubalianeni ishara na mahali pa kukusanyika moto unapoonekana."
+    ]
+   },
+   "high": false,
+   "coastal": false
+  },
+  {
+   "who": {
+    "en": "Council and sectors",
+    "sw": "Halmashauri na sekta"
+   },
+   "actions": {
+    "en": [
+     "Enforce the burning by-laws, keep the forest and wildlife authorities' patrols and the Fire and Rescue Force's reach known to the wards, and train village fire teams."
+    ],
+    "sw": [
+     "Simamieni sheria ndogo za uchomaji, hakikisheni doria za mamlaka za misitu na wanyamapori na ufikiwaji wa Jeshi la Zimamoto na Uokoaji vinajulikana kwa kata, na fundisheni timu za moto za vijiji."
+    ]
+   },
+   "high": false,
+   "coastal": false
+  },
+  {
+   "who": {
+    "en": "Households and committees",
+    "sw": "Kaya na kamati"
+   },
+   "actions": {
+    "en": [
+     "Keep a wide cleared belt around homes and stores, plant fire-resistant trees, and practise the fire drill with the school each dry season."
+    ],
+    "sw": [
+     "Wekeni ukanda mpana uliosafishwa kuzunguka nyumba na maghala, pandeni miti isiyoshika moto kwa urahisi, na fanyeni zoezi la moto pamoja na shule kila kiangazi."
+    ]
+   },
+   "high": true,
+   "coastal": false
+  },
+  {
+   "who": {
+    "en": "Council and sectors",
+    "sw": "Halmashauri na sekta"
+   },
+   "actions": {
+    "en": [
+     "Equip and train the village fire teams of the most fire-prone wards first, with tools, water points and a way to call the Fire and Rescue Force."
+    ],
+    "sw": [
+     "Wapeni vifaa na mafunzo timu za moto za vijiji vya kata zenye moto mara kwa mara kwanza, kwa zana, vituo vya maji na njia ya kuita Jeshi la Zimamoto na Uokoaji."
+    ]
+   },
+   "high": true,
+   "coastal": false
+  }
+ ]
+}

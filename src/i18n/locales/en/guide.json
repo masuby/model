@@ -117,14 +117,13 @@
     "less": "Show less"
   },
   "actions": {
-    "title": "What to do",
-    "lead": "The Guide Book’s rows for each hazard in {{name}}, by its score: what people may see, and what to do.",
+    "title": "What to always do",
+    "lead": "What to keep doing about each hazard present in {{name}}: at home, on the farm and the water, in the committees, and in the council and its sectors. Where a hazard’s risk is high, what goes further.",
     "at": "{{hazard}}",
     "more": "All {{count}} rows",
     "less": "Fewer rows",
-    "none": "No rows for this hazard at this level yet.",
-    "council": "This council’s own rows",
-    "summary": "{{count}} hazards with actions; highest: {{top}}",
+    "none": "The guide has no standing actions for this hazard yet.",
+    "summary": "{{count}} hazards with standing actions; highest: {{top}}",
     "choose": "Choose a hazard"
   },
   "groups": {

@@ -71,7 +71,7 @@ describe('RiskCardPage', { timeout: 60_000 }, () => {
     expect(screen.getByText('Risk level')).toBeInTheDocument();
     // In INFORM's terms only: no level word or colour of the Guide Book (PMO-DMD, 14 October 2026); the book's rows under "What to do".
     expect(screen.queryByText(/Advisory|Major warning|Take action|Level [123]/)).not.toBeInTheDocument();
-    expect(await screen.findByText('What to do', {}, { timeout: 20_000 })).toBeInTheDocument();
+    expect(await screen.findByText('What to always do', {}, { timeout: 20_000 })).toBeInTheDocument();
   });
 
   it('shows where the area lies and the risk communication, with no generated statements', async () => {

@@ -1,0 +1,111 @@
+{
+ "hazard": "publicHealth",
+ "title": {
+  "en": "Public health",
+  "sw": "Afya ya jamii"
+ },
+ "intro": {
+  "en": "Outbreaks follow dirty water, crowding and mosquitoes. Clean water, latrines, nets and vaccines are the everyday protection; they matter most after floods and in the dry season.",
+  "sw": "Milipuko hufuata maji machafu, msongamano na mbu. Maji safi, vyoo, vyandarua na chanjo ni kinga ya kila siku; ni muhimu zaidi baada ya mafuriko na wakati wa kiangazi."
+ },
+ "rows": [
+  {
+   "who": {
+    "en": "Households",
+    "sw": "Kaya"
+   },
+   "actions": {
+    "en": [
+     "Drink treated or boiled water, wash hands with soap, use and keep the latrine clean, and sleep under a treated net every night.",
+     "Keep every child's vaccinations up to date and take a fever to the clinic early."
+    ],
+    "sw": [
+     "Kunyweni maji yaliyotibiwa au kuchemshwa, nawe mikono kwa sabuni, tumieni na safisheni choo, na laleni ndani ya chandarua chenye dawa kila usiku.",
+     "Kamilisheni chanjo za kila mtoto na pelekeni homa kliniki mapema."
+    ]
+   },
+   "high": false,
+   "coastal": false
+  },
+  {
+   "who": {
+    "en": "Markets, schools and food sellers",
+    "sw": "Masoko, shule na wauza chakula"
+   },
+   "actions": {
+    "en": [
+     "Keep handwashing water and soap at the entrance, waste collected, and food covered."
+    ],
+    "sw": [
+     "Wekeni maji ya kunawa na sabuni mlangoni, taka zikikusanywa, na chakula kikiwa kimefunikwa."
+    ]
+   },
+   "high": false,
+   "coastal": false
+  },
+  {
+   "who": {
+    "en": "Village, mtaa and ward committees",
+    "sw": "Kamati za kijiji, mtaa na kata"
+   },
+   "actions": {
+    "en": [
+     "Keep the water points protected and chlorine at hand, drain standing water, and report two or more cases of watery diarrhoea or fever with rash to the health facility the same day."
+    ],
+    "sw": [
+     "Lindeni vituo vya maji na wekeni klorini karibu, ondoeni maji yaliyotuama, na toeni taarifa ya wagonjwa wawili au zaidi wa kuhara maji au homa yenye vipele kwa kituo cha afya siku hiyo hiyo."
+    ]
+   },
+   "high": false,
+   "coastal": false
+  },
+  {
+   "who": {
+    "en": "Council and sectors",
+    "sw": "Halmashauri na sekta"
+   },
+   "actions": {
+    "en": [
+     "Keep the disease surveillance, the community health workers, the vaccine cold chain and the stocks of ORS and chlorine working all year, and water sources tested after floods."
+    ],
+    "sw": [
+     "Hakikisheni ufuatiliaji wa magonjwa, wahudumu wa afya ya jamii, mnyororo wa baridi wa chanjo na akiba za ORS na klorini vinafanya kazi mwaka mzima, na vyanzo vya maji vinapimwa baada ya mafuriko."
+    ]
+   },
+   "high": false,
+   "coastal": false
+  },
+  {
+   "who": {
+    "en": "Households and committees",
+    "sw": "Kaya na kamati"
+   },
+   "actions": {
+    "en": [
+     "Join the improved community health fund (iCHF), keep a two-week supply of regular medicines, and know the nearest facility and a second one."
+    ],
+    "sw": [
+     "Jiungeni na bima ya afya ya jamii iliyoboreshwa (iCHF), wekeni dawa za kawaida za wiki mbili, na fahamuni kituo cha afya kilicho karibu na cha pili."
+    ]
+   },
+   "high": true,
+   "coastal": false
+  },
+  {
+   "who": {
+    "en": "Council and sectors",
+    "sw": "Halmashauri na sekta"
+   },
+   "actions": {
+    "en": [
+     "Put the wards with the most cases first for water, sanitation and outreach, and keep an outbreak response plan rehearsed with the health facilities."
+    ],
+    "sw": [
+     "Wekeni kata zenye wagonjwa wengi zaidi mbele kwa maji, usafi wa mazingira na huduma ya mkoba, na wekeni mpango wa kukabiliana na mlipuko uliofanyiwa mazoezi pamoja na vituo vya afya."
+    ]
+   },
+   "high": true,
+   "coastal": false
+  }
+ ]
+}

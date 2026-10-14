@@ -117,14 +117,13 @@
     "less": "Onyesha vichache"
   },
   "actions": {
-    "title": "Cha kufanya",
-    "lead": "Mistari ya Kitabu cha Mwongozo kwa kila hatari hapa {{name}}, kwa alama yake: watu wanaweza kuona nini, na wafanye nini.",
+    "title": "Cha kufanya siku zote",
+    "lead": "Cha kuendelea kufanya kuhusu kila hatari iliyopo hapa {{name}}: nyumbani, shambani na majini, kwenye kamati, na kwenye halmashauri na sekta zake. Pale hatari ilipo juu, kinachoenda mbali zaidi.",
     "at": "{{hazard}}",
     "more": "Mistari yote {{count}}",
     "less": "Mistari michache",
-    "none": "Hakuna mistari ya hatari hii katika ngazi hii bado.",
-    "council": "Mistari ya halmashauri hii yenyewe",
-    "summary": "Hatari {{count}} zenye hatua; ya juu zaidi: {{top}}",
+    "none": "Mwongozo hauna hatua za kudumu za hatari hii bado.",
+    "summary": "Hatari {{count}} zenye hatua za kudumu; ya juu zaidi: {{top}}",
     "choose": "Chagua hatari"
   },
   "groups": {

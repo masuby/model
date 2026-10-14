@@ -961,7 +961,7 @@
       "event": "Ripoti ya tukio",
       "warning": "Tahadhari",
       "vc": "Kupunguza hatari",
-      "action": "Mawasiliano ya hatari"
+      "action": "Hatua za kudumu"
     },
     "kindLead": {
       "drr": "Kama mipango ipo: mpango wa kujiandaa na kukabiliana pamoja na tathmini yake ya hatari na udhaifu, hatua za mapema, timu ya kukabiliana iliyofunzwa, kituo cha operesheni, mafunzo ya kamati kuhusu kupunguza hatari; na jinsi kamati inavyofanya kazi: inafanya kazi, inashirikiana na wadau, inashiriki masuala ya kupunguza hatari. Injini hupima mitano ya kwanza kama mipango ya usimamizi wa maafa iliyopo na vigezo vitatu kama utendaji wa kamati.",
@@ -969,7 +969,7 @@
       "event": "Tukio la kitisho lililotokea: lini, nini, na athari zake. Kamati ya mkoa huthibitisha.",
       "warning": "Tahadhari rasmi kama ilivyotolewa na TMA: kitisho, kiwango, maeneo na muda. Huchapishwa mara moja kwenye maeneo yaliyotajwa na huondoka tarehe ya mwisho.",
       "vc": "Maktaba ya hatua: kwa kila kundi la viashiria la INFORM (vitisho, udhaifu na uwezo wa kukabiliana), kinachokipunguza na sekta zinazoongoza. PMO-DMD huandika, kamati ya taifa hupitia; hatua na sekta huonekana kwenye kadi ya hatari ya kina na kwenye kila eneo ambako kundi lina uzito mkubwa zaidi.",
-      "action": "Mstari mmoja wa kile watu wanaweza kuona na cha kufanya, kwa hatari au kundi la udhaifu au uwezo wa kukabiliana, kwa kundi moja la madaraja ya INFORM au madaraja yote: unasimama badala ya mstari wa Kitabu cha Mwongozo au unafuata mistari ya kitabu kwenye kichunguzi, wasifu na kadi za hatari za eneo lako (au kila mahali, kwa mistari ya kitaifa)."
+      "action": "Mstari mmoja wa cha kufanya siku zote, kwa hatari au kundi la udhaifu au uwezo wa kukabiliana: nani, na hatua zinazokabili hatari mwaka mzima, si onyo. Unasimama badala ya mstari wa Kitabu cha Mwongozo au unafuata mistari ya kitabu kwenye kichunguzi, wasifu na kadi za hatari za eneo lako (au kila mahali, kwa mistari ya kitaifa)."
     },
     "recordTitle": {
       "drr": "Rekodi mipango",
@@ -977,7 +977,7 @@
       "event": "Ripoti tukio",
       "warning": "Rekodi tahadhari rasmi",
       "vc": "Andika au sasisha hatua za kundi",
-      "action": "Andika mstari wa cha kufanya"
+      "action": "Andika mstari wa cha kufanya siku zote"
     },
     "unit": "Eneo",
     "pendingNotice": "Rekodi ya eneo hili inasubiri kuidhinishwa; mpya huchukua nafasi yake ikishaidhinishwa.",
@@ -1118,19 +1118,18 @@
       "national": "Tanzania (kila eneo)",
       "target": "Hatari au kundi",
       "hazards": "Hatari za Kitabu cha Mwongozo",
-      "level": "Inahusu maeneo na hatari zenye alama",
-      "levelAll": "Madaraja yote",
+      "level": "Inashikilia pale hatari au kundi lina alama",
+      "levelAll": "Kila mahali",
       "replaces": "Mstari wa Kitabu cha Mwongozo",
       "replacesNew": "Ongeza mstari mpya baada ya mistari ya kitabu",
       "replacesRow": "Unasimama badala ya mstari {{n}} wa Kitabu cha Mwongozo",
       "bookRows": "Kitabu kina mistari {{count}} hapa; chagua mmoja ili uubadilishe, au ongeza mstari mpya.",
-      "bookRowsNone": "Chagua kundi la madaraja ili kuona mistari ya kitabu kwa hatari; mistari ya kundi hushikilia madaraja yote.",
-      "impact": "Watu wanaweza kuona nini",
-      "actions": "Cha kufanya",
+      "bookRowsNone": "Kitabu hakina mistari hapa bado.",
+      "impact": "Nani",
+      "actions": "Cha kufanya siku zote",
       "actionsHint": "Hatua moja kwa kila mstari.",
       "levels": {
-        "1": "Chini sana na Chini",
-        "2": "Wastani",
+        "2": "Wastani na zaidi",
         "3": "Juu na Juu sana"
       }
     }
@@ -1312,7 +1311,7 @@
     },
     "communication": {
       "title": "Mawasiliano ya hatari",
-      "lead": "Kile kichunguzi, wasifu na kadi za hatari zinasema kifanyike: mistari ya Kitabu cha Mwongozo kwa kila hatari katika ngazi yake na kwa kila kundi la udhaifu na uwezo wa kukabiliana, pamoja na mistari ya kamati inayosimama badala yake au kuifuata. Mistari huandikwa na kupitiwa kwenye dawati la kamati.",
+      "lead": "Kile kichunguzi, wasifu na kadi za hatari zinasema kiendelee kufanywa: hatua za kudumu za Kitabu cha Mwongozo kwa kila hatari iliyopo, kinachoenda mbali zaidi pale hatari ilipo juu, na kauli na hatua za kila kundi la udhaifu na uwezo wa kukabiliana, pamoja na mistari ya kamati inayosimama badala yake au kuifuata. Mistari huandikwa na kupitiwa kwenye dawati la kamati.",
       "hazards": "Hatari kwenye Kitabu cha Mwongozo",
       "groups": "Makundi kwenye Kitabu cha Mwongozo",
       "approved": "Mistari ya kamati iliyochapishwa",

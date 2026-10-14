@@ -1,7 +1,6 @@
 import { useTranslation } from 'react-i18next';
 import { onClassColor } from '@/components/risk/RiskBadge';
 import { CLASS_KEYS, classColor, classify, classRanges, THRESHOLDS, type Scale } from '@/engine/risk/classes';
-import { BAND_BY_CLASS } from '@/features/guide/alert';
 import { ALERT_LEVELS } from '@/features/guide/data';
 import { Callout, Cases, DocSection, Formula, Line, N, Op, P, SubHeading, Txt, V } from '../ui';
 import { NO_VALUE } from '@/lib/utils';
@@ -173,26 +172,20 @@ export function ClassificationSection() {
           <thead>
             <tr className="border-b border-foreground/25 text-left text-xs text-muted-foreground">
               <th scope="col" className="py-2.5 pr-3 font-medium">
-                {t('classification.levels.col.classes')}
-              </th>
-              <th scope="col" className="px-3 py-2.5 font-medium">
-                {t('classification.levels.col.set')}
+                {t('classification.levels.col.score')}
               </th>
               <th scope="col" className="py-2.5 pl-3 font-medium">
-                {t('classification.levels.col.groups')}
+                {t('classification.levels.col.shown')}
               </th>
             </tr>
           </thead>
           <tbody className="divide-y divide-border">
             {ALERT_LEVELS.map((band) => (
               <tr key={band}>
-                <th scope="row" className="py-2.5 pr-3 text-left font-normal">
-                  {CLASS_KEYS.filter((k) => BAND_BY_CLASS[k] === band)
-                    .map((k) => t(`common:classes.${k}`))
-                    .join(', ')}
+                <th scope="row" className="num py-2.5 pr-3 text-left font-normal whitespace-nowrap">
+                  {t(`classification.levels.groups.${band}`)}
                 </th>
-                <td className="px-3 py-2.5">{t(`classification.levels.set.${band}`)}</td>
-                <td className="num py-2.5 pl-3">{t(`classification.levels.groups.${band}`)}</td>
+                <td className="py-2.5 pl-3">{t(`classification.levels.rows.${band}`)}</td>
               </tr>
             ))}
           </tbody>

@@ -1,0 +1,113 @@
+{
+ "hazard": "drought",
+ "title": {
+  "en": "Drought",
+  "sw": "Ukame"
+ },
+ "intro": {
+  "en": "Where drought is documented, the dry years return. Water saved, food stored and incomes spread are the work of every year, not of the dry year alone.",
+  "sw": "Pale ukame ulipoandikwa, miaka ya ukame hurudi. Maji yaliyohifadhiwa, chakula kilichotunzwa na vipato vilivyogawanywa ni kazi ya kila mwaka, si ya mwaka wa ukame pekee."
+ },
+ "rows": [
+  {
+   "who": {
+    "en": "Households",
+    "sw": "Kaya"
+   },
+   "actions": {
+    "en": [
+     "Harvest rainwater from the roof into a covered tank, use water carefully, and keep a store of drinking water.",
+     "Store part of each harvest in a sealed, raised store, and keep a small reserve of cash or savings for the dry months."
+    ],
+    "sw": [
+     "Vuneni maji ya mvua kutoka paa kwenye tangi lililofunikwa, tumieni maji kwa uangalifu, na wekeni akiba ya maji ya kunywa.",
+     "Hifadhini sehemu ya kila mavuno kwenye ghala lililofungwa na kuinuliwa, na wekeni akiba ndogo ya fedha au ya kikundi kwa miezi ya kiangazi."
+    ]
+   },
+   "high": false,
+   "coastal": false
+  },
+  {
+   "who": {
+    "en": "Farmers and herders",
+    "sw": "Wakulima na wafugaji"
+   },
+   "actions": {
+    "en": [
+     "Plant drought-tolerant and early-maturing varieties, keep the soil covered, and keep fewer, healthier animals with fodder stored for the dry season.",
+     "Agree grazing and water routes with neighbouring villages before the dry season."
+    ],
+    "sw": [
+     "Pandeni mbegu zinazostahimili ukame na zinazokomaa mapema, wekeni udongo ukiwa umefunikwa, na fugeni wanyama wachache wenye afya huku malisho yakihifadhiwa kwa kiangazi.",
+     "Kubalianeni njia za malisho na maji na vijiji jirani kabla ya kiangazi."
+    ]
+   },
+   "high": false,
+   "coastal": false
+  },
+  {
+   "who": {
+    "en": "Village, mtaa and ward committees",
+    "sw": "Kamati za kijiji, mtaa na kata"
+   },
+   "actions": {
+    "en": [
+     "Keep the water points maintained and their committees active, protect springs and catchments with trees, and tell the ward early when households start to skip meals."
+    ],
+    "sw": [
+     "Tunzeni vituo vya maji na kamati zake zikiwa hai, lindeni chemchemi na vyanzo vya maji kwa miti, na julisheni kata mapema kaya zinapoanza kuruka milo."
+    ]
+   },
+   "high": false,
+   "coastal": false
+  },
+  {
+   "who": {
+    "en": "Council and sectors",
+    "sw": "Halmashauri na sekta"
+   },
+   "actions": {
+    "en": [
+     "Keep boreholes, dams and charco dams maintained before the dry season, share TMA's seasonal outlook with farmers, and keep seed, fodder and food reserves planned with TASAF and the agriculture sector."
+    ],
+    "sw": [
+     "Karabatini visima virefu, mabwawa na malambo kabla ya kiangazi, shirikisheni wakulima mwelekeo wa msimu wa TMA, na pangeni akiba za mbegu, malisho na chakula pamoja na TASAF na sekta ya kilimo."
+    ]
+   },
+   "high": false,
+   "coastal": false
+  },
+  {
+   "who": {
+    "en": "Households and committees",
+    "sw": "Kaya na kamati"
+   },
+   "actions": {
+    "en": [
+     "Add a second income that does not depend on the rain, join a savings group, and plan the kitchen garden and the fodder store around the dry months."
+    ],
+    "sw": [
+     "Ongezeni kipato cha pili kisichotegemea mvua, jiungeni na kikundi cha kuweka na kukopa, na pangeni bustani ya nyumbani na ghala la malisho kulingana na miezi ya kiangazi."
+    ]
+   },
+   "high": true,
+   "coastal": false
+  },
+  {
+   "who": {
+    "en": "Council and sectors",
+    "sw": "Halmashauri na sekta"
+   },
+   "actions": {
+    "en": [
+     "Put the driest wards first for water supply, irrigation and livestock water, keep a drought contingency plan with triggers from the season's rain, and start support before the lean season bites."
+    ],
+    "sw": [
+     "Wekeni kata kavu zaidi mbele kwa usambazaji wa maji, umwagiliaji na maji ya mifugo, wekeni mpango wa dharura wa ukame wenye vichocheo kutoka mvua ya msimu, na anzeni msaada kabla msimu wa njaa haujakaza."
+    ]
+   },
+   "high": true,
+   "coastal": false
+  }
+ ]
+}

@@ -961,7 +961,7 @@
       "event": "Event report",
       "warning": "Warning",
       "vc": "Reducing risk",
-      "action": "Risk communication"
+      "action": "Standing actions"
     },
     "kindLead": {
       "drr": "Whether the arrangements are in place: preparedness and response plan with its risk and vulnerability assessment, anticipatory action, trained response team, operations centre, DRR training of the committee; and how the committee functions: active, collaborating with stakeholders, involved in DRR issues. The engine scores the first five as DRM arrangements in place and the three criteria as committee functioning.",
@@ -969,7 +969,7 @@
       "event": "A hazard event that happened: when, what, and its impacts. The regional committee validates it.",
       "warning": "An official warning as issued by TMA: hazard, level, areas and validity. It is published at once on the areas named and lifts on its end date.",
       "vc": "The action library: for each INFORM indicator group (hazards, vulnerability and coping capacity), what reduces it and which sectors lead. PMO-DMD writes, the national committee reviews; the actions and the sectors appear on the detailed risk card and on every area where the group weighs most.",
-      "action": "One row of what people may see and what to do, for a hazard or a vulnerability or coping group, for one group of INFORM classes or for every class: it stands in place of a Guide Book row or follows the book’s rows on the explorer, the profile and the risk cards of your area (or everywhere, for national rows)."
+      "action": "One row of what to always do, for a hazard or a vulnerability or coping group: who, and the actions that address the risk all year, not a warning. It stands in place of a Guide Book row or follows the book’s rows on the explorer, the profile and the risk cards of your area (or everywhere, for national rows)."
     },
     "recordTitle": {
       "drr": "Record the arrangements",
@@ -977,7 +977,7 @@
       "event": "Report an event",
       "warning": "Record an official warning",
       "vc": "Write or update the actions for a group",
-      "action": "Write a row of what to do"
+      "action": "Write a row of what to always do"
     },
     "unit": "Area",
     "pendingNotice": "A record for this area is awaiting approval; a new one replaces it once approved.",
@@ -1118,19 +1118,18 @@
       "national": "Tanzania (every area)",
       "target": "Hazard or group",
       "hazards": "Hazards of the Guide Book",
-      "level": "Applies to areas and hazards scoring",
-      "levelAll": "Every class",
+      "level": "Holds where the hazard or group scores",
+      "levelAll": "Everywhere",
       "replaces": "Guide Book row",
       "replacesNew": "Add a new row after the book’s rows",
       "replacesRow": "Stands in place of Guide Book row {{n}}",
       "bookRows": "The book has {{count}} rows here; choose one to replace it, or add a new row.",
-      "bookRowsNone": "Choose a class group to see the book’s rows for a hazard; a group’s rows hold for every class.",
-      "impact": "What people may see",
-      "actions": "What to do",
+      "bookRowsNone": "The book has no rows here yet.",
+      "impact": "Who",
+      "actions": "What to always do",
       "actionsHint": "One action per line.",
       "levels": {
-        "1": "Very low and Low",
-        "2": "Medium",
+        "2": "Medium and above",
         "3": "High and Very high"
       }
     }
@@ -1312,7 +1311,7 @@
     },
     "communication": {
       "title": "Risk communication",
-      "lead": "What the explorer, the profiles and the risk cards say to do: the Guide Book’s rows for each hazard at its level and for each vulnerability and coping group, with the committees’ rows standing in place of them or following them. The rows are written and reviewed at the committee desk.",
+      "lead": "What the explorer, the profiles and the risk cards say to keep doing: the Guide Book’s standing actions for each hazard present, what goes further where its risk is high, and each vulnerability and coping group’s statement and actions, with the committees’ rows standing in place of them or following them. The rows are written and reviewed at the committee desk.",
       "hazards": "Hazards in the Guide Book",
       "groups": "Groups in the Guide Book",
       "approved": "Committee rows published",

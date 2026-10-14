@@ -1,13 +1,13 @@
 /**
- * What to do here: the Risk Action Guide Book's rows for an area, assembled per hazard and per vulnerability
- * or coping group at the level the model puts them (docs/RISK_COMMUNICATION_DESIGN.md).
+ * What to always do here: the Risk Action Guide Book's standing actions for an area, assembled per hazard
+ * and per vulnerability or coping group (docs/RISK_COMMUNICATION_DESIGN.md). Nothing here is a warning: the
+ * rows say what to keep doing all year where a hazard or a condition is present.
  *
- *  • A hazard takes its level from its own score (levelForScore), or the area's level when the guide
- *    documents it without a score; its rows are the council's own (Tabora) or the guide's at that level.
- *  • A vulnerability or coping group shows at Level 2 or 3 by its score, with the guide's rows, which hold
- *    at every level.
+ *  • A hazard shows its standing rows (chapter 13.0); where its own score is high or very high (band 3),
+ *    the rows that go further are added; rows for the coast show on the coast only.
+ *  • A vulnerability or coping group shows at band 2 or 3 by its score, with the guide's statement and rows.
  *  • The committees' approved 'action' records (national, the region's, the council's) stand in place of a
- *    guide row or follow the guide's rows; the most specific first.
+ *    guide row or follow the guide's rows; a record holds for every band, or from the band it names up.
  */
 import * as React from 'react';
 import type { CommitteeRecord, GuidancePayload } from '@/data-layer/types';
@@ -17,7 +17,8 @@ import { isNum } from '@/engine/risk/math';
 import type { Unit } from '@/engine/risk/types';
 import { levelForScore, riskBandFor, type AreaRisk } from './alert';
 import type { HazardItem } from './crosswalk';
-import { isStatusRow, useAreaRecords, useHazardGuides, useIndicatorGuides, type AlertLevel, type AreaGuide, type CouncilGuide, type GuideLevels, type GuideRow, type HazardKey, type IndicatorGuide } from './data';
+import { isCoastal } from './crosswalk';
+import { useAreaRecords, useIndicatorGuides, useStandingGuides, type AlertLevel, type AreaGuide, type GuideRow, type HazardKey, type IndicatorGuide, type StandingGuide } from './data';
 
 export interface ActionRow extends GuideRow {
   /** The guide's row, the council's own row, or a committee's. */
@@ -33,8 +34,8 @@ export interface ActionScope {
 const when = (r: CommitteeRecord) => r.reviewedAt ?? r.createdAt;
 
 /**
- * The approved 'action' rows that apply to a hazard or a group at a level: the council's, then the region's,
- * then the national ones; a row without a level holds at every level.
+ * The approved 'action' rows that apply to a hazard or a group at a band: the council's, then the region's,
+ * then the national ones; a row without a band holds everywhere, a row with one holds from that band up.
  */
 export function actionRecords(records: readonly CommitteeRecord[], target: { hazard?: HazardKey | null; group?: string | null }, level: AlertLevel, scope: ActionScope): CommitteeRecord[] {
   const rank = (r: CommitteeRecord) => (r.unitId === scope.councilId ? 0 : r.unitId === scope.regionId ? 1 : r.unitId === 'TZ' ? 2 : -1);
@@ -44,13 +45,13 @@ export function actionRecords(records: readonly CommitteeRecord[], target: { haz
       const p = r.payload as GuidancePayload;
       if (p.topic !== 'action') return false;
       if (target.hazard ? r.hazard !== target.hazard : !target.group || p.group !== target.group) return false;
-      return p.level == null || p.level === level;
+      return p.level == null || level >= p.level;
     })
     .sort((a, b) => rank(a) - rank(b) || when(a).localeCompare(when(b)));
 }
 
 /** The guide's rows with the committees' rows applied: a row that replaces row i stands in its place (the most specific, latest wins); the others follow. */
-export function applyActions(base: readonly GuideRow[], from: 'guide' | 'council', records: readonly CommitteeRecord[]): ActionRow[] {
+export function applyActions(base: readonly GuideRow[], from: 'guide' | 'council', records: readonly CommitteeRecord[], keep: (i: number) => boolean = () => true): ActionRow[] {
   const replaced = new Map<number, CommitteeRecord>();
   const added: CommitteeRecord[] = [];
   // Least specific first, so that the council's row overwrites the national one for the same guide row.
@@ -63,14 +64,18 @@ export function applyActions(base: readonly GuideRow[], from: 'guide' | 'council
     const p = r.payload as GuidancePayload;
     return { impact: p.impact ?? { en: '', sw: '' }, actions: p.actions ?? { en: [], sw: [] }, from: 'committee', record: r };
   };
-  return [...base.map((row, i) => (replaced.has(i) ? view(replaced.get(i)!) : { ...row, from })), ...added.map(view)];
+  return [...base.flatMap((row, i) => (keep(i) ? [replaced.has(i) ? view(replaced.get(i)!) : { ...row, from }] : [])), ...added.map(view)];
 }
 
-/** The rows of a hazard at a level: the council's own rows when the guide has them, else the hazard's; the rows that only say "keep following updates" left out. */
-export function hazardActionRows(level: AlertLevel, hazard: GuideLevels | null | undefined, council: CouncilGuide | null | undefined, hazardKey: HazardKey, records: readonly CommitteeRecord[], scope: ActionScope): ActionRow[] {
-  const own = council?.levels?.[String(level) as '1' | '2' | '3'];
-  const base = (own?.length ? own : (hazard?.[String(level) as '1' | '2' | '3'] ?? [])).filter((r) => !isStatusRow(r));
-  return applyActions(base, own?.length ? 'council' : 'guide', actionRecords(records, { hazard: hazardKey }, level, scope));
+/**
+ * The standing rows of a hazard at a band: every row that holds everywhere, the rows that go further where the
+ * band is 3 (high or very high), the coast's rows on the coast; the committees' rows applied. `replaces` counts
+ * the guide's rows as the book lists them (the rows for high risk included).
+ */
+export function hazardActionRows(band: AlertLevel, standing: StandingGuide | null | undefined, coastal: boolean, hazardKey: HazardKey, records: readonly CommitteeRecord[], scope: ActionScope): ActionRow[] {
+  const rows = standing?.rows ?? [];
+  const base: GuideRow[] = rows.map((r) => ({ impact: r.who, actions: r.actions }));
+  return applyActions(base, 'guide', actionRecords(records, { hazard: hazardKey }, band, scope), (i) => (!rows[i].high || band === 3) && (!rows[i].coastal || coastal));
 }
 
 /** The rows of a vulnerability or coping group at a level: the guide's rows, which hold at every level, with the committees' rows applied. */
@@ -80,9 +85,8 @@ export function groupActionRows(level: AlertLevel, guide: IndicatorGuide | null 
 
 export interface HazardCommunication {
   item: HazardItem;
+  /** The band of the hazard's own score (1 under 4, 2 to under 6, 3 from 6), or the area's band where the guide documents it without a score. */
   level: AlertLevel;
-  /** Whether the level is the hazard's own (from its score) or the area's (a documented hazard without a score). */
-  own: boolean;
   rows: ActionRow[];
 }
 export interface GroupCommunication {
@@ -122,30 +126,29 @@ export function scopeOf(unit: Unit): ActionScope {
   return { councilId: null, regionId: null };
 }
 
-/** Everything the surfaces show for an area: its level, the rows per hazard at each hazard's level, and the groups at Level 2 or 3 with their rows. */
+/** Everything the surfaces show for an area: its class, the standing rows per hazard, and the groups scoring medium or above with their rows. */
 export function useAreaCommunication(unit: Unit, items: readonly HazardItem[], guide: AreaGuide): AreaCommunication {
   const risk = riskBandFor(unit.risk);
   const { records } = useAreaRecords(unit);
   const hazardKeys = React.useMemo(() => [...new Set(items.flatMap((i) => (i.guide && i.guidance === 'guide' ? [i.guide] : [])))], [items]);
   const groups = React.useMemo(() => groupsAtLevel(unit), [unit]);
   const groupKeys = React.useMemo(() => groups.map((g) => g.key), [groups]);
-  const hazardGuides = useHazardGuides(hazardKeys);
+  const standing = useStandingGuides(hazardKeys);
   const indicatorGuides = useIndicatorGuides(groupKeys);
-  const council = unit.level === 'council' ? (guide.entries.find((e) => e.council.id === unit.id)?.guide ?? null) : null;
+  const coastal = isCoastal(unit);
   const scope = React.useMemo(() => scopeOf(unit), [unit]);
   return React.useMemo(() => {
     const hazards: HazardCommunication[] = items
       .filter((i) => i.guide && i.guidance === 'guide')
       .map((i) => {
-        const ownLevel = levelForScore(i.score);
-        const level = ownLevel ?? risk?.band ?? 1;
-        return { item: i, level, own: ownLevel != null, rows: hazardActionRows(level, hazardGuides.byKey.get(i.guide!), council, i.guide!, records, scope) };
+        const level = levelForScore(i.score) ?? risk?.band ?? 1;
+        return { item: i, level, rows: hazardActionRows(level, standing.byKey.get(i.guide!), coastal, i.guide!, records, scope) };
       });
     const groupRows: GroupCommunication[] = groups.map((g) => {
       const ref = `${g.dim}:${g.key}`;
       const ig = indicatorGuides.byKey.get(g.key) ?? null;
       return { ...g, ref, guide: ig, rows: groupActionRows(g.level, ig, ref, records, scope) };
     });
-    return { loading: guide.loading || hazardGuides.loading || indicatorGuides.loading, risk, hazards, groups: groupRows };
-  }, [items, groups, hazardGuides, indicatorGuides, council, records, scope, risk, guide.loading]);
+    return { loading: guide.loading || standing.loading || indicatorGuides.loading, risk, hazards, groups: groupRows };
+  }, [items, groups, standing, indicatorGuides, coastal, records, scope, risk, guide.loading]);
 }

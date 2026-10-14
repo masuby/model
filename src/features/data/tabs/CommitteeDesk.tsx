@@ -42,7 +42,7 @@ import { regionIdOf } from '@/engine/risk/rawValues';
 import { authorityLabel } from '@/engine/risk/sources';
 import type { RiskModel, Unit } from '@/engine/risk/types';
 import { ALERT_COLOR, onAlertColor } from '@/features/guide/alert';
-import { ALERT_LEVELS, HAZARD_KEYS, useAreaGuide, useHazardGuide, useIndicatorGuides, type AlertLevel, type HazardKey } from '@/features/guide/data';
+import { ALERT_LEVELS, HAZARD_KEYS, useAreaGuide, useIndicatorGuides, useStandingGuide, type AlertLevel, type HazardKey } from '@/features/guide/data';
 import { cn, formatDate } from '@/lib/utils';
 import { EmptyState, ErrorState, ListSkeleton } from '../components/common';
 import { NOTE_MAX } from '../components/SubmitPanel';
@@ -764,9 +764,9 @@ const ACTION_TARGETS = [...HAZARD_KEYS.map((h) => ({ value: `guide:${h}`, dim: '
 
 /**
  * One row of the risk-communication library (docs/RISK_COMMUNICATION_DESIGN.md): for the country, the
- * person's region or council; for a hazard or a group; for one group of INFORM classes (very low and low,
- * medium, high and very high) or for every class; standing in place of a Guide Book row or added after
- * them. Reviewed like any committee record.
+ * person's region or council; for a hazard or a group; holding everywhere, from medium up, or at high and
+ * very high only; standing in place of a Guide Book row or added after them. A standing action, never a
+ * warning. Reviewed like any committee record.
  */
 function ActionForm({ records }: { records: readonly CommitteeRecord[] }) {
   const { t, i18n } = useTranslation(['data', 'common', 'indicators', 'guide']);
@@ -778,17 +778,17 @@ function ActionForm({ records }: { records: readonly CommitteeRecord[] }) {
   const units = React.useMemo(() => scopedUnits(model, profile, 'guidance'), [model, profile]);
   const [scope, setScope] = React.useState<string>(() => (national ? 'TZ' : (units[0]?.unit.id ?? '')));
   const [target, setTarget] = React.useState(ACTION_TARGETS[0].value);
-  const [level, setLevel] = React.useState<'all' | '1' | '2' | '3'>('all');
+  const [level, setLevel] = React.useState<'all' | '2' | '3'>('all');
   const [impact, setImpact] = React.useState({ en: '', sw: '' });
   const [actions, setActions] = React.useState({ en: '', sw: '' });
   const [replaces, setReplaces] = React.useState('new');
   const [source, setSource] = React.useState('');
   const hazardKey = target.startsWith('guide:') ? (target.slice(6) as HazardKey) : null;
   const groupKey = hazardKey ? null : target.split(':')[1];
-  // The Guide Book's rows for the target at the level, so that a row to replace is chosen by what it says.
-  const hazardGuide = useHazardGuide(hazardKey);
+  // The Guide Book's rows for the target (a hazard's standing rows, a group's rows), so that a row to replace is chosen by what it says.
+  const standing = useStandingGuide(hazardKey);
   const indicatorGuides = useIndicatorGuides(groupKey ? [groupKey] : []);
-  const bookRows = hazardKey ? (level === 'all' ? [] : (hazardGuide.data?.[level] ?? [])) : (indicatorGuides.byKey.get(groupKey!)?.rows ?? []);
+  const bookRows = hazardKey ? (standing.data?.rows ?? []).map((r) => ({ impact: r.who, actions: r.actions })) : (indicatorGuides.byKey.get(groupKey!)?.rows ?? []);
   React.useEffect(() => setReplaces('new'), [target, level]);
   const lines = (x: string) => x.split('\n').map((l) => l.trim()).filter(Boolean);
   const complete = lines(actions.en).length + lines(actions.sw).length > 0;
@@ -866,9 +866,9 @@ function ActionForm({ records }: { records: readonly CommitteeRecord[] }) {
           </div>
           <div className="space-y-1.5">
             <Label htmlFor="action-level">{t('committee.action.level')}</Label>
-            <Select value={level} onValueChange={(v) => setLevel(v as 'all' | '1' | '2' | '3')} aria-label={t('committee.action.level')} className="h-9 w-full">
+            <Select value={level} onValueChange={(v) => setLevel(v as 'all' | '2' | '3')} aria-label={t('committee.action.level')} className="h-9 w-full">
               <SelectItem value="all">{t('committee.action.levelAll')}</SelectItem>
-              {ALERT_LEVELS.map((l) => (
+              {([2, 3] as const).map((l) => (
                 <SelectItem key={l} value={String(l)}>
                   {t(`committee.action.levels.${l}`)}
                 </SelectItem>

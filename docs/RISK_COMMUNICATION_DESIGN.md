@@ -4,42 +4,48 @@ Design of 14 October 2026, built the same day. The Guide Book (`docs/RISK_ACTION
 PMO-DMD) is the source of everything the system says about what a risk means for people and what to do;
 the INFORM model stays untouched and decides which of the book's statements apply to an area.
 
-## 1. Decision: the Guide Book's actions follow the INFORM risk class, in INFORM's terms
+## 1. Decision: standing actions, in INFORM's terms
 
-PMO-DMD's decision of 14 October 2026: the system communicates in INFORM's own terms, the risk class
-("Medium risk, 3.8 out of 10"), and the class decides which of the Guide Book's three sets of actions
-apply. The book's level words (advisory, warning, major warning) and its colour names are never shown,
-and no warning is derived from the class (the rule of 11 October stands).
+PMO-DMD's decisions of 14 October 2026:
 
-| INFORM risk class    | Guide Book actions shown |
-|----------------------|--------------------------|
-| Very low, Low        | the book's first set     |
-| Medium               | the second set           |
-| High, Very high      | the third set            |
+- The system communicates in INFORM's own terms, the risk class ("Medium risk, 3.8 out of 10"). The
+  book's level words (advisory, warning, major warning) and colour names are never shown, and no warning
+  is derived from the class.
+- What the system says to do is what people should **always** be doing about the risks present: actions
+  that address the risk all year, at home, on the farm and the water, in the committees and in the
+  council. Nothing reads like a warning or a forecast in force; a warning is a separate record the
+  committees publish, with its own validity, and the book's warning tables (chapters 1.0 to 9.0) are not
+  shown as risk communication.
 
-The class thresholds are the SADC workbook's (risk 2.5 / 3.4 / 4.3 / 5.9) and do not change, and the map
-keeps the five-step palette of 11 October.
+The book's chapter 13.0, Standing actions by hazard (added 14 October 2026), carries these actions: for
+each of the nine hazards, rows by who (households; farmers, herders, fishers; village, mtaa and ward
+committees; council and sectors) and, where the hazard's risk is high, the rows that go further.
 
-The same correlation applies to **one hazard or indicator group** by its own score, with the hazard list's
-display rule (decision D7: under 2 very low, 2 to 4 low, 4 to 6 medium, 6 to 8 high, 8 and above very
-high): very low and low take the first set, medium the second, high and very high the third. So a
-Medium-risk council whose drought scores 9.4 shows the third set of drought actions and the second set of
-wildfire actions: when a value reaches the next class, the specific action changes with it.
+How the scores select what is shown (the hazard list's display rule, D7: under 4, 4 to under 6, 6 and
+above):
 
-A published warning (a committee record of kind `warning`) remains a separate record with its own areas
-and validity, shown while in force.
+| A hazard or group's own score | Shown |
+|---|---|
+| under 4 | the hazard's standing actions |
+| 4 to under 6 | the hazard's standing actions; a vulnerability or coping group's statement and actions |
+| 6 and above | the hazard's standing actions and those for high risk; a group's statement and actions |
+
+A row for the coast (tsunami) shows on the coast only. The class thresholds are the SADC workbook's and
+do not change; the map keeps the palette of 11 October. The two standing messages of the area's class
+(for those who live here, for those who plan here) stay as they were.
 
 ## 2. Content: what the book provides
 
 All of it bilingual, extracted by `scripts/build-action-guide.py` from the book in `data-source/`:
 
-- **Hazards (chapters 1.0 to 9.0)**: for each guide hazard, three levels of IMPACT → ACTION rows
-  (`src/data/action-guide/hazards/<hazard>.json`). Tabora's councils carry their own rows.
+- **Hazards (chapters 1.0 to 9.0)**: the warning-level tables (`hazards/<hazard>.json`), kept for the
+  warnings the committees publish, not shown as risk communication.
 - **Incidents (10.0)**: the rapid-response guide (`incidents.json`).
-- **Vulnerability (11.0) and Lack of Coping Capacity (12.0)**, new on 14 October: for each INFORM group a
-  statement of what the indicator measures and what a high score means, the lead sectors, and IMPACT →
-  ACTION rows that hold at every level (`src/data/action-guide/indicators/<group>.json`).
-- **Regions (13.0)**: each council's documented hazards and "Know your risk" statements (`regions/`).
+- **Vulnerability (11.0) and Lack of Coping Capacity (12.0)**: per INFORM group, what the indicator
+  measures and what a high score means, the lead sectors, and rows of what helps (`indicators/<group>.json`).
+- **Standing actions by hazard (13.0)**: per guide hazard, the rows by who, and the rows for high risk
+  (`standing/<hazard>.json`, with `high` and `coastal` flags).
+- **Regions (14.0)**: each council's documented hazards and "Know your risk" statements (`regions/`).
 
 The crosswalk (`src/features/guide/crosswalk.ts`) ties the model's hazard groups to the guide's hazards.
 
@@ -48,16 +54,13 @@ The crosswalk (`src/features/guide/crosswalk.ts`) ties the model's hazard groups
 Every surface names the INFORM class, in the reader's language, with the book's own words and no
 stories:
 
-| Surface | Class | Hazard actions | Vulnerability and coping |
+| Surface | Class | Standing actions by hazard | Vulnerability and coping |
 |---|---|---|---|
-| Explorer panel, Risk communication | the class badge and the two standing messages | the area's top three hazards, each by its own score: two rows, fold to all | the two highest groups scoring medium or above: one row each, fold to all |
-| Profile, "What to do" and "What makes the difference here" | same | each hazard with its class, score and rows (folded) | every group scoring medium or above, with what it measures and the library's entry |
+| Explorer panel, Risk communication | the class badge and the two standing messages | "What to always do": a chip per hazard present (colour and score, the highest chosen first); the chosen one's rows | "What makes the difference here": a chip per group scoring medium or above; the chosen one's rows |
+| Profile | same | the same choosers, folded | the same, with what the group measures and the library's entry |
 | One-page risk card | the class badge | top three hazards, one row each | the groups scoring high or above, one row each |
 | Detailed risk card | the class badge | every high-scoring hazard group, its rows | every high-scoring group: the book's rows and the committee's library entry when there is one |
-| Methodology, Classification | the table of section 1 and the group rule | | |
-
-Council-specific rows (Tabora) replace the national rows of the hazard. Rows that only say "keep following
-updates" stay out, as before.
+| Methodology, Classification | the table of section 1 | | |
 
 ## 4. Management: the library in the Data portal
 
@@ -66,7 +69,8 @@ committee records on top of it. A record of kind `guidance` with `topic: 'action
 
 ```
 { topic: 'action', group: 'hazard:flood' | 'vulnerability:livelihoods' | ..., hazard?: 'floods',
-  level: 1 | 2 | 3 | null (the class group it holds for, or every class), impact: {en, sw}, actions: {en: [], sw: []},
+  level: null (holds everywhere) | 2 (from medium up) | 3 (high and very high), impact: {en, sw} (who),
+  actions: {en: [], sw: []},
   replaces: <book row index> | null }
 ```
 
@@ -74,9 +78,9 @@ committee records on top of it. A record of kind `guidance` with `topic: 'action
   NDRRC (as the vulnerability-and-coping library is today); council rows by the council's DDRRC, reviewed by
   the RDRRC; region rows by the RDRRC, reviewed by the NDRRC.
 - A row with `replaces` stands in place of that book row; without it, it is added after the book's rows.
-- The desk (Data portal → Committee desk → "Risk communication") offers the form: scope, indicator group
-  or hazard, the class group (very low and low, medium, high and very high, or every class), impact and
-  actions in both languages, the book row it replaces, the source. The Data
+- The desk (Data portal → Committee desk → "Standing actions") offers the form: scope, hazard or
+  group, where it holds (everywhere, from medium up, at high and very high), who and the actions in both
+  languages, the book row it replaces, the source. A row is a standing action, never a warning. The Data
   management tab shows the library's state: book rows and committee rows per level.
 - Reviewed records are published at once on every surface; the audit log records them as any committee
   record. No database change is needed: the rows use the existing `committee_records` table, which the live

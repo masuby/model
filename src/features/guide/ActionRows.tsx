@@ -58,7 +58,6 @@ export function HazardActions({ hazard, coastal, first = 3, dense = false }: { h
             {t(`common:classes.${band}`)} · {formatScore(hazard.item.score)}
           </span>
         )}
-        {hazard.rows.some((r) => r.from === 'council') && <span className="text-xs text-muted-foreground">{t('actions.council')}</span>}
       </p>
       <ActionList rows={hazard.rows} first={first} dense={dense} className="mt-1" />
     </div>

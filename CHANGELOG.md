@@ -2,6 +2,18 @@
 
 ## Unreleased
 
+### Standing actions, not warnings (14 October 2026)
+
+- What the system says to do is now what people should always be doing about the risks present, by
+  PMO-DMD's decision: the Guide Book's new chapter 13.0, Standing actions by hazard, gives for each of the
+  nine hazards the rows by who (households; farmers, herders, fishers; village, mtaa and ward committees;
+  council and sectors) and, where a hazard's own score is high or very high, the rows that go further. A
+  row for the coast shows on the coast only. The book's warning-level tables are no longer shown as risk
+  communication; they belong to the warnings the committees publish.
+- "What to do" reads "What to always do" on the panel, the profile and the cards; the desk's rows are
+  "Standing actions" and hold everywhere, from medium up, or at high and very high.
+- The book in docs/ and data-source/ carries the chapter; the regions chapter is now 14.0.
+
 ### What to do: choose the hazard or the group (14 October 2026)
 
 - On the explorer panel and the profile, "What to do" and "What makes the difference here" offer a chip

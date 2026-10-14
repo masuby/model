@@ -256,17 +256,16 @@
     "example": "A score of {{value}} is {{hazardClass}} on the Hazard & Exposure scale but only {{riskClass}} on the INFORM Risk scale.",
     "if": "if",
     "levels": {
-      "title": "How the Guide Book’s actions follow the INFORM class",
-      "lead": "The Risk Action Guide Book arranges its actions for each hazard in three sets. The system shows the first set for areas whose INFORM risk is Very low or Low, the second for Medium, the third for High and Very high; one hazard or indicator group follows its own score (under 4, 4 to 6, 6 and above). The book’s level words and colours are not shown: the site communicates in the INFORM classes. A warning the committees publish is a separate record with its own validity.",
+      "title": "How the Guide Book’s standing actions follow the scores",
+      "lead": "The Risk Action Guide Book’s chapter on standing actions says what to keep doing all year where a hazard is present. The system shows these actions for each hazard documented or scored in an area; where a hazard’s own score is high or very high (6 and above) the actions for high risk are added, and the vulnerability and coping groups scoring medium or above (4 and above) show their statement and actions. Nothing shown is a warning: a warning is a separate record the committees publish, with its own validity. The book’s warning tables are not shown.",
       "col": {
-        "classes": "INFORM risk class",
-        "set": "Guide Book actions shown",
-        "groups": "A hazard or group’s own score"
+        "score": "A hazard or group’s score",
+        "shown": "Shown"
       },
-      "set": {
-        "1": "first set",
-        "2": "second set",
-        "3": "third set"
+      "rows": {
+        "1": "the hazard’s standing actions",
+        "2": "the hazard’s standing actions; a group’s statement and actions",
+        "3": "the hazard’s standing actions and those for high risk; a group’s statement and actions"
       },
       "groups": {
         "1": "under 4",

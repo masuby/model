@@ -1,0 +1,111 @@
+{
+ "hazard": "largeWaves",
+ "title": {
+  "en": "Large waves",
+  "sw": "Mawimbi makubwa"
+ },
+ "intro": {
+  "en": "On the coast and the great lakes, high waves and storms are part of every year. Safe boats, safe landing sites and homes set back from the shore are the standing answers.",
+  "sw": "Pwani na kwenye maziwa makuu, mawimbi makubwa na dhoruba ni sehemu ya kila mwaka. Vyombo salama, mialo salama na nyumba zilizojengwa mbali na ufukwe ndiyo majibu ya kudumu."
+ },
+ "rows": [
+  {
+   "who": {
+    "en": "Households",
+    "sw": "Kaya"
+   },
+   "actions": {
+    "en": [
+     "Build and extend away from the shoreline and the eroding bank, above the highest known wave mark.",
+     "Keep children away from the shore and the landing site in rough weather."
+    ],
+    "sw": [
+     "Jengeni na ongezeni nyumba mbali na ufukwe na kingo zinazomomonyoka, juu ya alama ya juu ya mawimbi inayojulikana.",
+     "Waweke watoto mbali na ufukwe na mwalo hali ya hewa inapokuwa mbaya."
+    ]
+   },
+   "high": false,
+   "coastal": false
+  },
+  {
+   "who": {
+    "en": "Fishers and boat operators",
+    "sw": "Wavuvi na waendesha vyombo"
+   },
+   "actions": {
+    "en": [
+     "Keep life jackets for every person on board, the boat sound and registered, and check the weather before each trip; a trip left for another day is a trip saved."
+    ],
+    "sw": [
+     "Kuweni na maboya ya kuokolea kwa kila mtu chomboni, chombo kikiwa imara na kimesajiliwa, na angalieni hali ya hewa kabla ya kila safari; safari iliyoahirishwa ni safari iliyookolewa."
+    ]
+   },
+   "high": false,
+   "coastal": false
+  },
+  {
+   "who": {
+    "en": "Beach management units and committees",
+    "sw": "Vitengo vya usimamizi wa mialo na kamati"
+   },
+   "actions": {
+    "en": [
+     "Keep the landing site's flag or signal in use, a rescue boat and trained swimmers at hand, and the list of boats and crews up to date."
+    ],
+    "sw": [
+     "Tumieni bendera au ishara ya mwalo, wekeni mtumbwi wa uokoaji na waogeleaji waliofundishwa karibu, na sasisheni orodha ya vyombo na wahudumu wake."
+    ]
+   },
+   "high": false,
+   "coastal": false
+  },
+  {
+   "who": {
+    "en": "Council and sectors",
+    "sw": "Halmashauri na sekta"
+   },
+   "actions": {
+    "en": [
+     "Keep mangroves, reefs and dunes protected and planted; keep the shoreline reserve out of building permits; keep harbours and ferries inspected."
+    ],
+    "sw": [
+     "Lindeni na pandeni mikoko, miamba na matuta ya mchanga; wekeni hifadhi ya ufukwe nje ya vibali vya ujenzi; kagueni bandari na vivuko."
+    ]
+   },
+   "high": false,
+   "coastal": false
+  },
+  {
+   "who": {
+    "en": "Households and committees",
+    "sw": "Kaya na kamati"
+   },
+   "actions": {
+    "en": [
+     "Agree the safe place above the shore and the way to it, and keep the route clear; move stores and nets above the wave mark each season."
+    ],
+    "sw": [
+     "Kubalianeni mahali salama juu ya ufukwe na njia ya kufika, na wekeni njia hiyo wazi; hamisheni akiba na nyavu juu ya alama ya mawimbi kila msimu."
+    ]
+   },
+   "high": true,
+   "coastal": false
+  },
+  {
+   "who": {
+    "en": "Council and sectors",
+    "sw": "Halmashauri na sekta"
+   },
+   "actions": {
+    "en": [
+     "Plan and keep sea walls, drainage and the gradual move of the most exposed homes, with the lands and environment sectors."
+    ],
+    "sw": [
+     "Pangeni na tunzeni kuta za bahari, mitaro na uhamishaji wa taratibu wa nyumba zilizo hatarini zaidi, pamoja na sekta za ardhi na mazingira."
+    ]
+   },
+   "high": true,
+   "coastal": false
+  }
+ ]
+}

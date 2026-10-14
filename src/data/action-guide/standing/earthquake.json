@@ -1,0 +1,111 @@
+{
+ "hazard": "earthquake",
+ "title": {
+  "en": "Earthquake and tsunami",
+  "sw": "Tetemeko la ardhi na tsunami"
+ },
+ "intro": {
+  "en": "Tremors come without notice, so the preparation is in how we build and in what everyone knows: drop, cover and hold; and on the coast, the way to high ground.",
+  "sw": "Mitetemeko huja bila taarifa, hivyo maandalizi yako katika jinsi tunavyojenga na kile kila mtu anachokijua: inama, jifunike na shikilia; na pwani, njia ya kwenda mwinuko."
+ },
+ "rows": [
+  {
+   "who": {
+    "en": "Households",
+    "sw": "Kaya"
+   },
+   "actions": {
+    "en": [
+     "Build with tied corners, ring beams and light roofs, and fix heavy shelves and water tanks so that they cannot fall.",
+     "Teach everyone at home: drop, cover and hold; then go out to an open space away from walls and wires."
+    ],
+    "sw": [
+     "Jengeni kwa pembe zilizofungwa, boriti za kuzunguka na paa nyepesi, na fungeni rafu nzito na matangi ya maji yasianguke.",
+     "Fundisheni kila mtu nyumbani: inama, jifunike na shikilia; kisha tokeni nje kwenye eneo la wazi mbali na kuta na nyaya."
+    ]
+   },
+   "high": false,
+   "coastal": false
+  },
+  {
+   "who": {
+    "en": "Schools and workplaces",
+    "sw": "Shule na sehemu za kazi"
+   },
+   "actions": {
+    "en": [
+     "Practise the earthquake drill twice a year and keep the exits clear."
+    ],
+    "sw": [
+     "Fanyeni zoezi la tetemeko mara mbili kwa mwaka na wekeni njia za kutokea wazi."
+    ]
+   },
+   "high": false,
+   "coastal": false
+  },
+  {
+   "who": {
+    "en": "Coastal households and committees",
+    "sw": "Kaya na kamati za pwani"
+   },
+   "actions": {
+    "en": [
+     "Know the way to high ground from the home, the school and the landing site; a long tremor or the sea pulling back means going up at once and staying until the leaders say the sea has settled."
+    ],
+    "sw": [
+     "Fahamuni njia ya kwenda mwinuko kutoka nyumbani, shuleni na mwaloni; tetemeko refu au bahari kujiondoa humaanisha kupanda mara moja na kukaa hadi viongozi waseme bahari imetulia."
+    ]
+   },
+   "high": false,
+   "coastal": true
+  },
+  {
+   "who": {
+    "en": "Council and sectors",
+    "sw": "Halmashauri na sekta"
+   },
+   "actions": {
+    "en": [
+     "Apply the building code for masonry and public buildings, check schools and clinics, and keep GST's advice and the drill in the school calendar."
+    ],
+    "sw": [
+     "Tumieni kanuni za ujenzi kwa majengo ya matofali na ya umma, kagueni shule na zahanati, na wekeni ushauri wa GST na zoezi kwenye kalenda ya shule."
+    ]
+   },
+   "high": false,
+   "coastal": false
+  },
+  {
+   "who": {
+    "en": "Households and committees",
+    "sw": "Kaya na kamati"
+   },
+   "actions": {
+    "en": [
+     "Strengthen existing walls with bands and buttresses where an engineer advises, and keep a first-aid kit and a torch where they can be found in the dark."
+    ],
+    "sw": [
+     "Imarisheni kuta zilizopo kwa mikanda na nguzo za kuegemeza pale mhandisi anaposhauri, na wekeni kifaa cha huduma ya kwanza na tochi mahali pa kupatikana gizani."
+    ]
+   },
+   "high": true,
+   "coastal": false
+  },
+  {
+   "who": {
+    "en": "Council and sectors",
+    "sw": "Halmashauri na sekta"
+   },
+   "actions": {
+    "en": [
+     "Assess and strengthen the schools, clinics and markets in the most exposed wards first, and train the response team in search and rescue with the Fire and Rescue Force."
+    ],
+    "sw": [
+     "Fanyeni tathmini na imarisheni shule, zahanati na masoko ya kata zilizo hatarini zaidi kwanza, na fundisheni timu ya kukabiliana utafutaji na uokoaji pamoja na Jeshi la Zimamoto na Uokoaji."
+    ]
+   },
+   "high": true,
+   "coastal": false
+  }
+ ]
+}

@@ -1,0 +1,119 @@
+{
+ "hazard": "floods",
+ "title": {
+  "en": "Floods",
+  "sw": "Mafuriko"
+ },
+ "intro": {
+  "en": "Where floods are documented, the water will come back. These are the things to keep doing, in every season, so that the next flood finds people ready.",
+  "sw": "Pale mafuriko yalipoandikwa, maji yatarudi. Haya ni mambo ya kuendelea kufanya, kila msimu, ili mafuriko yajayo yawakute watu wako tayari."
+ },
+ "rows": [
+  {
+   "who": {
+    "en": "Households",
+    "sw": "Kaya"
+   },
+   "actions": {
+    "en": [
+     "Know how high past floods reached and keep beds, stores and power sockets above that mark.",
+     "Keep documents, medicines and some cash in a sealed bag that can be picked up quickly.",
+     "Treat or boil drinking water after any flood, and keep a covered store of clean water."
+    ],
+    "sw": [
+     "Fahamuni kiwango cha juu ambacho mafuriko ya zamani yalifikia na wekeni vitanda, akiba na soketi za umeme juu ya alama hiyo.",
+     "Hifadhini nyaraka, dawa na fedha kidogo kwenye mfuko usiopitisha maji unaoweza kuchukuliwa haraka.",
+     "Tibuni au chemsheni maji ya kunywa baada ya mafuriko yoyote, na wekeni akiba ya maji safi iliyofunikwa."
+    ]
+   },
+   "high": false,
+   "coastal": false
+  },
+  {
+   "who": {
+    "en": "Farmers and traders",
+    "sw": "Wakulima na wafanyabiashara"
+   },
+   "actions": {
+    "en": [
+     "Keep the river reserve free of crops and structures, and store the harvest and stock on raised platforms."
+    ],
+    "sw": [
+     "Acheni hifadhi ya mto bila mazao wala majengo, na hifadhini mavuno na bidhaa kwenye sakafu zilizoinuliwa."
+    ]
+   },
+   "high": false,
+   "coastal": false
+  },
+  {
+   "who": {
+    "en": "Village, mtaa and ward committees",
+    "sw": "Kamati za kijiji, mtaa na kata"
+   },
+   "actions": {
+    "en": [
+     "Mark the flood-prone plots and the safe places, and agree with residents how the word is passed when the river rises.",
+     "Keep the list of households who need help to move up to date, and practise the route once a year."
+    ],
+    "sw": [
+     "Wekeni alama viwanja vinavyofurika na mahali salama, na kubalianeni na wakazi jinsi taarifa inavyopitishwa mto unapopanda.",
+     "Sasisheni orodha ya kaya zinazohitaji msaada kuhama, na fanyeni mazoezi ya njia mara moja kwa mwaka."
+    ]
+   },
+   "high": false,
+   "coastal": false
+  },
+  {
+   "who": {
+    "en": "Council and sectors",
+    "sw": "Halmashauri na sekta"
+   },
+   "actions": {
+    "en": [
+     "Keep the drains, culverts and river crossings clear, and the flood-prone areas out of new building permits.",
+     "Keep the river gauges read, and TMA's and the basin board's advice reaching the wards."
+    ],
+    "sw": [
+     "Wekeni mitaro, makalavati na vivuko vya mito wazi, na maeneo yanayofurika nje ya vibali vipya vya ujenzi.",
+     "Hakikisheni vipimo vya mito vinasomwa, na ushauri wa TMA na bodi ya bonde unazifikia kata."
+    ]
+   },
+   "high": false,
+   "coastal": false
+  },
+  {
+   "who": {
+    "en": "Households and committees",
+    "sw": "Kaya na kamati"
+   },
+   "actions": {
+    "en": [
+     "Build new rooms and latrines on higher ground or raised plinths, and keep a safe place for livestock.",
+     "Agree with neighbours who checks on older persons, people with disabilities and children living near the water."
+    ],
+    "sw": [
+     "Jengeni vyumba vipya na vyoo kwenye ardhi ya juu au misingi iliyoinuliwa, na wekeni mahali salama kwa mifugo.",
+     "Kubalianeni na majirani nani anawafuatilia wazee, watu wenye ulemavu na watoto wanaoishi karibu na maji."
+    ]
+   },
+   "high": true,
+   "coastal": false
+  },
+  {
+   "who": {
+    "en": "Council and sectors",
+    "sw": "Halmashauri na sekta"
+   },
+   "actions": {
+    "en": [
+     "Plan and keep protective works (embankments, drains, raised roads) and the gradual move of the most exposed households, with the land and water sectors."
+    ],
+    "sw": [
+     "Pangeni na tunzeni kazi za kinga (matuta, mitaro, barabara zilizoinuliwa) na uhamishaji wa taratibu wa kaya zilizo hatarini zaidi, pamoja na sekta za ardhi na maji."
+    ]
+   },
+   "high": true,
+   "coastal": false
+  }
+ ]
+}

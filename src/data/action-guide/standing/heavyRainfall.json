@@ -1,0 +1,123 @@
+{
+ "hazard": "heavyRainfall",
+ "title": {
+  "en": "Heavy rainfall",
+  "sw": "Mvua kubwa"
+ },
+ "intro": {
+  "en": "Heavy rain comes every season where it is documented. These are the things to keep doing so that it causes less harm; they hold all year, not only when rain is expected.",
+  "sw": "Mvua kubwa huja kila msimu pale ilipoandikwa. Haya ni mambo ya kuendelea kufanya ili isilete madhara makubwa; yanashikilia mwaka mzima, si tu mvua inapotarajiwa."
+ },
+ "rows": [
+  {
+   "who": {
+    "en": "Households",
+    "sw": "Kaya"
+   },
+   "actions": {
+    "en": [
+     "Keep the drains and water channels around the home clear of waste all year.",
+     "Store food, documents and valuables above floor level, in sealed containers.",
+     "Repair the roof and tie down loose sheets before each rainy season.",
+     "Keep children away from open drains, pits and swollen streams during the rains."
+    ],
+    "sw": [
+     "Wekeni mitaro na njia za maji kuzunguka nyumba zikiwa wazi bila taka mwaka mzima.",
+     "Hifadhini chakula, nyaraka na vitu vya thamani juu ya sakafu, kwenye vyombo vilivyofungwa.",
+     "Karabatini paa na fungeni mabati yaliyolegea kabla ya kila msimu wa mvua.",
+     "Waweke watoto mbali na mitaro iliyo wazi, mashimo na vijito vilivyojaa wakati wa mvua."
+    ]
+   },
+   "high": false,
+   "coastal": false
+  },
+  {
+   "who": {
+    "en": "Farmers and herders",
+    "sw": "Wakulima na wafugaji"
+   },
+   "actions": {
+    "en": [
+     "Open drainage furrows in the fields and plant along the contour on slopes.",
+     "Keep seed and fodder in a dry, raised store."
+    ],
+    "sw": [
+     "Fungueni mifereji ya kutolea maji shambani na pandeni kwa kufuata kontua kwenye miteremko.",
+     "Hifadhini mbegu na malisho kwenye ghala kavu lililoinuliwa."
+    ]
+   },
+   "high": false,
+   "coastal": false
+  },
+  {
+   "who": {
+    "en": "Village, mtaa and ward committees",
+    "sw": "Kamati za kijiji, mtaa na kata"
+   },
+   "actions": {
+    "en": [
+     "Hold a drain-clearing day with residents before each rainy season and keep culverts and footbridges open.",
+     "Keep the list of households that need help to move, and the safe places and routes, up to date."
+    ],
+    "sw": [
+     "Fanyeni siku ya kusafisha mitaro pamoja na wakazi kabla ya kila msimu wa mvua na wekeni makalavati na vidaraja vikiwa wazi.",
+     "Sasisheni orodha ya kaya zinazohitaji msaada kuhama, na mahali salama na njia zake."
+    ]
+   },
+   "high": false,
+   "coastal": false
+  },
+  {
+   "who": {
+    "en": "Council and sectors",
+    "sw": "Halmashauri na sekta"
+   },
+   "actions": {
+    "en": [
+     "Clear and repair culverts, drains and river crossings every dry season; keep schools, clinics and markets drained.",
+     "Share TMA's seasonal outlook with wards and farmers in good time."
+    ],
+    "sw": [
+     "Safisheni na karabatini makalavati, mitaro na vivuko vya mito kila kiangazi; hakikisheni shule, zahanati na masoko hayatuamishi maji.",
+     "Shirikisheni kata na wakulima mwelekeo wa msimu wa TMA kwa wakati."
+    ]
+   },
+   "high": false,
+   "coastal": false
+  },
+  {
+   "who": {
+    "en": "Households and committees",
+    "sw": "Kaya na kamati"
+   },
+   "actions": {
+    "en": [
+     "Agree on a safe place and the way to it, and walk the route together once a year.",
+     "Keep a radio, a charged phone and the leaders' numbers at hand through the rainy season."
+    ],
+    "sw": [
+     "Kubalianeni mahali salama na njia ya kufika, na mtembee njia hiyo pamoja mara moja kwa mwaka.",
+     "Wekeni redio, simu iliyochajiwa na namba za viongozi karibu msimu wote wa mvua."
+    ]
+   },
+   "high": true,
+   "coastal": false
+  },
+  {
+   "who": {
+    "en": "Council and sectors",
+    "sw": "Halmashauri na sekta"
+   },
+   "actions": {
+    "en": [
+     "Put the wards with the heaviest rain first in the drainage, road and school-repair budgets, and keep a response team ready for the season."
+    ],
+    "sw": [
+     "Wekeni kata zenye mvua nyingi zaidi mbele kwenye bajeti za mitaro, barabara na ukarabati wa shule, na wekeni timu ya kukabiliana tayari kwa msimu."
+    ]
+   },
+   "high": true,
+   "coastal": false
+  }
+ ]
+}

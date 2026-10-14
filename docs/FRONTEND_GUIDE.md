@@ -222,7 +222,7 @@ both in the reader's language (`?lang=sw|en` prints the other one for the card o
 
 Risk communication (`docs/RISK_COMMUNICATION_DESIGN.md`): `src/features/guide/alert.ts` maps the INFORM risk
 class to the Guide Book's three sets of actions (`BAND_BY_CLASS`, an internal band: no level word or colour is shown) and one group's score to a set (`levelForScore`);
-`actions.ts` assembles the book's rows per hazard and per vulnerability or coping group with the committees'
-rows applied (`useAreaCommunication`); `ActionRows.tsx` renders them.
+`actions.ts` assembles the book's standing actions per hazard (chapter 13.0) and the rows per vulnerability or
+coping group with the committees' rows applied (`useAreaCommunication`); `ActionRows.tsx` renders them.
 The guide data in `src/data/action-guide/` is built from `data-source/RISK_ACTION_GUIDE_BOOK_0222.docx` by
-`scripts/build-action-guide.py` (hazards, incidents, regions, and `indicators/` for chapters 11.0 and 12.0).
+`scripts/build-action-guide.py` (hazards, incidents, regions, `indicators/` for chapters 11.0 and 12.0, `standing/` for chapter 13.0).

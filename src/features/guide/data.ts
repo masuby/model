@@ -66,6 +66,19 @@ export interface IndicatorGuide {
 }
 /** The two chapters' own statements. */
 export type DimensionGuides = Record<'vulnerability' | 'coping', { title: Text; intro: Text }>;
+/** One row of a hazard's standing actions (chapter 13.0): who, and what to keep doing; `high` rows go further where the hazard's risk is high; `coastal` rows are for the coast. */
+export interface StandingRow {
+  who: Text;
+  actions: TextList;
+  high: boolean;
+  coastal: boolean;
+}
+export interface StandingGuide {
+  hazard: HazardKey;
+  title: Text;
+  intro: Text;
+  rows: StandingRow[];
+}
 
 export const HAZARD_KEYS = ['heavyRainfall', 'floods', 'landslide', 'strongWinds', 'largeWaves', 'wildfire', 'drought', 'earthquake', 'publicHealth'] as const;
 export type HazardKey = (typeof HAZARD_KEYS)[number];
@@ -84,6 +97,13 @@ export const isStatusRow = (r: GuideRow) => /^warning status$/i.test(r.impact.en
 const regionFiles = import.meta.glob<RegionGuide>('../../data/action-guide/regions/*.json', { import: 'default' });
 const hazardFiles = import.meta.glob<{ levels: GuideLevels }>('../../data/action-guide/hazards/*.json', { import: 'default' });
 const indicatorFiles = import.meta.glob<IndicatorGuide>('../../data/action-guide/indicators/*.json', { import: 'default' });
+const standingFiles = import.meta.glob<StandingGuide>('../../data/action-guide/standing/*.json', { import: 'default' });
+
+/** A hazard's standing actions; null for a hazard the guide has none for. */
+export function loadStandingGuide(key: HazardKey): Promise<StandingGuide | null> {
+  const load = standingFiles[`../../data/action-guide/standing/${key}.json`];
+  return load ? load() : Promise.resolve(null);
+}
 /** The vulnerability and coping groups the guide states (by group key). */
 export const INDICATOR_GUIDE_KEYS: readonly string[] = Object.keys(indicatorFiles).map((f) => f.replace(/^.*\//, '').replace(/\.json$/, ''));
 
@@ -272,6 +292,29 @@ export function useHazardGuides(keys: readonly HazardKey[]): { loading: boolean;
         const byKey = new Map<HazardKey, GuideLevels>();
         stable.split(',').forEach((k, i) => {
           if (k && results[i]?.data) byKey.set(k as HazardKey, results[i].data!);
+        });
+        return { loading: results.some((r) => r.isLoading), byKey };
+      },
+      [stable],
+    ),
+  });
+}
+
+export function useStandingGuide(key: HazardKey | null) {
+  return useQuery({ queryKey: ['guide', 'standing', key], queryFn: () => loadStandingGuide(key!), enabled: !!key, staleTime: Infinity });
+}
+
+/** The standing actions of several hazards at once, by hazard key. */
+export function useStandingGuides(keys: readonly HazardKey[]): { loading: boolean; byKey: ReadonlyMap<HazardKey, StandingGuide> } {
+  const stable = keys.join(',');
+  return useQueries({
+    queries: keys.map((k) => ({ queryKey: ['guide', 'standing', k], queryFn: () => loadStandingGuide(k), staleTime: Infinity })),
+    combine: React.useCallback(
+      (results: Array<{ isLoading: boolean; data?: StandingGuide | null }>) => {
+        const byKey = new Map<HazardKey, StandingGuide>();
+        stable.split(',').forEach((k, i) => {
+          const d = results[i]?.data;
+          if (k && d) byKey.set(k as HazardKey, d);
         });
         return { loading: results.some((r) => r.isLoading), byKey };
       },

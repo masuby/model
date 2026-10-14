@@ -1,0 +1,113 @@
+{
+ "hazard": "landslide",
+ "title": {
+  "en": "Landslide",
+  "sw": "Maporomoko ya ardhi"
+ },
+ "intro": {
+  "en": "On steep, wet slopes the ground can move. Keeping slopes covered and water channelled, and knowing the signs, is work for every year.",
+  "sw": "Kwenye miteremko mikali yenye unyevu, ardhi inaweza kusogea. Kuweka miteremko ikiwa imefunikwa na maji yakielekezwa, na kujua dalili, ni kazi ya kila mwaka."
+ },
+ "rows": [
+  {
+   "who": {
+    "en": "Households",
+    "sw": "Kaya"
+   },
+   "actions": {
+    "en": [
+     "Keep trees and grass on the slope above and below the house; do not cut into the slope or pile soil on it.",
+     "Lead roof and yard water away from the slope in a lined channel.",
+     "Know the signs (new cracks, tilting trees or poles, muddy springs): tell the leaders and keep away when they appear."
+    ],
+    "sw": [
+     "Acheni miti na nyasi kwenye mteremko juu na chini ya nyumba; msikate mteremko wala kurundika udongo juu yake.",
+     "Elekezeni maji ya paa na ya uwanja mbali na mteremko kwa mfereji uliojengwa.",
+     "Fahamuni dalili (nyufa mpya, miti au nguzo kuinama, chemchemi za tope): toeni taarifa kwa viongozi na kaeni mbali zinapoonekana."
+    ]
+   },
+   "high": false,
+   "coastal": false
+  },
+  {
+   "who": {
+    "en": "Farmers",
+    "sw": "Wakulima"
+   },
+   "actions": {
+    "en": [
+     "Plant along the contour, keep terraces and grass strips, and leave the steepest land to trees."
+    ],
+    "sw": [
+     "Pandeni kwa kufuata kontua, tunzeni matuta na mistari ya nyasi, na acheni ardhi yenye mwinuko mkali kwa miti."
+    ]
+   },
+   "high": false,
+   "coastal": false
+  },
+  {
+   "who": {
+    "en": "Village, mtaa and ward committees",
+    "sw": "Kamati za kijiji, mtaa na kata"
+   },
+   "actions": {
+    "en": [
+     "Map the slopes that have moved before and keep new houses off them; plant and protect trees on them with the residents."
+    ],
+    "sw": [
+     "Chorini ramani ya miteremko iliyowahi kuporomoka na zuieni nyumba mpya juu yake; pandeni na lindeni miti huko pamoja na wakazi."
+    ]
+   },
+   "high": false,
+   "coastal": false
+  },
+  {
+   "who": {
+    "en": "Council and sectors",
+    "sw": "Halmashauri na sekta"
+   },
+   "actions": {
+    "en": [
+     "Keep roads and drains on slopes maintained, and mining pits and quarries drained and fenced; keep slope land out of building permits."
+    ],
+    "sw": [
+     "Tunzeni barabara na mitaro kwenye miteremko, na mashimo ya migodi na machimbo yakiwa yametolewa maji na kuzungushiwa uzio; wekeni ardhi ya miteremko nje ya vibali vya ujenzi."
+    ]
+   },
+   "high": false,
+   "coastal": false
+  },
+  {
+   "who": {
+    "en": "Households and committees",
+    "sw": "Kaya na kamati"
+   },
+   "actions": {
+    "en": [
+     "Agree a safe place off the slope and the way to it, and keep a bag with documents and medicines ready through the rains."
+    ],
+    "sw": [
+     "Kubalianeni mahali salama nje ya mteremko na njia ya kufika, na wekeni mfuko wenye nyaraka na dawa tayari msimu wote wa mvua."
+    ]
+   },
+   "high": true,
+   "coastal": false
+  },
+  {
+   "who": {
+    "en": "Council and sectors",
+    "sw": "Halmashauri na sekta"
+   },
+   "actions": {
+    "en": [
+     "Plan the gradual move of households from the slopes that have moved before, with the land sector and the residents, and keep a response team trained for slope rescue."
+    ],
+    "sw": [
+     "Pangeni uhamishaji wa taratibu wa kaya kutoka miteremko iliyowahi kuporomoka, pamoja na sekta ya ardhi na wakazi, na wekeni timu ya kukabiliana iliyofundishwa uokoaji kwenye miteremko."
+    ]
+   },
+   "high": true,
+   "coastal": false
+  }
+ ]
+}
