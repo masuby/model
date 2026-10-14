@@ -19,15 +19,12 @@ const read = (p) => JSON.parse(fs.readFileSync(ROOT + p, 'utf8'));
 const councils = read('src/data/tanzania-councils.json');
 const regions = read('src/data/tanzania-regions.json');
 const water = read('src/data/tanzania-waterbodies.json');
-// The lakes that cross the border, whole (Natural Earth 10 m, public domain): their outlines show faintly beyond Tanzania.
-const lakesBeyond = read('src/data/tanzania-lakes-beyond.json');
 
-// Frame: Tanzania's extent with a small margin, enough for the outlines of the border lakes to show a
-// little beyond the country (Lake Victoria reaches 0.5° N, Lake Nyasa 14.4° S; about 0.4° of them shows).
-const LON0 = 28.95;
-const LON1 = 40.7;
-const LAT0 = -12.2;
-const LAT1 = -0.55;
+// Frame: Tanzania's extent with a small margin.
+const LON0 = 29.25;
+const LON1 = 40.55;
+const LAT0 = -11.8;
+const LAT1 = -0.95;
 const PHI = ((LAT0 + LAT1) / 2) * (Math.PI / 180);
 const WIDTH = 1000;
 const K = WIDTH / ((LON1 - LON0) * Math.cos(PHI));
@@ -81,12 +78,7 @@ const files = {
   'src/data/tanzania-svg-councils.json': { ...frame, units: councils.features.map((f) => ({ id: String(f.properties.code), d: featurePath(f, 0.012) })) },
   'src/data/tanzania-svg-regions.json': { ...frame, units: regions.features.map((f) => ({ id: String(f.properties.reg_name), d: featurePath(f, 0.012) })) },
   // Lakes only: the Indian Ocean polygon would dominate a small map without adding information.
-  'src/data/tanzania-svg-water.json': {
-    ...frame,
-    water: water.features.filter((f) => !/ocean/i.test(String(f.properties.name))).map((f) => featurePath(f, 0.02)).filter(Boolean),
-    // Whole lakes: only their outline is drawn, faintly, in the background, so the parts beyond the border show where the lake continues.
-    beyond: lakesBeyond.features.map((f) => featurePath(f, 0.02)).filter(Boolean),
-  },
+  'src/data/tanzania-svg-water.json': { ...frame, water: water.features.filter((f) => !/ocean/i.test(String(f.properties.name))).map((f) => featurePath(f, 0.02)).filter(Boolean) },
 };
 for (const [path, data] of Object.entries(files)) {
   fs.writeFileSync(ROOT + path, JSON.stringify(data));

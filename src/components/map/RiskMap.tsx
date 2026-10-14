@@ -14,7 +14,6 @@ import councilsUrl from '@/data/tanzania-councils.json?url';
 import districtsUrl from '@/data/tanzania-districts.json?url';
 import regionsUrl from '@/data/tanzania-regions.json?url';
 import waterUrl from '@/data/tanzania-waterbodies.json?url';
-import lakesUrl from '@/data/tanzania-lakes-beyond.json?url';
 import type { ClassKey } from '@/engine/risk/classes';
 import { metricColor, type Metric } from '@/engine/risk/metrics';
 import { placeKey } from '@/engine/risk/model';
@@ -61,9 +60,9 @@ type Geo = FeatureCollection<Geometry, Props0>;
  * Boundaries are static files fetched on demand (and cached by the service worker), so the app bundle
  * carries no geometry and each level downloads only what it draws. One request per file per session.
  */
-const GEO_URL: Record<Level | 'water' | 'lakes', string> = { council: councilsUrl, region: regionsUrl, national: regionsUrl, source: districtsUrl, water: waterUrl, lakes: lakesUrl };
+const GEO_URL: Record<Level | 'water', string> = { council: councilsUrl, region: regionsUrl, national: regionsUrl, source: districtsUrl, water: waterUrl };
 const geoCache = new Map<string, Promise<Geo>>();
-function loadGeo(key: Level | 'water' | 'lakes'): Promise<Geo> {
+function loadGeo(key: Level | 'water'): Promise<Geo> {
   const url = GEO_URL[key];
   if (!geoCache.has(url)) {
     geoCache.set(
@@ -76,7 +75,7 @@ function loadGeo(key: Level | 'water' | 'lakes'): Promise<Geo> {
   }
   return geoCache.get(url)!;
 }
-function useGeo(key: Level | 'water' | 'lakes'): Geo | null {
+function useGeo(key: Level | 'water'): Geo | null {
   const [geo, setGeo] = React.useState<{ key: string; data: Geo } | null>(null);
   React.useEffect(() => {
     let alive = true;
@@ -164,8 +163,6 @@ export default function RiskMap({
   const theme = resolveTheme(usePrefs((s) => s.theme));
   const loadedGeo = useGeo(level);
   const water = useGeo('water');
-  // The lakes that cross the border, whole: only their outline, drawn faintly in the background when there is no basemap.
-  const lakes = useGeo('lakes');
   const geo = loadedGeo ?? EMPTY;
   const unitOf = useUnitResolver(model, level);
   const layerRef = React.useRef<L.GeoJSON | null>(null);
@@ -285,14 +282,6 @@ export default function RiskMap({
       >
         <Resizer padding={fitPadding} keepFit={!focusId} />
         {basemap !== 'none' && <TileLayer key={theme} url={tiles} attribution='&copy; OpenStreetMap &copy; CARTO' />}
-        {basemap === 'none' && lakes && (
-          <GeoJSON
-            key={`lakes-${theme}`}
-            data={lakes}
-            interactive={false}
-            style={() => ({ fill: false, color: getComputedStyle(document.documentElement).getPropertyValue('--map-water-stroke').trim(), weight: 0.8, opacity: 0.55 })}
-          />
-        )}
         {loadedGeo && <GeoJSON key={level} ref={layerRef} data={geo} style={style as L.StyleFunction} onEachFeature={onEach as (f: Feature, l: L.Layer) => void} />}
         {water && (
           <GeoJSON

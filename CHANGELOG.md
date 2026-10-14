@@ -2,7 +2,7 @@
 
 ## Unreleased
 
-### The data discrepancies resolved: conflict groups withheld, earthquake and drought measured per council, the lakes whole (14 October 2026)
+### The data discrepancies resolved: conflict groups withheld, earthquake and drought measured per council (14 October 2026)
 
 - Conflict intensity, conflict risk and internal violence carry no data anywhere in the live model, by
   programme decision (data notes DN-12 to DN-14); the human-hazard category is the mean of hazardous
@@ -21,9 +21,6 @@
   Guide Book in 72 councils instead of 111; docs/assessment/INFORM_TZ_Driver_Discrepancies_2026-10-14.md
   records what remains. National INFORM Risk reads 4.3 (High on the SADC thresholds) with 101 councils
   high, 92 medium and 2 low.
-- The outlines of the three lakes that cross the border (Victoria, Tanganyika, Nyasa) show faintly in
-  the background beyond Tanzania on the static maps and the explorer map, from the public-domain Natural
-  Earth lakes; the water inside the country is drawn as before.
 - Where two notes withhold the same value, the first in the register names the hold (a unit's own query
   before the general decision).
 

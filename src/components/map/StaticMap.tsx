@@ -27,8 +27,6 @@ interface PathSet {
 const COUNCILS = councilPaths as PathSet;
 const REGIONS = regionPaths as PathSet;
 const WATER = (waterPaths as { water: string[] }).water;
-/** The lakes that cross the border, whole: only their outline, drawn first and faintly in the background. */
-const LAKES_BEYOND = (waterPaths as { beyond?: string[] }).beyond ?? [];
 
 export interface StaticMapProps {
   model: RiskModel;
@@ -122,11 +120,6 @@ export default function StaticMap({
     >
       {/* A picture when it only shows; a group of buttons when the areas select. */}
       <svg ref={svgRef} viewBox={viewBox} className="size-full" role={selectable ? 'group' : 'img'} aria-label={label} preserveAspectRatio="xMidYMid meet">
-        <g aria-hidden>
-          {LAKES_BEYOND.map((d, i) => (
-            <path key={i} d={d} fill="none" stroke="var(--map-water-stroke)" strokeWidth={0.6} strokeOpacity={0.55} vectorEffect="non-scaling-stroke" pointerEvents="none" />
-          ))}
-        </g>
         <g>
           {set.units.map((p) => {
             const unit = unitFor(p.id);
