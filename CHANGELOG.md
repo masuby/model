@@ -8,6 +8,8 @@
   of the home map, the profile maps and the explorer map, so the Tanzanian part of Lake Tanganyika (and
   of Nyasa and Victoria along their borders) is told apart from the rest. The stretches come from the
   national boundary lines (NBS/PO-RALG) clipped to the water bodies.
+- The explorer map draws these paths on the live site too: the boundary file is served as a hashed asset
+  rather than inlined into the script, which the site's Content Security Policy would not let fetch().
 
 ### The data discrepancies resolved: conflict groups withheld, earthquake and drought measured per council (14 October 2026)
 

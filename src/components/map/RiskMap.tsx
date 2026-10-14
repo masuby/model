@@ -14,7 +14,9 @@ import councilsUrl from '@/data/tanzania-councils.json?url';
 import districtsUrl from '@/data/tanzania-districts.json?url';
 import regionsUrl from '@/data/tanzania-regions.json?url';
 import waterUrl from '@/data/tanzania-waterbodies.json?url';
-import lakeBoundariesUrl from '@/data/tanzania-lake-boundaries.json?url';
+// The file is small enough for Vite to inline it as a data: URL, which the site's Content Security Policy does
+// not let fetch() open; no-inline keeps it a hashed asset like the other boundary files.
+import lakeBoundariesUrl from '@/data/tanzania-lake-boundaries.json?url&no-inline';
 import type { ClassKey } from '@/engine/risk/classes';
 import { metricColor, type Metric } from '@/engine/risk/metrics';
 import { placeKey } from '@/engine/risk/model';
