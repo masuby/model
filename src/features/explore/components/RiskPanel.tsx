@@ -30,7 +30,7 @@ import { dataNotesFor, isWithheld } from '@/engine/risk/notes';
 import type { CommitteeRecord } from '@/data-layer/types';
 import type { Unit } from '@/engine/risk/types';
 import { useAreaCommunication } from '@/features/guide/actions';
-import { GroupActions, HazardActions } from '@/features/guide/ActionRows';
+import { GroupChooser, HazardChooser } from '@/features/guide/ActionRows';
 import { ALERT_COLOR, planMessage, riskBandFor } from '@/features/guide/alert';
 import { guideHazardName, isCoastal, reconciledHazards } from '@/features/guide/crosswalk';
 import { RiskBandBadge } from '@/features/guide/AlertBadge';
@@ -271,10 +271,6 @@ function InsightFolds({ unit }: { unit: Unit }) {
 
 
 /** Risk communication: the two messages of the area's risk level, for residents and for those who plan, build or invest here. */
-/** The hazards and the groups the panel shows with their rows; the profile and the cards show more. */
-const PANEL_HAZARDS = 3;
-const PANEL_GROUPS = 2;
-
 /**
  * Risk communication, in INFORM's terms: the two standing messages of the area's class, then the Guide
  * Book's rows for the top hazards (each by its own score) and for the vulnerability and coping groups that
@@ -290,8 +286,6 @@ function RiskCommunication({ unit }: { unit: Unit }) {
   const vars = { cls: t(`common:classes.${risk.cls}`).toLowerCase(), name: unit.name };
   const plan = planMessage(unit, risk);
   const planVars = plan.hazard ? { ...vars, hazard: t(`indicators:${plan.hazard.key}`).toLowerCase(), score: formatScore(plan.hazard.score) } : vars;
-  const hazards = comm.hazards.slice(0, PANEL_HAZARDS);
-  const groups = comm.groups.slice(0, PANEL_GROUPS);
   return (
     <section aria-labelledby="risk-communication-title" className="pb-6">
       <SectionTitle as="h3" id="risk-communication-title" className="mb-2">
@@ -307,23 +301,21 @@ function RiskCommunication({ unit }: { unit: Unit }) {
           <dd className="mt-1">{t(`guide:${plan.key}`, planVars)}</dd>
         </div>
       </dl>
-      {!comm.loading && hazards.length > 0 && (
+      {!comm.loading && comm.hazards.length > 0 && (
         <div className="mt-5">
           <h4 className="text-xs font-semibold tracking-wide text-muted-foreground uppercase">{t('guide:actions.title')}</h4>
-          <div className="mt-2 space-y-4">
-            {hazards.map((h) => (
-              <HazardActions key={h.item.key} hazard={h} coastal={isCoastal(unit)} first={2} />
-            ))}
+          <p className="mt-0.5 text-xs text-muted-foreground">{t('guide:actions.choose')}</p>
+          <div className="mt-2">
+            <HazardChooser key={unit.id} hazards={comm.hazards} coastal={isCoastal(unit)} first={2} />
           </div>
         </div>
       )}
-      {!comm.loading && groups.length > 0 && (
+      {!comm.loading && comm.groups.length > 0 && (
         <div className="mt-5">
           <h4 className="text-xs font-semibold tracking-wide text-muted-foreground uppercase">{t('guide:groups.title')}</h4>
-          <div className="mt-2 space-y-4">
-            {groups.map((g) => (
-              <GroupActions key={g.ref} group={g} first={1} intro={false} />
-            ))}
+          <p className="mt-0.5 text-xs text-muted-foreground">{t('guide:groups.choose')}</p>
+          <div className="mt-2">
+            <GroupChooser key={unit.id} groups={comm.groups} first={1} intro={false} />
           </div>
         </div>
       )}

@@ -21,7 +21,7 @@ import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import type { Unit } from '@/engine/risk/types';
 import { type AreaCommunication, useAreaCommunication } from '@/features/guide/actions';
-import { GroupActions, HazardActions } from '@/features/guide/ActionRows';
+import { GroupChooser, HazardChooser } from '@/features/guide/ActionRows';
 import { type AreaRisk, planMessage, riskBandFor } from '@/features/guide/alert';
 import { RiskBandBadge } from '@/features/guide/AlertBadge';
 import { guideHazardName, hazardItemName, isCoastal, reconciledHazards, type HazardItem } from '@/features/guide/crosswalk';
@@ -324,7 +324,6 @@ function Band({ item }: { item: HazardItem }) {
 /** What to do: the Guide Book's rows for each hazard by its own score here. Open for a council, folded for larger areas. */
 function Actions({ unit, comm }: { unit: Unit; comm: AreaCommunication }) {
   const { t } = useTranslation(['guide', 'common', 'indicators']);
-  const list = useShowMore(comm.hazards, FIRST_HAZARDS);
   if (comm.loading || !comm.hazards.length) return null;
   const coastal = isCoastal(unit);
   const top = comm.hazards
@@ -333,14 +332,9 @@ function Actions({ unit, comm }: { unit: Unit; comm: AreaCommunication }) {
     .join(', ');
   return (
     <Fold id="actions-title" title={t('actions.title')} lead={t('actions.lead', { name: unit.name })} summary={t('actions.summary', { count: comm.hazards.length, top })} open={unit.level === 'council'}>
-      <div className="divide-y divide-border border-y border-border">
-        {list.shown.map((h) => (
-          <div key={h.item.key} className="py-4">
-            <HazardActions hazard={h} coastal={coastal} first={3} />
-          </div>
-        ))}
+      <div className="border-y border-border py-4">
+        <HazardChooser key={unit.id} hazards={comm.hazards} coastal={coastal} first={3} />
       </div>
-      {list.more && <MoreButton all={list.all} label={t('more.hazards', { count: comm.hazards.length })} less={t('more.less')} onClick={list.toggle} />}
     </Fold>
   );
 }
@@ -358,24 +352,24 @@ function Groups({ unit, comm }: { unit: Unit; comm: AreaCommunication }) {
     .join(', ');
   return (
     <Fold id="groups-title" title={t('groups.title')} lead={t('groups.lead', { name: unit.name })} summary={t('groups.summary', { count: comm.groups.length, top })}>
-      <ul className="divide-y divide-border border-y border-border">
-        {comm.groups.map((g) => {
-          const action = library.get(g.ref);
-          return (
-            <li key={g.ref} className="py-4">
-              <GroupActions group={g} first={2} />
-              {action && (
-                <div className="mt-2 border-l-2 border-border pl-3 text-sm leading-relaxed">
-                  {action.leadSectors.length > 0 && <p className="text-xs text-muted-foreground">{t('vc.lead_sector', { sector: action.leadSectors.map((k) => t(`common:sectors.${k}`, { defaultValue: k })).join(', ') })}</p>}
-                  {pick(action.why, lang) && <p className="text-muted-foreground">{pick(action.why, lang)}</p>}
-                  <p className={cn(pick(action.why, lang) && 'mt-1.5')}>{pick(action.actions, lang)}</p>
-                  <p className="mt-1.5 text-xs text-muted-foreground">{t('vc.by', { by: action.record.reviewerName ?? action.record.authorName, date: formatDate(action.record.reviewedAt ?? action.record.createdAt, lang) })}</p>
-                </div>
-              )}
-            </li>
-          );
-        })}
-      </ul>
+      <div className="border-y border-border py-4">
+        <GroupChooser
+          key={unit.id}
+          groups={comm.groups}
+          first={2}
+          extra={(g) => {
+            const action = library.get(g.ref);
+            return action ? (
+              <div className="mt-2 border-l-2 border-border pl-3 text-sm leading-relaxed">
+                {action.leadSectors.length > 0 && <p className="text-xs text-muted-foreground">{t('vc.lead_sector', { sector: action.leadSectors.map((k) => t(`common:sectors.${k}`, { defaultValue: k })).join(', ') })}</p>}
+                {pick(action.why, lang) && <p className="text-muted-foreground">{pick(action.why, lang)}</p>}
+                <p className={cn(pick(action.why, lang) && 'mt-1.5')}>{pick(action.actions, lang)}</p>
+                <p className="mt-1.5 text-xs text-muted-foreground">{t('vc.by', { by: action.record.reviewerName ?? action.record.authorName, date: formatDate(action.record.reviewedAt ?? action.record.createdAt, lang) })}</p>
+              </div>
+            ) : null;
+          }}
+        />
+      </div>
     </Fold>
   );
 }

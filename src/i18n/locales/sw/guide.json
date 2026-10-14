@@ -124,13 +124,15 @@
     "less": "Mistari michache",
     "none": "Hakuna mistari ya hatari hii katika ngazi hii bado.",
     "council": "Mistari ya halmashauri hii yenyewe",
-    "summary": "Hatari {{count}} zenye hatua; ya juu zaidi: {{top}}"
+    "summary": "Hatari {{count}} zenye hatua; ya juu zaidi: {{top}}",
+    "choose": "Chagua hatari"
   },
   "groups": {
     "title": "Kinacholeta tofauti hapa",
     "lead": "Makundi ya udhaifu na uwezo wa kukabiliana yenye alama ya wastani au zaidi hapa {{name}}, kila moja linapima nini, na nini husaidia.",
     "measures": "Kinachopimwa",
     "none": "Hakuna kundi la udhaifu au uwezo wa kukabiliana lenye alama ya wastani au zaidi hapa.",
-    "summary": "Makundi {{count}} yenye alama ya wastani au zaidi; la juu zaidi: {{top}}"
+    "summary": "Makundi {{count}} yenye alama ya wastani au zaidi; la juu zaidi: {{top}}",
+    "choose": "Chagua kundi"
   }
 }

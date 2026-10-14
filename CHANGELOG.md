@@ -2,6 +2,11 @@
 
 ## Unreleased
 
+### What to do: choose the hazard or the group (14 October 2026)
+
+- On the explorer panel and the profile, "What to do" and "What makes the difference here" offer a chip
+  per hazard and per group (its colour and score, the highest chosen first); choosing one shows its rows.
+
 ### The explorer panel without the group list and the score breakdown (14 October 2026)
 
 - The risk explorer's panel no longer carries "Highest-scoring indicator groups" and "How the score is

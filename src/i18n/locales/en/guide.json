@@ -124,13 +124,15 @@
     "less": "Fewer rows",
     "none": "No rows for this hazard at this level yet.",
     "council": "This council’s own rows",
-    "summary": "{{count}} hazards with actions; highest: {{top}}"
+    "summary": "{{count}} hazards with actions; highest: {{top}}",
+    "choose": "Choose a hazard"
   },
   "groups": {
     "title": "What makes the difference here",
     "lead": "The vulnerability and coping groups scoring medium or above in {{name}}, what each measures, and what helps.",
     "measures": "What it measures",
     "none": "No group of vulnerability or coping capacity scores medium or above here.",
-    "summary": "{{count}} groups score medium or above; highest: {{top}}"
+    "summary": "{{count}} groups score medium or above; highest: {{top}}",
+    "choose": "Choose a group"
   }
 }
