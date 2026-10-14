@@ -1,0 +1,67 @@
+{
+ "ref": "vulnerability:displacedPeople",
+ "title": {
+  "en": "Displaced people",
+  "sw": "Watu waliohama makazi"
+ },
+ "intro": {
+  "en": "This indicator counts people displaced within the country, from IDMC records for the region, and takes in the refugee settlements that some councils host. A high score means that many people have recently moved and may not yet know the local hazards, safe places and warning channels, while host communities share their services with them. Lead sectors: PMO-DMD and the Disaster Management Committees; Home Affairs (refugee and migration services); PO-RALG and the council.",
+  "sw": "Kiashiria hiki kinahesabu watu waliohama makazi ndani ya nchi, kutoka kumbukumbu za IDMC kwa mkoa, na kinazingatia makazi ya wakimbizi yanayohifadhiwa na baadhi ya halmashauri. Alama ya juu inamaanisha kuwa watu wengi wamehama hivi karibuni na huenda bado hawajui hatari za eneo, mahali salama na njia za tahadhari, huku jamii zinazowapokea zikishirikiana nao huduma zake. Sekta zinazoongoza: OWM-IMM na Kamati za Usimamizi wa Maafa; Mambo ya Ndani (huduma za wakimbizi na uhamiaji); TAMISEMI na halmashauri."
+ },
+ "rows": [
+  {
+   "impact": {
+    "en": "New arrivals may not yet know where the water rises, where the safe places are, or how warnings are passed on",
+    "sw": "Wageni wapya huenda bado hawajui maji hupanda wapi, mahali salama ni wapi, au tahadhari hupitishwa vipi"
+   },
+   "actions": {
+    "en": [
+     "Welcome new neighbours and walk them to the safe place, the water points and the health facility; share the emergency number 190.",
+     "Village/Mtaa leaders: register new households and give them this guide's Know Your Risk page for the area.",
+     "Camp and settlement managers: keep the camp's hazard map and contingency plan visible and explained in the languages people speak."
+    ],
+    "sw": [
+     "Wakaribisheni majirani wapya na watembezeni hadi mahali salama, vituo vya maji na kituo cha afya; washirikisheni namba ya dharura 190.",
+     "Viongozi wa Kijiji/Mtaa: sajilini kaya mpya na wapeni ukurasa wa Fahamu Hatari ya Eneo Lako wa mwongozo huu.",
+     "Wasimamizi wa kambi na makazi: wekeni ramani ya hatari ya kambi na mpango wa dharura mahali panapoonekana na vielezwe kwa lugha wanazozungumza watu."
+    ]
+   }
+  },
+  {
+   "impact": {
+    "en": "Temporary shelters and new plots are often on the land that was left, which may flood or slip",
+    "sw": "Makazi ya muda na viwanja vipya mara nyingi huwa kwenye ardhi iliyobaki, ambayo inaweza kufurika au kuporomoka"
+   },
+   "actions": {
+    "en": [
+     "Before settling, ask the village leader or the council which ground is safe; raise floors and dig small drains around shelters.",
+     "Host communities and the council: set aside safe land for new settlement and keep the river reserve free.",
+     "Disaster Management Committees: include displaced and host households together in drills and contingency plans."
+    ],
+    "sw": [
+     "Kabla ya kuweka makazi, uliza kiongozi wa kijiji au halmashauri ardhi ipi ni salama; inua sakafu na chimba mitaro midogo kuzunguka makazi.",
+     "Jamii zinazowapokea na halmashauri: tengeni ardhi salama kwa makazi mapya na acheni hifadhi ya mto wazi.",
+     "Kamati za Usimamizi wa Maafa: washirikisheni kaya zilizohama na zinazowapokea pamoja kwenye mazoezi na mipango ya dharura."
+    ]
+   }
+  },
+  {
+   "impact": {
+    "en": "Shared water, clinics and schools serve more people than they were built for, so queues grow during a hazard",
+    "sw": "Maji, zahanati na shule zinazoshirikiwa huhudumia watu wengi kuliko zilivyojengwa, hivyo foleni huongezeka wakati wa janga"
+   },
+   "actions": {
+    "en": [
+     "Use water carefully and keep shared water points and latrines clean; report breakdowns to the water committee quickly.",
+     "Council and partners: plan extra water, sanitation and health capacity for both hosts and new arrivals before the rains.",
+     "Treat everyone with respect; displaced and host families are neighbours with the same right to safety and services."
+    ],
+    "sw": [
+     "Tumieni maji kwa uangalifu na wekeni vituo vya maji na vyoo vinavyoshirikiwa safi; toeni taarifa za uharibifu kwa kamati ya maji haraka.",
+     "Halmashauri na wadau: pangeni uwezo wa ziada wa maji, usafi wa mazingira na afya kwa wenyeji na wageni wapya kabla ya mvua.",
+     "Mheshimu kila mtu; familia zilizohama na zinazowapokea ni majirani wenye haki sawa ya usalama na huduma."
+    ]
+   }
+  }
+ ]
+}

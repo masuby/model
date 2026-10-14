@@ -1,0 +1,67 @@
+{
+ "ref": "coping:education",
+ "title": {
+  "en": "Education",
+  "sw": "Elimu"
+ },
+ "intro": {
+  "en": "This indicator combines the mean years of schooling for the region with the national adult literacy rate. A high score means that many adults have had little schooling, so written warnings, forms and leaflets reach fewer people and spoken and visual information matter more. It says nothing about people's knowledge of their own area, which is often deep. Lead sectors: education; PO-RALG and the council.",
+  "sw": "Kiashiria hiki kinaunganisha wastani wa miaka ya shule kwa mkoa na kiwango cha kusoma na kuandika kwa watu wazima kitaifa. Alama ya juu inamaanisha kuwa watu wazima wengi wamepata elimu ndogo, hivyo tahadhari, fomu na vipeperushi vya maandishi huwafikia watu wachache na taarifa za mdomo na za picha ni muhimu zaidi. Haisemi chochote kuhusu maarifa ya watu juu ya eneo lao wenyewe, ambayo mara nyingi ni makubwa. Sekta zinazoongoza: elimu; TAMISEMI na halmashauri."
+ },
+ "rows": [
+  {
+   "impact": {
+    "en": "Written warnings, maps and forms are not useful to everyone; spoken and pictured messages reach more people",
+    "sw": "Tahadhari, ramani na fomu za maandishi hazimfai kila mtu; ujumbe wa mdomo na wa picha huwafikia watu wengi zaidi"
+   },
+   "actions": {
+    "en": [
+     "Explain warnings in meetings and at the market in plain words, and use the colour levels and pictures of this guide.",
+     "Teachers and pupils: carry the message home; a child who knows the safe place teaches the family.",
+     "Council and committees: read registration and relief forms aloud and help people to fill them without charge."
+    ],
+    "sw": [
+     "Elezeni tahadhari kwenye mikutano na sokoni kwa maneno rahisi, na tumieni ngazi za rangi na picha za mwongozo huu.",
+     "Walimu na wanafunzi: pelekeni ujumbe nyumbani; mtoto anayejua mahali salama hufundisha familia.",
+     "Halmashauri na kamati: someni fomu za usajili na misaada kwa sauti na wasaidieni watu kuzijaza bila malipo."
+    ]
+   }
+  },
+  {
+   "impact": {
+    "en": "Schools are often the strongest buildings and the natural meeting place in a hazard",
+    "sw": "Shule mara nyingi ni majengo imara zaidi na mahali pa asili pa kukusanyika wakati wa janga"
+   },
+   "actions": {
+    "en": [
+     "School committees: agree with the village how the school serves as a safe place, who holds the keys, and how classes resume quickly afterwards.",
+     "Head teachers: keep a school safety plan with the safe routes, a first-aid kit and the pupils' guardian list.",
+     "Education department: repair school roofs, latrines and water before the season and keep the school feeding going during it."
+    ],
+    "sw": [
+     "Kamati za shule: kubalianeni na kijiji jinsi shule inavyotumika kama mahali salama, nani anashika funguo, na jinsi masomo yanavyorejea haraka baadaye.",
+     "Walimu wakuu: wekeni mpango wa usalama wa shule wenye njia salama, kifaa cha huduma ya kwanza na orodha ya walezi wa wanafunzi.",
+     "Idara ya elimu: karabatini paa, vyoo na maji ya shule kabla ya msimu na endeleeni na chakula shuleni wakati wa msimu."
+    ]
+   }
+  },
+  {
+   "impact": {
+    "en": "Children miss weeks of school when routes flood or classrooms are used as shelters",
+    "sw": "Watoto hukosa wiki kadhaa za shule njia zinapofurika au madarasa yanapotumika kama makazi ya muda"
+   },
+   "actions": {
+    "en": [
+     "Parents and teachers: agree a safe route or a temporary learning place so that lessons continue near home.",
+     "Ward education officers: plan where classes move when the school is used as a shelter, and for how long.",
+     "Youth and adult learners: use the council's adult education classes; they also teach how to read a warning."
+    ],
+    "sw": [
+     "Wazazi na walimu: kubalianeni njia salama au mahali pa muda pa kujifunzia ili masomo yaendelee karibu na nyumbani.",
+     "Maafisa elimu wa kata: pangeni madarasa yanahamia wapi shule inapotumika kama makazi ya muda, na kwa muda gani.",
+     "Vijana na watu wazima: tumieni madarasa ya elimu ya watu wazima ya halmashauri; pia hufundisha jinsi ya kusoma tahadhari."
+    ]
+   }
+  }
+ ]
+}

@@ -1,0 +1,67 @@
+{
+ "ref": "vulnerability:economicDependency",
+ "title": {
+  "en": "Economic dependency",
+  "sw": "Utegemezi wa kiuchumi"
+ },
+ "intro": {
+  "en": "This indicator uses the dependency ratio, that is how many children and older persons each working-age adult supports, together with the country's reliance on aid and remittances. A high score means that household income rests on few earners, so when work stops after a hazard, many people feel it at once. Lead sectors: finance and planning; industry and trade.",
+  "sw": "Kiashiria hiki kinatumia uwiano wa utegemezi, yaani idadi ya watoto na wazee anaowahudumia kila mtu mzima mwenye uwezo wa kufanya kazi, pamoja na utegemezi wa nchi kwa misaada na fedha kutoka kwa wanaoishi nje. Alama ya juu inamaanisha kuwa kipato cha kaya kinategemea wachache wanaoingiza kipato, hivyo kazi ikisimama baada ya janga, watu wengi huathirika kwa pamoja. Sekta zinazoongoza: fedha na mipango; viwanda na biashara."
+ },
+ "rows": [
+  {
+   "impact": {
+    "en": "One earner supports many people, so a few days without work or sales are felt by the whole household",
+    "sw": "Mwingiza kipato mmoja anahudumia watu wengi, hivyo siku chache bila kazi au mauzo huathiri kaya nzima"
+   },
+   "actions": {
+    "en": [
+     "Build a second source of income where possible: a kitchen garden, poultry, small trade or a skill that sells in every season.",
+     "Keep part of the harvest and a little cash for the weeks when work stops during heavy rain or drought.",
+     "Village leaders and extension officers: connect households to cooperatives, markets and seasonal work."
+    ],
+    "sw": [
+     "Jenga chanzo cha pili cha kipato inapowezekana: bustani ya nyumbani, kuku, biashara ndogo au ujuzi unaouzika kila msimu.",
+     "Hifadhi sehemu ya mavuno na fedha kidogo kwa ajili ya wiki ambazo kazi husimama wakati wa mvua kubwa au ukame.",
+     "Viongozi wa kijiji na maafisa ugani: unganisheni kaya na vyama vya ushirika, masoko na kazi za msimu."
+    ]
+   }
+  },
+  {
+   "impact": {
+    "en": "Children and older persons depend on others for food, medicine and movement when a hazard disrupts daily life",
+    "sw": "Watoto na wazee huwategemea wengine kwa chakula, dawa na kuhama janga linapovuruga maisha ya kila siku"
+   },
+   "actions": {
+    "en": [
+     "Agree in the family and with neighbours who will look after children and older persons if the earner is away when a hazard strikes.",
+     "Village/Mtaa committees: keep an up-to-date list of households with many dependants and visit them before each season.",
+     "Social welfare officers: make sure older persons and orphans are registered for the support they are entitled to."
+    ],
+    "sw": [
+     "Kubalianeni ndani ya familia na majirani nani atawatunza watoto na wazee ikiwa mwingiza kipato hayupo janga linapotokea.",
+     "Kamati za Kijiji/Mtaa: wekeni orodha iliyosasishwa ya kaya zenye wategemezi wengi na zitembeleeni kabla ya kila msimu.",
+     "Maafisa ustawi wa jamii: hakikisheni wazee na yatima wamesajiliwa kwa msaada wanaostahili."
+    ]
+   }
+  },
+  {
+   "impact": {
+    "en": "Remittances and aid can slow down when a hazard affects many places at once",
+    "sw": "Fedha kutoka kwa ndugu walio mbali na misaada vinaweza kuchelewa janga linapoathiri maeneo mengi kwa wakati mmoja"
+   },
+   "actions": {
+    "en": [
+     "Keep a mobile money account active and the numbers of relatives who can help saved in more than one phone.",
+     "Savings groups: agree a small emergency fund that members can borrow from quickly after a hazard.",
+     "Council: keep a contingency budget line so that the first response does not wait for outside help."
+    ],
+    "sw": [
+     "Weka akaunti ya pesa za simu ikiwa hai na hifadhi namba za ndugu wanaoweza kusaidia kwenye simu zaidi ya moja.",
+     "Vikundi vya kuweka na kukopa: kubalianeni mfuko mdogo wa dharura ambao wanachama wanaweza kukopa haraka baada ya janga.",
+     "Halmashauri: wekeni kifungu cha bajeti ya dharura ili hatua za kwanza zisisubiri msaada wa nje."
+    ]
+   }
+  }
+ ]
+}

@@ -1,0 +1,67 @@
+{
+ "ref": "vulnerability:economic",
+ "title": {
+  "en": "Economically vulnerable groups",
+  "sw": "Makundi hatarishi kiuchumi"
+ },
+ "intro": {
+  "en": "This indicator is meant to capture households whose income is irregular or very low: households led by one adult or by children, older persons without a pension, people who are paid by the day and people with disabilities who cannot find work. INFORM Tanzania carries no data for it yet; councils can fill it from the TASAF, social welfare and community registers. A high score would mean that many households have no cushion at all when work stops. Lead sectors: finance and planning; industry and trade.",
+  "sw": "Kiashiria hiki kimekusudiwa kuonyesha kaya zenye kipato kisicho cha uhakika au kidogo sana: kaya zinazoongozwa na mtu mzima mmoja au na watoto, wazee wasio na pensheni, watu wanaolipwa kwa siku na watu wenye ulemavu wasiopata kazi. INFORM Tanzania bado haina data yake; halmashauri zinaweza kuijaza kutoka rejista za TASAF, ustawi wa jamii na jamii. Alama ya juu ingemaanisha kuwa kaya nyingi hazina kinga yoyote kazi inaposimama. Sekta zinazoongoza: fedha na mipango; viwanda na biashara."
+ },
+ "rows": [
+  {
+   "impact": {
+    "en": "Day workers, small traders and boda boda riders lose their income on the days that rain, floods or closures stop work",
+    "sw": "Vibarua, wafanyabiashara wadogo na waendesha bodaboda hukosa kipato siku ambazo mvua, mafuriko au kufungwa kwa shughuli husimamisha kazi"
+   },
+   "actions": {
+    "en": [
+     "Put a little aside on good days, in a savings group or mobile money, for the days work stops.",
+     "Market and stand leaders: agree in advance where traders can move their goods when water rises.",
+     "Council trade officers: allow temporary trading places during a hazard so that incomes continue."
+    ],
+    "sw": [
+     "Weka akiba kidogo siku nzuri, kwenye kikundi cha kuweka na kukopa au pesa za simu, kwa ajili ya siku kazi inaposimama.",
+     "Viongozi wa masoko na vituo: kubalianeni mapema wafanyabiashara wataweka wapi bidhaa zao maji yanapopanda.",
+     "Maafisa biashara wa halmashauri: ruhusuni maeneo ya muda ya biashara wakati wa janga ili kipato kiendelee."
+    ]
+   }
+  },
+  {
+   "impact": {
+    "en": "Older persons without a pension and households led by children have no one to replace lost food or housing",
+    "sw": "Wazee wasio na pensheni na kaya zinazoongozwa na watoto hawana wa kuwarejeshea chakula au makazi yaliyopotea"
+   },
+   "actions": {
+    "en": [
+     "Neighbours and faith groups: know these households by name and check on them before, during and after a hazard.",
+     "Social welfare officers and TASAF: keep these households on the registers and make sure they receive their entitlements first.",
+     "Village committees: include at least one older person and one young person in the committee, so that their needs are heard."
+    ],
+    "sw": [
+     "Majirani na vikundi vya kidini: zifahamuni kaya hizi kwa majina na zitembeleeni kabla, wakati na baada ya janga.",
+     "Maafisa ustawi wa jamii na TASAF: wekeni kaya hizi kwenye rejista na hakikisheni zinapata stahiki zao kwanza.",
+     "Kamati za kijiji: mjumuishe angalau mzee mmoja na kijana mmoja kwenye kamati, ili mahitaji yao yasikike."
+    ]
+   }
+  },
+  {
+   "impact": {
+    "en": "People with disabilities may be left out of work, information and relief unless this is planned for",
+    "sw": "Watu wenye ulemavu wanaweza kuachwa nje ya kazi, taarifa na misaada isipopangwa makusudi"
+   },
+   "actions": {
+    "en": [
+     "Ask people with disabilities what they need to work, move and receive information, and plan with them, not for them.",
+     "Committees: keep relief and registration points reachable for wheelchairs and give information in spoken, written and sign form.",
+     "Council: link people with disabilities to the disability loan fund, skills training and assistive devices."
+    ],
+    "sw": [
+     "Waulize watu wenye ulemavu wanahitaji nini ili kufanya kazi, kutembea na kupata taarifa, na panga pamoja nao, si kwa niaba yao.",
+     "Kamati: hakikisheni vituo vya misaada na usajili vinafikika kwa viti vya magurudumu na toeni taarifa kwa maneno, maandishi na lugha ya alama.",
+     "Halmashauri: unganisheni watu wenye ulemavu na mfuko wa mikopo ya watu wenye ulemavu, mafunzo ya ujuzi na vifaa saidizi."
+    ]
+   }
+  }
+ ]
+}

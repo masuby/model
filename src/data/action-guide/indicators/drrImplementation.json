@@ -1,0 +1,67 @@
+{
+ "ref": "coping:drrImplementation",
+ "title": {
+  "en": "Disaster risk reduction implementation",
+  "sw": "Utekelezaji wa kupunguza hatari za maafa"
+ },
+ "intro": {
+  "en": "This indicator uses the Sendai Framework index and the share of people covered by early warning, as one value for Tanzania; the model also records for each council the five arrangements of the Disaster Management Act: an emergency preparedness and response plan, an emergency operations and communication centre, an emergency response team, a risk, vulnerability and capacity assessment, and anticipatory action. A high score means that these arrangements are not yet in place or not yet practised, so the first hours of a hazard are improvised. Lead sectors: PMO-DMD and the Disaster Management Committees; PO-RALG and the council.",
+  "sw": "Kiashiria hiki kinatumia Kielelezo cha Mfumo wa Sendai na sehemu ya watu wanaofikiwa na tahadhari za mapema, kama thamani moja kwa Tanzania; mfumo pia unarekodi kwa kila halmashauri mipango mitano ya Sheria ya Usimamizi wa Maafa: mpango wa kujiandaa na kukabiliana na dharura, kituo cha uendeshaji na mawasiliano ya dharura, timu ya kukabiliana na dharura, tathmini ya hatari, udhaifu na uwezo, na hatua za mapema. Alama ya juu inamaanisha kuwa mipango hii bado haipo au bado haijafanyiwa mazoezi, hivyo saa za kwanza za janga hufanywa bila mpango. Sekta zinazoongoza: OWM-IMM na Kamati za Usimamizi wa Maafa; TAMISEMI na halmashauri."
+ },
+ "rows": [
+  {
+   "impact": {
+    "en": "Without a practised plan, the first hours of a hazard are spent deciding who does what",
+    "sw": "Bila mpango uliofanyiwa mazoezi, saa za kwanza za janga hutumika kuamua nani afanye nini"
+   },
+   "actions": {
+    "en": [
+     "Council: prepare or update the emergency preparedness and response plan every year, with the wards, and share it with the committees.",
+     "Ward and village committees: write a one-page contingency plan: the hazards, the safe places, the people who need help to move, and who calls whom.",
+     "Practise once a year before the season; a short drill at the school or the market shows what is missing."
+    ],
+    "sw": [
+     "Halmashauri: andaeni au sasisheni mpango wa kujiandaa na kukabiliana na dharura kila mwaka, pamoja na kata, na ushirikisheni kamati.",
+     "Kamati za kata na vijiji: andikeni mpango wa dharura wa ukurasa mmoja: hatari, mahali salama, watu wanaohitaji msaada kuhama, na nani anampigia nani.",
+     "Fanyeni mazoezi mara moja kwa mwaka kabla ya msimu; zoezi fupi shuleni au sokoni huonyesha kinachokosekana."
+    ]
+   }
+  },
+  {
+   "impact": {
+    "en": "A warning that stops at the council office does not help the household by the river",
+    "sw": "Tahadhari inayoishia ofisi ya halmashauri haiisaidii kaya iliyo kando ya mto"
+   },
+   "actions": {
+    "en": [
+     "Council: set up the emergency operations and communication centre with a duty roster and the numbers of every ward and village leader.",
+     "Ward and village leaders: pass every warning on the same day by the agreed channels, and confirm back to the council that it reached the villages.",
+     "Residents: tell the leaders how you prefer to receive warnings, and act on them early; moving early is always allowed."
+    ],
+    "sw": [
+     "Halmashauri: anzisheni kituo cha uendeshaji na mawasiliano ya dharura chenye ratiba ya zamu na namba za kila kiongozi wa kata na kijiji.",
+     "Viongozi wa kata na vijiji: pitisheni kila tahadhari siku hiyo hiyo kwa njia zilizokubaliwa, na thibitisheni kwa halmashauri kuwa imevifikia vijiji.",
+     "Wakazi: waelezeni viongozi jinsi mnavyopendelea kupokea tahadhari, na zifuateni mapema; kuhama mapema kunaruhusiwa siku zote."
+    ]
+   }
+  },
+  {
+   "impact": {
+    "en": "Response teams, assessments and early action depend on people and small budgets that are easy to forget in a quiet year",
+    "sw": "Timu za kukabiliana, tathmini na hatua za mapema hutegemea watu na bajeti ndogo ambazo ni rahisi kusahaulika mwaka wa utulivu"
+   },
+   "actions": {
+    "en": [
+     "Council: keep an emergency response team trained and equipped, and repeat the risk, vulnerability and capacity assessment with the communities every few years.",
+     "Agree early actions tied to TMA's forecasts: clearing drains, moving stocks and pre-positioning supplies before the water rises.",
+     "Everyone: volunteers, youth groups, faith groups and businesses are welcome in the response team; ask the council how to join."
+    ],
+    "sw": [
+     "Halmashauri: wekeni timu ya kukabiliana na dharura iliyofundishwa na yenye vifaa, na rudieni tathmini ya hatari, udhaifu na uwezo pamoja na jamii kila baada ya miaka michache.",
+     "Kubalianeni hatua za mapema zinazofungamana na utabiri wa TMA: kusafisha mitaro, kuhamisha akiba na kuweka vifaa mapema kabla maji hayajapanda.",
+     "Kila mtu: wajitolea, vikundi vya vijana, vikundi vya kidini na biashara wanakaribishwa kwenye timu ya kukabiliana; ulizeni halmashauri jinsi ya kujiunga."
+    ]
+   }
+  }
+ ]
+}

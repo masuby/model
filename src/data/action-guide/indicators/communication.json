@@ -1,0 +1,67 @@
+{
+ "ref": "coping:communication",
+ "title": {
+  "en": "Communication",
+  "sw": "Mawasiliano"
+ },
+ "intro": {
+  "en": "This indicator combines access to electricity, mobile phone ownership and internet access for the region. A high score means that fewer households can receive a warning by phone, radio or television, and that power cuts leave people without news just when they need it. Lead sectors: communications (TCRA, operators); energy (TANESCO, REA); works and roads (TANROADS, TARURA).",
+  "sw": "Kiashiria hiki kinaunganisha upatikanaji wa umeme, umiliki wa simu za mkononi na intaneti kwa mkoa. Alama ya juu inamaanisha kuwa kaya chache zinaweza kupokea tahadhari kwa simu, redio au televisheni, na kukatika kwa umeme kunawaacha watu bila habari wakati wanapozihitaji zaidi. Sekta zinazoongoza: mawasiliano (TCRA, watoa huduma); nishati (TANESCO, REA); ujenzi na barabara (TANROADS, TARURA)."
+ },
+ "rows": [
+  {
+   "impact": {
+    "en": "A warning sent by phone or on television does not reach households without a phone, power or network",
+    "sw": "Tahadhari inayotumwa kwa simu au televisheni haiwafikii kaya zisizo na simu, umeme au mtandao"
+   },
+   "actions": {
+    "en": [
+     "Agree in the village or mtaa how a warning is passed on: a phone tree, the mosque or church loudspeaker, a bell, a whistle, or a messenger to every ten houses.",
+     "Keep a wind-up or battery radio and spare batteries; TBC and the community radio carry TMA's warnings.",
+     "Village/Mtaa leaders: make sure the message also reaches people who are deaf, blind, housebound or do not read, by a visit or through a trusted neighbour."
+    ],
+    "sw": [
+     "Kubalianeni kijijini au mtaani jinsi tahadhari inavyopitishwa: mnyororo wa simu, kipaza sauti cha msikiti au kanisa, kengele, filimbi, au mjumbe kwa kila nyumba kumi.",
+     "Weka redio ya kuzungusha au ya betri na betri za akiba; TBC na redio ya jamii hutangaza tahadhari za TMA.",
+     "Viongozi wa Kijiji/Mtaa: hakikisheni ujumbe unawafikia pia viziwi, wasioona, wasioweza kutoka nyumbani au wasiosoma, kwa kutembelewa au kupitia jirani wanayemwamini."
+    ]
+   }
+  },
+  {
+   "impact": {
+    "en": "Phones run out of charge and the network goes down when the power is cut for days",
+    "sw": "Simu huisha chaji na mtandao hupotea umeme unapokatika kwa siku kadhaa"
+   },
+   "actions": {
+    "en": [
+     "Charge phones and power banks when a warning is issued, and keep the emergency number 190 and the leaders' numbers written on paper.",
+     "Committees: identify a place with solar charging (the health facility, a shop, a school) that stays open during a hazard.",
+     "TANESCO, REA and the operators: restore power and network to the health facility, the water pump and the council office first."
+    ],
+    "sw": [
+     "Chaji simu na betri za akiba tahadhari inapotolewa, na andika namba ya dharura 190 na namba za viongozi kwenye karatasi.",
+     "Kamati: ainisheni mahali penye chaji ya sola (kituo cha afya, duka, shule) panapobaki wazi wakati wa janga.",
+     "TANESCO, REA na watoa huduma: rejesheni umeme na mtandao kwa kituo cha afya, pampu ya maji na ofisi ya halmashauri kwanza."
+    ]
+   }
+  },
+  {
+   "impact": {
+    "en": "Rumours spread faster than official information where there are few trusted channels",
+    "sw": "Uvumi huenea haraka kuliko taarifa rasmi pale ambapo njia za kuaminika ni chache"
+   },
+   "actions": {
+    "en": [
+     "Check news with the village leader, the ward office or the Disaster Management Committee before passing it on.",
+     "Committees: name one spokesperson per village and update the community at the same time and place every day during a hazard.",
+     "PMO-DMD, TMA and the council: send warnings in plain Kiswahili with what to do, through the operators, the radio and the leaders at the same time."
+    ],
+    "sw": [
+     "Hakiki habari kwa kiongozi wa kijiji, ofisi ya kata au Kamati ya Usimamizi wa Maafa kabla ya kuzisambaza.",
+     "Kamati: wekeni msemaji mmoja kwa kila kijiji na toeni taarifa kwa jamii wakati na mahali palepale kila siku wakati wa janga.",
+     "OWM-IMM, TMA na halmashauri: tumeni tahadhari kwa Kiswahili rahisi zenye hatua za kuchukua, kupitia watoa huduma, redio na viongozi kwa wakati mmoja."
+    ]
+   }
+  }
+ ]
+}

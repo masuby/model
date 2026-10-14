@@ -1,0 +1,67 @@
+{
+ "ref": "vulnerability:childrenHealthNutrition",
+ "title": {
+  "en": "Children's health and nutrition",
+  "sw": "Afya na lishe ya watoto"
+ },
+ "intro": {
+  "en": "This indicator combines neonatal, infant and under-five mortality with the share of children who are underweight, for the region. A high score means that many young children are already not growing as they should, so a few weeks of poor food or unsafe water after a hazard can set them back for life. Lead sectors: health; community development and social protection (TASAF).",
+  "sw": "Kiashiria hiki kinaunganisha vifo vya watoto wachanga, wachanga na walio chini ya miaka mitano na sehemu ya watoto wenye uzito pungufu, kwa mkoa. Alama ya juu inamaanisha kuwa watoto wengi wadogo tayari hawakui inavyotakiwa, hivyo wiki chache za chakula duni au maji yasiyo salama baada ya janga zinaweza kuwarudisha nyuma maishani. Sekta zinazoongoza: afya; maendeleo ya jamii na hifadhi ya jamii (TASAF)."
+ },
+ "rows": [
+  {
+   "impact": {
+    "en": "Young children lose weight quickly when meals are missed or water is unsafe",
+    "sw": "Watoto wadogo hupungua uzito haraka milo inapokosekana au maji yasipokuwa salama"
+   },
+   "actions": {
+    "en": [
+     "Keep feeding children small meals often, continue breastfeeding, and give treated or boiled water.",
+     "Attend the monthly growth monitoring at the clinic or the outreach; a child who is not gaining weight gets help early.",
+     "Health and nutrition officers: screen children in affected wards within the first days of a hazard and refer those who need it."
+    ],
+    "sw": [
+     "Endelea kuwalisha watoto milo midogo mara kwa mara, endelea kunyonyesha, na wape maji yaliyotibiwa au kuchemshwa.",
+     "Hudhuria kliniki ya kupima ukuaji kila mwezi au huduma ya mkoba; mtoto asiyeongezeka uzito hupata msaada mapema.",
+     "Maafisa afya na lishe: wapimeni watoto katika kata zilizoathirika ndani ya siku za kwanza za janga na wapelekeni wanaohitaji msaada."
+    ]
+   }
+  },
+  {
+   "impact": {
+    "en": "Floodwater, open pits and busy roads are dangerous for children left without an adult during a hazard",
+    "sw": "Maji ya mafuriko, mashimo yaliyo wazi na barabara zenye magari mengi ni hatari kwa watoto walioachwa bila mtu mzima wakati wa janga"
+   },
+   "actions": {
+    "en": [
+     "Agree who watches the children when adults are busy saving property or fetching water, and keep children away from flowing water.",
+     "Schools and teachers: keep a list of the children's guardians and practise the safe route home with pupils.",
+     "Village/Mtaa leaders: fence or mark open wells and pits, and set up a child-friendly corner at the safe place."
+    ],
+    "sw": [
+     "Kubalianeni nani anawaangalia watoto wakati watu wazima wanaokoa mali au kuchota maji, na waweke watoto mbali na maji yanayotiririka.",
+     "Shule na walimu: wekeni orodha ya walezi wa watoto na fanyeni mazoezi ya njia salama ya kurudi nyumbani pamoja na wanafunzi.",
+     "Viongozi wa Kijiji/Mtaa: wekeni uzio au alama kwenye visima na mashimo yaliyo wazi, na tengeni kona rafiki kwa watoto mahali salama."
+    ]
+   }
+  },
+  {
+   "impact": {
+    "en": "Pregnant women and mothers of newborns need clean water, food and a reachable health facility, also when it rains",
+    "sw": "Wajawazito na mama wa watoto wachanga wanahitaji maji safi, chakula na kituo cha afya kinachofikika, hata mvua inaponyesha"
+   },
+   "actions": {
+    "en": [
+     "Plan the birth early: know the facility, the transport and who will go with you, especially in the rainy months.",
+     "Neighbours and families: make sure pregnant women and new mothers eat enough and rest; a shared meal costs little.",
+     "Health facilities: keep maternity waiting arrangements and emergency transport ready during the season."
+    ],
+    "sw": [
+     "Panga kujifungua mapema: fahamu kituo, usafiri na nani ataongozana nawe, hasa katika miezi ya mvua.",
+     "Majirani na familia: hakikisheni wajawazito na mama wachanga wanakula vya kutosha na kupumzika; mlo wa pamoja hugharimu kidogo.",
+     "Vituo vya afya: wekeni mipango ya nyumba za kusubiria wajawazito na usafiri wa dharura tayari wakati wa msimu."
+    ]
+   }
+  }
+ ]
+}

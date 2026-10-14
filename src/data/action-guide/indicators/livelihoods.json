@@ -1,0 +1,67 @@
+{
+ "ref": "vulnerability:livelihoods",
+ "title": {
+  "en": "Livelihoods",
+  "sw": "Riziki"
+ },
+ "intro": {
+  "en": "This indicator measures the share of people without enough food, from the IPC food security classification for the region. A high score means that many households already struggle to feed themselves between harvests, so a failed rain, a flood on the fields or a market closure is felt quickly. Lead sectors: agriculture and livestock; community development and social protection (TASAF).",
+  "sw": "Kiashiria hiki kinapima sehemu ya watu wasio na chakula cha kutosha, kutoka uainishaji wa IPC wa usalama wa chakula kwa mkoa. Alama ya juu inamaanisha kuwa kaya nyingi tayari zinapambana kupata chakula kati ya mavuno, hivyo mvua kushindwa, mafuriko mashambani au soko kufungwa huhisiwa haraka. Sekta zinazoongoza: kilimo na mifugo; maendeleo ya jamii na hifadhi ya jamii (TASAF)."
+ },
+ "rows": [
+  {
+   "impact": {
+    "en": "Food stocks run low between harvests, so a poor season leaves little to fall back on",
+    "sw": "Akiba ya chakula hupungua kati ya mavuno, hivyo msimu mbaya huacha akiba ndogo ya kutegemea"
+   },
+   "actions": {
+    "en": [
+     "Store part of the harvest in sealed bags or a raised store, protected from rain, pests and damp.",
+     "Plant early-maturing and drought-tolerant varieties alongside the usual crop, as advised by the extension officer.",
+     "Agriculture department: keep seed and fodder reserves at the ward level and share TMA's seasonal forecasts with farmers in good time."
+    ],
+    "sw": [
+     "Hifadhi sehemu ya mavuno kwenye magunia yaliyofungwa vizuri au ghala lililoinuliwa, kinga dhidi ya mvua, wadudu na unyevu.",
+     "Panda mbegu zinazokomaa mapema na zinazostahimili ukame sambamba na zao la kawaida, kama anavyoshauri afisa ugani.",
+     "Idara ya kilimo: wekeni akiba ya mbegu na malisho ngazi ya kata na washirikisheni wakulima utabiri wa msimu wa TMA kwa wakati."
+    ]
+   }
+  },
+  {
+   "impact": {
+    "en": "Families who depend on one crop, one herd or one fishing ground lose most when that one source is hit",
+    "sw": "Familia zinazotegemea zao moja, kundi moja la mifugo au eneo moja la uvuvi hupoteza zaidi chanzo hicho kimoja kinapoathirika"
+   },
+   "actions": {
+    "en": [
+     "Grow more than one crop and keep a few small animals; a vegetable garden near the house adds food and income in every season.",
+     "Pastoralists: agree grazing and water routes with neighbouring villages before the dry season.",
+     "Fishers: use TMA's weather information and the beach management unit's advice before going out, and keep life jackets on board."
+    ],
+    "sw": [
+     "Lima zaidi ya zao moja na fuga wanyama wadogo wachache; bustani ya mboga karibu na nyumba huongeza chakula na kipato kila msimu.",
+     "Wafugaji: kubalianeni njia za malisho na maji na vijiji jirani kabla ya kiangazi.",
+     "Wavuvi: tumieni taarifa za hali ya hewa za TMA na ushauri wa kitengo cha usimamizi wa mwalo kabla ya kwenda majini, na kuweni na maboya ya kuokolea chomboni."
+    ]
+   }
+  },
+  {
+   "impact": {
+    "en": "When food is short, it is the youngest, the oldest and those who are ill who go without first",
+    "sw": "Chakula kinapopungua, watoto wadogo, wazee na wagonjwa ndio hukosa kwanza"
+   },
+   "actions": {
+    "en": [
+     "Share available food with vulnerable neighbours and tell the village leader early when households start to skip meals.",
+     "Village/Mtaa committees: report signs of food shortage to the ward and the council early, so that support arrives before the situation worsens.",
+     "TASAF and the council: pay transfers on time and use public works to keep income flowing in a poor season."
+    ],
+    "sw": [
+     "Shirikianeni chakula kilichopo na majirani walio hatarini na mjulisheni kiongozi wa kijiji mapema kaya zinapoanza kuruka milo.",
+     "Kamati za Kijiji/Mtaa: toeni taarifa za dalili za uhaba wa chakula kwa kata na halmashauri mapema, ili msaada ufike kabla hali haijawa mbaya.",
+     "TASAF na halmashauri: lipeni ruzuku kwa wakati na tumieni kazi za umma kuhakikisha kipato kinaendelea katika msimu mbaya."
+    ]
+   }
+  }
+ ]
+}

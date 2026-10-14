@@ -1,0 +1,67 @@
+{
+ "ref": "vulnerability:developmentPoverty",
+ "title": {
+  "en": "Development and poverty",
+  "sw": "Maendeleo na umaskini"
+ },
+ "intro": {
+  "en": "This indicator combines the Human Development Index, the Gender Development Index, wealth inequality and the Multidimensional Poverty Index for the region. A high score means that many households have low incomes, little schooling or limited services, so a shock costs them more and recovery takes longer. Lead sectors: finance and planning; community development and social protection (TASAF); PO-RALG and the council.",
+  "sw": "Kiashiria hiki kinaunganisha Kielelezo cha Maendeleo ya Binadamu, Kielelezo cha Maendeleo ya Kijinsia, ukosefu wa usawa wa utajiri na Kielelezo cha Umaskini wa Nyanja Nyingi kwa mkoa. Alama ya juu inamaanisha kuwa kaya nyingi zina kipato kidogo, elimu ndogo au huduma chache, hivyo mshtuko unawagharimu zaidi na kupona huchukua muda mrefu. Sekta zinazoongoza: fedha na mipango; maendeleo ya jamii na hifadhi ya jamii (TASAF); TAMISEMI na halmashauri."
+ },
+ "rows": [
+  {
+   "impact": {
+    "en": "Households with little savings take longer to replace food, tools and housing after a flood or drought",
+    "sw": "Kaya zenye akiba ndogo huchukua muda mrefu kurejesha chakula, zana na makazi baada ya mafuriko au ukame"
+   },
+   "actions": {
+    "en": [
+     "Join or form a savings group (VICOBA or SACCOS) and keep a small reserve for the rainy or dry season.",
+     "Keep identity, land and school documents in a sealed bag in a safe place.",
+     "Council and TASAF: register eligible households for social protection and public works before the season starts."
+    ],
+    "sw": [
+     "Jiunge au anzisha kikundi cha kuweka na kukopa (VICOBA au SACCOS) na weka akiba ndogo kwa ajili ya msimu wa mvua au kiangazi.",
+     "Hifadhi vitambulisho, hati za ardhi na nyaraka za shule kwenye mfuko usiopitisha maji mahali salama.",
+     "Halmashauri na TASAF: sajilini kaya zinazostahili kwa hifadhi ya jamii na kazi za umma kabla msimu haujaanza."
+    ]
+   }
+  },
+  {
+   "impact": {
+    "en": "Fewer services nearby: water points, clinics and good roads may be far, so help and supplies take longer to arrive",
+    "sw": "Huduma chache karibu: vituo vya maji, zahanati na barabara nzuri zinaweza kuwa mbali, hivyo msaada na mahitaji huchelewa kufika"
+   },
+   "actions": {
+    "en": [
+     "Agree as a village or mtaa on a safe meeting place and on who will check on households that live far from the road.",
+     "Ward and village committees: map the households and services in the ward and share the map with the council.",
+     "Council departments: give these wards priority when planning water points, roads and clinics."
+    ],
+    "sw": [
+     "Kubalianeni kama kijiji au mtaa mahali salama pa kukusanyika na nani atazifuatilia kaya zinazoishi mbali na barabara.",
+     "Kamati za kata na vijiji: chorini ramani ya kaya na huduma zilizopo kwenye kata na mshirikishe halmashauri.",
+     "Idara za halmashauri: zipeni kata hizi kipaumbele katika kupanga vituo vya maji, barabara na zahanati."
+    ]
+   }
+  },
+  {
+   "impact": {
+    "en": "Women, young people and people with disabilities may have fewer chances to earn and to take part in decisions",
+    "sw": "Wanawake, vijana na watu wenye ulemavu wanaweza kuwa na fursa chache za kuingiza kipato na kushiriki katika maamuzi"
+   },
+   "actions": {
+    "en": [
+     "Include women, youth and people with disabilities in committees, savings groups and training; everyone's knowledge counts.",
+     "Community development officers: link groups to the council's women, youth and disability loans and to skills training.",
+     "Share information in meetings, on the radio and door to door, so that it reaches everyone, including those who do not read."
+    ],
+    "sw": [
+     "Washirikishe wanawake, vijana na watu wenye ulemavu kwenye kamati, vikundi vya kuweka na kukopa na mafunzo; maarifa ya kila mtu yana thamani.",
+     "Maafisa maendeleo ya jamii: unganisheni vikundi na mikopo ya halmashauri ya wanawake, vijana na watu wenye ulemavu, na mafunzo ya ujuzi.",
+     "Toeni taarifa kwenye mikutano, redioni na nyumba kwa nyumba ili zimfikie kila mtu, wakiwemo wasiosoma."
+    ]
+   }
+  }
+ ]
+}

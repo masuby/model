@@ -9,6 +9,10 @@ Writes, all bilingual (English and Kiswahili, as published in the guide), loaded
   src/data/action-guide/regions/<region>.json per council (by site council id): the hazards the guide
                                               documents for it and its "Know your risk" statements;
                                               Tabora's councils also carry their own alert-level actions
+  src/data/action-guide/indicators/<group>.json one file per vulnerability and coping group (chapters 11.0
+                                              and 12.0, added 14 October 2026): what the indicator measures
+                                              and its impact -> action rows, which hold at every level
+  src/data/action-guide/dimensions.json       the two chapters' own statements
 
 The per-council alert tables of the guide are only used to read each council's documented hazards: their
 generated sentences repeat one flood template (and some substitutions are broken), so the site shows the
@@ -149,11 +153,26 @@ def hazards_in(text: str):
 # ------------------------------------------------------------------------------------------------ #
 
 doc = Document(str(SRC))
+W = '{http://schemas.openxmlformats.org/wordprocessingml/2006/main}'
+
+
+def accepted_text(p) -> str:
+    """A paragraph's text with its tracked changes accepted: inserted runs count, deleted text does not
+    (the book of 14 October 2026 carries thousands of revisions; python-docx's `.text` skips insertions)."""
+    out = []
+    for el in p.iter():
+        if el.tag == W + 't':
+            out.append(el.text or '')
+        elif el.tag in (W + 'tab', W + 'br', W + 'cr'):
+            out.append(' ')
+    return ''.join(out)
+
+
 blocks = []
 for child in doc.element.body.iterchildren():
     tag = child.tag.rsplit('}', 1)[-1]
     if tag == 'p':
-        text = Paragraph(child, doc).text.strip()
+        text = accepted_text(child).strip()
         if text:
             blocks.append({'t': 'p', 'text': text})
     elif tag == 'tbl':
@@ -164,7 +183,7 @@ for child in doc.element.body.iterchildren():
                 if id(cell._tc) in seen:
                     continue
                 seen.add(id(cell._tc))
-                cells.append([q.text.strip() for q in cell.paragraphs if q.text.strip()])
+                cells.append([accepted_text(q._p).strip() for q in cell.paragraphs if accepted_text(q._p).strip()])
             rows.append(cells)
         blocks.append({'t': 'table', 'rows': rows})
 
@@ -400,6 +419,70 @@ for n, start in enumerate(region_starts):
         problems.append(f'{region_en}: {len(know) - len(order)} "Know your risk" rows without a council')
 
 # ------------------------------------------------------------------------------------------------ #
+# Vulnerability and Lack of Coping Capacity (chapters 11.0 and 12.0): a statement and one impact/action
+# table per INFORM group, holding at every level.
+# ------------------------------------------------------------------------------------------------ #
+
+INDICATOR_CHAPTERS = {
+    'DEVELOPMENT AND POVERTY': 'vulnerability:developmentPoverty',
+    'ECONOMIC DEPENDENCY': 'vulnerability:economicDependency',
+    'HABITAT': 'vulnerability:habitat',
+    'LIVELIHOODS': 'vulnerability:livelihoods',
+    'DISPLACED PEOPLE': 'vulnerability:displacedPeople',
+    'HEALTH CONDITIONS': 'vulnerability:healthConditions',
+    "CHILDREN'S HEALTH AND NUTRITION": 'vulnerability:childrenHealthNutrition',
+    'ECONOMICALLY VULNERABLE GROUPS': 'vulnerability:economic',
+    'ACCESS TO HEALTH CARE': 'coping:accessHealth',
+    'ECONOMIC CAPACITY': 'coping:economicCapacity',
+    'WATER, SANITATION AND HYGIENE': 'coping:wash',
+    'COMMUNICATION': 'coping:communication',
+    'EDUCATION': 'coping:education',
+    'DISASTER RISK REDUCTION IMPLEMENTATION': 'coping:drrImplementation',
+    'GOVERNANCE': 'coping:governance',
+}
+DIMENSION_CHAPTERS = {'11': 'vulnerability', '12': 'coping'}
+chapter_rx = re.compile(r'^(1[12])\.(\d) (.+?) \| (.+)$')
+
+
+def sentence(s: str) -> str:
+    """A chapter title as the book prints it, in sentence case ('CHILDREN'S HEALTH' -> 'Children's health')."""
+    s = clean(s).lower()
+    return s[:1].upper() + s[1:]
+
+
+def statement_after(start: int, stop: int):
+    """The EN:/SW: paragraphs and the impact/action table of a chapter or section."""
+    intro, rows = {'en': '', 'sw': ''}, []
+    for b in blocks[start + 1:stop]:
+        if b['t'] == 'p':
+            if b['text'].startswith('EN: '):
+                intro['en'] = clean(b['text'][4:])
+            elif b['text'].startswith('SW: '):
+                intro['sw'] = clean(b['text'][4:])
+        elif b['t'] == 'table' and 'IMPACT' in head(b):
+            rows.extend(impact_rows(b))
+    return intro, rows
+
+
+guide['indicators'] = {}
+guide['dimensions'] = {}
+chapter_starts = [i for i, b in enumerate(blocks) if b['t'] == 'p' and chapter_rx.match(b['text'])]
+for n, s in enumerate(chapter_starts):
+    e = chapter_starts[n + 1] if n + 1 < len(chapter_starts) else index_of(is_p(r'^13\.0 '), s)
+    m = chapter_rx.match(blocks[s]['text'])
+    chapter, section, title_en, title_sw = m.group(1), m.group(2), m.group(3).strip(), m.group(4).strip()
+    intro, rows = statement_after(s, e)
+    if section == '0':
+        guide['dimensions'][DIMENSION_CHAPTERS[chapter]] = {'title': {'en': sentence(title_en), 'sw': sentence(title_sw)}, 'intro': intro}
+        continue
+    ref = INDICATOR_CHAPTERS.get(title_en.upper())
+    assert ref, f'unknown indicator chapter: {title_en}'
+    assert rows, f'{title_en}: no impact/action table'
+    guide['indicators'][ref] = {'ref': ref, 'title': {'en': sentence(title_en), 'sw': sentence(title_sw)}, 'intro': intro, 'rows': rows}
+assert set(guide['indicators']) == set(INDICATOR_CHAPTERS.values()), sorted(set(INDICATOR_CHAPTERS.values()) - set(guide['indicators']))
+assert set(guide['dimensions']) == {'vulnerability', 'coping'}
+
+# ------------------------------------------------------------------------------------------------ #
 # Checks and output
 # ------------------------------------------------------------------------------------------------ #
 
@@ -428,7 +511,7 @@ dashes = [s for s in walk([guide, regions]) if '\u2014' in s]
 assert not dashes, dashes[:3]
 
 counts = Counter(h for r in regions.values() for c in r['councils'].values() for h in c['hazards'])
-print(f'hazards: {len(guide["hazards"])} | incident groups: {len(guide["incidents"])} | regions: {len(regions)} | councils: {len(covered)} of {len(COUNCILS)}')
+print(f'hazards: {len(guide["hazards"])} | indicator groups: {len(guide["indicators"])} | incident groups: {len(guide["incidents"])} | regions: {len(regions)} | councils: {len(covered)} of {len(COUNCILS)}')
 print('councils per documented hazard:', dict(counts.most_common()))
 print(f'problems ({len(problems)}):')
 for p in problems:
@@ -447,6 +530,9 @@ def write(path: Path, data) -> None:
 for key, hazard in guide['hazards'].items():
     write(OUT / 'hazards' / f'{key}.json', hazard)
 write(OUT / 'incidents.json', guide['incidents'])
+for ref, entry in guide['indicators'].items():
+    write(OUT / 'indicators' / f"{ref.split(':')[1]}.json", entry)
+write(OUT / 'dimensions.json', guide['dimensions'])
 for key, r in regions.items():
     write(OUT / 'regions' / f'{key}.json', r)
 print(f'written to {OUT.relative_to(ROOT)}')

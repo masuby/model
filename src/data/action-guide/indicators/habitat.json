@@ -1,0 +1,67 @@
+{
+ "ref": "vulnerability:habitat",
+ "title": {
+  "en": "Habitat",
+  "sw": "Makazi"
+ },
+ "intro": {
+  "en": "This indicator measures the share of people living in informal settlements and in towns. A high score means that many homes stand close together on land that was not planned for them, often near rivers, drains or steep ground, with limited space for water, sanitation and access roads. Lead sectors: lands, housing and urban planning; PO-RALG and the council.",
+  "sw": "Kiashiria hiki kinapima sehemu ya watu wanaoishi kwenye makazi yasiyo rasmi na mijini. Alama ya juu inamaanisha kuwa nyumba nyingi zimejengwa karibu karibu kwenye ardhi isiyopangwa kwa ajili yake, mara nyingi karibu na mito, mitaro au miteremko mikali, na kwa nafasi finyu ya maji, usafi wa mazingira na barabara za kufikia. Sekta zinazoongoza: ardhi, nyumba na mipango miji; TAMISEMI na halmashauri."
+ },
+ "rows": [
+  {
+   "impact": {
+    "en": "Homes built close to rivers, drains and steep ground are the first to be reached by floodwater or slipping soil",
+    "sw": "Nyumba zilizojengwa karibu na mito, mitaro na miteremko mikali ndizo za kwanza kufikiwa na maji ya mafuriko au udongo unaoporomoka"
+   },
+   "actions": {
+    "en": [
+     "Keep the river reserve and the drains in front of your home clear, and raise doorways and valuables above the highest known water mark.",
+     "Before building or extending, ask the ward or council land office which plots are safe and which are reserved for water.",
+     "Council planners: regularise and service settlements where it is safe, and offer planned plots where it is not."
+    ],
+    "sw": [
+     "Weka hifadhi ya mto na mitaro iliyo mbele ya nyumba yako wazi, na inua milango na vitu vya thamani juu ya alama ya juu ya maji inayojulikana.",
+     "Kabla ya kujenga au kuongeza nyumba, uliza ofisi ya ardhi ya kata au halmashauri ni viwanja vipi ni salama na vipi vimehifadhiwa kwa maji.",
+     "Wapangaji wa halmashauri: rasimisheni na wekeeni huduma makazi pale palipo salama, na toeni viwanja vilivyopangwa pale pasipo salama."
+    ]
+   }
+  },
+  {
+   "impact": {
+    "en": "Narrow paths and crowded plots make it harder for people, ambulances and fire engines to move quickly",
+    "sw": "Njia nyembamba na viwanja vilivyosongamana hufanya iwe vigumu kwa watu, magari ya wagonjwa na ya zimamoto kupita haraka"
+   },
+   "actions": {
+    "en": [
+     "Agree with neighbours to keep at least one path open and free of stalls, vehicles and building materials.",
+     "Mtaa committees: mark the routes to the safe place and the water points, and walk them with residents, including people who use wheelchairs or walk with help.",
+     "Fire and Rescue Force and the council: locate hydrants, water tanks and turning points for the settlement."
+    ],
+    "sw": [
+     "Kubalianeni na majirani kuacha angalau njia moja wazi bila vibanda, magari au vifaa vya ujenzi.",
+     "Kamati za mtaa: wekeni alama njia za kwenda mahali salama na vituo vya maji, na zitembeeni pamoja na wakazi, wakiwemo wanaotumia viti vya magurudumu au wanaotembea kwa msaada.",
+     "Jeshi la Zimamoto na Uokoaji na halmashauri: ainisheni mabomba ya maji, matangi na sehemu za kugeuzia magari kwenye makazi."
+    ]
+   }
+  },
+  {
+   "impact": {
+    "en": "Houses with weak walls or loose roofing sheets are damaged more easily by strong winds, heavy rain and tremors",
+    "sw": "Nyumba zenye kuta dhaifu au mabati yaliyolegea huharibika kwa urahisi zaidi na upepo mkali, mvua kubwa na mitetemeko"
+   },
+   "actions": {
+    "en": [
+     "Tie down roofing sheets, repair cracks and strengthen corners before the rainy season; small repairs each year cost less than one big one.",
+     "Builders and homeowners: follow the simple safe-building guidance from the council's engineers.",
+     "Council: run yearly safe-building days with local fundis and keep the building guidance available at the ward office."
+    ],
+    "sw": [
+     "Funga vizuri mabati, ziba nyufa na imarisha pembe za nyumba kabla ya msimu wa mvua; marekebisho madogo kila mwaka ni nafuu kuliko makubwa mara moja.",
+     "Mafundi na wenye nyumba: fuateni mwongozo rahisi wa ujenzi salama kutoka kwa wahandisi wa halmashauri.",
+     "Halmashauri: fanyeni siku za ujenzi salama kila mwaka pamoja na mafundi wa eneo, na wekeni mwongozo wa ujenzi upatikane ofisi ya kata."
+    ]
+   }
+  }
+ ]
+}

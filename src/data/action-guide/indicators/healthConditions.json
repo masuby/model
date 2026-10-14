@@ -1,0 +1,67 @@
+{
+ "ref": "vulnerability:healthConditions",
+ "title": {
+  "en": "Health conditions",
+  "sw": "Hali ya afya"
+ },
+ "intro": {
+  "en": "This indicator combines life expectancy and malaria prevalence for the region with the national measles incidence. A high score means that more people live with illness or a weaker immune system, so a flood, a water shortage or crowding in shelters can make them sick sooner. Lead sector: health.",
+  "sw": "Kiashiria hiki kinaunganisha matarajio ya kuishi na kuenea kwa malaria kwa mkoa na matukio ya surua kitaifa. Alama ya juu inamaanisha kuwa watu wengi zaidi wanaishi na magonjwa au kinga dhaifu ya mwili, hivyo mafuriko, uhaba wa maji au msongamano kwenye makazi ya muda vinaweza kuwafanya waugue mapema zaidi. Sekta inayoongoza: afya."
+ },
+ "rows": [
+  {
+   "impact": {
+    "en": "People on regular treatment (for HIV, TB, diabetes, high blood pressure or epilepsy) need their medicines even when roads are cut",
+    "sw": "Watu wanaotumia dawa mara kwa mara (kwa VVU, kifua kikuu, kisukari, shinikizo la damu au kifafa) wanahitaji dawa zao hata barabara zinapokatika"
+   },
+   "actions": {
+    "en": [
+     "Ask your clinic for a longer supply before the rainy season and keep medicines dry, in their containers, in a bag you can carry.",
+     "Know a second facility you can reach if the usual one is cut off, and tell a trusted neighbour about your treatment.",
+     "Health facilities: give multi-month dispensing before the season and keep a list of clients who may need follow-up during a hazard."
+    ],
+    "sw": [
+     "Omba kituo chako cha afya dawa za muda mrefu zaidi kabla ya msimu wa mvua na zihifadhi zikiwa kavu, kwenye vyombo vyake, ndani ya mfuko unaoweza kubeba.",
+     "Fahamu kituo cha pili unachoweza kufikia ikiwa cha kawaida kimekatika njia, na mweleze jirani unayemwamini kuhusu matibabu yako.",
+     "Vituo vya afya: toeni dawa za miezi kadhaa kabla ya msimu na wekeni orodha ya wateja wanaoweza kuhitaji ufuatiliaji wakati wa janga."
+    ]
+   }
+  },
+  {
+   "impact": {
+    "en": "Standing water after rain brings more mosquitoes, so malaria rises where many people are already weak",
+    "sw": "Maji yaliyotuama baada ya mvua huongeza mbu, hivyo malaria huongezeka pale ambapo watu wengi tayari ni dhaifu"
+   },
+   "actions": {
+    "en": [
+     "Sleep under a treated net every night, drain standing water around the house and cover water containers.",
+     "Community health workers: check that households with pregnant women, children and chronically ill members have nets and know the danger signs of fever.",
+     "Council health department: plan indoor spraying and net distribution before the rains in the wards with most malaria."
+    ],
+    "sw": [
+     "Lala ndani ya chandarua chenye dawa kila usiku, ondoa maji yaliyotuama kuzunguka nyumba na funika vyombo vya maji.",
+     "Wahudumu wa afya ya jamii: hakikisheni kaya zenye wajawazito, watoto na wagonjwa wa muda mrefu zina vyandarua na zinajua dalili za hatari za homa.",
+     "Idara ya afya ya halmashauri: pangeni unyunyiziaji wa dawa majumbani na ugawaji wa vyandarua kabla ya mvua katika kata zenye malaria nyingi."
+    ]
+   }
+  },
+  {
+   "impact": {
+    "en": "Crowded shelters and shared water can spread measles, diarrhoea and cholera quickly",
+    "sw": "Makazi ya muda yaliyosongamana na maji yanayoshirikiwa yanaweza kueneza surua, kuhara na kipindupindu haraka"
+   },
+   "actions": {
+    "en": [
+     "Make sure every child's vaccinations are up to date; the clinic card shows what is due.",
+     "Wash hands with soap, drink treated or boiled water and use the latrine; report two or more cases of watery diarrhoea to the health facility the same day.",
+     "Health facilities and committees: keep oral rehydration salts, chlorine and vaccines ready at the ward level before the season."
+    ],
+    "sw": [
+     "Hakikisha chanjo za kila mtoto zimekamilika; kadi ya kliniki inaonyesha chanjo inayofuata.",
+     "Nawa mikono kwa sabuni, kunywa maji yaliyotibiwa au kuchemshwa na tumia choo; toa taarifa ya wagonjwa wawili au zaidi wa kuhara maji kwa kituo cha afya siku hiyo hiyo.",
+     "Vituo vya afya na kamati: wekeni ORS, klorini na chanjo tayari ngazi ya kata kabla ya msimu."
+    ]
+   }
+  }
+ ]
+}

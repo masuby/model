@@ -1,0 +1,67 @@
+{
+ "ref": "coping:economicCapacity",
+ "title": {
+  "en": "Economic capacity",
+  "sw": "Uwezo wa kiuchumi"
+ },
+ "intro": {
+  "en": "This indicator combines the International Wealth Index and income per person for the region with national household income. A high score means that households, businesses and the council itself have less money to spend on preparation and on rebuilding, so recovery depends more on outside help. Lead sectors: finance and planning; PO-RALG and the council.",
+  "sw": "Kiashiria hiki kinaunganisha Kielelezo cha Utajiri cha Kimataifa na pato kwa mtu kwa mkoa na kipato cha kaya kitaifa. Alama ya juu inamaanisha kuwa kaya, biashara na halmashauri yenyewe zina fedha chache za kutumia kwa maandalizi na kujenga upya, hivyo kupona kunategemea zaidi msaada wa nje. Sekta zinazoongoza: fedha na mipango; TAMISEMI na halmashauri."
+ },
+ "rows": [
+  {
+   "impact": {
+    "en": "Repairs and replacements after a hazard wait for money that households and the council do not have at hand",
+    "sw": "Marekebisho na kurejesha vilivyoharibika baada ya janga husubiri fedha ambazo kaya na halmashauri hazina mkononi"
+   },
+   "actions": {
+    "en": [
+     "Savings groups: build a small emergency fund alongside the normal loans, and agree the rules for using it before a hazard.",
+     "Council: keep a contingency line in the budget and a list of local suppliers who can deliver quickly after a hazard.",
+     "Businesses: keep stock and records above flood level and insure what can be insured."
+    ],
+    "sw": [
+     "Vikundi vya kuweka na kukopa: jengeni mfuko mdogo wa dharura sambamba na mikopo ya kawaida, na kubalianeni kanuni za kuutumia kabla ya janga.",
+     "Halmashauri: wekeni kifungu cha dharura kwenye bajeti na orodha ya wasambazaji wa eneo wanaoweza kuleta vifaa haraka baada ya janga.",
+     "Biashara: wekeni bidhaa na kumbukumbu juu ya kiwango cha mafuriko na kateni bima pale inapowezekana."
+    ]
+   }
+  },
+  {
+   "impact": {
+    "en": "Prevention that costs little now, such as clearing drains or fixing roofs, is skipped when money is short",
+    "sw": "Kinga inayogharimu kidogo sasa, kama kusafisha mitaro au kukarabati paa, huachwa fedha zinapokuwa chache"
+   },
+   "actions": {
+    "en": [
+     "Do the low-cost work together: community days to clear drains, cut firebreaks and repair paths before each season.",
+     "Ward councillors and the council: use public works programmes to pay residents for preparedness work in their own wards.",
+     "Development partners and the private sector: support ward-level preparedness through the council's plan, not outside it."
+    ],
+    "sw": [
+     "Fanyeni kazi za gharama ndogo kwa pamoja: siku za jamii za kusafisha mitaro, kukata njia za kuzuia moto na kukarabati njia kabla ya kila msimu.",
+     "Madiwani na halmashauri: tumieni programu za kazi za umma kuwalipa wakazi kwa kazi za maandalizi kwenye kata zao.",
+     "Wadau wa maendeleo na sekta binafsi: saidieni maandalizi ngazi ya kata kupitia mpango wa halmashauri, si nje yake."
+    ]
+   }
+  },
+  {
+   "impact": {
+    "en": "Local markets and employers recover slowly, so jobs and goods return later than the water goes down",
+    "sw": "Masoko na waajiri wa eneo hupona taratibu, hivyo ajira na bidhaa hurejea baadaye kuliko maji yanavyopungua"
+   },
+   "actions": {
+    "en": [
+     "Traders and cooperatives: agree how to share transport and storage after a hazard so that goods reach the market again quickly.",
+     "Council trade and cooperative officers: reopen markets and roads early and set temporary trading places where needed.",
+     "Banks, SACCOS and microfinance institutions: offer short repayment holidays after a declared hazard so that small businesses can restart."
+    ],
+    "sw": [
+     "Wafanyabiashara na vyama vya ushirika: kubalianeni jinsi ya kushirikiana usafiri na maghala baada ya janga ili bidhaa zirudi sokoni haraka.",
+     "Maafisa biashara na ushirika wa halmashauri: fungueni masoko na barabara mapema na wekeni maeneo ya muda ya biashara inapohitajika.",
+     "Benki, SACCOS na taasisi za mikopo midogo: toeni muda wa ahueni ya marejesho baada ya janga lililotangazwa ili biashara ndogo zianze upya."
+    ]
+   }
+  }
+ ]
+}

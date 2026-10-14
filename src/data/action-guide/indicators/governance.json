@@ -1,0 +1,67 @@
+{
+ "ref": "coping:governance",
+ "title": {
+  "en": "Governance",
+  "sw": "Utawala"
+ },
+ "intro": {
+  "en": "This indicator combines a subnational corruption index for the region with national government effectiveness; the model also records whether each council's Disaster Management Committee meets the criteria of the Act. A high score means that decisions, budgets and information move more slowly or less fairly, so help may not reach those who need it most. Lead sectors: PMO-DMD and the Disaster Management Committees; PO-RALG and the council.",
+  "sw": "Kiashiria hiki kinaunganisha kielelezo cha rushwa cha ngazi za chini kwa mkoa na ufanisi wa serikali kitaifa; mfumo pia unarekodi iwapo Kamati ya Usimamizi wa Maafa ya kila halmashauri inakidhi vigezo vya Sheria. Alama ya juu inamaanisha kuwa maamuzi, bajeti na taarifa husafiri taratibu zaidi au kwa usawa mdogo, hivyo msaada unaweza usiwafikie wanaouhitaji zaidi. Sekta zinazoongoza: OWM-IMM na Kamati za Usimamizi wa Maafa; TAMISEMI na halmashauri."
+ },
+ "rows": [
+  {
+   "impact": {
+    "en": "A committee that meets only after a hazard has little time to prepare and to know its people",
+    "sw": "Kamati inayokutana tu baada ya janga ina muda mchache wa kujiandaa na kuwafahamu watu wake"
+   },
+   "actions": {
+    "en": [
+     "Committees at every level: meet before each rainy and dry season with a short agenda: what has changed, who needs help, what is in stock.",
+     "Include women, youth, older persons, people with disabilities and faith and business representatives in the committee, as the Act provides.",
+     "Council: record the meetings and the decisions and share a summary with the wards."
+    ],
+    "sw": [
+     "Kamati za ngazi zote: kutaneni kabla ya kila msimu wa mvua na kiangazi kwa ajenda fupi: nini kimebadilika, nani anahitaji msaada, nini kipo kwenye akiba.",
+     "Jumuisheni wanawake, vijana, wazee, watu wenye ulemavu na wawakilishi wa dini na biashara kwenye kamati, kama Sheria inavyoelekeza.",
+     "Halmashauri: rekodini mikutano na maamuzi na shirikisheni kata muhtasari."
+    ]
+   }
+  },
+  {
+   "impact": {
+    "en": "Relief and support lose trust when people do not know who gets what, and why",
+    "sw": "Misaada hupoteza uaminifu watu wasipojua nani anapata nini, na kwa nini"
+   },
+   "actions": {
+    "en": [
+     "Committees: post the criteria and the list of households receiving support at the village office and read them out at the meeting.",
+     "Residents: ask questions and report concerns to the ward office, the council or PMO-DMD; raising a concern is part of good governance.",
+     "Council: keep simple records of what was received and distributed, and audit them openly after each event."
+    ],
+    "sw": [
+     "Kamati: bandikeni vigezo na orodha ya kaya zinazopata msaada ofisi ya kijiji na zisomeni kwenye mkutano.",
+     "Wakazi: ulizeni maswali na toeni taarifa za wasiwasi kwa ofisi ya kata, halmashauri au OWM-IMM; kutoa hoja ni sehemu ya utawala bora.",
+     "Halmashauri: wekeni kumbukumbu rahisi za kilichopokelewa na kugawiwa, na zikaguliwe kwa uwazi baada ya kila tukio."
+    ]
+   }
+  },
+  {
+   "impact": {
+    "en": "Decisions taken far from the affected area may miss what local people already know",
+    "sw": "Maamuzi yanayofanywa mbali na eneo lililoathirika yanaweza kukosa kile ambacho wenyeji tayari wanakijua"
+   },
+   "actions": {
+    "en": [
+     "Village and ward committees: send your hazard map and your list of needs to the council before the season, not after the event.",
+     "Council: give ward committees a small budget and the authority to act on early warnings without waiting for approval.",
+     "Regional and district commissioners: visit the most affected wards early and let their committees speak first."
+    ],
+    "sw": [
+     "Kamati za vijiji na kata: pelekeni ramani yenu ya hatari na orodha ya mahitaji kwa halmashauri kabla ya msimu, si baada ya tukio.",
+     "Halmashauri: zipeni kamati za kata bajeti ndogo na mamlaka ya kuchukua hatua kwa tahadhari za mapema bila kusubiri kibali.",
+     "Wakuu wa mikoa na wilaya: tembeleeni kata zilizoathirika zaidi mapema na waacheni kamati zao ziseme kwanza."
+    ]
+   }
+  }
+ ]
+}

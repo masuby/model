@@ -1,0 +1,67 @@
+{
+ "ref": "coping:wash",
+ "title": {
+  "en": "Water, sanitation and hygiene",
+  "sw": "Maji, usafi wa mazingira na usafi binafsi"
+ },
+ "intro": {
+  "en": "This indicator measures the share of people using at least basic drinking water and basic sanitation, from the WHO/UNICEF joint monitoring programme, as one value for Tanzania. A high score means that many households fetch water from unprotected sources and lack improved latrines, so floods and droughts turn quickly into diarrhoea and cholera. Lead sectors: water (Ministry of Water, basin boards, RUWASA, water authorities); health; PO-RALG and the council.",
+  "sw": "Kiashiria hiki kinapima sehemu ya watu wanaotumia angalau huduma za msingi za maji ya kunywa na za usafi, kutoka programu ya pamoja ya ufuatiliaji ya WHO/UNICEF, kama thamani moja kwa Tanzania. Alama ya juu inamaanisha kuwa kaya nyingi huchota maji kutoka vyanzo visivyolindwa na hazina vyoo bora, hivyo mafuriko na ukame hugeuka haraka kuwa kuhara na kipindupindu. Sekta zinazoongoza: maji (Wizara ya Maji, bodi za mabonde, RUWASA, mamlaka za maji); afya; TAMISEMI na halmashauri."
+ },
+ "rows": [
+  {
+   "impact": {
+    "en": "Floodwater reaches open wells and shallow sources, and the water looks the same but is no longer safe",
+    "sw": "Maji ya mafuriko hufika kwenye visima vilivyo wazi na vyanzo vya kina kifupi, na maji huonekana yaleyale lakini si salama tena"
+   },
+   "actions": {
+    "en": [
+     "Treat drinking water with chlorine (such as WaterGuard) or boil it after any flood, and store it in covered containers.",
+     "Water committees: raise and cover well mouths and protect springs before the rains; keep chlorine at the water point.",
+     "RUWASA and the water authority: test the sources after floods and tell people which ones are safe."
+    ],
+    "sw": [
+     "Tibu maji ya kunywa kwa klorini (kama WaterGuard) au yachemshe baada ya mafuriko yoyote, na yahifadhi kwenye vyombo vilivyofunikwa.",
+     "Kamati za maji: inueni na funikeni midomo ya visima na lindeni chemchemi kabla ya mvua; wekeni klorini kwenye kituo cha maji.",
+     "RUWASA na mamlaka ya maji: pimeni vyanzo baada ya mafuriko na waelezeni watu vyanzo vipi ni salama."
+    ]
+   }
+  },
+  {
+   "impact": {
+    "en": "In drought, people walk further for water and use less of it for washing, and hygiene drops",
+    "sw": "Wakati wa ukame, watu hutembea mbali zaidi kutafuta maji na kutumia kidogo kwa kuosha, na usafi hupungua"
+   },
+   "actions": {
+    "en": [
+     "Store rainwater from the roof in a clean covered tank or drums during the rains for the dry months.",
+     "Keep handwashing going with little water: a tippy tap by the latrine and the kitchen uses a cup of water.",
+     "Council water department: plan water trucking and rehabilitate boreholes before the dry season, starting with schools and clinics."
+    ],
+    "sw": [
+     "Hifadhi maji ya mvua kutoka paa kwenye tangi au mapipa safi yaliyofunikwa wakati wa mvua kwa ajili ya miezi ya kiangazi.",
+     "Endelea kunawa mikono kwa maji kidogo: kibuyu chirizi karibu na choo na jikoni hutumia kikombe kimoja cha maji.",
+     "Idara ya maji ya halmashauri: pangeni usambazaji wa maji kwa magari na karabatini visima virefu kabla ya kiangazi, mkianza na shule na zahanati."
+    ]
+   }
+  },
+  {
+   "impact": {
+    "en": "Pit latrines on low ground overflow in floods and spread disease to the whole neighbourhood",
+    "sw": "Vyoo vya shimo vilivyo kwenye ardhi ya chini hufurika wakati wa mafuriko na kueneza magonjwa kwa mtaa mzima"
+   },
+   "actions": {
+    "en": [
+     "Build the latrine on higher ground, raise its floor and keep it covered; empty it before it fills.",
+     "Mtaa and village committees: agree shared latrines at the safe place and who keeps them clean.",
+     "Health officers: run hygiene promotion and distribute soap and chlorine in affected wards within the first week."
+    ],
+    "sw": [
+     "Jenga choo kwenye ardhi ya juu, inua sakafu yake, na kikae kimefunikwa; kiondoe kinyesi kabla hakijajaa.",
+     "Kamati za mtaa na kijiji: kubalianeni vyoo vya pamoja mahali salama na nani atavisafisha.",
+     "Maafisa afya: fanyeni hamasa ya usafi na gaweni sabuni na klorini katika kata zilizoathirika ndani ya wiki ya kwanza."
+    ]
+   }
+  }
+ ]
+}

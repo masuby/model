@@ -25,8 +25,8 @@
       "sw": "Eneo hili ni bondeni: maji kutoka maeneo ya miinuko jirani hukusanyika hapa, na wakati wa dhoruba kali za Msimu (Novemba–Aprili) maji yanaweza kutuama hadi usawa wa goti ndani ya saa moja pale mitaro ilipoziba."
      },
      "advice": {
-      "en": "For those living and trading here, it helps to build floors and shop entrances above the highest known water mark and keep the drain in front of your plot clean and open all year.",
-      "sw": "Kwa wanaoishi na kufanya biashara hapa, ni vyema kujenga sakafu na milango ya maduka juu ya alama ya juu ya maji inayojulikana na kuweka mtaro wa mbele ya kiwanja chako safi na wazi mwaka mzima."
+      "en": "For those living and trading here, it helps to build floors and shop entrances above the highest known water mark and keep the drain in front of your plot clean and open all year. What raises the risk: building or extending shops over the drains, tipping waste into them, and storing goods on the floor. Know the higher street your household or shop will move to when water starts to pond, lift goods and documents before the storm, and do not wade through flooded streets. Agree who will help anyone in the household who cannot move, see or hear a warning on their own.",
+      "sw": "Kwa wanaoishi na kufanya biashara hapa, ni vyema kujenga sakafu na milango ya maduka juu ya alama ya juu ya maji inayojulikana na kuweka mtaro wa mbele ya kiwanja chako safi na wazi mwaka mzima. Kinachoongeza hatari: kujenga au kupanua maduka juu ya mitaro, kutupa taka ndani yake, na kuhifadhi bidhaa sakafuni. Fahamu mtaa wa juu ambao kaya au duka lako litahamia maji yanapoanza kutuama, inua bidhaa na nyaraka kabla ya dhoruba, na usitembee kwenye mitaa iliyofurika. Kubalianeni nani atamsaidia yeyote katika kaya asiyeweza kuondoka, kuona au kusikia tahadhari peke yake."
      }
     },
     {
@@ -39,8 +39,8 @@
       "sw": "Kiwanja hiki kiko kando ya kijito cha msimu: hakina maji muda mwingi wa mwaka lakini hujaa ndani ya dakika chache baada ya dhoruba kubwa upande wa juu, na taka au majengo ndani ya mkondo husukuma maji kwenye viwanja vya jirani."
      },
      "advice": {
-      "en": "For those living here, it helps to keep the channel and stream reserve clear and to place buildings and stores on the higher part of your plot, outside the flood path.",
-      "sw": "Kwa wanaoishi hapa, ni vyema kuweka mkondo na hifadhi ya kijito wazi na kujenga majengo na maghala sehemu ya juu ya kiwanja, nje ya njia ya mafuriko."
+      "en": "For those living here, it helps to keep the channel and stream reserve clear and to place buildings and stores on the higher part of your plot, outside the flood path. What raises the risk: building inside the stream reserve, filling the channel with waste or soil, and extending the house towards the stream. Know the higher ground away from the stream that your household will move to, and go when the water rises towards the house, not after it enters. Agree who will help anyone in the household who cannot move, see or hear a warning on their own.",
+      "sw": "Kwa wanaoishi hapa, ni vyema kuweka mkondo na hifadhi ya kijito wazi na kujenga majengo na maghala sehemu ya juu ya kiwanja, nje ya njia ya mafuriko. Kinachoongeza hatari: kujenga ndani ya hifadhi ya kijito, kujaza mkondo taka au udongo, na kupanua nyumba kuelekea kijitoni. Fahamu eneo la juu mbali na kijito ambalo kaya yako itahamia, na ondokeni maji yanapopanda kuelekea nyumbani, si baada ya kuingia. Kubalianeni nani atamsaidia yeyote katika kaya asiyeweza kuondoka, kuona au kusikia tahadhari peke yake."
      }
     },
     {
@@ -53,8 +53,8 @@
       "sw": "Hapa ni eneo la umma lenye msongamano: masoko, stendi ya mabasi na stesheni ya reli hukusanya watu wengi katika maeneo madogo yenye vibanda vya mbao, mabati yaliyolegea na miunganisho holela ya umeme, na upepo mkali, moto na msukumano husababisha majeraha mengi hapa."
      },
      "advice": {
-      "en": "For those trading and travelling here, it helps to keep exits clear, fire extinguishers working, stalls and signboards firmly anchored and electrical connections safe.",
-      "sw": "Kwa wanaofanya biashara na kusafiri hapa, ni vyema kuweka njia za kutokea wazi, vizimamoto vikifanya kazi, vibanda na mabango vimefungwa imara na miunganisho ya umeme ikiwa salama."
+      "en": "For those trading and travelling here, it helps to keep exits clear, fire extinguishers working, stalls and signboards firmly anchored and electrical connections safe. What raises the risk: blocking exits with stock, running unlicensed wiring between stalls, storing fuel or gas inside the market and leaving signboards loose in the wind. Know the open ground outside the market, bus stand or station that traders and passengers will move to if fire or a storm starts, and clear the building at once when told. Agree who will help anyone in the household who cannot move, see or hear a warning on their own.",
+      "sw": "Kwa wanaofanya biashara na kusafiri hapa, ni vyema kuweka njia za kutokea wazi, vizimamoto vikifanya kazi, vibanda na mabango vimefungwa imara na miunganisho ya umeme ikiwa salama. Kinachoongeza hatari: kuziba njia za kutokea kwa mizigo, kutumia nyaya za umeme zisizo rasmi kati ya vibanda, kuhifadhi mafuta au gesi ndani ya soko na kuacha mabango yakilegea kwenye upepo. Fahamu uwanja wazi nje ya soko, stendi au stesheni ambao wafanyabiashara na abiria watahamia moto au dhoruba ikianza, na ondokeni jengoni mara moja mnapoambiwa. Kubalianeni nani atamsaidia yeyote katika kaya asiyeweza kuondoka, kuona au kusikia tahadhari peke yake."
      }
     },
     {
@@ -67,8 +67,8 @@
       "sw": "Eneo hili lina hatari ya radi: ngurumo na radi hutokea mara kwa mara Tabora wakati wa Msimu, na vifo na majeraha mengi hutokea viwanjani, chini ya miti mirefu iliyosimama peke yake na kwenye majengo yasiyo na kinga ya radi."
      },
      "advice": {
-      "en": "For those living, studying and working here, it helps when schools, markets and public buildings have earthed lightning arresters, and treat the 30 minutes after the last thunder as still dangerous.",
-      "sw": "Kwa wanaoishi, kusoma na kufanya kazi hapa, ni vyema shule, masoko na majengo ya umma yawe na vizuia radi vilivyounganishwa ardhini, na zingatieni kuwa dakika 30 baada ya ngurumo ya mwisho bado ni hatari."
+      "en": "For those living, studying and working here, it helps when schools, markets and public buildings have earthed lightning arresters, and treat the 30 minutes after the last thunder as still dangerous. What raises the risk: sheltering under tall trees or in open ground, standing in groups on sports fields, and carrying metal tools or hoes when thunder starts. Agree where pupils, players and workers will go when thunder is heard, a closed building with walls, not a tree or an open shed, and get there before the storm arrives. Agree who will help anyone in the household who cannot move, see or hear a warning on their own.",
+      "sw": "Kwa wanaoishi, kusoma na kufanya kazi hapa, ni vyema shule, masoko na majengo ya umma yawe na vizuia radi vilivyounganishwa ardhini, na zingatieni kuwa dakika 30 baada ya ngurumo ya mwisho bado ni hatari. Kinachoongeza hatari: kujikinga chini ya miti mirefu au uwanjani, kusimama kwa makundi viwanjani, na kubeba zana za chuma au majembe ngurumo zinapoanza. Kubalianeni wanafunzi, wachezaji na wafanyakazi wataenda wapi ngurumo zinaposikika, jengo lililofungwa lenye kuta, si mti au kibanda wazi, na fikeni huko kabla dhoruba haijafika. Kubalianeni nani atamsaidia yeyote katika kaya asiyeweza kuondoka, kuona au kusikia tahadhari peke yake."
      }
     },
     {
@@ -81,8 +81,8 @@
       "sw": "Eneo hili lina hatari ya magonjwa yatokanayo na maji: uhaba wa maji wakati wa kiangazi husukuma kaya kutumia vyanzo visivyo salama, na maji ya mafuriko yanayoingia vyooni na kwenye visima vifupi husambaza kipindupindu na kuhara haraka kwenye mitaa yenye msongamano."
      },
      "advice": {
-      "en": "For those living here, it helps to store water in clean covered containers, treat or boil drinking water, and build lined latrines raised above flood level.",
-      "sw": "Kwa wanaoishi hapa, ni vyema kuhifadhi maji kwenye vyombo safi vilivyofunikwa, kutibu au kuchemsha maji ya kunywa, na kujenga vyoo vilivyojengewa na kuinuliwa juu ya kiwango cha mafuriko."
+      "en": "For those living here, it helps to store water in clean covered containers, treat or boil drinking water, and build lined latrines raised above flood level. What raises the risk: drawing water from shallow wells or the stream after a flood, digging latrines in ground that floods, and leaving water standing in open containers. If flood water has entered the wells, change the water source at once and report the first case of watery diarrhoea the same day; do not wait for a second case. Agree who will help anyone in the household who cannot move, see or hear a warning on their own.",
+      "sw": "Kwa wanaoishi hapa, ni vyema kuhifadhi maji kwenye vyombo safi vilivyofunikwa, kutibu au kuchemsha maji ya kunywa, na kujenga vyoo vilivyojengewa na kuinuliwa juu ya kiwango cha mafuriko. Kinachoongeza hatari: kuchota maji kwenye visima vifupi au kijito baada ya mafuriko, kuchimba vyoo kwenye ardhi inayofurika, na kuacha maji yakituama kwenye vyombo wazi. Maji ya mafuriko yakiingia visimani, badilisheni chanzo cha maji mara moja na ripoti mgonjwa wa kwanza wa kuharisha maji siku hiyo hiyo; msisubiri wa pili. Kubalianeni nani atamsaidia yeyote katika kaya asiyeweza kuondoka, kuona au kusikia tahadhari peke yake."
      }
     }
    ],
@@ -229,8 +229,8 @@
       "sw": "Sehemu hii ya mji iko chini: Nzega iko kwenye uwanda wenye mteremko mdogo, na maji ya dhoruba kutoka mashamba yanayozunguka hukutana kwenye mitaa ya chini na eneo la soko, ambapo mitaro ni myembamba na mara nyingi huziba."
      },
      "advice": {
-      "en": "For those living and trading here, it helps to build on raised foundations, keep drains open and store goods on shelves above floor level.",
-      "sw": "Kwa wanaoishi na kufanya biashara hapa, ni vyema kujenga kwa misingi iliyoinuliwa, kuweka mitaro wazi na kuhifadhi bidhaa kwenye rafu juu ya sakafu."
+      "en": "For those living and trading here, it helps to build on raised foundations, keep drains open and store goods on shelves above floor level. What raises the risk: building over the drains or filling them with waste, and extending shops into the low ground that ponds. Know the higher street your household or shop will move to when water starts to pond, and lift goods and documents before the storm. Agree who will help anyone in the household who cannot move, see or hear a warning on their own.",
+      "sw": "Kwa wanaoishi na kufanya biashara hapa, ni vyema kujenga kwa misingi iliyoinuliwa, kuweka mitaro wazi na kuhifadhi bidhaa kwenye rafu juu ya sakafu. Kinachoongeza hatari: kujenga juu ya mitaro au kuijaza taka, na kupanua maduka kwenye ardhi ya chini inayotuamisha maji. Fahamu mtaa wa juu ambao kaya au duka lako litahamia maji yanapoanza kutuama, na inua bidhaa na nyaraka kabla ya dhoruba. Kubalianeni nani atamsaidia yeyote katika kaya asiyeweza kuondoka, kuona au kusikia tahadhari peke yake."
      }
     },
     {
@@ -243,8 +243,8 @@
       "sw": "Haya ni makutano ya barabara kuu yenye shughuli nyingi: T3 na T8 hukutana Nzega zikipitisha malori makubwa na magari ya mafuta katikati ya mji, na biashara na maegesho kando ya barabara hupunguza upana wa barabara na kuongeza hatari ya ajali, kumwagika kwa mafuta na moto."
      },
      "advice": {
-      "en": "For those trading and working here, it helps to use market spaces set back from the carriageway and marked parking bays, and keep fire extinguishers ready at fuel stations and garages.",
-      "sw": "Kwa wanaofanya biashara na kazi hapa, ni vyema kutumia maeneo ya biashara yaliyo mbali kidogo na barabara na maegesho yaliyowekwa alama, na kuweka vizimamoto tayari kwenye vituo vya mafuta na gereji."
+      "en": "For those trading and working here, it helps to use market spaces set back from the carriageway and marked parking bays, and keep fire extinguishers ready at fuel stations and garages. What raises the risk: trading, parking and loading on the carriageway, storing fuel in shops and homes, and letting children play along the highway edge. Know the open ground away from the fuel stations and the highway that traders will move to if a fuel fire or tanker crash happens, and clear it at once when told. Agree who will help anyone in the household who cannot move, see or hear a warning on their own.",
+      "sw": "Kwa wanaofanya biashara na kazi hapa, ni vyema kutumia maeneo ya biashara yaliyo mbali kidogo na barabara na maegesho yaliyowekwa alama, na kuweka vizimamoto tayari kwenye vituo vya mafuta na gereji. Kinachoongeza hatari: kufanya biashara, kuegesha na kupakia barabarani, kuhifadhi mafuta madukani na majumbani, na kuwaacha watoto wacheze ukingoni mwa barabara kuu. Fahamu uwanja wazi mbali na vituo vya mafuta na barabara kuu ambao wafanyabiashara watahamia moto wa mafuta au ajali ya lori la mafuta ikitokea, na ondokeni mara moja mnapoambiwa. Kubalianeni nani atamsaidia yeyote katika kaya asiyeweza kuondoka, kuona au kusikia tahadhari peke yake."
      }
     },
     {
@@ -257,8 +257,8 @@
       "sw": "Mji huu hukumbwa na uhaba wa maji wa mara kwa mara: upatikanaji wa maji Nzega hupungua wakati wa kiangazi (Juni–Oktoba) na pale mabomba au pampu zinapoharibika, hivyo kaya hulazimika kutumia vyanzo visivyolindwa."
      },
      "advice": {
-      "en": "For those living here, it helps to harvest roof rainwater, store water safely at home and report leaks early so supply lasts between interruptions.",
-      "sw": "Kwa wanaoishi hapa, ni vyema kuvuna maji ya mvua kutoka paa, kuhifadhi maji salama nyumbani na kutoa taarifa mapema za uvujaji ili maji yadumu kipindi cha kukatika kwa huduma."
+      "en": "For those living here, it helps to harvest roof rainwater, store water safely at home and report leaks early so supply lasts between interruptions. What raises the risk: leaving water standing in open containers, drawing from unprotected sources when the supply stops, and wasting water in the dry months. Agree as a household where water will come from when the supply is cut for days, and treat or boil any water from a new source. Agree who will help anyone in the household who cannot move, see or hear a warning on their own.",
+      "sw": "Kwa wanaoishi hapa, ni vyema kuvuna maji ya mvua kutoka paa, kuhifadhi maji salama nyumbani na kutoa taarifa mapema za uvujaji ili maji yadumu kipindi cha kukatika kwa huduma. Kinachoongeza hatari: kuacha maji yakituama kwenye vyombo wazi, kuchota kwenye vyanzo visivyolindwa maji yanapokatika, na kupoteza maji miezi ya kiangazi. Kubalianeni kama kaya maji yatatoka wapi yanapokatika kwa siku kadhaa, na tibuni au chemsheni maji yoyote ya chanzo kipya. Kubalianeni nani atamsaidia yeyote katika kaya asiyeweza kuondoka, kuona au kusikia tahadhari peke yake."
      }
     },
     {
@@ -271,8 +271,8 @@
       "sw": "Eneo hili lina mashimo ya madini: mashimo ya dhahabu kuzunguka Nzega yana kuta zisizoimarishwa kwenye udongo laini, hubomoka yanapojaa maji wakati wa mvua, na hujaa maji yenye kina cha kuweza kuzamisha."
      },
      "advice": {
-      "en": "For those mining and living here, it helps to shore pit walls, divert run-off away from pit mouths, and fence or backfill abandoned pits.",
-      "sw": "Kwa wanaochimba na kuishi hapa, ni vyema kuimarisha kuta za mashimo, kuelekeza maji ya mvua mbali na midomo ya mashimo, na kuzungushia uzio au kufukia mashimo yaliyoachwa."
+      "en": "For those mining and living here, it helps to shore pit walls, divert run-off away from pit mouths, and fence or backfill abandoned pits. What raises the risk: digging pits without timbering, working them while rain is falling, building homes at the lip of old pits and washing ore in the streams people drink from. Keep everyone out of the pits once rain starts and know the firm ground away from them that your household will move to. Agree who will help anyone in the household who cannot move, see or hear a warning on their own.",
+      "sw": "Kwa wanaochimba na kuishi hapa, ni vyema kuimarisha kuta za mashimo, kuelekeza maji ya mvua mbali na midomo ya mashimo, na kuzungushia uzio au kufukia mashimo yaliyoachwa. Kinachoongeza hatari: kuchimba mashimo bila mihimili, kuyafanyia kazi mvua ikinyesha, kujenga nyumba kando ya mashimo ya zamani na kuosha mawe ya madini kwenye vijito ambavyo watu hunywa. Mtoe kila mtu mashimoni mara mvua inapoanza na fahamu eneo imara mbali nayo ambalo kaya yako itahamia. Kubalianeni nani atamsaidia yeyote katika kaya asiyeweza kuondoka, kuona au kusikia tahadhari peke yake."
      }
     },
     {
@@ -285,8 +285,8 @@
       "sw": "Haya ni makazi yaliyobanana: katika mitaa isiyopangwa nyumba hutegemea mitaro na njia zile zile, hivyo mtaro mmoja ukiziba nyumba kadhaa hufurika na moto mmoja unaweza kusambaa kutoka paa moja hadi jingine."
      },
      "advice": {
-      "en": "For those living here, it helps to leave space between buildings, keep lanes wide enough for fire and rescue vehicles, and keep shared drains open.",
-      "sw": "Kwa wanaoishi hapa, ni vyema kuacha nafasi kati ya majengo, kuweka njia pana za kupitisha magari ya zimamoto na uokoaji, na kuweka mitaro ya pamoja wazi."
+      "en": "For those living here, it helps to leave space between buildings, keep lanes wide enough for fire and rescue vehicles, and keep shared drains open. What raises the risk: building wall to wall across the lanes, running loose wiring between houses, cooking with charcoal inside closed rooms and filling the shared drains with waste. Agree with neighbours on the open ground the street will move to if fire breaks out, and keep the lane to it clear every day, not only when the fire truck is coming. Agree who will help anyone in the household who cannot move, see or hear a warning on their own.",
+      "sw": "Kwa wanaoishi hapa, ni vyema kuacha nafasi kati ya majengo, kuweka njia pana za kupitisha magari ya zimamoto na uokoaji, na kuweka mitaro ya pamoja wazi. Kinachoongeza hatari: kujenga ukuta kwa ukuta kuvuka vichochoro, kuvuta nyaya zilizolegea kati ya nyumba, kupika kwa mkaa ndani ya vyumba vilivyofungwa na kujaza mitaro ya pamoja taka. Kubalianeni na majirani uwanja wazi ambao mtaa utahamia moto ukitokea, na wekeni njia ya kufika huko wazi kila siku, si tu gari la zimamoto linapokuja. Kubalianeni nani atamsaidia yeyote katika kaya asiyeweza kuondoka, kuona au kusikia tahadhari peke yake."
      }
     }
    ],
@@ -432,8 +432,8 @@
       "sw": "Eneo hili ni uwanda wa mafuriko: mbuga za Manonga na Wembere ni tambarare zenye udongo mweusi wa mfinyanzi unaopitisha maji polepole sana, na baada ya mvua kubwa maji yanaweza kutuama mashambani na kwenye makazi kwa wiki kadhaa."
      },
      "advice": {
-      "en": "For those living and farming here, it helps to build houses and stores on raised plinths or natural high points and keep food and seed above the flood line.",
-      "sw": "Kwa wanaoishi na kulima hapa, ni vyema kujenga nyumba na maghala kwenye misingi iliyoinuliwa au miinuko ya asili na kuhifadhi chakula na mbegu juu ya kiwango cha mafuriko."
+      "en": "For those living and farming here, it helps to build houses and stores on raised plinths or natural high points and keep food and seed above the flood line. What raises the risk: building new houses on the low mbuga that floods, returning to the low ground while the water is still high, and leaving seed and food at floor level. Know the raised ground and the dry route to it that your village will use when the mbuga floods, and move people, stores and animals there when the water begins to rise. Agree who will help anyone in the household who cannot move, see or hear a warning on their own.",
+      "sw": "Kwa wanaoishi na kulima hapa, ni vyema kujenga nyumba na maghala kwenye misingi iliyoinuliwa au miinuko ya asili na kuhifadhi chakula na mbegu juu ya kiwango cha mafuriko. Kinachoongeza hatari: kujenga nyumba mpya kwenye mbuga ya chini inayofurika, kurudi kwenye ardhi ya chini maji yakiwa bado juu, na kuacha mbegu na chakula sakafuni. Fahamu eneo lililoinuka na njia kavu ya kufika huko ambayo kijiji chenu kitatumia mbuga inapofurika, na hamisheni watu, akiba na mifugo huko maji yanapoanza kupanda. Kubalianeni nani atamsaidia yeyote katika kaya asiyeweza kuondoka, kuona au kusikia tahadhari peke yake."
      }
     },
     {
@@ -446,8 +446,8 @@
       "sw": "Eneo hili ni skimu ya umwagiliaji: skimu za mpunga kama Mwamapuli hutegemea maji yanayodhibitiwa, na vyanzo na mifereji vinapofurika wakati wa mvua kubwa mashamba hujaa maji na mifereji yenye mkondo mkali huwa hatari ya kuzama kwa watoto."
      },
      "advice": {
-      "en": "For those farming and living here, it helps to maintain canals and drainage gates and to supervise children at canal crossings.",
-      "sw": "Kwa wanaolima na kuishi hapa, ni vyema kutunza mifereji na milango ya maji na kuwasimamia watoto kwenye vivuko vya mifereji."
+      "en": "For those farming and living here, it helps to maintain canals and drainage gates and to supervise children at canal crossings. What raises the risk: cutting the canal banks to take water out of turn, blocking the drainage gates, and letting children swim or cross the canals alone in the rains. Know the higher ground your household will move to when the canals overtop, and agree the water-sharing turns before the season, not during a shortage. Agree who will help anyone in the household who cannot move, see or hear a warning on their own.",
+      "sw": "Kwa wanaolima na kuishi hapa, ni vyema kutunza mifereji na milango ya maji na kuwasimamia watoto kwenye vivuko vya mifereji. Kinachoongeza hatari: kukata kingo za mifereji kuchukua maji nje ya zamu, kuziba milango ya kutolea maji, na kuwaacha watoto waogelee au wavuke mifereji peke yao wakati wa mvua. Fahamu eneo la juu ambalo kaya yako itahamia mifereji inapofurika, na kubalianeni zamu za kugawana maji kabla ya msimu, si wakati wa uhaba. Kubalianeni nani atamsaidia yeyote katika kaya asiyeweza kuondoka, kuona au kusikia tahadhari peke yake."
      }
     },
     {
@@ -460,8 +460,8 @@
       "sw": "Sehemu hii ya barabara hufurika: maji hupita juu ya sehemu za chini na makalavati ya barabara T3 na barabara za vijijini, na maji yanayotiririka ya sentimita 15 yanaweza kumwangusha mtu huku sentimita 30 zikiweza kuelea pikipiki au gari dogo."
      },
      "advice": {
-      "en": "For those travelling and transporting goods here, it helps to know the low crossings on your route, plan journeys around heavy-rain periods and use marked alternative routes.",
-      "sw": "Kwa wanaosafiri na kusafirisha bidhaa hapa, ni vyema kufahamu vivuko vya chini kwenye njia yenu, kupanga safari kuzingatia vipindi vya mvua kubwa na kutumia njia mbadala zilizowekwa alama."
+      "en": "For those travelling and transporting goods here, it helps to know the low crossings on your route, plan journeys around heavy-rain periods and use marked alternative routes. What raises the risk: driving or walking through flowing water at the low crossings, overloading vehicles on the wet roads and travelling at night in the storm season. Wait at the crossings for the water to drop rather than cross; if the road is cut, know the village where you will wait and keep food and a phone on every trip. Agree who will help anyone in the household who cannot move, see or hear a warning on their own.",
+      "sw": "Kwa wanaosafiri na kusafirisha bidhaa hapa, ni vyema kufahamu vivuko vya chini kwenye njia yenu, kupanga safari kuzingatia vipindi vya mvua kubwa na kutumia njia mbadala zilizowekwa alama. Kinachoongeza hatari: kupita kwa gari au kwa miguu kwenye maji yanayotiririka vivukoni, kupakia magari kupita kiasi kwenye barabara za matope na kusafiri usiku msimu wa dhoruba. Subirini vivukoni maji yapungue badala ya kuvuka; barabara ikikatika, fahamu kijiji mtakachosubiria na bebeni chakula na simu kila safari. Kubalianeni nani atamsaidia yeyote katika kaya asiyeweza kuondoka, kuona au kusikia tahadhari peke yake."
      }
     },
     {
@@ -474,8 +474,8 @@
       "sw": "Hili ni eneo la malisho lenye shinikizo: Igunga ina makundi makubwa ya ng'ombe, na msimu wa mvua ukiwa hafifu malisho na vyanzo vya maji hupungua, mifugo hukusanyika kwenye vyanzo vilivyobaki na migogoro na wakulima huongezeka."
      },
      "advice": {
-      "en": "For those keeping livestock and farming here, it helps to follow agreed livestock routes and village land-use plans, protect watering points and plan early sale of animals when rains fail.",
-      "sw": "Kwa wanaofuga na kulima hapa, ni vyema kufuata njia za mifugo zilizokubaliwa na mipango ya matumizi ya ardhi ya vijiji, kulinda vyanzo vya maji na kupanga mapema kuuza mifugo mvua zikikosekana."
+      "en": "For those keeping livestock and farming here, it helps to follow agreed livestock routes and village land-use plans, protect watering points and plan early sale of animals when rains fail. What raises the loss and to the quarrels in a dry year: keeping more animals than the dry-season pasture can carry, driving herds onto cropped fields, cutting fields across the livestock routes and letting cattle foul the drinking points. Agree early, between farmers and herders, where the herds will water in a failed season, and sell stock while still in condition, before the animals weaken, not after. Agree who will help anyone in the household who cannot move, see or hear a warning on their own.",
+      "sw": "Kwa wanaofuga na kulima hapa, ni vyema kufuata njia za mifugo zilizokubaliwa na mipango ya matumizi ya ardhi ya vijiji, kulinda vyanzo vya maji na kupanga mapema kuuza mifugo mvua zikikosekana. Kinachoongeza hasara na migogoro mwaka wa ukame: kuweka mifugo mingi kuliko malisho ya kiangazi yanavyoweza kubeba, kuingiza mifugo kwenye mashamba yenye mazao, kulima kuvuka njia za mifugo na kuacha ng'ombe wachafue vyanzo vya maji ya kunywa. Kubalianeni mapema, wakulima na wafugaji, mifugo itanyweshwa wapi msimu ukikosekana, na uzeni mifugo ikiwa bado na afya, kabla haijadhoofika, si baadaye. Kubalianeni nani atamsaidia yeyote katika kaya asiyeweza kuondoka, kuona au kusikia tahadhari peke yake."
      }
     },
     {
@@ -488,8 +488,8 @@
       "sw": "Haya ni maeneo ya kilimo cha nchi kavu: mvua kwenye miinuko ya Igunga si za uhakika, na vipindi vya ukavu vya wiki mbili hadi tatu kati ya Desemba na Februari mara nyingi huathiri mahindi wakati wa kuchanua."
      },
      "advice": {
-      "en": "For those farming here, it helps to grow sorghum, millet, cassava and early-maturing varieties and to keep a household food reserve.",
-      "sw": "Kwa wanaolima hapa, ni vyema kupanda mtama, uwele, mihogo na mbegu zinazokomaa mapema na kuweka akiba ya chakula ya kaya."
+      "en": "For those farming here, it helps to grow sorghum, millet, cassava and early-maturing varieties and to keep a household food reserve. What raises the loss when the rains fail: relying on maize alone, selling the whole harvest at once and cutting the remaining trees for charcoal when money is short. Agree early, as a household and a village, where food will come from in a failed season, and act before the stores are empty. Agree who will help anyone in the household who cannot move, see or hear a warning on their own.",
+      "sw": "Kwa wanaolima hapa, ni vyema kupanda mtama, uwele, mihogo na mbegu zinazokomaa mapema na kuweka akiba ya chakula ya kaya. Kinachoongeza hasara mvua zikikosekana: kutegemea mahindi pekee, kuuza mavuno yote kwa mara moja na kukata miti iliyobaki kwa mkaa pesa zinapopungua. Kubalianeni mapema, kama kaya na kijiji, chakula kitatoka wapi msimu ukikosekana, na chukueni hatua kabla akiba haijaisha. Kubalianeni nani atamsaidia yeyote katika kaya asiyeweza kuondoka, kuona au kusikia tahadhari peke yake."
      }
     }
    ],
@@ -637,8 +637,8 @@
       "sw": "Eneo hili ni kingo za ardhioevu: kingo za Malagarasi na Ugalla hupanuka kila msimu wa mvua kubwa, na kina cha maji kinaweza kubaki juu kwa wiki kadhaa baada ya mvua kwisha."
      },
      "advice": {
-      "en": "For those farming and fishing here, it helps to use the margins seasonally and to keep permanent houses and stores above the highest known flood mark.",
-      "sw": "Kwa wanaolima na kuvua hapa, ni vyema kutumia kingo kwa msimu na kujenga nyumba za kudumu na maghala juu ya alama ya juu kabisa ya mafuriko inayojulikana."
+      "en": "For those farming and fishing here, it helps to use the margins seasonally and to keep permanent houses and stores above the highest known flood mark. What raises the risk: building permanent houses on the wetland margin, staying on the low ground while the rivers are still rising, and blocking the natural outflow with bunds. Know the raised ground and the dry route to it that your village will use when the Malagarasi and Ugalla spread, and move people, stores and animals there as the water begins to rise. Agree who will help anyone in the household who cannot move, see or hear a warning on their own.",
+      "sw": "Kwa wanaolima na kuvua hapa, ni vyema kutumia kingo kwa msimu na kujenga nyumba za kudumu na maghala juu ya alama ya juu kabisa ya mafuriko inayojulikana. Kinachoongeza hatari: kujenga nyumba za kudumu kwenye kingo za ardhioevu, kubaki kwenye ardhi ya chini mito ikiwa bado inapanda, na kuziba njia ya asili ya maji kwa matuta. Fahamu eneo lililoinuka na njia kavu ya kufika huko ambayo kijiji chenu kitatumia Malagarasi na Ugalla zinapotapakaa, na hamisheni watu, akiba na mifugo huko maji yanapoanza kupanda. Kubalianeni nani atamsaidia yeyote katika kaya asiyeweza kuondoka, kuona au kusikia tahadhari peke yake."
      }
     },
     {
@@ -651,8 +651,8 @@
       "sw": "Hili ni eneo la kambi za uvuvi: kambi ziko maeneo ya mbali na ya chini, kupanda kwa maji, dhoruba za mchana na kupinduka kwa mitumbwi ni hatari kuu, na msaada mara nyingi uko saa kadhaa mbali."
      },
      "advice": {
-      "en": "For those fishing here, it helps to wear life jackets, bring boats to shore before storms build and keep the camp register up to date with the village.",
-      "sw": "Kwa wanaovua hapa, ni vyema kuvaa maboya ya kujiokoa, kurudisha mitumbwi ufukweni kabla dhoruba haijaanza na kuhuisha daftari la kambi lililoko kijijini."
+      "en": "For those fishing here, it helps to wear life jackets, bring boats to shore before storms build and keep the camp register up to date with the village. What raises the risk: going out in overloaded boats when clouds build, drinking untreated water at the camps, and setting up camp where the village does not know you are. Know the sheltered landing you will run to when a storm builds, and report the first case of fever or watery diarrhoea at the camp the same day. Agree who will help anyone in the household who cannot move, see or hear a warning on their own.",
+      "sw": "Kwa wanaovua hapa, ni vyema kuvaa maboya ya kujiokoa, kurudisha mitumbwi ufukweni kabla dhoruba haijaanza na kuhuisha daftari la kambi lililoko kijijini. Kinachoongeza hatari: kutoka majini kwa vyombo vilivyojaa mawingu yanapojengeka, kunywa maji yasiyotibiwa kambini, na kuweka kambi mahali ambapo kijiji hakijui mlipo. Fahamu mwalo uliokingwa utakaokimbilia dhoruba inapojengeka, na ripoti mgonjwa wa kwanza wa homa au kuharisha maji kambini siku hiyo hiyo. Kubalianeni nani atamsaidia yeyote katika kaya asiyeweza kuondoka, kuona au kusikia tahadhari peke yake."
      }
     },
     {
@@ -665,8 +665,8 @@
       "sw": "Eneo hili linapakana na misitu ya miombo: kati ya Juni na Oktoba nyasi kavu na majani yaliyoanguka huungua haraka, na moto unaosukumwa na upepo wa mchana unaweza kusafiri kilomita kadhaa kwa siku."
      },
      "advice": {
-      "en": "For those living and farming here, it helps to keep fire breaks cleared around homes, tobacco barns and apiaries, and to burn fields early in the dry season on calm days with village approval.",
-      "sw": "Kwa wanaoishi na kulima hapa, ni vyema kusafisha njia za kuzuia moto kuzunguka nyumba, mabani ya tumbaku na mizinga, na kuchoma mashamba mapema wakati wa kiangazi siku zisizo na upepo kwa idhini ya kijiji."
+      "en": "For those living and farming here, it helps to keep fire breaks cleared around homes, tobacco barns and apiaries, and to burn fields early in the dry season on calm days with village approval. What raises the risk: burning late in the dry season on windy days, leaving fires unattended, and stacking dry tobacco or firewood against the barn walls. Know the cleared open ground your household will move to if a bush fire comes towards the houses, move when smoke is seen on the field edge, and report any fire to the village leaders at once. Agree who will help anyone in the household who cannot move, see or hear a warning on their own.",
+      "sw": "Kwa wanaoishi na kulima hapa, ni vyema kusafisha njia za kuzuia moto kuzunguka nyumba, mabani ya tumbaku na mizinga, na kuchoma mashamba mapema wakati wa kiangazi siku zisizo na upepo kwa idhini ya kijiji. Kinachoongeza hatari: kuchoma mwishoni mwa kiangazi siku za upepo, kuacha moto bila uangalizi, na kurundika tumbaku kavu au kuni kwenye kuta za ghala. Fahamu uwanja wazi uliosafishwa ambao kaya yako itahamia moto wa porini ukielekea nyumbani, ondokeni moshi ukionekana mpakani mwa shamba, na ripoti moto wowote kwa viongozi wa kijiji mara moja. Kubalianeni nani atamsaidia yeyote katika kaya asiyeweza kuondoka, kuona au kusikia tahadhari peke yake."
      }
     },
     {
@@ -679,8 +679,8 @@
       "sw": "Kijiji hiki kinapakana na hifadhi: vijiji jirani na hifadhi za misitu na wanyamapori hukumbwa na uvamizi wa mazao na mashambulizi ya mara kwa mara, mara nyingi usiku na kipindi cha mavuno."
      },
      "advice": {
-      "en": "For those living and farming here, it helps to use community deterrents such as chilli fences and night guarding, keep in touch with wildlife officers and plan movement after dark.",
-      "sw": "Kwa wanaoishi na kulima hapa, ni vyema kutumia mbinu za jamii kama uzio wa pilipili na ulinzi wa usiku, kuwasiliana na maafisa wanyamapori na kupanga safari za usiku."
+      "en": "For those living and farming here, it helps to use community deterrents such as chilli fences and night guarding, keep in touch with wildlife officers and plan movement after dark. What raises the risk: opening fields and settling right against the reserve boundary, walking alone through the bush at dusk, and confronting elephants with torches or stones. Report elephants near the fields to the village leaders and wildlife officers at once, and agree as a village where people will shelter if a herd enters the settlement. Agree who will help anyone in the household who cannot move, see or hear a warning on their own.",
+      "sw": "Kwa wanaoishi na kulima hapa, ni vyema kutumia mbinu za jamii kama uzio wa pilipili na ulinzi wa usiku, kuwasiliana na maafisa wanyamapori na kupanga safari za usiku. Kinachoongeza hatari: kufungua mashamba na kukaa moja kwa moja mpakani mwa hifadhi, kutembea peke yako porini jioni, na kuwakabili tembo kwa tochi au mawe. Ripoti tembo karibu na mashamba kwa viongozi wa kijiji na maafisa wa wanyamapori mara moja, na kubalianeni kama kijiji watu watajikinga wapi kundi likiingia makazini. Kubalianeni nani atamsaidia yeyote katika kaya asiyeweza kuondoka, kuona au kusikia tahadhari peke yake."
      }
     },
     {
@@ -693,8 +693,8 @@
       "sw": "Eneo hili lina mabani ya tumbaku na reli inayofurika: mabani ni majengo marefu yaliyojengwa kwa wepesi yanayoathiriwa na upepo mkali wa dhoruba, na mafuriko mara kwa mara hukata reli ya Kigoma na barabara za vijijini kwenye sehemu za chini."
      },
      "advice": {
-      "en": "For those farming and living here, it helps to fix barn roofing to every purlin, tie walls to the frame, and use designated crossings rather than the railway line for people and livestock.",
-      "sw": "Kwa wanaolima na kuishi hapa, ni vyema kufunga mabati ya mabani kila mbao ya kenchi, kuunganisha kuta na fremu, na kutumia vivuko vilivyotengwa badala ya reli kwa watu na mifugo."
+      "en": "For those farming and living here, it helps to fix barn roofing to every purlin, tie walls to the frame, and use designated crossings rather than the railway line for people and livestock. What raises the risk: leaving roofs loosely fixed, sheltering under trees when thunder starts, and walking or driving livestock along the railway line. When a storm is forecast, get children and animals under a solid roof early and away from windows and metal; if the barn roof starts to lift, leave the building rather than hold it. Agree who will help anyone in the household who cannot move, see or hear a warning on their own.",
+      "sw": "Kwa wanaolima na kuishi hapa, ni vyema kufunga mabati ya mabani kila mbao ya kenchi, kuunganisha kuta na fremu, na kutumia vivuko vilivyotengwa badala ya reli kwa watu na mifugo. Kinachoongeza hatari: kuacha paa zisizofungwa imara, kujikinga chini ya miti ngurumo zinapoanza, na kutembea au kuswaga mifugo kando ya reli. Dhoruba ikitabiriwa, waweke watoto na mifugo chini ya paa imara mapema mbali na madirisha na vyuma; paa la ghala likianza kuinuka, tokeni jengoni badala ya kulishikilia. Kubalianeni nani atamsaidia yeyote katika kaya asiyeweza kuondoka, kuona au kusikia tahadhari peke yake."
      }
     }
    ],
@@ -851,8 +851,8 @@
       "sw": "Hili ni eneo la uchimbaji mdogo: mashimo kwenye miamba iliyooza na udongo laini hubomoka yanapojaa maji, na mashimo yaliyoachwa wazi hujaa maji na kuwa hatari ya kuzamisha watoto na mifugo."
      },
      "advice": {
-      "en": "For those mining and living here, it helps to timber or bench pit walls, cut diversion channels around pit mouths, and fence or backfill abandoned pits.",
-      "sw": "Kwa wanaochimba na kuishi hapa, ni vyema kuimarisha kuta za mashimo kwa mbao au ngazi, kuchimba mifereji ya kuelekeza maji kuzunguka midomo ya mashimo, na kuzungushia uzio au kufukia mashimo yaliyoachwa."
+      "en": "For those mining and living here, it helps to timber or bench pit walls, cut diversion channels around pit mouths, and fence or backfill abandoned pits. What raises the risk: digging pits without timbering, working them while rain is falling, building homes at the lip of old pits and washing ore with mercury in the streams people drink from. Keep everyone out of the pits once rain starts and know the firm ground away from them that your household will move to; if people fall sick after drinking from a stream below the workings, change the source and report it the same day. Agree who will help anyone in the household who cannot move, see or hear a warning on their own.",
+      "sw": "Kwa wanaochimba na kuishi hapa, ni vyema kuimarisha kuta za mashimo kwa mbao au ngazi, kuchimba mifereji ya kuelekeza maji kuzunguka midomo ya mashimo, na kuzungushia uzio au kufukia mashimo yaliyoachwa. Kinachoongeza hatari: kuchimba mashimo bila mihimili, kuyafanyia kazi mvua ikinyesha, kujenga nyumba kando ya mashimo ya zamani na kuosha mawe ya madini kwa zebaki kwenye vijito ambavyo watu hunywa. Mtoe kila mtu mashimoni mara mvua inapoanza na fahamu eneo imara mbali nayo ambalo kaya yako itahamia; watu wakiugua baada ya kunywa maji ya kijito chini ya machimbo, badilisheni chanzo na ripoti siku hiyo hiyo. Kubalianeni nani atamsaidia yeyote katika kaya asiyeweza kuondoka, kuona au kusikia tahadhari peke yake."
      }
     },
     {
@@ -865,8 +865,8 @@
       "sw": "Eneo hili ni mbuga ya mfinyanzi na bonde: udongo hushikilia maji kwa siku hadi wiki kadhaa baada ya mvua kubwa, na kufanya mazao, makazi na barabara za udongo kujaa maji."
      },
      "advice": {
-      "en": "For those living and farming here, it helps to build on higher ground, keep field drains open and store harvests on raised platforms.",
-      "sw": "Kwa wanaoishi na kulima hapa, ni vyema kujenga sehemu za miinuko, kuweka mifereji ya mashamba wazi na kuhifadhi mavuno juu ya vichanja."
+      "en": "For those living and farming here, it helps to build on higher ground, keep field drains open and store harvests on raised platforms. What raises the loss in both wet and dry years: building homes and stores on the low mbuga, relying on one crop and selling the whole harvest at once. Know the raised ground your household will move to when the mbuga floods, and agree early where food will come from in a failed season. Agree who will help anyone in the household who cannot move, see or hear a warning on their own.",
+      "sw": "Kwa wanaoishi na kulima hapa, ni vyema kujenga sehemu za miinuko, kuweka mifereji ya mashamba wazi na kuhifadhi mavuno juu ya vichanja. Kinachoongeza hasara katika miaka ya mvua nyingi na ya ukame: kujenga nyumba na maghala kwenye mbuga za chini, kutegemea zao moja na kuuza mavuno yote kwa mara moja. Fahamu eneo lililoinuka ambalo kaya yako itahamia mbuga inapofurika, na kubalianeni mapema chakula kitatoka wapi msimu ukikosekana. Kubalianeni nani atamsaidia yeyote katika kaya asiyeweza kuondoka, kuona au kusikia tahadhari peke yake."
      }
     },
     {
@@ -879,8 +879,8 @@
       "sw": "Kijiji hiki kina vyanzo vichache vya maji: visima vifupi na malambo hukauka katikati ya kiangazi, na kuongeza umbali wa kutafuta maji na utegemezi wa maji yasiyo salama."
      },
      "advice": {
-      "en": "For those living here, it helps to harvest rainwater, protect and deepen wells, and keep livestock watering points separate from drinking-water sources.",
-      "sw": "Kwa wanaoishi hapa, ni vyema kuvuna maji ya mvua, kulinda na kuongeza kina cha visima, na kutenganisha vyanzo vya kunyweshea mifugo na vya maji ya kunywa."
+      "en": "For those living here, it helps to harvest rainwater, protect and deepen wells, and keep livestock watering points separate from drinking-water sources. What raises the risk: letting cattle drink and stand in the household wells, drawing from the mine run-off streams when the wells run low, and leaving water standing in open containers. Agree as a village where water will come from when the wells fail in a long dry season, and treat or boil any water from a new source. Agree who will help anyone in the household who cannot move, see or hear a warning on their own.",
+      "sw": "Kwa wanaoishi hapa, ni vyema kuvuna maji ya mvua, kulinda na kuongeza kina cha visima, na kutenganisha vyanzo vya kunyweshea mifugo na vya maji ya kunywa. Kinachoongeza hatari: kuacha ng'ombe wanywe na kusimama kwenye visima vya kaya, kuchota kwenye vijito vya maji ya migodi visima vikipungua, na kuacha maji yakituama kwenye vyombo wazi. Kubalianeni kama kijiji maji yatatoka wapi visima vikikauka kiangazi kirefu, na tibuni au chemsheni maji yoyote ya chanzo kipya. Kubalianeni nani atamsaidia yeyote katika kaya asiyeweza kuondoka, kuona au kusikia tahadhari peke yake."
      }
     },
     {
@@ -893,8 +893,8 @@
       "sw": "Eneo hili lina watu wengi: kaskazini mwa Nzega ndiyo sehemu yenye watu wengi zaidi Mkoa wa Tabora, ambapo mashamba madogo na mifugo mingi hutegemea ardhi na maji yale yale, hivyo msimu ukishindwa chakula na kipato huathirika haraka."
      },
      "advice": {
-      "en": "For those farming here, it helps to grow drought-tolerant crops, keep household food reserves and save through village savings groups.",
-      "sw": "Kwa wanaolima hapa, ni vyema kupanda mazao yanayostahimili ukame, kuweka akiba ya chakula ya kaya na kuweka akiba kupitia vikundi vya kijiji."
+      "en": "For those farming here, it helps to grow drought-tolerant crops, keep household food reserves and save through village savings groups. What raises the loss when the rains fail: relying on maize alone, selling the whole harvest at once and cutting the remaining trees for charcoal when money is short. Agree early, as a household and a village, where food will come from in a failed season, and act before the stores are empty. Agree who will help anyone in the household who cannot move, see or hear a warning on their own.",
+      "sw": "Kwa wanaolima hapa, ni vyema kupanda mazao yanayostahimili ukame, kuweka akiba ya chakula ya kaya na kuweka akiba kupitia vikundi vya kijiji. Kinachoongeza hasara mvua zikikosekana: kutegemea mahindi pekee, kuuza mavuno yote kwa mara moja na kukata miti iliyobaki kwa mkaa pesa zinapopungua. Kubalianeni mapema, kama kaya na kijiji, chakula kitatoka wapi msimu ukikosekana, na chukueni hatua kabla akiba haijaisha. Kubalianeni nani atamsaidia yeyote katika kaya asiyeweza kuondoka, kuona au kusikia tahadhari peke yake."
      }
     },
     {
@@ -907,8 +907,8 @@
       "sw": "Eneo hili liko kando ya Reli ya Kati: reli inapita wilayani kupitia Bukene, maji mengi husomba makalavati na sehemu za tuta, na shughuli ndani ya hifadhi ya reli huongeza mmomonyoko."
      },
      "advice": {
-      "en": "For those living and farming here, it helps to keep the railway reserve clear and to report damaged culverts to TRC early.",
-      "sw": "Kwa wanaoishi na kulima hapa, ni vyema kuweka hifadhi ya reli wazi na kutoa taarifa mapema za makalavati yaliyoharibika kwa TRC."
+      "en": "For those living and farming here, it helps to keep the railway reserve clear and to report damaged culverts to TRC early. What raises the risk: building or farming inside the railway reserve, blocking the culverts with soil or waste, and walking or driving livestock along the line. Know the designated crossings on your route and use them even when the line looks quiet; keep off the embankment when the culverts are running full. Agree who will help anyone in the household who cannot move, see or hear a warning on their own.",
+      "sw": "Kwa wanaoishi na kulima hapa, ni vyema kuweka hifadhi ya reli wazi na kutoa taarifa mapema za makalavati yaliyoharibika kwa TRC. Kinachoongeza hatari: kujenga au kulima ndani ya hifadhi ya reli, kuziba makalavati kwa udongo au taka, na kutembea au kuswaga mifugo kando ya reli. Fahamu vivuko rasmi kwenye njia yako na vitumie hata reli ikionekana tulivu; epukeni tuta la reli makalavati yakiwa yamejaa maji. Kubalianeni nani atamsaidia yeyote katika kaya asiyeweza kuondoka, kuona au kusikia tahadhari peke yake."
      }
     }
    ],
@@ -1055,8 +1055,8 @@
       "sw": "Eneo hili ni hifadhi ya misitu na wanyamapori: hifadhi zinachukua sehemu kubwa ya Sikonge, na moto wa mwishoni mwa kiangazi (Agosti–Oktoba) huwaka kwa nguvu zaidi na kusambaa haraka, mara nyingi ukianzishwa na usafishaji wa mashamba, urinaji wa asali au uwindaji."
      },
      "advice": {
-      "en": "For those living and working here, it helps to burn early and under control, maintain fire breaks and put fires out fully before leaving the bush.",
-      "sw": "Kwa wanaoishi na kufanya kazi hapa, ni vyema kuchoma mapema kwa udhibiti, kutunza njia za kuzuia moto na kuzima moto kabisa kabla ya kuondoka porini."
+      "en": "For those living and working here, it helps to burn early and under control, maintain fire breaks and put fires out fully before leaving the bush. What raises the risk: burning late in the dry season on windy days, lighting fires to smoke bees or clear fields and walking away before they are out, and leaving charcoal kilns unattended. Know the cleared open ground your household will move to if a miombo fire comes towards the houses, move when smoke is seen on the forest edge, and report any fire to the village leaders at once. Agree who will help anyone in the household who cannot move, see or hear a warning on their own.",
+      "sw": "Kwa wanaoishi na kufanya kazi hapa, ni vyema kuchoma mapema kwa udhibiti, kutunza njia za kuzuia moto na kuzima moto kabisa kabla ya kuondoka porini. Kinachoongeza hatari: kuchoma mwishoni mwa kiangazi siku za upepo, kuwasha moto kufukuza nyuki au kusafisha mashamba na kuondoka kabla haujazimika, na kuacha matanuri ya mkaa bila uangalizi. Fahamu uwanja wazi uliosafishwa ambao kaya yako itahamia moto wa miombo ukielekea nyumbani, ondokeni moshi ukionekana mpakani mwa msitu, na ripoti moto wowote kwa viongozi wa kijiji mara moja. Kubalianeni nani atamsaidia yeyote katika kaya asiyeweza kuondoka, kuona au kusikia tahadhari peke yake."
      }
     },
     {
@@ -1069,8 +1069,8 @@
       "sw": "Hili ni eneo la ufugaji nyuki: warina asali hufanya kazi ndani kabisa ya miombo, mbali na barabara na vituo vya afya, wakikabiliwa na moto, nyoka, wanyamapori na kuumwa na nyuki."
      },
      "advice": {
-      "en": "For those keeping bees here, it helps to work in groups, share your trip plan with the village, handle smokers safely and carry a phone, water and first-aid kit.",
-      "sw": "Kwa wanaofuga nyuki hapa, ni vyema kufanya kazi kwa vikundi, kukijulisha kijiji mpango wa safari, kutumia vifaa vya kufukiza moshi kwa usalama na kubeba simu, maji na vifaa vya huduma ya kwanza."
+      "en": "For those keeping bees here, it helps to work in groups, share your trip plan with the village, handle smokers safely and carry a phone, water and first-aid kit. What raises the risk: going into the forest alone or without telling anyone, harvesting at night without light, and leaving smokers burning on the ground. Agree with the village the day you are expected back and the route you will take, so that a search can start the same night if you do not return. Agree who will help anyone in the household who cannot move, see or hear a warning on their own.",
+      "sw": "Kwa wanaofuga nyuki hapa, ni vyema kufanya kazi kwa vikundi, kukijulisha kijiji mpango wa safari, kutumia vifaa vya kufukiza moshi kwa usalama na kubeba simu, maji na vifaa vya huduma ya kwanza. Kinachoongeza hatari: kuingia msituni peke yako au bila kumwambia yeyote, kurina usiku bila mwanga, na kuacha vivukizi vikiwaka ardhini. Kubalianeni na kijiji siku mnayotarajiwa kurudi na njia mtakayopita, ili msako uanze usiku huo huo msiporudi. Kubalianeni nani atamsaidia yeyote katika kaya asiyeweza kuondoka, kuona au kusikia tahadhari peke yake."
      }
     },
     {
@@ -1083,8 +1083,8 @@
       "sw": "Kijiji hiki kiko karibu na maeneo ya wanyamapori: tembo na wanyama wengine wakubwa hupita kati ya hifadhi na mashamba, wakivamia mazao hasa usiku na karibu na mavuno."
      },
      "advice": {
-      "en": "For those living and farming here, it helps to use community deterrents, keep in touch with wildlife officers and plan movement at night and early morning.",
-      "sw": "Kwa wanaoishi na kulima hapa, ni vyema kutumia mbinu za jamii za kufukuza wanyama, kuwasiliana na maafisa wanyamapori na kupanga safari za usiku na alfajiri."
+      "en": "For those living and farming here, it helps to use community deterrents, keep in touch with wildlife officers and plan movement at night and early morning. What raises the risk: opening fields and settling right against the reserve boundary, walking alone through the bush at dusk, and confronting elephants with torches or stones. Report elephants near the fields to the village leaders and wildlife officers at once, and agree as a village where people will shelter if a herd enters the settlement. Agree who will help anyone in the household who cannot move, see or hear a warning on their own.",
+      "sw": "Kwa wanaoishi na kulima hapa, ni vyema kutumia mbinu za jamii za kufukuza wanyama, kuwasiliana na maafisa wanyamapori na kupanga safari za usiku na alfajiri. Kinachoongeza hatari: kufungua mashamba na kukaa moja kwa moja mpakani mwa hifadhi, kutembea peke yako porini jioni, na kuwakabili tembo kwa tochi au mawe. Ripoti tembo karibu na mashamba kwa viongozi wa kijiji na maafisa wa wanyamapori mara moja, na kubalianeni kama kijiji watu watajikinga wapi kundi likiingia makazini. Kubalianeni nani atamsaidia yeyote katika kaya asiyeweza kuondoka, kuona au kusikia tahadhari peke yake."
      }
     },
     {
@@ -1097,8 +1097,8 @@
       "sw": "Njia hii ina vivuko vya mito vinavyofurika: mito inayokatiza barabara ya T8 na ya Ipole–Mpanda hujaa haraka baada ya dhoruba upande wa juu na inaweza kufunga njia kwa saa hadi siku kadhaa."
      },
      "advice": {
-      "en": "For those travelling and transporting goods here, it helps to plan journeys around the rains and carry food, water and a phone on every trip.",
-      "sw": "Kwa wanaosafiri na kusafirisha bidhaa hapa, ni vyema kupanga safari kuzingatia mvua na kubeba chakula, maji na simu kila safari."
+      "en": "For those travelling and transporting goods here, it helps to plan journeys around the rains and carry food, water and a phone on every trip. What raises the risk: driving or walking through flowing water at the low crossings, travelling at night in the storm season, and setting out without telling anyone the route. Wait at the crossings for the water to drop rather than cross; if the road is cut, know the village where you will wait, and let family know before you leave. Agree who will help anyone in the household who cannot move, see or hear a warning on their own.",
+      "sw": "Kwa wanaosafiri na kusafirisha bidhaa hapa, ni vyema kupanga safari kuzingatia mvua na kubeba chakula, maji na simu kila safari. Kinachoongeza hatari: kupita kwa gari au kwa miguu kwenye maji yanayotiririka vivukoni, kusafiri usiku msimu wa dhoruba, na kuondoka bila kumwambia yeyote njia. Subirini vivukoni maji yapungue badala ya kuvuka; barabara ikikatika, fahamu kijiji mtakachosubiria, na wajulishe familia kabla ya kuondoka. Kubalianeni nani atamsaidia yeyote katika kaya asiyeweza kuondoka, kuona au kusikia tahadhari peke yake."
      }
     },
     {
@@ -1111,8 +1111,8 @@
       "sw": "Hiki ni kijiji cha mbali: vijiji vimetawanyika katika wilaya kubwa sana, huduma ya dharura inaweza kuchukua saa nyingi, na msaada wa kwanza mara nyingi hutoka kwa majirani."
      },
      "advice": {
-      "en": "For those living here, it helps to keep a village first-aid kit, a food reserve and leaders' phone numbers, and agree a family meeting point.",
-      "sw": "Kwa wanaoishi hapa, ni vyema kuwa na vifaa vya huduma ya kwanza vya kijiji, akiba ya chakula na namba za simu za viongozi, na kukubaliana mahali pa kukutana kama familia."
+      "en": "For those living here, it helps to keep a village first-aid kit, a food reserve and leaders' phone numbers, and agree a family meeting point. What raises the risk in a place this remote: letting the village food and medicine stocks run out before the roads close, and waiting for outside help before acting when someone is hurt. Restock the village before the rains, because the road may be cut for weeks; agree now where each family will meet if separated, and who in the village will call for help and from which hill the phone works. Agree who will help anyone in the household who cannot move, see or hear a warning on their own.",
+      "sw": "Kwa wanaoishi hapa, ni vyema kuwa na vifaa vya huduma ya kwanza vya kijiji, akiba ya chakula na namba za simu za viongozi, na kukubaliana mahali pa kukutana kama familia. Kinachoongeza hatari mahali pa mbali kama hapa: kuacha akiba za chakula na dawa za kijiji ziishe kabla barabara hazijafungwa, na kusubiri msaada wa nje kabla ya kuchukua hatua mtu akiumia. Jazeni akiba kijijini kabla ya mvua, kwa sababu barabara inaweza kufungwa kwa wiki; kubalianeni sasa kila familia itakutana wapi ikitengana, na nani kijijini ataita msaada na kutoka kilima kipi simu inapatikana. Kubalianeni nani atamsaidia yeyote katika kaya asiyeweza kuondoka, kuona au kusikia tahadhari peke yake."
      }
     }
    ],
@@ -1259,8 +1259,8 @@
       "sw": "Eneo hili linapakana na mabwawa na maji ya wazi: Urambo ina sehemu kubwa ya mabwawa ya mkoa, na katika miaka ya mvua nyingi maji ya mafuriko husambaa hadi mashamba na makazi ya jirani."
      },
      "advice": {
-      "en": "For those living and farming here, it helps to keep houses and stores above the highest remembered flood mark and grow flood-tolerant crops on the swamp edge.",
-      "sw": "Kwa wanaoishi na kulima hapa, ni vyema kujenga nyumba na maghala juu ya alama ya juu kabisa ya mafuriko inayokumbukwa na kupanda mazao yanayostahimili maji pembezoni mwa mabwawa."
+      "en": "For those living and farming here, it helps to keep houses and stores above the highest remembered flood mark and grow flood-tolerant crops on the swamp edge. What raises the risk: building new houses on the swamp edge, blocking the natural outflow with bunds and roads, and staying on the low ground while the water is still rising. Know the raised ground and the dry route to it that your village will use when the swamp spreads, and move people, stores and animals there as the water begins to rise. Agree who will help anyone in the household who cannot move, see or hear a warning on their own.",
+      "sw": "Kwa wanaoishi na kulima hapa, ni vyema kujenga nyumba na maghala juu ya alama ya juu kabisa ya mafuriko inayokumbukwa na kupanda mazao yanayostahimili maji pembezoni mwa mabwawa. Kinachoongeza hatari: kujenga nyumba mpya kwenye kingo za bwawa, kuziba njia ya asili ya maji kwa matuta na barabara, na kubaki kwenye ardhi ya chini maji yakiwa bado yanapanda. Fahamu eneo lililoinuka na njia kavu ya kufika huko ambayo kijiji chenu kitatumia bwawa linapotanuka, na hamisheni watu, akiba na mifugo huko maji yanapoanza kupanda. Kubalianeni nani atamsaidia yeyote katika kaya asiyeweza kuondoka, kuona au kusikia tahadhari peke yake."
      }
     },
     {
@@ -1273,8 +1273,8 @@
       "sw": "Hili ni eneo la kukausha tumbaku: upepo mkali wa dhoruba hung'oa paa za mabani zisizofungwa vizuri, na mabani ya kukaushia kwa kuni ni chanzo cha mara kwa mara cha moto wakati wa msimu wa kukausha."
      },
      "advice": {
-      "en": "For those curing tobacco here, it helps to fix roofing to every purlin, keep a cleared fire break and have water or sand beside each barn.",
-      "sw": "Kwa wanaokausha tumbaku hapa, ni vyema kufunga mabati kila mbao ya kenchi, kuweka njia ya kuzuia moto iliyosafishwa na kuwa na maji au mchanga karibu na kila banda."
+      "en": "For those curing tobacco here, it helps to fix roofing to every purlin, keep a cleared fire break and have water or sand beside each barn. What raises the risk: stacking dry tobacco or firewood against the barn walls, leaving the furnace unattended at night, and building barns close to the houses. Agree where the household will move to if a barn fire spreads towards the houses, and get children and animals under a solid roof early when a storm is forecast. Agree who will help anyone in the household who cannot move, see or hear a warning on their own.",
+      "sw": "Kwa wanaokausha tumbaku hapa, ni vyema kufunga mabati kila mbao ya kenchi, kuweka njia ya kuzuia moto iliyosafishwa na kuwa na maji au mchanga karibu na kila banda. Kinachoongeza hatari: kurundika tumbaku kavu au kuni kwenye kuta za ghala, kuacha tanuru bila uangalizi usiku, na kujenga maghala karibu na nyumba. Kubalianeni kaya itahamia wapi moto wa ghala ukisambaa kuelekea nyumbani, na waweke watoto na mifugo chini ya paa imara mapema dhoruba ikitabiriwa. Kubalianeni nani atamsaidia yeyote katika kaya asiyeweza kuondoka, kuona au kusikia tahadhari peke yake."
      }
     },
     {
@@ -1287,8 +1287,8 @@
       "sw": "Haya ni maeneo ya miombo na mashamba ya pori: kukata miombo kwa ajili ya mashamba mapya ya tumbaku na kuni za kukaushia huondoa miti inayoshikilia udongo na unyevu, na kurefusha ukame na kuongeza mtiririko wa maji na mafuriko."
      },
      "advice": {
-      "en": "For those farming here, it helps to plant woodlots, use fuel-efficient curing barns and keep trees along stream banks.",
-      "sw": "Kwa wanaolima hapa, ni vyema kupanda mashamba ya miti, kutumia mabani ya kukaushia yanayotumia kuni kidogo na kuacha miti kando ya vijito."
+      "en": "For those farming here, it helps to plant woodlots, use fuel-efficient curing barns and keep trees along stream banks. What raises the loss when the rains fail and to the floods when they come: clearing new miombo for tobacco every season, cutting the trees along the streams for curing fuel, and farming right to the stream bank. Agree early where food will come from in a failed season; in heavy rain, know the higher ground away from the streams that your household will move to. Agree who will help anyone in the household who cannot move, see or hear a warning on their own.",
+      "sw": "Kwa wanaolima hapa, ni vyema kupanda mashamba ya miti, kutumia mabani ya kukaushia yanayotumia kuni kidogo na kuacha miti kando ya vijito. Kinachoongeza hasara mvua zikikosekana na mafuriko zinapokuja: kufyeka miombo mipya kwa tumbaku kila msimu, kukata miti ya kando ya vijito kwa kuni za kukaushia, na kulima hadi ukingo wa kijito. Kubalianeni mapema chakula kitatoka wapi msimu ukikosekana; wakati wa mvua kubwa, fahamu eneo la juu mbali na vijito ambalo kaya yako itahamia. Kubalianeni nani atamsaidia yeyote katika kaya asiyeweza kuondoka, kuona au kusikia tahadhari peke yake."
      }
     },
     {
@@ -1301,8 +1301,8 @@
       "sw": "Hili ni eneo la mbung'o: sehemu kubwa ya wilaya ina mbung'o wanaoeneza malale kwa binadamu na nagana kwa ng'ombe, hasa karibu na misitu na maji."
      },
      "advice": {
-      "en": "For those living and keeping livestock here, it helps to graze away from tsetse hotspots, treat cattle with insecticide and get fever tested early after fly bites.",
-      "sw": "Kwa wanaoishi na kufuga hapa, ni vyema kulisha mifugo mbali na maeneo yenye mbung'o wengi, kuogesha mifugo kwa dawa na kupima homa mapema baada ya kuumwa na mbung'o."
+      "en": "For those living and keeping livestock here, it helps to graze away from tsetse hotspots, treat cattle with insecticide and get fever tested early after fly bites. What raises the risk: grazing or camping inside the thick bush where the flies breed, and treating a fever at home for days before going to the dispensary. Go to the dispensary the same week a fever starts after fly bites, and tell the health worker where you have been grazing. Agree who will help anyone in the household who cannot move, see or hear a warning on their own.",
+      "sw": "Kwa wanaoishi na kufuga hapa, ni vyema kulisha mifugo mbali na maeneo yenye mbung'o wengi, kuogesha mifugo kwa dawa na kupima homa mapema baada ya kuumwa na mbung'o. Kinachoongeza hatari: kuchunga au kupiga kambi ndani ya kichaka kinene ambako nzi huzaliana, na kutibu homa nyumbani kwa siku kadhaa kabla ya kwenda zahanati. Nendeni zahanati wiki hiyo hiyo homa inapoanza baada ya kuumwa na nzi, na mwambie mhudumu wa afya mlikokuwa mkichunga. Kubalianeni nani atamsaidia yeyote katika kaya asiyeweza kuondoka, kuona au kusikia tahadhari peke yake."
      }
     },
     {
@@ -1315,8 +1315,8 @@
       "sw": "Eneo hili lina vivuko vya mito vinavyofurika: vivuko kwenye barabara za vijijini hufurika haraka baada ya dhoruba, na watoto wengi hupita humo wakienda shule."
      },
      "advice": {
-      "en": "For those living here, it helps to mark danger points and agree safe school routes before the rains begin.",
-      "sw": "Kwa wanaoishi hapa, ni vyema kuweka alama sehemu za hatari na kukubaliana njia salama za kwenda shule kabla mvua hazijaanza."
+      "en": "For those living here, it helps to mark danger points and agree safe school routes before the rains begin. What raises the risk: letting children cross the flooded drifts or walk the railway line to school, and sending them out when heavy rain is already falling. Agree with the school who keeps the children when the crossings are flooded, and that pupils are released only to a parent or named adult during a warning. Agree who will help anyone in the household who cannot move, see or hear a warning on their own.",
+      "sw": "Kwa wanaoishi hapa, ni vyema kuweka alama sehemu za hatari na kukubaliana njia salama za kwenda shule kabla mvua hazijaanza. Kinachoongeza hatari: kuwaacha watoto wavuke vivuko vilivyofurika au watembee kwenye reli kwenda shule, na kuwatuma nje mvua kubwa ikiwa tayari inanyesha. Kubalianeni na shule nani atawabakiza watoto vivuko vikifurika, na kwamba wanafunzi waruhusiwe kwa mzazi au mtu mzima aliyetajwa tu wakati wa tahadhari. Kubalianeni nani atamsaidia yeyote katika kaya asiyeweza kuondoka, kuona au kusikia tahadhari peke yake."
      }
     }
    ],
@@ -1463,8 +1463,8 @@
       "sw": "Eneo hili lina vijito vya msimu: vijito vya Uyui huwa vikavu kwa miezi kadhaa lakini hubeba mafuriko ya ghafla ndani ya saa moja baada ya dhoruba, na kukata vivuko vya barabara za vijijini na kutenga vijiji."
      },
      "advice": {
-      "en": "For those living and travelling here, it helps to keep grass and trees on stream banks and to plan journeys around storm periods.",
-      "sw": "Kwa wanaoishi na kusafiri hapa, ni vyema kuacha nyasi na miti kwenye kingo za vijito na kupanga safari kuzingatia vipindi vya dhoruba."
+      "en": "For those living and travelling here, it helps to keep grass and trees on stream banks and to plan journeys around storm periods. What raises the risk: farming or building right on the stream bank, clearing the trees that hold it, and crossing the drifts while water is still running. Know the higher ground away from the stream that your household will move to when it rises, and wait at the crossings for the water to drop rather than cross. Agree who will help anyone in the household who cannot move, see or hear a warning on their own.",
+      "sw": "Kwa wanaoishi na kusafiri hapa, ni vyema kuacha nyasi na miti kwenye kingo za vijito na kupanga safari kuzingatia vipindi vya dhoruba. Kinachoongeza hatari: kulima au kujenga moja kwa moja kwenye ukingo wa kijito, kukata miti inayoushikilia, na kuvuka vivuko maji yakiwa bado yanatiririka. Fahamu eneo la juu mbali na kijito ambalo kaya yako itahamia kinapojaa, na subirini vivukoni maji yapungue badala ya kuvuka. Kubalianeni nani atamsaidia yeyote katika kaya asiyeweza kuondoka, kuona au kusikia tahadhari peke yake."
      }
     },
     {
@@ -1477,8 +1477,8 @@
       "sw": "Eneo hili ni mbuga ya bonde: hupokea maji kutoka miombo inayozunguka na hubaki na maji kwa wiki kadhaa katika msimu wa kawaida wa mvua."
      },
      "advice": {
-      "en": "For those living and farming here, it helps to grow rice and other flood-tolerant crops on the mbuga and build homes on the higher ground.",
-      "sw": "Kwa wanaoishi na kulima hapa, ni vyema kupanda mpunga na mazao mengine yanayostahimili maji kwenye mbuga na kujenga makazi sehemu za miinuko."
+      "en": "For those living and farming here, it helps to grow rice and other flood-tolerant crops on the mbuga and build homes on the higher ground. What raises the risk: building permanent houses and stores on the mbuga because it looks dry, blocking the natural outflow with bunds and roads, and returning before the water has gone. Know the raised ground and the dry route to it that your village will use when the mbuga floods, and move people, stores and animals there as the water begins to rise. Agree who will help anyone in the household who cannot move, see or hear a warning on their own.",
+      "sw": "Kwa wanaoishi na kulima hapa, ni vyema kupanda mpunga na mazao mengine yanayostahimili maji kwenye mbuga na kujenga makazi sehemu za miinuko. Kinachoongeza hatari: kujenga nyumba na maghala ya kudumu kwenye mbuga kwa sababu inaonekana kavu, kuziba njia ya asili ya maji kwa matuta na barabara, na kurudi kabla maji hayajaondoka. Fahamu eneo lililoinuka na njia kavu ya kufika huko ambayo kijiji chenu kitatumia mbuga inapofurika, na hamisheni watu, akiba na mifugo huko maji yanapoanza kupanda. Kubalianeni nani atamsaidia yeyote katika kaya asiyeweza kuondoka, kuona au kusikia tahadhari peke yake."
      }
     },
     {
@@ -1491,8 +1491,8 @@
       "sw": "Hiki ni kijiji cha miombo: moto wa kiangazi kwenye nyasi na misitu husambaa haraka kwa upepo wa mchana na kuhatarisha nyumba, mabani na mizinga."
      },
      "advice": {
-      "en": "For those living and farming here, it helps to keep fire breaks around homes and barns and to burn fields early on calm days with village approval.",
-      "sw": "Kwa wanaoishi na kulima hapa, ni vyema kuweka njia za kuzuia moto kuzunguka nyumba na mabani na kuchoma mashamba mapema siku zisizo na upepo kwa idhini ya kijiji."
+      "en": "For those living and farming here, it helps to keep fire breaks around homes and barns and to burn fields early on calm days with village approval. What raises the risk: burning late in the dry season on windy days, leaving fires unattended, and stacking dry tobacco or firewood against the barn walls. Know the cleared open ground your household will move to if a bush fire comes towards the houses, move when smoke is seen on the field edge, and report any fire to the village leaders at once. Agree who will help anyone in the household who cannot move, see or hear a warning on their own.",
+      "sw": "Kwa wanaoishi na kulima hapa, ni vyema kuweka njia za kuzuia moto kuzunguka nyumba na mabani na kuchoma mashamba mapema siku zisizo na upepo kwa idhini ya kijiji. Kinachoongeza hatari: kuchoma mwishoni mwa kiangazi siku za upepo, kuacha moto bila uangalizi, na kurundika tumbaku kavu au kuni kwenye kuta za ghala. Fahamu uwanja wazi uliosafishwa ambao kaya yako itahamia moto wa porini ukielekea nyumbani, ondokeni moshi ukionekana mpakani mwa shamba, na ripoti moto wowote kwa viongozi wa kijiji mara moja. Kubalianeni nani atamsaidia yeyote katika kaya asiyeweza kuondoka, kuona au kusikia tahadhari peke yake."
      }
     },
     {
@@ -1505,8 +1505,8 @@
       "sw": "Hili ni eneo linalokua kwa kasi kuzunguka mji wa Tabora: nyumba mpya zinajengwa kwenye kingo za vijito na viwanja vya chini vinavyofurika wakati wa mvua kubwa."
      },
      "advice": {
-      "en": "For those building here, it helps to obtain a building permit and have the plot checked by the village or council before investing in construction.",
-      "sw": "Kwa wanaojenga hapa, ni vyema kupata kibali cha ujenzi na kiwanja kukaguliwa na kijiji au halmashauri kabla ya kuwekeza kwenye ujenzi."
+      "en": "For those building here, it helps to obtain a building permit and have the plot checked by the village or council before investing in construction. What raises the risk and the loss when the plot floods: buying or building on plots in the stream reserves and the low mbuga around the growing town because they are cheap, and filling drains to make room. Before building, ask the village or council where the water goes in a heavy storm, and know the higher ground your household will move to if the new settlement floods. Agree who will help anyone in the household who cannot move, see or hear a warning on their own.",
+      "sw": "Kwa wanaojenga hapa, ni vyema kupata kibali cha ujenzi na kiwanja kukaguliwa na kijiji au halmashauri kabla ya kuwekeza kwenye ujenzi. Kinachoongeza hatari na hasara kiwanja kinapofurika: kununua au kujenga kwenye viwanja ndani ya hifadhi za vijito na mbuga za chini kuzunguka mji unaokua kwa sababu ni rahisi, na kujaza mitaro kupata nafasi. Kabla ya kujenga, ulizeni kijiji au halmashauri maji huenda wapi dhoruba kali, na fahamu eneo la juu ambalo kaya yako itahamia makazi mapya yakifurika. Kubalianeni nani atamsaidia yeyote katika kaya asiyeweza kuondoka, kuona au kusikia tahadhari peke yake."
      }
     },
     {
@@ -1519,8 +1519,8 @@
       "sw": "Hili ni eneo la kilimo linalokumbwa na ukame: vipindi vya ukavu katikati ya msimu wa mvua (Januari–Februari) ni vya kawaida Uyui na mara nyingi huharibu mahindi wakati wa kuchanua."
      },
      "advice": {
-      "en": "For those farming here, it helps to plant early, choose early-maturing and drought-tolerant varieties and keep a household food reserve.",
-      "sw": "Kwa wanaolima hapa, ni vyema kupanda mapema, kuchagua mbegu zinazokomaa mapema na zinazostahimili ukame na kuweka akiba ya chakula ya kaya."
+      "en": "For those farming here, it helps to plant early, choose early-maturing and drought-tolerant varieties and keep a household food reserve. What raises the loss when the rains fail: relying on maize alone, selling the whole harvest at once and cutting the remaining trees for charcoal when money is short. Agree early, as a household and a village, where food will come from in a failed season, and act before the stores are empty. Agree who will help anyone in the household who cannot move, see or hear a warning on their own.",
+      "sw": "Kwa wanaolima hapa, ni vyema kupanda mapema, kuchagua mbegu zinazokomaa mapema na zinazostahimili ukame na kuweka akiba ya chakula ya kaya. Kinachoongeza hasara mvua zikikosekana: kutegemea mahindi pekee, kuuza mavuno yote kwa mara moja na kukata miti iliyobaki kwa mkaa pesa zinapopungua. Kubalianeni mapema, kama kaya na kijiji, chakula kitatoka wapi msimu ukikosekana, na chukueni hatua kabla akiba haijaisha. Kubalianeni nani atamsaidia yeyote katika kaya asiyeweza kuondoka, kuona au kusikia tahadhari peke yake."
      }
     }
    ],

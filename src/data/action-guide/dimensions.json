@@ -1,0 +1,22 @@
+{
+ "vulnerability": {
+  "title": {
+   "en": "Vulnerability",
+   "sw": "Udhaifu"
+  },
+  "intro": {
+   "en": "Vulnerability describes how easily people and households can be harmed when a hazard strikes, and how quickly they recover. INFORM Tanzania scores each council from 0 to 10 on eight indicators: development and poverty, economic dependency, habitat, livelihoods, displaced people, health conditions, children's health and nutrition, and economically vulnerable groups. A higher score does not mean that a disaster will happen; it means that the same flood, drought or storm would be harder to bear, so that preparation and support should reach these households first. The statements below say what each indicator means for people and what helps, in a way that every household, committee and sector can act on.",
+   "sw": "Udhaifu unaeleza jinsi watu na kaya wanavyoweza kudhurika kwa urahisi janga linapotokea, na jinsi wanavyopona haraka. INFORM Tanzania inatoa alama kuanzia 0 hadi 10 kwa kila halmashauri katika viashiria vinane: maendeleo na umaskini, utegemezi wa kiuchumi, makazi, riziki, watu waliohama makazi, hali ya afya, afya na lishe ya watoto, na makundi hatarishi kiuchumi. Alama ya juu haimaanishi kuwa maafa yatatokea; inamaanisha kuwa mafuriko, ukame au dhoruba ileile ingekuwa ngumu zaidi kuvumilika, hivyo maandalizi na msaada yafike kwanza kwa kaya hizi. Kauli zilizo hapa chini zinaeleza kila kiashiria kina maana gani kwa watu na nini husaidia, kwa namna ambayo kila kaya, kamati na sekta inaweza kutekeleza."
+  }
+ },
+ "coping": {
+  "title": {
+   "en": "Lack of coping capacity",
+   "sw": "Ukosefu wa uwezo wa kukabiliana"
+  },
+  "intro": {
+   "en": "Lack of coping capacity describes how much an area lacks the services and institutions that help people get through a hazard and recover: health care, economic means, water and sanitation, communication, education, disaster risk reduction arrangements and governance. INFORM Tanzania scores each council from 0 to 10 on seven indicators; a higher score means fewer resources to cope, not that people do not try. Most of these conditions can be improved by councils, sectors and communities working together, and the statements below show where to start.",
+   "sw": "Ukosefu wa uwezo wa kukabiliana unaeleza kiwango ambacho eneo linakosa huduma na taasisi zinazowasaidia watu kupita salama janga na kupona: huduma za afya, uwezo wa kiuchumi, maji na usafi wa mazingira, mawasiliano, elimu, mipango ya kupunguza hatari za maafa na utawala. INFORM Tanzania inatoa alama kuanzia 0 hadi 10 kwa kila halmashauri katika viashiria saba; alama ya juu inamaanisha rasilimali chache za kukabiliana, si kwamba watu hawajitahidi. Hali nyingi kati ya hizi zinaweza kuboreshwa na halmashauri, sekta na jamii zikishirikiana, na kauli zilizo hapa chini zinaonyesha pa kuanzia."
+  }
+ }
+}

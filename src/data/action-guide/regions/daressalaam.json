@@ -26,8 +26,8 @@
       "sw": "Hiki ni kitovu cha biashara chenye msongamano: Kariakoo na katikati ya jiji hujaza wafanyabiashara, bidhaa na magari kwenye mitaa myembamba, ambapo mitaro iliyoziba hufurika haraka wakati wa mvua za Masika na moto husambaa haraka kati ya majengo."
      },
      "advice": {
-      "en": "For those trading and working here, it helps to keep drains, fire exits and hydrants clear, store flammable goods safely and keep electrical connections certified.",
-      "sw": "Kwa wanaofanya biashara na kazi hapa, ni vyema kuweka mitaro, njia za dharura na mabomba ya zimamoto wazi, kuhifadhi bidhaa zinazoshika moto kwa usalama na kuhakikisha miunganisho ya umeme imethibitishwa."
+      "en": "For those trading and working here, it helps to keep drains, fire exits and hydrants clear, store flammable goods safely and keep electrical connections certified. What raises the risk: stacking goods over drains, blocking fire exits with stock and running unlicensed wiring. Know the nearest open space or wide road you will move to if fire or flood starts, agree it with neighbouring traders, and leave goods behind when told to go. Agree who will help anyone in the household who cannot move, see or hear a warning on their own.",
+      "sw": "Kwa wanaofanya biashara na kazi hapa, ni vyema kuweka mitaro, njia za dharura na mabomba ya zimamoto wazi, kuhifadhi bidhaa zinazoshika moto kwa usalama na kuhakikisha miunganisho ya umeme imethibitishwa. Kinachoongeza hatari: kurundika bidhaa juu ya mitaro, kuziba njia za dharura kwa mizigo na kutumia nyaya za umeme zisizo rasmi. Fahamu uwanja wazi au barabara pana iliyo karibu utakayohamia moto au mafuriko yakianza, kubaliana nayo na wafanyabiashara jirani, na acha bidhaa unapoambiwa uondoke. Kubalianeni nani atamsaidia yeyote katika kaya asiyeweza kuondoka, kuona au kusikia tahadhari peke yake."
      }
     },
     {
@@ -40,8 +40,8 @@
       "sw": "Eneo hili ni uwanda wa mafuriko wa Msimbazi: mto hujaa kwa kasi wakati wa mvua kubwa, Jangwani na makazi ya jirani hufurika mara kwa mara, na kivuko cha Barabara ya Morogoro hukatika."
      },
      "advice": {
-      "en": "For those living and trading here, it helps to keep homes and goods above the flood level, keep the river channel free of waste and use safe routes when the valley floods.",
-      "sw": "Kwa wanaoishi na kufanya biashara hapa, ni vyema kuweka makazi na bidhaa juu ya kiwango cha mafuriko, kuweka mkondo wa mto bila taka na kutumia njia salama bonde linapofurika."
+      "en": "For those living and trading here, it helps to keep homes and goods above the flood level, keep the river channel free of waste and use safe routes when the valley floods. What raises the risk: building or extending houses inside the Msimbazi valley floor, and dumping waste in the channel; for new building choose ground above the flood line, and for houses already here know the exit and raise what you can. Know the high ground on either side of the valley that you will move to, keep documents and medicines in one bag, and go as soon as the river starts to rise, not when Jangwani is already under water. Agree who will help anyone in the household who cannot move, see or hear a warning on their own.",
+      "sw": "Kwa wanaoishi na kufanya biashara hapa, ni vyema kuweka makazi na bidhaa juu ya kiwango cha mafuriko, kuweka mkondo wa mto bila taka na kutumia njia salama bonde linapofurika. Kinachoongeza hatari: kujenga au kupanua nyumba ndani ya sakafu ya bonde la Msimbazi, na kutupa taka kwenye mkondo; kwa ujenzi mpya chagueni ardhi iliyo juu ya mstari wa mafuriko, na kwa nyumba zilizopo tayari fahamu njia ya kutokea na inueni mnachoweza. Fahamu sehemu ya juu pande zote za bonde utakayohamia, weka nyaraka na dawa kwenye begi moja, na ondoka mara mto unapoanza kujaa, si wakati Jangwani tayari imezama. Kubalianeni nani atamsaidia yeyote katika kaya asiyeweza kuondoka, kuona au kusikia tahadhari peke yake."
      }
     }
    ]
@@ -67,8 +67,8 @@
       "sw": "Eneo hili lina ufukwe wa chini unaokumbwa na mmomonyoko na mawimbi makubwa, pamoja na mabonde ya mito yanayofurika haraka pale majengo na taka zilipobana mikondo."
      },
      "advice": {
-      "en": "For those living and building here, it helps to respect coastal and river setbacks, keep channels open and raise floor levels on low plots.",
-      "sw": "Kwa wanaoishi na kujenga hapa, ni vyema kuheshimu umbali wa ujenzi kutoka ufukweni na mitoni, kuweka mikondo wazi na kuinua sakafu kwenye viwanja vya chini."
+      "en": "For those living and building here, it helps to respect coastal and river setbacks, keep channels open and raise floor levels on low plots. What raises the risk: building on the beach front or inside the Mbezi and Tegeta channels, and filling valleys with waste or soil. Know the higher road or open ground inland that you will move to, and go when the valley rises or when a storm-tide warning is given, before the access roads flood. Agree who will help anyone in the household who cannot move, see or hear a warning on their own.",
+      "sw": "Kwa wanaoishi na kujenga hapa, ni vyema kuheshimu umbali wa ujenzi kutoka ufukweni na mitoni, kuweka mikondo wazi na kuinua sakafu kwenye viwanja vya chini. Kinachoongeza hatari: kujenga ufukweni au ndani ya mikondo ya Mbezi na Tegeta, na kujaza mabonde kwa taka au udongo. Fahamu barabara ya juu au eneo wazi la ndani utakalohamia, na ondoka bonde linapojaa au tahadhari ya mawimbi ya dhoruba inapotolewa, kabla barabara za kuingia hazijafurika. Kubalianeni nani atamsaidia yeyote katika kaya asiyeweza kuondoka, kuona au kusikia tahadhari peke yake."
      }
     }
    ]
@@ -93,8 +93,8 @@
       "sw": "Eneo hili lina makazi mengi ya chini na yasiyopangwa kando ya mito Kizinga na Mzinga, ambapo maji hutuama kwa siku kadhaa baada ya mvua kubwa na vyoo hufurika, na kusambaza kipindupindu."
      },
      "advice": {
-      "en": "For those living here, it helps to raise floors and latrines above flood level, keep shared drains open and treat or boil drinking water.",
-      "sw": "Kwa wanaoishi hapa, ni vyema kuinua sakafu na vyoo juu ya kiwango cha mafuriko, kuweka mitaro ya pamoja wazi na kutibu au kuchemsha maji ya kunywa."
+      "en": "For those living here, it helps to raise floors and latrines above flood level, keep shared drains open and treat or boil drinking water. What raises the risk: digging latrines in ground that floods, blocking shared drains with waste and drawing water from shallow wells after a flood. Know the school, mosque or church on higher ground that is your assembly point, and move there with children and the elderly when water enters the compound, before it stands in the house. Agree who will help anyone in the household who cannot move, see or hear a warning on their own.",
+      "sw": "Kwa wanaoishi hapa, ni vyema kuinua sakafu na vyoo juu ya kiwango cha mafuriko, kuweka mitaro ya pamoja wazi na kutibu au kuchemsha maji ya kunywa. Kinachoongeza hatari: kuchimba vyoo kwenye ardhi inayofurika, kuziba mitaro ya pamoja kwa taka na kuchota maji kwenye visima vifupi baada ya mafuriko. Fahamu shule, msikiti au kanisa lililo sehemu ya juu ambalo ni kituo chenu cha kukusanyika, na hamia huko na watoto na wazee maji yakiingia uani, kabla hayajatuama ndani ya nyumba. Kubalianeni nani atamsaidia yeyote katika kaya asiyeweza kuondoka, kuona au kusikia tahadhari peke yake."
      }
     }
    ]
@@ -118,8 +118,8 @@
       "sw": "Eneo hili liko kando ya Barabara ya Morogoro, ambapo makazi yanayokua kwa kasi yamejengwa kwenye miteremko ya mabonde na kingo za vijito; dhoruba husababisha mafuriko ya ghafla, mmomonyoko wa makorongo na usumbufu kwenye kituo cha mabasi."
      },
      "advice": {
-      "en": "For those living and trading here, it helps to build away from stream banks, protect slopes with vegetation and keep drains around markets and terminals clear.",
-      "sw": "Kwa wanaoishi na kufanya biashara hapa, ni vyema kujenga mbali na kingo za vijito, kulinda miteremko kwa mimea na kuweka mitaro kuzunguka masoko na vituo vya mabasi wazi."
+      "en": "For those living and trading here, it helps to build away from stream banks, protect slopes with vegetation and keep drains around markets and terminals clear. What raises the risk: cutting house plots into valley slopes, building right on the stream bank and tipping waste into gullies. Know the route to higher ground that does not cross a stream or gully, and use it when heavy rain starts, especially at night; do not wait at the terminal for the water to pass. Agree who will help anyone in the household who cannot move, see or hear a warning on their own.",
+      "sw": "Kwa wanaoishi na kufanya biashara hapa, ni vyema kujenga mbali na kingo za vijito, kulinda miteremko kwa mimea na kuweka mitaro kuzunguka masoko na vituo vya mabasi wazi. Kinachoongeza hatari: kuchonga viwanja kwenye miteremko ya bonde, kujenga moja kwa moja kwenye ukingo wa kijito na kumwaga taka kwenye makorongo. Fahamu njia ya kwenda sehemu ya juu isiyovuka kijito au korongo, na itumie mvua kubwa inapoanza, hasa usiku; usisubiri kituoni maji yapite. Kubalianeni nani atamsaidia yeyote katika kaya asiyeweza kuondoka, kuona au kusikia tahadhari peke yake."
      }
     }
    ]
@@ -144,8 +144,8 @@
       "sw": "Eneo hili ni rasi ya chini ya pwani: mmomonyoko wa fukwe, mawimbi makubwa na upepo mkali huathiri makazi ya fukweni na kivuko, na baadhi ya maeneo ya chini hufurika wakati wa mvua kubwa."
      },
      "advice": {
-      "en": "For those living and working here, it helps to build back from the shoreline, keep mangroves and dune vegetation intact and follow ferry operating notices in rough weather.",
-      "sw": "Kwa wanaoishi na kufanya kazi hapa, ni vyema kujenga mbali na ufukwe, kulinda mikoko na mimea ya matuta ya mchanga na kufuata taarifa za uendeshaji wa kivuko hali ya hewa ikiwa mbaya."
+      "en": "For those living and working here, it helps to build back from the shoreline, keep mangroves and dune vegetation intact and follow ferry operating notices in rough weather. What raises the risk: building on the beach, cutting mangroves for poles or plots and mining sand from the shore. Know the higher ground inland that you will move to, and go when a storm-tide or strong-wind warning is given; if the ferry is suspended, stay on the peninsula rather than crossing by small boat. Agree who will help anyone in the household who cannot move, see or hear a warning on their own.",
+      "sw": "Kwa wanaoishi na kufanya kazi hapa, ni vyema kujenga mbali na ufukwe, kulinda mikoko na mimea ya matuta ya mchanga na kufuata taarifa za uendeshaji wa kivuko hali ya hewa ikiwa mbaya. Kinachoongeza hatari: kujenga ufukweni, kukata mikoko kwa ajili ya nguzo au viwanja na kuchimba mchanga ufukweni. Fahamu sehemu ya juu ya ndani utakayohamia, na ondoka tahadhari ya mawimbi ya dhoruba au upepo mkali inapotolewa; kivuko kikisimamishwa, baki rasi badala ya kuvuka kwa chombo kidogo. Kubalianeni nani atamsaidia yeyote katika kaya asiyeweza kuondoka, kuona au kusikia tahadhari peke yake."
      }
     }
    ]

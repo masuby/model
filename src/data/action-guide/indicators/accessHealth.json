@@ -1,0 +1,67 @@
+{
+ "ref": "coping:accessHealth",
+ "title": {
+  "en": "Access to health care",
+  "sw": "Upatikanaji wa huduma za afya"
+ },
+ "intro": {
+  "en": "This indicator combines immunisation coverage and the density of health facilities for the region with national health spending and the number of doctors. A high score means that facilities, staff and vaccines are thinner on the ground, so injuries and illness after a hazard take longer to treat. Lead sectors: health; PO-RALG and the council.",
+  "sw": "Kiashiria hiki kinaunganisha chanjo na msongamano wa vituo vya afya kwa mkoa na matumizi ya afya na idadi ya madaktari kitaifa. Alama ya juu inamaanisha kuwa vituo, watumishi na chanjo ni vichache zaidi, hivyo majeraha na magonjwa baada ya janga huchukua muda mrefu kutibiwa. Sekta zinazoongoza: afya; TAMISEMI na halmashauri."
+ },
+ "rows": [
+  {
+   "impact": {
+    "en": "The nearest facility may be far, and the road to it may be cut during heavy rain",
+    "sw": "Kituo cha afya kilicho karibu kinaweza kuwa mbali, na barabara ya kukifikia inaweza kukatika wakati wa mvua kubwa"
+   },
+   "actions": {
+    "en": [
+     "Know the nearest facility and a second one, how to reach each in the rains, and who in the village has transport.",
+     "Join the improved community health fund (iCHF) so that treatment does not wait for money.",
+     "Council health department: pre-position supplies at the dispensaries that get cut off, and agree emergency transport with boda boda and vehicle owners."
+    ],
+    "sw": [
+     "Fahamu kituo cha afya kilicho karibu na cha pili, jinsi ya kufika kila kimoja wakati wa mvua, na nani kijijini ana usafiri.",
+     "Jiunge na bima ya afya ya jamii iliyoboreshwa (iCHF) ili matibabu yasisubiri fedha.",
+     "Idara ya afya ya halmashauri: wekeni vifaa mapema kwenye zahanati zinazokatikiwa njia, na kubalianeni usafiri wa dharura na wamiliki wa bodaboda na magari."
+    ]
+   }
+  },
+  {
+   "impact": {
+    "en": "A few health workers serve many people, so minor injuries and illness can wait a long time after a hazard",
+    "sw": "Watumishi wachache wa afya huhudumia watu wengi, hivyo majeraha na magonjwa madogo yanaweza kusubiri muda mrefu baada ya janga"
+   },
+   "actions": {
+    "en": [
+     "Train members of every village and mtaa in first aid; the Red Cross and the council's health team offer courses.",
+     "Keep a first-aid kit at the school, the market and the village office, and know who is trained to use it.",
+     "Community health workers: visit households that are ill or have newly delivered within the first days after a hazard."
+    ],
+    "sw": [
+     "Wafundisheni wanachama wa kila kijiji na mtaa huduma ya kwanza; Msalaba Mwekundu na timu ya afya ya halmashauri hutoa mafunzo.",
+     "Wekeni kifaa cha huduma ya kwanza shuleni, sokoni na ofisi ya kijiji, na mfahamu nani amefundishwa kukitumia.",
+     "Wahudumu wa afya ya jamii: tembeleeni kaya zenye wagonjwa au waliojifungua karibuni ndani ya siku za kwanza baada ya janga."
+    ]
+   }
+  },
+  {
+   "impact": {
+    "en": "Where vaccination coverage is low, outbreaks spread faster among children after floods and in shelters",
+    "sw": "Pale chanjo zilipo chache, milipuko huenea haraka zaidi miongoni mwa watoto baada ya mafuriko na kwenye makazi ya muda"
+   },
+   "actions": {
+    "en": [
+     "Take children to every vaccination visit on the clinic card and to the outreach days in the village.",
+     "Village leaders and religious leaders: announce the vaccination and outreach days and encourage every family to attend.",
+     "Health facilities: run catch-up vaccination in the wards with low coverage before the rainy season."
+    ],
+    "sw": [
+     "Wapelekeni watoto kwenye kila chanjo iliyo kwenye kadi ya kliniki na kwenye siku za huduma ya mkoba kijijini.",
+     "Viongozi wa kijiji na wa dini: tangazeni siku za chanjo na huduma ya mkoba na hamasisheni kila familia kuhudhuria.",
+     "Vituo vya afya: fanyeni chanjo za kufidia katika kata zenye chanjo chache kabla ya msimu wa mvua."
+    ]
+   }
+  }
+ ]
+}
