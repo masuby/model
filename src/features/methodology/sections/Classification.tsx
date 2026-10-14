@@ -146,6 +146,24 @@ export function ClassificationSection() {
 
       <div className="mt-12 grid gap-8 lg:grid-cols-2 lg:gap-12">
         <P className="text-[15px]">{t('classification.own')}</P>
+        <Callout title={t('classification.exampleTitle')}>
+          {t('classification.example', { value: sample.toFixed(1), hazardClass: onHazard ? t(`common:classes.${onHazard.key}`) : NO_VALUE, riskClass: onRisk ? t(`common:classes.${onRisk.key}`) : NO_VALUE })}
+          <span className="mt-3 flex flex-wrap items-center gap-2">
+            <span className="text-xs text-muted-foreground">{t('common:dimensions.hazard')}</span>
+            <N>
+              <span className="text-sm font-semibold text-foreground">{sample.toFixed(1)}</span>
+            </N>
+            <span className="rounded-full px-2 py-0.5 text-[11px] font-semibold" style={{ background: onHazard?.color, color: onHazard ? onClassColor(onHazard.color) : undefined }}>
+              {onHazard && t(`common:classes.${onHazard.key}`)}
+            </span>
+            <span className="text-xs text-muted-foreground">≠ {t('common:informRisk')}</span>
+            <span className="rounded-full px-2 py-0.5 text-[11px] font-semibold" style={{ background: onRisk?.color, color: onRisk ? onClassColor(onRisk.color) : undefined }}>
+              {onRisk && t(`common:classes.${onRisk.key}`)}
+            </span>
+          </span>
+        </Callout>
+      </div>
+
       <SubHeading id="classification-levels" className="mt-14">
         {t('classification.levels.title')}
       </SubHeading>
@@ -190,25 +208,6 @@ export function ClassificationSection() {
           </tbody>
         </table>
       </div>
-
-        <Callout title={t('classification.exampleTitle')}>
-          {t('classification.example', { value: sample.toFixed(1), hazardClass: onHazard ? t(`common:classes.${onHazard.key}`) : NO_VALUE, riskClass: onRisk ? t(`common:classes.${onRisk.key}`) : NO_VALUE })}
-          <span className="mt-3 flex flex-wrap items-center gap-2">
-            <span className="text-xs text-muted-foreground">{t('common:dimensions.hazard')}</span>
-            <N>
-              <span className="text-sm font-semibold text-foreground">{sample.toFixed(1)}</span>
-            </N>
-            <span className="rounded-full px-2 py-0.5 text-[11px] font-semibold" style={{ background: onHazard?.color, color: onHazard ? onClassColor(onHazard.color) : undefined }}>
-              {onHazard && t(`common:classes.${onHazard.key}`)}
-            </span>
-            <span className="text-xs text-muted-foreground">≠ {t('common:informRisk')}</span>
-            <span className="rounded-full px-2 py-0.5 text-[11px] font-semibold" style={{ background: onRisk?.color, color: onRisk ? onClassColor(onRisk.color) : undefined }}>
-              {onRisk && t(`common:classes.${onRisk.key}`)}
-            </span>
-          </span>
-        </Callout>
-      </div>
-
     </DocSection>
   );
 }
