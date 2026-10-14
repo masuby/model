@@ -20,7 +20,8 @@
   Burundi corner at Kagunga to the tripoint in Lake Tanganyika was missing, and every stretch now runs
   to the shore where the border leaves the water. Only Tanzania's own boundary is drawn; the arcs between
   the DRC and Burundi and between the DRC and Zambia, which the boundary-lines file also carries, are left
-  out. Lake Nyasa carries the Tanzania–Malawi line from the Songwe mouth to the Mozambique tripoint.
+  out. No boundary is drawn in Lake Nyasa: the line through the lake between Tanzania and Malawi is not
+  settled between the two countries and the map takes no position on it.
 
 ### The data discrepancies resolved: conflict groups withheld, earthquake and drought measured per council (14 October 2026)
 

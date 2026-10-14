@@ -149,6 +149,13 @@ function trimSpikes(run) {
  * Tanzania's boundary through the lakes (the Indian Ocean left out): the runs of boundary vertices inside a lake,
  * joined to the shore where the line leaves the water, as simplified line strings.
  */
+/**
+ * No boundary is drawn in Lake Nyasa: the line through the lake between Tanzania and Malawi is not settled between
+ * the two countries, and the map takes no position on it (programme decision, 14 October 2026). The Mozambique
+ * stretch there ends at the same point in the lake, so it is left out with it.
+ */
+const NO_BOUNDARY_LAKES = /nyasa/i;
+
 function lakeBoundaries() {
   const lakes = water.features.filter((f) => !/ocean/i.test(String(f.properties.name)));
   const lakeOf = (pt) => lakes.find((lake) => booleanPointInPolygon(pt, lake)) ?? null;
@@ -181,6 +188,10 @@ function lakeBoundaries() {
   for (const { run, lake, before, after } of runs) {
     const name = String(lake.properties.name).replace(/\s+/g, ' ').trim() || 'unnamed water';
     if (spanOf(run) < 0.05) continue; // a few vertices touching a shore or a river pool
+    if (NO_BOUNDARY_LAKES.test(name)) {
+      console.log(`  ${name}: ${run.length} vertices left out, no boundary drawn in this lake`);
+      continue;
+    }
     if (!isOwn(run)) {
       console.log(`  ${name}: a neighbours' arc of ${run.length} vertices left out`);
       continue;
