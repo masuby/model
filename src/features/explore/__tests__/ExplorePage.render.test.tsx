@@ -138,7 +138,9 @@ describe('ExplorePage - desktop', () => {
     const card = await screen.findByRole('complementary', { name: `Details for ${council.name}` });
     expect(within(card).getByRole('heading', { level: 2, name: council.name })).toBeInTheDocument();
     expect(within(card).getByRole('link', { name: /View full profile/ })).toHaveAttribute('href', `/area/${council.id}`);
-    expect(within(card).getByText('Top drivers')).toBeInTheDocument();
+    // The panel reads the risk communication; the score breakdown and the group list are gone (14 October 2026).
+    expect(within(card).getByRole('heading', { name: 'Risk communication' })).toBeInTheDocument();
+    expect(within(card).queryByText('Top drivers')).not.toBeInTheDocument();
     expect(within(card).getByText(`Marker: ${model.byId.get(`R-${placeKey(council.region)}`)!.name} region`)).toBeInTheDocument();
     expect(screen.getByTestId('map').dataset.selected).toBe(council.id);
   });
@@ -234,40 +236,28 @@ describe('ExplorePage - desktop', () => {
     expect(within(panel).getByText('If you live or work here')).toBeInTheDocument();
     expect(within(panel).getByText('If you plan, build, invest or settle here')).toBeInTheDocument();
     expect(within(panel).queryByText(/^Risk here is/)).not.toBeInTheDocument();
-    expect(within(panel).getByRole('heading', { name: 'Highest-scoring indicator groups' })).toBeInTheDocument();
+    expect(within(panel).queryByRole('heading', { name: 'Highest-scoring indicator groups' })).not.toBeInTheDocument();
+    expect(within(panel).queryByText('How the score is built')).not.toBeInTheDocument();
     expect(within(panel).queryByText(/Alert category|Major warning|^Warning$|Advisory|Level [123]/)).not.toBeInTheDocument();
     expect(within(panel).getByRole('link', { name: /View full profile/ })).toHaveAttribute('href', `/area/${council.id}`);
     expect(within(panel).getByRole('link', { name: /Risk card/ })).toHaveAttribute('href', `/area/${council.id}/card`);
   });
 
-  it("lists the same hazards as the profile, the model's scores included (Kibiti: strong winds first), and folds the human hazards", async () => {
+  it('opens the evidence of a hazard from the hazard profile: the map follows, the sources and storms show, Escape returns to the area', async () => {
     await renderAt('?level=council&id=C051');
-    const panel = await screen.findByRole('complementary', { name: 'Details for Kibiti District' });
-    const rows = await within(panel).findAllByRole('button', { name: /Show the evidence$/ }, { timeout: 20_000 });
-    // Three per dimension: the hazards, then the vulnerability groups, then the coping groups.
-    expect(rows.slice(0, 4).map((b) => b.getAttribute('aria-label')!.split(':')[0])).toEqual(['Storms & cyclones', 'Flood', 'Coastal hazards', 'Displaced people']);
-    expect(rows[6].getAttribute('aria-label')!.split(':')[0]).toBe('Economic capacity');
-    expect(rows[0].getAttribute('aria-label')).toBe('Storms & cyclones: 10.0. Show the evidence');
-    expect(within(panel).getAllByText('National value').length).toBeGreaterThan(0);
-    expect(within(panel).getAllByText('Regional value').length).toBeGreaterThan(0);
-  });
-
-  it('opens the evidence of a hazard: the map follows, the sources and storms show, Escape returns to the area', async () => {
-    await renderAt('?level=council&id=C051');
-    const panel = await screen.findByRole('complementary', { name: 'Details for Kibiti District' });
-    const storms = await within(panel).findByRole('button', { name: /^Storms & cyclones: 10\.0/ }, { timeout: 20_000 });
-    fireEvent.click(storms);
+    const insight = screen.getByRole('complementary', { name: 'Map and charts of Kibiti District' });
+    fireEvent.click(within(insight).getByRole('button', { name: /^Storms & cyclones: 10\.0/ }));
     expect(params().get('metric')).toBe('ind:hazard:stormsCyclone');
     const view = screen.getByRole('complementary', { name: 'Details for Kibiti District' });
     expect(within(view).getByRole('heading', { level: 3, name: 'Storms & cyclones' })).toBeInTheDocument();
     expect(within(view).getByText('What the data say')).toBeInTheDocument();
-    expect(within(view).getByText('Storms: Jobo 2021, Hidaya 2024')).toBeInTheDocument();
+    expect(await within(view).findByText('Storms: Jobo 2021, Hidaya 2024', {}, { timeout: 20_000 })).toBeInTheDocument();
     expect(within(view).getByText('Benchmark 2026 · 1980-2026 · TMA')).toBeInTheDocument();
-    expect(document.activeElement).toBe(within(view).getByRole('heading', { level: 2, name: 'Kibiti District' }));
+    within(view).getByRole('heading', { level: 2, name: 'Kibiti District' }).focus();
     fireEvent.keyDown(document.activeElement!, { key: 'Escape' });
     expect(params().get('metric')).toBeNull();
     expect(params().get('id')).toBe('C051');
-    expect(within(screen.getByRole('complementary', { name: 'Details for Kibiti District' })).getByRole('heading', { name: 'Highest-scoring indicator groups' })).toBeInTheDocument();
+    expect(within(screen.getByRole('complementary', { name: 'Details for Kibiti District' })).getByRole('heading', { name: 'Risk communication' })).toBeInTheDocument();
   });
 
   it('moves focus to the panel when someone selects an area, not when a link opens with one', async () => {
@@ -294,13 +284,12 @@ describe('ExplorePage - desktop', () => {
     expect(screen.getByTestId('map').dataset.focus).toBe('TZ');
     const country = await screen.findByRole('complementary', { name: `Details for ${model.national.name}` });
     expect(within(country).getByRole('heading', { level: 2, name: 'Tanzania' })).toBeInTheDocument();
-    expect(within(country).getByRole('heading', { name: 'Highest-scoring indicator groups' })).toBeInTheDocument();
-    expect(within(country).getByText('Councils by risk class')).toBeInTheDocument();
-    // The country's highest-scoring hazard group opens its evidence: the spread over the regions.
-    const wildfire = await within(country).findByRole('button', { name: /^Wildfire: [\d.]+\. Show the evidence/ }, { timeout: 20_000 });
-    fireEvent.click(wildfire);
-    expect(params().get('metric')).toBe('ind:hazard:wildfire');
-    const view = screen.getByRole('complementary', { name: `Details for ${model.national.name}` });
+    expect(within(country).getByRole('heading', { name: 'Risk communication' })).toBeInTheDocument();
+  }, SLOW);
+
+  it("the country's evidence of a hazard shows the spread over the regions", async () => {
+    await renderAt('?level=national&id=TZ&metric=ind:hazard:wildfire');
+    const view = await screen.findByRole('complementary', { name: `Details for ${model.national.name}` });
     expect(await within(view).findByRole('heading', { level: 3, name: 'Wildfire' }, { timeout: 20_000 })).toBeInTheDocument();
     expect(within(view).getByText(/^\d+ of \d+ have a value; highest:$/)).toBeInTheDocument();
   }, SLOW);
@@ -340,7 +329,7 @@ describe('ExplorePage - desktop', () => {
     const panel = screen.getByRole('complementary', { name: 'Details for Kibiti District' });
     expect(within(panel).getByRole('heading', { level: 3, name: 'Storms & cyclones' })).toBeInTheDocument();
     fireEvent.click(within(panel).getByRole('button', { name: 'Kibiti District: overview' }));
-    expect(within(screen.getByRole('complementary', { name: 'Details for Kibiti District' })).getByRole('heading', { name: 'Highest-scoring indicator groups' })).toBeInTheDocument();
+    expect(within(screen.getByRole('complementary', { name: 'Details for Kibiti District' })).getByRole('heading', { name: 'Risk communication' })).toBeInTheDocument();
     // The controls open as a drawer over the column.
     fireEvent.click(within(insight).getByRole('button', { name: 'Show the controls' }));
     expect(screen.getByRole('radiogroup', { name: 'Colour by' })).toBeInTheDocument();

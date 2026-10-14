@@ -2,6 +2,13 @@
 
 ## Unreleased
 
+### The explorer panel without the group list and the score breakdown (14 October 2026)
+
+- The risk explorer's panel no longer carries "Highest-scoring indicator groups" and "How the score is
+  built": it reads the area's risk communication, the warnings in force, the area's hazards and, beside
+  the map, its map and charts. A hazard's evidence still opens from the hazard profile in the charts
+  column and from the map's colour-by lens.
+
 ### Risk communication from the Risk Action Guide Book (14 October 2026)
 
 - The Guide Book's actions follow the INFORM risk class, by PMO-DMD's decision, in INFORM's own terms:

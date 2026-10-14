@@ -19,11 +19,11 @@ import * as React from 'react';
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
 import { useModel } from '@/data-layer/DataProvider';
-import { DataNoteLine, DataNoteMark } from '@/components/risk/DataNoteMark';
+import { DataNoteLine } from '@/components/risk/DataNoteMark';
 import { Button } from '@/components/ui/button';
 import type { WarningPayload } from '@/data-layer/types';
-import { CLASS_COLORS, CLASS_KEYS, classify, NO_DATA_COLOR } from '@/engine/risk/classes';
-import { DIMENSION_BY_KEY, DIMENSIONS, type DimensionKey } from '@/engine/risk/hierarchy';
+import { NO_DATA_COLOR } from '@/engine/risk/classes';
+import type { DimensionKey } from '@/engine/risk/hierarchy';
 import { rampColor, type Metric } from '@/engine/risk/metrics';
 import { indicatorValue, placeKey } from '@/engine/risk/model';
 import { dataNotesFor, isWithheld } from '@/engine/risk/notes';
@@ -38,17 +38,15 @@ import { useAreaGuide, useAreaRecords, type HazardKey } from '@/features/guide/d
 import { cn, formatDate, formatScore, NO_VALUE } from '@/lib/utils';
 import { MAX_COMPARE } from '../lib/explore';
 import { useExplore } from '../lib/ExploreContext';
-import { coarseOf, dimensionGroups, evidenceFor, groupRanks, guideKeysFor, memberSpread, type TopGroup } from '../lib/riskPanel';
+import { coarseOf, evidenceFor, groupRanks, guideKeysFor, memberSpread } from '../lib/riskPanel';
 import { EvidenceItem } from './Evidence';
 import { PanelResizer, PanelWidthButton, usePanelWidth } from './PanelResizer';
-import { AreaBody } from './AreaCard';
 import { AreaCharts, AreaNavMap } from './AreaInsight';
 import { SectionTitle } from './bits';
 
 export type RiskPanelPlacement = 'docked' | 'table';
 
 /** Groups of a dimension shown before "Show all". */
-const TOP_FIRST = 3;
 const pct = (v: number | null | undefined) => (typeof v === 'number' ? Math.max(0, Math.min(100, v * 10)) : 0);
 
 /** The indicator group a lens shows (`dim:group`), or null for risk and dimension lenses. */
@@ -111,11 +109,6 @@ export function RiskPanel({ placement, withInsight = false }: { placement: RiskP
     closing.current = { to: returnFocus.current };
     actions.deselect();
   };
-  const openGroup = (key: string) => {
-    if (metric.kind !== 'indicator') returnMetric.current = metric.key;
-    internal.current = true;
-    actions.setMetric(key);
-  };
   const back = () => {
     internal.current = true;
     actions.setMetric(returnMetric.current);
@@ -145,7 +138,7 @@ export function RiskPanel({ placement, withInsight = false }: { placement: RiskP
       </div>
       <div key={`${selected.id}|${groupRef ?? ''}`} className="min-h-0 flex-1 overflow-y-auto overscroll-contain px-5 pt-5 pb-6">
         <React.Suspense fallback={<BodySkeleton />}>
-          <PanelBody unit={selected} groupRef={groupRef} onOpenGroup={openGroup} onBack={back} withInsight={withInsight} />
+          <PanelBody unit={selected} groupRef={groupRef} onBack={back} withInsight={withInsight} />
         </React.Suspense>
       </div>
       <div className="shrink-0 border-t border-border px-4 py-3">
@@ -229,23 +222,21 @@ export function PanelHeader({ unit, headingRef, onClose, compact = false }: { un
 /* Body                                                                                               */
 /* ------------------------------------------------------------------------------------------------ */
 
-export function PanelBody({ unit, groupRef, onOpenGroup, onBack, withInsight = false }: { unit: Unit; groupRef: string | null; onOpenGroup: (metricKey: string) => void; onBack: () => void; withInsight?: boolean }) {
+export function PanelBody({ unit, groupRef, onBack, withInsight = false }: { unit: Unit; groupRef: string | null; onBack: () => void; withInsight?: boolean }) {
   if (groupRef) {
     const [dim, key] = groupRef.split(':') as [DimensionKey, string];
     return <GroupView unit={unit} dim={dim} groupKey={key} onBack={onBack} />;
   }
-  return <AreaView unit={unit} onOpenGroup={onOpenGroup} withInsight={withInsight} />;
+  return <AreaView unit={unit} withInsight={withInsight} />;
 }
 
-function AreaView({ unit, onOpenGroup, withInsight }: { unit: Unit; onOpenGroup: (metricKey: string) => void; withInsight: boolean }) {
+function AreaView({ unit, withInsight }: { unit: Unit; withInsight: boolean }) {
   return (
     <div className="divide-y divide-border">
       <RiskCommunication unit={unit} />
-      <TopGroups unit={unit} onOpen={onOpenGroup} />
       <Warnings unit={unit} />
       {unit.level !== 'national' && <Nature unit={unit} />}
       {withInsight && <InsightFolds unit={unit} />}
-      <Scores unit={unit} />
     </div>
   );
 }
@@ -340,90 +331,6 @@ function RiskCommunication({ unit }: { unit: Unit }) {
   );
 }
 
-/** The highest-scoring indicator groups of each dimension, each one click from its evidence. */
-function TopGroups({ unit, onOpen }: { unit: Unit; onOpen: (metricKey: string) => void }) {
-  const { t } = useTranslation('explore');
-  return (
-    <section aria-labelledby="risk-top-title" className="py-6">
-      <SectionTitle as="h3" id="risk-top-title" className="mb-3">
-        {t('riskPanel.top.title')}
-      </SectionTitle>
-      <div className="space-y-4">
-        {DIMENSIONS.map((d) => (
-          <DimensionBlock key={d.key} unit={unit} dim={d.key} onOpen={onOpen} />
-        ))}
-      </div>
-    </section>
-  );
-}
-
-function DimensionBlock({ unit, dim, onOpen }: { unit: Unit; dim: DimensionKey; onOpen: (metricKey: string) => void }) {
-  const { t } = useTranslation(['explore', 'common']);
-  const [all, setAll] = React.useState(false);
-  const groups = React.useMemo(() => dimensionGroups(unit, dim), [unit, dim]);
-  const shown = all ? groups : groups.slice(0, TOP_FIRST);
-  const score = unit.dims[dim].score;
-  const scale = DIMENSION_BY_KEY[dim].scale;
-  return (
-    <div>
-      <p className="flex items-baseline justify-between gap-2 text-sm font-semibold">
-        <span className="inline-flex min-w-0 items-center gap-1.5">
-          <span className="size-2 shrink-0 rounded-full" style={{ background: classify(score, scale)?.color ?? NO_DATA_COLOR }} aria-hidden />
-          <span className="truncate">{t(`common:dimensions.${dim}`)}</span>
-        </span>
-        <span className="num">{formatScore(score)}</span>
-      </p>
-      {groups.length ? (
-        <ul className="-mx-2 mt-0.5">
-          {shown.map((g) => (
-            <GroupRow key={g.key} unit={unit} group={g} onOpen={onOpen} />
-          ))}
-        </ul>
-      ) : (
-        <p className="mt-1 text-sm text-muted-foreground">{t('riskPanel.top.empty')}</p>
-      )}
-      {groups.length > TOP_FIRST && (
-        <button type="button" onClick={() => setAll((v) => !v)} className="mt-1 inline-flex items-center gap-1 text-sm font-medium text-primary hover:underline">
-          <ChevronDown className={cn('size-4 transition-transform', all && 'rotate-180')} aria-hidden />
-          {all ? t('riskPanel.top.less') : t('riskPanel.top.more', { count: groups.length })}
-        </button>
-      )}
-    </div>
-  );
-}
-
-function GroupRow({ unit, group, onOpen }: { unit: Unit; group: TopGroup; onOpen: (metricKey: string) => void }) {
-  const { t } = useTranslation(['explore', 'indicators']);
-  const name = t(`indicators:${group.key}`);
-  const notes = dataNotesFor(unit, group.dim, group.key);
-  return (
-    <li>
-      <button
-        type="button"
-        onClick={() => onOpen(group.metricKey)}
-        aria-label={t('riskPanel.top.open', { name, score: formatScore(group.score) })}
-        className="w-full rounded-md px-2 py-2 text-left transition-colors duration-150 hover:bg-muted/70"
-      >
-        <span className="flex items-baseline justify-between gap-2">
-          <span className="truncate text-sm">{name}</span>
-          <span className="num inline-flex items-center gap-1 text-sm font-semibold">
-            {formatScore(group.score)}
-            <DataNoteMark notes={notes} focusable={false} />
-          </span>
-        </span>
-        <span className="mt-1.5 block h-1 bg-muted">
-          <span className="block h-full" style={{ width: `${pct(group.score)}%`, background: rampColor(group.score, DIMENSION_BY_KEY[group.dim].scale) }} />
-        </span>
-        {group.coarse && (
-          <span className="mt-1 inline-block rounded-sm border border-border px-1 py-px text-xs text-muted-foreground" title={t(`riskPanel.coarse.${group.coarse}Title`)}>
-            {t(`riskPanel.coarse.${group.coarse}`)}
-          </span>
-        )}
-      </button>
-    </li>
-  );
-}
-
 /** Warnings the committees published that are in force for the area (colour, hazard, areas, validity, issuer; no level wording). */
 function Warnings({ unit, hazards }: { unit: Unit; hazards?: readonly HazardKey[] }) {
   // The data portal's texts load on demand: wait for them here rather than suspend the page and its map.
@@ -494,67 +401,6 @@ function Nature({ unit }: { unit: Unit }) {
         {councils.length > 4 && <p className="mt-1 text-xs text-muted-foreground">{t('riskPanel.nature.more', { count: councils.length - 4 })}</p>}
       </details>
     </section>
-  );
-}
-
-/** Rank, dimensions, drivers, people and data coverage (the analysis), folded under a one-line summary. */
-function Scores({ unit }: { unit: Unit }) {
-  const { t } = useTranslation(['explore', 'common']);
-  const summary = DIMENSIONS.map((d) => `${t(`common:dimensions.${d.key}Short`)} ${formatScore(unit.dims[d.key].score)}`).join(' · ');
-  return (
-    <section className="pt-6">
-      <details className="group">
-        <summary className="flex cursor-pointer list-none items-start justify-between gap-2 [&::-webkit-details-marker]:hidden">
-          <span>
-            <span className="block text-sm font-semibold">{t('riskPanel.scores.title')}</span>
-            <span className="num mt-0.5 block text-xs text-muted-foreground">{summary}</span>
-          </span>
-          <ChevronDown className="mt-0.5 size-4 shrink-0 text-muted-foreground transition-transform group-open:rotate-180" aria-hidden />
-        </summary>
-        <div className="mt-4">
-          {unit.level === 'national' ? <NationalScores /> : <AreaBody unit={unit} />}
-        </div>
-      </details>
-    </section>
-  );
-}
-
-function NationalScores() {
-  const { t } = useTranslation(['explore', 'common']);
-  const { model } = useExplore();
-  const n = model.national;
-  const counts = CLASS_KEYS.map((k) => ({ k, n: model.councils.filter((c) => classify(c.risk, 'risk')?.key === k).length }));
-  return (
-    <div className="space-y-5">
-      <ul>
-        {DIMENSIONS.map((d) => {
-          const v = n.dims[d.key].score;
-          const c = classify(v, d.scale);
-          return (
-            <li key={d.key} className="py-2">
-              <span className="flex items-baseline justify-between gap-2">
-                <span className="truncate text-sm font-medium">{t(`common:dimensions.${d.key}`)}</span>
-                <span className="num text-sm font-semibold">{formatScore(v)}</span>
-              </span>
-              <span className="mt-1.5 block h-1 bg-muted">
-                <span className="block h-full" style={{ width: `${pct(v)}%`, background: c?.color ?? NO_DATA_COLOR }} />
-              </span>
-            </li>
-          );
-        })}
-      </ul>
-      <div>
-        <p className="text-xs font-medium text-muted-foreground">{t('riskPanel.scores.councilsByClass')}</p>
-        <ul className="mt-1.5 flex flex-wrap gap-x-4 gap-y-1 text-sm">
-          {[...counts].reverse().map(({ k, n: count }) => (
-            <li key={k} className="inline-flex items-center gap-1.5">
-              <span className="size-2.5 rounded-[2px]" style={{ background: CLASS_COLORS[k] }} aria-hidden />
-              {t(`common:classes.${k}`)} <span className="num font-semibold">{count}</span>
-            </li>
-          ))}
-        </ul>
-      </div>
-    </div>
   );
 }
 
@@ -744,12 +590,6 @@ export function RiskPanelSheetBody({ unit }: { unit: Unit }) {
           unit={unit}
           withInsight
           groupRef={groupRef}
-          onOpenGroup={(key) => {
-            if (metric.kind !== 'indicator') returnMetric.current = metric.key;
-            actions.setMetric(key);
-            // Show the map coloured by the hazard; the peek keeps the hazard's score.
-            actions.setSheetExpanded(false);
-          }}
           onBack={() => actions.setMetric(returnMetric.current)}
         />
       </React.Suspense>
