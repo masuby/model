@@ -30,11 +30,14 @@ describe('the palettes', () => {
     expect(CLASS_COLORS).toBe(CLASS_PALETTES.risk);
   });
 
-  it('nest the risk classes in the three colour bands: yellows, oranges, red, and no green', () => {
+  it('run the risk classes from yellows through oranges to red, with no green', () => {
     const family = (h: number) => (h >= 45 && h <= 65 ? 'yellow' : h >= 15 && h < 45 ? 'orange' : h < 15 || h > 345 ? 'red' : 'other');
     const bandFamily = { 1: family(hue(ALERT_COLOR[1])), 2: family(hue(ALERT_COLOR[2])), 3: family(hue(ALERT_COLOR[3])) };
     expect(bandFamily).toEqual({ 1: 'yellow', 2: 'orange', 3: 'red' });
-    for (const k of CLASS_KEYS) expect(family(hue(CLASS_PALETTES.risk[k]))).toBe(bandFamily[BAND_BY_CLASS[k]]);
+    // The map's five steps as PMO-DMD approved them on 11 October 2026: yellows, then oranges, then red. The
+    // Guide Book band of a class (BAND_BY_CLASS) only selects the book's rows and is not a colour.
+    const mapFamily = { veryLow: 'yellow', low: 'yellow', medium: 'orange', high: 'orange', veryHigh: 'red' } as const;
+    for (const k of CLASS_KEYS) expect(family(hue(CLASS_PALETTES.risk[k]))).toBe(mapFamily[k]);
     for (const k of CLASS_KEYS) expect(hue(CLASS_PALETTES.risk[k])).not.toBeGreaterThan(70); // nothing green
   });
 
