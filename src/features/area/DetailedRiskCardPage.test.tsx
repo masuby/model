@@ -1,6 +1,6 @@
 // @vitest-environment jsdom
 /**
- * The detailed risk card: Kiswahili first, the risk and its parts, every high-scoring group of each
+ * The detailed risk card: in the reader's language, the risk and its parts, every high-scoring group of each
  * dimension with its measured values and lead sectors, every group in one table, the DRR arrangements.
  */
 import { render, screen, waitFor, within } from '@testing-library/react';
@@ -73,8 +73,8 @@ describe('DetailedRiskCardPage', { timeout: 60_000 }, () => {
     expect(screen.queryByText(/Advisory|Major warning|Take action immediately/)).not.toBeInTheDocument();
   });
 
-  it('prints in Kiswahili by default and names the country for the national card', async () => {
-    await i18n.changeLanguage('en');
+  it("follows the reader's language and names the country for the national card", async () => {
+    await i18n.changeLanguage('sw');
     const view = renderCard('/area/TZ/card/detailed');
     await waitFor(() => expect(i18n.language).toBe('sw'));
     expect(screen.getByRole('heading', { level: 1, name: 'Tanzania' })).toBeInTheDocument();
@@ -82,6 +82,6 @@ describe('DetailedRiskCardPage', { timeout: 60_000 }, () => {
     expect(screen.getByText('Makundi ya viashiria yenye alama za juu (5.0 na zaidi)')).toBeInTheDocument();
     expect(screen.getAllByText(/^Moto wa nyika/).length).toBeGreaterThan(0);
     view.unmount();
-    await waitFor(() => expect(i18n.language).toBe('en'));
+    expect(i18n.language).toBe('sw');
   });
 });

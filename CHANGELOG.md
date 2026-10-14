@@ -2,6 +2,12 @@
 
 ## Unreleased
 
+### The risk cards in the reader's language (14 October 2026)
+
+- The profile's "Risk card (Kiswahili)" button is "Risk card" again, and the one-page and detailed risk
+  cards open in the language the site is set to, like every other page. The switch on the card prints the
+  other language and the reader's own is restored on leaving.
+
 ### The boundary through Lake Tanganyika (14 October 2026)
 
 - Where the international boundary runs through a lake, it is drawn as a faint dashed path on the water

@@ -1,6 +1,6 @@
 /**
  * The detailed risk card of an area: what sectors and decision-makers need on two or three A4 pages,
- * Kiswahili first like the one-page card. The risk level and its parts against the region and the
+ * in the reader's language like the one-page card. The risk level and its parts against the region and the
  * country; every indicator group scoring 5.0 or more in each dimension with the measured values behind
  * it, the lead sectors and the national action library's entry when there is one; every group in one
  * table with its sources; the guide's statements about the area and what helps; the DRR arrangements and

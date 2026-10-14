@@ -1,6 +1,7 @@
 /**
  * The one-page risk card of an area (RC-08): what a ward office, notice board or radio desk needs on a
- * single A4 sheet, Kiswahili first (decision D9). The risk level on its colour band with what it means
+ * single A4 sheet, in the reader's language (the in-card switch prints the other one). The risk level on its
+ * colour band with what it means
  * for residents and for those who plan or invest here, the emergency number, the warnings in force, the
  * reconciled hazard list with its bands, the statements generated from the area's own data (its rank,
  * what weighs most, its hazards, vulnerability, coping gaps and people) beside a locator map, the
@@ -25,7 +26,6 @@ import type { DimensionKey } from '@/engine/risk/hierarchy';
 import { parseMetric } from '@/engine/risk/metrics';
 import { placeKey } from '@/engine/risk/model';
 import { dataNotesFor, worstStatus } from '@/engine/risk/notes';
-import { usePrefs } from '@/state/prefs';
 import { formatDate, formatScore } from '@/lib/utils';
 import { resolveUnit, servicesFor } from './lib';
 
@@ -43,18 +43,25 @@ const CARD_CSS = `
 /** One number for every emergency, stated on its own (no institution named with it). */
 const EMERGENCY_NUMBER = '190';
 
-/** The card's language comes from ?lang (Kiswahili by default) and is restored to the reader's choice on leaving. */
+/**
+ * The card's language: the reader's own (the site's language control), unless ?lang asks for the other one
+ * (the in-card switch, a shared link); a language switched this way is restored on leaving.
+ */
 export function useCardLanguage() {
   const [params] = useSearchParams();
-  const wanted = params.get('lang') === 'en' ? 'en' : 'sw';
+  const param = params.get('lang');
+  const forced = param === 'en' || param === 'sw' ? param : null;
+  const { i18n: current } = useTranslation();
+  const lang = forced ?? (current.language.startsWith('sw') ? 'sw' : 'en');
   React.useEffect(() => {
-    const before = usePrefs.getState().language;
-    if (i18n.language !== wanted) void i18n.changeLanguage(wanted);
+    if (!forced) return;
+    const before = i18n.language;
+    if (before !== forced) void i18n.changeLanguage(forced);
     return () => {
       if (i18n.language !== before) void i18n.changeLanguage(before);
     };
-  }, [wanted]);
-  return wanted;
+  }, [forced]);
+  return lang;
 }
 
 export default function RiskCardPage() {

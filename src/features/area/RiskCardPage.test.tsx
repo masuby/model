@@ -1,7 +1,8 @@
 // @vitest-environment jsdom
 /**
- * The one-page risk card: Kiswahili first, the area's name, the emergency number, the hazard list and
- * the statements about the area, with the reader's language restored afterwards.
+ * The one-page risk card: in the reader's language, the area's name, the emergency number, the hazard list
+ * and the statements about the area; ?lang prints the other language for the card only and the reader's
+ * choice is restored afterwards.
  */
 import { render, screen, waitFor } from '@testing-library/react';
 import { MemoryRouter, Route, Routes } from 'react-router-dom';
@@ -40,16 +41,24 @@ describe('RiskCardPage', { timeout: 60_000 }, () => {
     await i18n.changeLanguage('en');
   });
 
-  it('prints a Kiswahili card by default and restores English when left', async () => {
+  it("prints in the reader's language", async () => {
     await i18n.changeLanguage('en');
-    const view = renderCard('/area/C001/card');
-    await waitFor(() => expect(i18n.language).toBe('sw'));
+    renderCard('/area/C001/card');
     expect(screen.getByRole('heading', { level: 1, name: 'Kondoa District' })).toBeInTheDocument();
     expect(screen.getByText('190')).toBeInTheDocument();
+    expect(await screen.findByText('Hazards in Kondoa District', {}, { timeout: 20_000 })).toBeInTheDocument();
+    expect(screen.getByText('Risk communication')).toBeInTheDocument();
+    expect(i18n.language).toBe('en');
+    expect(document.title).toContain('Kondoa District');
+  });
+
+  it('?lang prints the other language for the card only, and the reader keeps their own when they leave', async () => {
+    await i18n.changeLanguage('en');
+    const view = renderCard('/area/C001/card?lang=sw');
+    await waitFor(() => expect(i18n.language).toBe('sw'));
     expect(await screen.findByText('Vitisho katika Kondoa District', {}, { timeout: 20_000 })).toBeInTheDocument();
     expect(screen.getByText('Mawasiliano ya hatari')).toBeInTheDocument();
     expect(screen.queryByText('Eneo na vitisho vyake')).not.toBeInTheDocument();
-    expect(document.title).toContain('Kondoa District');
     view.unmount();
     await waitFor(() => expect(i18n.language).toBe('en'));
   });

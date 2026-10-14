@@ -1,7 +1,7 @@
 # The detailed risk card
 
-Route `/area/:id/card/detailed` (`?lang=sw|en`, Kiswahili by default; `?print=1` opens the print
-dialogue). Built 11 October 2026 from the user's request: "a detailed risk card as well, which guides
+Route `/area/:id/card/detailed` (the reader's language; `?lang=sw|en` prints the other one; `?print=1` opens the
+print dialogue). Built 11 October 2026 from the user's request: "a detailed risk card as well, which guides
 sectors and decision-makers on all high-scoring contributing risk indicators; it talks for all".
 Code: `src/features/area/DetailedRiskCardPage.tsx`, lead sectors in `src/features/guide/sectors.ts`,
 texts under `detailed` in `src/i18n/locales/{en,sw}/area.json` and the sector names under `sectors` in

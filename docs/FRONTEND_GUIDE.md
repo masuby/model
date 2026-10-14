@@ -218,4 +218,4 @@ four steps, applied pre-paint by `public/theme-init.js` and kept in sync by `use
 
 Routes: `/area/:id` renders any unit's profile; `/area/:id/card` the one-page risk card and
 `/area/:id/card/detailed` the detailed risk card for sectors and decision-makers (`docs/DETAILED_RISK_CARD.md`),
-both Kiswahili first (`?lang=en`).
+both in the reader's language (`?lang=sw|en` prints the other one for the card only).

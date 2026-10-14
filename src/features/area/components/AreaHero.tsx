@@ -256,12 +256,12 @@ export function AreaHero({ view }: { view: AreaView }) {
               <Printer /> {t('actions.print')}
             </Button>
             <Button variant="outline" asChild>
-              <Link to={`/area/${unit.id}/card?lang=sw`}>
+              <Link to={`/area/${unit.id}/card`}>
                 <FileText /> {t('actions.card')}
               </Link>
             </Button>
             <Button variant="ghost" asChild>
-              <Link to={`/area/${unit.id}/card/detailed?lang=sw`} aria-label={t('actions.cardDetailed')}>
+              <Link to={`/area/${unit.id}/card/detailed`} aria-label={t('actions.cardDetailed')}>
                 <FileText /> <span className="hidden sm:inline">{t('actions.cardDetailed')}</span>
               </Link>
             </Button>
