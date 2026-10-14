@@ -11,6 +11,24 @@
  "rows": [
   {
    "who": {
+    "en": "Everyone",
+    "sw": "Kila mtu"
+   },
+   "actions": {
+    "en": [
+     "Know the drought years here, how long they lasted and how the area got through them: the water points, the stores and the help that mattered; the committee keeps the record.",
+     "Know the water sources that last through a dry year and keep them protected."
+    ],
+    "sw": [
+     "Fahamuni miaka ya ukame hapa, ilidumu muda gani na eneo lilivyopita salama: vituo vya maji, maghala na msaada uliosaidia; kamati inatunza kumbukumbu.",
+     "Fahamuni vyanzo vya maji vinavyodumu mwaka wa ukame na vilindwe."
+    ]
+   },
+   "high": false,
+   "coastal": false
+  },
+  {
+   "who": {
     "en": "Households",
     "sw": "Kaya"
    },

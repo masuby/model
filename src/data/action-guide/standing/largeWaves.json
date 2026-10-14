@@ -11,6 +11,24 @@
  "rows": [
   {
    "who": {
+    "en": "Everyone",
+    "sw": "Kila mtu"
+   },
+   "actions": {
+    "en": [
+     "Know the seasons and the storms that have hit this shore, the places the waves reached and the boats lost; the beach management unit and the committee keep the record.",
+     "Know the high ground agreed as the safe place and the way to it from the shore and the landing site."
+    ],
+    "sw": [
+     "Fahamuni misimu na dhoruba zilizowahi kupiga ufukwe huu, maeneo ambayo mawimbi yalifika na vyombo vilivyopotea; kitengo cha usimamizi wa mwalo na kamati vinatunza kumbukumbu.",
+     "Fahamuni mwinuko uliokubaliwa kama mahali salama na njia ya kufika kutoka ufukweni na mwaloni."
+    ]
+   },
+   "high": false,
+   "coastal": false
+  },
+  {
+   "who": {
     "en": "Households",
     "sw": "Kaya"
    },

@@ -11,6 +11,24 @@
  "rows": [
   {
    "who": {
+    "en": "Everyone",
+    "sw": "Kila mtu"
+   },
+   "actions": {
+    "en": [
+     "Know the months when strong winds come here and the places where they have taken roofs and trees; the committee keeps the record.",
+     "Know the strong buildings (the school, the mosque, the church, the office) agreed as shelters, and keep them open to all."
+    ],
+    "sw": [
+     "Fahamuni miezi ambayo upepo mkali huja hapa na maeneo ambayo umewahi kuvua paa na kuangusha miti; kamati inatunza kumbukumbu.",
+     "Fahamuni majengo imara (shule, msikiti, kanisa, ofisi) yaliyokubaliwa kama makimbilio, na yawe wazi kwa wote."
+    ]
+   },
+   "high": false,
+   "coastal": false
+  },
+  {
+   "who": {
     "en": "Households",
     "sw": "Kaya"
    },

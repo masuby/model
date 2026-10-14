@@ -11,6 +11,24 @@
  "rows": [
   {
    "who": {
+    "en": "Everyone",
+    "sw": "Kila mtu"
+   },
+   "actions": {
+    "en": [
+     "Know the months when the heaviest rain comes here and the streets, fields and crossings it floods or cuts; the village or ward committee keeps the record and the map.",
+     "Know the safe places on high ground and the ways to them, and keep them clear."
+    ],
+    "sw": [
+     "Fahamuni miezi ambayo mvua kubwa zaidi huja hapa na mitaa, mashamba na vivuko inayofurika au kukata; kamati ya kijiji au kata inatunza kumbukumbu na ramani.",
+     "Fahamuni mahali salama kwenye mwinuko na njia za kufika, na wekeni mahali hapo wazi."
+    ]
+   },
+   "high": false,
+   "coastal": false
+  },
+  {
+   "who": {
     "en": "Households",
     "sw": "Kaya"
    },

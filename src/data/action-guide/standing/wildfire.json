@@ -11,6 +11,24 @@
  "rows": [
   {
    "who": {
+    "en": "Everyone",
+    "sw": "Kila mtu"
+   },
+   "actions": {
+    "en": [
+     "Know where fires have come from in past dry seasons, the months and the fields, forests and homes they reached; the committee keeps the record and the map.",
+     "Know the firebreaks and the open grounds that stop a fire and keep them cut and clear each dry season."
+    ],
+    "sw": [
+     "Fahamuni moto umewahi kutoka wapi katika kiangazi za nyuma, miezi na mashamba, misitu na nyumba ulizofikia; kamati inatunza kumbukumbu na ramani.",
+     "Fahamuni njia za kuzuia moto na maeneo ya wazi yanayosimamisha moto na yakatwe na kuwekwa wazi kila kiangazi."
+    ]
+   },
+   "high": false,
+   "coastal": false
+  },
+  {
+   "who": {
     "en": "Households",
     "sw": "Kaya"
    },

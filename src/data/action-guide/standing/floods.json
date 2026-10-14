@@ -11,6 +11,24 @@
  "rows": [
   {
    "who": {
+    "en": "Everyone",
+    "sw": "Kila mtu"
+   },
+   "actions": {
+    "en": [
+     "Know the history of floods here: the years, the rivers and the highest marks they reached, and who was affected; the committee keeps the record and the map.",
+     "Know the high grounds agreed as safe places and the ways to them, and keep them clear and reachable."
+    ],
+    "sw": [
+     "Fahamuni historia ya mafuriko hapa: miaka, mito na alama za juu zilizofikiwa, na nani aliathirika; kamati inatunza kumbukumbu na ramani.",
+     "Fahamuni maeneo ya mwinuko yaliyokubaliwa kama mahali salama na njia za kufika, na wekeni mahali hapo wazi na panapofikika."
+    ]
+   },
+   "high": false,
+   "coastal": false
+  },
+  {
+   "who": {
     "en": "Households",
     "sw": "Kaya"
    },

@@ -11,6 +11,24 @@
  "rows": [
   {
    "who": {
+    "en": "Everyone",
+    "sw": "Kila mtu"
+   },
+   "actions": {
+    "en": [
+     "Know the outbreaks this area has had, the cholera years, the malaria months, and the water sources and places that were behind them; the health facility and the committee keep the record.",
+     "Know the health facility that serves you, its opening hours and the way to it in the rains."
+    ],
+    "sw": [
+     "Fahamuni milipuko ambayo eneo hili limewahi kupata, miaka ya kipindupindu, miezi ya malaria, na vyanzo vya maji na maeneo yaliyokuwa nyuma yake; kituo cha afya na kamati vinatunza kumbukumbu.",
+     "Fahamuni kituo cha afya kinachokuhudumia, saa zake za kufungua na njia ya kufika wakati wa mvua."
+    ]
+   },
+   "high": false,
+   "coastal": false
+  },
+  {
+   "who": {
     "en": "Households",
     "sw": "Kaya"
    },

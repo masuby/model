@@ -11,17 +11,35 @@
  "rows": [
   {
    "who": {
+    "en": "Everyone",
+    "sw": "Kila mtu"
+   },
+   "actions": {
+    "en": [
+     "Know the earthquake history of this area: that it lies in the Rift zone, the tremors it has felt, their years and strength, and what they damaged; the committee keeps the record with the Geological Survey.",
+     "Know the open grounds near home, the school, the market and the places of worship, away from buildings, walls and wires, agreed as the places to gather after a tremor; keep them clear of structures."
+    ],
+    "sw": [
+     "Fahamuni historia ya matetemeko ya eneo hili: kwamba liko kwenye ukanda wa Bonde la Ufa, mitetemeko iliyowahi kuhisiwa, miaka na ukubwa wake, na ilichoharibu; kamati inatunza kumbukumbu pamoja na Taasisi ya Jiolojia.",
+     "Fahamuni maeneo ya wazi karibu na nyumbani, shuleni, sokoni na nyumba za ibada, mbali na majengo, kuta na nyaya, yaliyokubaliwa kama mahali pa kukusanyika baada ya tetemeko; yawekwe wazi bila majengo."
+    ]
+   },
+   "high": false,
+   "coastal": false
+  },
+  {
+   "who": {
     "en": "Households",
     "sw": "Kaya"
    },
    "actions": {
     "en": [
      "Build with tied corners, ring beams and light roofs, and fix heavy shelves and water tanks so that they cannot fall.",
-     "Teach everyone at home: drop, cover and hold; then go out to an open space away from walls and wires."
+     "Teach everyone at home: drop, cover and hold, then walk to the agreed open ground; practise it with the children."
     ],
     "sw": [
      "Jengeni kwa pembe zilizofungwa, boriti za kuzunguka na paa nyepesi, na fungeni rafu nzito na matangi ya maji yasianguke.",
-     "Fundisheni kila mtu nyumbani: inama, jifunike na shikilia; kisha tokeni nje kwenye eneo la wazi mbali na kuta na nyaya."
+     "Fundisheni kila mtu nyumbani: inama, jifunike na shikilia, kisha tembeeni hadi eneo la wazi lililokubaliwa; fanyeni mazoezi pamoja na watoto."
     ]
    },
    "high": false,
@@ -50,10 +68,10 @@
    },
    "actions": {
     "en": [
-     "Know the way to high ground from the home, the school and the landing site; a long tremor or the sea pulling back means going up at once and staying until the leaders say the sea has settled."
+     "Know the way to high ground from the home, the school and the landing site, and walk it once a year; everyone here should know that a long tremor or the sea pulling back is the sign to go up and stay up until the leaders say the sea has settled."
     ],
     "sw": [
-     "Fahamuni njia ya kwenda mwinuko kutoka nyumbani, shuleni na mwaloni; tetemeko refu au bahari kujiondoa humaanisha kupanda mara moja na kukaa hadi viongozi waseme bahari imetulia."
+     "Fahamuni njia ya kwenda mwinuko kutoka nyumbani, shuleni na mwaloni, na itembeeni mara moja kwa mwaka; kila mtu hapa ajue kuwa tetemeko refu au bahari kujiondoa ni ishara ya kupanda na kubaki juu hadi viongozi waseme bahari imetulia."
     ]
    },
    "high": false,

@@ -11,6 +11,24 @@
  "rows": [
   {
    "who": {
+    "en": "Everyone",
+    "sw": "Kila mtu"
+   },
+   "actions": {
+    "en": [
+     "Know the slopes that have moved before, the years and the rains that set them off; the committee keeps the record and the map.",
+     "Know the open, flat grounds off the slopes that serve as safe places, and keep them clear."
+    ],
+    "sw": [
+     "Fahamuni miteremko iliyowahi kuporomoka, miaka na mvua zilizosababisha; kamati inatunza kumbukumbu na ramani.",
+     "Fahamuni maeneo ya wazi na tambarare nje ya miteremko yanayotumika kama mahali salama, na wekeni mahali hapo wazi."
+    ]
+   },
+   "high": false,
+   "coastal": false
+  },
+  {
+   "who": {
     "en": "Households",
     "sw": "Kaya"
    },
