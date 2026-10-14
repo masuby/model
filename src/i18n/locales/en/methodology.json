@@ -256,13 +256,17 @@
     "example": "A score of {{value}} is {{hazardClass}} on the Hazard & Exposure scale but only {{riskClass}} on the INFORM Risk scale.",
     "if": "if",
     "levels": {
-      "title": "The Guide Book’s three levels",
-      "lead": "The Risk Action Guide Book communicates in three levels. Every area carries the level of its INFORM risk class, and every indicator group the level of its own score, by the hazard list’s display rule (under 2 very low, 2 to 4 low, 4 to 6 medium, 6 to 8 high, 8 and above very high), so the actions shown for a hazard change when its value reaches the next level. A warning the committees publish has its own level and validity and is shown beside the standing level while it is in force.",
+      "title": "How the Guide Book’s actions follow the INFORM class",
+      "lead": "The Risk Action Guide Book arranges its actions for each hazard in three sets. The system shows the first set for areas whose INFORM risk is Very low or Low, the second for Medium, the third for High and Very high; one hazard or indicator group follows its own score (under 4, 4 to 6, 6 and above). The book’s level words and colours are not shown: the site communicates in the INFORM classes. A warning the committees publish is a separate record with its own validity.",
       "col": {
-        "level": "Level",
-        "name": "Name and call",
-        "classes": "INFORM risk classes",
-        "groups": "An indicator group’s score"
+        "classes": "INFORM risk class",
+        "set": "Guide Book actions shown",
+        "groups": "A hazard or group’s own score"
+      },
+      "set": {
+        "1": "first set",
+        "2": "second set",
+        "3": "third set"
       },
       "groups": {
         "1": "under 4",

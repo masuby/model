@@ -969,7 +969,7 @@
       "event": "A hazard event that happened: when, what, and its impacts. The regional committee validates it.",
       "warning": "An official warning as issued by TMA: hazard, level, areas and validity. It is published at once on the areas named and lifts on its end date.",
       "vc": "The action library: for each INFORM indicator group (hazards, vulnerability and coping capacity), what reduces it and which sectors lead. PMO-DMD writes, the national committee reviews; the actions and the sectors appear on the detailed risk card and on every area where the group weighs most.",
-      "action": "One row of what people may see and what to do, for a hazard or a vulnerability or coping group, at one level or every level: it stands in place of a Guide Book row or follows the book’s rows on the explorer, the profile and the risk cards of your area (or everywhere, for national rows)."
+      "action": "One row of what people may see and what to do, for a hazard or a vulnerability or coping group, for one group of INFORM classes or for every class: it stands in place of a Guide Book row or follows the book’s rows on the explorer, the profile and the risk cards of your area (or everywhere, for national rows)."
     },
     "recordTitle": {
       "drr": "Record the arrangements",
@@ -1118,16 +1118,21 @@
       "national": "Tanzania (every area)",
       "target": "Hazard or group",
       "hazards": "Hazards of the Guide Book",
-      "level": "Level",
-      "levelAll": "Every level",
+      "level": "Applies to areas and hazards scoring",
+      "levelAll": "Every class",
       "replaces": "Guide Book row",
       "replacesNew": "Add a new row after the book’s rows",
       "replacesRow": "Stands in place of Guide Book row {{n}}",
       "bookRows": "The book has {{count}} rows here; choose one to replace it, or add a new row.",
-      "bookRowsNone": "Choose a level to see the book’s rows for a hazard; a group’s rows hold at every level.",
+      "bookRowsNone": "Choose a class group to see the book’s rows for a hazard; a group’s rows hold for every class.",
       "impact": "What people may see",
       "actions": "What to do",
-      "actionsHint": "One action per line."
+      "actionsHint": "One action per line.",
+      "levels": {
+        "1": "Very low and Low",
+        "2": "Medium",
+        "3": "High and Very high"
+      }
     }
   },
   "inbox": {

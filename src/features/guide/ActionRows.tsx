@@ -7,8 +7,7 @@ import * as React from 'react';
 import { useTranslation } from 'react-i18next';
 import { cn, formatScore } from '@/lib/utils';
 import type { ActionRow, GroupCommunication, HazardCommunication } from './actions';
-import { LevelBadge } from './AlertBadge';
-import { hazardItemName } from './crosswalk';
+import { bandFor, hazardItemName } from './crosswalk';
 import { pick, pickList } from './data';
 
 export function ActionList({ rows, first = 3, dense = false, className }: { rows: readonly ActionRow[]; first?: number; dense?: boolean; className?: string }) {
@@ -43,16 +42,19 @@ export function ActionList({ rows, first = 3, dense = false, className }: { rows
   );
 }
 
-/** One hazard: its name, its level, and its rows. */
+/** One hazard: its name, its INFORM class and score, and its rows. */
 export function HazardActions({ hazard, coastal, first = 3, dense = false }: { hazard: HazardCommunication; coastal: boolean; first?: number; dense?: boolean }) {
   const { t } = useTranslation(['guide', 'common', 'indicators']);
+  const band = bandFor(hazard.item.score);
   return (
     <div>
       <p className="flex flex-wrap items-center gap-x-2 gap-y-1">
         <span className={cn('font-semibold', dense && 'text-[12px]')}>{hazardItemName(t, hazard.item, coastal)}</span>
-        {hazard.item.score != null && <span className="num text-xs text-muted-foreground">{formatScore(hazard.item.score)}</span>}
-        <LevelBadge level={hazard.level} size="sm" />
-        {!hazard.own && <span className="text-xs text-muted-foreground">{t('actions.areaLevel')}</span>}
+        {band && (
+          <span className="num text-xs text-muted-foreground">
+            {t(`common:classes.${band}`)} · {formatScore(hazard.item.score)}
+          </span>
+        )}
         {hazard.rows.some((r) => r.from === 'council') && <span className="text-xs text-muted-foreground">{t('actions.council')}</span>}
       </p>
       <ActionList rows={hazard.rows} first={first} dense={dense} className="mt-1" />
@@ -60,17 +62,18 @@ export function HazardActions({ hazard, coastal, first = 3, dense = false }: { h
   );
 }
 
-/** One vulnerability or coping group: its name, score and level, the guide's statement, and its rows. */
+/** One vulnerability or coping group: its name, dimension, class and score, the guide's statement, and its rows. */
 export function GroupActions({ group, first = 2, dense = false, intro = true }: { group: GroupCommunication; first?: number; dense?: boolean; intro?: boolean }) {
   const { t, i18n } = useTranslation(['guide', 'common', 'indicators']);
+  const band = bandFor(group.score);
   return (
     <div>
       <p className="flex flex-wrap items-center gap-x-2 gap-y-1">
         <span className={cn('font-semibold', dense && 'text-[12px]')}>{t(`indicators:${group.key}`)}</span>
         <span className="num text-xs text-muted-foreground">
-          {t(`common:dimensions.${group.dim}Short`)} · {formatScore(group.score)}
+          {t(`common:dimensions.${group.dim}Short`)} · {band ? `${t(`common:classes.${band}`)} · ` : ''}
+          {formatScore(group.score)}
         </span>
-        <LevelBadge level={group.level} size="sm" />
       </p>
       {intro && group.guide && <p className={cn('mt-1 text-muted-foreground', dense ? 'text-[12px] leading-snug' : 'text-sm leading-relaxed')}>{pick(group.guide.intro, i18n.language)}</p>}
       <ActionList rows={group.rows} first={first} dense={dense} className="mt-1" />

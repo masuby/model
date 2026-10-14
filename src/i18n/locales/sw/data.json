@@ -969,7 +969,7 @@
       "event": "Tukio la kitisho lililotokea: lini, nini, na athari zake. Kamati ya mkoa huthibitisha.",
       "warning": "Tahadhari rasmi kama ilivyotolewa na TMA: kitisho, kiwango, maeneo na muda. Huchapishwa mara moja kwenye maeneo yaliyotajwa na huondoka tarehe ya mwisho.",
       "vc": "Maktaba ya hatua: kwa kila kundi la viashiria la INFORM (vitisho, udhaifu na uwezo wa kukabiliana), kinachokipunguza na sekta zinazoongoza. PMO-DMD huandika, kamati ya taifa hupitia; hatua na sekta huonekana kwenye kadi ya hatari ya kina na kwenye kila eneo ambako kundi lina uzito mkubwa zaidi.",
-      "action": "Mstari mmoja wa kile watu wanaweza kuona na cha kufanya, kwa hatari au kundi la udhaifu au uwezo wa kukabiliana, katika ngazi moja au ngazi zote: unasimama badala ya mstari wa Kitabu cha Mwongozo au unafuata mistari ya kitabu kwenye kichunguzi, wasifu na kadi za hatari za eneo lako (au kila mahali, kwa mistari ya kitaifa)."
+      "action": "Mstari mmoja wa kile watu wanaweza kuona na cha kufanya, kwa hatari au kundi la udhaifu au uwezo wa kukabiliana, kwa kundi moja la madaraja ya INFORM au madaraja yote: unasimama badala ya mstari wa Kitabu cha Mwongozo au unafuata mistari ya kitabu kwenye kichunguzi, wasifu na kadi za hatari za eneo lako (au kila mahali, kwa mistari ya kitaifa)."
     },
     "recordTitle": {
       "drr": "Rekodi mipango",
@@ -1118,16 +1118,21 @@
       "national": "Tanzania (kila eneo)",
       "target": "Hatari au kundi",
       "hazards": "Hatari za Kitabu cha Mwongozo",
-      "level": "Ngazi",
-      "levelAll": "Ngazi zote",
+      "level": "Inahusu maeneo na hatari zenye alama",
+      "levelAll": "Madaraja yote",
       "replaces": "Mstari wa Kitabu cha Mwongozo",
       "replacesNew": "Ongeza mstari mpya baada ya mistari ya kitabu",
       "replacesRow": "Unasimama badala ya mstari {{n}} wa Kitabu cha Mwongozo",
       "bookRows": "Kitabu kina mistari {{count}} hapa; chagua mmoja ili uubadilishe, au ongeza mstari mpya.",
-      "bookRowsNone": "Chagua ngazi ili kuona mistari ya kitabu kwa hatari; mistari ya kundi hushikilia ngazi zote.",
+      "bookRowsNone": "Chagua kundi la madaraja ili kuona mistari ya kitabu kwa hatari; mistari ya kundi hushikilia madaraja yote.",
       "impact": "Watu wanaweza kuona nini",
       "actions": "Cha kufanya",
-      "actionsHint": "Hatua moja kwa kila mstari."
+      "actionsHint": "Hatua moja kwa kila mstari.",
+      "levels": {
+        "1": "Chini sana na Chini",
+        "2": "Wastani",
+        "3": "Juu na Juu sana"
+      }
     }
   },
   "inbox": {

@@ -1,17 +1,18 @@
 /**
- * Risk communication levels. Every area is named by its INFORM risk class, and the class carries one of
- * the three levels of the Risk Action Guide Book, with the book's colour, name and call (PMO-DMD's
- * decision of 14 October 2026, docs/RISK_COMMUNICATION_DESIGN.md):
+ * Risk communication is in INFORM's own terms: every area is named by its INFORM risk class, and the
+ * class decides which of the Risk Action Guide Book's three sets of actions apply (PMO-DMD's decision of
+ * 14 October 2026, docs/RISK_COMMUNICATION_DESIGN.md):
  *
- *   INFORM risk class    level   colour    name            call
- *   Very low, Low        1       yellow    Advisory        Be prepared
- *   Medium               2       orange    Warning         Take action
- *   High, Very high      3       red       Major warning   Take action immediately
+ *   INFORM risk class    Guide Book set (band)
+ *   Very low, Low        1
+ *   Medium               2
+ *   High, Very high      3
  *
- * The level shown with the class is the area's standing level; a warning the committees publish through
- * the Data portal has its own level and validity and is shown beside it while in force. One indicator
- * group takes its level from its own score, by the hazard list's display rule (levelForScore), so the
- * actions shown for a hazard change when its value reaches the next level.
+ * The band only selects the book's rows: its level words (advisory, warning, major warning) and its colour
+ * names are never shown, and no warning is derived from the class. A warning the committees publish through
+ * the Data portal has its own level and validity and is shown while in force. One indicator group takes
+ * its band from its own score, by the hazard list's display rule (levelForScore), so the actions shown for
+ * a hazard change when its value reaches the next class.
  */
 import { classify, type ClassKey } from '@/engine/risk/classes';
 import { isNum } from '@/engine/risk/math';
@@ -19,12 +20,12 @@ import type { Unit } from '@/engine/risk/types';
 import { bandFor, type Band } from './crosswalk';
 import type { AlertLevel } from './data';
 
-/** The Guide Book level of a class: 1 yellow, 2 orange, 3 red. */
+/** The Guide Book set a class selects (1, 2 or 3). */
 export type RiskBand = AlertLevel;
 
 export const BAND_BY_CLASS: Record<ClassKey, RiskBand> = { veryLow: 1, low: 1, medium: 2, high: 3, veryHigh: 3 };
 
-/** The level of one indicator group by its score, through the hazard list's display rule (D7). */
+/** The Guide Book set of one indicator group by its own score, through the hazard list's display rule (D7). */
 const LEVEL_BY_BAND: Record<Band, AlertLevel> = { veryLow: 1, low: 1, medium: 2, high: 3, veryHigh: 3 };
 export function levelForScore(score: number | null | undefined): AlertLevel | null {
   const b = bandFor(score);

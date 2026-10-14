@@ -21,7 +21,7 @@ import type { WarningPayload } from '@/data-layer/types';
 import { useAreaCommunication } from '@/features/guide/actions';
 import { GroupActions, HazardActions } from '@/features/guide/ActionRows';
 import { ALERT_COLOR, planMessage, riskBandFor } from '@/features/guide/alert';
-import { LevelBadge, RiskBandBadge } from '@/features/guide/AlertBadge';
+import { RiskBandBadge } from '@/features/guide/AlertBadge';
 import { guideHazardName, hazardItemName, isCoastal, reconciledHazards, type HazardItem } from '@/features/guide/crosswalk';
 import { useAreaGuide, useAreaRecords } from '@/features/guide/data';
 import type { DimensionKey } from '@/engine/risk/hierarchy';
@@ -156,7 +156,6 @@ export default function RiskCardPage() {
           <p className="text-[11px] font-semibold tracking-wide text-muted-foreground uppercase">{t('guide:risk.label')}</p>
           <p className="mt-1 flex flex-wrap items-center justify-end gap-2">
             <RiskBandBadge risk={unit.risk} />
-            {risk && <LevelBadge level={risk.band} />}
             <span className="num text-base text-muted-foreground">({formatScore(unit.risk)} / 10)</span>
           </p>
         </div>
@@ -248,7 +247,7 @@ export default function RiskCardPage() {
       </div>
 
 
-      {/* What to do: the top hazards at their level, and the groups at Level 3 */}
+      {/* What to do: the top hazards by their own scores, and the groups scoring high or above */}
       {!comm.loading && (comm.hazards.length > 0 || comm.groups.some((g) => g.level === 3)) && (
         <section className="mt-4">
           <h2 className="text-[12px] font-semibold tracking-wide text-muted-foreground uppercase">{t('guide:actions.title')}</h2>

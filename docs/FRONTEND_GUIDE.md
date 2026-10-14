@@ -221,8 +221,8 @@ Routes: `/area/:id` renders any unit's profile; `/area/:id/card` the one-page ri
 both in the reader's language (`?lang=sw|en` prints the other one for the card only).
 
 Risk communication (`docs/RISK_COMMUNICATION_DESIGN.md`): `src/features/guide/alert.ts` maps the INFORM risk
-class to the Guide Book's three levels (`BAND_BY_CLASS`) and one group's score to a level (`levelForScore`);
+class to the Guide Book's three sets of actions (`BAND_BY_CLASS`, an internal band: no level word or colour is shown) and one group's score to a set (`levelForScore`);
 `actions.ts` assembles the book's rows per hazard and per vulnerability or coping group with the committees'
-rows applied (`useAreaCommunication`); `ActionRows.tsx` renders them; `AlertBadge.tsx` carries `LevelBadge`.
+rows applied (`useAreaCommunication`); `ActionRows.tsx` renders them.
 The guide data in `src/data/action-guide/` is built from `data-source/RISK_ACTION_GUIDE_BOOK_0222.docx` by
 `scripts/build-action-guide.py` (hazards, incidents, regions, and `indicators/` for chapters 11.0 and 12.0).

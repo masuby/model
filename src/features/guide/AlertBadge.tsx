@@ -8,19 +8,6 @@ import { cn } from '@/lib/utils';
 import { ALERT_COLOR, onAlertColor, riskBandFor } from './alert';
 import type { AlertLevel } from './data';
 
-/** "Level 2 · Warning" on the level's colour: the Guide Book level of a class or of one hazard's score. */
-export function LevelBadge({ level, size = 'md', className }: { level: AlertLevel; size?: 'sm' | 'md'; className?: string }) {
-  const { t } = useTranslation('guide');
-  return (
-    <span
-      className={cn('inline-flex items-center rounded-full font-semibold whitespace-nowrap', size === 'sm' ? 'px-2 py-0.5 text-[11px]' : 'px-3 py-1 text-sm', className)}
-      style={{ background: ALERT_COLOR[level], color: onAlertColor(level) }}
-    >
-      <span className="sr-only">{t('levels.label')}:</span> <span>{t('levels.badge', { n: level, name: t(`levels.${level}.name`) })}</span>
-    </span>
-  );
-}
-
 export function AlertDot({ level, className }: { level: AlertLevel; className?: string }) {
   // The ring keeps the yellow visible on a light page.
   return <span aria-hidden className={cn('inline-block size-2.5 shrink-0 rounded-full ring-1 ring-foreground/30', className)} style={{ background: ALERT_COLOR[level] }} />;

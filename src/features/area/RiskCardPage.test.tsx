@@ -69,8 +69,9 @@ describe('RiskCardPage', { timeout: 60_000 }, () => {
     expect(screen.getByRole('heading', { level: 1, name: 'Kasulu Town' })).toBeInTheDocument();
     expect(await screen.findByText('Hazards in Kasulu Town', {}, { timeout: 20_000 })).toBeInTheDocument();
     expect(screen.getByText('Risk level')).toBeInTheDocument();
-    // The Guide Book level of the class, named with its colour (PMO-DMD, 14 October 2026).
-    expect(screen.getAllByText(/^Level [123] · (Advisory|Warning|Major warning)$/).length).toBeGreaterThan(0);
+    // In INFORM's terms only: no level word or colour of the Guide Book (PMO-DMD, 14 October 2026); the book's rows under "What to do".
+    expect(screen.queryByText(/Advisory|Major warning|Take action|Level [123]/)).not.toBeInTheDocument();
+    expect(await screen.findByText('What to do', {}, { timeout: 20_000 })).toBeInTheDocument();
   });
 
   it('shows where the area lies and the risk communication, with no generated statements', async () => {

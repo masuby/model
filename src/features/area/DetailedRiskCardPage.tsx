@@ -29,7 +29,7 @@ import { type ActionRow, useAreaCommunication } from '@/features/guide/actions';
 import { ActionList } from '@/features/guide/ActionRows';
 import { ALERT_COLOR, planMessage, riskBandFor } from '@/features/guide/alert';
 import { guideHazardName, isCoastal, reconciledHazards } from '@/features/guide/crosswalk';
-import { LevelBadge, RiskBandBadge } from '@/features/guide/AlertBadge';
+import { RiskBandBadge } from '@/features/guide/AlertBadge';
 import type { AlertLevel, IndicatorGuide } from '@/features/guide/data';
 import { pick, useAreaGuide, useAreaRecords, vcActions, type VcAction } from '@/features/guide/data';
 import { formatDate, formatScore, NO_VALUE } from '@/lib/utils';
@@ -158,7 +158,6 @@ export default function DetailedRiskCardPage() {
           <p className={H2}>{t('guide:risk.label')}</p>
           <p className="mt-1 flex flex-wrap items-center justify-end gap-2">
             <RiskBandBadge risk={unit.risk} />
-            {risk && <LevelBadge level={risk.band} />}
             <span className="num text-base text-muted-foreground">({formatScore(unit.risk)} / 10)</span>
           </p>
         </div>
@@ -424,7 +423,7 @@ function rankOfRisk(model: RiskModel, unit: Unit): { rank: number; of: number } 
   return { rank: 1 + scored.filter((x) => x > v).length, of: scored.length };
 }
 
-/** One high-scoring group: score and comparison, the measured values, the lead sectors, the Guide Book's level and rows, and the library's entry. */
+/** One high-scoring group: score and comparison, the measured values, the lead sectors, the Guide Book's rows for it, and the library's entry. */
 function GroupBlock({ model, unit, region, national, group, lang, library, book }: { model: RiskModel; unit: Unit; region: Unit | null; national: Unit | null; group: TopGroup; lang: string; library: VcAction | null; book: { level: AlertLevel; rows: ActionRow[]; guide: IndicatorGuide | null } | null }) {
   const { t } = useTranslation(['area', 'common', 'indicators', 'explore']);
   const scale = DIMENSION_BY_KEY[group.dim].scale;
@@ -475,10 +474,7 @@ function GroupBlock({ model, unit, region, national, group, lang, library, book 
       </p>
       {book && (
         <div className="mt-1 text-[12px]">
-          <p className="flex flex-wrap items-center gap-2">
-            <span className="font-medium">{t('guide:actions.title')}</span>
-            <LevelBadge level={book.level} size="sm" />
-          </p>
+          <p className="font-medium">{t('guide:actions.title')}</p>
           {book.guide && <p className="mt-0.5 text-muted-foreground">{pick(book.guide.intro, lang)}</p>}
           <ActionList rows={book.rows} first={book.guide ? 3 : 4} dense className="mt-0.5" />
         </div>

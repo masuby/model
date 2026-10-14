@@ -79,8 +79,7 @@ const DYNAMIC = [
   ...['hazard', 'vulnerability', 'coping'].flatMap((d) => [`common:dimensions.${d}`, `common:dimensions.${d}Short`]),
   ...['natural', 'human', 'socioEconomic', 'vulnerableGroups', 'infrastructure', 'institutional'].map((c) => `common:categories.${c}`),
   ...['veryLow', 'low', 'medium', 'high', 'veryHigh', 'noData'].map((c) => `common:classes.${c}`),
-  // The committee desk names the Guide Book levels (risk-communication rows).
-  ...[1, 2, 3].map((l) => `guide:levels.${l}.name`),
+  ...[1, 2, 3].map((l) => `committee.action.levels.${l}`),
 ];
 
 describe('data portal translations', () => {

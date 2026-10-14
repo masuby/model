@@ -22,8 +22,8 @@ import { Button } from '@/components/ui/button';
 import type { Unit } from '@/engine/risk/types';
 import { type AreaCommunication, useAreaCommunication } from '@/features/guide/actions';
 import { GroupActions, HazardActions } from '@/features/guide/ActionRows';
-import { type AreaRisk, levelForScore, planMessage, riskBandFor } from '@/features/guide/alert';
-import { LevelBadge, RiskBandBadge } from '@/features/guide/AlertBadge';
+import { type AreaRisk, planMessage, riskBandFor } from '@/features/guide/alert';
+import { RiskBandBadge } from '@/features/guide/AlertBadge';
 import { guideHazardName, hazardItemName, isCoastal, reconciledHazards, type HazardItem } from '@/features/guide/crosswalk';
 import { dataNotesFor } from '@/engine/risk/notes';
 import type { DimensionKey } from '@/engine/risk/hierarchy';
@@ -105,7 +105,6 @@ function RiskStatus({ unit, risk }: { unit: Unit; risk: AreaRisk }) {
       </h3>
       <p className="mt-2.5 flex flex-wrap items-center gap-x-3 gap-y-1.5">
         <RiskBandBadge risk={risk.score} />
-        <LevelBadge level={risk.band} />
         <span className="num text-sm text-muted-foreground">{t('risk.basis', { cls, score: formatScore(risk.score) })}</span>
       </p>
       <dl className="mt-5 grid gap-x-10 gap-y-4 sm:grid-cols-2 lg:grid-cols-1">
@@ -314,17 +313,15 @@ function HazardList({ unit, items }: { unit: Unit; items: readonly HazardItem[] 
 function Band({ item }: { item: HazardItem }) {
   const { t } = useTranslation(['guide', 'common']);
   if (!item.band) return <span className="text-muted-foreground">{t('hazardList.noScore')}</span>;
-  const level = levelForScore(item.score);
   return (
     <>
       <span className="font-medium">{t(`common:classes.${item.band}`)}</span>
       <span className="num text-muted-foreground"> · {formatScore(item.score)}</span>
-      {level && <LevelBadge level={level} size="sm" className="ml-2 align-middle" />}
     </>
   );
 }
 
-/** What to do: the Guide Book's rows for each hazard at its own level here. Open for a council, folded for larger areas. */
+/** What to do: the Guide Book's rows for each hazard by its own score here. Open for a council, folded for larger areas. */
 function Actions({ unit, comm }: { unit: Unit; comm: AreaCommunication }) {
   const { t } = useTranslation(['guide', 'common', 'indicators']);
   const list = useShowMore(comm.hazards, FIRST_HAZARDS);
@@ -348,7 +345,7 @@ function Actions({ unit, comm }: { unit: Unit; comm: AreaCommunication }) {
   );
 }
 
-/** What makes the difference here: the vulnerability and coping groups at Level 2 or 3, the guide's statement and rows for each, and the library's entry (PMO-DMD writes, the NDRRC reviews) when there is one. Folded. */
+/** What makes the difference here: the vulnerability and coping groups scoring medium or above, the guide's statement and rows for each, and the library's entry (PMO-DMD writes, the NDRRC reviews) when there is one. Folded. */
 function Groups({ unit, comm }: { unit: Unit; comm: AreaCommunication }) {
   const { t, i18n } = useTranslation(['guide', 'common', 'indicators']);
   const lang = i18n.language;

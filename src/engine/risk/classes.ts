@@ -23,10 +23,9 @@ export const THRESHOLDS: Record<Scale, readonly [number, number, number, number]
 /**
  * Class colours: one palette per scale, so a dimension is never read in the colours of risk.
  *
- *   risk           five steps from pale yellow to deep red, nested in the three Guide Book levels of
- *                  risk communication (src/features/guide/alert.ts): very low and low in the yellow of
- *                  Level 1, medium the orange of Level 2, high and very high in the reds of Level 3. No
- *                  area is a "safe" green; the level's colour is the family of the map's colour.
+ *   risk           five steps from pale yellow to deep red (PMO-DMD, 11 October 2026). No area is a
+ *                  "safe" green. The steps are not the colours of the Guide Book's levels: the site
+ *                  communicates in INFORM's classes and never names a level or its colour.
  *   hazard, vulnerability, coping
  *                  the palettes of the INFORM SADC 2024 workbook's own class formatting (hazard yellow
  *                  to brown, vulnerability blue, lack of coping capacity green), the fourth hazard step
@@ -36,7 +35,7 @@ export const THRESHOLDS: Record<Scale, readonly [number, number, number, number]
  * The risk palette is kept in sync with the `--color-class-*` tokens in `src/styles/index.css`.
  */
 export const CLASS_PALETTES: Record<Scale, Record<ClassKey, string>> = {
-  risk: { veryLow: '#fef08a', low: '#facc15', medium: '#f97316', high: '#dc2626', veryHigh: '#991b1b' },
+  risk: { veryLow: '#fef08a', low: '#facc15', medium: '#fb923c', high: '#ea580c', veryHigh: '#b91c1c' },
   hazard: { veryLow: '#f9ffc9', low: '#ffaf79', medium: '#ff7900', high: '#c94a25', veryHigh: '#a04121' },
   vulnerability: { veryLow: '#cfecf5', low: '#a2d8e6', medium: '#4ac0df', high: '#0092c8', veryHigh: '#133d73' },
   coping: { veryLow: '#dfede0', low: '#bfe1c5', medium: '#70c396', high: '#00ab69', veryHigh: '#006853' },

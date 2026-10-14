@@ -70,8 +70,9 @@ describe('DetailedRiskCardPage', { timeout: 60_000 }, () => {
     expect(screen.getByText('Emergency preparedness and response plan')).toBeInTheDocument();
     expect(screen.getByText('Stakeholder collaboration')).toBeInTheDocument();
     expect(document.title).toContain('Kibiti District');
-    // The Guide Book level of the class in the header, and of each high-scoring group.
-    expect(screen.getAllByText(/^Level [123] · (Advisory|Warning|Major warning)$/).length).toBeGreaterThan(0);
+    // In INFORM's terms only: no level word or colour of the Guide Book; the book's rows under "What to do".
+    expect(screen.queryByText(/Advisory|Major warning|Take action immediately|Level [123]/)).not.toBeInTheDocument();
+    expect(screen.getAllByText('What to do').length).toBeGreaterThan(0);
   });
 
   it("follows the reader's language and names the country for the national card", async () => {

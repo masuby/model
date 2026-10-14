@@ -1,7 +1,7 @@
 import { useTranslation } from 'react-i18next';
 import { onClassColor } from '@/components/risk/RiskBadge';
 import { CLASS_KEYS, classColor, classify, classRanges, THRESHOLDS, type Scale } from '@/engine/risk/classes';
-import { ALERT_COLOR, BAND_BY_CLASS, onAlertColor } from '@/features/guide/alert';
+import { BAND_BY_CLASS } from '@/features/guide/alert';
 import { ALERT_LEVELS } from '@/features/guide/data';
 import { Callout, Cases, DocSection, Formula, Line, N, Op, P, SubHeading, Txt, V } from '../ui';
 import { NO_VALUE } from '@/lib/utils';
@@ -52,7 +52,7 @@ function ScaleBar({ scale }: { scale: Scale }) {
 }
 
 export function ClassificationSection() {
-  const { t } = useTranslation(['methodology', 'common', 'guide']);
+  const { t } = useTranslation(['methodology', 'common']);
   const label = useScaleLabel();
   const sample = 4;
   const onHazard = classify(sample, 'hazard');
@@ -173,13 +173,10 @@ export function ClassificationSection() {
           <thead>
             <tr className="border-b border-foreground/25 text-left text-xs text-muted-foreground">
               <th scope="col" className="py-2.5 pr-3 font-medium">
-                {t('classification.levels.col.level')}
-              </th>
-              <th scope="col" className="px-3 py-2.5 font-medium">
-                {t('classification.levels.col.name')}
-              </th>
-              <th scope="col" className="px-3 py-2.5 font-medium">
                 {t('classification.levels.col.classes')}
+              </th>
+              <th scope="col" className="px-3 py-2.5 font-medium">
+                {t('classification.levels.col.set')}
               </th>
               <th scope="col" className="py-2.5 pl-3 font-medium">
                 {t('classification.levels.col.groups')}
@@ -187,22 +184,15 @@ export function ClassificationSection() {
             </tr>
           </thead>
           <tbody className="divide-y divide-border">
-            {ALERT_LEVELS.map((level) => (
-              <tr key={level}>
-                <th scope="row" className="py-2.5 pr-3 text-left font-normal whitespace-nowrap">
-                  <span className="inline-flex items-center rounded-full px-2 py-0.5 text-[11px] font-semibold" style={{ background: ALERT_COLOR[level], color: onAlertColor(level) }}>
-                    {t(`guide:levels.${level}.short`)} · {t(`guide:levels.${level}.colour`)}
-                  </span>
-                </th>
-                <td className="px-3 py-2.5">
-                  {t(`guide:levels.${level}.name`)} · {t(`guide:levels.${level}.call`)}
-                </td>
-                <td className="px-3 py-2.5">
-                  {CLASS_KEYS.filter((k) => BAND_BY_CLASS[k] === level)
+            {ALERT_LEVELS.map((band) => (
+              <tr key={band}>
+                <th scope="row" className="py-2.5 pr-3 text-left font-normal">
+                  {CLASS_KEYS.filter((k) => BAND_BY_CLASS[k] === band)
                     .map((k) => t(`common:classes.${k}`))
                     .join(', ')}
-                </td>
-                <td className="num py-2.5 pl-3">{t(`classification.levels.groups.${level}`)}</td>
+                </th>
+                <td className="px-3 py-2.5">{t(`classification.levels.set.${band}`)}</td>
+                <td className="num py-2.5 pl-3">{t(`classification.levels.groups.${band}`)}</td>
               </tr>
             ))}
           </tbody>

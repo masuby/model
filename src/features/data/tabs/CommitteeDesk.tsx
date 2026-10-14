@@ -42,14 +42,13 @@ import { regionIdOf } from '@/engine/risk/rawValues';
 import { authorityLabel } from '@/engine/risk/sources';
 import type { RiskModel, Unit } from '@/engine/risk/types';
 import { ALERT_COLOR, onAlertColor } from '@/features/guide/alert';
-import { LevelBadge } from '@/features/guide/AlertBadge';
 import { ALERT_LEVELS, HAZARD_KEYS, useAreaGuide, useHazardGuide, useIndicatorGuides, type AlertLevel, type HazardKey } from '@/features/guide/data';
 import { cn, formatDate } from '@/lib/utils';
 import { EmptyState, ErrorState, ListSkeleton } from '../components/common';
 import { NOTE_MAX } from '../components/SubmitPanel';
 import { errorMessage } from '../lib/batch';
 
-/** What the desk offers: the record kinds, the action library (national guidance of topic 'vc') and the risk-communication rows (guidance of topic 'action'). */
+/** What the desk offers: the record kinds, the action library (national guidance of topic 'vc') and the risk-communication rows (guidance of topic 'action'; a row holds for the INFORM classes it names). */
 type DeskKind = CommitteeKind | 'vc' | 'action';
 
 interface ScopedUnit {
@@ -765,8 +764,9 @@ const ACTION_TARGETS = [...HAZARD_KEYS.map((h) => ({ value: `guide:${h}`, dim: '
 
 /**
  * One row of the risk-communication library (docs/RISK_COMMUNICATION_DESIGN.md): for the country, the
- * person's region or council; for a hazard or a group; at one level or every level; standing in place of a
- * Guide Book row or added after them. Reviewed like any committee record.
+ * person's region or council; for a hazard or a group; for one group of INFORM classes (very low and low,
+ * medium, high and very high) or for every class; standing in place of a Guide Book row or added after
+ * them. Reviewed like any committee record.
  */
 function ActionForm({ records }: { records: readonly CommitteeRecord[] }) {
   const { t, i18n } = useTranslation(['data', 'common', 'indicators', 'guide']);
@@ -870,7 +870,7 @@ function ActionForm({ records }: { records: readonly CommitteeRecord[] }) {
               <SelectItem value="all">{t('committee.action.levelAll')}</SelectItem>
               {ALERT_LEVELS.map((l) => (
                 <SelectItem key={l} value={String(l)}>
-                  {t('guide:levels.badge', { n: l, name: t(`guide:levels.${l}.name`) })}
+                  {t(`committee.action.levels.${l}`)}
                 </SelectItem>
               ))}
             </Select>
@@ -968,7 +968,7 @@ function PayloadSummary({ r, className }: { r: CommitteeRecord; className?: stri
       <div className={cn('text-sm', className)}>
         <p className="flex flex-wrap items-center gap-2 font-medium">
           <span>{r.hazard ? guideHazardName(t, r.hazard, false) : p.group ? t(`indicators:${p.group.split(':')[1]}`) : ''}</span>
-          {p.level ? <LevelBadge level={p.level} size="sm" /> : <span className="text-xs font-normal text-muted-foreground">{t('committee.action.levelAll')}</span>}
+          <span className="text-xs font-normal text-muted-foreground">{p.level ? t(`committee.action.levels.${p.level}`) : t('committee.action.levelAll')}</span>
         </p>
         {p.impact && text(p.impact) && <p className="mt-1 leading-relaxed">{text(p.impact)}</p>}
         {list.length > 0 && (

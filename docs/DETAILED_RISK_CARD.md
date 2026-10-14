@@ -79,8 +79,7 @@ level is derived from the risk level.
 
 ## Risk communication (14 October 2026)
 
-The header carries the area's Guide Book level beside its class (`LevelBadge`). Each high-scoring group
-block shows "What to do" with the group's level: a hazard group's rows are the book's rows for its guide
-hazard at that level (a council's own rows for Tabora); a vulnerability or coping group's rows are the
+Each high-scoring group block shows "What to do": a hazard group's rows are the book's rows for its guide
+hazard in the set its own score selects (a council's own rows for Tabora); a vulnerability or coping group's rows are the
 book's chapter 11.0 or 12.0 rows, preceded by what the indicator measures; committee rows of the library
 stand in place of a book row or follow the rows. See `docs/RISK_COMMUNICATION_DESIGN.md`.

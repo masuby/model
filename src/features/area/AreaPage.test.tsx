@@ -170,8 +170,8 @@ describe('AreaPage', { timeout: 90_000 }, () => {
     expect(within(status).getByText('If you live or work here')).toBeInTheDocument();
     expect(within(status).getByText('If you plan, build, invest or settle here')).toBeInTheDocument();
     expect(within(status).queryByText(/^Risk here is/)).not.toBeInTheDocument();
-    // The Guide Book level of the class beside it (PMO-DMD, 14 October 2026); one emergency number.
-    expect(within(status).getByText(`Level ${risk.band} · ${i18n.t(`guide:levels.${risk.band}.name`)}`)).toBeInTheDocument();
+    // In INFORM's terms only: no level word or colour of the Guide Book; one emergency number.
+    expect(within(section).queryByText(/Advisory|Major warning|Take action|Be prepared|Level [123]/)).not.toBeInTheDocument();
     expect(within(section).getByRole('link', { name: 'Call 190' })).toHaveAttribute('href', 'tel:190');
     expect(within(section).queryByText('114')).not.toBeInTheDocument();
     // The reconciled hazard list with its bands.
@@ -192,7 +192,7 @@ describe('AreaPage', { timeout: 90_000 }, () => {
       expect(within(section).getByText('Ukiishi au kufanya kazi hapa')).toBeInTheDocument();
       expect(within(section).getByText('Ukipanga, kujenga, kuwekeza au kuhamia hapa')).toBeInTheDocument();
       expect(await within(section).findByRole('heading', { name: `Vitisho katika ${c.name}` }, { timeout: 20_000 })).toBeInTheDocument();
-      expect(within(section).getAllByText(/^Ngazi ya [123] · /).length).toBeGreaterThan(0);
+      expect(within(section).queryByText(/Ushauri|Tahadhari kubwa|Onyo|Chukua hatua|Ngazi ya [123]/)).not.toBeInTheDocument();
     } finally {
       await i18n.changeLanguage('en');
     }

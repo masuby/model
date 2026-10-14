@@ -33,7 +33,7 @@ import { useAreaCommunication } from '@/features/guide/actions';
 import { GroupActions, HazardActions } from '@/features/guide/ActionRows';
 import { ALERT_COLOR, planMessage, riskBandFor } from '@/features/guide/alert';
 import { guideHazardName, isCoastal, reconciledHazards } from '@/features/guide/crosswalk';
-import { LevelBadge, RiskBandBadge } from '@/features/guide/AlertBadge';
+import { RiskBandBadge } from '@/features/guide/AlertBadge';
 import { useAreaGuide, useAreaRecords, type HazardKey } from '@/features/guide/data';
 import { cn, formatDate, formatScore, NO_VALUE } from '@/lib/utils';
 import { MAX_COMPARE } from '../lib/explore';
@@ -285,9 +285,9 @@ const PANEL_HAZARDS = 3;
 const PANEL_GROUPS = 2;
 
 /**
- * Risk communication: the area's Guide Book level with the two standing messages, then the book's rows
- * for the top hazards at each hazard's own level and for the vulnerability and coping groups at Level 2
- * or 3 (docs/RISK_COMMUNICATION_DESIGN.md).
+ * Risk communication, in INFORM's terms: the two standing messages of the area's class, then the Guide
+ * Book's rows for the top hazards (each by its own score) and for the vulnerability and coping groups that
+ * score medium or above (docs/RISK_COMMUNICATION_DESIGN.md).
  */
 function RiskCommunication({ unit }: { unit: Unit }) {
   const { t } = useTranslation(['explore', 'guide', 'common', 'indicators']);
@@ -306,9 +306,6 @@ function RiskCommunication({ unit }: { unit: Unit }) {
       <SectionTitle as="h3" id="risk-communication-title" className="mb-2">
         {t('guide:risk.communication')}
       </SectionTitle>
-      <p className="mb-3">
-        <LevelBadge level={risk.band} size="sm" />
-      </p>
       <dl className="space-y-3 border-l-4 pl-3 text-sm leading-relaxed" style={{ borderColor: risk.color }}>
         <div>
           <dt className="text-xs font-semibold tracking-wide text-muted-foreground uppercase">{t('guide:risk.live')}</dt>

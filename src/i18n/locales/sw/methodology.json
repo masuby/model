@@ -256,13 +256,17 @@
     "example": "Alama ya {{value}} ni {{hazardClass}} kwenye mizani ya Vitisho na Kuathirika lakini ni {{riskClass}} tu kwenye mizani ya Hatari ya INFORM.",
     "if": "kama",
     "levels": {
-      "title": "Ngazi tatu za Kitabu cha Mwongozo",
-      "lead": "Kitabu cha Mwongozo wa Hatua dhidi ya Hatari kinawasiliana kwa ngazi tatu. Kila eneo hubeba ngazi ya daraja lake la hatari la INFORM, na kila kundi la viashiria ngazi ya alama yake yenyewe, kwa kanuni ya orodha ya vitisho (chini ya 2 chini sana, 2 hadi 4 chini, 4 hadi 6 wastani, 6 hadi 8 juu, 8 na zaidi juu sana), hivyo hatua zinazoonyeshwa kwa hatari hubadilika thamani yake inapofikia ngazi inayofuata. Onyo linalotolewa na kamati lina ngazi na muda wake na huonyeshwa kando ya ngazi ya kudumu likiwa linatumika.",
+      "title": "Jinsi hatua za Kitabu cha Mwongozo zinavyofuata daraja la INFORM",
+      "lead": "Kitabu cha Mwongozo wa Hatua dhidi ya Hatari kinapanga hatua zake kwa kila hatari katika seti tatu. Mfumo unaonyesha seti ya kwanza kwa maeneo yenye hatari ya INFORM ya Chini sana au Chini, ya pili kwa Wastani, ya tatu kwa Juu na Juu sana; hatari au kundi la viashiria hufuata alama yake yenyewe (chini ya 4, 4 hadi 6, 6 na zaidi). Maneno ya ngazi na rangi za kitabu hayaonyeshwi: tovuti inawasiliana kwa madaraja ya INFORM. Onyo linalotolewa na kamati ni rekodi tofauti yenye muda wake.",
       "col": {
-        "level": "Ngazi",
-        "name": "Jina na wito",
-        "classes": "Madaraja ya hatari ya INFORM",
-        "groups": "Alama ya kundi la viashiria"
+        "classes": "Daraja la hatari la INFORM",
+        "set": "Hatua za Kitabu cha Mwongozo zinazoonyeshwa",
+        "groups": "Alama ya hatari au kundi lenyewe"
+      },
+      "set": {
+        "1": "seti ya kwanza",
+        "2": "seti ya pili",
+        "3": "seti ya tatu"
       },
       "groups": {
         "1": "chini ya 4",
