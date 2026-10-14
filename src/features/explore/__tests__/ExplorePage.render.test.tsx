@@ -141,7 +141,7 @@ describe('ExplorePage - desktop', () => {
     // The panel reads the risk communication; the score breakdown and the group list are gone (14 October 2026).
     expect(within(card).getByRole('heading', { name: 'Risk communication' })).toBeInTheDocument();
     expect(within(card).queryByText('Top drivers')).not.toBeInTheDocument();
-    expect(within(card).getByText(`Marker: ${model.byId.get(`R-${placeKey(council.region)}`)!.name} region`)).toBeInTheDocument();
+    expect(within(card).queryByText(/^Marker: /)).not.toBeInTheDocument();
     expect(screen.getByTestId('map').dataset.selected).toBe(council.id);
   });
 
